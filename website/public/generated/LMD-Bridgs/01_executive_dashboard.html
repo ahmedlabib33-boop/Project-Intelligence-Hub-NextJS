@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LMD Bridge &amp; Road Interchange - Executive Dashboard</title>
+  <style>
+    @page { size: A3 landscape; margin: 0; }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; background:#061a31; color:#f4f8ff; font-family:Inter,Segoe UI,Arial,sans-serif; }
+    .dash { width:1600px; min-height:1000px; margin:0 auto; padding:28px 26px 18px; background:radial-gradient(circle at 22% 0%,#0f355c 0,#071d36 38%,#041426 100%); border:1px solid rgba(71,163,255,.18); }
+    .top { display:flex; justify-content:space-between; align-items:flex-start; padding:0 2px 28px; border-bottom:1px solid rgba(125,170,218,.22); }
+    h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+    .subtitle { color:#aac0dc; font-size:17px; }
+    .top-right { display:flex; gap:46px; align-items:center; color:#c8d8ef; }
+    .date-pill { border:1px solid rgba(125,170,218,.25); border-radius:9px; padding:12px 18px; min-width:180px; text-align:center; background:rgba(3,22,43,.45); }
+    .director small { display:block; color:#b7c9e2; } .director b { font-size:18px; color:#dce8fb; }
+    .avatar { width:48px; height:48px; border-radius:50%; border:1px solid rgba(168,196,231,.3); display:grid; place-items:center; background:rgba(255,255,255,.08); }
+    .content { display:grid; grid-template-columns:1fr 380px; gap:18px; }
+    .section { padding:18px 0 0; }
+    .section-title { margin:0 0 14px; padding-left:14px; border-left:3px solid #36e0d0; font-weight:800; font-size:17px; }
+    .evm-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+    .evm-card { min-height:106px; border-radius:8px; border:1px solid rgba(81,144,222,.35); padding:18px; display:grid; grid-template-columns:38px 1fr; gap:12px; background:linear-gradient(135deg,rgba(19,57,99,.9),rgba(12,34,64,.82)); box-shadow:inset 0 0 28px rgba(41,125,204,.08); }
+    .evm-card.cyan { background:linear-gradient(135deg,rgba(14,97,124,.86),rgba(9,45,72,.82)); border-color:rgba(52,211,224,.42); }
+    .evm-card.green,.evm-card.teal { background:linear-gradient(135deg,rgba(16,95,87,.72),rgba(11,45,61,.86)); border-color:rgba(70,220,188,.38); }
+    .evm-card.gold { background:linear-gradient(135deg,rgba(91,72,29,.72),rgba(25,42,64,.86)); border-color:rgba(255,194,71,.42); }
+    .evm-card.red { background:linear-gradient(135deg,rgba(92,43,57,.72),rgba(25,42,64,.86)); border-color:rgba(255,101,101,.45); }
+    .evm-card.purple { background:linear-gradient(135deg,rgba(69,51,113,.72),rgba(25,42,64,.86)); border-color:rgba(178,128,255,.42); }
+    .icon { width:32px; height:32px; border-radius:50%; display:grid; place-items:center; background:rgba(55,153,255,.25); color:#76c9ff; font-weight:900; }
+    .cyan .icon { color:#65eff0; } .green .icon,.teal .icon { color:#65f0ce; } .gold .icon { color:#ffc247; } .red .icon { color:#ff7777; } .purple .icon { color:#c9a7ff; }
+    .card-label,.small-label { color:#b7c9e2; font-size:13px; }
+    .card-value { margin-top:7px; font-size:25px; font-weight:900; color:#fff; }
+    .card-note { margin-top:5px; color:#9fb4d1; font-size:13px; }
+    .alerts { border-left:1px solid rgba(125,170,218,.22); padding-left:16px; }
+    .alerts-head { display:flex; justify-content:space-between; align-items:center; margin:18px 6px 12px; }
+    .alerts-head b { font-size:17px; } .alerts-head span { border:1px solid rgba(125,170,218,.28); border-radius:8px; padding:8px 14px; color:#9fb4d1; font-size:12px; }
+    .alert { display:grid; grid-template-columns:44px 1fr 74px; gap:12px; align-items:center; margin-bottom:10px; padding:14px; border:1px solid rgba(70,130,205,.32); border-radius:8px; background:rgba(4,28,54,.72); }
+    .alert.red { background:linear-gradient(90deg,rgba(103,43,58,.5),rgba(4,28,54,.72)); border-color:rgba(255,97,97,.42); }
+    .alert.amber { background:linear-gradient(90deg,rgba(95,68,35,.45),rgba(4,28,54,.72)); } .alert.purple { background:linear-gradient(90deg,rgba(64,49,111,.45),rgba(4,28,54,.72)); }
+    .alert-icon { width:34px; height:34px; border-radius:50%; display:grid; place-items:center; border:2px solid currentColor; color:#ff6666; font-weight:900; } .amber .alert-icon { color:#ff9f2f; } .blue .alert-icon { color:#55b8ff; } .purple .alert-icon { color:#ba8cff; }
+    .alert-body strong { display:block; font-size:15px; } .alert-body span { display:block; color:#a9bbd6; font-size:12px; line-height:1.35; margin-top:4px; }
+    .priority { font-size:12px; color:#ff6b6b; font-weight:800; } .priority i { display:inline-block; width:10px; height:10px; border-radius:50%; background:#ff4d4d; margin-right:7px; } .amber .priority,.purple .priority,.blue .priority { color:#ff9f2f; } .amber .priority i,.purple .priority i,.blue .priority i { background:#ff9f2f; }
+    .overview-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+    .overview-card,.panel { border:1px solid rgba(88,145,214,.35); border-radius:8px; background:rgba(5,31,59,.74); padding:18px; }
+    .donut-row { display:flex; align-items:center; gap:18px; margin-top:12px; }
+    .donut { --c:#4ee2d1; width:86px; height:86px; border-radius:50%; background:conic-gradient(var(--c) calc(var(--p)*1%), rgba(126,151,181,.32) 0); position:relative; } .donut:after { content:''; position:absolute; inset:10px; border-radius:50%; background:#08203a; } .donut.gold { --c:#ffc247; } .donut.blue { --c:#55b8ff; }
+    .big-percent { font-size:26px; font-weight:900; color:white; }
+    .panels { display:grid; grid-template-columns:1.05fr .95fr 1.05fr; gap:14px; margin-top:8px; }
+    .panel-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; } .panel-head b { font-size:15px; } .panel-head span { border:1px solid rgba(125,170,218,.28); border-radius:7px; padding:7px 12px; color:#9fb4d1; font-size:12px; }
+    .line-chart { width:100%; height:180px; } .grid-lines line { stroke:rgba(139,172,211,.17); stroke-width:1; } .month-axis { display:grid; grid-template-columns:repeat(12,1fr); color:#8fa7c5; font-size:10px; margin:0 2px; }
+    .legend { display:flex; gap:18px; color:#bdd0e7; font-size:11px; margin-bottom:6px; } .legend i,.legend-row i { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; }
+    .bar-row { display:grid; grid-template-columns:130px 1fr 54px; gap:12px; align-items:center; margin:17px 0; color:#dce8fb; font-size:14px; } .bar-track { height:8px; border-radius:999px; background:rgba(111,146,184,.24); overflow:hidden; } .bar-track b { display:block; height:100%; border-radius:999px; background:linear-gradient(90deg,#54e0d0,#55a7ff); } .bar-row em { color:#b6c8e1; font-style:normal; font-size:12px; }
+    .cost-wrap { display:grid; grid-template-columns:190px 1fr; gap:20px; align-items:center; } .cost-donut { width:170px; height:170px; border-radius:50%; background:conic-gradient(#2f80ed 0.00% 2.94%, #55d5d0 2.94% 5.88%, #2fb59d 5.88% 8.82%, #f7b733 8.82% 100.00%); display:grid; place-items:center; position:relative; } .cost-donut:after { content:''; position:absolute; inset:42px; background:#08203a; border-radius:50%; } .cost-center { position:relative; z-index:1; text-align:center; font-weight:900; } .cost-center small { display:block; color:#9fb4d1; font-size:11px; font-weight:500; }
+    .legend-row { display:grid; grid-template-columns:16px 1fr 52px; gap:6px; align-items:center; margin:14px 0; color:#c9d8ed; font-size:12px; } .legend-row b { text-align:right; color:#eaf2ff; }
+    .bottom-strip { display:grid; grid-template-columns:repeat(8,1fr); margin-top:18px; border:1px solid rgba(88,145,214,.35); border-radius:8px; background:rgba(5,31,59,.78); overflow:hidden; }
+    .bottom-item { min-height:84px; display:grid; grid-template-columns:42px 1fr; grid-template-rows:1fr 1fr; column-gap:10px; padding:15px 18px; border-right:1px solid rgba(125,170,218,.22); } .bottom-item i { grid-row:1/3; align-self:center; width:34px; height:34px; border-radius:50%; display:grid; place-items:center; background:rgba(55,153,255,.22); color:#55b8ff; font-style:normal; } .bottom-item span { color:#9fb4d1; font-size:12px; } .bottom-item b { color:#fff; font-size:18px; } .bottom-item.red b { color:#ff6262; } .bottom-item.green i { color:#42e2aa; } .bottom-item.gold i,.bottom-item.amber i { color:#ffc247; } .bottom-item.purple i { color:#c9a7ff; }
+    .brand { display:grid; place-items:center; font-size:28px; letter-spacing:4px; color:#f4f8ff; } .brand small { display:block; margin-top:6px; letter-spacing:1px; color:#a9bbd6; font-size:11px; }
+    .footer { margin-top:26px; text-align:center; color:#a8bdd8; font-size:14px; letter-spacing:3px; font-style:italic; } .footer b { color:#43e0d3; }
+  </style>
+</head>
+<body>
+  <main class="dash">
+    <header class="top"><div><h1>Executive Dashboard</h1><div class="subtitle">Project Performance & Control Center</div></div><div class="top-right"><div class="date-pill">20 Jul 2026</div><div class="director"><small>Good Morning,</small><b>Executive Director</b></div><div class="avatar">◎</div></div></header>
+    <section class="content">
+      <div>
+        <section class="section"><div class="section-title">Earned Value Management</div><div class="evm-grid">
+        <div class="evm-card blue">
+          <div class="icon">▣</div>
+          <div><div class="card-label">BAC</div><div class="card-value">EGP 850,000,000</div><div class="card-note">Budget at Completion</div></div>
+        </div>
+        
+        <div class="evm-card cyan">
+          <div class="icon">▤</div>
+          <div><div class="card-label">AC</div><div class="card-value">EGP 311,965,280</div><div class="card-note">Actual Cost</div></div>
+        </div>
+        
+        <div class="evm-card green">
+          <div class="icon">▧</div>
+          <div><div class="card-label">EV</div><div class="card-value">EGP 294,306,867</div><div class="card-note">Earned Value</div></div>
+        </div>
+        
+        <div class="evm-card gold">
+          <div class="icon">▥</div>
+          <div><div class="card-label">PV</div><div class="card-value">EGP 343,174,699</div><div class="card-note">Planned Value</div></div>
+        </div>
+        
+        <div class="evm-card teal">
+          <div class="icon">▦</div>
+          <div><div class="card-label">Schedule Variance</div><div class="card-value">EGP -48,867,831</div><div class="card-note">Behind Schedule</div></div>
+        </div>
+        
+        <div class="evm-card red">
+          <div class="icon">▨</div>
+          <div><div class="card-label">Cost Variance</div><div class="card-value">EGP -17,658,412</div><div class="card-note">Over Budget</div></div>
+        </div>
+        
+        <div class="evm-card blue">
+          <div class="icon">▩</div>
+          <div><div class="card-label">EAC</div><div class="card-value">EGP 867,658,412</div><div class="card-note">Estimate at Completion</div></div>
+        </div>
+        
+        <div class="evm-card purple">
+          <div class="icon">⌁</div>
+          <div><div class="card-label">TCPI</div><div class="card-value">1.000</div><div class="card-note">To Complete Performance Index</div></div>
+        </div>
+        </div></section>
+        <section class="section"><div class="section-title">Performance Overview</div><div class="overview-grid">
+        <div class="overview-card">
+          <div class="small-label">Overall Progress</div>
+          <div class="donut-row">
+            <div class="donut cyan" style="--p:31.00"></div>
+            <div><div class="big-percent">31.0%</div><div class="card-note">Actual Complete</div></div>
+          </div>
+        </div>
+        
+        <div class="overview-card">
+          <div class="small-label">Planned Progress</div>
+          <div class="donut-row">
+            <div class="donut cyan" style="--p:38.00"></div>
+            <div><div class="big-percent">38.0%</div><div class="card-note">Baseline Plan</div></div>
+          </div>
+        </div>
+        
+        <div class="evm-card blue">
+          <div class="icon">▣</div>
+          <div><div class="card-label">Contract Value</div><div class="card-value">EGP 850,000,000</div><div class="card-note">Total Contract Value</div></div>
+        </div>
+        
+        <div class="evm-card cyan">
+          <div class="icon">▤</div>
+          <div><div class="card-label">Actual Cost</div><div class="card-value">EGP 311,965,280</div><div class="card-note">36.7% of BAC</div></div>
+        </div>
+        
+        <div class="overview-card">
+          <div class="small-label">Remaining Duration</div>
+          <div class="donut-row">
+            <div class="donut gold" style="--p:48.60"></div>
+            <div><div class="big-percent">48.6%</div><div class="card-note">243 Days Left</div></div>
+          </div>
+        </div>
+        </div></section>
+      </div>
+      <aside class="alerts"><div class="alerts-head"><b>Critical Alerts</b><span>View All</span></div>
+        <div class="alert red">
+          <div class="alert-icon">!</div>
+          <div class="alert-body"><strong>Steel Supply Delay</strong><span>Delay in steel shipment affecting structure building progress</span></div>
+          <div class="priority"><i></i>High</div>
+        </div>
+        
+        <div class="alert amber">
+          <div class="alert-icon">!</div>
+          <div class="alert-body"><strong>IFC Clash Detected</strong><span>4 clashes found in current coordination records</span></div>
+          <div class="priority"><i></i>High</div>
+        </div>
+        
+        <div class="alert blue">
+          <div class="alert-icon">?</div>
+          <div class="alert-body"><strong>RFIs Pending</strong><span>5 RFIs are pending response from consultants</span></div>
+          <div class="priority"><i></i>Medium</div>
+        </div>
+        
+        <div class="alert purple">
+          <div class="alert-icon">✓</div>
+          <div class="alert-body"><strong>Contract Exposure</strong><span>Exposure amount exceeds threshold for active contracts</span></div>
+          <div class="priority"><i></i>Medium</div>
+        </div>
+        </aside>
+    </section>
+    <section class="panels">
+      <div class="panel"><div class="panel-head"><b>Cost Performance</b><span>View Trend</span></div><div class="legend"><span><i style="background:#47a3ff"></i>AC (Actual Cost)</span><span><i style="background:#4fe2d1"></i>EV (Earned Value)</span><span><i style="background:#ffc247"></i>PV (Planned Value)</span></div>
+    <svg class="line-chart" viewBox="0 0 590 220" preserveAspectRatio="none">
+      <g class="grid-lines">
+        <line x1="30" y1="40" x2="570" y2="40"/><line x1="30" y1="88" x2="570" y2="88"/>
+        <line x1="30" y1="136" x2="570" y2="136"/><line x1="30" y1="184" x2="570" y2="184"/>
+      </g>
+      <polyline points='32.0,158.2 80.0,147.5 128.0,136.7 176.0,126.0 224.0,115.2 272.0,104.5 320.0,93.7 368.0,83.0 416.0,72.2 464.0,61.5 512.0,50.7 560.0,40.0' fill='none' stroke='#47a3ff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' />
+      <polyline points='32.0,165.1 80.0,158.0 128.0,151.0 176.0,144.0 224.0,137.0 272.0,129.9 320.0,122.9 368.0,115.9 416.0,108.8 464.0,101.8 512.0,94.8 560.0,87.8' fill='none' stroke='#4fe2d1' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' />
+      <polyline points='32.0,139.9 80.0,131.2 128.0,122.5 176.0,113.9 224.0,105.2 272.0,96.5 320.0,87.9 368.0,79.2 416.0,70.5 464.0,61.8 512.0,53.2 560.0,44.5' fill='none' stroke='#ffc247' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='8 6'/>
+    </svg>
+    <div class="month-axis"><span>Jan &#x27;26</span><span>Feb &#x27;26</span><span>Mar &#x27;26</span><span>Apr &#x27;26</span><span>May &#x27;26</span><span>Jun &#x27;26</span><span>Jul &#x27;26</span><span>Aug &#x27;26</span><span>Sep &#x27;26</span><span>Oct &#x27;26</span><span>Nov &#x27;26</span><span>Dec &#x27;26</span></div></div>
+      <div class="panel"><div class="panel-head"><b>Progress by Discipline</b><span>View All</span></div><div class='bar-row'><span>Engineering</span><div class='bar-track'><b style='width:0.7%'></b></div><em>0.7%</em></div><div class='bar-row'><span>Procurement</span><div class='bar-track'><b style='width:0.5%'></b></div><em>0.5%</em></div><div class='bar-row'><span>Construction</span><div class='bar-track'><b style='width:0.3%'></b></div><em>0.3%</em></div><div class='bar-row'><span>Overall</span><div class='bar-track'><b style='width:31.0%'></b></div><em>31.0%</em></div></div>
+      <div class="panel"><div class="panel-head"><b>Cost Breakdown</b><span>View Report</span></div><div class="cost-wrap"><div class="cost-donut"><div class="cost-center">EGP<br>311,965,280<small>Total Cost</small></div></div><div><div class='legend-row'><i style='background:#2f80ed'></i><span>Engineering</span><b>2.9%</b></div><div class='legend-row'><i style='background:#55d5d0'></i><span>Procurement</span><b>2.9%</b></div><div class='legend-row'><i style='background:#2fb59d'></i><span>Construction</span><b>2.9%</b></div><div class='legend-row'><i style='background:#f7b733'></i><span>Overall</span><b>91.2%</b></div></div></div></div>
+    </section>
+    <section class="bottom-strip"><div class='bottom-item blue'><i>▦</i><span>Total Activities</span><b>17</b></div><div class='bottom-item red'><i>⚑</i><span>Critical Activities</span><b>10</b></div><div class='bottom-item green'><i>⌁</i><span>SPI</span><b>0.86</b></div><div class='bottom-item gold'><i>▣</i><span>CPI</span><b>0.94</b></div><div class='bottom-item amber'><i>▤</i><span>Active Contracts</span><b>2</b></div><div class='bottom-item blue'><i>⌕</i><span>Open RFIs</span><b>5</b></div><div class='bottom-item purple'><i>◇</i><span>Open Submittals</span><b>1</b></div><div class="brand">Prime Roads &amp; Bridges<small>LMD Bridge &amp; Road Interchange</small></div></section>
+    <footer class="footer">Created and Developed by <b>Eng. Ahmed Labib</b> © Senior Planning Engineer</footer>
+  </main>
+</body>
+</html>

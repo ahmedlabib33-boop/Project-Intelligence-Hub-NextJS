@@ -1,0 +1,46 @@
+﻿# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Secrets
+.env
+.env.local
+.streamlit/secrets.toml
+
+# Logs / runtime
+*.log
+*.err
+logs/
+12-logs/
+outputs/
+generated_outputs/
+backups/
+.sync_state/
+.streamlit/delay_tia_upload_cache/
+.tmp/
+.codex/
+.agents/
+
+# Node / frontend
+node_modules/
+.next/
+.vercel/
+dist/
+build/
+
+# OS
+Thumbs.db
+.DS_Store
+~$*
+
+# Archives / large temp
+*.zip
+*.rar
+*.7z
+PIH.txt
+*.token
+*.secret

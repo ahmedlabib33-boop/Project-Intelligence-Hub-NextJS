@@ -1,0 +1,46 @@
+﻿{
+    "owner":  "ahmedlabib33-boop",
+    "repository":  "Project-Intelligence-Hub-NextJS",
+    "branch":  "main",
+    "interval_minutes":  30,
+    "interval_seconds":  30,
+    "sync_deletions":  true,
+    "prune_legacy_project_folders":  true,
+    "max_file_size_mb":  95,
+    "excluded_directories":  [
+                                 ".git",
+                                 ".venv",
+                                 "venv",
+                                 "__pycache__",
+                                 ".pytest_cache",
+                                 ".mypy_cache",
+                                 ".ruff_cache",
+                                 ".tmp",
+                                 ".streamlit/delay_tia_upload_cache",
+                                 "node_modules",
+                                 ".next",
+                                 ".vercel",
+                                 "out",
+                                 "backups",
+                                 ".sync_state",
+                                 "logs"
+                             ],
+    "excluded_files":  [
+                           ".streamlit/secrets.toml",
+                           ".env",
+                           ".env.local",
+                           "PIH.txt",
+                           "*.token",
+                           "*.secret"
+                       ],
+    "excluded_patterns":  [
+                              "*.pyc",
+                              "*.pyo",
+                              "*.log",
+                              "*.err",
+                              "*.out",
+                              "*.tmp",
+                              "~$*",
+                              "*PIH.txt"
+                          ]
+}

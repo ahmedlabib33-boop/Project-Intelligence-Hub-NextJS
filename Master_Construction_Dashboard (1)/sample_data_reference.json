@@ -1,0 +1,21 @@
+{
+  "_comment": "This is a sample data structure reference. See data_loader.py for complete documentation.",
+  "overview": {
+    "project_name": "Sample Tower",
+    "project_code": "ST-2024-001",
+    "client": "Sample Client",
+    "contractor": "Sample Contractor",
+    "contract_value": 500000000,
+    "start_date": "2024-01-01",
+    "finish_date": "2027-12-31",
+    "actual_start": "2024-01-15",
+    "overall_progress": 35.0,
+    "status": "On Track",
+    "health_score": 85,
+    "total_activities": 500,
+    "completed_activities": 175,
+    "total_manpower": 1500,
+    "budget_utilized": 175000000,
+    "budget_remaining": 325000000
+  }
+}

@@ -1,0 +1,1500 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Master Dashboard - Sophia Mall Mixed-Use Development</title>
+<script src='https://cdn.plot.ly/plotly-2.35.2.min.js'></script>
+<style>
+:root{--bg:#0a0e27;--card:rgba(15,23,42,.86);--card2:rgba(30,41,59,.62);--line:rgba(148,163,184,.18);--gold:#f59e0b;--emerald:#10b981;--rose:#f43f5e;--cyan:#06b6d4;--sapphire:#3b82f6;--violet:#8b5cf6;--text:#f8fafc;--muted:#94a3b8}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 18% 8%,rgba(59,130,246,.16),transparent 26%),radial-gradient(circle at 80% 4%,rgba(245,158,11,.14),transparent 24%),linear-gradient(180deg,#0a0e27,#111827 70%,#0a0e27);color:var(--text);font-family:Segoe UI,Arial,sans-serif}
+.md-shell{max-width:1480px;margin:0 auto;padding:28px 24px 46px} .md-tab-radio{position:absolute;left:-9999px;opacity:0} .md-hero{border:1px solid var(--line);border-radius:24px;padding:26px;background:linear-gradient(135deg,rgba(15,23,42,.95),rgba(30,41,59,.74));box-shadow:0 24px 60px rgba(0,0,0,.32)} .md-eyebrow{color:var(--gold);font-weight:900;text-transform:uppercase;letter-spacing:.18em;font-size:12px} h1{margin:8px 0 6px;font-size:38px;line-height:1.05} .md-sub{color:var(--muted);font-size:15px} .md-nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 6px} .md-tab-button{display:inline-flex;text-decoration:none;color:var(--text);background:rgba(255,255,255,.06);border:1px solid var(--line);padding:9px 12px;border-radius:999px;font-size:12px;font-weight:800;cursor:pointer;user-select:none} .md-section{display:none;margin-top:22px;padding:18px;border:1px solid var(--line);border-radius:22px;background:rgba(15,23,42,.54);box-shadow:0 18px 42px rgba(0,0,0,.2)} #md-tab-overview:checked ~ .md-sections #overview{display:block} #md-tab-overview:checked ~ .md-hero .md-nav label[for='md-tab-overview']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-wbs:checked ~ .md-sections #wbs{display:block} #md-tab-wbs:checked ~ .md-hero .md-nav label[for='md-tab-wbs']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-activities:checked ~ .md-sections #activities{display:block} #md-tab-activities:checked ~ .md-hero .md-nav label[for='md-tab-activities']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-milestones:checked ~ .md-sections #milestones{display:block} #md-tab-milestones:checked ~ .md-hero .md-nav label[for='md-tab-milestones']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-s_curve:checked ~ .md-sections #s_curve{display:block} #md-tab-s_curve:checked ~ .md-hero .md-nav label[for='md-tab-s_curve']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-evm:checked ~ .md-sections #evm{display:block} #md-tab-evm:checked ~ .md-hero .md-nav label[for='md-tab-evm']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-contracts:checked ~ .md-sections #contracts{display:block} #md-tab-contracts:checked ~ .md-hero .md-nav label[for='md-tab-contracts']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-letters:checked ~ .md-sections #letters{display:block} #md-tab-letters:checked ~ .md-hero .md-nav label[for='md-tab-letters']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-risks:checked ~ .md-sections #risks{display:block} #md-tab-risks:checked ~ .md-hero .md-nav label[for='md-tab-risks']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-delay:checked ~ .md-sections #delay{display:block} #md-tab-delay:checked ~ .md-hero .md-nav label[for='md-tab-delay']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} .md-section-head{display:flex;justify-content:space-between;gap:14px;align-items:end;margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:12px} .md-section-head span{font-size:22px;font-weight:900;color:var(--gold)} .md-section-head small{color:var(--muted);text-align:right} .md-kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:14px} .md-kpi{border:1px solid var(--line);border-top:4px solid var(--gold);border-radius:18px;background:linear-gradient(145deg,rgba(15,23,42,.95),rgba(30,41,59,.72));padding:16px;min-height:116px} .tone-emerald{border-top-color:var(--emerald)}.tone-rose{border-top-color:var(--rose)}.tone-cyan{border-top-color:var(--cyan)}.tone-sapphire{border-top-color:var(--sapphire)}.tone-violet{border-top-color:var(--violet)} .md-kpi-title{font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:900;letter-spacing:.08em} .md-kpi-value{font-size:28px;font-weight:900;margin-top:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .md-kpi-note{font-size:12px;color:var(--muted);margin-top:8px} .md-grid{display:grid;gap:14px} .md-grid.two{grid-template-columns:1fr 1fr} .md-card{border:1px solid var(--line);border-radius:18px;background:var(--card);padding:14px;overflow:auto} .md-card h3{margin:0 0 10px;color:#fbbf24;font-size:16px} .md-table{width:100%;border-collapse:collapse;font-size:12px} .md-table th{background:rgba(245,158,11,.18);color:#f8fafc;text-align:left;padding:8px;border-bottom:1px solid var(--line);white-space:nowrap} .md-table td{padding:7px 8px;border-bottom:1px solid rgba(148,163,184,.10);color:#dbeafe;vertical-align:top} .md-empty{border:1px dashed var(--line);border-radius:14px;padding:18px;color:var(--muted);text-align:center} .footer{margin-top:22px;text-align:center;color:var(--muted);font-size:12px}
+@media(max-width:900px){.md-shell{padding:14px 10px} h1{font-size:25px} .md-kpi-grid,.md-grid.two{grid-template-columns:1fr} .md-section{padding:12px} .md-section-head{display:block} .md-section-head small{display:block;text-align:left;margin-top:5px} .md-kpi-value{font-size:22px}}
+</style>
+</head>
+<body><main class="md-shell"><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-overview' checked><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-wbs'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-activities'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-milestones'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-s_curve'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-evm'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-contracts'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-letters'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-risks'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-delay'><header class="md-hero"><div class="md-eyebrow">Master Dashboard</div><h1>Sophia Mall Mixed-Use Development</h1><div class="md-sub">Project-scoped construction intelligence dashboard | Project ID: Sophia-Mall | Generated 20 Jul 2026 15:45</div><nav class="md-nav"><label class='md-tab-button' for='md-tab-overview'>Overview</label><label class='md-tab-button' for='md-tab-wbs'>WBS</label><label class='md-tab-button' for='md-tab-activities'>Activities</label><label class='md-tab-button' for='md-tab-milestones'>Milestones</label><label class='md-tab-button' for='md-tab-s_curve'>S-Curve</label><label class='md-tab-button' for='md-tab-evm'>EVM</label><label class='md-tab-button' for='md-tab-contracts'>Contracts</label><label class='md-tab-button' for='md-tab-letters'>Letters</label><label class='md-tab-button' for='md-tab-risks'>Risks</label><label class='md-tab-button' for='md-tab-delay'>Delay & TIA</label></nav></header><div class="md-sections"><section id='overview' class='md-section'><div class='md-section-head'><span>Project Overview</span><small>Executive KPIs, health indicators, and project vitals</small></div><div class='md-kpi-grid'><div class='md-kpi tone-gold'><div class='md-kpi-title'>Contract Value</div><div class='md-kpi-value'>EGP 2,100,000,000</div><div class='md-kpi-note'>Project budget</div></div><div class='md-kpi tone-emerald'><div class='md-kpi-title'>Overall Progress</div><div class='md-kpi-value'>33.0%</div><div class='md-kpi-note'>Planned 31.0%</div></div><div class='md-kpi tone-cyan'><div class='md-kpi-title'>Activities</div><div class='md-kpi-value'>17</div><div class='md-kpi-note'>Critical 11</div></div><div class='md-kpi tone-sapphire'><div class='md-kpi-title'>Duration</div><div class='md-kpi-value'>654 days</div><div class='md-kpi-note'>Remaining 57.5%</div></div></div><div class='md-grid two'><div class='md-card'><h3>Phase Progress</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>phase</th>
+      <th>planned</th>
+      <th>actual</th>
+      <th>variance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Engineering</td>
+      <td>0.84</td>
+      <td>0.89</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <td>Procurement</td>
+      <td>0.67</td>
+      <td>0.71</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <td>Construction</td>
+      <td>0.57</td>
+      <td>0.6</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <td>Overall</td>
+      <td>31.0</td>
+      <td>33.0</td>
+      <td>2.0</td>
+    </tr>
+  </tbody>
+</table></div><div class='md-card'><h3>Project Vitals</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Project</th>
+      <th>Start</th>
+      <th>Finish</th>
+      <th>Project ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sophia Mall Mixed-Use Development</td>
+      <td>15-Oct-2025</td>
+      <td>31-Jul-2027</td>
+      <td>Sophia-Mall</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='wbs' class='md-section'><div class='md-section-head'><span>Work Breakdown Structure</span><small>Project WBS progress and register</small></div><div class='md-grid two'><div class='md-card'><div>                            <div id="10fe2875-79fe-4e0f-8816-2e7b50c2ae44" class="plotly-graph-div" style="height:330px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("10fe2875-79fe-4e0f-8816-2e7b50c2ae44")) {                    Plotly.newPlot(                        "10fe2875-79fe-4e0f-8816-2e7b50c2ae44",                        [{"hovertemplate":"wbs_code=%{x}\u003cbr\u003eperformance_%_complete_num=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#f59e0b","pattern":{"shape":""}},"name":"","orientation":"v","showlegend":false,"textposition":"auto","x":["No Priority","Sophia-Mall - P.01 - UP-20-April-26","Sophia-Mall - P.01 - UP-20-April-26.KD","Sophia-Mall - P.01 - UP-20-April-26.KD.MI","Sophia-Mall - P.01 - UP-20-April-26.KD.MO","Sophia-Mall - P.01 - UP-20-April-26.EN","Sophia-Mall - P.01 - UP-20-April-26.P","Sophia-Mall - P.01 - UP-20-April-26.CON","Sophia-Mall - P.01 - UP-20-April-26.CON.EW","Sophia-Mall - P.01 - UP-20-April-26.CON.B1","Sophia-Mall - P.01 - UP-20-April-26.CON.PD","Sophia-Mall - P.01 - UP-20-April-26.CON.TR"],"xaxis":"x","y":{"dtype":"f8","bdata":"Di2yne+n1j8OLbKd76fWPwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOLbKd76fWPwAAAAAAAPA\u002fPQrXo3A92j8fhetRuB7VPzMzMzMzM9M\u002f"},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"wbs_code"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"performance_%_complete_num"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"legend":{"tracegroupgap":0,"font":{"size":10},"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"title":{"text":"WBS Progress"},"barmode":"relative","font":{"color":"#f8fafc","family":"Segoe UI, Arial, sans-serif"},"margin":{"l":32,"r":18,"t":48,"b":36},"height":330,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div><div class='md-card'><h3>WBS Register</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>project_id</th>
+      <th>source_project_id</th>
+      <th>wbs_code</th>
+      <th>wbs_name</th>
+      <th>total_activities</th>
+      <th>bl_project_duration</th>
+      <th>remaining_duration</th>
+      <th>total_float</th>
+      <th>bl_project_start</th>
+      <th>bl_project_finish</th>
+      <th>actual_start</th>
+      <th>actual_finish</th>
+      <th>schedule_%_complete</th>
+      <th>performance_%_complete</th>
+      <th>budget_at_completion</th>
+      <th>earned_value_cost</th>
+      <th>planned_value_cost</th>
+      <th>schedule_%_complete_num</th>
+      <th>performance_%_complete_num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall-P.01-UP-20-April-26</td>
+      <td>No Priority</td>
+      <td></td>
+      <td>1064</td>
+      <td>543</td>
+      <td>376</td>
+      <td>0.0</td>
+      <td>25-Aug-25</td>
+      <td>18-Feb-27</td>
+      <td>28-Aug-25</td>
+      <td></td>
+      <td>0.623</td>
+      <td>0.354</td>
+      <td>382400000</td>
+      <td>135369600</td>
+      <td>238235200</td>
+      <td>0.623</td>
+      <td>0.354</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall-P.01-UP-20-April-26</td>
+      <td>Sophia-Mall - P.01 - UP-20-April-26</td>
+      <td>SOPHIA MALL MIXED-USE DEVELOPMENT</td>
+      <td>1064</td>
+      <td>543</td>
+      <td>376</td>
+      <td>-38.0</td>
+      <td>25-Aug-25</td>
+      <td>18-Feb-27</td>
+      <td>28-Aug-25</td>
+      <td></td>
+      <td>0.623</td>
+      <td>0.354</td>
+      <td>382400000</td>
+      <td>135369600</td>
+      <td>238235200</td>
+      <td>0.623</td>
+      <td>0.354</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall-P.01-UP-20-April-26</td>
+      <td>Sophia-Mall - P.01 - UP-20-April-26.KD</td>
+      <td>Key Dates</td>
+      <td>8</td>
+      <td>543</td>
+      <td>376</td>
+      <td>-38.0</td>
+      <td>25-Aug-25</td>
+      <td>18-Feb-27</td>
+      <td>28-Aug-25</td>
+      <td></td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall-P.01-UP-20-April-26</td>
+      <td>Sophia-Mall - P.01 - UP-20-April-26.KD.MI</td>
+      <td>Milestone</td>
+      <td>5</td>
+      <td>543</td>
+      <td>376</td>
+      <td>-38.0</td>
+      <td>25-Aug-25</td>
+      <td>18-Feb-27</td>
+      <td>28-Aug-25</td>
+      <td></td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall-P.01-UP-20-April-26</td>
+      <td>Sophia-Mall - P.01 - UP-20-April-26.KD.MO</td>
+      <td>Mobilization</td>
+      <td>10</td>
+      <td>16</td>
+      <td>0</td>
+      <td></td>
+      <td>25-Aug-25</td>
+      <td>10-Sep-25</td>
+      <td>29-Aug-25</td>
+      <td>15-Sep-25</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall-P.01-UP-20-April-26</td>
+      <td>Sophia-Mall - P.01 - UP-20-April-26.EN</td>
+      <td>Engineering</td>
+      <td>241</td>
+      <td>248</td>
+      <td>32</td>
+      <td>144.0</td>
+      <td>25-Aug-25</td>
+      <td>30-Apr-26</td>
+      <td>28-Aug-25</td>
+      <td></td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall-P.01-UP-20-April-26</td>
+      <td>Sophia-Mall - P.01 - UP-20-April-26.P</td>
+      <td>Procurement</td>
+      <td>86</td>
+      <td>440</td>
+      <td>212</td>
+      <td>88.0</td>
+      <td>25-Aug-25</td>
+      <td>8-Nov-26</td>
+      <td>28-Aug-25</td>
+      <td></td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall-P.01-UP-20-April-26</td>
+      <td>Sophia-Mall - P.01 - UP-20-April-26.CON</td>
+      <td>Construction</td>
+      <td>552</td>
+      <td>492</td>
+      <td>348</td>
+      <td>-26.0</td>
+      <td>29-Sep-25</td>
+      <td>10-Dec-26</td>
+      <td>28-Aug-25</td>
+      <td></td>
+      <td>0.623</td>
+      <td>0.354</td>
+      <td>382400000</td>
+      <td>135369600</td>
+      <td>238235200</td>
+      <td>0.623</td>
+      <td>0.354</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall-P.01-UP-20-April-26</td>
+      <td>Sophia-Mall - P.01 - UP-20-April-26.CON.EW</td>
+      <td>Earth Works</td>
+      <td>31</td>
+      <td>62</td>
+      <td>0</td>
+      <td></td>
+      <td>24-Sep-25</td>
+      <td>25-Nov-25</td>
+      <td>22-Sep-25</td>
+      <td>11-Nov-25</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>21850000</td>
+      <td>21850000</td>
+      <td>21850000</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall-P.01-UP-20-April-26</td>
+      <td>Sophia-Mall - P.01 - UP-20-April-26.CON.B1</td>
+      <td>Basement &amp; Substructure</td>
+      <td>122</td>
+      <td>310</td>
+      <td>188</td>
+      <td>-45.0</td>
+      <td>14-Oct-25</td>
+      <td>20-Aug-26</td>
+      <td>28-Aug-25</td>
+      <td></td>
+      <td>0.68</td>
+      <td>0.41</td>
+      <td>97300000</td>
+      <td>39893000</td>
+      <td>66164000</td>
+      <td>0.68</td>
+      <td>0.41</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='activities' class='md-section'><div class='md-section-head'><span>Activities</span><small>Activity progress, critical path, and variance</small></div><div class='md-kpi-grid'><div class='md-kpi tone-rose'><div class='md-kpi-title'>Critical Activities</div><div class='md-kpi-value'>11</div><div class='md-kpi-note'>Current critical path</div></div><div class='md-kpi tone-gold'><div class='md-kpi-title'>Deviated Activities</div><div class='md-kpi-value'>13</div><div class='md-kpi-note'>Progress or finish variance</div></div><div class='md-kpi tone-cyan'><div class='md-kpi-title'>RFT Activities</div><div class='md-kpi-value'>1</div><div class='md-kpi-note'>Steel/RFT related</div></div></div><div class='md-grid two'><div class='md-card'><div>                            <div id="2557bab1-f314-4a7d-92a4-1eed73198952" class="plotly-graph-div" style="height:330px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("2557bab1-f314-4a7d-92a4-1eed73198952")) {                    Plotly.newPlot(                        "2557bab1-f314-4a7d-92a4-1eed73198952",                        [{"hovertemplate":"\u003cb\u003e%{hovertext}\u003c\u002fb\u003e\u003cbr\u003e\u003cbr\u003eis_critical=No\u003cbr\u003eplanned_progress_num=%{x}\u003cbr\u003eactual_progress_num=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","hovertext":["Project Start Date","Contract Agreement","Mobilization and site logistics setup","Surveying and benchmark establishment","MEP sleeves, embeds and risers coordination","Façade and retail shell finishing"],"legendgroup":"No","marker":{"color":"#10b981","symbol":"circle"},"mode":"markers","name":"No","orientation":"v","showlegend":true,"x":{"dtype":"f8","bdata":"AAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D+4HoXrUbiePwAAAAAAAAAA"},"xaxis":"x","y":{"dtype":"f8","bdata":"AAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D+4HoXrUbiePwAAAAAAAAAA"},"yaxis":"y","type":"scatter"},{"hovertemplate":"\u003cb\u003e%{hovertext}\u003c\u002fb\u003e\u003cbr\u003e\u003cbr\u003eis_critical=Yes\u003cbr\u003eplanned_progress_num=%{x}\u003cbr\u003eactual_progress_num=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","hovertext":["IFC Drawing Package","Structural and architectural shop drawings","Approval of podium and basement drawings","Long lead procurement for steel and MEP sleeves","Bulk excavation and dewatering","RFT for raft foundation","Raft foundation concrete works","Basement B1 columns and walls","Ground floor slab and beams","Testing, commissioning and authorities handover","Substantial Completion"],"legendgroup":"Yes","marker":{"color":"#f43f5e","symbol":"circle"},"mode":"markers","name":"Yes","orientation":"v","showlegend":true,"x":{"dtype":"f8","bdata":"AAAAAAAA8D\u002fNzMzMzMzsP\u002fYoXI\u002fC9eg\u002fcT0K16Nw5T9mZmZmZmbuPz0K16NwPeo\u002f16NwPQrX4z9mZmZmZmbWP5qZmZmZmbk\u002fAAAAAAAAAAAAAAAAAAAAAA=="},"xaxis":"x","y":{"dtype":"f8","bdata":"AAAAAAAA8D9mZmZmZmbuP4\u002fC9Shcj+o\u002fuB6F61G45j8AAAAAAADwP9ejcD0K1+s\u002fH4XrUbge5T+uR+F6FK7XPylcj8L1KLw\u002fAAAAAAAAAAAAAAAAAAAAAA=="},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"planned_progress_num"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"actual_progress_num"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"legend":{"title":{"text":"is_critical"},"tracegroupgap":0,"font":{"size":10},"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"title":{"text":"Planned vs Actual Activity Progress"},"font":{"color":"#f8fafc","family":"Segoe UI, Arial, sans-serif"},"margin":{"l":32,"r":18,"t":48,"b":36},"height":330,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div><div class='md-card'><h3>Critical Activities</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>project_id</th>
+      <th>wbs_id</th>
+      <th>activity_id</th>
+      <th>activity_name</th>
+      <th>planned_start</th>
+      <th>planned_finish</th>
+      <th>actual_start</th>
+      <th>actual_finish</th>
+      <th>forecast_start</th>
+      <th>forecast_finish</th>
+      <th>planned_weight</th>
+      <th>planned_progress</th>
+      <th>actual_progress</th>
+      <th>total_float_days</th>
+      <th>is_critical</th>
+      <th>responsible_party</th>
+      <th>planned_progress_num</th>
+      <th>actual_progress_num</th>
+      <th>planned_weight_num</th>
+      <th>total_float_days_num</th>
+      <th>progress_variance</th>
+      <th>planned_finish_dt</th>
+      <th>forecast_finish_dt</th>
+      <th>actual_finish_dt</th>
+      <th>finish_slip_days</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall.TESTING</td>
+      <td>TST-SM-1080</td>
+      <td>Testing, commissioning and authorities handover</td>
+      <td>28-May-27</td>
+      <td>12-Jul-27</td>
+      <td></td>
+      <td></td>
+      <td>2-Jun-27</td>
+      <td>14-Jul-27</td>
+      <td>0.0241</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-35.0</td>
+      <td>Yes</td>
+      <td>QA/QC</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0241</td>
+      <td>-35.0</td>
+      <td>0.0</td>
+      <td>2027-07-12</td>
+      <td>2027-07-14</td>
+      <td>NaT</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall.MILESTONE</td>
+      <td>KD-MS-1020</td>
+      <td>IFC Drawing Package</td>
+      <td>25-Oct-25</td>
+      <td></td>
+      <td>25-Oct-25 A</td>
+      <td>25-Oct-25 A</td>
+      <td>25-Oct-25</td>
+      <td></td>
+      <td>0.012</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td></td>
+      <td>Yes</td>
+      <td>Engineering</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.012</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>2025-10-25</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall.MILESTONE</td>
+      <td>KD-MS-9000</td>
+      <td>Substantial Completion</td>
+      <td>1-Aug-27</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>6-Aug-27</td>
+      <td></td>
+      <td>0.012</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-37.0</td>
+      <td>Yes</td>
+      <td>Project Controls</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.012</td>
+      <td>-37.0</td>
+      <td>0.0</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall.CONSTRUCTION</td>
+      <td>CON-SM-GF-1050</td>
+      <td>Ground floor slab and beams</td>
+      <td>26-Jun-26</td>
+      <td>4-Sep-26</td>
+      <td>1-Jul-26 A</td>
+      <td></td>
+      <td>1-Jul-26</td>
+      <td>6-Sep-26</td>
+      <td>0.1205</td>
+      <td>0.1</td>
+      <td>0.11</td>
+      <td>-29.0</td>
+      <td>Yes</td>
+      <td>Construction</td>
+      <td>0.1</td>
+      <td>0.11</td>
+      <td>0.1205</td>
+      <td>-29.0</td>
+      <td>0.009999999999999995</td>
+      <td>2026-09-04</td>
+      <td>2026-09-06</td>
+      <td>NaT</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall.CONSTRUCTION</td>
+      <td>CON-SM-B1-1040</td>
+      <td>Basement B1 columns and walls</td>
+      <td>29-Apr-26</td>
+      <td>26-Jun-26</td>
+      <td>10-May-26 A</td>
+      <td></td>
+      <td>10-May-26</td>
+      <td>28-Jun-26</td>
+      <td>0.1205</td>
+      <td>0.35</td>
+      <td>0.37</td>
+      <td>-27.0</td>
+      <td>Yes</td>
+      <td>Construction</td>
+      <td>0.35</td>
+      <td>0.37</td>
+      <td>0.1205</td>
+      <td>-27.0</td>
+      <td>0.020000000000000018</td>
+      <td>2026-06-26</td>
+      <td>2026-06-28</td>
+      <td>NaT</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall.PROCUREMENT</td>
+      <td>P-MDEL-SM-1000</td>
+      <td>Long lead procurement for steel and MEP sleeves</td>
+      <td>24-Dec-25</td>
+      <td>2-Mar-26</td>
+      <td>1-Jan-26 A</td>
+      <td></td>
+      <td>1-Jan-26</td>
+      <td>4-Mar-26</td>
+      <td>0.0602</td>
+      <td>0.67</td>
+      <td>0.71</td>
+      <td>-19.0</td>
+      <td>Yes</td>
+      <td>Procurement</td>
+      <td>0.67</td>
+      <td>0.71</td>
+      <td>0.0602</td>
+      <td>-19.0</td>
+      <td>0.039999999999999925</td>
+      <td>2026-03-02</td>
+      <td>2026-03-04</td>
+      <td>NaT</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall.CONSTRUCTION</td>
+      <td>CON-SM-CON-1030</td>
+      <td>Raft foundation concrete works</td>
+      <td>30-Mar-26</td>
+      <td>29-Apr-26</td>
+      <td>7-Apr-26 A</td>
+      <td></td>
+      <td>7-Apr-26</td>
+      <td>1-May-26</td>
+      <td>0.1205</td>
+      <td>0.62</td>
+      <td>0.66</td>
+      <td>-25.0</td>
+      <td>Yes</td>
+      <td>Construction</td>
+      <td>0.62</td>
+      <td>0.66</td>
+      <td>0.1205</td>
+      <td>-25.0</td>
+      <td>0.040000000000000036</td>
+      <td>2026-04-29</td>
+      <td>2026-05-01</td>
+      <td>NaT</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall.ENGINEERING</td>
+      <td>E-SUB-SM-1020</td>
+      <td>Structural and architectural shop drawings</td>
+      <td>22-Nov-25</td>
+      <td>6-Jan-26</td>
+      <td>3-Dec-25 A</td>
+      <td></td>
+      <td>3-Dec-25</td>
+      <td>8-Jan-26</td>
+      <td>0.0361</td>
+      <td>0.9</td>
+      <td>0.95</td>
+      <td>-15.0</td>
+      <td>Yes</td>
+      <td>Engineering</td>
+      <td>0.9</td>
+      <td>0.95</td>
+      <td>0.0361</td>
+      <td>-15.0</td>
+      <td>0.04999999999999993</td>
+      <td>2026-01-06</td>
+      <td>2026-01-08</td>
+      <td>NaT</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall.ENGINEERING</td>
+      <td>E-APP-SM-1020</td>
+      <td>Approval of podium and basement drawings</td>
+      <td>5-Jan-26</td>
+      <td>10-Feb-26</td>
+      <td>10-Jan-26 A</td>
+      <td></td>
+      <td>10-Jan-26</td>
+      <td>12-Feb-26</td>
+      <td>0.0361</td>
+      <td>0.78</td>
+      <td>0.83</td>
+      <td>-17.0</td>
+      <td>Yes</td>
+      <td>Engineer</td>
+      <td>0.78</td>
+      <td>0.83</td>
+      <td>0.0361</td>
+      <td>-17.0</td>
+      <td>0.04999999999999993</td>
+      <td>2026-02-10</td>
+      <td>2026-02-12</td>
+      <td>NaT</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Sophia-Mall.CONSTRUCTION</td>
+      <td>CON-SM-EXC-1010</td>
+      <td>Bulk excavation and dewatering</td>
+      <td>9-Dec-25</td>
+      <td>19-Mar-26</td>
+      <td>20-Dec-25 A</td>
+      <td>1-Apr-26 A</td>
+      <td>20-Dec-25</td>
+      <td>21-Mar-26</td>
+      <td>0.1205</td>
+      <td>0.95</td>
+      <td>1.0</td>
+      <td></td>
+      <td>Yes</td>
+      <td>Construction</td>
+      <td>0.95</td>
+      <td>1.0</td>
+      <td>0.1205</td>
+      <td>0.0</td>
+      <td>0.050000000000000044</td>
+      <td>2026-03-19</td>
+      <td>2026-03-21</td>
+      <td>2026-04-01</td>
+      <td>2.0</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='milestones' class='md-section'><div class='md-section-head'><span>Main Milestones</span><small>Milestones and change-order context</small></div><div class='md-grid two'><div class='md-card'><h3>Main Milestones</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>milestone_id</th>
+      <th>project_id</th>
+      <th>activity_name</th>
+      <th>planned_date</th>
+      <th>forecast_date</th>
+      <th>actual_date</th>
+      <th>milestone_contractual_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>KD-MS-1000</td>
+      <td>Sophia-Mall</td>
+      <td>Project Start Date</td>
+      <td>15-Oct-25</td>
+      <td>15-Oct-25</td>
+      <td>15-Oct-25</td>
+      <td>Start milestone</td>
+    </tr>
+    <tr>
+      <td>KD-MS-1010</td>
+      <td>Sophia-Mall</td>
+      <td>Contract Agreement</td>
+      <td>15-Oct-25</td>
+      <td>15-Oct-25</td>
+      <td>15-Oct-25</td>
+      <td>Start milestone</td>
+    </tr>
+    <tr>
+      <td>KD-MS-1020</td>
+      <td>Sophia-Mall</td>
+      <td>IFC Drawing Package</td>
+      <td>22-Oct-25</td>
+      <td>27-Oct-25</td>
+      <td>22-Oct-25</td>
+      <td>Key milestone</td>
+    </tr>
+    <tr>
+      <td>KD-MS-5000</td>
+      <td>Sophia-Mall</td>
+      <td>Structural Works Completion</td>
+      <td>15-Oct-26</td>
+      <td>30-Oct-26</td>
+      <td></td>
+      <td>Interim milestone</td>
+    </tr>
+    <tr>
+      <td>KD-MS-9000</td>
+      <td>Sophia-Mall</td>
+      <td>Substantial Completion</td>
+      <td>31-Jul-27</td>
+      <td>25-Aug-27</td>
+      <td></td>
+      <td>Finish milestone</td>
+    </tr>
+  </tbody>
+</table></div><div class='md-card'><h3>Change Orders</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>change_order_id</th>
+      <th>contract_id</th>
+      <th>project_id</th>
+      <th>title</th>
+      <th>submitted_date</th>
+      <th>approved_date</th>
+      <th>status</th>
+      <th>claimed_amount</th>
+      <th>approved_amount</th>
+      <th>cost_impact</th>
+      <th>time_impact_days</th>
+      <th>owner_response_due</th>
+      <th>claimed_amount_num</th>
+      <th>approved_amount_num</th>
+      <th>cost_impact_num</th>
+      <th>time_impact_days_num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CO-001</td>
+      <td>SM-PH-01</td>
+      <td>Sophia-Mall</td>
+      <td>Additional dewatering and temporary works</td>
+      <td>29-Dec-25</td>
+      <td>16-Feb-26</td>
+      <td>Approved</td>
+      <td>37800000</td>
+      <td>31500000</td>
+      <td>Yes</td>
+      <td>0</td>
+      <td>26-Jan-26</td>
+      <td>37800000.0</td>
+      <td>31500000.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>CO-002</td>
+      <td>SM-PH-01</td>
+      <td>Sophia-Mall</td>
+      <td>Revised structural details and access sequence</td>
+      <td>2-Mar-26</td>
+      <td></td>
+      <td>Under Review</td>
+      <td>25200000</td>
+      <td>0</td>
+      <td>Yes</td>
+      <td>17</td>
+      <td>30-Mar-26</td>
+      <td>25200000.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>17.0</td>
+    </tr>
+    <tr>
+      <td>CO-003</td>
+      <td>SM-PH-02</td>
+      <td>Sophia-Mall</td>
+      <td>Additional night shift and traffic control measures</td>
+      <td>18-Apr-26</td>
+      <td></td>
+      <td>Submitted</td>
+      <td>12600000</td>
+      <td>0</td>
+      <td>Yes</td>
+      <td>7</td>
+      <td>16-May-26</td>
+      <td>12600000.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>7.0</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='s_curve' class='md-section'><div class='md-section-head'><span>S-Curve Analysis</span><small>Planned, actual, and invoiced curves</small></div><div class='md-grid two'><div class='md-card wide'><div>                            <div id="173d1fa7-b486-4124-a5e7-1c41798a77fa" class="plotly-graph-div" style="height:360px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("173d1fa7-b486-4124-a5e7-1c41798a77fa")) {                    Plotly.newPlot(                        "173d1fa7-b486-4124-a5e7-1c41798a77fa",                        [{"hovertemplate":"Curve=Planned\u003cbr\u003eMonth=%{x}\u003cbr\u003eValue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Planned","line":{"color":"#000001","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines+markers","name":"Planned","orientation":"v","showlegend":true,"x":["1-Oct-25","1-Nov-25","1-Dec-25","1-Jan-26","1-Feb-26","1-Mar-26","1-Apr-26","1-May-26","1-Jun-26","1-Jul-26"],"xaxis":"x","y":{"dtype":"f8","bdata":"AAAAAPQGhEEAAAAAbgqeQQAAAECmRbBBAAAAwP7JvEEAAADgmufFQQAAAKClqs5BAAAAYLxm00EAAAAgCijXQQAAAEAgSdpBAAAAwP7J3EE="},"yaxis":"y","type":"scatter"},{"hovertemplate":"Curve=Actual\u003cbr\u003eMonth=%{x}\u003cbr\u003eValue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Actual","line":{"color":"#000002","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines+markers","name":"Actual","orientation":"v","showlegend":true,"x":["1-Oct-25","1-Nov-25","1-Dec-25","1-Jan-26","1-Feb-26","1-Mar-26","1-Apr-26","1-May-26","1-Jun-26","1-Jul-26"],"xaxis":"x","y":{"dtype":"f8","bdata":"AAAAgGILgkEAAABAHbSbQQAAAHBVwa5BAAAAGHrZu0EAAAA8kKXFQQAAABww785BAAAApJvo00EAAACUuiDYQQAAAG5MWNpBAAAA7tkq3EE="},"yaxis":"y","type":"scatter"},{"hovertemplate":"Curve=Invoiced\u003cbr\u003eMonth=%{x}\u003cbr\u003eValue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Invoiced","line":{"color":"#000003","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines+markers","name":"Invoiced","orientation":"v","showlegend":true,"x":["1-Oct-25","1-Nov-25","1-Dec-25","1-Jan-26","1-Feb-26","1-Mar-26","1-Apr-26","1-May-26","1-Jun-26","1-Jul-26"],"xaxis":"x","y":{"dtype":"f8","bdata":"AAAAAAAAAAAAAAAAAAAAAAAAADCNXppBAAAAnAdSsEEAAABs4F28QQAAAEZ8bcVBAAAAMDpbzEEAAACgG3jRQQAAAPPPMtNBAAAAM7me1EE="},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Month"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Value"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"legend":{"title":{"text":"Curve"},"tracegroupgap":0,"font":{"size":10},"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"title":{"text":"S-Curve and Invoicing Trend"},"font":{"color":"#f8fafc","family":"Segoe UI, Arial, sans-serif"},"margin":{"l":32,"r":18,"t":48,"b":36},"height":360,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div><div class='md-card'><h3>S-Curve Data</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>project_id</th>
+      <th>months</th>
+      <th>monthly_planned</th>
+      <th>cumm_monthly_planned</th>
+      <th>monthly_actual</th>
+      <th>cumm_monthly_actual</th>
+      <th>monthly_invoiced</th>
+      <th>cumm_monthly_invoiced</th>
+      <th>MonthSort</th>
+      <th>Month</th>
+      <th>Planned</th>
+      <th>Actual</th>
+      <th>Invoiced</th>
+      <th>planned_value_num</th>
+      <th>actual_cost_num</th>
+      <th>invoice_amount_num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>1-Oct-25</td>
+      <td>42000000.0</td>
+      <td>42000000.0</td>
+      <td>37842000.0</td>
+      <td>37842000.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2025-10-01</td>
+      <td>1-Oct-25</td>
+      <td>42000000.0</td>
+      <td>37842000.0</td>
+      <td>0.0</td>
+      <td>42000000.0</td>
+      <td>37842000.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>1-Nov-25</td>
+      <td>84000000.0</td>
+      <td>126000000.0</td>
+      <td>78355200.0</td>
+      <td>116197200.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2025-11-01</td>
+      <td>1-Nov-25</td>
+      <td>126000000.0</td>
+      <td>116197200.0</td>
+      <td>0.0</td>
+      <td>84000000.0</td>
+      <td>78355200.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>1-Dec-25</td>
+      <td>147000000.0</td>
+      <td>273000000.0</td>
+      <td>141796200.0</td>
+      <td>257993400.0</td>
+      <td>110601036.0</td>
+      <td>110601036.0</td>
+      <td>2025-12-01</td>
+      <td>1-Dec-25</td>
+      <td>273000000.0</td>
+      <td>257993400.0</td>
+      <td>110601036.0</td>
+      <td>147000000.0</td>
+      <td>141796200.0</td>
+      <td>110601036.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>1-Jan-26</td>
+      <td>210000000.0</td>
+      <td>483000000.0</td>
+      <td>209244000.0</td>
+      <td>467237400.0</td>
+      <td>163210320.0</td>
+      <td>273811356.0</td>
+      <td>2026-01-01</td>
+      <td>1-Jan-26</td>
+      <td>483000000.0</td>
+      <td>467237400.0</td>
+      <td>273811356.0</td>
+      <td>210000000.0</td>
+      <td>209244000.0</td>
+      <td>163210320.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>1-Feb-26</td>
+      <td>252000000.0</td>
+      <td>735000000.0</td>
+      <td>259106400.0</td>
+      <td>726343800.0</td>
+      <td>202102992.0</td>
+      <td>475914348.0</td>
+      <td>2026-02-01</td>
+      <td>1-Feb-26</td>
+      <td>735000000.0</td>
+      <td>726343800.0</td>
+      <td>475914348.0</td>
+      <td>252000000.0</td>
+      <td>259106400.0</td>
+      <td>202102992.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>1-Mar-26</td>
+      <td>294000000.0</td>
+      <td>1029000000.0</td>
+      <td>311640000.0</td>
+      <td>1037983800.0</td>
+      <td>243079200.0</td>
+      <td>718993548.0</td>
+      <td>2026-03-01</td>
+      <td>1-Mar-26</td>
+      <td>1029000000.0</td>
+      <td>1037983800.0</td>
+      <td>718993548.0</td>
+      <td>294000000.0</td>
+      <td>311640000.0</td>
+      <td>243079200.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>1-Apr-26</td>
+      <td>273000000.0</td>
+      <td>1302000000.0</td>
+      <td>298061400.0</td>
+      <td>1336045200.0</td>
+      <td>232487892.0</td>
+      <td>951481440.0</td>
+      <td>2026-04-01</td>
+      <td>1-Apr-26</td>
+      <td>1302000000.0</td>
+      <td>1336045200.0</td>
+      <td>951481440.0</td>
+      <td>273000000.0</td>
+      <td>298061400.0</td>
+      <td>232487892.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>1-May-26</td>
+      <td>252000000.0</td>
+      <td>1554000000.0</td>
+      <td>283147200.0</td>
+      <td>1619192400.0</td>
+      <td>220854816.0</td>
+      <td>1172336256.0</td>
+      <td>2026-05-01</td>
+      <td>1-May-26</td>
+      <td>1554000000.0</td>
+      <td>1619192400.0</td>
+      <td>1172336256.0</td>
+      <td>252000000.0</td>
+      <td>283147200.0</td>
+      <td>220854816.0</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='evm' class='md-section'><div class='md-section-head'><span>Earned Value Management</span><small>BAC, PV, EV, AC, SPI/CPI support</small></div><div class='md-grid two'><div class='md-card'><div>                            <div id="1251139d-f401-43d9-b0b0-5680a76c6cf0" class="plotly-graph-div" style="height:330px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("1251139d-f401-43d9-b0b0-5680a76c6cf0")) {                    Plotly.newPlot(                        "1251139d-f401-43d9-b0b0-5680a76c6cf0",                        [{"hovertemplate":"Metric=%{x}\u003cbr\u003eValue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#f59e0b","pattern":{"shape":""}},"name":"","orientation":"v","showlegend":false,"textposition":"auto","x":["BAC","PV","EV","AC"],"xaxis":"x","y":{"dtype":"f8","bdata":"1qMAQN1K30FxPfrl05PQQY\u002fCBRIqY9FBZmb2Fqc20UE="},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Metric"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Value"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"legend":{"tracegroupgap":0,"font":{"size":10},"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"title":{"text":"EVM Value Comparison"},"barmode":"relative","font":{"color":"#f8fafc","family":"Segoe UI, Arial, sans-serif"},"margin":{"l":32,"r":18,"t":48,"b":36},"height":330,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div><div class='md-card'><h3>EVM Readout</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Metric</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>BAC</td>
+      <td>EGP 2,100,000,000</td>
+    </tr>
+    <tr>
+      <td>PV</td>
+      <td>EGP 1,112,493,976</td>
+    </tr>
+    <tr>
+      <td>EV</td>
+      <td>EGP 1,166,846,024</td>
+    </tr>
+    <tr>
+      <td>AC</td>
+      <td>EGP 1,155,177,564</td>
+    </tr>
+    <tr>
+      <td>SV</td>
+      <td>EGP 54,352,048</td>
+    </tr>
+    <tr>
+      <td>CV</td>
+      <td>EGP 11,668,460</td>
+    </tr>
+    <tr>
+      <td>EAC</td>
+      <td>EGP 2,088,331,540</td>
+    </tr>
+    <tr>
+      <td>TCPI</td>
+      <td>1.000</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='contracts' class='md-section'><div class='md-section-head'><span>Contracts</span><small>Contract, payment, and commercial position</small></div><div class='md-kpi-grid'><div class='md-kpi tone-violet'><div class='md-kpi-title'>Contracts</div><div class='md-kpi-value'>2</div><div class='md-kpi-note'>Loaded records</div></div><div class='md-kpi tone-gold'><div class='md-kpi-title'>Contract Value</div><div class='md-kpi-value'>EGP 2,478,000,000</div><div class='md-kpi-note'>Active contracts</div></div><div class='md-kpi tone-sapphire'><div class='md-kpi-title'>Certified</div><div class='md-kpi-value'>EGP 970,200,000</div><div class='md-kpi-note'>Payment certificates</div></div><div class='md-kpi tone-emerald'><div class='md-kpi-title'>Paid</div><div class='md-kpi-value'>EGP 809,004,000</div><div class='md-kpi-note'>Actual paid</div></div></div><div class='md-grid two'><div class='md-card'><h3>Contracts</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>contract_id</th>
+      <th>project_id</th>
+      <th>package</th>
+      <th>contractor</th>
+      <th>contract_type</th>
+      <th>original_value</th>
+      <th>approved_variations</th>
+      <th>pending_variations</th>
+      <th>paid_to_date</th>
+      <th>retention_percent</th>
+      <th>status</th>
+      <th>original_value_num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SM-PH-01</td>
+      <td>Sophia-Mall</td>
+      <td>1</td>
+      <td>Delta Build Contractors</td>
+      <td>Unit rate</td>
+      <td>2100000000</td>
+      <td>73500000</td>
+      <td>25200000</td>
+      <td>519750000</td>
+      <td>5%</td>
+      <td>Active</td>
+      <td>2100000000.0</td>
+    </tr>
+    <tr>
+      <td>SM-PH-02</td>
+      <td>Sophia-Mall</td>
+      <td>2</td>
+      <td>Delta Build Contractors</td>
+      <td>Lump sum</td>
+      <td>378000000</td>
+      <td>3780000</td>
+      <td>7560000</td>
+      <td>43659000</td>
+      <td>5%</td>
+      <td>Active</td>
+      <td>378000000.0</td>
+    </tr>
+  </tbody>
+</table></div><div class='md-card'><h3>Payments</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>project_id</th>
+      <th>payment</th>
+      <th>contract</th>
+      <th>project</th>
+      <th>invoice no</th>
+      <th>invoice date</th>
+      <th>certified amount</th>
+      <th>paid amount</th>
+      <th>payment status</th>
+      <th>Contractual interest due</th>
+      <th>Date of Cash Cheque Receipt</th>
+      <th>Period for payment release</th>
+      <th>Period in which interest is applied</th>
+      <th>Amount of interest claimed (EGP)</th>
+      <th>delayed duration(Days)</th>
+      <th>Unnamed: 14</th>
+      <th>Unnamed: 15</th>
+      <th>Unnamed: 16</th>
+      <th>payment_id</th>
+      <th>contract_id</th>
+      <th>invoice_no</th>
+      <th>invoice_date</th>
+      <th>payment_date</th>
+      <th>certified_amount</th>
+      <th>paid_amount</th>
+      <th>payment_status</th>
+      <th>delayed_duration_days</th>
+      <th>certified_amount_num</th>
+      <th>paid_amount_num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>1.0</td>
+      <td>SM-PH-01</td>
+      <td>Sophia-Mall</td>
+      <td>1.0</td>
+      <td>28-Jan-26</td>
+      <td>98700000.0</td>
+      <td>98700000.0</td>
+      <td>Paid</td>
+      <td>45.0</td>
+      <td>14-Mar-26</td>
+      <td>45.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>1.0</td>
+      <td>SM-PH-01</td>
+      <td>1.0</td>
+      <td>28-Jan-26</td>
+      <td>14-Mar-26</td>
+      <td>98700000.0</td>
+      <td>98700000.0</td>
+      <td>Paid</td>
+      <td>0.0</td>
+      <td>98700000.0</td>
+      <td>98700000.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>2.0</td>
+      <td>SM-PH-01</td>
+      <td>Sophia-Mall</td>
+      <td>2.0</td>
+      <td>27-Feb-26</td>
+      <td>123900000.0</td>
+      <td>123900000.0</td>
+      <td>Paid</td>
+      <td>45.0</td>
+      <td>13-Apr-26</td>
+      <td>45.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>2.0</td>
+      <td>SM-PH-01</td>
+      <td>2.0</td>
+      <td>27-Feb-26</td>
+      <td>13-Apr-26</td>
+      <td>123900000.0</td>
+      <td>123900000.0</td>
+      <td>Paid</td>
+      <td>0.0</td>
+      <td>123900000.0</td>
+      <td>123900000.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>3.0</td>
+      <td>SM-PH-01</td>
+      <td>Sophia-Mall</td>
+      <td>3.0</td>
+      <td>29-Mar-26</td>
+      <td>149100000.0</td>
+      <td>149100000.0</td>
+      <td>Paid</td>
+      <td>45.0</td>
+      <td>13-May-26</td>
+      <td>45.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>3.0</td>
+      <td>SM-PH-01</td>
+      <td>3.0</td>
+      <td>29-Mar-26</td>
+      <td>13-May-26</td>
+      <td>149100000.0</td>
+      <td>149100000.0</td>
+      <td>Paid</td>
+      <td>0.0</td>
+      <td>149100000.0</td>
+      <td>149100000.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>4.0</td>
+      <td>SM-PH-01</td>
+      <td>Sophia-Mall</td>
+      <td>4.0</td>
+      <td>28-Apr-26</td>
+      <td>174300000.0</td>
+      <td>174300000.0</td>
+      <td>Paid</td>
+      <td>45.0</td>
+      <td>12-Jun-26</td>
+      <td>45.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>4.0</td>
+      <td>SM-PH-01</td>
+      <td>4.0</td>
+      <td>28-Apr-26</td>
+      <td>12-Jun-26</td>
+      <td>174300000.0</td>
+      <td>174300000.0</td>
+      <td>Paid</td>
+      <td>0.0</td>
+      <td>174300000.0</td>
+      <td>174300000.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>5.0</td>
+      <td>SM-PH-01</td>
+      <td>Sophia-Mall</td>
+      <td>5.0</td>
+      <td>28-May-26</td>
+      <td>199500000.0</td>
+      <td>123690000.0</td>
+      <td>Partially Paid</td>
+      <td>45.0</td>
+      <td>12-Jul-26</td>
+      <td>45.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>5.0</td>
+      <td>SM-PH-01</td>
+      <td>5.0</td>
+      <td>28-May-26</td>
+      <td>12-Jul-26</td>
+      <td>199500000.0</td>
+      <td>123690000.0</td>
+      <td>Partially Paid</td>
+      <td>0.0</td>
+      <td>199500000.0</td>
+      <td>123690000.0</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>6.0</td>
+      <td>SM-PH-01</td>
+      <td>Sophia-Mall</td>
+      <td>6.0</td>
+      <td>27-Jun-26</td>
+      <td>224700000.0</td>
+      <td>139314000.0</td>
+      <td>Certified</td>
+      <td>45.0</td>
+      <td></td>
+      <td></td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>6.0</td>
+      <td>SM-PH-01</td>
+      <td>6.0</td>
+      <td>27-Jun-26</td>
+      <td></td>
+      <td>224700000.0</td>
+      <td>139314000.0</td>
+      <td>Certified</td>
+      <td></td>
+      <td>224700000.0</td>
+      <td>139314000.0</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='letters' class='md-section'><div class='md-section-head'><span>Letters Intelligence</span><small>Correspondence threads and source status</small></div><div class='md-grid two'><div class='md-card'><h3>Top Correspondence Threads</h3><div class='md-empty'>No project-scoped records available.</div></div><div class='md-card'><h3>Letter Sources</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Workbook/Inboxes</th>
+      <th>Project Scope</th>
+      <th>Thread Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Project letters workbook and project inbox folders</td>
+      <td>Sophia-Mall</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='risks' class='md-section'><div class='md-section-head'><span>Risk Analysis</span><small>Risk matrix inputs, RFIs, steel, and IFC conflicts</small></div><div class='md-kpi-grid'><div class='md-kpi tone-rose'><div class='md-kpi-title'>Total Risks</div><div class='md-kpi-value'>3</div><div class='md-kpi-note'>Risk register</div></div><div class='md-kpi tone-gold'><div class='md-kpi-title'>Steel Issues</div><div class='md-kpi-value'>4</div><div class='md-kpi-note'>Steel delay records</div></div><div class='md-kpi tone-sapphire'><div class='md-kpi-title'>RFIs</div><div class='md-kpi-value'>5</div><div class='md-kpi-note'>RFI status records</div></div><div class='md-kpi tone-violet'><div class='md-kpi-title'>IFC Conflicts</div><div class='md-kpi-value'>4</div><div class='md-kpi-note'>Design conflict records</div></div></div><div class='md-grid two'><div class='md-card'><div>                            <div id="7722b56b-075b-4489-b38a-469f1e9cf04f" class="plotly-graph-div" style="height:330px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("7722b56b-075b-4489-b38a-469f1e9cf04f")) {                    Plotly.newPlot(                        "7722b56b-075b-4489-b38a-469f1e9cf04f",                        [{"hovertemplate":"Status=%{x}\u003cbr\u003eCount=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#f59e0b","pattern":{"shape":""}},"name":"","orientation":"v","showlegend":false,"textposition":"auto","x":["open","monitoring"],"xaxis":"x","y":{"dtype":"i1","bdata":"AgE="},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Status"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Count"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"legend":{"tracegroupgap":0,"font":{"size":10},"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"title":{"text":"Risk Status Breakdown"},"barmode":"relative","font":{"color":"#f8fafc","family":"Segoe UI, Arial, sans-serif"},"margin":{"l":32,"r":18,"t":48,"b":36},"height":330,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div><div class='md-card'><h3>Risk Register</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>risk_id</th>
+      <th>project_id</th>
+      <th>risk_title</th>
+      <th>risk_category</th>
+      <th>probability</th>
+      <th>time_impact_days</th>
+      <th>cost_impact</th>
+      <th>response_strategy</th>
+      <th>owner</th>
+      <th>status</th>
+      <th>due_date</th>
+      <th>probability_norm</th>
+      <th>time_impact_flag</th>
+      <th>cost_impact_flag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>R-001</td>
+      <td>Sophia-Mall</td>
+      <td>Steel delivery delay</td>
+      <td>Schedule</td>
+      <td>medium</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>Mitigate</td>
+      <td>Project manager</td>
+      <td>open</td>
+      <td>30-Jun-26</td>
+      <td>medium</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <td>R-002</td>
+      <td>Sophia-Mall</td>
+      <td>Late design clarification and IFC revisions</td>
+      <td>Engineering</td>
+      <td>medium</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>Transfer</td>
+      <td>Technical office manager</td>
+      <td>open</td>
+      <td>15-Jul-26</td>
+      <td>medium</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <td>R-003</td>
+      <td>Sophia-Mall</td>
+      <td>Cashflow pressure due to delayed certification</td>
+      <td>Commercial</td>
+      <td>medium</td>
+      <td>no</td>
+      <td>yes</td>
+      <td>Mitigate</td>
+      <td>Commercial manager</td>
+      <td>monitoring</td>
+      <td>31-Jul-26</td>
+      <td>medium</td>
+      <td>no</td>
+      <td>yes</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='delay' class='md-section'><div class='md-section-head'><span>Delay &amp; Time Impact</span><small>Delay register, EOT signal, and responsibility split</small></div><div class='md-kpi-grid'><div class='md-kpi tone-rose'><div class='md-kpi-title'>Delay Events</div><div class='md-kpi-value'>5</div><div class='md-kpi-note'>Loaded events</div></div><div class='md-kpi tone-gold'><div class='md-kpi-title'>Delay Days</div><div class='md-kpi-value'>128</div><div class='md-kpi-note'>Indicative days</div></div><div class='md-kpi tone-sapphire'><div class='md-kpi-title'>Employer Delays</div><div class='md-kpi-value'>5</div><div class='md-kpi-note'>Client/Employer</div></div><div class='md-kpi tone-emerald'><div class='md-kpi-title'>EOT Potential</div><div class='md-kpi-value'>5</div><div class='md-kpi-note'>Potential items</div></div></div><div class='md-grid two'><div class='md-card'><div>                            <div id="c99e4982-b149-4456-95b0-92b9b80c5090" class="plotly-graph-div" style="height:330px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("c99e4982-b149-4456-95b0-92b9b80c5090")) {                    Plotly.newPlot(                        "c99e4982-b149-4456-95b0-92b9b80c5090",                        [{"hovertemplate":"Responsible Group=%{x}\u003cbr\u003eCount=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#f59e0b","pattern":{"shape":""}},"name":"","orientation":"v","showlegend":false,"textposition":"auto","x":["Employer \u002f Client"],"xaxis":"x","y":{"dtype":"i1","bdata":"BQ=="},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Responsible Group"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Count"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"legend":{"tracegroupgap":0,"font":{"size":10},"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"title":{"text":"Delay Responsibility"},"barmode":"relative","font":{"color":"#f8fafc","family":"Segoe UI, Arial, sans-serif"},"margin":{"l":32,"r":18,"t":48,"b":36},"height":330,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div><div class='md-card'><h3>Delay Register</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>project_id</th>
+      <th>Primary Event ID</th>
+      <th>Activity ID</th>
+      <th>Activity Name</th>
+      <th>BL Start</th>
+      <th>BL Finish</th>
+      <th>Start</th>
+      <th>Finish</th>
+      <th>Delayed duration</th>
+      <th>Overlap Start</th>
+      <th>Overlap Finish</th>
+      <th>BL Critical Path</th>
+      <th>Current Critical Path</th>
+      <th>Delayed duration after overlap</th>
+      <th>delay_id</th>
+      <th>delay_title</th>
+      <th>activity_id</th>
+      <th>activity_name</th>
+      <th>start_date</th>
+      <th>end_date</th>
+      <th>estimated_delay_days</th>
+      <th>approved_eot_days</th>
+      <th>responsibility</th>
+      <th>cause_category</th>
+      <th>notice_ref</th>
+      <th>status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Delay in employer free issue steel supply</td>
+      <td>CON-SM-EXC-1010</td>
+      <td>Bulk excavation and dewatering</td>
+      <td>9-Dec-25</td>
+      <td>19-Mar-26</td>
+      <td>14-Dec-25</td>
+      <td>3-Apr-26</td>
+      <td>-15</td>
+      <td>14-Dec-25</td>
+      <td>3-Apr-26</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>15</td>
+      <td>Delay in employer free issue steel supply</td>
+      <td>Delay in employer free issue steel supply</td>
+      <td>CON-SM-EXC-1010</td>
+      <td>Bulk excavation and dewatering</td>
+      <td>14-Dec-25</td>
+      <td>3-Apr-26</td>
+      <td>15</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>Delay in employer free issue steel supply</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Late IFC / design clarification</td>
+      <td>CON-SM-RFT-1020</td>
+      <td>RFT for raft foundation</td>
+      <td>22-Feb-26</td>
+      <td>30-Mar-26</td>
+      <td>4-Mar-26</td>
+      <td>20-Apr-26</td>
+      <td>-21</td>
+      <td>4-Mar-26</td>
+      <td>20-Apr-26</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>21</td>
+      <td>Late IFC / design clarification</td>
+      <td>Late IFC / design clarification</td>
+      <td>CON-SM-RFT-1020</td>
+      <td>RFT for raft foundation</td>
+      <td>4-Mar-26</td>
+      <td>20-Apr-26</td>
+      <td>21</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>Late IFC / design clarification</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Delayed RFI response</td>
+      <td>CON-SM-CON-1030</td>
+      <td>Raft foundation concrete works</td>
+      <td>30-Mar-26</td>
+      <td>29-Apr-26</td>
+      <td>14-Apr-26</td>
+      <td>26-May-26</td>
+      <td>-27</td>
+      <td>14-Apr-26</td>
+      <td>26-May-26</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>27</td>
+      <td>Delayed RFI response</td>
+      <td>Delayed RFI response</td>
+      <td>CON-SM-CON-1030</td>
+      <td>Raft foundation concrete works</td>
+      <td>14-Apr-26</td>
+      <td>26-May-26</td>
+      <td>27</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>Delayed RFI response</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>Access constraint and traffic diversion</td>
+      <td>CON-SM-B1-1040</td>
+      <td>Basement B1 columns and walls</td>
+      <td>29-Apr-26</td>
+      <td>26-Jun-26</td>
+      <td>19-May-26</td>
+      <td>29-Jul-26</td>
+      <td>-33</td>
+      <td>19-May-26</td>
+      <td>29-Jul-26</td>
+      <td>No</td>
+      <td>No</td>
+      <td>33</td>
+      <td>Access constraint and traffic diversion</td>
+      <td>Access constraint and traffic diversion</td>
+      <td>CON-SM-B1-1040</td>
+      <td>Basement B1 columns and walls</td>
+      <td>19-May-26</td>
+      <td>29-Jul-26</td>
+      <td>33</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>Access constraint and traffic diversion</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>Sophia-Mall</td>
+      <td>MEP sleeve coordination delay</td>
+      <td>CON-SM-GF-1050</td>
+      <td>Ground floor slab and beams</td>
+      <td>26-Jun-26</td>
+      <td>4-Sep-26</td>
+      <td>21-Jul-26</td>
+      <td>13-Oct-26</td>
+      <td>-39</td>
+      <td>21-Jul-26</td>
+      <td>13-Oct-26</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>32</td>
+      <td>MEP sleeve coordination delay</td>
+      <td>MEP sleeve coordination delay</td>
+      <td>CON-SM-GF-1050</td>
+      <td>Ground floor slab and beams</td>
+      <td>21-Jul-26</td>
+      <td>13-Oct-26</td>
+      <td>32</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>MEP sleeve coordination delay</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+  </tbody>
+</table></div></div></section></div><div class="footer">Generated from Project Intelligence Hub project-scoped data. No cross-project fallback is used for project-specific exports.</div></main><script>
+(function(){
+  const buttons = Array.from(document.querySelectorAll('.md-tab-button'));
+  const sections = Array.from(document.querySelectorAll('.md-section'));
+  function showTab(tabId){
+    buttons.forEach(function(btn) { btn.classList.toggle('active', btn.getAttribute('for') === 'md-tab-' + tabId); });
+    sections.forEach(function(section) { section.classList.toggle('active', section.id === tabId); });
+    window.dispatchEvent(new Event('resize'));
+  }
+  buttons.forEach(function(btn) {
+    btn.addEventListener('click', function() { showTab(btn.getAttribute('for').replace('md-tab-', '')); });
+  });
+  if (buttons.length && !document.querySelector('.md-section.active')) {
+    showTab(buttons[0].getAttribute('for').replace('md-tab-', '') || 'overview');
+  }
+})();
+</script></body></html>

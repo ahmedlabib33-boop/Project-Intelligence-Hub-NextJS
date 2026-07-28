@@ -1,0 +1,1500 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Master Dashboard - Suez Tunnel Civil &amp; MEP Works</title>
+<script src='https://cdn.plot.ly/plotly-2.35.2.min.js'></script>
+<style>
+:root{--bg:#0a0e27;--card:rgba(15,23,42,.86);--card2:rgba(30,41,59,.62);--line:rgba(148,163,184,.18);--gold:#f59e0b;--emerald:#10b981;--rose:#f43f5e;--cyan:#06b6d4;--sapphire:#3b82f6;--violet:#8b5cf6;--text:#f8fafc;--muted:#94a3b8}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 18% 8%,rgba(59,130,246,.16),transparent 26%),radial-gradient(circle at 80% 4%,rgba(245,158,11,.14),transparent 24%),linear-gradient(180deg,#0a0e27,#111827 70%,#0a0e27);color:var(--text);font-family:Segoe UI,Arial,sans-serif}
+.md-shell{max-width:1480px;margin:0 auto;padding:28px 24px 46px} .md-tab-radio{position:absolute;left:-9999px;opacity:0} .md-hero{border:1px solid var(--line);border-radius:24px;padding:26px;background:linear-gradient(135deg,rgba(15,23,42,.95),rgba(30,41,59,.74));box-shadow:0 24px 60px rgba(0,0,0,.32)} .md-eyebrow{color:var(--gold);font-weight:900;text-transform:uppercase;letter-spacing:.18em;font-size:12px} h1{margin:8px 0 6px;font-size:38px;line-height:1.05} .md-sub{color:var(--muted);font-size:15px} .md-nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 6px} .md-tab-button{display:inline-flex;text-decoration:none;color:var(--text);background:rgba(255,255,255,.06);border:1px solid var(--line);padding:9px 12px;border-radius:999px;font-size:12px;font-weight:800;cursor:pointer;user-select:none} .md-section{display:none;margin-top:22px;padding:18px;border:1px solid var(--line);border-radius:22px;background:rgba(15,23,42,.54);box-shadow:0 18px 42px rgba(0,0,0,.2)} #md-tab-overview:checked ~ .md-sections #overview{display:block} #md-tab-overview:checked ~ .md-hero .md-nav label[for='md-tab-overview']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-wbs:checked ~ .md-sections #wbs{display:block} #md-tab-wbs:checked ~ .md-hero .md-nav label[for='md-tab-wbs']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-activities:checked ~ .md-sections #activities{display:block} #md-tab-activities:checked ~ .md-hero .md-nav label[for='md-tab-activities']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-milestones:checked ~ .md-sections #milestones{display:block} #md-tab-milestones:checked ~ .md-hero .md-nav label[for='md-tab-milestones']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-s_curve:checked ~ .md-sections #s_curve{display:block} #md-tab-s_curve:checked ~ .md-hero .md-nav label[for='md-tab-s_curve']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-evm:checked ~ .md-sections #evm{display:block} #md-tab-evm:checked ~ .md-hero .md-nav label[for='md-tab-evm']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-contracts:checked ~ .md-sections #contracts{display:block} #md-tab-contracts:checked ~ .md-hero .md-nav label[for='md-tab-contracts']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-letters:checked ~ .md-sections #letters{display:block} #md-tab-letters:checked ~ .md-hero .md-nav label[for='md-tab-letters']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-risks:checked ~ .md-sections #risks{display:block} #md-tab-risks:checked ~ .md-hero .md-nav label[for='md-tab-risks']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-delay:checked ~ .md-sections #delay{display:block} #md-tab-delay:checked ~ .md-hero .md-nav label[for='md-tab-delay']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} .md-section-head{display:flex;justify-content:space-between;gap:14px;align-items:end;margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:12px} .md-section-head span{font-size:22px;font-weight:900;color:var(--gold)} .md-section-head small{color:var(--muted);text-align:right} .md-kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:14px} .md-kpi{border:1px solid var(--line);border-top:4px solid var(--gold);border-radius:18px;background:linear-gradient(145deg,rgba(15,23,42,.95),rgba(30,41,59,.72));padding:16px;min-height:116px} .tone-emerald{border-top-color:var(--emerald)}.tone-rose{border-top-color:var(--rose)}.tone-cyan{border-top-color:var(--cyan)}.tone-sapphire{border-top-color:var(--sapphire)}.tone-violet{border-top-color:var(--violet)} .md-kpi-title{font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:900;letter-spacing:.08em} .md-kpi-value{font-size:28px;font-weight:900;margin-top:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .md-kpi-note{font-size:12px;color:var(--muted);margin-top:8px} .md-grid{display:grid;gap:14px} .md-grid.two{grid-template-columns:1fr 1fr} .md-card{border:1px solid var(--line);border-radius:18px;background:var(--card);padding:14px;overflow:auto} .md-card h3{margin:0 0 10px;color:#fbbf24;font-size:16px} .md-table{width:100%;border-collapse:collapse;font-size:12px} .md-table th{background:rgba(245,158,11,.18);color:#f8fafc;text-align:left;padding:8px;border-bottom:1px solid var(--line);white-space:nowrap} .md-table td{padding:7px 8px;border-bottom:1px solid rgba(148,163,184,.10);color:#dbeafe;vertical-align:top} .md-empty{border:1px dashed var(--line);border-radius:14px;padding:18px;color:var(--muted);text-align:center} .footer{margin-top:22px;text-align:center;color:var(--muted);font-size:12px}
+@media(max-width:900px){.md-shell{padding:14px 10px} h1{font-size:25px} .md-kpi-grid,.md-grid.two{grid-template-columns:1fr} .md-section{padding:12px} .md-section-head{display:block} .md-section-head small{display:block;text-align:left;margin-top:5px} .md-kpi-value{font-size:22px}}
+</style>
+</head>
+<body><main class="md-shell"><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-overview' checked><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-wbs'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-activities'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-milestones'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-s_curve'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-evm'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-contracts'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-letters'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-risks'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-delay'><header class="md-hero"><div class="md-eyebrow">Master Dashboard</div><h1>Suez Tunnel Civil &amp; MEP Works</h1><div class="md-sub">Project-scoped construction intelligence dashboard | Project ID: Suez-Tunnel | Generated 20 Jul 2026 15:45</div><nav class="md-nav"><label class='md-tab-button' for='md-tab-overview'>Overview</label><label class='md-tab-button' for='md-tab-wbs'>WBS</label><label class='md-tab-button' for='md-tab-activities'>Activities</label><label class='md-tab-button' for='md-tab-milestones'>Milestones</label><label class='md-tab-button' for='md-tab-s_curve'>S-Curve</label><label class='md-tab-button' for='md-tab-evm'>EVM</label><label class='md-tab-button' for='md-tab-contracts'>Contracts</label><label class='md-tab-button' for='md-tab-letters'>Letters</label><label class='md-tab-button' for='md-tab-risks'>Risks</label><label class='md-tab-button' for='md-tab-delay'>Delay & TIA</label></nav></header><div class="md-sections"><section id='overview' class='md-section'><div class='md-section-head'><span>Project Overview</span><small>Executive KPIs, health indicators, and project vitals</small></div><div class='md-kpi-grid'><div class='md-kpi tone-gold'><div class='md-kpi-title'>Contract Value</div><div class='md-kpi-value'>EGP 1,250,000,000</div><div class='md-kpi-note'>Project budget</div></div><div class='md-kpi tone-emerald'><div class='md-kpi-title'>Overall Progress</div><div class='md-kpi-value'>35.0%</div><div class='md-kpi-note'>Planned 42.0%</div></div><div class='md-kpi tone-cyan'><div class='md-kpi-title'>Activities</div><div class='md-kpi-value'>17</div><div class='md-kpi-note'>Critical 11</div></div><div class='md-kpi tone-sapphire'><div class='md-kpi-title'>Duration</div><div class='md-kpi-value'>545 days</div><div class='md-kpi-note'>Remaining 40.9%</div></div></div><div class='md-grid two'><div class='md-card'><h3>Phase Progress</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>phase</th>
+      <th>planned</th>
+      <th>actual</th>
+      <th>variance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Engineering</td>
+      <td>0.9</td>
+      <td>0.74</td>
+      <td>-0.16</td>
+    </tr>
+    <tr>
+      <td>Procurement</td>
+      <td>0.72</td>
+      <td>0.6</td>
+      <td>-0.12</td>
+    </tr>
+    <tr>
+      <td>Construction</td>
+      <td>0.43</td>
+      <td>0.36</td>
+      <td>-0.07</td>
+    </tr>
+    <tr>
+      <td>Overall</td>
+      <td>42.0</td>
+      <td>35.0</td>
+      <td>-7.0</td>
+    </tr>
+  </tbody>
+</table></div><div class='md-card'><h3>Project Vitals</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Project</th>
+      <th>Start</th>
+      <th>Finish</th>
+      <th>Project ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Suez Tunnel Civil &amp; MEP Works</td>
+      <td>01-Sep-2025</td>
+      <td>28-Feb-2027</td>
+      <td>Suez-Tunnel</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='wbs' class='md-section'><div class='md-section-head'><span>Work Breakdown Structure</span><small>Project WBS progress and register</small></div><div class='md-grid two'><div class='md-card'><div>                            <div id="969df801-33dd-46b8-9dd7-d75343c7aa23" class="plotly-graph-div" style="height:330px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("969df801-33dd-46b8-9dd7-d75343c7aa23")) {                    Plotly.newPlot(                        "969df801-33dd-46b8-9dd7-d75343c7aa23",                        [{"hovertemplate":"wbs_code=%{x}\u003cbr\u003eperformance_%_complete_num=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#f59e0b","pattern":{"shape":""}},"name":"","orientation":"v","showlegend":false,"textposition":"auto","x":["No Priority","Suez-Tunnel - P.01 - UP-20-April-26","Suez-Tunnel - P.01 - UP-20-April-26.KD","Suez-Tunnel - P.01 - UP-20-April-26.KD.MI","Suez-Tunnel - P.01 - UP-20-April-26.KD.MO","Suez-Tunnel - P.01 - UP-20-April-26.EN","Suez-Tunnel - P.01 - UP-20-April-26.P","Suez-Tunnel - P.01 - UP-20-April-26.CON","Suez-Tunnel - P.01 - UP-20-April-26.CON.EW","Suez-Tunnel - P.01 - UP-20-April-26.CON.PA","Suez-Tunnel - P.01 - UP-20-April-26.CON.PB","Suez-Tunnel - P.01 - UP-20-April-26.CON.TE"],"xaxis":"x","y":{"dtype":"f8","bdata":"ke18PzVe0j+R7Xw\u002fNV7SPwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACR7Xw\u002fNV7SP+F6FK5H4eo\u002f16NwPQrX0z\u002fsUbgehevRPylcj8L1KMw\u002f"},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"wbs_code"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"performance_%_complete_num"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"legend":{"tracegroupgap":0,"font":{"size":10},"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"title":{"text":"WBS Progress"},"barmode":"relative","font":{"color":"#f8fafc","family":"Segoe UI, Arial, sans-serif"},"margin":{"l":32,"r":18,"t":48,"b":36},"height":330,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div><div class='md-card'><h3>WBS Register</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>project_id</th>
+      <th>source_project_id</th>
+      <th>wbs_code</th>
+      <th>wbs_name</th>
+      <th>total_activities</th>
+      <th>bl_project_duration</th>
+      <th>remaining_duration</th>
+      <th>total_float</th>
+      <th>bl_project_start</th>
+      <th>bl_project_finish</th>
+      <th>actual_start</th>
+      <th>actual_finish</th>
+      <th>schedule_%_complete</th>
+      <th>performance_%_complete</th>
+      <th>budget_at_completion</th>
+      <th>earned_value_cost</th>
+      <th>planned_value_cost</th>
+      <th>schedule_%_complete_num</th>
+      <th>performance_%_complete_num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel-P.01-UP-20-April-26</td>
+      <td>No Priority</td>
+      <td></td>
+      <td>1218</td>
+      <td>614</td>
+      <td>492</td>
+      <td>0.0</td>
+      <td>15-Sep-25</td>
+      <td>22-May-27</td>
+      <td>17-Sep-25</td>
+      <td></td>
+      <td>0.545</td>
+      <td>0.287</td>
+      <td>495750000</td>
+      <td>142280250</td>
+      <td>270183750</td>
+      <td>0.545</td>
+      <td>0.287</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel-P.01-UP-20-April-26</td>
+      <td>Suez-Tunnel - P.01 - UP-20-April-26</td>
+      <td>SUEZ TUNNEL INFRASTRUCTURE PROJECT</td>
+      <td>1218</td>
+      <td>614</td>
+      <td>492</td>
+      <td>-86.0</td>
+      <td>15-Sep-25</td>
+      <td>22-May-27</td>
+      <td>17-Sep-25</td>
+      <td></td>
+      <td>0.545</td>
+      <td>0.287</td>
+      <td>495750000</td>
+      <td>142280250</td>
+      <td>270183750</td>
+      <td>0.545</td>
+      <td>0.287</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel-P.01-UP-20-April-26</td>
+      <td>Suez-Tunnel - P.01 - UP-20-April-26.KD</td>
+      <td>Key Dates</td>
+      <td>9</td>
+      <td>614</td>
+      <td>492</td>
+      <td>-86.0</td>
+      <td>15-Sep-25</td>
+      <td>22-May-27</td>
+      <td>17-Sep-25</td>
+      <td></td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel-P.01-UP-20-April-26</td>
+      <td>Suez-Tunnel - P.01 - UP-20-April-26.KD.MI</td>
+      <td>Milestone</td>
+      <td>6</td>
+      <td>614</td>
+      <td>492</td>
+      <td>-86.0</td>
+      <td>15-Sep-25</td>
+      <td>22-May-27</td>
+      <td>17-Sep-25</td>
+      <td></td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel-P.01-UP-20-April-26</td>
+      <td>Suez-Tunnel - P.01 - UP-20-April-26.KD.MO</td>
+      <td>Mobilization</td>
+      <td>12</td>
+      <td>18</td>
+      <td>0</td>
+      <td></td>
+      <td>15-Sep-25</td>
+      <td>3-Oct-25</td>
+      <td>18-Sep-25</td>
+      <td>7-Oct-25</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel-P.01-UP-20-April-26</td>
+      <td>Suez-Tunnel - P.01 - UP-20-April-26.EN</td>
+      <td>Engineering</td>
+      <td>286</td>
+      <td>292</td>
+      <td>66</td>
+      <td>112.0</td>
+      <td>15-Sep-25</td>
+      <td>4-Jul-26</td>
+      <td>17-Sep-25</td>
+      <td></td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel-P.01-UP-20-April-26</td>
+      <td>Suez-Tunnel - P.01 - UP-20-April-26.P</td>
+      <td>Procurement</td>
+      <td>119</td>
+      <td>520</td>
+      <td>286</td>
+      <td>76.0</td>
+      <td>15-Sep-25</td>
+      <td>17-Feb-27</td>
+      <td>17-Sep-25</td>
+      <td></td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel-P.01-UP-20-April-26</td>
+      <td>Suez-Tunnel - P.01 - UP-20-April-26.CON</td>
+      <td>Construction</td>
+      <td>623</td>
+      <td>548</td>
+      <td>452</td>
+      <td>-52.0</td>
+      <td>20-Oct-25</td>
+      <td>13-Mar-27</td>
+      <td>17-Sep-25</td>
+      <td></td>
+      <td>0.545</td>
+      <td>0.287</td>
+      <td>495750000</td>
+      <td>142280250</td>
+      <td>270183750</td>
+      <td>0.545</td>
+      <td>0.287</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel-P.01-UP-20-April-26</td>
+      <td>Suez-Tunnel - P.01 - UP-20-April-26.CON.EW</td>
+      <td>Earth Works</td>
+      <td>46</td>
+      <td>102</td>
+      <td>8</td>
+      <td>-14.0</td>
+      <td>15-Oct-25</td>
+      <td>25-Jan-26</td>
+      <td>13-Oct-25</td>
+      <td>4-Jan-26</td>
+      <td>0.92</td>
+      <td>0.84</td>
+      <td>38450000</td>
+      <td>32298000</td>
+      <td>35374000</td>
+      <td>0.92</td>
+      <td>0.84</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel-P.01-UP-20-April-26</td>
+      <td>Suez-Tunnel - P.01 - UP-20-April-26.CON.PA</td>
+      <td>Portal A</td>
+      <td>132</td>
+      <td>418</td>
+      <td>330</td>
+      <td>-75.0</td>
+      <td>24-Nov-25</td>
+      <td>16-Jan-27</td>
+      <td>17-Sep-25</td>
+      <td></td>
+      <td>0.57</td>
+      <td>0.31</td>
+      <td>86300000</td>
+      <td>26753000</td>
+      <td>49191000</td>
+      <td>0.57</td>
+      <td>0.31</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='activities' class='md-section'><div class='md-section-head'><span>Activities</span><small>Activity progress, critical path, and variance</small></div><div class='md-kpi-grid'><div class='md-kpi tone-rose'><div class='md-kpi-title'>Critical Activities</div><div class='md-kpi-value'>11</div><div class='md-kpi-note'>Current critical path</div></div><div class='md-kpi tone-gold'><div class='md-kpi-title'>Deviated Activities</div><div class='md-kpi-value'>13</div><div class='md-kpi-note'>Progress or finish variance</div></div><div class='md-kpi tone-cyan'><div class='md-kpi-title'>RFT Activities</div><div class='md-kpi-value'>1</div><div class='md-kpi-note'>Steel/RFT related</div></div></div><div class='md-grid two'><div class='md-card'><div>                            <div id="ad519d91-eae6-43d4-a8c8-a7b9e7aeab23" class="plotly-graph-div" style="height:330px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("ad519d91-eae6-43d4-a8c8-a7b9e7aeab23")) {                    Plotly.newPlot(                        "ad519d91-eae6-43d4-a8c8-a7b9e7aeab23",                        [{"hovertemplate":"\u003cb\u003e%{hovertext}\u003c\u002fb\u003e\u003cbr\u003e\u003cbr\u003eis_critical=No\u003cbr\u003eplanned_progress_num=%{x}\u003cbr\u003eactual_progress_num=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","hovertext":["Project Start Date","Contract Agreement","Mobilization and temporary facilities","Topographic survey and utility detection","Drainage and pump station rough-in","Road reinstatement and asphalt works"],"legendgroup":"No","marker":{"color":"#10b981","symbol":"circle"},"mode":"markers","name":"No","orientation":"v","showlegend":true,"x":{"dtype":"f8","bdata":"AAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAAAAAAAAAAAAAAAA"},"xaxis":"x","y":{"dtype":"f8","bdata":"AAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAAAAAAAAAAAAAAAA"},"yaxis":"y","type":"scatter"},{"hovertemplate":"\u003cb\u003e%{hovertext}\u003c\u002fb\u003e\u003cbr\u003e\u003cbr\u003eis_critical=Yes\u003cbr\u003eplanned_progress_num=%{x}\u003cbr\u003eactual_progress_num=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","hovertext":["IFC Drawing Package","Tunnel alignment shop drawings","Approval of tunnel alignment shop drawings","Delivery of waterproofing membrane and steel","Open cut excavation and shoring","RFT for base slab reinforcement","Concrete casting for base slab","Tunnel wall reinforcement and formwork","Roof slab reinforcement and concrete","Integrated testing and commissioning","Substantial Completion"],"legendgroup":"Yes","marker":{"color":"#f43f5e","symbol":"circle"},"mode":"markers","name":"Yes","orientation":"v","showlegend":true,"x":{"dtype":"f8","bdata":"AAAAAAAA8D8AAAAAAADwP5qZmZmZmek\u002fCtejcD0K5z89CtejcD3qPzMzMzMzM+M\u002f4XoUrkfh2j8AAAAAAADQP5qZmZmZmak\u002fAAAAAAAAAAAAAAAAAAAAAA=="},"xaxis":"x","y":{"dtype":"f8","bdata":"AAAAAAAA8D+PwvUoXI\u002fqPx+F61G4HuU\u002fMzMzMzMz4z\u002fD9Shcj8LlPwAAAAAAAOA\u002fZmZmZmZm1j\u002fhehSuR+HKP3sUrkfheqQ\u002fAAAAAAAAAAAAAAAAAAAAAA=="},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"planned_progress_num"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"actual_progress_num"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"legend":{"title":{"text":"is_critical"},"tracegroupgap":0,"font":{"size":10},"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"title":{"text":"Planned vs Actual Activity Progress"},"font":{"color":"#f8fafc","family":"Segoe UI, Arial, sans-serif"},"margin":{"l":32,"r":18,"t":48,"b":36},"height":330,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div><div class='md-card'><h3>Critical Activities</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>project_id</th>
+      <th>wbs_id</th>
+      <th>activity_id</th>
+      <th>activity_name</th>
+      <th>planned_start</th>
+      <th>planned_finish</th>
+      <th>actual_start</th>
+      <th>actual_finish</th>
+      <th>forecast_start</th>
+      <th>forecast_finish</th>
+      <th>planned_weight</th>
+      <th>planned_progress</th>
+      <th>actual_progress</th>
+      <th>total_float_days</th>
+      <th>is_critical</th>
+      <th>responsible_party</th>
+      <th>planned_progress_num</th>
+      <th>actual_progress_num</th>
+      <th>planned_weight_num</th>
+      <th>total_float_days_num</th>
+      <th>progress_variance</th>
+      <th>planned_finish_dt</th>
+      <th>forecast_finish_dt</th>
+      <th>actual_finish_dt</th>
+      <th>finish_slip_days</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel.ENGINEERING</td>
+      <td>E-SUB-ST-1020</td>
+      <td>Tunnel alignment shop drawings</td>
+      <td>6-Oct-25</td>
+      <td>10-Nov-25</td>
+      <td>28-Oct-25 A</td>
+      <td></td>
+      <td>28-Oct-25</td>
+      <td>30-Nov-25</td>
+      <td>0.0361</td>
+      <td>1.0</td>
+      <td>0.83</td>
+      <td>-26.0</td>
+      <td>Yes</td>
+      <td>Engineering</td>
+      <td>1.0</td>
+      <td>0.83</td>
+      <td>0.0361</td>
+      <td>-26.0</td>
+      <td>-0.17000000000000004</td>
+      <td>2025-11-10</td>
+      <td>2025-11-30</td>
+      <td>NaT</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel.ENGINEERING</td>
+      <td>E-APP-ST-1020</td>
+      <td>Approval of tunnel alignment shop drawings</td>
+      <td>12-Nov-25</td>
+      <td>7-Dec-25</td>
+      <td>28-Nov-25 A</td>
+      <td></td>
+      <td>28-Nov-25</td>
+      <td>27-Dec-25</td>
+      <td>0.0361</td>
+      <td>0.8</td>
+      <td>0.66</td>
+      <td>-28.0</td>
+      <td>Yes</td>
+      <td>Engineer</td>
+      <td>0.8</td>
+      <td>0.66</td>
+      <td>0.0361</td>
+      <td>-28.0</td>
+      <td>-0.14</td>
+      <td>2025-12-07</td>
+      <td>2025-12-27</td>
+      <td>NaT</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel.CONSTRUCTION</td>
+      <td>CON-ST-EXC-1010</td>
+      <td>Open cut excavation and shoring</td>
+      <td>29-Oct-25</td>
+      <td>27-Jan-26</td>
+      <td>20-Nov-25 A</td>
+      <td></td>
+      <td>20-Nov-25</td>
+      <td>16-Feb-26</td>
+      <td>0.1205</td>
+      <td>0.82</td>
+      <td>0.68</td>
+      <td>-32.0</td>
+      <td>Yes</td>
+      <td>Construction</td>
+      <td>0.82</td>
+      <td>0.68</td>
+      <td>0.1205</td>
+      <td>-32.0</td>
+      <td>-0.1399999999999999</td>
+      <td>2026-01-27</td>
+      <td>2026-02-16</td>
+      <td>NaT</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel.PROCUREMENT</td>
+      <td>P-MDEL-ST-1000</td>
+      <td>Delivery of waterproofing membrane and steel</td>
+      <td>2-Nov-25</td>
+      <td>27-Dec-25</td>
+      <td>21-Nov-25 A</td>
+      <td></td>
+      <td>21-Nov-25</td>
+      <td>16-Jan-26</td>
+      <td>0.0602</td>
+      <td>0.72</td>
+      <td>0.6</td>
+      <td>-30.0</td>
+      <td>Yes</td>
+      <td>Employer/Procurement</td>
+      <td>0.72</td>
+      <td>0.6</td>
+      <td>0.0602</td>
+      <td>-30.0</td>
+      <td>-0.12</td>
+      <td>2025-12-27</td>
+      <td>2026-01-16</td>
+      <td>NaT</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel.CONSTRUCTION</td>
+      <td>CON-ST-RFT-1020</td>
+      <td>RFT for base slab reinforcement</td>
+      <td>28-Dec-25</td>
+      <td>25-Jan-26</td>
+      <td>13-Jan-26 A</td>
+      <td></td>
+      <td>13-Jan-26</td>
+      <td>14-Feb-26</td>
+      <td>0.1205</td>
+      <td>0.6</td>
+      <td>0.5</td>
+      <td>-34.0</td>
+      <td>Yes</td>
+      <td>Construction</td>
+      <td>0.6</td>
+      <td>0.5</td>
+      <td>0.1205</td>
+      <td>-34.0</td>
+      <td>-0.09999999999999998</td>
+      <td>2026-01-25</td>
+      <td>2026-02-14</td>
+      <td>NaT</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel.CONSTRUCTION</td>
+      <td>CON-ST-CON-1030</td>
+      <td>Concrete casting for base slab</td>
+      <td>28-Jan-26</td>
+      <td>21-Feb-26</td>
+      <td>16-Feb-26 A</td>
+      <td></td>
+      <td>16-Feb-26</td>
+      <td>13-Mar-26</td>
+      <td>0.1205</td>
+      <td>0.42</td>
+      <td>0.35</td>
+      <td>-36.0</td>
+      <td>Yes</td>
+      <td>Construction</td>
+      <td>0.42</td>
+      <td>0.35</td>
+      <td>0.1205</td>
+      <td>-36.0</td>
+      <td>-0.07</td>
+      <td>2026-02-21</td>
+      <td>2026-03-13</td>
+      <td>NaT</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel.CONSTRUCTION</td>
+      <td>CON-ST-WALL-1040</td>
+      <td>Tunnel wall reinforcement and formwork</td>
+      <td>26-Feb-26</td>
+      <td>27-Apr-26</td>
+      <td>20-Mar-26 A</td>
+      <td></td>
+      <td>20-Mar-26</td>
+      <td>17-May-26</td>
+      <td>0.1205</td>
+      <td>0.25</td>
+      <td>0.21</td>
+      <td>-38.0</td>
+      <td>Yes</td>
+      <td>Construction</td>
+      <td>0.25</td>
+      <td>0.21</td>
+      <td>0.1205</td>
+      <td>-38.0</td>
+      <td>-0.04000000000000001</td>
+      <td>2026-04-27</td>
+      <td>2026-05-17</td>
+      <td>NaT</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel.CONSTRUCTION</td>
+      <td>CON-ST-SLAB-1050</td>
+      <td>Roof slab reinforcement and concrete</td>
+      <td>27-Apr-26</td>
+      <td>1-Jul-26</td>
+      <td>13-May-26 A</td>
+      <td></td>
+      <td>13-May-26</td>
+      <td>21-Jul-26</td>
+      <td>0.1205</td>
+      <td>0.05</td>
+      <td>0.04</td>
+      <td>-40.0</td>
+      <td>Yes</td>
+      <td>Construction</td>
+      <td>0.05</td>
+      <td>0.04</td>
+      <td>0.1205</td>
+      <td>-40.0</td>
+      <td>-0.010000000000000002</td>
+      <td>2026-07-01</td>
+      <td>2026-07-21</td>
+      <td>NaT</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel.TESTING</td>
+      <td>TST-ST-1080</td>
+      <td>Integrated testing and commissioning</td>
+      <td>5-Nov-26</td>
+      <td>10-Dec-26</td>
+      <td></td>
+      <td></td>
+      <td>21-Nov-26</td>
+      <td>18-Dec-26</td>
+      <td>0.0241</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-46.0</td>
+      <td>Yes</td>
+      <td>QA/QC</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0241</td>
+      <td>-46.0</td>
+      <td>0.0</td>
+      <td>2026-12-10</td>
+      <td>2026-12-18</td>
+      <td>NaT</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Suez-Tunnel.MILESTONE</td>
+      <td>KD-MS-1020</td>
+      <td>IFC Drawing Package</td>
+      <td>6-Sep-25</td>
+      <td></td>
+      <td>6-Sep-25 A</td>
+      <td>6-Sep-25 A</td>
+      <td>6-Sep-25</td>
+      <td></td>
+      <td>0.012</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td></td>
+      <td>Yes</td>
+      <td>Engineering</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.012</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>2025-09-06</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='milestones' class='md-section'><div class='md-section-head'><span>Main Milestones</span><small>Milestones and change-order context</small></div><div class='md-grid two'><div class='md-card'><h3>Main Milestones</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>milestone_id</th>
+      <th>project_id</th>
+      <th>activity_name</th>
+      <th>planned_date</th>
+      <th>forecast_date</th>
+      <th>actual_date</th>
+      <th>milestone_contractual_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>KD-MS-1000</td>
+      <td>Suez-Tunnel</td>
+      <td>Project Start Date</td>
+      <td>1-Sep-25</td>
+      <td>1-Sep-25</td>
+      <td>1-Sep-25</td>
+      <td>Start milestone</td>
+    </tr>
+    <tr>
+      <td>KD-MS-1010</td>
+      <td>Suez-Tunnel</td>
+      <td>Contract Agreement</td>
+      <td>1-Sep-25</td>
+      <td>1-Sep-25</td>
+      <td>1-Sep-25</td>
+      <td>Start milestone</td>
+    </tr>
+    <tr>
+      <td>KD-MS-1020</td>
+      <td>Suez-Tunnel</td>
+      <td>IFC Drawing Package</td>
+      <td>8-Sep-25</td>
+      <td>24-Sep-25</td>
+      <td>8-Sep-25</td>
+      <td>Key milestone</td>
+    </tr>
+    <tr>
+      <td>KD-MS-5000</td>
+      <td>Suez-Tunnel</td>
+      <td>Structural Works Completion</td>
+      <td>1-Sep-26</td>
+      <td>19-Oct-26</td>
+      <td></td>
+      <td>Interim milestone</td>
+    </tr>
+    <tr>
+      <td>KD-MS-9000</td>
+      <td>Suez-Tunnel</td>
+      <td>Substantial Completion</td>
+      <td>28-Feb-27</td>
+      <td>18-May-27</td>
+      <td></td>
+      <td>Finish milestone</td>
+    </tr>
+  </tbody>
+</table></div><div class='md-card'><h3>Change Orders</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>change_order_id</th>
+      <th>contract_id</th>
+      <th>project_id</th>
+      <th>title</th>
+      <th>submitted_date</th>
+      <th>approved_date</th>
+      <th>status</th>
+      <th>claimed_amount</th>
+      <th>approved_amount</th>
+      <th>cost_impact</th>
+      <th>time_impact_days</th>
+      <th>owner_response_due</th>
+      <th>claimed_amount_num</th>
+      <th>approved_amount_num</th>
+      <th>cost_impact_num</th>
+      <th>time_impact_days_num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CO-001</td>
+      <td>ST-PH-01</td>
+      <td>Suez-Tunnel</td>
+      <td>Additional dewatering and temporary works</td>
+      <td>15-Nov-25</td>
+      <td>3-Jan-26</td>
+      <td>Approved</td>
+      <td>22500000</td>
+      <td>18750000</td>
+      <td>Yes</td>
+      <td>0</td>
+      <td>13-Dec-25</td>
+      <td>22500000.0</td>
+      <td>18750000.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>CO-002</td>
+      <td>ST-PH-01</td>
+      <td>Suez-Tunnel</td>
+      <td>Revised structural details and access sequence</td>
+      <td>17-Jan-26</td>
+      <td></td>
+      <td>Under Review</td>
+      <td>15000000</td>
+      <td>0</td>
+      <td>Yes</td>
+      <td>28</td>
+      <td>14-Feb-26</td>
+      <td>15000000.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>28.0</td>
+    </tr>
+    <tr>
+      <td>CO-003</td>
+      <td>ST-PH-02</td>
+      <td>Suez-Tunnel</td>
+      <td>Additional night shift and traffic control measures</td>
+      <td>5-Mar-26</td>
+      <td></td>
+      <td>Submitted</td>
+      <td>7500000</td>
+      <td>0</td>
+      <td>Yes</td>
+      <td>7</td>
+      <td>2-Apr-26</td>
+      <td>7500000.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>7.0</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='s_curve' class='md-section'><div class='md-section-head'><span>S-Curve Analysis</span><small>Planned, actual, and invoiced curves</small></div><div class='md-grid two'><div class='md-card wide'><div>                            <div id="0c66a4c4-eba9-4323-a88b-9c3d8b8fa7e8" class="plotly-graph-div" style="height:360px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("0c66a4c4-eba9-4323-a88b-9c3d8b8fa7e8")) {                    Plotly.newPlot(                        "0c66a4c4-eba9-4323-a88b-9c3d8b8fa7e8",                        [{"hovertemplate":"Curve=Planned\u003cbr\u003eMonth=%{x}\u003cbr\u003eValue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Planned","line":{"color":"#000001","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines+markers","name":"Planned","orientation":"v","showlegend":true,"x":["1-Sep-25","1-Oct-25","1-Nov-25","1-Dec-25","1-Jan-26","1-Feb-26","1-Mar-26","1-Apr-26","1-May-26","1-Jun-26"],"xaxis":"x","y":{"dtype":"f8","bdata":"AAAAAITXd0EAAAAAo+GRQQAAAEAbX6NBAAAA4OYisUEAAABguBO6QQAAABABQcJBAAAA4McYx0EAAACgMJHLQQAAAEDdSs9BAAAA4OYi0UE="},"yaxis":"y","type":"scatter"},{"hovertemplate":"Curve=Actual\u003cbr\u003eMonth=%{x}\u003cbr\u003eValue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Actual","line":{"color":"#000002","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines+markers","name":"Actual","orientation":"v","showlegend":true,"x":["1-Sep-25","1-Oct-25","1-Nov-25","1-Dec-25","1-Jan-26","1-Feb-26","1-Mar-26","1-Apr-26","1-May-26","1-Jun-26"],"xaxis":"x","y":{"dtype":"f8","bdata":"AAAAwAfScEEAAADgBdOJQQAAAKg\u002fq5xBAAAA5Nn1qUEAAAA6py20QQAAAAr+1bxBAAAAluGOwkEAAAB+u33GQQAAACBpIclBAAAAoNRMy0E="},"yaxis":"y","type":"scatter"},{"hovertemplate":"Curve=Invoiced\u003cbr\u003eMonth=%{x}\u003cbr\u003eValue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Invoiced","line":{"color":"#000003","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines+markers","name":"Invoiced","orientation":"v","showlegend":true,"x":["1-Sep-25","1-Oct-25","1-Nov-25","1-Dec-25","1-Jan-26","1-Feb-26","1-Mar-26","1-Apr-26","1-May-26","1-Jun-26"],"xaxis":"x","y":{"dtype":"f8","bdata":"AAAAAAAAAAAAAAAAAAAAAAAAAEihlIhBAAAAlDptnkEAAAACRXGqQQAAABlh+bNBAAAAyMxuukEAAABwvkjAQQAAAN\u002fFV8JBAAAAHwAJxEE="},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Month"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Value"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"legend":{"title":{"text":"Curve"},"tracegroupgap":0,"font":{"size":10},"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"title":{"text":"S-Curve and Invoicing Trend"},"font":{"color":"#f8fafc","family":"Segoe UI, Arial, sans-serif"},"margin":{"l":32,"r":18,"t":48,"b":36},"height":360,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div><div class='md-card'><h3>S-Curve Data</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>project_id</th>
+      <th>months</th>
+      <th>monthly_planned</th>
+      <th>cumm_monthly_planned</th>
+      <th>monthly_actual</th>
+      <th>cumm_monthly_actual</th>
+      <th>monthly_invoiced</th>
+      <th>cumm_monthly_invoiced</th>
+      <th>MonthSort</th>
+      <th>Month</th>
+      <th>Planned</th>
+      <th>Actual</th>
+      <th>Invoiced</th>
+      <th>planned_value_num</th>
+      <th>actual_cost_num</th>
+      <th>invoice_amount_num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>1-Sep-25</td>
+      <td>25000000.0</td>
+      <td>25000000.0</td>
+      <td>17637500.0</td>
+      <td>17637500.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2025-09-01</td>
+      <td>1-Sep-25</td>
+      <td>25000000.0</td>
+      <td>17637500.0</td>
+      <td>0.0</td>
+      <td>25000000.0</td>
+      <td>17637500.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>1-Oct-25</td>
+      <td>50000000.0</td>
+      <td>75000000.0</td>
+      <td>36520000.0</td>
+      <td>54157500.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2025-10-01</td>
+      <td>1-Oct-25</td>
+      <td>75000000.0</td>
+      <td>54157500.0</td>
+      <td>0.0</td>
+      <td>50000000.0</td>
+      <td>36520000.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>1-Nov-25</td>
+      <td>87500000.0</td>
+      <td>162500000.0</td>
+      <td>66088750.0</td>
+      <td>120246250.0</td>
+      <td>51549225.0</td>
+      <td>51549225.0</td>
+      <td>2025-11-01</td>
+      <td>1-Nov-25</td>
+      <td>162500000.0</td>
+      <td>120246250.0</td>
+      <td>51549225.0</td>
+      <td>87500000.0</td>
+      <td>66088750.0</td>
+      <td>51549225.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>1-Dec-25</td>
+      <td>125000000.0</td>
+      <td>287500000.0</td>
+      <td>97525000.0</td>
+      <td>217771250.0</td>
+      <td>76069500.0</td>
+      <td>127618725.0</td>
+      <td>2025-12-01</td>
+      <td>1-Dec-25</td>
+      <td>287500000.0</td>
+      <td>217771250.0</td>
+      <td>127618725.0</td>
+      <td>125000000.0</td>
+      <td>97525000.0</td>
+      <td>76069500.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>1-Jan-26</td>
+      <td>150000000.0</td>
+      <td>437500000.0</td>
+      <td>120765000.0</td>
+      <td>338536250.0</td>
+      <td>94196700.0</td>
+      <td>221815425.0</td>
+      <td>2026-01-01</td>
+      <td>1-Jan-26</td>
+      <td>437500000.0</td>
+      <td>338536250.0</td>
+      <td>221815425.0</td>
+      <td>150000000.0</td>
+      <td>120765000.0</td>
+      <td>94196700.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>1-Feb-26</td>
+      <td>175000000.0</td>
+      <td>612500000.0</td>
+      <td>145250000.0</td>
+      <td>483786250.0</td>
+      <td>113295000.0</td>
+      <td>335110425.0</td>
+      <td>2026-02-01</td>
+      <td>1-Feb-26</td>
+      <td>612500000.0</td>
+      <td>483786250.0</td>
+      <td>335110425.0</td>
+      <td>175000000.0</td>
+      <td>145250000.0</td>
+      <td>113295000.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>1-Mar-26</td>
+      <td>162500000.0</td>
+      <td>775000000.0</td>
+      <td>138921250.0</td>
+      <td>622707500.0</td>
+      <td>108358575.0</td>
+      <td>443469000.0</td>
+      <td>2026-03-01</td>
+      <td>1-Mar-26</td>
+      <td>775000000.0</td>
+      <td>622707500.0</td>
+      <td>443469000.0</td>
+      <td>162500000.0</td>
+      <td>138921250.0</td>
+      <td>108358575.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>1-Apr-26</td>
+      <td>150000000.0</td>
+      <td>925000000.0</td>
+      <td>131970000.0</td>
+      <td>754677500.0</td>
+      <td>102936600.0</td>
+      <td>546405600.0</td>
+      <td>2026-04-01</td>
+      <td>1-Apr-26</td>
+      <td>925000000.0</td>
+      <td>754677500.0</td>
+      <td>546405600.0</td>
+      <td>150000000.0</td>
+      <td>131970000.0</td>
+      <td>102936600.0</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='evm' class='md-section'><div class='md-section-head'><span>Earned Value Management</span><small>BAC, PV, EV, AC, SPI/CPI support</small></div><div class='md-grid two'><div class='md-card'><div>                            <div id="51bd2a91-0ea4-47a3-84a7-6eab531fedfb" class="plotly-graph-div" style="height:330px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("51bd2a91-0ea4-47a3-84a7-6eab531fedfb")) {                    Plotly.newPlot(                        "51bd2a91-0ea4-47a3-84a7-6eab531fedfb",                        [{"hovertemplate":"Metric=%{x}\u003cbr\u003eValue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#f59e0b","pattern":{"shape":""}},"name":"","orientation":"v","showlegend":false,"textposition":"auto","x":["BAC","PV","EV","AC"],"xaxis":"x","y":{"dtype":"f8","bdata":"KVz\u002fH1+g0kEK1wOKR8nAQaVwvXby7rxB2KPwK12rvkE="},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Metric"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Value"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"legend":{"tracegroupgap":0,"font":{"size":10},"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"title":{"text":"EVM Value Comparison"},"barmode":"relative","font":{"color":"#f8fafc","family":"Segoe UI, Arial, sans-serif"},"margin":{"l":32,"r":18,"t":48,"b":36},"height":330,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div><div class='md-card'><h3>EVM Readout</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Metric</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>BAC</td>
+      <td>EGP 1,250,000,000</td>
+    </tr>
+    <tr>
+      <td>PV</td>
+      <td>EGP 563,253,012</td>
+    </tr>
+    <tr>
+      <td>EV</td>
+      <td>EGP 485,421,687</td>
+    </tr>
+    <tr>
+      <td>AC</td>
+      <td>EGP 514,546,988</td>
+    </tr>
+    <tr>
+      <td>SV</td>
+      <td>EGP -77,831,325</td>
+    </tr>
+    <tr>
+      <td>CV</td>
+      <td>EGP -29,125,301</td>
+    </tr>
+    <tr>
+      <td>EAC</td>
+      <td>EGP 1,279,125,301</td>
+    </tr>
+    <tr>
+      <td>TCPI</td>
+      <td>1.000</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='contracts' class='md-section'><div class='md-section-head'><span>Contracts</span><small>Contract, payment, and commercial position</small></div><div class='md-kpi-grid'><div class='md-kpi tone-violet'><div class='md-kpi-title'>Contracts</div><div class='md-kpi-value'>2</div><div class='md-kpi-note'>Loaded records</div></div><div class='md-kpi tone-gold'><div class='md-kpi-title'>Contract Value</div><div class='md-kpi-value'>EGP 1,475,000,000</div><div class='md-kpi-note'>Active contracts</div></div><div class='md-kpi tone-sapphire'><div class='md-kpi-title'>Certified</div><div class='md-kpi-value'>EGP 577,500,000</div><div class='md-kpi-note'>Payment certificates</div></div><div class='md-kpi tone-emerald'><div class='md-kpi-title'>Paid</div><div class='md-kpi-value'>EGP 481,550,000</div><div class='md-kpi-note'>Actual paid</div></div></div><div class='md-grid two'><div class='md-card'><h3>Contracts</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>contract_id</th>
+      <th>project_id</th>
+      <th>package</th>
+      <th>contractor</th>
+      <th>contract_type</th>
+      <th>original_value</th>
+      <th>approved_variations</th>
+      <th>pending_variations</th>
+      <th>paid_to_date</th>
+      <th>retention_percent</th>
+      <th>status</th>
+      <th>original_value_num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ST-PH-01</td>
+      <td>Suez-Tunnel</td>
+      <td>1</td>
+      <td>Nile Infra JV</td>
+      <td>Unit rate</td>
+      <td>1250000000</td>
+      <td>43750000</td>
+      <td>15000000</td>
+      <td>328125000</td>
+      <td>5%</td>
+      <td>Active</td>
+      <td>1250000000.0</td>
+    </tr>
+    <tr>
+      <td>ST-PH-02</td>
+      <td>Suez-Tunnel</td>
+      <td>2</td>
+      <td>Nile Infra JV</td>
+      <td>Lump sum</td>
+      <td>225000000</td>
+      <td>2250000</td>
+      <td>4500000</td>
+      <td>27562500</td>
+      <td>5%</td>
+      <td>Active</td>
+      <td>225000000.0</td>
+    </tr>
+  </tbody>
+</table></div><div class='md-card'><h3>Payments</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>project_id</th>
+      <th>payment</th>
+      <th>contract</th>
+      <th>project</th>
+      <th>invoice no</th>
+      <th>invoice date</th>
+      <th>certified amount</th>
+      <th>paid amount</th>
+      <th>payment status</th>
+      <th>Contractual interest due</th>
+      <th>Date of Cash Cheque Receipt</th>
+      <th>Period for payment release</th>
+      <th>Period in which interest is applied</th>
+      <th>Amount of interest claimed (EGP)</th>
+      <th>delayed duration(Days)</th>
+      <th>Unnamed: 14</th>
+      <th>Unnamed: 15</th>
+      <th>Unnamed: 16</th>
+      <th>payment_id</th>
+      <th>contract_id</th>
+      <th>invoice_no</th>
+      <th>invoice_date</th>
+      <th>payment_date</th>
+      <th>certified_amount</th>
+      <th>paid_amount</th>
+      <th>payment_status</th>
+      <th>delayed_duration_days</th>
+      <th>certified_amount_num</th>
+      <th>paid_amount_num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>1.0</td>
+      <td>ST-PH-01</td>
+      <td>Suez-Tunnel</td>
+      <td>1.0</td>
+      <td>15-Dec-25</td>
+      <td>58750000.0</td>
+      <td>58750000.0</td>
+      <td>Paid</td>
+      <td>45.0</td>
+      <td>3-Feb-26</td>
+      <td>50.0</td>
+      <td>5.0</td>
+      <td>35250.0</td>
+      <td>5.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>1.0</td>
+      <td>ST-PH-01</td>
+      <td>1.0</td>
+      <td>15-Dec-25</td>
+      <td>3-Feb-26</td>
+      <td>58750000.0</td>
+      <td>58750000.0</td>
+      <td>Paid</td>
+      <td>5.0</td>
+      <td>58750000.0</td>
+      <td>58750000.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>2.0</td>
+      <td>ST-PH-01</td>
+      <td>Suez-Tunnel</td>
+      <td>2.0</td>
+      <td>14-Jan-26</td>
+      <td>73750000.0</td>
+      <td>73750000.0</td>
+      <td>Paid</td>
+      <td>45.0</td>
+      <td>10-Mar-26</td>
+      <td>55.0</td>
+      <td>10.0</td>
+      <td>88500.0</td>
+      <td>10.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>2.0</td>
+      <td>ST-PH-01</td>
+      <td>2.0</td>
+      <td>14-Jan-26</td>
+      <td>10-Mar-26</td>
+      <td>73750000.0</td>
+      <td>73750000.0</td>
+      <td>Paid</td>
+      <td>10.0</td>
+      <td>73750000.0</td>
+      <td>73750000.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>3.0</td>
+      <td>ST-PH-01</td>
+      <td>Suez-Tunnel</td>
+      <td>3.0</td>
+      <td>13-Feb-26</td>
+      <td>88750000.0</td>
+      <td>88750000.0</td>
+      <td>Paid</td>
+      <td>45.0</td>
+      <td>14-Apr-26</td>
+      <td>60.0</td>
+      <td>15.0</td>
+      <td>159750.0</td>
+      <td>15.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>3.0</td>
+      <td>ST-PH-01</td>
+      <td>3.0</td>
+      <td>13-Feb-26</td>
+      <td>14-Apr-26</td>
+      <td>88750000.0</td>
+      <td>88750000.0</td>
+      <td>Paid</td>
+      <td>15.0</td>
+      <td>88750000.0</td>
+      <td>88750000.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>4.0</td>
+      <td>ST-PH-01</td>
+      <td>Suez-Tunnel</td>
+      <td>4.0</td>
+      <td>15-Mar-26</td>
+      <td>103750000.0</td>
+      <td>103750000.0</td>
+      <td>Paid</td>
+      <td>45.0</td>
+      <td>19-May-26</td>
+      <td>65.0</td>
+      <td>20.0</td>
+      <td>249000.0</td>
+      <td>20.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>4.0</td>
+      <td>ST-PH-01</td>
+      <td>4.0</td>
+      <td>15-Mar-26</td>
+      <td>19-May-26</td>
+      <td>103750000.0</td>
+      <td>103750000.0</td>
+      <td>Paid</td>
+      <td>20.0</td>
+      <td>103750000.0</td>
+      <td>103750000.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>5.0</td>
+      <td>ST-PH-01</td>
+      <td>Suez-Tunnel</td>
+      <td>5.0</td>
+      <td>14-Apr-26</td>
+      <td>118750000.0</td>
+      <td>73625000.0</td>
+      <td>Partially Paid</td>
+      <td>45.0</td>
+      <td>23-Jun-26</td>
+      <td>70.0</td>
+      <td>25.0</td>
+      <td>356250.0</td>
+      <td>25.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>5.0</td>
+      <td>ST-PH-01</td>
+      <td>5.0</td>
+      <td>14-Apr-26</td>
+      <td>23-Jun-26</td>
+      <td>118750000.0</td>
+      <td>73625000.0</td>
+      <td>Partially Paid</td>
+      <td>25.0</td>
+      <td>118750000.0</td>
+      <td>73625000.0</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>6.0</td>
+      <td>ST-PH-01</td>
+      <td>Suez-Tunnel</td>
+      <td>6.0</td>
+      <td>14-May-26</td>
+      <td>133750000.0</td>
+      <td>82925000.0</td>
+      <td>Certified</td>
+      <td>45.0</td>
+      <td></td>
+      <td></td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>6.0</td>
+      <td>ST-PH-01</td>
+      <td>6.0</td>
+      <td>14-May-26</td>
+      <td></td>
+      <td>133750000.0</td>
+      <td>82925000.0</td>
+      <td>Certified</td>
+      <td></td>
+      <td>133750000.0</td>
+      <td>82925000.0</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='letters' class='md-section'><div class='md-section-head'><span>Letters Intelligence</span><small>Correspondence threads and source status</small></div><div class='md-grid two'><div class='md-card'><h3>Top Correspondence Threads</h3><div class='md-empty'>No project-scoped records available.</div></div><div class='md-card'><h3>Letter Sources</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Workbook/Inboxes</th>
+      <th>Project Scope</th>
+      <th>Thread Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Project letters workbook and project inbox folders</td>
+      <td>Suez-Tunnel</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='risks' class='md-section'><div class='md-section-head'><span>Risk Analysis</span><small>Risk matrix inputs, RFIs, steel, and IFC conflicts</small></div><div class='md-kpi-grid'><div class='md-kpi tone-rose'><div class='md-kpi-title'>Total Risks</div><div class='md-kpi-value'>3</div><div class='md-kpi-note'>Risk register</div></div><div class='md-kpi tone-gold'><div class='md-kpi-title'>Steel Issues</div><div class='md-kpi-value'>4</div><div class='md-kpi-note'>Steel delay records</div></div><div class='md-kpi tone-sapphire'><div class='md-kpi-title'>RFIs</div><div class='md-kpi-value'>5</div><div class='md-kpi-note'>RFI status records</div></div><div class='md-kpi tone-violet'><div class='md-kpi-title'>IFC Conflicts</div><div class='md-kpi-value'>4</div><div class='md-kpi-note'>Design conflict records</div></div></div><div class='md-grid two'><div class='md-card'><div>                            <div id="bdc50775-1820-4b46-8efa-75d96ae82804" class="plotly-graph-div" style="height:330px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("bdc50775-1820-4b46-8efa-75d96ae82804")) {                    Plotly.newPlot(                        "bdc50775-1820-4b46-8efa-75d96ae82804",                        [{"hovertemplate":"Status=%{x}\u003cbr\u003eCount=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#f59e0b","pattern":{"shape":""}},"name":"","orientation":"v","showlegend":false,"textposition":"auto","x":["open","monitoring"],"xaxis":"x","y":{"dtype":"i1","bdata":"AgE="},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Status"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Count"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"legend":{"tracegroupgap":0,"font":{"size":10},"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"title":{"text":"Risk Status Breakdown"},"barmode":"relative","font":{"color":"#f8fafc","family":"Segoe UI, Arial, sans-serif"},"margin":{"l":32,"r":18,"t":48,"b":36},"height":330,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div><div class='md-card'><h3>Risk Register</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>risk_id</th>
+      <th>project_id</th>
+      <th>risk_title</th>
+      <th>risk_category</th>
+      <th>probability</th>
+      <th>time_impact_days</th>
+      <th>cost_impact</th>
+      <th>response_strategy</th>
+      <th>owner</th>
+      <th>status</th>
+      <th>due_date</th>
+      <th>probability_norm</th>
+      <th>time_impact_flag</th>
+      <th>cost_impact_flag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>R-001</td>
+      <td>Suez-Tunnel</td>
+      <td>Steel delivery delay</td>
+      <td>Schedule</td>
+      <td>high</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>Mitigate</td>
+      <td>Project manager</td>
+      <td>open</td>
+      <td>30-Jun-26</td>
+      <td>high</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <td>R-002</td>
+      <td>Suez-Tunnel</td>
+      <td>Late design clarification and IFC revisions</td>
+      <td>Engineering</td>
+      <td>medium</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>Transfer</td>
+      <td>Technical office manager</td>
+      <td>open</td>
+      <td>15-Jul-26</td>
+      <td>medium</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <td>R-003</td>
+      <td>Suez-Tunnel</td>
+      <td>Cashflow pressure due to delayed certification</td>
+      <td>Commercial</td>
+      <td>medium</td>
+      <td>no</td>
+      <td>yes</td>
+      <td>Mitigate</td>
+      <td>Commercial manager</td>
+      <td>monitoring</td>
+      <td>31-Jul-26</td>
+      <td>medium</td>
+      <td>no</td>
+      <td>yes</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='delay' class='md-section'><div class='md-section-head'><span>Delay &amp; Time Impact</span><small>Delay register, EOT signal, and responsibility split</small></div><div class='md-kpi-grid'><div class='md-kpi tone-rose'><div class='md-kpi-title'>Delay Events</div><div class='md-kpi-value'>5</div><div class='md-kpi-note'>Loaded events</div></div><div class='md-kpi tone-gold'><div class='md-kpi-title'>Delay Days</div><div class='md-kpi-value'>183</div><div class='md-kpi-note'>Indicative days</div></div><div class='md-kpi tone-sapphire'><div class='md-kpi-title'>Employer Delays</div><div class='md-kpi-value'>5</div><div class='md-kpi-note'>Client/Employer</div></div><div class='md-kpi tone-emerald'><div class='md-kpi-title'>EOT Potential</div><div class='md-kpi-value'>5</div><div class='md-kpi-note'>Potential items</div></div></div><div class='md-grid two'><div class='md-card'><div>                            <div id="dab50f19-8807-4d2f-b0ef-ab2f7d14d388" class="plotly-graph-div" style="height:330px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("dab50f19-8807-4d2f-b0ef-ab2f7d14d388")) {                    Plotly.newPlot(                        "dab50f19-8807-4d2f-b0ef-ab2f7d14d388",                        [{"hovertemplate":"Responsible Group=%{x}\u003cbr\u003eCount=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#f59e0b","pattern":{"shape":""}},"name":"","orientation":"v","showlegend":false,"textposition":"auto","x":["Employer \u002f Client"],"xaxis":"x","y":{"dtype":"i1","bdata":"BQ=="},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Responsible Group"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Count"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"legend":{"tracegroupgap":0,"font":{"size":10},"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"title":{"text":"Delay Responsibility"},"barmode":"relative","font":{"color":"#f8fafc","family":"Segoe UI, Arial, sans-serif"},"margin":{"l":32,"r":18,"t":48,"b":36},"height":330,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div><div class='md-card'><h3>Delay Register</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>project_id</th>
+      <th>Primary Event ID</th>
+      <th>Activity ID</th>
+      <th>Activity Name</th>
+      <th>BL Start</th>
+      <th>BL Finish</th>
+      <th>Start</th>
+      <th>Finish</th>
+      <th>Delayed duration</th>
+      <th>Overlap Start</th>
+      <th>Overlap Finish</th>
+      <th>BL Critical Path</th>
+      <th>Current Critical Path</th>
+      <th>Delayed duration after overlap</th>
+      <th>delay_id</th>
+      <th>delay_title</th>
+      <th>activity_id</th>
+      <th>activity_name</th>
+      <th>start_date</th>
+      <th>end_date</th>
+      <th>estimated_delay_days</th>
+      <th>approved_eot_days</th>
+      <th>responsibility</th>
+      <th>cause_category</th>
+      <th>notice_ref</th>
+      <th>status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Delay in employer free issue steel supply</td>
+      <td>CON-ST-EXC-1010</td>
+      <td>Open cut excavation and shoring</td>
+      <td>29-Oct-25</td>
+      <td>27-Jan-26</td>
+      <td>14-Nov-25</td>
+      <td>22-Feb-26</td>
+      <td>-26</td>
+      <td>14-Nov-25</td>
+      <td>22-Feb-26</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>26</td>
+      <td>Delay in employer free issue steel supply</td>
+      <td>Delay in employer free issue steel supply</td>
+      <td>CON-ST-EXC-1010</td>
+      <td>Open cut excavation and shoring</td>
+      <td>14-Nov-25</td>
+      <td>22-Feb-26</td>
+      <td>26</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>Delay in employer free issue steel supply</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Late IFC / design clarification</td>
+      <td>CON-ST-RFT-1020</td>
+      <td>RFT for base slab reinforcement</td>
+      <td>28-Dec-25</td>
+      <td>25-Jan-26</td>
+      <td>18-Jan-26</td>
+      <td>26-Feb-26</td>
+      <td>-32</td>
+      <td>18-Jan-26</td>
+      <td>26-Feb-26</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>32</td>
+      <td>Late IFC / design clarification</td>
+      <td>Late IFC / design clarification</td>
+      <td>CON-ST-RFT-1020</td>
+      <td>RFT for base slab reinforcement</td>
+      <td>18-Jan-26</td>
+      <td>26-Feb-26</td>
+      <td>32</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>Late IFC / design clarification</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Delayed RFI response</td>
+      <td>CON-ST-CON-1030</td>
+      <td>Concrete casting for base slab</td>
+      <td>28-Jan-26</td>
+      <td>21-Feb-26</td>
+      <td>23-Feb-26</td>
+      <td>31-Mar-26</td>
+      <td>-38</td>
+      <td>23-Feb-26</td>
+      <td>31-Mar-26</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>38</td>
+      <td>Delayed RFI response</td>
+      <td>Delayed RFI response</td>
+      <td>CON-ST-CON-1030</td>
+      <td>Concrete casting for base slab</td>
+      <td>23-Feb-26</td>
+      <td>31-Mar-26</td>
+      <td>38</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>Delayed RFI response</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>Access constraint and traffic diversion</td>
+      <td>CON-ST-WALL-1040</td>
+      <td>Tunnel wall reinforcement and formwork</td>
+      <td>26-Feb-26</td>
+      <td>27-Apr-26</td>
+      <td>29-Mar-26</td>
+      <td>10-Jun-26</td>
+      <td>-44</td>
+      <td>29-Mar-26</td>
+      <td>10-Jun-26</td>
+      <td>No</td>
+      <td>No</td>
+      <td>44</td>
+      <td>Access constraint and traffic diversion</td>
+      <td>Access constraint and traffic diversion</td>
+      <td>CON-ST-WALL-1040</td>
+      <td>Tunnel wall reinforcement and formwork</td>
+      <td>29-Mar-26</td>
+      <td>10-Jun-26</td>
+      <td>44</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>Access constraint and traffic diversion</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>Suez-Tunnel</td>
+      <td>MEP sleeve coordination delay</td>
+      <td>CON-ST-SLAB-1050</td>
+      <td>Roof slab reinforcement and concrete</td>
+      <td>27-Apr-26</td>
+      <td>1-Jul-26</td>
+      <td>2-Jun-26</td>
+      <td>20-Aug-26</td>
+      <td>-50</td>
+      <td>2-Jun-26</td>
+      <td>20-Aug-26</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>43</td>
+      <td>MEP sleeve coordination delay</td>
+      <td>MEP sleeve coordination delay</td>
+      <td>CON-ST-SLAB-1050</td>
+      <td>Roof slab reinforcement and concrete</td>
+      <td>2-Jun-26</td>
+      <td>20-Aug-26</td>
+      <td>43</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>MEP sleeve coordination delay</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+  </tbody>
+</table></div></div></section></div><div class="footer">Generated from Project Intelligence Hub project-scoped data. No cross-project fallback is used for project-specific exports.</div></main><script>
+(function(){
+  const buttons = Array.from(document.querySelectorAll('.md-tab-button'));
+  const sections = Array.from(document.querySelectorAll('.md-section'));
+  function showTab(tabId){
+    buttons.forEach(function(btn) { btn.classList.toggle('active', btn.getAttribute('for') === 'md-tab-' + tabId); });
+    sections.forEach(function(section) { section.classList.toggle('active', section.id === tabId); });
+    window.dispatchEvent(new Event('resize'));
+  }
+  buttons.forEach(function(btn) {
+    btn.addEventListener('click', function() { showTab(btn.getAttribute('for').replace('md-tab-', '')); });
+  });
+  if (buttons.length && !document.querySelector('.md-section.active')) {
+    showTab(buttons[0].getAttribute('for').replace('md-tab-', '') || 'overview');
+  }
+})();
+</script></body></html>

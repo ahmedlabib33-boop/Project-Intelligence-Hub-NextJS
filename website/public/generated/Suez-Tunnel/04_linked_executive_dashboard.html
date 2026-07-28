@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Linked Executive Dashboard Export</title>
+  <style>
+    body{margin:0;background:#07111f;color:#e5eef8;font-family:Arial,sans-serif}
+    .wrap{max-width:1380px;margin:0 auto;padding:24px}
+    .hero,.card{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.05);backdrop-filter:blur(18px);border-radius:24px;box-shadow:0 20px 40px rgba(0,0,0,.22)}
+    .hero{padding:24px}
+    .hero-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+    .eyebrow span{display:inline-block;margin-right:8px;margin-bottom:8px;padding:7px 12px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+    .eyebrow .a{background:#fff;color:#0f172a}
+    .eyebrow .b{background:rgba(56,189,248,.14);color:#bae6fd;border:1px solid rgba(56,189,248,.25)}
+    .eyebrow .c{background:rgba(249,115,22,.14);color:#fed7aa;border:1px solid rgba(249,115,22,.25)}
+    h1{margin:12px 0 0;font-size:48px;line-height:1.05}
+    h2{margin:0;font-size:32px}
+    .sub{margin-top:12px;color:#c7d4e3;max-width:820px;line-height:1.7}
+    .hero-side{min-width:280px}
+    .hero-side .slot{background:rgba(2,6,23,.5);padding:14px 16px;border-radius:18px;margin-bottom:10px}
+    .hero-side .slot span{display:block;color:#9fb1c6;font-size:12px}
+    .hero-side .slot strong{display:block;margin-top:6px;color:#fff;font-size:22px}
+    .grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:18px}
+    .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px}
+    .metric{padding:22px;border-radius:22px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+    .metric-title{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#94a3b8}
+    .metric-value{font-size:34px;font-weight:900;color:#fff;margin-top:12px}
+    .metric-sub{font-size:13px;color:#c7d4e3;margin-top:10px}
+    .section{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px;margin-top:18px}
+    .card{padding:22px}
+    .span-7{grid-column:span 7}
+    .span-5{grid-column:span 5}
+    .span-8{grid-column:span 8}
+    .span-4{grid-column:span 4}
+    .span-12{grid-column:span 12}
+    .label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#94a3b8}
+    .card h3{margin:10px 0 16px;font-size:28px;color:#fff}
+    .risk-stack,.mini-stack{display:flex;flex-direction:column;gap:14px}
+    .risk-card,.mini-card{background:rgba(2,6,23,.52);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:16px}
+    .evm-addon-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+    .evm-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(244,63,94,.16);border:1px solid rgba(244,63,94,.28);color:#fecdd3;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.12em}
+    .evm-note{margin-top:14px;padding:16px 18px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#dbe6f2;line-height:1.7}
+    .comment-panel{margin-top:14px;padding:14px 16px;border-radius:18px;background:rgba(2,6,23,.52);border:1px solid rgba(255,255,255,.08)}
+    .comment-label{font-size:12px;font-weight:800;color:#93c5fd;text-transform:uppercase;letter-spacing:.12em}
+    .comment-body{margin-top:10px;color:#e5eef8;line-height:1.6}
+    .risk-top{display:flex;justify-content:space-between;gap:12px;color:#fff}
+    .risk-top span{color:#fda4af;font-size:12px}
+    .risk-body{margin-top:10px;color:#c7d4e3;line-height:1.6;font-size:14px}
+    .risk-foot{margin-top:10px;color:#94a3b8;font-size:12px}
+    .mini-title{font-weight:800;color:#fff}
+    .mini-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+    .mini-grid div{background:rgba(255,255,255,.04);padding:12px;border-radius:16px;text-align:center}
+    .mini-grid span{display:block;color:#94a3b8;font-size:11px}
+    .mini-grid strong{display:block;color:#fff;font-size:22px;margin-top:6px}
+    table{width:100%;border-collapse:collapse;font-size:14px;overflow:hidden}
+    th,td{padding:14px 12px;border-top:1px solid rgba(255,255,255,.08);text-align:left}
+    th{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#94a3b8;background:rgba(255,255,255,.05)}
+    td{color:#e5eef8}
+    .footer{margin-top:18px;padding:18px 22px;border-radius:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:#c7d4e3}
+    @media (max-width: 1100px) {
+      .grid4,.grid2{grid-template-columns:1fr 1fr}
+      .span-7,.span-5,.span-8,.span-4,.span-12{grid-column:span 12}
+      h1{font-size:36px}
+    }
+    @media (max-width: 700px) {
+      .grid4,.grid2{grid-template-columns:1fr}
+      h1{font-size:28px}
+      h2{font-size:24px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="hero-top">
+        <div>
+          <div class="eyebrow">
+            <span class="a">Suez Urban Development Authority</span>
+            <span class="b">Executive Control Tower</span>
+            <span class="c">Report Date: 20-Jul-2026</span>
+          </div>
+          <h1>Suez Tunnel Civil &amp; MEP Works</h1>
+          <div class="sub">This linked executive dashboard is generated from the platform CSV files and updates each time the platform data changes.</div>
+        </div>
+        <div class="hero-side">
+          <div class="slot"><span>Schedule Health</span><strong>SPI 0.86</strong></div>
+          <div class="slot"><span>Contractual Completion</span><strong>28-Feb-2027</strong></div>
+          <div class="slot"><span>Forecast Completion</span><strong>18-May-2027</strong></div>
+        </div>
+      </div>
+      <div class="grid4">
+        
+        <div class="metric">
+          <div class="metric-title">Contract Value</div>
+          <div class="metric-value">1,250,000,000 EGP</div>
+          <div class="metric-sub">Original contract value</div>
+        </div>
+        
+        
+        <div class="metric">
+          <div class="metric-title">Schedule Variance</div>
+          <div class="metric-value">-77,831,325 EGP</div>
+          <div class="metric-sub">EV minus PV exposure</div>
+        </div>
+        
+        
+        <div class="metric">
+          <div class="metric-title">Cumulative Paid</div>
+          <div class="metric-value">481,550,000 EGP</div>
+          <div class="metric-sub">Paid to date</div>
+        </div>
+        
+        
+        <div class="metric">
+          <div class="metric-title">Ongoing Risks</div>
+          <div class="metric-value">4</div>
+          <div class="metric-sub">Active project constraints</div>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="card span-7">
+        <div class="label">Progress Intelligence</div>
+        <h3>Planned vs Actual by Phase</h3>
+        <div>                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.5.0.min.js" integrity="sha256-fHbNLP+GlIXN+efbQec78UkemUz3NJp7UmfGxC1tNxs=" crossorigin="anonymous"></script>                <div id="cce70215-3665-4003-8bda-b04343a8b448" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("cce70215-3665-4003-8bda-b04343a8b448")) {                    Plotly.newPlot(                        "cce70215-3665-4003-8bda-b04343a8b448",                        [{"alignmentgroup":"True","hovertemplate":"variable=planned\u003cbr\u003ephase=%{x}\u003cbr\u003evalue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"planned","marker":{"color":"#38bdf8","pattern":{"shape":""}},"name":"planned","offsetgroup":"planned","orientation":"v","showlegend":true,"textposition":"auto","x":["Engineering","Procurement","Construction","Overall"],"xaxis":"x","y":{"dtype":"f8","bdata":"zczMzMzM7D8K16NwPQrnP4XrUbgehds\u002fAAAAAAAARUA="},"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"variable=actual\u003cbr\u003ephase=%{x}\u003cbr\u003evalue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"actual","marker":{"color":"#f97316","pattern":{"shape":""}},"name":"actual","offsetgroup":"actual","orientation":"v","showlegend":true,"textposition":"auto","x":["Engineering","Procurement","Construction","Overall"],"xaxis":"x","y":{"dtype":"f8","bdata":"rkfhehSu5z8zMzMzMzPjPwrXo3A9Ctc\u002fAAAAAACAQUA="},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":""}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"%"}},"legend":{"title":{"text":""},"tracegroupgap":0},"title":{"text":"Planned vs Actual by Phase"},"barmode":"group","font":{"color":"#e5eef8"},"paper_bgcolor":"#0b1320","plot_bgcolor":"#0b1320"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div>
+      </div>
+      <div class="card span-5">
+        <div class="label">Command Decisions</div>
+        <h3>Critical Recovery Agenda</h3>
+        <div class="risk-stack">
+        <div class="risk-card">
+          <div class="risk-top"><strong>Schedule</strong><span>Ongoing</span></div>
+          <div class="risk-body">Steel delivery delay</div>
+          <div class="risk-foot">Impact: High</div>
+        </div>
+        
+        <div class="risk-card">
+          <div class="risk-top"><strong>Engineering</strong><span>Ongoing</span></div>
+          <div class="risk-body">Late design clarification and IFC revisions</div>
+          <div class="risk-foot">Impact: Medium</div>
+        </div>
+        
+        <div class="risk-card">
+          <div class="risk-top"><strong>Commercial</strong><span>Monitoring</span></div>
+          <div class="risk-body">Cashflow pressure due to delayed certification</div>
+          <div class="risk-foot">Impact: Medium</div>
+        </div>
+        
+        <div class="risk-card">
+          <div class="risk-top"><strong>Access constraint and traffic diversion</strong><span>Ongoing</span></div>
+          <div class="risk-body">Access constraint and traffic diversion</div>
+          <div class="risk-foot">Impact: Critical</div>
+        </div>
+        
+        <div class="risk-card">
+          <div class="risk-top"><strong>MEP sleeve coordination delay</strong><span>Ongoing</span></div>
+          <div class="risk-body">MEP sleeve coordination delay</div>
+          <div class="risk-foot">Impact: Critical</div>
+        </div>
+        </div>
+      </div>
+      <div class="card span-12">
+        <div class="label">Phase Gauges</div>
+        <h3>Plan vs Actual Snapshot</h3>
+        <div class="grid4">
+          
+        <div class="metric">
+          <div class="metric-title">Engineering</div>
+          <div class="metric-value">0.74%</div>
+          <div class="metric-sub">Planned 0.90% | Variance -0.16%</div>
+        </div>
+        
+        <div class="metric">
+          <div class="metric-title">Procurement</div>
+          <div class="metric-value">0.60%</div>
+          <div class="metric-sub">Planned 0.72% | Variance -0.12%</div>
+        </div>
+        
+        <div class="metric">
+          <div class="metric-title">Construction</div>
+          <div class="metric-value">0.36%</div>
+          <div class="metric-sub">Planned 0.43% | Variance -0.07%</div>
+        </div>
+        
+        <div class="metric">
+          <div class="metric-title">Overall</div>
+          <div class="metric-value">35.00%</div>
+          <div class="metric-sub">Planned 42.00% | Variance -7.00%</div>
+        </div>
+        
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="card span-8">
+        <div class="label">Milestone Exposure</div>
+        <h3>Forecast Completion by Discipline / Area</h3>
+        <table>
+          <thead><tr><th>Discipline</th><th>Plan Completion</th><th>Forecast Completion</th><th>Variance Days</th></tr></thead>
+          <tbody>
+        <tr>
+          <td>Engineering</td>
+          <td>07-Dec-2025</td>
+          <td>27-Dec-2025</td>
+          <td>-20</td>
+        </tr>
+        
+        <tr>
+          <td>Procurement</td>
+          <td>27-Dec-2025</td>
+          <td>16-Jan-2026</td>
+          <td>-20</td>
+        </tr>
+        
+        <tr>
+          <td>Construction</td>
+          <td>01-Jul-2026</td>
+          <td>21-Jul-2026</td>
+          <td>-20</td>
+        </tr>
+        
+        <tr>
+          <td>B-01</td>
+          <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+          <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+          <td>0</td>
+        </tr>
+        
+        <tr>
+          <td>B-02</td>
+          <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+          <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+          <td>0</td>
+        </tr>
+        
+        <tr>
+          <td>B-03</td>
+          <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+          <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+          <td>0</td>
+        </tr>
+        
+        <tr>
+          <td>B-04</td>
+          <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+          <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+          <td>0</td>
+        </tr>
+        </tbody>
+        </table>
+      </div>
+      <div class="card span-4">
+        <div class="label">Engineering Deliverables</div>
+        <h3>Document Submission Control</h3>
+        <div class="mini-stack">
+        <div class="mini-card">
+          <div class="mini-title">Civil - Submittals</div>
+          <div class="mini-grid">
+            <div><span>Total</span><strong>1</strong></div>
+            <div><span>Plan</span><strong>0</strong></div>
+            <div><span>Actual</span><strong>0</strong></div>
+          </div>
+        </div>
+        
+        <div class="mini-card">
+          <div class="mini-title">Civil - Shop Drawings</div>
+          <div class="mini-grid">
+            <div><span>Total</span><strong>1</strong></div>
+            <div><span>Plan</span><strong>0</strong></div>
+            <div><span>Actual</span><strong>0</strong></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="card span-5">
+        <div class="label">Cashflow Position</div>
+        <h3>Invoice Conversion Funnel</h3>
+        <div>                            <div id="376893ae-e1f3-4c38-b2bf-9808deebcc6a" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("376893ae-e1f3-4c38-b2bf-9808deebcc6a")) {                    Plotly.newPlot(                        "376893ae-e1f3-4c38-b2bf-9808deebcc6a",                        [{"customdata":[["Submitted"],["Approved"],["Paid"]],"domain":{"x":[0.0,1.0],"y":[0.0,1.0]},"hole":0.45,"hovertemplate":"name=%{customdata[0]}\u003cbr\u003evalue=%{value}\u003cextra\u003e\u003c\u002fextra\u003e","labels":["Submitted","Approved","Paid"],"legendgroup":"","marker":{"colors":["#38bdf8","#a78bfa","#22c55e"]},"name":"","showlegend":true,"values":{"dtype":"f8","bdata":"AAAAsPk1wUEAAACw+TXBQQAAALDes7xB"},"type":"pie"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"legend":{"tracegroupgap":0,"title":{"text":""}},"margin":{"t":60},"font":{"color":"#e5eef8"},"showlegend":true,"paper_bgcolor":"#0b1320","plot_bgcolor":"#0b1320"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div>
+        <div class="grid2">
+          
+        <div class="metric">
+          <div class="metric-title">Paid</div>
+          <div class="metric-value">481,550,000 EGP</div>
+          <div class="metric-sub">Released cash</div>
+        </div>
+        
+          
+        <div class="metric">
+          <div class="metric-title">Under Payment</div>
+          <div class="metric-value">95,950,000 EGP</div>
+          <div class="metric-sub">Certified not yet paid</div>
+        </div>
+        
+        </div>
+      </div>
+      <div class="card span-7">
+        <div class="label">Invoices Register</div>
+        <h3>Payment Status Control</h3>
+        <table>
+          <thead><tr><th>Invoice</th><th>Submission Date</th><th>Value</th><th>Status</th></tr></thead>
+          <tbody>
+        <tr>
+          <td>Invoice #1</td>
+          <td>15-Dec-2025</td>
+          <td>58,750,000</td>
+          <td>Paid</td>
+        </tr>
+        
+        <tr>
+          <td>Invoice #2</td>
+          <td>14-Jan-2026</td>
+          <td>73,750,000</td>
+          <td>Paid</td>
+        </tr>
+        
+        <tr>
+          <td>Invoice #3</td>
+          <td>13-Feb-2026</td>
+          <td>88,750,000</td>
+          <td>Paid</td>
+        </tr>
+        
+        <tr>
+          <td>Invoice #4</td>
+          <td>15-Mar-2026</td>
+          <td>103,750,000</td>
+          <td>Paid</td>
+        </tr>
+        
+        <tr>
+          <td>Invoice #5</td>
+          <td>14-Apr-2026</td>
+          <td>118,750,000</td>
+          <td>Partially Paid</td>
+        </tr>
+        
+        <tr>
+          <td>Invoice #6</td>
+          <td>14-May-2026</td>
+          <td>133,750,000</td>
+          <td>Certified</td>
+        </tr>
+        </tbody>
+        </table>
+      </div>
+      <div class="card span-12">
+        <div class="label">Earned Value Management</div>
+        <h3>BAC / PV / EV / SV Executive Readout</h3>
+        <div>                            <div id="eff118ee-cdea-4746-8ede-d0a609cac611" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("eff118ee-cdea-4746-8ede-d0a609cac611")) {                    Plotly.newPlot(                        "eff118ee-cdea-4746-8ede-d0a609cac611",                        [{"hovertemplate":"metric=%{x}\u003cbr\u003evalue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"BAC","marker":{"color":"#38bdf8","pattern":{"shape":""}},"name":"BAC","orientation":"v","showlegend":true,"textposition":"auto","x":["BAC"],"xaxis":"x","y":{"dtype":"f8","bdata":"KVz\u002fH1+g0kE="},"yaxis":"y","type":"bar"},{"hovertemplate":"metric=%{x}\u003cbr\u003evalue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"PV","marker":{"color":"#22c55e","pattern":{"shape":""}},"name":"PV","orientation":"v","showlegend":true,"textposition":"auto","x":["PV"],"xaxis":"x","y":{"dtype":"f8","bdata":"CtcDikfJwEE="},"yaxis":"y","type":"bar"},{"hovertemplate":"metric=%{x}\u003cbr\u003evalue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"EV","marker":{"color":"#f97316","pattern":{"shape":""}},"name":"EV","orientation":"v","showlegend":true,"textposition":"auto","x":["EV"],"xaxis":"x","y":{"dtype":"f8","bdata":"pXC9dvLuvEE="},"yaxis":"y","type":"bar"},{"hovertemplate":"metric=%{x}\u003cbr\u003evalue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"SV","marker":{"color":"#f43f5e","pattern":{"shape":""}},"name":"SV","orientation":"v","showlegend":true,"textposition":"auto","x":["SV"],"xaxis":"x","y":{"dtype":"f8","bdata":"wvUodXKOkkE="},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"metric"},"categoryorder":"array","categoryarray":["BAC","PV","EV","SV"]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"value"}},"legend":{"title":{"text":"metric"},"tracegroupgap":0},"title":{"text":"BAC \u002f PV \u002f EV \u002f SV Executive Readout"},"barmode":"relative","font":{"color":"#e5eef8"},"showlegend":false,"paper_bgcolor":"#0b1320","plot_bgcolor":"#0b1320"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="card span-12">
+        <div class="label">Earned Value Analysis Add-on</div>
+        <h3>Quantitative Performance (EVM Metrics)</h3>
+        <div class="evm-chip">Critical Delay</div>
+        <div class="grid4" style="margin-top:16px">
+          
+        <div class="metric">
+          <div class="metric-title">BAC</div>
+          <div class="metric-value">SAR 1,249,999,999.99</div>
+          <div class="metric-sub">Budget @ Completion</div>
+        </div>
+        
+          
+        <div class="metric">
+          <div class="metric-title">PV</div>
+          <div class="metric-value">SAR 563,253,012.03</div>
+          <div class="metric-sub">Cumm. Planned Value</div>
+        </div>
+        
+          
+        <div class="metric">
+          <div class="metric-title">EV</div>
+          <div class="metric-value">SAR 485,421,686.74</div>
+          <div class="metric-sub">Cumm. Earned Value</div>
+        </div>
+        
+          
+        <div class="metric">
+          <div class="metric-title">SV</div>
+          <div class="metric-value">SAR -77,831,325.29</div>
+          <div class="metric-sub">Negative schedule exposure</div>
+        </div>
+        
+          
+        <div class="metric">
+          <div class="metric-title">SPI</div>
+          <div class="metric-value">0.86</div>
+          <div class="metric-sub">Schedule performance index</div>
+        </div>
+        
+          
+        <div class="metric">
+          <div class="metric-title">Planned completion value position</div>
+          <div class="metric-value">45.1%</div>
+          <div class="metric-sub">PV as a share of BAC</div>
+        </div>
+        
+          
+        <div class="metric">
+          <div class="metric-title">Earned value gap</div>
+          <div class="metric-value">SAR 77,831,325.29</div>
+          <div class="metric-sub">PV not converted into EV</div>
+        </div>
+        
+          
+        <div class="metric">
+          <div class="metric-title">Schedule health classification</div>
+          <div class="metric-value">Critical Delay</div>
+          <div class="metric-sub">Executive status</div>
+        </div>
+        
+        </div>
+        <div class="grid2">
+          <div><div>                            <div id="b847ecab-e9b0-43e4-a9c9-a32e6086d856" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("b847ecab-e9b0-43e4-a9c9-a32e6086d856")) {                    Plotly.newPlot(                        "b847ecab-e9b0-43e4-a9c9-a32e6086d856",                        [{"hovertemplate":"metric=%{x}\u003cbr\u003evalue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"BAC","marker":{"color":"#38bdf8","pattern":{"shape":""}},"name":"BAC","orientation":"v","showlegend":true,"textposition":"auto","x":["BAC"],"xaxis":"x","y":{"dtype":"f8","bdata":"KVz\u002fH1+g0kE="},"yaxis":"y","type":"bar"},{"hovertemplate":"metric=%{x}\u003cbr\u003evalue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"PV","marker":{"color":"#22c55e","pattern":{"shape":""}},"name":"PV","orientation":"v","showlegend":true,"textposition":"auto","x":["PV"],"xaxis":"x","y":{"dtype":"f8","bdata":"CtcDikfJwEE="},"yaxis":"y","type":"bar"},{"hovertemplate":"metric=%{x}\u003cbr\u003evalue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"EV","marker":{"color":"#f97316","pattern":{"shape":""}},"name":"EV","orientation":"v","showlegend":true,"textposition":"auto","x":["EV"],"xaxis":"x","y":{"dtype":"f8","bdata":"pXC9dvLuvEE="},"yaxis":"y","type":"bar"},{"hovertemplate":"metric=%{x}\u003cbr\u003evalue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"SV Exposure","marker":{"color":"#f43f5e","pattern":{"shape":""}},"name":"SV Exposure","orientation":"v","showlegend":true,"textposition":"auto","x":["SV Exposure"],"xaxis":"x","y":{"dtype":"f8","bdata":"vPUodXKOkkE="},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"metric"},"categoryorder":"array","categoryarray":["BAC","PV","EV","SV Exposure"]},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"value"}},"legend":{"title":{"text":"metric"},"tracegroupgap":0},"title":{"text":"BAC vs PV vs EV with SV Exposure"},"barmode":"relative","font":{"color":"#e5eef8"},"showlegend":false,"paper_bgcolor":"#0b1320","plot_bgcolor":"#0b1320"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div>
+          <div><div>                            <div id="2bafd155-4f1d-4bb9-b2be-118597554517" class="plotly-graph-div" style="height:340px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("2bafd155-4f1d-4bb9-b2be-118597554517")) {                    Plotly.newPlot(                        "2bafd155-4f1d-4bb9-b2be-118597554517",                        [{"gauge":{"axis":{"range":[0,1.5]},"bar":{"color":"#f43f5e"},"steps":[{"color":"#3a161e","range":[0,0.75]},{"color":"#4a3412","range":[0.75,1.0]},{"color":"#15382b","range":[1.0,1.5]}],"threshold":{"line":{"color":"#ffffff","width":4},"value":1.0}},"mode":"gauge+number","number":{"valueformat":".2f"},"title":{"text":"SPI Health"},"value":0.8618181818336118,"type":"indicator"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"margin":{"l":10,"r":10,"t":50,"b":10},"font":{"color":"#e5eef8"},"height":340,"paper_bgcolor":"#0b1320"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div>
+        </div>
+        <div class="evm-note">The project is underperforming against the planned value baseline. The earned value is significantly below the planned value, creating a negative schedule variance of SAR 77.83M and an SPI of 0.86. This indicates that the project is progressing at approximately 86% of the planned schedule efficiency.</div>
+        
+        <div class="comment-panel">
+          <div class="comment-label">Add / Edit My Comment</div>
+          <div class="comment-body">No user comment added.</div>
+        </div>
+        
+      </div>
+
+      <div class="card span-12">
+        <div class="label">Earned Value Analysis Add-on</div>
+        <h3>Root Cause Linkage</h3>
+        <table>
+          <thead><tr><th>Cause Title</th><th>Impact Area</th><th>Link to EVM Impact</th><th>Status</th><th>Severity</th></tr></thead>
+          <tbody>
+        <tr>
+          <td>Delay in RFT steel supply by Owner</td>
+          <td>Procurement / Construction</td>
+          <td>PV not converted into EV due to blocked work fronts and delayed material-driven execution.</td>
+          <td>Ongoing</td>
+          <td>Critical</td>
+        </tr>
+        
+        <tr>
+          <td>Delay in design review process</td>
+          <td>Engineering</td>
+          <td>Planned engineering progress could not flow into approved deliverables and downstream earned value.</td>
+          <td>Closed</td>
+          <td>High</td>
+        </tr>
+        
+        <tr>
+          <td>Delay in reply on RFI 4 and RFI 5</td>
+          <td>Engineering / Construction</td>
+          <td>Technical closure delays restricted workface release and slowed conversion of planned progress into earned progress.</td>
+          <td>Ongoing</td>
+          <td>High</td>
+        </tr>
+        
+        <tr>
+          <td>Delay in determining the MEP executing party</td>
+          <td>Engineering / Procurement / Construction</td>
+          <td>Interface uncertainty delayed execution planning, procurement flow, and forecast progress realization.</td>
+          <td>Closed</td>
+          <td>Medium</td>
+        </tr>
+        
+        <tr>
+          <td>Payment delay impact on resource continuity and productivity</td>
+          <td>Commercial / Construction</td>
+          <td>Liquidity pressure reduced productivity continuity and slowed the conversion of planned value into earned value.</td>
+          <td>Closed</td>
+          <td>High</td>
+        </tr>
+        </tbody>
+        </table>
+        <div class="evm-note">The negative schedule variance is not an isolated numerical deviation. It is directly linked to unresolved external and interface-driven constraints that prevented planned progress from being converted into earned value, mainly within construction and procurement work fronts.</div>
+        
+        <div class="comment-panel">
+          <div class="comment-label">Add / Edit My Comment</div>
+          <div class="comment-body">No user comment added.</div>
+        </div>
+        
+      </div>
+
+      <div class="card span-12">
+        <div class="label">Earned Value Analysis Add-on</div>
+        <h3>Contractor Mitigation & Recovery Status</h3>
+        <table>
+          <thead><tr><th>Action</th><th>Owner / Responsible party</th><th>Current status</th><th>Recovery impact</th><th>Required next decision</th></tr></thead>
+          <tbody>
+        <tr>
+          <td>RFT Steel Supply Recovery</td>
+          <td>Project Controls / Procurement / Owner Interface</td>
+          <td>In Progress</td>
+          <td>Releases blocked structural work fronts and supports EV generation in construction.</td>
+          <td>Secure committed steel release and delivery sequence from Owner.</td>
+        </tr>
+        
+        <tr>
+          <td>RFI Closure Acceleration</td>
+          <td>Engineering Team / Consultant Interface</td>
+          <td>In Progress</td>
+          <td>Enables technical closure and unblocks affected planned activities.</td>
+          <td>Escalate overdue RFI responses for closure dates.</td>
+        </tr>
+        
+        <tr>
+          <td>Design Review Follow-up</td>
+          <td>Engineering Management</td>
+          <td>Monitoring</td>
+          <td>Protects planned engineering completion and downstream procurement readiness.</td>
+          <td>Freeze review turnaround commitments with reviewing parties.</td>
+        </tr>
+        
+        <tr>
+          <td>MEP Interface Finalization</td>
+          <td>Project Management / Client Interface</td>
+          <td>Monitoring</td>
+          <td>Reduces interface uncertainty and improves forecast execution reliability.</td>
+          <td>Confirm final executing responsibility and interface release logic.</td>
+        </tr>
+        
+        <tr>
+          <td>Commercial / Payment Follow-up</td>
+          <td>Commercial Team</td>
+          <td>In Progress</td>
+          <td>Supports resource continuity and mitigates productivity disruption risk.</td>
+          <td>Close outstanding payment approvals and release under-payment invoices.</td>
+        </tr>
+        
+        <tr>
+          <td>Construction Productivity Recovery</td>
+          <td>Construction Team</td>
+          <td>Ready Upon Constraint Removal</td>
+          <td>Accelerates EV generation once technical and supply constraints are removed.</td>
+          <td>Approve recovery sequence by priority work front.</td>
+        </tr>
+        </tbody>
+        </table>
+        <div class="evm-note">Contractor mitigation is focused on protecting available work fronts, accelerating technical closures, maintaining commercial entitlement records, and recovering productivity once external constraints are removed. Recovery remains dependent on timely closure of outstanding Owner / Engineer-driven constraints.</div>
+        
+        <div class="comment-panel">
+          <div class="comment-label">Add / Edit My Comment</div>
+          <div class="comment-body">No user comment added.</div>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="card span-5">
+        <div class="label">Risk Register</div>
+        <h3>Risk & Issue Control</h3>
+        <div class="risk-stack">
+        <div class="risk-card">
+          <div class="risk-top"><strong>Schedule</strong><span>Ongoing</span></div>
+          <div class="risk-body">Steel delivery delay</div>
+          <div class="risk-foot">Impact: High</div>
+        </div>
+        
+        <div class="risk-card">
+          <div class="risk-top"><strong>Engineering</strong><span>Ongoing</span></div>
+          <div class="risk-body">Late design clarification and IFC revisions</div>
+          <div class="risk-foot">Impact: Medium</div>
+        </div>
+        
+        <div class="risk-card">
+          <div class="risk-top"><strong>Commercial</strong><span>Monitoring</span></div>
+          <div class="risk-body">Cashflow pressure due to delayed certification</div>
+          <div class="risk-foot">Impact: Medium</div>
+        </div>
+        
+        <div class="risk-card">
+          <div class="risk-top"><strong>Access constraint and traffic diversion</strong><span>Ongoing</span></div>
+          <div class="risk-body">Access constraint and traffic diversion</div>
+          <div class="risk-foot">Impact: Critical</div>
+        </div>
+        
+        <div class="risk-card">
+          <div class="risk-top"><strong>MEP sleeve coordination delay</strong><span>Ongoing</span></div>
+          <div class="risk-body">MEP sleeve coordination delay</div>
+          <div class="risk-foot">Impact: Critical</div>
+        </div>
+        </div>
+      </div>
+      <div class="card span-7">
+        <div class="label">Causal Intelligence</div>
+        <h3>Root Cause / Impact Radar</h3>
+        <div>                            <div id="1912eb10-6edf-4fd8-88ce-0c8fca345aa8" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("1912eb10-6edf-4fd8-88ce-0c8fca345aa8")) {                    Plotly.newPlot(                        "1912eb10-6edf-4fd8-88ce-0c8fca345aa8",                        [{"fill":"toself","line":{"color":"#f97316"},"name":"Exposure","r":{"dtype":"f8","bdata":"AAAAAAAAVkAAAAAAAIBVQAAAAAAAAFNAAAAAAAAAUEAAAAAAAABKQA=="},"theta":["Access constraint and traffic diversion","MEP sleeve coordination delay","Delayed RFI response","Late IFC \u002f design clarification","Delay in employer free issue steel supply"],"type":"scatterpolar"},{"fill":"toself","line":{"color":"#38bdf8"},"name":"Recovery","r":{"dtype":"f8","bdata":"zczMzMzMSUCamZmZmVlKQJqZmZmZGU1AMzMzMzMzUECamZmZmdlRQA=="},"theta":["Access constraint and traffic diversion","MEP sleeve coordination delay","Delayed RFI response","Late IFC \u002f design clarification","Delay in employer free issue steel supply"],"type":"scatterpolar"},{"fill":"toself","line":{"color":"#f43f5e"},"name":"Time Impact","r":{"dtype":"f8","bdata":"mpmZmZkZV0AzMzMzM5NWQDMzMzMz81NAzczMzMzMUEDNzMzMzExLQA=="},"theta":["Access constraint and traffic diversion","MEP sleeve coordination delay","Delayed RFI response","Late IFC \u002f design clarification","Delay in employer free issue steel supply"],"type":"scatterpolar"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"polar":{"radialaxis":{"visible":true,"range":[0,100],"gridcolor":"rgba(255,255,255,0.12)"},"angularaxis":{"gridcolor":"rgba(255,255,255,0.12)"}},"font":{"color":"#e5eef8"},"showlegend":true,"paper_bgcolor":"#0b1320","plot_bgcolor":"#0b1320","title":{"text":"Root Cause \u002f Impact Radar"}},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div>
+      </div>
+      <div class="card span-12">
+        <div class="label">Resource Quantities</div>
+        <h3>RFT Quantity Distribution</h3>
+        <div class='sub'>No dedicated resource quantity source is currently available.</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div>Effective Date: 01-Sep-2025 ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· Ground Works Forecast: 01-Sep-2025</div>
+      <div>Strategic priority: recover construction productivity and preserve entitlement evidence.</div>
+    </div>
+  </div>
+</body>
+</html>

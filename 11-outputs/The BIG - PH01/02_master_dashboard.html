@@ -1,0 +1,1654 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Master Dashboard - ROYA-BIG PROJECT PHASE01 (B1-4)</title>
+<script src='https://cdn.plot.ly/plotly-2.35.2.min.js'></script>
+<style>
+:root{--bg:#0a0e27;--card:rgba(15,23,42,.86);--card2:rgba(30,41,59,.62);--line:rgba(148,163,184,.18);--gold:#f59e0b;--emerald:#10b981;--rose:#f43f5e;--cyan:#06b6d4;--sapphire:#3b82f6;--violet:#8b5cf6;--text:#f8fafc;--muted:#94a3b8}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 18% 8%,rgba(59,130,246,.16),transparent 26%),radial-gradient(circle at 80% 4%,rgba(245,158,11,.14),transparent 24%),linear-gradient(180deg,#0a0e27,#111827 70%,#0a0e27);color:var(--text);font-family:Segoe UI,Arial,sans-serif}
+.md-shell{max-width:1480px;margin:0 auto;padding:28px 24px 46px} .md-tab-radio{position:absolute;left:-9999px;opacity:0} .md-hero{border:1px solid var(--line);border-radius:24px;padding:26px;background:linear-gradient(135deg,rgba(15,23,42,.95),rgba(30,41,59,.74));box-shadow:0 24px 60px rgba(0,0,0,.32)} .md-eyebrow{color:var(--gold);font-weight:900;text-transform:uppercase;letter-spacing:.18em;font-size:12px} h1{margin:8px 0 6px;font-size:38px;line-height:1.05} .md-sub{color:var(--muted);font-size:15px} .md-nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 6px} .md-tab-button{display:inline-flex;text-decoration:none;color:var(--text);background:rgba(255,255,255,.06);border:1px solid var(--line);padding:9px 12px;border-radius:999px;font-size:12px;font-weight:800;cursor:pointer;user-select:none} .md-section{display:none;margin-top:22px;padding:18px;border:1px solid var(--line);border-radius:22px;background:rgba(15,23,42,.54);box-shadow:0 18px 42px rgba(0,0,0,.2)} #md-tab-overview:checked ~ .md-sections #overview{display:block} #md-tab-overview:checked ~ .md-hero .md-nav label[for='md-tab-overview']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-wbs:checked ~ .md-sections #wbs{display:block} #md-tab-wbs:checked ~ .md-hero .md-nav label[for='md-tab-wbs']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-activities:checked ~ .md-sections #activities{display:block} #md-tab-activities:checked ~ .md-hero .md-nav label[for='md-tab-activities']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-milestones:checked ~ .md-sections #milestones{display:block} #md-tab-milestones:checked ~ .md-hero .md-nav label[for='md-tab-milestones']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-s_curve:checked ~ .md-sections #s_curve{display:block} #md-tab-s_curve:checked ~ .md-hero .md-nav label[for='md-tab-s_curve']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-evm:checked ~ .md-sections #evm{display:block} #md-tab-evm:checked ~ .md-hero .md-nav label[for='md-tab-evm']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-contracts:checked ~ .md-sections #contracts{display:block} #md-tab-contracts:checked ~ .md-hero .md-nav label[for='md-tab-contracts']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-letters:checked ~ .md-sections #letters{display:block} #md-tab-letters:checked ~ .md-hero .md-nav label[for='md-tab-letters']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-risks:checked ~ .md-sections #risks{display:block} #md-tab-risks:checked ~ .md-hero .md-nav label[for='md-tab-risks']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} #md-tab-delay:checked ~ .md-sections #delay{display:block} #md-tab-delay:checked ~ .md-hero .md-nav label[for='md-tab-delay']{background:linear-gradient(135deg,rgba(245,158,11,.95),rgba(251,191,36,.82));border-color:rgba(245,158,11,.75);color:#111827;box-shadow:0 10px 24px rgba(245,158,11,.18)} .md-section-head{display:flex;justify-content:space-between;gap:14px;align-items:end;margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:12px} .md-section-head span{font-size:22px;font-weight:900;color:var(--gold)} .md-section-head small{color:var(--muted);text-align:right} .md-kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:14px} .md-kpi{border:1px solid var(--line);border-top:4px solid var(--gold);border-radius:18px;background:linear-gradient(145deg,rgba(15,23,42,.95),rgba(30,41,59,.72));padding:16px;min-height:116px} .tone-emerald{border-top-color:var(--emerald)}.tone-rose{border-top-color:var(--rose)}.tone-cyan{border-top-color:var(--cyan)}.tone-sapphire{border-top-color:var(--sapphire)}.tone-violet{border-top-color:var(--violet)} .md-kpi-title{font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:900;letter-spacing:.08em} .md-kpi-value{font-size:28px;font-weight:900;margin-top:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .md-kpi-note{font-size:12px;color:var(--muted);margin-top:8px} .md-grid{display:grid;gap:14px} .md-grid.two{grid-template-columns:1fr 1fr} .md-card{border:1px solid var(--line);border-radius:18px;background:var(--card);padding:14px;overflow:auto} .md-card h3{margin:0 0 10px;color:#fbbf24;font-size:16px} .md-table{width:100%;border-collapse:collapse;font-size:12px} .md-table th{background:rgba(245,158,11,.18);color:#f8fafc;text-align:left;padding:8px;border-bottom:1px solid var(--line);white-space:nowrap} .md-table td{padding:7px 8px;border-bottom:1px solid rgba(148,163,184,.10);color:#dbeafe;vertical-align:top} .md-empty{border:1px dashed var(--line);border-radius:14px;padding:18px;color:var(--muted);text-align:center} .footer{margin-top:22px;text-align:center;color:var(--muted);font-size:12px}
+@media(max-width:900px){.md-shell{padding:14px 10px} h1{font-size:25px} .md-kpi-grid,.md-grid.two{grid-template-columns:1fr} .md-section{padding:12px} .md-section-head{display:block} .md-section-head small{display:block;text-align:left;margin-top:5px} .md-kpi-value{font-size:22px}}
+</style>
+</head>
+<body><main class="md-shell"><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-overview' checked><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-wbs'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-activities'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-milestones'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-s_curve'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-evm'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-contracts'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-letters'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-risks'><input class='md-tab-radio' type='radio' name='md-tabs' id='md-tab-delay'><header class="md-hero"><div class="md-eyebrow">Master Dashboard</div><h1>ROYA-BIG PROJECT PHASE01 (B1-4)</h1><div class="md-sub">Project-scoped construction intelligence dashboard | Project ID: The Big -P.01-UP-20-April-26 | Generated 20 Jul 2026 15:45</div><nav class="md-nav"><label class='md-tab-button' for='md-tab-overview'>Overview</label><label class='md-tab-button' for='md-tab-wbs'>WBS</label><label class='md-tab-button' for='md-tab-activities'>Activities</label><label class='md-tab-button' for='md-tab-milestones'>Milestones</label><label class='md-tab-button' for='md-tab-s_curve'>S-Curve</label><label class='md-tab-button' for='md-tab-evm'>EVM</label><label class='md-tab-button' for='md-tab-contracts'>Contracts</label><label class='md-tab-button' for='md-tab-letters'>Letters</label><label class='md-tab-button' for='md-tab-risks'>Risks</label><label class='md-tab-button' for='md-tab-delay'>Delay & TIA</label></nav></header><div class="md-sections"><section id='overview' class='md-section'><div class='md-section-head'><span>Project Overview</span><small>Executive KPIs, health indicators, and project vitals</small></div><div class='md-kpi-grid'><div class='md-kpi tone-gold'><div class='md-kpi-title'>Contract Value</div><div class='md-kpi-value'>EGP 367,286,025</div><div class='md-kpi-note'>Project budget</div></div><div class='md-kpi tone-emerald'><div class='md-kpi-title'>Overall Progress</div><div class='md-kpi-value'>30.7%</div><div class='md-kpi-note'>Planned 65.3%</div></div><div class='md-kpi tone-cyan'><div class='md-kpi-title'>Activities</div><div class='md-kpi-value'>1363</div><div class='md-kpi-note'>Critical 573</div></div><div class='md-kpi tone-sapphire'><div class='md-kpi-title'>Duration</div><div class='md-kpi-value'>576 days</div><div class='md-kpi-note'>Remaining 45.8%</div></div></div><div class='md-grid two'><div class='md-card'><h3>Phase Progress</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>phase</th>
+      <th>planned</th>
+      <th>actual</th>
+      <th>variance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Engineering</td>
+      <td>0.98</td>
+      <td>0.64</td>
+      <td>-0.35</td>
+    </tr>
+    <tr>
+      <td>Procurement</td>
+      <td>0.72</td>
+      <td>0.53</td>
+      <td>-0.19</td>
+    </tr>
+    <tr>
+      <td>Construction</td>
+      <td>0.44</td>
+      <td>0.08</td>
+      <td>-0.37</td>
+    </tr>
+    <tr>
+      <td>Overall</td>
+      <td>65.32</td>
+      <td>30.68</td>
+      <td>-34.64</td>
+    </tr>
+  </tbody>
+</table></div><div class='md-card'><h3>Project Vitals</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Project</th>
+      <th>Start</th>
+      <th>Finish</th>
+      <th>Project ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ROYA-BIG PROJECT PHASE01 (B1-4)</td>
+      <td>11-Sep-2025</td>
+      <td>10-Apr-2027</td>
+      <td>The Big -P.01-UP-20-April-26</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='wbs' class='md-section'><div class='md-section-head'><span>Work Breakdown Structure</span><small>Project WBS progress and register</small></div><div class='md-grid two'><div class='md-card'><div>                            <div id="85c3c8bf-97a5-42f8-893b-c1f97141d5cd" class="plotly-graph-div" style="height:330px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("85c3c8bf-97a5-42f8-893b-c1f97141d5cd")) {                    Plotly.newPlot(                        "85c3c8bf-97a5-42f8-893b-c1f97141d5cd",                        [{"hovertemplate":"wbs_code=%{x}\u003cbr\u003eperformance_%_complete_num=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#f59e0b","pattern":{"shape":""}},"name":"","orientation":"v","showlegend":false,"textposition":"auto","x":["No Priority","The Big - P.01 - UP-20-April-26","The Big - P.01 - UP-20-April-26.KD","The Big - P.01 - UP-20-April-26.KD.MI","The Big - P.01 - UP-20-April-26.KD.MO","The Big - P.01 - UP-20-April-26.EN","The Big - P.01 - UP-20-April-26.P","The Big - P.01 - UP-20-April-26.CON","The Big - P.01 - UP-20-April-26.CON.EW","The Big - P.01 - UP-20-April-26.CON.P02.B01","The Big - P.01 - UP-20-April-26.CON.P02.B02","The Big - P.01 - UP-20-April-26.CON.P01.B04"],"xaxis":"x","y":{"dtype":"f8","bdata":"rBxaZDvf0z+sHFpkO9\u002fTPwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACsHFpkO9\u002fTPwAAAAAAAPA\u002fjnVxGw3g0T9B8WPMXUvUPxsN4C2QoNA\u002f"},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"wbs_code"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"performance_%_complete_num"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"legend":{"tracegroupgap":0,"font":{"size":10},"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"title":{"text":"WBS Progress"},"barmode":"relative","font":{"color":"#f8fafc","family":"Segoe UI, Arial, sans-serif"},"margin":{"l":32,"r":18,"t":48,"b":36},"height":330,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div><div class='md-card'><h3>WBS Register</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>project_id</th>
+      <th>wbs_code</th>
+      <th>wbs_name</th>
+      <th>total_activities</th>
+      <th>bl_project_duration</th>
+      <th>remaining_duration</th>
+      <th>total_float</th>
+      <th>bl_project_start</th>
+      <th>bl_project_finish</th>
+      <th>actual_start</th>
+      <th>actual_finish</th>
+      <th>schedule_%_complete</th>
+      <th>performance_%_complete</th>
+      <th>budget_at_completion</th>
+      <th>earned_value_cost</th>
+      <th>planned_value_cost</th>
+      <th>schedule_%_complete_num</th>
+      <th>performance_%_complete_num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>No Priority</td>
+      <td></td>
+      <td>1363</td>
+      <td>577</td>
+      <td>473</td>
+      <td>0.0</td>
+      <td>11-Sep-25</td>
+      <td>10-Apr-27</td>
+      <td>11-Sep-25</td>
+      <td></td>
+      <td>0.6916</td>
+      <td>0.3105</td>
+      <td>367286025.0</td>
+      <td>114050908.4</td>
+      <td>254009356.2</td>
+      <td>0.6916</td>
+      <td>0.3105</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-20-April-26</td>
+      <td>ROYA-BIG PROJECT PHASE01 (B1-4)</td>
+      <td>1363</td>
+      <td>577</td>
+      <td>473</td>
+      <td>0.0</td>
+      <td>11-Sep-25</td>
+      <td>10-Apr-27</td>
+      <td>11-Sep-25</td>
+      <td></td>
+      <td>0.6916</td>
+      <td>0.3105</td>
+      <td>367286025.0</td>
+      <td>114050908.4</td>
+      <td>254009356.2</td>
+      <td>0.6916</td>
+      <td>0.3105</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-20-April-26.KD</td>
+      <td>Key Dates</td>
+      <td>8</td>
+      <td>577</td>
+      <td>344</td>
+      <td>-144.0</td>
+      <td>11-Sep-25</td>
+      <td>10-Apr-27</td>
+      <td>11-Sep-25</td>
+      <td></td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-20-April-26.KD.MI</td>
+      <td>Milestone</td>
+      <td>5</td>
+      <td>577</td>
+      <td>344</td>
+      <td>-144.0</td>
+      <td>11-Sep-25</td>
+      <td>10-Apr-27</td>
+      <td>11-Sep-25</td>
+      <td></td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-20-April-26.KD.MO</td>
+      <td>Mobilization</td>
+      <td>0</td>
+      <td>15</td>
+      <td>0</td>
+      <td></td>
+      <td>11-Sep-25</td>
+      <td>28-Sep-25</td>
+      <td>13-Sep-25</td>
+      <td>29-Sep-25</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-20-April-26.EN</td>
+      <td>Engineering</td>
+      <td>387</td>
+      <td>270</td>
+      <td>40</td>
+      <td>247.0</td>
+      <td>11-Sep-25</td>
+      <td>7-Jun-26</td>
+      <td>11-Sep-25</td>
+      <td></td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-20-April-26.P</td>
+      <td>Procurement</td>
+      <td>54</td>
+      <td>493</td>
+      <td>245</td>
+      <td>228.0</td>
+      <td>11-Sep-25</td>
+      <td>16-Jan-27</td>
+      <td>11-Sep-25</td>
+      <td></td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-20-April-26.CON</td>
+      <td>Construction</td>
+      <td>522</td>
+      <td>505</td>
+      <td>445</td>
+      <td>28.0</td>
+      <td>25-Oct-25</td>
+      <td>13-Mar-27</td>
+      <td>5-Oct-25</td>
+      <td></td>
+      <td>0.6916</td>
+      <td>0.3105</td>
+      <td>367286025.0</td>
+      <td>114050908.4</td>
+      <td>254009356.2</td>
+      <td>0.6916</td>
+      <td>0.3105</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-20-April-26.CON.EW</td>
+      <td>Earth Works</td>
+      <td>8</td>
+      <td>55</td>
+      <td>0</td>
+      <td></td>
+      <td>3-Nov-25</td>
+      <td>5-Jan-26</td>
+      <td>10-Oct-25</td>
+      <td>3-Dec-25</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>7596000.0</td>
+      <td>7596000.0</td>
+      <td>7596000.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-20-April-26.CON.P02.B01</td>
+      <td>B01</td>
+      <td>145</td>
+      <td>473</td>
+      <td>445</td>
+      <td>-130.0</td>
+      <td>26-Nov-25</td>
+      <td>13-Mar-27</td>
+      <td>26-Nov-25</td>
+      <td></td>
+      <td>0.6669</td>
+      <td>0.2793</td>
+      <td>118088212.4</td>
+      <td>32977443.94</td>
+      <td>78754236.56</td>
+      <td>0.6669</td>
+      <td>0.2793</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='activities' class='md-section'><div class='md-section-head'><span>Activities</span><small>Activity progress, critical path, and variance</small></div><div class='md-kpi-grid'><div class='md-kpi tone-rose'><div class='md-kpi-title'>Critical Activities</div><div class='md-kpi-value'>573</div><div class='md-kpi-note'>Current critical path</div></div><div class='md-kpi tone-gold'><div class='md-kpi-title'>Deviated Activities</div><div class='md-kpi-value'>1183</div><div class='md-kpi-note'>Progress or finish variance</div></div><div class='md-kpi tone-cyan'><div class='md-kpi-title'>RFT Activities</div><div class='md-kpi-value'>791</div><div class='md-kpi-note'>Steel/RFT related</div></div></div><div class='md-grid two'><div class='md-card'><div>                            <div id="cc655d9e-cea9-4cf0-9dbb-fb978df76ab6" class="plotly-graph-div" style="height:330px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("cc655d9e-cea9-4cf0-9dbb-fb978df76ab6")) {                    Plotly.newPlot(                        "cc655d9e-cea9-4cf0-9dbb-fb978df76ab6",                        [{"hovertemplate":"\u003cb\u003e%{hovertext}\u003c\u002fb\u003e\u003cbr\u003e\u003cbr\u003eis_critical=No\u003cbr\u003eplanned_progress_num=%{x}\u003cbr\u003eactual_progress_num=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","hovertext":["Project Start Date","Contract Agreement","IFC Drawing Package","Surveying Works","Equipment Mobilization","Site Preparation","Submittal for RFT Rebar","Design Review","Submittal for General Replacement Plan & Typical Sections for Replacement \u002f Backfilling DWGs  (B01)","Submittal for General Replacement Plan & Typical Sections for Replacement \u002f Backfilling DWGs (B02)","Submittal for PC Raft Conc. Dim. DWGs (B04) (Water Tank)","Submittal for Soil Replacement","Submittal for Plain Concrete","Submittal for RC Raft Conc. Dim. DWGs (B04) (Water Tank)","Submittal for RC Raft RFT DWGs (B04) (Water Tank)","Submittal for Rc Concrete","Submittal for  Waterproofing Layout Plan (B04)","Submittal for Col. & Walls DWGs (B04) (Water Tank)","Submittal for Waterproofing","Submittal for cold applied damp-proofing","Submittal for cold Crystalline waterproofing for Water tank","Approval for General Replacement Plan & Typical Sections for Replacement \u002f Backfilling DWGs (B02)","Submittal for Slabs DWGs (B04) (Water Tank)","Submittal for General Replacement Plan & Typical Sections for Replacement \u002f Backfilling DWGs (B03)","Submittal for PC Raft Conc. Dim. DWGs (B01) (footing)","Approval for RFT Rebar","Approval for General Replacement Plan & Typical Sections for Replacement \u002f Backfilling DWGs (B01)","Approval for PC Raft Conc. Dim. DWGs (B04) (Water Tank)","Submittal for RC Raft & Footings Conc. Dim. DWGs (B01) (footing)","Approval for Soil Replacement","Approval for Plain Concrete","Submittal for PC Raft Conc. Dim. DWGs (B02) (footing)","Approval for General Replacement Plan & Typical Sections for Replacement \u002f Backfilling DWGs (B03)","Submittal for PC Raft Conc. Dim. DWGs (B04) (footing)","Approval for RC Raft Conc. Dim. DWGs (B04) (Water Tank)","Submittal for  Waterproofing Layout Plan (B02)","Submittal for  Waterproofing Layout Plan (B01)","Submittal for RC Raft & Footings Conc. Dim. DWGs (B02) (footing)","Submittal for PC Raft Conc. Dim. DWGs (B03) (footing)","Submittal for RC Raft & Footings Conc. Dim. DWGs (B04) (footing)","Approval for RC Raft RFT DWGs (B04) (Water Tank)","Submittal for  Waterproofing Layout Plan (B03)","Submittal for RC Raft & Footings RFT DWGs (B01) (footing)","Approval for Rc Concrete","Approval for  Waterproofing Layout Plan (B04)","Submittal for RC Raft & Footings RFT DWGs (B02) (footing)","Submittal for RC Raft & Footings Conc. Dim. DWGs (B03) (footing)","Approval for Col. & Walls DWGs (B04) (Water Tank)","Approval for Waterproofing","Approval for cold applied damp-proofing","Approval for cold Crystalline waterproofing for Water tank","Submittal for RC Raft & Footings RFT DWGs (B04) (footing)","Submittal for RC Raft & Footings RFT DWGs (B03) (footing)","P.O for  Soil Replacement","P.O for  Plain Concrete","P.O for Rebar Patch#1 (Footing & Water tank)","Approval for Slabs DWGs (B04) (Water Tank)","Delivery for Plain Concrete","Submittal for General Replacement Plan & Typical Sections for Replacement \u002f Backfilling DWGs (B04)","Approval for PC Raft Conc. Dim. DWGs (B01) (footing)","Excavation for Water Tank (+198.15) (B04) (Water Tank)","P.O for  Rc Concrete","Approval for RC Raft & Footings Conc. Dim. DWGs (B01)","P.O for  Waterproofing","P.O for cold applied damp-proofing","Delivery for Soil Replacement","Delivery for Rc Concrete","P.O for cold Crystalline waterproofing for Water tank","Approval for PC Raft Conc. Dim. DWGs (B02) (footing)","Approval for PC Raft Conc. Dim. DWGs (B04) (footing)","Delivery for Waterproofing","Delivery for cold applied damp-proofing","Approval for  Waterproofing Layout Plan (B02)","Approval for  Waterproofing Layout Plan (B01)","Approval for RC Raft & Footings Conc. Dim. DWGs (B02) (footing)","Approval for PC Raft Conc. Dim. DWGs (B03) (footing)","Delivery for Rebar Patch#1 (Footing & Water tank)","Approval for RC Raft & Footings Conc. Dim. DWGs (B04) (footing)","Approval for  Waterproofing Layout Plan (B03)","Soil Replacement & Leveling & Compaction (B01)","Approval for RC Raft & Footings RFT DWGs (B01)","Approval for RC Raft & Footings RFT DWGs (B02) (footing)","Approval for RC Raft & Footings Conc. Dim. DWGs  (B03) (footing)","Compaction of Soil (B04) (Water Tank)","Soil Compaction Test (B01)","Approval for RC Raft & Footings RFT DWGs (B04) (footing)","Approval for RC Raft & Footings RFT DWGs  (B03) (footing)","Shuttering for PC Raft (B04) (Water Tank)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B03) (Bas 02)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B04) (Bas 02)","Submittal for Col. & Walls Conc. Dim.& RFT DWGs (B02) (Bas 02)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B01) (Bas 02)","Approval for General Replacement Plan & Typical Sections for Replacement \u002f Backfilling DWGs (B04)","Soil Replacement & Leveling & Compaction (B02)","Pouring for PC Raft (B04) (Water Tank)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B03) (Bas 02)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B04) (Bas 02)","Submittal for Stairs Conc. Dim.& RFT DWGs (B02) (Bas 02)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B01) (Bas 02)","Curing for PC Raft (B04) (Water Tank)","Submittal for PC Raft Conc. Dim. DWGs As-Built Drawing (B04) (Water Tank)","Soil Compaction Test (B02)","Submittal for Beams Conc. Dim.  & RFT DWGs (B03) (Bas 02)","Submittal for Ramps Conc. Dim.  & RFT DWGs (B04) (Bas 02)","Submittal for Beams Conc. Dim.& RFT DWGs (B02) (Bas 02)","Submittal for Ramps Conc. Dim.  & RFT DWGs (B01) (Bas 02)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B01) (Bas 01)","Submittal for Slabs Conc. Dim.  & RFT DWGs (B03) (Bas 02)","Submittal for Beams Conc. Dim.  & RFT DWGs (B04) (Bas 02)","Submittal for Slabs Conc. Dim.& RFT DWGs (B02) (Bas 02)","Submittal for Beams Conc. Dim.  & RFT DWGs (B01) (Bas 02)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B03) (Bas 01)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B02) (Bas 01)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B01) (Bas 01)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B01)","Submittal for Slabs Conc. Dim.  & RFT DWGs (B04) (Bas 02)","Submittal for Slabs Conc. Dim.  & RFT DWGs (B01) (Bas 02)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B03) (Bas 01)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B02) (Bas 01)","Submittal for Ramps Conc. Dim.  & RFT DWGs (B01) (Bas 01)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B01)","Submittal for General Replacement Plan & Typical Sections for Replacement \u002f Backfilling DWGs As-Built Drawing (B01)","P.O for Rebar Patch#2  (Basement 2)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B02) (GF)","Shuttering for PC Raft (B01) (footing)","Waterproofing & Ins. Protection works (B04) (Water Tank)","Delivery for Rebar Patch#2  (Basement 2)","Pouring for PC Raft (B01) (footing)","Submittal for Beams Conc. Dim.  & RFT DWGs (B03) (Bas 01)","Submittal for Beams Conc. Dim.  & RFT DWGs (B02) (Bas 01)","Submittal for Beams Conc. Dim.  & RFT DWGs (B01) (Bas 01)","Curing for PC Raft (B01) (footing)","Shuttering for RC Raft (B04) (Water Tank)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B02) (GF)","Soil Replacement & Leveling & Compaction (B03)","Submittal for PC Raft Conc. Dim. DWGs As-Built Drawing (B01) (footing)","Approval for PC Raft Conc. Dim. DWGs As-Built Drawing (B04) (Water Tank)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B04) (Bas 01)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B03) (GF)","Waterproofing & Ins. Protection works (B01) (footing)","Submittal for Slabs Conc. Dim.  & RFT DWGs (B03) (Bas 01)","Submittal for Slabs Conc. Dim.  & RFT DWGs (B02) (Bas 01)","Submittal for Slabs Conc. Dim.  & RFT DWGs (B01) (Bas 01)","Approval for Col. & Walls Conc. Dim.  & RFT DWGs (B02) (Bas 02)","Approval for Col. & Walls Conc. Dim.  & RFT DWGs (B01) (Bas 02)","Approval for Col. & Walls Conc. Dim.  & RFT DWGs  (B03) (Bas 02)","Approval for Col. & Walls Conc. Dim.  & RFT DWGs (B04) (Bas 02)","Soil Compaction Test (B03)","Shuttering for RC Raft & Footings (B01) (footing)","RFT for RC Raft (B04) (Water Tank)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B04) (Bas 01)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B03) (GF)","Delivery for cold Crystalline waterproofing for Water tank","Submittal for RC Raft Conc. Dim. DWGs As-Built Drawing (B04) (Water Tank)","Submittal for  Waterproofing Layout Plan DWGs As-Built Drawing (B01)","Approval for Stairs Conc. Dim.  & RFT DWGs (B02) (Bas 02)","Approval for Stairs Conc. Dim.  & RFT DWGs (B01) (Bas 02)","Approval for Stairs Conc. Dim.  & RFT DWGs  (B03) (Bas 02)","Approval for Stairs Conc. Dim.  & RFT DWGs (B04) (Bas 02)","RFT for RC Raft & Footings (B01) (footing)","Submittal for Ramps Conc. Dim.  & RFT DWGs (B04) (Bas 01)","Approval for Beams Conc. Dim.  & RFT DWGs (B02) (Bas 02)","Approval for Ramps Conc. Dim.  & RFT DWGs (B01) (Bas 02)","Approval for Col. & Walls Conc. Dim.  & RFT DWGs (B01) (Bas 01)","Approval for Beams Conc. Dim.  & RFT DWGs  (B03) (Bas 02)","Approval for Ramps Conc. Dim.  & RFT DWGs (B04) (Bas 02)","Approval for General Replacement Plan & Typical Sections for Replacement \u002f Backfilling DWGs As-Built Drawing (B01)","Shuttering for PC Raft (B02) (footing)","Pouring for RC Raft (B04) (Water Tank)","Submittal for RC Raft RFT DWGs As-Built Drawing (B04) (Water Tank)","Submittal for General Replacement Plan & Typical Sections for Replacement \u002f Backfilling DWGs As-Built Drawing (B02)","Pouring for PC Raft (B02) (footing)","Submittal for Beams Conc. Dim.  & RFT DWGs (B04) (Bas 01)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B03) (1st)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B01) (1st)","Curing for PC Raft (B02) (footing)","Curing & Deshuttering for RC Raft (B04) (Water Tank)","Approval for Slabs Conc. Dim.  & RFT DWGs (B02) (Bas 02)","Approval for Beams Conc. Dim.  & RFT DWGs (B01) (Bas 02)","Approval for Col. & Walls Conc. Dim.  & RFT DWGs (B02) (Bas 01)","Approval for Stairs Conc. Dim.  & RFT DWGs (B01) (Bas 01)","Approval for Col. & Walls Conc. Dim.  & RFT DWGs (B01)  (GF)","Approval for Slabs Conc. Dim.  & RFT DWGs  (B03) (Bas 02)","Approval for Beams Conc. Dim.  & RFT DWGs (B04) (Bas 02)","Approval for Col. & Walls Conc. Dim.  & RFT DWGs  (B03) (Bas 01)","Submittal for PC Raft Conc. Dim. DWGs As-Built Drawing (B02) (footing)","Shuttering for Walls (B04) (Water Tank)","RFT for Walls (B04) (Water Tank)","Approval for PC Raft Conc. Dim. DWGs As-Built Drawing (B01) (footing)","Waterproofing & Ins. Protection works (B02) (footing)","Submittal for Slabs Conc. Dim.  & RFT DWGs (B04) (Bas 01)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B03) (1st)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B01) (1st)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B04) (GF)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B02) (1st)","Approval for Slabs Conc. Dim.  & RFT DWGs (B01) (Bas 02)","Approval for Stairs Conc. Dim.  & RFT DWGs (B02) (Bas 01)","Approval for Ramps Conc. Dim.  & RFT DWGs (B01) (Bas 01)","Approval for Stairs Conc. Dim.  & RFT DWGs (B01)  (GF)","Approval for Slabs Conc. Dim.  & RFT DWGs (B04) (Bas 02)","Approval for Stairs Conc. Dim.  & RFT DWGs  (B03) (Bas 01)","Approval for Col. & Walls Conc. Dim.  & RFT DWGs (B02) (GF)","Shuttering for RC Raft & Footings (B02) (footing)","Installation for Waterstop Insulation (B04) (Water Tank)","Approval for RC Raft Conc. Dim. DWGs As-Built Drawing (B04) (Water Tank)","Approval for  Waterproofing Layout Plan DWGs As-Built Drawing (B01)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B04) (GF)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B02) (1st)","Approval for Beams Conc. Dim.  & RFT DWGs (B02) (Bas 01)","Approval for Beams Conc. Dim.  & RFT DWGs (B01) (Bas 01)","Approval for Beams Conc. Dim.  & RFT DWGs  (B03) (Bas 01)","Pouring for RC Raft & Footings (B01) (footing)","RFT for RC Raft & Footings (B02) (footing)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B03) (2nd)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B01) (2nd)","Approval for Stairs Conc. Dim.  & RFT DWGs (B02) (GF)","Approval for Col. & Walls Conc. Dim.  & RFT DWGs (B04) (Bas 01)","Approval for Col. & Walls Conc. Dim.  & RFT DWGs  (B03) (GF)","Pouring for Walls (B04) (Water Tank)","Submittal for Beams Conc. Dim.  & RFT DWGs (B02) (1st)","Approval for Slabs Conc. Dim.  & RFT DWGs (B02) (Bas 01)","Approval for Slabs Conc. Dim.  & RFT DWGs (B01) (Bas 01)","Approval for Slabs Conc. Dim.  & RFT DWGs  (B03) (Bas 01)","Submittal for RC Raft & Footings Conc. Dim. DWGs As-Built Drawing (B01) (footing)","Submittal for RC Raft & Footings RFT DWGs As-Built Drawing (B01) (footing)","Shuttering for Columns & Walls Below SOG (B01) (footing)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B03) (2nd)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B01) (2nd)","Approval for RC Raft RFT DWGs As-Built Drawing (B04) (Water Tank)","Approval for General Replacement Plan & Typical Sections for Replacement \u002f Backfilling DWGs As-Built Drawing (B02)","RFT for Columns & Walls Below SOG (B02) (footing)","Approval for Stairs Conc. Dim.  & RFT DWGs (B04) (Bas 01)","Approval for Stairs Conc. Dim.  & RFT DWGs  (B03) (GF)","Submittal for Col. & Walls DWGs As-Built Drawing (B04) (Water Tank)","Bitumen Ins. for RC Raft & Footings (B01) (footing)","Shuttering for PC Raft (B03) (footing)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B04) (1st)","Submittal for Slabs Conc. Dim.  & RFT DWGs (B02) (1st)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B02) (2nd)","Approval for PC Raft Conc. Dim. DWGs As-Built Drawing (B02) (footing)","Submittal for General Replacement Plan & Typical Sections for Replacement \u002f Backfilling DWGs As-Built Drawing (B03)","Pouring for PC Raft (B03) (footing)","Submittal for Beams Conc. Dim.  & RFT DWGs (B03) (2nd)","Submittal for Beams Conc. Dim.  & RFT DWGs (B01) (2nd)","Soil Replacement & Leveling & Compaction (B04)","Curing for PC Raft (B03) (footing)","Approval for Ramps Conc. Dim.  & RFT DWGs (B04) (Bas 01)","Submittal for PC Raft Conc. Dim. DWGs As-Built Drawing (B03) (footing)","Soil Backfilling (B01) (footing)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B04) (1st)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B02) (2nd)","Soil Compaction Test (B04)","Submittal for RC Raft & Footings Conc. Dim. DWGs As-Built Drawing  (B02) (footing)","Submittal for Slabs Conc. Dim.  & RFT DWGs (B03) (2nd)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B03) (3rd)","Submittal for Slabs Conc. Dim.  & RFT DWGs (B01) (2nd)","Submittal for Col. & Walls Conc. Dim.  & RFT DWGs (B01) (3rd)","Pouring Columns & Walls Below SOG (B01) (footing)","Pouring for RC Raft & Footings (B02) (footing)","Waterproofing & Ins. Protection works (B03) (footing)","Approval for Col. & Walls Conc. Dim.  & RFT DWGs (B01) (1st)","Approval for Beams Conc. Dim.  & RFT DWGs (B04) (Bas 01)","Approval for Col. & Walls Conc. Dim.  & RFT DWGs  (B03) (1st)","Submittal for Beams Conc. Dim.  & RFT DWGs (B02) (2nd)","Curing & Deshuttering for RC Raft & Footings (B02) (footing)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B03) (3rd)","Submittal for Stairs Conc. Dim.  & RFT DWGs (B01) (3rd)","Submittal for RC Raft & Footings RFT DWGs As-Built Drawing (B02) (footing)","Shuttering for RC Raft & Footings (B03) (footing)"],"legendgroup":"No","marker":{"color":"#10b981","symbol":"circle"},"mode":"markers","name":"No","orientation":"v","showlegend":true,"x":{"dtype":"f8","bdata":"AAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPw=="},"xaxis":"x","y":{"dtype":"f8","bdata":"AAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAAAAAAAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAAAAAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAAAAAAAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAAAAAAAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAAAAAAAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAAAAAAAAAAAA8D8AAAAAAADwPwAAAAAAAAAAAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAAAAAAAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAAAAAAAAAAAAAAAAAAAAAADwPwAAAAAAAPA\u002fAAAAAAAAAAAAAAAAAADwPwAAAAAAAAAAAAAAAAAAAAAAAAAAAADwPwAAAAAAAAAAAAAAAAAAAAAAAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPA\u002fAAAAAAAAAAAAAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAAAAAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAAAAAAAAAAAADwPw=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"\u003cb\u003e%{hovertext}\u003c\u002fb\u003e\u003cbr\u003e\u003cbr\u003eis_critical=Yes\u003cbr\u003eplanned_progress_num=%{x}\u003cbr\u003eactual_progress_num=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","hovertext":["Submittal for Beams Conc. Dim.  & RFT DWGs (B01)","Submittal for Slabs Conc. Dim.  & RFT DWGs (B01)","Submittal for Beams Conc. Dim.  & RFT DWGs (B02) (GF)","Submittal for Slabs Conc. Dim.  & RFT DWGs (B02) (GF)","Submittal for Beams Conc. Dim.  & RFT DWGs (B03) (GF)","Shuttering for Columns & Walls Below SOG (B01) (footing)","RFT for Columns & Walls Below SOG (B01) (footing)","Submittal for Slabs Conc. Dim.  & RFT DWGs (B03) (GF)","Submittal for Beams Conc. Dim.  & RFT DWGs (B03) (1st)","Submittal for Beams Conc. Dim.  & RFT DWGs (B01) (1st)","Approval for Beams Conc. Dim.  & RFT DWGs (B01)  (GF)","Pouring Columns & Walls Below SOG (B01) (footing)","Submittal for Slabs Conc. Dim.  & RFT DWGs (B01) (1st)","Submittal for Slabs Conc. Dim.  & RFT DWGs (B03) (1st)","Curing & Deshuttering for RC Raft & Footings (B01) (footing)","Curing & Deshuttering for Walls (B04) (Water Tank)","Submittal for Beams Conc. Dim.  & RFT DWGs (B04) (GF)","Approval for Slabs Conc. Dim.  & RFT DWGs (B01)  (GF)","Approval for Beams Conc. Dim.  & RFT DWGs (B02) (GF)","Scaffolding works for Walls, Col. & Cores (B01) (Bas 02)","RFT for Walls, Col. & Cores (B01) (Bas 02)","Formwork for Top Slab (B04) (Water Tank)","Submittal for Slabs Conc. Dim.  & RFT DWGs (B04) (GF)","RFT for Top Slab (B04) (Water Tank)","Approval for Slabs Conc. Dim.  & RFT DWGs (B02) (GF)","Approval for Beams Conc. Dim.  & RFT DWGs  (B03) (GF)","Shuttering for Walls, Col. & Cores (B01) (Bas 02)","Approval for Slabs Conc. Dim.  & RFT DWGs  (B03) (GF)","Submittal for Beams Conc. Dim.  & RFT DWGs (B04) (1st)","Pouring for Top Slab (B04) (Water Tank)","Curing & Desmantling Formwork for Top Slab (B04) (Water Tank)"],"legendgroup":"Yes","marker":{"color":"#f43f5e","symbol":"circle"},"mode":"markers","name":"Yes","orientation":"v","showlegend":true,"x":{"dtype":"f8","bdata":"AAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8AAAAAAADwPwAAAAAAAPA\u002fAAAAAAAA8D8="},"xaxis":"x","y":{"dtype":"f8","bdata":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADMzMzMzM+s\u002fMzMzMzMz6z8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADMzMzMzM+M\u002fAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"planned_progress_num"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"actual_progress_num"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"legend":{"title":{"text":"is_critical"},"tracegroupgap":0,"font":{"size":10},"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"title":{"text":"Planned vs Actual Activity Progress"},"font":{"color":"#f8fafc","family":"Segoe UI, Arial, sans-serif"},"margin":{"l":32,"r":18,"t":48,"b":36},"height":330,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div><div class='md-card'><h3>Critical Activities</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>project_id</th>
+      <th>wbs_id</th>
+      <th>activity_id</th>
+      <th>activity_name</th>
+      <th>planned_start</th>
+      <th>planned_finish</th>
+      <th>actual_start</th>
+      <th>actual_finish</th>
+      <th>forecast_start</th>
+      <th>forecast_finish</th>
+      <th>planned_weight</th>
+      <th>planned_progress</th>
+      <th>actual_progress</th>
+      <th>total_float_days</th>
+      <th>is_critical</th>
+      <th>responsible_party</th>
+      <th>planned_progress_num</th>
+      <th>actual_progress_num</th>
+      <th>planned_weight_num</th>
+      <th>total_float_days_num</th>
+      <th>progress_variance</th>
+      <th>planned_finish_dt</th>
+      <th>forecast_finish_dt</th>
+      <th>actual_finish_dt</th>
+      <th>finish_slip_days</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-24-MAY-26.EN.2.S.P01.B03.SUP.1stF</td>
+      <td>E-SUB-B03-1ST-1020</td>
+      <td>Submittal for Beams Conc. Dim.  &amp; RFT DWGs (B03) (1st)</td>
+      <td>17-Dec-25</td>
+      <td>6-Jan-26</td>
+      <td>17-May-26</td>
+      <td>10-Jun-26</td>
+      <td>17-May-26</td>
+      <td>10-Jun-26</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Yes</td>
+      <td></td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>-1.0</td>
+      <td>2026-01-06</td>
+      <td>2026-06-10</td>
+      <td>2026-06-10</td>
+      <td>155.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-24-MAY-26.EN.2.S.P01.B03.SUP.1stF</td>
+      <td>E-SUB-B03-1ST-1030</td>
+      <td>Submittal for Slabs Conc. Dim.  &amp; RFT DWGs (B03) (1st)</td>
+      <td>21-Dec-25</td>
+      <td>11-Jan-26</td>
+      <td>20-May-26</td>
+      <td>14-Jun-26</td>
+      <td>20-May-26</td>
+      <td>14-Jun-26</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Yes</td>
+      <td></td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>-1.0</td>
+      <td>2026-01-11</td>
+      <td>2026-06-14</td>
+      <td>2026-06-14</td>
+      <td>154.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-24-MAY-26.EN.2.A.P01.B03.SUP.1stF</td>
+      <td>E-APP-B03-1ST-1030</td>
+      <td>Approval for Slabs Conc. Dim.  &amp; RFT DWGs  (B03) (1st)</td>
+      <td>12-Jan-26</td>
+      <td>22-Jan-26</td>
+      <td>15-Jun-26</td>
+      <td>25-Jun-26</td>
+      <td>15-Jun-26</td>
+      <td>25-Jun-26</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Yes</td>
+      <td></td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>-1.0</td>
+      <td>2026-01-22</td>
+      <td>2026-06-25</td>
+      <td>2026-06-25</td>
+      <td>154.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-24-MAY-26.EN.2.A.P01.B04.SUP.1stF</td>
+      <td>E-APP-B04-1ST-1020</td>
+      <td>Approval for Beams Conc. Dim.  &amp; RFT DWGs (B04) (1st)</td>
+      <td>24-Jan-26</td>
+      <td>4-Feb-26</td>
+      <td>11-Jun-26</td>
+      <td>22-Jun-26</td>
+      <td>19-May-26</td>
+      <td>3-Jun-26</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>-16.0</td>
+      <td>Yes</td>
+      <td></td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>-16.0</td>
+      <td>-1.0</td>
+      <td>2026-02-04</td>
+      <td>2026-06-03</td>
+      <td>2026-06-22</td>
+      <td>119.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-24-MAY-26.EN.2.A.P02.B01.SUP.1stF</td>
+      <td>E-APP-B01-1ST-1020</td>
+      <td>Approval for Beams Conc. Dim.  &amp; RFT DWGs (B01) (1st)</td>
+      <td>8-Jan-26</td>
+      <td>19-Jan-26</td>
+      <td>11-Jun-26</td>
+      <td>22-Jun-26</td>
+      <td>5-May-26</td>
+      <td>16-May-26</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>-28.0</td>
+      <td>Yes</td>
+      <td></td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>-28.0</td>
+      <td>-1.0</td>
+      <td>2026-01-19</td>
+      <td>2026-05-16</td>
+      <td>2026-06-22</td>
+      <td>117.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-24-MAY-26.EN.2.S.P02.B01.SUP.1stF</td>
+      <td>E-SUB-B01-1ST-1020</td>
+      <td>Submittal for Beams Conc. Dim.  &amp; RFT DWGs (B01) (1st)</td>
+      <td>17-Dec-25</td>
+      <td>6-Jan-26</td>
+      <td>17-May-26</td>
+      <td>10-Jun-26</td>
+      <td>11-Apr-26</td>
+      <td>2-May-26</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>-30.0</td>
+      <td>Yes</td>
+      <td></td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>-30.0</td>
+      <td>-1.0</td>
+      <td>2026-01-06</td>
+      <td>2026-05-02</td>
+      <td>2026-06-10</td>
+      <td>116.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-24-MAY-26.EN.2.A.P02.B01.SUP.1stF</td>
+      <td>E-APP-B01-1ST-1030</td>
+      <td>Approval for Slabs Conc. Dim.  &amp; RFT DWGs (B01) (1st)</td>
+      <td>11-Jan-26</td>
+      <td>21-Jan-26</td>
+      <td>14-Jun-26</td>
+      <td>24-Jun-26</td>
+      <td>5-May-26</td>
+      <td>16-May-26</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>-30.0</td>
+      <td>Yes</td>
+      <td></td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>-30.0</td>
+      <td>-1.0</td>
+      <td>2026-01-21</td>
+      <td>2026-05-16</td>
+      <td>2026-06-24</td>
+      <td>115.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-24-MAY-26.EN.2.A.P01.B04.SUP.1stF</td>
+      <td>E-APP-B04-1ST-1030</td>
+      <td>Approval for Slabs Conc. Dim.  &amp; RFT DWGs (B04) (1st)</td>
+      <td>28-Jan-26</td>
+      <td>8-Feb-26</td>
+      <td>15-Jun-26</td>
+      <td>25-Jun-26</td>
+      <td>19-May-26</td>
+      <td>3-Jun-26</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>-19.0</td>
+      <td>Yes</td>
+      <td></td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>-19.0</td>
+      <td>-1.0</td>
+      <td>2026-02-08</td>
+      <td>2026-06-03</td>
+      <td>2026-06-25</td>
+      <td>115.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-24-MAY-26.EN.2.S.P02.B01.SUP.1stF</td>
+      <td>E-SUB-B01-1ST-1030</td>
+      <td>Submittal for Slabs Conc. Dim.  &amp; RFT DWGs (B01) (1st)</td>
+      <td>20-Dec-25</td>
+      <td>10-Jan-26</td>
+      <td>19-May-26</td>
+      <td>13-Jun-26</td>
+      <td>14-Apr-26</td>
+      <td>4-May-26</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>-30.0</td>
+      <td>Yes</td>
+      <td></td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>-30.0</td>
+      <td>-1.0</td>
+      <td>2026-01-10</td>
+      <td>2026-05-04</td>
+      <td>2026-06-13</td>
+      <td>114.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>The Big - P.01 - UP-24-MAY-26.EN.2.S.P01.B04.SUP.1stF</td>
+      <td>E-SUB-B04-1ST-1020</td>
+      <td>Submittal for Beams Conc. Dim.  &amp; RFT DWGs (B04) (1st)</td>
+      <td>1-Jan-26</td>
+      <td>22-Jan-26</td>
+      <td>17-May-26</td>
+      <td>10-Jun-26</td>
+      <td>25-Apr-26</td>
+      <td>14-May-26</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>-19.0</td>
+      <td>Yes</td>
+      <td></td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>-19.0</td>
+      <td>-1.0</td>
+      <td>2026-01-22</td>
+      <td>2026-05-14</td>
+      <td>2026-06-10</td>
+      <td>112.0</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='milestones' class='md-section'><div class='md-section-head'><span>Main Milestones</span><small>Milestones and change-order context</small></div><div class='md-grid two'><div class='md-card'><h3>Main Milestones</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>milestone_id</th>
+      <th>project_id</th>
+      <th>activity_name</th>
+      <th>planned_date</th>
+      <th>forecast_date</th>
+      <th>actual_date</th>
+      <th>milestone_contractual_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>KD`-MS-1000</td>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>Project Start Date</td>
+      <td>11-Sep-25</td>
+      <td>11-Sep-25</td>
+      <td>11-Sep-25</td>
+      <td>Start milestone</td>
+    </tr>
+    <tr>
+      <td>KD-MS-1010</td>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>Contract Agreement</td>
+      <td>11-Sep-25</td>
+      <td>11-Sep-25</td>
+      <td>11-Sep-25</td>
+      <td>Start milestone</td>
+    </tr>
+    <tr>
+      <td>KD-MS-1020</td>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>IFC Drawing Package</td>
+      <td>11-Sep-25</td>
+      <td>11-Sep-25</td>
+      <td>11-Sep-25</td>
+      <td>Start milestone</td>
+    </tr>
+    <tr>
+      <td>KD-MS-1040</td>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>Ground Works Finish Date</td>
+      <td>11-May-26</td>
+      <td>10-Sep-26</td>
+      <td></td>
+      <td>Finish milestone</td>
+    </tr>
+  </tbody>
+</table></div><div class='md-card'><h3>Change Orders</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>change_order_id</th>
+      <th>contract_id</th>
+      <th>project_id</th>
+      <th>title</th>
+      <th>submitted_date</th>
+      <th>approved_date</th>
+      <th>status</th>
+      <th>claimed_amount</th>
+      <th>approved_amount</th>
+      <th>cost_impact</th>
+      <th>time_impact_days</th>
+      <th>owner_response_due</th>
+      <th>claimed_amount_num</th>
+      <th>approved_amount_num</th>
+      <th>cost_impact_num</th>
+      <th>time_impact_days_num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>PH-01</td>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>Earth Work</td>
+      <td>03-Nov-25</td>
+      <td>02-Jan-26</td>
+      <td>Approved</td>
+      <td>$17,671,310.00</td>
+      <td>$17,671,310.00</td>
+      <td></td>
+      <td>0</td>
+      <td>Change in quantity</td>
+      <td>17671310.0</td>
+      <td>17671310.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='s_curve' class='md-section'><div class='md-section-head'><span>S-Curve Analysis</span><small>Planned, actual, and invoiced curves</small></div><div class='md-grid two'><div class='md-card wide'><div>                            <div id="6d2396d8-1d66-4c27-8e75-f0760dfe6596" class="plotly-graph-div" style="height:360px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("6d2396d8-1d66-4c27-8e75-f0760dfe6596")) {                    Plotly.newPlot(                        "6d2396d8-1d66-4c27-8e75-f0760dfe6596",                        [{"hovertemplate":"Curve=Planned\u003cbr\u003eMonth=%{x}\u003cbr\u003eValue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Planned","line":{"color":"#000001","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines+markers","name":"Planned","orientation":"v","showlegend":true,"x":["1-Oct-25","1-Nov-25","1-Dec-25","1-Jan-26","1-Feb-26","1-Mar-26","1-Apr-26","1-May-26","1-Jun-26","1-Jul-26","1-Aug-26","1-Sep-26","1-Oct-26","1-Nov-26","1-Dec-26","1-Jan-27","1-Feb-27","1-Mar-27"],"xaxis":"x","y":{"dtype":"f8","bdata":"AAAAAAAAAADNzMwcqNdfQaRwPRFaoZBBmpmZkIJcoEEzMzMf8F6kQTMzMzL\u002f6ahBmpmZTQN1rEEzMzN9St+uQZqZmT5+PbBBzczM278esUGamZmOL7axQZqZGXBic7JBzcxMk1\u002f3skGamRnSsNCzQc3MzLf9dLRBzczMWxNQtUGamZltydu1QQAAAAlX5LVB"},"yaxis":"y","type":"scatter"},{"hovertemplate":"Curve=Actual\u003cbr\u003eMonth=%{x}\u003cbr\u003eValue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Actual","line":{"color":"#000002","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines+markers","name":"Actual","orientation":"v","showlegend":true,"x":["1-Oct-25","1-Nov-25","1-Dec-25","1-Jan-26","1-Feb-26","1-Mar-26","1-Apr-26","1-May-26","1-Jun-26","1-Jul-26","1-Aug-26","1-Sep-26","1-Oct-26","1-Nov-26","1-Dec-26","1-Jan-27","1-Feb-27","1-Mar-27"],"xaxis":"x","y":{"dtype":"f8","bdata":"j8L1SORSTkFxPQrvcQJnQQAAAOCSoXNB16NwJ1xoikFSuB7xaQWSQfYoXFUocZVBzczMcA+0mUEzMzOrKfaaQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"},"yaxis":"y","type":"scatter"},{"hovertemplate":"Curve=Invoiced\u003cbr\u003eMonth=%{x}\u003cbr\u003eValue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Invoiced","line":{"color":"#000003","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines+markers","name":"Invoiced","orientation":"v","showlegend":true,"x":["1-Oct-25","1-Nov-25","1-Dec-25","1-Jan-26","1-Feb-26","1-Mar-26","1-Apr-26","1-May-26","1-Jun-26","1-Jul-26","1-Aug-26","1-Sep-26","1-Oct-26","1-Nov-26","1-Dec-26","1-Jan-27","1-Feb-27","1-Mar-27"],"xaxis":"x","y":{"dtype":"f8","bdata":"AAAAAAAAAAAAAAAAAAAAAIXrUWDaZXZBUrgepgqqkEFmZmZOekuaQQAAAJo8gJ5BAAAAi2UYoUEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Month"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Value"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"legend":{"title":{"text":"Curve"},"tracegroupgap":0,"font":{"size":10},"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"title":{"text":"S-Curve and Invoicing Trend"},"font":{"color":"#f8fafc","family":"Segoe UI, Arial, sans-serif"},"margin":{"l":32,"r":18,"t":48,"b":36},"height":360,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div><div class='md-card'><h3>S-Curve Data</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>project_id</th>
+      <th>months</th>
+      <th>monthly_planned</th>
+      <th>cumm_monthly_planned</th>
+      <th>monthly_actual</th>
+      <th>cumm_monthly_actual</th>
+      <th>monthly_invoiced</th>
+      <th>cumm_monthly_invoiced</th>
+      <th>MonthSort</th>
+      <th>Month</th>
+      <th>Planned</th>
+      <th>Actual</th>
+      <th>Invoiced</th>
+      <th>planned_value_num</th>
+      <th>actual_cost_num</th>
+      <th>invoice_amount_num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>1-Oct-25</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>3974600.57</td>
+      <td>3974600.57</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2025-10-01</td>
+      <td>1-Oct-25</td>
+      <td>0.0</td>
+      <td>3974600.57</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>3974600.57</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>1-Nov-25</td>
+      <td>8347296.45</td>
+      <td>8347296.45</td>
+      <td>8089030.9</td>
+      <td>12063631.47</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2025-11-01</td>
+      <td>1-Nov-25</td>
+      <td>8347296.45</td>
+      <td>12063631.47</td>
+      <td>0.0</td>
+      <td>8347296.45</td>
+      <td>8089030.9</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>1-Dec-25</td>
+      <td>61405155.86</td>
+      <td>69752452.31</td>
+      <td>8521118.53</td>
+      <td>20584750.0</td>
+      <td>23485862.02</td>
+      <td>23485862.02</td>
+      <td>2025-12-01</td>
+      <td>1-Dec-25</td>
+      <td>69752452.31</td>
+      <td>20584750.0</td>
+      <td>23485862.02</td>
+      <td>61405155.86</td>
+      <td>8521118.53</td>
+      <td>23485862.02</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>1-Jan-26</td>
+      <td>67496644.02</td>
+      <td>137249096.3</td>
+      <td>34796118.93</td>
+      <td>55380868.93</td>
+      <td>46408963.51</td>
+      <td>69894825.53</td>
+      <td>2026-01-01</td>
+      <td>1-Jan-26</td>
+      <td>137249096.3</td>
+      <td>55380868.93</td>
+      <td>69894825.53</td>
+      <td>67496644.02</td>
+      <td>34796118.93</td>
+      <td>46408963.51</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>1-Feb-26</td>
+      <td>33633991.22</td>
+      <td>170883087.6</td>
+      <td>20205303.35</td>
+      <td>75586172.28</td>
+      <td>40393706.06</td>
+      <td>110288531.6</td>
+      <td>2026-02-01</td>
+      <td>1-Feb-26</td>
+      <td>170883087.6</td>
+      <td>75586172.28</td>
+      <td>110288531.6</td>
+      <td>33633991.22</td>
+      <td>20205303.35</td>
+      <td>40393706.06</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>1-Mar-26</td>
+      <td>38111113.51</td>
+      <td>208994201.1</td>
+      <td>14348185.06</td>
+      <td>89934357.34</td>
+      <td>17641618.94</td>
+      <td>127930150.5</td>
+      <td>2026-03-01</td>
+      <td>1-Mar-26</td>
+      <td>208994201.1</td>
+      <td>89934357.34</td>
+      <td>127930150.5</td>
+      <td>38111113.51</td>
+      <td>14348185.06</td>
+      <td>17641618.94</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>1-Apr-26</td>
+      <td>29721101.71</td>
+      <td>238715302.8</td>
+      <td>17873350.85</td>
+      <td>107807708.2</td>
+      <td>15475615.0</td>
+      <td>143405765.5</td>
+      <td>2026-04-01</td>
+      <td>1-Apr-26</td>
+      <td>238715302.8</td>
+      <td>107807708.2</td>
+      <td>143405765.5</td>
+      <td>29721101.71</td>
+      <td>17873350.85</td>
+      <td>15475615.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>1-May-26</td>
+      <td>20259735.78</td>
+      <td>258975038.6</td>
+      <td>5277326.61</td>
+      <td>113085034.8</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2026-05-01</td>
+      <td>1-May-26</td>
+      <td>258975038.6</td>
+      <td>113085034.8</td>
+      <td>0.0</td>
+      <td>20259735.78</td>
+      <td>5277326.61</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='evm' class='md-section'><div class='md-section-head'><span>Earned Value Management</span><small>BAC, PV, EV, AC, SPI/CPI support</small></div><div class='md-grid two'><div class='md-card'><div>                            <div id="7fc4e771-1323-412e-94b1-61e413a2b127" class="plotly-graph-div" style="height:330px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("7fc4e771-1323-412e-94b1-61e413a2b127")) {                    Plotly.newPlot(                        "7fc4e771-1323-412e-94b1-61e413a2b127",                        [{"hovertemplate":"Metric=%{x}\u003cbr\u003eValue=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#f59e0b","pattern":{"shape":""}},"name":"","orientation":"v","showlegend":false,"textposition":"auto","x":["BAC","PV","EV","AC"],"xaxis":"x","y":{"dtype":"f8","bdata":"pHD9CFfktUGG61HuviKuQRSuR6sp9ppBFK5Hqyn2mkE="},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Metric"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Value"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"legend":{"tracegroupgap":0,"font":{"size":10},"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"title":{"text":"EVM Value Comparison"},"barmode":"relative","font":{"color":"#f8fafc","family":"Segoe UI, Arial, sans-serif"},"margin":{"l":32,"r":18,"t":48,"b":36},"height":330,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div><div class='md-card'><h3>EVM Readout</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Metric</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>BAC</td>
+      <td>EGP 367,286,025</td>
+    </tr>
+    <tr>
+      <td>PV</td>
+      <td>EGP 252,796,791</td>
+    </tr>
+    <tr>
+      <td>EV</td>
+      <td>EGP 113,085,035</td>
+    </tr>
+    <tr>
+      <td>AC</td>
+      <td>EGP 113,085,035</td>
+    </tr>
+    <tr>
+      <td>SV</td>
+      <td>EGP -139,711,756</td>
+    </tr>
+    <tr>
+      <td>CV</td>
+      <td>EGP 0</td>
+    </tr>
+    <tr>
+      <td>EAC</td>
+      <td>EGP 367,286,025</td>
+    </tr>
+    <tr>
+      <td>TCPI</td>
+      <td>1.000</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='contracts' class='md-section'><div class='md-section-head'><span>Contracts</span><small>Contract, payment, and commercial position</small></div><div class='md-kpi-grid'><div class='md-kpi tone-violet'><div class='md-kpi-title'>Contracts</div><div class='md-kpi-value'>2</div><div class='md-kpi-note'>Loaded records</div></div><div class='md-kpi tone-gold'><div class='md-kpi-title'>Contract Value</div><div class='md-kpi-value'>EGP 367,286,025</div><div class='md-kpi-note'>Active contracts</div></div><div class='md-kpi tone-sapphire'><div class='md-kpi-title'>Certified</div><div class='md-kpi-value'>EGP 143,405,766</div><div class='md-kpi-note'>Payment certificates</div></div><div class='md-kpi tone-emerald'><div class='md-kpi-title'>Paid</div><div class='md-kpi-value'>EGP 110,288,532</div><div class='md-kpi-note'>Actual paid</div></div></div><div class='md-grid two'><div class='md-card'><h3>Contracts</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>contract_id</th>
+      <th>project_id</th>
+      <th>package</th>
+      <th>contractor</th>
+      <th>contract_type</th>
+      <th>original_value</th>
+      <th>approved_variations</th>
+      <th>pending_variations</th>
+      <th>paid_to_date</th>
+      <th>retention_percent</th>
+      <th>status</th>
+      <th>original_value_num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>PH-01</td>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>1</td>
+      <td>SAMCO</td>
+      <td>Unite rate</td>
+      <td>367286025</td>
+      <td>17671310</td>
+      <td>0</td>
+      <td>17671310</td>
+      <td>5%</td>
+      <td>Active</td>
+      <td>367286025.0</td>
+    </tr>
+    <tr>
+      <td>PH-02</td>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>2</td>
+      <td>SAMCO</td>
+      <td>Unite rate</td>
+      <td>900000000</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>5%</td>
+      <td>In-Active</td>
+      <td>900000000.0</td>
+    </tr>
+  </tbody>
+</table></div><div class='md-card'><h3>Payments</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>project_id</th>
+      <th>payment</th>
+      <th>contract</th>
+      <th>project</th>
+      <th>invoice no</th>
+      <th>invoice date</th>
+      <th>certified amount</th>
+      <th>paid amount</th>
+      <th>payment status</th>
+      <th>Contractual interest due</th>
+      <th>Date of Cash Cheque Receipt</th>
+      <th>Period for payment release</th>
+      <th>Period in which interest is applied</th>
+      <th>Amount of interest claimed (EGP)</th>
+      <th>delayed duration(Days)</th>
+      <th>Unnamed: 14</th>
+      <th>Unnamed: 15</th>
+      <th>Unnamed: 16</th>
+      <th>payment_id</th>
+      <th>contract_id</th>
+      <th>invoice_no</th>
+      <th>invoice_date</th>
+      <th>payment_date</th>
+      <th>certified_amount</th>
+      <th>paid_amount</th>
+      <th>payment_status</th>
+      <th>delayed_duration_days</th>
+      <th>certified_amount_num</th>
+      <th>paid_amount_num</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>1.0</td>
+      <td>Ph-01</td>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>1.0</td>
+      <td>6-Dec-25</td>
+      <td>23485862.02</td>
+      <td>23485862.02</td>
+      <td>Paid</td>
+      <td>45.0</td>
+      <td>10-Feb-26</td>
+      <td>66.0</td>
+      <td>7.0</td>
+      <td>17547.5994</td>
+      <td>6.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>1.0</td>
+      <td>Ph-01</td>
+      <td>1.0</td>
+      <td>6-Dec-25</td>
+      <td>10-Feb-26</td>
+      <td>23485862.02</td>
+      <td>23485862.02</td>
+      <td>Paid</td>
+      <td>6.0</td>
+      <td>23485862.02</td>
+      <td>23485862.02</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>2.0</td>
+      <td>Ph-01</td>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>2.0</td>
+      <td>29-Dec-25</td>
+      <td>26309019.51</td>
+      <td>26309019.51</td>
+      <td>Paid</td>
+      <td>45.0</td>
+      <td>10-Mar-26</td>
+      <td>71.0</td>
+      <td>26.0</td>
+      <td>73052.11174</td>
+      <td>11.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>2.0</td>
+      <td>Ph-01</td>
+      <td>2.0</td>
+      <td>29-Dec-25</td>
+      <td>10-Mar-26</td>
+      <td>26309019.51</td>
+      <td>26309019.51</td>
+      <td>Paid</td>
+      <td>11.0</td>
+      <td>26309019.51</td>
+      <td>26309019.51</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>3.0</td>
+      <td>Ph-01</td>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>3.0</td>
+      <td>24-Jan-26</td>
+      <td>20099944.0</td>
+      <td>20099944.0</td>
+      <td>Paid</td>
+      <td>45.0</td>
+      <td>19-Apr-26</td>
+      <td>85.0</td>
+      <td>40.0</td>
+      <td>63236.8278</td>
+      <td>25.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>3.0</td>
+      <td>Ph-01</td>
+      <td>3.0</td>
+      <td>24-Jan-26</td>
+      <td>19-Apr-26</td>
+      <td>20099944.0</td>
+      <td>20099944.0</td>
+      <td>Paid</td>
+      <td>25.0</td>
+      <td>20099944.0</td>
+      <td>20099944.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>4.0</td>
+      <td>Ph-01</td>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>4.0</td>
+      <td>25-Feb-26</td>
+      <td>40393706.06</td>
+      <td>40393706.06</td>
+      <td>Paid</td>
+      <td>45.0</td>
+      <td>4-May-26</td>
+      <td>68.0</td>
+      <td>23.0</td>
+      <td>78936.30398</td>
+      <td>8.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>4.0</td>
+      <td>Ph-01</td>
+      <td>4.0</td>
+      <td>25-Feb-26</td>
+      <td>4-May-26</td>
+      <td>40393706.06</td>
+      <td>40393706.06</td>
+      <td>Paid</td>
+      <td>8.0</td>
+      <td>40393706.06</td>
+      <td>40393706.06</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>5.0</td>
+      <td>Ph-01</td>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>5.0</td>
+      <td>25-Mar-26</td>
+      <td>17641618.94</td>
+      <td>0.0</td>
+      <td>Under Payment</td>
+      <td>45.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>5.0</td>
+      <td>Ph-01</td>
+      <td>5.0</td>
+      <td>25-Mar-26</td>
+      <td></td>
+      <td>17641618.94</td>
+      <td>0.0</td>
+      <td>Under Payment</td>
+      <td></td>
+      <td>17641618.94</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>6.0</td>
+      <td>Ph-01</td>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>6.0</td>
+      <td>26-Apr-26</td>
+      <td>15475615.0</td>
+      <td>0.0</td>
+      <td>Under Payment</td>
+      <td>45.0</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>6.0</td>
+      <td>Ph-01</td>
+      <td>6.0</td>
+      <td>26-Apr-26</td>
+      <td></td>
+      <td>15475615.0</td>
+      <td>0.0</td>
+      <td>Under Payment</td>
+      <td></td>
+      <td>15475615.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='letters' class='md-section'><div class='md-section-head'><span>Letters Intelligence</span><small>Correspondence threads and source status</small></div><div class='md-grid two'><div class='md-card'><h3>Top Correspondence Threads</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>project_id</th>
+      <th>Thread</th>
+      <th>SAMCO Ref(s)</th>
+      <th>6</th>
+      <th>Main Link</th>
+      <th>Priority</th>
+      <th>Next Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>Outstanding deliverables / tower cranes</td>
+      <td>STR-003</td>
+      <td>LET-001; LET-002</td>
+      <td>ACE notice followed by SAMCO rebuttal/updates</td>
+      <td>High</td>
+      <td>Confirm closed deliverables and baseline dependency</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>Survey / batching plant / Zone 2</td>
+      <td>STR-004</td>
+      <td>LET-003</td>
+      <td>SAMCO raised site/survey issues; ACE issued clarification</td>
+      <td>Medium</td>
+      <td>Close survey/ramp/batching plant decisions</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>Contractual submissions / reports</td>
+      <td>STR-006; STR-033; STR-074</td>
+      <td>LET-004; LET-018; LET-021; LET-030; LET-032; LET-037</td>
+      <td>Submittals, programme, periodic reporting compliance, and slow-progress reporting comments.</td>
+      <td>High</td>
+      <td>Agree reporting baseline, submit overdue weekly / corrected monthly reports, and close the reporting-compliance and recovery-plan issues.</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>Water leakage / pipe breakage</td>
+      <td>STR-005; STR-007; STR-012; STR-013; STR-014; STR-039</td>
+      <td>LET-005; LET-011; LET-023</td>
+      <td>Contractor notices vs ACE closures/rejections</td>
+      <td>High</td>
+      <td>Separate closed incidents from substantiated rework/EOT claims</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>Ramp / access route</td>
+      <td>STR-008; STR-018</td>
+      <td>LET-008; LET-014; LET-015</td>
+      <td>Access responsibility and soil replacement delay</td>
+      <td>High</td>
+      <td>Determine access-route cost/time responsibility</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>Design verification / design criteria</td>
+      <td>STR-009; STR-019; STR-026; STR-029; STR-030; STR-034; STR-040; STR-047; STR-063; STR-064; STR-066; STR-067</td>
+      <td>LET-006; LET-010; LET-020; LET-022; LET-024</td>
+      <td>Design review, criteria, revised package and RFIs</td>
+      <td>High</td>
+      <td>Issue one coordinated design basis and close RFI/design-change impacts</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>Insurance</td>
+      <td>STR-021</td>
+      <td>LET-007</td>
+      <td>ACE rejection followed by SAMCO undertaking</td>
+      <td>Medium</td>
+      <td>Confirm compliant original insurance policies</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>MEP / first fix / flanges / VI-0003</td>
+      <td>STR-016; STR-024; STR-027; STR-035; STR-041; STR-049; STR-072; STR-078</td>
+      <td>LET-017; LET-019; LET-025; LET-026</td>
+      <td>Scope dispute and first-fix coordination evolving into conditional execution under VO and MOM instructions</td>
+      <td>High</td>
+      <td>Finalize VO, BOQ, supervision, first-fix responsibilities, and close MOM action items.</td>
+    </tr>
+  </tbody>
+</table></div><div class='md-card'><h3>Letter Sources</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Workbook/Inboxes</th>
+      <th>Project Scope</th>
+      <th>Thread Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Project letters workbook and project inbox folders</td>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>19</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='risks' class='md-section'><div class='md-section-head'><span>Risk Analysis</span><small>Risk matrix inputs, RFIs, steel, and IFC conflicts</small></div><div class='md-kpi-grid'><div class='md-kpi tone-rose'><div class='md-kpi-title'>Total Risks</div><div class='md-kpi-value'>2</div><div class='md-kpi-note'>Risk register</div></div><div class='md-kpi tone-gold'><div class='md-kpi-title'>Steel Issues</div><div class='md-kpi-value'>3</div><div class='md-kpi-note'>Steel delay records</div></div><div class='md-kpi tone-sapphire'><div class='md-kpi-title'>RFIs</div><div class='md-kpi-value'>4</div><div class='md-kpi-note'>RFI status records</div></div><div class='md-kpi tone-violet'><div class='md-kpi-title'>IFC Conflicts</div><div class='md-kpi-value'>16</div><div class='md-kpi-note'>Design conflict records</div></div></div><div class='md-grid two'><div class='md-card'><div>                            <div id="cbafda6e-08db-4d64-b283-70e2d1b68d09" class="plotly-graph-div" style="height:330px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("cbafda6e-08db-4d64-b283-70e2d1b68d09")) {                    Plotly.newPlot(                        "cbafda6e-08db-4d64-b283-70e2d1b68d09",                        [{"hovertemplate":"Status=%{x}\u003cbr\u003eCount=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#f59e0b","pattern":{"shape":""}},"name":"","orientation":"v","showlegend":false,"textposition":"auto","x":["open","Closed"],"xaxis":"x","y":{"dtype":"i1","bdata":"AQE="},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Status"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Count"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"legend":{"tracegroupgap":0,"font":{"size":10},"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"title":{"text":"Risk Status Breakdown"},"barmode":"relative","font":{"color":"#f8fafc","family":"Segoe UI, Arial, sans-serif"},"margin":{"l":32,"r":18,"t":48,"b":36},"height":330,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div><div class='md-card'><h3>Risk Register</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>risk_id</th>
+      <th>project_id</th>
+      <th>risk_title</th>
+      <th>risk_category</th>
+      <th>probability</th>
+      <th>time_impact_days</th>
+      <th>cost_impact</th>
+      <th>response_strategy</th>
+      <th>owner</th>
+      <th>status</th>
+      <th>due_date</th>
+      <th>probability_norm</th>
+      <th>time_impact_flag</th>
+      <th>cost_impact_flag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>Steel delivery delay</td>
+      <td>Schedule</td>
+      <td>high</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>Avoid</td>
+      <td>Project manager</td>
+      <td>open</td>
+      <td>30-May-26</td>
+      <td>high</td>
+      <td>yes</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>Deploting MEP sub contractor</td>
+      <td>Schedule</td>
+      <td>high</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>Transfer</td>
+      <td>Project manager</td>
+      <td>Closed</td>
+      <td>28-Feb-26</td>
+      <td>high</td>
+      <td>yes</td>
+      <td>yes</td>
+    </tr>
+  </tbody>
+</table></div></div></section>
+<section id='delay' class='md-section'><div class='md-section-head'><span>Delay &amp; Time Impact</span><small>Delay register, EOT signal, and responsibility split</small></div><div class='md-kpi-grid'><div class='md-kpi tone-rose'><div class='md-kpi-title'>Delay Events</div><div class='md-kpi-value'>25</div><div class='md-kpi-note'>Loaded events</div></div><div class='md-kpi tone-gold'><div class='md-kpi-title'>Delay Days</div><div class='md-kpi-value'>1,675</div><div class='md-kpi-note'>Indicative days</div></div><div class='md-kpi tone-sapphire'><div class='md-kpi-title'>Employer Delays</div><div class='md-kpi-value'>25</div><div class='md-kpi-note'>Client/Employer</div></div><div class='md-kpi tone-emerald'><div class='md-kpi-title'>EOT Potential</div><div class='md-kpi-value'>23</div><div class='md-kpi-note'>Potential items</div></div></div><div class='md-grid two'><div class='md-card'><div>                            <div id="d49bf878-38cb-4f13-9c85-f695ae57e1e9" class="plotly-graph-div" style="height:330px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("d49bf878-38cb-4f13-9c85-f695ae57e1e9")) {                    Plotly.newPlot(                        "d49bf878-38cb-4f13-9c85-f695ae57e1e9",                        [{"hovertemplate":"Responsible Group=%{x}\u003cbr\u003eCount=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#f59e0b","pattern":{"shape":""}},"name":"","orientation":"v","showlegend":false,"textposition":"auto","x":["Employer \u002f Client"],"xaxis":"x","y":{"dtype":"i1","bdata":"GQ=="},"yaxis":"y","type":"bar"}],                        {"template":{"data":{"candlestick":[{"decreasing":{"line":{"color":"#000033"}},"increasing":{"line":{"color":"#000032"}},"type":"candlestick"}],"contourcarpet":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contourcarpet"}],"contour":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"contour"}],"heatmap":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"heatmap"}],"histogram2d":[{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"type":"histogram2d"}],"icicle":[{"textfont":{"color":"white"},"type":"icicle"}],"sankey":[{"textfont":{"color":"#000036"},"type":"sankey"}],"scatter":[{"marker":{"line":{"width":0}},"type":"scatter"}],"table":[{"cells":{"fill":{"color":"#000038"},"font":{"color":"#000037"},"line":{"color":"#000039"}},"header":{"fill":{"color":"#000040"},"font":{"color":"#000036"},"line":{"color":"#000039"}},"type":"table"}],"waterfall":[{"connector":{"line":{"color":"#000036","width":2}},"decreasing":{"marker":{"color":"#000033"}},"increasing":{"marker":{"color":"#000032"}},"totals":{"marker":{"color":"#000034"}},"type":"waterfall"}]},"layout":{"coloraxis":{"colorscale":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorscale":{"diverging":[[0.0,"#000021"],[0.1111111111111111,"#000022"],[0.2222222222222222,"#000023"],[0.3333333333333333,"#000024"],[0.4444444444444444,"#000025"],[0.5555555555555556,"#000026"],[0.6666666666666666,"#000027"],[0.7777777777777778,"#000028"],[0.8888888888888888,"#000029"],[1.0,"#000030"]],"sequential":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]],"sequentialminus":[[0.0,"#000011"],[0.1111111111111111,"#000012"],[0.2222222222222222,"#000013"],[0.3333333333333333,"#000014"],[0.4444444444444444,"#000015"],[0.5555555555555556,"#000016"],[0.6666666666666666,"#000017"],[0.7777777777777778,"#000018"],[0.8888888888888888,"#000019"],[1.0,"#000020"]]},"colorway":["#000001","#000002","#000003","#000004","#000005","#000006","#000007","#000008","#000009","#000010"]}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Responsible Group"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Count"},"gridcolor":"rgba(148,163,184,.12)","zerolinecolor":"rgba(148,163,184,.16)"},"legend":{"tracegroupgap":0,"font":{"size":10},"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"title":{"text":"Delay Responsibility"},"barmode":"relative","font":{"color":"#f8fafc","family":"Segoe UI, Arial, sans-serif"},"margin":{"l":32,"r":18,"t":48,"b":36},"height":330,"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div></div><div class='md-card'><h3>Delay Register</h3><table class="dataframe md-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>project_id</th>
+      <th>Primary Event ID</th>
+      <th>Activity ID</th>
+      <th>Activity Name</th>
+      <th>BL Start</th>
+      <th>BL Finish</th>
+      <th>Start</th>
+      <th>Finish</th>
+      <th>Delayed duration</th>
+      <th>Overlap Start</th>
+      <th>Overlap Finish</th>
+      <th>BL Critical Path</th>
+      <th>Current Critical Path</th>
+      <th>Delayed duration after overlap</th>
+      <th>delay_id</th>
+      <th>delay_title</th>
+      <th>activity_id</th>
+      <th>activity_name</th>
+      <th>start_date</th>
+      <th>end_date</th>
+      <th>estimated_delay_days</th>
+      <th>approved_eot_days</th>
+      <th>responsibility</th>
+      <th>cause_category</th>
+      <th>notice_ref</th>
+      <th>status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>Delay in steel supply by client</td>
+      <td>CON-B02-FOOT-1070</td>
+      <td>RFT for Columns &amp; Walls Below SOG (B02) (footing)</td>
+      <td>23-Dec-25</td>
+      <td>29-Dec-25</td>
+      <td>28-Jan-26</td>
+      <td>4-Mar-26</td>
+      <td>-24</td>
+      <td>28-Jan-26</td>
+      <td>4-Mar-26</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>24</td>
+      <td>Delay in steel supply by client</td>
+      <td>Delay in steel supply by client</td>
+      <td>CON-B02-FOOT-1070</td>
+      <td>RFT for Columns &amp; Walls Below SOG (B02) (footing)</td>
+      <td>28-Jan-26</td>
+      <td>4-Mar-26</td>
+      <td>24</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>Delay in steel supply by client</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>Delay in steel supply by client</td>
+      <td>CON-B01-FOOT-1050</td>
+      <td>RFT for RC Raft &amp; Footings (B01) (footing)</td>
+      <td>6-Dec-25</td>
+      <td>18-Dec-25</td>
+      <td>1-Feb-26</td>
+      <td>5-Mar-26</td>
+      <td>-14</td>
+      <td>1-Feb-26</td>
+      <td>5-Mar-26</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>14</td>
+      <td>Delay in steel supply by client</td>
+      <td>Delay in steel supply by client</td>
+      <td>CON-B01-FOOT-1050</td>
+      <td>RFT for RC Raft &amp; Footings (B01) (footing)</td>
+      <td>1-Feb-26</td>
+      <td>5-Mar-26</td>
+      <td>14</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>Delay in steel supply by client</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>Delay in steel supply by client</td>
+      <td>CON-B04-WT-1110</td>
+      <td>RFT for Walls (B04) (Water Tank)</td>
+      <td>13-Dec-25</td>
+      <td>21-Dec-25</td>
+      <td>4-Mar-26</td>
+      <td>14-Apr-26</td>
+      <td>-25</td>
+      <td>4-Mar-26</td>
+      <td>14-Apr-26</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>0</td>
+      <td>Delay in steel supply by client</td>
+      <td>Delay in steel supply by client</td>
+      <td>CON-B04-WT-1110</td>
+      <td>RFT for Walls (B04) (Water Tank)</td>
+      <td>4-Mar-26</td>
+      <td>14-Apr-26</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>Delay in steel supply by client</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>Delay in steel supply by client</td>
+      <td>CON-B04-FOOT-1050</td>
+      <td>RFT for RC Raft &amp; Footings (B04) (footing)</td>
+      <td>15-Jan-26</td>
+      <td>24-Jan-26</td>
+      <td>1-Mar-26</td>
+      <td>7-May-26</td>
+      <td>-43</td>
+      <td>1-Mar-26</td>
+      <td>7-May-26</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>43</td>
+      <td>Delay in steel supply by client</td>
+      <td>Delay in steel supply by client</td>
+      <td>CON-B04-FOOT-1050</td>
+      <td>RFT for RC Raft &amp; Footings (B04) (footing)</td>
+      <td>1-Mar-26</td>
+      <td>7-May-26</td>
+      <td>43</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>Delay in steel supply by client</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>Delay in steel supply by client</td>
+      <td>CON-B04-FOOT-1070</td>
+      <td>RFT for Columns &amp; Walls Below SOG (B04) (footing)</td>
+      <td>21-Jan-26</td>
+      <td>27-Jan-26</td>
+      <td>10-Mar-26</td>
+      <td>6-May-26</td>
+      <td>-48</td>
+      <td>10-Mar-26</td>
+      <td>6-May-26</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>48</td>
+      <td>Delay in steel supply by client</td>
+      <td>Delay in steel supply by client</td>
+      <td>CON-B04-FOOT-1070</td>
+      <td>RFT for Columns &amp; Walls Below SOG (B04) (footing)</td>
+      <td>10-Mar-26</td>
+      <td>6-May-26</td>
+      <td>48</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>Delay in steel supply by client</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>IFC</td>
+      <td>E-SUB-B01-BAS02-1030</td>
+      <td>Submittal for Beams Conc. Dim.  &amp; RFT DWGs (B01) (Bas 02)</td>
+      <td>20-Nov-25</td>
+      <td>16-Feb-26</td>
+      <td>1-May-26</td>
+      <td>19-May-26</td>
+      <td>-92</td>
+      <td>1-May-26</td>
+      <td>19-May-26</td>
+      <td>No</td>
+      <td>No</td>
+      <td>92</td>
+      <td>IFC</td>
+      <td>IFC</td>
+      <td>E-SUB-B01-BAS02-1030</td>
+      <td>Submittal for Beams Conc. Dim.  &amp; RFT DWGs (B01) (Bas 02)</td>
+      <td>1-May-26</td>
+      <td>19-May-26</td>
+      <td>92</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>IFC</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>IFC</td>
+      <td>E-SUB-B01-BAS02-1040</td>
+      <td>Submittal for Slabs Conc. Dim.  &amp; RFT DWGs (B01) (Bas 02)</td>
+      <td>30-Nov-25</td>
+      <td>22-Feb-26</td>
+      <td>2-May-26</td>
+      <td>20-May-26</td>
+      <td>-87</td>
+      <td>2-May-26</td>
+      <td>20-May-26</td>
+      <td>No</td>
+      <td>No</td>
+      <td>87</td>
+      <td>IFC</td>
+      <td>IFC</td>
+      <td>E-SUB-B01-BAS02-1040</td>
+      <td>Submittal for Slabs Conc. Dim.  &amp; RFT DWGs (B01) (Bas 02)</td>
+      <td>2-May-26</td>
+      <td>20-May-26</td>
+      <td>87</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>IFC</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>IFC</td>
+      <td>E-SUB-B01-BAS01-1030</td>
+      <td>Submittal for Beams Conc. Dim.  &amp; RFT DWGs (B01) (Bas 01)</td>
+      <td>2-Nov-25</td>
+      <td>10-Mar-26</td>
+      <td>9-May-26</td>
+      <td>27-May-26</td>
+      <td>-78</td>
+      <td>9-May-26</td>
+      <td>27-May-26</td>
+      <td>No</td>
+      <td>No</td>
+      <td>78</td>
+      <td>IFC</td>
+      <td>IFC</td>
+      <td>E-SUB-B01-BAS01-1030</td>
+      <td>Submittal for Beams Conc. Dim.  &amp; RFT DWGs (B01) (Bas 01)</td>
+      <td>9-May-26</td>
+      <td>27-May-26</td>
+      <td>78</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>IFC</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>IFC</td>
+      <td>E-SUB-B01-BAS01-1040</td>
+      <td>Submittal for Slabs Conc. Dim.  &amp; RFT DWGs (B01) (Bas 01)</td>
+      <td>5-Nov-25</td>
+      <td>31-Mar-26</td>
+      <td>10-May-26</td>
+      <td>28-May-26</td>
+      <td>-58</td>
+      <td>10-May-26</td>
+      <td>28-May-26</td>
+      <td>No</td>
+      <td>No</td>
+      <td>58</td>
+      <td>IFC</td>
+      <td>IFC</td>
+      <td>E-SUB-B01-BAS01-1040</td>
+      <td>Submittal for Slabs Conc. Dim.  &amp; RFT DWGs (B01) (Bas 01)</td>
+      <td>10-May-26</td>
+      <td>28-May-26</td>
+      <td>58</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>IFC</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+    <tr>
+      <td>The Big -P.01-UP-20-April-26</td>
+      <td>IFC</td>
+      <td>E-SUB-B02-BAS02-1020</td>
+      <td>Submittal for Beams Conc. Dim.&amp; RFT DWGs (B02) (Bas 02)</td>
+      <td>22-Oct-25</td>
+      <td>11-Nov-25</td>
+      <td>3-May-26</td>
+      <td>21-May-26</td>
+      <td>-191</td>
+      <td>3-May-26</td>
+      <td>21-May-26</td>
+      <td>No</td>
+      <td>No</td>
+      <td>191</td>
+      <td>IFC</td>
+      <td>IFC</td>
+      <td>E-SUB-B02-BAS02-1020</td>
+      <td>Submittal for Beams Conc. Dim.&amp; RFT DWGs (B02) (Bas 02)</td>
+      <td>3-May-26</td>
+      <td>21-May-26</td>
+      <td>191</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Employer / Client</td>
+      <td>IFC</td>
+      <td>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â</td>
+      <td>Open</td>
+    </tr>
+  </tbody>
+</table></div></div></section></div><div class="footer">Generated from Project Intelligence Hub project-scoped data. No cross-project fallback is used for project-specific exports.</div></main><script>
+(function(){
+  const buttons = Array.from(document.querySelectorAll('.md-tab-button'));
+  const sections = Array.from(document.querySelectorAll('.md-section'));
+  function showTab(tabId){
+    buttons.forEach(function(btn) { btn.classList.toggle('active', btn.getAttribute('for') === 'md-tab-' + tabId); });
+    sections.forEach(function(section) { section.classList.toggle('active', section.id === tabId); });
+    window.dispatchEvent(new Event('resize'));
+  }
+  buttons.forEach(function(btn) {
+    btn.addEventListener('click', function() { showTab(btn.getAttribute('for').replace('md-tab-', '')); });
+  });
+  if (buttons.length && !document.querySelector('.md-section.active')) {
+    showTab(buttons[0].getAttribute('for').replace('md-tab-', '') || 'overview');
+  }
+})();
+</script></body></html>
