@@ -6,5 +6,5 @@ export const runtime = "nodejs";
 
 export async function GET() {
   const providers = await Promise.all([checkGroqHealth(), checkOpenAIHealth()]);
-  return NextResponse.json({ providers });
+  return NextResponse.json({ providers }, { headers: { "Cache-Control": "private, max-age=300" } });
 }

@@ -5,6 +5,7 @@ import { sanitizeText } from "../../../../lib/ai/provider";
 import { checkRateLimit } from "../../../../lib/ai/rate-limit";
 import { withSamcoDirectorPrompt } from "../../../../lib/ai/samco-director";
 import { loadQuestionBank, localTechnicalAnswer, searchQuestionBank } from "../../../../lib/technical-knowledge";
+import { aiRequestFailure, readAiJson } from "../../../../lib/ai/request";
 
 export const runtime = "nodejs";
 
@@ -42,7 +43,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const body = await req.json();
+    const body = await readAiJson(req);
     const question = sanitizeText(body?.question, 2200);
     const projectKey = sanitizeText(body?.projectKey || body?.projectId, 120);
     const mode = sanitizeText(body?.mode, 30) === "project" ? "project" : "portfolio";
@@ -73,7 +74,9 @@ export async function POST(req: NextRequest) {
       status: result.status,
       latencyMs: result.latencyMs
     }));
-  } catch {
+  } catch (error) {
+    const failure = aiRequestFailure(error);
+    if (failure) return NextResponse.json({ error: failure.error }, { status: failure.status });
     return NextResponse.json({ error: "Technical Knowledge Advisor failed." }, { status: 500 });
   }
 }

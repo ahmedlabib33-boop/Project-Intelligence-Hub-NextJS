@@ -116,13 +116,7 @@ export async function askOpenAI(
 export async function checkOpenAIHealth() {
   const apiKey = getServerEnv("OPENAI_API_KEY");
   if (!apiKey) return { name: "openai", available: false, error: "OPENAI_API_KEY not configured" };
-  const started = Date.now();
-  const result = await askOpenAI("Answer with ok only.", "ok", { maxTokens: 16, temperature: 0 });
-  return {
-    name: "openai",
-    available: result.status === "success",
-    error: result.status === "success" ? undefined : result.error || "OpenAI health check failed",
-    latency_ms: Date.now() - started,
-    model: result.model
-  };
+  // Configuration status is enough for the public UI. Provider reachability is
+  // confirmed by the real user request, avoiding an avoidable paid API call.
+  return { name: "openai", available: true, configured: true, model: OPENAI_MODEL };
 }

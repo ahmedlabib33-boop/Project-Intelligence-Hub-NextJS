@@ -4,6 +4,7 @@ import { buildProjectContext, contextToPrompt } from "../../../lib/ai/project-co
 import { checkRateLimit } from "../../../lib/ai/rate-limit";
 import { sanitizeText } from "../../../lib/ai/provider";
 import { withSamcoDirectorPrompt } from "../../../lib/ai/samco-director";
+import { aiRequestFailure, readAiJson } from "../../../lib/ai/request";
 
 export const runtime = "nodejs";
 
@@ -34,7 +35,7 @@ export async function POST(req: NextRequest) {
   if (!limit.allowed) return NextResponse.json({ error: "Too many AI requests." }, { status: 429 });
 
   try {
-    const body = await req.json();
+    const body = await readAiJson(req);
     const projectKey = sanitizeText(body?.projectKey || body?.projectId, 120);
     if (!projectKey) return NextResponse.json({ error: "projectKey is required." }, { status: 400 });
     const context = await buildProjectContext(projectKey, "summary");
@@ -42,7 +43,9 @@ export async function POST(req: NextRequest) {
 
     const result = await askConfiguredAI(PROMPT, contextToPrompt(context), { json: true, maxTokens: 1200, temperature: 0.2 });
     return NextResponse.json({ ...parseSummary(result.answer), provider: result.provider, model: result.model, status: result.status, latencyMs: result.latencyMs });
-  } catch {
+  } catch (error) {
+    const failure = aiRequestFailure(error);
+    if (failure) return NextResponse.json({ error: failure.error }, { status: failure.status });
     return NextResponse.json({ error: "Project summary failed." }, { status: 500 });
   }
 }

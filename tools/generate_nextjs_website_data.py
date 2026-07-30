@@ -19,7 +19,6 @@ OUTPUTS_ROOT = ROOT / "11-outputs"
 WEBSITE_PUBLIC = ROOT / "website" / "public"
 DATA_ROOT = WEBSITE_PUBLIC / "data"
 GENERATED_ROOT = WEBSITE_PUBLIC / "generated"
-ROOT_TIA_SUBMITTED_GUIDE = ROOT / "TIA submitted Guide"
 
 
 def slugify(value: str) -> str:
@@ -213,9 +212,19 @@ def submitted_tia_guide_root(base: Path, project: dict[str, Any]) -> Path | None
     for candidate in candidates:
         if candidate.exists():
             return candidate
-    searchable_name = f"{project.get('project_folder_name', '')} {project.get('project_display_name', '')} {project.get('project_id', '')}".lower()
-    if "big" in searchable_name and ROOT_TIA_SUBMITTED_GUIDE.exists():
-        return ROOT_TIA_SUBMITTED_GUIDE
+
+    # A project may explicitly point to a legacy guide during a staged migration.
+    # The path is declared in that project's manifest, never inferred from its name.
+    configured_path = str(project.get("submitted_tia_guide_path") or "").strip()
+    if configured_path:
+        configured = Path(configured_path)
+        candidate = configured if configured.is_absolute() else (base / configured)
+        try:
+            candidate.resolve().relative_to(ROOT.resolve())
+        except ValueError:
+            return None
+        if candidate.is_dir():
+            return candidate
     return None
 
 
@@ -546,26 +555,101 @@ def weighted_activity_progress(rows: list[dict[str, Any]], progress_fields: list
     return weighted_value / total_weight if total_weight > 0 else None
 
 
+def risk_factor(value: Any, *, numeric_kind: str = "rating") -> float | None:
+    """Normalize common qualitative or numeric risk values to a 0-1 factor."""
+    text = str(value or "").strip().lower()
+    if not text:
+        return None
+    labels = {
+        "very low": 0.1,
+        "low": 0.25,
+        "medium": 0.5,
+        "moderate": 0.5,
+        "high": 0.75,
+        "very high": 1.0,
+        "critical": 1.0,
+        "severe": 1.0,
+        "yes": 0.75,
+        "true": 0.75,
+        "no": 0.0,
+        "false": 0.0,
+    }
+    if text in labels:
+        return labels[text]
+
+    number = safe_float(value)
+    if number is None:
+        return None
+    number = abs(number)
+    if numeric_kind == "days":
+        if number <= 0:
+            return 0.0
+        if number <= 7:
+            return 0.25
+        if number <= 30:
+            return 0.5
+        if number <= 90:
+            return 0.75
+        return 1.0
+    if number <= 1:
+        return number
+    if number <= 5:
+        return number / 5.0
+    if number <= 25:
+        return number / 25.0
+    return min(number / 100.0, 1.0)
+
+
+def active_risk(row: dict[str, Any]) -> bool:
+    status = str(pick(row, ["status", "risk_status", "current_status"]) or "").strip().lower()
+    return status not in {"closed", "resolved", "cancelled", "canceled", "inactive", "withdrawn"}
+
+
 def qualitative_risk_metrics(rows: list[dict[str, Any]]) -> tuple[float | None, int, str]:
-    """Use an explicit numeric score when supplied, otherwise mirror the legacy risk-count heuristic."""
-    explicit = [
-        safe_float(pick(row, ["risk_score", "risk rating", "risk_rating", "score", "severity_score"]))
-        for row in rows
-    ]
-    numeric_scores = [value for value in explicit if value is not None]
-    high_terms = {"high", "critical", "severe", "very high"}
+    """Derive an active-risk score from explicit scores or probability/impact fields.
+
+    Closed records are excluded. This is intentionally a transparent management
+    indicator, not a replacement for a project-approved risk matrix.
+    """
+    scores: list[float] = []
     high_count = 0
+    high_terms = {"high", "very high", "critical", "severe"}
+
     for row in rows:
-        terms = {
-            str(pick(row, ["probability"]) or "").strip().lower(),
-            str(pick(row, ["severity", "impact", "status"]) or "").strip().lower(),
+        if not active_risk(row):
+            continue
+
+        explicit = risk_factor(pick(row, ["risk_score", "risk rating", "risk_rating", "score", "severity_score"]))
+        probability = risk_factor(pick(row, ["probability", "likelihood", "chance"]))
+        impact_values = [
+            risk_factor(pick(row, ["severity", "impact", "impact_rating", "impact level"])),
+            risk_factor(pick(row, ["time_impact_days", "schedule_impact_days", "delay_days"]), numeric_kind="days"),
+            risk_factor(pick(row, ["cost_impact", "cost impact", "financial_impact"])),
+        ]
+        impacts = [value for value in impact_values if value is not None]
+        impact = max(impacts) if impacts else None
+
+        if explicit is not None:
+            score = explicit * 100.0
+        elif probability is not None and impact is not None:
+            score = probability * impact * 100.0
+        elif probability is not None:
+            score = probability * 100.0
+        elif impact is not None:
+            score = impact * 100.0
+        else:
+            continue
+
+        scores.append(score)
+        qualitative_terms = {
+            str(pick(row, ["probability", "likelihood", "chance"]) or "").strip().lower(),
+            str(pick(row, ["severity", "impact", "impact_rating", "impact level"]) or "").strip().lower(),
         }
-        if terms & high_terms:
+        if score >= 70.0 or qualitative_terms & high_terms:
             high_count += 1
-    if numeric_scores:
-        return average(numeric_scores), high_count, "risks.csv:numeric risk score average"
-    if rows:
-        return min(100.0, float(len(rows)) * 20.0), high_count, "risks.csv:legacy record-count heuristic"
+
+    if scores:
+        return average(scores), high_count, "risks.csv:active probability-impact risk matrix"
     return None, high_count, "Unavailable"
 
 
@@ -686,8 +770,8 @@ def build_decision_reasons(args: dict[str, Any]) -> list[dict[str, str]]:
     if delay_days:
         reasons.append({
             "issue": "Delay exposure recorded",
-            "trigger": f"{delay_days:.0f} delay days from delay event records",
-            "impact": "Potential effect on delivery, mitigation, or EOT position.",
+            "trigger": f"{delay_days:.0f} cumulative delay-event days; EOT not yet verified",
+            "impact": "Indicative schedule exposure only until critical path, fragnet, and concurrency tests are verified.",
             "owner": "Planning / Claims Team",
             "evidence_status": data_confidence,
             "urgency": "High" if delay_days >= 30 else "Medium",
@@ -917,7 +1001,10 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         cpi,
         risk_score,
     ]
-    completeness = sum(value is not None for value in data_quality_fields) / len(data_quality_fields)
+    metric_completeness = sum(value is not None for value in data_quality_fields) / len(data_quality_fields)
+    required_source_sets = ("projects", "activities", "evm", "risks")
+    source_completeness = sum(bool(rows[name]) for name in required_source_sets) / len(required_source_sets)
+    data_quality = round((metric_completeness * 0.75 + source_completeness * 0.25) * 100, 1)
 
     if (spi is not None and spi < 0.9) or (cpi is not None and cpi < 0.9) or high_risk_count > 0:
         decision_required = True
@@ -928,7 +1015,7 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
     cost_health = health_from_ratio(cpi)
     delay_exposure = exposure_from_value(delay_days, medium=1, high=30)
     claim_exposure_level = exposure_from_value(claims_exposure, medium=1, high=1000000)
-    data_confidence = confidence_from_quality(round(completeness * 100, 1))
+    data_confidence = confidence_from_quality(data_quality)
     priority_inputs = [
         "High" if decision_required else "Low",
         "High" if schedule_health == "Critical" else schedule_health,
@@ -939,7 +1026,6 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         "High" if data_confidence == "Low" else data_confidence,
     ]
     decision_priority = sorted(priority_inputs, key=priority_rank)[0]
-    data_quality = round(completeness * 100, 1)
     decision_reasons = build_decision_reasons({
         "project_display_name": project["project_display_name"],
         "schedule_health": schedule_health,
@@ -947,11 +1033,17 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         "spi": spi,
         "cpi": cpi,
         "delay_days": delay_days,
+        "delay_assessment": "Indicative schedule exposure only. Verify critical path, fragnet logic, and concurrency in Primavera P6 before using as EOT.",
         "claims_exposure": claims_exposure,
         "claimed_days": claimed_days,
         "high_risk_count": high_risk_count,
         "data_confidence": data_confidence,
         "data_quality": data_quality,
+        "data_quality_components": {
+            "metric_completeness": round(metric_completeness * 100, 1),
+            "required_source_completeness": round(source_completeness * 100, 1),
+            "required_source_sets": list(required_source_sets),
+        },
     })
 
     return {
@@ -1012,7 +1104,7 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
             "ev": {"source": ev_source, "aggregation": "sum of selected project EVM records"},
             "ac": {"source": ac_source, "aggregation": "sum of selected project EVM records"},
             "risk_score": {"source": risk_source, "aggregation": "project risk register"},
-            "delay_days": {"source": "delay_events.csv:Delayed duration after overlap", "aggregation": "sum of selected project delay events"},
+            "delay_days": {"source": "delay_events.csv:estimated or overlap-adjusted duration", "aggregation": "cumulative event exposure; not a verified EOT calculation"},
             "claims_exposure": {"source": "claims.csv:claimed_amount", "aggregation": "sum of selected project claim records"},
         },
         "features": build_feature_payload(project, rows),

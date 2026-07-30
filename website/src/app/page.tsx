@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import portfolio from "../../public/data/portfolio.json";
 import MermaidDiagram from "../components/MermaidDiagram";
 import AiChatPanel from "../components/ai/AiChatPanel";
@@ -11,7 +12,6 @@ import ExecutiveLightModeToggle from "../components/executive/ExecutiveLightMode
 import ManagementDecisionBrief, { type ActionItem, type DecisionBriefItem } from "../components/executive/ManagementDecisionBrief";
 import PredictiveWarningPanel from "../components/executive/PredictiveWarningPanel";
 import ScenarioPlanner from "../components/executive/ScenarioPlanner";
-import SourceConfidenceBadge from "../components/executive/SourceConfidenceBadge";
 import UnifiedIntelligenceSearch from "../components/executive/UnifiedIntelligenceSearch";
 
 type ReportKey = "executive_dashboard" | "master_dashboard" | "elite_svg_charts" | "linked_executive_dashboard";
@@ -253,11 +253,6 @@ function metricSource(project: ProjectRecord, metric: string, fallback: string) 
   return project.metric_sources?.[metric]?.source || fallback;
 }
 
-function safeRatio(value: number | null | undefined, target = 1) {
-  if (value === null || value === undefined || !Number.isFinite(value)) return 0;
-  return Math.max(0.03, Math.min(1, value / target));
-}
-
 function statusTone(value: number | null | undefined, target = 1) {
   if (value === null || value === undefined || !Number.isFinite(value)) return "neutral";
   if (value >= target) return "good";
@@ -286,41 +281,6 @@ function HoloKpi({
   );
 }
 
-function ProjectNetwork({ selectedProject }: { selectedProject: ProjectRecord }) {
-  return (
-    <svg className="network-map" viewBox="0 0 720 390" role="img" aria-label="Interactive project network">
-      <defs>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="5" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-      <path className="network-line dashed" d="M76 300 C174 130 302 292 420 106 C510 8 566 142 640 72" />
-      <path className="network-line" d="M95 292 L285 214 L432 120 L636 78" />
-      <path className="network-line soft" d="M285 214 L360 318 L636 78" />
-      {projects.map((project, index) => {
-        const points = [
-          { x: 95, y: 292, color: "#39d7d2" },
-          { x: 285, y: 214, color: "#d6a23a" },
-          { x: 432, y: 120, color: "#63a8ff" },
-          { x: 636, y: 78, color: "#a78bfa" }
-        ];
-        const point = points[index % points.length];
-        const active = project.project_key === selectedProject.project_key;
-        return (
-          <g key={project.project_key} className={active ? "network-node active" : "network-node"}>
-            <circle cx={point.x} cy={point.y} r={active ? 43 : 32} fill={point.color} filter="url(#glow)" />
-            <text x={point.x + 48} y={point.y + 5}>{project.project_folder_name}</text>
-          </g>
-        );
-      })}
-    </svg>
-  );
-}
-
 function portfolioDecisionMermaid(selectedProject: ProjectRecord) {
   const projectCount = numberValue(portfolio.project_count);
   const sectorCount = numberValue(portfolio.sector_count);
@@ -343,36 +303,6 @@ function portfolioDecisionMermaid(selectedProject: ProjectRecord) {
     I --> J["Action Closure\\nUpdate source files and regenerate outputs"]`;
 }
 
-function SignalBar({ label, value, tone }: { label: string; value: number | null | undefined; tone: string }) {
-  const width = `${Math.round(safeRatio(value, 1) * 100)}%`;
-  return (
-    <div className="signal-bar">
-      <span>{label}</span>
-      <div><i className={`tone-${tone}`} style={{ width }} /></div>
-      <b>{percent(value)}</b>
-    </div>
-  );
-}
-
-function Gauge({ label, value, tone }: { label: string; value: number | null | undefined; tone: string }) {
-  const percentValue = Math.round(safeRatio(value, 1) * 100);
-  return (
-    <article className={`gauge tone-${tone}`}>
-      <svg viewBox="0 0 160 100">
-        <path d="M24 78 A56 56 0 0 1 136 78" className="gauge-track" />
-        <path
-          d="M24 78 A56 56 0 0 1 136 78"
-          className="gauge-fill"
-          pathLength="100"
-          strokeDasharray={`${percentValue} ${100 - percentValue}`}
-        />
-      </svg>
-      <strong>{numberValue(value, 2)}</strong>
-      <span>{label}</span>
-    </article>
-  );
-}
-
 function ProjectConsole({ selectedProject }: { selectedProject: ProjectRecord }) {
   return (
     <section className="project-console">
@@ -393,25 +323,6 @@ function ProjectConsole({ selectedProject }: { selectedProject: ProjectRecord })
         <HoloKpi title="CPI" value={numberValue(selectedProject.cpi, 2)} note="Cost performance" tone={statusTone(selectedProject.cpi) as "good" | "watch" | "critical" | "neutral"} />
         <HoloKpi title="Activities" value={numberValue(selectedProject.activity_count)} note="Activity records loaded" tone="blue" />
         <HoloKpi title="Data Quality" value={`${numberValue(selectedProject.data_quality, 1)}%`} note="Source completeness" tone="violet" />
-      </div>
-    </section>
-  );
-}
-
-function SourceRegister({ project }: { project: ProjectRecord }) {
-  return (
-    <section className="glass-panel source-register">
-      <div className="section-header">
-        <div>
-          <p className="eyebrow">Source Register</p>
-          <h2>Selected Project Data Feed</h2>
-        </div>
-        <span>{Object.values(project.source_files).reduce((sum, count) => sum + count, 0)} rows recognized</span>
-      </div>
-      <div className="source-grid">
-        {Object.entries(project.source_files).map(([name, count]) => (
-          <span key={name}>{name}<b>{count}</b></span>
-        ))}
       </div>
     </section>
   );
@@ -644,7 +555,7 @@ function SubmittedTiaGuidePanel({ submitted }: { submitted: SubmittedTiaPayload 
         <div className="tia-visual-grid">
           {(submitted.visuals || []).slice(0, 6).map((visual) => (
             <figure key={visual.url}>
-              <img src={visual.url} alt={visual.name} />
+              <Image src={visual.url} alt={visual.name} width={960} height={540} sizes="(max-width: 760px) 92vw, 33vw" />
               <figcaption>{visual.name}</figcaption>
             </figure>
           ))}
@@ -1270,7 +1181,7 @@ function DecisionOperationsDashboard({
   return (
     <div className={lightMode ? "digital-operations executive-light-mode" : "digital-operations"}>
       <section className="operations-hero">
-        <div className="operations-brand"><img src="/assets/logo.png" alt="SAMCO Egypt" /><div><span>Samco Egypt</span><b>Decision Making Dashboard</b><small>Portfolio command layer | source-backed management intelligence</small></div></div>
+        <div className="operations-brand"><Image src="/assets/logo.png" alt="SAMCO Egypt" width={58} height={58} priority /><div><span>Samco Egypt</span><b>Decision Making Dashboard</b><small>Portfolio command layer | source-backed management intelligence</small></div></div>
         <div className="operations-hero-controls">
           <label><span>Portfolio lens</span><select value={sectorFilter} onChange={(event) => setSectorFilter(event.target.value)}><option>All sectors</option>{sectors.map((sector) => <option key={sector.sector}>{sector.sector}</option>)}</select></label>
           <ExecutiveLightModeToggle enabled={lightMode} onChange={setLightMode} />

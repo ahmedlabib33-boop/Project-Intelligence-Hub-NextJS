@@ -4,6 +4,7 @@ import { buildProjectContext, contextToPrompt } from "../../../lib/ai/project-co
 import { checkRateLimit } from "../../../lib/ai/rate-limit";
 import { sanitizeText } from "../../../lib/ai/provider";
 import { withSamcoDirectorPrompt } from "../../../lib/ai/samco-director";
+import { aiRequestFailure, readAiJson } from "../../../lib/ai/request";
 
 export const runtime = "nodejs";
 
@@ -27,7 +28,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const body = await req.json();
+    const body = await readAiJson(req);
     const question = sanitizeText(body?.question, 2000);
     const projectKey = sanitizeText(body?.projectKey || body?.projectId, 120);
     const sector = sanitizeText(body?.sector, 120);
@@ -43,7 +44,9 @@ export async function POST(req: NextRequest) {
     const userPrompt = `Project data context:\n${contextToPrompt(context)}\n\nQuestion:\n${question}`;
     const result = await askConfiguredAI(SYSTEM_PROMPT, userPrompt, { maxTokens: 1400, temperature: 0.25 });
     return NextResponse.json(result);
-  } catch {
+  } catch (error) {
+    const failure = aiRequestFailure(error);
+    if (failure) return NextResponse.json({ error: failure.error }, { status: failure.status });
     return NextResponse.json({ error: "AI request failed. Please retry." }, { status: 500 });
   }
 }

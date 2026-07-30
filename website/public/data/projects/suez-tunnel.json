@@ -24,7 +24,7 @@
   "vac": -74999999.98806953,
   "spi": 0.8618181818336116,
   "cpi": 0.9433962264231616,
-  "risk_score": 60.0,
+  "risk_score": 43.75,
   "high_risk_count": 1,
   "delay_days": 183.0,
   "delay_event_count": 5,
@@ -61,8 +61,8 @@
     },
     {
       "issue": "Delay exposure recorded",
-      "trigger": "183 delay days from delay event records",
-      "impact": "Potential effect on delivery, mitigation, or EOT position.",
+      "trigger": "183 cumulative delay-event days; EOT not yet verified",
+      "impact": "Indicative schedule exposure only until critical path, fragnet, and concurrency tests are verified.",
       "owner": "Planning / Claims Team",
       "evidence_status": "High",
       "urgency": "High",
@@ -143,12 +143,12 @@
       "aggregation": "sum of selected project EVM records"
     },
     "risk_score": {
-      "source": "risks.csv:legacy record-count heuristic",
+      "source": "risks.csv:active probability-impact risk matrix",
       "aggregation": "project risk register"
     },
     "delay_days": {
-      "source": "delay_events.csv:Delayed duration after overlap",
-      "aggregation": "sum of selected project delay events"
+      "source": "delay_events.csv:estimated or overlap-adjusted duration",
+      "aggregation": "cumulative event exposure; not a verified EOT calculation"
     },
     "claims_exposure": {
       "source": "claims.csv:claimed_amount",
