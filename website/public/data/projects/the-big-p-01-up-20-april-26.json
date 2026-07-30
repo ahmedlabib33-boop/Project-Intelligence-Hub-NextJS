@@ -6,52 +6,81 @@
   "sector": "Buildings",
   "meeting_url": null,
   "status": "Active",
-  "contract_value": 0.0,
-  "paid_amount": null,
-  "spent_amount": null,
-  "remaining_value": 0.0,
-  "planned_progress": 1.0,
-  "actual_progress": 1.0,
-  "progress_variance": 0.0,
-  "bac": 0.0,
-  "pv": 0.0,
-  "ev": 0.0,
-  "ac": null,
-  "spi": 0.0,
-  "cpi": 0.0,
-  "risk_score": null,
-  "high_risk_count": 0,
-  "delay_days": 0,
-  "claims_exposure": 0,
+  "contract_value": 367286025.0,
+  "paid_amount": 110288531.59,
+  "spent_amount": 113085034.82000002,
+  "remaining_value": 256997493.41,
+  "planned_progress": 0.6531999999999999,
+  "actual_progress": 0.3068,
+  "progress_variance": -0.3463999999999999,
+  "bac": 367286024.98999965,
+  "pv": 252796791.15999988,
+  "ev": 113085034.82000002,
+  "ac": 113085034.82000002,
+  "sv": -139711756.33999985,
+  "cv": 0.0,
+  "eac": 367286024.98999965,
+  "etc": 254200990.16999963,
+  "vac": 0.0,
+  "spi": 0.4473357209207073,
+  "cpi": 1.0,
+  "risk_score": 40.0,
+  "high_risk_count": 2,
+  "delay_days": 1675.0,
+  "delay_event_count": 25,
+  "claims_exposure": 0.0,
+  "claimed_days": 35.0,
+  "risk_record_count": 2,
+  "planned_start": "11-Sep-25",
+  "planned_finish": "10-Apr-27",
+  "forecast_finish": "19-Aug-27",
   "schedule_health": "Critical",
-  "cost_health": "Critical",
-  "delay_exposure": "Low",
+  "cost_health": "Healthy",
+  "delay_exposure": "High",
   "claim_exposure_level": "Low",
-  "data_confidence": "Medium",
+  "data_confidence": "High",
   "decision_priority": "High",
   "decision_reasons": [
     {
       "issue": "Schedule performance below executive threshold",
-      "trigger": "SPI 0.00",
+      "trigger": "SPI 0.45",
       "impact": "Potential recovery plan and critical path review required.",
       "owner": "Planning Manager",
-      "evidence_status": "Medium",
+      "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting."
     },
     {
-      "issue": "Cost performance below executive threshold",
-      "trigger": "CPI 0.00",
-      "impact": "Forecast final cost and payment/cost controls may need management intervention.",
-      "owner": "Commercial Manager",
-      "evidence_status": "Medium",
+      "issue": "Delay exposure recorded",
+      "trigger": "1675 delay days from delay event records",
+      "impact": "Potential effect on delivery, mitigation, or EOT position.",
+      "owner": "Planning / Claims Team",
+      "evidence_status": "High",
       "urgency": "High",
-      "recommended_action": "Review cost-control plan, paid/spent records, and EAC exposure."
+      "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness."
+    },
+    {
+      "issue": "Claims / EOT exposure available",
+      "trigger": "Claimed days 35",
+      "impact": "Commercial strategy and entitlement evidence should be aligned.",
+      "owner": "Contracts Manager",
+      "evidence_status": "High",
+      "urgency": "Medium",
+      "recommended_action": "Review entitlement matrix, notice status, and supporting correspondence."
+    },
+    {
+      "issue": "High-risk records detected",
+      "trigger": "2 high-risk items",
+      "impact": "Risk exposure may require mitigation ownership and deadlines.",
+      "owner": "Project Manager",
+      "evidence_status": "High",
+      "urgency": "High",
+      "recommended_action": "Assign mitigation owners and confirm closure evidence for high-risk records."
     }
   ],
   "activity_count": 1363,
   "milestone_count": 4,
-  "data_quality": 71.4,
+  "data_quality": 100.0,
   "decision_required": true,
   "last_updated": "2026-07-27T23:22:25",
   "fingerprint": "25a60234a5411a9dad8dcd53950fb0dd3c1391cc93e7320b1d1309b30fbcb599",
@@ -66,6 +95,56 @@
     "activities": 1363,
     "milestones": 4,
     "delay_events": 25
+  },
+  "metric_sources": {
+    "contract_value": {
+      "source": "projects.csv:contract_value",
+      "aggregation": "project summary or project-level fallback"
+    },
+    "paid_amount": {
+      "source": "payments.csv:paid amount total",
+      "aggregation": "sum of selected project records"
+    },
+    "spent_amount": {
+      "source": "evm.csv:AC total",
+      "aggregation": "sum of selected project records"
+    },
+    "planned_progress": {
+      "source": "projects.csv:planned_progress_percent",
+      "aggregation": "project summary or project-level calculation"
+    },
+    "actual_progress": {
+      "source": "projects.csv:actual_progress_percent",
+      "aggregation": "project summary or project-level calculation"
+    },
+    "bac": {
+      "source": "evm.csv:BAC total",
+      "aggregation": "sum of selected project EVM records"
+    },
+    "pv": {
+      "source": "evm.csv:PV total",
+      "aggregation": "sum of selected project EVM records"
+    },
+    "ev": {
+      "source": "evm.csv:EV total",
+      "aggregation": "sum of selected project EVM records"
+    },
+    "ac": {
+      "source": "evm.csv:AC total",
+      "aggregation": "sum of selected project EVM records"
+    },
+    "risk_score": {
+      "source": "risks.csv:legacy record-count heuristic",
+      "aggregation": "project risk register"
+    },
+    "delay_days": {
+      "source": "delay_events.csv:Delayed duration after overlap",
+      "aggregation": "sum of selected project delay events"
+    },
+    "claims_exposure": {
+      "source": "claims.csv:claimed_amount",
+      "aggregation": "sum of selected project claim records"
+    }
   },
   "features": {
     "overview": {
@@ -2887,7 +2966,7 @@
           },
           {
             "name": "04-Event 04 Engineer’s Delayed Response to RFI and Required Technical Clarification",
-            "file_count": 5,
+            "file_count": 6,
             "xer_count": 2,
             "pdf_count": 4,
             "xlsx_count": 0

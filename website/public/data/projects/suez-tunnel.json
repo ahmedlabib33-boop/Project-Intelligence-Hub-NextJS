@@ -7,43 +7,90 @@
   "meeting_url": null,
   "status": "Delayed",
   "contract_value": 1250000000.0,
-  "paid_amount": null,
-  "spent_amount": 15963855.42,
-  "remaining_value": 1234036144.58,
-  "planned_progress": 1.0,
-  "actual_progress": 1.0,
-  "progress_variance": 0.0,
-  "bac": 1250000000.0,
-  "pv": 1250000000.0,
-  "ev": 1250000000.0,
-  "ac": 15963855.42,
-  "spi": 1.0,
-  "cpi": 78.30188680072624,
-  "risk_score": null,
-  "high_risk_count": 0,
-  "delay_days": 0,
-  "claims_exposure": 0,
-  "schedule_health": "Healthy",
-  "cost_health": "Healthy",
-  "delay_exposure": "Low",
-  "claim_exposure_level": "Low",
-  "data_confidence": "Medium",
-  "decision_priority": "Medium",
+  "paid_amount": 481550000.0,
+  "spent_amount": 514546987.94,
+  "remaining_value": 768450000.0,
+  "planned_progress": 0.42,
+  "actual_progress": 0.35,
+  "progress_variance": -0.07,
+  "bac": 1249999999.99,
+  "pv": 563253012.0300001,
+  "ev": 485421686.74,
+  "ac": 514546987.94,
+  "sv": -77831325.29000008,
+  "cv": -29125301.199999988,
+  "eac": 1324999999.9780695,
+  "etc": 810453012.0380695,
+  "vac": -74999999.98806953,
+  "spi": 0.8618181818336116,
+  "cpi": 0.9433962264231616,
+  "risk_score": 60.0,
+  "high_risk_count": 1,
+  "delay_days": 183.0,
+  "delay_event_count": 5,
+  "claims_exposure": 18750000.0,
+  "claimed_days": 71.0,
+  "risk_record_count": 3,
+  "planned_start": "1-Sep-25",
+  "planned_finish": "28-Feb-27",
+  "forecast_finish": "18-May-27",
+  "schedule_health": "Critical",
+  "cost_health": "Watchlist",
+  "delay_exposure": "High",
+  "claim_exposure_level": "High",
+  "data_confidence": "High",
+  "decision_priority": "High",
   "decision_reasons": [
     {
-      "issue": "No immediate executive trigger",
-      "trigger": "Suez Tunnel Civil & MEP Works is within available decision thresholds",
-      "impact": "Continue routine monitoring with the current evidence set.",
+      "issue": "Schedule performance below executive threshold",
+      "trigger": "SPI 0.86",
+      "impact": "Potential recovery plan and critical path review required.",
+      "owner": "Planning Manager",
+      "evidence_status": "High",
+      "urgency": "High",
+      "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting."
+    },
+    {
+      "issue": "Cost performance on watchlist",
+      "trigger": "CPI 0.94",
+      "impact": "Cost trend should be checked before commitment decisions.",
+      "owner": "Commercial Manager",
+      "evidence_status": "High",
+      "urgency": "Medium",
+      "recommended_action": "Validate actual cost and payment records against budget baseline."
+    },
+    {
+      "issue": "Delay exposure recorded",
+      "trigger": "183 delay days from delay event records",
+      "impact": "Potential effect on delivery, mitigation, or EOT position.",
+      "owner": "Planning / Claims Team",
+      "evidence_status": "High",
+      "urgency": "High",
+      "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness."
+    },
+    {
+      "issue": "Claims / EOT exposure available",
+      "trigger": "Claim amount EGP 18,750,000 | Claimed days 71",
+      "impact": "Commercial strategy and entitlement evidence should be aligned.",
+      "owner": "Contracts Manager",
+      "evidence_status": "High",
+      "urgency": "High",
+      "recommended_action": "Review entitlement matrix, notice status, and supporting correspondence."
+    },
+    {
+      "issue": "High-risk records detected",
+      "trigger": "1 high-risk items",
+      "impact": "Risk exposure may require mitigation ownership and deadlines.",
       "owner": "Project Manager",
-      "evidence_status": "Medium",
-      "urgency": "Low",
-      "recommended_action": "Keep source files updated and monitor SPI, CPI, risk, claims, and delay records."
+      "evidence_status": "High",
+      "urgency": "High",
+      "recommended_action": "Assign mitigation owners and confirm closure evidence for high-risk records."
     }
   ],
   "activity_count": 17,
   "milestone_count": 5,
-  "data_quality": 71.4,
-  "decision_required": false,
+  "data_quality": 100.0,
+  "decision_required": true,
   "last_updated": "2026-07-27T23:22:25",
   "fingerprint": "1242fa300c543717c097f5989ee334eacbd2f16001344cd95174e517f58f37b9",
   "source_files": {
@@ -57,6 +104,56 @@
     "activities": 17,
     "milestones": 5,
     "delay_events": 5
+  },
+  "metric_sources": {
+    "contract_value": {
+      "source": "projects.csv:contract_value",
+      "aggregation": "project summary or project-level fallback"
+    },
+    "paid_amount": {
+      "source": "payments.csv:paid amount total",
+      "aggregation": "sum of selected project records"
+    },
+    "spent_amount": {
+      "source": "evm.csv:AC total",
+      "aggregation": "sum of selected project records"
+    },
+    "planned_progress": {
+      "source": "projects.csv:planned_progress_percent",
+      "aggregation": "project summary or project-level calculation"
+    },
+    "actual_progress": {
+      "source": "projects.csv:actual_progress_percent",
+      "aggregation": "project summary or project-level calculation"
+    },
+    "bac": {
+      "source": "evm.csv:BAC total",
+      "aggregation": "sum of selected project EVM records"
+    },
+    "pv": {
+      "source": "evm.csv:PV total",
+      "aggregation": "sum of selected project EVM records"
+    },
+    "ev": {
+      "source": "evm.csv:EV total",
+      "aggregation": "sum of selected project EVM records"
+    },
+    "ac": {
+      "source": "evm.csv:AC total",
+      "aggregation": "sum of selected project EVM records"
+    },
+    "risk_score": {
+      "source": "risks.csv:legacy record-count heuristic",
+      "aggregation": "project risk register"
+    },
+    "delay_days": {
+      "source": "delay_events.csv:Delayed duration after overlap",
+      "aggregation": "sum of selected project delay events"
+    },
+    "claims_exposure": {
+      "source": "claims.csv:claimed_amount",
+      "aggregation": "sum of selected project claim records"
+    }
   },
   "features": {
     "overview": {

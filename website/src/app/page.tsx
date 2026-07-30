@@ -30,11 +30,26 @@ type ProjectRecord = {
   planned_progress: number | null;
   actual_progress: number | null;
   progress_variance: number | null;
+  bac: number | null;
+  pv: number | null;
+  ev: number | null;
+  ac: number | null;
+  sv: number | null;
+  cv: number | null;
+  eac: number | null;
+  etc: number | null;
+  vac: number | null;
   spi: number | null;
   cpi: number | null;
   risk_score: number | null;
+  risk_record_count?: number;
   delay_days: number | null;
+  delay_event_count?: number;
   claims_exposure: number | null;
+  claimed_days?: number | null;
+  planned_start?: string | null;
+  planned_finish?: string | null;
+  forecast_finish?: string | null;
   schedule_health?: string | null;
   cost_health?: string | null;
   delay_exposure?: string | null;
@@ -49,6 +64,7 @@ type ProjectRecord = {
   last_updated: string | null;
   meeting_url?: string | null;
   source_files: Record<string, number>;
+  metric_sources?: Record<string, { source: string; aggregation: string }>;
   features: FeaturePayload;
   reports: Record<ReportKey, string>;
 };
@@ -231,6 +247,10 @@ function money(value: number | null | undefined) {
 function percent(value: number | null | undefined) {
   if (value === null || value === undefined || Number.isNaN(value) || !Number.isFinite(value)) return "N/A";
   return `${(value * 100).toFixed(1)}%`;
+}
+
+function metricSource(project: ProjectRecord, metric: string, fallback: string) {
+  return project.metric_sources?.[metric]?.source || fallback;
 }
 
 function safeRatio(value: number | null | undefined, target = 1) {
@@ -737,10 +757,11 @@ function WorkspaceTabContent({
         <div className="workspace-grid">
           <MiniMetric label="Project" value={project.project_folder_name} note={project.project_display_name} />
           <MiniMetric label="Status" value={project.status} note={`${project.sector} sector`} />
-          <MiniMetric label="Contract Value" value={money(project.contract_value)} note="Project source value" />
-          <MiniMetric label="Remaining Value" value={money(project.remaining_value)} note="Contract less paid/spent" />
-          <MiniMetric label="Planned Progress" value={percent(project.planned_progress)} note="Planned progress source" />
-          <MiniMetric label="Actual Progress" value={percent(project.actual_progress)} note="Actual progress source" />
+          <MiniMetric label="Contract Value" value={money(project.contract_value)} note={metricSource(project, "contract_value", "Project source value")} />
+          <MiniMetric label="Remaining Value" value={money(project.remaining_value)} note="Contract value less paid amount" />
+          <MiniMetric label="Planned Progress" value={percent(project.planned_progress)} note={metricSource(project, "planned_progress", "Planned progress source")} />
+          <MiniMetric label="Actual Progress" value={percent(project.actual_progress)} note={metricSource(project, "actual_progress", "Actual progress source")} />
+          <MiniMetric label="Baseline Finish" value={project.planned_finish || "N/A"} note={`Forecast ${project.forecast_finish || "N/A"}`} />
         </div>
         <div className="workspace-two">
           <FeatureSvg mode="portfolio" />
@@ -812,12 +833,17 @@ function WorkspaceTabContent({
     return (
       <div className="feature-stack">
         <div className="workspace-grid">
-          <MiniMetric label="BAC" value={money(project.contract_value)} note="Budget at completion" />
-          <MiniMetric label="PV" value={money(project.contract_value !== null && project.planned_progress !== null ? project.contract_value * project.planned_progress : null)} note="Planned value" />
-          <MiniMetric label="EV" value={money(project.contract_value !== null && project.actual_progress !== null ? project.contract_value * project.actual_progress : null)} note="Earned value" />
-          <MiniMetric label="AC" value={money(project.spent_amount)} note="Actual cost / spent" />
+          <MiniMetric label="BAC" value={money(project.bac)} note={metricSource(project, "bac", "Budget at completion")} />
+          <MiniMetric label="PV" value={money(project.pv)} note={metricSource(project, "pv", "Planned value")} />
+          <MiniMetric label="EV" value={money(project.ev)} note={metricSource(project, "ev", "Earned value")} />
+          <MiniMetric label="AC" value={money(project.ac)} note={metricSource(project, "ac", "Actual cost")} />
           <MiniMetric label="SPI" value={numberValue(project.spi, 2)} note="EV / PV" />
           <MiniMetric label="CPI" value={numberValue(project.cpi, 2)} note="EV / AC" />
+          <MiniMetric label="SV" value={money(project.sv)} note="EV less PV" />
+          <MiniMetric label="CV" value={money(project.cv)} note="EV less AC" />
+          <MiniMetric label="EAC" value={money(project.eac)} note="BAC / CPI" />
+          <MiniMetric label="ETC" value={money(project.etc)} note="EAC less AC" />
+          <MiniMetric label="VAC" value={money(project.vac)} note="BAC less EAC" />
         </div>
         <TablePreviewPanel table={project.features.overview.source_tables.evm} title="EVM Source Table" />
       </div>
@@ -828,9 +854,9 @@ function WorkspaceTabContent({
     return (
       <div className="feature-stack">
         <div className="workspace-grid">
-          <MiniMetric label="Contract Value" value={money(project.contract_value)} note="Current contract value" />
-          <MiniMetric label="Paid Amount" value={money(project.paid_amount)} note="Payment file amount" />
-          <MiniMetric label="Spent Amount" value={money(project.spent_amount)} note="Actual cost / spent" />
+          <MiniMetric label="Contract Value" value={money(project.contract_value)} note={metricSource(project, "contract_value", "Current contract value")} />
+          <MiniMetric label="Paid Amount" value={money(project.paid_amount)} note={metricSource(project, "paid_amount", "Payment file amount")} />
+          <MiniMetric label="Spent Amount" value={money(project.spent_amount)} note={metricSource(project, "spent_amount", "Actual cost")} />
           <MiniMetric label="Remaining" value={money(project.remaining_value)} note="Commercial balance" />
           <MiniMetric label="Contract Rows" value={numberValue(project.source_files.contracts)} note="Contract records" />
           <MiniMetric label="Payment Rows" value={numberValue(project.source_files.payments)} note="Payment records" />
@@ -848,8 +874,8 @@ function WorkspaceTabContent({
       <div className="feature-stack">
         <AiInsightCard type="delay" projectKey={project.project_key} />
         <div className="workspace-grid">
-          <MiniMetric label="Delay Days" value={numberValue(project.delay_days)} note="Delay exposure from project records" />
-          <MiniMetric label="Delay Events" value={numberValue(project.source_files.delay_events)} note="Delay event rows loaded" />
+          <MiniMetric label="Delay Days" value={numberValue(project.delay_days)} note={metricSource(project, "delay_days", "Delay exposure from project data")} />
+          <MiniMetric label="Delay Events" value={numberValue(project.delay_event_count ?? project.source_files.delay_events)} note="Delay event rows loaded" />
           <MiniMetric label="SPI" value={numberValue(project.spi, 2)} note="Schedule performance signal" />
           <MiniMetric label="Decision Required" value={project.decision_required ? "Yes" : "No"} note="Delay or performance trigger" />
         </div>
@@ -885,8 +911,8 @@ function WorkspaceTabContent({
       <div className="feature-stack">
         <AiInsightCard type="risk" projectKey={project.project_key} />
         <div className="workspace-grid">
-          <MiniMetric label="Risk Score" value={numberValue(project.risk_score, 1)} note="Average risk indicator" />
-          <MiniMetric label="Risk Records" value={numberValue(project.source_files.risks)} note="Risk rows loaded" />
+          <MiniMetric label="Risk Score" value={numberValue(project.risk_score, 1)} note={metricSource(project, "risk_score", "Risk register indicator")} />
+          <MiniMetric label="Risk Records" value={numberValue(project.risk_record_count ?? project.source_files.risks)} note="Risk rows loaded" />
           <MiniMetric label="Decision Required" value={project.decision_required ? "Yes" : "No"} note="Rule-based management trigger" />
           <MiniMetric label="Delay Days" value={numberValue(project.delay_days)} note="Delay exposure" />
         </div>
@@ -975,7 +1001,8 @@ function WorkspaceTabContent({
           <FeatureSvg mode="claims" />
         </div>
         <div className="workspace-grid">
-          <MiniMetric label="Claims / EOT Exposure" value={money(project.claims_exposure)} note="Claims and EOT source exposure" />
+          <MiniMetric label="Claims Exposure" value={money(project.claims_exposure)} note={metricSource(project, "claims_exposure", "Claims source exposure")} />
+          <MiniMetric label="Claimed Days" value={numberValue(project.claimed_days)} note="claims.csv claimed_days total" />
           <MiniMetric label="Claims Rows" value={numberValue(project.source_files.claims)} note="Claims records loaded" />
           <MiniMetric label="Contracts Rows" value={numberValue(project.source_files.contracts)} note="Contract source rows" />
           <MiniMetric label="Evidence Readiness" value={`${numberValue(project.data_quality, 1)}%`} note="Source completeness indicator" />

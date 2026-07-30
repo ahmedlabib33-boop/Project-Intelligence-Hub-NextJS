@@ -1,31 +1,48 @@
 {
-  "generated_at": "2026-07-28T13:39:39",
+  "generated_at": "2026-07-30T23:18:40",
   "project_count": 4,
   "sector_count": 3,
   "totals": {
-    "contract_value": 4200000000.0,
-    "paid_amount": 0,
-    "spent_amount": 51867469.879999995,
-    "remaining_value": 4148132530.12,
-    "average_progress": 1.0,
-    "average_spi": 0.75,
-    "average_cpi": 60.110539352931944,
-    "average_risk_score": null,
-    "delayed_projects": 1,
-    "high_risk_projects": 0,
-    "claims_exposure": 0,
-    "decisions_required": 1,
-    "average_data_quality": 71.4
+    "contract_value": 4567286025.0,
+    "paid_amount": 1728296531.59,
+    "spent_amount": 2094774866.1299999,
+    "remaining_value": 2838989493.41,
+    "average_progress": 0.3298859200459205,
+    "average_spi": 0.8039026642929984,
+    "average_cpi": 0.9742233657412727,
+    "average_risk_score": 55.0,
+    "delayed_projects": 4,
+    "high_risk_projects": 3,
+    "claims_exposure": 63000000.0,
+    "decisions_required": 4,
+    "average_data_quality": 100.0
   },
   "warning_summary": {
-    "schedule_critical": 1,
-    "cost_critical": 1,
-    "delay_high": 0,
-    "claims_high": 0,
+    "schedule_critical": 3,
+    "cost_critical": 0,
+    "delay_high": 4,
+    "claims_high": 3,
     "low_confidence": 0,
-    "high_priority": 1
+    "high_priority": 4
   },
   "decision_brief": [
+    {
+      "decision_id": "DEC-lmd-bridge-01",
+      "project_key": "lmd-bridge",
+      "project_id": "LMD-Bridge",
+      "project_display_name": "LMD Bridge & Road Interchange",
+      "project_folder_name": "LMD-Bridgs",
+      "sector": "Bridges",
+      "priority": "High",
+      "issue": "Schedule performance below executive threshold",
+      "trigger": "SPI 0.86",
+      "impact": "Potential recovery plan and critical path review required.",
+      "owner": "Planning Manager",
+      "evidence_status": "High",
+      "urgency": "High",
+      "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting.",
+      "last_updated": "2026-07-27T23:22:25"
+    },
     {
       "decision_id": "DEC-the-big-p-01-up-20-april-26-01",
       "project_key": "the-big-p-01-up-20-april-26",
@@ -35,10 +52,10 @@
       "sector": "Buildings",
       "priority": "High",
       "issue": "Schedule performance below executive threshold",
-      "trigger": "SPI 0.00",
+      "trigger": "SPI 0.45",
       "impact": "Potential recovery plan and critical path review required.",
       "owner": "Planning Manager",
-      "evidence_status": "Medium",
+      "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting.",
       "last_updated": "2026-07-27T23:22:25"
@@ -51,13 +68,98 @@
       "project_folder_name": "The BIG - PH01",
       "sector": "Buildings",
       "priority": "High",
-      "issue": "Cost performance below executive threshold",
-      "trigger": "CPI 0.00",
-      "impact": "Forecast final cost and payment/cost controls may need management intervention.",
-      "owner": "Commercial Manager",
-      "evidence_status": "Medium",
+      "issue": "Delay exposure recorded",
+      "trigger": "1675 delay days from delay event records",
+      "impact": "Potential effect on delivery, mitigation, or EOT position.",
+      "owner": "Planning / Claims Team",
+      "evidence_status": "High",
       "urgency": "High",
-      "recommended_action": "Review cost-control plan, paid/spent records, and EAC exposure.",
+      "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness.",
+      "last_updated": "2026-07-27T23:22:25"
+    },
+    {
+      "decision_id": "DEC-sophia-mall-01",
+      "project_key": "sophia-mall",
+      "project_id": "Sophia-Mall",
+      "project_display_name": "Sophia Mall Mixed-Use Development",
+      "project_folder_name": "Sophia-Mall",
+      "sector": "Buildings",
+      "priority": "High",
+      "issue": "Delay exposure recorded",
+      "trigger": "128 delay days from delay event records",
+      "impact": "Potential effect on delivery, mitigation, or EOT position.",
+      "owner": "Planning / Claims Team",
+      "evidence_status": "High",
+      "urgency": "High",
+      "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness.",
+      "last_updated": "2026-07-27T23:22:25"
+    },
+    {
+      "decision_id": "DEC-sophia-mall-02",
+      "project_key": "sophia-mall",
+      "project_id": "Sophia-Mall",
+      "project_display_name": "Sophia Mall Mixed-Use Development",
+      "project_folder_name": "Sophia-Mall",
+      "sector": "Buildings",
+      "priority": "High",
+      "issue": "Claims / EOT exposure available",
+      "trigger": "Claim amount EGP 31,500,000 | Claimed days 49",
+      "impact": "Commercial strategy and entitlement evidence should be aligned.",
+      "owner": "Contracts Manager",
+      "evidence_status": "High",
+      "urgency": "High",
+      "recommended_action": "Review entitlement matrix, notice status, and supporting correspondence.",
+      "last_updated": "2026-07-27T23:22:25"
+    },
+    {
+      "decision_id": "DEC-suez-tunnel-01",
+      "project_key": "suez-tunnel",
+      "project_id": "Suez-Tunnel",
+      "project_display_name": "Suez Tunnel Civil & MEP Works",
+      "project_folder_name": "Suez-Tunnel",
+      "sector": "Tunnels",
+      "priority": "High",
+      "issue": "Schedule performance below executive threshold",
+      "trigger": "SPI 0.86",
+      "impact": "Potential recovery plan and critical path review required.",
+      "owner": "Planning Manager",
+      "evidence_status": "High",
+      "urgency": "High",
+      "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting.",
+      "last_updated": "2026-07-27T23:22:25"
+    },
+    {
+      "decision_id": "DEC-lmd-bridge-02",
+      "project_key": "lmd-bridge",
+      "project_id": "LMD-Bridge",
+      "project_display_name": "LMD Bridge & Road Interchange",
+      "project_folder_name": "LMD-Bridgs",
+      "sector": "Bridges",
+      "priority": "High",
+      "issue": "Cost performance on watchlist",
+      "trigger": "CPI 0.94",
+      "impact": "Cost trend should be checked before commitment decisions.",
+      "owner": "Commercial Manager",
+      "evidence_status": "High",
+      "urgency": "Medium",
+      "recommended_action": "Validate actual cost and payment records against budget baseline.",
+      "last_updated": "2026-07-27T23:22:25"
+    },
+    {
+      "decision_id": "DEC-suez-tunnel-02",
+      "project_key": "suez-tunnel",
+      "project_id": "Suez-Tunnel",
+      "project_display_name": "Suez Tunnel Civil & MEP Works",
+      "project_folder_name": "Suez-Tunnel",
+      "sector": "Tunnels",
+      "priority": "High",
+      "issue": "Cost performance on watchlist",
+      "trigger": "CPI 0.94",
+      "impact": "Cost trend should be checked before commitment decisions.",
+      "owner": "Commercial Manager",
+      "evidence_status": "High",
+      "urgency": "Medium",
+      "recommended_action": "Validate actual cost and payment records against budget baseline.",
       "last_updated": "2026-07-27T23:22:25"
     }
   ],
@@ -66,52 +168,52 @@
       "sector": "Bridges",
       "project_count": 1,
       "contract_value": 850000000.0,
-      "paid_amount": 0,
-      "spent_amount": 10855421.69,
-      "average_progress": 1.0,
-      "average_spi": 1.0,
-      "average_cpi": 78.30188676898834,
-      "average_risk_score": null,
-      "delayed_projects": 0,
-      "decisions_required": 0,
-      "average_data_quality": 71.4,
-      "critical_schedule_projects": 0,
+      "paid_amount": 327454000.0,
+      "spent_amount": 311965279.52000004,
+      "average_progress": 0.31,
+      "average_spi": 0.8576007162215656,
+      "average_cpi": 0.9433962264417058,
+      "average_risk_score": 60.0,
+      "delayed_projects": 1,
+      "decisions_required": 1,
+      "average_data_quality": 100.0,
+      "critical_schedule_projects": 1,
       "critical_cost_projects": 0,
-      "high_priority_projects": 0
+      "high_priority_projects": 1
     },
     {
       "sector": "Buildings",
       "project_count": 2,
-      "contract_value": 2100000000.0,
-      "paid_amount": 0,
-      "spent_amount": 25048192.77,
-      "average_progress": 1.0,
-      "average_spi": 0.5,
-      "average_cpi": 41.9191919210066,
-      "average_risk_score": null,
-      "delayed_projects": 1,
-      "decisions_required": 1,
-      "average_data_quality": 71.4,
+      "contract_value": 2467286025.0,
+      "paid_amount": 919292531.59,
+      "spent_amount": 1268262598.6699998,
+      "average_progress": 0.3184,
+      "average_spi": 0.7480958795584083,
+      "average_cpi": 1.0050505050501117,
+      "average_risk_score": 50.0,
+      "delayed_projects": 2,
+      "decisions_required": 2,
+      "average_data_quality": 100.0,
       "critical_schedule_projects": 1,
-      "critical_cost_projects": 1,
-      "high_priority_projects": 1
+      "critical_cost_projects": 0,
+      "high_priority_projects": 2
     },
     {
       "sector": "Tunnels",
       "project_count": 1,
       "contract_value": 1250000000.0,
-      "paid_amount": 0,
-      "spent_amount": 15963855.42,
-      "average_progress": 1.0,
-      "average_spi": 1.0,
-      "average_cpi": 78.30188680072624,
-      "average_risk_score": null,
-      "delayed_projects": 0,
-      "decisions_required": 0,
-      "average_data_quality": 71.4,
-      "critical_schedule_projects": 0,
+      "paid_amount": 481550000.0,
+      "spent_amount": 514546987.94,
+      "average_progress": 0.35,
+      "average_spi": 0.8618181818336116,
+      "average_cpi": 0.9433962264231616,
+      "average_risk_score": 60.0,
+      "delayed_projects": 1,
+      "decisions_required": 1,
+      "average_data_quality": 100.0,
+      "critical_schedule_projects": 1,
       "critical_cost_projects": 0,
-      "high_priority_projects": 0
+      "high_priority_projects": 1
     }
   ],
   "projects": [
@@ -124,43 +226,90 @@
       "meeting_url": null,
       "status": "Delayed",
       "contract_value": 850000000.0,
-      "paid_amount": null,
-      "spent_amount": 10855421.69,
-      "remaining_value": 839144578.31,
-      "planned_progress": 1.0,
-      "actual_progress": 1.0,
-      "progress_variance": 0.0,
+      "paid_amount": 327454000.0,
+      "spent_amount": 311965279.52000004,
+      "remaining_value": 522546000.0,
+      "planned_progress": 0.38,
+      "actual_progress": 0.31,
+      "progress_variance": -0.07,
       "bac": 850000000.0,
-      "pv": 850000000.0,
-      "ev": 850000000.0,
-      "ac": 10855421.69,
-      "spi": 1.0,
-      "cpi": 78.30188676898834,
-      "risk_score": null,
-      "high_risk_count": 0,
-      "delay_days": 0,
-      "claims_exposure": 0,
-      "schedule_health": "Healthy",
-      "cost_health": "Healthy",
-      "delay_exposure": "Low",
-      "claim_exposure_level": "Low",
-      "data_confidence": "Medium",
-      "decision_priority": "Medium",
+      "pv": 343174698.79999995,
+      "ev": 294306867.48,
+      "ac": 311965279.52000004,
+      "sv": -48867831.31999993,
+      "cv": -17658412.04000002,
+      "eac": 900999999.9745845,
+      "etc": 589034720.4545844,
+      "vac": -50999999.97458446,
+      "spi": 0.8576007162215656,
+      "cpi": 0.9433962264417058,
+      "risk_score": 60.0,
+      "high_risk_count": 1,
+      "delay_days": 208.0,
+      "delay_event_count": 5,
+      "claims_exposure": 12750000.0,
+      "claimed_days": 81.0,
+      "risk_record_count": 3,
+      "planned_start": "5-Nov-25",
+      "planned_finish": "20-Mar-27",
+      "forecast_finish": "9-Jun-27",
+      "schedule_health": "Critical",
+      "cost_health": "Watchlist",
+      "delay_exposure": "High",
+      "claim_exposure_level": "High",
+      "data_confidence": "High",
+      "decision_priority": "High",
       "decision_reasons": [
         {
-          "issue": "No immediate executive trigger",
-          "trigger": "LMD Bridge & Road Interchange is within available decision thresholds",
-          "impact": "Continue routine monitoring with the current evidence set.",
+          "issue": "Schedule performance below executive threshold",
+          "trigger": "SPI 0.86",
+          "impact": "Potential recovery plan and critical path review required.",
+          "owner": "Planning Manager",
+          "evidence_status": "High",
+          "urgency": "High",
+          "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting."
+        },
+        {
+          "issue": "Cost performance on watchlist",
+          "trigger": "CPI 0.94",
+          "impact": "Cost trend should be checked before commitment decisions.",
+          "owner": "Commercial Manager",
+          "evidence_status": "High",
+          "urgency": "Medium",
+          "recommended_action": "Validate actual cost and payment records against budget baseline."
+        },
+        {
+          "issue": "Delay exposure recorded",
+          "trigger": "208 delay days from delay event records",
+          "impact": "Potential effect on delivery, mitigation, or EOT position.",
+          "owner": "Planning / Claims Team",
+          "evidence_status": "High",
+          "urgency": "High",
+          "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness."
+        },
+        {
+          "issue": "Claims / EOT exposure available",
+          "trigger": "Claim amount EGP 12,750,000 | Claimed days 81",
+          "impact": "Commercial strategy and entitlement evidence should be aligned.",
+          "owner": "Contracts Manager",
+          "evidence_status": "High",
+          "urgency": "High",
+          "recommended_action": "Review entitlement matrix, notice status, and supporting correspondence."
+        },
+        {
+          "issue": "High-risk records detected",
+          "trigger": "1 high-risk items",
+          "impact": "Risk exposure may require mitigation ownership and deadlines.",
           "owner": "Project Manager",
-          "evidence_status": "Medium",
-          "urgency": "Low",
-          "recommended_action": "Keep source files updated and monitor SPI, CPI, risk, claims, and delay records."
+          "evidence_status": "High",
+          "urgency": "High",
+          "recommended_action": "Assign mitigation owners and confirm closure evidence for high-risk records."
         }
       ],
       "activity_count": 17,
       "milestone_count": 5,
-      "data_quality": 71.4,
-      "decision_required": false,
+      "data_quality": 100.0,
+      "decision_required": true,
       "last_updated": "2026-07-27T23:22:25",
       "fingerprint": "8078842fdcd3be09d2bbbb1ab32ced31773c24631723afecc19f048f747164ca",
       "source_files": {
@@ -174,6 +323,56 @@
         "activities": 17,
         "milestones": 5,
         "delay_events": 5
+      },
+      "metric_sources": {
+        "contract_value": {
+          "source": "projects.csv:contract_value",
+          "aggregation": "project summary or project-level fallback"
+        },
+        "paid_amount": {
+          "source": "payments.csv:paid amount total",
+          "aggregation": "sum of selected project records"
+        },
+        "spent_amount": {
+          "source": "evm.csv:AC total",
+          "aggregation": "sum of selected project records"
+        },
+        "planned_progress": {
+          "source": "projects.csv:planned_progress_percent",
+          "aggregation": "project summary or project-level calculation"
+        },
+        "actual_progress": {
+          "source": "projects.csv:actual_progress_percent",
+          "aggregation": "project summary or project-level calculation"
+        },
+        "bac": {
+          "source": "evm.csv:BAC total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "pv": {
+          "source": "evm.csv:PV total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "ev": {
+          "source": "evm.csv:EV total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "ac": {
+          "source": "evm.csv:AC total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "risk_score": {
+          "source": "risks.csv:legacy record-count heuristic",
+          "aggregation": "project risk register"
+        },
+        "delay_days": {
+          "source": "delay_events.csv:Delayed duration after overlap",
+          "aggregation": "sum of selected project delay events"
+        },
+        "claims_exposure": {
+          "source": "claims.csv:claimed_amount",
+          "aggregation": "sum of selected project claim records"
+        }
       },
       "features": {
         "overview": {
@@ -3831,52 +4030,81 @@
       "sector": "Buildings",
       "meeting_url": null,
       "status": "Active",
-      "contract_value": 0.0,
-      "paid_amount": null,
-      "spent_amount": null,
-      "remaining_value": 0.0,
-      "planned_progress": 1.0,
-      "actual_progress": 1.0,
-      "progress_variance": 0.0,
-      "bac": 0.0,
-      "pv": 0.0,
-      "ev": 0.0,
-      "ac": null,
-      "spi": 0.0,
-      "cpi": 0.0,
-      "risk_score": null,
-      "high_risk_count": 0,
-      "delay_days": 0,
-      "claims_exposure": 0,
+      "contract_value": 367286025.0,
+      "paid_amount": 110288531.59,
+      "spent_amount": 113085034.82000002,
+      "remaining_value": 256997493.41,
+      "planned_progress": 0.6531999999999999,
+      "actual_progress": 0.3068,
+      "progress_variance": -0.3463999999999999,
+      "bac": 367286024.98999965,
+      "pv": 252796791.15999988,
+      "ev": 113085034.82000002,
+      "ac": 113085034.82000002,
+      "sv": -139711756.33999985,
+      "cv": 0.0,
+      "eac": 367286024.98999965,
+      "etc": 254200990.16999963,
+      "vac": 0.0,
+      "spi": 0.4473357209207073,
+      "cpi": 1.0,
+      "risk_score": 40.0,
+      "high_risk_count": 2,
+      "delay_days": 1675.0,
+      "delay_event_count": 25,
+      "claims_exposure": 0.0,
+      "claimed_days": 35.0,
+      "risk_record_count": 2,
+      "planned_start": "11-Sep-25",
+      "planned_finish": "10-Apr-27",
+      "forecast_finish": "19-Aug-27",
       "schedule_health": "Critical",
-      "cost_health": "Critical",
-      "delay_exposure": "Low",
+      "cost_health": "Healthy",
+      "delay_exposure": "High",
       "claim_exposure_level": "Low",
-      "data_confidence": "Medium",
+      "data_confidence": "High",
       "decision_priority": "High",
       "decision_reasons": [
         {
           "issue": "Schedule performance below executive threshold",
-          "trigger": "SPI 0.00",
+          "trigger": "SPI 0.45",
           "impact": "Potential recovery plan and critical path review required.",
           "owner": "Planning Manager",
-          "evidence_status": "Medium",
+          "evidence_status": "High",
           "urgency": "High",
           "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting."
         },
         {
-          "issue": "Cost performance below executive threshold",
-          "trigger": "CPI 0.00",
-          "impact": "Forecast final cost and payment/cost controls may need management intervention.",
-          "owner": "Commercial Manager",
-          "evidence_status": "Medium",
+          "issue": "Delay exposure recorded",
+          "trigger": "1675 delay days from delay event records",
+          "impact": "Potential effect on delivery, mitigation, or EOT position.",
+          "owner": "Planning / Claims Team",
+          "evidence_status": "High",
           "urgency": "High",
-          "recommended_action": "Review cost-control plan, paid/spent records, and EAC exposure."
+          "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness."
+        },
+        {
+          "issue": "Claims / EOT exposure available",
+          "trigger": "Claimed days 35",
+          "impact": "Commercial strategy and entitlement evidence should be aligned.",
+          "owner": "Contracts Manager",
+          "evidence_status": "High",
+          "urgency": "Medium",
+          "recommended_action": "Review entitlement matrix, notice status, and supporting correspondence."
+        },
+        {
+          "issue": "High-risk records detected",
+          "trigger": "2 high-risk items",
+          "impact": "Risk exposure may require mitigation ownership and deadlines.",
+          "owner": "Project Manager",
+          "evidence_status": "High",
+          "urgency": "High",
+          "recommended_action": "Assign mitigation owners and confirm closure evidence for high-risk records."
         }
       ],
       "activity_count": 1363,
       "milestone_count": 4,
-      "data_quality": 71.4,
+      "data_quality": 100.0,
       "decision_required": true,
       "last_updated": "2026-07-27T23:22:25",
       "fingerprint": "25a60234a5411a9dad8dcd53950fb0dd3c1391cc93e7320b1d1309b30fbcb599",
@@ -3891,6 +4119,56 @@
         "activities": 1363,
         "milestones": 4,
         "delay_events": 25
+      },
+      "metric_sources": {
+        "contract_value": {
+          "source": "projects.csv:contract_value",
+          "aggregation": "project summary or project-level fallback"
+        },
+        "paid_amount": {
+          "source": "payments.csv:paid amount total",
+          "aggregation": "sum of selected project records"
+        },
+        "spent_amount": {
+          "source": "evm.csv:AC total",
+          "aggregation": "sum of selected project records"
+        },
+        "planned_progress": {
+          "source": "projects.csv:planned_progress_percent",
+          "aggregation": "project summary or project-level calculation"
+        },
+        "actual_progress": {
+          "source": "projects.csv:actual_progress_percent",
+          "aggregation": "project summary or project-level calculation"
+        },
+        "bac": {
+          "source": "evm.csv:BAC total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "pv": {
+          "source": "evm.csv:PV total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "ev": {
+          "source": "evm.csv:EV total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "ac": {
+          "source": "evm.csv:AC total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "risk_score": {
+          "source": "risks.csv:legacy record-count heuristic",
+          "aggregation": "project risk register"
+        },
+        "delay_days": {
+          "source": "delay_events.csv:Delayed duration after overlap",
+          "aggregation": "sum of selected project delay events"
+        },
+        "claims_exposure": {
+          "source": "claims.csv:claimed_amount",
+          "aggregation": "sum of selected project claim records"
+        }
       },
       "features": {
         "overview": {
@@ -6712,7 +6990,7 @@
               },
               {
                 "name": "04-Event 04 Engineer’s Delayed Response to RFI and Required Technical Clarification",
-                "file_count": 5,
+                "file_count": 6,
                 "xer_count": 2,
                 "pdf_count": 4,
                 "xlsx_count": 0
@@ -10241,43 +10519,63 @@
       "meeting_url": null,
       "status": "On Track",
       "contract_value": 2100000000.0,
-      "paid_amount": null,
-      "spent_amount": 25048192.77,
-      "remaining_value": 2074951807.23,
-      "planned_progress": 1.0,
-      "actual_progress": 1.0,
-      "progress_variance": 0.0,
-      "bac": 2100000000.0,
-      "pv": 2100000000.0,
-      "ev": 2100000000.0,
-      "ac": 25048192.77,
-      "spi": 1.0,
-      "cpi": 83.8383838420132,
-      "risk_score": null,
+      "paid_amount": 809004000.0,
+      "spent_amount": 1155177563.85,
+      "remaining_value": 1290996000.0,
+      "planned_progress": 0.31,
+      "actual_progress": 0.33,
+      "progress_variance": 0.020000000000000018,
+      "bac": 2100000000.0100005,
+      "pv": 1112493975.9099996,
+      "ev": 1166846024.09,
+      "ac": 1155177563.85,
+      "sv": 54352048.180000305,
+      "cv": 11668460.24000001,
+      "eac": 2079000000.01152,
+      "etc": 923822436.16152,
+      "vac": 20999999.99848056,
+      "spi": 1.0488560381961092,
+      "cpi": 1.0101010101002232,
+      "risk_score": 60.0,
       "high_risk_count": 0,
-      "delay_days": 0,
-      "claims_exposure": 0,
+      "delay_days": 128.0,
+      "delay_event_count": 5,
+      "claims_exposure": 31500000.0,
+      "claimed_days": 49.0,
+      "risk_record_count": 3,
+      "planned_start": "15-Oct-25",
+      "planned_finish": "31-Jul-27",
+      "forecast_finish": "25-Aug-27",
       "schedule_health": "Healthy",
       "cost_health": "Healthy",
-      "delay_exposure": "Low",
-      "claim_exposure_level": "Low",
-      "data_confidence": "Medium",
-      "decision_priority": "Medium",
+      "delay_exposure": "High",
+      "claim_exposure_level": "High",
+      "data_confidence": "High",
+      "decision_priority": "High",
       "decision_reasons": [
         {
-          "issue": "No immediate executive trigger",
-          "trigger": "Sophia Mall Mixed-Use Development is within available decision thresholds",
-          "impact": "Continue routine monitoring with the current evidence set.",
-          "owner": "Project Manager",
-          "evidence_status": "Medium",
-          "urgency": "Low",
-          "recommended_action": "Keep source files updated and monitor SPI, CPI, risk, claims, and delay records."
+          "issue": "Delay exposure recorded",
+          "trigger": "128 delay days from delay event records",
+          "impact": "Potential effect on delivery, mitigation, or EOT position.",
+          "owner": "Planning / Claims Team",
+          "evidence_status": "High",
+          "urgency": "High",
+          "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness."
+        },
+        {
+          "issue": "Claims / EOT exposure available",
+          "trigger": "Claim amount EGP 31,500,000 | Claimed days 49",
+          "impact": "Commercial strategy and entitlement evidence should be aligned.",
+          "owner": "Contracts Manager",
+          "evidence_status": "High",
+          "urgency": "High",
+          "recommended_action": "Review entitlement matrix, notice status, and supporting correspondence."
         }
       ],
       "activity_count": 17,
       "milestone_count": 5,
-      "data_quality": 71.4,
-      "decision_required": false,
+      "data_quality": 100.0,
+      "decision_required": true,
       "last_updated": "2026-07-27T23:22:25",
       "fingerprint": "ac5199dbf682ed624619df889d61a8d6589e4f1bc7dc20764f443f4866cac7a4",
       "source_files": {
@@ -10291,6 +10589,56 @@
         "activities": 17,
         "milestones": 5,
         "delay_events": 5
+      },
+      "metric_sources": {
+        "contract_value": {
+          "source": "projects.csv:contract_value",
+          "aggregation": "project summary or project-level fallback"
+        },
+        "paid_amount": {
+          "source": "payments.csv:paid amount total",
+          "aggregation": "sum of selected project records"
+        },
+        "spent_amount": {
+          "source": "evm.csv:AC total",
+          "aggregation": "sum of selected project records"
+        },
+        "planned_progress": {
+          "source": "projects.csv:planned_progress_percent",
+          "aggregation": "project summary or project-level calculation"
+        },
+        "actual_progress": {
+          "source": "projects.csv:actual_progress_percent",
+          "aggregation": "project summary or project-level calculation"
+        },
+        "bac": {
+          "source": "evm.csv:BAC total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "pv": {
+          "source": "evm.csv:PV total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "ev": {
+          "source": "evm.csv:EV total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "ac": {
+          "source": "evm.csv:AC total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "risk_score": {
+          "source": "risks.csv:legacy record-count heuristic",
+          "aggregation": "project risk register"
+        },
+        "delay_days": {
+          "source": "delay_events.csv:Delayed duration after overlap",
+          "aggregation": "sum of selected project delay events"
+        },
+        "claims_exposure": {
+          "source": "claims.csv:claimed_amount",
+          "aggregation": "sum of selected project claim records"
+        }
       },
       "features": {
         "overview": {
@@ -13949,43 +14297,90 @@
       "meeting_url": null,
       "status": "Delayed",
       "contract_value": 1250000000.0,
-      "paid_amount": null,
-      "spent_amount": 15963855.42,
-      "remaining_value": 1234036144.58,
-      "planned_progress": 1.0,
-      "actual_progress": 1.0,
-      "progress_variance": 0.0,
-      "bac": 1250000000.0,
-      "pv": 1250000000.0,
-      "ev": 1250000000.0,
-      "ac": 15963855.42,
-      "spi": 1.0,
-      "cpi": 78.30188680072624,
-      "risk_score": null,
-      "high_risk_count": 0,
-      "delay_days": 0,
-      "claims_exposure": 0,
-      "schedule_health": "Healthy",
-      "cost_health": "Healthy",
-      "delay_exposure": "Low",
-      "claim_exposure_level": "Low",
-      "data_confidence": "Medium",
-      "decision_priority": "Medium",
+      "paid_amount": 481550000.0,
+      "spent_amount": 514546987.94,
+      "remaining_value": 768450000.0,
+      "planned_progress": 0.42,
+      "actual_progress": 0.35,
+      "progress_variance": -0.07,
+      "bac": 1249999999.99,
+      "pv": 563253012.0300001,
+      "ev": 485421686.74,
+      "ac": 514546987.94,
+      "sv": -77831325.29000008,
+      "cv": -29125301.199999988,
+      "eac": 1324999999.9780695,
+      "etc": 810453012.0380695,
+      "vac": -74999999.98806953,
+      "spi": 0.8618181818336116,
+      "cpi": 0.9433962264231616,
+      "risk_score": 60.0,
+      "high_risk_count": 1,
+      "delay_days": 183.0,
+      "delay_event_count": 5,
+      "claims_exposure": 18750000.0,
+      "claimed_days": 71.0,
+      "risk_record_count": 3,
+      "planned_start": "1-Sep-25",
+      "planned_finish": "28-Feb-27",
+      "forecast_finish": "18-May-27",
+      "schedule_health": "Critical",
+      "cost_health": "Watchlist",
+      "delay_exposure": "High",
+      "claim_exposure_level": "High",
+      "data_confidence": "High",
+      "decision_priority": "High",
       "decision_reasons": [
         {
-          "issue": "No immediate executive trigger",
-          "trigger": "Suez Tunnel Civil & MEP Works is within available decision thresholds",
-          "impact": "Continue routine monitoring with the current evidence set.",
+          "issue": "Schedule performance below executive threshold",
+          "trigger": "SPI 0.86",
+          "impact": "Potential recovery plan and critical path review required.",
+          "owner": "Planning Manager",
+          "evidence_status": "High",
+          "urgency": "High",
+          "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting."
+        },
+        {
+          "issue": "Cost performance on watchlist",
+          "trigger": "CPI 0.94",
+          "impact": "Cost trend should be checked before commitment decisions.",
+          "owner": "Commercial Manager",
+          "evidence_status": "High",
+          "urgency": "Medium",
+          "recommended_action": "Validate actual cost and payment records against budget baseline."
+        },
+        {
+          "issue": "Delay exposure recorded",
+          "trigger": "183 delay days from delay event records",
+          "impact": "Potential effect on delivery, mitigation, or EOT position.",
+          "owner": "Planning / Claims Team",
+          "evidence_status": "High",
+          "urgency": "High",
+          "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness."
+        },
+        {
+          "issue": "Claims / EOT exposure available",
+          "trigger": "Claim amount EGP 18,750,000 | Claimed days 71",
+          "impact": "Commercial strategy and entitlement evidence should be aligned.",
+          "owner": "Contracts Manager",
+          "evidence_status": "High",
+          "urgency": "High",
+          "recommended_action": "Review entitlement matrix, notice status, and supporting correspondence."
+        },
+        {
+          "issue": "High-risk records detected",
+          "trigger": "1 high-risk items",
+          "impact": "Risk exposure may require mitigation ownership and deadlines.",
           "owner": "Project Manager",
-          "evidence_status": "Medium",
-          "urgency": "Low",
-          "recommended_action": "Keep source files updated and monitor SPI, CPI, risk, claims, and delay records."
+          "evidence_status": "High",
+          "urgency": "High",
+          "recommended_action": "Assign mitigation owners and confirm closure evidence for high-risk records."
         }
       ],
       "activity_count": 17,
       "milestone_count": 5,
-      "data_quality": 71.4,
-      "decision_required": false,
+      "data_quality": 100.0,
+      "decision_required": true,
       "last_updated": "2026-07-27T23:22:25",
       "fingerprint": "1242fa300c543717c097f5989ee334eacbd2f16001344cd95174e517f58f37b9",
       "source_files": {
@@ -13999,6 +14394,56 @@
         "activities": 17,
         "milestones": 5,
         "delay_events": 5
+      },
+      "metric_sources": {
+        "contract_value": {
+          "source": "projects.csv:contract_value",
+          "aggregation": "project summary or project-level fallback"
+        },
+        "paid_amount": {
+          "source": "payments.csv:paid amount total",
+          "aggregation": "sum of selected project records"
+        },
+        "spent_amount": {
+          "source": "evm.csv:AC total",
+          "aggregation": "sum of selected project records"
+        },
+        "planned_progress": {
+          "source": "projects.csv:planned_progress_percent",
+          "aggregation": "project summary or project-level calculation"
+        },
+        "actual_progress": {
+          "source": "projects.csv:actual_progress_percent",
+          "aggregation": "project summary or project-level calculation"
+        },
+        "bac": {
+          "source": "evm.csv:BAC total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "pv": {
+          "source": "evm.csv:PV total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "ev": {
+          "source": "evm.csv:EV total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "ac": {
+          "source": "evm.csv:AC total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "risk_score": {
+          "source": "risks.csv:legacy record-count heuristic",
+          "aggregation": "project risk register"
+        },
+        "delay_days": {
+          "source": "delay_events.csv:Delayed duration after overlap",
+          "aggregation": "sum of selected project delay events"
+        },
+        "claims_exposure": {
+          "source": "claims.csv:claimed_amount",
+          "aggregation": "sum of selected project claim records"
+        }
       },
       "features": {
         "overview": {
@@ -17654,11 +18099,11 @@
     "mode": "WARN",
     "ok": true,
     "block_count": 0,
-    "warn_count": 21,
-    "issue_count": 21,
+    "warn_count": 13,
+    "issue_count": 13,
     "report_path": "D:/Project Intelligence Hub NextJS/12-logs/guardrail_report_latest.md",
-    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260728_133939",
-    "last_checked": "2026-07-28T13:39:39",
+    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260730_231840",
+    "last_checked": "2026-07-30T23:18:40",
     "top_issues": [
       {
         "severity": "WARN",
@@ -17667,78 +18112,78 @@
         "project_id": "LMD-Bridge",
         "project_key": "lmd-bridge",
         "project_display_name": "LMD Bridge & Road Interchange",
-        "field": "suspicious_full_progress",
-        "message": "Actual progress is exactly 100% while status indicates delay/watchlist; verify source progress mapping."
+        "field": "letters_folder_name",
+        "message": "Inbox folder 'From Consultant' does not match 'From X to Y'."
       },
       {
-        "severity": "BLOCK",
+        "severity": "WARN",
         "effective_severity": "WARN",
         "scope": "LMD Bridge & Road Interchange",
         "project_id": "LMD-Bridge",
         "project_key": "lmd-bridge",
         "project_display_name": "LMD Bridge & Road Interchange",
-        "field": "cpi_out_of_range",
-        "message": "CPI=78.30 is outside plausible range [0.20, 3.00]. Check EV, PV and AC source mapping."
+        "field": "letters_folder_name",
+        "message": "Inbox folder 'From Contractor' does not match 'From X to Y'."
       },
       {
-        "severity": "BLOCK",
+        "severity": "WARN",
+        "effective_severity": "WARN",
+        "scope": "LMD Bridge & Road Interchange",
+        "project_id": "LMD-Bridge",
+        "project_key": "lmd-bridge",
+        "project_display_name": "LMD Bridge & Road Interchange",
+        "field": "letters_folder_name",
+        "message": "Inbox folder 'From SAMCO' does not match 'From X to Y'."
+      },
+      {
+        "severity": "WARN",
         "effective_severity": "WARN",
         "scope": "Sophia Mall Mixed-Use Development",
         "project_id": "Sophia-Mall",
         "project_key": "sophia-mall",
         "project_display_name": "Sophia Mall Mixed-Use Development",
-        "field": "cpi_out_of_range",
-        "message": "CPI=83.84 is outside plausible range [0.20, 3.00]. Check EV, PV and AC source mapping."
+        "field": "letters_folder_name",
+        "message": "Inbox folder 'From Consultant' does not match 'From X to Y'."
       },
       {
         "severity": "WARN",
         "effective_severity": "WARN",
-        "scope": "Suez Tunnel Civil & MEP Works",
-        "project_id": "Suez-Tunnel",
-        "project_key": "suez-tunnel",
-        "project_display_name": "Suez Tunnel Civil & MEP Works",
-        "field": "suspicious_full_progress",
-        "message": "Actual progress is exactly 100% while status indicates delay/watchlist; verify source progress mapping."
+        "scope": "Sophia Mall Mixed-Use Development",
+        "project_id": "Sophia-Mall",
+        "project_key": "sophia-mall",
+        "project_display_name": "Sophia Mall Mixed-Use Development",
+        "field": "letters_folder_name",
+        "message": "Inbox folder 'From Contractor' does not match 'From X to Y'."
       },
       {
-        "severity": "BLOCK",
+        "severity": "WARN",
         "effective_severity": "WARN",
-        "scope": "Suez Tunnel Civil & MEP Works",
-        "project_id": "Suez-Tunnel",
-        "project_key": "suez-tunnel",
-        "project_display_name": "Suez Tunnel Civil & MEP Works",
-        "field": "cpi_out_of_range",
-        "message": "CPI=78.30 is outside plausible range [0.20, 3.00]. Check EV, PV and AC source mapping."
+        "scope": "Sophia Mall Mixed-Use Development",
+        "project_id": "Sophia-Mall",
+        "project_key": "sophia-mall",
+        "project_display_name": "Sophia Mall Mixed-Use Development",
+        "field": "letters_folder_name",
+        "message": "Inbox folder 'From SAMCO' does not match 'From X to Y'."
       },
       {
-        "severity": "BLOCK",
-        "effective_severity": "WARN",
-        "scope": "ROYA-BIG PROJECT PHASE01 (B1-4)",
-        "project_id": "The Big -P.01-UP-20-April-26",
-        "project_key": "the-big-p-01-up-20-april-26",
-        "project_display_name": "ROYA-BIG PROJECT PHASE01 (B1-4)",
-        "field": "contract_value_zero",
-        "message": "Contract value is zero or negative while the project is active; verify contract/source cost files."
-      },
-      {
-        "severity": "BLOCK",
+        "severity": "WARN",
         "effective_severity": "WARN",
         "scope": "ROYA-BIG PROJECT PHASE01 (B1-4)",
         "project_id": "The Big -P.01-UP-20-April-26",
         "project_key": "the-big-p-01-up-20-april-26",
         "project_display_name": "ROYA-BIG PROJECT PHASE01 (B1-4)",
-        "field": "spi_out_of_range",
-        "message": "SPI=0.00 is outside plausible range [0.10, 2.00]. Check EV, PV and AC source mapping."
+        "field": "letters_folder_name",
+        "message": "Inbox folder 'From ACE' does not match 'From X to Y'."
       },
       {
-        "severity": "BLOCK",
+        "severity": "WARN",
         "effective_severity": "WARN",
         "scope": "ROYA-BIG PROJECT PHASE01 (B1-4)",
         "project_id": "The Big -P.01-UP-20-April-26",
         "project_key": "the-big-p-01-up-20-april-26",
         "project_display_name": "ROYA-BIG PROJECT PHASE01 (B1-4)",
-        "field": "cpi_out_of_range",
-        "message": "CPI=0.00 is outside plausible range [0.20, 3.00]. Check EV, PV and AC source mapping."
+        "field": "letters_folder_name",
+        "message": "Inbox folder 'From Consultant' does not match 'From X to Y'."
       }
     ]
   }

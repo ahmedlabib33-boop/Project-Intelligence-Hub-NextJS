@@ -27,20 +27,35 @@ def slugify(value: str) -> str:
     return value or "project"
 
 
+def normalize_field_name(value: Any) -> str:
+    """Match CSV headers despite spaces, punctuation, case, or underscores."""
+    return re.sub(r"[^a-z0-9]+", "", str(value or "").strip().lower())
+
+
 def safe_float(value: Any) -> float | None:
     if value is None:
         return None
+    if isinstance(value, bool):
+        return float(value)
+    if isinstance(value, (int, float)):
+        number = float(value)
+        return number if math.isfinite(number) else None
     text = str(value).strip()
     if not text or text.lower() in {"nan", "none", "null", "n/a", "na", "-"}:
         return None
-    text = text.replace(",", "").replace("%", "").replace("EGP", "").strip()
+    negative = text.startswith("(") and text.endswith(")")
+    if negative:
+        text = text[1:-1]
+    numeric_match = re.search(r"[-+]?\d+(?:\.\d+)?", text.replace(",", ""))
+    if numeric_match is None:
+        return None
     try:
-        number = float(text)
+        number = float(numeric_match.group(0))
     except ValueError:
         return None
     if not math.isfinite(number):
         return None
-    return number
+    return -number if negative else number
 
 
 def safe_percent(value: Any) -> float | None:
@@ -49,7 +64,7 @@ def safe_percent(value: Any) -> float | None:
         return None
     if number > 1:
         number = number / 100.0
-    return max(0.0, min(number, 10.0))
+    return max(0.0, min(number, 1.0))
 
 
 def read_json(path: Path) -> dict[str, Any]:
@@ -477,9 +492,9 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
 
 
 def pick(row: dict[str, Any], names: list[str]) -> Any:
-    lowered = {str(k).strip().lower(): v for k, v in row.items()}
+    lowered = {normalize_field_name(k): v for k, v in row.items()}
     for name in names:
-        key = name.strip().lower()
+        key = normalize_field_name(name)
         if key in lowered and str(lowered[key]).strip() != "":
             return lowered[key]
     return None
@@ -501,6 +516,79 @@ def sum_column(rows: list[dict[str, Any]], names: list[str]) -> float | None:
         if value is not None:
             total += value
             seen = True
+    return total if seen else None
+
+
+def choose_measurement(*candidates: tuple[str, float | None]) -> tuple[float | None, str]:
+    """Return the first meaningful source while retaining a zero source as a last resort."""
+    available: list[tuple[str, float]] = []
+    for source, value in candidates:
+        if value is None or not math.isfinite(value):
+            continue
+        available.append((source, value))
+        if abs(value) > 1e-9:
+            return value, source
+    if available:
+        return available[0][1], available[0][0]
+    return None, "Unavailable"
+
+
+def weighted_activity_progress(rows: list[dict[str, Any]], progress_fields: list[str]) -> float | None:
+    weighted_value = 0.0
+    total_weight = 0.0
+    for row in rows:
+        weight = safe_float(pick(row, ["planned_weight", "weight", "budget_weight"]))
+        progress = safe_percent(pick(row, progress_fields))
+        if weight is None or progress is None or weight <= 0:
+            continue
+        weighted_value += weight * progress
+        total_weight += weight
+    return weighted_value / total_weight if total_weight > 0 else None
+
+
+def qualitative_risk_metrics(rows: list[dict[str, Any]]) -> tuple[float | None, int, str]:
+    """Use an explicit numeric score when supplied, otherwise mirror the legacy risk-count heuristic."""
+    explicit = [
+        safe_float(pick(row, ["risk_score", "risk rating", "risk_rating", "score", "severity_score"]))
+        for row in rows
+    ]
+    numeric_scores = [value for value in explicit if value is not None]
+    high_terms = {"high", "critical", "severe", "very high"}
+    high_count = 0
+    for row in rows:
+        terms = {
+            str(pick(row, ["probability"]) or "").strip().lower(),
+            str(pick(row, ["severity", "impact", "status"]) or "").strip().lower(),
+        }
+        if terms & high_terms:
+            high_count += 1
+    if numeric_scores:
+        return average(numeric_scores), high_count, "risks.csv:numeric risk score average"
+    if rows:
+        return min(100.0, float(len(rows)) * 20.0), high_count, "risks.csv:legacy record-count heuristic"
+    return None, high_count, "Unavailable"
+
+
+def summed_delay_days(rows: list[dict[str, Any]]) -> float | None:
+    total = 0.0
+    seen = False
+    for row in rows:
+        value = safe_float(
+            pick(
+                row,
+                [
+                    "estimated_delay_days",
+                    "Delayed duration after overlap",
+                    "Concurrent delay",
+                    "delay_days",
+                    "Delayed duration",
+                ],
+            )
+        )
+        if value is None:
+            continue
+        total += abs(value)
+        seen = True
     return total if seen else None
 
 
@@ -548,6 +636,7 @@ def build_decision_reasons(args: dict[str, Any]) -> list[dict[str, str]]:
     cost_health = str(args.get("cost_health") or "Unknown")
     delay_days = args.get("delay_days") or 0
     claims_exposure = args.get("claims_exposure") or 0
+    claimed_days = args.get("claimed_days") or 0
     high_risk_count = args.get("high_risk_count") or 0
     data_confidence = str(args.get("data_confidence") or "Low")
     data_quality = args.get("data_quality") or 0
@@ -605,10 +694,15 @@ def build_decision_reasons(args: dict[str, Any]) -> list[dict[str, str]]:
             "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness.",
         })
 
-    if claims_exposure:
+    if claims_exposure or claimed_days:
+        claim_trigger_parts: list[str] = []
+        if claims_exposure:
+            claim_trigger_parts.append(f"Claim amount EGP {claims_exposure:,.0f}")
+        if claimed_days:
+            claim_trigger_parts.append(f"Claimed days {claimed_days:.0f}")
         reasons.append({
             "issue": "Claims / EOT exposure available",
-            "trigger": f"Exposure value {claims_exposure:.0f}",
+            "trigger": " | ".join(claim_trigger_parts),
             "impact": "Commercial strategy and entitlement evidence should be aligned.",
             "owner": "Contracts Manager",
             "evidence_status": data_confidence,
@@ -729,38 +823,89 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
     }
 
     project_meta = rows["projects"][0] if rows["projects"] else {}
-    contract_value = (
-        safe_float(first_valid(rows["projects"], ["contract_value", "budget", "bac"]))
-        or sum_column(rows["contracts"], ["contract_value", "value", "amount", "bac"])
-        or safe_float(first_valid(rows["evm"], ["bac", "budget_at_completion"]))
-    )
-    paid_amount = sum_column(rows["payments"], ["paid_amount", "paid", "payment_amount", "amount"])
-    spent_amount = (
-        sum_column(rows["payments"], ["actual_cost", "spent_amount", "cost", "ac"])
-        or safe_float(first_valid(rows["evm"], ["ac", "actual_cost"]))
-        or paid_amount
-    )
-    planned_progress = (
-        safe_percent(first_valid(rows["progress"], ["planned_progress", "planned %", "planned_percent"]))
-        or safe_percent(first_valid(rows["evm"], ["planned_progress", "planned_percent"]))
-    )
-    actual_progress = (
-        safe_percent(first_valid(rows["progress"], ["actual_progress", "progress", "actual %", "actual_percent"]))
-        or safe_percent(first_valid(rows["projects"], ["progress", "actual_progress"]))
+
+    # Project summary records are the authoritative source for project identity and progress.
+    # EVM records are activity-level, so every monetary EVM metric is summed across the
+    # selected project's complete file, matching the legacy Streamlit calculation flow.
+    project_contract_value = safe_float(first_valid(rows["projects"], ["contract_value", "budget", "bac"]))
+    contract_register_value = sum_column(rows["contracts"], ["contract_value", "original_value", "value", "amount", "bac"])
+    evm_bac_total = sum_column(rows["evm"], ["bac", "budget_at_completion"])
+    contract_value, contract_source = choose_measurement(
+        ("projects.csv:contract_value", project_contract_value),
+        ("contracts.csv:original_value total", contract_register_value),
+        ("evm.csv:BAC total", evm_bac_total),
     )
 
-    bac = contract_value
-    pv = bac * planned_progress if bac is not None and planned_progress is not None else None
-    ev = bac * actual_progress if bac is not None and actual_progress is not None else None
-    ac = spent_amount
-    spi = ev / pv if ev is not None and pv and pv > 0 else safe_float(first_valid(rows["evm"], ["spi"]))
-    cpi = ev / ac if ev is not None and ac and ac > 0 else safe_float(first_valid(rows["evm"], ["cpi"]))
-    remaining_value = contract_value - (paid_amount or spent_amount or 0) if contract_value is not None else None
-    risk_values = [safe_float(pick(row, ["risk_score", "score", "severity"])) for row in rows["risks"]]
-    risk_score = average(risk_values)
-    high_risk_count = sum(1 for value in risk_values if value is not None and value >= 70)
-    delay_days = sum_column(rows["delay_events"], ["delay_days", "duration", "delay_duration"]) or 0
-    claims_exposure = sum_column(rows["claims"], ["claim_amount", "amount", "eot_exposure", "exposure"]) or 0
+    paid_from_payments = sum_column(rows["payments"], ["paid_amount", "paid amount", "paid", "payment_amount", "amount"])
+    paid_from_contracts = sum_column(rows["contracts"], ["paid_to_date", "paid amount", "paid_amount"])
+    paid_amount, paid_source = choose_measurement(
+        ("payments.csv:paid amount total", paid_from_payments),
+        ("contracts.csv:paid_to_date total", paid_from_contracts),
+    )
+
+    evm_pv_total = sum_column(rows["evm"], ["pv", "planned_value", "planned value"])
+    evm_ev_total = sum_column(rows["evm"], ["ev", "earned_value", "earned value"])
+    evm_ac_total = sum_column(rows["evm"], ["ac", "actual_cost", "actual cost"])
+    progress_pv_total = sum_column(rows["progress"], ["planned_value", "planned value"])
+    progress_ev_total = sum_column(rows["progress"], ["earned_value", "earned value"])
+    progress_ac_total = sum_column(rows["progress"], ["actual_cost", "actual cost"])
+
+    project_planned_progress = safe_percent(
+        first_valid(rows["projects"], ["planned_progress_percent", "planned_progress", "planned percent", "baseline_progress"])
+    )
+    project_actual_progress = safe_percent(
+        first_valid(rows["projects"], ["actual_progress_percent", "actual_progress", "overall_progress", "progress"])
+    )
+    activity_planned_progress = weighted_activity_progress(rows["activities"], ["planned_progress", "planned percent"])
+    activity_actual_progress = weighted_activity_progress(rows["activities"], ["actual_progress", "actual percent", "progress"])
+
+    bac, bac_source = choose_measurement(
+        ("evm.csv:BAC total", evm_bac_total),
+        ("projects.csv:contract_value", contract_value),
+    )
+    derived_pv = bac * project_planned_progress if bac is not None and project_planned_progress is not None else None
+    derived_ev = bac * project_actual_progress if bac is not None and project_actual_progress is not None else None
+    pv, pv_source = choose_measurement(
+        ("evm.csv:PV total", evm_pv_total),
+        ("progress_updates.csv:planned_value total", progress_pv_total),
+        ("projects.csv:contract value x planned progress", derived_pv),
+    )
+    ev, ev_source = choose_measurement(
+        ("evm.csv:EV total", evm_ev_total),
+        ("progress_updates.csv:earned_value total", progress_ev_total),
+        ("projects.csv:contract value x actual progress", derived_ev),
+    )
+    ac, ac_source = choose_measurement(
+        ("evm.csv:AC total", evm_ac_total),
+        ("progress_updates.csv:actual_cost total", progress_ac_total),
+        ("payments.csv:paid amount total (cost proxy)", paid_amount),
+    )
+    spent_amount = ac
+
+    planned_progress, planned_progress_source = choose_measurement(
+        ("projects.csv:planned_progress_percent", project_planned_progress),
+        ("evm.csv:PV / BAC", pv / bac if pv is not None and bac not in (None, 0) else None),
+        ("activities.csv:weighted planned progress", activity_planned_progress),
+    )
+    actual_progress, actual_progress_source = choose_measurement(
+        ("projects.csv:actual_progress_percent", project_actual_progress),
+        ("evm.csv:EV / BAC", ev / bac if ev is not None and bac not in (None, 0) else None),
+        ("activities.csv:weighted actual progress", activity_actual_progress),
+    )
+
+    spi = ev / pv if ev is not None and pv not in (None, 0) else None
+    cpi = ev / ac if ev is not None and ac not in (None, 0) else None
+    sv = ev - pv if ev is not None and pv is not None else None
+    cv = ev - ac if ev is not None and ac is not None else None
+    eac = bac / cpi if bac is not None and cpi not in (None, 0) else None
+    etc = eac - ac if eac is not None and ac is not None else None
+    vac = bac - eac if bac is not None and eac is not None else None
+    remaining_value = contract_value - paid_amount if contract_value is not None and paid_amount is not None else None
+
+    risk_score, high_risk_count, risk_source = qualitative_risk_metrics(rows["risks"])
+    delay_days = summed_delay_days(rows["delay_events"])
+    claims_exposure = sum_column(rows["claims"], ["claim_amount", "claimed_amount", "amount", "eot_exposure", "exposure"])
+    claimed_days = sum_column(rows["claims"], ["claimed_days", "claim_days", "eot_days", "claimed duration"])
     status = str(first_valid(rows["projects"], ["status", "project_status"]) or "Active")
 
     data_quality_fields = [
@@ -777,7 +922,7 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
     if (spi is not None and spi < 0.9) or (cpi is not None and cpi < 0.9) or high_risk_count > 0:
         decision_required = True
     else:
-        decision_required = bool(delay_days or claims_exposure)
+        decision_required = bool(delay_days or claims_exposure or claimed_days)
 
     schedule_health = health_from_ratio(spi)
     cost_health = health_from_ratio(cpi)
@@ -803,6 +948,7 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         "cpi": cpi,
         "delay_days": delay_days,
         "claims_exposure": claims_exposure,
+        "claimed_days": claimed_days,
         "high_risk_count": high_risk_count,
         "data_confidence": data_confidence,
         "data_quality": data_quality,
@@ -822,12 +968,23 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         "pv": pv,
         "ev": ev,
         "ac": ac,
+        "sv": sv,
+        "cv": cv,
+        "eac": eac,
+        "etc": etc,
+        "vac": vac,
         "spi": spi,
         "cpi": cpi,
         "risk_score": risk_score,
         "high_risk_count": high_risk_count,
         "delay_days": delay_days,
+        "delay_event_count": len(rows["delay_events"]),
         "claims_exposure": claims_exposure,
+        "claimed_days": claimed_days,
+        "risk_record_count": len(rows["risks"]),
+        "planned_start": first_valid(rows["projects"], ["planned_start", "project_start", "baseline_start"]),
+        "planned_finish": first_valid(rows["projects"], ["planned_finish", "project_finish", "baseline_finish"]),
+        "forecast_finish": first_valid(rows["projects"], ["forecast_finish", "current_finish", "forecast date"]),
         "schedule_health": schedule_health,
         "cost_health": cost_health,
         "delay_exposure": delay_exposure,
@@ -843,6 +1000,20 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         "fingerprint": fingerprint(base),
         "source_files": {
             key: len(value) for key, value in rows.items()
+        },
+        "metric_sources": {
+            "contract_value": {"source": contract_source, "aggregation": "project summary or project-level fallback"},
+            "paid_amount": {"source": paid_source, "aggregation": "sum of selected project records"},
+            "spent_amount": {"source": ac_source, "aggregation": "sum of selected project records"},
+            "planned_progress": {"source": planned_progress_source, "aggregation": "project summary or project-level calculation"},
+            "actual_progress": {"source": actual_progress_source, "aggregation": "project summary or project-level calculation"},
+            "bac": {"source": bac_source, "aggregation": "sum of selected project EVM records"},
+            "pv": {"source": pv_source, "aggregation": "sum of selected project EVM records"},
+            "ev": {"source": ev_source, "aggregation": "sum of selected project EVM records"},
+            "ac": {"source": ac_source, "aggregation": "sum of selected project EVM records"},
+            "risk_score": {"source": risk_source, "aggregation": "project risk register"},
+            "delay_days": {"source": "delay_events.csv:Delayed duration after overlap", "aggregation": "sum of selected project delay events"},
+            "claims_exposure": {"source": "claims.csv:claimed_amount", "aggregation": "sum of selected project claim records"},
         },
         "features": build_feature_payload(project, rows),
         "reports": {
@@ -925,6 +1096,7 @@ def build_portfolio(projects: list[dict[str, Any]]) -> dict[str, Any]:
     total_contract = sum(p["contract_value"] or 0 for p in projects)
     total_paid = sum(p["paid_amount"] or 0 for p in projects)
     total_spent = sum(p["spent_amount"] or 0 for p in projects)
+    total_remaining = sum(p["remaining_value"] or 0 for p in projects)
     progress_values = [p["actual_progress"] for p in projects]
     weighted_progress = None
     weighted_basis = sum(p["contract_value"] or 0 for p in projects if p["actual_progress"] is not None)
@@ -984,7 +1156,7 @@ def build_portfolio(projects: list[dict[str, Any]]) -> dict[str, Any]:
             "contract_value": total_contract,
             "paid_amount": total_paid,
             "spent_amount": total_spent,
-            "remaining_value": total_contract - max(total_paid, total_spent),
+            "remaining_value": total_remaining,
             "average_progress": weighted_progress if weighted_progress is not None else average(progress_values),
             "average_spi": average([p["spi"] for p in projects]),
             "average_cpi": average([p["cpi"] for p in projects]),

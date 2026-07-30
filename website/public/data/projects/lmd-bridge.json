@@ -7,43 +7,90 @@
   "meeting_url": null,
   "status": "Delayed",
   "contract_value": 850000000.0,
-  "paid_amount": null,
-  "spent_amount": 10855421.69,
-  "remaining_value": 839144578.31,
-  "planned_progress": 1.0,
-  "actual_progress": 1.0,
-  "progress_variance": 0.0,
+  "paid_amount": 327454000.0,
+  "spent_amount": 311965279.52000004,
+  "remaining_value": 522546000.0,
+  "planned_progress": 0.38,
+  "actual_progress": 0.31,
+  "progress_variance": -0.07,
   "bac": 850000000.0,
-  "pv": 850000000.0,
-  "ev": 850000000.0,
-  "ac": 10855421.69,
-  "spi": 1.0,
-  "cpi": 78.30188676898834,
-  "risk_score": null,
-  "high_risk_count": 0,
-  "delay_days": 0,
-  "claims_exposure": 0,
-  "schedule_health": "Healthy",
-  "cost_health": "Healthy",
-  "delay_exposure": "Low",
-  "claim_exposure_level": "Low",
-  "data_confidence": "Medium",
-  "decision_priority": "Medium",
+  "pv": 343174698.79999995,
+  "ev": 294306867.48,
+  "ac": 311965279.52000004,
+  "sv": -48867831.31999993,
+  "cv": -17658412.04000002,
+  "eac": 900999999.9745845,
+  "etc": 589034720.4545844,
+  "vac": -50999999.97458446,
+  "spi": 0.8576007162215656,
+  "cpi": 0.9433962264417058,
+  "risk_score": 60.0,
+  "high_risk_count": 1,
+  "delay_days": 208.0,
+  "delay_event_count": 5,
+  "claims_exposure": 12750000.0,
+  "claimed_days": 81.0,
+  "risk_record_count": 3,
+  "planned_start": "5-Nov-25",
+  "planned_finish": "20-Mar-27",
+  "forecast_finish": "9-Jun-27",
+  "schedule_health": "Critical",
+  "cost_health": "Watchlist",
+  "delay_exposure": "High",
+  "claim_exposure_level": "High",
+  "data_confidence": "High",
+  "decision_priority": "High",
   "decision_reasons": [
     {
-      "issue": "No immediate executive trigger",
-      "trigger": "LMD Bridge & Road Interchange is within available decision thresholds",
-      "impact": "Continue routine monitoring with the current evidence set.",
+      "issue": "Schedule performance below executive threshold",
+      "trigger": "SPI 0.86",
+      "impact": "Potential recovery plan and critical path review required.",
+      "owner": "Planning Manager",
+      "evidence_status": "High",
+      "urgency": "High",
+      "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting."
+    },
+    {
+      "issue": "Cost performance on watchlist",
+      "trigger": "CPI 0.94",
+      "impact": "Cost trend should be checked before commitment decisions.",
+      "owner": "Commercial Manager",
+      "evidence_status": "High",
+      "urgency": "Medium",
+      "recommended_action": "Validate actual cost and payment records against budget baseline."
+    },
+    {
+      "issue": "Delay exposure recorded",
+      "trigger": "208 delay days from delay event records",
+      "impact": "Potential effect on delivery, mitigation, or EOT position.",
+      "owner": "Planning / Claims Team",
+      "evidence_status": "High",
+      "urgency": "High",
+      "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness."
+    },
+    {
+      "issue": "Claims / EOT exposure available",
+      "trigger": "Claim amount EGP 12,750,000 | Claimed days 81",
+      "impact": "Commercial strategy and entitlement evidence should be aligned.",
+      "owner": "Contracts Manager",
+      "evidence_status": "High",
+      "urgency": "High",
+      "recommended_action": "Review entitlement matrix, notice status, and supporting correspondence."
+    },
+    {
+      "issue": "High-risk records detected",
+      "trigger": "1 high-risk items",
+      "impact": "Risk exposure may require mitigation ownership and deadlines.",
       "owner": "Project Manager",
-      "evidence_status": "Medium",
-      "urgency": "Low",
-      "recommended_action": "Keep source files updated and monitor SPI, CPI, risk, claims, and delay records."
+      "evidence_status": "High",
+      "urgency": "High",
+      "recommended_action": "Assign mitigation owners and confirm closure evidence for high-risk records."
     }
   ],
   "activity_count": 17,
   "milestone_count": 5,
-  "data_quality": 71.4,
-  "decision_required": false,
+  "data_quality": 100.0,
+  "decision_required": true,
   "last_updated": "2026-07-27T23:22:25",
   "fingerprint": "8078842fdcd3be09d2bbbb1ab32ced31773c24631723afecc19f048f747164ca",
   "source_files": {
@@ -57,6 +104,56 @@
     "activities": 17,
     "milestones": 5,
     "delay_events": 5
+  },
+  "metric_sources": {
+    "contract_value": {
+      "source": "projects.csv:contract_value",
+      "aggregation": "project summary or project-level fallback"
+    },
+    "paid_amount": {
+      "source": "payments.csv:paid amount total",
+      "aggregation": "sum of selected project records"
+    },
+    "spent_amount": {
+      "source": "evm.csv:AC total",
+      "aggregation": "sum of selected project records"
+    },
+    "planned_progress": {
+      "source": "projects.csv:planned_progress_percent",
+      "aggregation": "project summary or project-level calculation"
+    },
+    "actual_progress": {
+      "source": "projects.csv:actual_progress_percent",
+      "aggregation": "project summary or project-level calculation"
+    },
+    "bac": {
+      "source": "evm.csv:BAC total",
+      "aggregation": "sum of selected project EVM records"
+    },
+    "pv": {
+      "source": "evm.csv:PV total",
+      "aggregation": "sum of selected project EVM records"
+    },
+    "ev": {
+      "source": "evm.csv:EV total",
+      "aggregation": "sum of selected project EVM records"
+    },
+    "ac": {
+      "source": "evm.csv:AC total",
+      "aggregation": "sum of selected project EVM records"
+    },
+    "risk_score": {
+      "source": "risks.csv:legacy record-count heuristic",
+      "aggregation": "project risk register"
+    },
+    "delay_days": {
+      "source": "delay_events.csv:Delayed duration after overlap",
+      "aggregation": "sum of selected project delay events"
+    },
+    "claims_exposure": {
+      "source": "claims.csv:claimed_amount",
+      "aggregation": "sum of selected project claim records"
+    }
   },
   "features": {
     "overview": {
