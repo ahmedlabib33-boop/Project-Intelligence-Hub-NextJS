@@ -125,13 +125,21 @@ function Invoke-PipelineStep(
     Push-Location $WorkingDirectory
     try {
         $global:LASTEXITCODE = 0
-        & $Executable @Arguments 2>&1 | ForEach-Object {
-            $line = Protect-SensitiveText ([string]$_)
-            Write-Host $line
-            Add-Content -LiteralPath $logPath -Value $line
+        $previousErrorActionPreference = $ErrorActionPreference
+        $ErrorActionPreference = "Continue"
+        try {
+            & $Executable @Arguments 2>&1 | ForEach-Object {
+                $line = Protect-SensitiveText ([string]$_)
+                Write-Host $line
+                Add-Content -LiteralPath $logPath -Value $line
+            }
+            $exitCode = $LASTEXITCODE
         }
-        if ($LASTEXITCODE -ne 0) {
-            throw "$Label failed with exit code $LASTEXITCODE."
+        finally {
+            $ErrorActionPreference = $previousErrorActionPreference
+        }
+        if ($exitCode -ne 0) {
+            throw "$Label failed with exit code $exitCode."
         }
     }
     finally {
