@@ -87,6 +87,15 @@ def _percent(value: Any) -> float | None:
     return min(max(number, 0.0), 1.0)
 
 
+def _parse_date_series(values: Any) -> pd.Series:
+    """Parse the approved project date formats without format-inference warnings."""
+    source = pd.Series(values, dtype="object").astype("string").str.strip()
+    parsed = pd.to_datetime(source, format="%d-%b-%y", errors="coerce")
+    for date_format in ("%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y", "%d-%m-%Y", "%Y-%m"):
+        parsed = parsed.fillna(pd.to_datetime(source, format=date_format, errors="coerce"))
+    return parsed
+
+
 def _library_status() -> dict[str, dict[str, Any]]:
     packages = {
         "pandas": "pandas",
@@ -141,10 +150,7 @@ def _activity_anomalies(activities: list[dict[str, Any]]) -> dict[str, Any]:
     frame["total_float_days"] = frame.apply(lambda row: _number(_pick(row.to_dict(), ["total_float_days", "total float"])), axis=1)
     planned_finish = frame.apply(lambda row: _pick(row.to_dict(), ["planned_finish", "baseline_finish", "bl finish"]), axis=1)
     forecast_finish = frame.apply(lambda row: _pick(row.to_dict(), ["forecast_finish", "current_finish", "finish"]), axis=1)
-    frame["finish_variance_days"] = (
-        pd.to_datetime(forecast_finish, errors="coerce", dayfirst=True)
-        - pd.to_datetime(planned_finish, errors="coerce", dayfirst=True)
-    ).dt.days
+    frame["finish_variance_days"] = (_parse_date_series(forecast_finish) - _parse_date_series(planned_finish)).dt.days
     frame["critical_flag"] = frame.apply(
         lambda row: 1.0 if str(_pick(row.to_dict(), ["is_critical", "critical", "critical_path"]) or "").strip().lower() in {"yes", "true", "1"} else 0.0,
         axis=1,
@@ -223,7 +229,7 @@ def _s_curve_forecast(s_curve: list[dict[str, Any]], contract_value: float | Non
     frame["date"] = frame.apply(lambda row: _pick(row.to_dict(), ["months", "month", "date", "period"]), axis=1)
     frame["planned"] = frame.apply(lambda row: _number(_pick(row.to_dict(), ["cumm_monthly_planned", "cumulative_planned", "planned_cumulative"])), axis=1)
     frame["actual"] = frame.apply(lambda row: _number(_pick(row.to_dict(), ["cumm_monthly_actual", "cumulative_actual", "actual_cumulative"])), axis=1)
-    frame["date"] = pd.to_datetime(frame["date"], errors="coerce", dayfirst=True)
+    frame["date"] = _parse_date_series(frame["date"])
     frame = frame.dropna(subset=["date", "actual"]).sort_values("date").drop_duplicates(subset=["date"], keep="last")
     if len(frame) < MIN_S_CURVE_PERIODS:
         return (

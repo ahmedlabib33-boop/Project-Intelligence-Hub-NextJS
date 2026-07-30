@@ -90,6 +90,7 @@ export async function buildProjectContext(projectKey?: string, mode = "general")
         decision_required: project.decision_required
       },
       source_files: project.source_files,
+      advanced_analytics: compact(project.advanced_analytics),
       guardrails: {
         status: guardrails.status,
         mode: guardrails.mode,

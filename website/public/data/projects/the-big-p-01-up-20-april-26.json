@@ -81,6 +81,213 @@
   "activity_count": 1363,
   "milestone_count": 4,
   "data_quality": 100.0,
+  "advanced_analytics": {
+    "engine_version": "1.0",
+    "scope": "selected_project_only",
+    "data_profile": {
+      "activity_records": 1363,
+      "s_curve_periods": 18,
+      "delay_event_records": 25,
+      "risk_records": 2,
+      "labelled_historical_outcome_records": 0
+    },
+    "activity_anomalies": {
+      "status": "ready",
+      "method": "scikit-learn IsolationForest",
+      "activity_records": 1363,
+      "features_available": [
+        "progress_variance",
+        "total_float_days",
+        "finish_variance_days",
+        "critical_flag"
+      ],
+      "flagged_count": 508,
+      "items": [
+        {
+          "activity_id": "P-MDEL-1060",
+          "activity_name": "Delivery for cold Crystalline waterproofing for Water tank",
+          "anomaly_score": 0.1741,
+          "reason": "unusual total-float position"
+        },
+        {
+          "activity_id": "P-MPOS-1060",
+          "activity_name": "P.O for cold Crystalline waterproofing for Water tank",
+          "anomaly_score": 0.1688,
+          "reason": "unusual total-float position"
+        },
+        {
+          "activity_id": "CON-B02-FOOT-1060",
+          "activity_name": "Shuttering for Columns & Walls Below SOG (B01) (footing)",
+          "anomaly_score": 0.162,
+          "reason": "material forecast-finish variance"
+        },
+        {
+          "activity_id": "CON-B02-FOOT-1080",
+          "activity_name": "Pouring Columns & Walls Below SOG (B01) (footing)",
+          "anomaly_score": 0.1615,
+          "reason": "material forecast-finish variance"
+        },
+        {
+          "activity_id": "CON-B02-FOOT-1070",
+          "activity_name": "RFT for Columns & Walls Below SOG (B02) (footing)",
+          "anomaly_score": 0.1613,
+          "reason": "material forecast-finish variance"
+        },
+        {
+          "activity_id": "P-MS-1060",
+          "activity_name": "Submittal for cold Crystalline waterproofing for Water tank",
+          "anomaly_score": 0.1542,
+          "reason": "material forecast-finish variance"
+        },
+        {
+          "activity_id": "E-SUB-B03-1ST-1020",
+          "activity_name": "Submittal for Beams Conc. Dim.  & RFT DWGs (B03) (1st)",
+          "anomaly_score": 0.1521,
+          "reason": "material actual-versus-planned progress variance"
+        },
+        {
+          "activity_id": "E-SUB-B03-1ST-1030",
+          "activity_name": "Submittal for Slabs Conc. Dim.  & RFT DWGs (B03) (1st)",
+          "anomaly_score": 0.151,
+          "reason": "material actual-versus-planned progress variance"
+        },
+        {
+          "activity_id": "E-APP-B03-1ST-1030",
+          "activity_name": "Approval for Slabs Conc. Dim.  & RFT DWGs  (B03) (1st)",
+          "anomaly_score": 0.151,
+          "reason": "material actual-versus-planned progress variance"
+        },
+        {
+          "activity_id": "P-MA-1060",
+          "activity_name": "Approval for cold Crystalline waterproofing for Water tank",
+          "anomaly_score": 0.1495,
+          "reason": "material forecast-finish variance"
+        }
+      ],
+      "message": "Unsupervised outlier screening. Review flagged activities against the schedule and source evidence before acting."
+    },
+    "s_curve_forecast": {
+      "status": "ready",
+      "method": "numpy linear trend fallback",
+      "periods_available": 18,
+      "current_actual_value": 0.0,
+      "current_planned_value": 367286025.0,
+      "completion_target_value": 367286025.0,
+      "recent_period_change": 0.0,
+      "projected_completion_date": null,
+      "months_to_target": null,
+      "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
+    },
+    "s_curve_chart_url": "/data/analytics/the-big-p-01-up-20-april-26-s-curve-analytics.png",
+    "technical_topics": {
+      "status": "ready",
+      "method": "spaCy normalized keyword extraction",
+      "source_text_records": 1390,
+      "topics": [
+        {
+          "term": "rft",
+          "count": 817
+        },
+        {
+          "term": "dwgs",
+          "count": 779
+        },
+        {
+          "term": "conc",
+          "count": 715
+        },
+        {
+          "term": "dim",
+          "count": 715
+        },
+        {
+          "term": "submittal",
+          "count": 409
+        },
+        {
+          "term": "approval",
+          "count": 393
+        },
+        {
+          "term": "built",
+          "count": 385
+        },
+        {
+          "term": "drawing",
+          "count": 384
+        },
+        {
+          "term": "walls",
+          "count": 345
+        },
+        {
+          "term": "slabs",
+          "count": 332
+        },
+        {
+          "term": "beams",
+          "count": 328
+        },
+        {
+          "term": "col",
+          "count": 324
+        }
+      ]
+    },
+    "model_governance": {
+      "libraries": {
+        "pandas": {
+          "installed": true
+        },
+        "numpy": {
+          "installed": true
+        },
+        "matplotlib": {
+          "installed": true
+        },
+        "seaborn": {
+          "installed": false
+        },
+        "scikit_learn": {
+          "installed": true
+        },
+        "statsmodels": {
+          "installed": false
+        },
+        "spacy": {
+          "installed": true
+        },
+        "xgboost": {
+          "installed": false
+        },
+        "pytorch": {
+          "installed": true
+        },
+        "tensorflow": {
+          "installed": false
+        }
+      },
+      "xgboost": {
+        "status": "not_trained",
+        "minimum_labelled_records": 50,
+        "records_available": 0,
+        "reason": "Requires labelled historic outcomes such as verified delay days, cost variance, or completion performance."
+      },
+      "pytorch": {
+        "status": "not_trained",
+        "minimum_labelled_records": 500,
+        "records_available": 0,
+        "reason": "Requires a large, validated labelled data set and an approved model-governance process."
+      },
+      "tensorflow": {
+        "status": "not_trained",
+        "minimum_labelled_records": 500,
+        "records_available": 0,
+        "reason": "Requires a large, validated labelled data set and an approved model-governance process."
+      }
+    },
+    "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
+  },
   "decision_required": true,
   "last_updated": "2026-07-31T01:23:47",
   "fingerprint": "7bfea26d3116d0ed7aa576d037750da81c8354e519a359bf1908a6c959939bf9",

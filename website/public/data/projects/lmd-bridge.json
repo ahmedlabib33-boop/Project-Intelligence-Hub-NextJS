@@ -90,6 +90,147 @@
   "activity_count": 17,
   "milestone_count": 5,
   "data_quality": 100.0,
+  "advanced_analytics": {
+    "engine_version": "1.0",
+    "scope": "selected_project_only",
+    "data_profile": {
+      "activity_records": 17,
+      "s_curve_periods": 10,
+      "delay_event_records": 5,
+      "risk_records": 3,
+      "labelled_historical_outcome_records": 0
+    },
+    "activity_anomalies": {
+      "status": "insufficient_data",
+      "method": "IsolationForest",
+      "minimum_activity_records": 20,
+      "activity_records": 17,
+      "message": "At least 20 activity records are required for unsupervised anomaly detection.",
+      "flagged_count": 0,
+      "items": []
+    },
+    "s_curve_forecast": {
+      "status": "ready",
+      "method": "numpy linear trend fallback",
+      "periods_available": 10,
+      "current_actual_value": 616724300.0,
+      "current_planned_value": 782000000.0,
+      "completion_target_value": 850000000.0,
+      "recent_period_change": 49504000.0,
+      "projected_completion_date": "2026-11-01",
+      "months_to_target": 3,
+      "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
+    },
+    "s_curve_chart_url": "/data/analytics/lmd-bridge-s-curve-analytics.png",
+    "technical_topics": {
+      "status": "ready",
+      "method": "spaCy normalized keyword extraction",
+      "source_text_records": 25,
+      "topics": [
+        {
+          "term": "piers",
+          "count": 4
+        },
+        {
+          "term": "abutments",
+          "count": 4
+        },
+        {
+          "term": "deck",
+          "count": 3
+        },
+        {
+          "term": "road",
+          "count": 3
+        },
+        {
+          "term": "ifc",
+          "count": 2
+        },
+        {
+          "term": "shop",
+          "count": 2
+        },
+        {
+          "term": "drawings",
+          "count": 2
+        },
+        {
+          "term": "steel",
+          "count": 2
+        },
+        {
+          "term": "delivery",
+          "count": 2
+        },
+        {
+          "term": "bored",
+          "count": 2
+        },
+        {
+          "term": "piles",
+          "count": 2
+        },
+        {
+          "term": "pile",
+          "count": 2
+        }
+      ]
+    },
+    "model_governance": {
+      "libraries": {
+        "pandas": {
+          "installed": true
+        },
+        "numpy": {
+          "installed": true
+        },
+        "matplotlib": {
+          "installed": true
+        },
+        "seaborn": {
+          "installed": false
+        },
+        "scikit_learn": {
+          "installed": true
+        },
+        "statsmodels": {
+          "installed": false
+        },
+        "spacy": {
+          "installed": true
+        },
+        "xgboost": {
+          "installed": false
+        },
+        "pytorch": {
+          "installed": true
+        },
+        "tensorflow": {
+          "installed": false
+        }
+      },
+      "xgboost": {
+        "status": "not_trained",
+        "minimum_labelled_records": 50,
+        "records_available": 0,
+        "reason": "Requires labelled historic outcomes such as verified delay days, cost variance, or completion performance."
+      },
+      "pytorch": {
+        "status": "not_trained",
+        "minimum_labelled_records": 500,
+        "records_available": 0,
+        "reason": "Requires a large, validated labelled data set and an approved model-governance process."
+      },
+      "tensorflow": {
+        "status": "not_trained",
+        "minimum_labelled_records": 500,
+        "records_available": 0,
+        "reason": "Requires a large, validated labelled data set and an approved model-governance process."
+      }
+    },
+    "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
+  },
   "decision_required": true,
   "last_updated": "2026-07-31T00:47:21",
   "fingerprint": "b6d41c578ee802f8c39725afbeebce90263a169ab03b1707807475e0d6bb8895",

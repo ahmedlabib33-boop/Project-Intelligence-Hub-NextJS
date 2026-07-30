@@ -972,6 +972,67 @@ h2 {
   line-height: 1.55;
 }
 
+.analytics-chart-layout > .feature-card {
+  min-width: 0;
+}
+
+.analytics-chart-card {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.analytics-chart-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.analytics-detail-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.analytics-detail-row b {
+  color: var(--text);
+}
+
+.analytics-topic-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.analytics-topic-list span {
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--cyan);
+  background: rgba(57, 215, 210, 0.08);
+  font-size: 0.8rem;
+}
+
+.analytics-topic-list b {
+  color: var(--text);
+}
+
+.analytics-note,
+.analytics-disclaimer {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.analytics-disclaimer {
+  margin: 0;
+  font-size: 0.86rem;
+}
+
 .detector-badge {
   display: inline-flex;
   margin-bottom: 12px;

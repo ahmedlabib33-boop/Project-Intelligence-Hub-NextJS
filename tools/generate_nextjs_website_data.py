@@ -1098,6 +1098,7 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         "activity_count": len(rows["activities"]),
         "milestone_count": len(rows["milestones"]),
         "data_quality": data_quality,
+        "advanced_analytics": advanced_analytics,
         "decision_required": decision_required,
         "last_updated": latest_mtime(base),
         "fingerprint": fingerprint(base),

@@ -8,6 +8,7 @@ import AiChatPanel from "../components/ai/AiChatPanel";
 import AiInsightCard from "../components/ai/AiInsightCard";
 import TechnicalKnowledgeAdvisor from "../components/ai/TechnicalKnowledgeAdvisor";
 import ActionTracker from "../components/executive/ActionTracker";
+import AdvancedAnalyticsPanel, { type AdvancedAnalyticsPayload } from "../components/executive/AdvancedAnalyticsPanel";
 import ExecutiveLightModeToggle from "../components/executive/ExecutiveLightModeToggle";
 import ManagementDecisionBrief, { type ActionItem, type DecisionBriefItem } from "../components/executive/ManagementDecisionBrief";
 import PredictiveWarningPanel from "../components/executive/PredictiveWarningPanel";
@@ -71,6 +72,7 @@ type ProjectRecord = {
   meeting_url?: string | null;
   source_files: Record<string, number>;
   metric_sources?: Record<string, { source: string; aggregation: string }>;
+  advanced_analytics?: AdvancedAnalyticsPayload;
   features: FeaturePayload;
   reports: Record<ReportKey, string>;
 };
@@ -226,6 +228,7 @@ const workspaceTabs = [
   "Milestones",
   "S-Curve",
   "EVM Analysis",
+  "Analytics Intelligence",
   "Contracts",
   "Letters Intelligence",
   "Delays",
@@ -765,6 +768,10 @@ function WorkspaceTabContent({
         <TablePreviewPanel table={project.features.overview.source_tables.evm} title="EVM Source Table" />
       </div>
     );
+  }
+
+  if (activeTab === "Analytics Intelligence") {
+    return <AdvancedAnalyticsPanel analytics={project.advanced_analytics} />;
   }
 
   if (activeTab === "Contracts") {
