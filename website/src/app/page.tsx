@@ -1107,11 +1107,201 @@ function StreamlitFullClone() {
   );
 }
 
-export default function HomePage() {
+type OperationsPanel = "portfolio" | "delivery" | "decisions" | "intelligence";
+
+function clampPercent(value: number | null | undefined) {
+  if (value === null || value === undefined || !Number.isFinite(value)) return 0;
+  return Math.max(0, Math.min(100, value * 100));
+}
+
+function PortfolioVisuals({
+  projects: visibleProjects,
+  sectors: visibleSectors,
+  panel
+}: {
+  projects: ProjectRecord[];
+  sectors: SectorRecord[];
+  panel: OperationsPanel;
+}) {
+  const chartProjects = visibleProjects.length ? visibleProjects : projects;
+  const chartSectors = visibleSectors.length ? visibleSectors : sectors;
+  const maxContract = Math.max(...chartSectors.map((sector) => sector.contract_value || 0), 1);
+  const totalSectorValue = chartSectors.reduce((sum, sector) => sum + (sector.contract_value || 0), 0) || 1;
+
+  if (panel === "portfolio") {
+    return (
+      <div className="operations-chart-grid">
+        <section className="ops-chart-card">
+          <div className="ops-chart-head"><div><span>Portfolio Composition</span><b>Sector allocation</b></div><small>{chartSectors.length} sectors</small></div>
+          <div className="sector-composition">
+            <div
+              className="sector-donut"
+              style={{
+                background: `conic-gradient(${chartSectors.map((sector, index) => {
+                  const colors = ["#39d7d2", "#63a8ff", "#d6a23a", "#a78bfa", "#4ade80"];
+                  const start = chartSectors.slice(0, index).reduce((sum, item) => sum + ((item.contract_value || 0) / totalSectorValue) * 100, 0);
+                  const finish = start + ((sector.contract_value || 0) / totalSectorValue) * 100;
+                  return `${colors[index % colors.length]} ${start}% ${finish}%`;
+                }).join(", ")})`
+              }}
+            >
+              <div><b>{numberValue(chartProjects.length)}</b><span>projects</span></div>
+            </div>
+            <div className="chart-legend">
+              {chartSectors.map((sector, index) => <span key={sector.sector}><i className={`legend-dot dot-${index % 5}`} />{sector.sector}<b>{numberValue((sector.contract_value / totalSectorValue) * 100, 0)}%</b></span>)}
+            </div>
+          </div>
+        </section>
+        <section className="ops-chart-card">
+          <div className="ops-chart-head"><div><span>Project Signals</span><b>Delivery health</b></div><small>Actual versus planned</small></div>
+          <div className="project-pulse-list">
+            {chartProjects.map((project) => (
+              <article key={project.project_key}>
+                <div><span>{project.project_display_name}</span><b>{percent(project.actual_progress)}</b></div>
+                <div className="pulse-track"><i className="pulse-plan" style={{ width: `${clampPercent(project.planned_progress)}%` }} /><i className="pulse-actual" style={{ width: `${clampPercent(project.actual_progress)}%` }} /></div>
+                <small>Planned {percent(project.planned_progress)} | {project.status}</small>
+              </article>
+            ))}
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  if (panel === "delivery") {
+    return (
+      <div className="operations-chart-grid">
+        <section className="ops-chart-card">
+          <div className="ops-chart-head"><div><span>Contract Allocation</span><b>Value by sector</b></div><small>Source: portfolio JSON</small></div>
+          <div className="value-bar-chart">
+            {chartSectors.map((sector, index) => (
+              <article key={sector.sector}>
+                <div><span>{sector.sector}</span><b>{money(sector.contract_value)}</b></div>
+                <div><i className={`bar-fill bar-${index % 5}`} style={{ width: `${Math.max(4, (sector.contract_value / maxContract) * 100)}%` }} /></div>
+                <small>{numberValue(sector.project_count)} projects | paid {money(sector.paid_amount)}</small>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="ops-chart-card">
+          <div className="ops-chart-head"><div><span>Schedule Position</span><b>SPI operating field</b></div><small>1.00 is plan</small></div>
+          <svg className="operations-scatter" viewBox="0 0 640 330" role="img" aria-label="Project schedule performance chart">
+            <line x1="72" y1="270" x2="600" y2="270" /><line x1="72" y1="62" x2="72" y2="270" />
+            <line className="scatter-target" x1="72" y1="166" x2="600" y2="166" />
+            <text x="10" y="74">Ahead</text><text x="10" y="274">Behind</text><text x="520" y="312">Actual progress</text>
+            {chartProjects.map((project, index) => {
+              const x = 102 + clampPercent(project.actual_progress) * 4.55;
+              const spi = project.spi === null || project.spi === undefined || !Number.isFinite(project.spi) ? 0 : Math.min(1.5, Math.max(0, project.spi));
+              const y = 270 - (spi / 1.5) * 188;
+              const color = project.decision_required ? "#fb7185" : project.status === "Delayed" ? "#d6a23a" : "#39d7d2";
+              return <g key={project.project_key}><circle cx={x} cy={y} r={13 + index * 2} fill={color} /><text x={x + 16} y={y + 4}>{project.project_folder_name}</text></g>;
+            })}
+          </svg>
+          <p className="chart-note">Markers use the actual project SPI and reported actual progress. Out-of-range values are retained in source data and monitored through guardrails.</p>
+        </section>
+      </div>
+    );
+  }
+
   return (
-    <main className="future-shell streamlit-clone-page">
-      <StreamlitFullClone />
-      <AiChatPanel projectName="Decision Making Dashboard" />
+    <div className="operations-chart-grid">
+      <section className="ops-chart-card risk-grid-card">
+        <div className="ops-chart-head"><div><span>Decision Heatmap</span><b>Priority and evidence confidence</b></div><small>Portfolio signals</small></div>
+        <div className="risk-heatmap">
+          <span className="heat-label high">High action</span><span className="heat-label medium">Watch</span><span className="heat-label low">Routine</span>
+          {chartProjects.map((project, index) => {
+            const vertical = project.decision_required ? 18 : project.status === "Delayed" ? 48 : 76;
+            const horizontal = project.data_confidence === "Low" ? 72 : project.data_confidence === "Medium" ? 48 : 24;
+            return <button type="button" title={`${project.project_display_name}: ${project.decision_priority || "N/A"}`} style={{ left: `${horizontal + index * 4}%`, top: `${vertical + index * 3}%` }} key={project.project_key}>{project.project_folder_name.slice(0, 3).toUpperCase()}</button>;
+          })}
+        </div>
+        <p className="chart-note">Vertical position reflects decision trigger; horizontal position reflects reported data confidence. This is an evidence awareness view, not a risk calculation replacement.</p>
+      </section>
+      <MermaidDiagram chart={portfolioDecisionMermaid(chartProjects[0] || projects[0])} title="Portfolio Decision Flow" />
+    </div>
+  );
+}
+
+function DecisionOperationsDashboard({
+  onChooseProject
+}: {
+  onChooseProject: (projectKey: string) => void;
+}) {
+  const [panel, setPanel] = useState<OperationsPanel>("portfolio");
+  const [sectorFilter, setSectorFilter] = useState("All sectors");
+  const [lightMode, setLightMode] = useState(false);
+  const [actions, setActions] = useState<ActionItem[]>([]);
+  const visibleProjects = useMemo(
+    () => sectorFilter === "All sectors" ? projects : projects.filter((project) => project.sector === sectorFilter),
+    [sectorFilter]
+  );
+  const visibleSectors = useMemo(
+    () => sectorFilter === "All sectors" ? sectors : sectors.filter((sector) => sector.sector === sectorFilter),
+    [sectorFilter]
+  );
+
+  return (
+    <div className={lightMode ? "digital-operations executive-light-mode" : "digital-operations"}>
+      <section className="operations-hero">
+        <div className="operations-brand"><img src="/assets/logo.png" alt="SAMCO Egypt" /><div><span>Samco Egypt</span><b>Decision Making Dashboard</b><small>Portfolio command layer | source-backed management intelligence</small></div></div>
+        <div className="operations-hero-controls">
+          <label><span>Portfolio lens</span><select value={sectorFilter} onChange={(event) => setSectorFilter(event.target.value)}><option>All sectors</option>{sectors.map((sector) => <option key={sector.sector}>{sector.sector}</option>)}</select></label>
+          <ExecutiveLightModeToggle enabled={lightMode} onChange={setLightMode} />
+        </div>
+      </section>
+      <div className="operations-kpi-grid">
+        <HoloKpi title="Active Projects" value={numberValue(visibleProjects.length)} note={`${visibleSectors.length} sectors in view`} tone="cyan" />
+        <HoloKpi title="Contract Value" value={money(visibleProjects.reduce((sum, project) => sum + (project.contract_value || 0), 0))} note="Filtered portfolio value" tone="gold" />
+        <HoloKpi title="Delivery Position" value={percent(visibleProjects.reduce((sum, project) => sum + (project.actual_progress || 0), 0) / Math.max(visibleProjects.length, 1))} note="Reported actual progress" tone="blue" />
+        <HoloKpi title="Delayed Projects" value={numberValue(visibleProjects.filter((project) => project.status === "Delayed" || (project.delay_days || 0) > 0).length)} note="Schedule attention signals" tone="red" />
+        <HoloKpi title="Decisions Required" value={numberValue(visibleProjects.filter((project) => project.decision_required).length)} note="Threshold-based management gates" tone="violet" />
+        <HoloKpi title="Data Trust" value={`${numberValue(visibleProjects.reduce((sum, project) => sum + (project.data_quality || 0), 0) / Math.max(visibleProjects.length, 1), 1)}%`} note={guardrails?.status || "Data guardrails"} tone="green" />
+      </div>
+      <nav className="operations-tabs" aria-label="Decision dashboard views">
+        {([
+          ["portfolio", "Portfolio Pulse"],
+          ["delivery", "Delivery & Value"],
+          ["decisions", "Risk & Decisions"],
+          ["intelligence", "AI Intelligence"]
+        ] as Array<[OperationsPanel, string]>).map(([key, label]) => <button type="button" className={panel === key ? "active" : ""} onClick={() => setPanel(key)} key={key}>{label}</button>)}
+      </nav>
+      {panel === "portfolio" || panel === "delivery" ? <PortfolioVisuals projects={visibleProjects} sectors={visibleSectors} panel={panel} /> : null}
+      {panel === "decisions" ? <div className="operations-stack"><PortfolioVisuals projects={visibleProjects} sectors={visibleSectors} panel={panel} /><PredictiveWarningPanel projects={visibleProjects} warningSummary={warningSummary} /><ManagementDecisionBrief items={decisionBrief.filter((item) => sectorFilter === "All sectors" || item.sector === sectorFilter)} onAddAction={(item) => setActions((current) => [...current, item])} /><ActionTracker scopeKey="portfolio" seedActions={actions} /></div> : null}
+      {panel === "intelligence" ? <div className="operations-stack"><UnifiedIntelligenceSearch mode="portfolio" /><TechnicalKnowledgeAdvisor mode="portfolio" /><ScenarioPlanner projects={visibleProjects} portfolioContractValue={visibleProjects.reduce((sum, project) => sum + (project.contract_value || 0), 0)} /></div> : null}
+      <section className="operations-project-rail">
+        <div><span>Project Deep Dive</span><b>Open any project in the same page</b><small>Each selection remains bound to its own generated project JSON, data sources, reports, letters, Delay TIA, and claims context.</small></div>
+        <div className="project-rail-buttons">{visibleProjects.map((project) => <button type="button" key={project.project_key} onClick={() => onChooseProject(project.project_key)}>{project.project_display_name}<small>{project.sector} | {project.status}</small></button>)}</div>
+      </section>
+    </div>
+  );
+}
+
+function DigitalOperationsApp() {
+  const [scope, setScope] = useState(DECISION_DASHBOARD_KEY);
+  const [selectedReport, setSelectedReport] = useState<ReportKey>("executive_dashboard");
+  const [showFullWorkspace, setShowFullWorkspace] = useState(false);
+  const selectedProject = projects.find((project) => project.project_key === scope) || projects[0];
+  const isDecisionDashboard = scope === DECISION_DASHBOARD_KEY;
+
+  return (
+    <main className="future-shell operations-shell">
+      <header className="operations-command-bar">
+        <div className="command-identity"><span>PIH / 01</span><b>Digital Operations</b></div>
+        <label className="scope-control"><span>Operating scope</span><select value={scope} onChange={(event) => { setScope(event.target.value); setShowFullWorkspace(false); }}><option value={DECISION_DASHBOARD_KEY}>Decision Making Dashboard</option>{projects.map((project) => <option value={project.project_key} key={project.project_key}>{project.sector} / {project.project_display_name}</option>)}</select></label>
+        <div className="command-status"><i /><span>{isDecisionDashboard ? "Portfolio mode" : `${selectedProject.sector} project mode`}</span></div>
+      </header>
+      {isDecisionDashboard ? <DecisionOperationsDashboard onChooseProject={setScope} /> : (
+        <>
+          <div className="project-view-switch"><button type="button" className={!showFullWorkspace ? "active" : ""} onClick={() => setShowFullWorkspace(false)}>Digital project workspace</button><button type="button" className={showFullWorkspace ? "active" : ""} onClick={() => setShowFullWorkspace(true)}>Complete controls workspace</button></div>
+          {showFullWorkspace ? <StreamlitFullClone /> : <ProjectWorkspace project={selectedProject} selectedReport={selectedReport} setSelectedReport={setSelectedReport} />}
+        </>
+      )}
+      <footer className="operations-footer">Designed &amp; Created | <strong>Engr. Ahmed Labib</strong><span>Source-backed controls | Project-isolated intelligence</span></footer>
+      <AiChatPanel projectKey={isDecisionDashboard ? undefined : selectedProject.project_key} projectName={isDecisionDashboard ? "Decision Making Dashboard" : selectedProject.project_display_name} sector={isDecisionDashboard ? undefined : selectedProject.sector} />
     </main>
   );
+}
+
+export default function HomePage() {
+  return <DigitalOperationsApp />;
 }
