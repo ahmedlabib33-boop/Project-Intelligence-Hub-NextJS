@@ -2015,6 +2015,54 @@ h2 {
   margin-top: 6px;
 }
 
+.streamlit-clone-shell {
+  min-height: calc(100vh - 88px);
+  border: 1px solid rgba(115, 193, 218, 0.24);
+  border-radius: 28px;
+  overflow: hidden;
+  background: rgba(4, 17, 34, 0.72);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.32);
+}
+
+.streamlit-clone-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(115, 193, 218, 0.18);
+  background: linear-gradient(135deg, rgba(8, 27, 52, 0.96), rgba(12, 53, 80, 0.88));
+}
+
+.streamlit-clone-head h2 {
+  margin: 2px 0;
+  font-size: 1.35rem;
+}
+
+.streamlit-clone-head span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.streamlit-clone-head a {
+  flex: 0 0 auto;
+  color: #061a2d;
+  background: linear-gradient(135deg, #6ee7f9, #f8c95d);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.streamlit-clone-shell iframe {
+  display: block;
+  width: 100%;
+  height: calc(100vh - 176px);
+  min-height: 820px;
+  border: 0;
+  background: #ffffff;
+}
+
 .tia-visual-grid figure {
   margin: 0;
   border: 1px solid rgba(95, 146, 178, 0.26);
@@ -2233,5 +2281,18 @@ h2 {
 
   .ai-insight-head button {
     width: 100%;
+  }
+
+  .streamlit-clone-head {
+    display: grid;
+  }
+
+  .streamlit-clone-head a {
+    text-align: center;
+  }
+
+  .streamlit-clone-shell iframe {
+    height: calc(100vh - 210px);
+    min-height: 720px;
   }
 }

@@ -188,6 +188,7 @@ const warningSummary = (portfolio as { warning_summary?: Record<string, number> 
 const decisionBrief = ((portfolio as { decision_brief?: DecisionBriefItem[] }).decision_brief || []) as DecisionBriefItem[];
 const guardrails = (portfolio as { guardrails?: GuardrailSummary }).guardrails;
 const DECISION_DASHBOARD_KEY = "__decision_making_dashboard__";
+const STREAMLIT_APP_URL = "https://samco-project-intelegent-dashboard.streamlit.app/?embed=true";
 
 const reportTabs: Array<{ key: ReportKey; label: string; note: string }> = [
   { key: "executive_dashboard", label: "Executive Dashboard", note: "Portfolio-style project summary" },
@@ -1094,174 +1095,33 @@ function ProjectWorkspace({
   );
 }
 
-export default function HomePage() {
-  const [selectedViewKey, setSelectedViewKey] = useState(DECISION_DASHBOARD_KEY);
-  const [selectedReport, setSelectedReport] = useState<ReportKey>("executive_dashboard");
-  const [executiveLightMode, setExecutiveLightMode] = useState(false);
-  const [portfolioActionSeeds, setPortfolioActionSeeds] = useState<ActionItem[]>([]);
-  const isDecisionDashboard = selectedViewKey === DECISION_DASHBOARD_KEY;
-  const selectedProject = useMemo(
-    () => projects.find((project) => project.project_key === selectedViewKey) ?? projects[0],
-    [selectedViewKey]
-  );
-
+function StreamlitFullClone() {
   return (
-    <main className={`future-shell ${executiveLightMode ? "executive-light-mode" : ""}`}>
-      <section className="future-hero">
-        <div className="hero-copy">
-          <div className="brand-lockup">
-            <img src="/assets/logo.png" alt="SAMCO Egypt logo" />
-            <div>
-              <span>SAMCO Egypt</span>
-              <small>Project Intelligence Hub</small>
-            </div>
-          </div>
-          <p className="eyebrow">Decision Making Dashboard</p>
-          <h1>Decision Making Dashboard</h1>
-          <p>
-            A separated portfolio command view for top management. It aggregates all recognized project data
-            automatically for board-level decisions, early warnings, and management actions.
-          </p>
+    <section className="streamlit-clone-shell">
+      <div className="streamlit-clone-head">
+        <div>
+          <p className="eyebrow">100% Streamlit App Clone</p>
+          <h2>Project Intelligence Hub</h2>
+          <span>Same app, same dropdown, same tabs, same charts, same project logic.</span>
         </div>
-        <div className="decision-phase-card">
-          <span>{isDecisionDashboard ? "Decision View" : "Project View"}</span>
-          <b>{isDecisionDashboard ? "Portfolio decisions only" : selectedProject.project_display_name}</b>
-          <label className="holo-select compact-select">
-            <span>Open view</span>
-            <select value={selectedViewKey} onChange={(event) => setSelectedViewKey(event.target.value)}>
-              <option value={DECISION_DASHBOARD_KEY}>Decision Making Dashboard</option>
-              {projects.map((project) => (
-                <option value={project.project_key} key={project.project_key}>
-                  {project.project_display_name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <ExecutiveLightModeToggle enabled={executiveLightMode} onChange={setExecutiveLightMode} />
-        </div>
-      </section>
-
-      {isDecisionDashboard ? (
-        <>
-          <section className="holo-kpi-grid">
-            <HoloKpi title="Projects" value={numberValue(portfolio.project_count)} note={`${portfolio.sector_count} sectors recognized`} tone="cyan" />
-            <HoloKpi title="Portfolio Value" value={money(totals.contract_value)} note="Aggregated contract value" tone="gold" />
-            <HoloKpi title="Average Progress" value={percent(totals.average_progress)} note="Weighted where possible" tone="green" />
-            <HoloKpi title="Average SPI" value={numberValue(totals.average_spi, 2)} note="Portfolio schedule signal" tone={statusTone(totals.average_spi) as "good" | "watch" | "critical" | "neutral"} />
-            <HoloKpi title="Average CPI" value={numberValue(totals.average_cpi, 2)} note="Portfolio cost signal" tone={statusTone(totals.average_cpi) as "good" | "watch" | "critical" | "neutral"} />
-            <HoloKpi title="Decisions" value={numberValue(totals.decisions_required)} note="Management action triggers" tone={totals.decisions_required > 0 ? "red" : "green"} />
-          </section>
-
-          <div className="portfolio-confidence-row">
-            <SourceConfidenceBadge
-              confidence={(totals.average_data_quality ?? 0) >= 85 ? "High" : (totals.average_data_quality ?? 0) >= 55 ? "Medium" : "Low"}
-              dataQuality={totals.average_data_quality}
-              lastUpdated={portfolio.generated_at}
-              sourceCount={projects.reduce((total, project) => total + Object.values(project.source_files || {}).reduce((sum, value) => sum + (Number(value) || 0), 0), 0)}
-            />
-            {guardrails && (
-              <span className={`guardrail-status guardrail-${guardrails.status.toLowerCase()}`}>
-                <b>Data Guardrails: {guardrails.status}</b>
-                <small>
-                  {guardrails.issue_count} issue(s) | {guardrails.block_count} block | {guardrails.warn_count} warn | Mode {guardrails.mode}
-                </small>
-                <small>{guardrails.report_path}</small>
-              </span>
-            )}
-          </div>
-
-          <PredictiveWarningPanel projects={projects} warningSummary={warningSummary} />
-
-          <section className="command-tabs">
-            <input id="deck-command" name="deck-tab" type="radio" defaultChecked />
-            <input id="deck-sectors" name="deck-tab" type="radio" />
-            <input id="deck-flow" name="deck-tab" type="radio" />
-            <div className="deck-labels">
-              <label htmlFor="deck-command">Portfolio Command</label>
-              <label htmlFor="deck-sectors">Sector Matrix</label>
-              <label htmlFor="deck-flow">Decision Flow</label>
-            </div>
-
-            <div className="deck-panels">
-              <section id="command-panel" className="deck-panel">
-                <div className="twin-grid">
-                  <article className="glass-panel digital-map">
-                    <div className="section-header">
-                      <div>
-                        <p className="eyebrow">Interactive Network</p>
-                        <h2>Portfolio Digital Twin</h2>
-                      </div>
-                      <span>{portfolio.project_count} projects recognized</span>
-                    </div>
-                    <ProjectNetwork selectedProject={selectedProject} />
-                  </article>
-                  <article className="glass-panel neural-console">
-                    <div className="section-header">
-                      <div>
-                        <p className="eyebrow">Performance Signals</p>
-                        <h2>Portfolio Neural Console</h2>
-                      </div>
-                      <span>{portfolio.sector_count} sectors</span>
-                    </div>
-                    <div className="gauge-grid">
-                      <Gauge label="SPI" value={totals.average_spi} tone={statusTone(totals.average_spi)} />
-                      <Gauge label="CPI" value={totals.average_cpi} tone={statusTone(totals.average_cpi)} />
-                      <Gauge label="Progress" value={totals.average_progress} tone="cyan" />
-                    </div>
-                    <SignalBar label="Average progress" value={totals.average_progress} tone="cyan" />
-                    <SignalBar label="Average SPI" value={totals.average_spi} tone={statusTone(totals.average_spi)} />
-                    <SignalBar label="Average CPI" value={totals.average_cpi} tone={statusTone(totals.average_cpi)} />
-                  </article>
-                </div>
-              </section>
-
-              <section id="sectors-panel" className="deck-panel">
-                <div className="sector-future-grid">
-                  {sectors.map((sector) => (
-                    <article className="glass-panel sector-orb" key={sector.sector}>
-                      <h2>{sector.sector}</h2>
-                      <div className="orb-value">{sector.project_count}</div>
-                      <SignalBar label="Progress" value={sector.average_progress} tone="cyan" />
-                      <SignalBar label="SPI" value={sector.average_spi} tone={statusTone(sector.average_spi)} />
-                      <SignalBar label="CPI" value={sector.average_cpi} tone={statusTone(sector.average_cpi)} />
-                      <div className="metric-row"><span>Budget</span><b>{money(sector.contract_value)}</b></div>
-                      <div className="metric-row"><span>Decisions</span><b>{sector.decisions_required}</b></div>
-                    </article>
-                  ))}
-                </div>
-              </section>
-
-              <section id="flow-panel" className="deck-panel">
-                <MermaidDiagram chart={portfolioDecisionMermaid(selectedProject)} title="Portfolio Decision Architecture" />
-              </section>
-            </div>
-          </section>
-
-          <ManagementDecisionBrief
-            items={decisionBrief}
-            onAddAction={(action) => setPortfolioActionSeeds((current) => [action, ...current])}
-          />
-          <UnifiedIntelligenceSearch mode="portfolio" />
-          <TechnicalKnowledgeAdvisor mode="portfolio" />
-          <ScenarioPlanner projects={projects} portfolioContractValue={totals.contract_value} />
-          <ActionTracker scopeKey="portfolio" seedActions={portfolioActionSeeds} />
-        </>
-      ) : (
-        <>
-          <ProjectWorkspace
-            project={selectedProject}
-            selectedReport={selectedReport}
-            setSelectedReport={setSelectedReport}
-          />
-          <SourceRegister project={selectedProject} />
-        </>
-      )}
-
-      <AiChatPanel
-        projectKey={isDecisionDashboard ? undefined : selectedProject.project_key}
-        projectName={isDecisionDashboard ? "Decision Making Dashboard" : selectedProject.project_display_name}
-        sector={isDecisionDashboard ? undefined : selectedProject.sector}
+        <a href="https://samco-project-intelegent-dashboard.streamlit.app" target="_blank" rel="noreferrer">
+          Open original
+        </a>
+      </div>
+      <iframe
+        src={STREAMLIT_APP_URL}
+        title="SAMCO Project Intelligence Hub Streamlit full clone"
+        allow="camera; microphone; clipboard-read; clipboard-write; fullscreen"
       />
+    </section>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <main className="future-shell">
+      <StreamlitFullClone />
+      <AiChatPanel projectName="Decision Making Dashboard" />
       <footer className="app-credit">
         Designed &amp; Created | <strong>Engr. Ahmed Labib</strong>
       </footer>
