@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import portfolio from "../../public/data/portfolio.json";
 import MermaidDiagram from "../components/MermaidDiagram";
 import AiChatPanel from "../components/ai/AiChatPanel";
@@ -1076,14 +1076,9 @@ function ProjectWorkspace({
 }
 
 export default function HomePage() {
-  const [selectedProjectKey, setSelectedProjectKey] = useState(projects[0]?.project_key ?? "");
-  const [selectedReport, setSelectedReport] = useState<ReportKey>("executive_dashboard");
   const [executiveLightMode, setExecutiveLightMode] = useState(false);
   const [portfolioActionSeeds, setPortfolioActionSeeds] = useState<ActionItem[]>([]);
-  const selectedProject = useMemo(
-    () => projects.find((project) => project.project_key === selectedProjectKey) ?? projects[0],
-    [selectedProjectKey]
-  );
+  const selectedProject = projects[0];
 
   return (
     <main className={`future-shell ${executiveLightMode ? "executive-light-mode" : ""}`}>
@@ -1099,14 +1094,14 @@ export default function HomePage() {
           <p className="eyebrow">Decision Making Dashboard</p>
           <h1>Decision Making Dashboard</h1>
           <p>
-            Phase 1 is a separated portfolio command view for top management. It aggregates all recognized
-            project data automatically, then hands decisions to the Project Deep Dive section below on the same page.
+            A separated portfolio command view for top management. It aggregates all recognized project data
+            automatically for board-level decisions, early warnings, and management actions.
           </p>
         </div>
         <div className="decision-phase-card">
           <span>Phase 1</span>
           <b>Portfolio decisions only</b>
-          <small>No project tabs are mixed into this section. Project controls start in Phase 2 below.</small>
+          <small>No project workspace tabs are rendered in this executive decision view.</small>
           <ExecutiveLightModeToggle enabled={executiveLightMode} onChange={setExecutiveLightMode} />
         </div>
       </section>
@@ -1214,14 +1209,6 @@ export default function HomePage() {
       <ScenarioPlanner projects={projects} portfolioContractValue={totals.contract_value} />
       <ActionTracker scopeKey="portfolio" seedActions={portfolioActionSeeds} />
 
-      <ProjectWorkspace
-        project={selectedProject}
-        selectedReport={selectedReport}
-        setSelectedReport={setSelectedReport}
-        selectedProjectKey={selectedProjectKey}
-        setSelectedProjectKey={setSelectedProjectKey}
-      />
-      <SourceRegister project={selectedProject} />
       <AiChatPanel
         projectKey={selectedProject.project_key}
         projectName={selectedProject.project_display_name}
