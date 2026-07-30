@@ -715,7 +715,7 @@ function ConferencePanel({ project }: { project: ProjectRecord }) {
             {meetingUrl ? (
               <a href={meetingUrl} target="_blank" rel="noreferrer">Join Conference</a>
             ) : (
-              <span>Add `meeting_url` to this project's `project.json` to activate the join button.</span>
+              <span>Add `meeting_url` to this project&apos;s `project.json` to activate the join button.</span>
             )}
           </div>
         </section>
@@ -893,7 +893,7 @@ function WorkspaceTabContent({
         <div className="workspace-two">
           <section className="feature-card">
             <div className="feature-card-head"><h3>Time Impact Position</h3><span>{project.features.delay_analysis.logic_mode || "Project-scoped"}</span></div>
-            <p>Shows the selected project's time-impact evidence, recognized TIA inputs, and generated time-impact outputs without mixing data from other projects.</p>
+            <p>Shows the selected project&apos;s time-impact evidence, recognized TIA inputs, and generated time-impact outputs without mixing data from other projects.</p>
             <DataStatus label="Recognized TIA Files" count={project.features.delay_analysis.recognized_file_count} />
             <DataStatus label="Required TIA Files" count={project.features.delay_analysis.required_file_count} />
             <DataStatus label="Delay Events" count={project.source_files.delay_events} />
@@ -928,7 +928,7 @@ function WorkspaceTabContent({
         <div className="workspace-two">
           <div>
             <h3>Letters Intelligence</h3>
-            <p>Correspondence is project-isolated. New letters added inside this project's inbox folder are recognized by the generator and reflected after sync/deploy.</p>
+            <p>Correspondence is project-isolated. New letters added inside this project&apos;s inbox folder are recognized by the generator and reflected after sync/deploy.</p>
             <DataStatus label="Inbox Files" count={project.features.letters_intelligence.inbox_file_count} />
             <DataStatus label="Claims Rows" count={project.source_files.claims} />
             <DataStatus label="Delay Events" count={project.source_files.delay_events} />
@@ -952,7 +952,7 @@ function WorkspaceTabContent({
         <div className="workspace-two">
           <div>
             <h3>Delay Analysis - Time Impact Analysis</h3>
-            <p>Applies the selected project's Delay Analysis logic. Submitted TIA packages are assessed through authority, evidence, procedure, causation, schedule, concurrency, mitigation, and determination gates.</p>
+            <p>Applies the selected project&apos;s Delay Analysis logic. Submitted TIA packages are assessed through authority, evidence, procedure, causation, schedule, concurrency, mitigation, and determination gates.</p>
             <DataStatus label="Logic Mode" count={project.features.delay_analysis.submitted_tia?.available ? 1 : 0} />
             <DataStatus label="Recognized TIA Files" count={project.features.delay_analysis.recognized_file_count} />
             <DataStatus label="Required TIA Files" count={project.features.delay_analysis.required_file_count} />
@@ -993,7 +993,7 @@ function WorkspaceTabContent({
         <div className="workspace-two">
           <div>
             <h3>Contract & Claims Intelligence Center</h3>
-            <p>Uses the selected project's contract source folder, evidence folder, and project-specific SQLite knowledge base. It does not read another project's claim library.</p>
+            <p>Uses the selected project&apos;s contract source folder, evidence folder, and project-specific SQLite knowledge base. It does not read another project&apos;s claim library.</p>
             <DataStatus label="Contract Files" count={project.features.contract_claims.source_files.length} />
             <DataStatus label="Evidence Files" count={project.features.contract_claims.evidence_files.length} />
             <DataStatus label="Knowledge Tables" count={Object.keys(project.features.contract_claims.database.tables || {}).length} />

@@ -52,7 +52,12 @@ export default function AiInsightCard({ type, projectKey }: AiInsightCardProps) 
   }
 
   useEffect(() => {
-    void loadInsight();
+    const timer = window.setTimeout(() => {
+      void loadInsight();
+    }, 0);
+    return () => window.clearTimeout(timer);
+    // The requested context is intentionally reloaded when its project or insight type changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectKey, type]);
 
   function renderList(label: string, values: unknown) {
