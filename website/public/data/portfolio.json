@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T00:47:01",
+  "generated_at": "2026-07-31T00:50:05",
   "project_count": 4,
   "sector_count": 3,
   "totals": {
@@ -41,7 +41,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting.",
-      "last_updated": "2026-07-27T23:22:25"
+      "last_updated": "2026-07-31T00:47:21"
     },
     {
       "decision_id": "DEC-the-big-p-01-up-20-april-26-01",
@@ -143,7 +143,7 @@
       "evidence_status": "High",
       "urgency": "Medium",
       "recommended_action": "Validate actual cost and payment records against budget baseline.",
-      "last_updated": "2026-07-27T23:22:25"
+      "last_updated": "2026-07-31T00:47:21"
     },
     {
       "decision_id": "DEC-suez-tunnel-02",
@@ -310,8 +310,8 @@
       "milestone_count": 5,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-07-27T23:22:25",
-      "fingerprint": "8078842fdcd3be09d2bbbb1ab32ced31773c24631723afecc19f048f747164ca",
+      "last_updated": "2026-07-31T00:47:21",
+      "fingerprint": "b6d41c578ee802f8c39725afbeebce90263a169ab03b1707807475e0d6bb8895",
       "source_files": {
         "projects": 1,
         "contracts": 2,
@@ -18102,8 +18102,8 @@
     "warn_count": 13,
     "issue_count": 13,
     "report_path": "D:/Project Intelligence Hub NextJS/12-logs/guardrail_report_latest.md",
-    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260731_004701",
-    "last_checked": "2026-07-31T00:47:01",
+    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260731_005005",
+    "last_checked": "2026-07-31T00:50:05",
     "top_issues": [
       {
         "severity": "WARN",
