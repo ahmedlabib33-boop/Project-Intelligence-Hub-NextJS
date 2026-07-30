@@ -7,18 +7,12 @@ set "INTERVAL_SECONDS=30"
 if not "%~1"=="" set "MODE=%~1"
 if not "%~2"=="" set "INTERVAL_SECONDS=%~2"
 
-echo Project Intelligence Hub full-workspace no-Git synchronization
+echo Project Intelligence Hub validated local-to-Vercel pipeline
 echo Mode: %MODE%  Interval: %INTERVAL_SECONDS% second(s)
-echo Target and deletion policy are controlled by tools\github_sync_config.json
-echo Credentials are read only from GITHUB_TOKEN or GH_TOKEN.
-echo Codespaces user secrets do not authenticate this local Windows process.
+echo A project or website change is generated, validated, built, published, deployed, then publicly verified.
+echo GitHub publishing uses the no-Git API sync configured in tools\github_sync_config.json.
+echo Credentials are read only from GITHUB_TOKEN or GH_TOKEN; Vercel uses the existing local Vercel login.
 echo.
 
-if /I "%MODE%"=="Watch" (
-    echo Running immediate one-time sync before starting the 30-second watcher...
-    powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\github_no_git_sync.ps1" -Mode Once -IntervalSeconds %INTERVAL_SECONDS%
-    if errorlevel 1 exit /b %ERRORLEVEL%
-)
-
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\github_no_git_sync.ps1" -Mode "%MODE%" -IntervalSeconds %INTERVAL_SECONDS%
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\vercel_project_pipeline.ps1" -Mode "%MODE%" -IntervalSeconds %INTERVAL_SECONDS%
 exit /b %ERRORLEVEL%
