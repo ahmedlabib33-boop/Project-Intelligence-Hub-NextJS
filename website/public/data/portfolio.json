@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T01:42:09",
+  "generated_at": "2026-07-31T02:48:20",
   "project_count": 4,
   "sector_count": 3,
   "totals": {
@@ -322,7 +322,9 @@
         "claims": 2,
         "activities": 17,
         "milestones": 5,
-        "delay_events": 5
+        "delay_events": 5,
+        "s_curve": 10,
+        "historical_outcomes": 0
       },
       "metric_sources": {
         "contract_value": {
@@ -386,7 +388,9 @@
             "claims": 2,
             "activities": 17,
             "milestones": 5,
-            "delay_events": 5
+            "delay_events": 5,
+            "s_curve": 10,
+            "historical_outcomes": 0
           },
           "source_tables": {
             "projects": {
@@ -4118,7 +4122,9 @@
         "claims": 1,
         "activities": 1363,
         "milestones": 4,
-        "delay_events": 25
+        "delay_events": 25,
+        "s_curve": 18,
+        "historical_outcomes": 0
       },
       "metric_sources": {
         "contract_value": {
@@ -4182,7 +4188,9 @@
             "claims": 1,
             "activities": 1363,
             "milestones": 4,
-            "delay_events": 25
+            "delay_events": 25,
+            "s_curve": 18,
+            "historical_outcomes": 0
           },
           "source_tables": {
             "projects": {
@@ -9314,7 +9322,9 @@
         "claims": 2,
         "activities": 17,
         "milestones": 5,
-        "delay_events": 5
+        "delay_events": 5,
+        "s_curve": 10,
+        "historical_outcomes": 0
       },
       "metric_sources": {
         "contract_value": {
@@ -9378,7 +9388,9 @@
             "claims": 2,
             "activities": 17,
             "milestones": 5,
-            "delay_events": 5
+            "delay_events": 5,
+            "s_curve": 10,
+            "historical_outcomes": 0
           },
           "source_tables": {
             "projects": {
@@ -13119,7 +13131,9 @@
         "claims": 2,
         "activities": 17,
         "milestones": 5,
-        "delay_events": 5
+        "delay_events": 5,
+        "s_curve": 10,
+        "historical_outcomes": 0
       },
       "metric_sources": {
         "contract_value": {
@@ -13183,7 +13197,9 @@
             "claims": 2,
             "activities": 17,
             "milestones": 5,
-            "delay_events": 5
+            "delay_events": 5,
+            "s_curve": 10,
+            "historical_outcomes": 0
           },
           "source_tables": {
             "projects": {
@@ -16828,8 +16844,8 @@
     "warn_count": 13,
     "issue_count": 13,
     "report_path": "D:/Project Intelligence Hub NextJS/12-logs/guardrail_report_latest.md",
-    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260731_014209",
-    "last_checked": "2026-07-31T01:42:09",
+    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260731_024820",
+    "last_checked": "2026-07-31T02:48:20",
     "top_issues": [
       {
         "severity": "WARN",

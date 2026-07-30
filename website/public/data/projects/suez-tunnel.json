@@ -103,7 +103,9 @@
     "claims": 2,
     "activities": 17,
     "milestones": 5,
-    "delay_events": 5
+    "delay_events": 5,
+    "s_curve": 10,
+    "historical_outcomes": 0
   },
   "metric_sources": {
     "contract_value": {
@@ -167,7 +169,9 @@
         "claims": 2,
         "activities": 17,
         "milestones": 5,
-        "delay_events": 5
+        "delay_events": 5,
+        "s_curve": 10,
+        "historical_outcomes": 0
       },
       "source_tables": {
         "projects": {

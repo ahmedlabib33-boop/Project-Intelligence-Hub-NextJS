@@ -1,0 +1,17 @@
+# Core, source-backed analytics used by tools/advanced_analytics.py
+pandas>=2.2
+numpy>=2.0
+matplotlib>=3.9
+scikit-learn>=1.5
+spacy>=3.8
+
+# Optional enhancements. The engine falls back safely when they are unavailable.
+seaborn>=0.13
+statsmodels>=0.14
+xgboost>=2.1
+torch>=2.5
+
+# TensorFlow is intentionally optional: current Python 3.14 has no supported
+# package in this environment, and deep learning remains disabled until there
+# are at least 500 validated labelled outcome records.
+tensorflow>=2.18; python_version < "3.14"

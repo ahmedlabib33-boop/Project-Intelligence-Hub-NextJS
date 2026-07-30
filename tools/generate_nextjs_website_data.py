@@ -12,6 +12,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from advanced_analytics import build_advanced_analytics
+
 
 ROOT = Path(__file__).resolve().parents[1]
 PROJECTS_ROOT = ROOT / "projects"
@@ -904,6 +906,8 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         "activities": read_csv_rows(data_dir / "activities.csv"),
         "milestones": read_csv_rows(data_dir / "milestones.csv"),
         "delay_events": read_csv_rows(data_dir / "delay_events.csv"),
+        "s_curve": read_csv_rows(data_dir / "s_curve.csv"),
+        "historical_outcomes": read_csv_rows(data_dir / "historical_outcomes.csv"),
     }
 
     project_meta = rows["projects"][0] if rows["projects"] else {}
@@ -1016,6 +1020,12 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
     delay_exposure = exposure_from_value(delay_days, medium=1, high=30)
     claim_exposure_level = exposure_from_value(claims_exposure, medium=1, high=1000000)
     data_confidence = confidence_from_quality(data_quality)
+    advanced_analytics = build_advanced_analytics(
+        project_key=str(project["project_key"]),
+        rows=rows,
+        contract_value=contract_value,
+        output_dir=DATA_ROOT / "analytics",
+    )
     priority_inputs = [
         "High" if decision_required else "Low",
         "High" if schedule_health == "Critical" else schedule_health,
@@ -1044,6 +1054,7 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
             "required_source_completeness": round(source_completeness * 100, 1),
             "required_source_sets": list(required_source_sets),
         },
+        "advanced_analytics": advanced_analytics,
     })
 
     return {
