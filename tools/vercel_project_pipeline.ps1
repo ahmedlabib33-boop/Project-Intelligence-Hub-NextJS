@@ -261,6 +261,10 @@ try {
         }
     }
 }
+catch {
+    Write-PipelineLog "Fatal pipeline failure: $($_.Exception.Message)"
+    exit 1
+}
 finally {
     if ($null -ne $script:WatchMutex) {
         $script:WatchMutex.ReleaseMutex() | Out-Null
