@@ -198,16 +198,18 @@ const reportTabs: Array<{ key: ReportKey; label: string; note: string }> = [
 
 const workspaceTabs = [
   "Overview",
-  "EBS / WBS",
+  "WBS",
   "Activities",
   "Milestones",
   "S-Curve",
-  "EVM",
+  "EVM Analysis",
   "Contracts",
-  "Risk Matrix",
   "Letters Intelligence",
-  "Delay Analysis",
-  "Contract & Claims",
+  "Delays",
+  "Time Impact",
+  "Risks",
+  "Delay Analysis - Time Impact Analysis",
+  "Contract & Claims Intelligence Center",
   "Technical Advisor",
   "Conference",
   "Output Studio"
@@ -747,7 +749,7 @@ function WorkspaceTabContent({
     );
   }
 
-  if (activeTab === "EBS / WBS") {
+  if (activeTab === "WBS") {
     return (
       <div className="feature-stack">
         <div className="workspace-grid">
@@ -756,7 +758,7 @@ function WorkspaceTabContent({
           <MiniMetric label="Project Scope" value={project.sector} note="Sector-based project grouping" />
         </div>
         <div className="workspace-two">
-          <TablePreviewPanel table={project.features.overview.source_tables.wbs} title="EBS / WBS Source Table" />
+          <TablePreviewPanel table={project.features.overview.source_tables.wbs} title="WBS Source Table" />
           <iframe src={project.reports.master_dashboard} title={`${project.project_display_name} master dashboard WBS`} />
         </div>
       </div>
@@ -805,7 +807,7 @@ function WorkspaceTabContent({
     );
   }
 
-  if (activeTab === "EVM") {
+  if (activeTab === "EVM Analysis") {
     return (
       <div className="feature-stack">
         <div className="workspace-grid">
@@ -840,7 +842,44 @@ function WorkspaceTabContent({
     );
   }
 
-  if (activeTab === "Risk Matrix") {
+  if (activeTab === "Delays") {
+    return (
+      <div className="feature-stack">
+        <AiInsightCard type="delay" projectKey={project.project_key} />
+        <div className="workspace-grid">
+          <MiniMetric label="Delay Days" value={numberValue(project.delay_days)} note="Delay exposure from project records" />
+          <MiniMetric label="Delay Events" value={numberValue(project.source_files.delay_events)} note="Delay event rows loaded" />
+          <MiniMetric label="SPI" value={numberValue(project.spi, 2)} note="Schedule performance signal" />
+          <MiniMetric label="Decision Required" value={project.decision_required ? "Yes" : "No"} note="Delay or performance trigger" />
+        </div>
+        <div className="workspace-two">
+          <FeatureSvg mode="delay" />
+          <TablePreviewPanel table={project.features.overview.source_tables.delay_events} title="Delay Events Source Table" />
+        </div>
+      </div>
+    );
+  }
+
+  if (activeTab === "Time Impact") {
+    return (
+      <div className="feature-stack">
+        <div className="workspace-two">
+          <section className="feature-card">
+            <div className="feature-card-head"><h3>Time Impact Position</h3><span>{project.features.delay_analysis.logic_mode || "Project-scoped"}</span></div>
+            <p>Shows the selected project's time-impact evidence, recognized TIA inputs, and generated time-impact outputs without mixing data from other projects.</p>
+            <DataStatus label="Recognized TIA Files" count={project.features.delay_analysis.recognized_file_count} />
+            <DataStatus label="Required TIA Files" count={project.features.delay_analysis.required_file_count} />
+            <DataStatus label="Delay Events" count={project.source_files.delay_events} />
+          </section>
+          <FeatureSvg mode="delay" />
+        </div>
+        <TemplateInventory templates={project.features.delay_analysis.templates} />
+        <iframe className="wide-embed" src={project.reports.elite_svg_charts} title={`${project.project_display_name} time impact charts`} />
+      </div>
+    );
+  }
+
+  if (activeTab === "Risks") {
     return (
       <div className="feature-stack">
         <AiInsightCard type="risk" projectKey={project.project_key} />
@@ -850,7 +889,7 @@ function WorkspaceTabContent({
           <MiniMetric label="Decision Required" value={project.decision_required ? "Yes" : "No"} note="Rule-based management trigger" />
           <MiniMetric label="Delay Days" value={numberValue(project.delay_days)} note="Delay exposure" />
         </div>
-        <TablePreviewPanel table={project.features.overview.source_tables.risks} title="Risk Matrix Source Table" />
+        <TablePreviewPanel table={project.features.overview.source_tables.risks} title="Risks Source Table" />
       </div>
     );
   }
@@ -879,7 +918,7 @@ function WorkspaceTabContent({
     );
   }
 
-  if (activeTab === "Delay Analysis") {
+  if (activeTab === "Delay Analysis - Time Impact Analysis") {
     return (
       <div className="feature-stack">
         <AiInsightCard type="delay" projectKey={project.project_key} />
@@ -920,7 +959,7 @@ function WorkspaceTabContent({
     );
   }
 
-  if (activeTab === "Contract & Claims") {
+  if (activeTab === "Contract & Claims Intelligence Center") {
     return (
       <div className="feature-stack">
         <AiInsightCard type="contract" projectKey={project.project_key} />
