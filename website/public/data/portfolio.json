@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T02:51:30",
+  "generated_at": "2026-07-31T02:55:35",
   "project_count": 4,
   "sector_count": 3,
   "totals": {
@@ -309,6 +309,147 @@
       "activity_count": 17,
       "milestone_count": 5,
       "data_quality": 100.0,
+      "advanced_analytics": {
+        "engine_version": "1.0",
+        "scope": "selected_project_only",
+        "data_profile": {
+          "activity_records": 17,
+          "s_curve_periods": 10,
+          "delay_event_records": 5,
+          "risk_records": 3,
+          "labelled_historical_outcome_records": 0
+        },
+        "activity_anomalies": {
+          "status": "insufficient_data",
+          "method": "IsolationForest",
+          "minimum_activity_records": 20,
+          "activity_records": 17,
+          "message": "At least 20 activity records are required for unsupervised anomaly detection.",
+          "flagged_count": 0,
+          "items": []
+        },
+        "s_curve_forecast": {
+          "status": "ready",
+          "method": "numpy linear trend fallback",
+          "periods_available": 10,
+          "current_actual_value": 616724300.0,
+          "current_planned_value": 782000000.0,
+          "completion_target_value": 850000000.0,
+          "recent_period_change": 49504000.0,
+          "projected_completion_date": "2026-11-01",
+          "months_to_target": 3,
+          "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
+        },
+        "s_curve_chart_url": "/data/analytics/lmd-bridge-s-curve-analytics.png",
+        "technical_topics": {
+          "status": "ready",
+          "method": "spaCy normalized keyword extraction",
+          "source_text_records": 25,
+          "topics": [
+            {
+              "term": "piers",
+              "count": 4
+            },
+            {
+              "term": "abutments",
+              "count": 4
+            },
+            {
+              "term": "deck",
+              "count": 3
+            },
+            {
+              "term": "road",
+              "count": 3
+            },
+            {
+              "term": "ifc",
+              "count": 2
+            },
+            {
+              "term": "shop",
+              "count": 2
+            },
+            {
+              "term": "drawings",
+              "count": 2
+            },
+            {
+              "term": "steel",
+              "count": 2
+            },
+            {
+              "term": "delivery",
+              "count": 2
+            },
+            {
+              "term": "bored",
+              "count": 2
+            },
+            {
+              "term": "piles",
+              "count": 2
+            },
+            {
+              "term": "pile",
+              "count": 2
+            }
+          ]
+        },
+        "model_governance": {
+          "libraries": {
+            "pandas": {
+              "installed": true
+            },
+            "numpy": {
+              "installed": true
+            },
+            "matplotlib": {
+              "installed": true
+            },
+            "seaborn": {
+              "installed": false
+            },
+            "scikit_learn": {
+              "installed": true
+            },
+            "statsmodels": {
+              "installed": false
+            },
+            "spacy": {
+              "installed": true
+            },
+            "xgboost": {
+              "installed": false
+            },
+            "pytorch": {
+              "installed": true
+            },
+            "tensorflow": {
+              "installed": false
+            }
+          },
+          "xgboost": {
+            "status": "not_trained",
+            "minimum_labelled_records": 50,
+            "records_available": 0,
+            "reason": "Requires labelled historic outcomes such as verified delay days, cost variance, or completion performance."
+          },
+          "pytorch": {
+            "status": "not_trained",
+            "minimum_labelled_records": 500,
+            "records_available": 0,
+            "reason": "Requires a large, validated labelled data set and an approved model-governance process."
+          },
+          "tensorflow": {
+            "status": "not_trained",
+            "minimum_labelled_records": 500,
+            "records_available": 0,
+            "reason": "Requires a large, validated labelled data set and an approved model-governance process."
+          }
+        },
+        "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
+      },
       "decision_required": true,
       "last_updated": "2026-07-31T00:47:21",
       "fingerprint": "b6d41c578ee802f8c39725afbeebce90263a169ab03b1707807475e0d6bb8895",
@@ -4109,6 +4250,214 @@
       "activity_count": 1363,
       "milestone_count": 4,
       "data_quality": 100.0,
+      "advanced_analytics": {
+        "engine_version": "1.0",
+        "scope": "selected_project_only",
+        "data_profile": {
+          "activity_records": 1363,
+          "s_curve_periods": 18,
+          "delay_event_records": 25,
+          "risk_records": 2,
+          "labelled_historical_outcome_records": 0
+        },
+        "activity_anomalies": {
+          "status": "ready",
+          "method": "scikit-learn IsolationForest",
+          "activity_records": 1363,
+          "review_queue_limit": 10,
+          "features_available": [
+            "progress_variance",
+            "total_float_days",
+            "finish_variance_days",
+            "critical_flag"
+          ],
+          "flagged_count": 10,
+          "items": [
+            {
+              "activity_id": "P-MDEL-1060",
+              "activity_name": "Delivery for cold Crystalline waterproofing for Water tank",
+              "anomaly_score": 0.0418,
+              "reason": "unusual total-float position"
+            },
+            {
+              "activity_id": "P-MPOS-1060",
+              "activity_name": "P.O for cold Crystalline waterproofing for Water tank",
+              "anomaly_score": 0.0365,
+              "reason": "unusual total-float position"
+            },
+            {
+              "activity_id": "CON-B02-FOOT-1060",
+              "activity_name": "Shuttering for Columns & Walls Below SOG (B01) (footing)",
+              "anomaly_score": 0.0297,
+              "reason": "material forecast-finish variance"
+            },
+            {
+              "activity_id": "CON-B02-FOOT-1080",
+              "activity_name": "Pouring Columns & Walls Below SOG (B01) (footing)",
+              "anomaly_score": 0.0292,
+              "reason": "material forecast-finish variance"
+            },
+            {
+              "activity_id": "CON-B02-FOOT-1070",
+              "activity_name": "RFT for Columns & Walls Below SOG (B02) (footing)",
+              "anomaly_score": 0.029,
+              "reason": "material forecast-finish variance"
+            },
+            {
+              "activity_id": "P-MS-1060",
+              "activity_name": "Submittal for cold Crystalline waterproofing for Water tank",
+              "anomaly_score": 0.0219,
+              "reason": "material forecast-finish variance"
+            },
+            {
+              "activity_id": "E-SUB-B03-1ST-1020",
+              "activity_name": "Submittal for Beams Conc. Dim.  & RFT DWGs (B03) (1st)",
+              "anomaly_score": 0.0198,
+              "reason": "material actual-versus-planned progress variance"
+            },
+            {
+              "activity_id": "E-SUB-B03-1ST-1030",
+              "activity_name": "Submittal for Slabs Conc. Dim.  & RFT DWGs (B03) (1st)",
+              "anomaly_score": 0.0187,
+              "reason": "material actual-versus-planned progress variance"
+            },
+            {
+              "activity_id": "E-APP-B03-1ST-1030",
+              "activity_name": "Approval for Slabs Conc. Dim.  & RFT DWGs  (B03) (1st)",
+              "anomaly_score": 0.0187,
+              "reason": "material actual-versus-planned progress variance"
+            },
+            {
+              "activity_id": "P-MA-1060",
+              "activity_name": "Approval for cold Crystalline waterproofing for Water tank",
+              "anomaly_score": 0.0172,
+              "reason": "material forecast-finish variance"
+            }
+          ],
+          "message": "Unsupervised outlier screening. Review flagged activities against the schedule and source evidence before acting."
+        },
+        "s_curve_forecast": {
+          "status": "outside_horizon",
+          "method": "numpy linear trend fallback",
+          "periods_available": 18,
+          "current_actual_value": 0.0,
+          "current_planned_value": 367286025.0,
+          "completion_target_value": 367286025.0,
+          "recent_period_change": 0.0,
+          "projected_completion_date": null,
+          "months_to_target": null,
+          "message": "The 24-month trend horizon does not reach the source-value completion target. Confirm recovery strategy, remaining scope, and the accepted programme before treating this as a completion forecast."
+        },
+        "s_curve_chart_url": "/data/analytics/the-big-p-01-up-20-april-26-s-curve-analytics.png",
+        "technical_topics": {
+          "status": "ready",
+          "method": "spaCy normalized keyword extraction",
+          "source_text_records": 1390,
+          "topics": [
+            {
+              "term": "rft",
+              "count": 817
+            },
+            {
+              "term": "dwgs",
+              "count": 779
+            },
+            {
+              "term": "conc",
+              "count": 715
+            },
+            {
+              "term": "dim",
+              "count": 715
+            },
+            {
+              "term": "submittal",
+              "count": 409
+            },
+            {
+              "term": "approval",
+              "count": 393
+            },
+            {
+              "term": "built",
+              "count": 385
+            },
+            {
+              "term": "drawing",
+              "count": 384
+            },
+            {
+              "term": "walls",
+              "count": 345
+            },
+            {
+              "term": "slabs",
+              "count": 332
+            },
+            {
+              "term": "beams",
+              "count": 328
+            },
+            {
+              "term": "col",
+              "count": 324
+            }
+          ]
+        },
+        "model_governance": {
+          "libraries": {
+            "pandas": {
+              "installed": true
+            },
+            "numpy": {
+              "installed": true
+            },
+            "matplotlib": {
+              "installed": true
+            },
+            "seaborn": {
+              "installed": false
+            },
+            "scikit_learn": {
+              "installed": true
+            },
+            "statsmodels": {
+              "installed": false
+            },
+            "spacy": {
+              "installed": true
+            },
+            "xgboost": {
+              "installed": false
+            },
+            "pytorch": {
+              "installed": true
+            },
+            "tensorflow": {
+              "installed": false
+            }
+          },
+          "xgboost": {
+            "status": "not_trained",
+            "minimum_labelled_records": 50,
+            "records_available": 0,
+            "reason": "Requires labelled historic outcomes such as verified delay days, cost variance, or completion performance."
+          },
+          "pytorch": {
+            "status": "not_trained",
+            "minimum_labelled_records": 500,
+            "records_available": 0,
+            "reason": "Requires a large, validated labelled data set and an approved model-governance process."
+          },
+          "tensorflow": {
+            "status": "not_trained",
+            "minimum_labelled_records": 500,
+            "records_available": 0,
+            "reason": "Requires a large, validated labelled data set and an approved model-governance process."
+          }
+        },
+        "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
+      },
       "decision_required": true,
       "last_updated": "2026-07-31T01:23:47",
       "fingerprint": "7bfea26d3116d0ed7aa576d037750da81c8354e519a359bf1908a6c959939bf9",
@@ -9309,6 +9658,147 @@
       "activity_count": 17,
       "milestone_count": 5,
       "data_quality": 100.0,
+      "advanced_analytics": {
+        "engine_version": "1.0",
+        "scope": "selected_project_only",
+        "data_profile": {
+          "activity_records": 17,
+          "s_curve_periods": 10,
+          "delay_event_records": 5,
+          "risk_records": 3,
+          "labelled_historical_outcome_records": 0
+        },
+        "activity_anomalies": {
+          "status": "insufficient_data",
+          "method": "IsolationForest",
+          "minimum_activity_records": 20,
+          "activity_records": 17,
+          "message": "At least 20 activity records are required for unsupervised anomaly detection.",
+          "flagged_count": 0,
+          "items": []
+        },
+        "s_curve_forecast": {
+          "status": "ready",
+          "method": "numpy linear trend fallback",
+          "periods_available": 10,
+          "current_actual_value": 1890281400.0,
+          "current_planned_value": 1932000000.0,
+          "completion_target_value": 2100000000.0,
+          "recent_period_change": 122304000.0,
+          "projected_completion_date": "2026-08-01",
+          "months_to_target": 1,
+          "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
+        },
+        "s_curve_chart_url": "/data/analytics/sophia-mall-s-curve-analytics.png",
+        "technical_topics": {
+          "status": "ready",
+          "method": "spaCy normalized keyword extraction",
+          "source_text_records": 25,
+          "topics": [
+            {
+              "term": "raft",
+              "count": 4
+            },
+            {
+              "term": "foundation",
+              "count": 4
+            },
+            {
+              "term": "basement",
+              "count": 3
+            },
+            {
+              "term": "ifc",
+              "count": 2
+            },
+            {
+              "term": "drawings",
+              "count": 2
+            },
+            {
+              "term": "steel",
+              "count": 2
+            },
+            {
+              "term": "mep",
+              "count": 2
+            },
+            {
+              "term": "sleeves",
+              "count": 2
+            },
+            {
+              "term": "bulk",
+              "count": 2
+            },
+            {
+              "term": "excavation",
+              "count": 2
+            },
+            {
+              "term": "dewatering",
+              "count": 2
+            },
+            {
+              "term": "rft",
+              "count": 2
+            }
+          ]
+        },
+        "model_governance": {
+          "libraries": {
+            "pandas": {
+              "installed": true
+            },
+            "numpy": {
+              "installed": true
+            },
+            "matplotlib": {
+              "installed": true
+            },
+            "seaborn": {
+              "installed": false
+            },
+            "scikit_learn": {
+              "installed": true
+            },
+            "statsmodels": {
+              "installed": false
+            },
+            "spacy": {
+              "installed": true
+            },
+            "xgboost": {
+              "installed": false
+            },
+            "pytorch": {
+              "installed": true
+            },
+            "tensorflow": {
+              "installed": false
+            }
+          },
+          "xgboost": {
+            "status": "not_trained",
+            "minimum_labelled_records": 50,
+            "records_available": 0,
+            "reason": "Requires labelled historic outcomes such as verified delay days, cost variance, or completion performance."
+          },
+          "pytorch": {
+            "status": "not_trained",
+            "minimum_labelled_records": 500,
+            "records_available": 0,
+            "reason": "Requires a large, validated labelled data set and an approved model-governance process."
+          },
+          "tensorflow": {
+            "status": "not_trained",
+            "minimum_labelled_records": 500,
+            "records_available": 0,
+            "reason": "Requires a large, validated labelled data set and an approved model-governance process."
+          }
+        },
+        "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
+      },
       "decision_required": true,
       "last_updated": "2026-07-27T23:22:25",
       "fingerprint": "ac5199dbf682ed624619df889d61a8d6589e4f1bc7dc20764f443f4866cac7a4",
@@ -13118,6 +13608,147 @@
       "activity_count": 17,
       "milestone_count": 5,
       "data_quality": 100.0,
+      "advanced_analytics": {
+        "engine_version": "1.0",
+        "scope": "selected_project_only",
+        "data_profile": {
+          "activity_records": 17,
+          "s_curve_periods": 10,
+          "delay_event_records": 5,
+          "risk_records": 3,
+          "labelled_historical_outcome_records": 0
+        },
+        "activity_anomalies": {
+          "status": "insufficient_data",
+          "method": "IsolationForest",
+          "minimum_activity_records": 20,
+          "activity_records": 17,
+          "message": "At least 20 activity records are required for unsupervised anomaly detection.",
+          "flagged_count": 0,
+          "items": []
+        },
+        "s_curve_forecast": {
+          "status": "ready",
+          "method": "numpy linear trend fallback",
+          "periods_available": 10,
+          "current_actual_value": 916040000.0,
+          "current_planned_value": 1150000000.0,
+          "completion_target_value": 1250000000.0,
+          "recent_period_change": 72800000.0,
+          "projected_completion_date": "2026-09-01",
+          "months_to_target": 3,
+          "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
+        },
+        "s_curve_chart_url": "/data/analytics/suez-tunnel-s-curve-analytics.png",
+        "technical_topics": {
+          "status": "ready",
+          "method": "spaCy normalized keyword extraction",
+          "source_text_records": 25,
+          "topics": [
+            {
+              "term": "slab",
+              "count": 6
+            },
+            {
+              "term": "reinforcement",
+              "count": 6
+            },
+            {
+              "term": "tunnel",
+              "count": 4
+            },
+            {
+              "term": "base",
+              "count": 4
+            },
+            {
+              "term": "concrete",
+              "count": 4
+            },
+            {
+              "term": "ifc",
+              "count": 2
+            },
+            {
+              "term": "alignment",
+              "count": 2
+            },
+            {
+              "term": "shop",
+              "count": 2
+            },
+            {
+              "term": "drawings",
+              "count": 2
+            },
+            {
+              "term": "delivery",
+              "count": 2
+            },
+            {
+              "term": "steel",
+              "count": 2
+            },
+            {
+              "term": "open",
+              "count": 2
+            }
+          ]
+        },
+        "model_governance": {
+          "libraries": {
+            "pandas": {
+              "installed": true
+            },
+            "numpy": {
+              "installed": true
+            },
+            "matplotlib": {
+              "installed": true
+            },
+            "seaborn": {
+              "installed": false
+            },
+            "scikit_learn": {
+              "installed": true
+            },
+            "statsmodels": {
+              "installed": false
+            },
+            "spacy": {
+              "installed": true
+            },
+            "xgboost": {
+              "installed": false
+            },
+            "pytorch": {
+              "installed": true
+            },
+            "tensorflow": {
+              "installed": false
+            }
+          },
+          "xgboost": {
+            "status": "not_trained",
+            "minimum_labelled_records": 50,
+            "records_available": 0,
+            "reason": "Requires labelled historic outcomes such as verified delay days, cost variance, or completion performance."
+          },
+          "pytorch": {
+            "status": "not_trained",
+            "minimum_labelled_records": 500,
+            "records_available": 0,
+            "reason": "Requires a large, validated labelled data set and an approved model-governance process."
+          },
+          "tensorflow": {
+            "status": "not_trained",
+            "minimum_labelled_records": 500,
+            "records_available": 0,
+            "reason": "Requires a large, validated labelled data set and an approved model-governance process."
+          }
+        },
+        "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
+      },
       "decision_required": true,
       "last_updated": "2026-07-27T23:22:25",
       "fingerprint": "1242fa300c543717c097f5989ee334eacbd2f16001344cd95174e517f58f37b9",
@@ -16844,8 +17475,8 @@
     "warn_count": 13,
     "issue_count": 13,
     "report_path": "D:/Project Intelligence Hub NextJS/12-logs/guardrail_report_latest.md",
-    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260731_025130",
-    "last_checked": "2026-07-31T02:51:30",
+    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260731_025536",
+    "last_checked": "2026-07-31T02:55:36",
     "top_issues": [
       {
         "severity": "WARN",

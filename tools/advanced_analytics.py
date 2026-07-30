@@ -173,7 +173,11 @@ def _activity_anomalies(activities: list[dict[str, Any]]) -> dict[str, Any]:
     normalized = matrix[usable].copy()
     for column in usable:
         normalized[column] = normalized[column].fillna(normalized[column].median())
-    model = IsolationForest(n_estimators=200, contamination="auto", random_state=42)
+    # Keep the output a review queue, not a misleading assertion that a large
+    # share of the schedule is abnormal. The schedule analyst can expand it
+    # after inspecting the source programme and update logic.
+    contamination = min(0.05, 10 / len(normalized))
+    model = IsolationForest(n_estimators=200, contamination=contamination, random_state=42)
     labels = model.fit_predict(normalized)
     scores = -model.decision_function(normalized)
     medians = normalized.median()
@@ -207,6 +211,7 @@ def _activity_anomalies(activities: list[dict[str, Any]]) -> dict[str, Any]:
         "status": "ready",
         "method": "scikit-learn IsolationForest",
         "activity_records": len(frame),
+        "review_queue_limit": 10,
         "features_available": usable,
         "flagged_count": len(candidates),
         "items": candidates[:10],
@@ -272,9 +277,15 @@ def _s_curve_forecast(s_curve: list[dict[str, Any]], contract_value: float | Non
             "forecast": forecast_values,
         }
     )
+    status = "ready" if completion_index else "outside_horizon"
+    message = (
+        "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
+        if completion_index
+        else "The 24-month trend horizon does not reach the source-value completion target. Confirm recovery strategy, remaining scope, and the accepted programme before treating this as a completion forecast."
+    )
     return (
         {
-            "status": "ready",
+            "status": status,
             "method": method,
             "periods_available": len(frame),
             "current_actual_value": round(float(actual_values[-1]), 2),
@@ -283,7 +294,7 @@ def _s_curve_forecast(s_curve: list[dict[str, Any]], contract_value: float | Non
             "recent_period_change": round(trend_delta, 2),
             "projected_completion_date": projected_date,
             "months_to_target": completion_index,
-            "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions.",
+            "message": message,
         },
         pd.concat([frame[["date", "planned", "actual"]], forecast_frame], ignore_index=True, sort=False),
     )

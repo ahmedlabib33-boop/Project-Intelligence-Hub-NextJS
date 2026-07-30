@@ -101,6 +101,44 @@ def expected_source_metrics(data_dir: Path) -> dict[str, float | None]:
     }
 
 
+def validate_advanced_analytics_output(
+    project_key: str,
+    output: dict[str, Any],
+    expected_counts: dict[str, int],
+    errors: list[str],
+    checks: list[str],
+) -> None:
+    analytics = output.get("advanced_analytics")
+    if not isinstance(analytics, dict):
+        errors.append(f"{project_key}: advanced analytics payload is missing")
+        return
+    if analytics.get("scope") != "selected_project_only":
+        errors.append(f"{project_key}: advanced analytics scope is not project-isolated")
+    profile = analytics.get("data_profile", {})
+    if profile.get("activity_records") != expected_counts["activities"]:
+        errors.append(f"{project_key}: advanced analytics activity count does not match selected-project source")
+    if profile.get("s_curve_periods") != expected_counts["s_curve"]:
+        errors.append(f"{project_key}: advanced analytics S-curve count does not match selected-project source")
+    anomalies = analytics.get("activity_anomalies", {})
+    if anomalies.get("status") == "ready" and int(anomalies.get("flagged_count") or 0) > 10:
+        errors.append(f"{project_key}: advanced analytics anomaly review queue exceeds 10 records")
+    forecast = analytics.get("s_curve_forecast", {})
+    if expected_counts["s_curve"] >= 6 and forecast.get("status") not in {"ready", "outside_horizon", "insufficient_data"}:
+        errors.append(f"{project_key}: advanced analytics forecast returned an unknown status")
+    chart_url = analytics.get("s_curve_chart_url")
+    if chart_url:
+        expected_chart = ROOT / "website" / "public" / str(chart_url).lstrip("/")
+        if not expected_chart.exists():
+            errors.append(f"{project_key}: advanced analytics chart asset is missing")
+    governance = analytics.get("model_governance", {})
+    for model_name in ("xgboost", "pytorch", "tensorflow"):
+        model = governance.get(model_name, {})
+        if model.get("records_available") != profile.get("labelled_historical_outcome_records"):
+            errors.append(f"{project_key}: {model_name} governance does not use selected-project history")
+    if not any(error.startswith(f"{project_key}:") for error in errors):
+        checks.append(f"{project_key}: advanced analytics is project-scoped, source-backed, and governed")
+
+
 def fetch_public_json(public_url: str, relative_path: str) -> dict[str, Any]:
     """Read a cache-busted JSON artifact from the deployed Vercel site."""
     url = f"{public_url.rstrip('/')}/{relative_path.lstrip('/')}?{urlencode({'pipeline_check': datetime.now().timestamp()})}"
@@ -192,6 +230,10 @@ def validate_public_delivery(
             errors.append(f"{project_key}: public metric source traceability does not match local generated project")
         else:
             checks.append(f"{project_key}: public project data and traceability match local generation")
+        if public_project.get("advanced_analytics") != local_project.get("advanced_analytics"):
+            errors.append(f"{project_key}: public advanced analytics does not match the selected-project local result")
+        else:
+            checks.append(f"{project_key}: public advanced analytics matches the selected-project local result")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -241,6 +283,7 @@ def main(argv: list[str] | None = None) -> int:
             "risks": len(read_csv_rows(Path(project["path"]) / "01-data" / "import_templates" / "risks.csv")),
             "claims": len(read_csv_rows(Path(project["path"]) / "01-data" / "import_templates" / "claims.csv")),
             "delay_events": len(read_csv_rows(Path(project["path"]) / "01-data" / "import_templates" / "delay_events.csv")),
+            "s_curve": len(read_csv_rows(Path(project["path"]) / "01-data" / "import_templates" / "s_curve.csv")),
         }
         for dataset, expected_count in expected_counts.items():
             if output.get("source_files", {}).get(dataset) != expected_count:
@@ -249,6 +292,7 @@ def main(argv: list[str] | None = None) -> int:
         for metric in ("contract_value", "paid_amount", "bac", "pv", "ev", "ac", "risk_score", "delay_days", "claims_exposure"):
             if expected.get(metric) not in (None, 0) and not output.get("metric_sources", {}).get(metric, {}).get("source"):
                 errors.append(f"{project_key}: {metric} is missing source traceability")
+        validate_advanced_analytics_output(project_key, output, expected_counts, errors, checks)
 
     portfolio_path = DATA_ROOT.parent / "portfolio.json"
     if not portfolio_path.exists():

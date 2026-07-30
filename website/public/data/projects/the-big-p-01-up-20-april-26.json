@@ -95,79 +95,80 @@
       "status": "ready",
       "method": "scikit-learn IsolationForest",
       "activity_records": 1363,
+      "review_queue_limit": 10,
       "features_available": [
         "progress_variance",
         "total_float_days",
         "finish_variance_days",
         "critical_flag"
       ],
-      "flagged_count": 508,
+      "flagged_count": 10,
       "items": [
         {
           "activity_id": "P-MDEL-1060",
           "activity_name": "Delivery for cold Crystalline waterproofing for Water tank",
-          "anomaly_score": 0.1741,
+          "anomaly_score": 0.0418,
           "reason": "unusual total-float position"
         },
         {
           "activity_id": "P-MPOS-1060",
           "activity_name": "P.O for cold Crystalline waterproofing for Water tank",
-          "anomaly_score": 0.1688,
+          "anomaly_score": 0.0365,
           "reason": "unusual total-float position"
         },
         {
           "activity_id": "CON-B02-FOOT-1060",
           "activity_name": "Shuttering for Columns & Walls Below SOG (B01) (footing)",
-          "anomaly_score": 0.162,
+          "anomaly_score": 0.0297,
           "reason": "material forecast-finish variance"
         },
         {
           "activity_id": "CON-B02-FOOT-1080",
           "activity_name": "Pouring Columns & Walls Below SOG (B01) (footing)",
-          "anomaly_score": 0.1615,
+          "anomaly_score": 0.0292,
           "reason": "material forecast-finish variance"
         },
         {
           "activity_id": "CON-B02-FOOT-1070",
           "activity_name": "RFT for Columns & Walls Below SOG (B02) (footing)",
-          "anomaly_score": 0.1613,
+          "anomaly_score": 0.029,
           "reason": "material forecast-finish variance"
         },
         {
           "activity_id": "P-MS-1060",
           "activity_name": "Submittal for cold Crystalline waterproofing for Water tank",
-          "anomaly_score": 0.1542,
+          "anomaly_score": 0.0219,
           "reason": "material forecast-finish variance"
         },
         {
           "activity_id": "E-SUB-B03-1ST-1020",
           "activity_name": "Submittal for Beams Conc. Dim.  & RFT DWGs (B03) (1st)",
-          "anomaly_score": 0.1521,
+          "anomaly_score": 0.0198,
           "reason": "material actual-versus-planned progress variance"
         },
         {
           "activity_id": "E-SUB-B03-1ST-1030",
           "activity_name": "Submittal for Slabs Conc. Dim.  & RFT DWGs (B03) (1st)",
-          "anomaly_score": 0.151,
+          "anomaly_score": 0.0187,
           "reason": "material actual-versus-planned progress variance"
         },
         {
           "activity_id": "E-APP-B03-1ST-1030",
           "activity_name": "Approval for Slabs Conc. Dim.  & RFT DWGs  (B03) (1st)",
-          "anomaly_score": 0.151,
+          "anomaly_score": 0.0187,
           "reason": "material actual-versus-planned progress variance"
         },
         {
           "activity_id": "P-MA-1060",
           "activity_name": "Approval for cold Crystalline waterproofing for Water tank",
-          "anomaly_score": 0.1495,
+          "anomaly_score": 0.0172,
           "reason": "material forecast-finish variance"
         }
       ],
       "message": "Unsupervised outlier screening. Review flagged activities against the schedule and source evidence before acting."
     },
     "s_curve_forecast": {
-      "status": "ready",
+      "status": "outside_horizon",
       "method": "numpy linear trend fallback",
       "periods_available": 18,
       "current_actual_value": 0.0,
@@ -176,7 +177,7 @@
       "recent_period_change": 0.0,
       "projected_completion_date": null,
       "months_to_target": null,
-      "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
+      "message": "The 24-month trend horizon does not reach the source-value completion target. Confirm recovery strategy, remaining scope, and the accepted programme before treating this as a completion forecast."
     },
     "s_curve_chart_url": "/data/analytics/the-big-p-01-up-20-april-26-s-curve-analytics.png",
     "technical_topics": {
