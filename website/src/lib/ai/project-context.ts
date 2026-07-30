@@ -76,6 +76,7 @@ export async function buildProjectContext(projectKey?: string, mode = "general")
         cpi: project.cpi,
         risk_score: project.risk_score,
         delay_days: project.delay_days,
+        delay_assessment: project.delay_assessment,
         claims_exposure: project.claims_exposure,
         schedule_health: project.schedule_health,
         cost_health: project.cost_health,
@@ -85,6 +86,7 @@ export async function buildProjectContext(projectKey?: string, mode = "general")
         decision_priority: project.decision_priority,
         decision_reasons: project.decision_reasons,
         data_quality: project.data_quality,
+        data_quality_components: project.data_quality_components,
         decision_required: project.decision_required
       },
       source_files: project.source_files,

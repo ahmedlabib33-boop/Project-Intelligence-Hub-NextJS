@@ -44,6 +44,7 @@ type ProjectRecord = {
   risk_score: number | null;
   risk_record_count?: number;
   delay_days: number | null;
+  delay_assessment?: string | null;
   delay_event_count?: number;
   claims_exposure: number | null;
   claimed_days?: number | null;
@@ -58,6 +59,11 @@ type ProjectRecord = {
   decision_priority?: string | null;
   decision_reasons?: Array<Record<string, string>>;
   data_quality: number | null;
+  data_quality_components?: {
+    metric_completeness?: number;
+    required_source_completeness?: number;
+    required_source_sets?: string[];
+  };
   decision_required: boolean;
   activity_count: number;
   milestone_count: number;
