@@ -197,21 +197,30 @@ function Invoke-GitHubApi([string]$Method, [string]$Uri, [object]$Body = $null) 
         $params.Body = [System.Text.Encoding]::UTF8.GetBytes($jsonBody)
         $params.ContentType = "application/json"
     }
-    try {
-        return Invoke-RestMethod @params
-    } catch {
-        $statusCode = $null
-        $responseBody = ""
-        if ($null -ne $_.Exception.Response) {
-            $statusCode = [int]$_.Exception.Response.StatusCode
-            try {
-                $reader = New-Object System.IO.StreamReader($_.Exception.Response.GetResponseStream())
-                $responseBody = $reader.ReadToEnd()
-                $reader.Dispose()
-            } catch { $responseBody = "" }
+    for ($attempt = 1; $attempt -le 4; $attempt++) {
+        try {
+            return Invoke-RestMethod @params
+        } catch {
+            $statusCode = $null
+            $responseBody = ""
+            if ($null -ne $_.Exception.Response) {
+                $statusCode = [int]$_.Exception.Response.StatusCode
+                try {
+                    $reader = New-Object System.IO.StreamReader($_.Exception.Response.GetResponseStream())
+                    $responseBody = $reader.ReadToEnd()
+                    $reader.Dispose()
+                } catch { $responseBody = "" }
+            }
+            $isRetryable = $null -eq $statusCode -or $statusCode -in @(408, 429, 500, 502, 503, 504)
+            if ($isRetryable -and $attempt -lt 4) {
+                $delaySeconds = [int][math]::Pow(2, $attempt)
+                Write-SyncLog "Transient GitHub API failure for $Method. Retrying attempt $($attempt + 1) of 4 in $delaySeconds seconds."
+                Start-Sleep -Seconds $delaySeconds
+                continue
+            }
+            $detail = if ($responseBody) { " Response: $responseBody" } else { "" }
+            throw "GitHub API $Method $Uri failed$(if ($statusCode) { " (HTTP $statusCode)" }): $($_.Exception.Message)$detail"
         }
-        $detail = if ($responseBody) { " Response: $responseBody" } else { "" }
-        throw "GitHub API $Method $Uri failed$(if ($statusCode) { " (HTTP $statusCode)" }): $($_.Exception.Message)$detail"
     }
 }
 
@@ -257,7 +266,12 @@ function Invoke-SyncCycle {
         }
         $localBlobSha = Get-GitBlobSha $bytes
         if ($remote.ContainsKey($path) -and $remote[$path] -eq $localBlobSha) { continue }
-        $blob = Invoke-GitHubApi "Post" "$apiBase/git/blobs" @{ content = [Convert]::ToBase64String($bytes); encoding = "base64" }
+        try {
+            $blob = Invoke-GitHubApi "Post" "$apiBase/git/blobs" @{ content = [Convert]::ToBase64String($bytes); encoding = "base64" }
+        } catch {
+            Write-SyncLog "Blob upload failed for path: $path ($($info.Length) bytes)."
+            throw
+        }
         $uploadEntries += @{ path = $path; mode = "100644"; type = "blob"; sha = $blob.sha }
     }
     if ([bool]$config.sync_deletions -or [bool]$config.prune_legacy_project_folders) {

@@ -7,12 +7,16 @@ source totals.
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
 import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Any
+from urllib.error import HTTPError, URLError
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,6 +35,28 @@ from generate_nextjs_website_data import (  # noqa: E402
 
 DATA_ROOT = ROOT / "website" / "public" / "data" / "projects"
 REPORT_PATH = ROOT / "12-logs" / "vercel_streamlit_pipeline_audit_latest.md"
+
+PUBLIC_METRICS = (
+    "contract_value",
+    "paid_amount",
+    "spent_amount",
+    "remaining_value",
+    "planned_progress",
+    "actual_progress",
+    "bac",
+    "pv",
+    "ev",
+    "ac",
+    "spi",
+    "cpi",
+    "risk_score",
+    "high_risk_count",
+    "delay_days",
+    "claims_exposure",
+    "claimed_days",
+    "activity_count",
+    "milestone_count",
+)
 
 
 def close_enough(actual: Any, expected: float | None) -> bool:
@@ -75,11 +101,111 @@ def expected_source_metrics(data_dir: Path) -> dict[str, float | None]:
     }
 
 
-def main() -> int:
+def fetch_public_json(public_url: str, relative_path: str) -> dict[str, Any]:
+    """Read a cache-busted JSON artifact from the deployed Vercel site."""
+    url = f"{public_url.rstrip('/')}/{relative_path.lstrip('/')}?{urlencode({'pipeline_check': datetime.now().timestamp()})}"
+    request = Request(
+        url,
+        headers={
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+            "User-Agent": "Project-Intelligence-Hub-Pipeline-Validator/1.0",
+        },
+    )
+    try:
+        with urlopen(request, timeout=30) as response:  # nosec B310 - URL is an explicit CLI argument.
+            return json.loads(response.read().decode("utf-8"))
+    except (HTTPError, URLError, TimeoutError, json.JSONDecodeError) as error:
+        raise RuntimeError(f"{url}: {error}") from error
+
+
+def fetch_public_page(public_url: str) -> None:
+    request = Request(
+        public_url.rstrip("/") + "/",
+        headers={"Cache-Control": "no-cache", "User-Agent": "Project-Intelligence-Hub-Pipeline-Validator/1.0"},
+    )
+    try:
+        with urlopen(request, timeout=30) as response:  # nosec B310 - URL is an explicit CLI argument.
+            body = response.read(512).decode("utf-8", errors="replace")
+            if not body.strip():
+                raise RuntimeError("empty HTTP response")
+    except (HTTPError, URLError, TimeoutError, RuntimeError) as error:
+        raise RuntimeError(f"{public_url}: {error}") from error
+
+
+def validate_public_delivery(
+    public_url: str,
+    local_portfolio: dict[str, Any] | None,
+    local_projects: list[dict[str, Any]],
+    checks: list[str],
+    errors: list[str],
+) -> None:
+    """Verify public artifacts match the generated project-isolated data."""
+    try:
+        fetch_public_page(public_url)
+        checks.append("public Vercel application is reachable")
+        public_portfolio = fetch_public_json(public_url, "data/portfolio.json")
+    except RuntimeError as error:
+        errors.append(f"public Vercel application cannot be verified: {error}")
+        return
+
+    if local_portfolio is None:
+        errors.append("public Vercel parity cannot run because local portfolio.json is missing")
+        return
+
+    local_keys = {str(item.get("project_key")) for item in local_portfolio.get("projects", [])}
+    public_keys = {str(item.get("project_key")) for item in public_portfolio.get("projects", [])}
+    if public_keys != local_keys:
+        errors.append("public portfolio project list does not match local generated portfolio")
+    else:
+        checks.append("public portfolio project list matches local generated portfolio")
+
+    for metric in ("contract_value", "paid_amount", "spent_amount", "remaining_value", "claims_exposure"):
+        if not close_enough(public_portfolio.get("totals", {}).get(metric), local_portfolio.get("totals", {}).get(metric)):
+            errors.append(f"public portfolio {metric} does not match local generated portfolio")
+        else:
+            checks.append(f"public portfolio {metric} matches local generated portfolio")
+
+    for local_project in local_projects:
+        project_key = str(local_project.get("project_key"))
+        try:
+            public_project = fetch_public_json(public_url, f"data/projects/{project_key}.json")
+        except RuntimeError as error:
+            errors.append(f"{project_key}: public project JSON cannot be verified: {error}")
+            continue
+
+        if public_project.get("project_id") != local_project.get("project_id"):
+            errors.append(f"{project_key}: public project_id does not match local generated project")
+            continue
+        for metric in PUBLIC_METRICS:
+            local_value = local_project.get(metric)
+            public_value = public_project.get(metric)
+            if isinstance(local_value, (int, float)) or isinstance(public_value, (int, float)):
+                if not close_enough(public_value, local_value):
+                    errors.append(f"{project_key}: public {metric} does not match local generated project")
+            elif public_value != local_value:
+                errors.append(f"{project_key}: public {metric} does not match local generated project")
+
+        local_sources = local_project.get("metric_sources", {})
+        public_sources = public_project.get("metric_sources", {})
+        if public_sources != local_sources:
+            errors.append(f"{project_key}: public metric source traceability does not match local generated project")
+        else:
+            checks.append(f"{project_key}: public project data and traceability match local generation")
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Validate Streamlit project source data against generated and deployed Next.js artifacts.")
+    parser.add_argument(
+        "--public-url",
+        help="Optional deployed Vercel base URL. When provided, public JSON must match local generated JSON.",
+    )
+    args = parser.parse_args(argv)
     errors: list[str] = []
     checks: list[str] = []
     project_keys: set[str] = set()
     generated_projects: list[dict[str, Any]] = []
+    portfolio: dict[str, Any] | None = None
 
     for project in discover_projects():
         project_key = str(project["project_key"])
@@ -142,12 +268,16 @@ def main() -> int:
             else:
                 checks.append(f"portfolio {metric} matches isolated project totals")
 
+    if args.public_url:
+        validate_public_delivery(args.public_url, portfolio, generated_projects, checks, errors)
+
     REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
     report = [
         "# Vercel / Streamlit Pipeline Audit",
         "",
         f"Generated: {datetime.now().isoformat(timespec='seconds')}",
         f"Projects checked: {len(project_keys)}",
+        f"Public deployment checked: {args.public_url or 'No'}",
         f"Status: {'PASS' if not errors else 'FAIL'}",
         "",
         "## Checks",

@@ -23,6 +23,7 @@
                                  "out",
                                  "backups",
                                  ".sync_state",
+                                 "12-logs",
                                  "logs"
                              ],
     "excluded_files":  [
@@ -41,6 +42,9 @@
                               "*.out",
                               "*.tmp",
                               "~$*",
+                              ".env*",
+                              "*.pem",
+                              "*.key",
                               "*PIH.txt"
                           ]
 }

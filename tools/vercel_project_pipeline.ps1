@@ -1,0 +1,261 @@
+param(
+    [ValidateSet("Watch", "Once", "Test", "DryRun")]
+    [string]$Mode = "Watch",
+    [int]$IntervalSeconds = 30,
+    [string]$PublicUrl = ""
+)
+
+$ErrorActionPreference = "Stop"
+
+$root = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+$websiteRoot = Join-Path $root "website"
+$generatorPath = Join-Path $PSScriptRoot "generate_nextjs_website_data.py"
+$validatorPath = Join-Path $PSScriptRoot "validate_streamlit_vercel_pipeline.py"
+$githubSyncPath = Join-Path $PSScriptRoot "github_no_git_sync.ps1"
+$vercelProjectPath = Join-Path $websiteRoot ".vercel\project.json"
+$logPath = Join-Path $root "12-logs\vercel_project_pipeline.log"
+$statePath = Join-Path $root ".sync_state\vercel_project_pipeline_state.json"
+$script:WatchMutex = $null
+
+New-Item -ItemType Directory -Force -Path (Split-Path -Parent $logPath), (Split-Path -Parent $statePath) | Out-Null
+
+foreach ($requiredPath in @($websiteRoot, $generatorPath, $validatorPath, $githubSyncPath, $vercelProjectPath)) {
+    if (-not (Test-Path -LiteralPath $requiredPath)) {
+        throw "Required pipeline path is missing: $requiredPath"
+    }
+}
+
+if ($IntervalSeconds -lt 10) {
+    $IntervalSeconds = 10
+}
+
+if ([string]::IsNullOrWhiteSpace($PublicUrl)) {
+    $vercelProject = Get-Content -LiteralPath $vercelProjectPath -Raw | ConvertFrom-Json
+    if ([string]::IsNullOrWhiteSpace([string]$vercelProject.projectName)) {
+        throw "Vercel project name is missing from $vercelProjectPath"
+    }
+    $PublicUrl = "https://$($vercelProject.projectName).vercel.app"
+}
+
+function Protect-SensitiveText([string]$Text) {
+    $sanitized = $Text -replace 'github_pat_[A-Za-z0-9_]+', '[REDACTED_GITHUB_TOKEN]'
+    $sanitized = $sanitized -replace 'gh[pousr]_[A-Za-z0-9_]+', '[REDACTED_GITHUB_TOKEN]'
+    return $sanitized -replace 'gsk_[A-Za-z0-9_]+', '[REDACTED_GROQ_KEY]'
+}
+
+function Write-PipelineLog([string]$Text) {
+    $line = "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] $(Protect-SensitiveText $Text)"
+    Write-Host $line
+    Add-Content -LiteralPath $logPath -Value $line
+}
+
+function Get-RelativePath([string]$FullName) {
+    $rootUri = New-Object System.Uri(($root.TrimEnd('\') + '\'))
+    $fileUri = New-Object System.Uri([System.IO.Path]::GetFullPath($FullName))
+    return ([System.Uri]::UnescapeDataString($rootUri.MakeRelativeUri($fileUri).ToString()) -replace '\\', '/')
+}
+
+function Test-TrackedPath([string]$FullName) {
+    $relative = Get-RelativePath $FullName
+    $lower = $relative.ToLowerInvariant()
+    if ($lower -match '(^|/)(\.git|\.next|node_modules|\.vercel|12-logs|backups|\.sync_state|__pycache__)(/|$)') { return $false }
+    if ($lower -match '^website/public/(data|generated)(/|$)') { return $false }
+    if ($lower -match '(^|/)(\.env|\.env\.local)$') { return $false }
+    return $true
+}
+
+function Get-WatchedItems {
+    $items = New-Object System.Collections.Generic.List[object]
+    $watchRoots = @(
+        (Join-Path $root "projects"),
+        (Join-Path $websiteRoot "src"),
+        (Join-Path $websiteRoot "public"),
+        $generatorPath,
+        $validatorPath,
+        (Join-Path $PSScriptRoot "pih_data_guardrails.py"),
+        $githubSyncPath,
+        (Join-Path $PSScriptRoot "github_sync_config.json"),
+        (Join-Path $websiteRoot "package.json"),
+        (Join-Path $websiteRoot "package-lock.json"),
+        (Join-Path $websiteRoot "next.config.js"),
+        (Join-Path $websiteRoot "vercel.json")
+    )
+
+    foreach ($watchRoot in $watchRoots) {
+        if (-not (Test-Path -LiteralPath $watchRoot)) { continue }
+        $item = Get-Item -LiteralPath $watchRoot
+        if ($item.PSIsContainer) {
+            foreach ($directory in (Get-ChildItem -LiteralPath $item.FullName -Recurse -Directory -Force -ErrorAction SilentlyContinue)) {
+                if (Test-TrackedPath $directory.FullName) {
+                    $items.Add([PSCustomObject]@{ Type = 'D'; RelativePath = Get-RelativePath $directory.FullName; Length = 0; Modified = $directory.LastWriteTimeUtc.Ticks })
+                }
+            }
+            foreach ($file in (Get-ChildItem -LiteralPath $item.FullName -Recurse -File -Force -ErrorAction SilentlyContinue)) {
+                if (Test-TrackedPath $file.FullName) {
+                    $items.Add([PSCustomObject]@{ Type = 'F'; RelativePath = Get-RelativePath $file.FullName; Length = $file.Length; Modified = $file.LastWriteTimeUtc.Ticks })
+                }
+            }
+        }
+        elseif (Test-TrackedPath $item.FullName) {
+            $items.Add([PSCustomObject]@{ Type = 'F'; RelativePath = Get-RelativePath $item.FullName; Length = $item.Length; Modified = $item.LastWriteTimeUtc.Ticks })
+        }
+    }
+    return @($items | Sort-Object Type, RelativePath -Unique)
+}
+
+function Get-WatchedFingerprint {
+    $lines = Get-WatchedItems | ForEach-Object { "$($_.Type)|$($_.RelativePath)|$($_.Length)|$($_.Modified)" }
+    $content = [System.Text.Encoding]::UTF8.GetBytes([string]::Join("`n", [string[]]$lines))
+    $sha256 = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        return -join ($sha256.ComputeHash($content) | ForEach-Object { $_.ToString('x2') })
+    }
+    finally {
+        $sha256.Dispose()
+    }
+}
+
+function Invoke-PipelineStep(
+    [string]$Label,
+    [string]$Executable,
+    [string[]]$Arguments,
+    [string]$WorkingDirectory
+) {
+    Write-PipelineLog "$Label"
+    Push-Location $WorkingDirectory
+    try {
+        $global:LASTEXITCODE = 0
+        & $Executable @Arguments 2>&1 | ForEach-Object {
+            $line = Protect-SensitiveText ([string]$_)
+            Write-Host $line
+            Add-Content -LiteralPath $logPath -Value $line
+        }
+        if ($LASTEXITCODE -ne 0) {
+            throw "$Label failed with exit code $LASTEXITCODE."
+        }
+    }
+    finally {
+        Pop-Location
+    }
+}
+
+function Write-PipelineState([string]$Fingerprint) {
+    $state = [ordered]@{
+        status = "PASS"
+        updated_at = (Get-Date).ToUniversalTime().ToString("o")
+        public_url = $PublicUrl
+        source_fingerprint = $Fingerprint
+        mode = $Mode
+    }
+    $state | ConvertTo-Json | Set-Content -LiteralPath $statePath -Encoding utf8
+}
+
+function Test-WatcherDetection {
+    $before = Get-WatchedFingerprint
+    $probeDirectory = Join-Path $root "projects\_pipeline_watcher_probe"
+    $probeFile = Join-Path $probeDirectory "probe.txt"
+    try {
+        New-Item -ItemType Directory -Force -Path $probeDirectory | Out-Null
+        [System.IO.File]::WriteAllText($probeFile, "Pipeline watcher probe $(Get-Date -Format o)", [System.Text.UTF8Encoding]::new($false))
+        $during = Get-WatchedFingerprint
+        if ($before -eq $during) {
+            throw "Pipeline watcher did not detect a new project-folder file."
+        }
+    }
+    finally {
+        if (Test-Path -LiteralPath $probeDirectory) {
+            Remove-Item -LiteralPath $probeDirectory -Recurse -Force
+        }
+    }
+    $after = Get-WatchedFingerprint
+    if ($before -ne $after) {
+        throw "Pipeline watcher probe did not restore the original workspace fingerprint."
+    }
+    Write-PipelineLog "PASS watcher detection test: new project-folder files and folders are detected."
+}
+
+function Invoke-PublishPipeline {
+    $fingerprintBefore = Get-WatchedFingerprint
+    Invoke-PipelineStep "Generating project-scoped Next.js data" "python" @($generatorPath) $root
+    Invoke-PipelineStep "Validating Streamlit to Next.js source parity" "python" @($validatorPath) $root
+    Invoke-PipelineStep "Building Next.js production application" "npm.cmd" @("run", "build") $websiteRoot
+    Invoke-PipelineStep "Publishing validated workspace changes to GitHub without Git CLI" "powershell.exe" @(
+        "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", $githubSyncPath,
+        "-Mode", "Once", "-IntervalSeconds", [string]$IntervalSeconds,
+        "-Message", "Publish validated Next.js project pipeline"
+    ) $root
+    Invoke-PipelineStep "Deploying validated production build to Vercel" "npx.cmd" @("vercel", "--prod", "--yes") $websiteRoot
+
+    $verified = $false
+    for ($attempt = 1; $attempt -le 8; $attempt++) {
+        try {
+            Invoke-PipelineStep "Verifying public Vercel project data (attempt $attempt of 8)" "python" @($validatorPath, "--public-url", $PublicUrl) $root
+            $verified = $true
+            break
+        }
+        catch {
+            if ($attempt -eq 8) { throw }
+            Write-PipelineLog "Public Vercel data is still propagating. Retrying in 10 seconds."
+            Start-Sleep -Seconds 10
+        }
+    }
+    if (-not $verified) {
+        throw "Public Vercel verification did not complete."
+    }
+
+    $fingerprintAfter = Get-WatchedFingerprint
+    if ($fingerprintBefore -ne $fingerprintAfter) {
+        throw "Source changed while the pipeline was running. The watcher will retry so the deployment contains the latest project data."
+    }
+    Write-PipelineState $fingerprintAfter
+    Write-PipelineLog "PASS full local-to-Vercel pipeline. Public URL: $PublicUrl"
+    return $fingerprintAfter
+}
+
+try {
+    switch ($Mode) {
+        "DryRun" {
+            Test-WatcherDetection
+            Write-PipelineLog "DRY RUN: watcher paths, source roots, and public target are configured. No generation, publish, or deployment was run."
+            Write-PipelineLog "Target: $PublicUrl"
+            exit 0
+        }
+        "Test" {
+            Test-WatcherDetection
+            [void](Invoke-PublishPipeline)
+            exit 0
+        }
+        "Once" {
+            [void](Invoke-PublishPipeline)
+            exit 0
+        }
+        "Watch" {
+            $script:WatchMutex = New-Object System.Threading.Mutex($false, "Local\ProjectIntelligenceHubNextVercelPipeline")
+            if (-not $script:WatchMutex.WaitOne(0, $false)) {
+                Write-PipelineLog "A Project Intelligence Hub Vercel pipeline watcher is already running."
+                exit 0
+            }
+            $lastFingerprint = Invoke-PublishPipeline
+            Write-PipelineLog "Watcher active. Polling tracked code and project folders every $IntervalSeconds seconds."
+            while ($true) {
+                Start-Sleep -Seconds $IntervalSeconds
+                $currentFingerprint = Get-WatchedFingerprint
+                if ($currentFingerprint -eq $lastFingerprint) { continue }
+                Write-PipelineLog "Change detected in tracked project or website source. Starting validated publish pipeline."
+                try {
+                    $lastFingerprint = Invoke-PublishPipeline
+                }
+                catch {
+                    Write-PipelineLog "Pipeline failed: $($_.Exception.Message)"
+                    Write-PipelineLog "The watcher will retry on the next polling cycle."
+                }
+            }
+        }
+    }
+}
+finally {
+    if ($null -ne $script:WatchMutex) {
+        $script:WatchMutex.ReleaseMutex() | Out-Null
+        $script:WatchMutex.Dispose()
+    }
+}
