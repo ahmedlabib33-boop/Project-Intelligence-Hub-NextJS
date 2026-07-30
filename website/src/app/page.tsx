@@ -1098,16 +1098,6 @@ function ProjectWorkspace({
 function StreamlitFullClone() {
   return (
     <section className="streamlit-clone-shell">
-      <div className="streamlit-clone-head">
-        <div>
-          <p className="eyebrow">100% Streamlit App Clone</p>
-          <h2>Project Intelligence Hub</h2>
-          <span>Same app, same dropdown, same tabs, same charts, same project logic.</span>
-        </div>
-        <a href="https://samco-project-intelegent-dashboard.streamlit.app" target="_blank" rel="noreferrer">
-          Open original
-        </a>
-      </div>
       <iframe
         src={STREAMLIT_APP_URL}
         title="SAMCO Project Intelligence Hub Streamlit full clone"
@@ -1119,12 +1109,9 @@ function StreamlitFullClone() {
 
 export default function HomePage() {
   return (
-    <main className="future-shell">
+    <main className="future-shell streamlit-clone-page">
       <StreamlitFullClone />
       <AiChatPanel projectName="Decision Making Dashboard" />
-      <footer className="app-credit">
-        Designed &amp; Created | <strong>Engr. Ahmed Labib</strong>
-      </footer>
     </main>
   );
 }

@@ -92,7 +92,7 @@ export default function AiChatPanel({ projectKey, projectName, sector }: AiChatP
               <span>Project Intelligence AI</span>
               <b>{projectName || "Portfolio"}</b>
             </div>
-            <button type="button" onClick={() => setOpen(false)} aria-label="Close AI panel">×</button>
+            <button type="button" onClick={() => setOpen(false)} aria-label="Close AI panel">&times;</button>
           </div>
           <div className="ai-chat-messages">
             {messages.map((message, index) => (

@@ -2016,49 +2016,22 @@ h2 {
 }
 
 .streamlit-clone-shell {
-  min-height: calc(100vh - 88px);
-  border: 1px solid rgba(115, 193, 218, 0.24);
-  border-radius: 28px;
-  overflow: hidden;
-  background: rgba(4, 17, 34, 0.72);
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.32);
+  width: 100%;
+  min-height: 100dvh;
+  background: #ffffff;
 }
 
-.streamlit-clone-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 16px 18px;
-  border-bottom: 1px solid rgba(115, 193, 218, 0.18);
-  background: linear-gradient(135deg, rgba(8, 27, 52, 0.96), rgba(12, 53, 80, 0.88));
-}
-
-.streamlit-clone-head h2 {
-  margin: 2px 0;
-  font-size: 1.35rem;
-}
-
-.streamlit-clone-head span {
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-.streamlit-clone-head a {
-  flex: 0 0 auto;
-  color: #061a2d;
-  background: linear-gradient(135deg, #6ee7f9, #f8c95d);
-  border-radius: 999px;
-  padding: 10px 14px;
-  font-weight: 900;
-  text-decoration: none;
+.future-shell.streamlit-clone-page {
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .streamlit-clone-shell iframe {
   display: block;
   width: 100%;
-  height: calc(100vh - 176px);
-  min-height: 820px;
+  height: 100dvh;
+  min-height: 720px;
   border: 0;
   background: #ffffff;
 }
@@ -2283,16 +2256,8 @@ h2 {
     width: 100%;
   }
 
-  .streamlit-clone-head {
-    display: grid;
-  }
-
-  .streamlit-clone-head a {
-    text-align: center;
-  }
-
   .streamlit-clone-shell iframe {
-    height: calc(100vh - 210px);
+    height: 100dvh;
     min-height: 720px;
   }
 }
