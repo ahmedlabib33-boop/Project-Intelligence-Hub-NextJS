@@ -138,6 +138,9 @@ type TablePreview = {
   source_path?: string;
 };
 
+const EMPTY_TABLE_ROWS: Record<string, unknown>[] = [];
+const EMPTY_TABLE_COLUMNS: string[] = [];
+
 type XlsxSummary = {
   file: string;
   exists: boolean;
@@ -519,8 +522,8 @@ function ProjectDataTable({
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(0);
   const pageSize = 25;
-  const rows = table?.rows || [];
-  const columns = table?.columns || [];
+  const rows = table?.rows ?? EMPTY_TABLE_ROWS;
+  const columns = table?.columns ?? EMPTY_TABLE_COLUMNS;
   const normalizedQuery = query.trim().toLowerCase();
   const filteredRows = useMemo(
     () => normalizedQuery
@@ -728,46 +731,6 @@ function SubmittedTiaGuidePanel({ submitted }: { submitted: SubmittedTiaPayload 
         </div>
       </section>
     </div>
-  );
-}
-
-function TemplateInventory({ templates }: { templates: TablePreview[] }) {
-  return (
-    <section className="feature-card">
-      <div className="feature-card-head">
-        <h3>Recognized TIA Template Files</h3>
-        <span>{templates.length} files</span>
-      </div>
-      <div className="template-grid">
-        {templates.map((template) => (
-          <div key={template.file}>
-            <b>{template.file}</b>
-            <span>{template.row_count} rows / {template.column_count} columns</span>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function WorkbookSummary({ workbook, title }: { workbook: XlsxSummary; title: string }) {
-  return (
-    <section className="feature-card">
-      <div className="feature-card-head">
-        <h3>{title}</h3>
-        <span>{workbook.exists ? `${workbook.sheets?.length || 0} sheets` : "Missing"}</span>
-      </div>
-      {!workbook.exists ? <p className="empty-note">Workbook not available for this project.</p> : null}
-      {workbook.error ? <p className="empty-note">{workbook.error}</p> : null}
-      <div className="template-grid">
-        {(workbook.sheets || []).map((sheet) => (
-          <div key={sheet.name}>
-            <b>{sheet.name}</b>
-            <span>{sheet.row_count} rows / {sheet.column_count} columns</span>
-          </div>
-        ))}
-      </div>
-    </section>
   );
 }
 
@@ -1400,16 +1363,15 @@ function DigitalOperationsApp() {
   const [projectLoadError, setProjectLoadError] = useState("");
   const selectedProjectSummary = projects.find((project) => project.project_key === scope) || projects[0];
   const isDecisionDashboard = scope === DECISION_DASHBOARD_KEY;
-
-  useEffect(() => {
-    if (isDecisionDashboard) {
-      setProjectDetails(null);
-      setProjectLoadError("");
-      return;
-    }
-    let cancelled = false;
+  const selectScope = (nextScope: string) => {
+    setScope(nextScope);
     setProjectDetails(null);
     setProjectLoadError("");
+  };
+
+  useEffect(() => {
+    if (isDecisionDashboard) return;
+    let cancelled = false;
     fetch(`/data/projects/${encodeURIComponent(scope)}.json`, { cache: "no-store" })
       .then((response) => {
         if (!response.ok) throw new Error("Selected project data is not available.");
@@ -1428,10 +1390,10 @@ function DigitalOperationsApp() {
     <main className="future-shell operations-shell">
       <header className="operations-command-bar">
         <div className="command-identity"><span>PIH / 01</span><b>Digital Operations</b></div>
-        <label className="scope-control"><span>Operating scope</span><select value={scope} onChange={(event) => setScope(event.target.value)}><option value={DECISION_DASHBOARD_KEY}>Decision Making Dashboard</option>{projects.map((project) => <option value={project.project_key} key={project.project_key}>{project.sector} / {project.project_display_name}</option>)}</select></label>
+        <label className="scope-control"><span>Operating scope</span><select value={scope} onChange={(event) => selectScope(event.target.value)}><option value={DECISION_DASHBOARD_KEY}>Decision Making Dashboard</option>{projects.map((project) => <option value={project.project_key} key={project.project_key}>{project.sector} / {project.project_display_name}</option>)}</select></label>
         <div className="command-status"><i /><span>{isDecisionDashboard ? "Portfolio mode" : `${selectedProjectSummary.sector} project mode`}</span></div>
       </header>
-      {isDecisionDashboard ? <DecisionOperationsDashboard onChooseProject={setScope} /> : (
+      {isDecisionDashboard ? <DecisionOperationsDashboard onChooseProject={selectScope} /> : (
         projectDetails ? <ProjectWorkspace project={projectDetails} selectedReport={selectedReport} setSelectedReport={setSelectedReport} /> : <section className="feature-card project-load-state"><h2>{selectedProjectSummary.project_display_name}</h2><p>{projectLoadError || "Loading the complete project controls workspace..."}</p></section>
       )}
       <footer className="operations-footer">Designed &amp; Created | <strong>Engr. Ahmed Labib</strong><span>Source-backed controls | Project-isolated intelligence</span></footer>

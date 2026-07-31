@@ -127,7 +127,7 @@ export default function OutputStudioDownloadButton({
 
       setStatus("Report opened for download.");
     }
-  }, []);
+  }, [href]);
 
   return (
     <div
