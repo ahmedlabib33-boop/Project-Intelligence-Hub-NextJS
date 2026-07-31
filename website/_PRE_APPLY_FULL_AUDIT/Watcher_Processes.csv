@@ -1,0 +1,7 @@
+﻿"ProcessId","Name","CommandLine"
+"19844","node.exe","""C:\Program Files\nodejs\\node.exe""  ""C:\Program Files\nodejs\\node_modules\npm\bin\npm-cli.js"" run dev -- -p 3001"
+"9244","cmd.exe","C:\Windows\system32\cmd.exe /d /s /c next dev -p 3001"
+"5288","node.exe","""node""   ""D:\Project Intelligence Hub NextJS\website\node_modules\.bin\\..\next\dist\bin\next"" dev -p 3001"
+"14936","node.exe","""C:\Program Files\nodejs\node.exe"" ""D:\Project Intelligence Hub NextJS\website\node_modules\next\dist\server\lib\start-server.js"""
+"14992","node.exe","""C:\Program Files\nodejs\node.exe"" ./mcp/server.cjs --stdio"
+"25656","node.exe","""C:\Program Files\nodejs\node.exe"" ./mcp/server.cjs --stdio"

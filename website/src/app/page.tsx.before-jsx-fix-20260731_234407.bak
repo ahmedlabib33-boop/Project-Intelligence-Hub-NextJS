@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import portfolio from "../../public/data/portfolio.json";
 import MermaidDiagram from "../components/MermaidDiagram";
@@ -14,7 +14,7 @@ import ManagementDecisionBrief, { type ActionItem, type DecisionBriefItem } from
 import PredictiveWarningPanel from "../components/executive/PredictiveWarningPanel";
 import ScenarioPlanner from "../components/executive/ScenarioPlanner";
 import UnifiedIntelligenceSearch from "../components/executive/UnifiedIntelligenceSearch";
-import OutputStudioDownloadButton from "../components/OutputStudioDownloadButton";
+import OutputStudioDownloadButton from "@/components/OutputStudioDownloadButton";
 
 type ReportKey = "executive_dashboard" | "master_dashboard" | "elite_svg_charts" | "linked_executive_dashboard";
 
@@ -78,10 +78,6 @@ type ProjectRecord = {
   reports: Record<ReportKey, string>;
 };
 
-// The portfolio payload deliberately excludes large feature tables. Those are loaded
-// only after the user selects a project, keeping the executive dashboard responsive.
-type ProjectSummary = Omit<ProjectRecord, "features" | "advanced_analytics">;
-
 type SectorRecord = {
   sector: string;
   project_count: number;
@@ -134,8 +130,6 @@ type TablePreview = {
   column_count: number;
   columns: string[];
   rows: Record<string, unknown>[];
-  truncated?: boolean;
-  source_path?: string;
 };
 
 type XlsxSummary = {
@@ -147,7 +141,6 @@ type XlsxSummary = {
     column_count: number;
     columns: string[];
     rows: Record<string, unknown>[];
-    truncated?: boolean;
   }>;
   error?: string;
 };
@@ -156,14 +149,12 @@ type FeaturePayload = {
   overview: {
     data_sources: Record<string, number>;
     source_tables: Record<string, TablePreview>;
-    workspace_tables?: Record<string, TablePreview>;
   };
   letters_intelligence: {
     folder: string;
     inbox_files: FileRecord[];
     inbox_file_count: number;
     workbook: XlsxSummary;
-    workbook_tables?: XlsxSummary;
     detectors: DetectorRecord[];
   };
   delay_analysis: {
@@ -171,12 +162,10 @@ type FeaturePayload = {
     logic_mode?: string;
     submitted_tia?: SubmittedTiaPayload;
     templates: TablePreview[];
-    template_tables?: TablePreview[];
     required_file_count: number;
     recognized_file_count: number;
     missing_required_files: string[];
     schedule_tables: Record<string, TablePreview>;
-    schedule_workspace_tables?: Record<string, TablePreview>;
     detectors: DetectorRecord[];
   };
   contract_claims: {
@@ -188,13 +177,7 @@ type FeaturePayload = {
       tables: Record<string, number | null>;
       error: string | null;
     };
-    knowledge_base?: {
-      exists: boolean;
-      tables: Record<string, TablePreview>;
-      error: string | null;
-    };
     clause_library: XlsxSummary;
-    clause_library_tables?: XlsxSummary;
     detectors: DetectorRecord[];
   };
   outputs_and_watchers: {
@@ -223,13 +206,14 @@ type SubmittedTiaPayload = {
   recommended_next_moves?: string[];
 };
 
-const projects = portfolio.projects as unknown as ProjectSummary[];
+const projects = portfolio.projects as ProjectRecord[];
 const sectors = portfolio.sectors as SectorRecord[];
 const totals = portfolio.totals;
 const warningSummary = (portfolio as { warning_summary?: Record<string, number> }).warning_summary;
 const decisionBrief = ((portfolio as { decision_brief?: DecisionBriefItem[] }).decision_brief || []) as DecisionBriefItem[];
 const guardrails = (portfolio as { guardrails?: GuardrailSummary }).guardrails;
 const DECISION_DASHBOARD_KEY = "__decision_making_dashboard__";
+const STREAMLIT_APP_URL = "https://samco-project-intelegent-dashboard.streamlit.app/?embed=true";
 
 const reportTabs: Array<{ key: ReportKey; label: string; note: string }> = [
   { key: "executive_dashboard", label: "Executive Dashboard", note: "Portfolio-style project summary" },
@@ -307,7 +291,7 @@ function HoloKpi({
   );
 }
 
-function portfolioDecisionMermaid(selectedProject: ProjectSummary) {
+function portfolioDecisionMermaid(selectedProject: ProjectRecord) {
   const projectCount = numberValue(portfolio.project_count);
   const sectorCount = numberValue(portfolio.sector_count);
   const decisionCount = numberValue(totals.decisions_required);
@@ -490,146 +474,6 @@ function TablePreviewPanel({ table, title }: { table: TablePreview | undefined; 
   );
 }
 
-function downloadTableCsv(table: TablePreview, name: string) {
-  const headers = table.columns;
-  const escapeCsv = (value: unknown) => `"${String(value ?? "").replace(/"/g, '""')}"`;
-  const csv = [headers.map(escapeCsv).join(","), ...table.rows.map((row) => headers.map((header) => escapeCsv(row[header])).join(","))].join("\n");
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = name.endsWith(".csv") ? name : `${name}.csv`;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
-
-function ProjectDataTable({
-  table,
-  title,
-  fileName,
-  empty = "No project data is available for this view."
-}: {
-  table: TablePreview | undefined;
-  title: string;
-  fileName?: string;
-  empty?: string;
-}) {
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(0);
-  const pageSize = 25;
-  const rows = table?.rows || [];
-  const columns = table?.columns || [];
-  const normalizedQuery = query.trim().toLowerCase();
-  const filteredRows = useMemo(
-    () => normalizedQuery
-      ? rows.filter((row) => columns.some((column) => String(row[column] ?? "").toLowerCase().includes(normalizedQuery)))
-      : rows,
-    [columns, normalizedQuery, rows]
-  );
-  const pageCount = Math.max(1, Math.ceil(filteredRows.length / pageSize));
-  const safePage = Math.min(page, pageCount - 1);
-  const displayRows = filteredRows.slice(safePage * pageSize, safePage * pageSize + pageSize);
-
-  if (!table || !table.exists) {
-    return <TablePreviewPanel table={table} title={title} />;
-  }
-
-  return (
-    <section className="feature-card project-data-table">
-      <div className="feature-card-head">
-        <div><h3>{title}</h3><small>{table.file} / {table.row_count} rows / {table.column_count} columns</small></div>
-        <div className="data-table-actions">
-          <button type="button" onClick={() => downloadTableCsv(table, fileName || table.file)}>Download CSV</button>
-        </div>
-      </div>
-      <div className="data-table-toolbar">
-        <input
-          aria-label={`Search ${title}`}
-          placeholder="Search this project data"
-          value={query}
-          onChange={(event) => { setQuery(event.target.value); setPage(0); }}
-        />
-        <span>{filteredRows.length} matching rows{table.truncated ? " / safety cap applied" : ""}</span>
-      </div>
-      {displayRows.length && columns.length ? (
-        <div className="table-scroll project-data-table-scroll">
-          <table>
-            <thead><tr>{columns.map((column) => <th key={column}>{column}</th>)}</tr></thead>
-            <tbody>{displayRows.map((row, index) => <tr key={safePage * pageSize + index}>{columns.map((column) => <td key={column}>{displayCell(row[column])}</td>)}</tr>)}</tbody>
-          </table>
-        </div>
-      ) : <p className="empty-note">{empty}</p>}
-      {filteredRows.length > pageSize ? (
-        <div className="data-table-pagination">
-          <button type="button" disabled={safePage === 0} onClick={() => setPage((current) => Math.max(0, current - 1))}>Previous</button>
-          <span>Page {safePage + 1} of {pageCount}</span>
-          <button type="button" disabled={safePage >= pageCount - 1} onClick={() => setPage((current) => Math.min(pageCount - 1, current + 1))}>Next</button>
-        </div>
-      ) : null}
-    </section>
-  );
-}
-
-function ProjectTableSelector({
-  title,
-  tables,
-  preferred = []
-}: {
-  title: string;
-  tables: Record<string, TablePreview>;
-  preferred?: string[];
-}) {
-  const names = Object.keys(tables);
-  const initial = preferred.find((name) => names.includes(name)) || names[0] || "";
-  const [selectedName, setSelectedName] = useState(initial);
-  const table = tables[selectedName] || tables[names[0]];
-  return (
-    <div className="feature-stack">
-      <div className="subview-select-row">
-        <label>{title}<select value={selectedName} onChange={(event) => setSelectedName(event.target.value)}>{names.map((name) => <option key={name}>{name}</option>)}</select></label>
-      </div>
-      <ProjectDataTable table={table} title={selectedName || title} />
-    </div>
-  );
-}
-
-function WorkbookDataPanel({ workbook, title, preferred = [] }: { workbook: XlsxSummary | undefined; title: string; preferred?: string[] }) {
-  const sheets = workbook?.sheets || [];
-  const tableMap = Object.fromEntries(sheets.map((sheet) => [sheet.name, {
-    file: `${workbook?.file || title} / ${sheet.name}`,
-    exists: Boolean(workbook?.exists),
-    row_count: sheet.row_count,
-    column_count: sheet.column_count,
-    columns: sheet.columns,
-    rows: sheet.rows,
-    truncated: sheet.truncated,
-  }]));
-  if (!sheets.length) {
-    return <section className="feature-card"><div className="feature-card-head"><h3>{title}</h3><span>Missing</span></div><p className="empty-note">No workbook records are available for this selected project.</p></section>;
-  }
-  return <ProjectTableSelector title={title} tables={tableMap} preferred={preferred} />;
-}
-
-function ModuleTabs({
-  label,
-  tabs,
-  activeTab,
-  onChange
-}: {
-  label: string;
-  tabs: string[];
-  activeTab: string;
-  onChange: (tab: string) => void;
-}) {
-  return (
-    <nav className="module-tabs" aria-label={label}>
-      {tabs.map((tab) => <button type="button" className={tab === activeTab ? "active" : ""} onClick={() => onChange(tab)} key={tab}>{tab}</button>)}
-    </nav>
-  );
-}
-
 function ObjectTable({
   rows,
   title,
@@ -771,119 +615,6 @@ function WorkbookSummary({ workbook, title }: { workbook: XlsxSummary; title: st
   );
 }
 
-function selectedProjectTables(project: ProjectRecord) {
-  return project.features.overview.workspace_tables || project.features.overview.source_tables;
-}
-
-function LettersIntelligencePanel({ project }: { project: ProjectRecord }) {
-  const [view, setView] = useState("Inbox & Auto Ingest");
-  const letters = project.features.letters_intelligence;
-  const sheets = letters.workbook_tables?.sheets || [];
-  const matchingSheets = (terms: string[]) => sheets.filter((sheet) => terms.some((term) => sheet.name.toLowerCase().includes(term)));
-  const selectedWorkbook = { ...letters.workbook_tables, sheets: view === "Issue Threads" ? matchingSheets(["thread", "alert"]) : view === "Linked Correspondence" ? matchingSheets(["link", "relationship"]) : matchingSheets(["contractor", "consultant", "ace", "samco", "letter"]) } as XlsxSummary;
-  return (
-    <div className="feature-stack">
-      <div className="workspace-two">
-        <section className="feature-card">
-          <div className="feature-card-head"><h3>Letters Intelligence</h3><span>Selected project only</span></div>
-          <p>Correspondence is classified from the selected project&apos;s inbox and workbook. New files are collected by the local pipeline, then published to Vercel through the generated project JSON.</p>
-          <div className="workspace-grid compact-grid">
-            <MiniMetric label="Inbox Files" value={numberValue(letters.inbox_file_count)} note="Recognized project letters" />
-            <MiniMetric label="Claims Rows" value={numberValue(project.source_files.claims)} note="Project claims register" />
-            <MiniMetric label="Delay Events" value={numberValue(project.source_files.delay_events)} note="Project delay register" />
-          </div>
-        </section>
-        <FeatureSvg mode="letters" />
-      </div>
-      <ModuleTabs label="Letters Intelligence views" tabs={["Inbox & Auto Ingest", "Letter Registers", "Issue Threads", "Linked Correspondence", "AI Letter Review"]} activeTab={view} onChange={setView} />
-      {view === "Inbox & Auto Ingest" ? <><DetectorGrid detectors={letters.detectors} /><FileList title="Automatic Letter Inbox" files={letters.inbox_files} emptyText="No correspondence files were detected in this project inbox." /></> : null}
-      {view === "Letter Registers" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="Letters Registers" preferred={["From Contractor", "From Consultant", "ACE", "SAMCO"]} /> : null}
-      {view === "Issue Threads" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="Issue Threads & Alerts" preferred={["Issue Threads", "Alerts"]} /> : null}
-      {view === "Linked Correspondence" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="Linked Correspondence Engine" preferred={["Contractor Links", "Consultant Links"]} /> : null}
-      {view === "AI Letter Review" ? <div className="feature-stack"><AiInsightCard type="letters" projectKey={project.project_key} /><UnifiedIntelligenceSearch mode="project" projectKey={project.project_key} projectName={project.project_display_name} /></div> : null}
-    </div>
-  );
-}
-
-function DelayTiaParityPanel({ project }: { project: ProjectRecord }) {
-  const [view, setView] = useState("Uploads");
-  const [includeIfc, setIncludeIfc] = useState(true);
-  const [includeRfi, setIncludeRfi] = useState(true);
-  const [includePayments, setIncludePayments] = useState(true);
-  const [includeMitigation, setIncludeMitigation] = useState(true);
-  const delay = project.features.delay_analysis;
-  const templateTables = Object.fromEntries((delay.template_tables || delay.templates).map((table) => [table.file, table]));
-  const scheduleTables = delay.schedule_workspace_tables || delay.schedule_tables;
-  const eventTables = Object.fromEntries(Object.entries(templateTables).filter(([name]) => /ifc|rfi|payment|concurrency|master|p6|relationship|contract/i.test(name)));
-  return (
-    <div className="feature-stack">
-      <div className="workspace-two">
-        <section className="feature-card">
-          <div className="feature-card-head"><h3>Delay Analysis - Time Impact Analysis</h3><span>{delay.logic_mode || "Project TIA readiness"}</span></div>
-          <p>All TIA evidence is retained per project. Schedule movement remains indicative until the P6 fragnet, critical path, float, concurrency, mitigation, and entitlement tests are confirmed.</p>
-          <div className="workspace-grid compact-grid">
-            <MiniMetric label="Recognized Files" value={numberValue(delay.recognized_file_count)} note={`Required ${delay.required_file_count}`} />
-            <MiniMetric label="Delay Events" value={numberValue(project.delay_event_count)} note="Project event register" />
-            <MiniMetric label="Delay Days" value={numberValue(project.delay_days)} note="Not verified EOT" />
-            <MiniMetric label="Data Status" value={delay.missing_required_files.length ? "Needs Files" : "Ready"} note={`${delay.missing_required_files.length} missing required files`} />
-          </div>
-        </section>
-        <FeatureSvg mode="delay" />
-      </div>
-      <ModuleTabs label="Delay TIA views" tabs={["Uploads", "Tables & Conclusion", "MEP Activities", "AI - TIA", "Question", "Download Reports"]} activeTab={view} onChange={setView} />
-      {view === "Uploads" ? <>
-        <DetectorGrid detectors={delay.detectors} />
-        <section className="feature-card"><div className="feature-card-head"><h3>Include / Exclude Supposed Delay Streams</h3><span>Scenario scope only</span></div><div className="stream-toggle-grid">
-          <label><input type="checkbox" checked={includeIfc} onChange={(event) => setIncludeIfc(event.target.checked)} /> IFC support events</label>
-          <label><input type="checkbox" checked={includeRfi} onChange={(event) => setIncludeRfi(event.target.checked)} /> RFI support events</label>
-          <label><input type="checkbox" checked={includePayments} onChange={(event) => setIncludePayments(event.target.checked)} /> Payment support events</label>
-          <label><input type="checkbox" checked={includeMitigation} onChange={(event) => setIncludeMitigation(event.target.checked)} /> Contractor mitigation evidence</label>
-        </div><p className="empty-note">These controls change the review scope only. They do not calculate or grant EOT, and contractor supply stays excluded from employer delay entitlement.</p></section>
-        <ProjectTableSelector title="Required Delay TIA Source Files" tables={templateTables} preferred={["01-project_metadata_template.csv", "02- master_activity_steel_analysis.csv", "04- p6_activity_export.csv", "11-concurrency_matrix_template.updated.csv"]} />
-      </> : null}
-      {view === "Tables & Conclusion" ? <>
-        <AiInsightCard type="delay" projectKey={project.project_key} />
-        <SubmittedTiaGuidePanel submitted={delay.submitted_tia || { available: false, status: "Missing", scope_note: "No submitted TIA guide detected." }} />
-        <ProjectTableSelector title="TIA Evidence Tables" tables={eventTables} preferred={["11-concurrency_matrix_template.updated.csv", "04- p6_activity_export.csv", "02- master_activity_steel_analysis.csv"]} />
-      </> : null}
-      {view === "MEP Activities" ? <><ProjectTableSelector title="MEP Activities and Civil Interface Logic" tables={scheduleTables} preferred={["MEP Activities", "MEP Schedule", "MEP Civil Logic", "BL Schedule"]} /><WorkbookDataPanel workbook={project.features.letters_intelligence.workbook_tables} title="Related Letters Intelligence References" /></> : null}
-      {view === "AI - TIA" ? <><SubmittedTiaGuidePanel submitted={delay.submitted_tia || { available: false, status: "Missing", scope_note: "No submitted TIA guide detected." }} /><ProjectTableSelector title="Active TIA File Priority and Dependency Evidence" tables={templateTables} preferred={["01-project_metadata_template.csv", "02- master_activity_steel_analysis.csv", "04- p6_activity_export.csv", "05- relationship_file.csv", "11-concurrency_matrix_template.updated.csv"]} /></> : null}
-      {view === "Question" ? <div className="feature-stack"><AiInsightCard type="delay" projectKey={project.project_key} /><UnifiedIntelligenceSearch mode="project" projectKey={project.project_key} projectName={project.project_display_name} /><ProjectTableSelector title="Question Evidence Source" tables={eventTables} preferred={["11-concurrency_matrix_template.updated.csv", "09-rfi_status.csv", "07-ifc_conflict.csv"]} /></div> : null}
-      {view === "Download Reports" ? <section className="feature-card"><div className="feature-card-head"><h3>Delay TIA Generated Outputs</h3><span>HTML reports</span></div><p>Download the selected project&apos;s generated Delay TIA and executive report files. Source data stays project-isolated.</p><OutputStudioDownloadButton href={project.reports.elite_svg_charts} label="Download Delay TIA Charts" /><FileList title="Available Project Outputs" files={project.features.outputs_and_watchers.output_files} /></section> : null}
-    </div>
-  );
-}
-
-function ContractClaimsParityPanel({ project }: { project: ProjectRecord }) {
-  const [center, setCenter] = useState("Contract Clauses");
-  const [view, setView] = useState("Contract Library");
-  const claims = project.features.contract_claims;
-  const knowledgeTables = claims.knowledge_base?.tables || {};
-  const clauseTable = knowledgeTables.contract_clauses || knowledgeTables[Object.keys(knowledgeTables).find((name) => /clause/i.test(name)) || ""];
-  const evidenceTables = Object.fromEntries(Object.entries(knowledgeTables).filter(([name]) => /evidence|document|mapping/i.test(name)));
-  const claimTables = Object.fromEntries(Object.entries(knowledgeTables).filter(([name]) => /claim|trigger|defense|rebuttal|draft/i.test(name)));
-  return (
-    <div className="feature-stack">
-      <div className="workspace-two">
-        <section className="feature-card"><div className="feature-card-head"><h3>Contract & Claims Intelligence Center</h3><span>Selected project only</span></div><p>The library, evidence register, clause search, claim records, and AI analysis use only this project&apos;s contract folder and SQLite knowledge base.</p><div className="workspace-grid compact-grid"><MiniMetric label="Contract Files" value={numberValue(claims.source_files.length)} note="Project contract source" /><MiniMetric label="Evidence Files" value={numberValue(claims.evidence_files.length)} note="Project evidence source" /><MiniMetric label="Claims Rows" value={numberValue(project.source_files.claims)} note="Project claims register" /><MiniMetric label="Knowledge Tables" value={numberValue(Object.keys(knowledgeTables).length)} note="Project database only" /></div></section>
-        <FeatureSvg mode="claims" />
-      </div>
-      <ModuleTabs label="Contract claims center" tabs={["Contract Clauses", "Claims Intelligence Center"]} activeTab={center} onChange={setCenter} />
-      {center === "Contract Clauses" ? <div className="feature-stack"><ProjectDataTable table={clauseTable} title="Contract Clause Matching Engine" empty="No clause library is available for this selected project." /><WorkbookDataPanel workbook={claims.clause_library_tables} title="Overall Contract Clause Library" /></div> : null}
-      {center === "Claims Intelligence Center" ? <>
-        <ModuleTabs label="Claims Intelligence views" tabs={["Upload & Extract", "Contract Library", "Ask Contract AI", "Evidence Mapping", "Client Rebuttal Engine", "Claim Builder", "Export Center"]} activeTab={view} onChange={setView} />
-        {view === "Upload & Extract" ? <><DetectorGrid detectors={claims.detectors} /><div className="workspace-two"><FileList title="Contract Source Repository" files={claims.source_files} /><FileList title="Project Evidence Repository" files={claims.evidence_files} /></div><section className="feature-card"><div className="feature-card-head"><h3>Local Pipeline Status</h3><span>Read-only Vercel view</span></div><p>Add or replace source files in this project&apos;s local folder. The watcher rebuilds the project knowledge base and publishes the updated isolated data to Vercel. The public site does not write into another project or overwrite source files.</p></section></> : null}
-        {view === "Contract Library" ? <div className="feature-stack"><ProjectDataTable table={clauseTable} title="Searchable Contract Claims Library" /><WorkbookDataPanel workbook={claims.clause_library_tables} title="Contract Clause Library Workbook" /></div> : null}
-        {view === "Ask Contract AI" ? <div className="feature-stack"><AiInsightCard type="contract" projectKey={project.project_key} /><UnifiedIntelligenceSearch mode="project" projectKey={project.project_key} projectName={project.project_display_name} /></div> : null}
-        {view === "Evidence Mapping" ? <div className="feature-stack"><ProjectTableSelector title="Evidence-to-Clause Mapping" tables={Object.keys(evidenceTables).length ? evidenceTables : knowledgeTables} preferred={["evidence_mappings", "evidence_documents"]} /><FileList title="Evidence Files" files={claims.evidence_files} /></div> : null}
-        {view === "Client Rebuttal Engine" ? <div className="feature-stack"><AiInsightCard type="contract" projectKey={project.project_key} /><ProjectTableSelector title="Client Defenses and Contractor Rebuttals" tables={Object.keys(claimTables).length ? claimTables : knowledgeTables} preferred={["client_defenses", "contractor_rebuttals"]} /></div> : null}
-        {view === "Claim Builder" ? <div className="feature-stack"><ProjectTableSelector title="Claim Categories, Triggers, and Drafts" tables={Object.keys(claimTables).length ? claimTables : knowledgeTables} preferred={["claim_categories", "claim_triggers", "claim_drafts"]} /><AiInsightCard type="contract" projectKey={project.project_key} /></div> : null}
-        {view === "Export Center" ? <section className="feature-card"><div className="feature-card-head"><h3>Export Center</h3><span>Project outputs</span></div><p>Download the active project&apos;s source-backed Output Studio report. Individual source tables above can also be exported as CSV.</p><OutputStudioDownloadButton href={project.reports.master_dashboard} label="Download Master Dashboard" /><FileList title="Automatic HTML Outputs" files={project.features.outputs_and_watchers.output_files} /></section> : null}
-      </> : null}
-    </div>
-  );
-}
-
 function ConferencePanel({ project }: { project: ProjectRecord }) {
   const meetingUrl = project.meeting_url?.trim();
   const canEmbed = Boolean(meetingUrl && !meetingUrl.includes("teams.microsoft.com") && !meetingUrl.includes("zoom.us"));
@@ -911,10 +642,8 @@ function ConferencePanel({ project }: { project: ProjectRecord }) {
         </section>
       </div>
       {meetingUrl && canEmbed ? (
-        <>
-          <OutputStudioDownloadButton />
-          <iframe className="wide-embed conference-embed" src={meetingUrl} title={`${project.project_display_name} conference`} />
-        </>
+        <OutputStudioDownloadButton />
+        <iframe className="wide-embed conference-embed" src={meetingUrl} title={`${project.project_display_name} conference`} />
       ) : (
         <section className="feature-card">
           <div className="feature-card-head">
@@ -943,7 +672,6 @@ function WorkspaceTabContent({
   selectedReport: ReportKey;
   setSelectedReport: (key: ReportKey) => void;
 }) {
-  const workspaceTables = selectedProjectTables(project);
   if (activeTab === "Overview") {
     return (
       <div className="feature-stack">
@@ -959,7 +687,7 @@ function WorkspaceTabContent({
         </div>
         <div className="workspace-two">
           <FeatureSvg mode="portfolio" />
-          <ProjectDataTable table={workspaceTables.projects} title="Project Overview Source" />
+          <TablePreviewPanel table={project.features.overview.source_tables.projects} title="Project Overview Source" />
         </div>
       </div>
     );
@@ -974,7 +702,7 @@ function WorkspaceTabContent({
           <MiniMetric label="Project Scope" value={project.sector} note="Sector-based project grouping" />
         </div>
         <div className="workspace-two">
-          <ProjectDataTable table={workspaceTables.wbs} title="WBS Source Table" />
+          <TablePreviewPanel table={project.features.overview.source_tables.wbs} title="WBS Source Table" />
           <iframe src={project.reports.master_dashboard} title={`${project.project_display_name} master dashboard WBS`} />
         </div>
       </div>
@@ -990,7 +718,7 @@ function WorkspaceTabContent({
           <MiniMetric label="EVM Records" value={numberValue(project.source_files.evm)} note="Earned value rows" />
           <MiniMetric label="Delay Events" value={numberValue(project.source_files.delay_events)} note="Delay event records" />
         </div>
-        <ProjectDataTable table={workspaceTables.activities} title="Activities Register" />
+        <TablePreviewPanel table={project.features.overview.source_tables.activities} title="Activities Register Preview" />
       </div>
     );
   }
@@ -1003,7 +731,7 @@ function WorkspaceTabContent({
           <MiniMetric label="Schedule Health" value={numberValue(project.spi, 2)} note="SPI schedule indicator" />
           <MiniMetric label="Delayed Days" value={numberValue(project.delay_days)} note="Delay days from project data" />
         </div>
-        <ProjectDataTable table={workspaceTables.milestones} title="Milestone Register" />
+        <TablePreviewPanel table={project.features.overview.source_tables.milestones} title="Milestone Register Preview" />
       </div>
     );
   }
@@ -1016,7 +744,7 @@ function WorkspaceTabContent({
           <p>Uses the selected project progress and generated dashboard outputs. If the source S-curve file is missing, the report remains available with controlled source notes.</p>
           <DataStatus label="S-Curve Rows" count={project.features.overview.source_tables.s_curve?.row_count} />
           <DataStatus label="Progress Updates" count={project.source_files.progress} />
-          <ProjectDataTable table={workspaceTables.s_curve} title="S-Curve Source" />
+          <TablePreviewPanel table={project.features.overview.source_tables.s_curve} title="S-Curve Source" />
         </div>
         <iframe src={project.reports.linked_executive_dashboard} title={`${project.project_display_name} linked dashboard`} />
       </div>
@@ -1039,7 +767,7 @@ function WorkspaceTabContent({
           <MiniMetric label="ETC" value={money(project.etc)} note="EAC less AC" />
           <MiniMetric label="VAC" value={money(project.vac)} note="BAC less EAC" />
         </div>
-        <ProjectDataTable table={workspaceTables.evm} title="EVM Source Table" />
+        <TablePreviewPanel table={project.features.overview.source_tables.evm} title="EVM Source Table" />
       </div>
     );
   }
@@ -1060,8 +788,8 @@ function WorkspaceTabContent({
           <MiniMetric label="Payment Rows" value={numberValue(project.source_files.payments)} note="Payment records" />
         </div>
         <div className="workspace-two">
-          <ProjectDataTable table={workspaceTables.contracts} title="Contracts Register" />
-          <ProjectDataTable table={workspaceTables.payments} title="Payments Register" />
+          <TablePreviewPanel table={project.features.overview.source_tables.contracts} title="Contracts Register Preview" />
+          <TablePreviewPanel table={project.features.overview.source_tables.payments} title="Payments Register Preview" />
         </div>
       </div>
     );
@@ -1079,7 +807,7 @@ function WorkspaceTabContent({
         </div>
         <div className="workspace-two">
           <FeatureSvg mode="delay" />
-          <ProjectDataTable table={workspaceTables.delay_events} title="Delay Events Register" />
+          <TablePreviewPanel table={project.features.overview.source_tables.delay_events} title="Delay Events Source Table" />
         </div>
       </div>
     );
@@ -1098,7 +826,7 @@ function WorkspaceTabContent({
           </section>
           <FeatureSvg mode="delay" />
         </div>
-        <ProjectTableSelector title="Time Impact Evidence Tables" tables={Object.fromEntries((project.features.delay_analysis.template_tables || project.features.delay_analysis.templates).map((table) => [table.file, table]))} preferred={["04- p6_activity_export.csv", "11-concurrency_matrix_template.updated.csv", "05- relationship_file.csv"]} />
+        <TemplateInventory templates={project.features.delay_analysis.templates} />
         <iframe className="wide-embed" src={project.reports.elite_svg_charts} title={`${project.project_display_name} time impact charts`} />
       </div>
     );
@@ -1114,16 +842,116 @@ function WorkspaceTabContent({
           <MiniMetric label="Decision Required" value={project.decision_required ? "Yes" : "No"} note="Rule-based management trigger" />
           <MiniMetric label="Delay Days" value={numberValue(project.delay_days)} note="Delay exposure" />
         </div>
-        <ProjectDataTable table={workspaceTables.risks} title="Risk Register" />
+        <TablePreviewPanel table={project.features.overview.source_tables.risks} title="Risks Source Table" />
       </div>
     );
   }
 
-  if (activeTab === "Letters Intelligence") return <LettersIntelligencePanel project={project} />;
+  if (activeTab === "Letters Intelligence") {
+    return (
+      <div className="feature-stack">
+        <AiInsightCard type="letters" projectKey={project.project_key} />
+        <div className="workspace-two">
+          <div>
+            <h3>Letters Intelligence</h3>
+            <p>Correspondence is project-isolated. New letters added inside this project&apos;s inbox folder are recognized by the generator and reflected after sync/deploy.</p>
+            <DataStatus label="Inbox Files" count={project.features.letters_intelligence.inbox_file_count} />
+            <DataStatus label="Claims Rows" count={project.source_files.claims} />
+            <DataStatus label="Delay Events" count={project.source_files.delay_events} />
+          </div>
+          <FeatureSvg mode="letters" />
+        </div>
+        <DetectorGrid detectors={project.features.letters_intelligence.detectors} />
+        <div className="workspace-two">
+          <WorkbookSummary workbook={project.features.letters_intelligence.workbook} title="Letters Intelligence Workbook" />
+          <FileList title="Detected Letter Files" files={project.features.letters_intelligence.inbox_files} />
+        </div>
+        <iframe className="wide-embed" src={project.reports.master_dashboard} title={`${project.project_display_name} letters intelligence`} />
+      </div>
+    );
+  }
 
-  if (activeTab === "Delay Analysis - Time Impact Analysis") return <DelayTiaParityPanel project={project} />;
+  if (activeTab === "Delay Analysis - Time Impact Analysis") {
+    return (
+      <div className="feature-stack">
+        <AiInsightCard type="delay" projectKey={project.project_key} />
+        <div className="workspace-two">
+          <div>
+            <h3>Delay Analysis - Time Impact Analysis</h3>
+            <p>Applies the selected project&apos;s Delay Analysis logic. Submitted TIA packages are assessed through authority, evidence, procedure, causation, schedule, concurrency, mitigation, and determination gates.</p>
+            <DataStatus label="Logic Mode" count={project.features.delay_analysis.submitted_tia?.available ? 1 : 0} />
+            <DataStatus label="Recognized TIA Files" count={project.features.delay_analysis.recognized_file_count} />
+            <DataStatus label="Required TIA Files" count={project.features.delay_analysis.required_file_count} />
+            <DataStatus label="Delay Events" count={project.source_files.delay_events} />
+          </div>
+          <FeatureSvg mode="delay" />
+        </div>
+        <DetectorGrid detectors={project.features.delay_analysis.detectors} />
+        <SubmittedTiaGuidePanel submitted={project.features.delay_analysis.submitted_tia || { available: false, status: "Missing", scope_note: "No submitted TIA guide detected." }} />
+        {project.features.delay_analysis.missing_required_files.length ? (
+          <section className="feature-card warning-card">
+            <div className="feature-card-head"><h3>Missing Required TIA Files</h3><span>{project.features.delay_analysis.missing_required_files.length}</span></div>
+            <p>{project.features.delay_analysis.missing_required_files.join(", ")}</p>
+          </section>
+        ) : null}
+        <section className="feature-card">
+          <div className="feature-card-head"><h3>Supporting Source Inputs</h3><span>{project.features.delay_analysis.logic_mode || "TIA readiness"}</span></div>
+          <p className="empty-note">These tables remain available for audit and future project onboarding. The submitted TIA logic above controls the event assessment where a submitted guide exists.</p>
+        </section>
+        <TemplateInventory templates={project.features.delay_analysis.templates} />
+        <div className="workspace-two">
+          <TablePreviewPanel table={project.features.delay_analysis.schedule_tables["MEP Activities"]} title="MEP Activities" />
+          <TablePreviewPanel table={project.features.delay_analysis.schedule_tables["MEP Schedule"]} title="MEP Schedule" />
+        </div>
+        <div className="workspace-two">
+          <TablePreviewPanel table={project.features.delay_analysis.schedule_tables["MEP Civil Logic"]} title="MEP Civil Logic" />
+          <TablePreviewPanel table={project.features.delay_analysis.schedule_tables["BL Schedule"]} title="BL Schedule" />
+        </div>
+        <iframe className="wide-embed" src={project.reports.elite_svg_charts} title={`${project.project_display_name} delay analysis charts`} />
+      </div>
+    );
+  }
 
-  if (activeTab === "Contract & Claims Intelligence Center") return <ContractClaimsParityPanel project={project} />;
+  if (activeTab === "Contract & Claims Intelligence Center") {
+    return (
+      <div className="feature-stack">
+        <AiInsightCard type="contract" projectKey={project.project_key} />
+        <div className="workspace-two">
+          <div>
+            <h3>Contract & Claims Intelligence Center</h3>
+            <p>Uses the selected project&apos;s contract source folder, evidence folder, and project-specific SQLite knowledge base. It does not read another project&apos;s claim library.</p>
+            <DataStatus label="Contract Files" count={project.features.contract_claims.source_files.length} />
+            <DataStatus label="Evidence Files" count={project.features.contract_claims.evidence_files.length} />
+            <DataStatus label="Knowledge Tables" count={Object.keys(project.features.contract_claims.database.tables || {}).length} />
+          </div>
+          <FeatureSvg mode="claims" />
+        </div>
+        <div className="workspace-grid">
+          <MiniMetric label="Claims Exposure" value={money(project.claims_exposure)} note={metricSource(project, "claims_exposure", "Claims source exposure")} />
+          <MiniMetric label="Claimed Days" value={numberValue(project.claimed_days)} note="claims.csv claimed_days total" />
+          <MiniMetric label="Claims Rows" value={numberValue(project.source_files.claims)} note="Claims records loaded" />
+          <MiniMetric label="Contracts Rows" value={numberValue(project.source_files.contracts)} note="Contract source rows" />
+          <MiniMetric label="Evidence Readiness" value={`${numberValue(project.data_quality, 1)}%`} note="Source completeness indicator" />
+        </div>
+        <DetectorGrid detectors={project.features.contract_claims.detectors} />
+        <div className="workspace-two">
+          <WorkbookSummary workbook={project.features.contract_claims.clause_library} title="Overall Contract Clause Library" />
+          <section className="feature-card">
+            <div className="feature-card-head"><h3>Knowledge Base Tables</h3><span>{project.features.contract_claims.database.exists ? "SQLite" : "Missing"}</span></div>
+            <div className="template-grid">
+              {Object.entries(project.features.contract_claims.database.tables || {}).map(([table, count]) => (
+                <div key={table}><b>{table}</b><span>{count ?? "N/A"} rows</span></div>
+              ))}
+            </div>
+          </section>
+        </div>
+        <div className="workspace-two">
+          <FileList title="Contract Source Files" files={project.features.contract_claims.source_files} />
+          <FileList title="Evidence Files" files={project.features.contract_claims.evidence_files} />
+        </div>
+      </div>
+    );
+  }
 
   if (activeTab === "Technical Advisor") {
     return (
@@ -1169,10 +997,6 @@ function WorkspaceTabContent({
           </button>
         ))}
       </div>
-      <OutputStudioDownloadButton
-        href={project.reports[selectedReport]}
-        label={`Download ${reportTabs.find((tab) => tab.key === selectedReport)?.label || "Report"}`}
-      />
       <DetectorGrid detectors={project.features.outputs_and_watchers.watchers} />
       <FileList title="Automatic HTML Outputs" files={project.features.outputs_and_watchers.output_files} />
       <iframe src={project.reports[selectedReport]} title={`${project.project_display_name} - ${selectedReport}`} />
@@ -1224,6 +1048,18 @@ function ProjectWorkspace({
   );
 }
 
+function StreamlitFullClone() {
+  return (
+    <section className="streamlit-clone-shell">
+      <iframe
+        src={STREAMLIT_APP_URL}
+        title="SAMCO Project Intelligence Hub Streamlit full clone"
+        allow="camera; microphone; clipboard-read; clipboard-write; fullscreen"
+      />
+    </section>
+  );
+}
+
 type OperationsPanel = "portfolio" | "delivery" | "decisions" | "intelligence";
 
 function clampPercent(value: number | null | undefined) {
@@ -1236,7 +1072,7 @@ function PortfolioVisuals({
   sectors: visibleSectors,
   panel
 }: {
-  projects: ProjectSummary[];
+  projects: ProjectRecord[];
   sectors: SectorRecord[];
   panel: OperationsPanel;
 }) {
@@ -1396,46 +1232,25 @@ function DecisionOperationsDashboard({
 function DigitalOperationsApp() {
   const [scope, setScope] = useState(DECISION_DASHBOARD_KEY);
   const [selectedReport, setSelectedReport] = useState<ReportKey>("executive_dashboard");
-  const [projectDetails, setProjectDetails] = useState<ProjectRecord | null>(null);
-  const [projectLoadError, setProjectLoadError] = useState("");
-  const selectedProjectSummary = projects.find((project) => project.project_key === scope) || projects[0];
+  const [showFullWorkspace, setShowFullWorkspace] = useState(false);
+  const selectedProject = projects.find((project) => project.project_key === scope) || projects[0];
   const isDecisionDashboard = scope === DECISION_DASHBOARD_KEY;
-
-  useEffect(() => {
-    if (isDecisionDashboard) {
-      setProjectDetails(null);
-      setProjectLoadError("");
-      return;
-    }
-    let cancelled = false;
-    setProjectDetails(null);
-    setProjectLoadError("");
-    fetch(`/data/projects/${encodeURIComponent(scope)}.json`, { cache: "no-store" })
-      .then((response) => {
-        if (!response.ok) throw new Error("Selected project data is not available.");
-        return response.json() as Promise<ProjectRecord>;
-      })
-      .then((payload) => {
-        if (!cancelled && payload.project_key === scope) setProjectDetails(payload);
-      })
-      .catch((error: unknown) => {
-        if (!cancelled) setProjectLoadError(error instanceof Error ? error.message : "Unable to load selected project data.");
-      });
-    return () => { cancelled = true; };
-  }, [isDecisionDashboard, scope]);
 
   return (
     <main className="future-shell operations-shell">
       <header className="operations-command-bar">
         <div className="command-identity"><span>PIH / 01</span><b>Digital Operations</b></div>
-        <label className="scope-control"><span>Operating scope</span><select value={scope} onChange={(event) => setScope(event.target.value)}><option value={DECISION_DASHBOARD_KEY}>Decision Making Dashboard</option>{projects.map((project) => <option value={project.project_key} key={project.project_key}>{project.sector} / {project.project_display_name}</option>)}</select></label>
-        <div className="command-status"><i /><span>{isDecisionDashboard ? "Portfolio mode" : `${selectedProjectSummary.sector} project mode`}</span></div>
+        <label className="scope-control"><span>Operating scope</span><select value={scope} onChange={(event) => { setScope(event.target.value); setShowFullWorkspace(false); }}><option value={DECISION_DASHBOARD_KEY}>Decision Making Dashboard</option>{projects.map((project) => <option value={project.project_key} key={project.project_key}>{project.sector} / {project.project_display_name}</option>)}</select></label>
+        <div className="command-status"><i /><span>{isDecisionDashboard ? "Portfolio mode" : `${selectedProject.sector} project mode`}</span></div>
       </header>
       {isDecisionDashboard ? <DecisionOperationsDashboard onChooseProject={setScope} /> : (
-        projectDetails ? <ProjectWorkspace project={projectDetails} selectedReport={selectedReport} setSelectedReport={setSelectedReport} /> : <section className="feature-card project-load-state"><h2>{selectedProjectSummary.project_display_name}</h2><p>{projectLoadError || "Loading the complete project controls workspace..."}</p></section>
+        <>
+          <div className="project-view-switch"><button type="button" className={!showFullWorkspace ? "active" : ""} onClick={() => setShowFullWorkspace(false)}>Digital project workspace</button><button type="button" className={showFullWorkspace ? "active" : ""} onClick={() => setShowFullWorkspace(true)}>Complete controls workspace</button></div>
+          {showFullWorkspace ? <StreamlitFullClone /> : <ProjectWorkspace project={selectedProject} selectedReport={selectedReport} setSelectedReport={setSelectedReport} />}
+        </>
       )}
       <footer className="operations-footer">Designed &amp; Created | <strong>Engr. Ahmed Labib</strong><span>Source-backed controls | Project-isolated intelligence</span></footer>
-      <AiChatPanel projectKey={isDecisionDashboard ? undefined : selectedProjectSummary.project_key} projectName={isDecisionDashboard ? "Decision Making Dashboard" : selectedProjectSummary.project_display_name} sector={isDecisionDashboard ? undefined : selectedProjectSummary.sector} />
+      <AiChatPanel projectKey={isDecisionDashboard ? undefined : selectedProject.project_key} projectName={isDecisionDashboard ? "Decision Making Dashboard" : selectedProject.project_display_name} sector={isDecisionDashboard ? undefined : selectedProject.sector} />
     </main>
   );
 }
@@ -1443,5 +1258,4 @@ function DigitalOperationsApp() {
 export default function HomePage() {
   return <DigitalOperationsApp />;
 }
-
 

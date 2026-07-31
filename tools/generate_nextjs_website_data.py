@@ -133,6 +133,27 @@ def preview_table(path: Path, limit: int = 8) -> dict[str, Any]:
     }
 
 
+def workspace_table(path: Path, limit: int = 3000) -> dict[str, Any]:
+    """Return a project-scoped table suitable for the digital workspace.
+
+    The portfolio remains a compact executive payload. Full rows travel only in
+    the selected project's JSON file so one project's source evidence cannot be
+    rendered in another project's workspace.
+    """
+    rows = read_csv_rows(path)
+    columns = list(rows[0].keys()) if rows else []
+    return {
+        "file": path.name,
+        "exists": path.exists(),
+        "row_count": len(rows),
+        "column_count": len(columns),
+        "columns": columns,
+        "rows": rows[:limit],
+        "truncated": len(rows) > limit,
+        "source_path": path.name,
+    }
+
+
 def xlsx_summary(path: Path, limit: int = 8) -> dict[str, Any]:
     summary = {"file": path.name, "exists": path.exists(), "sheets": []}
     if not path.exists():
@@ -163,6 +184,83 @@ def xlsx_summary(path: Path, limit: int = 8) -> dict[str, Any]:
     except Exception as exc:
         summary["error"] = str(exc)
     return summary
+
+
+def xlsx_workspace_tables(path: Path, limit_per_sheet: int = 3000) -> dict[str, Any]:
+    """Expose full project-owned workbook sheets with an explicit safety cap."""
+    result: dict[str, Any] = {"file": path.name, "exists": path.exists(), "sheets": []}
+    if not path.exists():
+        return result
+    try:
+        from openpyxl import load_workbook  # type: ignore
+
+        workbook = load_workbook(path, read_only=True, data_only=True)
+        for sheet_name in workbook.sheetnames:
+            sheet = workbook[sheet_name]
+            rows_iter = sheet.iter_rows(values_only=True)
+            headers = [str(value or "").strip() for value in next(rows_iter, [])]
+            headers = [header or f"Column {index + 1}" for index, header in enumerate(headers)]
+            records: list[dict[str, Any]] = []
+            row_count = 0
+            for row in rows_iter:
+                row_count += 1
+                if len(records) < limit_per_sheet:
+                    records.append({headers[index]: excel_value(value) for index, value in enumerate(row[:len(headers)])})
+            result["sheets"].append(
+                {
+                    "name": sheet_name,
+                    "row_count": row_count,
+                    "column_count": len(headers),
+                    "columns": headers,
+                    "rows": records,
+                    "truncated": row_count > limit_per_sheet,
+                }
+            )
+    except Exception as exc:
+        result["error"] = str(exc)
+    return result
+
+
+def json_safe_sql_value(value: Any) -> Any:
+    if isinstance(value, bytes):
+        return f"[binary {len(value)} bytes]"
+    return excel_value(value)
+
+
+def sqlite_table_rows(path: Path, limit_per_table: int = 3000) -> dict[str, Any]:
+    """Read project-local claims records without exposing files from other projects."""
+    result: dict[str, Any] = {"exists": path.exists(), "tables": {}, "error": None}
+    if not path.exists():
+        return result
+    try:
+        connection = sqlite3.connect(path)
+        table_names = [
+            str(row[0])
+            for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name")
+            if not str(row[0]).startswith("sqlite_")
+        ]
+        for table_name in table_names:
+            quoted_name = table_name.replace('"', '""')
+            cursor = connection.execute(f'SELECT * FROM "{quoted_name}" LIMIT ?', (limit_per_table,))
+            columns = [str(column[0]) for column in cursor.description or []]
+            records = [
+                {columns[index]: json_safe_sql_value(value) for index, value in enumerate(row)}
+                for row in cursor.fetchall()
+            ]
+            total = connection.execute(f'SELECT COUNT(*) FROM "{quoted_name}"').fetchone()[0]
+            result["tables"][table_name] = {
+                "file": f"{path.name}:{table_name}",
+                "exists": True,
+                "row_count": total,
+                "column_count": len(columns),
+                "columns": columns,
+                "rows": records,
+                "truncated": total > limit_per_table,
+            }
+        connection.close()
+    except Exception as exc:
+        result["error"] = str(exc)
+    return result
 
 
 def normalize_markdown_text(text: str) -> str:
@@ -399,10 +497,9 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     letters_dir = base / "07-letters_intelligence"
     outputs_dir = OUTPUTS_ROOT / project["project_folder_name"]
 
-    delay_templates = [
-        preview_table(path)
-        for path in sorted(delay_dir.glob("*.csv"))
-    ]
+    delay_template_paths = sorted(delay_dir.glob("*.csv"))
+    delay_templates = [preview_table(path) for path in delay_template_paths]
+    delay_template_tables = [workspace_table(path) for path in delay_template_paths]
     delay_required_names = [
         "01-project_metadata_template.csv",
         "02-master_activity_steel_analysis.csv",
@@ -423,35 +520,47 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     ]
 
     letter_files = list_project_files(letters_dir / "inbox", base, 160)
-    letter_workbook = xlsx_summary(letters_dir / "letters_intelligence.xlsx")
+    letter_workbook_path = letters_dir / "letters_intelligence.xlsx"
+    letter_workbook = xlsx_summary(letter_workbook_path)
     contract_files = list_project_files(contracts_dir / "source", base, 80)
     evidence_files = list_project_files(evidence_dir, base, 80)
     output_files = list_project_files(outputs_dir, OUTPUTS_ROOT, 20)
     submitted_tia = build_submitted_tia_payload(project, base)
+    overview_paths = {
+        "projects": data_dir / "projects.csv",
+        "activities": data_dir / "activities.csv",
+        "progress_updates": data_dir / "progress_updates.csv",
+        "evm": data_dir / "evm.csv",
+        "risks": data_dir / "risks.csv",
+        "claims": data_dir / "claims.csv",
+        "contracts": data_dir / "contracts.csv",
+        "payments": data_dir / "payments.csv",
+        "milestones": data_dir / "milestones.csv",
+        "delay_events": data_dir / "delay_events.csv",
+        "wbs": data_dir / "wbs.csv",
+        "s_curve": data_dir / "s_curve.csv",
+    }
+    schedule_paths = {
+        "MEP Activities": schedule_dir / "MEP Activities.csv",
+        "MEP Schedule": schedule_dir / "MEP Schedule.csv",
+        "MEP Civil Logic": schedule_dir / "MEP Civil Logic.csv",
+        "BL Schedule": schedule_dir / "BL Schedule.csv",
+    }
 
     return {
         "overview": {
             "data_sources": {key: len(value) for key, value in rows.items()},
             "source_tables": {
-                "projects": preview_table(data_dir / "projects.csv"),
-                "activities": preview_table(data_dir / "activities.csv"),
-                "progress_updates": preview_table(data_dir / "progress_updates.csv"),
-                "evm": preview_table(data_dir / "evm.csv"),
-                "risks": preview_table(data_dir / "risks.csv"),
-                "claims": preview_table(data_dir / "claims.csv"),
-                "contracts": preview_table(data_dir / "contracts.csv"),
-                "payments": preview_table(data_dir / "payments.csv"),
-                "milestones": preview_table(data_dir / "milestones.csv"),
-                "delay_events": preview_table(data_dir / "delay_events.csv"),
-                "wbs": preview_table(data_dir / "wbs.csv"),
-                "s_curve": preview_table(data_dir / "s_curve.csv"),
+                key: preview_table(path) for key, path in overview_paths.items()
             },
+            "workspace_tables": {key: workspace_table(path) for key, path in overview_paths.items()},
         },
         "letters_intelligence": {
             "folder": "07-letters_intelligence",
             "inbox_files": letter_files,
             "inbox_file_count": len(letter_files),
             "workbook": letter_workbook,
+            "workbook_tables": xlsx_workspace_tables(letter_workbook_path),
             "detectors": [
                 {"name": "Inbox folder detector", "status": "Active" if (letters_dir / "inbox").exists() else "Missing", "detail": "Recognizes new PDF, DOCX, XLSX, CSV, and message files under project letters inbox."},
                 {"name": "Letters workbook detector", "status": "Active" if (letters_dir / "letters_intelligence.xlsx").exists() else "Missing", "detail": "Reads the project-specific letters intelligence workbook when available."},
@@ -463,15 +572,12 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
             "logic_mode": "Submitted TIA Level 1-4 assessment" if submitted_tia.get("available") else "Generic project TIA readiness",
             "submitted_tia": submitted_tia,
             "templates": delay_templates,
+            "template_tables": delay_template_tables,
             "required_file_count": len(delay_required_names),
             "recognized_file_count": len(delay_templates),
             "missing_required_files": missing_delay,
-            "schedule_tables": {
-                "MEP Activities": preview_table(schedule_dir / "MEP Activities.csv"),
-                "MEP Schedule": preview_table(schedule_dir / "MEP Schedule.csv"),
-                "MEP Civil Logic": preview_table(schedule_dir / "MEP Civil Logic.csv"),
-                "BL Schedule": preview_table(schedule_dir / "BL Schedule.csv"),
-            },
+            "schedule_tables": {key: preview_table(path) for key, path in schedule_paths.items()},
+            "schedule_workspace_tables": {key: workspace_table(path) for key, path in schedule_paths.items()},
             "detectors": [
                 {"name": "Delay TIA template detector", "status": "Ready" if not missing_delay else "Needs files", "detail": f"{len(delay_templates)} CSV files recognized in the selected project."},
                 {"name": "Column inspector", "status": "Active", "detail": "Every detected CSV includes row count, column count, and preview rows."},
@@ -483,7 +589,9 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
             "source_files": contract_files,
             "evidence_files": evidence_files,
             "database": sqlite_table_counts(contracts_dir / "contract_claims.db"),
+            "knowledge_base": sqlite_table_rows(contracts_dir / "contract_claims.db"),
             "clause_library": xlsx_summary(contracts_dir / "source" / "Overall_Contract_clause_library.xlsx"),
+            "clause_library_tables": xlsx_workspace_tables(contracts_dir / "source" / "Overall_Contract_clause_library.xlsx"),
             "detectors": [
                 {"name": "Contract source detector", "status": "Active" if contract_files else "Missing", "detail": "Finds contract PDFs and clause libraries inside the selected project only."},
                 {"name": "Knowledge base detector", "status": "Active" if (contracts_dir / "contract_claims.db").exists() else "Missing", "detail": "Uses the selected project's own SQLite knowledge base."},
@@ -1196,6 +1304,62 @@ def build_portfolio_decision_brief(projects: list[dict[str, Any]]) -> list[dict[
     )[:18]
 
 
+def portfolio_project_summary(project: dict[str, Any]) -> dict[str, Any]:
+    """Keep portfolio JSON executive-sized; detailed evidence remains per project."""
+    fields = (
+        "project_id",
+        "project_key",
+        "project_folder_name",
+        "project_display_name",
+        "sector",
+        "status",
+        "contract_value",
+        "paid_amount",
+        "spent_amount",
+        "remaining_value",
+        "planned_progress",
+        "actual_progress",
+        "progress_variance",
+        "bac",
+        "pv",
+        "ev",
+        "ac",
+        "sv",
+        "cv",
+        "eac",
+        "etc",
+        "vac",
+        "spi",
+        "cpi",
+        "risk_score",
+        "high_risk_count",
+        "risk_record_count",
+        "delay_days",
+        "delay_event_count",
+        "claims_exposure",
+        "claimed_days",
+        "planned_start",
+        "planned_finish",
+        "forecast_finish",
+        "schedule_health",
+        "cost_health",
+        "delay_exposure",
+        "claim_exposure_level",
+        "data_confidence",
+        "decision_priority",
+        "decision_reasons",
+        "activity_count",
+        "milestone_count",
+        "data_quality",
+        "decision_required",
+        "last_updated",
+        "source_files",
+        "metric_sources",
+        "reports",
+    )
+    return {field: project.get(field) for field in fields}
+
+
 def build_portfolio(projects: list[dict[str, Any]]) -> dict[str, Any]:
     total_contract = sum(p["contract_value"] or 0 for p in projects)
     total_paid = sum(p["paid_amount"] or 0 for p in projects)
@@ -1274,7 +1438,10 @@ def build_portfolio(projects: list[dict[str, Any]]) -> dict[str, Any]:
         "warning_summary": warning_summary,
         "decision_brief": build_portfolio_decision_brief(projects),
         "sectors": sorted(sectors.values(), key=lambda item: item["sector"]),
-        "projects": sorted(projects, key=lambda item: (item["sector"], item["project_display_name"])),
+        "projects": sorted(
+            (portfolio_project_summary(project) for project in projects),
+            key=lambda item: (item["sector"], item["project_display_name"]),
+        ),
     }
 
 

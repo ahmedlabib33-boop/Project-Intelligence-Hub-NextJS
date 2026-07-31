@@ -1,0 +1,3 @@
+﻿"Integration","Status","Packages","EnvironmentNames","EvidenceFiles"
+"OpenAI","Code evidence","","","src\app\api\health\ai\route.ts; src\lib\ai\gateway.ts; src\lib\ai\openai.ts"
+"Groq","Integrated evidence","groq-sdk","GROQ_API_KEY","package.json; package-lock.json; src\app\api\health\ai\route.ts; src\components\ai\AiChatPanel.tsx; src\components\ai\AiInsightCard.tsx; src\lib\ai\gateway.ts; src\lib\ai\groq.ts"

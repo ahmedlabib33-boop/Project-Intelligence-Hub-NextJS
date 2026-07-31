@@ -2874,6 +2874,197 @@ h2 {
   font-size: 0.76rem;
 }
 
+/* Project-control subviews keep the legacy feature depth inside the new digital shell. */
+.module-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(4, 13, 24, 0.5);
+  scrollbar-width: thin;
+}
+
+.module-tabs button {
+  flex: 0 0 auto;
+  min-height: 38px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.module-tabs button:hover,
+.module-tabs button.active {
+  border-color: rgba(57, 215, 210, 0.46);
+  background: rgba(57, 215, 210, 0.13);
+  color: var(--text);
+}
+
+.subview-select-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.subview-select-row label {
+  display: grid;
+  gap: 7px;
+  min-width: min(100%, 390px);
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.subview-select-row select,
+.data-table-toolbar input {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid rgba(130, 184, 219, 0.28);
+  border-radius: 10px;
+  outline: none;
+  background: rgba(7, 25, 43, 0.82);
+  color: var(--text);
+  padding: 9px 12px;
+}
+
+.project-data-table {
+  min-width: 0;
+}
+
+.project-data-table .feature-card-head small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.data-table-actions button,
+.data-table-pagination button {
+  min-height: 36px;
+  border: 1px solid rgba(57, 215, 210, 0.38);
+  border-radius: 8px;
+  background: rgba(57, 215, 210, 0.1);
+  color: var(--cyan);
+  padding: 7px 10px;
+  font-size: 0.76rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.data-table-actions button:hover,
+.data-table-pagination button:not(:disabled):hover {
+  background: rgba(57, 215, 210, 0.2);
+}
+
+.data-table-pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.data-table-toolbar,
+.data-table-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.data-table-toolbar span,
+.data-table-pagination span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  white-space: nowrap;
+}
+
+.project-data-table-scroll {
+  max-height: min(68vh, 720px);
+  overflow: auto;
+}
+
+.project-data-table-scroll thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.stream-toggle-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.stream-toggle-grid label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  border: 1px solid rgba(95, 146, 178, 0.28);
+  border-radius: 10px;
+  background: rgba(7, 19, 33, 0.58);
+  color: var(--text);
+  padding: 10px 12px;
+  font-size: 0.84rem;
+}
+
+.stream-toggle-grid input {
+  accent-color: var(--cyan);
+}
+
+.project-load-state {
+  display: grid;
+  min-height: 260px;
+  place-content: center;
+  text-align: center;
+}
+
+.project-load-state h2 {
+  color: var(--text);
+}
+
+@media (max-width: 760px) {
+  .module-tabs {
+    margin-inline: -2px;
+  }
+
+  .module-tabs button {
+    min-height: 42px;
+  }
+
+  .subview-select-row {
+    justify-content: stretch;
+  }
+
+  .subview-select-row label {
+    min-width: 0;
+  }
+
+  .feature-card-head,
+  .data-table-toolbar,
+  .data-table-pagination {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .data-table-actions button,
+  .data-table-pagination button {
+    width: 100%;
+  }
+
+  .stream-toggle-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (min-width: 761px) and (max-height: 900px) {
   .operations-shell { padding-top: 10px; padding-bottom: 28px; }
   .digital-operations { gap: 12px; margin-top: 12px; }

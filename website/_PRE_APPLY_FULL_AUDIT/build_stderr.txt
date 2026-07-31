@@ -1,0 +1,32 @@
+﻿
+> Build error occurred
+Error: Turbopack build failed with 1 errors:
+./src/app/page.tsx:16:90
+Module not found: Can't resolve '@/components/OutputStudioDownloadButton'
+  [90m14 |[0m ...[32momponents/executive/PredictiveWarningPanel"[0m;
+  [90m15 |[0m ...[32mts/executive/ScenarioPlanner"[0m;
+[31m[1m>[0m [90m16 |[0m ...[32m./components/executive/UnifiedIntelligenceSearch"[0m;
+  [90m   |[0m                                                     [31m[1m^[0m
+[31m[1m>[0m [90m17 |[0m ...[32m@/components/OutputStudioDownloadButton"[0m;
+  [90m   |[0m    [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m18 |[0m ...
+  [90m19 |[0m ... [32m"master_dashboard"[0m | [32m"elite_svg_charts"[0m | [32m"linked_executive_dashboard"[0m;
+  [90m20 |[0m ...
+
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/page.tsx [Client Component Browser]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/page.tsx [Client Component SSR]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (./src/app/page.tsx:16:90)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+

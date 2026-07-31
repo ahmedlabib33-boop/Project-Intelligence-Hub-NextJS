@@ -31,6 +31,11 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "_APP_UNDERSTANDING_REPORT",
+    "_DR3_App_Intelligence_Report",
+    "_OUTPUT_STUDIO_BACKUP_*",
+    "_OUTPUT_STUDIO_DOWNLOAD_AUDIT",
+    "_PRE_APPLY_FULL_AUDIT"
   ]
 }
