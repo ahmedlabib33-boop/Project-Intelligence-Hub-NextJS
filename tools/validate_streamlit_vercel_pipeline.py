@@ -35,6 +35,7 @@ from generate_nextjs_website_data import (  # noqa: E402
 
 DATA_ROOT = ROOT / "website" / "public" / "data" / "projects"
 REPORT_PATH = ROOT / "12-logs" / "vercel_streamlit_pipeline_audit_latest.md"
+PAGE_PATH = ROOT / "website" / "src" / "app" / "page.tsx"
 
 PUBLIC_METRICS = (
     "contract_value",
@@ -56,6 +57,37 @@ PUBLIC_METRICS = (
     "claimed_days",
     "activity_count",
     "milestone_count",
+)
+
+REQUIRED_PROJECT_TABS = (
+    "Overview",
+    "WBS",
+    "Activities",
+    "Milestones",
+    "S-Curve",
+    "EVM Analysis",
+    "Contracts",
+    "Letters Intelligence",
+    "Delays",
+    "Time Impact",
+    "Risks",
+    "Delay Analysis - Time Impact Analysis",
+    "Contract & Claims Intelligence Center",
+    "Technical Advisor",
+    "Output Studio",
+)
+
+REQUIRED_WORKSPACE_TABLES = (
+    "projects",
+    "wbs",
+    "activities",
+    "milestones",
+    "s_curve",
+    "evm",
+    "contracts",
+    "payments",
+    "risks",
+    "delay_events",
 )
 
 
@@ -99,6 +131,82 @@ def expected_source_metrics(data_dir: Path) -> dict[str, float | None]:
         "claims_exposure": sum_column(rows["claims"], ["claim_amount", "claimed_amount", "amount", "eot_exposure", "exposure"]),
         "claimed_days": sum_column(rows["claims"], ["claimed_days", "claim_days", "eot_days", "claimed duration"]),
     }
+
+
+def validate_project_workspace_surface(
+    project_key: str,
+    output: dict[str, Any],
+    project_path: Path,
+    errors: list[str],
+    checks: list[str],
+) -> None:
+    """Verify feature payloads are complete and remain inside one project boundary."""
+    features = output.get("features")
+    if not isinstance(features, dict):
+        errors.append(f"{project_key}: complete project workspace payload is missing")
+        return
+
+    overview = features.get("overview")
+    tables = overview.get("workspace_tables") if isinstance(overview, dict) else None
+    if not isinstance(tables, dict):
+        errors.append(f"{project_key}: workspace source tables are missing")
+    else:
+        for table_name in REQUIRED_WORKSPACE_TABLES:
+            table = tables.get(table_name)
+            if not isinstance(table, dict):
+                errors.append(f"{project_key}: workspace table '{table_name}' is missing")
+                continue
+            source_path = project_path / "01-data" / "import_templates" / f"{table_name}.csv"
+            expected_rows = len(read_csv_rows(source_path))
+            if int(table.get("row_count") or 0) != expected_rows:
+                errors.append(f"{project_key}: workspace table '{table_name}' does not match selected-project source rows")
+
+    letters = features.get("letters_intelligence")
+    if not isinstance(letters, dict) or not isinstance(letters.get("workbook_tables"), dict):
+        errors.append(f"{project_key}: Letters Intelligence workbook payload is missing")
+
+    delay = features.get("delay_analysis")
+    if not isinstance(delay, dict):
+        errors.append(f"{project_key}: Delay TIA payload is missing")
+    else:
+        templates = delay.get("templates")
+        full_templates = delay.get("template_tables")
+        if not isinstance(templates, list) or not isinstance(full_templates, list):
+            errors.append(f"{project_key}: Delay TIA template table payload is incomplete")
+        elif len(templates) != len(full_templates):
+            errors.append(f"{project_key}: Delay TIA template table count differs from template inventory")
+        if not isinstance(delay.get("schedule_workspace_tables"), dict):
+            errors.append(f"{project_key}: Delay TIA MEP and baseline schedule payload is missing")
+
+    claims = features.get("contract_claims")
+    if not isinstance(claims, dict):
+        errors.append(f"{project_key}: Contract & Claims payload is missing")
+    else:
+        if not isinstance(claims.get("knowledge_base"), dict):
+            errors.append(f"{project_key}: project-only Contract & Claims knowledge base payload is missing")
+        if not isinstance(claims.get("clause_library_tables"), dict):
+            errors.append(f"{project_key}: contract clause library workbook payload is missing")
+
+    reports = output.get("reports")
+    expected_reports = {"executive_dashboard", "master_dashboard", "elite_svg_charts", "linked_executive_dashboard"}
+    if not isinstance(reports, dict) or not expected_reports.issubset(reports):
+        errors.append(f"{project_key}: Output Studio report links are incomplete")
+
+    if not any(error.startswith(f"{project_key}:") for error in errors):
+        checks.append(f"{project_key}: all project workspace tabs have selected-project source payloads")
+
+
+def validate_workspace_tab_catalog(errors: list[str], checks: list[str]) -> None:
+    """Keep the Vercel workspace tab set aligned with the retained Streamlit controls."""
+    if not PAGE_PATH.exists():
+        errors.append("website project workspace page is missing")
+        return
+    page_source = PAGE_PATH.read_text(encoding="utf-8")
+    missing = [tab for tab in REQUIRED_PROJECT_TABS if f'"{tab}"' not in page_source]
+    if missing:
+        errors.append(f"Next.js project workspace is missing tabs: {', '.join(missing)}")
+    else:
+        checks.append(f"Next.js project workspace exposes {len(REQUIRED_PROJECT_TABS)} retained project-control tabs")
 
 
 def validate_advanced_analytics_output(
@@ -249,6 +357,8 @@ def main(argv: list[str] | None = None) -> int:
     generated_projects: list[dict[str, Any]] = []
     portfolio: dict[str, Any] | None = None
 
+    validate_workspace_tab_catalog(errors, checks)
+
     for project in discover_projects():
         project_key = str(project["project_key"])
         if project_key in project_keys:
@@ -292,6 +402,7 @@ def main(argv: list[str] | None = None) -> int:
         for metric in ("contract_value", "paid_amount", "bac", "pv", "ev", "ac", "risk_score", "delay_days", "claims_exposure"):
             if expected.get(metric) not in (None, 0) and not output.get("metric_sources", {}).get(metric, {}).get("source"):
                 errors.append(f"{project_key}: {metric} is missing source traceability")
+        validate_project_workspace_surface(project_key, output, Path(project["path"]), errors, checks)
         validate_advanced_analytics_output(project_key, output, expected_counts, errors, checks)
 
     portfolio_path = DATA_ROOT.parent / "portfolio.json"
@@ -311,6 +422,10 @@ def main(argv: list[str] | None = None) -> int:
                 errors.append(f"portfolio {metric} generated={totals.get(metric)!r}, projects total={expected_total!r}")
             else:
                 checks.append(f"portfolio {metric} matches isolated project totals")
+        if any("features" in item for item in portfolio.get("projects", [])):
+            errors.append("portfolio.json contains full project feature payloads instead of lightweight summaries")
+        else:
+            checks.append("portfolio is lightweight; full tab data is loaded only after project selection")
 
     if args.public_url:
         validate_public_delivery(args.public_url, portfolio, generated_projects, checks, errors)
