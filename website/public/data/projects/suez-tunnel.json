@@ -111,15 +111,15 @@
     },
     "s_curve_forecast": {
       "status": "ready",
-      "method": "numpy linear trend fallback",
+      "method": "statsmodels damped Holt trend",
       "periods_available": 10,
       "current_actual_value": 916040000.0,
       "current_planned_value": 1150000000.0,
       "completion_target_value": 1250000000.0,
       "excluded_cumulative_reset_periods": 0,
       "recent_period_change": 72800000.0,
-      "projected_completion_date": "2026-09-01",
-      "months_to_target": 3,
+      "projected_completion_date": "2026-10-01",
+      "months_to_target": 4,
       "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
     },
     "s_curve_chart_url": "/data/analytics/suez-tunnel-s-curve-analytics.png",
@@ -190,25 +190,25 @@
           "installed": true
         },
         "seaborn": {
-          "installed": false
+          "installed": true
         },
         "scikit_learn": {
           "installed": true
         },
         "statsmodels": {
-          "installed": false
+          "installed": true
         },
         "spacy": {
           "installed": true
         },
         "xgboost": {
-          "installed": false
+          "installed": true
         },
         "pytorch": {
           "installed": true
         },
         "tensorflow": {
-          "installed": false
+          "installed": true
         }
       },
       "xgboost": {
@@ -3719,159 +3719,8 @@
       "clause_library": {
         "file": "Overall_Contract_clause_library.xlsx",
         "exists": true,
-        "sheets": [
-          {
-            "name": "Contract Clause Library",
-            "row_count": 26,
-            "column_count": 14,
-            "columns": [
-              "Clause / Topic",
-              "Location",
-              "Plain English Meaning",
-              "Beneath the Lines",
-              "Who Holds Leverage",
-              "Notice / Time Bar",
-              "Money Impact",
-              "Schedule Impact",
-              "Practical Action / Evidence",
-              "Source File",
-              "Claim Type",
-              "Risk Level",
-              "Claim Strength",
-              "Exact Clause Text"
-            ],
-            "rows": [
-              {
-                "Clause / Topic": "Agreement Summary",
-                "Location": "1",
-                "Plain English Meaning": "This clause falls under Contractor Counterarguments. In practical contractor terms, it means: 1. Agreement Summary This synthetic contract record is prepared for the Suez-Tunnel Project comprising civil, structural, temporary works, tunnel approach structures, and associated utilities. The Employer is Suez Infrastructure Authority, the Contractor is SAMCO Egypt, and the Engineer / PMO is Suez PMO Consultant. Th",
-                "Beneath the Lines": "Tie the facts directly to the contractual exception or saving wording.",
-                "Who Holds Leverage": "Shared",
-                "Notice / Time Bar": "Unclear",
-                "Money Impact": "Possible",
-                "Schedule Impact": "Yes",
-                "Practical Action / Evidence": "Exception facts, supporting letters, notices, approvals, and event records.",
-                "Source File": "Overall Contract.pdf",
-                "Claim Type": "Counterargument / Exception",
-                "Risk Level": "Medium",
-                "Claim Strength": "Medium",
-                "Exact Clause Text": "1. Agreement Summary This synthetic contract record is prepared for the Suez-Tunnel Project comprising civil, structural, temporary works, tunnel approach structures, and associated utilities. The Employer is Suez Infrastructure Authority, the Contractor is SAMCO Egypt, and the Engineer / PMO is Suez PMO Consultant. The Agreement Effective Date is 15-Jan-2026 and the Commencement Date is 01-Feb-2026. Item Value Project Suez-Tunnel Project Contract Number ST-CTR-2026-001 Scope civil, structural, temporary works, tunnel approach structures, and associated utilities Accepted Contract Amount EGP 685,750,000 excluding VAT unless otherwise stated Time for Completion"
-              },
-              {
-                "Clause / Topic": "months from the Commencement Date",
-                "Location": "24",
-                "Plain English Meaning": "This clause falls under Notice Requirements. In practical contractor terms, it means: 24 months from the Commencement Date Key Section Milestone first tunnel approach concrete and ground interface works within 9 months from Commencement Governing Law Laws of the Arab Republic of Egypt Ruling Language English",
-                "Beneath the Lines": "Demonstrate timely notice, continuing notice trail, or waiver / actual knowledge by the receiving party.",
-                "Who Holds Leverage": "Shared",
-                "Notice / Time Bar": "Unclear",
-                "Money Impact": "Possible",
-                "Schedule Impact": "Possible",
-                "Practical Action / Evidence": "Notice letters, emails, meeting minutes, proof of submission and receipt.",
-                "Source File": "Overall Contract.pdf",
-                "Claim Type": "Notice Compliance",
-                "Risk Level": "Medium",
-                "Claim Strength": "Medium",
-                "Exact Clause Text": "24 months from the Commencement Date Key Section Milestone first tunnel approach concrete and ground interface works within 9 months from Commencement Governing Law Laws of the Arab Republic of Egypt Ruling Language English"
-              },
-              {
-                "Clause / Topic": "Document Priority",
-                "Location": "2",
-                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 2. Document Priority",
-                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                "Who Holds Leverage": "Shared",
-                "Notice / Time Bar": "Unclear",
-                "Money Impact": "Possible",
-                "Schedule Impact": "Possible",
-                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                "Source File": "Overall Contract.pdf",
-                "Claim Type": "General Contract Risk",
-                "Risk Level": "Low",
-                "Claim Strength": "Weak",
-                "Exact Clause Text": "2. Document Priority"
-              },
-              {
-                "Clause / Topic": "This Agreement",
-                "Location": "1",
-                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 1. This Agreement",
-                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                "Who Holds Leverage": "Shared",
-                "Notice / Time Bar": "Unclear",
-                "Money Impact": "Possible",
-                "Schedule Impact": "Possible",
-                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                "Source File": "Overall Contract.pdf",
-                "Claim Type": "General Contract Risk",
-                "Risk Level": "Low",
-                "Claim Strength": "Weak",
-                "Exact Clause Text": "1. This Agreement"
-              },
-              {
-                "Clause / Topic": "Appendix to Tender / Contract Data",
-                "Location": "2",
-                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 2. Appendix to Tender / Contract Data",
-                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                "Who Holds Leverage": "Shared",
-                "Notice / Time Bar": "Unclear",
-                "Money Impact": "Possible",
-                "Schedule Impact": "Possible",
-                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                "Source File": "Overall Contract.pdf",
-                "Claim Type": "General Contract Risk",
-                "Risk Level": "Low",
-                "Claim Strength": "Weak",
-                "Exact Clause Text": "2. Appendix to Tender / Contract Data"
-              },
-              {
-                "Clause / Topic": "Particular Conditions",
-                "Location": "3",
-                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 3. Particular Conditions",
-                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                "Who Holds Leverage": "Shared",
-                "Notice / Time Bar": "Unclear",
-                "Money Impact": "Possible",
-                "Schedule Impact": "Possible",
-                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                "Source File": "Overall Contract.pdf",
-                "Claim Type": "General Contract Risk",
-                "Risk Level": "Low",
-                "Claim Strength": "Weak",
-                "Exact Clause Text": "3. Particular Conditions"
-              },
-              {
-                "Clause / Topic": "General Conditions",
-                "Location": "4",
-                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 4. General Conditions",
-                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                "Who Holds Leverage": "Shared",
-                "Notice / Time Bar": "Unclear",
-                "Money Impact": "Possible",
-                "Schedule Impact": "Possible",
-                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                "Source File": "Overall Contract.pdf",
-                "Claim Type": "General Contract Risk",
-                "Risk Level": "Low",
-                "Claim Strength": "Weak",
-                "Exact Clause Text": "4. General Conditions"
-              },
-              {
-                "Clause / Topic": "General Requirements",
-                "Location": "5",
-                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 5. General Requirements",
-                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                "Who Holds Leverage": "Shared",
-                "Notice / Time Bar": "Unclear",
-                "Money Impact": "Possible",
-                "Schedule Impact": "Possible",
-                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                "Source File": "Overall Contract.pdf",
-                "Claim Type": "General Contract Risk",
-                "Risk Level": "Low",
-                "Claim Strength": "Weak",
-                "Exact Clause Text": "5. General Requirements"
-              }
-            ]
-          }
-        ]
+        "sheets": [],
+        "error": "No module named 'openpyxl'"
       },
       "detectors": [
         {

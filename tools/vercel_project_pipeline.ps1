@@ -13,6 +13,14 @@ $generatorPath = Join-Path $PSScriptRoot "generate_nextjs_website_data.py"
 $validatorPath = Join-Path $PSScriptRoot "validate_streamlit_vercel_pipeline.py"
 $githubSyncPath = Join-Path $PSScriptRoot "github_no_git_sync.ps1"
 $vercelProjectPath = Join-Path $websiteRoot ".vercel\project.json"
+$analyticsPython = Join-Path $root ".venv-analytics\Scripts\python.exe"
+$pythonExecutable = "python"
+if (Test-Path -LiteralPath $analyticsPython) {
+    & $analyticsPython -c "import pandas, numpy, matplotlib, sklearn, spacy" 2>$null
+    if ($LASTEXITCODE -eq 0) {
+        $pythonExecutable = $analyticsPython
+    }
+}
 $logPath = Join-Path $root "12-logs\vercel_project_pipeline.log"
 $statePath = Join-Path $root ".sync_state\vercel_project_pipeline_state.json"
 $script:WatchMutex = $null
@@ -49,6 +57,13 @@ function Write-PipelineLog([string]$Text) {
     Add-Content -LiteralPath $logPath -Value $line
 }
 
+if ($pythonExecutable -eq $analyticsPython) {
+    Write-PipelineLog "Using the project-local advanced analytics runtime: $analyticsPython"
+}
+else {
+    Write-PipelineLog "Project-local analytics runtime is incomplete; using the validated fallback Python runtime."
+}
+
 function Get-RelativePath([string]$FullName) {
     $rootUri = New-Object System.Uri(($root.TrimEnd('\') + '\'))
     $fileUri = New-Object System.Uri([System.IO.Path]::GetFullPath($FullName))
@@ -73,6 +88,7 @@ function Get-WatchedItems {
         $generatorPath,
         $validatorPath,
         (Join-Path $PSScriptRoot "pih_data_guardrails.py"),
+        (Join-Path $root "analytics\requirements-advanced.txt"),
         $githubSyncPath,
         (Join-Path $PSScriptRoot "github_sync_config.json"),
         (Join-Path $websiteRoot "package.json"),
@@ -184,8 +200,8 @@ function Test-WatcherDetection {
 
 function Invoke-PublishPipeline {
     $fingerprintBefore = Get-WatchedFingerprint
-    Invoke-PipelineStep "Generating project-scoped Next.js data" "python" @($generatorPath) $root
-    Invoke-PipelineStep "Validating Streamlit to Next.js source parity" "python" @($validatorPath) $root
+    Invoke-PipelineStep "Generating project-scoped Next.js data" $pythonExecutable @($generatorPath) $root
+    Invoke-PipelineStep "Validating Streamlit to Next.js source parity" $pythonExecutable @($validatorPath) $root
     Invoke-PipelineStep "Building Next.js production application" "npm.cmd" @("run", "build") $websiteRoot
     Invoke-PipelineStep "Publishing validated workspace changes to GitHub without Git CLI" "powershell.exe" @(
         "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", $githubSyncPath,
@@ -197,7 +213,7 @@ function Invoke-PublishPipeline {
     $verified = $false
     for ($attempt = 1; $attempt -le 8; $attempt++) {
         try {
-            Invoke-PipelineStep "Verifying public Vercel project data (attempt $attempt of 8)" "python" @($validatorPath, "--public-url", $PublicUrl) $root
+            Invoke-PipelineStep "Verifying public Vercel project data (attempt $attempt of 8)" $pythonExecutable @($validatorPath, "--public-url", $PublicUrl) $root
             $verified = $true
             break
         }

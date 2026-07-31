@@ -1,5 +1,6 @@
 ﻿# Python
 .venv/
+.venv-analytics/
 venv/
 __pycache__/
 *.pyc
@@ -22,6 +23,8 @@ backups/
 .sync_state/
 .streamlit/delay_tia_upload_cache/
 .tmp/
+.pip-cache/
+.pip-tmp/
 .codex/
 .agents/
 

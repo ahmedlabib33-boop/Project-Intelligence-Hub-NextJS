@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T03:00:07",
+  "generated_at": "2026-07-31T03:34:44",
   "project_count": 4,
   "sector_count": 3,
   "totals": {
@@ -8,7 +8,7 @@
     "spent_amount": 2094774866.1299999,
     "remaining_value": 2838989493.41,
     "average_progress": 0.3298859200459205,
-    "average_spi": 0.8039026642929984,
+    "average_spi": 0.8039026642929985,
     "average_cpi": 0.9742233657412727,
     "average_risk_score": 45.3125,
     "delayed_projects": 4,
@@ -330,15 +330,15 @@
         },
         "s_curve_forecast": {
           "status": "ready",
-          "method": "numpy linear trend fallback",
+          "method": "statsmodels damped Holt trend",
           "periods_available": 10,
           "current_actual_value": 616724300.0,
           "current_planned_value": 782000000.0,
           "completion_target_value": 850000000.0,
           "excluded_cumulative_reset_periods": 0,
           "recent_period_change": 49504000.0,
-          "projected_completion_date": "2026-11-01",
-          "months_to_target": 3,
+          "projected_completion_date": "2027-02-01",
+          "months_to_target": 6,
           "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
         },
         "s_curve_chart_url": "/data/analytics/lmd-bridge-s-curve-analytics.png",
@@ -409,25 +409,25 @@
               "installed": true
             },
             "seaborn": {
-              "installed": false
+              "installed": true
             },
             "scikit_learn": {
               "installed": true
             },
             "statsmodels": {
-              "installed": false
+              "installed": true
             },
             "spacy": {
               "installed": true
             },
             "xgboost": {
-              "installed": false
+              "installed": true
             },
             "pytorch": {
               "installed": true
             },
             "tensorflow": {
-              "installed": false
+              "installed": true
             }
           },
           "xgboost": {
@@ -3938,159 +3938,8 @@
           "clause_library": {
             "file": "Overall_Contract_clause_library.xlsx",
             "exists": true,
-            "sheets": [
-              {
-                "name": "Contract Clause Library",
-                "row_count": 26,
-                "column_count": 14,
-                "columns": [
-                  "Clause / Topic",
-                  "Location",
-                  "Plain English Meaning",
-                  "Beneath the Lines",
-                  "Who Holds Leverage",
-                  "Notice / Time Bar",
-                  "Money Impact",
-                  "Schedule Impact",
-                  "Practical Action / Evidence",
-                  "Source File",
-                  "Claim Type",
-                  "Risk Level",
-                  "Claim Strength",
-                  "Exact Clause Text"
-                ],
-                "rows": [
-                  {
-                    "Clause / Topic": "Agreement Summary",
-                    "Location": "1",
-                    "Plain English Meaning": "This clause falls under Contractor Counterarguments. In practical contractor terms, it means: 1. Agreement Summary This synthetic contract record is prepared for the LMD-Bridge Project comprising bridge substructure, superstructure, road approaches, retaining walls, drainage, and related civil works. The Employer is LMD Infrastructure, the Contractor is SAMCO Egypt, and the Engineer / PMO is BridgeWorks PMO. Th",
-                    "Beneath the Lines": "Tie the facts directly to the contractual exception or saving wording.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Yes",
-                    "Practical Action / Evidence": "Exception facts, supporting letters, notices, approvals, and event records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "Counterargument / Exception",
-                    "Risk Level": "Medium",
-                    "Claim Strength": "Medium",
-                    "Exact Clause Text": "1. Agreement Summary This synthetic contract record is prepared for the LMD-Bridge Project comprising bridge substructure, superstructure, road approaches, retaining walls, drainage, and related civil works. The Employer is LMD Infrastructure, the Contractor is SAMCO Egypt, and the Engineer / PMO is BridgeWorks PMO. The Agreement Effective Date is 10-Mar-2026 and the Commencement Date is 25-Mar-2026. Item Value Project LMD-Bridge Project Contract Number LB-CTR-2026-003 Scope bridge substructure, superstructure, road approaches, retaining walls, drainage, and related civil works Accepted Contract Amount EGP 512,900,000 excluding VAT unless otherwise stated Time for Completion"
-                  },
-                  {
-                    "Clause / Topic": "months from the Commencement Date",
-                    "Location": "20",
-                    "Plain English Meaning": "This clause falls under Notice Requirements. In practical contractor terms, it means: 20 months from the Commencement Date Key Section Milestone main pier foundation and first deck segment readiness within 7 months from Commencement Governing Law Laws of the Arab Republic of Egypt Ruling Language English",
-                    "Beneath the Lines": "Demonstrate timely notice, continuing notice trail, or waiver / actual knowledge by the receiving party.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Notice letters, emails, meeting minutes, proof of submission and receipt.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "Notice Compliance",
-                    "Risk Level": "Medium",
-                    "Claim Strength": "Medium",
-                    "Exact Clause Text": "20 months from the Commencement Date Key Section Milestone main pier foundation and first deck segment readiness within 7 months from Commencement Governing Law Laws of the Arab Republic of Egypt Ruling Language English"
-                  },
-                  {
-                    "Clause / Topic": "Document Priority",
-                    "Location": "2",
-                    "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 2. Document Priority",
-                    "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "General Contract Risk",
-                    "Risk Level": "Low",
-                    "Claim Strength": "Weak",
-                    "Exact Clause Text": "2. Document Priority"
-                  },
-                  {
-                    "Clause / Topic": "This Agreement",
-                    "Location": "1",
-                    "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 1. This Agreement",
-                    "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "General Contract Risk",
-                    "Risk Level": "Low",
-                    "Claim Strength": "Weak",
-                    "Exact Clause Text": "1. This Agreement"
-                  },
-                  {
-                    "Clause / Topic": "Appendix to Tender / Contract Data",
-                    "Location": "2",
-                    "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 2. Appendix to Tender / Contract Data",
-                    "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "General Contract Risk",
-                    "Risk Level": "Low",
-                    "Claim Strength": "Weak",
-                    "Exact Clause Text": "2. Appendix to Tender / Contract Data"
-                  },
-                  {
-                    "Clause / Topic": "Particular Conditions",
-                    "Location": "3",
-                    "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 3. Particular Conditions",
-                    "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "General Contract Risk",
-                    "Risk Level": "Low",
-                    "Claim Strength": "Weak",
-                    "Exact Clause Text": "3. Particular Conditions"
-                  },
-                  {
-                    "Clause / Topic": "General Conditions",
-                    "Location": "4",
-                    "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 4. General Conditions",
-                    "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "General Contract Risk",
-                    "Risk Level": "Low",
-                    "Claim Strength": "Weak",
-                    "Exact Clause Text": "4. General Conditions"
-                  },
-                  {
-                    "Clause / Topic": "General Requirements",
-                    "Location": "5",
-                    "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 5. General Requirements",
-                    "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "General Contract Risk",
-                    "Risk Level": "Low",
-                    "Claim Strength": "Weak",
-                    "Exact Clause Text": "5. General Requirements"
-                  }
-                ]
-              }
-            ]
+            "sheets": [],
+            "error": "No module named 'openpyxl'"
           },
           "detectors": [
             {
@@ -4339,15 +4188,15 @@
         },
         "s_curve_forecast": {
           "status": "ready",
-          "method": "numpy linear trend fallback",
+          "method": "statsmodels damped Holt trend",
           "periods_available": 8,
           "current_actual_value": 113085034.8,
           "current_planned_value": 258975038.6,
           "completion_target_value": 367286025.0,
           "excluded_cumulative_reset_periods": 10,
           "recent_period_change": 5277326.6,
-          "projected_completion_date": "2027-07-01",
-          "months_to_target": 14,
+          "projected_completion_date": "2027-12-01",
+          "months_to_target": 19,
           "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
         },
         "s_curve_chart_url": "/data/analytics/the-big-p-01-up-20-april-26-s-curve-analytics.png",
@@ -4418,25 +4267,25 @@
               "installed": true
             },
             "seaborn": {
-              "installed": false
+              "installed": true
             },
             "scikit_learn": {
               "installed": true
             },
             "statsmodels": {
-              "installed": false
+              "installed": true
             },
             "spacy": {
               "installed": true
             },
             "xgboost": {
-              "installed": false
+              "installed": true
             },
             "pytorch": {
               "installed": true
             },
             "tensorflow": {
-              "installed": false
+              "installed": true
             }
           },
           "xgboost": {
@@ -5915,781 +5764,8 @@
           "workbook": {
             "file": "letters_intelligence.xlsx",
             "exists": true,
-            "sheets": [
-              {
-                "name": "From SAMCO to ACE",
-                "row_count": 82,
-                "column_count": 18,
-                "columns": [
-                  "Ref No",
-                  "Date",
-                  "Type",
-                  "Subject",
-                  "Main Purpose",
-                  "Key Requests",
-                  "Scope Impact",
-                  "Responsibility",
-                  "Affected Activities",
-                  "Start Dependency",
-                  "Sequence Impact",
-                  "Commercial Impact",
-                  "Risk Type",
-                  "Risk Owner",
-                  "Delay Risk",
-                  "EOT Potential",
-                  "Claim Strength",
-                  "Required Actions"
-                ],
-                "rows": [
-                  {
-                    "Ref No": "BD-CW-SAMCO-ACE-LET-STR-001",
-                    "Date": "20-May-2025",
-                    "Type": "Delegation",
-                    "Subject": "Delegation of Authority",
-                    "Main Purpose": "Authorize SAMCO representative for project matters",
-                    "Key Requests": "Acknowledge delegated authority",
-                    "Scope Impact": null,
-                    "Responsibility": "SAMCO",
-                    "Affected Activities": "Project administration",
-                    "Start Dependency": null,
-                    "Sequence Impact": null,
-                    "Commercial Impact": null,
-                    "Risk Type": "Administrative",
-                    "Risk Owner": "SAMCO",
-                    "Delay Risk": null,
-                    "EOT Potential": null,
-                    "Claim Strength": null,
-                    "Required Actions": "Record authorized representative"
-                  },
-                  {
-                    "Ref No": "BD-CW-SAMCO-ACE-LET-STR-002",
-                    "Date": "30-Jun-2025",
-                    "Type": "Delegation",
-                    "Subject": "Delegation of Authority",
-                    "Main Purpose": "Update/confirm SAMCO authorized representative",
-                    "Key Requests": "Acknowledge Eng. Ahmed El Geady authority",
-                    "Scope Impact": null,
-                    "Responsibility": "SAMCO",
-                    "Affected Activities": "Project administration",
-                    "Start Dependency": null,
-                    "Sequence Impact": null,
-                    "Commercial Impact": null,
-                    "Risk Type": "Administrative",
-                    "Risk Owner": "SAMCO",
-                    "Delay Risk": null,
-                    "EOT Potential": null,
-                    "Claim Strength": null,
-                    "Required Actions": "Update correspondence matrix"
-                  },
-                  {
-                    "Ref No": "BD-CW-SAMCO-ACE-LET-STR-003",
-                    "Date": "30-Jun-2025",
-                    "Type": "Response / Reservation",
-                    "Subject": "RE: Outstanding Deliverables - Urgent Response Required",
-                    "Main Purpose": "Respond to ACE-PM notices on overdue deliverables and delay items",
-                    "Key Requests": "Confirm TC1 installed, request soil replacement completion schedule, submit PM CV, reserve baseline dependency",
-                    "Scope Impact": "No new scope; start tied to soil replacement by others",
-                    "Responsibility": "Shared: SAMCO for submittals, Employer/others for soil works",
-                    "Affected Activities": "Tower cranes, baseline program, shop drawings, soil replacement, steel inventory",
-                    "Start Dependency": "Completion of soil replacement and confirmed start date",
-                    "Sequence Impact": "High impact on baseline and start of works",
-                    "Commercial Impact": "Potential prolongation if dependencies remain unresolved",
-                    "Risk Type": "Schedule / Interface",
-                    "Risk Owner": "Shared",
-                    "Delay Risk": "High",
-                    "EOT Potential": "Moderate",
-                    "Claim Strength": "Moderate",
-                    "Required Actions": "Close outstanding submittals and issue confirmed soil replacement schedule"
-                  },
-                  {
-                    "Ref No": "BD-CW-SAMCO-ACE-LET-STR-004",
-                    "Date": "28-Aug-2025",
-                    "Type": "Notice / Site Condition",
-                    "Subject": "RE: Site Survey Findings and Allocation of Concrete Batching Plant",
-                    "Main Purpose": "Record survey deviations, ramp changes, batching plant location, and Zone 2 handover conditions",
-                    "Key Requests": "Review survey findings, approve guidance, accept owner cost/time if batching plant relocated",
-                    "Scope Impact": "Site boundaries, ramp, batching plant and Zone 2 handover affected",
-                    "Responsibility": "Owner/Engineer for handover/location; SAMCO for execution after access",
-                    "Affected Activities": "Boundary excavation, ramp works, batching plant, Zone 2 works",
-                    "Start Dependency": "Full land handover; Zone 2 commencement three months after handover",
-                    "Sequence Impact": "Medium to High, especially Zone 2",
-                    "Commercial Impact": "Possible relocation cost and time extension",
-                    "Risk Type": "Site Access / Interface",
-                    "Risk Owner": "Shared / Owner",
-                    "Delay Risk": "High",
-                    "EOT Potential": "Moderate to High",
-                    "Claim Strength": "Moderate",
-                    "Required Actions": "Issue final survey decisions and confirm batching plant/ramp instructions"
-                  },
-                  {
-                    "Ref No": "BD-CW-SAMCO-ACE-LET-STR-005",
-                    "Date": "10-Sep-2025",
-                    "Type": "Notice of Delay / Site Obstacle",
-                    "Subject": "RE: Documentation of Site Obstacles Affecting Project Progress",
-                    "Main Purpose": "Document water leakage and inability to complete testing/excavation",
-                    "Key Requests": "Resolve leakage, notify when clear, exclude affected period from contract duration",
-                    "Scope Impact": "No scope change; site condition obstructs works",
-                    "Responsibility": "Owner/Engineer for utility issue; SAMCO to resume after clearance",
-                    "Affected Activities": "DCPT, open pits, tank survey, excavation",
-                    "Start Dependency": "Leakage repair and safe site access",
-                    "Sequence Impact": "High for affected testing/excavation sequence",
-                    "Commercial Impact": "Potential prolongation and remediation cost",
-                    "Risk Type": "Site Condition / Delay",
-                    "Risk Owner": "Owner / Shared",
-                    "Delay Risk": "High",
-                    "EOT Potential": "Moderate to High",
-                    "Claim Strength": "Moderate",
-                    "Required Actions": "Repair leakage, document affected period, update recovery plan"
-                  },
-                  {
-                    "Ref No": "BD-CW-SAMCO-ACE-LET-STR-006",
-                    "Date": "22-Sep-2025",
-                    "Type": "Response",
-                    "Subject": "RE: Response to Letter No. BD-ACEPM-SAMCO-LET-004",
-                    "Main Purpose": "Confirm contractual submissions are being completed",
-                    "Key Requests": "Submit staff, schedule, HSE, QAP, BBS and reports progressively",
-                    "Scope Impact": "No scope impact",
-                    "Responsibility": "SAMCO",
-                    "Affected Activities": "Pre-construction submittals and reporting",
-                    "Start Dependency": "Contractual submission cycle",
-                    "Sequence Impact": "Medium if approvals lag",
-                    "Commercial Impact": "Low direct commercial impact",
-                    "Risk Type": "Contract Compliance",
-                    "Risk Owner": "SAMCO",
-                    "Delay Risk": "Medium",
-                    "EOT Potential": "Low",
-                    "Claim Strength": "Weak",
-                    "Required Actions": "Submit remaining contractual documents"
-                  },
-                  {
-                    "Ref No": "BD-CW-SAMCO-ACE-LET-STR-007",
-                    "Date": "24-Sep-2025",
-                    "Type": "Response / Reservation",
-                    "Subject": "RE: Response to Letter No. BD-ACEPM-SAMCO-LET-005",
-                    "Main Purpose": "Respond to ACE-PM rejection of site obstacle position",
-                    "Key Requests": "Confirm tests resumed/completed, state approvals route, reserve contractual claims",
-                    "Scope Impact": "No scope change; records time effects from leakage",
-                    "Responsibility": "Shared",
-                    "Affected Activities": "Soil tests, grid leveling, excavation drawings, reporting",
-                    "Start Dependency": "Leakage repair and consultant approvals",
-                    "Sequence Impact": "Medium",
-                    "Commercial Impact": "Potential future claim if substantiated",
-                    "Risk Type": "Site Condition / Contract",
-                    "Risk Owner": "Shared",
-                    "Delay Risk": "Medium",
-                    "EOT Potential": "Conditional",
-                    "Claim Strength": "Moderate",
-                    "Required Actions": "Track approvals and submit any claim with particulars"
-                  },
-                  {
-                    "Ref No": "BD-CW-SAMCO-ACE-LET-STR-008",
-                    "Date": "24-Sep-2025",
-                    "Type": "Claim Notice / Reservation",
-                    "Subject": "Response Regarding Site Ramp Modification Works",
-                    "Main Purpose": "Reserve entitlement for ramp modification works outside original scope",
-                    "Key Requests": "Recognize cost and time compensation for ramp widening/level changes",
-                    "Scope Impact": "Potential additional access route works",
-                    "Responsibility": "Employer/Engineer if instructed; SAMCO if accepted as access obligation",
-                    "Affected Activities": "Service ramp, material access, site logistics",
-                    "Start Dependency": "Engineer instruction and agreed compensation basis",
-                    "Sequence Impact": "Medium",
-                    "Commercial Impact": "Additional payment and EOT claimed",
-                    "Risk Type": "Access / Variation",
-                    "Risk Owner": "Shared",
-                    "Delay Risk": "Medium",
-                    "EOT Potential": "Conditional",
-                    "Claim Strength": "Moderate",
-                    "Required Actions": "Issue determination on ramp scope and compensation"
-                  }
-                ]
-              },
-              {
-                "name": "From ACE to SAMCO",
-                "row_count": 36,
-                "column_count": 18,
-                "columns": [
-                  "Ref No",
-                  "Date",
-                  "Type",
-                  "Subject",
-                  "Main Purpose",
-                  "Key Requests",
-                  "Scope Impact",
-                  "Responsibility",
-                  "Affected Activities",
-                  "Start Dependency",
-                  "Sequence Impact",
-                  "Commercial Impact",
-                  "Risk Type",
-                  "Risk Owner",
-                  "Delay Risk",
-                  "EOT Potential",
-                  "Claim Strength",
-                  "Required Actions"
-                ],
-                "rows": [
-                  {
-                    "Ref No": "BD-ACEPM-SAMCO-LET-001",
-                    "Date": "24-Jun-2025",
-                    "Type": "Notice",
-                    "Subject": "Outstanding Deliverables",
-                    "Main Purpose": "Record overdue deliverables",
-                    "Key Requests": "Submit crane, program, CV, methodology, soil report, steel data",
-                    "Scope Impact": "No new scope",
-                    "Responsibility": "Contractor",
-                    "Affected Activities": "Cranes, soil replacement, shop drawings, steel",
-                    "Start Dependency": "Crane/docs before soil works",
-                    "Sequence Impact": "High",
-                    "Commercial Impact": "Possible delay damages",
-                    "Risk Type": "Schedule/contract",
-                    "Risk Owner": "Contractor",
-                    "Delay Risk": "High",
-                    "EOT Potential": "Low",
-                    "Claim Strength": "Contractor weak",
-                    "Required Actions": "Submit all overdue items"
-                  },
-                  {
-                    "Ref No": "BD-ACEPM-SAMCO-LET-002",
-                    "Date": "25-Jun-2025",
-                    "Type": "Delay notice",
-                    "Subject": "Tower Crane No. 1 delay",
-                    "Main Purpose": "Warn crane delay affects soil works",
-                    "Key Requests": "Start TC1 installation and confirm date",
-                    "Scope Impact": "No new scope",
-                    "Responsibility": "Contractor",
-                    "Affected Activities": "TC1, soil replacement",
-                    "Start Dependency": "TC1 needed before soil stage",
-                    "Sequence Impact": "High",
-                    "Commercial Impact": "Contractor delay exposure",
-                    "Risk Type": "Schedule",
-                    "Risk Owner": "Contractor",
-                    "Delay Risk": "High",
-                    "EOT Potential": "Low",
-                    "Claim Strength": "Contractor weak",
-                    "Required Actions": "Install TC1 immediately"
-                  },
-                  {
-                    "Ref No": "BD-ACEPM-SAMCO-LET-003",
-                    "Date": "31-Aug-2025",
-                    "Type": "Clarification",
-                    "Subject": "Survey and batching plant",
-                    "Main Purpose": "Respond to survey, ramp, batching plant issues",
-                    "Key Requests": "Follow consultant review; finalize plant/ramp position",
-                    "Scope Impact": "Possible interface impact",
-                    "Responsibility": "Shared",
-                    "Affected Activities": "Boundaries, ramp, plant, Zone 2",
-                    "Start Dependency": "Zone 2 after full handover",
-                    "Sequence Impact": "Medium",
-                    "Commercial Impact": "Possible relocation cost/time if owner-caused",
-                    "Risk Type": "Interface/site",
-                    "Risk Owner": "Shared",
-                    "Delay Risk": "Medium",
-                    "EOT Potential": "Conditional",
-                    "Claim Strength": "Moderate if owner-caused",
-                    "Required Actions": "Close reviews and approvals"
-                  },
-                  {
-                    "Ref No": "BD-ACEPM-SAMCO-LET-004",
-                    "Date": "17-Sep-2025",
-                    "Type": "Submission notice",
-                    "Subject": "Required contractual submissions",
-                    "Main Purpose": "Enforce pre-construction submissions",
-                    "Key Requests": "Staff, program, HSE, QA, BBS, reports",
-                    "Scope Impact": "No new scope",
-                    "Responsibility": "Contractor",
-                    "Affected Activities": "Mobilization, procurement, reporting",
-                    "Start Dependency": "Submissions before proper progress",
-                    "Sequence Impact": "Medium",
-                    "Commercial Impact": "Procurement/payment risk",
-                    "Risk Type": "Contract/schedule",
-                    "Risk Owner": "Contractor",
-                    "Delay Risk": "High",
-                    "EOT Potential": "Low",
-                    "Claim Strength": "Contractor weak",
-                    "Required Actions": "Submit full package"
-                  },
-                  {
-                    "Ref No": "BD-ACEPM-SAMCO-LET-005",
-                    "Date": "17-Sep-2025",
-                    "Type": "Response",
-                    "Subject": "Site obstacles B1-B4",
-                    "Main Purpose": "Rebut handover/leakage delay claim",
-                    "Key Requests": "Follow claim procedure; submit program",
-                    "Scope Impact": "No change; events closed",
-                    "Responsibility": "Contractor",
-                    "Affected Activities": "Handover, tests, leakage, program",
-                    "Start Dependency": "Commencement fixed 11-Sep-2025",
-                    "Sequence Impact": "Low/Medium",
-                    "Commercial Impact": "No EOT recognized",
-                    "Risk Type": "Contract/site",
-                    "Risk Owner": "Contractor",
-                    "Delay Risk": "Low",
-                    "EOT Potential": "Low",
-                    "Claim Strength": "Contractor weak",
-                    "Required Actions": "Submit compliant claim if any"
-                  },
-                  {
-                    "Ref No": "BD-ACEPM-SAMCO-LET-006",
-                    "Date": "22-Sep-2025",
-                    "Type": "Reminder",
-                    "Subject": "Design verification",
-                    "Main Purpose": "Enforce design verification duty",
-                    "Key Requests": "Submit consultant prequalification and report",
-                    "Scope Impact": "No new scope",
-                    "Responsibility": "Contractor",
-                    "Affected Activities": "Design review",
-                    "Start Dependency": "Consultant approval before review",
-                    "Sequence Impact": "Medium",
-                    "Commercial Impact": "Contractor own cost",
-                    "Risk Type": "Technical/contract",
-                    "Risk Owner": "Contractor",
-                    "Delay Risk": "Medium",
-                    "EOT Potential": "Low",
-                    "Claim Strength": "Contractor weak",
-                    "Required Actions": "Submit prequalification/report"
-                  },
-                  {
-                    "Ref No": "BD-ACEPM-SAMCO-LET-007",
-                    "Date": "22-Sep-2025",
-                    "Type": "Rejection",
-                    "Subject": "Insurance policy",
-                    "Main Purpose": "Reject incomplete insurance",
-                    "Key Requests": "Resubmit all required policies by 08-Oct",
-                    "Scope Impact": "No new scope",
-                    "Responsibility": "Contractor",
-                    "Affected Activities": "Insurance, site equipment",
-                    "Start Dependency": "Valid insurance for site operations",
-                    "Sequence Impact": "Low/Medium",
-                    "Commercial Impact": "Uninsured equipment may be barred",
-                    "Risk Type": "Insurance/contract",
-                    "Risk Owner": "Contractor",
-                    "Delay Risk": "Medium",
-                    "EOT Potential": "Low",
-                    "Claim Strength": "Contractor weak",
-                    "Required Actions": "Resubmit complete policies"
-                  },
-                  {
-                    "Ref No": "BD-ACEPM-SAMCO-LET-008",
-                    "Date": "28-Sep-2025",
-                    "Type": "Claim rejection",
-                    "Subject": "Site ramp works",
-                    "Main Purpose": "Reject cost/EOT for ramp",
-                    "Key Requests": "Maintain/modify access route at own cost",
-                    "Scope Impact": "Within contractor scope",
-                    "Responsibility": "Contractor",
-                    "Affected Activities": "Ramp, access, deliveries",
-                    "Start Dependency": "Access route by contractor",
-                    "Sequence Impact": "Medium",
-                    "Commercial Impact": "No payment or EOT",
-                    "Risk Type": "Access/commercial",
-                    "Risk Owner": "Contractor",
-                    "Delay Risk": "Medium",
-                    "EOT Potential": null,
-                    "Claim Strength": "Contractor weak",
-                    "Required Actions": "Maintain ramp and proceed"
-                  }
-                ]
-              },
-              {
-                "name": "SAMCO to ACE Links",
-                "row_count": 82,
-                "column_count": 17,
-                "columns": [
-                  "Thread",
-                  "SAMCO Ref No",
-                  "SAMCO Sheet Row",
-                  "SAMCO Date",
-                  "SAMCO Type",
-                  "SAMCO Subject",
-                  "Related ACE Ref No(s)",
-                  "ACE Sheet Row(s)",
-                  "ACE Date(s)",
-                  "ACE Subject(s)",
-                  "Relationship",
-                  "Confidence",
-                  "SAMCO Claim Strength",
-                  "ACE Claim Strength",
-                  "SAMCO Delay Risk",
-                  "ACE Delay Risk",
-                  "Recommended Follow-up"
-                ],
-                "rows": [
-                  {
-                    "Thread": "Concrete specification variation",
-                    "SAMCO Ref No": "BD-CW-SAMCO-ACE-LET-STR-050",
-                    "SAMCO Sheet Row": 51,
-                    "SAMCO Date": "03-Feb-2026",
-                    "SAMCO Type": "Notice of Variation",
-                    "SAMCO Subject": "Concrete Strength/Cement Content Difference",
-                    "Related ACE Ref No(s)": null,
-                    "ACE Sheet Row(s)": null,
-                    "ACE Date(s)": null,
-                    "ACE Subject(s)": null,
-                    "Relationship": "No direct ACE response in table",
-                    "Confidence": "Low",
-                    "SAMCO Claim Strength": "Strong",
-                    "ACE Claim Strength": null,
-                    "SAMCO Delay Risk": "Medium",
-                    "ACE Delay Risk": null,
-                    "Recommended Follow-up": "Locate Engineer determination/VO response"
-                  },
-                  {
-                    "Thread": "Contractual submissions",
-                    "SAMCO Ref No": "BD-CW-SAMCO-ACE-LET-STR-006",
-                    "SAMCO Sheet Row": 7,
-                    "SAMCO Date": "22-Sep-2025",
-                    "SAMCO Type": "Response",
-                    "SAMCO Subject": "RE: Response to Letter No. BD-ACEPM-SAMCO-LET-004",
-                    "Related ACE Ref No(s)": "BD-ACEPM-SAMCO-LET-004",
-                    "ACE Sheet Row(s)": 5,
-                    "ACE Date(s)": "17-Sep-2025",
-                    "ACE Subject(s)": "BD-ACEPM-SAMCO-LET-004 - Required contractual submissions",
-                    "Relationship": "Response to ACE submission notice",
-                    "Confidence": "High",
-                    "SAMCO Claim Strength": "Weak",
-                    "ACE Claim Strength": "Contractor weak",
-                    "SAMCO Delay Risk": "Medium",
-                    "ACE Delay Risk": "High",
-                    "Recommended Follow-up": "Track remaining submission approvals"
-                  },
-                  {
-                    "Thread": "Critical MEP interface / tank base slab",
-                    "SAMCO Ref No": "BD-CW-SAMCO-ACE-LET-STR-041",
-                    "SAMCO Sheet Row": 42,
-                    "SAMCO Date": "06-Jan-2026",
-                    "SAMCO Type": "Urgent Notice / Conditional Proposal",
-                    "SAMCO Subject": "Critical Interface Issue on Critical Path",
-                    "Related ACE Ref No(s)": "BD-ACEPM-SAMCO-LET-025; BD-ACEPM-SAMCO-LET-026",
-                    "ACE Sheet Row(s)": "26; 27",
-                    "ACE Date(s)": "27-Jan-2026; 02-Feb-2026",
-                    "ACE Subject(s)": "BD-ACEPM-SAMCO-LET-025 - MEP first fix variation | BD-ACEPM-SAMCO-LET-026 - Response to LET-025",
-                    "Relationship": "Directly related to MEP first-fix instruction thread",
-                    "Confidence": "High",
-                    "SAMCO Claim Strength": "Strong if instruction delayed",
-                    "ACE Claim Strength": "Employer strong; Moderate if procedure followed",
-                    "SAMCO Delay Risk": "High",
-                    "ACE Delay Risk": "High; High",
-                    "Recommended Follow-up": "Issue urgent VO, approved drawings and supervision"
-                  },
-                  {
-                    "Thread": "Delegation / administration",
-                    "SAMCO Ref No": "BD-CW-SAMCO-ACE-LET-STR-001",
-                    "SAMCO Sheet Row": 2,
-                    "SAMCO Date": "20-May-2025",
-                    "SAMCO Type": "Delegation",
-                    "SAMCO Subject": "Delegation of Authority",
-                    "Related ACE Ref No(s)": null,
-                    "ACE Sheet Row(s)": null,
-                    "ACE Date(s)": null,
-                    "ACE Subject(s)": null,
-                    "Relationship": "No direct ACE response in table",
-                    "Confidence": "Low",
-                    "SAMCO Claim Strength": null,
-                    "ACE Claim Strength": null,
-                    "SAMCO Delay Risk": null,
-                    "ACE Delay Risk": null,
-                    "Recommended Follow-up": "Keep for authority record only"
-                  },
-                  {
-                    "Thread": "Delegation / administration",
-                    "SAMCO Ref No": "BD-CW-SAMCO-ACE-LET-STR-002",
-                    "SAMCO Sheet Row": 3,
-                    "SAMCO Date": "30-Jun-2025",
-                    "SAMCO Type": "Delegation",
-                    "SAMCO Subject": "Delegation of Authority",
-                    "Related ACE Ref No(s)": null,
-                    "ACE Sheet Row(s)": null,
-                    "ACE Date(s)": null,
-                    "ACE Subject(s)": null,
-                    "Relationship": "No direct ACE response in table",
-                    "Confidence": "Low",
-                    "SAMCO Claim Strength": null,
-                    "ACE Claim Strength": null,
-                    "SAMCO Delay Risk": null,
-                    "ACE Delay Risk": null,
-                    "Recommended Follow-up": "Keep for authority record only"
-                  },
-                  {
-                    "Thread": "Design discrepancies / claim",
-                    "SAMCO Ref No": "BD-CW-SAMCO-ACE-LET-STR-067",
-                    "SAMCO Sheet Row": 68,
-                    "SAMCO Date": "16-Apr-2026",
-                    "SAMCO Type": "Notice of Claim",
-                    "SAMCO Subject": "Design Discrepancies and Impact on Time and Cost",
-                    "Related ACE Ref No(s)": null,
-                    "ACE Sheet Row(s)": null,
-                    "ACE Date(s)": null,
-                    "ACE Subject(s)": null,
-                    "Relationship": "No direct ACE response in table",
-                    "Confidence": "Low",
-                    "SAMCO Claim Strength": "Strong",
-                    "ACE Claim Strength": null,
-                    "SAMCO Delay Risk": "High",
-                    "ACE Delay Risk": null,
-                    "Recommended Follow-up": "Track pending RFI 17 / coordinated package response"
-                  },
-                  {
-                    "Thread": "Design discrepancy / revised package",
-                    "SAMCO Ref No": "BD-CW-SAMCO-ACE-LET-STR-063",
-                    "SAMCO Sheet Row": 64,
-                    "SAMCO Date": "31-Mar-2026",
-                    "SAMCO Type": "Design Change Notice",
-                    "SAMCO Subject": "Comparison of Design Issued 18-Mar-2026 vs 27-Oct-2025",
-                    "Related ACE Ref No(s)": "BD-ACEPM-SAMCO-LET-022; BD-ACEPM-SAMCO-LET-024",
-                    "ACE Sheet Row(s)": "23; 25",
-                    "ACE Date(s)": "28-Dec-2025; 22-Jan-2026",
-                    "ACE Subject(s)": "BD-ACEPM-SAMCO-LET-022 - Design review | BD-ACEPM-SAMCO-LET-024 - Adopted design criteria",
-                    "Relationship": "Same design criteria/review thread",
-                    "Confidence": "Medium",
-                    "SAMCO Claim Strength": "Strong",
-                    "ACE Claim Strength": "Weak/uncertain; Contractor weak",
-                    "SAMCO Delay Risk": "High",
-                    "ACE Delay Risk": "High; Medium",
-                    "Recommended Follow-up": "Issue coordinated revision decision for executed works"
-                  },
-                  {
-                    "Thread": "Design modification / RFI 16 delay",
-                    "SAMCO Ref No": "BD-CW-SAMCO-ACE-LET-STR-066",
-                    "SAMCO Sheet Row": 67,
-                    "SAMCO Date": "11-Apr-2026",
-                    "SAMCO Type": "Notice of Claim",
-                    "SAMCO Subject": "Modifications Included in Latest Design Package",
-                    "Related ACE Ref No(s)": null,
-                    "ACE Sheet Row(s)": null,
-                    "ACE Date(s)": null,
-                    "ACE Subject(s)": null,
-                    "Relationship": "No direct ACE response in table",
-                    "Confidence": "Low",
-                    "SAMCO Claim Strength": "Strong",
-                    "ACE Claim Strength": null,
-                    "SAMCO Delay Risk": "High",
-                    "ACE Delay Risk": null,
-                    "Recommended Follow-up": "Link to RFI 16 response when available"
-                  }
-                ]
-              },
-              {
-                "name": "ACE to SAMCO Links",
-                "row_count": 36,
-                "column_count": 13,
-                "columns": [
-                  "ACE Ref No",
-                  "ACE Sheet Row",
-                  "ACE Date",
-                  "ACE Type",
-                  "ACE Subject",
-                  "Related SAMCO Ref No(s)",
-                  "SAMCO Sheet Row(s)",
-                  "SAMCO Subject(s)",
-                  "Thread(s)",
-                  "ACE Delay Risk",
-                  "ACE EOT Potential",
-                  "ACE Claim Strength",
-                  "ACE Required Actions"
-                ],
-                "rows": [
-                  {
-                    "ACE Ref No": "BD-ACEPM-SAMCO-LET-001",
-                    "ACE Sheet Row": 2,
-                    "ACE Date": "24-Jun-2025",
-                    "ACE Type": "Notice",
-                    "ACE Subject": "Outstanding Deliverables",
-                    "Related SAMCO Ref No(s)": "BD-CW-SAMCO-ACE-LET-STR-003",
-                    "SAMCO Sheet Row(s)": "4",
-                    "SAMCO Subject(s)": "BD-CW-SAMCO-ACE-LET-STR-003 - RE: Outstanding Deliverables - Urgent Response Required",
-                    "Thread(s)": "Outstanding deliverables / tower cranes",
-                    "ACE Delay Risk": "High",
-                    "ACE EOT Potential": "Low",
-                    "ACE Claim Strength": "Contractor weak",
-                    "ACE Required Actions": "Submit all overdue items"
-                  },
-                  {
-                    "ACE Ref No": "BD-ACEPM-SAMCO-LET-002",
-                    "ACE Sheet Row": 3,
-                    "ACE Date": "25-Jun-2025",
-                    "ACE Type": "Delay notice",
-                    "ACE Subject": "Tower Crane No. 1 delay",
-                    "Related SAMCO Ref No(s)": "BD-CW-SAMCO-ACE-LET-STR-003",
-                    "SAMCO Sheet Row(s)": "4",
-                    "SAMCO Subject(s)": "BD-CW-SAMCO-ACE-LET-STR-003 - RE: Outstanding Deliverables - Urgent Response Required",
-                    "Thread(s)": "Outstanding deliverables / tower cranes",
-                    "ACE Delay Risk": "High",
-                    "ACE EOT Potential": "Low",
-                    "ACE Claim Strength": "Contractor weak",
-                    "ACE Required Actions": "Install TC1 immediately"
-                  },
-                  {
-                    "ACE Ref No": "BD-ACEPM-SAMCO-LET-003",
-                    "ACE Sheet Row": 4,
-                    "ACE Date": "31-Aug-2025",
-                    "ACE Type": "Clarification",
-                    "ACE Subject": "Survey and batching plant",
-                    "Related SAMCO Ref No(s)": "BD-CW-SAMCO-ACE-LET-STR-004",
-                    "SAMCO Sheet Row(s)": "5",
-                    "SAMCO Subject(s)": "BD-CW-SAMCO-ACE-LET-STR-004 - RE: Site Survey Findings and Allocation of Concrete Batching Plant",
-                    "Thread(s)": "Survey / batching plant / Zone 2",
-                    "ACE Delay Risk": "Medium",
-                    "ACE EOT Potential": "Conditional",
-                    "ACE Claim Strength": "Moderate if owner-caused",
-                    "ACE Required Actions": "Close reviews and approvals"
-                  },
-                  {
-                    "ACE Ref No": "BD-ACEPM-SAMCO-LET-004",
-                    "ACE Sheet Row": 5,
-                    "ACE Date": "17-Sep-2025",
-                    "ACE Type": "Submission notice",
-                    "ACE Subject": "Required contractual submissions",
-                    "Related SAMCO Ref No(s)": "BD-CW-SAMCO-ACE-LET-STR-006",
-                    "SAMCO Sheet Row(s)": "7",
-                    "SAMCO Subject(s)": "BD-CW-SAMCO-ACE-LET-STR-006 - RE: Response to Letter No. BD-ACEPM-SAMCO-LET-004",
-                    "Thread(s)": "Contractual submissions",
-                    "ACE Delay Risk": "High",
-                    "ACE EOT Potential": "Low",
-                    "ACE Claim Strength": "Contractor weak",
-                    "ACE Required Actions": "Submit full package"
-                  },
-                  {
-                    "ACE Ref No": "BD-ACEPM-SAMCO-LET-005",
-                    "ACE Sheet Row": 6,
-                    "ACE Date": "17-Sep-2025",
-                    "ACE Type": "Response",
-                    "ACE Subject": "Site obstacles B1-B4",
-                    "Related SAMCO Ref No(s)": "BD-CW-SAMCO-ACE-LET-STR-005; BD-CW-SAMCO-ACE-LET-STR-007",
-                    "SAMCO Sheet Row(s)": "6; 8",
-                    "SAMCO Subject(s)": "BD-CW-SAMCO-ACE-LET-STR-005 - RE: Documentation of Site Obstacles Affecting Project Progress | BD-CW-SAMCO-ACE-LET-STR-007 - RE: Response to Letter No. BD-ACEPM-SAMCO-LET-005",
-                    "Thread(s)": "Site obstacles / water leakage",
-                    "ACE Delay Risk": "Low",
-                    "ACE EOT Potential": "Low",
-                    "ACE Claim Strength": "Contractor weak",
-                    "ACE Required Actions": "Submit compliant claim if any"
-                  },
-                  {
-                    "ACE Ref No": "BD-ACEPM-SAMCO-LET-006",
-                    "ACE Sheet Row": 7,
-                    "ACE Date": "22-Sep-2025",
-                    "ACE Type": "Reminder",
-                    "ACE Subject": "Design verification",
-                    "Related SAMCO Ref No(s)": "BD-CW-SAMCO-ACE-LET-STR-009",
-                    "SAMCO Sheet Row(s)": "10",
-                    "SAMCO Subject(s)": "BD-CW-SAMCO-ACE-LET-STR-009 - Submission of Consultant CV and Approval Certificate",
-                    "Thread(s)": "Design verification consultant",
-                    "ACE Delay Risk": "Medium",
-                    "ACE EOT Potential": "Low",
-                    "ACE Claim Strength": "Contractor weak",
-                    "ACE Required Actions": "Submit prequalification/report"
-                  },
-                  {
-                    "ACE Ref No": "BD-ACEPM-SAMCO-LET-007",
-                    "ACE Sheet Row": 8,
-                    "ACE Date": "22-Sep-2025",
-                    "ACE Type": "Rejection",
-                    "ACE Subject": "Insurance policy",
-                    "Related SAMCO Ref No(s)": "BD-CW-SAMCO-ACE-LET-STR-021",
-                    "SAMCO Sheet Row(s)": "22",
-                    "SAMCO Subject(s)": "BD-CW-SAMCO-ACE-LET-STR-021 - Contractor Commitment to Maintain Required Insurance",
-                    "Thread(s)": "Insurance",
-                    "ACE Delay Risk": "Medium",
-                    "ACE EOT Potential": "Low",
-                    "ACE Claim Strength": "Contractor weak",
-                    "ACE Required Actions": "Resubmit complete policies"
-                  },
-                  {
-                    "ACE Ref No": "BD-ACEPM-SAMCO-LET-008",
-                    "ACE Sheet Row": 9,
-                    "ACE Date": "28-Sep-2025",
-                    "ACE Type": "Claim rejection",
-                    "ACE Subject": "Site ramp works",
-                    "Related SAMCO Ref No(s)": "BD-CW-SAMCO-ACE-LET-STR-008",
-                    "SAMCO Sheet Row(s)": "9",
-                    "SAMCO Subject(s)": "BD-CW-SAMCO-ACE-LET-STR-008 - Response Regarding Site Ramp Modification Works",
-                    "Thread(s)": "Ramp / access route",
-                    "ACE Delay Risk": "Medium",
-                    "ACE EOT Potential": null,
-                    "ACE Claim Strength": "Contractor weak",
-                    "ACE Required Actions": "Maintain ramp and proceed"
-                  }
-                ]
-              },
-              {
-                "name": "Issue Threads",
-                "row_count": 18,
-                "column_count": 6,
-                "columns": [
-                  "Thread",
-                  "SAMCO Ref(s)",
-                  "6",
-                  "Main Link",
-                  "Priority",
-                  "Next Action"
-                ],
-                "rows": [
-                  {
-                    "Thread": "Outstanding deliverables / tower cranes",
-                    "SAMCO Ref(s)": "STR-003",
-                    "6": "LET-001; LET-002",
-                    "Main Link": "ACE notice followed by SAMCO rebuttal/updates",
-                    "Priority": "High",
-                    "Next Action": "Confirm closed deliverables and baseline dependency"
-                  },
-                  {
-                    "Thread": "Survey / batching plant / Zone 2",
-                    "SAMCO Ref(s)": "STR-004",
-                    "6": "LET-003",
-                    "Main Link": "SAMCO raised site/survey issues; ACE issued clarification",
-                    "Priority": "Medium",
-                    "Next Action": "Close survey/ramp/batching plant decisions"
-                  },
-                  {
-                    "Thread": "Contractual submissions / reports",
-                    "SAMCO Ref(s)": "STR-006; STR-033; STR-074",
-                    "6": "LET-004; LET-018; LET-021; LET-030; LET-032; LET-037",
-                    "Main Link": "Submittals, programme, periodic reporting compliance, and slow-progress reporting comments.",
-                    "Priority": "High",
-                    "Next Action": "Agree reporting baseline, submit overdue weekly / corrected monthly reports, and close the reporting-compliance and recovery-plan issues."
-                  },
-                  {
-                    "Thread": "Water leakage / pipe breakage",
-                    "SAMCO Ref(s)": "STR-005; STR-007; STR-012; STR-013; STR-014; STR-039",
-                    "6": "LET-005; LET-011; LET-023",
-                    "Main Link": "Contractor notices vs ACE closures/rejections",
-                    "Priority": "High",
-                    "Next Action": "Separate closed incidents from substantiated rework/EOT claims"
-                  },
-                  {
-                    "Thread": "Ramp / access route",
-                    "SAMCO Ref(s)": "STR-008; STR-018",
-                    "6": "LET-008; LET-014; LET-015",
-                    "Main Link": "Access responsibility and soil replacement delay",
-                    "Priority": "High",
-                    "Next Action": "Determine access-route cost/time responsibility"
-                  },
-                  {
-                    "Thread": "Design verification / design criteria",
-                    "SAMCO Ref(s)": "STR-009; STR-019; STR-026; STR-029; STR-030; STR-034; STR-040; STR-047; STR-063; STR-064; STR-066; STR-067",
-                    "6": "LET-006; LET-010; LET-020; LET-022; LET-024",
-                    "Main Link": "Design review, criteria, revised package and RFIs",
-                    "Priority": "High",
-                    "Next Action": "Issue one coordinated design basis and close RFI/design-change impacts"
-                  },
-                  {
-                    "Thread": "Insurance",
-                    "SAMCO Ref(s)": "STR-021",
-                    "6": "LET-007",
-                    "Main Link": "ACE rejection followed by SAMCO undertaking",
-                    "Priority": "Medium",
-                    "Next Action": "Confirm compliant original insurance policies"
-                  },
-                  {
-                    "Thread": "MEP / first fix / flanges / VI-0003",
-                    "SAMCO Ref(s)": "STR-016; STR-024; STR-027; STR-035; STR-041; STR-049; STR-072; STR-078",
-                    "6": "LET-017; LET-019; LET-025; LET-026",
-                    "Main Link": "Scope dispute and first-fix coordination evolving into conditional execution under VO and MOM instructions",
-                    "Priority": "High",
-                    "Next Action": "Finalize VO, BOQ, supervision, first-fix responsibilities, and close MOM action items."
-                  }
-                ]
-              }
-            ]
+            "sheets": [],
+            "error": "No module named 'openpyxl'"
           },
           "detectors": [
             {
@@ -9401,123 +8477,8 @@
           "clause_library": {
             "file": "Overall_Contract_clause_library.xlsx",
             "exists": true,
-            "sheets": [
-              {
-                "name": "Clause Library",
-                "row_count": 67,
-                "column_count": 10,
-                "columns": [
-                  "Clause / Topic",
-                  "Location",
-                  "Plain English Meaning",
-                  "Beneath the Lines",
-                  "Who Holds Leverage",
-                  "Notice / Time Bar",
-                  "Money Impact",
-                  "Schedule Impact",
-                  "Practical Action / Evidence",
-                  ""
-                ],
-                "rows": [
-                  {
-                    "Clause / Topic": "Contract basics",
-                    "Location": "Agreement / Contract Data",
-                    "Plain English Meaning": "Project is the Big Project civil works between Roya as Employer and Samco as Contractor, effective 30-Apr-2025.",
-                    "Beneath the Lines": "All later letters should be read against this baseline: parties, project, price, time, and risk allocation are fixed from this date.",
-                    "Who Holds Leverage": "Neutral",
-                    "Notice / Time Bar": "Use exact contract references in all notices.",
-                    "Money Impact": "Defines the starting commercial baseline.",
-                    "Schedule Impact": "Defines the baseline programme period.",
-                    "Practical Action / Evidence": "Keep contract date, parties, amount, and commencement records in every claim file.",
-                    "Column 10": null
-                  },
-                  {
-                    "Clause / Topic": "Accepted Contract Amount",
-                    "Location": "Agreement / Appendix",
-                    "Plain English Meaning": "Contract amount is EGP 367,286,025 including social insurance, duties, and taxes except VAT.",
-                    "Beneath the Lines": "The price is intended to be comprehensive. The Contractor must prove why any extra is outside the agreed scope or qualifies under variation/adjustment clauses.",
-                    "Who Holds Leverage": "Employer",
-                    "Notice / Time Bar": "Any extra must follow Variation or Claim procedure.",
-                    "Money Impact": "High barrier to extra payment unless clear instruction/change exists.",
-                    "Schedule Impact": "No direct time right unless linked to variation or delay event.",
-                    "Practical Action / Evidence": "For each extra cost, attach instruction, BOQ gap analysis, and timely notice.",
-                    "Column 10": null
-                  },
-                  {
-                    "Clause / Topic": "Re-measured contract",
-                    "Location": "Agreement / Appendix",
-                    "Plain English Meaning": "Contract is on a re-measured basis and payment is based on actual executed quantities.",
-                    "Beneath the Lines": "Quantities can increase or decrease, but rates and risk wording still matter. More quantity is not automatically a new scope claim.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Measurement records must be timely and supported.",
-                    "Money Impact": "Payment follows measured work, not tender BOQ quantity warranty.",
-                    "Schedule Impact": "Quantity change may affect time only if it impacts critical path and is claimed.",
-                    "Practical Action / Evidence": "Keep survey sheets, IR approvals, measurement sheets, and BOQ mapping.",
-                    "Column 10": null
-                  },
-                  {
-                    "Clause / Topic": "BOQ quantity no warranty",
-                    "Location": "Agreement",
-                    "Plain English Meaning": "Employer gives no warranty that BOQ quantities are accurate.",
-                    "Beneath the Lines": "The Contractor cannot rely only on tender quantities to claim surprise. The claim must be tied to changed scope, instruction, or unforeseeable condition.",
-                    "Who Holds Leverage": "Employer",
-                    "Notice / Time Bar": "Claim notice still required if quantity change delays or costs more than normal remeasurement.",
-                    "Money Impact": "Limits quantity-based claims.",
-                    "Schedule Impact": "Possible only if actual quantity change affects critical path and is properly proved.",
-                    "Practical Action / Evidence": "Compare tender BOQ, IFC drawings, actual measurements, and programme impact.",
-                    "Column 10": null
-                  },
-                  {
-                    "Clause / Topic": "Fixed and final price wording",
-                    "Location": "Appendix",
-                    "Plain English Meaning": "Accepted amount is fixed and final, inclusive of compensation, contingencies, future law, fuel, and currency changes except specified material adjustment.",
-                    "Beneath the Lines": "This is a strong anti-claim clause. Most market escalation arguments are blocked unless they fit the concrete/steel adjustment formula.",
-                    "Who Holds Leverage": "Employer",
-                    "Notice / Time Bar": "Use price adjustment clause only where allowed.",
-                    "Money Impact": "Reduces escalation and hardship claims.",
-                    "Schedule Impact": "No direct EOT from price movement.",
-                    "Practical Action / Evidence": "Separate allowed concrete/steel adjustment from general inflation claims.",
-                    "Column 10": null
-                  },
-                  {
-                    "Clause / Topic": "Concrete and steel price adjustment",
-                    "Location": "Appendix",
-                    "Plain English Meaning": "Concrete and steel may be adjusted using CAPMAS indices if delay is not due to Contractor.",
-                    "Beneath the Lines": "Price adjustment is conditional. If Employer/Engineer says the Contractor caused the delay, the adjustment may be rejected.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Need proof delay was not Contractor-caused.",
-                    "Money Impact": "Potential recovery for concrete/steel escalation only.",
-                    "Schedule Impact": "Depends on non-contractor delay period and affected procurement.",
-                    "Practical Action / Evidence": "Prepare CAPMAS index comparison, baseline prices, procurement dates, and delay responsibility analysis.",
-                    "Column 10": null
-                  },
-                  {
-                    "Clause / Topic": "Exclusions from contract amount",
-                    "Location": "Appendix",
-                    "Plain English Meaning": "Employer/Engineer site mobilization, authority permits/licenses, relocation/protection of utilities, and dewatering are excluded.",
-                    "Beneath the Lines": "These are possible entitlement areas, but only if actually instructed or required and not already covered elsewhere.",
-                    "Who Holds Leverage": "Contractor if documented",
-                    "Notice / Time Bar": "Variation/claim notice required before or immediately after impact.",
-                    "Money Impact": "Potential additional payment if outside scope and instructed/required.",
-                    "Schedule Impact": "Potential EOT if critical and not Contractor fault.",
-                    "Practical Action / Evidence": "Record instruction, site condition, authority requirement, photographs, and cost/time impact.",
-                    "Column 10": null
-                  },
-                  {
-                    "Clause / Topic": "Advance payment structure",
-                    "Location": "Appendix / Clause 14.2",
-                    "Plain English Meaning": "Advance payment is 25 percent; 30 percent cash against bank check and 70 percent as steel supplied by Employer according to approved programme.",
-                    "Beneath the Lines": "Steel supply is commercially tied to the advance. But entitlement depends on approved programme and proper requisitions.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Steel delay notices should be immediate and linked to approved programme dates.",
-                    "Money Impact": "Employer-supplied steel affects advance/payment accounting.",
-                    "Schedule Impact": "Late steel may support delay only if critical and properly requested.",
-                    "Practical Action / Evidence": "Keep approved programme, steel requisitions, delivery notes, and impact analysis.",
-                    "Column 10": null
-                  }
-                ]
-              }
-            ]
+            "sheets": [],
+            "error": "No module named 'openpyxl'"
           },
           "detectors": [
             {
@@ -9681,15 +8642,15 @@
         },
         "s_curve_forecast": {
           "status": "ready",
-          "method": "numpy linear trend fallback",
+          "method": "statsmodels damped Holt trend",
           "periods_available": 10,
           "current_actual_value": 1890281400.0,
           "current_planned_value": 1932000000.0,
           "completion_target_value": 2100000000.0,
           "excluded_cumulative_reset_periods": 0,
           "recent_period_change": 122304000.0,
-          "projected_completion_date": "2026-08-01",
-          "months_to_target": 1,
+          "projected_completion_date": "2026-09-01",
+          "months_to_target": 2,
           "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
         },
         "s_curve_chart_url": "/data/analytics/sophia-mall-s-curve-analytics.png",
@@ -9760,25 +8721,25 @@
               "installed": true
             },
             "seaborn": {
-              "installed": false
+              "installed": true
             },
             "scikit_learn": {
               "installed": true
             },
             "statsmodels": {
-              "installed": false
+              "installed": true
             },
             "spacy": {
               "installed": true
             },
             "xgboost": {
-              "installed": false
+              "installed": true
             },
             "pytorch": {
               "installed": true
             },
             "tensorflow": {
-              "installed": false
+              "installed": true
             }
           },
           "xgboost": {
@@ -13289,159 +12250,8 @@
           "clause_library": {
             "file": "Overall_Contract_clause_library.xlsx",
             "exists": true,
-            "sheets": [
-              {
-                "name": "Contract Clause Library",
-                "row_count": 27,
-                "column_count": 14,
-                "columns": [
-                  "Clause / Topic",
-                  "Location",
-                  "Plain English Meaning",
-                  "Beneath the Lines",
-                  "Who Holds Leverage",
-                  "Notice / Time Bar",
-                  "Money Impact",
-                  "Schedule Impact",
-                  "Practical Action / Evidence",
-                  "Source File",
-                  "Claim Type",
-                  "Risk Level",
-                  "Claim Strength",
-                  "Exact Clause Text"
-                ],
-                "rows": [
-                  {
-                    "Clause / Topic": "Agreement Summary",
-                    "Location": "1",
-                    "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 1. Agreement Summary This synthetic contract record is prepared for the Sophia-Mall Project comprising civil works, structural frame, finishing interfaces, mall service corridors, and enabling works. The Employer is Sophia Developments, the Contractor is SAMCO Egypt, and the Engineer / PMO is Urban Retail PMO. The Agre",
-                    "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "General Contract Risk",
-                    "Risk Level": "Low",
-                    "Claim Strength": "Weak",
-                    "Exact Clause Text": "1. Agreement Summary This synthetic contract record is prepared for the Sophia-Mall Project comprising civil works, structural frame, finishing interfaces, mall service corridors, and enabling works. The Employer is Sophia Developments, the Contractor is SAMCO Egypt, and the Engineer / PMO is Urban Retail PMO. The Agreement Effective Date is"
-                  },
-                  {
-                    "Clause / Topic": "Feb-2026 and the Commencement Date is 15-Feb-2026.",
-                    "Location": "01",
-                    "Plain English Meaning": "This clause falls under Contractor Counterarguments. In practical contractor terms, it means: 01-Feb-2026 and the Commencement Date is 15-Feb-2026. Item Value Project Sophia-Mall Project Contract Number SM-CTR-2026-002 Scope civil works, structural frame, finishing interfaces, mall service corridors, and enabling works Accepted Contract Amount EGP 429,650,000 excluding VAT unless otherwise stated Time for Compl",
-                    "Beneath the Lines": "Tie the facts directly to the contractual exception or saving wording.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Yes",
-                    "Practical Action / Evidence": "Exception facts, supporting letters, notices, approvals, and event records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "Counterargument / Exception",
-                    "Risk Level": "Medium",
-                    "Claim Strength": "Medium",
-                    "Exact Clause Text": "01-Feb-2026 and the Commencement Date is 15-Feb-2026. Item Value Project Sophia-Mall Project Contract Number SM-CTR-2026-002 Scope civil works, structural frame, finishing interfaces, mall service corridors, and enabling works Accepted Contract Amount EGP 429,650,000 excluding VAT unless otherwise stated Time for Completion"
-                  },
-                  {
-                    "Clause / Topic": "months from the Commencement Date",
-                    "Location": "18",
-                    "Plain English Meaning": "This clause falls under Notice Requirements. In practical contractor terms, it means: 18 months from the Commencement Date Key Section Milestone ground floor slab and main retail podium structure within 8 months from Commencement Governing Law Laws of the Arab Republic of Egypt Ruling Language English",
-                    "Beneath the Lines": "Demonstrate timely notice, continuing notice trail, or waiver / actual knowledge by the receiving party.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Notice letters, emails, meeting minutes, proof of submission and receipt.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "Notice Compliance",
-                    "Risk Level": "Medium",
-                    "Claim Strength": "Medium",
-                    "Exact Clause Text": "18 months from the Commencement Date Key Section Milestone ground floor slab and main retail podium structure within 8 months from Commencement Governing Law Laws of the Arab Republic of Egypt Ruling Language English"
-                  },
-                  {
-                    "Clause / Topic": "Document Priority",
-                    "Location": "2",
-                    "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 2. Document Priority",
-                    "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "General Contract Risk",
-                    "Risk Level": "Low",
-                    "Claim Strength": "Weak",
-                    "Exact Clause Text": "2. Document Priority"
-                  },
-                  {
-                    "Clause / Topic": "This Agreement",
-                    "Location": "1",
-                    "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 1. This Agreement",
-                    "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "General Contract Risk",
-                    "Risk Level": "Low",
-                    "Claim Strength": "Weak",
-                    "Exact Clause Text": "1. This Agreement"
-                  },
-                  {
-                    "Clause / Topic": "Appendix to Tender / Contract Data",
-                    "Location": "2",
-                    "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 2. Appendix to Tender / Contract Data",
-                    "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "General Contract Risk",
-                    "Risk Level": "Low",
-                    "Claim Strength": "Weak",
-                    "Exact Clause Text": "2. Appendix to Tender / Contract Data"
-                  },
-                  {
-                    "Clause / Topic": "Particular Conditions",
-                    "Location": "3",
-                    "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 3. Particular Conditions",
-                    "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "General Contract Risk",
-                    "Risk Level": "Low",
-                    "Claim Strength": "Weak",
-                    "Exact Clause Text": "3. Particular Conditions"
-                  },
-                  {
-                    "Clause / Topic": "General Conditions",
-                    "Location": "4",
-                    "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 4. General Conditions",
-                    "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "General Contract Risk",
-                    "Risk Level": "Low",
-                    "Claim Strength": "Weak",
-                    "Exact Clause Text": "4. General Conditions"
-                  }
-                ]
-              }
-            ]
+            "sheets": [],
+            "error": "No module named 'openpyxl'"
           },
           "detectors": [
             {
@@ -13632,15 +12442,15 @@
         },
         "s_curve_forecast": {
           "status": "ready",
-          "method": "numpy linear trend fallback",
+          "method": "statsmodels damped Holt trend",
           "periods_available": 10,
           "current_actual_value": 916040000.0,
           "current_planned_value": 1150000000.0,
           "completion_target_value": 1250000000.0,
           "excluded_cumulative_reset_periods": 0,
           "recent_period_change": 72800000.0,
-          "projected_completion_date": "2026-09-01",
-          "months_to_target": 3,
+          "projected_completion_date": "2026-10-01",
+          "months_to_target": 4,
           "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
         },
         "s_curve_chart_url": "/data/analytics/suez-tunnel-s-curve-analytics.png",
@@ -13711,25 +12521,25 @@
               "installed": true
             },
             "seaborn": {
-              "installed": false
+              "installed": true
             },
             "scikit_learn": {
               "installed": true
             },
             "statsmodels": {
-              "installed": false
+              "installed": true
             },
             "spacy": {
               "installed": true
             },
             "xgboost": {
-              "installed": false
+              "installed": true
             },
             "pytorch": {
               "installed": true
             },
             "tensorflow": {
-              "installed": false
+              "installed": true
             }
           },
           "xgboost": {
@@ -17240,159 +16050,8 @@
           "clause_library": {
             "file": "Overall_Contract_clause_library.xlsx",
             "exists": true,
-            "sheets": [
-              {
-                "name": "Contract Clause Library",
-                "row_count": 26,
-                "column_count": 14,
-                "columns": [
-                  "Clause / Topic",
-                  "Location",
-                  "Plain English Meaning",
-                  "Beneath the Lines",
-                  "Who Holds Leverage",
-                  "Notice / Time Bar",
-                  "Money Impact",
-                  "Schedule Impact",
-                  "Practical Action / Evidence",
-                  "Source File",
-                  "Claim Type",
-                  "Risk Level",
-                  "Claim Strength",
-                  "Exact Clause Text"
-                ],
-                "rows": [
-                  {
-                    "Clause / Topic": "Agreement Summary",
-                    "Location": "1",
-                    "Plain English Meaning": "This clause falls under Contractor Counterarguments. In practical contractor terms, it means: 1. Agreement Summary This synthetic contract record is prepared for the Suez-Tunnel Project comprising civil, structural, temporary works, tunnel approach structures, and associated utilities. The Employer is Suez Infrastructure Authority, the Contractor is SAMCO Egypt, and the Engineer / PMO is Suez PMO Consultant. Th",
-                    "Beneath the Lines": "Tie the facts directly to the contractual exception or saving wording.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Yes",
-                    "Practical Action / Evidence": "Exception facts, supporting letters, notices, approvals, and event records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "Counterargument / Exception",
-                    "Risk Level": "Medium",
-                    "Claim Strength": "Medium",
-                    "Exact Clause Text": "1. Agreement Summary This synthetic contract record is prepared for the Suez-Tunnel Project comprising civil, structural, temporary works, tunnel approach structures, and associated utilities. The Employer is Suez Infrastructure Authority, the Contractor is SAMCO Egypt, and the Engineer / PMO is Suez PMO Consultant. The Agreement Effective Date is 15-Jan-2026 and the Commencement Date is 01-Feb-2026. Item Value Project Suez-Tunnel Project Contract Number ST-CTR-2026-001 Scope civil, structural, temporary works, tunnel approach structures, and associated utilities Accepted Contract Amount EGP 685,750,000 excluding VAT unless otherwise stated Time for Completion"
-                  },
-                  {
-                    "Clause / Topic": "months from the Commencement Date",
-                    "Location": "24",
-                    "Plain English Meaning": "This clause falls under Notice Requirements. In practical contractor terms, it means: 24 months from the Commencement Date Key Section Milestone first tunnel approach concrete and ground interface works within 9 months from Commencement Governing Law Laws of the Arab Republic of Egypt Ruling Language English",
-                    "Beneath the Lines": "Demonstrate timely notice, continuing notice trail, or waiver / actual knowledge by the receiving party.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Notice letters, emails, meeting minutes, proof of submission and receipt.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "Notice Compliance",
-                    "Risk Level": "Medium",
-                    "Claim Strength": "Medium",
-                    "Exact Clause Text": "24 months from the Commencement Date Key Section Milestone first tunnel approach concrete and ground interface works within 9 months from Commencement Governing Law Laws of the Arab Republic of Egypt Ruling Language English"
-                  },
-                  {
-                    "Clause / Topic": "Document Priority",
-                    "Location": "2",
-                    "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 2. Document Priority",
-                    "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "General Contract Risk",
-                    "Risk Level": "Low",
-                    "Claim Strength": "Weak",
-                    "Exact Clause Text": "2. Document Priority"
-                  },
-                  {
-                    "Clause / Topic": "This Agreement",
-                    "Location": "1",
-                    "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 1. This Agreement",
-                    "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "General Contract Risk",
-                    "Risk Level": "Low",
-                    "Claim Strength": "Weak",
-                    "Exact Clause Text": "1. This Agreement"
-                  },
-                  {
-                    "Clause / Topic": "Appendix to Tender / Contract Data",
-                    "Location": "2",
-                    "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 2. Appendix to Tender / Contract Data",
-                    "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "General Contract Risk",
-                    "Risk Level": "Low",
-                    "Claim Strength": "Weak",
-                    "Exact Clause Text": "2. Appendix to Tender / Contract Data"
-                  },
-                  {
-                    "Clause / Topic": "Particular Conditions",
-                    "Location": "3",
-                    "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 3. Particular Conditions",
-                    "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "General Contract Risk",
-                    "Risk Level": "Low",
-                    "Claim Strength": "Weak",
-                    "Exact Clause Text": "3. Particular Conditions"
-                  },
-                  {
-                    "Clause / Topic": "General Conditions",
-                    "Location": "4",
-                    "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 4. General Conditions",
-                    "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "General Contract Risk",
-                    "Risk Level": "Low",
-                    "Claim Strength": "Weak",
-                    "Exact Clause Text": "4. General Conditions"
-                  },
-                  {
-                    "Clause / Topic": "General Requirements",
-                    "Location": "5",
-                    "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 5. General Requirements",
-                    "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                    "Who Holds Leverage": "Shared",
-                    "Notice / Time Bar": "Unclear",
-                    "Money Impact": "Possible",
-                    "Schedule Impact": "Possible",
-                    "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
-                    "Source File": "Overall Contract.pdf",
-                    "Claim Type": "General Contract Risk",
-                    "Risk Level": "Low",
-                    "Claim Strength": "Weak",
-                    "Exact Clause Text": "5. General Requirements"
-                  }
-                ]
-              }
-            ]
+            "sheets": [],
+            "error": "No module named 'openpyxl'"
           },
           "detectors": [
             {
@@ -17479,8 +16138,8 @@
     "warn_count": 13,
     "issue_count": 13,
     "report_path": "D:/Project Intelligence Hub NextJS/12-logs/guardrail_report_latest.md",
-    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260731_030008",
-    "last_checked": "2026-07-31T03:00:08",
+    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260731_033444",
+    "last_checked": "2026-07-31T03:34:44",
     "top_issues": [
       {
         "severity": "WARN",
