@@ -123,7 +123,7 @@ def validate_advanced_analytics_output(
     if anomalies.get("status") == "ready" and int(anomalies.get("flagged_count") or 0) > 10:
         errors.append(f"{project_key}: advanced analytics anomaly review queue exceeds 10 records")
     forecast = analytics.get("s_curve_forecast", {})
-    if expected_counts["s_curve"] >= 6 and forecast.get("status") not in {"ready", "outside_horizon", "insufficient_data"}:
+    if expected_counts["s_curve"] >= 6 and forecast.get("status") not in {"ready", "outside_horizon", "source_inconsistent", "insufficient_data"}:
         errors.append(f"{project_key}: advanced analytics forecast returned an unknown status")
     chart_url = analytics.get("s_curve_chart_url")
     if chart_url:

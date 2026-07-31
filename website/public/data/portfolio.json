@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T02:55:35",
+  "generated_at": "2026-07-31T03:00:07",
   "project_count": 4,
   "sector_count": 3,
   "totals": {
@@ -335,6 +335,7 @@
           "current_actual_value": 616724300.0,
           "current_planned_value": 782000000.0,
           "completion_target_value": 850000000.0,
+          "excluded_cumulative_reset_periods": 0,
           "recent_period_change": 49504000.0,
           "projected_completion_date": "2026-11-01",
           "months_to_target": 3,
@@ -4337,16 +4338,17 @@
           "message": "Unsupervised outlier screening. Review flagged activities against the schedule and source evidence before acting."
         },
         "s_curve_forecast": {
-          "status": "outside_horizon",
+          "status": "ready",
           "method": "numpy linear trend fallback",
-          "periods_available": 18,
-          "current_actual_value": 0.0,
-          "current_planned_value": 367286025.0,
+          "periods_available": 8,
+          "current_actual_value": 113085034.8,
+          "current_planned_value": 258975038.6,
           "completion_target_value": 367286025.0,
-          "recent_period_change": 0.0,
-          "projected_completion_date": null,
-          "months_to_target": null,
-          "message": "The 24-month trend horizon does not reach the source-value completion target. Confirm recovery strategy, remaining scope, and the accepted programme before treating this as a completion forecast."
+          "excluded_cumulative_reset_periods": 10,
+          "recent_period_change": 5277326.6,
+          "projected_completion_date": "2027-07-01",
+          "months_to_target": 14,
+          "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
         },
         "s_curve_chart_url": "/data/analytics/the-big-p-01-up-20-april-26-s-curve-analytics.png",
         "technical_topics": {
@@ -9684,6 +9686,7 @@
           "current_actual_value": 1890281400.0,
           "current_planned_value": 1932000000.0,
           "completion_target_value": 2100000000.0,
+          "excluded_cumulative_reset_periods": 0,
           "recent_period_change": 122304000.0,
           "projected_completion_date": "2026-08-01",
           "months_to_target": 1,
@@ -13634,6 +13637,7 @@
           "current_actual_value": 916040000.0,
           "current_planned_value": 1150000000.0,
           "completion_target_value": 1250000000.0,
+          "excluded_cumulative_reset_periods": 0,
           "recent_period_change": 72800000.0,
           "projected_completion_date": "2026-09-01",
           "months_to_target": 3,
@@ -17475,8 +17479,8 @@
     "warn_count": 13,
     "issue_count": 13,
     "report_path": "D:/Project Intelligence Hub NextJS/12-logs/guardrail_report_latest.md",
-    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260731_025536",
-    "last_checked": "2026-07-31T02:55:36",
+    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260731_030008",
+    "last_checked": "2026-07-31T03:00:08",
     "top_issues": [
       {
         "severity": "WARN",

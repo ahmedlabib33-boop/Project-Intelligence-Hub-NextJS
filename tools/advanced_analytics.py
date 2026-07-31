@@ -96,6 +96,25 @@ def _parse_date_series(values: Any) -> pd.Series:
     return parsed
 
 
+def _clean_cumulative_series(values: pd.Series) -> tuple[pd.Series, int]:
+    """Exclude unsubstantiated cumulative resets without rewriting source data."""
+    cleaned: list[float] = []
+    highest_value: float | None = None
+    excluded = 0
+    for value in values:
+        number = _number(value)
+        if number is None:
+            cleaned.append(float("nan"))
+            continue
+        if highest_value is not None and number < highest_value:
+            cleaned.append(float("nan"))
+            excluded += 1
+            continue
+        cleaned.append(number)
+        highest_value = number if highest_value is None else max(highest_value, number)
+    return pd.Series(cleaned, index=values.index, dtype=float), excluded
+
+
 def _library_status() -> dict[str, dict[str, Any]]:
     packages = {
         "pandas": "pandas",
@@ -234,6 +253,7 @@ def _s_curve_forecast(s_curve: list[dict[str, Any]], contract_value: float | Non
     frame["date"] = frame.apply(lambda row: _pick(row.to_dict(), ["months", "month", "date", "period"]), axis=1)
     frame["planned"] = frame.apply(lambda row: _number(_pick(row.to_dict(), ["cumm_monthly_planned", "cumulative_planned", "planned_cumulative"])), axis=1)
     frame["actual"] = frame.apply(lambda row: _number(_pick(row.to_dict(), ["cumm_monthly_actual", "cumulative_actual", "actual_cumulative"])), axis=1)
+    frame["actual"], excluded_actual_periods = _clean_cumulative_series(frame["actual"])
     frame["date"] = _parse_date_series(frame["date"])
     frame = frame.dropna(subset=["date", "actual"]).sort_values("date").drop_duplicates(subset=["date"], keep="last")
     if len(frame) < MIN_S_CURVE_PERIODS:
@@ -252,6 +272,21 @@ def _s_curve_forecast(s_curve: list[dict[str, Any]], contract_value: float | Non
         return ({"status": "insufficient_data", "periods_available": len(frame), "message": "No valid completion-value target is available."}, frame)
 
     actual_values = frame["actual"].to_numpy(dtype=float)
+    current_actual_value = float(actual_values[-1])
+    current_planned_value = round(float(frame["planned"].dropna().iloc[-1]), 2) if frame["planned"].notna().any() else None
+    if current_actual_value > target * 1.05:
+        return (
+            {
+                "status": "source_inconsistent",
+                "periods_available": len(frame),
+                "current_actual_value": round(current_actual_value, 2),
+                "current_planned_value": current_planned_value,
+                "completion_target_value": round(target, 2),
+                "excluded_cumulative_reset_periods": excluded_actual_periods,
+                "message": "Forecast disabled: the latest valid cumulative actual value exceeds the selected completion-value target. Reconcile S-curve units, cumulative resets, and the approved baseline before using the curve for management forecasting.",
+            },
+            frame[["date", "planned", "actual"]],
+        )
     method = "numpy linear trend fallback"
     forecast_values: np.ndarray
     try:
@@ -288,9 +323,10 @@ def _s_curve_forecast(s_curve: list[dict[str, Any]], contract_value: float | Non
             "status": status,
             "method": method,
             "periods_available": len(frame),
-            "current_actual_value": round(float(actual_values[-1]), 2),
-            "current_planned_value": round(float(frame["planned"].dropna().iloc[-1]), 2) if frame["planned"].notna().any() else None,
+            "current_actual_value": round(current_actual_value, 2),
+            "current_planned_value": current_planned_value,
             "completion_target_value": round(target, 2),
+            "excluded_cumulative_reset_periods": excluded_actual_periods,
             "recent_period_change": round(trend_delta, 2),
             "projected_completion_date": projected_date,
             "months_to_target": completion_index,
