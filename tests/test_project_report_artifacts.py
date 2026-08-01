@@ -30,6 +30,13 @@ def sample_project() -> dict[str, object]:
         "delay_assessment": "Indicative only",
         "last_updated": "2026-08-01T00:00:00",
         "fingerprint": "source-fingerprint-001",
+        "chart_payloads": {
+            "catalog_version": "2026-08-01",
+            "charts": [
+                {"id": "contracts.planned_vs_actual_cash_flow", "title": "Planned vs Actual Cash Flow", "status": "ready"},
+                {"id": "delay.tia_recovery_scenario", "title": "Baseline vs Impacted vs Recovery", "status": "draft"},
+            ],
+        },
     }
 
 
@@ -59,6 +66,11 @@ def test_report_artifacts_are_project_scoped_and_reused_when_unchanged(tmp_path:
     manifest = json.loads((output_dir / ".report_manifest.json").read_text(encoding="utf-8"))
     assert manifest["project_id"] == "project-001"
     assert manifest["project_fingerprint"] == "source-fingerprint-001"
+    assert manifest["chart_catalog_version"] == "2026-08-01"
+    assert manifest["chart_status"] == {
+        "contracts.planned_vs_actual_cash_flow": "ready",
+        "delay.tia_recovery_scenario": "draft",
+    }
 
 
 def test_changed_project_regenerates_without_rewriting_another_project(tmp_path: Path) -> None:
