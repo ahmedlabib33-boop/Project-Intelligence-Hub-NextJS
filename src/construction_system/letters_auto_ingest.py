@@ -369,10 +369,13 @@ def merge_inbox_letters(
             "Message": "Added to the letter, link, and issue-thread tables.",
         })
 
-    sheets[SAMCO_SHEET] = samco_df.fillna("")
-    sheets[ACE_SHEET] = ace_df.fillna("")
-    sheets[SAMCO_LINKS_SHEET] = samco_links_df.fillna("")
-    sheets[ACE_LINKS_SHEET] = ace_links_df.fillna("")
-    sheets[THREADS_SHEET] = threads_df.fillna("")
-    sheets[AUTO_REGISTER_SHEET] = pd.DataFrame(register_rows, columns=REGISTER_COLUMNS).fillna("")
+    def text_safe(frame: pd.DataFrame) -> pd.DataFrame:
+        return frame.astype("object").where(frame.notna(), "")
+
+    sheets[SAMCO_SHEET] = text_safe(samco_df)
+    sheets[ACE_SHEET] = text_safe(ace_df)
+    sheets[SAMCO_LINKS_SHEET] = text_safe(samco_links_df)
+    sheets[ACE_LINKS_SHEET] = text_safe(ace_links_df)
+    sheets[THREADS_SHEET] = text_safe(threads_df)
+    sheets[AUTO_REGISTER_SHEET] = text_safe(pd.DataFrame(register_rows, columns=REGISTER_COLUMNS))
     return sheets

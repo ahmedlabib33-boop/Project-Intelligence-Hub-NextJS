@@ -32,6 +32,8 @@ DEFAULT_BLOCK_FIELDS = {
 SUSPICIOUS_FULL_PROGRESS_STATUSES = {"delayed", "critical", "watchlist"}
 REF_PATTERN = re.compile(r"[A-Z]{2,}(?:-[A-Z0-9]+)+-LET-\d+", re.IGNORECASE)
 DIRECTION_PATTERN = re.compile(r"from\s+(.+?)\s+to\s+(.+)", re.IGNORECASE)
+ONE_WAY_DIRECTION_PATTERN = re.compile(r"^\s*from\s+(.+?)\s*$", re.IGNORECASE)
+GENERIC_LETTER_PARTIES = {"ACE", "CLIENT", "CONSULTANT", "CONTRACTOR", "EMPLOYER", "ENGINEER", "SAMCO"}
 
 
 @dataclass
@@ -278,7 +280,15 @@ def check_letters_intelligence(projects_root: Path, result: GuardrailResult, pro
                 continue
             match = DIRECTION_PATTERN.search(child.name)
             if not match:
-                result.add("WARN", display, "letters_folder_name", f"Inbox folder '{child.name}' does not match 'From X to Y'.", project=project)
+                one_way_match = ONE_WAY_DIRECTION_PATTERN.match(child.name)
+                if not one_way_match:
+                    result.add("WARN", display, "letters_folder_name", f"Inbox folder '{child.name}' does not match 'From X to Y' or 'From Party'.", project=project)
+                else:
+                    raw_party = one_way_match.group(1).strip()
+                    normalized = re.sub(r"[^A-Za-z0-9]", "", raw_party).upper()
+                    corrected = closest_party(raw_party, known_parties)
+                    if normalized not in GENERIC_LETTER_PARTIES and not corrected:
+                        result.add("WARN", display, "letters_party_name", f"Inbox folder '{child.name}' uses an unrecognized party name.", project=project)
             else:
                 for raw_party in match.groups():
                     corrected = closest_party(raw_party, known_parties)
