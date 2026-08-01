@@ -33,6 +33,7 @@ if (Test-Path -LiteralPath $analyticsPython) {
 $logPath = Join-Path $root "12-logs\vercel_project_pipeline.log"
 $statePath = Join-Path $root ".sync_state\vercel_project_pipeline_state.json"
 $script:WatchMutex = $null
+$script:WatchHashCache = @{}
 
 New-Item -ItemType Directory -Force -Path (Split-Path -Parent $logPath), (Split-Path -Parent $statePath) | Out-Null
 
@@ -125,24 +126,48 @@ function Get-WatchedItems {
         if ($item.PSIsContainer) {
             foreach ($directory in (Get-ChildItem -LiteralPath $item.FullName -Recurse -Directory -Force -ErrorAction SilentlyContinue)) {
                 if (Test-TrackedPath $directory.FullName) {
-                    $items.Add([PSCustomObject]@{ Type = 'D'; RelativePath = Get-RelativePath $directory.FullName; Length = 0; Modified = $directory.LastWriteTimeUtc.Ticks })
+                    $items.Add([PSCustomObject]@{ Type = 'D'; FullName = $directory.FullName; RelativePath = Get-RelativePath $directory.FullName; Length = 0; Modified = $directory.LastWriteTimeUtc.Ticks })
                 }
             }
             foreach ($file in (Get-ChildItem -LiteralPath $item.FullName -Recurse -File -Force -ErrorAction SilentlyContinue)) {
                 if (Test-TrackedPath $file.FullName) {
-                    $items.Add([PSCustomObject]@{ Type = 'F'; RelativePath = Get-RelativePath $file.FullName; Length = $file.Length; Modified = $file.LastWriteTimeUtc.Ticks })
+                    $items.Add([PSCustomObject]@{ Type = 'F'; FullName = $file.FullName; RelativePath = Get-RelativePath $file.FullName; Length = $file.Length; Modified = $file.LastWriteTimeUtc.Ticks })
                 }
             }
         }
         elseif (Test-TrackedPath $item.FullName) {
-            $items.Add([PSCustomObject]@{ Type = 'F'; RelativePath = Get-RelativePath $item.FullName; Length = $item.Length; Modified = $item.LastWriteTimeUtc.Ticks })
+            $items.Add([PSCustomObject]@{ Type = 'F'; FullName = $item.FullName; RelativePath = Get-RelativePath $item.FullName; Length = $item.Length; Modified = $item.LastWriteTimeUtc.Ticks })
         }
     }
     return @($items | Sort-Object Type, RelativePath -Unique)
 }
 
+function Get-WatchedFileHash($Item) {
+    $cacheKey = [string]$Item.FullName
+    $stamp = "$($Item.Length)|$($Item.Modified)"
+    $cached = $script:WatchHashCache[$cacheKey]
+    if ($null -ne $cached -and $cached.stamp -eq $stamp) {
+        return [string]$cached.hash
+    }
+    try {
+        $hash = (Get-FileHash -LiteralPath $Item.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+    }
+    catch {
+        # A locked file must remain visible to the watcher rather than being silently ignored.
+        $hash = "unreadable:$stamp"
+    }
+    $script:WatchHashCache[$cacheKey] = @{ stamp = $stamp; hash = $hash }
+    return $hash
+}
+
 function Get-WatchedFingerprint {
-    $lines = Get-WatchedItems | ForEach-Object { "$($_.Type)|$($_.RelativePath)|$($_.Length)|$($_.Modified)" }
+    $lines = Get-WatchedItems | ForEach-Object {
+        if ($_.Type -eq 'D') {
+            # Directory timestamps change when an unrelated child is touched. Path presence is the useful signal.
+            return "D|$($_.RelativePath)"
+        }
+        return "F|$($_.RelativePath)|$(Get-WatchedFileHash $_)"
+    }
     $content = [System.Text.Encoding]::UTF8.GetBytes([string]::Join("`n", [string[]]$lines))
     $sha256 = [System.Security.Cryptography.SHA256]::Create()
     try {
@@ -221,6 +246,9 @@ function Test-WatcherDetection {
 }
 
 function Invoke-PublishPipeline {
+    param(
+        [int]$StabilityAttempt = 1
+    )
     $fingerprintBefore = Get-WatchedFingerprint
     Invoke-PipelineStep "Generating project-scoped Next.js data" $pythonExecutable @($generatorPath) $root
     Invoke-PipelineStep "Validating Streamlit to Next.js source parity" $pythonExecutable @($validatorPath) $root
@@ -251,7 +279,11 @@ function Invoke-PublishPipeline {
 
     $fingerprintAfter = Get-WatchedFingerprint
     if ($fingerprintBefore -ne $fingerprintAfter) {
-        throw "Source changed while the pipeline was running. The watcher will retry so the deployment contains the latest project data."
+        if ($StabilityAttempt -lt 2) {
+            Write-PipelineLog "Tracked file content changed while the pipeline was running. Re-running one verified stabilization pass."
+            return Invoke-PublishPipeline -StabilityAttempt ($StabilityAttempt + 1)
+        }
+        throw "Tracked file content changed during two consecutive publish passes. Publish again after the source files stop changing."
     }
     Write-PipelineState $fingerprintAfter
     Write-PipelineLog "PASS full local-to-Vercel pipeline. Public URL: $PublicUrl"
