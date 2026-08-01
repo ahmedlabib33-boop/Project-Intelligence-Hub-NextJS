@@ -1,7 +1,7 @@
 {
   "project_id": "LMD-Bridge",
   "project_key": "LMD-Bridgs",
-  "project_fingerprint": "1da89a957c7667c9d990e78f3f68f1715c406c7189fac32bd6ee5559a99ae920",
+  "project_fingerprint": "5e91ddb4bba5079a750d608cd47d789539eec14b2889b632a5050ece07ee081c",
   "generator_version": "2026.08.project-scoped-html-pdf-pptx.v3",
   "chart_catalog_version": "2026-08-01",
   "chart_status": {
@@ -17,7 +17,7 @@
     "determination_status": "p6_recalculation_required",
     "source_scope": "selected_project_only"
   },
-  "generated_at": "2026-08-01T12:08:56",
+  "generated_at": "2026-08-01T12:18:18",
   "reports": {
     "executive_dashboard": {
       "html": "/generated/LMD-Bridgs/01_executive_dashboard.html",
@@ -27,17 +27,17 @@
         "html": {
           "name": "01_executive_dashboard.html",
           "bytes": 1807,
-          "sha256": "3764eccb097f78342ebbc99dbe189a8ea968162ed846befecf9c09b312e6c676"
+          "sha256": "985a09ca2b563e68c44f0ea73b1426754bfb692b2fe3cad34e4f0bd2aa6bf46f"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 69019,
-          "sha256": "c6e139138a9d97ae20b96ae4dbf596ac171ab6e1b9d2319681943e6c79fe804e"
+          "bytes": 69015,
+          "sha256": "b48d438bb422199a5fe5bcbc53332ff7d8f8a7bceedb9197fe5eba0714000a7e"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29122,
-          "sha256": "ded5d722362949c7c7fbdcb51077f3687f3816583a3a681362c55f111d8df7ae"
+          "sha256": "c8da60ca263e0955b3f739b11dc24f791b7dea6480e44a30a9713469488d3442"
         }
       }
     },
@@ -49,17 +49,17 @@
         "html": {
           "name": "02_master_dashboard.html",
           "bytes": 1801,
-          "sha256": "e234483a624938ff6e4617727a46d0dd6836568cad0c0a72d00de4aa8e5fdff2"
+          "sha256": "96a379fda2a74f199d3ea67cd163042dd5931d65b53edf7155966b592c23ada0"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 69012,
-          "sha256": "a5ecfffca36c2db23e1ae8febef190592f97e4dd5d18f2d543fa1f57831af9c5"
+          "sha256": "c7fb4ce1a555c11619527819bed336090e1c65f4f1b5e706e6adc7a73eee088f"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29119,
-          "sha256": "ce46c6a3a5f5be1f412225b75cedbf6bd35c17db13b07925830fcdaa9e48bfa3"
+          "sha256": "74c32ac05ab4c8ab1a74faad7c7e0b8d5a624770535c11759edca1153ffc7247"
         }
       }
     },
@@ -71,17 +71,17 @@
         "html": {
           "name": "03_elite_svg_charts.html",
           "bytes": 1801,
-          "sha256": "490ac2f260c7518f3812e4e28107df3f431b8587883180d06ee091b110030a35"
+          "sha256": "30ed16171f66bde92e861e182dcb639857dcd02c0bf19f27de5014efcbe13842"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 69130,
-          "sha256": "49b915097a17521b858f442292b2953449e84c79affc32e161570f680752aec7"
+          "sha256": "cbbb3da13b91c58e558eebc7293e682215d9b24dd23005442cd6793549e15402"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29119,
-          "sha256": "aef6812db2b28339084959a40b9bd39ce95b6e0aa6f988a7a2a16b456df25ff1"
+          "sha256": "e698295ae3b110fe349d7b95a3ca5de3ddb6df8e9e50940d852f9360774f460d"
         }
       }
     },
@@ -93,17 +93,17 @@
         "html": {
           "name": "04_linked_executive_dashboard.html",
           "bytes": 1821,
-          "sha256": "9815e230fc36c8a408414fdff9935f26e7c04b73d383f1e920f6b4c514947095"
+          "sha256": "d5f848ade00039c023e163aec68124c5fd9f999b759b82ac8979e9328f4ff3d4"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
-          "bytes": 69285,
-          "sha256": "24a74cc1a0478037adf85f3d4f09d7aae087e9bf2bd6d2e59e8cbbc8a2e56e89"
+          "bytes": 69284,
+          "sha256": "ffa82381392c2f5e5a13fa9968c3e0e1f961a587721bd2a5a17271386b57485d"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29128,
-          "sha256": "4d9174f6888695e49d8b0e6ec5069f61b2353560e629255897cf8f2eec46c40d"
+          "sha256": "2f04f18e0745b33a3e3a9edbb4f2468fb29c5567ae8b094db4e47fb5cfaf4958"
         }
       }
     }

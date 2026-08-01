@@ -14,4 +14,5 @@ def test_watcher_tracks_chart_sources_but_ignores_its_own_generated_outputs():
     assert '11-outputs' in source
     assert "^website/src/generated(/|$)" in source
     assert "website/next-env.d.ts" in source
+    assert "\\.(log|tsbuildinfo)$" in source
     assert '(Join-Path $canonicalRoot "projects")' in source

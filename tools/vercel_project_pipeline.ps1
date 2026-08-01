@@ -101,6 +101,8 @@ function Test-TrackedPath([string]$FullName) {
     if ($lower -match '^website/public/(data|generated)(/|$)') { return $false }
     if ($lower -match '^website/src/generated(/|$)') { return $false }
     if ($lower -eq 'website/next-env.d.ts') { return $false }
+    # Local preview logs and TypeScript build state are generated artifacts, not source changes.
+    if ($lower -match '\.(log|tsbuildinfo)$') { return $false }
     if ($lower -match '(^|/)(\.env|\.env\.local)$') { return $false }
     return $true
 }

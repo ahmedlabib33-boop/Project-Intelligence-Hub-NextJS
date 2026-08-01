@@ -1,7 +1,7 @@
 {
   "project_id": "Suez-Tunnel",
   "project_key": "Suez-Tunnel",
-  "project_fingerprint": "10e1c73ffd4be37fae58a528edae900f18320cf9ca3d27b0ab605382e6316167",
+  "project_fingerprint": "b544223b91c984fdc6129d2c83dbc7011749405b0abc62363a5ab366f30e81ad",
   "generator_version": "2026.08.project-scoped-html-pdf-pptx.v3",
   "chart_catalog_version": "2026-08-01",
   "chart_status": {
@@ -17,7 +17,7 @@
     "determination_status": "p6_recalculation_required",
     "source_scope": "selected_project_only"
   },
-  "generated_at": "2026-08-01T12:09:08",
+  "generated_at": "2026-08-01T12:18:32",
   "reports": {
     "executive_dashboard": {
       "html": "/generated/Suez-Tunnel/01_executive_dashboard.html",
@@ -27,17 +27,17 @@
         "html": {
           "name": "01_executive_dashboard.html",
           "bytes": 1812,
-          "sha256": "b87f0e979a44ca645e4a30184b379de2d5242c0fea497321874ac3c0c87b024f"
+          "sha256": "6d5d5806990628d01330974ba717c5be8b32217a28d1c7ab6e6720ac17199eec"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 71676,
-          "sha256": "b57c3ae6b3c8b3f10ff2b0ad50269bad971c9b1375b9cf75674ceee360fdccb3"
+          "bytes": 71675,
+          "sha256": "98e1baf4a1654d21eae2f2ccb8ec4b2063767a984637dc06ec9376e52b88fd3c"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29125,
-          "sha256": "9ad6e940cdfd90c426c840ed3c3a8548a1e3fa6cf476e2908495951fb72a31ac"
+          "sha256": "d8f81af554ed8f7656b7b2655e414d6770489267fee7efd207315fbcc050276f"
         }
       }
     },
@@ -49,17 +49,17 @@
         "html": {
           "name": "02_master_dashboard.html",
           "bytes": 1806,
-          "sha256": "10768acd65692fd72c7e5d8b1e64c127e8ced5dd00d7cf057b9bf3e04e5f9f02"
+          "sha256": "a84d93001a23ddf2b8999919fe72dbc0ea005f7fc22fe3fb7279fd9cc8b05018"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 71662,
-          "sha256": "fea1ecde918e4048015754dd019fcc43a971f78ddafafcbe7e4ee4222bc055fb"
+          "sha256": "8f30df2a2a5c66fd9aa07ddcb16b3b0290175dc9146b4ee536262917907c12da"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29122,
-          "sha256": "f73b47794f384dbf84713840fefc3b2bf532385f7f71ac1eaa9c5c4369b66e26"
+          "sha256": "2e6ce51840f6a3270863c9fb9d712bf9da69b0f0eb8baf860fac9d73fad9152b"
         }
       }
     },
@@ -71,17 +71,17 @@
         "html": {
           "name": "03_elite_svg_charts.html",
           "bytes": 1806,
-          "sha256": "258447dda096f7f7b452dc38747e671a30f50881f1b964b6bbaa5ac230ab064b"
+          "sha256": "dca34844e393cced185e59f64b3ebee85d5dbd281c4cb81c3496d49ebc37ffcc"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 71776,
-          "sha256": "8ffc7ccdf90d42fe92b73cdbbcc5c055142dc64ad0bf31f9761308b2b508f71f"
+          "sha256": "352cf82c49b3fa8da4053a3801fbe7499b5b47f30cb2bd4eeaf085c842727f2f"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29122,
-          "sha256": "cfcab87675fbb490417ba15f47eff4980c8cfc45a74fe333d5316a93a17b8800"
+          "sha256": "e5e2c390f332dfa3e1c21c3caf4ae1dc3499ebd13db66cfc0bdd92f649863600"
         }
       }
     },
@@ -93,17 +93,17 @@
         "html": {
           "name": "04_linked_executive_dashboard.html",
           "bytes": 1826,
-          "sha256": "12c2ae3abec9ac021f323b6836bd860ae9ad8ee5a0f80d259523d96c527f737f"
+          "sha256": "048d4e74f314dea3f597a6366efa0909e3ea680430f5205a3488f8a4b3e72bcb"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 71690,
-          "sha256": "2b389cdff4023e70629c5b50146053f92c17d10b85bad58d3049b47253f6850c"
+          "sha256": "8004b29cf227806dc13bc910ee036126ef7a6307b6bdde394f589841af4d264f"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29131,
-          "sha256": "c64811d90bd8835e11fe693c33f784fad1acda82dd7b2ed119e15c0f5e56c792"
+          "sha256": "b61c4b389cb658e9a3c9fccefe8094799e67d536749bd1052423fc2d5bc3e9a3"
         }
       }
     }

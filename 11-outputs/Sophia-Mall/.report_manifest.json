@@ -1,7 +1,7 @@
 {
   "project_id": "Sophia-Mall",
   "project_key": "Sophia-Mall",
-  "project_fingerprint": "575cb96dba6cd60dcbbf85a437c19f6dd51902f5db8854699a2b668f6f7adbe5",
+  "project_fingerprint": "2bc95c3eea5da9d2e586599f8530b995ae0ad2cece60b6be0e83c754db6bc90a",
   "generator_version": "2026.08.project-scoped-html-pdf-pptx.v3",
   "chart_catalog_version": "2026-08-01",
   "chart_status": {
@@ -17,7 +17,7 @@
     "determination_status": "p6_recalculation_required",
     "source_scope": "selected_project_only"
   },
-  "generated_at": "2026-08-01T12:09:04",
+  "generated_at": "2026-08-01T12:18:28",
   "reports": {
     "executive_dashboard": {
       "html": "/generated/Sophia-Mall/01_executive_dashboard.html",
@@ -27,17 +27,17 @@
         "html": {
           "name": "01_executive_dashboard.html",
           "bytes": 1821,
-          "sha256": "5861f2aa2519f53fb208844d80a7b053de6e34b73d00d4cb5b100825653e04a1"
+          "sha256": "07e07ec7c1fc1be0165838462e8812e7cbbc43f76d4aae8d04e9910be4db6b48"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 70258,
-          "sha256": "d1026b21672a0ed8e9bbcee5ba4a2f24b1ae51ec1754c16f57f831d0584ab744"
+          "bytes": 70256,
+          "sha256": "3255191b7d083bb6c5203deff417fbc9a32efab8721f3636ee4cb40eb1914215"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29125,
-          "sha256": "9e3e6e02924a804f2ef94d785d45eea1961efac42844faf2c2e1757a2d56b384"
+          "sha256": "28fe0916801278665fdbc03e207962b41247c3abb05dc5d2a12fa810e6a7baf8"
         }
       }
     },
@@ -49,17 +49,17 @@
         "html": {
           "name": "02_master_dashboard.html",
           "bytes": 1815,
-          "sha256": "cb65570dec46b7b6118671aef8041883139345651b07e2e4450fe0222ab3fbdc"
+          "sha256": "9521add43ec579a97d4828e68edbf22b3f2d1dfadd7ff286e40b2ed0f4688a4c"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 70252,
-          "sha256": "9b305aa39fdd73f86cc29352fafde1c3639151675dd88f6f441985c7d6d35771"
+          "sha256": "be9fd3a80a6014995a99c70e7d424dacdb059ec1c38f9cd90681c1566cddd447"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29122,
-          "sha256": "039a864ac7bcffbde71971b841882a2f2a2f1906633e7fddcdc64bcb2e3026db"
+          "sha256": "d5e91b948a449688f584f616588b0bee8ae12b9955d8898c59e647fcea63d590"
         }
       }
     },
@@ -71,17 +71,17 @@
         "html": {
           "name": "03_elite_svg_charts.html",
           "bytes": 1815,
-          "sha256": "60684523b2ce0d3f3ce88afb72a7101eadf09387e507f6957216450c06146294"
+          "sha256": "c00581e116315d39c4866cc6489c1dbe823ac6bd7cf9056607b2b8c22e541358"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 70376,
-          "sha256": "f60073f860c9d2b8ce2414ac4f184ac7e035e3d6ed225c4dbf611fe3967e55c5"
+          "sha256": "c56f72456e5bd00d178ae79d9f7ee94db3dc178ec6cf5c370b0ccea710964209"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29123,
-          "sha256": "b46a26a1d953355e70da433b2f1fa368670982c2588d3631dc7f995ae6863634"
+          "sha256": "25f438515d6d3d480816679d1f86b177025e5cb36d895d11d2d8cce80c770375"
         }
       }
     },
@@ -93,17 +93,17 @@
         "html": {
           "name": "04_linked_executive_dashboard.html",
           "bytes": 1835,
-          "sha256": "e1fe0464e8c29aa0084981c0ddd10cd405bf7b4a684ef0f4c9b187abb8ee05c8"
+          "sha256": "74aaa4744adebe9b23b926cd2c47e84f3faee158f36fdd26dd61e9b7469fc90b"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 70531,
-          "sha256": "731a4eab56d04ef2ed67fa60ed096376eb8ef4ee0869586d3ee2979c8b5ac86f"
+          "sha256": "c6e41307000e6de26aa9f9970990a5bb0ade612ea39e51e37075d0bc57d39fad"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29131,
-          "sha256": "6ee7878062ff33ba9aeea1262da88c3cd4abedfb73c74301efb329e04e0655a4"
+          "sha256": "22f0dc739dc29cf2117faf7319237175c655afefc7a7b7864e0129dc1644c7b6"
         }
       }
     }
