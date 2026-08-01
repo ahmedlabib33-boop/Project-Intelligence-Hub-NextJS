@@ -1,0 +1,97 @@
+{
+  "project_id": "Suez-Tunnel",
+  "project_key": "Suez-Tunnel",
+  "project_fingerprint": "1ee9129fcb83618d8d72b2ad06d5832d0b912dbd7daeea2044ab21ae196f1b15",
+  "generator_version": "2026.08.project-scoped-html-pdf-pptx.v1",
+  "generated_at": "2026-08-01T03:53:48",
+  "reports": {
+    "executive_dashboard": {
+      "html": "/generated/Suez-Tunnel/01_executive_dashboard.html",
+      "pdf": "/generated/Suez-Tunnel/01_executive_dashboard.pdf",
+      "pptx": "/generated/Suez-Tunnel/01_executive_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "01_executive_dashboard.html",
+          "bytes": 18281,
+          "sha256": "b5836656b285c699b345e82528e65936c7449ca0be18a0761df0e04b83a477c4"
+        },
+        "pdf": {
+          "name": "01_executive_dashboard.pdf",
+          "bytes": 942926,
+          "sha256": "bd26ef6d6e9d09e495474225d203935cb11cc88e1473a21ce48bd5a079e87dfb"
+        },
+        "pptx": {
+          "name": "01_executive_dashboard.pptx",
+          "bytes": 29125,
+          "sha256": "52129d645c67b4946a4213214574a2dcec92b3a6f500f282b97a488dfad48959"
+        }
+      }
+    },
+    "master_dashboard": {
+      "html": "/generated/Suez-Tunnel/02_master_dashboard.html",
+      "pdf": "/generated/Suez-Tunnel/02_master_dashboard.pdf",
+      "pptx": "/generated/Suez-Tunnel/02_master_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "02_master_dashboard.html",
+          "bytes": 86813,
+          "sha256": "83c127dcd4429dc14498857e01416ab88315dfb12f7ea9882df3394e4d24c3bd"
+        },
+        "pdf": {
+          "name": "02_master_dashboard.pdf",
+          "bytes": 884629,
+          "sha256": "903d411a467c8437348d6fdf97b43da066c01da60abac34078fd159db6729b97"
+        },
+        "pptx": {
+          "name": "02_master_dashboard.pptx",
+          "bytes": 29122,
+          "sha256": "6e3a78efae85b4ea5c400465678e462068163d7c527f73f0ac7159a92e5e3812"
+        }
+      }
+    },
+    "elite_svg_charts": {
+      "html": "/generated/Suez-Tunnel/03_elite_svg_charts.html",
+      "pdf": "/generated/Suez-Tunnel/03_elite_svg_charts.pdf",
+      "pptx": "/generated/Suez-Tunnel/03_elite_svg_charts.pptx",
+      "files": {
+        "html": {
+          "name": "03_elite_svg_charts.html",
+          "bytes": 52006,
+          "sha256": "0311a6667677d42651efa85ad4d44374ff5efb0bcd8a08ba62fea6674da59cc4"
+        },
+        "pdf": {
+          "name": "03_elite_svg_charts.pdf",
+          "bytes": 241294,
+          "sha256": "5c56008da4fd8c186e098b20ae8ce868d2787629beadfddacefaec19fa4c4cb1"
+        },
+        "pptx": {
+          "name": "03_elite_svg_charts.pptx",
+          "bytes": 29122,
+          "sha256": "ca16cf8f01c9a4bf0da489cd16fa237344d094ed49ffb27c358c970aa838dae3"
+        }
+      }
+    },
+    "linked_executive_dashboard": {
+      "html": "/generated/Suez-Tunnel/04_linked_executive_dashboard.html",
+      "pdf": "/generated/Suez-Tunnel/04_linked_executive_dashboard.pdf",
+      "pptx": "/generated/Suez-Tunnel/04_linked_executive_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "04_linked_executive_dashboard.html",
+          "bytes": 57603,
+          "sha256": "4bdee7dc2d79dc039f142cb23561cbb9638505a73aa961adde51a8c296a4b9ca"
+        },
+        "pdf": {
+          "name": "04_linked_executive_dashboard.pdf",
+          "bytes": 1264198,
+          "sha256": "120fe1ca077d46f883fa057f238ddf587a565b643c45dec5fbb26d4454cf0b90"
+        },
+        "pptx": {
+          "name": "04_linked_executive_dashboard.pptx",
+          "bytes": 29131,
+          "sha256": "4f6642cd1d29e75633c76a2ebd045855602db925d18eec7dd1da439a12cc76e5"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "project_id": "LMD-Bridge",
+  "project_key": "LMD-Bridgs",
+  "project_fingerprint": "827f3b281fad9cf72a53a9b5e0a2f847336f88acdb4924262f9ce182b386fc6b",
+  "generator_version": "2026.08.project-scoped-html-pdf-pptx.v1",
+  "generated_at": "2026-08-01T03:52:31",
+  "reports": {
+    "executive_dashboard": {
+      "html": "/generated/LMD-Bridgs/01_executive_dashboard.html",
+      "pdf": "/generated/LMD-Bridgs/01_executive_dashboard.pdf",
+      "pptx": "/generated/LMD-Bridgs/01_executive_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "01_executive_dashboard.html",
+          "bytes": 18287,
+          "sha256": "f098cc3f505a4b3b68899ddd8b5544eb6b49481824a97f378fa10413b9412eb7"
+        },
+        "pdf": {
+          "name": "01_executive_dashboard.pdf",
+          "bytes": 980754,
+          "sha256": "49419b05daf189c4076a2a836e2f287819e16a49b83f4df999e595f8b3fbce74"
+        },
+        "pptx": {
+          "name": "01_executive_dashboard.pptx",
+          "bytes": 29122,
+          "sha256": "f22c8291871c38ab967d7070280a43597531abd37c71a326f919ffdb3a7cb65e"
+        }
+      }
+    },
+    "master_dashboard": {
+      "html": "/generated/LMD-Bridgs/02_master_dashboard.html",
+      "pdf": "/generated/LMD-Bridgs/02_master_dashboard.pdf",
+      "pptx": "/generated/LMD-Bridgs/02_master_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "02_master_dashboard.html",
+          "bytes": 86593,
+          "sha256": "e77c0da4f5180aadb2bbcc20984393042a026c2b44922953044acd9b1978c6b6"
+        },
+        "pdf": {
+          "name": "02_master_dashboard.pdf",
+          "bytes": 883457,
+          "sha256": "eda46d497a4bf98ec7467fac46ea83e20d6959f8938070f5843bc04d1bdf8ed0"
+        },
+        "pptx": {
+          "name": "02_master_dashboard.pptx",
+          "bytes": 29119,
+          "sha256": "090916f4a141f28c253e625cdc1a49c1eff4271a988bbf13cac17df589a432d2"
+        }
+      }
+    },
+    "elite_svg_charts": {
+      "html": "/generated/LMD-Bridgs/03_elite_svg_charts.html",
+      "pdf": "/generated/LMD-Bridgs/03_elite_svg_charts.pdf",
+      "pptx": "/generated/LMD-Bridgs/03_elite_svg_charts.pptx",
+      "files": {
+        "html": {
+          "name": "03_elite_svg_charts.html",
+          "bytes": 51985,
+          "sha256": "ac81d5b449b8be0f959d55643a59f2718c71375edf4ef7d5700fe0f2f258b13f"
+        },
+        "pdf": {
+          "name": "03_elite_svg_charts.pdf",
+          "bytes": 241612,
+          "sha256": "41c2235224d97a69c4bd607ee9ac1ea60acc14abac88c68683619ed52319ecdd"
+        },
+        "pptx": {
+          "name": "03_elite_svg_charts.pptx",
+          "bytes": 29119,
+          "sha256": "34db68aa5d3f7a670a3ac0283445b8a261364f79e8d68cd017ef13f7d1767fa0"
+        }
+      }
+    },
+    "linked_executive_dashboard": {
+      "html": "/generated/LMD-Bridgs/04_linked_executive_dashboard.html",
+      "pdf": "/generated/LMD-Bridgs/04_linked_executive_dashboard.pdf",
+      "pptx": "/generated/LMD-Bridgs/04_linked_executive_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "04_linked_executive_dashboard.html",
+          "bytes": 57585,
+          "sha256": "d787920febc0e598477a65b6c51bb0ae634d53633d14a56afba855fdb8151024"
+        },
+        "pdf": {
+          "name": "04_linked_executive_dashboard.pdf",
+          "bytes": 1209596,
+          "sha256": "885909740748ff98ff58c4e3bd53a868315bcf17fcbbfc5c52966dd0294f1664"
+        },
+        "pptx": {
+          "name": "04_linked_executive_dashboard.pptx",
+          "bytes": 29128,
+          "sha256": "f5e37baa223c418b7f628d3bc441341bd00a225bc7f2674665174caefdbc1db2"
+        }
+      }
+    }
+  }
+}

@@ -9,6 +9,15 @@ $ErrorActionPreference = "Stop"
 
 $root = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $websiteRoot = Join-Path $root "website"
+$canonicalRoot = $root
+if (-not [string]::IsNullOrWhiteSpace($env:PIH_SOURCE_ROOT)) {
+    $canonicalRoot = (Resolve-Path $env:PIH_SOURCE_ROOT).Path
+}
+elseif (Test-Path -LiteralPath "D:\one drive data\OneDrive\Documents\Project Intelligence Hub\projects") {
+    # Local delivery default. CI and other machines retain the repository copy.
+    $canonicalRoot = (Resolve-Path "D:\one drive data\OneDrive\Documents\Project Intelligence Hub").Path
+}
+$env:PIH_SOURCE_ROOT = $canonicalRoot
 $generatorPath = Join-Path $PSScriptRoot "generate_nextjs_website_data.py"
 $validatorPath = Join-Path $PSScriptRoot "validate_streamlit_vercel_pipeline.py"
 $githubSyncPath = Join-Path $PSScriptRoot "github_no_git_sync.ps1"
@@ -31,6 +40,9 @@ foreach ($requiredPath in @($websiteRoot, $generatorPath, $validatorPath, $githu
     if (-not (Test-Path -LiteralPath $requiredPath)) {
         throw "Required pipeline path is missing: $requiredPath"
     }
+}
+if (-not (Test-Path -LiteralPath (Join-Path $canonicalRoot "projects"))) {
+    throw "Canonical project source is missing its projects folder: $canonicalRoot"
 }
 
 if ($IntervalSeconds -lt 10) {
@@ -63,11 +75,19 @@ if ($pythonExecutable -eq $analyticsPython) {
 else {
     Write-PipelineLog "Project-local analytics runtime is incomplete; using the validated fallback Python runtime."
 }
+Write-PipelineLog "Canonical source root: $canonicalRoot"
 
 function Get-RelativePath([string]$FullName) {
-    $rootUri = New-Object System.Uri(($root.TrimEnd('\') + '\'))
-    $fileUri = New-Object System.Uri([System.IO.Path]::GetFullPath($FullName))
-    return ([System.Uri]::UnescapeDataString($rootUri.MakeRelativeUri($fileUri).ToString()) -replace '\\', '/')
+    $fullPath = [System.IO.Path]::GetFullPath($FullName)
+    $basePath = $root
+    $prefix = ""
+    if ($canonicalRoot -ne $root -and $fullPath.StartsWith($canonicalRoot.TrimEnd('\'), [System.StringComparison]::OrdinalIgnoreCase)) {
+        $basePath = $canonicalRoot
+        $prefix = "canonical/"
+    }
+    $rootUri = New-Object System.Uri(($basePath.TrimEnd('\') + '\'))
+    $fileUri = New-Object System.Uri($fullPath)
+    return $prefix + (([System.Uri]::UnescapeDataString($rootUri.MakeRelativeUri($fileUri).ToString())) -replace '\\', '/')
 }
 
 function Test-TrackedPath([string]$FullName) {
@@ -82,7 +102,9 @@ function Test-TrackedPath([string]$FullName) {
 function Get-WatchedItems {
     $items = New-Object System.Collections.Generic.List[object]
     $watchRoots = @(
-        (Join-Path $root "projects"),
+        (Join-Path $canonicalRoot "projects"),
+        (Join-Path $canonicalRoot "src"),
+        (Join-Path $canonicalRoot "dashboard.py"),
         (Join-Path $websiteRoot "src"),
         (Join-Path $websiteRoot "public"),
         $generatorPath,
@@ -176,7 +198,7 @@ function Write-PipelineState([string]$Fingerprint) {
 
 function Test-WatcherDetection {
     $before = Get-WatchedFingerprint
-    $probeDirectory = Join-Path $root "projects\_pipeline_watcher_probe"
+    $probeDirectory = Join-Path $canonicalRoot "projects\_pipeline_watcher_probe"
     $probeFile = Join-Path $probeDirectory "probe.txt"
     try {
         New-Item -ItemType Directory -Force -Path $probeDirectory | Out-Null

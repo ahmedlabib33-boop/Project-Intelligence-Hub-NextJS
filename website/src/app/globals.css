@@ -3082,6 +3082,34 @@ h2 {
 .operations-footer strong { color: var(--cyan); }
 .operations-footer span { color: #7491a4; }
 
+.report-format-downloads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.report-format-downloads a {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(57, 215, 210, 0.44);
+  border-radius: 8px;
+  background: rgba(57, 215, 210, 0.1);
+  color: var(--cyan);
+  padding: 7px 12px;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.report-format-downloads a:hover,
+.report-format-downloads a:focus-visible {
+  background: rgba(57, 215, 210, 0.2);
+  color: var(--text);
+}
+
 @media (max-width: 1160px) {
   .operations-command-bar { grid-template-columns: 1fr minmax(280px, 1fr); }
   .command-status { display: none; }
@@ -3114,4 +3142,5 @@ h2 {
   .project-view-switch { width: 100%; overflow: visible; }
   .project-view-switch button { min-width: 0; flex: 1 1 calc(50% - 2px); white-space: normal; padding: 8px 10px; }
   .operations-footer { display: grid; line-height: 1.5; }
+  .report-format-downloads a { flex: 1 1 0; }
 }

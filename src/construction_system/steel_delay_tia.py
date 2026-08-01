@@ -872,6 +872,86 @@ def _float_value(value: Any) -> float:
         return 0.0
 
 
+def _activity_key(value: Any) -> str:
+    """Return a stable activity identifier without changing the source value."""
+    text = str(value or "").strip()
+    return text.upper() if text and text.lower() not in {"nan", "none"} else ""
+
+
+def normalize_relationship_logic(relationship_df: pd.DataFrame) -> pd.DataFrame:
+    """Normalize P6 relationship records for evidence-led CPM and fragnet guidance.
+
+    This is deliberately a logic register, not a CPM recalculation. P6 remains
+    the authoritative scheduling engine for the final critical-path and EOT test.
+    """
+    columns = ["Predecessor Activity ID", "Successor Activity ID", "Relationship Type", "Lag", "Source Row"]
+    if relationship_df is None or relationship_df.empty:
+        return pd.DataFrame(columns=columns)
+    source = relationship_df.copy()
+    if not {"Predecessor ID", "Successor ID"}.issubset(source.columns):
+        source, _, _ = apply_mapping(source, suggest_mapping(source, REL_ALIASES), CANONICAL_REL_FIELDS)
+    for field in CANONICAL_REL_FIELDS:
+        if field not in source.columns:
+            source[field] = ""
+    records: list[dict[str, Any]] = []
+    valid_types = {"FS", "SS", "FF", "SF"}
+    for source_row, row in source.reset_index(drop=True).iterrows():
+        activity_id = _activity_key(row.get("Activity ID"))
+        predecessor = _activity_key(row.get("Predecessor ID"))
+        successor = _activity_key(row.get("Successor ID")) or activity_id
+        if not predecessor or not successor:
+            continue
+        relation = str(row.get("Relationship Type") or "FS").strip().upper()
+        records.append({
+            "Predecessor Activity ID": predecessor,
+            "Successor Activity ID": successor,
+            "Relationship Type": relation if relation in valid_types else "UNKNOWN",
+            "Lag": _float_value(row.get("Lag")),
+            "Source Row": int(source_row) + 2,
+        })
+    if not records:
+        return pd.DataFrame(columns=columns)
+    result = pd.DataFrame(records).drop_duplicates(subset=["Predecessor Activity ID", "Successor Activity ID", "Relationship Type", "Lag"])
+    return result.sort_values(["Successor Activity ID", "Predecessor Activity ID", "Relationship Type", "Lag"]).reset_index(drop=True)
+
+
+def attach_relationship_logic(p6_df: pd.DataFrame, relationship_logic_df: pd.DataFrame) -> pd.DataFrame:
+    """Attach explicit incoming/outgoing relationship evidence to P6 activities."""
+    result = p6_df.copy()
+    defaults = {
+        "Relationship Predecessors": "", "Relationship Successors": "",
+        "Driving Predecessor Activity ID": "", "Driving Predecessor Relationship Type": "", "Driving Predecessor Lag": 0.0,
+        "Driving Successor Activity ID": "", "Driving Successor Relationship Type": "", "Driving Successor Lag": 0.0,
+        "Relationship Logic Status": "Missing relationship file",
+    }
+    if result.empty:
+        return result
+    for column, value in defaults.items():
+        result[column] = value
+    if relationship_logic_df.empty or "Activity ID" not in result.columns:
+        return result
+    incoming = {activity: group.sort_values(["Relationship Type", "Lag", "Predecessor Activity ID"]) for activity, group in relationship_logic_df.groupby("Successor Activity ID")}
+    outgoing = {activity: group.sort_values(["Relationship Type", "Lag", "Successor Activity ID"]) for activity, group in relationship_logic_df.groupby("Predecessor Activity ID")}
+    for index, activity_id in result["Activity ID"].items():
+        key = _activity_key(activity_id)
+        in_links, out_links = incoming.get(key), outgoing.get(key)
+        if in_links is not None and not in_links.empty:
+            first = in_links.iloc[0]
+            result.at[index, "Relationship Predecessors"] = "; ".join(f"{row['Predecessor Activity ID']} ({row['Relationship Type']} {row['Lag']:g}d)" for _, row in in_links.iterrows())
+            result.at[index, "Driving Predecessor Activity ID"] = first["Predecessor Activity ID"]
+            result.at[index, "Driving Predecessor Relationship Type"] = first["Relationship Type"]
+            result.at[index, "Driving Predecessor Lag"] = first["Lag"]
+        if out_links is not None and not out_links.empty:
+            first = out_links.iloc[0]
+            result.at[index, "Relationship Successors"] = "; ".join(f"{row['Successor Activity ID']} ({row['Relationship Type']} {row['Lag']:g}d)" for _, row in out_links.iterrows())
+            result.at[index, "Driving Successor Activity ID"] = first["Successor Activity ID"]
+            result.at[index, "Driving Successor Relationship Type"] = first["Relationship Type"]
+            result.at[index, "Driving Successor Lag"] = first["Lag"]
+        if (in_links is not None and not in_links.empty) or (out_links is not None and not out_links.empty):
+            result.at[index, "Relationship Logic Status"] = "Relationship file linked"
+    return result
+
+
 def build_affected_candidates(p6_df: pd.DataFrame, balance_df: pd.DataFrame, settings: SteelTiaSettings, stock_events_df: pd.DataFrame | None = None) -> pd.DataFrame:
     if p6_df.empty:
         return pd.DataFrame()
@@ -952,7 +1032,8 @@ def build_affected_candidates(p6_df: pd.DataFrame, balance_df: pd.DataFrame, set
         receipt_after_need = historical_delay_flag and pd.notna(client_supply_receipt_date) and ((pd.notna(planned_start_date) and client_supply_receipt_date.normalize() > planned_start_date.normalize()) or client_supply_receipt_date.normalize() > required_date.normalize())
         test4 = current_balance <= 0 or activity_gap < 0 or receipt_after_need
         test5 = _critical_flag(row["Critical"]) or _longest_path_flag(row["Longest Path"]) or row["Total Float"] <= float(settings.near_critical_float_threshold)
-        successors = str(row.get("Successors", "")).strip()
+        predecessors = str(row.get("Relationship Predecessors") or row.get("Predecessors", "")).strip()
+        successors = str(row.get("Relationship Successors") or row.get("Successors", "")).strip()
         test6 = bool(successors) or any(k in str(row["Activity Name"]).lower() for k in ["column", "slab", "beam", "wall", "raft", "next floor", "milestone", "core"])
         shortage_qty = max(abs(current_balance) if current_balance < 0 else 0.0, abs(activity_gap) if activity_gap < 0 else 0.0)
         if shortage_qty <= 0 and receipt_after_need:
@@ -989,8 +1070,15 @@ def build_affected_candidates(p6_df: pd.DataFrame, balance_df: pd.DataFrame, set
                 "Downstream Impact Test": "Pass" if test6 else "Fail",
                 "Civil / Structural Work Package": row["Civil / Structural Work Package"],
                 "Construction Sequence Impact": row["Construction Sequence Impact"],
-                "Predecessors": row.get("Predecessors", ""),
+                "Predecessors": predecessors,
                 "Successors": successors,
+                "Predecessor Activity ID": row.get("Driving Predecessor Activity ID", ""),
+                "Predecessor Relationship Type": row.get("Driving Predecessor Relationship Type", ""),
+                "Predecessor Lag": row.get("Driving Predecessor Lag", 0.0),
+                "Successor Activity ID": row.get("Driving Successor Activity ID", ""),
+                "Successor Relationship Type": row.get("Driving Successor Relationship Type", ""),
+                "Successor Lag": row.get("Driving Successor Lag", 0.0),
+                "Relationship Logic Status": row.get("Relationship Logic Status", "Missing relationship file"),
                 "Required Date": required_date,
                 "Selection Explanation": row.get("Selection Explanation", ""),
                 "Client Supply vs Actual Gap": activity_gap,
@@ -1043,9 +1131,13 @@ def build_fragnet_recommendation(candidates_df: pd.DataFrame, balance_df: pd.Dat
             open_delay = later_positive.empty
 
         fragment_duration = max((fragment_finish - fragment_start).days, 0)
-        predecessor_text = str(candidate.get("Predecessors", "")).split(",")[0].strip() if str(candidate.get("Predecessors", "")).strip() else ""
-        successor_text = str(candidate.get("Successors", "")).split(",")[0].strip() if str(candidate.get("Successors", "")).strip() else ""
-        recommended_logic = "Finish-to-finish (FF) with lag" if predecessor_text and successor_text else "Finish-to-start (FS) placeholder pending P6 logic review"
+        predecessor_text = str(candidate.get("Predecessor Activity ID") or candidate.get("Predecessors", "")).split(",")[0].strip()
+        successor_text = str(candidate.get("Successor Activity ID") or candidate.get("Successors", "")).split(",")[0].strip()
+        predecessor_type = str(candidate.get("Predecessor Relationship Type") or "").strip().upper()
+        successor_type = str(candidate.get("Successor Relationship Type") or "").strip().upper()
+        predecessor_lag = _float_value(candidate.get("Predecessor Lag"))
+        successor_lag = _float_value(candidate.get("Successor Lag"))
+        recommended_logic = f"Preserve P6 {predecessor_type} driving relationship and test inserted fragnet links in P6" if predecessor_text and successor_text and predecessor_type in {"FS", "SS", "FF", "SF"} else "Finish-to-start (FS) placeholder pending P6 relationship review"
         insertion_sequence = "Stepped insertion by chronological stock-out window" if len(qualified) > 1 else "Global insertion acceptable for single event"
         rows.append(
             {
@@ -1053,6 +1145,13 @@ def build_fragnet_recommendation(candidates_df: pd.DataFrame, balance_df: pd.Dat
                 "Last completed / available predecessor": predecessor_text,
                 "Affected Activity": f"{candidate['Activity ID']} - {candidate['Activity Name']}",
                 "Insert Fragment Before": candidate["Activity ID"],
+                "Predecessor Activity ID": predecessor_text,
+                "Predecessor Relationship Type": predecessor_type or "P6 review required",
+                "Predecessor Lag": predecessor_lag,
+                "Successor Activity ID": successor_text,
+                "Successor Relationship Type": successor_type or "P6 review required",
+                "Successor Lag": successor_lag,
+                "Relationship Logic Status": candidate.get("Relationship Logic Status", "Missing relationship file"),
                 "Fragment Start": fragment_start,
                 "Fragment Finish": fragment_finish,
                 "Fragment Duration": fragment_duration,
@@ -1358,6 +1457,9 @@ def run_steel_delay_tia_analysis(
     if "Activity ID" not in p6_df.columns and not p6_df.empty:
         p6_df, _, _ = apply_mapping(p6_df, suggest_mapping(p6_df, P6_ALIASES), CANONICAL_P6_FIELDS)
 
+    relationship_logic_df = normalize_relationship_logic(relationship_df)
+    p6_df = attach_relationship_logic(p6_df, relationship_logic_df)
+
     requirement_df = requirement_df.copy()
     auto_requirements_used = False
     if requirement_df.empty:
@@ -1405,10 +1507,13 @@ def run_steel_delay_tia_analysis(
             "Client Available Qty",
             "Client Supply vs Actual Gap",
             "Client Supply Receipt Date",
+            "Planned Start Date",
+            "BL Start Date",
             "Drive Activity Dates",
             "Activity Units % Complete",
             "Reason for Delay",
             "Responsibility",
+            "Historical Employer Delay Flag",
         ]:
             if optional_col not in req_lookup.columns:
                 req_lookup[optional_col] = ""
@@ -1534,6 +1639,22 @@ def run_steel_delay_tia_analysis(
     executive_summary = pd.DataFrame(executive_rows)
 
     data_quality_rows = []
+    if relationship_logic_df.empty:
+        data_quality_rows.append({
+            "Dataset": "P6 Relationship File",
+            "Issue Type": "No Usable Logic Links",
+            "Detail": "No predecessor/successor links could be normalized. Fragnet recommendations remain provisional until the selected project relationship file is corrected and re-tested in Primavera P6.",
+            "Severity": "Warning",
+        })
+    elif not candidates_df.empty:
+        open_logic_count = int(candidates_df["Relationship Logic Status"].ne("Relationship file linked").sum())
+        if open_logic_count:
+            data_quality_rows.append({
+                "Dataset": "P6 Relationship File",
+                "Issue Type": "Open-Ended Affected Activities",
+                "Detail": f"{open_logic_count} affected activities do not have a linked predecessor or successor record in the relationship file.",
+                "Severity": "Warning",
+            })
     if not quantity_basis_valid:
         data_quality_rows.append(
             {
@@ -1571,6 +1692,7 @@ def run_steel_delay_tia_analysis(
     return {
         "balance_df": balance_df,
         "stock_out_df": stock_out_df,
+        "relationship_logic_df": relationship_logic_df,
         "candidates_df": candidates_df,
         "fragnet_df": fragnet_df,
         "contract_matches_df": contract_matches_df,
@@ -1591,6 +1713,9 @@ def run_steel_delay_tia_analysis(
             "Total Shortage Qty": total_shortage,
             "First Stock-Out Date": stock_out_df["Stock-Out Date"].min() if not stock_out_df.empty else pd.NaT,
             "Number of Stock-Out Events": int(len(stock_out_df)),
+            "Relationship Links Loaded": int(len(relationship_logic_df)),
+            "Driving FS Links": int(relationship_logic_df["Relationship Type"].eq("FS").sum()) if not relationship_logic_df.empty else 0,
+            "Open-Ended Impacted Activities": int(candidates_df["Relationship Logic Status"].ne("Relationship file linked").sum()) if not candidates_df.empty else 0,
             "Number of Strong TIA Candidates": int(candidates_df["Candidate Classification"].eq("Strong TIA Candidate").sum()) if not candidates_df.empty else 0,
             "Critical Activities Affected": int(candidates_df["Critical"].eq("Yes").sum()) if not candidates_df.empty else 0,
             "Longest Path Activities Affected": int(candidates_df["Longest Path"].eq("Yes").sum()) if not candidates_df.empty else 0,

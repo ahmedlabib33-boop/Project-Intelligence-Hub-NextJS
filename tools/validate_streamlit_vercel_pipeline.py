@@ -66,14 +66,14 @@ REQUIRED_PROJECT_TABS = (
     "Milestones",
     "S-Curve",
     "EVM Analysis",
+    "Analytics Intelligence",
     "Contracts",
     "Letters Intelligence",
-    "Delays",
-    "Time Impact",
     "Risks",
     "Delay Analysis - Time Impact Analysis",
     "Contract & Claims Intelligence Center",
     "Technical Advisor",
+    "Conference",
     "Output Studio",
 )
 
@@ -177,6 +177,13 @@ def validate_project_workspace_surface(
             errors.append(f"{project_key}: Delay TIA template table count differs from template inventory")
         if not isinstance(delay.get("schedule_workspace_tables"), dict):
             errors.append(f"{project_key}: Delay TIA MEP and baseline schedule payload is missing")
+        canonical = delay.get("canonical_analysis")
+        if not isinstance(canonical, dict):
+            errors.append(f"{project_key}: canonical TIA analysis payload is missing")
+        elif canonical.get("status") == "ready":
+            canonical_tables = canonical.get("tables")
+            if not isinstance(canonical_tables, dict) or "relationship_logic_df" not in canonical_tables:
+                errors.append(f"{project_key}: canonical TIA analysis did not publish relationship logic evidence")
 
     claims = features.get("contract_claims")
     if not isinstance(claims, dict):
@@ -191,6 +198,26 @@ def validate_project_workspace_surface(
     expected_reports = {"executive_dashboard", "master_dashboard", "elite_svg_charts", "linked_executive_dashboard"}
     if not isinstance(reports, dict) or not expected_reports.issubset(reports):
         errors.append(f"{project_key}: Output Studio report links are incomplete")
+    artifacts = output.get("report_artifacts")
+    if not isinstance(artifacts, dict) or not expected_reports.issubset(artifacts):
+        errors.append(f"{project_key}: Output Studio artifact manifest is incomplete")
+    else:
+        for report_key in expected_reports:
+            artifact = artifacts.get(report_key)
+            if not isinstance(artifact, dict):
+                errors.append(f"{project_key}: {report_key} artifact is invalid")
+                continue
+            for extension in ("html", "pdf", "pptx"):
+                url = artifact.get(extension)
+                if not isinstance(url, str) or not url.startswith("/generated/"):
+                    errors.append(f"{project_key}: {report_key} {extension} download URL is missing")
+                    continue
+                target = ROOT / "website" / "public" / url.lstrip("/")
+                if not target.exists() or target.stat().st_size == 0:
+                    errors.append(f"{project_key}: {report_key} {extension} artifact is missing or empty")
+
+    if not str(output.get("project_id") or "").strip() or not str(output.get("project_key") or "").strip():
+        errors.append(f"{project_key}: project identity is missing from generated payload")
 
     if not any(error.startswith(f"{project_key}:") for error in errors):
         checks.append(f"{project_key}: all project workspace tabs have selected-project source payloads")
@@ -202,11 +229,17 @@ def validate_workspace_tab_catalog(errors: list[str], checks: list[str]) -> None
         errors.append("website project workspace page is missing")
         return
     page_source = PAGE_PATH.read_text(encoding="utf-8")
-    missing = [tab for tab in REQUIRED_PROJECT_TABS if f'"{tab}"' not in page_source]
+    tabs_start = page_source.find("const workspaceTabs")
+    tabs_end = page_source.find("] as const;", tabs_start)
+    tab_catalog = page_source[tabs_start:tabs_end] if tabs_start >= 0 and tabs_end > tabs_start else ""
+    missing = [tab for tab in REQUIRED_PROJECT_TABS if f'"{tab}"' not in tab_catalog]
     if missing:
         errors.append(f"Next.js project workspace is missing tabs: {', '.join(missing)}")
     else:
         checks.append(f"Next.js project workspace exposes {len(REQUIRED_PROJECT_TABS)} retained project-control tabs")
+    hidden_legacy = [tab for tab in ("Delays", "Time Impact") if f'"{tab}"' in tab_catalog]
+    if hidden_legacy:
+        errors.append(f"Next.js workspace still exposes legacy compatibility tabs: {', '.join(hidden_legacy)}")
 
 
 def validate_advanced_analytics_output(

@@ -1,0 +1,97 @@
+{
+  "project_id": "Sophia-Mall",
+  "project_key": "Sophia-Mall",
+  "project_fingerprint": "d1d6087bd3e74839bf251f6bea9dcf5434ec3a53c30c056bf6f848cf40b35269",
+  "generator_version": "2026.08.project-scoped-html-pdf-pptx.v1",
+  "generated_at": "2026-08-01T03:52:59",
+  "reports": {
+    "executive_dashboard": {
+      "html": "/generated/Sophia-Mall/01_executive_dashboard.html",
+      "pdf": "/generated/Sophia-Mall/01_executive_dashboard.pdf",
+      "pptx": "/generated/Sophia-Mall/01_executive_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "01_executive_dashboard.html",
+          "bytes": 18302,
+          "sha256": "a688311e32b6fbab298a65b076a050a4a2d1c22729fa5d306bb6421a394c5d2e"
+        },
+        "pdf": {
+          "name": "01_executive_dashboard.pdf",
+          "bytes": 876575,
+          "sha256": "29b28c7fc976b8360a479a80f44948b6ecea0a698f76ff741348361f0a859d3b"
+        },
+        "pptx": {
+          "name": "01_executive_dashboard.pptx",
+          "bytes": 29125,
+          "sha256": "47bac93dae48556b0c4ec725a9bbe2936184f21ffd8c8ea29e10b5d4e3fdc3bb"
+        }
+      }
+    },
+    "master_dashboard": {
+      "html": "/generated/Sophia-Mall/02_master_dashboard.html",
+      "pdf": "/generated/Sophia-Mall/02_master_dashboard.pdf",
+      "pptx": "/generated/Sophia-Mall/02_master_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "02_master_dashboard.html",
+          "bytes": 86744,
+          "sha256": "88dcb81917d63c1fc19691f54d2fa1a86db95ad879f4f518973791166ecd95dc"
+        },
+        "pdf": {
+          "name": "02_master_dashboard.pdf",
+          "bytes": 883080,
+          "sha256": "7784590ad3131bf6844722984ee954f6aa6347b83ce62e6ff4c52efa8b048012"
+        },
+        "pptx": {
+          "name": "02_master_dashboard.pptx",
+          "bytes": 29122,
+          "sha256": "7a4dff3d45348de00c19a000bd546404e72d83a4fe3b765a9259d67248d601f4"
+        }
+      }
+    },
+    "elite_svg_charts": {
+      "html": "/generated/Sophia-Mall/03_elite_svg_charts.html",
+      "pdf": "/generated/Sophia-Mall/03_elite_svg_charts.pdf",
+      "pptx": "/generated/Sophia-Mall/03_elite_svg_charts.pptx",
+      "files": {
+        "html": {
+          "name": "03_elite_svg_charts.html",
+          "bytes": 52018,
+          "sha256": "03b252a62ab47d9949435d6a0e8ba934043df3a5f80b6bb844420a26badf405a"
+        },
+        "pdf": {
+          "name": "03_elite_svg_charts.pdf",
+          "bytes": 240147,
+          "sha256": "8c73d9bfa0c8328d8cac4c70f52dea198a5622172d3b5e625a670d93d9bd66a3"
+        },
+        "pptx": {
+          "name": "03_elite_svg_charts.pptx",
+          "bytes": 29123,
+          "sha256": "b1c2e0c18923d7edb45d3e8799c793e9f6c3d57846557643d30adb7972b9f512"
+        }
+      }
+    },
+    "linked_executive_dashboard": {
+      "html": "/generated/Sophia-Mall/04_linked_executive_dashboard.html",
+      "pdf": "/generated/Sophia-Mall/04_linked_executive_dashboard.pdf",
+      "pptx": "/generated/Sophia-Mall/04_linked_executive_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "04_linked_executive_dashboard.html",
+          "bytes": 57578,
+          "sha256": "210c8be7b556ee1da896e3e27ad67b4dacee636d39d1a8bde0f88e438d8ba9fc"
+        },
+        "pdf": {
+          "name": "04_linked_executive_dashboard.pdf",
+          "bytes": 1262281,
+          "sha256": "1690b6c9c2356ee54b89aa3ab99d0fcd2034fa6b88479971acf36f8fde4b84d7"
+        },
+        "pptx": {
+          "name": "04_linked_executive_dashboard.pptx",
+          "bytes": 29131,
+          "sha256": "406d2461c7e73fe7bc615a82248478a5e719fce9e108424aaf50adc49f972c9c"
+        }
+      }
+    }
+  }
+}

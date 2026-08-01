@@ -233,8 +233,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-07-31T00:47:21",
-  "fingerprint": "b6d41c578ee802f8c39725afbeebce90263a169ab03b1707807475e0d6bb8895",
+  "last_updated": "2026-06-27T05:23:53",
+  "fingerprint": "827f3b281fad9cf72a53a9b5e0a2f847336f88acdb4924262f9ce182b386fc6b",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -3314,6 +3314,592 @@
         "available": false,
         "status": "No submitted TIA guide detected",
         "scope_note": "Generic TIA readiness mode only. Add a project-specific submitted guide under 02-delay_analysis/submitted_tia to activate submitted-event logic."
+      },
+      "canonical_analysis": {
+        "status": "ready",
+        "message": "Canonical Streamlit TIA engine completed for the selected project. Results remain indicative until P6 recalculation is verified.",
+        "kpis": {
+          "Total Delivered Steel": 1390.8,
+          "Total Required Steel": 87.4,
+          "Current Steel Balance": 1303.3999999999999,
+          "Total Shortage Qty": 0.0,
+          "First Stock-Out Date": null,
+          "Number of Stock-Out Events": 0,
+          "Relationship Links Loaded": 15,
+          "Driving FS Links": 15,
+          "Open-Ended Impacted Activities": 0,
+          "Number of Strong TIA Candidates": 0,
+          "Critical Activities Affected": 0,
+          "Longest Path Activities Affected": 0,
+          "Open Delay Duration": 0,
+          "Employer Risk Events": 0,
+          "Concurrent Risk Events": 0,
+          "Auto Requirements Used": false,
+          "Quantity Basis Valid": true
+        },
+        "tables": {
+          "balance_df": {
+            "file": "TIA engine - balance_df",
+            "exists": true,
+            "row_count": 11,
+            "column_count": 12,
+            "columns": [
+              "Date",
+              "Building",
+              "Steel Type / Diameter",
+              "Activity ID",
+              "Activity Name",
+              "Required Steel Qty",
+              "Client Delivered Qty",
+              "Cumulative Delivered",
+              "Cumulative Required",
+              "Steel Balance",
+              "Stock-Out?",
+              "Shortage Qty"
+            ],
+            "rows": [
+              {
+                "Date": "2025-10-22T00:00:00",
+                "Building": "ALL",
+                "Steel Type / Diameter": "ALL STEEL TYPES",
+                "Activity ID": "",
+                "Activity Name": "Delivery / balance checkpoint",
+                "Required Steel Qty": 0.0,
+                "Client Delivered Qty": 145.5,
+                "Cumulative Delivered": 145.5,
+                "Cumulative Required": 0.0,
+                "Steel Balance": 145.5,
+                "Stock-Out?": "NO",
+                "Shortage Qty": 0.0
+              },
+              {
+                "Date": "2025-12-07T00:00:00",
+                "Building": "ALL",
+                "Steel Type / Diameter": "ALL STEEL TYPES",
+                "Activity ID": "",
+                "Activity Name": "Delivery / balance checkpoint",
+                "Required Steel Qty": 0.0,
+                "Client Delivered Qty": 286.8,
+                "Cumulative Delivered": 432.3,
+                "Cumulative Required": 0.0,
+                "Steel Balance": 432.3,
+                "Stock-Out?": "NO",
+                "Shortage Qty": 0.0
+              },
+              {
+                "Date": "2025-12-12T00:00:00",
+                "Building": "UNALLOCATED",
+                "Steel Type / Diameter": "RFT",
+                "Activity ID": "CON-LB-AA-RFT-1050",
+                "Activity Name": "RFT for Abutment A pile cap RFT (Abutment-A)",
+                "Required Steel Qty": 0.0,
+                "Client Delivered Qty": 0.0,
+                "Cumulative Delivered": 432.3,
+                "Cumulative Required": 0.0,
+                "Steel Balance": 432.3,
+                "Stock-Out?": "NO",
+                "Shortage Qty": 0.0
+              },
+              {
+                "Date": "2025-12-14T00:00:00",
+                "Building": "UNALLOCATED",
+                "Steel Type / Diameter": "RFT",
+                "Activity ID": "CON-LB-P1-RFT-1060",
+                "Activity Name": "RFT for Pier P1 starter bars RFT (Pier-P1)",
+                "Required Steel Qty": 0.0,
+                "Client Delivered Qty": 0.0,
+                "Cumulative Delivered": 432.3,
+                "Cumulative Required": 0.0,
+                "Steel Balance": 432.3,
+                "Stock-Out?": "NO",
+                "Shortage Qty": 0.0
+              },
+              {
+                "Date": "2026-01-09T00:00:00",
+                "Building": "UNALLOCATED",
+                "Steel Type / Diameter": "RFT",
+                "Activity ID": "CON-LB-P2-RFT-1070",
+                "Activity Name": "RFT for Pier P2 shaft RFT (Pier-P2)",
+                "Required Steel Qty": 0.0,
+                "Client Delivered Qty": 0.0,
+                "Cumulative Delivered": 432.3,
+                "Cumulative Required": 0.0,
+                "Steel Balance": 432.3,
+                "Stock-Out?": "NO",
+                "Shortage Qty": 0.0
+              },
+              {
+                "Date": "2026-01-11T00:00:00",
+                "Building": "UNALLOCATED",
+                "Steel Type / Diameter": "RFT",
+                "Activity ID": "CON-LB-DS-RFT-1080",
+                "Activity Name": "RFT for Deck span diaphragm RFT (Deck-Span)",
+                "Required Steel Qty": 51.6,
+                "Client Delivered Qty": 0.0,
+                "Cumulative Delivered": 432.3,
+                "Cumulative Required": 51.6,
+                "Steel Balance": 380.7,
+                "Stock-Out?": "NO",
+                "Shortage Qty": 0.0
+              },
+              {
+                "Date": "2026-01-25T00:00:00",
+                "Building": "UNALLOCATED",
+                "Steel Type / Diameter": "RFT",
+                "Activity ID": "CON-LB-AB-RFT-1090",
+                "Activity Name": "RFT for Abutment B wing wall RFT (Abutment-B)",
+                "Required Steel Qty": 35.8,
+                "Client Delivered Qty": 0.0,
+                "Cumulative Delivered": 432.3,
+                "Cumulative Required": 87.4,
+                "Steel Balance": 344.9,
+                "Stock-Out?": "NO",
+                "Shortage Qty": 0.0
+              },
+              {
+                "Date": "2026-02-16T00:00:00",
+                "Building": "ALL",
+                "Steel Type / Diameter": "ALL STEEL TYPES",
+                "Activity ID": "",
+                "Activity Name": "Delivery / balance checkpoint",
+                "Required Steel Qty": 0.0,
+                "Client Delivered Qty": 74.2,
+                "Cumulative Delivered": 506.5,
+                "Cumulative Required": 87.4,
+                "Steel Balance": 419.1,
+                "Stock-Out?": "NO",
+                "Shortage Qty": 0.0
+              },
+              {
+                "Date": "2026-03-30T00:00:00",
+                "Building": "ALL",
+                "Steel Type / Diameter": "ALL STEEL TYPES",
+                "Activity ID": "",
+                "Activity Name": "Delivery / balance checkpoint",
+                "Required Steel Qty": 0.0,
+                "Client Delivered Qty": 390.6,
+                "Cumulative Delivered": 897.1,
+                "Cumulative Required": 87.4,
+                "Steel Balance": 809.7,
+                "Stock-Out?": "NO",
+                "Shortage Qty": 0.0
+              },
+              {
+                "Date": "2026-05-07T00:00:00",
+                "Building": "ALL",
+                "Steel Type / Diameter": "ALL STEEL TYPES",
+                "Activity ID": "",
+                "Activity Name": "Delivery / balance checkpoint",
+                "Required Steel Qty": 0.0,
+                "Client Delivered Qty": 182.4,
+                "Cumulative Delivered": 1079.5,
+                "Cumulative Required": 87.4,
+                "Steel Balance": 992.1,
+                "Stock-Out?": "NO",
+                "Shortage Qty": 0.0
+              },
+              {
+                "Date": "2026-06-05T00:00:00",
+                "Building": "ALL",
+                "Steel Type / Diameter": "ALL STEEL TYPES",
+                "Activity ID": "",
+                "Activity Name": "Delivery / balance checkpoint",
+                "Required Steel Qty": 0.0,
+                "Client Delivered Qty": 311.3,
+                "Cumulative Delivered": 1390.8,
+                "Cumulative Required": 87.4,
+                "Steel Balance": 1303.3999999999999,
+                "Stock-Out?": "NO",
+                "Shortage Qty": 0.0
+              }
+            ],
+            "truncated": false,
+            "source_path": "TIA engine - balance_df"
+          },
+          "stock_out_df": {
+            "file": "TIA engine - stock_out_df",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 6,
+            "columns": [
+              "Stock-Out Date",
+              "Steel Type",
+              "Building",
+              "Quantity Shortage",
+              "Steel Recovered Later?",
+              "Recovery Date"
+            ],
+            "rows": [],
+            "truncated": false,
+            "source_path": "TIA engine - stock_out_df"
+          },
+          "relationship_logic_df": {
+            "file": "TIA engine - relationship_logic_df",
+            "exists": true,
+            "row_count": 15,
+            "column_count": 5,
+            "columns": [
+              "Predecessor Activity ID",
+              "Successor Activity ID",
+              "Relationship Type",
+              "Lag",
+              "Source Row"
+            ],
+            "rows": [
+              {
+                "Predecessor Activity ID": "CON-LB-AA-RFT-1050: FS 0",
+                "Successor Activity ID": "CON-LB-AA-CONC-1070",
+                "Relationship Type": "FS",
+                "Lag": 0.0,
+                "Source Row": 4
+              },
+              {
+                "Predecessor Activity ID": "E-APP-LB-AA-1020: FS 0",
+                "Successor Activity ID": "CON-LB-AA-FORM-1040",
+                "Relationship Type": "FS",
+                "Lag": 0.0,
+                "Source Row": 2
+              },
+              {
+                "Predecessor Activity ID": "CON-LB-AA-FORM-1040: FS 0",
+                "Successor Activity ID": "CON-LB-AA-RFT-1050",
+                "Relationship Type": "FS",
+                "Lag": 0.0,
+                "Source Row": 3
+              },
+              {
+                "Predecessor Activity ID": "CON-LB-AB-RFT-1090: FS 0",
+                "Successor Activity ID": "CON-LB-AB-CONC-1110",
+                "Relationship Type": "FS",
+                "Lag": 0.0,
+                "Source Row": 16
+              },
+              {
+                "Predecessor Activity ID": "E-APP-LB-AB-1060: FS 0",
+                "Successor Activity ID": "CON-LB-AB-FORM-1080",
+                "Relationship Type": "FS",
+                "Lag": 0.0,
+                "Source Row": 14
+              },
+              {
+                "Predecessor Activity ID": "CON-LB-AB-FORM-1080: FS 0",
+                "Successor Activity ID": "CON-LB-AB-RFT-1090",
+                "Relationship Type": "FS",
+                "Lag": 0.0,
+                "Source Row": 15
+              },
+              {
+                "Predecessor Activity ID": "CON-LB-DS-RFT-1080: FS 0",
+                "Successor Activity ID": "CON-LB-DS-CONC-1100",
+                "Relationship Type": "FS",
+                "Lag": 0.0,
+                "Source Row": 13
+              },
+              {
+                "Predecessor Activity ID": "E-APP-LB-DS-1050: FS 0",
+                "Successor Activity ID": "CON-LB-DS-FORM-1070",
+                "Relationship Type": "FS",
+                "Lag": 0.0,
+                "Source Row": 11
+              },
+              {
+                "Predecessor Activity ID": "CON-LB-DS-FORM-1070: FS 0",
+                "Successor Activity ID": "CON-LB-DS-RFT-1080",
+                "Relationship Type": "FS",
+                "Lag": 0.0,
+                "Source Row": 12
+              },
+              {
+                "Predecessor Activity ID": "CON-LB-P1-RFT-1060: FS 0",
+                "Successor Activity ID": "CON-LB-P1-CONC-1080",
+                "Relationship Type": "FS",
+                "Lag": 0.0,
+                "Source Row": 7
+              },
+              {
+                "Predecessor Activity ID": "E-APP-LB-P1-1030: FS 0",
+                "Successor Activity ID": "CON-LB-P1-FORM-1050",
+                "Relationship Type": "FS",
+                "Lag": 0.0,
+                "Source Row": 5
+              },
+              {
+                "Predecessor Activity ID": "CON-LB-P1-FORM-1050: FS 0",
+                "Successor Activity ID": "CON-LB-P1-RFT-1060",
+                "Relationship Type": "FS",
+                "Lag": 0.0,
+                "Source Row": 6
+              },
+              {
+                "Predecessor Activity ID": "CON-LB-P2-RFT-1070: FS 0",
+                "Successor Activity ID": "CON-LB-P2-CONC-1090",
+                "Relationship Type": "FS",
+                "Lag": 0.0,
+                "Source Row": 10
+              },
+              {
+                "Predecessor Activity ID": "E-APP-LB-P2-1040: FS 0",
+                "Successor Activity ID": "CON-LB-P2-FORM-1060",
+                "Relationship Type": "FS",
+                "Lag": 0.0,
+                "Source Row": 8
+              },
+              {
+                "Predecessor Activity ID": "CON-LB-P2-FORM-1060: FS 0",
+                "Successor Activity ID": "CON-LB-P2-RFT-1070",
+                "Relationship Type": "FS",
+                "Lag": 0.0,
+                "Source Row": 9
+              }
+            ],
+            "truncated": false,
+            "source_path": "TIA engine - relationship_logic_df"
+          },
+          "candidates_df": {
+            "file": "TIA engine - candidates_df",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 0,
+            "columns": [],
+            "rows": [],
+            "truncated": false,
+            "source_path": "TIA engine - candidates_df"
+          },
+          "fragnet_df": {
+            "file": "TIA engine - fragnet_df",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 0,
+            "columns": [],
+            "rows": [],
+            "truncated": false,
+            "source_path": "TIA engine - fragnet_df"
+          },
+          "contract_matches_df": {
+            "file": "TIA engine - contract_matches_df",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 0,
+            "columns": [],
+            "rows": [],
+            "truncated": false,
+            "source_path": "TIA engine - contract_matches_df"
+          },
+          "support_df": {
+            "file": "TIA engine - support_df",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 0,
+            "columns": [],
+            "rows": [],
+            "truncated": false,
+            "source_path": "TIA engine - support_df"
+          },
+          "assessment_df": {
+            "file": "TIA engine - assessment_df",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 0,
+            "columns": [],
+            "rows": [],
+            "truncated": false,
+            "source_path": "TIA engine - assessment_df"
+          },
+          "rebuttal_df": {
+            "file": "TIA engine - rebuttal_df",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 0,
+            "columns": [],
+            "rows": [],
+            "truncated": false,
+            "source_path": "TIA engine - rebuttal_df"
+          },
+          "action_tracker_df": {
+            "file": "TIA engine - action_tracker_df",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 0,
+            "columns": [],
+            "rows": [],
+            "truncated": false,
+            "source_path": "TIA engine - action_tracker_df"
+          },
+          "narrative_df": {
+            "file": "TIA engine - narrative_df",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 0,
+            "columns": [],
+            "rows": [],
+            "truncated": false,
+            "source_path": "TIA engine - narrative_df"
+          },
+          "executive_summary_df": {
+            "file": "TIA engine - executive_summary_df",
+            "exists": true,
+            "row_count": 10,
+            "column_count": 2,
+            "columns": [
+              "Question",
+              "Answer"
+            ],
+            "rows": [
+              {
+                "Question": "When did steel quantity become zero?",
+                "Answer": null
+              },
+              {
+                "Question": "Which steel type / diameter was affected?",
+                "Answer": "Not identified"
+              },
+              {
+                "Question": "Which building was affected?",
+                "Answer": "Not identified"
+              },
+              {
+                "Question": "Which activity was first impacted?",
+                "Answer": "Not identified"
+              },
+              {
+                "Question": "Where should the TIA fragnet be inserted?",
+                "Answer": "Not identified"
+              },
+              {
+                "Question": "What is the fragment start date?",
+                "Answer": null
+              },
+              {
+                "Question": "What is the fragment finish date?",
+                "Answer": null
+              },
+              {
+                "Question": "What is the fragment duration?",
+                "Answer": 0
+              },
+              {
+                "Question": "Is the delay critical, near-critical, concurrent, or non-driving?",
+                "Answer": "Not identified"
+              },
+              {
+                "Question": "Is the delay likely Employer / Client risk or Contractor risk?",
+                "Answer": "Not identified"
+              }
+            ],
+            "truncated": false,
+            "source_path": "TIA engine - executive_summary_df"
+          },
+          "notice_review_df": {
+            "file": "TIA engine - notice_review_df",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 0,
+            "columns": [],
+            "rows": [],
+            "truncated": false,
+            "source_path": "TIA engine - notice_review_df"
+          },
+          "money_impact_df": {
+            "file": "TIA engine - money_impact_df",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 0,
+            "columns": [],
+            "rows": [],
+            "truncated": false,
+            "source_path": "TIA engine - money_impact_df"
+          },
+          "schedule_impact_df": {
+            "file": "TIA engine - schedule_impact_df",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 0,
+            "columns": [],
+            "rows": [],
+            "truncated": false,
+            "source_path": "TIA engine - schedule_impact_df"
+          },
+          "data_quality_df": {
+            "file": "TIA engine - data_quality_df",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 0,
+            "columns": [],
+            "rows": [],
+            "truncated": false,
+            "source_path": "TIA engine - data_quality_df"
+          },
+          "requirement_df": {
+            "file": "TIA engine - requirement_df",
+            "exists": true,
+            "row_count": 5,
+            "column_count": 8,
+            "columns": [
+              "Activity ID",
+              "Activity Name",
+              "Building",
+              "Steel Type / Diameter",
+              "Required Steel Qty",
+              "Required Date",
+              "Priority",
+              "Remarks"
+            ],
+            "rows": [
+              {
+                "Activity ID": "CON-LB-AA-RFT-1050",
+                "Activity Name": "RFT for Abutment A pile cap RFT (Abutment-A)",
+                "Building": "",
+                "Steel Type / Diameter": "BIG.Q.Rft",
+                "Required Steel Qty": "0",
+                "Required Date": "12-Dec-25",
+                "Priority": "",
+                "Remarks": ""
+              },
+              {
+                "Activity ID": "CON-LB-P1-RFT-1060",
+                "Activity Name": "RFT for Pier P1 starter bars RFT (Pier-P1)",
+                "Building": "",
+                "Steel Type / Diameter": "BIG.Q.Rft",
+                "Required Steel Qty": "0",
+                "Required Date": "14-Dec-25",
+                "Priority": "",
+                "Remarks": ""
+              },
+              {
+                "Activity ID": "CON-LB-P2-RFT-1070",
+                "Activity Name": "RFT for Pier P2 shaft RFT (Pier-P2)",
+                "Building": "",
+                "Steel Type / Diameter": "BIG.Q.Rft",
+                "Required Steel Qty": "0",
+                "Required Date": "9-Jan-26",
+                "Priority": "",
+                "Remarks": ""
+              },
+              {
+                "Activity ID": "CON-LB-DS-RFT-1080",
+                "Activity Name": "RFT for Deck span diaphragm RFT (Deck-Span)",
+                "Building": "",
+                "Steel Type / Diameter": "BIG.Q.Rft",
+                "Required Steel Qty": "51.6",
+                "Required Date": "11-Jan-26",
+                "Priority": "",
+                "Remarks": ""
+              },
+              {
+                "Activity ID": "CON-LB-AB-RFT-1090",
+                "Activity Name": "RFT for Abutment B wing wall RFT (Abutment-B)",
+                "Building": "",
+                "Steel Type / Diameter": "BIG.Q.Rft",
+                "Required Steel Qty": "35.8",
+                "Required Date": "25-Jan-26",
+                "Priority": "",
+                "Remarks": ""
+              }
+            ],
+            "truncated": false,
+            "source_path": "TIA engine - requirement_df"
+          }
+        }
       },
       "templates": [
         {
@@ -9820,11 +10406,39 @@
           "modified": "2026-07-20T15:45:06"
         },
         {
+          "name": "01_executive_dashboard.pdf",
+          "relative_path": "LMD-Bridgs/01_executive_dashboard.pdf",
+          "extension": "pdf",
+          "size_kb": 957.8,
+          "modified": "2026-08-01T03:52:11"
+        },
+        {
+          "name": "01_executive_dashboard.pptx",
+          "relative_path": "LMD-Bridgs/01_executive_dashboard.pptx",
+          "extension": "pptx",
+          "size_kb": 28.4,
+          "modified": "2026-08-01T03:52:12"
+        },
+        {
           "name": "02_master_dashboard.html",
           "relative_path": "LMD-Bridgs/02_master_dashboard.html",
           "extension": "html",
           "size_kb": 84.6,
           "modified": "2026-07-20T15:45:06"
+        },
+        {
+          "name": "02_master_dashboard.pdf",
+          "relative_path": "LMD-Bridgs/02_master_dashboard.pdf",
+          "extension": "pdf",
+          "size_kb": 862.8,
+          "modified": "2026-08-01T03:52:18"
+        },
+        {
+          "name": "02_master_dashboard.pptx",
+          "relative_path": "LMD-Bridgs/02_master_dashboard.pptx",
+          "extension": "pptx",
+          "size_kb": 28.4,
+          "modified": "2026-08-01T03:52:19"
         },
         {
           "name": "03_elite_svg_charts.html",
@@ -9834,11 +10448,39 @@
           "modified": "2026-07-20T15:45:06"
         },
         {
+          "name": "03_elite_svg_charts.pdf",
+          "relative_path": "LMD-Bridgs/03_elite_svg_charts.pdf",
+          "extension": "pdf",
+          "size_kb": 235.9,
+          "modified": "2026-08-01T03:52:21"
+        },
+        {
+          "name": "03_elite_svg_charts.pptx",
+          "relative_path": "LMD-Bridgs/03_elite_svg_charts.pptx",
+          "extension": "pptx",
+          "size_kb": 28.4,
+          "modified": "2026-08-01T03:52:22"
+        },
+        {
           "name": "04_linked_executive_dashboard.html",
           "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.html",
           "extension": "html",
           "size_kb": 56.2,
           "modified": "2026-07-20T15:45:06"
+        },
+        {
+          "name": "04_linked_executive_dashboard.pdf",
+          "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.pdf",
+          "extension": "pdf",
+          "size_kb": 1181.2,
+          "modified": "2026-08-01T03:52:28"
+        },
+        {
+          "name": "04_linked_executive_dashboard.pptx",
+          "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.pptx",
+          "extension": "pptx",
+          "size_kb": 28.4,
+          "modified": "2026-08-01T03:52:29"
         }
       ],
       "watchers": [
@@ -9853,9 +10495,9 @@
           "detail": "Syncs local code, project folders, generated HTML, and website files to GitHub."
         },
         {
-          "name": "Generated HTML output watcher",
+          "name": "Generated report watcher",
           "status": "Configured",
-          "detail": "Publishes project-specific HTML outputs from 11-outputs."
+          "detail": "Publishes project-specific HTML, PDF, and PowerPoint outputs from 11-outputs."
         }
       ]
     }
@@ -9865,5 +10507,95 @@
     "master_dashboard": "/generated/LMD-Bridgs/02_master_dashboard.html",
     "elite_svg_charts": "/generated/LMD-Bridgs/03_elite_svg_charts.html",
     "linked_executive_dashboard": "/generated/LMD-Bridgs/04_linked_executive_dashboard.html"
+  },
+  "report_artifacts": {
+    "executive_dashboard": {
+      "html": "/generated/LMD-Bridgs/01_executive_dashboard.html",
+      "pdf": "/generated/LMD-Bridgs/01_executive_dashboard.pdf",
+      "pptx": "/generated/LMD-Bridgs/01_executive_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "01_executive_dashboard.html",
+          "bytes": 18287,
+          "sha256": "f098cc3f505a4b3b68899ddd8b5544eb6b49481824a97f378fa10413b9412eb7"
+        },
+        "pdf": {
+          "name": "01_executive_dashboard.pdf",
+          "bytes": 980754,
+          "sha256": "49419b05daf189c4076a2a836e2f287819e16a49b83f4df999e595f8b3fbce74"
+        },
+        "pptx": {
+          "name": "01_executive_dashboard.pptx",
+          "bytes": 29122,
+          "sha256": "f22c8291871c38ab967d7070280a43597531abd37c71a326f919ffdb3a7cb65e"
+        }
+      }
+    },
+    "master_dashboard": {
+      "html": "/generated/LMD-Bridgs/02_master_dashboard.html",
+      "pdf": "/generated/LMD-Bridgs/02_master_dashboard.pdf",
+      "pptx": "/generated/LMD-Bridgs/02_master_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "02_master_dashboard.html",
+          "bytes": 86593,
+          "sha256": "e77c0da4f5180aadb2bbcc20984393042a026c2b44922953044acd9b1978c6b6"
+        },
+        "pdf": {
+          "name": "02_master_dashboard.pdf",
+          "bytes": 883457,
+          "sha256": "eda46d497a4bf98ec7467fac46ea83e20d6959f8938070f5843bc04d1bdf8ed0"
+        },
+        "pptx": {
+          "name": "02_master_dashboard.pptx",
+          "bytes": 29119,
+          "sha256": "090916f4a141f28c253e625cdc1a49c1eff4271a988bbf13cac17df589a432d2"
+        }
+      }
+    },
+    "elite_svg_charts": {
+      "html": "/generated/LMD-Bridgs/03_elite_svg_charts.html",
+      "pdf": "/generated/LMD-Bridgs/03_elite_svg_charts.pdf",
+      "pptx": "/generated/LMD-Bridgs/03_elite_svg_charts.pptx",
+      "files": {
+        "html": {
+          "name": "03_elite_svg_charts.html",
+          "bytes": 51985,
+          "sha256": "ac81d5b449b8be0f959d55643a59f2718c71375edf4ef7d5700fe0f2f258b13f"
+        },
+        "pdf": {
+          "name": "03_elite_svg_charts.pdf",
+          "bytes": 241612,
+          "sha256": "41c2235224d97a69c4bd607ee9ac1ea60acc14abac88c68683619ed52319ecdd"
+        },
+        "pptx": {
+          "name": "03_elite_svg_charts.pptx",
+          "bytes": 29119,
+          "sha256": "34db68aa5d3f7a670a3ac0283445b8a261364f79e8d68cd017ef13f7d1767fa0"
+        }
+      }
+    },
+    "linked_executive_dashboard": {
+      "html": "/generated/LMD-Bridgs/04_linked_executive_dashboard.html",
+      "pdf": "/generated/LMD-Bridgs/04_linked_executive_dashboard.pdf",
+      "pptx": "/generated/LMD-Bridgs/04_linked_executive_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "04_linked_executive_dashboard.html",
+          "bytes": 57585,
+          "sha256": "d787920febc0e598477a65b6c51bb0ae634d53633d14a56afba855fdb8151024"
+        },
+        "pdf": {
+          "name": "04_linked_executive_dashboard.pdf",
+          "bytes": 1209596,
+          "sha256": "885909740748ff98ff58c4e3bd53a868315bcf17fcbbfc5c52966dd0294f1664"
+        },
+        "pptx": {
+          "name": "04_linked_executive_dashboard.pptx",
+          "bytes": 29128,
+          "sha256": "f5e37baa223c418b7f628d3bc441341bd00a225bc7f2674665174caefdbc1db2"
+        }
+      }
+    }
   }
 }

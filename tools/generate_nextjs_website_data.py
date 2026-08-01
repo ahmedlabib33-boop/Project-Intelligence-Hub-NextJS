@@ -4,6 +4,7 @@ import csv
 import hashlib
 import json
 import math
+import os
 import re
 import shutil
 import sqlite3
@@ -13,10 +14,13 @@ from pathlib import Path
 from typing import Any
 
 from advanced_analytics import build_advanced_analytics
+from project_report_artifacts import ensure_project_report_artifacts
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PROJECTS_ROOT = ROOT / "projects"
+CANONICAL_ROOT = Path(os.environ.get("PIH_SOURCE_ROOT", ROOT)).expanduser().resolve()
+PROJECTS_ROOT = CANONICAL_ROOT / "projects"
+SOURCE_OUTPUTS_ROOT = CANONICAL_ROOT / "11-outputs"
 OUTPUTS_ROOT = ROOT / "11-outputs"
 WEBSITE_PUBLIC = ROOT / "website" / "public"
 DATA_ROOT = WEBSITE_PUBLIC / "data"
@@ -320,7 +324,7 @@ def submitted_tia_guide_root(base: Path, project: dict[str, Any]) -> Path | None
         configured = Path(configured_path)
         candidate = configured if configured.is_absolute() else (base / configured)
         try:
-            candidate.resolve().relative_to(ROOT.resolve())
+            candidate.resolve().relative_to(CANONICAL_ROOT.resolve())
         except ValueError:
             return None
         if candidate.is_dir():
@@ -487,6 +491,101 @@ def sqlite_table_counts(path: Path) -> dict[str, Any]:
     return result
 
 
+def dataframe_workspace_table(frame: Any, file_name: str, limit: int = 3000) -> dict[str, Any]:
+    """Convert a canonical pandas result into the same safe table contract as CSV data."""
+    if frame is None:
+        return {"file": file_name, "exists": False, "row_count": 0, "column_count": 0, "columns": [], "rows": []}
+    try:
+        import pandas as pd  # type: ignore
+
+        columns = [str(column) for column in frame.columns]
+        rows: list[dict[str, Any]] = []
+        for record in frame.head(limit).to_dict(orient="records"):
+            cleaned: dict[str, Any] = {}
+            for key, value in record.items():
+                if pd.isna(value):
+                    cleaned[str(key)] = None
+                elif hasattr(value, "isoformat"):
+                    cleaned[str(key)] = value.isoformat()
+                elif isinstance(value, (str, int, float, bool)):
+                    cleaned[str(key)] = value
+                else:
+                    cleaned[str(key)] = str(value)
+            rows.append(cleaned)
+        return {
+            "file": file_name,
+            "exists": True,
+            "row_count": int(len(frame)),
+            "column_count": len(columns),
+            "columns": columns,
+            "rows": rows,
+            "truncated": len(frame) > limit,
+            "source_path": file_name,
+        }
+    except Exception as exc:
+        return {"file": file_name, "exists": False, "row_count": 0, "column_count": 0, "columns": [], "rows": [], "error": str(exc)}
+
+
+def build_canonical_tia_snapshot(delay_dir: Path) -> dict[str, Any]:
+    """Run the Streamlit TIA engine for one project and publish only its results.
+
+    A TIA failure is a visible readiness state, never a replacement result from
+    another project or a guessed EOT value.
+    """
+    if not delay_dir.exists():
+        return {"status": "missing", "message": "Delay TIA source folder is missing.", "tables": {}}
+    try:
+        import pandas as pd  # type: ignore
+
+        source_src = CANONICAL_ROOT / "src"
+        if str(source_src) not in sys.path:
+            sys.path.insert(0, str(source_src))
+        from construction_system.steel_delay_tia import SteelTiaSettings, run_steel_delay_tia_analysis
+
+        lookup = {re.sub(r"[^a-z0-9]+", "", path.name.lower()): path for path in delay_dir.glob("*.csv")}
+
+        def frame(fragment: str) -> Any:
+            path = lookup.get(re.sub(r"[^a-z0-9]+", "", fragment.lower()))
+            return pd.read_csv(path, dtype=object) if path and path.exists() else pd.DataFrame()
+
+        event_frames = [frame(name) for name in ("07-ifc_conflict.csv", "08-payments.csv", "09-rfi_status.csv")]
+        event_frames = [item for item in event_frames if not item.empty]
+        event_df = pd.concat(event_frames, ignore_index=True, sort=False) if event_frames else pd.DataFrame()
+        analysis = run_steel_delay_tia_analysis(
+            p6_df=frame("04-p6_activity_export.csv"),
+            steel_df=frame("03-employer_steel_supply_at_site.csv"),
+            requirement_df=frame("02-master_activity_steel_analysis.csv"),
+            relationship_df=frame("05-relationship_file.csv"),
+            contract_library_df=frame("06-contract_library.csv"),
+            delay_events_df=event_df,
+            settings=SteelTiaSettings(),
+        )
+        tables = {
+            key: dataframe_workspace_table(value, f"TIA engine - {key}")
+            for key, value in analysis.items()
+            if hasattr(value, "columns")
+        }
+        raw_kpis = analysis.get("kpis", {}) if isinstance(analysis.get("kpis"), dict) else {}
+        kpis: dict[str, Any] = {}
+        for key, value in raw_kpis.items():
+            if pd.isna(value):
+                kpis[str(key)] = None
+            elif hasattr(value, "isoformat"):
+                kpis[str(key)] = value.isoformat()
+            elif isinstance(value, (str, int, float, bool)):
+                kpis[str(key)] = value
+            else:
+                kpis[str(key)] = str(value)
+        return {
+            "status": "ready",
+            "message": "Canonical Streamlit TIA engine completed for the selected project. Results remain indicative until P6 recalculation is verified.",
+            "kpis": kpis,
+            "tables": tables,
+        }
+    except Exception as exc:
+        return {"status": "needs_review", "message": f"Canonical TIA engine could not complete: {exc}", "tables": {}}
+
+
 def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str, str]]]) -> dict[str, Any]:
     base = Path(project["path"])
     data_dir = base / "01-data" / "import_templates"
@@ -526,6 +625,7 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     evidence_files = list_project_files(evidence_dir, base, 80)
     output_files = list_project_files(outputs_dir, OUTPUTS_ROOT, 20)
     submitted_tia = build_submitted_tia_payload(project, base)
+    canonical_tia = build_canonical_tia_snapshot(delay_dir)
     overview_paths = {
         "projects": data_dir / "projects.csv",
         "activities": data_dir / "activities.csv",
@@ -571,6 +671,7 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
             "folder": "02-delay_analysis",
             "logic_mode": "Submitted TIA Level 1-4 assessment" if submitted_tia.get("available") else "Generic project TIA readiness",
             "submitted_tia": submitted_tia,
+            "canonical_analysis": canonical_tia,
             "templates": delay_templates,
             "template_tables": delay_template_tables,
             "required_file_count": len(delay_required_names),
@@ -604,7 +705,7 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
             "watchers": [
                 {"name": "Project data detector", "status": "Active", "detail": "Website data generator fingerprints every selected project folder."},
                 {"name": "No-Git sync watcher", "status": "Configured" if (ROOT / "RUN_FULL_PROJECT_NO_GIT_SYNC.bat").exists() else "Missing", "detail": "Syncs local code, project folders, generated HTML, and website files to GitHub."},
-                {"name": "Generated HTML output watcher", "status": "Configured" if outputs_dir.exists() else "Missing", "detail": "Publishes project-specific HTML outputs from 11-outputs."},
+                {"name": "Generated report watcher", "status": "Configured" if outputs_dir.exists() else "Missing", "detail": "Publishes project-specific HTML, PDF, and PowerPoint outputs from 11-outputs."},
             ],
         },
     }
@@ -961,7 +1062,7 @@ def fingerprint(path: Path) -> str:
             continue
         digest.update(rel.encode("utf-8"))
         digest.update(str(child.stat().st_size).encode("ascii"))
-        digest.update(str(int(child.stat().st_mtime)).encode("ascii"))
+        digest.update(str(child.stat().st_mtime_ns).encode("ascii"))
     return digest.hexdigest()
 
 
@@ -1237,19 +1338,63 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def copy_if_changed(source: Path, target: Path) -> None:
+    if target.exists() and target.stat().st_size == source.stat().st_size:
+        try:
+            if _sha256_file(target) == _sha256_file(source):
+                return
+        except OSError:
+            pass
+    target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(source, target)
+
+
+def write_json_if_changed(path: Path, payload: dict[str, Any]) -> bool:
+    """Write generated data only when its content changes, preserving project freshness."""
+    content = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
+    if path.exists() and path.read_text(encoding="utf-8") == content:
+        return False
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="utf-8")
+    return True
+
+
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
+    """Publish selected-project report artifacts without rewriting unchanged projects."""
     GENERATED_ROOT.mkdir(parents=True, exist_ok=True)
-    for child in GENERATED_ROOT.iterdir():
-        if child.is_dir():
-            shutil.rmtree(child)
+    OUTPUTS_ROOT.mkdir(parents=True, exist_ok=True)
+    active_public_dirs = {slugify(project["project_folder_name"]) for project in projects}
+    for orphan in GENERATED_ROOT.iterdir():
+        if orphan.is_dir() and orphan.name not in active_public_dirs:
+            shutil.rmtree(orphan)
+
     for project in projects:
-        source = OUTPUTS_ROOT / project["project_folder_name"]
-        target = GENERATED_ROOT / slugify(project["project_folder_name"])
+        project_folder = project["project_folder_name"]
+        source = SOURCE_OUTPUTS_ROOT / project_folder
+        output_dir = OUTPUTS_ROOT / project_folder
+        output_dir.mkdir(parents=True, exist_ok=True)
+        if source.exists() and source.resolve() != output_dir.resolve():
+            for html_report in sorted(source.glob("*.html")):
+                copy_if_changed(html_report, output_dir / html_report.name)
+
+        public_slug = slugify(project_folder)
+        artifacts = ensure_project_report_artifacts(project, output_dir, public_slug=public_slug)
+        project["report_artifacts"] = artifacts
+        project["features"]["outputs_and_watchers"]["output_files"] = list_project_files(output_dir, OUTPUTS_ROOT, 80)
+
+        target = GENERATED_ROOT / public_slug
         target.mkdir(parents=True, exist_ok=True)
-        if not source.exists():
-            continue
-        for html in sorted(source.glob("*.html")):
-            shutil.copy2(html, target / html.name)
+        for artifact in sorted(output_dir.iterdir()):
+            if artifact.is_file() and artifact.suffix.lower() in {".html", ".pdf", ".pptx"}:
+                copy_if_changed(artifact, target / artifact.name)
 
 
 def copy_tia_submitted_assets(projects: list[dict[str, Any]]) -> None:
@@ -1266,7 +1411,7 @@ def copy_tia_submitted_assets(projects: list[dict[str, Any]]) -> None:
             source = guide_root / str(visual.get("relative_path", ""))
             if source.exists() and source.is_file():
                 target_name = f"{slugify(source.stem)}{source.suffix.lower()}"
-                shutil.copy2(source, target / target_name)
+                copy_if_changed(source, target / target_name)
 
 
 def build_portfolio_decision_brief(projects: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -1452,13 +1597,13 @@ def main() -> None:
     copy_generated_outputs(project_records)
     copy_tia_submitted_assets(project_records)
     portfolio = build_portfolio(project_records)
-    (DATA_ROOT / "portfolio.json").write_text(json.dumps(portfolio, indent=2, ensure_ascii=False), encoding="utf-8")
+    write_json_if_changed(DATA_ROOT / "portfolio.json", portfolio)
     projects_dir = DATA_ROOT / "projects"
     projects_dir.mkdir(parents=True, exist_ok=True)
     for stale in projects_dir.glob("*.json"):
         stale.unlink()
     for project in project_records:
-        (projects_dir / f"{project['project_key']}.json").write_text(json.dumps(project, indent=2, ensure_ascii=False), encoding="utf-8")
+        write_json_if_changed(projects_dir / f"{project['project_key']}.json", project)
     try:
         from pih_data_guardrails import run_guardrails
 
@@ -1473,7 +1618,7 @@ def main() -> None:
             block_on_issues=block_on_issues,
         )
         portfolio["guardrails"] = guardrails
-        (DATA_ROOT / "portfolio.json").write_text(json.dumps(portfolio, indent=2, ensure_ascii=False), encoding="utf-8")
+        write_json_if_changed(DATA_ROOT / "portfolio.json", portfolio)
         print(
             "Guardrails: "
             f"{guardrails['status']} "
@@ -1507,7 +1652,7 @@ def main() -> None:
                 }
             ],
         }
-        (DATA_ROOT / "portfolio.json").write_text(json.dumps(portfolio, indent=2, ensure_ascii=False), encoding="utf-8")
+        write_json_if_changed(DATA_ROOT / "portfolio.json", portfolio)
         print(f"Guardrails: Error logged without blocking build: {exc}")
     print(f"Generated Next.js website data for {len(project_records)} projects.")
 

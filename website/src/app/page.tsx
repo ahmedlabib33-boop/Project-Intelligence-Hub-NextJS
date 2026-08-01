@@ -18,6 +18,13 @@ import OutputStudioDownloadButton from "../components/OutputStudioDownloadButton
 
 type ReportKey = "executive_dashboard" | "master_dashboard" | "elite_svg_charts" | "linked_executive_dashboard";
 
+type ReportArtifact = {
+  html: string;
+  pdf: string;
+  pptx: string;
+  files?: Record<string, { name: string; bytes: number; sha256: string }>;
+};
+
 type ProjectRecord = {
   project_id: string;
   project_key: string;
@@ -76,6 +83,7 @@ type ProjectRecord = {
   advanced_analytics?: AdvancedAnalyticsPayload;
   features: FeaturePayload;
   reports: Record<ReportKey, string>;
+  report_artifacts?: Partial<Record<ReportKey, ReportArtifact>>;
 };
 
 // The portfolio payload deliberately excludes large feature tables. Those are loaded
@@ -173,6 +181,12 @@ type FeaturePayload = {
     folder: string;
     logic_mode?: string;
     submitted_tia?: SubmittedTiaPayload;
+    canonical_analysis?: {
+      status: string;
+      message: string;
+      kpis?: Record<string, unknown>;
+      tables?: Record<string, TablePreview>;
+    };
     templates: TablePreview[];
     template_tables?: TablePreview[];
     required_file_count: number;
@@ -251,8 +265,6 @@ const workspaceTabs = [
   "Analytics Intelligence",
   "Contracts",
   "Letters Intelligence",
-  "Delays",
-  "Time Impact",
   "Risks",
   "Delay Analysis - Time Impact Analysis",
   "Contract & Claims Intelligence Center",
@@ -490,6 +502,30 @@ function TablePreviewPanel({ table, title }: { table: TablePreview | undefined; 
         </table>
       </div>
     </section>
+  );
+}
+
+function reportHtml(project: ProjectRecord, reportKey: ReportKey) {
+  return project.report_artifacts?.[reportKey]?.html || project.reports[reportKey];
+}
+
+function ReportFormatDownloads({ project, reportKey }: { project: ProjectRecord; reportKey: ReportKey }) {
+  const artifact = project.report_artifacts?.[reportKey];
+  const formats = artifact
+    ? ([
+        ["HTML", artifact.html, "text/html"],
+        ["PDF", artifact.pdf, "application/pdf"],
+        ["PowerPoint", artifact.pptx, "application/vnd.openxmlformats-officedocument.presentationml.presentation"],
+      ] as const)
+    : ([ ["HTML", project.reports[reportKey], "text/html"] ] as const);
+  return (
+    <div className="report-format-downloads" aria-label="Direct report downloads">
+      {formats.map(([label, href]) => (
+        <a key={label} href={href} download={href.split("/").pop()} rel="noopener">
+          {label}
+        </a>
+      ))}
+    </div>
   );
 }
 
@@ -768,6 +804,25 @@ function LettersIntelligencePanel({ project }: { project: ProjectRecord }) {
   );
 }
 
+function CanonicalTiaPanel({ analysis }: { analysis: FeaturePayload["delay_analysis"]["canonical_analysis"] }) {
+  if (!analysis) return null;
+  const kpis = Object.entries(analysis.kpis || {}).slice(0, 8);
+  const tables = analysis.tables || {};
+  return (
+    <div className="feature-stack">
+      <section className="feature-card">
+        <div className="feature-card-head"><h3>Canonical TIA Engine Result</h3><span>{analysis.status}</span></div>
+        <p>{analysis.message}</p>
+        <p className="empty-note">Relationship logic is evidence for the P6 implementation review. It does not replace a P6 recalculation or establish final EOT / compensation.</p>
+        {kpis.length ? <div className="workspace-grid compact-grid">
+          {kpis.map(([label, value]) => <MiniMetric key={label} label={label} value={displayCell(value)} note="Canonical selected-project TIA calculation" />)}
+        </div> : null}
+      </section>
+      {Object.keys(tables).length ? <ProjectTableSelector title="Canonical TIA Outputs" tables={tables} preferred={["relationship_logic_df", "candidates_df", "fragnet_df", "assessment_df", "data_quality_df"]} /> : null}
+    </div>
+  );
+}
+
 function DelayTiaParityPanel({ project }: { project: ProjectRecord }) {
   const [view, setView] = useState("Uploads");
   const [includeIfc, setIncludeIfc] = useState(true);
@@ -806,13 +861,14 @@ function DelayTiaParityPanel({ project }: { project: ProjectRecord }) {
       </> : null}
       {view === "Tables & Conclusion" ? <>
         <AiInsightCard type="delay" projectKey={project.project_key} />
+        <CanonicalTiaPanel analysis={delay.canonical_analysis} />
         <SubmittedTiaGuidePanel submitted={delay.submitted_tia || { available: false, status: "Missing", scope_note: "No submitted TIA guide detected." }} />
         <ProjectTableSelector title="TIA Evidence Tables" tables={eventTables} preferred={["11-concurrency_matrix_template.updated.csv", "04- p6_activity_export.csv", "02- master_activity_steel_analysis.csv"]} />
       </> : null}
       {view === "MEP Activities" ? <><ProjectTableSelector title="MEP Activities and Civil Interface Logic" tables={scheduleTables} preferred={["MEP Activities", "MEP Schedule", "MEP Civil Logic", "BL Schedule"]} /><WorkbookDataPanel workbook={project.features.letters_intelligence.workbook_tables} title="Related Letters Intelligence References" /></> : null}
-      {view === "AI - TIA" ? <><SubmittedTiaGuidePanel submitted={delay.submitted_tia || { available: false, status: "Missing", scope_note: "No submitted TIA guide detected." }} /><ProjectTableSelector title="Active TIA File Priority and Dependency Evidence" tables={templateTables} preferred={["01-project_metadata_template.csv", "02- master_activity_steel_analysis.csv", "04- p6_activity_export.csv", "05- relationship_file.csv", "11-concurrency_matrix_template.updated.csv"]} /></> : null}
+      {view === "AI - TIA" ? <><CanonicalTiaPanel analysis={delay.canonical_analysis} /><SubmittedTiaGuidePanel submitted={delay.submitted_tia || { available: false, status: "Missing", scope_note: "No submitted TIA guide detected." }} /><ProjectTableSelector title="Active TIA File Priority and Dependency Evidence" tables={templateTables} preferred={["01-project_metadata_template.csv", "02- master_activity_steel_analysis.csv", "04- p6_activity_export.csv", "05- relationship_file.csv", "11-concurrency_matrix_template.updated.csv"]} /></> : null}
       {view === "Question" ? <div className="feature-stack"><AiInsightCard type="delay" projectKey={project.project_key} /><UnifiedIntelligenceSearch mode="project" projectKey={project.project_key} projectName={project.project_display_name} /><ProjectTableSelector title="Question Evidence Source" tables={eventTables} preferred={["11-concurrency_matrix_template.updated.csv", "09-rfi_status.csv", "07-ifc_conflict.csv"]} /></div> : null}
-      {view === "Download Reports" ? <section className="feature-card"><div className="feature-card-head"><h3>Delay TIA Generated Outputs</h3><span>HTML reports</span></div><p>Download the selected project&apos;s generated Delay TIA and executive report files. Source data stays project-isolated.</p><OutputStudioDownloadButton href={project.reports.elite_svg_charts} label="Download Delay TIA Charts" /><FileList title="Available Project Outputs" files={project.features.outputs_and_watchers.output_files} /></section> : null}
+      {view === "Download Reports" ? <section className="feature-card"><div className="feature-card-head"><h3>Delay TIA Generated Outputs</h3><span>Project scoped</span></div><p>Download the selected project&apos;s TIA-supporting charts. HTML, PDF, and PowerPoint use the same selected-project metric payload; EOT conclusions remain indicative until P6 verification.</p><ReportFormatDownloads project={project} reportKey="elite_svg_charts" /><OutputStudioDownloadButton href={reportHtml(project, "elite_svg_charts")} label="Download Selected TIA Report" /><FileList title="Available Project Outputs" files={project.features.outputs_and_watchers.output_files} /></section> : null}
     </div>
   );
 }
@@ -841,7 +897,7 @@ function ContractClaimsParityPanel({ project }: { project: ProjectRecord }) {
         {view === "Evidence Mapping" ? <div className="feature-stack"><ProjectTableSelector title="Evidence-to-Clause Mapping" tables={Object.keys(evidenceTables).length ? evidenceTables : knowledgeTables} preferred={["evidence_mappings", "evidence_documents"]} /><FileList title="Evidence Files" files={claims.evidence_files} /></div> : null}
         {view === "Client Rebuttal Engine" ? <div className="feature-stack"><AiInsightCard type="contract" projectKey={project.project_key} /><ProjectTableSelector title="Client Defenses and Contractor Rebuttals" tables={Object.keys(claimTables).length ? claimTables : knowledgeTables} preferred={["client_defenses", "contractor_rebuttals"]} /></div> : null}
         {view === "Claim Builder" ? <div className="feature-stack"><ProjectTableSelector title="Claim Categories, Triggers, and Drafts" tables={Object.keys(claimTables).length ? claimTables : knowledgeTables} preferred={["claim_categories", "claim_triggers", "claim_drafts"]} /><AiInsightCard type="contract" projectKey={project.project_key} /></div> : null}
-        {view === "Export Center" ? <section className="feature-card"><div className="feature-card-head"><h3>Export Center</h3><span>Project outputs</span></div><p>Download the active project&apos;s source-backed Output Studio report. Individual source tables above can also be exported as CSV.</p><OutputStudioDownloadButton href={project.reports.master_dashboard} label="Download Master Dashboard" /><FileList title="Automatic HTML Outputs" files={project.features.outputs_and_watchers.output_files} /></section> : null}
+        {view === "Export Center" ? <section className="feature-card"><div className="feature-card-head"><h3>Export Center</h3><span>Project outputs</span></div><p>Download the active project&apos;s source-backed Output Studio report. Individual source tables above can also be exported as CSV.</p><ReportFormatDownloads project={project} reportKey="master_dashboard" /><OutputStudioDownloadButton href={reportHtml(project, "master_dashboard")} label="Download Master Dashboard" /><FileList title="Automatic Outputs" files={project.features.outputs_and_watchers.output_files} /></section> : null}
       </> : null}
     </div>
   );
@@ -1030,43 +1086,6 @@ function WorkspaceTabContent({
     );
   }
 
-  if (activeTab === "Delays") {
-    return (
-      <div className="feature-stack">
-        <AiInsightCard type="delay" projectKey={project.project_key} />
-        <div className="workspace-grid">
-          <MiniMetric label="Delay Days" value={numberValue(project.delay_days)} note={metricSource(project, "delay_days", "Delay exposure from project data")} />
-          <MiniMetric label="Delay Events" value={numberValue(project.delay_event_count ?? project.source_files.delay_events)} note="Delay event rows loaded" />
-          <MiniMetric label="SPI" value={numberValue(project.spi, 2)} note="Schedule performance signal" />
-          <MiniMetric label="Decision Required" value={project.decision_required ? "Yes" : "No"} note="Delay or performance trigger" />
-        </div>
-        <div className="workspace-two">
-          <FeatureSvg mode="delay" />
-          <ProjectDataTable table={workspaceTables.delay_events} title="Delay Events Register" />
-        </div>
-      </div>
-    );
-  }
-
-  if (activeTab === "Time Impact") {
-    return (
-      <div className="feature-stack">
-        <div className="workspace-two">
-          <section className="feature-card">
-            <div className="feature-card-head"><h3>Time Impact Position</h3><span>{project.features.delay_analysis.logic_mode || "Project-scoped"}</span></div>
-            <p>Shows the selected project&apos;s time-impact evidence, recognized TIA inputs, and generated time-impact outputs without mixing data from other projects.</p>
-            <DataStatus label="Recognized TIA Files" count={project.features.delay_analysis.recognized_file_count} />
-            <DataStatus label="Required TIA Files" count={project.features.delay_analysis.required_file_count} />
-            <DataStatus label="Delay Events" count={project.source_files.delay_events} />
-          </section>
-          <FeatureSvg mode="delay" />
-        </div>
-        <ProjectTableSelector title="Time Impact Evidence Tables" tables={Object.fromEntries((project.features.delay_analysis.template_tables || project.features.delay_analysis.templates).map((table) => [table.file, table]))} preferred={["04- p6_activity_export.csv", "11-concurrency_matrix_template.updated.csv", "05- relationship_file.csv"]} />
-        <iframe className="wide-embed" src={project.reports.elite_svg_charts} title={`${project.project_display_name} time impact charts`} />
-      </div>
-    );
-  }
-
   if (activeTab === "Risks") {
     return (
       <div className="feature-stack">
@@ -1133,12 +1152,13 @@ function WorkspaceTabContent({
         ))}
       </div>
       <OutputStudioDownloadButton
-        href={project.reports[selectedReport]}
+        href={reportHtml(project, selectedReport)}
         label={`Download ${reportTabs.find((tab) => tab.key === selectedReport)?.label || "Report"}`}
       />
+      <ReportFormatDownloads project={project} reportKey={selectedReport} />
       <DetectorGrid detectors={project.features.outputs_and_watchers.watchers} />
-      <FileList title="Automatic HTML Outputs" files={project.features.outputs_and_watchers.output_files} />
-      <iframe src={project.reports[selectedReport]} title={`${project.project_display_name} - ${selectedReport}`} />
+      <FileList title="Automatic Project Outputs" files={project.features.outputs_and_watchers.output_files} />
+      <iframe src={reportHtml(project, selectedReport)} title={`${project.project_display_name} - ${selectedReport}`} />
     </section>
   );
 }
@@ -1368,6 +1388,13 @@ function DigitalOperationsApp() {
     setProjectDetails(null);
     setProjectLoadError("");
   };
+
+  useEffect(() => {
+    const requestedProject = new URLSearchParams(window.location.search).get("project");
+    if (requestedProject && projects.some((project) => project.project_key === requestedProject)) {
+      setScope(requestedProject);
+    }
+  }, []);
 
   useEffect(() => {
     if (isDecisionDashboard) return;
