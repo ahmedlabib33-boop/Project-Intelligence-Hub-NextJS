@@ -1,0 +1,73 @@
+name: Sync Output Studio reports to OLA 360
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "11-outputs/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync-reports:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out report snapshot
+        uses: actions/checkout@v4
+
+      - name: Upload current HTML reports to OLA 360
+        env:
+          OLA360_APP_URL: ${{ vars.OLA360_APP_URL }}
+          OUTPUT_STUDIO_SYNC_SECRET: ${{ secrets.OUTPUT_STUDIO_SYNC_SECRET }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${OLA360_APP_URL:?Set repository variable OLA360_APP_URL.}"
+          : "${OUTPUT_STUDIO_SYNC_SECRET:?Set repository secret OUTPUT_STUDIO_SYNC_SECRET.}"
+
+          expected=(
+            "01_executive_dashboard.html"
+            "02_master_dashboard.html"
+            "03_elite_svg_charts.html"
+            "04_linked_executive_dashboard.html"
+          )
+
+          found_project=false
+          for project_dir in 11-outputs/*/; do
+            [ -d "$project_dir" ] || continue
+            found_project=true
+            project_folder="$(basename "$project_dir")"
+            project_name="$project_folder"
+            manifest=""
+            [ -f "${project_dir}.output_manifest.json" ] && manifest="${project_dir}.output_manifest.json"
+            [ -z "$manifest" ] && [ -f "${project_dir}.report_manifest.json" ] && manifest="${project_dir}.report_manifest.json"
+            if [ -n "$manifest" ]; then
+              project_name="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1], encoding="utf-8")).get("project_name", sys.argv[2]))' "$manifest" "$project_folder")"
+            fi
+
+            for report_name in "${expected[@]}"; do
+              report_path="${project_dir}${report_name}"
+              if [ ! -f "$report_path" ]; then
+                echo "::warning title=Missing Output Studio report::$project_folder is missing $report_name"
+                continue
+              fi
+
+              curl --fail-with-body --silent --show-error \
+                --request POST \
+                --header "x-output-studio-secret: ${OUTPUT_STUDIO_SYNC_SECRET}" \
+                --form "project_folder=${project_folder}" \
+                --form "project_name=${project_name}" \
+                --form "report_name=${report_name}" \
+                --form "source_modified_at=$(git log -1 --format=%cI -- "$report_path")" \
+                --form "report=@${report_path};type=text/html" \
+                "${OLA360_APP_URL%/}/api/output-studio/sync"
+              echo "Synced ${project_folder}/${report_name}"
+            done
+          done
+
+          if [ "$found_project" = false ]; then
+            echo "::error title=Output Studio reports missing::No project folders found under 11-outputs."
+            exit 1
+          fi
