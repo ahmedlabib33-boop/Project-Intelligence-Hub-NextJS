@@ -671,6 +671,35 @@ def build_canonical_tia_snapshot(delay_dir: Path) -> dict[str, Any]:
         return {"status": "needs_review", "message": f"Canonical TIA engine could not complete: {exc}", "tables": {}}
 
 
+def build_four_pipeline_snapshot(project: dict[str, Any], canonical_tia: dict[str, Any]) -> dict[str, Any]:
+    """Publish the canonical selected-project governance assessment.
+
+    The Next.js site renders this payload and does not derive a second TIA or
+    claims calculation in the browser.
+    """
+    try:
+        source_src = CANONICAL_ROOT / "src"
+        if str(source_src) not in sys.path:
+            sys.path.insert(0, str(source_src))
+        from construction_system.four_pipeline_assessment import build_four_pipeline_assessment
+
+        return build_four_pipeline_assessment(project, canonical_tia)
+    except Exception as exc:
+        return {
+            "project_id": str(project.get("project_id") or ""),
+            "project_key": str(project.get("project_key") or ""),
+            "assessment_profile": "readiness_only",
+            "assessment_status": "needs_review",
+            "source_scope": "selected_project_only",
+            "gates": [],
+            "missing_actions": [f"Four-pipeline assessment could not complete: {exc}"],
+            "pipeline_rows": [],
+            "source_inventory": [],
+            "evidence_ledger": [],
+            "summary": {},
+        }
+
+
 def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str, str]]]) -> dict[str, Any]:
     base = Path(project["path"])
     data_dir = base / "01-data" / "import_templates"
@@ -712,6 +741,7 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     submitted_tia = build_submitted_tia_payload(project, base)
     submitted_tia_visuals = build_submitted_tia_visuals(project, base)
     canonical_tia = build_canonical_tia_snapshot(delay_dir)
+    four_pipeline = build_four_pipeline_snapshot(project, canonical_tia)
     overview_paths = {
         "projects": data_dir / "projects.csv",
         "activities": data_dir / "activities.csv",
@@ -773,6 +803,7 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
                 {"name": "MEP schedule detector", "status": "Active" if (schedule_dir / "MEP Schedule.csv").exists() else "Missing", "detail": "Recognizes project-specific MEP schedule and civil logic tables."},
             ],
         },
+        "four_pipeline": four_pipeline,
         "contract_claims": {
             "folder": "05-contracts",
             "source_files": contract_files,

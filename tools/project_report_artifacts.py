@@ -72,6 +72,19 @@ def _metric_rows(project: dict[str, Any]) -> list[tuple[str, str]]:
         ("Delay Exposure", _text(project.get("delay_assessment") or "Indicative; verify in Primavera P6.")),
         ("Last Source Update", _text(project.get("last_updated"))),
     ]
+    features = project.get("features") if isinstance(project.get("features"), dict) else {}
+    assessment = features.get("four_pipeline") if isinstance(features.get("four_pipeline"), dict) else {}
+    if assessment:
+        summary = assessment.get("summary") if isinstance(assessment.get("summary"), dict) else {}
+        rows.extend([
+            ("Assessment Profile", _text(assessment.get("assessment_profile"))),
+            ("Assessment Status", _text(assessment.get("assessment_status"))),
+            ("P6 Determination Status", _text(assessment.get("determination_status"))),
+            ("Contract Sources", _text(summary.get("contract_source_count"))),
+            ("Evidence Sources", _text(summary.get("evidence_source_count"))),
+            ("Native XER Files", _text(summary.get("native_xer_count"))),
+            ("Source Scope", _text(assessment.get("source_scope"))),
+        ])
     if ready:
         rows.append(("Verified Source-Backed Charts", "; ".join(ready)))
     if draft:
