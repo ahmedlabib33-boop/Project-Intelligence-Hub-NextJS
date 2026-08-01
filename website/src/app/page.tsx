@@ -181,6 +181,7 @@ type FeaturePayload = {
     folder: string;
     logic_mode?: string;
     submitted_tia?: SubmittedTiaPayload;
+    submitted_visuals?: SubmittedTiaVisualPayload;
     canonical_analysis?: {
       status: string;
       message: string;
@@ -238,6 +239,20 @@ type SubmittedTiaPayload = {
   visuals?: Array<{ name: string; relative_path: string; url: string }>;
   source_files?: FileRecord[];
   recommended_next_moves?: string[];
+};
+
+type SubmittedTiaVisualPayload = {
+  available: boolean;
+  status: string;
+  scope_note: string;
+  evidentiary_note: string;
+  visuals: Array<{
+    name: string;
+    label: string;
+    category: string;
+    relative_path: string;
+    url: string;
+  }>;
 };
 
 const projects = portfolio.projects as unknown as ProjectSummary[];

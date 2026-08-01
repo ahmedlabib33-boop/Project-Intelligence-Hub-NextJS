@@ -332,6 +332,77 @@ def submitted_tia_guide_root(base: Path, project: dict[str, Any]) -> Path | None
     return None
 
 
+def submitted_tia_visual_category(name: str) -> str:
+    """Classify a submitted exhibit by its topic, without deriving any schedule result."""
+    normalized = name.lower().replace("_", " ").replace("-", " ")
+    if any(term in normalized for term in ("timeline", "chronology", "finish movement")):
+        return "Timeline & Events"
+    if any(term in normalized for term in ("float", "critical path", "fragnet", "concurrency", "affected activities")):
+        return "Path, Float & Fragnets"
+    if any(term in normalized for term in ("ev01", "ev02", "fishbone")):
+        return "Event Detail"
+    if any(term in normalized for term in ("methodology", "waterfall", "entitlement")):
+        return "Methodology & Entitlement"
+    return "Submitted Exhibits"
+
+
+def submitted_tia_visual_key(path: Path) -> str:
+    """Collapse alternate source variants while preferring revised and large-font exhibits."""
+    stem = path.stem.lower()
+    stem = stem.replace("_large_font", "").replace("_inkscape", "")
+    return stem.replace("eventnew", "event")
+
+
+def submitted_tia_visual_priority(path: Path) -> int:
+    name = path.stem.lower()
+    return (2 if "large_font" in name else 0) + (1 if "eventnew" in name else 0)
+
+
+def build_submitted_tia_visuals(project: dict[str, Any], base: Path) -> dict[str, Any]:
+    """Expose only selected-project submitted TIA exhibits stored with project evidence."""
+    visual_root = base / "02-delay_analysis" / "submitted_visuals"
+    if not visual_root.exists():
+        return {
+            "available": False,
+            "status": "No submitted visual exhibits detected",
+            "scope_note": "Add client or consultant TIA SVG/PNG exhibits under this selected project's 02-delay_analysis/submitted_visuals folder.",
+            "evidentiary_note": "No submitted exhibit is available for this selected project.",
+            "visuals": [],
+        }
+
+    supported = {".svg", ".png"}
+    candidates = [
+        item for item in sorted(visual_root.rglob("*"))
+        if item.is_file() and item.suffix.lower() in supported and not item.name.startswith(".")
+    ]
+    selected: dict[str, Path] = {}
+    for item in candidates:
+        key = submitted_tia_visual_key(item)
+        current = selected.get(key)
+        if current is None or submitted_tia_visual_priority(item) > submitted_tia_visual_priority(current):
+            selected[key] = item
+
+    project_slug = slugify(project["project_folder_name"])
+    visuals = []
+    for item in sorted(selected.values(), key=lambda path: (submitted_tia_visual_category(path.stem), path.name.lower())):
+        relative_path = item.relative_to(visual_root).as_posix()
+        visuals.append({
+            "name": item.name,
+            "label": re.sub(r"[_-]+", " ", item.stem).strip(),
+            "category": submitted_tia_visual_category(item.stem),
+            "relative_path": relative_path,
+            "url": f"/generated/{project_slug}/tia-submitted-exhibits/{slugify(item.stem)}{item.suffix.lower()}",
+        })
+
+    return {
+        "available": bool(visuals),
+        "status": "Submitted visual exhibits available" if visuals else "No supported submitted visual exhibits detected",
+        "scope_note": "These client-submission exhibits are available only in this selected project's Delay Analysis workspace.",
+        "evidentiary_note": "Figures and values within submitted exhibits are source material, not a Vercel recalculation. Confirm EOT, concurrency, and compensation in Primavera P6 and the project evidence record.",
+        "visuals": visuals,
+    }
+
+
 def parse_fragnet_comparison(path: Path) -> list[dict[str, Any]]:
     if not path.exists():
         return []
@@ -625,6 +696,7 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     evidence_files = list_project_files(evidence_dir, base, 80)
     output_files = list_project_files(outputs_dir, OUTPUTS_ROOT, 20)
     submitted_tia = build_submitted_tia_payload(project, base)
+    submitted_tia_visuals = build_submitted_tia_visuals(project, base)
     canonical_tia = build_canonical_tia_snapshot(delay_dir)
     overview_paths = {
         "projects": data_dir / "projects.csv",
@@ -671,6 +743,7 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
             "folder": "02-delay_analysis",
             "logic_mode": "Submitted TIA Level 1-4 assessment" if submitted_tia.get("available") else "Generic project TIA readiness",
             "submitted_tia": submitted_tia,
+            "submitted_visuals": submitted_tia_visuals,
             "canonical_analysis": canonical_tia,
             "templates": delay_templates,
             "template_tables": delay_template_tables,
@@ -1399,16 +1472,28 @@ def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
 
 def copy_tia_submitted_assets(projects: list[dict[str, Any]]) -> None:
     for project in projects:
-        submitted = project.get("features", {}).get("delay_analysis", {}).get("submitted_tia", {})
+        delay_analysis = project.get("features", {}).get("delay_analysis", {})
+        submitted = delay_analysis.get("submitted_tia", {})
         if not submitted.get("available"):
-            continue
+            submitted = {}
         guide_root = Path(str(submitted.get("guide_folder") or ""))
-        if not guide_root.exists():
+        if guide_root.exists():
+            target = GENERATED_ROOT / slugify(project["project_folder_name"]) / "tia-submitted-guide"
+            target.mkdir(parents=True, exist_ok=True)
+            for visual in submitted.get("visuals", []):
+                source = guide_root / str(visual.get("relative_path", ""))
+                if source.exists() and source.is_file():
+                    target_name = f"{slugify(source.stem)}{source.suffix.lower()}"
+                    copy_if_changed(source, target / target_name)
+
+        submitted_visuals = delay_analysis.get("submitted_visuals", {})
+        visual_root = PROJECTS_ROOT / project["sector"] / project["project_folder_name"] / "02-delay_analysis" / "submitted_visuals"
+        if not submitted_visuals.get("available") or not visual_root.exists():
             continue
-        target = GENERATED_ROOT / slugify(project["project_folder_name"]) / "tia-submitted-guide"
+        target = GENERATED_ROOT / slugify(project["project_folder_name"]) / "tia-submitted-exhibits"
         target.mkdir(parents=True, exist_ok=True)
-        for visual in submitted.get("visuals", []):
-            source = guide_root / str(visual.get("relative_path", ""))
+        for visual in submitted_visuals.get("visuals", []):
+            source = visual_root / str(visual.get("relative_path", ""))
             if source.exists() and source.is_file():
                 target_name = f"{slugify(source.stem)}{source.suffix.lower()}"
                 copy_if_changed(source, target / target_name)
