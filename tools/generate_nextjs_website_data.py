@@ -742,6 +742,9 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     submitted_tia_visuals = build_submitted_tia_visuals(project, base)
     canonical_tia = build_canonical_tia_snapshot(delay_dir)
     four_pipeline = build_four_pipeline_snapshot(project, canonical_tia)
+    if isinstance(four_pipeline, dict) and isinstance(four_pipeline.get("project_folder_path"), Path):
+        # Preserve project lineage in the public payload without leaking a non-serializable Path object.
+        four_pipeline["project_folder_path"] = str(four_pipeline["project_folder_path"])
     overview_paths = {
         "projects": data_dir / "projects.csv",
         "activities": data_dir / "activities.csv",

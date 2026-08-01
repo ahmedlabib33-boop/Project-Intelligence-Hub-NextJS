@@ -1,15 +1,30 @@
 from pathlib import Path
+import json
 import sys
+
+import pytest
 
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
 from generate_nextjs_website_data import (  # noqa: E402
+    build_project_record,
     build_submitted_tia_visuals,
+    discover_projects,
     qualitative_risk_metrics,
     submitted_tia_guide_root,
 )
+
+
+def test_discovered_project_payload_is_json_serializable():
+    projects = discover_projects()
+    if not projects:
+        pytest.skip("No project folders are available in this environment.")
+
+    payload = build_project_record(projects[0])
+
+    json.dumps(payload, ensure_ascii=False)
 
 
 def test_risk_matrix_excludes_closed_records_and_uses_active_probability_impact():
