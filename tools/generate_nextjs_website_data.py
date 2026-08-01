@@ -611,7 +611,7 @@ def dataframe_workspace_table(frame: Any, file_name: str, limit: int = WORKSPACE
         return {"file": file_name, "exists": False, "row_count": 0, "column_count": 0, "columns": [], "rows": [], "error": str(exc)}
 
 
-def build_canonical_tia_snapshot(delay_dir: Path) -> dict[str, Any]:
+def build_canonical_tia_snapshot(delay_dir: Path, project: dict[str, Any] | None = None) -> dict[str, Any]:
     """Run the Streamlit TIA engine for one project and publish only its results.
 
     A TIA failure is a visible readiness state, never a replacement result from
@@ -626,6 +626,7 @@ def build_canonical_tia_snapshot(delay_dir: Path) -> dict[str, Any]:
         if str(source_src) not in sys.path:
             sys.path.insert(0, str(source_src))
         from construction_system.steel_delay_tia import SteelTiaSettings, run_steel_delay_tia_analysis
+        from construction_system.tia_source_governance import build_tia_source_assessment
 
         lookup = {re.sub(r"[^a-z0-9]+", "", path.name.lower()): path for path in delay_dir.glob("*.csv")}
 
@@ -661,11 +662,18 @@ def build_canonical_tia_snapshot(delay_dir: Path) -> dict[str, Any]:
                 kpis[str(key)] = value
             else:
                 kpis[str(key)] = str(value)
+        governed = build_tia_source_assessment(project) if project else {
+            "status": "awaiting_project_context",
+            "source_scope": "selected_project_only",
+            "event_register": [],
+            "summary": {"final_eot_days": None, "final_eot_status": "Not calculated"},
+        }
         return {
             "status": "ready",
             "message": "Canonical Streamlit TIA engine completed for the selected project. Results remain indicative until P6 recalculation is verified.",
             "kpis": kpis,
             "tables": tables,
+            "source_governance": governed,
         }
     except Exception as exc:
         return {"status": "needs_review", "message": f"Canonical TIA engine could not complete: {exc}", "tables": {}}
@@ -788,7 +796,14 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     output_files = list_project_files(outputs_dir, OUTPUTS_ROOT, 20)
     submitted_tia = build_submitted_tia_payload(project, base)
     submitted_tia_visuals = build_submitted_tia_visuals(project, base)
-    canonical_tia = build_canonical_tia_snapshot(delay_dir)
+    canonical_tia = build_canonical_tia_snapshot(delay_dir, project)
+    source_governance = canonical_tia.get("source_governance", {}) if isinstance(canonical_tia, dict) else {}
+    governed_events = source_governance.get("event_register", []) if isinstance(source_governance, dict) else []
+    tia_evidence_ready = bool(
+        canonical_tia.get("status") == "ready"
+        and isinstance(governed_events, list)
+        and len(governed_events) > 0
+    )
     four_pipeline = build_four_pipeline_snapshot(project, canonical_tia)
     contract_controls = build_contract_controls_snapshot(project, contracts_dir, evidence_dir)
     overview_paths = {
@@ -835,6 +850,16 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
         },
         "delay_analysis": {
             "folder": "02-delay_analysis",
+            "visibility": "internal",
+            "internal_control": {
+                "ui_enabled": False,
+                "source_scope": "selected_project_only",
+                "automatic_engine": "canonical_streamlit_tia",
+                "groq_assist": "on_demand_after_evidence_validation",
+                "evidence_ready": tia_evidence_ready,
+                "evidence_status": str(source_governance.get("status") or "awaiting_evidence"),
+                "activation_rule": "Apply fragnet and CPM recommendations only from the active project's validated TIA evidence; do not use another project's TIA data.",
+            },
             "logic_mode": "Submitted TIA Level 1-4 assessment" if submitted_tia.get("available") else "Generic project TIA readiness",
             "submitted_tia": submitted_tia,
             "submitted_visuals": submitted_tia_visuals,
@@ -1444,6 +1469,14 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         delay_event_rows=rows["delay_events"],
         activity_rows=rows["activities"],
         read_csv_rows=read_csv_rows,
+        workspace_rows=rows,
+        project_metrics={
+            "bac": bac,
+            "pv": pv,
+            "ev": ev,
+            "ac": ac,
+            "eac": eac,
+        },
     )
 
     return {
@@ -1584,7 +1617,7 @@ def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
         target = GENERATED_ROOT / public_slug
         target.mkdir(parents=True, exist_ok=True)
         for artifact in sorted(output_dir.iterdir()):
-            if artifact.is_file() and artifact.suffix.lower() in {".html", ".pdf", ".pptx"}:
+            if artifact.is_file() and artifact.suffix.lower() in {".html", ".pdf", ".pptx", ".docx"}:
                 copy_if_changed(artifact, target / artifact.name)
 
 

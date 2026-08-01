@@ -10,8 +10,10 @@ HTML reports, before the Vercel build is published.
 import hashlib
 import html
 import json
+import os
 import shutil
 import subprocess
+import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -23,7 +25,7 @@ REPORTS: tuple[tuple[str, str, str], ...] = (
     ("elite_svg_charts", "03_elite_svg_charts", "Elite SVG Charts"),
     ("linked_executive_dashboard", "04_linked_executive_dashboard", "Linked Executive Dashboard"),
 )
-REPORT_GENERATOR_VERSION = "2026.08.project-scoped-html-pdf-pptx.v3"
+REPORT_GENERATOR_VERSION = "2026.08.project-scoped-html-pdf-pptx.v5"
 
 
 def _sha256(path: Path) -> str:
@@ -53,12 +55,7 @@ def _percent(value: Any) -> str:
 
 
 def _metric_rows(project: dict[str, Any]) -> list[tuple[str, str]]:
-    chart_payloads = project.get("chart_payloads") if isinstance(project.get("chart_payloads"), dict) else {}
-    chart_rows = chart_payloads.get("charts") if isinstance(chart_payloads.get("charts"), list) else []
-    ready = [str(item.get("title") or item.get("id")) for item in chart_rows if item.get("status") == "ready"]
-    draft = [str(item.get("title") or item.get("id")) for item in chart_rows if item.get("status") == "draft"]
-    awaiting = [str(item.get("title") or item.get("id")) for item in chart_rows if item.get("status") == "awaiting_data"]
-    rows = [
+    return [
         ("Project", _text(project.get("project_display_name"))),
         ("Project ID", _text(project.get("project_id"))),
         ("Sector", _text(project.get("sector"))),
@@ -69,29 +66,9 @@ def _metric_rows(project: dict[str, Any]) -> list[tuple[str, str]]:
         ("Planned Progress", _percent(project.get("planned_progress"))),
         ("BAC / PV / EV / AC", " / ".join(_money(project.get(key)) for key in ("bac", "pv", "ev", "ac"))),
         ("SPI / CPI", " / ".join(_text(round(project[key], 2)) if isinstance(project.get(key), (int, float)) else "N/A" for key in ("spi", "cpi"))),
-        ("Delay Exposure", _text(project.get("delay_assessment") or "Indicative; verify in Primavera P6.")),
+        ("Delay Days", _text(project.get("delay_days"))),
         ("Last Source Update", _text(project.get("last_updated"))),
     ]
-    features = project.get("features") if isinstance(project.get("features"), dict) else {}
-    assessment = features.get("four_pipeline") if isinstance(features.get("four_pipeline"), dict) else {}
-    if assessment:
-        summary = assessment.get("summary") if isinstance(assessment.get("summary"), dict) else {}
-        rows.extend([
-            ("Assessment Profile", _text(assessment.get("assessment_profile"))),
-            ("Assessment Status", _text(assessment.get("assessment_status"))),
-            ("P6 Determination Status", _text(assessment.get("determination_status"))),
-            ("Contract Sources", _text(summary.get("contract_source_count"))),
-            ("Evidence Sources", _text(summary.get("evidence_source_count"))),
-            ("Native XER Files", _text(summary.get("native_xer_count"))),
-            ("Source Scope", _text(assessment.get("source_scope"))),
-        ])
-    if ready:
-        rows.append(("Verified Source-Backed Charts", "; ".join(ready)))
-    if draft:
-        rows.append(("Draft Scenario Charts", "; ".join(draft)))
-    if awaiting:
-        rows.append(("Charts Awaiting Project Data", "; ".join(awaiting)))
-    return rows
 
 
 def _ensure_html(path: Path, title: str, project: dict[str, Any]) -> None:
@@ -241,6 +218,46 @@ def _write_pptx(path: Path, title: str, project: dict[str, Any]) -> None:
     presentation.save(path)
 
 
+def _ensure_governed_tia_artifacts(project: dict[str, Any], output_dir: Path, public_slug: str) -> dict[str, Any] | None:
+    """Use the canonical project TIA assessment; never rerun or reinterpret it here."""
+    features = project.get("features") if isinstance(project.get("features"), dict) else {}
+    delay = features.get("delay_analysis") if isinstance(features.get("delay_analysis"), dict) else {}
+    canonical = delay.get("canonical_analysis") if isinstance(delay.get("canonical_analysis"), dict) else {}
+    assessment = canonical.get("source_governance") if isinstance(canonical.get("source_governance"), dict) else None
+    if not assessment:
+        return None
+    canonical_root = Path(os.environ.get("PIH_SOURCE_ROOT") or r"D:\one drive data\OneDrive\Documents\Project Intelligence Hub")
+    source_dir = canonical_root / "src"
+    if source_dir.exists() and str(source_dir) not in sys.path:
+        sys.path.insert(0, str(source_dir))
+    try:
+        from construction_system.tia_report_engine import ensure_tia_report_artifacts
+
+        result = ensure_tia_report_artifacts(project, output_dir, assessment=assessment)
+        files = result.get("manifest", {}).get("files", {})
+        if not files:
+            return None
+        return {
+            extension: f"/generated/{public_slug}/{name}"
+            for extension, name in files.items()
+            if extension in {"html", "pdf", "pptx", "docx"}
+        } | {
+            "files": {
+                extension: {"name": name, "bytes": (output_dir / name).stat().st_size, "sha256": _sha256(output_dir / name)}
+                for extension, name in files.items()
+                if (output_dir / name).exists()
+            },
+            "assessment_status": assessment.get("status"),
+            "source_scope": "selected_project_only",
+        }
+    except Exception as exc:
+        return {
+            "generation_error": str(exc),
+            "assessment_status": assessment.get("status"),
+            "source_scope": "selected_project_only",
+        }
+
+
 def ensure_project_report_artifacts(
     project: dict[str, Any], output_dir: Path, public_slug: str | None = None
 ) -> dict[str, dict[str, Any]]:
@@ -252,6 +269,22 @@ def ensure_project_report_artifacts(
         try:
             existing = json.loads(manifest_path.read_text(encoding="utf-8"))
             existing_reports = existing.get("reports", {})
+            existing_tia = existing_reports.get("tia_governed_assessment", {}) if isinstance(existing_reports, dict) else {}
+            governance_available = (
+                isinstance(project.get("features"), dict)
+                and isinstance(project["features"].get("delay_analysis"), dict)
+                and isinstance(project["features"]["delay_analysis"].get("canonical_analysis"), dict)
+                and project["features"]["delay_analysis"]["canonical_analysis"].get("source_governance")
+            )
+            tia_is_current = (not governance_available) or (
+                isinstance(existing_tia, dict)
+                and {"html", "pdf", "pptx", "docx"}.issubset(set(existing_tia.get("files", {})))
+                and all(
+                    (output_dir / metadata.get("name", "")).exists()
+                    for metadata in (existing_tia.get("files", {}) or {}).values()
+                    if isinstance(metadata, dict)
+                )
+            )
             if (
                 existing.get("project_fingerprint") == project.get("fingerprint")
                 and existing.get("generator_version") == REPORT_GENERATOR_VERSION
@@ -261,6 +294,7 @@ def ensure_project_report_artifacts(
                     for extension in ("html", "pdf", "pptx")
                 )
                 and existing_reports
+                and tia_is_current
             ):
                 return existing_reports
         except Exception:
@@ -282,6 +316,9 @@ def ensure_project_report_artifacts(
                 for extension, path in (("html", html_path), ("pdf", pdf_path), ("pptx", pptx_path))
             },
         }
+    tia_artifacts = _ensure_governed_tia_artifacts(project, output_dir, project_slug)
+    if tia_artifacts:
+        results["tia_governed_assessment"] = tia_artifacts
     feature_payload = project.get("features") if isinstance(project.get("features"), dict) else {}
     assessment = feature_payload.get("four_pipeline") if isinstance(feature_payload.get("four_pipeline"), dict) else {}
     manifest = {

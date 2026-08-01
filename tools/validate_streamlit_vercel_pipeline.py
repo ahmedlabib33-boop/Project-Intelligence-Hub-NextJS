@@ -72,12 +72,13 @@ REQUIRED_PROJECT_TABS = (
     "Contracts",
     "Letters Intelligence",
     "Risks",
-    "Delay Analysis - Time Impact Analysis",
     "Contract & Claims Intelligence Center",
     "Technical Advisor",
     "Conference",
     "Output Studio",
 )
+
+INTERNAL_PROJECT_TAB = "Delay Analysis - Time Impact Analysis"
 
 REQUIRED_WORKSPACE_TABLES = (
     "projects",
@@ -174,8 +175,10 @@ def validate_project_workspace_surface(
             errors.append(f"{project_key}: project-scoped chart payload identity does not match selected project")
         charts = chart_payloads.get("charts")
         chart_ids = {str(item.get("id")) for item in charts if isinstance(item, dict)} if isinstance(charts, list) else set()
-        if chart_ids != REQUIRED_SOURCE_CHART_IDS:
-            errors.append(f"{project_key}: source chart catalogue is incomplete or has unexpected entries")
+        if not REQUIRED_SOURCE_CHART_IDS.issubset(chart_ids):
+            errors.append(f"{project_key}: source chart catalogue is missing required data-gated entries")
+        elif len(chart_ids) != len(charts):
+            errors.append(f"{project_key}: source chart catalogue contains duplicate chart IDs")
         elif any(
             chart.get("status") not in {"ready", "partial", "draft", "awaiting_data"}
             or not isinstance(chart.get("source_lineage"), dict)
@@ -311,7 +314,15 @@ def validate_workspace_tab_catalog(errors: list[str], checks: list[str]) -> None
     if missing:
         errors.append(f"Next.js project workspace is missing tabs: {', '.join(missing)}")
     else:
-        checks.append(f"Next.js project workspace exposes {len(REQUIRED_PROJECT_TABS)} retained project-control tabs")
+        checks.append(f"Next.js project workspace exposes {len(REQUIRED_PROJECT_TABS)} visible project-control tabs")
+    if (
+        'const INTERNAL_TIA_SURFACE_ENABLED = false;' not in page_source
+        or 'visibleWorkspaceTabs.map((tab)' not in page_source
+        or INTERNAL_PROJECT_TAB not in tab_catalog
+    ):
+        errors.append("Next.js workspace does not preserve the full internal Delay Analysis - Time Impact Analysis control")
+    else:
+        checks.append("Delay Analysis - Time Impact Analysis remains internal and is not rendered as a public project tab")
     hidden_legacy = [tab for tab in ("Delays", "Time Impact") if f'"{tab}"' in tab_catalog]
     if hidden_legacy:
         errors.append(f"Next.js workspace still exposes legacy compatibility tabs: {', '.join(hidden_legacy)}")

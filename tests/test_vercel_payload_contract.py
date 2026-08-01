@@ -24,13 +24,23 @@ def test_generated_project_payloads_keep_identity_tia_and_artifacts_scoped() -> 
         assert isinstance(charts, dict)
         assert charts.get("project_id") == payload["project_id"]
         assert charts.get("project_key") == payload["project_key"]
-        chart_ids = {chart.get("id") for chart in charts.get("charts", [])}
-        assert chart_ids == {
+        chart_items = charts.get("charts", [])
+        chart_ids = {chart.get("id") for chart in chart_items}
+        # The four data-gated charts must always be published, even when their
+        # project-local templates are still empty. The source-backed workspace
+        # charts are additive and vary with the selected project's inputs.
+        assert {
             "contracts.planned_vs_actual_cash_flow",
             "delay.root_cause_pareto",
             "delay.type_distribution",
             "delay.tia_recovery_scenario",
-        }
+        }.issubset(chart_ids)
+        assert len(chart_ids) == len(chart_items)
+        assert all(
+            isinstance(chart.get("source_lineage"), dict)
+            and chart.get("status") in {"ready", "partial", "draft", "awaiting_data"}
+            for chart in chart_items
+        )
         assert payload["features"]["outputs_and_watchers"]["outputs_folder"].endswith(payload["project_folder_name"])
         canonical_tia = payload["features"]["delay_analysis"]["canonical_analysis"]
         assert canonical_tia["status"] in {"ready", "missing", "needs_review"}
@@ -47,7 +57,13 @@ def test_generated_project_payloads_keep_identity_tia_and_artifacts_scoped() -> 
                 assert visual_path.stat().st_size > 0
 
         for report_key, artifact in payload["report_artifacts"].items():
-            assert report_key in payload["reports"]
+            if report_key == "tia_governed_assessment":
+                # The assessment is retained for a future recalled analysis but
+                # deliberately kept off the live workspace and Output Studio.
+                assert report_key not in payload["reports"]
+                assert artifact.get("source_scope") == "selected_project_only"
+            else:
+                assert report_key in payload["reports"]
             for extension in ("html", "pdf", "pptx"):
                 assert artifact[extension].startswith(f"/generated/{project_slug}/")
                 artifact_path = ROOT / "website" / "public" / artifact[extension].lstrip("/")

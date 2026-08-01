@@ -288,6 +288,182 @@ def _recovery(definition: dict[str, Any], project_id: str, recovery_rows: list[d
     )
 
 
+def _reference_chart(
+    *, chart_id: str, tab: str, title: str, chart_type: str, labels: list[str], series: list[dict[str, Any]],
+    source_files: list[str], message: str, status: str = "ready",
+) -> dict[str, Any]:
+    """Create a project-local chart payload using the SAMCO reference chart schema."""
+    return {
+        "id": chart_id,
+        "tab": tab,
+        "title": title,
+        "type": chart_type,
+        "status": status,
+        "message": message,
+        "labels": labels,
+        "series": series,
+        "source_lineage": {"files": source_files, "required_columns": ["project_id"]},
+        "validation": [],
+        "scenario": None,
+    }
+
+
+def _workspace_rows(rows: list[dict[str, Any]], project_id: str) -> list[dict[str, Any]]:
+    accepted, _ = _project_rows(rows, project_id, "workspace source")
+    return [row for _, row in accepted]
+
+
+def _group_numeric(rows: list[dict[str, Any]], label_fields: tuple[str, ...], value_fields: tuple[str, ...]) -> tuple[list[str], list[float]]:
+    totals: dict[str, float] = defaultdict(float)
+    for row in rows:
+        label = str(_value(row, *label_fields) or "").strip()
+        value = _number(_value(row, *value_fields))
+        if label and value is not None:
+            totals[label] += value
+    labels = [label for label, _ in sorted(totals.items(), key=lambda item: (-item[1], item[0].casefold()))]
+    return labels, [round(totals[label], 4) for label in labels]
+
+
+def _group_count(rows: list[dict[str, Any]], label_fields: tuple[str, ...]) -> tuple[list[str], list[float]]:
+    """Count selected-project records by a real categorical field."""
+    totals: dict[str, float] = defaultdict(float)
+    for row in rows:
+        label = str(_value(row, *label_fields) or "").strip()
+        if label:
+            totals[label] += 1
+    labels = [label for label, _ in sorted(totals.items(), key=lambda item: (-item[1], item[0].casefold()))]
+    return labels, [totals[label] for label in labels]
+
+
+def _workspace_reference_charts(
+    project_id: str,
+    rows: dict[str, list[dict[str, Any]]],
+    metrics: dict[str, Any],
+) -> list[dict[str, Any]]:
+    """Build all chart families that have real selected-project source values."""
+    charts: list[dict[str, Any]] = []
+    activities = _workspace_rows(rows.get("activities", []), project_id)
+    wbs = _workspace_rows(rows.get("wbs", []), project_id)
+    milestones = _workspace_rows(rows.get("milestones", []), project_id)
+    s_curve = _workspace_rows(rows.get("s_curve", []), project_id)
+    evm = _workspace_rows(rows.get("evm", []), project_id)
+    contracts = _workspace_rows(rows.get("contracts", []), project_id)
+    payments = _workspace_rows(rows.get("payments", []), project_id)
+    risks = _workspace_rows(rows.get("risks", []), project_id)
+    delays = _workspace_rows(rows.get("delay_events", []), project_id)
+
+    if activities:
+        labels, values = _group_count(activities, ("responsible_party",))
+        if labels:
+            charts.append(_reference_chart(chart_id="activities.responsible_party_workload", tab="Activities", title="Responsible Party Workload", chart_type="horizontal_bar", labels=labels, series=[{"label": "Activities", "color": "#06b6d4", "values": values}], source_files=["activities.csv"], message="Selected-project activities grouped by responsible party."))
+        status_labels, status_values = _group_numeric(activities, ("actual_progress",), ("planned_weight",))
+        complete = sum(1 for row in activities if (_percent(_value(row, "actual_progress")) or 0) >= 99.99)
+        started = sum(1 for row in activities if 0 < (_percent(_value(row, "actual_progress")) or 0) < 99.99)
+        not_started = sum(1 for row in activities if (_percent(_value(row, "actual_progress")) or 0) <= 0)
+        charts.append(_reference_chart(chart_id="activities.status_distribution", tab="Activities", title="Activity Status Distribution", chart_type="doughnut", labels=["Complete", "In progress", "Not started"], series=[{"label": "Activities", "color": "#06b6d4", "values": [complete, started, not_started]}], source_files=["activities.csv"], message="Status derived from selected-project actual progress values."))
+        critical = sum(1 for row in activities if str(_value(row, "is_critical") or "").strip().casefold() in {"yes", "true", "1", "y"})
+        near_critical = sum(1 for row in activities if (_number(_value(row, "total_float_days")) or 999999) <= 10 and str(_value(row, "is_critical") or "").strip().casefold() not in {"yes", "true", "1", "y"})
+        charts.append(_reference_chart(chart_id="activities.critical_path", tab="Activities", title="Critical Path Activities", chart_type="doughnut", labels=["Critical", "Near critical", "Normal float"], series=[{"label": "Activities", "color": "#f43f5e", "values": [critical, near_critical, max(0, len(activities) - critical - near_critical)]}], source_files=["activities.csv"], message="Criticality and float are read only from the selected-project activity register."))
+
+    if wbs:
+        labels, values = _group_numeric(wbs, ("wbs_name", "wbs_code"), ("performance_%_complete", "schedule_%_complete"))
+        if labels:
+            charts.append(_reference_chart(chart_id="wbs.progress_distribution", tab="WBS", title="WBS Progress Distribution", chart_type="bar", labels=labels, series=[{"label": "Performance %", "color": "#06b6d4", "values": values}], source_files=["wbs.csv"], message="Selected-project WBS performance values."))
+        labels, values = _group_numeric(wbs, ("wbs_name", "wbs_code"), ("bl_project_duration", "remaining_duration"))
+        if labels:
+            charts.append(_reference_chart(chart_id="wbs.duration_breakdown", tab="WBS", title="WBS Duration Breakdown", chart_type="horizontal_bar", labels=labels, series=[{"label": "Duration days", "color": "#8b5cf6", "values": values}], source_files=["wbs.csv"], message="Selected-project baseline or remaining WBS durations."))
+
+    if milestones:
+        health: dict[str, float] = defaultdict(float)
+        types: dict[str, float] = defaultdict(float)
+        variance_by_date: list[tuple[str, float]] = []
+        for row in milestones:
+            actual, forecast, planned = _date(_value(row, "actual_date")), _date(_value(row, "forecast_date")), _date(_value(row, "planned_date"))
+            if actual:
+                health["Complete"] += 1
+            elif forecast and planned and forecast > planned:
+                health["Delayed"] += 1
+            else:
+                health["On track"] += 1
+            milestone_type = str(_value(row, "milestone_contractual_type") or "Unclassified").strip()
+            types[milestone_type] += 1
+            if forecast and planned:
+                variance_by_date.append((planned.strftime("%Y-%m-%d"), round((forecast - planned).total_seconds() / 86400, 2)))
+        charts.append(_reference_chart(chart_id="milestones.schedule_health", tab="Milestones", title="Milestone Schedule Health", chart_type="doughnut", labels=list(health), series=[{"label": "Milestones", "color": "#10b981", "values": list(health.values())}], source_files=["milestones.csv"], message="Selected-project milestone actual and forecast dates."))
+        charts.append(_reference_chart(chart_id="milestones.type_breakdown", tab="Milestones", title="Milestone Type Breakdown", chart_type="bar", labels=list(types), series=[{"label": "Milestones", "color": "#8b5cf6", "values": list(types.values())}], source_files=["milestones.csv"], message="Selected-project contractual milestone classifications."))
+        if variance_by_date:
+            variance_by_date.sort()
+            charts.append(_reference_chart(chart_id="milestones.variance_trend", tab="Milestones", title="Milestone Variance Trend", chart_type="line", labels=[item[0] for item in variance_by_date], series=[{"label": "Forecast variance days", "color": "#f43f5e", "values": [item[1] for item in variance_by_date]}], source_files=["milestones.csv"], message="Forecast minus planned dates from selected-project milestones."))
+
+    if s_curve:
+        curve_points = []
+        for row in s_curve:
+            period = str(_value(row, "months", "month", "period") or "").strip()
+            planned, actual, invoiced = (_number(_value(row, field)) for field in ("cumm_monthly_planned", "cumm_monthly_actual", "cumm_monthly_invoiced"))
+            if period and any(value is not None for value in (planned, actual, invoiced)):
+                curve_points.append((period, planned, actual, invoiced))
+        if curve_points:
+            charts.append(_reference_chart(chart_id="scurve.master", tab="S-Curve", title="Master S-Curve", chart_type="line", labels=[item[0] for item in curve_points], series=[{"label": "Planned", "color": "#3b82f6", "values": [item[1] for item in curve_points]}, {"label": "Actual", "color": "#06b6d4", "values": [item[2] for item in curve_points]}, {"label": "Invoiced", "color": "#f59e0b", "values": [item[3] for item in curve_points]}], source_files=["s_curve.csv"], message="Cumulative selected-project planned, actual, and invoiced progress." , status="ready"))
+            charts.append(_reference_chart(chart_id="scurve.variance", tab="S-Curve", title="Progress Variance Over Time", chart_type="bar", labels=[item[0] for item in curve_points], series=[{"label": "Actual less planned", "color": "#f43f5e", "values": [round((item[2] or 0) - (item[1] or 0), 4) if item[1] is not None and item[2] is not None else None for item in curve_points]}], source_files=["s_curve.csv"], message="Selected-project actual less planned cumulative progress."))
+
+    if evm:
+        by_period: dict[str, dict[str, float]] = defaultdict(lambda: defaultdict(float))
+        for row in evm:
+            period = str(_value(row, "period", "date") or "").strip()
+            if not period:
+                continue
+            for field, name in (("PV", "PV"), ("EV", "EV"), ("AC", "AC")):
+                value = _number(_value(row, field))
+                if value is not None:
+                    by_period[period][name] += value
+        if by_period:
+            labels = sorted(by_period)
+            charts.append(_reference_chart(chart_id="evm.burnup", tab="EVM Analysis", title="EVM Burn-Up", chart_type="line", labels=labels, series=[{"label": "PV", "color": "#f59e0b", "values": [by_period[label].get("PV") for label in labels]}, {"label": "EV", "color": "#06b6d4", "values": [by_period[label].get("EV") for label in labels]}, {"label": "AC", "color": "#f43f5e", "values": [by_period[label].get("AC") for label in labels]}], source_files=["evm.csv"], message="Period-based selected-project EVM values."))
+        metric_labels = ["BAC", "PV", "EV", "AC", "EAC"]
+        metric_values = [_number(metrics.get(key.lower())) for key in metric_labels]
+        if any(value is not None for value in metric_values):
+            charts.append(_reference_chart(chart_id="evm.variance_waterfall", tab="EVM Analysis", title="EVM Variance Waterfall", chart_type="bar", labels=metric_labels, series=[{"label": "EGP", "color": "#8b5cf6", "values": metric_values}], source_files=["evm.csv", "projects.csv"], message="Selected-project EVM totals and forecast."))
+
+    if payments:
+        dated: dict[str, dict[str, float]] = defaultdict(lambda: defaultdict(float))
+        status: dict[str, float] = defaultdict(float)
+        for row in payments:
+            period = _month(_value(row, "invoice date", "date of cash cheque receipt"))
+            if period:
+                for field, name in (("certified amount", "Certified"), ("paid amount", "Paid")):
+                    value = _number(_value(row, field))
+                    if value is not None:
+                        dated[period][name] += value
+            payment_status = str(_value(row, "payment status") or "Unclassified").strip()
+            status[payment_status] += 1
+        if dated:
+            labels = sorted(dated)
+            charts.append(_reference_chart(chart_id="contracts.payment_history", tab="Contracts", title="Payment History", chart_type="bar", labels=labels, series=[{"label": "Certified", "color": "#3b82f6", "values": [dated[label].get("Certified") for label in labels]}, {"label": "Paid", "color": "#10b981", "values": [dated[label].get("Paid") for label in labels]}], source_files=["payments.csv"], message="Dated selected-project certified and paid payment records."))
+        if status:
+            charts.append(_reference_chart(chart_id="contracts.payment_status", tab="Contracts", title="Payment Status Breakdown", chart_type="doughnut", labels=list(status), series=[{"label": "Payment records", "color": "#10b981", "values": list(status.values())}], source_files=["payments.csv"], message="Selected-project payment status records."))
+
+    if contracts:
+        original = sum(value or 0 for value in (_number(_value(row, "original_value", "contract_value")) for row in contracts))
+        approved = sum(value or 0 for value in (_number(_value(row, "approved_variations")) for row in contracts))
+        pending = sum(value or 0 for value in (_number(_value(row, "pending_variations")) for row in contracts))
+        charts.append(_reference_chart(chart_id="contracts.variations", tab="Contracts", title="Contract vs Variations", chart_type="bar", labels=["Original", "Approved variations", "Pending variations", "Current total"], series=[{"label": "EGP", "color": "#f59e0b", "values": [original, approved, pending, original + approved + pending]}], source_files=["contracts.csv"], message="Selected-project contract value and variation fields."))
+
+    if risks:
+        labels, values = _group_numeric(risks, ("risk_category",), ("time_impact_days", "cost_impact"))
+        if labels:
+            charts.append(_reference_chart(chart_id="risks.category", tab="Risks", title="Risk Category Breakdown", chart_type="bar", labels=labels, series=[{"label": "Recorded impact", "color": "#f43f5e", "values": values}], source_files=["risks.csv"], message="Selected-project risk categories using available impact values."))
+        statuses: dict[str, float] = defaultdict(float)
+        for row in risks:
+            statuses[str(_value(row, "status") or "Unclassified").strip()] += 1
+        charts.append(_reference_chart(chart_id="risks.status", tab="Risks", title="Risk Status", chart_type="doughnut", labels=list(statuses), series=[{"label": "Risk records", "color": "#f43f5e", "values": list(statuses.values())}], source_files=["risks.csv"], message="Selected-project risk status records."))
+
+    if delays:
+        labels, values = _group_numeric(delays, ("Primary Event ID", "Activity Name"), ("Delayed duration after overlap", "Delayed duration"))
+        if labels:
+            charts.append(_reference_chart(chart_id="delay.events_timeline", tab="Delay Analysis - Time Impact Analysis", title="Delay Events Timeline", chart_type="bar", labels=labels, series=[{"label": "Indicative delay days", "color": "#f43f5e", "values": values}], source_files=["delay_events.csv"], message="Selected-project delay event durations. These are not a final EOT conclusion."))
+    return charts
+
+
 def build_project_chart_payloads(
     *,
     project_id: str,
@@ -298,6 +474,8 @@ def build_project_chart_payloads(
     delay_event_rows: list[dict[str, Any]],
     activity_rows: list[dict[str, Any]],
     read_csv_rows: Any,
+    workspace_rows: dict[str, list[dict[str, Any]]] | None = None,
+    project_metrics: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return only project-owned, data-gated chart datasets and validation findings."""
     version, definitions = _catalog()
@@ -317,6 +495,7 @@ def build_project_chart_payloads(
     root_cause, delay_type = _classifications(definitions, project_id, classification_rows, delay_event_rows)
     recovery = _recovery(definitions[required_ids[3]], project_id, recovery_rows, activity_rows)
     charts = [cash, root_cause, delay_type, recovery]
+    charts.extend(_workspace_reference_charts(project_id, workspace_rows or {"activities": activity_rows, "payments": payment_rows, "delay_events": delay_event_rows}, project_metrics or {}))
     validation = [issue for chart in charts for issue in chart.get("validation", [])]
     return {
         "catalog_version": version,

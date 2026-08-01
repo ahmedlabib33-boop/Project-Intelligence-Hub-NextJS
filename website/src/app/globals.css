@@ -3343,6 +3343,250 @@ h2 {
 .operations-footer strong { color: var(--cyan); }
 .operations-footer span { color: #7491a4; }
 
+/* Exact visual baseline for selected-project charts: Charts design/samco_dashboard_charts.html. */
+.chart-reference-workspace {
+  max-width: 1600px;
+  margin: 24px auto 0;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0;
+  background: #0b1120;
+  box-shadow: none;
+}
+
+.chart-reference-workspace .project-console {
+  margin: 0 0 20px;
+  padding: 0 0 12px;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0;
+  background: transparent;
+}
+
+.chart-reference-workspace .console-head,
+.chart-reference-workspace .workspace-subhead {
+  margin-bottom: 14px;
+  padding-bottom: 0;
+  border: 0;
+}
+
+.chart-reference-workspace .console-head h2,
+.chart-reference-workspace .workspace-subhead h2 {
+  margin: 0 0 4px;
+  background: linear-gradient(135deg, #f1f5f9 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+.chart-reference-workspace .console-head .eyebrow,
+.chart-reference-workspace .workspace-subhead .eyebrow { display: none; }
+
+.chart-reference-workspace .decision-pill {
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  border-radius: 20px;
+  background: rgba(244, 63, 94, 0.12);
+  color: #f43f5e;
+  padding: 3px 10px;
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+}
+
+.chart-reference-workspace .decision-pill.good {
+  border-color: rgba(16, 185, 129, 0.2);
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+}
+
+.chart-reference-workspace .console-grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.chart-reference-workspace .console-grid .holo-kpi,
+.chart-reference-workspace .mini-metric {
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.88);
+  box-shadow: none;
+  padding: 18px 20px;
+}
+
+.chart-reference-workspace .console-grid .holo-kpi::before { display: none; }
+.chart-reference-workspace .console-grid .holo-kpi__signal { display: none; }
+.chart-reference-workspace .console-grid .holo-kpi span,
+.chart-reference-workspace .mini-metric span {
+  color: #64748b;
+  font-size: .62rem;
+  letter-spacing: .1em;
+}
+.chart-reference-workspace .console-grid .holo-kpi strong,
+.chart-reference-workspace .mini-metric strong {
+  margin: 8px 0 6px;
+  color: #f1f5f9;
+  font-size: 1.22rem;
+}
+.chart-reference-workspace .console-grid .holo-kpi small,
+.chart-reference-workspace .mini-metric small {
+  color: #64748b;
+  font-size: .68rem;
+}
+
+.chart-reference-workspace .workspace-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0 0 24px;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.chart-reference-workspace .workspace-tab {
+  min-height: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #64748b;
+  padding: 8px 12px;
+  font-size: .67rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.chart-reference-workspace .workspace-tab:hover,
+.chart-reference-workspace .workspace-tab.active {
+  border: 0;
+  background: rgba(6, 182, 212, 0.12);
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.1);
+  color: #06b6d4;
+  transform: none;
+}
+
+.chart-reference-workspace .workspace-content { min-height: 0; }
+.chart-reference-workspace .feature-stack { gap: 20px; }
+.chart-reference-workspace .feature-card,
+.chart-reference-workspace .project-data-table {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.88);
+  box-shadow: none;
+}
+.chart-reference-workspace .feature-card { padding: 20px; }
+.chart-reference-workspace .feature-card::before { display: none; }
+.chart-reference-workspace .feature-card-head h3 {
+  color: #f1f5f9;
+  font-size: .75rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.chart-reference-workspace .feature-card-head h3::before {
+  display: inline-block;
+  width: 3px;
+  height: 14px;
+  margin-right: 8px;
+  border-radius: 2px;
+  background: #06b6d4;
+  box-shadow: 0 0 8px rgba(6, 182, 212, 0.3);
+  content: "";
+  vertical-align: -2px;
+}
+.chart-reference-workspace .feature-card-head span {
+  border-radius: 20px;
+  border-color: rgba(6, 182, 212, 0.2);
+  background: rgba(6, 182, 212, 0.12);
+  color: #06b6d4;
+  padding: 3px 10px;
+  font-size: .62rem;
+  letter-spacing: .05em;
+}
+
+.chart-reference-workspace .reference-chart-card {
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.88);
+  padding: 20px;
+}
+
+.chart-reference-workspace .source-chart-grid {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 20px;
+}
+.chart-reference-workspace .source-chart-grid > * { grid-column: span 6; }
+.chart-reference-workspace .source-chart-grid > *:first-child:only-child { grid-column: span 12; }
+.chart-reference-workspace .source-chart-grid > *:first-child:nth-last-child(3),
+.chart-reference-workspace .source-chart-grid > *:first-child:nth-last-child(3) ~ * { grid-column: span 4; }
+.chart-reference-workspace .project-smart-chart .reference-chart-card { grid-column: span 12; }
+
+@media (max-width: 1200px) {
+  .chart-reference-workspace .console-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .chart-reference-workspace .source-chart-grid > * { grid-column: span 6; }
+  .chart-reference-workspace .source-chart-grid > *:first-child:nth-last-child(3),
+  .chart-reference-workspace .source-chart-grid > *:first-child:nth-last-child(3) ~ * { grid-column: span 6; }
+}
+
+@media (max-width: 760px) {
+  .chart-reference-workspace { padding: 12px; }
+  .chart-reference-workspace .console-grid,
+  .chart-reference-workspace .source-chart-grid { grid-template-columns: 1fr; }
+  .chart-reference-workspace .source-chart-grid > *,
+  .chart-reference-workspace .source-chart-grid > *:first-child:nth-last-child(3),
+  .chart-reference-workspace .source-chart-grid > *:first-child:nth-last-child(3) ~ * { grid-column: span 1; }
+  .chart-reference-workspace .workspace-tabs { overflow-x: auto; flex-wrap: nowrap; }
+  .chart-reference-workspace .workspace-tab { flex: 0 0 auto; white-space: nowrap; }
+  .reference-chart-canvas.large { min-height: 250px; }
+  .reference-chart-canvas.medium { min-height: 210px; }
+}
+
+/* Source reference: Charts design/samco_dashboard_charts.html. */
+.reference-chart-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.88);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.025);
+  padding: 20px;
+  transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+
+.reference-chart-card::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgba(6,182,212,.34), transparent);
+}
+
+.reference-chart-card:hover {
+  border-color: rgba(6,182,212,.22);
+  box-shadow: 0 0 30px rgba(6,182,212,.06), inset 0 1px 0 rgba(255,255,255,.04);
+  transform: translateY(-1px);
+}
+
+.reference-chart-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.reference-chart-header h3 { display: flex; align-items: center; gap: 8px; margin: 0; color: #f1f5f9; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.reference-chart-header h3::before { width: 3px; height: 14px; border-radius: 2px; background: #06b6d4; box-shadow: 0 0 8px rgba(6,182,212,.35); content: ""; }
+.reference-chart-badge { flex: 0 0 auto; border-radius: 999px; border: 1px solid rgba(6,182,212,.20); background: rgba(6,182,212,.12); color: #06b6d4; padding: 3px 9px; font-size: .62rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+.reference-chart-badge.success { border-color: rgba(16,185,129,.24); background: rgba(16,185,129,.12); color: #10b981; }
+.reference-chart-badge.warning { border-color: rgba(245,158,11,.24); background: rgba(245,158,11,.12); color: #f59e0b; }
+.reference-chart-badge.critical { border-color: rgba(244,63,94,.24); background: rgba(244,63,94,.12); color: #f43f5e; }
+.reference-chart-note { min-height: 34px; margin: 0 0 12px; color: #94a3b8; font-size: .76rem; line-height: 1.4; }
+.reference-chart-canvas { position: relative; min-height: 240px; }
+.reference-chart-canvas.small { min-height: 200px; }
+.reference-chart-canvas.medium { min-height: 240px; }
+.reference-chart-canvas.large { min-height: 340px; }
+.reference-chart-canvas canvas { width: 100% !important; height: 100% !important; }
+.reference-chart-lineage { margin-top: 12px; color: #64748b; font-size: .68rem; line-height: 1.35; }
+
+.project-smart-chart,
+.source-chart-card { background: transparent; border: 0; padding: 0; }
+
 .report-format-downloads {
   display: flex;
   flex-wrap: wrap;
