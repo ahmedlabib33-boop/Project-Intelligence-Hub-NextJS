@@ -1,0 +1,37 @@
+{
+  "version": "2026-08-01",
+  "charts": [
+    {
+      "id": "contracts.planned_vs_actual_cash_flow",
+      "tab": "Contracts",
+      "title": "Planned vs Actual Cash Flow",
+      "type": "grouped_bar",
+      "sources": ["planned_cash_flow.csv", "payments.csv"],
+      "required_columns": ["project_id", "period_date", "planned_cash_out"]
+    },
+    {
+      "id": "delay.root_cause_pareto",
+      "tab": "Delay Analysis - Time Impact Analysis",
+      "title": "Delay by Root Cause",
+      "type": "horizontal_bar",
+      "sources": ["14-delay_event_classification.csv"],
+      "required_columns": ["project_id", "event_id", "root_cause", "delay_days", "analyst_status"]
+    },
+    {
+      "id": "delay.type_distribution",
+      "tab": "Delay Analysis - Time Impact Analysis",
+      "title": "Delay Type Distribution",
+      "type": "doughnut",
+      "sources": ["14-delay_event_classification.csv"],
+      "required_columns": ["project_id", "event_id", "delay_type", "analyst_status"]
+    },
+    {
+      "id": "delay.tia_recovery_scenario",
+      "tab": "Delay Analysis - Time Impact Analysis",
+      "title": "Baseline vs Impacted vs Recovery",
+      "type": "line",
+      "sources": ["15-tia_recovery_scenario.csv"],
+      "required_columns": ["project_id", "scenario_id", "activity_id", "status_date", "baseline_progress_percent", "impacted_progress_percent", "recovery_progress_percent", "analyst_status"]
+    }
+  ]
+}

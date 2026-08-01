@@ -339,7 +339,7 @@ function HoloKpi({
   );
 }
 
-function portfolioDecisionMermaid(selectedProject: ProjectSummary) {
+function portfolioDecisionMermaid() {
   const projectCount = numberValue(portfolio.project_count);
   const sectorCount = numberValue(portfolio.sector_count);
   const decisionCount = numberValue(totals.decisions_required);
@@ -347,7 +347,6 @@ function portfolioDecisionMermaid(selectedProject: ProjectSummary) {
   const highRiskCount = numberValue(totals.high_risk_projects);
   const averageSpi = numberValue(totals.average_spi, 2);
   const averageCpi = numberValue(totals.average_cpi, 2);
-  const selected = selectedProject.project_folder_name.replace(/"/g, "'");
   return `flowchart LR
     A["Project Folders\\n${projectCount} projects / ${sectorCount} sectors"] --> B["Generated Data Layer\\nPortfolio JSON + project JSON"]
     B --> C["Executive Controls\\nSPI ${averageSpi} / CPI ${averageCpi}"]
@@ -355,10 +354,7 @@ function portfolioDecisionMermaid(selectedProject: ProjectSummary) {
     C --> E{"Management Decision Gate\\n${decisionCount} decisions required"}
     D --> E
     E --> F["Technical Knowledge Advisor\\nQuestion bank + portfolio evidence"]
-    F --> G["Decision Brief\\nOwner / evidence / impact / deadline"]
-    G --> H["Same Page Project Deep Dive\\nSelected: ${selected}"]
-    H --> I["Project Workspace Tabs\\nOverview / EVM / Letters / Delay / Claims / Outputs"]
-    I --> J["Action Closure\\nUpdate source files and regenerate outputs"]`;
+    F --> G["Decision Brief\\nOwner / evidence / impact / deadline"]`;
 }
 
 function ProjectConsole({ selectedProject }: { selectedProject: ProjectRecord }) {
@@ -1591,16 +1587,12 @@ function PortfolioVisuals({
         </div>
         <p className="chart-note">Vertical position reflects decision trigger; horizontal position reflects reported data confidence. This is an evidence awareness view, not a risk calculation replacement.</p>
       </section>
-      <MermaidDiagram chart={portfolioDecisionMermaid(chartProjects[0] || projects[0])} title="Portfolio Decision Flow" />
+      <MermaidDiagram chart={portfolioDecisionMermaid()} title="Portfolio Decision Flow" />
     </div>
   );
 }
 
-function DecisionOperationsDashboard({
-  onChooseProject
-}: {
-  onChooseProject: (projectKey: string) => void;
-}) {
+function DecisionOperationsDashboard() {
   const [panel, setPanel] = useState<OperationsPanel>("portfolio");
   const [sectorFilter, setSectorFilter] = useState("All sectors");
   const [lightMode, setLightMode] = useState(false);
@@ -1642,10 +1634,6 @@ function DecisionOperationsDashboard({
       {panel === "portfolio" || panel === "delivery" ? <PortfolioVisuals projects={visibleProjects} sectors={visibleSectors} panel={panel} /> : null}
       {panel === "decisions" ? <div className="operations-stack"><PortfolioVisuals projects={visibleProjects} sectors={visibleSectors} panel={panel} /><PredictiveWarningPanel projects={visibleProjects} warningSummary={warningSummary} /><ManagementDecisionBrief items={decisionBrief.filter((item) => sectorFilter === "All sectors" || item.sector === sectorFilter)} onAddAction={(item) => setActions((current) => [...current, item])} /><ActionTracker scopeKey="portfolio" seedActions={actions} /></div> : null}
       {panel === "intelligence" ? <div className="operations-stack"><UnifiedIntelligenceSearch mode="portfolio" /><TechnicalKnowledgeAdvisor mode="portfolio" /><ScenarioPlanner projects={visibleProjects} portfolioContractValue={visibleProjects.reduce((sum, project) => sum + (project.contract_value || 0), 0)} /></div> : null}
-      <section className="operations-project-rail">
-        <div><span>Project Deep Dive</span><b>Open any project in the same page</b><small>Each selection remains bound to its own generated project JSON, data sources, reports, letters, Delay TIA, and claims context.</small></div>
-        <div className="project-rail-buttons">{visibleProjects.map((project) => <button type="button" key={project.project_key} onClick={() => onChooseProject(project.project_key)}>{project.project_display_name}<small>{project.sector} | {project.status}</small></button>)}</div>
-      </section>
     </div>
   );
 }
@@ -1674,7 +1662,7 @@ function DigitalOperationsApp() {
         <label className="scope-control"><span>Operating scope</span><select value={scope} onChange={(event) => selectScope(event.target.value)}><option value={DECISION_DASHBOARD_KEY}>Decision Making Dashboard</option>{projects.map((project) => <option value={project.project_key} key={project.project_key}>{project.sector} / {project.project_display_name}</option>)}</select></label>
         <div className="command-status"><i /><span>{isDecisionDashboard ? "Portfolio mode" : `${selectedProjectSummary.sector} project mode`}</span></div>
       </header>
-      {isDecisionDashboard ? <DecisionOperationsDashboard onChooseProject={selectScope} /> : (
+      {isDecisionDashboard ? <DecisionOperationsDashboard /> : (
         projectDetails ? <ProjectWorkspace project={projectDetails} selectedReport={selectedReport} setSelectedReport={setSelectedReport} /> : <section className="feature-card project-load-state"><h2>{selectedProjectSummary.project_display_name}</h2><p>Project workspace data is not available. Regenerate the verified website data pipeline for this selected project.</p></section>
       )}
       <footer className="operations-footer">Designed &amp; Created | <strong>Engr. Ahmed Labib</strong><span>Source-backed controls | Project-isolated intelligence</span></footer>

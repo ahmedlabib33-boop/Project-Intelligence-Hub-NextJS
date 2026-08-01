@@ -219,6 +219,9 @@ def ensure_project_samples(project_dir: Path) -> None:
         except (OSError, UnicodeDecodeError, json.JSONDecodeError, AttributeError):
             pass
     samples = {
+        "01-data/import_templates/planned_cash_flow.csv": "project_id,period_date,planned_cash_out,planned_cumulative_cash_out,currency,basis,source_file,source_sheet,source_row,notes\n",
+        "02-delay_analysis/steel_delay_tia_templates/14-delay_event_classification.csv": "project_id,event_id,activity_id,root_cause,delay_type,entitlement_status,responsible_party,event_start,event_finish,delay_days,evidence_reference,source_file,source_sheet,source_row,analyst_status,notes\n",
+        "02-delay_analysis/steel_delay_tia_templates/15-tia_recovery_scenario.csv": "project_id,scenario_id,scenario_name,analyst_status,activity_id,status_date,baseline_progress_percent,impacted_progress_percent,recovery_progress_percent,baseline_finish,impacted_finish,recovery_finish,predecessor_activity_id,successor_activity_id,relationship_type,lag_days,p6_update_reference,evidence_reference,source_file,source_sheet,source_row,notes\n",
         "08-branding/README.md": "# Branding\n\nReplace example files with project-approved brand assets. Existing files are never overwritten.\n",
         "08-branding/project_identity_template.json": json.dumps({"project_name": "Example Project", "client": "Example Client", "contractor": "Example Contractor", "consultant": "Example Consultant"}, indent=2) + "\n",
         "08-branding/color_palette_template.csv": f"project_id,role,color_hex\n{project_id},primary,#123B5D\n{project_id},secondary,#5B6870\n{project_id},accent,#C7A34B\n{project_id},background,#FFFFFF\n",

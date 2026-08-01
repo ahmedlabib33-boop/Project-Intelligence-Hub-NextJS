@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAMCO Project Intelligence Hub — Smart Charts</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0B1120;
+            --bg-secondary: #0F172A;
+            --bg-card: rgba(15, 23, 42, 0.88);
+            --border-color: rgba(255, 255, 255, 0.06);
+            --border-glow: rgba(6, 182, 212, 0.15);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-teal: #06b6d4;
+            --accent-teal-glow: rgba(6, 182, 212, 0.3);
+            --accent-green: #10b981;
+            --accent-red: #f43f5e;
+            --accent-amber: #f59e0b;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-blue: #3b82f6;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 24px;
+            background-image:
+                radial-gradient(ellipse at 20% 0%, rgba(6, 182, 212, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(139, 92, 246, 0.04) 0%, transparent 50%);
+        }
+        .tab-nav {
+            display: flex; gap: 4px; margin-bottom: 24px; padding: 6px;
+            background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color);
+            border-radius: 12px; overflow-x: auto; flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 8px 16px; border: none; background: transparent;
+            color: var(--text-muted); font-family: var(--font); font-size: 12px;
+            font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+            border-radius: 8px; cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
+        }
+        .tab-btn:hover { color: var(--text-secondary); background: rgba(255,255,255,0.03); }
+        .tab-btn.active {
+            background: rgba(6, 182, 212, 0.12); color: var(--accent-teal);
+            box-shadow: 0 0 12px rgba(6, 182, 212, 0.1);
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section-header {
+            margin-bottom: 20px; padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .section-header h2 {
+            font-size: 18px; font-weight: 700; letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-teal) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 4px;
+        }
+        .section-header p { color: var(--text-secondary); font-size: 13px; font-weight: 400; }
+        .charts-grid {
+            display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px;
+            max-width: 1600px; margin: 0 auto;
+        }
+        .chart-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 20px; position: relative;
+            overflow: hidden; backdrop-filter: blur(12px); transition: all 0.3s ease;
+        }
+        .chart-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-teal-glow), transparent);
+            opacity: 0.6;
+        }
+        .chart-card:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.06), inset 0 1px 0 rgba(255,255,255,0.04);
+            transform: translateY(-1px);
+        }
+        .col-12 { grid-column: span 12; }
+        .col-8 { grid-column: span 8; }
+        .col-6 { grid-column: span 6; }
+        .col-4 { grid-column: span 4; }
+        .col-3 { grid-column: span 3; }
+        .chart-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
+        }
+        .chart-title {
+            font-size: 12px; font-weight: 600; color: var(--text-primary);
+            text-transform: uppercase; letter-spacing: 0.08em;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .chart-title::before {
+            content: ''; width: 3px; height: 14px; background: var(--accent-teal);
+            border-radius: 2px; box-shadow: 0 0 8px var(--accent-teal-glow);
+        }
+        .chart-badge {
+            font-size: 10px; font-weight: 600; padding: 3px 10px;
+            border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .badge-critical { background: rgba(244, 63, 94, 0.12); color: var(--accent-red); border: 1px solid rgba(244, 63, 94, 0.2); }
+        .badge-success { background: rgba(16, 185, 129, 0.12); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.2); }
+        .badge-warning { background: rgba(245, 158, 11, 0.12); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.2); }
+        .badge-info { background: rgba(6, 182, 212, 0.12); color: var(--accent-teal); border: 1px solid rgba(6, 182, 212, 0.2); }
+        .badge-neutral { background: rgba(148, 163, 184, 0.1); color: var(--text-muted); border: 1px solid rgba(148, 163, 184, 0.15); }
+        .chart-container { position: relative; height: 280px; }
+        .chart-container.small { height: 200px; }
+        .chart-container.medium { height: 240px; }
+        .chart-container.large { height: 340px; }
+        .chart-legend { display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-secondary); font-weight: 500; }
+        .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .kpi-row {
+            display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-bottom: 24px;
+        }
+        .kpi-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 14px; padding: 18px 20px; position: relative;
+            overflow: hidden; backdrop-filter: blur(12px); transition: all 0.3s ease;
+        }
+        .kpi-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-teal-glow), transparent);
+        }
+        .kpi-card:hover { border-color: var(--border-glow); transform: translateY(-2px); }
+        .kpi-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 8px; }
+        .kpi-value { font-size: 22px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; letter-spacing: -0.02em; }
+        .kpi-sub { font-size: 11px; color: var(--text-muted); font-weight: 500; }
+        .kpi-trend { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; margin-top: 4px; }
+        .trend-up { color: var(--accent-green); }
+        .trend-down { color: var(--accent-red); }
+        .progress-ring-container { display: flex; align-items: center; justify-content: center; height: 200px; position: relative; }
+        .progress-ring-center { position: absolute; text-align: center; }
+        .progress-ring-value { font-size: 32px; font-weight: 700; color: var(--text-primary); }
+        .progress-ring-label { font-size: 11px; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+        .phase-bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .phase-name { width: 100px; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-align: right; flex-shrink: 0; }
+        .phase-track { flex: 1; height: 10px; background: rgba(255,255,255,0.04); border-radius: 5px; overflow: hidden; position: relative; }
+        .phase-fill { height: 100%; border-radius: 5px; transition: width 1s ease; position: relative; }
+        .phase-fill::after { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 20px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2)); border-radius: 0 5px 5px 0; }
+        .phase-values { width: 80px; font-size: 11px; font-weight: 600; color: var(--text-secondary); flex-shrink: 0; text-align: right; font-variant-numeric: tabular-nums; }
+        .quality-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+        .quality-label { width: 120px; font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+        .quality-track { flex: 1; height: 8px; background: rgba(255,255,255,0.04); border-radius: 4px; overflow: hidden; }
+        .quality-fill { height: 100%; border-radius: 4px; transition: width 1s ease; }
+        .quality-value { width: 50px; font-size: 12px; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+        .delay-list { display: flex; flex-direction: column; gap: 10px; }
+        .delay-item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 10px; transition: all 0.2s; }
+        .delay-item:hover { border-color: rgba(244, 63, 94, 0.2); background: rgba(244, 63, 94, 0.03); }
+        .delay-days { width: 50px; font-size: 16px; font-weight: 700; color: var(--accent-red); text-align: center; flex-shrink: 0; }
+        .delay-days span { display: block; font-size: 9px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; }
+        .delay-info { flex: 1; }
+        .delay-title { font-size: 12px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+        .delay-meta { font-size: 10px; color: var(--text-muted); }
+        .delay-severity { padding: 2px 8px; border-radius: 12px; font-size: 9px; font-weight: 600; text-transform: uppercase; }
+        .sev-high { background: rgba(244, 63, 94, 0.12); color: var(--accent-red); border: 1px solid rgba(244, 63, 94, 0.2); }
+        .sev-medium { background: rgba(245, 158, 11, 0.12); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.2); }
+        .contract-comparison { display: flex; flex-direction: column; gap: 16px; }
+        .contract-bar { display: flex; align-items: center; gap: 12px; }
+        .contract-label { width: 100px; font-size: 11px; color: var(--text-secondary); font-weight: 500; }
+        .contract-track { flex: 1; height: 24px; background: rgba(255,255,255,0.03); border-radius: 6px; overflow: hidden; position: relative; }
+        .contract-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; font-size: 11px; font-weight: 600; color: white; transition: width 1s ease; }
+        .contract-value { width: 100px; font-size: 13px; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+        .wbs-tree { display: flex; flex-direction: column; gap: 8px; }
+        .wbs-level-1 { background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6, 182, 212, 0.15); border-radius: 10px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
+        .wbs-level-2 { margin-left: 24px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
+        .wbs-name { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+        .wbs-meta { font-size: 10px; color: var(--text-muted); }
+        .wbs-progress { font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
+        .timeline-container { position: relative; padding: 24px 0 8px; }
+        .timeline-line { position: absolute; top: 32px; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent-green), var(--accent-teal), var(--accent-purple), var(--accent-red)); opacity: 0.25; }
+        .timeline-items { display: flex; justify-content: space-between; position: relative; }
+        .timeline-item { display: flex; flex-direction: column; align-items: center; gap: 10px; flex: 1; position: relative; }
+        .timeline-dot { width: 14px; height: 14px; border-radius: 50%; border: 3px solid var(--bg-primary); position: relative; z-index: 2; }
+        .timeline-dot.completed { background: var(--accent-green); box-shadow: 0 0 12px rgba(16, 185, 129, 0.35); }
+        .timeline-dot.delayed { background: var(--accent-red); box-shadow: 0 0 12px rgba(244, 63, 94, 0.35); }
+        .timeline-dot.upcoming { background: var(--accent-teal); box-shadow: 0 0 12px rgba(6, 182, 212, 0.35); }
+        .timeline-dot.planned { background: var(--text-muted); }
+        .timeline-label { font-size: 11px; font-weight: 600; color: var(--text-primary); text-align: center; max-width: 120px; }
+        .timeline-date { font-size: 10px; color: var(--text-muted); font-weight: 500; text-align: center; }
+        .risk-matrix-wrap { position: relative; padding-left: 24px; }
+        .risk-matrix { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; height: 200px; }
+        .risk-cell { border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.85); position: relative; cursor: pointer; transition: transform 0.2s; }
+        .risk-cell:hover { transform: scale(1.08); z-index: 2; }
+        .risk-low { background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .risk-medium { background: rgba(245, 158, 11, 0.2); border: 1px solid rgba(245, 158, 11, 0.3); }
+        .risk-high { background: rgba(244, 63, 94, 0.2); border: 1px solid rgba(244, 63, 94, 0.3); }
+        .risk-critical { background: rgba(244, 63, 94, 0.4); border: 1px solid rgba(244, 63, 94, 0.5); box-shadow: 0 0 10px rgba(244, 63, 94, 0.15); }
+        .risk-active { box-shadow: 0 0 0 2px var(--text-primary), 0 0 20px rgba(255,255,255,0.15); }
+        .risk-dot { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: var(--text-primary); box-shadow: 0 0 8px rgba(255,255,255,0.4); border: 2px solid var(--bg-primary); top: 3px; right: 3px; }
+        .matrix-labels { display: flex; justify-content: space-between; margin-top: 8px; font-size: 10px; color: var(--text-muted); font-weight: 500; }
+        .matrix-y-label { position: absolute; left: -20px; top: 50%; transform: rotate(-90deg) translateX(50%); transform-origin: center; font-size: 10px; color: var(--text-muted); font-weight: 500; white-space: nowrap; }
+        @media (max-width: 1200px) {
+            .col-3, .col-4 { grid-column: span 6; }
+            .kpi-row { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .col-6, .col-3, .col-4, .col-8 { grid-column: span 12; }
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+            body { padding: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== TAB NAVIGATION ==================== -->
+<div class="tab-nav">
+    <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+    <button class="tab-btn" onclick="showTab('wbs')">WBS</button>
+    <button class="tab-btn" onclick="showTab('activities')">Activities</button>
+    <button class="tab-btn" onclick="showTab('milestones')">Milestones</button>
+    <button class="tab-btn" onclick="showTab('scurve')">S-Curve</button>
+    <button class="tab-btn" onclick="showTab('evm')">EVM Analysis</button>
+    <button class="tab-btn" onclick="showTab('contracts')">Contracts</button>
+    <button class="tab-btn" onclick="showTab('risks')">Risks</button>
+    <button class="tab-btn" onclick="showTab('delay')">Delay Analysis</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 1: OVERVIEW                                              -->
+<!-- AI Agent: Render ALL charts in this section for Overview   -->
+<!-- ============================================================ -->
+<div id="overview" class="tab-content active">
+    <div class="section-header">
+        <h2>Project Overview</h2>
+        <p>ROYA-BIG PROJECT PHASE01 (B1-4) — Executive intelligence summary</p>
+    </div>
+    <div class="kpi-row">
+        <div class="kpi-card">
+            <div class="kpi-label">Contract Value</div>
+            <div class="kpi-value" style="color: var(--accent-teal);">EGP 367.3M</div>
+            <div class="kpi-sub">Original + approved variations</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Actual Progress</div>
+            <div class="kpi-value" style="color: var(--accent-amber);">30.7%</div>
+            <div class="kpi-sub">Planned: 65.3%</div>
+            <div class="kpi-trend trend-down">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 9l6 6 6-6"/></svg>
+                -34.6% behind plan
+            </div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">SPI</div>
+            <div class="kpi-value" style="color: var(--accent-red);">0.45</div>
+            <div class="kpi-sub">Schedule Performance Index</div>
+            <div class="kpi-trend trend-down">Critical — below 0.5</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">CPI</div>
+            <div class="kpi-value" style="color: var(--accent-green);">1.00</div>
+            <div class="kpi-sub">Cost Performance Index</div>
+            <div class="kpi-trend trend-up">On budget</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Total Delay</div>
+            <div class="kpi-value" style="color: var(--accent-red);">1,675</div>
+            <div class="kpi-sub">Days of delay exposure</div>
+            <div class="kpi-trend trend-down">25 delay events</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Risk Score</div>
+            <div class="kpi-value" style="color: var(--accent-amber);">56.3</div>
+            <div class="kpi-sub">Probability-Impact matrix</div>
+            <div class="kpi-trend trend-down">2 high-risk items</div>
+        </div>
+    </div>
+    <div class="charts-grid">
+        <div class="chart-card col-8">
+            <div class="chart-header">
+                <div class="chart-title">Schedule Performance (S-Curve)</div>
+                <span class="chart-badge badge-critical">Critical delay</span>
+            </div>
+            <div class="chart-container large"><canvas id="ovScurveChart"></canvas></div>
+            <div class="chart-legend">
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent-teal)"></div>Planned</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent-green)"></div>Actual</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent-amber)"></div>Forecast</div>
+                <div class="legend-item"><div class="legend-dot" style="background:rgba(244,63,94,0.4)"></div>Variance</div>
+            </div>
+        </div>
+        <div class="chart-card col-4">
+            <div class="chart-header">
+                <div class="chart-title">Overall Completion</div>
+                <span class="chart-badge badge-warning">Behind</span>
+            </div>
+            <div class="progress-ring-container">
+                <canvas id="ovGaugeChart"></canvas>
+                <div class="progress-ring-center">
+                    <div class="progress-ring-value">30.7%</div>
+                    <div class="progress-ring-label">Complete</div>
+                </div>
+            </div>
+            <div style="display:flex;justify-content:space-around;margin-top:4px">
+                <div style="text-align:center"><div style="font-size:16px;font-weight:700;color:var(--accent-teal)">65.3%</div><div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em">Planned</div></div>
+                <div style="text-align:center"><div style="font-size:16px;font-weight:700;color:var(--accent-red)">-34.6%</div><div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em">Variance</div></div>
+            </div>
+        </div>
+        <div class="chart-card col-4">
+            <div class="chart-header">
+                <div class="chart-title">Phase Progress</div>
+                <span class="chart-badge badge-info">By Phase</span>
+            </div>
+            <div style="padding:8px 0">
+                <div class="phase-bar-row"><div class="phase-name">Engineering</div><div class="phase-track"><div class="phase-fill" style="width:42%;background:linear-gradient(90deg,var(--accent-teal),var(--accent-blue))"></div></div><div class="phase-values">42%</div></div>
+                <div class="phase-bar-row"><div class="phase-name">Procurement</div><div class="phase-track"><div class="phase-fill" style="width:28%;background:linear-gradient(90deg,var(--accent-purple),var(--accent-pink))"></div></div><div class="phase-values">28%</div></div>
+                <div class="phase-bar-row"><div class="phase-name">Construction</div><div class="phase-track"><div class="phase-fill" style="width:18%;background:linear-gradient(90deg,var(--accent-green),var(--accent-teal))"></div></div><div class="phase-values">18%</div></div>
+                <div class="phase-bar-row"><div class="phase-name">Commissioning</div><div class="phase-track"><div class="phase-fill" style="width:0%;background:linear-gradient(90deg,var(--accent-amber),var(--accent-red))"></div></div><div class="phase-values">0%</div></div>
+                <div class="phase-bar-row"><div class="phase-name">Close-out</div><div class="phase-track"><div class="phase-fill" style="width:0%;background:linear-gradient(90deg,var(--accent-red),var(--accent-purple))"></div></div><div class="phase-values">0%</div></div>
+            </div>
+        </div>
+        <div class="chart-card col-4">
+            <div class="chart-header">
+                <div class="chart-title">Activity Status</div>
+                <span class="chart-badge badge-neutral">1,363 Total</span>
+            </div>
+            <div class="chart-container small"><canvas id="ovStatusChart"></canvas></div>
+            <div class="chart-legend">
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent-green)"></div>Complete (412)</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent-teal)"></div>In Progress (298)</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent-amber)"></div>Not Started (653)</div>
+            </div>
+        </div>
+        <div class="chart-card col-4">
+            <div class="chart-header">
+                <div class="chart-title">Discipline Health</div>
+                <span class="chart-badge badge-warning">Mixed</span>
+            </div>
+            <div class="chart-container small"><canvas id="ovRadarChart"></canvas></div>
+        </div>
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">Earned Value Trend</div>
+                <span class="chart-badge badge-info">EGP Millions</span>
+            </div>
+            <div class="chart-container medium"><canvas id="ovEvmChart"></canvas></div>
+            <div class="chart-legend">
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent-teal)"></div>PV</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent-green)"></div>EV</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent-purple)"></div>AC</div>
+            </div>
+        </div>
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">Performance Indices</div>
+                <span class="chart-badge badge-critical">SPI Alert</span>
+            </div>
+            <div class="chart-container medium"><canvas id="ovIndicesChart"></canvas></div>
+            <div class="chart-legend">
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent-red)"></div>SPI</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent-green)"></div>CPI</div>
+                <div class="legend-item"><div class="legend-dot" style="background:rgba(255,255,255,0.2)"></div>Threshold 1.0</div>
+            </div>
+        </div>
+        <div class="chart-card col-4">
+            <div class="chart-header">
+                <div class="chart-title">Data Quality</div>
+                <span class="chart-badge badge-success">100%</span>
+            </div>
+            <div style="padding:12px 0">
+                <div class="quality-row"><div class="quality-label">Completeness</div><div class="quality-track"><div class="quality-fill" style="width:100%;background:var(--accent-green)"></div></div><div class="quality-value" style="color:var(--accent-green)">100%</div></div>
+                <div class="quality-row"><div class="quality-label">Accuracy</div><div class="quality-track"><div class="quality-fill" style="width:98%;background:var(--accent-teal)"></div></div><div class="quality-value" style="color:var(--accent-teal)">98%</div></div>
+                <div class="quality-row"><div class="quality-label">Timeliness</div><div class="quality-track"><div class="quality-fill" style="width:87%;background:var(--accent-amber)"></div></div><div class="quality-value" style="color:var(--accent-amber)">87%</div></div>
+                <div class="quality-row"><div class="quality-label">Consistency</div><div class="quality-track"><div class="quality-fill" style="width:95%;background:var(--accent-blue)"></div></div><div class="quality-value" style="color:var(--accent-blue)">95%</div></div>
+                <div class="quality-row"><div class="quality-label">Validity</div><div class="quality-track"><div class="quality-fill" style="width:100%;background:var(--accent-purple)"></div></div><div class="quality-value" style="color:var(--accent-purple)">100%</div></div>
+            </div>
+        </div>
+        <div class="chart-card col-4">
+            <div class="chart-header">
+                <div class="chart-title">Top Delay Events</div>
+                <span class="chart-badge badge-critical">25 Events</span>
+            </div>
+            <div class="delay-list">
+                <div class="delay-item">
+                    <div class="delay-days">420<span>days</span></div>
+                    <div class="delay-info"><div class="delay-title">Material delivery delay — Steel reinforcement</div><div class="delay-meta">WBS: STR-B1-001 | Impact: Critical path</div></div>
+                    <span class="delay-severity sev-high">High</span>
+                </div>
+                <div class="delay-item">
+                    <div class="delay-days">310<span>days</span></div>
+                    <div class="delay-info"><div class="delay-title">Subcontractor mobilization — MEP works</div><div class="delay-meta">WBS: MEP-B1-045 | Impact: Float consumed</div></div>
+                    <span class="delay-severity sev-high">High</span>
+                </div>
+                <div class="delay-item">
+                    <div class="delay-days">280<span>days</span></div>
+                    <div class="delay-info"><div class="delay-title">RFI response delay — Structural design</div><div class="delay-meta">WBS: STR-B1-012 | Impact: Critical path</div></div>
+                    <span class="delay-severity sev-high">High</span>
+                </div>
+                <div class="delay-item">
+                    <div class="delay-days">245<span>days</span></div>
+                    <div class="delay-info"><div class="delay-title">Design review cycle — Architectural</div><div class="delay-meta">WBS: ARC-B1-003 | Impact: Near critical</div></div>
+                    <span class="delay-severity sev-medium">Medium</span>
+                </div>
+            </div>
+        </div>
+        <div class="chart-card col-4">
+            <div class="chart-header">
+                <div class="chart-title">Contract vs Payment</div>
+                <span class="chart-badge badge-info">EGP Millions</span>
+            </div>
+            <div class="contract-comparison" style="padding:8px 0">
+                <div class="contract-bar"><div class="contract-label">Contract value</div><div class="contract-track"><div class="contract-fill" style="width:100%;background:linear-gradient(90deg,var(--accent-teal),var(--accent-blue))">100%</div></div><div class="contract-value" style="color:var(--accent-teal)">367.3M</div></div>
+                <div class="contract-bar"><div class="contract-label">Paid amount</div><div class="contract-track"><div class="contract-fill" style="width:30%;background:linear-gradient(90deg,var(--accent-green),var(--accent-teal))">30%</div></div><div class="contract-value" style="color:var(--accent-green)">110.3M</div></div>
+                <div class="contract-bar"><div class="contract-label">Spent (AC)</div><div class="contract-track"><div class="contract-fill" style="width:31%;background:linear-gradient(90deg,var(--accent-purple),var(--accent-pink))">31%</div></div><div class="contract-value" style="color:var(--accent-purple)">113.1M</div></div>
+                <div class="contract-bar"><div class="contract-label">Remaining</div><div class="contract-track"><div class="contract-fill" style="width:69%;background:linear-gradient(90deg,var(--accent-amber),var(--accent-red))">69%</div></div><div class="contract-value" style="color:var(--accent-amber)">256.9M</div></div>
+            </div>
+        </div>
+        <div class="chart-card col-12">
+            <div class="chart-header">
+                <div class="chart-title">Key Milestones</div>
+                <span class="chart-badge badge-success">4 Loaded</span>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div class="timeline-items">
+                    <div class="timeline-item"><div class="timeline-dot completed"></div><div class="timeline-label">Project start</div><div class="timeline-date">11-Sep-25</div></div>
+                    <div class="timeline-item"><div class="timeline-dot completed"></div><div class="timeline-label">Contract agreement</div><div class="timeline-date">11-Sep-25</div></div>
+                    <div class="timeline-item"><div class="timeline-dot delayed"></div><div class="timeline-label">IFC drawing package</div><div class="timeline-date">Planned: 11-Sep-25</div></div>
+                    <div class="timeline-item"><div class="timeline-dot upcoming"></div><div class="timeline-label">Ground works finish</div><div class="timeline-date">Forecast: 10-Dec-26</div></div>
+                    <div class="timeline-item"><div class="timeline-dot planned"></div><div class="timeline-label">Structural complete</div><div class="timeline-date">Target: 15-Jun-27</div></div>
+                    <div class="timeline-item"><div class="timeline-dot planned"></div><div class="timeline-label">Project handover</div><div class="timeline-date">Baseline: 10-Apr-27</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 2: WBS                                                   -->
+<!-- AI Agent: Assign to WBS tab                                -->
+<!-- ============================================================ -->
+<div id="wbs" class="tab-content">
+    <div class="section-header">
+        <h2>Work Breakdown Structure</h2>
+        <p>WBS hierarchy with progress tracking — 15 WBS rows, 1,363 activity rows</p>
+    </div>
+    <div class="charts-grid">
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">WBS Progress Distribution</div>
+                <span class="chart-badge badge-info">By WBS</span>
+            </div>
+            <div class="chart-container"><canvas id="wbsProgressChart"></canvas></div>
+        </div>
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">WBS Duration Breakdown</div>
+                <span class="chart-badge badge-neutral">Days</span>
+            </div>
+            <div class="chart-container"><canvas id="wbsDurationChart"></canvas></div>
+        </div>
+        <div class="chart-card col-12">
+            <div class="chart-header">
+                <div class="chart-title">WBS Hierarchy & Progress</div>
+                <span class="chart-badge badge-info">15 WBS Elements</span>
+            </div>
+            <div class="wbs-tree" style="padding:8px 0">
+                <div class="wbs-level-1"><div><div class="wbs-name">The Big — P01 (Project)</div><div class="wbs-meta">Total activities: 1,363 | Duration: 577 days</div></div><div class="wbs-progress" style="color:var(--accent-amber)">30.7%</div></div>
+                <div class="wbs-level-2"><div><div class="wbs-name">No Priority (Preliminaries)</div><div class="wbs-meta">Activities: 10 | Duration: 0 days</div></div><div class="wbs-progress" style="color:var(--accent-green)">100%</div></div>
+                <div class="wbs-level-2"><div><div class="wbs-name">Key Dates</div><div class="wbs-meta">Activities: 8 | Duration: 344 days</div></div><div class="wbs-progress" style="color:var(--accent-green)">100%</div></div>
+                <div class="wbs-level-2"><div><div class="wbs-name">Milestones</div><div class="wbs-meta">Activities: 5 | Duration: 344 days</div></div><div class="wbs-progress" style="color:var(--accent-green)">50%</div></div>
+                <div class="wbs-level-2"><div><div class="wbs-name">Mobilization</div><div class="wbs-meta">Activities: 10 | Duration: 0 days</div></div><div class="wbs-progress" style="color:var(--accent-red)">0%</div></div>
+                <div class="wbs-level-2"><div><div class="wbs-name">Engineering</div><div class="wbs-meta">Activities: 337 | Duration: 247 days</div></div><div class="wbs-progress" style="color:var(--accent-amber)">42%</div></div>
+                <div class="wbs-level-2"><div><div class="wbs-name">Procurement</div><div class="wbs-meta">Activities: 54 | Duration: 238 days</div></div><div class="wbs-progress" style="color:var(--accent-amber)">28%</div></div>
+                <div class="wbs-level-2"><div><div class="wbs-name">Construction</div><div class="wbs-meta">Activities: 890 | Duration: 445 days</div></div><div class="wbs-progress" style="color:var(--accent-red)">18%</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 3: ACTIVITIES                                            -->
+<!-- AI Agent: Assign to Activities tab                         -->
+<!-- ============================================================ -->
+<div id="activities" class="tab-content">
+    <div class="section-header">
+        <h2>Activities Register</h2>
+        <p>1,363 activity records with progress, float, and critical path analysis</p>
+    </div>
+    <div class="charts-grid">
+        <div class="chart-card col-4">
+            <div class="chart-header">
+                <div class="chart-title">Status Distribution</div>
+                <span class="chart-badge badge-neutral">1,363 Total</span>
+            </div>
+            <div class="chart-container"><canvas id="actStatusChart"></canvas></div>
+        </div>
+        <div class="chart-card col-4">
+            <div class="chart-header">
+                <div class="chart-title">Critical Path Activities</div>
+                <span class="chart-badge badge-critical">173 Critical</span>
+            </div>
+            <div class="chart-container"><canvas id="actCriticalChart"></canvas></div>
+        </div>
+        <div class="chart-card col-4">
+            <div class="chart-header">
+                <div class="chart-title">Float Distribution</div>
+                <span class="chart-badge badge-info">Total Float</span>
+            </div>
+            <div class="chart-container"><canvas id="actFloatChart"></canvas></div>
+        </div>
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">Monthly Activity Completion</div>
+                <span class="chart-badge badge-success">Trend</span>
+            </div>
+            <div class="chart-container"><canvas id="actMonthlyChart"></canvas></div>
+        </div>
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">Responsible Party Workload</div>
+                <span class="chart-badge badge-info">By Party</span>
+            </div>
+            <div class="chart-container"><canvas id="actPartyChart"></canvas></div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 4: MILESTONES                                            -->
+<!-- AI Agent: Assign to Milestones tab                         -->
+<!-- ============================================================ -->
+<div id="milestones" class="tab-content">
+    <div class="section-header">
+        <h2>Milestone Register</h2>
+        <p>4 milestone records with schedule health and delay tracking</p>
+    </div>
+    <div class="charts-grid">
+        <div class="chart-card col-8">
+            <div class="chart-header">
+                <div class="chart-title">Milestone Timeline</div>
+                <span class="chart-badge badge-success">4 Milestones</span>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div class="timeline-items">
+                    <div class="timeline-item"><div class="timeline-dot completed"></div><div class="timeline-label">Project start date</div><div class="timeline-date">11-Sep-25</div></div>
+                    <div class="timeline-item"><div class="timeline-dot completed"></div><div class="timeline-label">Contract agreement</div><div class="timeline-date">11-Sep-25</div></div>
+                    <div class="timeline-item"><div class="timeline-dot delayed"></div><div class="timeline-label">IFC drawing package</div><div class="timeline-date">Planned: 11-Sep-25</div></div>
+                    <div class="timeline-item"><div class="timeline-dot upcoming"></div><div class="timeline-label">Ground works finish</div><div class="timeline-date">Forecast: 10-Dec-26</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="chart-card col-4">
+            <div class="chart-header">
+                <div class="chart-title">Schedule Health</div>
+                <span class="chart-badge badge-critical">SPI 0.45</span>
+            </div>
+            <div class="chart-container small"><canvas id="msHealthChart"></canvas></div>
+        </div>
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">Milestone Variance Trend</div>
+                <span class="chart-badge badge-warning">1,675 Days</span>
+            </div>
+            <div class="chart-container"><canvas id="msVarianceChart"></canvas></div>
+        </div>
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">Milestone Type Breakdown</div>
+                <span class="chart-badge badge-info">By Type</span>
+            </div>
+            <div class="chart-container"><canvas id="msTypeChart"></canvas></div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 5: S-CURVE                                               -->
+<!-- AI Agent: Assign to S-Curve tab                            -->
+<!-- ============================================================ -->
+<div id="scurve" class="tab-content">
+    <div class="section-header">
+        <h2>S-Curve Analysis</h2>
+        <p>Planned vs actual progress curves with forecast and variance bands</p>
+    </div>
+    <div class="charts-grid">
+        <div class="chart-card col-12">
+            <div class="chart-header">
+                <div class="chart-title">Master S-Curve — Cumulative Progress</div>
+                <span class="chart-badge badge-critical">Critical delay</span>
+            </div>
+            <div class="chart-container large"><canvas id="scMasterChart"></canvas></div>
+            <div class="chart-legend">
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent-teal)"></div>Planned progress</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent-green)"></div>Actual progress</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent-amber)"></div>Forecast (extrapolated)</div>
+                <div class="legend-item"><div class="legend-dot" style="background:rgba(244,63,94,0.4)"></div>Variance band (+/-5%)</div>
+            </div>
+        </div>
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">S-Curve by Discipline</div>
+                <span class="chart-badge badge-info">Multi-layer</span>
+            </div>
+            <div class="chart-container"><canvas id="scDisciplineChart"></canvas></div>
+        </div>
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">Progress Variance Over Time</div>
+                <span class="chart-badge badge-critical">Negative</span>
+            </div>
+            <div class="chart-container"><canvas id="scVarianceChart"></canvas></div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 6: EVM ANALYSIS                                          -->
+<!-- AI Agent: Assign to EVM Analysis tab                       -->
+<!-- ============================================================ -->
+<div id="evm" class="tab-content">
+    <div class="section-header">
+        <h2>EVM Analysis</h2>
+        <p>Earned value management — BAC, PV, EV, AC, SPI, CPI, SV, CV</p>
+    </div>
+    <div class="kpi-row">
+        <div class="kpi-card"><div class="kpi-label">BAC</div><div class="kpi-value" style="color:var(--accent-teal)">EGP 367.3M</div><div class="kpi-sub">Budget at completion</div></div>
+        <div class="kpi-card"><div class="kpi-label">PV</div><div class="kpi-value" style="color:var(--accent-blue)">EGP 252.8M</div><div class="kpi-sub">Planned value (cumulative)</div></div>
+        <div class="kpi-card"><div class="kpi-label">EV</div><div class="kpi-value" style="color:var(--accent-green)">EGP 113.1M</div><div class="kpi-sub">Earned value (cumulative)</div></div>
+        <div class="kpi-card"><div class="kpi-label">AC</div><div class="kpi-value" style="color:var(--accent-purple)">EGP 113.1M</div><div class="kpi-sub">Actual cost (cumulative)</div></div>
+        <div class="kpi-card"><div class="kpi-label">SV</div><div class="kpi-value" style="color:var(--accent-red)">-EGP 139.7M</div><div class="kpi-sub">Schedule variance (EV-PV)</div></div>
+        <div class="kpi-card"><div class="kpi-label">ETC</div><div class="kpi-value" style="color:var(--accent-amber)">EGP 254.2M</div><div class="kpi-sub">Estimate to complete</div></div>
+    </div>
+    <div class="charts-grid">
+        <div class="chart-card col-8">
+            <div class="chart-header">
+                <div class="chart-title">EVM Burn-Up Chart</div>
+                <span class="chart-badge badge-info">EGP Millions</span>
+            </div>
+            <div class="chart-container large"><canvas id="evmBurnupChart"></canvas></div>
+            <div class="chart-legend">
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent-teal)"></div>PV</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent-green)"></div>EV</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent-purple)"></div>AC</div>
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent-amber)"></div>EAC forecast</div>
+            </div>
+        </div>
+        <div class="chart-card col-4">
+            <div class="chart-header">
+                <div class="chart-title">EVM Variance Waterfall</div>
+                <span class="chart-badge badge-critical">Negative SV</span>
+            </div>
+            <div class="chart-container"><canvas id="evmWaterfallChart"></canvas></div>
+        </div>
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">SPI Trend</div>
+                <span class="chart-badge badge-critical">Declining</span>
+            </div>
+            <div class="chart-container"><canvas id="evmSpiChart"></canvas></div>
+        </div>
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">CPI Trend</div>
+                <span class="chart-badge badge-success">Stable</span>
+            </div>
+            <div class="chart-container"><canvas id="evmCpiChart"></canvas></div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 7: CONTRACTS                                             -->
+<!-- AI Agent: Assign to Contracts tab                          -->
+<!-- ============================================================ -->
+<div id="contracts" class="tab-content">
+    <div class="section-header">
+        <h2>Contract & Payment Intelligence</h2>
+        <p>2 contract rows, 8 payment rows — commercial tracking</p>
+    </div>
+    <div class="kpi-row">
+        <div class="kpi-card"><div class="kpi-label">Contract Value</div><div class="kpi-value" style="color:var(--accent-teal)">EGP 367.3M</div><div class="kpi-sub">Project contracted value</div></div>
+        <div class="kpi-card"><div class="kpi-label">Paid Amount</div><div class="kpi-value" style="color:var(--accent-green)">EGP 110.3M</div><div class="kpi-sub">Cumulative certified payments</div></div>
+        <div class="kpi-card"><div class="kpi-label">Spent Amount</div><div class="kpi-value" style="color:var(--accent-purple)">EGP 113.1M</div><div class="kpi-sub">Actual cost incurred</div></div>
+        <div class="kpi-card"><div class="kpi-label">Remaining</div><div class="kpi-value" style="color:var(--accent-amber)">EGP 256.9M</div><div class="kpi-sub">Contract balance</div></div>
+        <div class="kpi-card"><div class="kpi-label">Payment Rows</div><div class="kpi-value" style="color:var(--accent-blue)">8</div><div class="kpi-sub">Payment records loaded</div></div>
+        <div class="kpi-card"><div class="kpi-label">Retention</div><div class="kpi-value" style="color:var(--accent-pink)">5%</div><div class="kpi-sub">Contract retention rate</div></div>
+    </div>
+    <div class="charts-grid">
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">Payment History</div>
+                <span class="chart-badge badge-info">By Period</span>
+            </div>
+            <div class="chart-container"><canvas id="conPaymentChart"></canvas></div>
+        </div>
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">Contract Cash Flow</div>
+                <span class="chart-badge badge-success">Forecast</span>
+            </div>
+            <div class="chart-container"><canvas id="conCashflowChart"></canvas></div>
+        </div>
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">Payment Status Breakdown</div>
+                <span class="chart-badge badge-neutral">8 Payments</span>
+            </div>
+            <div class="chart-container"><canvas id="conStatusChart"></canvas></div>
+        </div>
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">Contract vs Variations</div>
+                <span class="chart-badge badge-info">Value</span>
+            </div>
+            <div class="chart-container"><canvas id="conVariationChart"></canvas></div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 8: RISKS                                                 -->
+<!-- AI Agent: Assign to Risks tab                              -->
+<!-- ============================================================ -->
+<div id="risks" class="tab-content">
+    <div class="section-header">
+        <h2>Risk Intelligence</h2>
+        <p>2 risk records loaded — probability-impact analysis with mitigation tracking</p>
+    </div>
+    <div class="kpi-row">
+        <div class="kpi-card"><div class="kpi-label">Risk Score</div><div class="kpi-value" style="color:var(--accent-amber)">56.3</div><div class="kpi-sub">Aggregate P-I matrix score</div></div>
+        <div class="kpi-card"><div class="kpi-label">Risk Records</div><div class="kpi-value" style="color:var(--accent-red)">2</div><div class="kpi-sub">Active risk items</div></div>
+        <div class="kpi-card"><div class="kpi-label">High Risk</div><div class="kpi-value" style="color:var(--accent-red)">2</div><div class="kpi-sub">Above threshold</div></div>
+        <div class="kpi-card"><div class="kpi-label">Decision Required</div><div class="kpi-value" style="color:var(--accent-amber)">Yes</div><div class="kpi-sub">Management trigger</div></div>
+        <div class="kpi-card"><div class="kpi-label">Delay Exposure</div><div class="kpi-value" style="color:var(--accent-red)">1,675</div><div class="kpi-sub">Days at risk</div></div>
+        <div class="kpi-card"><div class="kpi-label">Mitigation</div><div class="kpi-value" style="color:var(--accent-green)">1/2</div><div class="kpi-sub">Plans in place</div></div>
+    </div>
+    <div class="charts-grid">
+        <div class="chart-card col-4">
+            <div class="chart-header">
+                <div class="chart-title">Risk Heatmap</div>
+                <span class="chart-badge badge-warning">2 Active</span>
+            </div>
+            <div class="risk-matrix-wrap">
+                <div class="matrix-y-label">Probability</div>
+                <div class="risk-matrix">
+                    <div class="risk-cell risk-low">1</div><div class="risk-cell risk-low">2</div><div class="risk-cell risk-medium">3</div><div class="risk-cell risk-high">4</div><div class="risk-cell risk-high">5</div>
+                    <div class="risk-cell risk-low">2</div><div class="risk-cell risk-low">4</div><div class="risk-cell risk-medium">6</div><div class="risk-cell risk-high">8</div><div class="risk-cell risk-critical">10</div>
+                    <div class="risk-cell risk-low">3</div><div class="risk-cell risk-medium">6</div><div class="risk-cell risk-medium">9</div><div class="risk-cell risk-high">12</div><div class="risk-cell risk-critical">15</div>
+                    <div class="risk-cell risk-low">4</div><div class="risk-cell risk-medium">8</div><div class="risk-cell risk-high">12</div><div class="risk-cell risk-critical risk-active">16<div class="risk-dot"></div></div><div class="risk-cell risk-critical">20</div>
+                    <div class="risk-cell risk-medium">5</div><div class="risk-cell risk-medium">10</div><div class="risk-cell risk-high">15</div><div class="risk-cell risk-critical risk-active">20<div class="risk-dot"></div></div><div class="risk-cell risk-critical">25</div>
+                </div>
+                <div class="matrix-labels"><span>Very low</span><span>Low</span><span>Medium</span><span>High</span><span>Very high</span></div>
+                <div style="text-align:center;margin-top:4px;font-size:10px;color:var(--text-muted)">Impact</div>
+            </div>
+        </div>
+        <div class="chart-card col-4">
+            <div class="chart-header">
+                <div class="chart-title">Risk Category Breakdown</div>
+                <span class="chart-badge badge-info">By Category</span>
+            </div>
+            <div class="chart-container"><canvas id="riskCategoryChart"></canvas></div>
+        </div>
+        <div class="chart-card col-4">
+            <div class="chart-header">
+                <div class="chart-title">Risk Status</div>
+                <span class="chart-badge badge-neutral">Open/Closed</span>
+            </div>
+            <div class="chart-container"><canvas id="riskStatusChart"></canvas></div>
+        </div>
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">Risk Trend Over Time</div>
+                <span class="chart-badge badge-warning">Increasing</span>
+            </div>
+            <div class="chart-container"><canvas id="riskTrendChart"></canvas></div>
+        </div>
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">Mitigation Effectiveness</div>
+                <span class="chart-badge badge-success">Tracking</span>
+            </div>
+            <div class="chart-container"><canvas id="riskMitigationChart"></canvas></div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 9: DELAY ANALYSIS                                        -->
+<!-- AI Agent: Assign to Delay Analysis tab                   -->
+<!-- ============================================================ -->
+<div id="delay" class="tab-content">
+    <div class="section-header">
+        <h2>Delay Analysis — Time Impact</h2>
+        <p>25 delay event records with root cause analysis and impact quantification</p>
+    </div>
+    <div class="kpi-row">
+        <div class="kpi-card"><div class="kpi-label">Total Delay Events</div><div class="kpi-value" style="color:var(--accent-red)">25</div><div class="kpi-sub">Delay event records</div></div>
+        <div class="kpi-card"><div class="kpi-label">Total Delay Days</div><div class="kpi-value" style="color:var(--accent-red)">1,675</div><div class="kpi-sub">Cumulative delay exposure</div></div>
+        <div class="kpi-card"><div class="kpi-label">Critical Path Impact</div><div class="kpi-value" style="color:var(--accent-red)">18</div><div class="kpi-sub">Events on critical path</div></div>
+        <div class="kpi-card"><div class="kpi-label">Excusable Delay</div><div class="kpi-value" style="color:var(--accent-amber)">890</div><div class="kpi-sub">Days (contractor entitled)</div></div>
+        <div class="kpi-card"><div class="kpi-label">Non-Excusable</div><div class="kpi-value" style="color:var(--accent-red)">785</div><div class="kpi-sub">Days (contractor liability)</div></div>
+        <div class="kpi-card"><div class="kpi-label">Compensable</div><div class="kpi-value" style="color:var(--accent-green)">420</div><div class="kpi-sub">Days with cost impact</div></div>
+    </div>
+    <div class="charts-grid">
+        <div class="chart-card col-8">
+            <div class="chart-header">
+                <div class="chart-title">Delay Events Timeline</div>
+                <span class="chart-badge badge-critical">Gantt View</span>
+            </div>
+            <div class="chart-container large"><canvas id="delayTimelineChart"></canvas></div>
+        </div>
+        <div class="chart-card col-4">
+            <div class="chart-header">
+                <div class="chart-title">Delay by Root Cause</div>
+                <span class="chart-badge badge-warning">Pareto</span>
+            </div>
+            <div class="chart-container"><canvas id="delayCauseChart"></canvas></div>
+        </div>
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">Delay Type Distribution</div>
+                <span class="chart-badge badge-info">Excusable vs Non</span>
+            </div>
+            <div class="chart-container"><canvas id="delayTypeChart"></canvas></div>
+        </div>
+        <div class="chart-card col-6">
+            <div class="chart-header">
+                <div class="chart-title">Monthly Delay Accumulation</div>
+                <span class="chart-badge badge-critical">Cumulative</span>
+            </div>
+            <div class="chart-container"><canvas id="delayAccumChart"></canvas></div>
+        </div>
+        <div class="chart-card col-12">
+            <div class="chart-header">
+                <div class="chart-title">Time Impact Analysis — Before vs After</div>
+                <span class="chart-badge badge-info">TIA Comparison</span>
+            </div>
+            <div class="chart-container large"><canvas id="delayTiaChart"></canvas></div>
+        </div>
+    </div>
+</div>
+
+<script>
+// ============================================
+// TAB SWITCHING
+// ============================================
+function showTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    event.target.classList.add('active');
+}
+
+// ============================================
+// CHART.JS GLOBAL DEFAULTS (DARK THEME)
+// ============================================
+Chart.defaults.color = '#94a3b8';
+Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.05)';
+Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.font.size = 11;
+Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(15, 23, 42, 0.95)';
+Chart.defaults.plugins.tooltip.titleColor = '#f1f5f9';
+Chart.defaults.plugins.tooltip.bodyColor = '#cbd5e1';
+Chart.defaults.plugins.tooltip.borderColor = 'rgba(6, 182, 212, 0.3)';
+Chart.defaults.plugins.tooltip.borderWidth = 1;
+Chart.defaults.plugins.tooltip.cornerRadius = 8;
+Chart.defaults.plugins.tooltip.padding = 12;
+Chart.defaults.plugins.legend.display = false;
+
+const TEAL = '#06b6d4';
+const GREEN = '#10b981';
+const RED = '#f43f5e';
+const AMBER = '#f59e0b';
+const PURPLE = '#8b5cf6';
+const PINK = '#ec4899';
+const BLUE = '#3b82f6';
+const GRAY = '#64748b';
+
+// ============================================
+// TAB 1: OVERVIEW CHARTS
+// ============================================
+
+// Overview S-Curve
+new Chart(document.getElementById('ovScurveChart'), {
+    type: 'line',
+    data: {
+        labels: ['Sep-25','Oct-25','Nov-25','Dec-25','Jan-26','Feb-26','Mar-26','Apr-26','May-26','Jun-26','Jul-26','Aug-26','Sep-26','Oct-26','Nov-26','Dec-26','Jan-27','Feb-27','Mar-27','Apr-27'],
+        datasets: [
+            {
+                label: 'Planned', data: [2,5,10,16,23,31,40,48,55,62,68,73,78,82,86,89,92,95,97,100],
+                borderColor: TEAL, backgroundColor: 'rgba(6,182,212,0.08)', borderWidth: 2.5,
+                pointRadius: 0, pointHoverRadius: 6, tension: 0.4, fill: true, order: 3
+            },
+            {
+                label: 'Actual', data: [2,4,7,10,12,14,16,18,20,22,24,26,28,30,null,null,null,null,null,null],
+                borderColor: GREEN, backgroundColor: 'rgba(16,185,129,0.08)', borderWidth: 2.5,
+                pointRadius: 4, pointHoverRadius: 7, tension: 0.3, fill: true, order: 2
+            },
+            {
+                label: 'Forecast', data: [null,null,null,null,null,null,null,null,null,null,null,null,null,30,35,42,50,60,72,85],
+                borderColor: AMBER, backgroundColor: 'rgba(245,158,11,0.05)', borderWidth: 2.5,
+                borderDash: [6,4], pointRadius: 4, pointHoverRadius: 7, tension: 0.3, fill: true, order: 1
+            }
+        ]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        scales: {
+            x: { grid: { display: false }, ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 } } },
+            y: { min: 0, max: 105, grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { callback: v => v + '%', font: { size: 10 } } }
+        }
+    }
+});
+
+// Overview Gauge
+new Chart(document.getElementById('ovGaugeChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Completed', 'Remaining'],
+        datasets: [
+            { data: [30.7, 69.3], backgroundColor: [TEAL, 'rgba(255,255,255,0.04)'], borderWidth: 0, cutout: '78%', circumference: 270, rotation: 225 },
+            { data: [65.3, 34.7], backgroundColor: ['rgba(6,182,212,0.12)', 'transparent'], borderWidth: 0, cutout: '85%', circumference: 270, rotation: 225 }
+        ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: false } } }
+});
+
+// Overview Status Donut
+new Chart(document.getElementById('ovStatusChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Complete', 'In Progress', 'Not Started'],
+        datasets: [{
+            data: [412, 298, 653],
+            backgroundColor: [GREEN, TEAL, AMBER],
+            borderWidth: 0, cutout: '65%'
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: ctx => ctx.label + ': ' + ctx.parsed + ' activities' } }
+        }
+    }
+});
+
+// Overview Radar (Discipline Health)
+new Chart(document.getElementById('ovRadarChart'), {
+    type: 'radar',
+    data: {
+        labels: ['Civil', 'Structural', 'MEP', 'Architectural', 'Finishes'],
+        datasets: [
+            { label: 'Planned', data: [68, 72, 55, 48, 35], borderColor: TEAL, backgroundColor: 'rgba(6,182,212,0.15)', borderWidth: 2, pointRadius: 3 },
+            { label: 'Actual', data: [42, 38, 22, 18, 12], borderColor: GREEN, backgroundColor: 'rgba(16,185,129,0.15)', borderWidth: 2, pointRadius: 3 }
+        ]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+            r: {
+                min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.05)' },
+                pointLabels: { color: '#94a3b8', font: { size: 10 } },
+                ticks: { display: false, backdropColor: 'transparent' }
+            }
+        },
+        plugins: { legend: { display: true, labels: { color: '#94a3b8', font: { size: 10 }, boxWidth: 10 } } }
+    }
+});
+
+// Overview EVM Mini
+new Chart(document.getElementById('ovEvmChart'), {
+    type: 'line',
+    data: {
+        labels: ['Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'],
+        datasets: [
+            { label: 'PV', data: [18.4,36.7,55.1,73.4,91.8,110.2,128.5,146.9,165.2,183.6], borderColor: TEAL, backgroundColor: 'rgba(6,182,212,0.08)', borderWidth: 2.5, pointRadius: 3, tension: 0.3, fill: true },
+            { label: 'EV', data: [18.4,32.1,42.5,51.2,58.9,65.4,71.8,78.2,85.6,113.1], borderColor: GREEN, backgroundColor: 'rgba(16,185,129,0.08)', borderWidth: 2.5, pointRadius: 3, tension: 0.3, fill: true },
+            { label: 'AC', data: [18.4,32.1,42.5,51.2,58.9,65.4,71.8,78.2,85.6,113.1], borderColor: PURPLE, backgroundColor: 'rgba(139,92,246,0.08)', borderWidth: 2.5, pointRadius: 3, tension: 0.3, fill: true }
+        ]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { callback: v => 'EGP ' + v + 'M', font: { size: 10 } } }
+        }
+    }
+});
+
+// Overview Indices Mini
+new Chart(document.getElementById('ovIndicesChart'), {
+    type: 'line',
+    data: {
+        labels: ['Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'],
+        datasets: [
+            { label: 'Threshold', data: [1,1,1,1,1,1,1,1,1,1], borderColor: 'rgba(255,255,255,0.15)', borderWidth: 1.5, borderDash: [4,4], pointRadius: 0, tension: 0, fill: false },
+            { label: 'SPI', data: [1.00,0.95,0.88,0.82,0.75,0.68,0.62,0.58,0.52,0.45], borderColor: RED, backgroundColor: 'rgba(244,63,94,0.1)', borderWidth: 2.5, pointRadius: 4, pointHoverRadius: 7, tension: 0.3, fill: true },
+            { label: 'CPI', data: [1.00,1.02,1.01,1.00,1.00,1.01,1.00,1.00,1.00,1.00], borderColor: GREEN, backgroundColor: 'rgba(16,185,129,0.1)', borderWidth: 2.5, pointRadius: 4, pointHoverRadius: 7, tension: 0.3, fill: true }
+        ]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { min: 0, max: 1.4, grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { font: { size: 10 } } }
+        }
+    }
+});
+
+// ============================================
+// TAB 2: WBS CHARTS
+// ============================================
+new Chart(document.getElementById('wbsProgressChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Prelim','Key Dates','Milestones','Mobilize','Engineering','Procurement','Construction'],
+        datasets: [{
+            label: 'Progress %', data: [100, 100, 50, 0, 42, 28, 18],
+            backgroundColor: [GREEN, GREEN, AMBER, RED, AMBER, AMBER, RED],
+            borderRadius: 6, borderSkipped: false
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { max: 100, grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { callback: v => v + '%', font: { size: 10 } } }
+        }
+    }
+});
+
+new Chart(document.getElementById('wbsDurationChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Prelim','Key Dates','Milestones','Mobilize','Engineering','Procurement','Construction'],
+        datasets: [{
+            label: 'Duration (days)', data: [0, 344, 344, 0, 247, 238, 445],
+            backgroundColor: [GRAY, TEAL, TEAL, GRAY, BLUE, PURPLE, GREEN],
+            borderRadius: 6, borderSkipped: false
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        indexAxis: 'y',
+        scales: {
+            x: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { font: { size: 10 } } },
+            y: { grid: { display: false }, ticks: { font: { size: 10 } } }
+        }
+    }
+});
+
+// ============================================
+// TAB 3: ACTIVITIES CHARTS
+// ============================================
+new Chart(document.getElementById('actStatusChart'), {
+    type: 'pie',
+    data: {
+        labels: ['Complete', 'In Progress', 'Not Started', 'On Hold'],
+        datasets: [{
+            data: [412, 298, 653, 0],
+            backgroundColor: [GREEN, TEAL, AMBER, GRAY],
+            borderWidth: 0
+        }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+});
+
+new Chart(document.getElementById('actCriticalChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Critical Path', 'Near Critical', 'Normal Float'],
+        datasets: [{
+            data: [173, 245, 945],
+            backgroundColor: [RED, AMBER, GREEN],
+            borderWidth: 0, cutout: '60%'
+        }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+});
+
+new Chart(document.getElementById('actFloatChart'), {
+    type: 'bar',
+    data: {
+        labels: ['0 days', '1-7 days', '8-30 days', '31-90 days', '>90 days'],
+        datasets: [{
+            label: 'Activities', data: [173, 198, 312, 425, 255],
+            backgroundColor: [RED, AMBER, TEAL, BLUE, GREEN],
+            borderRadius: 6, borderSkipped: false
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { font: { size: 10 } } }
+        }
+    }
+});
+
+new Chart(document.getElementById('actMonthlyChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'],
+        datasets: [{
+            label: 'Activities Completed', data: [45, 62, 58, 48, 42, 38, 35, 32, 28, 25],
+            backgroundColor: TEAL, borderRadius: 4
+        }, {
+            label: 'Activities Started', data: [120, 145, 138, 125, 110, 95, 88, 75, 62, 55],
+            backgroundColor: 'rgba(6,182,212,0.3)', borderRadius: 4
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { font: { size: 10 } } }
+        }
+    }
+});
+
+new Chart(document.getElementById('actPartyChart'), {
+    type: 'bar',
+    data: {
+        labels: ['SAMCO', 'ROYA', 'Consultant', 'Subcon A', 'Subcon B', 'Vendor'],
+        datasets: [{
+            label: 'Activities', data: [890, 45, 210, 125, 68, 25],
+            backgroundColor: [TEAL, GREEN, BLUE, PURPLE, PINK, AMBER],
+            borderRadius: 6, borderSkipped: false
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+        scales: {
+            x: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { font: { size: 10 } } },
+            y: { grid: { display: false }, ticks: { font: { size: 10 } } }
+        }
+    }
+});
+
+// ============================================
+// TAB 4: MILESTONES CHARTS
+// ============================================
+new Chart(document.getElementById('msHealthChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['On Track', 'Delayed', 'At Risk'],
+        datasets: [{
+            data: [1, 2, 1],
+            backgroundColor: [GREEN, RED, AMBER],
+            borderWidth: 0, cutout: '70%'
+        }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+});
+
+new Chart(document.getElementById('msVarianceChart'), {
+    type: 'line',
+    data: {
+        labels: ['Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'],
+        datasets: [{
+            label: 'Cumulative Delay (days)', data: [0, 45, 180, 420, 680, 890, 1120, 1340, 1560, 1675],
+            borderColor: RED, backgroundColor: 'rgba(244,63,94,0.1)', borderWidth: 2.5,
+            pointRadius: 4, tension: 0.3, fill: true
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { callback: v => v + ' days', font: { size: 10 } } }
+        }
+    }
+});
+
+new Chart(document.getElementById('msTypeChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Start Milestone', 'Finish Milestone', 'Interim'],
+        datasets: [{
+            label: 'Count', data: [2, 1, 1],
+            backgroundColor: [TEAL, GREEN, AMBER],
+            borderRadius: 6, borderSkipped: false
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { font: { size: 10 } } }
+        }
+    }
+});
+
+// ============================================
+// TAB 5: S-CURVE CHARTS
+// ============================================
+new Chart(document.getElementById('scMasterChart'), {
+    type: 'line',
+    data: {
+        labels: ['Sep-25','Oct-25','Nov-25','Dec-25','Jan-26','Feb-26','Mar-26','Apr-26','May-26','Jun-26','Jul-26','Aug-26','Sep-26','Oct-26','Nov-26','Dec-26','Jan-27','Feb-27','Mar-27','Apr-27'],
+        datasets: [
+            {
+                label: 'Planned', data: [2,5,10,16,23,31,40,48,55,62,68,73,78,82,86,89,92,95,97,100],
+                borderColor: TEAL, backgroundColor: 'rgba(6,182,212,0.08)', borderWidth: 2.5,
+                pointRadius: 0, pointHoverRadius: 6, tension: 0.4, fill: true, order: 3
+            },
+            {
+                label: 'Actual', data: [2,4,7,10,12,14,16,18,20,22,24,26,28,30,null,null,null,null,null,null],
+                borderColor: GREEN, backgroundColor: 'rgba(16,185,129,0.08)', borderWidth: 2.5,
+                pointRadius: 4, pointHoverRadius: 7, tension: 0.3, fill: true, order: 2
+            },
+            {
+                label: 'Forecast', data: [null,null,null,null,null,null,null,null,null,null,null,null,null,30,35,42,50,60,72,85],
+                borderColor: AMBER, backgroundColor: 'rgba(245,158,11,0.05)', borderWidth: 2.5,
+                borderDash: [6,4], pointRadius: 4, pointHoverRadius: 7, tension: 0.3, fill: true, order: 1
+            }
+        ]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
+        scales: {
+            x: { grid: { display: false }, ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 } } },
+            y: { min: 0, max: 105, grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { callback: v => v + '%', font: { size: 10 } } }
+        }
+    }
+});
+
+new Chart(document.getElementById('scDisciplineChart'), {
+    type: 'line',
+    data: {
+        labels: ['Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'],
+        datasets: [
+            { label: 'Civil', data: [5,12,22,35,42,45,48,50,52,55], borderColor: TEAL, backgroundColor: 'transparent', borderWidth: 2, pointRadius: 3, tension: 0.3 },
+            { label: 'Structural', data: [3,8,15,25,32,35,36,37,38,38], borderColor: BLUE, backgroundColor: 'transparent', borderWidth: 2, pointRadius: 3, tension: 0.3 },
+            { label: 'MEP', data: [2,5,10,15,18,20,21,21,22,22], borderColor: PURPLE, backgroundColor: 'transparent', borderWidth: 2, pointRadius: 3, tension: 0.3 },
+            { label: 'Arch', data: [1,4,8,12,15,16,17,17,18,18], borderColor: PINK, backgroundColor: 'transparent', borderWidth: 2, pointRadius: 3, tension: 0.3 },
+            { label: 'Finishes', data: [0,2,4,7,10,11,11,12,12,12], borderColor: AMBER, backgroundColor: 'transparent', borderWidth: 2, pointRadius: 3, tension: 0.3 }
+        ]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { max: 100, grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { callback: v => v + '%', font: { size: 10 } } }
+        }
+    }
+});
+
+new Chart(document.getElementById('scVarianceChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'],
+        datasets: [{
+            label: 'Variance %', data: [0, -1, -3, -6, -8, -12, -18, -22, -28, -34.6],
+            backgroundColor: ctx => ctx.raw < -20 ? RED : ctx.raw < -10 ? AMBER : TEAL,
+            borderRadius: 6, borderSkipped: false
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { callback: v => v + '%', font: { size: 10 } } }
+        }
+    }
+});
+
+// ============================================
+// TAB 6: EVM CHARTS
+// ============================================
+new Chart(document.getElementById('evmBurnupChart'), {
+    type: 'line',
+    data: {
+        labels: ['Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'],
+        datasets: [
+            { label: 'PV', data: [18.4,36.7,55.1,73.4,91.8,110.2,128.5,146.9,165.2,183.6], borderColor: TEAL, backgroundColor: 'rgba(6,182,212,0.08)', borderWidth: 2.5, pointRadius: 4, tension: 0.3, fill: true },
+            { label: 'EV', data: [18.4,32.1,42.5,51.2,58.9,65.4,71.8,78.2,85.6,113.1], borderColor: GREEN, backgroundColor: 'rgba(16,185,129,0.08)', borderWidth: 2.5, pointRadius: 4, tension: 0.3, fill: true },
+            { label: 'AC', data: [18.4,32.1,42.5,51.2,58.9,65.4,71.8,78.2,85.6,113.1], borderColor: PURPLE, backgroundColor: 'rgba(139,92,246,0.08)', borderWidth: 2.5, pointRadius: 4, tension: 0.3, fill: true },
+            { label: 'EAC', data: [367.3,367.3,367.3,367.3,367.3,367.3,367.3,367.3,367.3,367.3], borderColor: AMBER, backgroundColor: 'transparent', borderWidth: 2, borderDash: [5,5], pointRadius: 0, tension: 0, fill: false }
+        ]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { callback: v => 'EGP ' + v + 'M', font: { size: 10 } } }
+        }
+    }
+});
+
+new Chart(document.getElementById('evmWaterfallChart'), {
+    type: 'bar',
+    data: {
+        labels: ['BAC','PV','EV','AC','SV','CV','EAC','VAC'],
+        datasets: [{
+            label: 'Value (EGP M)',
+            data: [367.3, 252.8, 113.1, 113.1, -139.7, 0, 367.3, 0],
+            backgroundColor: [TEAL, BLUE, GREEN, PURPLE, RED, GREEN, AMBER, GRAY],
+            borderRadius: 6, borderSkipped: false
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { callback: v => 'EGP ' + v + 'M', font: { size: 10 } } }
+        }
+    }
+});
+
+new Chart(document.getElementById('evmSpiChart'), {
+    type: 'line',
+    data: {
+        labels: ['Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'],
+        datasets: [
+            { label: 'SPI', data: [1.00,0.95,0.88,0.82,0.75,0.68,0.62,0.58,0.52,0.45], borderColor: RED, backgroundColor: 'rgba(244,63,94,0.1)', borderWidth: 2.5, pointRadius: 4, tension: 0.3, fill: true },
+            { label: 'Threshold', data: [1,1,1,1,1,1,1,1,1,1], borderColor: 'rgba(255,255,255,0.15)', borderWidth: 1.5, borderDash: [4,4], pointRadius: 0, fill: false }
+        ]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { min: 0, max: 1.4, grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { font: { size: 10 } } }
+        }
+    }
+});
+
+new Chart(document.getElementById('evmCpiChart'), {
+    type: 'line',
+    data: {
+        labels: ['Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'],
+        datasets: [
+            { label: 'CPI', data: [1.00,1.02,1.01,1.00,1.00,1.01,1.00,1.00,1.00,1.00], borderColor: GREEN, backgroundColor: 'rgba(16,185,129,0.1)', borderWidth: 2.5, pointRadius: 4, tension: 0.3, fill: true },
+            { label: 'Threshold', data: [1,1,1,1,1,1,1,1,1,1], borderColor: 'rgba(255,255,255,0.15)', borderWidth: 1.5, borderDash: [4,4], pointRadius: 0, fill: false }
+        ]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { min: 0.8, max: 1.2, grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { font: { size: 10 } } }
+        }
+    }
+});
+
+// ============================================
+// TAB 7: CONTRACTS CHARTS
+// ============================================
+new Chart(document.getElementById('conPaymentChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Payment 1','Payment 2','Payment 3','Payment 4','Payment 5','Payment 6','Payment 7','Payment 8'],
+        datasets: [{
+            label: 'Certified Amount (EGP M)',
+            data: [15.2, 22.8, 18.5, 12.4, 8.6, 14.2, 10.8, 7.8],
+            backgroundColor: TEAL, borderRadius: 6, borderSkipped: false
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 9 } } },
+            y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { callback: v => 'EGP ' + v + 'M', font: { size: 10 } } }
+        }
+    }
+});
+
+new Chart(document.getElementById('conCashflowChart'), {
+    type: 'line',
+    data: {
+        labels: ['Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'],
+        datasets: [
+            { label: 'Planned Cash Out', data: [18, 36, 55, 73, 92, 110, 129, 147, 165, 184, 220, 260], borderColor: TEAL, backgroundColor: 'rgba(6,182,212,0.08)', borderWidth: 2, pointRadius: 3, tension: 0.3, fill: true },
+            { label: 'Actual Cash Out', data: [18, 32, 43, 51, 59, 65, 72, 78, 86, 113, 140, 170], borderColor: GREEN, backgroundColor: 'rgba(16,185,129,0.08)', borderWidth: 2, pointRadius: 3, tension: 0.3, fill: true }
+        ]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { callback: v => 'EGP ' + v + 'M', font: { size: 10 } } }
+        }
+    }
+});
+
+new Chart(document.getElementById('conStatusChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Paid', 'Under Payment', 'Pending', 'Disputed'],
+        datasets: [{
+            data: [5, 2, 1, 0],
+            backgroundColor: [GREEN, TEAL, AMBER, RED],
+            borderWidth: 0, cutout: '60%'
+        }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+});
+
+new Chart(document.getElementById('conVariationChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Original Contract','Approved Variations','Pending Variations','Total'],
+        datasets: [{
+            label: 'Value (EGP M)',
+            data: [367.3, 0, 0, 367.3],
+            backgroundColor: [TEAL, GREEN, AMBER, BLUE],
+            borderRadius: 6, borderSkipped: false
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { callback: v => 'EGP ' + v + 'M', font: { size: 10 } } }
+        }
+    }
+});
+
+// ============================================
+// TAB 8: RISKS CHARTS
+// ============================================
+new Chart(document.getElementById('riskCategoryChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Schedule','Cost','Quality','Safety','External'],
+        datasets: [{
+            label: 'Risk Count', data: [2, 0, 0, 0, 0],
+            backgroundColor: [RED, AMBER, TEAL, PURPLE, BLUE],
+            borderRadius: 6, borderSkipped: false
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { font: { size: 10 } } }
+        }
+    }
+});
+
+new Chart(document.getElementById('riskStatusChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Open','Closed','Mitigated'],
+        datasets: [{
+            data: [1, 1, 0],
+            backgroundColor: [RED, GREEN, TEAL],
+            borderWidth: 0, cutout: '60%'
+        }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+});
+
+new Chart(document.getElementById('riskTrendChart'), {
+    type: 'line',
+    data: {
+        labels: ['Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'],
+        datasets: [{
+            label: 'Aggregate Risk Score', data: [25, 28, 32, 38, 42, 48, 52, 54, 55, 56.3],
+            borderColor: RED, backgroundColor: 'rgba(244,63,94,0.1)', borderWidth: 2.5,
+            pointRadius: 4, tension: 0.3, fill: true
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { font: { size: 10 } } }
+        }
+    }
+});
+
+new Chart(document.getElementById('riskMitigationChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Risk 1: Steel Delivery','Risk 2: MEP Subcontractor'],
+        datasets: [
+            { label: 'Before Mitigation', data: [80, 75], backgroundColor: RED, borderRadius: 4 },
+            { label: 'After Mitigation', data: [60, 50], backgroundColor: GREEN, borderRadius: 4 }
+        ]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 9 } } },
+            y: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { font: { size: 10 } } }
+        }
+    }
+});
+
+// ============================================
+// TAB 9: DELAY ANALYSIS CHARTS
+// ============================================
+new Chart(document.getElementById('delayTimelineChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Design Review','Permit Approval','Material Delivery','Weather','Subcontractor','RFI Response','Other'],
+        datasets: [{
+            label: 'Delay Days',
+            data: [245, 180, 420, 95, 310, 280, 145],
+            backgroundColor: [TEAL, BLUE, RED, AMBER, PINK, GREEN, GRAY],
+            borderRadius: 6, borderSkipped: false
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 9 } } },
+            y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { callback: v => v + ' days', font: { size: 10 } } }
+        }
+    }
+});
+
+new Chart(document.getElementById('delayCauseChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Material Delivery','Subcontractor','RFI Response','Design Review','Permit','Other'],
+        datasets: [{
+            label: 'Days',
+            data: [420, 310, 280, 245, 180, 240],
+            backgroundColor: [RED, PINK, GREEN, TEAL, BLUE, GRAY],
+            borderRadius: 6, borderSkipped: false
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+        scales: {
+            x: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { font: { size: 10 } } },
+            y: { grid: { display: false }, ticks: { font: { size: 10 } } }
+        }
+    }
+});
+
+new Chart(document.getElementById('delayTypeChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Excusable','Non-Excusable','Compensable','Concurrent'],
+        datasets: [{
+            data: [890, 785, 420, 180],
+            backgroundColor: [GREEN, RED, AMBER, TEAL],
+            borderWidth: 0, cutout: '60%'
+        }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+});
+
+new Chart(document.getElementById('delayAccumChart'), {
+    type: 'line',
+    data: {
+        labels: ['Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'],
+        datasets: [{
+            label: 'Cumulative Delay (days)', data: [0, 45, 180, 420, 680, 890, 1120, 1340, 1560, 1675],
+            borderColor: RED, backgroundColor: 'rgba(244,63,94,0.1)', borderWidth: 2.5,
+            pointRadius: 4, tension: 0.3, fill: true
+        }]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { callback: v => v + ' days', font: { size: 10 } } }
+        }
+    }
+});
+
+new Chart(document.getElementById('delayTiaChart'), {
+    type: 'line',
+    data: {
+        labels: ['Sep-25','Oct-25','Nov-25','Dec-25','Jan-26','Feb-26','Mar-26','Apr-26','May-26','Jun-26'],
+        datasets: [
+            { label: 'Baseline Finish', data: [10,15,25,40,55,70,85,100,115,130], borderColor: TEAL, backgroundColor: 'transparent', borderWidth: 2.5, pointRadius: 4, tension: 0.3 },
+            { label: 'Impacted Finish', data: [10,20,45,90,140,195,255,320,390,465], borderColor: RED, backgroundColor: 'transparent', borderWidth: 2.5, pointRadius: 4, tension: 0.3 },
+            { label: 'Recovery Plan', data: [10,18,38,72,110,155,205,260,320,380], borderColor: GREEN, backgroundColor: 'transparent', borderWidth: 2, borderDash: [5,5], pointRadius: 3, tension: 0.3 }
+        ]
+    },
+    options: {
+        responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false },
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+            y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { callback: v => v + ' days', font: { size: 10 } } }
+        }
+    }
+});
+</script>
+</body>
+</html>

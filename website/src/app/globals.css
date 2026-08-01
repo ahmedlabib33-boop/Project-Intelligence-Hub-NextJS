@@ -2398,7 +2398,6 @@ h2 {
 
 .operations-command-bar,
 .operations-hero,
-.operations-project-rail,
 .project-view-switch {
   border: 1px solid rgba(124, 178, 208, 0.28);
   background: linear-gradient(135deg, rgba(9, 28, 47, 0.94), rgba(5, 15, 28, 0.94));
@@ -2882,44 +2881,6 @@ h2 {
 
 .operations-stack { display: grid; gap: 16px; }
 
-.operations-project-rail {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 24px;
-  align-items: center;
-  border-radius: 14px;
-  padding: 20px;
-}
-
-.operations-project-rail > div:first-child span,
-.operations-project-rail > div:first-child b,
-.operations-project-rail > div:first-child small {
-  display: block;
-}
-
-.operations-project-rail > div:first-child span { color: var(--gold); font-size: 0.68rem; font-weight: 900; letter-spacing: 0.09em; text-transform: uppercase; }
-.operations-project-rail > div:first-child b { margin: 5px 0 7px; color: var(--text); font-size: 1.04rem; }
-.operations-project-rail > div:first-child small { color: var(--muted); line-height: 1.45; }
-
-.project-rail-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 9px; }
-
-.project-rail-buttons button {
-  display: grid;
-  gap: 5px;
-  min-height: 70px;
-  border: 1px solid rgba(95, 158, 192, 0.32);
-  border-radius: 8px;
-  background: rgba(8, 29, 47, 0.82);
-  color: var(--text);
-  padding: 12px;
-  text-align: left;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.project-rail-buttons button:hover { border-color: var(--cyan); background: rgba(57, 215, 210, 0.09); }
-.project-rail-buttons small { color: var(--muted); font-size: 0.72rem; font-weight: 700; }
-
 .project-view-switch {
   justify-content: flex-start;
   gap: 4px;
@@ -3179,7 +3140,6 @@ h2 {
   .operations-command-bar { grid-template-columns: 1fr minmax(280px, 1fr); }
   .command-status { display: none; }
   .operations-kpi-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .operations-project-rail { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 760px) {
@@ -3202,8 +3162,6 @@ h2 {
   .sector-donut > div { width: 92px; height: 92px; }
   .operations-scatter { height: 250px; }
   .operations-scatter text { font-size: 9px; }
-  .operations-project-rail { padding: 17px; }
-  .project-rail-buttons { grid-template-columns: 1fr; }
   .project-view-switch { width: 100%; overflow: visible; }
   .project-view-switch button { min-width: 0; flex: 1 1 calc(50% - 2px); white-space: normal; padding: 8px 10px; }
   .operations-footer { display: grid; line-height: 1.5; }
