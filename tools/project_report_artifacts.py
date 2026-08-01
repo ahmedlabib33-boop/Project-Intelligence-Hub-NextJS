@@ -23,7 +23,7 @@ REPORTS: tuple[tuple[str, str, str], ...] = (
     ("elite_svg_charts", "03_elite_svg_charts", "Elite SVG Charts"),
     ("linked_executive_dashboard", "04_linked_executive_dashboard", "Linked Executive Dashboard"),
 )
-REPORT_GENERATOR_VERSION = "2026.08.project-scoped-html-pdf-pptx.v1"
+REPORT_GENERATOR_VERSION = "2026.08.project-scoped-html-pdf-pptx.v2"
 
 
 def _sha256(path: Path) -> str:
@@ -53,7 +53,12 @@ def _percent(value: Any) -> str:
 
 
 def _metric_rows(project: dict[str, Any]) -> list[tuple[str, str]]:
-    return [
+    chart_payloads = project.get("chart_payloads") if isinstance(project.get("chart_payloads"), dict) else {}
+    chart_rows = chart_payloads.get("charts") if isinstance(chart_payloads.get("charts"), list) else []
+    ready = [str(item.get("title") or item.get("id")) for item in chart_rows if item.get("status") == "ready"]
+    draft = [str(item.get("title") or item.get("id")) for item in chart_rows if item.get("status") == "draft"]
+    awaiting = [str(item.get("title") or item.get("id")) for item in chart_rows if item.get("status") == "awaiting_data"]
+    rows = [
         ("Project", _text(project.get("project_display_name"))),
         ("Project ID", _text(project.get("project_id"))),
         ("Sector", _text(project.get("sector"))),
@@ -67,11 +72,16 @@ def _metric_rows(project: dict[str, Any]) -> list[tuple[str, str]]:
         ("Delay Exposure", _text(project.get("delay_assessment") or "Indicative; verify in Primavera P6.")),
         ("Last Source Update", _text(project.get("last_updated"))),
     ]
+    if ready:
+        rows.append(("Verified Source-Backed Charts", "; ".join(ready)))
+    if draft:
+        rows.append(("Draft Scenario Charts", "; ".join(draft)))
+    if awaiting:
+        rows.append(("Charts Awaiting Project Data", "; ".join(awaiting)))
+    return rows
 
 
 def _ensure_html(path: Path, title: str, project: dict[str, Any]) -> None:
-    if path.exists() and path.stat().st_size > 0:
-        return
     metrics = "".join(
         f"<tr><th>{html.escape(label)}</th><td>{html.escape(value)}</td></tr>"
         for label, value in _metric_rows(project)
@@ -264,6 +274,16 @@ def ensure_project_report_artifacts(
         "project_key": project_slug,
         "project_fingerprint": project.get("fingerprint"),
         "generator_version": REPORT_GENERATOR_VERSION,
+        "chart_catalog_version": (
+            project.get("chart_payloads", {}).get("catalog_version")
+            if isinstance(project.get("chart_payloads"), dict)
+            else None
+        ),
+        "chart_status": {
+            str(item.get("id")): str(item.get("status"))
+            for item in (project.get("chart_payloads", {}).get("charts", []) if isinstance(project.get("chart_payloads"), dict) else [])
+            if isinstance(item, dict) and item.get("id")
+        },
         "generated_at": datetime.now().isoformat(timespec="seconds"),
         "reports": results,
     }

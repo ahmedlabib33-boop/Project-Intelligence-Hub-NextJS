@@ -1155,37 +1155,35 @@ def fingerprint(path: Path) -> str:
 
 
 def discover_projects() -> list[dict[str, Any]]:
-    projects: list[dict[str, Any]] = []
+    """Discover project folders through the shared non-destructive catalog."""
     if not PROJECTS_ROOT.exists():
-        return projects
-    for sector_dir in sorted(p for p in PROJECTS_ROOT.iterdir() if p.is_dir() and not p.name.startswith("_")):
-        for project_dir in sorted(p for p in sector_dir.iterdir() if p.is_dir() and not p.name.startswith("_")):
-            manifest = read_json(project_dir / "project_manifest.json")
-            project_json = read_json(project_dir / "project.json")
-            project_id = manifest.get("project_id") or project_json.get("project_id") or slugify(project_dir.name).lower()
-            display_name = (
-                manifest.get("project_display_name")
-                or project_json.get("project_display_name")
-                or project_json.get("name")
-                or project_dir.name
-            )
-            projects.append(
-                {
-                    "project_id": str(project_id),
-                    "project_key": slugify(str(project_id)).lower(),
-                    "project_folder_name": project_dir.name,
-                    "project_display_name": str(display_name),
-                    "sector": sector_dir.name,
-                    "meeting_url": (
-                        project_json.get("meeting_url")
-                        or project_json.get("conference_url")
-                        or project_json.get("teams_url")
-                        or project_json.get("zoom_url")
-                        or project_json.get("google_meet_url")
-                    ),
-                    "path": project_dir,
-                }
-            )
+        return []
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
+    from src.construction_system.project_catalog import discover_projects as catalog_discover_projects
+
+    projects: list[dict[str, Any]] = []
+    for record in catalog_discover_projects(PROJECTS_ROOT):
+        project_dir = Path(str(record["project_dir"]))
+        project_json = read_json(project_dir / "project.json")
+        project_id = str(record["project_id"])
+        projects.append(
+            {
+                "project_id": project_id,
+                "project_key": slugify(project_id).lower(),
+                "project_folder_name": project_dir.name,
+                "project_display_name": str(record.get("project_display_name") or project_dir.name),
+                "sector": str(record.get("sector_name") or "Unassigned"),
+                "meeting_url": (
+                    project_json.get("meeting_url")
+                    or project_json.get("conference_url")
+                    or project_json.get("teams_url")
+                    or project_json.get("zoom_url")
+                    or project_json.get("google_meet_url")
+                ),
+                "path": project_dir,
+            }
+        )
     return projects
 
 

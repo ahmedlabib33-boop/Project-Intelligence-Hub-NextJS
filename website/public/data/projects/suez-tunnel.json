@@ -233,12 +233,13 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-06-27T05:23:55",
-  "fingerprint": "1ee9129fcb83618d8d72b2ad06d5832d0b912dbd7daeea2044ab21ae196f1b15",
+  "last_updated": "2026-08-01T11:09:50",
+  "fingerprint": "405b02ce7a76d2eec6c9fd67342f351dee8fba3080cdb82579be873d16298e1a",
   "source_files": {
     "projects": 1,
     "contracts": 2,
     "payments": 6,
+    "planned_cash_flow": 0,
     "progress": 17,
     "evm": 17,
     "risks": 3,
@@ -305,6 +306,7 @@
         "projects": 1,
         "contracts": 2,
         "payments": 6,
+        "planned_cash_flow": 0,
         "progress": 17,
         "evm": 17,
         "risks": 3,
@@ -1071,6 +1073,25 @@
               "Unnamed: 16": ""
             }
           ]
+        },
+        "planned_cash_flow": {
+          "file": "planned_cash_flow.csv",
+          "exists": true,
+          "row_count": 0,
+          "column_count": 10,
+          "columns": [
+            "project_id",
+            "period_date",
+            "planned_cash_out",
+            "planned_cumulative_cash_out",
+            "currency",
+            "basis",
+            "source_file",
+            "source_sheet",
+            "source_row",
+            "notes"
+          ],
+          "rows": []
         },
         "milestones": {
           "file": "milestones.csv",
@@ -2666,6 +2687,16 @@
           ],
           "truncated": false,
           "source_path": "payments.csv"
+        },
+        "planned_cash_flow": {
+          "file": "planned_cash_flow.csv",
+          "exists": true,
+          "row_count": 0,
+          "column_count": 0,
+          "columns": [],
+          "rows": [],
+          "truncated": false,
+          "source_path": "planned_cash_flow.csv"
         },
         "milestones": {
           "file": "milestones.csv",
@@ -5313,6 +5344,62 @@
               "1-May-26": "7.5"
             }
           ]
+        },
+        {
+          "file": "14-delay_event_classification.csv",
+          "exists": true,
+          "row_count": 0,
+          "column_count": 16,
+          "columns": [
+            "project_id",
+            "event_id",
+            "activity_id",
+            "root_cause",
+            "delay_type",
+            "entitlement_status",
+            "responsible_party",
+            "event_start",
+            "event_finish",
+            "delay_days",
+            "evidence_reference",
+            "source_file",
+            "source_sheet",
+            "source_row",
+            "analyst_status",
+            "notes"
+          ],
+          "rows": []
+        },
+        {
+          "file": "15-tia_recovery_scenario.csv",
+          "exists": true,
+          "row_count": 0,
+          "column_count": 22,
+          "columns": [
+            "project_id",
+            "scenario_id",
+            "scenario_name",
+            "analyst_status",
+            "activity_id",
+            "status_date",
+            "baseline_progress_percent",
+            "impacted_progress_percent",
+            "recovery_progress_percent",
+            "baseline_finish",
+            "impacted_finish",
+            "recovery_finish",
+            "predecessor_activity_id",
+            "successor_activity_id",
+            "relationship_type",
+            "lag_days",
+            "p6_update_reference",
+            "evidence_reference",
+            "source_file",
+            "source_sheet",
+            "source_row",
+            "notes"
+          ],
+          "rows": []
         }
       ],
       "template_tables": [
@@ -7022,10 +7109,30 @@
           ],
           "truncated": false,
           "source_path": "13-client_steel_supply_by_dia_wide.csv"
+        },
+        {
+          "file": "14-delay_event_classification.csv",
+          "exists": true,
+          "row_count": 0,
+          "column_count": 0,
+          "columns": [],
+          "rows": [],
+          "truncated": false,
+          "source_path": "14-delay_event_classification.csv"
+        },
+        {
+          "file": "15-tia_recovery_scenario.csv",
+          "exists": true,
+          "row_count": 0,
+          "column_count": 0,
+          "columns": [],
+          "rows": [],
+          "truncated": false,
+          "source_path": "15-tia_recovery_scenario.csv"
         }
       ],
       "required_file_count": 11,
-      "recognized_file_count": 13,
+      "recognized_file_count": 15,
       "missing_required_files": [],
       "schedule_tables": {
         "MEP Activities": {
@@ -8828,7 +8935,7 @@
         {
           "name": "Delay TIA template detector",
           "status": "Ready",
-          "detail": "13 CSV files recognized in the selected project."
+          "detail": "15 CSV files recognized in the selected project."
         },
         {
           "name": "Column inspector",
@@ -10416,15 +10523,15 @@
           "name": "01_executive_dashboard.pdf",
           "relative_path": "Suez-Tunnel/01_executive_dashboard.pdf",
           "extension": "pdf",
-          "size_kb": 920.8,
-          "modified": "2026-08-01T05:07:56"
+          "size_kb": 62.7,
+          "modified": "2026-08-01T11:17:51"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "Suez-Tunnel/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-01T05:07:57"
+          "modified": "2026-08-01T11:17:51"
         },
         {
           "name": "02_master_dashboard.html",
@@ -10437,15 +10544,15 @@
           "name": "02_master_dashboard.pdf",
           "relative_path": "Suez-Tunnel/02_master_dashboard.pdf",
           "extension": "pdf",
-          "size_kb": 863.9,
-          "modified": "2026-08-01T05:08:01"
+          "size_kb": 62.7,
+          "modified": "2026-08-01T11:17:53"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "Suez-Tunnel/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-01T05:08:02"
+          "modified": "2026-08-01T11:17:53"
         },
         {
           "name": "03_elite_svg_charts.html",
@@ -10458,15 +10565,15 @@
           "name": "03_elite_svg_charts.pdf",
           "relative_path": "Suez-Tunnel/03_elite_svg_charts.pdf",
           "extension": "pdf",
-          "size_kb": 235.6,
-          "modified": "2026-08-01T05:08:04"
+          "size_kb": 62.8,
+          "modified": "2026-08-01T11:17:54"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "Suez-Tunnel/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-01T05:08:04"
+          "modified": "2026-08-01T11:17:54"
         },
         {
           "name": "04_linked_executive_dashboard.html",
@@ -10479,15 +10586,15 @@
           "name": "04_linked_executive_dashboard.pdf",
           "relative_path": "Suez-Tunnel/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
-          "size_kb": 1234.6,
-          "modified": "2026-08-01T05:08:12"
+          "size_kb": 62.7,
+          "modified": "2026-08-01T11:17:55"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "Suez-Tunnel/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-01T05:08:12"
+          "modified": "2026-08-01T11:17:56"
         }
       ],
       "watchers": [
@@ -10509,6 +10616,114 @@
       ]
     }
   },
+  "chart_payloads": {
+    "catalog_version": "2026-08-01",
+    "project_id": "Suez-Tunnel",
+    "project_key": "suez-tunnel",
+    "charts": [
+      {
+        "id": "contracts.planned_vs_actual_cash_flow",
+        "tab": "Contracts",
+        "title": "Planned vs Actual Cash Flow",
+        "type": "grouped_bar",
+        "status": "awaiting_data",
+        "message": "Add project-matched planned cash-flow periods to activate this chart.",
+        "labels": [],
+        "series": [],
+        "source_lineage": {
+          "files": [
+            "planned_cash_flow.csv",
+            "payments.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "period_date",
+            "planned_cash_out"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "delay.root_cause_pareto",
+        "tab": "Delay Analysis - Time Impact Analysis",
+        "title": "Delay by Root Cause",
+        "type": "horizontal_bar",
+        "status": "awaiting_data",
+        "message": "Add Verified classifications linked to selected-project delay events to activate delay root-cause and type charts.",
+        "labels": [],
+        "series": [],
+        "source_lineage": {
+          "files": [
+            "14-delay_event_classification.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "event_id",
+            "root_cause",
+            "delay_days",
+            "analyst_status"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "delay.type_distribution",
+        "tab": "Delay Analysis - Time Impact Analysis",
+        "title": "Delay Type Distribution",
+        "type": "doughnut",
+        "status": "awaiting_data",
+        "message": "Add Verified classifications linked to selected-project delay events to activate delay root-cause and type charts.",
+        "labels": [],
+        "series": [],
+        "source_lineage": {
+          "files": [
+            "14-delay_event_classification.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "event_id",
+            "delay_type",
+            "analyst_status"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "delay.tia_recovery_scenario",
+        "tab": "Delay Analysis - Time Impact Analysis",
+        "title": "Baseline vs Impacted vs Recovery",
+        "type": "line",
+        "status": "awaiting_data",
+        "message": "Add a project-matched P6 recovery scenario to activate this chart.",
+        "labels": [],
+        "series": [],
+        "source_lineage": {
+          "files": [
+            "15-tia_recovery_scenario.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "scenario_id",
+            "activity_id",
+            "status_date",
+            "baseline_progress_percent",
+            "impacted_progress_percent",
+            "recovery_progress_percent",
+            "analyst_status"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      }
+    ],
+    "ready_count": 0,
+    "draft_count": 0,
+    "awaiting_count": 4,
+    "validation": []
+  },
   "reports": {
     "executive_dashboard": "/generated/Suez-Tunnel/01_executive_dashboard.html",
     "master_dashboard": "/generated/Suez-Tunnel/02_master_dashboard.html",
@@ -10523,18 +10738,18 @@
       "files": {
         "html": {
           "name": "01_executive_dashboard.html",
-          "bytes": 18281,
-          "sha256": "b5836656b285c699b345e82528e65936c7449ca0be18a0761df0e04b83a477c4"
+          "bytes": 1428,
+          "sha256": "2727bcb4652fe0ef637cbb5f9de0d3e3986d6d1dd9d8ec594db85e08a216b0d2"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 942926,
-          "sha256": "e3461e37697d173c59c581593a00658bcf545a7bf84d433ece88feddf77e3e21"
+          "bytes": 64162,
+          "sha256": "240fb4f0bc28bd4b3fe6571310ad309037aeb35806532a38c7683f5100a1c6e2"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29125,
-          "sha256": "2353e0fa7603e7af03b252e3ff0abc0c92527d00c50f8b6f77e84dc14812b9d8"
+          "sha256": "265fbd6fefe9af01d831ce02f585da531c8097fd2d6587c27426361a34a50708"
         }
       }
     },
@@ -10545,18 +10760,18 @@
       "files": {
         "html": {
           "name": "02_master_dashboard.html",
-          "bytes": 86813,
-          "sha256": "83c127dcd4429dc14498857e01416ab88315dfb12f7ea9882df3394e4d24c3bd"
+          "bytes": 1422,
+          "sha256": "ff9475d1b8a2535cac8627fdb3ef1c08e4cd7df1b99938cb3ee837aa54e73d07"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
-          "bytes": 884629,
-          "sha256": "015a4f5640de70072999809ca0ea19ab9e8070d3fe6922e399740c06b9a8840e"
+          "bytes": 64156,
+          "sha256": "5ff854a4e4ff8fa49baad09ca7d8e740c32f85ef4cafda9459334e48d4089bd4"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29122,
-          "sha256": "04342ce6b053e70c48e2b87468e80c19641b8ee918ae1763bdf8dac1b7e3956a"
+          "sha256": "045db1a7450ba2e5add0b3619f3d41a9f358c4314943698239c9735ad056ca6f"
         }
       }
     },
@@ -10567,18 +10782,18 @@
       "files": {
         "html": {
           "name": "03_elite_svg_charts.html",
-          "bytes": 52006,
-          "sha256": "0311a6667677d42651efa85ad4d44374ff5efb0bcd8a08ba62fea6674da59cc4"
+          "bytes": 1422,
+          "sha256": "0a00298b0657adaa6bcb6fac898e62b9f11b147df3bd01150b587435d8096cb5"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
-          "bytes": 241294,
-          "sha256": "a580f5d8eab1a34521a3a9702325c43c00e2ece40236b707803f8d00564f8d74"
+          "bytes": 64284,
+          "sha256": "e0b6e2bf17c521b135a2dcc7f1617d3437cc5ec1fc7b588b03cbf14ccf82a556"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29122,
-          "sha256": "077bd3f6c686a30322861860cc986801510d278b6296c901287e87b4b329f6a7"
+          "sha256": "a028afadde57e9ec497bd2a104f3377e680f6d09d42a0eced7e1be304be85e81"
         }
       }
     },
@@ -10589,18 +10804,18 @@
       "files": {
         "html": {
           "name": "04_linked_executive_dashboard.html",
-          "bytes": 57603,
-          "sha256": "4bdee7dc2d79dc039f142cb23561cbb9638505a73aa961adde51a8c296a4b9ca"
+          "bytes": 1442,
+          "sha256": "e5873dcfd2a5ddd2cefefca05441380b25008bdcbdf0635290d1ec1c903a4578"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
-          "bytes": 1264198,
-          "sha256": "609300eb5edd07a54984ceea594840ec05cfd2bcc216c78579d0d72c4ecd7dee"
+          "bytes": 64175,
+          "sha256": "f956f5f8c7bb6b0584d20e102cdb236599e4729c8e6a4438a31dcd5d106e875f"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29131,
-          "sha256": "d56d53b8d44349dae5158ba15af23de451a5d69539c207c0a99341d237901d68"
+          "sha256": "aca488d703581dc21f502fb89f0ddc761a9ee735d5a5cf281f8bda6f24a82cc7"
         }
       }
     }

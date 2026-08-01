@@ -20,6 +20,9 @@ elseif (Test-Path -LiteralPath "D:\one drive data\OneDrive\Documents\Project Int
 $env:PIH_SOURCE_ROOT = $canonicalRoot
 $generatorPath = Join-Path $PSScriptRoot "generate_nextjs_website_data.py"
 $validatorPath = Join-Path $PSScriptRoot "validate_streamlit_vercel_pipeline.py"
+$chartPayloadPath = Join-Path $PSScriptRoot "project_chart_payloads.py"
+$reportArtifactsPath = Join-Path $PSScriptRoot "project_report_artifacts.py"
+$chartCatalogPath = Join-Path $root "config\chart_catalog.json"
 $githubSyncPath = Join-Path $PSScriptRoot "github_no_git_sync.ps1"
 $vercelProjectPath = Join-Path $websiteRoot ".vercel\project.json"
 $analyticsPython = Join-Path $root ".venv-analytics\Scripts\python.exe"
@@ -37,7 +40,7 @@ $script:WatchHashCache = @{}
 
 New-Item -ItemType Directory -Force -Path (Split-Path -Parent $logPath), (Split-Path -Parent $statePath) | Out-Null
 
-foreach ($requiredPath in @($websiteRoot, $generatorPath, $validatorPath, $githubSyncPath, $vercelProjectPath)) {
+foreach ($requiredPath in @($websiteRoot, $generatorPath, $validatorPath, $chartPayloadPath, $reportArtifactsPath, $chartCatalogPath, $githubSyncPath, $vercelProjectPath)) {
     if (-not (Test-Path -LiteralPath $requiredPath)) {
         throw "Required pipeline path is missing: $requiredPath"
     }
@@ -110,6 +113,9 @@ function Get-WatchedItems {
         (Join-Path $websiteRoot "public"),
         $generatorPath,
         $validatorPath,
+        $chartPayloadPath,
+        $reportArtifactsPath,
+        $chartCatalogPath,
         (Join-Path $PSScriptRoot "pih_data_guardrails.py"),
         $PSCommandPath,
         (Join-Path $root "analytics\requirements-advanced.txt"),

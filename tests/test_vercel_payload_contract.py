@@ -20,6 +20,17 @@ def test_generated_project_payloads_keep_identity_tia_and_artifacts_scoped() -> 
     for payload in payloads:
         project_slug = slugify(payload["project_folder_name"])
         assert payload["project_key"]
+        charts = payload.get("chart_payloads")
+        assert isinstance(charts, dict)
+        assert charts.get("project_id") == payload["project_id"]
+        assert charts.get("project_key") == payload["project_key"]
+        chart_ids = {chart.get("id") for chart in charts.get("charts", [])}
+        assert chart_ids == {
+            "contracts.planned_vs_actual_cash_flow",
+            "delay.root_cause_pareto",
+            "delay.type_distribution",
+            "delay.tia_recovery_scenario",
+        }
         assert payload["features"]["outputs_and_watchers"]["outputs_folder"].endswith(payload["project_folder_name"])
         canonical_tia = payload["features"]["delay_analysis"]["canonical_analysis"]
         assert canonical_tia["status"] in {"ready", "missing", "needs_review"}

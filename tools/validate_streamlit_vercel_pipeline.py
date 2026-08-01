@@ -90,6 +90,19 @@ REQUIRED_WORKSPACE_TABLES = (
     "delay_events",
 )
 
+REQUIRED_CHART_INPUTS = {
+    "01-data/import_templates/planned_cash_flow.csv": "project_id",
+    "02-delay_analysis/steel_delay_tia_templates/14-delay_event_classification.csv": "project_id",
+    "02-delay_analysis/steel_delay_tia_templates/15-tia_recovery_scenario.csv": "project_id",
+}
+
+REQUIRED_SOURCE_CHART_IDS = {
+    "contracts.planned_vs_actual_cash_flow",
+    "delay.root_cause_pareto",
+    "delay.type_distribution",
+    "delay.tia_recovery_scenario",
+}
+
 
 def close_enough(actual: Any, expected: float | None) -> bool:
     if expected is None:
@@ -141,6 +154,36 @@ def validate_project_workspace_surface(
     checks: list[str],
 ) -> None:
     """Verify feature payloads are complete and remain inside one project boundary."""
+    for relative_path, required_column in REQUIRED_CHART_INPUTS.items():
+        input_path = project_path / relative_path
+        if not input_path.exists():
+            errors.append(f"{project_key}: project chart input template is missing: {relative_path}")
+            continue
+        header = input_path.read_text(encoding="utf-8-sig", errors="replace").splitlines()
+        columns = {column.strip().casefold() for column in header[0].split(",")} if header else set()
+        if required_column.casefold() not in columns:
+            errors.append(f"{project_key}: project chart input is missing required {required_column}: {relative_path}")
+
+    chart_payloads = output.get("chart_payloads")
+    if not isinstance(chart_payloads, dict):
+        errors.append(f"{project_key}: project-scoped chart payload is missing")
+    else:
+        if chart_payloads.get("project_id") != output.get("project_id") or chart_payloads.get("project_key") != output.get("project_key"):
+            errors.append(f"{project_key}: project-scoped chart payload identity does not match selected project")
+        charts = chart_payloads.get("charts")
+        chart_ids = {str(item.get("id")) for item in charts if isinstance(item, dict)} if isinstance(charts, list) else set()
+        if chart_ids != REQUIRED_SOURCE_CHART_IDS:
+            errors.append(f"{project_key}: source chart catalogue is incomplete or has unexpected entries")
+        elif any(
+            chart.get("status") not in {"ready", "partial", "draft", "awaiting_data"}
+            or not isinstance(chart.get("source_lineage"), dict)
+            for chart in charts
+            if isinstance(chart, dict)
+        ):
+            errors.append(f"{project_key}: source chart payload has an invalid status or missing lineage")
+        else:
+            checks.append(f"{project_key}: project-scoped source chart inputs and payload are isolated")
+
     features = output.get("features")
     if not isinstance(features, dict):
         errors.append(f"{project_key}: complete project workspace payload is missing")

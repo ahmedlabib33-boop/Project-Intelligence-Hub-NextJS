@@ -26,6 +26,37 @@ type ReportArtifact = {
   files?: Record<string, { name: string; bytes: number; sha256: string }>;
 };
 
+type SourceChartSeries = {
+  label: string;
+  color: string;
+  values: Array<number | null>;
+};
+
+type SourceChartPayload = {
+  id: string;
+  tab: "Contracts" | "Delay Analysis - Time Impact Analysis";
+  title: string;
+  type: "grouped_bar" | "horizontal_bar" | "doughnut" | "line";
+  status: "ready" | "partial" | "draft" | "awaiting_data";
+  message: string;
+  labels: string[];
+  series: SourceChartSeries[];
+  source_lineage: { files: string[]; required_columns: string[] };
+  validation: Array<{ file: string; source_row: string; field: string; message: string }>;
+  scenario?: { scenario_id: string; analyst_status: string; activity_count: number } | null;
+};
+
+type ProjectChartPayloads = {
+  catalog_version: string;
+  project_id: string;
+  project_key: string;
+  charts: SourceChartPayload[];
+  ready_count: number;
+  draft_count: number;
+  awaiting_count: number;
+  validation: Array<{ file: string; source_row: string; field: string; message: string }>;
+};
+
 type ProjectRecord = {
   project_id: string;
   project_key: string;
@@ -81,6 +112,7 @@ type ProjectRecord = {
   meeting_url?: string | null;
   source_files: Record<string, number>;
   metric_sources?: Record<string, { source: string; aggregation: string }>;
+  chart_payloads?: ProjectChartPayloads;
   advanced_analytics?: AdvancedAnalyticsPayload;
   features: FeaturePayload;
   reports: Record<ReportKey, string>;
@@ -749,6 +781,107 @@ function ProjectSmartChart({ project, mode }: { project: ProjectRecord; mode: Pr
   );
 }
 
+function sourceChartNumber(value: number | null | undefined) {
+  return value === null || value === undefined || !Number.isFinite(value) ? null : value;
+}
+
+function sourceChartValue(chart: SourceChartPayload, value: number | null | undefined) {
+  const numeric = sourceChartNumber(value);
+  if (numeric === null) return "N/A";
+  if (chart.id === "contracts.planned_vs_actual_cash_flow") return compactCurrency(numeric);
+  if (chart.id === "delay.tia_recovery_scenario") return `${numeric.toFixed(1)}%`;
+  return `${numberValue(numeric, 1)} days`;
+}
+
+function SourceChartCard({ chart, project }: { chart: SourceChartPayload; project: ProjectRecord }) {
+  const values = chart.series.flatMap((series) => series.values.map(sourceChartNumber).filter((value): value is number => value !== null));
+  const maxValue = Math.max(...values.map((value) => Math.abs(value)), 1);
+  const primarySeries = chart.series[0];
+  const doughnutValues = primarySeries?.values.map(sourceChartNumber) || [];
+  const doughnutTotal = doughnutValues.reduce<number>((total, value) => total + (value ?? 0), 0);
+  const doughnutColors = ["#a78bfa", "#39d7d2", "#63a8ff", "#d6a23a", "#fb7185"];
+  let doughnutCursor = 0;
+  const doughnutStops = doughnutValues.map((value, index) => {
+    const start = doughnutCursor;
+    doughnutCursor += doughnutTotal ? ((value || 0) / doughnutTotal) * 100 : 0;
+    const color = doughnutColors[index % doughnutColors.length];
+    return `${color} ${start}% ${doughnutCursor}%`;
+  });
+  const lineHeight = 142;
+  const lineWidth = 620;
+  const linePoints = (series: SourceChartSeries) => series.values
+    .map((value, index) => {
+      const numeric = sourceChartNumber(value);
+      if (numeric === null) return null;
+      const x = 36 + (index * (lineWidth - 72)) / Math.max(1, chart.labels.length - 1);
+      const y = 22 + lineHeight - (Math.max(0, numeric) / maxValue) * lineHeight;
+      return `${x},${y}`;
+    })
+    .filter((point): point is string => point !== null)
+    .join(" ");
+
+  return (
+    <section className="feature-card source-chart-card">
+      <div className="feature-card-head">
+        <h3>{chart.title}</h3>
+        <span>{chart.status === "draft" ? "Draft scenario" : "Selected project only"}</span>
+      </div>
+      <p>{chart.message}</p>
+      {chart.type === "doughnut" ? (
+        <div className="source-chart-doughnut-layout">
+          <div className="source-chart-doughnut" style={{ background: `conic-gradient(${doughnutStops.join(", ") || "#334155 0 100%"})` }}>
+            <div><strong>{numberValue(doughnutTotal, 1)}</strong><span>days</span></div>
+          </div>
+          <div className="source-chart-legend">
+            {chart.labels.map((label, index) => <div key={label}><span style={{ background: doughnutColors[index % doughnutColors.length] }} />{label}<b>{sourceChartValue(chart, chart.series[0]?.values[index])}</b></div>)}
+          </div>
+        </div>
+      ) : chart.type === "line" ? (
+        <div className="source-chart-line-wrap">
+          <svg viewBox={`0 0 ${lineWidth} 220`} role="img" aria-label={`${chart.title} for ${project.project_display_name}`}>
+            {[0, 1, 2, 3].map((line) => <line key={line} x1="30" y1={22 + line * (lineHeight / 3)} x2={lineWidth - 24} y2={22 + line * (lineHeight / 3)} className="project-chart-gridline" />)}
+            {chart.series.map((series) => <polyline key={series.label} fill="none" stroke={series.color} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" points={linePoints(series)} />)}
+            {chart.labels.map((label, index) => <text key={label} x={36 + (index * (lineWidth - 72)) / Math.max(1, chart.labels.length - 1)} y="194" textAnchor="middle" className="project-chart-label">{label}</text>)}
+          </svg>
+          <div className="source-chart-series">{chart.series.map((series) => <span key={series.label}><i style={{ background: series.color }} />{series.label}</span>)}</div>
+        </div>
+      ) : (
+        <div className="source-chart-bars">
+          {chart.labels.map((label, index) => (
+            <div className="source-chart-bar-row" key={label}>
+              <div className="source-chart-bar-label">{label}</div>
+              <div className="source-chart-bar-tracks">
+                {chart.series.map((series) => {
+                  const value = sourceChartNumber(series.values[index]);
+                  return <div className="source-chart-bar-track" key={series.label}><span style={{ width: `${value === null ? 0 : Math.max(2, (Math.abs(value) / maxValue) * 100)}%`, background: series.color }} /><b>{sourceChartValue(chart, value)}</b></div>;
+                })}
+              </div>
+            </div>
+          ))}
+          <div className="source-chart-series">{chart.series.map((series) => <span key={series.label}><i style={{ background: series.color }} />{series.label}</span>)}</div>
+        </div>
+      )}
+      <footer className="source-chart-lineage">Source: {chart.source_lineage.files.join(" + ")} | Project ID: {project.project_id}</footer>
+    </section>
+  );
+}
+
+function ProjectSourceChartGrid({ project, tab }: { project: ProjectRecord; tab: SourceChartPayload["tab"] }) {
+  const payload = project.chart_payloads;
+  if (!payload || payload.project_id !== project.project_id || payload.project_key !== project.project_key) {
+    return <section className="feature-card chart-readiness"><div className="feature-card-head"><h3>Chart Readiness</h3><span>Project isolation check</span></div><p className="empty-note">No matching source-chart payload is available for this selected project.</p></section>;
+  }
+  const tabCharts = payload.charts.filter((chart) => chart.tab === tab);
+  const visible = tabCharts.filter((chart) => ["ready", "partial", "draft"].includes(chart.status) && chart.labels.length && chart.series.length);
+  const pending = tabCharts.filter((chart) => !visible.includes(chart));
+  return (
+    <div className="feature-stack source-chart-stack">
+      {visible.length ? <div className="source-chart-grid">{visible.map((chart) => <SourceChartCard key={chart.id} chart={chart} project={project} />)}</div> : null}
+      {pending.length ? <section className="feature-card chart-readiness"><div className="feature-card-head"><h3>Chart Readiness</h3><span>{pending.length} input{pending.length === 1 ? "" : "s"} required</span></div>{pending.map((chart) => <p key={chart.id}><b>{chart.title}:</b> {chart.message}</p>)}</section> : null}
+    </div>
+  );
+}
+
 function reportHtml(project: ProjectRecord, reportKey: ReportKey) {
   return project.report_artifacts?.[reportKey]?.html || project.reports[reportKey];
 }
@@ -1108,6 +1241,7 @@ function DelayTiaParityPanel({ project }: { project: ProjectRecord }) {
         <FeatureSvg mode="delay" />
       </div>
       <ProjectSmartChart project={project} mode="delay" />
+      <ProjectSourceChartGrid project={project} tab="Delay Analysis - Time Impact Analysis" />
       <ModuleTabs label="Delay TIA views" tabs={["Uploads", "Tables & Conclusion", "MEP Activities", "AI - TIA", "Question", "Source Controls"]} activeTab={view} onChange={setView} />
       {view === "Uploads" ? <>
         <DetectorGrid detectors={delay.detectors} />
@@ -1345,6 +1479,7 @@ function WorkspaceTabContent({
           <MiniMetric label="Payment Rows" value={numberValue(project.source_files.payments)} note="Payment records" />
         </div>
         <ProjectSmartChart project={project} mode="contracts" />
+        <ProjectSourceChartGrid project={project} tab="Contracts" />
         <div className="workspace-two">
           <ProjectDataTable table={workspaceTables.contracts} title="Contracts Register" />
           <ProjectDataTable table={workspaceTables.payments} title="Payments Register" />

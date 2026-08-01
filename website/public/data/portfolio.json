@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-08-01T11:07:17",
+  "generated_at": "2026-08-01T11:24:42",
   "project_count": 4,
   "sector_count": 3,
   "totals": {
     "contract_value": 4567286025.0,
-    "paid_amount": 1728296531.59,
-    "spent_amount": 2094774866.1299999,
+    "paid_amount": 1728296531.5900002,
+    "spent_amount": 2094774866.13,
     "remaining_value": 2838989493.41,
     "average_progress": 0.3298859200459205,
     "average_spi": 0.8039026642929985,
-    "average_cpi": 0.9742233657412727,
+    "average_cpi": 0.9742233657412726,
     "average_risk_score": 45.3125,
     "delayed_projects": 4,
     "high_risk_projects": 3,
@@ -41,7 +41,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting.",
-      "last_updated": "2026-06-27T05:23:53"
+      "last_updated": "2026-08-01T11:09:50"
     },
     {
       "decision_id": "DEC-the-big-p-01-up-20-april-26-01",
@@ -58,7 +58,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting.",
-      "last_updated": "2026-07-07T09:47:41"
+      "last_updated": "2026-08-01T11:09:50"
     },
     {
       "decision_id": "DEC-the-big-p-01-up-20-april-26-02",
@@ -75,7 +75,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness.",
-      "last_updated": "2026-07-07T09:47:41"
+      "last_updated": "2026-08-01T11:09:50"
     },
     {
       "decision_id": "DEC-sophia-mall-01",
@@ -92,7 +92,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness.",
-      "last_updated": "2026-06-27T05:23:54"
+      "last_updated": "2026-08-01T11:09:50"
     },
     {
       "decision_id": "DEC-sophia-mall-02",
@@ -109,7 +109,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review entitlement matrix, notice status, and supporting correspondence.",
-      "last_updated": "2026-06-27T05:23:54"
+      "last_updated": "2026-08-01T11:09:50"
     },
     {
       "decision_id": "DEC-suez-tunnel-01",
@@ -126,7 +126,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting.",
-      "last_updated": "2026-06-27T05:23:55"
+      "last_updated": "2026-08-01T11:09:50"
     },
     {
       "decision_id": "DEC-lmd-bridge-02",
@@ -143,7 +143,7 @@
       "evidence_status": "High",
       "urgency": "Medium",
       "recommended_action": "Validate actual cost and payment records against budget baseline.",
-      "last_updated": "2026-06-27T05:23:53"
+      "last_updated": "2026-08-01T11:09:50"
     },
     {
       "decision_id": "DEC-suez-tunnel-02",
@@ -160,7 +160,7 @@
       "evidence_status": "High",
       "urgency": "Medium",
       "recommended_action": "Validate actual cost and payment records against budget baseline.",
-      "last_updated": "2026-06-27T05:23:55"
+      "last_updated": "2026-08-01T11:09:50"
     }
   ],
   "sectors": [
@@ -309,11 +309,12 @@
       "milestone_count": 5,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-06-27T05:23:53",
+      "last_updated": "2026-08-01T11:09:50",
       "source_files": {
         "projects": 1,
         "contracts": 2,
         "payments": 6,
+        "planned_cash_flow": 0,
         "progress": 17,
         "evm": 17,
         "risks": 3,
@@ -464,11 +465,12 @@
       "milestone_count": 4,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-07-07T09:47:41",
+      "last_updated": "2026-08-01T11:09:50",
       "source_files": {
         "projects": 1,
         "contracts": 2,
         "payments": 8,
+        "planned_cash_flow": 0,
         "progress": 1363,
         "evm": 1363,
         "risks": 2,
@@ -601,11 +603,12 @@
       "milestone_count": 5,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-06-27T05:23:54",
+      "last_updated": "2026-08-01T11:09:50",
       "source_files": {
         "projects": 1,
         "contracts": 2,
         "payments": 6,
+        "planned_cash_flow": 0,
         "progress": 17,
         "evm": 17,
         "risks": 3,
@@ -765,11 +768,12 @@
       "milestone_count": 5,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-06-27T05:23:55",
+      "last_updated": "2026-08-01T11:09:50",
       "source_files": {
         "projects": 1,
         "contracts": 2,
         "payments": 6,
+        "planned_cash_flow": 0,
         "progress": 17,
         "evm": 17,
         "risks": 3,
@@ -846,8 +850,8 @@
     "warn_count": 13,
     "issue_count": 13,
     "report_path": "D:/Project Intelligence Hub NextJS/12-logs/guardrail_report_latest.md",
-    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260801_110718",
-    "last_checked": "2026-08-01T11:07:18",
+    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260801_112443",
+    "last_checked": "2026-08-01T11:24:43",
     "top_issues": [
       {
         "severity": "WARN",
