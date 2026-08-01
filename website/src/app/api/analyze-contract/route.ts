@@ -4,7 +4,7 @@ import { buildProjectContext, contextToPrompt } from "../../../lib/ai/project-co
 import { checkRateLimit } from "../../../lib/ai/rate-limit";
 import { sanitizeText } from "../../../lib/ai/provider";
 import { withSamcoDirectorPrompt } from "../../../lib/ai/samco-director";
-import { aiRequestFailure, readAiJson } from "../../../lib/ai/request";
+import { aiRequestFailure, aiTextList, formatAiText, readAiJson } from "../../../lib/ai/request";
 
 export const runtime = "nodejs";
 
@@ -17,10 +17,10 @@ function parseContract(answer: string) {
   try {
     const parsed = JSON.parse(answer);
     return {
-      summary: String(parsed.summary || "No contract summary available from current data."),
-      keyClauses: Array.isArray(parsed.keyClauses) ? parsed.keyClauses.map(String).slice(0, 8) : [],
-      claimExposure: String(parsed.claimExposure || "Not enough data"),
-      recommendations: Array.isArray(parsed.recommendations) ? parsed.recommendations.map(String).slice(0, 8) : []
+      summary: formatAiText(parsed.summary) || "No contract summary available from current data.",
+      keyClauses: aiTextList(parsed.keyClauses),
+      claimExposure: formatAiText(parsed.claimExposure) || "Not enough data",
+      recommendations: aiTextList(parsed.recommendations)
     };
   } catch {
     return { summary: answer, keyClauses: [], claimExposure: "Not enough data", recommendations: [] };

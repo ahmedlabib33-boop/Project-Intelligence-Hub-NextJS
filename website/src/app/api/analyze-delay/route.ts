@@ -4,7 +4,7 @@ import { buildProjectContext, contextToPrompt } from "../../../lib/ai/project-co
 import { checkRateLimit } from "../../../lib/ai/rate-limit";
 import { sanitizeText } from "../../../lib/ai/provider";
 import { withSamcoDirectorPrompt } from "../../../lib/ai/samco-director";
-import { aiRequestFailure, readAiJson } from "../../../lib/ai/request";
+import { aiRequestFailure, aiTextList, formatAiText, readAiJson } from "../../../lib/ai/request";
 
 export const runtime = "nodejs";
 
@@ -17,10 +17,10 @@ function parseDelay(answer: string) {
   try {
     const parsed = JSON.parse(answer);
     return {
-      delayEvents: Array.isArray(parsed.delayEvents) ? parsed.delayEvents.map(String).slice(0, 8) : [],
-      criticalPathImpact: String(parsed.criticalPathImpact || "Not enough data to confirm critical path impact."),
-      recoveryOptions: Array.isArray(parsed.recoveryOptions) ? parsed.recoveryOptions.map(String).slice(0, 8) : [],
-      riskExposure: String(parsed.riskExposure || "Not enough data")
+      delayEvents: aiTextList(parsed.delayEvents),
+      criticalPathImpact: formatAiText(parsed.criticalPathImpact) || "Not enough data to confirm critical path impact.",
+      recoveryOptions: aiTextList(parsed.recoveryOptions),
+      riskExposure: formatAiText(parsed.riskExposure) || "Not enough data"
     };
   } catch {
     return { delayEvents: [answer], criticalPathImpact: "Not enough data to confirm critical path impact.", recoveryOptions: [], riskExposure: "Not enough data" };

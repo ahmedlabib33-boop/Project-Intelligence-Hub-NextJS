@@ -5,7 +5,7 @@ import { sanitizeText } from "../../../../lib/ai/provider";
 import { checkRateLimit } from "../../../../lib/ai/rate-limit";
 import { withSamcoDirectorPrompt } from "../../../../lib/ai/samco-director";
 import { loadQuestionBank, localTechnicalAnswer, searchQuestionBank } from "../../../../lib/technical-knowledge";
-import { aiRequestFailure, readAiJson } from "../../../../lib/ai/request";
+import { aiRequestFailure, aiTextList, formatAiText, readAiJson } from "../../../../lib/ai/request";
 
 export const runtime = "nodejs";
 
@@ -20,15 +20,15 @@ function parseStructured(answer: string, fallback: ReturnType<typeof localTechni
   try {
     const parsed = JSON.parse(answer);
     return {
-      answer: String(parsed.answer || fallback.answer),
+      answer: formatAiText(parsed.answer, 2400) || fallback.answer,
       matchedQuestions: Array.isArray(parsed.matchedQuestions) ? parsed.matchedQuestions : fallback.matchedQuestions,
-      departments: Array.isArray(parsed.departments) ? parsed.departments.map(String).slice(0, 8) : fallback.departments,
-      evidenceRequired: Array.isArray(parsed.evidenceRequired) ? parsed.evidenceRequired.map(String).slice(0, 10) : fallback.evidenceRequired,
-      owners: Array.isArray(parsed.owners) ? parsed.owners.map(String).slice(0, 8) : fallback.owners,
-      impactAreas: Array.isArray(parsed.impactAreas) ? parsed.impactAreas.map(String).slice(0, 8) : fallback.impactAreas,
-      recommendedActions: Array.isArray(parsed.recommendedActions) ? parsed.recommendedActions.map(String).slice(0, 10) : fallback.recommendedActions,
-      followUpQuestions: Array.isArray(parsed.followUpQuestions) ? parsed.followUpQuestions.map(String).slice(0, 8) : fallback.followUpQuestions,
-      sourceScope: String(parsed.sourceScope || fallback.sourceScope),
+      departments: Array.isArray(parsed.departments) ? aiTextList(parsed.departments) : fallback.departments,
+      evidenceRequired: Array.isArray(parsed.evidenceRequired) ? aiTextList(parsed.evidenceRequired, 10) : fallback.evidenceRequired,
+      owners: Array.isArray(parsed.owners) ? aiTextList(parsed.owners) : fallback.owners,
+      impactAreas: Array.isArray(parsed.impactAreas) ? aiTextList(parsed.impactAreas) : fallback.impactAreas,
+      recommendedActions: Array.isArray(parsed.recommendedActions) ? aiTextList(parsed.recommendedActions, 10) : fallback.recommendedActions,
+      followUpQuestions: Array.isArray(parsed.followUpQuestions) ? aiTextList(parsed.followUpQuestions) : fallback.followUpQuestions,
+      sourceScope: formatAiText(parsed.sourceScope) || fallback.sourceScope,
       ...meta
     };
   } catch {

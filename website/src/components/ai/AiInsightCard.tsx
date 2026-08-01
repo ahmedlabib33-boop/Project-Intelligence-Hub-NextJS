@@ -25,6 +25,16 @@ const titleByType: Record<InsightType, string> = {
   contract: "AI Contract Insight"
 };
 
+function displayValue(value: unknown): string {
+  if (value === null || value === undefined) return "";
+  if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") return String(value);
+  if (Array.isArray(value)) return value.map(displayValue).filter(Boolean).join("; ");
+  return Object.entries(value as Record<string, unknown>)
+    .slice(0, 5)
+    .map(([key, item]) => `${key.replace(/([A-Z])/g, " $1").replace(/[_-]+/g, " ").trim()}: ${displayValue(item)}`)
+    .join("; ");
+}
+
 export default function AiInsightCard({ type, projectKey }: AiInsightCardProps) {
   const [data, setData] = useState<Record<string, unknown> | null>(null);
   const [loading, setLoading] = useState(false);
@@ -66,7 +76,7 @@ export default function AiInsightCard({ type, projectKey }: AiInsightCardProps) 
       <div className="ai-insight-list">
         <b>{label}</b>
         <ul>
-          {values.slice(0, 5).map((item, index) => <li key={index}>{String(item)}</li>)}
+          {values.slice(0, 5).map((item, index) => <li key={index}>{displayValue(item)}</li>)}
         </ul>
       </div>
     );
@@ -87,10 +97,10 @@ export default function AiInsightCard({ type, projectKey }: AiInsightCardProps) 
       {!error && loading ? <p className="ai-insight-muted">Generating source-backed insight...</p> : null}
       {!error && data ? (
         <div className="ai-insight-body">
-          {"summary" in data ? <p>{String(data.summary)}</p> : null}
-          {"criticalPathImpact" in data ? <p>{String(data.criticalPathImpact)}</p> : null}
-          {"riskExposure" in data ? <p><b>Risk exposure:</b> {String(data.riskExposure)}</p> : null}
-          {"claimExposure" in data ? <p><b>Claim exposure:</b> {String(data.claimExposure)}</p> : null}
+          {"summary" in data ? <p>{displayValue(data.summary)}</p> : null}
+          {"criticalPathImpact" in data ? <p>{displayValue(data.criticalPathImpact)}</p> : null}
+          {"riskExposure" in data ? <p><b>Risk exposure:</b> {displayValue(data.riskExposure)}</p> : null}
+          {"claimExposure" in data ? <p><b>Claim exposure:</b> {displayValue(data.claimExposure)}</p> : null}
           {renderList("Actions", data.actions)}
           {renderList("Risks", data.risks)}
           {renderList("Themes", data.themes)}

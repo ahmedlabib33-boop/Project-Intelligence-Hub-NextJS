@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import portfolio from "../../public/data/portfolio.json";
+import workspacePayloads from "../generated/project-workspace-payloads.json";
 import MermaidDiagram from "../components/MermaidDiagram";
 import AiChatPanel from "../components/ai/AiChatPanel";
 import AiInsightCard from "../components/ai/AiInsightCard";
@@ -256,6 +257,7 @@ type SubmittedTiaVisualPayload = {
 };
 
 const projects = portfolio.projects as unknown as ProjectSummary[];
+const projectWorkspacePayloads = workspacePayloads as unknown as Record<string, ProjectRecord>;
 const sectors = portfolio.sectors as SectorRecord[];
 const totals = portfolio.totals;
 const warningSummary = (portfolio as { warning_summary?: Record<string, number> }).warning_summary;
@@ -520,6 +522,237 @@ function TablePreviewPanel({ table, title }: { table: TablePreview | undefined; 
   );
 }
 
+type ProjectChartMode =
+  | "overview"
+  | "wbs"
+  | "activities"
+  | "milestones"
+  | "s-curve"
+  | "evm"
+  | "analytics"
+  | "contracts"
+  | "letters"
+  | "risks"
+  | "delay"
+  | "claims"
+  | "technical"
+  | "conference"
+  | "outputs";
+
+type ProjectChartPoint = {
+  label: string;
+  value: number | null | undefined;
+  display: string;
+  color: string;
+};
+
+function compactCurrency(value: number | null | undefined) {
+  if (value === null || value === undefined || !Number.isFinite(value)) return "N/A";
+  if (Math.abs(value) >= 1_000_000_000) return `EGP ${(value / 1_000_000_000).toFixed(2)}B`;
+  if (Math.abs(value) >= 1_000_000) return `EGP ${(value / 1_000_000).toFixed(1)}M`;
+  if (Math.abs(value) >= 1_000) return `EGP ${(value / 1_000).toFixed(1)}K`;
+  return money(value);
+}
+
+function sourceCount(project: ProjectRecord, keys: string[]) {
+  return keys.reduce((sum, key) => sum + (project.source_files[key] || 0), 0);
+}
+
+function ProjectSmartChart({ project, mode }: { project: ProjectRecord; mode: ProjectChartMode }) {
+  const delay = project.features.delay_analysis;
+  const claims = project.features.contract_claims;
+  const relationshipRows = delay.canonical_analysis?.tables?.relationship_logic_df?.row_count || 0;
+  const outputFiles = project.features.outputs_and_watchers.output_files.length;
+  const watcherCount = project.features.outputs_and_watchers.watchers.filter((watcher) => /active|configured|ready/i.test(watcher.status)).length;
+  const pointsByMode: Record<ProjectChartMode, { title: string; note: string; points: ProjectChartPoint[] }> = {
+    overview: {
+      title: "Project Position",
+      note: "Progress and earned-value indices from the selected project.",
+      points: [
+        { label: "Planned", value: project.planned_progress === null ? null : project.planned_progress * 100, display: percent(project.planned_progress), color: "#63a8ff" },
+        { label: "Actual", value: project.actual_progress === null ? null : project.actual_progress * 100, display: percent(project.actual_progress), color: "#39d7d2" },
+        { label: "SPI", value: project.spi === null ? null : project.spi * 100, display: numberValue(project.spi, 2), color: "#d6a23a" },
+        { label: "CPI", value: project.cpi === null ? null : project.cpi * 100, display: numberValue(project.cpi, 2), color: "#a78bfa" }
+      ]
+    },
+    wbs: {
+      title: "Work Breakdown Coverage",
+      note: "Record availability in the selected project planning structure.",
+      points: [
+        { label: "WBS", value: project.features.overview.source_tables.wbs?.row_count, display: numberValue(project.features.overview.source_tables.wbs?.row_count), color: "#63a8ff" },
+        { label: "Activities", value: project.activity_count, display: numberValue(project.activity_count), color: "#39d7d2" },
+        { label: "Milestones", value: project.milestone_count, display: numberValue(project.milestone_count), color: "#d6a23a" },
+        { label: "Progress rows", value: project.source_files.progress, display: numberValue(project.source_files.progress), color: "#a78bfa" }
+      ]
+    },
+    activities: {
+      title: "Activity Control Signals",
+      note: "Selected-project schedule and control record counts.",
+      points: [
+        { label: "Activities", value: project.activity_count, display: numberValue(project.activity_count), color: "#39d7d2" },
+        { label: "Progress", value: project.source_files.progress, display: numberValue(project.source_files.progress), color: "#63a8ff" },
+        { label: "EVM", value: project.source_files.evm, display: numberValue(project.source_files.evm), color: "#d6a23a" },
+        { label: "Delay events", value: project.source_files.delay_events, display: numberValue(project.source_files.delay_events), color: "#fb7185" }
+      ]
+    },
+    milestones: {
+      title: "Milestone Delivery Position",
+      note: "Progress and schedule performance for the selected project.",
+      points: [
+        { label: "Planned", value: project.planned_progress === null ? null : project.planned_progress * 100, display: percent(project.planned_progress), color: "#63a8ff" },
+        { label: "Actual", value: project.actual_progress === null ? null : project.actual_progress * 100, display: percent(project.actual_progress), color: "#39d7d2" },
+        { label: "SPI", value: project.spi === null ? null : project.spi * 100, display: numberValue(project.spi, 2), color: "#d6a23a" },
+        { label: "Milestones", value: project.milestone_count, display: numberValue(project.milestone_count), color: "#a78bfa" }
+      ]
+    },
+    "s-curve": {
+      title: "Progress Position",
+      note: "This compares the currently available planned and actual progress values; it is not a reconstructed time-series curve.",
+      points: [
+        { label: "Planned", value: project.planned_progress === null ? null : project.planned_progress * 100, display: percent(project.planned_progress), color: "#63a8ff" },
+        { label: "Actual", value: project.actual_progress === null ? null : project.actual_progress * 100, display: percent(project.actual_progress), color: "#39d7d2" },
+        { label: "Variance", value: project.progress_variance === null ? null : Math.abs(project.progress_variance) * 100, display: percent(project.progress_variance), color: "#d6a23a" }
+      ]
+    },
+    evm: {
+      title: "Earned Value Position",
+      note: "BAC, PV, EV, and AC from the selected-project control data.",
+      points: [
+        { label: "BAC", value: project.bac, display: compactCurrency(project.bac), color: "#63a8ff" },
+        { label: "PV", value: project.pv, display: compactCurrency(project.pv), color: "#d6a23a" },
+        { label: "EV", value: project.ev, display: compactCurrency(project.ev), color: "#39d7d2" },
+        { label: "AC", value: project.ac, display: compactCurrency(project.ac), color: "#fb7185" }
+      ]
+    },
+    analytics: {
+      title: "Analytics Health Indicators",
+      note: "Normalized progress, performance, and data-trust indicators.",
+      points: [
+        { label: "Data trust", value: project.data_quality === null ? null : project.data_quality * 100, display: percent(project.data_quality), color: "#a78bfa" },
+        { label: "Actual", value: project.actual_progress === null ? null : project.actual_progress * 100, display: percent(project.actual_progress), color: "#39d7d2" },
+        { label: "SPI", value: project.spi === null ? null : project.spi * 100, display: numberValue(project.spi, 2), color: "#d6a23a" },
+        { label: "CPI", value: project.cpi === null ? null : project.cpi * 100, display: numberValue(project.cpi, 2), color: "#63a8ff" }
+      ]
+    },
+    contracts: {
+      title: "Commercial Position",
+      note: "Contract, paid, spent, and remaining values from the selected project.",
+      points: [
+        { label: "Contract", value: project.contract_value, display: compactCurrency(project.contract_value), color: "#63a8ff" },
+        { label: "Paid", value: project.paid_amount, display: compactCurrency(project.paid_amount), color: "#39d7d2" },
+        { label: "Spent", value: project.spent_amount, display: compactCurrency(project.spent_amount), color: "#fb7185" },
+        { label: "Remaining", value: project.remaining_value, display: compactCurrency(project.remaining_value), color: "#d6a23a" }
+      ]
+    },
+    letters: {
+      title: "Correspondence Intelligence Coverage",
+      note: "Counts are taken only from the selected project letter, claim, and delay registers.",
+      points: [
+        { label: "Inbox", value: project.features.letters_intelligence.inbox_file_count, display: numberValue(project.features.letters_intelligence.inbox_file_count), color: "#39d7d2" },
+        { label: "Workbook sheets", value: project.features.letters_intelligence.workbook_tables?.sheets?.length, display: numberValue(project.features.letters_intelligence.workbook_tables?.sheets?.length), color: "#63a8ff" },
+        { label: "Claims", value: project.source_files.claims, display: numberValue(project.source_files.claims), color: "#d6a23a" },
+        { label: "Delay events", value: project.source_files.delay_events, display: numberValue(project.source_files.delay_events), color: "#fb7185" }
+      ]
+    },
+    risks: {
+      title: "Risk Exposure Signals",
+      note: "Risk score and source-backed control record counts for the selected project.",
+      points: [
+        { label: "Risk score", value: project.risk_score, display: numberValue(project.risk_score, 1), color: "#fb7185" },
+        { label: "Risk rows", value: project.risk_record_count ?? project.source_files.risks, display: numberValue(project.risk_record_count ?? project.source_files.risks), color: "#d6a23a" },
+        { label: "Delay events", value: project.delay_event_count ?? project.source_files.delay_events, display: numberValue(project.delay_event_count ?? project.source_files.delay_events), color: "#a78bfa" },
+        { label: "Claims", value: project.source_files.claims, display: numberValue(project.source_files.claims), color: "#63a8ff" }
+      ]
+    },
+    delay: {
+      title: "TIA Evidence Readiness",
+      note: "Evidence completeness only. This chart does not determine EOT or compensation.",
+      points: [
+        { label: "Recognized", value: delay.recognized_file_count, display: numberValue(delay.recognized_file_count), color: "#39d7d2" },
+        { label: "Required", value: delay.required_file_count, display: numberValue(delay.required_file_count), color: "#63a8ff" },
+        { label: "Relationships", value: relationshipRows, display: numberValue(relationshipRows), color: "#d6a23a" },
+        { label: "Events", value: project.delay_event_count, display: numberValue(project.delay_event_count), color: "#fb7185" }
+      ]
+    },
+    claims: {
+      title: "Claims Evidence Coverage",
+      note: "Contract, evidence, claim, and knowledge-base records from this project only.",
+      points: [
+        { label: "Contract files", value: claims.source_files.length, display: numberValue(claims.source_files.length), color: "#63a8ff" },
+        { label: "Evidence files", value: claims.evidence_files.length, display: numberValue(claims.evidence_files.length), color: "#39d7d2" },
+        { label: "Claims", value: project.source_files.claims, display: numberValue(project.source_files.claims), color: "#d6a23a" },
+        { label: "Knowledge", value: Object.keys(claims.knowledge_base?.tables || {}).length, display: numberValue(Object.keys(claims.knowledge_base?.tables || {}).length), color: "#a78bfa" }
+      ]
+    },
+    technical: {
+      title: "Technical Advisory Context",
+      note: "Source-backed project information available to the Technical Advisor.",
+      points: [
+        { label: "Activities", value: project.activity_count, display: numberValue(project.activity_count), color: "#39d7d2" },
+        { label: "Risks", value: project.risk_record_count ?? project.source_files.risks, display: numberValue(project.risk_record_count ?? project.source_files.risks), color: "#fb7185" },
+        { label: "Delays", value: project.delay_event_count ?? project.source_files.delay_events, display: numberValue(project.delay_event_count ?? project.source_files.delay_events), color: "#d6a23a" },
+        { label: "Letters", value: project.features.letters_intelligence.inbox_file_count, display: numberValue(project.features.letters_intelligence.inbox_file_count), color: "#63a8ff" }
+      ]
+    },
+    conference: {
+      title: "Review Meeting Readiness",
+      note: "Meeting availability and selected-project information readiness.",
+      points: [
+        { label: "Meeting", value: project.meeting_url ? 1 : 0, display: project.meeting_url ? "Available" : "Missing", color: "#39d7d2" },
+        { label: "Data trust", value: project.data_quality === null ? null : project.data_quality * 100, display: percent(project.data_quality), color: "#a78bfa" },
+        { label: "Source sets", value: sourceCount(project, ["activities", "progress", "evm", "risks", "claims", "contracts", "payments"]), display: numberValue(sourceCount(project, ["activities", "progress", "evm", "risks", "claims", "contracts", "payments"])), color: "#63a8ff" },
+        { label: "Decision", value: project.decision_required ? 1 : 0, display: project.decision_required ? "Required" : "Clear", color: "#d6a23a" }
+      ]
+    },
+    outputs: {
+      title: "Output Studio Readiness",
+      note: "Generated artifacts and publishing controls for this selected project.",
+      points: [
+        { label: "Report families", value: Object.keys(project.report_artifacts || {}).length, display: numberValue(Object.keys(project.report_artifacts || {}).length), color: "#39d7d2" },
+        { label: "Output files", value: outputFiles, display: numberValue(outputFiles), color: "#63a8ff" },
+        { label: "Watchers", value: watcherCount, display: numberValue(watcherCount), color: "#d6a23a" },
+        { label: "Data trust", value: project.data_quality === null ? null : project.data_quality * 100, display: percent(project.data_quality), color: "#a78bfa" }
+      ]
+    }
+  };
+  const chart = pointsByMode[mode];
+  const visiblePoints = chart.points.filter((point) => point.value !== null && point.value !== undefined && Number.isFinite(point.value));
+  if (!visiblePoints.length) {
+    return <section className="feature-card project-smart-chart"><div className="feature-card-head"><h3>{chart.title}</h3><span>Awaiting data</span></div><p className="empty-note">No source-backed value is currently available for this selected project.</p></section>;
+  }
+  const maxValue = Math.max(...visiblePoints.map((point) => Math.max(0, point.value || 0)), 1);
+  const width = 660;
+  const chartHeight = 148;
+  const barWidth = 88;
+  const spacing = Math.max(28, (width - 64 - visiblePoints.length * barWidth) / Math.max(1, visiblePoints.length - 1));
+  return (
+    <section className="feature-card project-smart-chart">
+      <div className="feature-card-head"><h3>{chart.title}</h3><span>Selected project only</span></div>
+      <p>{chart.note}</p>
+      <svg viewBox={`0 0 ${width} 236`} role="img" aria-label={`${chart.title} chart for ${project.project_display_name}`}>
+        {[0, 1, 2, 3].map((line) => {
+          const y = 24 + line * (chartHeight / 3);
+          return <line key={line} x1="30" y1={y} x2={width - 24} y2={y} className="project-chart-gridline" />;
+        })}
+        {visiblePoints.map((point, index) => {
+          const value = Math.max(0, point.value || 0);
+          const height = Math.max(5, (value / maxValue) * chartHeight);
+          const x = 42 + index * (barWidth + spacing);
+          const y = 24 + chartHeight - height;
+          return (
+            <g key={point.label} className="project-chart-bar">
+              <rect x={x} y={y} width={barWidth} height={height} rx="10" fill={point.color} opacity="0.9" />
+              <rect x={x} y={y} width={barWidth} height="4" rx="2" fill="#f4fbff" opacity="0.7" />
+              <text x={x + barWidth / 2} y={y - 8} textAnchor="middle" className="project-chart-value">{point.display}</text>
+              <text x={x + barWidth / 2} y="202" textAnchor="middle" className="project-chart-label">{point.label}</text>
+            </g>
+          );
+        })}
+      </svg>
+    </section>
+  );
+}
+
 function reportHtml(project: ProjectRecord, reportKey: ReportKey) {
   return project.report_artifacts?.[reportKey]?.html || project.reports[reportKey];
 }
@@ -770,18 +1003,32 @@ function SubmittedTiaGuidePanel({ submitted }: { submitted: SubmittedTiaPayload 
         <div className="feature-card-head"><h3>Recommended Engineer Next Moves</h3><span>{submitted.recommended_next_moves?.length || 0}</span></div>
         <ol className="compact-list">{(submitted.recommended_next_moves || []).map((item) => <li key={item}>{item}</li>)}</ol>
       </section>
-      <section className="feature-card">
-        <div className="feature-card-head"><h3>Submitted TIA Visual Audit</h3><span>{submitted.visuals?.length || 0}</span></div>
-        <div className="tia-visual-grid">
-          {(submitted.visuals || []).slice(0, 6).map((visual) => (
-            <figure key={visual.url}>
-              <Image src={visual.url} alt={visual.name} width={960} height={540} sizes="(max-width: 760px) 92vw, 33vw" />
-              <figcaption>{visual.name}</figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
     </div>
+  );
+}
+
+function SubmittedTiaVisualsPanel({ submitted }: { submitted?: SubmittedTiaVisualPayload }) {
+  const [category, setCategory] = useState("");
+  const visuals = submitted?.visuals || [];
+  const categories = Array.from(new Set(visuals.map((visual) => visual.category)));
+  const activeCategory = categories.includes(category) ? category : categories[0];
+  const visibleVisuals = visuals.filter((visual) => visual.category === activeCategory);
+  if (!submitted?.available || !visuals.length) return null;
+  return (
+    <section className="feature-card submitted-tia-exhibits">
+      <div className="feature-card-head"><h3>Submitted TIA Exhibit Visuals</h3><span>{visuals.length} source figures</span></div>
+      <p>{submitted.evidentiary_note}</p>
+      {categories.length > 1 ? <ModuleTabs label="Submitted TIA exhibit categories" tabs={categories} activeTab={activeCategory} onChange={setCategory} /> : null}
+      <div className="tia-visual-grid">
+        {visibleVisuals.map((visual) => (
+          <figure key={visual.url}>
+            <Image src={visual.url} alt={visual.label} width={1280} height={720} sizes="(max-width: 760px) 92vw, (max-width: 1240px) 45vw, 30vw" />
+            <figcaption>{visual.label}</figcaption>
+          </figure>
+        ))}
+      </div>
+      <small className="submitted-tia-exhibits__scope">{submitted.scope_note}</small>
+    </section>
   );
 }
 
@@ -809,6 +1056,7 @@ function LettersIntelligencePanel({ project }: { project: ProjectRecord }) {
         </section>
         <FeatureSvg mode="letters" />
       </div>
+      <ProjectSmartChart project={project} mode="letters" />
       <ModuleTabs label="Letters Intelligence views" tabs={["Inbox & Auto Ingest", "Letter Registers", "Issue Threads", "Linked Correspondence", "AI Letter Review"]} activeTab={view} onChange={setView} />
       {view === "Inbox & Auto Ingest" ? <><DetectorGrid detectors={letters.detectors} /><FileList title="Automatic Letter Inbox" files={letters.inbox_files} emptyText="No correspondence files were detected in this project inbox." /></> : null}
       {view === "Letter Registers" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="Letters Registers" preferred={["From Contractor", "From Consultant", "ACE", "SAMCO"]} /> : null}
@@ -863,7 +1111,8 @@ function DelayTiaParityPanel({ project }: { project: ProjectRecord }) {
         </section>
         <FeatureSvg mode="delay" />
       </div>
-      <ModuleTabs label="Delay TIA views" tabs={["Uploads", "Tables & Conclusion", "MEP Activities", "AI - TIA", "Question", "Download Reports"]} activeTab={view} onChange={setView} />
+      <ProjectSmartChart project={project} mode="delay" />
+      <ModuleTabs label="Delay TIA views" tabs={["Uploads", "Tables & Conclusion", "MEP Activities", "AI - TIA", "Question", "Source Controls"]} activeTab={view} onChange={setView} />
       {view === "Uploads" ? <>
         <DetectorGrid detectors={delay.detectors} />
         <section className="feature-card"><div className="feature-card-head"><h3>Include / Exclude Supposed Delay Streams</h3><span>Scenario scope only</span></div><div className="stream-toggle-grid">
@@ -877,13 +1126,14 @@ function DelayTiaParityPanel({ project }: { project: ProjectRecord }) {
       {view === "Tables & Conclusion" ? <>
         <AiInsightCard type="delay" projectKey={project.project_key} />
         <CanonicalTiaPanel analysis={delay.canonical_analysis} />
+        <SubmittedTiaVisualsPanel submitted={delay.submitted_visuals} />
         <SubmittedTiaGuidePanel submitted={delay.submitted_tia || { available: false, status: "Missing", scope_note: "No submitted TIA guide detected." }} />
         <ProjectTableSelector title="TIA Evidence Tables" tables={eventTables} preferred={["11-concurrency_matrix_template.updated.csv", "04- p6_activity_export.csv", "02- master_activity_steel_analysis.csv"]} />
       </> : null}
       {view === "MEP Activities" ? <><ProjectTableSelector title="MEP Activities and Civil Interface Logic" tables={scheduleTables} preferred={["MEP Activities", "MEP Schedule", "MEP Civil Logic", "BL Schedule"]} /><WorkbookDataPanel workbook={project.features.letters_intelligence.workbook_tables} title="Related Letters Intelligence References" /></> : null}
       {view === "AI - TIA" ? <><CanonicalTiaPanel analysis={delay.canonical_analysis} /><SubmittedTiaGuidePanel submitted={delay.submitted_tia || { available: false, status: "Missing", scope_note: "No submitted TIA guide detected." }} /><ProjectTableSelector title="Active TIA File Priority and Dependency Evidence" tables={templateTables} preferred={["01-project_metadata_template.csv", "02- master_activity_steel_analysis.csv", "04- p6_activity_export.csv", "05- relationship_file.csv", "11-concurrency_matrix_template.updated.csv"]} /></> : null}
       {view === "Question" ? <div className="feature-stack"><AiInsightCard type="delay" projectKey={project.project_key} /><UnifiedIntelligenceSearch mode="project" projectKey={project.project_key} projectName={project.project_display_name} /><ProjectTableSelector title="Question Evidence Source" tables={eventTables} preferred={["11-concurrency_matrix_template.updated.csv", "09-rfi_status.csv", "07-ifc_conflict.csv"]} /></div> : null}
-      {view === "Download Reports" ? <section className="feature-card"><div className="feature-card-head"><h3>Delay TIA Generated Outputs</h3><span>Project scoped</span></div><p>Download the selected project&apos;s TIA-supporting charts. HTML, PDF, and PowerPoint use the same selected-project metric payload; EOT conclusions remain indicative until P6 verification.</p><ReportFormatDownloads project={project} reportKey="elite_svg_charts" /><OutputStudioDownloadButton href={reportHtml(project, "elite_svg_charts")} label="Download Selected TIA Report" /><FileList title="Available Project Outputs" files={project.features.outputs_and_watchers.output_files} /></section> : null}
+      {view === "Source Controls" ? <section className="feature-card"><div className="feature-card-head"><h3>TIA Source Controls</h3><span>Selected project only</span></div><p>Formal reports and files are intentionally available only in Output Studio. This view keeps the active project&apos;s TIA source controls, file priority, and evidence tables inside the analysis workflow.</p><ProjectTableSelector title="TIA Template and Evidence Controls" tables={templateTables} preferred={["01-project_metadata_template.csv", "04- p6_activity_export.csv", "05- relationship_file.csv", "11-concurrency_matrix_template.updated.csv"]} /></section> : null}
     </div>
   );
 }
@@ -902,6 +1152,7 @@ function ContractClaimsParityPanel({ project }: { project: ProjectRecord }) {
         <section className="feature-card"><div className="feature-card-head"><h3>Contract & Claims Intelligence Center</h3><span>Selected project only</span></div><p>The library, evidence register, clause search, claim records, and AI analysis use only this project&apos;s contract folder and SQLite knowledge base.</p><div className="workspace-grid compact-grid"><MiniMetric label="Contract Files" value={numberValue(claims.source_files.length)} note="Project contract source" /><MiniMetric label="Evidence Files" value={numberValue(claims.evidence_files.length)} note="Project evidence source" /><MiniMetric label="Claims Rows" value={numberValue(project.source_files.claims)} note="Project claims register" /><MiniMetric label="Knowledge Tables" value={numberValue(Object.keys(knowledgeTables).length)} note="Project database only" /></div></section>
         <FeatureSvg mode="claims" />
       </div>
+      <ProjectSmartChart project={project} mode="claims" />
       <ModuleTabs label="Contract claims center" tabs={["Contract Clauses", "Claims Intelligence Center"]} activeTab={center} onChange={setCenter} />
       {center === "Contract Clauses" ? <div className="feature-stack"><ProjectDataTable table={clauseTable} title="Contract Clause Matching Engine" empty="No clause library is available for this selected project." /><WorkbookDataPanel workbook={claims.clause_library_tables} title="Overall Contract Clause Library" /></div> : null}
       {center === "Claims Intelligence Center" ? <>
@@ -912,7 +1163,7 @@ function ContractClaimsParityPanel({ project }: { project: ProjectRecord }) {
         {view === "Evidence Mapping" ? <div className="feature-stack"><ProjectTableSelector title="Evidence-to-Clause Mapping" tables={Object.keys(evidenceTables).length ? evidenceTables : knowledgeTables} preferred={["evidence_mappings", "evidence_documents"]} /><FileList title="Evidence Files" files={claims.evidence_files} /></div> : null}
         {view === "Client Rebuttal Engine" ? <div className="feature-stack"><AiInsightCard type="contract" projectKey={project.project_key} /><ProjectTableSelector title="Client Defenses and Contractor Rebuttals" tables={Object.keys(claimTables).length ? claimTables : knowledgeTables} preferred={["client_defenses", "contractor_rebuttals"]} /></div> : null}
         {view === "Claim Builder" ? <div className="feature-stack"><ProjectTableSelector title="Claim Categories, Triggers, and Drafts" tables={Object.keys(claimTables).length ? claimTables : knowledgeTables} preferred={["claim_categories", "claim_triggers", "claim_drafts"]} /><AiInsightCard type="contract" projectKey={project.project_key} /></div> : null}
-        {view === "Export Center" ? <section className="feature-card"><div className="feature-card-head"><h3>Export Center</h3><span>Project outputs</span></div><p>Download the active project&apos;s source-backed Output Studio report. Individual source tables above can also be exported as CSV.</p><ReportFormatDownloads project={project} reportKey="master_dashboard" /><OutputStudioDownloadButton href={reportHtml(project, "master_dashboard")} label="Download Master Dashboard" /><FileList title="Automatic Outputs" files={project.features.outputs_and_watchers.output_files} /></section> : null}
+        {view === "Export Center" ? <section className="feature-card"><div className="feature-card-head"><h3>Claim Source Controls</h3><span>Selected project only</span></div><p>Formal reports and files are intentionally available only in Output Studio. This view keeps the active project&apos;s clause, evidence, claim, and rebuttal source tables available for review.</p><ProjectTableSelector title="Claims Source Tables" tables={knowledgeTables} preferred={["contract_clauses", "evidence_mappings", "claim_categories", "claim_triggers"]} /></section> : null}
       </> : null}
     </div>
   );
@@ -944,9 +1195,9 @@ function ConferencePanel({ project }: { project: ProjectRecord }) {
           </div>
         </section>
       </div>
+      <ProjectSmartChart project={project} mode="conference" />
       {meetingUrl && canEmbed ? (
         <>
-          <OutputStudioDownloadButton />
           <iframe className="wide-embed conference-embed" src={meetingUrl} title={`${project.project_display_name} conference`} />
         </>
       ) : (
@@ -995,6 +1246,7 @@ function WorkspaceTabContent({
           <FeatureSvg mode="portfolio" />
           <ProjectDataTable table={workspaceTables.projects} title="Project Overview Source" />
         </div>
+        <ProjectSmartChart project={project} mode="overview" />
       </div>
     );
   }
@@ -1009,7 +1261,7 @@ function WorkspaceTabContent({
         </div>
         <div className="workspace-two">
           <ProjectDataTable table={workspaceTables.wbs} title="WBS Source Table" />
-          <iframe src={project.reports.master_dashboard} title={`${project.project_display_name} master dashboard WBS`} />
+          <ProjectSmartChart project={project} mode="wbs" />
         </div>
       </div>
     );
@@ -1024,6 +1276,7 @@ function WorkspaceTabContent({
           <MiniMetric label="EVM Records" value={numberValue(project.source_files.evm)} note="Earned value rows" />
           <MiniMetric label="Delay Events" value={numberValue(project.source_files.delay_events)} note="Delay event records" />
         </div>
+        <ProjectSmartChart project={project} mode="activities" />
         <ProjectDataTable table={workspaceTables.activities} title="Activities Register" />
       </div>
     );
@@ -1037,6 +1290,7 @@ function WorkspaceTabContent({
           <MiniMetric label="Schedule Health" value={numberValue(project.spi, 2)} note="SPI schedule indicator" />
           <MiniMetric label="Delayed Days" value={numberValue(project.delay_days)} note="Delay days from project data" />
         </div>
+        <ProjectSmartChart project={project} mode="milestones" />
         <ProjectDataTable table={workspaceTables.milestones} title="Milestone Register" />
       </div>
     );
@@ -1044,15 +1298,15 @@ function WorkspaceTabContent({
 
   if (activeTab === "S-Curve") {
     return (
-      <div className="workspace-two">
-        <div>
-          <h3>S-Curve</h3>
-          <p>Uses the selected project progress and generated dashboard outputs. If the source S-curve file is missing, the report remains available with controlled source notes.</p>
+      <div className="feature-stack">
+        <section className="feature-card">
+          <div className="feature-card-head"><h3>S-Curve</h3><span>Selected project source</span></div>
+          <p>Uses the selected project&apos;s S-curve and progress source records. When no time-series source is available, the chart shows only the current progress position and does not fabricate a curve.</p>
           <DataStatus label="S-Curve Rows" count={project.features.overview.source_tables.s_curve?.row_count} />
           <DataStatus label="Progress Updates" count={project.source_files.progress} />
-          <ProjectDataTable table={workspaceTables.s_curve} title="S-Curve Source" />
-        </div>
-        <iframe src={project.reports.linked_executive_dashboard} title={`${project.project_display_name} linked dashboard`} />
+        </section>
+        <ProjectSmartChart project={project} mode="s-curve" />
+        <ProjectDataTable table={workspaceTables.s_curve} title="S-Curve Source" />
       </div>
     );
   }
@@ -1073,13 +1327,14 @@ function WorkspaceTabContent({
           <MiniMetric label="ETC" value={money(project.etc)} note="EAC less AC" />
           <MiniMetric label="VAC" value={money(project.vac)} note="BAC less EAC" />
         </div>
+        <ProjectSmartChart project={project} mode="evm" />
         <ProjectDataTable table={workspaceTables.evm} title="EVM Source Table" />
       </div>
     );
   }
 
   if (activeTab === "Analytics Intelligence") {
-    return <AdvancedAnalyticsPanel analytics={project.advanced_analytics} />;
+    return <div className="feature-stack"><ProjectSmartChart project={project} mode="analytics" /><AdvancedAnalyticsPanel analytics={project.advanced_analytics} /></div>;
   }
 
   if (activeTab === "Contracts") {
@@ -1093,6 +1348,7 @@ function WorkspaceTabContent({
           <MiniMetric label="Contract Rows" value={numberValue(project.source_files.contracts)} note="Contract records" />
           <MiniMetric label="Payment Rows" value={numberValue(project.source_files.payments)} note="Payment records" />
         </div>
+        <ProjectSmartChart project={project} mode="contracts" />
         <div className="workspace-two">
           <ProjectDataTable table={workspaceTables.contracts} title="Contracts Register" />
           <ProjectDataTable table={workspaceTables.payments} title="Payments Register" />
@@ -1111,6 +1367,7 @@ function WorkspaceTabContent({
           <MiniMetric label="Decision Required" value={project.decision_required ? "Yes" : "No"} note="Rule-based management trigger" />
           <MiniMetric label="Delay Days" value={numberValue(project.delay_days)} note="Delay exposure" />
         </div>
+        <ProjectSmartChart project={project} mode="risks" />
         <ProjectDataTable table={workspaceTables.risks} title="Risk Register" />
       </div>
     );
@@ -1125,6 +1382,7 @@ function WorkspaceTabContent({
   if (activeTab === "Technical Advisor") {
     return (
       <div className="feature-stack">
+        <ProjectSmartChart project={project} mode="technical" />
         <UnifiedIntelligenceSearch
           mode="project"
           projectKey={project.project_key}
@@ -1166,6 +1424,7 @@ function WorkspaceTabContent({
           </button>
         ))}
       </div>
+      <ProjectSmartChart project={project} mode="outputs" />
       <OutputStudioDownloadButton
         href={reportHtml(project, selectedReport)}
         label={`Download ${reportTabs.find((tab) => tab.key === selectedReport)?.label || "Report"}`}
@@ -1394,14 +1653,11 @@ function DecisionOperationsDashboard({
 function DigitalOperationsApp() {
   const [scope, setScope] = useState(DECISION_DASHBOARD_KEY);
   const [selectedReport, setSelectedReport] = useState<ReportKey>("executive_dashboard");
-  const [projectDetails, setProjectDetails] = useState<ProjectRecord | null>(null);
-  const [projectLoadError, setProjectLoadError] = useState("");
   const selectedProjectSummary = projects.find((project) => project.project_key === scope) || projects[0];
   const isDecisionDashboard = scope === DECISION_DASHBOARD_KEY;
+  const projectDetails = isDecisionDashboard ? null : projectWorkspacePayloads[scope] || null;
   const selectScope = (nextScope: string) => {
     setScope(nextScope);
-    setProjectDetails(null);
-    setProjectLoadError("");
   };
 
   useEffect(() => {
@@ -1411,23 +1667,6 @@ function DigitalOperationsApp() {
     }
   }, []);
 
-  useEffect(() => {
-    if (isDecisionDashboard) return;
-    let cancelled = false;
-    fetch(`/data/projects/${encodeURIComponent(scope)}.json`, { cache: "no-store" })
-      .then((response) => {
-        if (!response.ok) throw new Error("Selected project data is not available.");
-        return response.json() as Promise<ProjectRecord>;
-      })
-      .then((payload) => {
-        if (!cancelled && payload.project_key === scope) setProjectDetails(payload);
-      })
-      .catch((error: unknown) => {
-        if (!cancelled) setProjectLoadError(error instanceof Error ? error.message : "Unable to load selected project data.");
-      });
-    return () => { cancelled = true; };
-  }, [isDecisionDashboard, scope]);
-
   return (
     <main className="future-shell operations-shell">
       <header className="operations-command-bar">
@@ -1436,7 +1675,7 @@ function DigitalOperationsApp() {
         <div className="command-status"><i /><span>{isDecisionDashboard ? "Portfolio mode" : `${selectedProjectSummary.sector} project mode`}</span></div>
       </header>
       {isDecisionDashboard ? <DecisionOperationsDashboard onChooseProject={selectScope} /> : (
-        projectDetails ? <ProjectWorkspace project={projectDetails} selectedReport={selectedReport} setSelectedReport={setSelectedReport} /> : <section className="feature-card project-load-state"><h2>{selectedProjectSummary.project_display_name}</h2><p>{projectLoadError || "Loading the complete project controls workspace..."}</p></section>
+        projectDetails ? <ProjectWorkspace project={projectDetails} selectedReport={selectedReport} setSelectedReport={setSelectedReport} /> : <section className="feature-card project-load-state"><h2>{selectedProjectSummary.project_display_name}</h2><p>Project workspace data is not available. Regenerate the verified website data pipeline for this selected project.</p></section>
       )}
       <footer className="operations-footer">Designed &amp; Created | <strong>Engr. Ahmed Labib</strong><span>Source-backed controls | Project-isolated intelligence</span></footer>
       <AiChatPanel projectKey={isDecisionDashboard ? undefined : selectedProjectSummary.project_key} projectName={isDecisionDashboard ? "Decision Making Dashboard" : selectedProjectSummary.project_display_name} sector={isDecisionDashboard ? undefined : selectedProjectSummary.sector} />
@@ -1447,5 +1686,3 @@ function DigitalOperationsApp() {
 export default function HomePage() {
   return <DigitalOperationsApp />;
 }
-
-

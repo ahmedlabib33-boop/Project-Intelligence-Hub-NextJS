@@ -26,6 +26,15 @@ def test_generated_project_payloads_keep_identity_tia_and_artifacts_scoped() -> 
         if canonical_tia["status"] == "ready":
             assert "relationship_logic_df" in canonical_tia["tables"]
 
+        submitted_visuals = payload["features"]["delay_analysis"].get("submitted_visuals", {})
+        if submitted_visuals.get("available"):
+            assert submitted_visuals.get("visuals")
+            for visual in submitted_visuals["visuals"]:
+                assert visual["url"].startswith(f"/generated/{project_slug}/tia-submitted-exhibits/")
+                visual_path = ROOT / "website" / "public" / visual["url"].lstrip("/")
+                assert visual_path.exists()
+                assert visual_path.stat().st_size > 0
+
         for report_key, artifact in payload["report_artifacts"].items():
             assert report_key in payload["reports"]
             for extension in ("html", "pdf", "pptx"):

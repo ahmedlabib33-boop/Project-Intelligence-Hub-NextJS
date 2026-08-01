@@ -4,7 +4,7 @@ import { buildProjectContext, contextToPrompt } from "../../../lib/ai/project-co
 import { checkRateLimit } from "../../../lib/ai/rate-limit";
 import { sanitizeText } from "../../../lib/ai/provider";
 import { withSamcoDirectorPrompt } from "../../../lib/ai/samco-director";
-import { aiRequestFailure, readAiJson } from "../../../lib/ai/request";
+import { aiRequestFailure, aiTextList, readAiJson } from "../../../lib/ai/request";
 
 export const runtime = "nodejs";
 
@@ -17,10 +17,10 @@ function parseListResponse(answer: string) {
   try {
     const parsed = JSON.parse(answer);
     return {
-      themes: Array.isArray(parsed.themes) ? parsed.themes.map(String).slice(0, 8) : [],
-      criticalLetters: Array.isArray(parsed.criticalLetters) ? parsed.criticalLetters.map(String).slice(0, 8) : [],
-      actionItems: Array.isArray(parsed.actionItems) ? parsed.actionItems.map(String).slice(0, 8) : [],
-      deadlines: Array.isArray(parsed.deadlines) ? parsed.deadlines.map(String).slice(0, 8) : []
+      themes: aiTextList(parsed.themes),
+      criticalLetters: aiTextList(parsed.criticalLetters),
+      actionItems: aiTextList(parsed.actionItems),
+      deadlines: aiTextList(parsed.deadlines)
     };
   } catch {
     return { themes: [answer], criticalLetters: [], actionItems: [], deadlines: [] };

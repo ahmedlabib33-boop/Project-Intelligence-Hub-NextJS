@@ -946,6 +946,56 @@ h2 {
     linear-gradient(145deg, rgba(4, 13, 24, 0.7), rgba(15, 42, 66, 0.64));
 }
 
+.project-smart-chart {
+  min-width: 0;
+  overflow: hidden;
+  border-color: rgba(57, 215, 210, 0.34);
+  background:
+    radial-gradient(circle at 92% 8%, rgba(99, 168, 255, 0.14), transparent 34%),
+    linear-gradient(145deg, rgba(7, 25, 43, 0.9), rgba(4, 13, 24, 0.72));
+}
+
+.project-smart-chart > p {
+  max-width: 920px;
+}
+
+.project-smart-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+  overflow: visible;
+}
+
+.project-chart-gridline {
+  stroke: rgba(130, 184, 219, 0.18);
+  stroke-width: 1;
+  stroke-dasharray: 5 8;
+}
+
+.project-chart-bar rect {
+  transition: opacity 160ms ease, transform 160ms ease;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+
+.project-chart-bar:hover rect {
+  opacity: 1;
+  transform: scaleY(1.03);
+}
+
+.project-chart-value {
+  fill: #f4fbff;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.project-chart-label {
+  fill: #9bb8ca;
+  font-size: 14px;
+  font-weight: 800;
+}
+
 .detector-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2119,6 +2169,21 @@ h2 {
   font-weight: 800;
   font-size: 0.8rem;
   background: #eef6fb;
+}
+
+.submitted-tia-exhibits {
+  border-color: rgba(214, 162, 58, 0.42);
+}
+
+.submitted-tia-exhibits .module-tabs {
+  margin: 14px 0;
+}
+
+.submitted-tia-exhibits__scope {
+  display: block;
+  margin-top: 14px;
+  color: var(--muted);
+  line-height: 1.5;
 }
 
 .executive-light-mode .wide-embed,

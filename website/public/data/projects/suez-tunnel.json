@@ -3315,6 +3315,13 @@
         "status": "No submitted TIA guide detected",
         "scope_note": "Generic TIA readiness mode only. Add a project-specific submitted guide under 02-delay_analysis/submitted_tia to activate submitted-event logic."
       },
+      "submitted_visuals": {
+        "available": false,
+        "status": "No submitted visual exhibits detected",
+        "scope_note": "Add client or consultant TIA SVG/PNG exhibits under this selected project's 02-delay_analysis/submitted_visuals folder.",
+        "evidentiary_note": "No submitted exhibit is available for this selected project.",
+        "visuals": []
+      },
       "canonical_analysis": {
         "status": "ready",
         "message": "Canonical Streamlit TIA engine completed for the selected project. Results remain indicative until P6 recalculation is verified.",
@@ -10410,14 +10417,14 @@
           "relative_path": "Suez-Tunnel/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 920.8,
-          "modified": "2026-08-01T03:53:25"
+          "modified": "2026-08-01T05:07:56"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "Suez-Tunnel/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-01T03:53:26"
+          "modified": "2026-08-01T05:07:57"
         },
         {
           "name": "02_master_dashboard.html",
@@ -10431,14 +10438,14 @@
           "relative_path": "Suez-Tunnel/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 863.9,
-          "modified": "2026-08-01T03:53:32"
+          "modified": "2026-08-01T05:08:01"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "Suez-Tunnel/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-01T03:53:32"
+          "modified": "2026-08-01T05:08:02"
         },
         {
           "name": "03_elite_svg_charts.html",
@@ -10452,14 +10459,14 @@
           "relative_path": "Suez-Tunnel/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 235.6,
-          "modified": "2026-08-01T03:53:34"
+          "modified": "2026-08-01T05:08:04"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "Suez-Tunnel/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-01T03:53:35"
+          "modified": "2026-08-01T05:08:04"
         },
         {
           "name": "04_linked_executive_dashboard.html",
@@ -10473,14 +10480,14 @@
           "relative_path": "Suez-Tunnel/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1234.6,
-          "modified": "2026-08-01T03:53:44"
+          "modified": "2026-08-01T05:08:12"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "Suez-Tunnel/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-01T03:53:45"
+          "modified": "2026-08-01T05:08:12"
         }
       ],
       "watchers": [
@@ -10522,12 +10529,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 942926,
-          "sha256": "bd26ef6d6e9d09e495474225d203935cb11cc88e1473a21ce48bd5a079e87dfb"
+          "sha256": "e3461e37697d173c59c581593a00658bcf545a7bf84d433ece88feddf77e3e21"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29125,
-          "sha256": "52129d645c67b4946a4213214574a2dcec92b3a6f500f282b97a488dfad48959"
+          "sha256": "2353e0fa7603e7af03b252e3ff0abc0c92527d00c50f8b6f77e84dc14812b9d8"
         }
       }
     },
@@ -10544,12 +10551,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 884629,
-          "sha256": "903d411a467c8437348d6fdf97b43da066c01da60abac34078fd159db6729b97"
+          "sha256": "015a4f5640de70072999809ca0ea19ab9e8070d3fe6922e399740c06b9a8840e"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29122,
-          "sha256": "6e3a78efae85b4ea5c400465678e462068163d7c527f73f0ac7159a92e5e3812"
+          "sha256": "04342ce6b053e70c48e2b87468e80c19641b8ee918ae1763bdf8dac1b7e3956a"
         }
       }
     },
@@ -10566,12 +10573,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 241294,
-          "sha256": "5c56008da4fd8c186e098b20ae8ce868d2787629beadfddacefaec19fa4c4cb1"
+          "sha256": "a580f5d8eab1a34521a3a9702325c43c00e2ece40236b707803f8d00564f8d74"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29122,
-          "sha256": "ca16cf8f01c9a4bf0da489cd16fa237344d094ed49ffb27c358c970aa838dae3"
+          "sha256": "077bd3f6c686a30322861860cc986801510d278b6296c901287e87b4b329f6a7"
         }
       }
     },
@@ -10588,12 +10595,12 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1264198,
-          "sha256": "120fe1ca077d46f883fa057f238ddf587a565b643c45dec5fbb26d4454cf0b90"
+          "sha256": "609300eb5edd07a54984ceea594840ec05cfd2bcc216c78579d0d72c4ecd7dee"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29131,
-          "sha256": "4f6642cd1d29e75633c76a2ebd045855602db925d18eec7dd1da439a12cc76e5"
+          "sha256": "d56d53b8d44349dae5158ba15af23de451a5d69539c207c0a99341d237901d68"
         }
       }
     }

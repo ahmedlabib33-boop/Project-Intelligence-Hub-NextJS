@@ -4,7 +4,7 @@ import { buildProjectContext, contextToPrompt } from "../../../lib/ai/project-co
 import { checkRateLimit } from "../../../lib/ai/rate-limit";
 import { sanitizeText } from "../../../lib/ai/provider";
 import { withSamcoDirectorPrompt } from "../../../lib/ai/samco-director";
-import { aiRequestFailure, readAiJson } from "../../../lib/ai/request";
+import { aiRequestFailure, aiTextList, formatAiText, readAiJson } from "../../../lib/ai/request";
 
 export const runtime = "nodejs";
 
@@ -20,9 +20,9 @@ function parseSummary(answer: string) {
   try {
     const parsed = JSON.parse(answer);
     return {
-      summary: String(parsed.summary || "No summary available from current data."),
-      actions: Array.isArray(parsed.actions) ? parsed.actions.map(String).slice(0, 6) : [],
-      risks: Array.isArray(parsed.risks) ? parsed.risks.map(String).slice(0, 6) : [],
+      summary: formatAiText(parsed.summary) || "No summary available from current data.",
+      actions: aiTextList(parsed.actions, 6),
+      risks: aiTextList(parsed.risks, 6),
       health: ["Green", "Yellow", "Red"].includes(parsed.health) ? parsed.health : "Yellow"
     };
   } catch {

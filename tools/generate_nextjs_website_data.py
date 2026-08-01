@@ -18,13 +18,26 @@ from project_report_artifacts import ensure_project_report_artifacts
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CANONICAL_ROOT = Path(os.environ.get("PIH_SOURCE_ROOT", ROOT)).expanduser().resolve()
+DEFAULT_CANONICAL_ROOT = Path(r"D:\one drive data\OneDrive\Documents\Project Intelligence Hub")
+if os.environ.get("PIH_SOURCE_ROOT"):
+    CANONICAL_ROOT = Path(os.environ["PIH_SOURCE_ROOT"]).expanduser().resolve()
+elif (DEFAULT_CANONICAL_ROOT / "projects").exists():
+    # Keep direct local generation aligned with the watcher and avoid publishing the stale target copy.
+    CANONICAL_ROOT = DEFAULT_CANONICAL_ROOT.resolve()
+else:
+    CANONICAL_ROOT = ROOT
 PROJECTS_ROOT = CANONICAL_ROOT / "projects"
 SOURCE_OUTPUTS_ROOT = CANONICAL_ROOT / "11-outputs"
 OUTPUTS_ROOT = ROOT / "11-outputs"
 WEBSITE_PUBLIC = ROOT / "website" / "public"
 DATA_ROOT = WEBSITE_PUBLIC / "data"
 GENERATED_ROOT = WEBSITE_PUBLIC / "generated"
+WEBSITE_SOURCE_GENERATED = ROOT / "website" / "src" / "generated"
+
+# Project workspaces show source-backed, paginated previews. Keeping every raw row
+# in browser payloads makes selected-project navigation unreliable on mobile and
+# does not add report capability; complete report artifacts stay in Output Studio.
+WORKSPACE_TABLE_ROW_LIMIT = 200
 
 
 def slugify(value: str) -> str:
@@ -137,7 +150,7 @@ def preview_table(path: Path, limit: int = 8) -> dict[str, Any]:
     }
 
 
-def workspace_table(path: Path, limit: int = 3000) -> dict[str, Any]:
+def workspace_table(path: Path, limit: int = WORKSPACE_TABLE_ROW_LIMIT) -> dict[str, Any]:
     """Return a project-scoped table suitable for the digital workspace.
 
     The portfolio remains a compact executive payload. Full rows travel only in
@@ -190,7 +203,7 @@ def xlsx_summary(path: Path, limit: int = 8) -> dict[str, Any]:
     return summary
 
 
-def xlsx_workspace_tables(path: Path, limit_per_sheet: int = 3000) -> dict[str, Any]:
+def xlsx_workspace_tables(path: Path, limit_per_sheet: int = WORKSPACE_TABLE_ROW_LIMIT) -> dict[str, Any]:
     """Expose full project-owned workbook sheets with an explicit safety cap."""
     result: dict[str, Any] = {"file": path.name, "exists": path.exists(), "sheets": []}
     if not path.exists():
@@ -231,7 +244,7 @@ def json_safe_sql_value(value: Any) -> Any:
     return excel_value(value)
 
 
-def sqlite_table_rows(path: Path, limit_per_table: int = 3000) -> dict[str, Any]:
+def sqlite_table_rows(path: Path, limit_per_table: int = WORKSPACE_TABLE_ROW_LIMIT) -> dict[str, Any]:
     """Read project-local claims records without exposing files from other projects."""
     result: dict[str, Any] = {"exists": path.exists(), "tables": {}, "error": None}
     if not path.exists():
@@ -562,7 +575,7 @@ def sqlite_table_counts(path: Path) -> dict[str, Any]:
     return result
 
 
-def dataframe_workspace_table(frame: Any, file_name: str, limit: int = 3000) -> dict[str, Any]:
+def dataframe_workspace_table(frame: Any, file_name: str, limit: int = WORKSPACE_TABLE_ROW_LIMIT) -> dict[str, Any]:
     """Convert a canonical pandas result into the same safe table contract as CSV data."""
     if frame is None:
         return {"file": file_name, "exists": False, "row_count": 0, "column_count": 0, "columns": [], "rows": []}
@@ -1677,6 +1690,7 @@ def build_portfolio(projects: list[dict[str, Any]]) -> dict[str, Any]:
 
 def main() -> None:
     DATA_ROOT.mkdir(parents=True, exist_ok=True)
+    WEBSITE_SOURCE_GENERATED.mkdir(parents=True, exist_ok=True)
     raw_projects = discover_projects()
     project_records = [build_project_record(project) for project in raw_projects]
     copy_generated_outputs(project_records)
@@ -1689,6 +1703,12 @@ def main() -> None:
         stale.unlink()
     for project in project_records:
         write_json_if_changed(projects_dir / f"{project['project_key']}.json", project)
+    # A generated, keyed module payload makes same-page project switching robust:
+    # it preserves project_id/project_key isolation without a fragile browser fetch.
+    write_json_if_changed(
+        WEBSITE_SOURCE_GENERATED / "project-workspace-payloads.json",
+        {project["project_key"]: project for project in project_records},
+    )
     try:
         from pih_data_guardrails import run_guardrails
 

@@ -5,7 +5,7 @@ import { sanitizeText } from "../../../../lib/ai/provider";
 import { checkRateLimit } from "../../../../lib/ai/rate-limit";
 import { withSamcoDirectorPrompt } from "../../../../lib/ai/samco-director";
 import { loadQuestionBank, searchQuestionBank } from "../../../../lib/technical-knowledge";
-import { aiRequestFailure, readAiJson } from "../../../../lib/ai/request";
+import { aiRequestFailure, aiTextList, formatAiText, readAiJson } from "../../../../lib/ai/request";
 
 export const runtime = "nodejs";
 
@@ -109,12 +109,12 @@ function parseStructured(answer: string, fallback: ReturnType<typeof fallbackAns
   try {
     const parsed = JSON.parse(answer);
     return {
-      answer: String(parsed.answer || fallback.answer),
+      answer: formatAiText(parsed.answer, 2400) || fallback.answer,
       matchedSources: Array.isArray(parsed.matchedSources) ? parsed.matchedSources.slice(0, 12) : fallback.matchedSources,
       matchedQuestions: Array.isArray(parsed.matchedQuestions) ? parsed.matchedQuestions.slice(0, 8) : fallback.matchedQuestions,
-      recommendedActions: Array.isArray(parsed.recommendedActions) ? parsed.recommendedActions.map(String).slice(0, 10) : fallback.recommendedActions,
-      followUpQuestions: Array.isArray(parsed.followUpQuestions) ? parsed.followUpQuestions.map(String).slice(0, 8) : fallback.followUpQuestions,
-      sourceScope: String(parsed.sourceScope || fallback.sourceScope),
+      recommendedActions: Array.isArray(parsed.recommendedActions) ? aiTextList(parsed.recommendedActions, 10) : fallback.recommendedActions,
+      followUpQuestions: Array.isArray(parsed.followUpQuestions) ? aiTextList(parsed.followUpQuestions) : fallback.followUpQuestions,
+      sourceScope: formatAiText(parsed.sourceScope) || fallback.sourceScope,
       ...meta
     };
   } catch {
