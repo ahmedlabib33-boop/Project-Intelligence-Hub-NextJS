@@ -1,7 +1,7 @@
 {
   "project_id": "The Big -P.01-UP-20-April-26",
   "project_key": "The-BIG-PH01",
-  "project_fingerprint": "c4ebebeac09ef79014c0c72db093186df6d93f84be5fd0ff8e1a5588fcaadbaf",
+  "project_fingerprint": "dc6983ba9125ca5eac622ebb61873d20407c32d2e331fad6195a025b04bd6252",
   "generator_version": "2026.08.project-scoped-html-pdf-pptx.v3",
   "chart_catalog_version": "2026-08-01",
   "chart_status": {
@@ -17,7 +17,7 @@
     "determination_status": "p6_recalculation_required",
     "source_scope": "selected_project_only"
   },
-  "generated_at": "2026-08-01T12:18:23",
+  "generated_at": "2026-08-01T12:22:36",
   "reports": {
     "executive_dashboard": {
       "html": "/generated/The-BIG-PH01/01_executive_dashboard.html",
@@ -27,17 +27,17 @@
         "html": {
           "name": "01_executive_dashboard.html",
           "bytes": 1821,
-          "sha256": "4292f05b67ff2a68b2ce6bb9993281aee858cbcd8b9295d45f04d43992be4d16"
+          "sha256": "f00eb520f8309f966138434064a2a3b496a3fffb2e7dec1b5879aeecef436f82"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 71985,
-          "sha256": "6503b79ac9a7a8ea6c9d4963366b2eae652d351773f704d021b5bd73c53aa854"
+          "sha256": "b89090fe79ada4db5ee2e4110a471cdf89c285a905ec947e019e04c415b56d85"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29140,
-          "sha256": "67bea39cc19148565e7c30391039ccc7f94b9f64d313cb993ccb5f83c27d9c8b"
+          "sha256": "8550bea979cbf223a1c9269b3f12678c486f1a1cd25b310d5ce2f6ad92733171"
         }
       }
     },
@@ -49,17 +49,17 @@
         "html": {
           "name": "02_master_dashboard.html",
           "bytes": 1815,
-          "sha256": "58cb6eecdcd74bfbd8b45b58a8a90bc11ef0e03c0b3016159b1516753cebaf73"
+          "sha256": "989baeab4169f8e34a952264c08b088f2a41a3dc012fac306e05f7119d945c29"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 72420,
-          "sha256": "aea474f248bb3acc123a73f93d0e0e3c581c79bbbdc68356547cb097449fcbc3"
+          "sha256": "422d5329e9284619e68205e0ce65f232df85a68671fc87a57fbd58d5aad54271"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29137,
-          "sha256": "26fea095acc660aa760ad6c750b7f0b879d53718955295cf1d3fae77af5c7262"
+          "sha256": "ac007d9166e30d13fb50c7a7c73c0af09c205bb583f06131df2a690a250f1a99"
         }
       }
     },
@@ -71,17 +71,17 @@
         "html": {
           "name": "03_elite_svg_charts.html",
           "bytes": 1815,
-          "sha256": "b4edad9ff4e3142f1b0d7f608df65c41cc5a7e3bc210086eacc40501562557dd"
+          "sha256": "c69320b2db1f1b83bf0c9ce96d5b548166f2e64e774416b03b646fb589871f85"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 71780,
-          "sha256": "1d3e57bfed5c1be6cb3d45db9a9683521715be8be530eb52c5b51f5d1e7d11f1"
+          "sha256": "1dbe21e1bd069f439e72c9c5aada58bdc0251937fd86b2cf6128a0b8b121b0a7"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29138,
-          "sha256": "09908a1e1682c91eaf54b4b9e38ec533dae75951b9f01c2a8e97ca4a16e0415f"
+          "sha256": "2de548b23980991aa731c74f32d303e9c9fe76ded96dcc6681eb864233020975"
         }
       }
     },
@@ -93,17 +93,17 @@
         "html": {
           "name": "04_linked_executive_dashboard.html",
           "bytes": 1835,
-          "sha256": "4e1f2a00ba16ddf4bd1215459e2bb19f140e90166ceeb00a58bdbe93e0ab37e6"
+          "sha256": "20aa2b44d4241bb8d642867c3e198acef5a9ed95b67c16343a49a2dcdc98a44c"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 72250,
-          "sha256": "992220ca2808d29d5ab5d69033b1797839c5094dc9e386824acc40d9ef0fb0f7"
+          "sha256": "2df6b9fa623d3229e78f9858221d14a895db63f108eb884cd85018af47dd1d02"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29147,
-          "sha256": "db1e1932c544f6d7f071915bf82cb65bfd161911af52b7d82b8f9866694f3f7c"
+          "sha256": "89e26ee7e7b76636a6180d99dd111eac5b775a1f28583540c568cd3fb3e7425f"
         }
       }
     }

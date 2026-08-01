@@ -171,14 +171,22 @@ function Get-WatchedFileHash($Item) {
     return $hash
 }
 
-function Get-WatchedFingerprint {
-    $lines = Get-WatchedItems | ForEach-Object {
+function Get-WatchedSnapshot {
+    $snapshot = [ordered]@{}
+    Get-WatchedItems | ForEach-Object {
         if ($_.Type -eq 'D') {
             # Directory timestamps change when an unrelated child is touched. Path presence is the useful signal.
-            return "D|$($_.RelativePath)"
+            $snapshot[$_.RelativePath] = "D"
+            return
         }
-        return "F|$($_.RelativePath)|$(Get-WatchedFileHash $_)"
+        $snapshot[$_.RelativePath] = "F|$(Get-WatchedFileHash $_)"
     }
+    return $snapshot
+}
+
+function Get-WatchedFingerprint([System.Collections.IDictionary]$Snapshot = $null) {
+    if ($null -eq $Snapshot) { $Snapshot = Get-WatchedSnapshot }
+    $lines = $Snapshot.Keys | Sort-Object | ForEach-Object { "$_|$($Snapshot[$_])" }
     $content = [System.Text.Encoding]::UTF8.GetBytes([string]::Join("`n", [string[]]$lines))
     $sha256 = [System.Security.Cryptography.SHA256]::Create()
     try {
@@ -187,6 +195,17 @@ function Get-WatchedFingerprint {
     finally {
         $sha256.Dispose()
     }
+}
+
+function Get-WatchedChangedPaths(
+    [System.Collections.IDictionary]$Before,
+    [System.Collections.IDictionary]$After
+) {
+    $paths = @($Before.Keys) + @($After.Keys) | Sort-Object -Unique
+    return @($paths | Where-Object {
+        $path = $_
+        -not $Before.Contains($path) -or -not $After.Contains($path) -or $Before[$path] -ne $After[$path]
+    })
 }
 
 function Invoke-PipelineStep(
@@ -260,7 +279,8 @@ function Invoke-PublishPipeline {
     param(
         [int]$StabilityAttempt = 1
     )
-    $fingerprintBefore = Get-WatchedFingerprint
+    $watchSnapshotBefore = Get-WatchedSnapshot
+    $fingerprintBefore = Get-WatchedFingerprint -Snapshot $watchSnapshotBefore
     Invoke-PipelineStep "Generating project-scoped Next.js data" $pythonExecutable @($generatorPath) $root
     Invoke-PipelineStep "Validating Streamlit to Next.js source parity" $pythonExecutable @($validatorPath) $root
     Invoke-PipelineStep "Building Next.js production application" "npm.cmd" @("run", "build") $websiteRoot
@@ -288,8 +308,12 @@ function Invoke-PublishPipeline {
         throw "Public Vercel verification did not complete."
     }
 
-    $fingerprintAfter = Get-WatchedFingerprint
+    $watchSnapshotAfter = Get-WatchedSnapshot
+    $fingerprintAfter = Get-WatchedFingerprint -Snapshot $watchSnapshotAfter
     if ($fingerprintBefore -ne $fingerprintAfter) {
+        $changedPaths = Get-WatchedChangedPaths -Before $watchSnapshotBefore -After $watchSnapshotAfter
+        $displayPaths = @($changedPaths | Select-Object -First 20)
+        Write-PipelineLog "Tracked paths changed during publish: $($displayPaths -join '; ')$(if ($changedPaths.Count -gt $displayPaths.Count) { "; plus $($changedPaths.Count - $displayPaths.Count) more" })"
         if ($StabilityAttempt -lt 2) {
             Write-PipelineLog "Tracked file content changed while the pipeline was running. Re-running one verified stabilization pass."
             return Invoke-PublishPipeline -StabilityAttempt ($StabilityAttempt + 1)
