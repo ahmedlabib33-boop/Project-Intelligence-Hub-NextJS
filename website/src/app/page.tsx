@@ -4,7 +4,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Chart from "chart.js/auto";
 import portfolio from "../../public/data/portfolio.json";
-import workspacePayloads from "../generated/project-workspace-payloads.json";
 import MermaidDiagram from "../components/MermaidDiagram";
 import AiChatPanel from "../components/ai/AiChatPanel";
 import AiInsightCard from "../components/ai/AiInsightCard";
@@ -324,7 +323,6 @@ type SubmittedTiaVisualPayload = {
 };
 
 const projects = portfolio.projects as unknown as ProjectSummary[];
-const projectWorkspacePayloads = workspacePayloads as unknown as Record<string, ProjectRecord>;
 const sectors = portfolio.sectors as SectorRecord[];
 const totals = portfolio.totals;
 const warningSummary = (portfolio as { warning_summary?: Record<string, number> }).warning_summary;
@@ -1874,9 +1872,10 @@ function DecisionOperationsDashboard() {
 function DigitalOperationsApp() {
   const [scope, setScope] = useState(DECISION_DASHBOARD_KEY);
   const [selectedReport, setSelectedReport] = useState<ReportKey>("executive_dashboard");
+  const [projectDetails, setProjectDetails] = useState<ProjectRecord | null>(null);
+  const [projectLoadState, setProjectLoadState] = useState<"idle" | "loading" | "ready" | "error">("idle");
   const selectedProjectSummary = projects.find((project) => project.project_key === scope) || projects[0];
   const isDecisionDashboard = scope === DECISION_DASHBOARD_KEY;
-  const projectDetails = isDecisionDashboard ? null : projectWorkspacePayloads[scope] || null;
   const selectScope = (nextScope: string) => {
     setScope(nextScope);
   };
@@ -1888,6 +1887,44 @@ function DigitalOperationsApp() {
     }
   }, []);
 
+  useEffect(() => {
+    if (isDecisionDashboard || !selectedProjectSummary) {
+      setProjectDetails(null);
+      setProjectLoadState("idle");
+      return;
+    }
+
+    let cancelled = false;
+    setProjectDetails(null);
+    setProjectLoadState("loading");
+    const projectKey = selectedProjectSummary.project_key;
+
+    fetch(`/data/projects/${encodeURIComponent(projectKey)}.json`, { cache: "no-store" })
+      .then(async (response) => {
+        if (!response.ok) throw new Error(`Project payload request failed (${response.status}).`);
+        return response.json() as Promise<ProjectRecord>;
+      })
+      .then((payload) => {
+        if (payload.project_key !== projectKey || payload.project_id !== selectedProjectSummary.project_id) {
+          throw new Error("Project payload identity validation failed.");
+        }
+        if (!cancelled) {
+          setProjectDetails(payload);
+          setProjectLoadState("ready");
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setProjectDetails(null);
+          setProjectLoadState("error");
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isDecisionDashboard, selectedProjectSummary]);
+
   return (
     <main className="future-shell operations-shell">
       <header className="operations-command-bar">
@@ -1896,7 +1933,9 @@ function DigitalOperationsApp() {
         <div className="command-status"><i /><span>{isDecisionDashboard ? "Portfolio mode" : `${selectedProjectSummary.sector} project mode`}</span></div>
       </header>
       {isDecisionDashboard ? <DecisionOperationsDashboard /> : (
-        projectDetails ? <ProjectWorkspace project={projectDetails} selectedReport={selectedReport} setSelectedReport={setSelectedReport} /> : <section className="feature-card project-load-state"><h2>{selectedProjectSummary.project_display_name}</h2><p>Project workspace data is not available. Regenerate the verified website data pipeline for this selected project.</p></section>
+        projectLoadState === "loading" ? <section className="feature-card project-load-state"><h2>Loading {selectedProjectSummary.project_display_name}</h2><p>Validating the selected project payload and source boundary.</p></section>
+          : projectDetails ? <ProjectWorkspace project={projectDetails} selectedReport={selectedReport} setSelectedReport={setSelectedReport} />
+            : <section className="feature-card project-load-state"><h2>{selectedProjectSummary.project_display_name}</h2><p>{projectLoadState === "error" ? "The selected project payload failed its identity or availability check. Regenerate the verified project pipeline." : "Project workspace data is not available. Regenerate the verified website data pipeline for this selected project."}</p></section>
       )}
       <footer className="operations-footer">Designed &amp; Created | <strong>Engr. Ahmed Labib</strong><span>Source-backed controls | Project-isolated intelligence</span></footer>
       <AiChatPanel projectKey={isDecisionDashboard ? undefined : selectedProjectSummary.project_key} projectName={isDecisionDashboard ? "Decision Making Dashboard" : selectedProjectSummary.project_display_name} sector={isDecisionDashboard ? undefined : selectedProjectSummary.sector} />

@@ -101,6 +101,9 @@ function Test-TrackedPath([string]$FullName) {
     if ($lower -match '^website/public/(data|generated)(/|$)') { return $false }
     if ($lower -match '^website/src/generated(/|$)') { return $false }
     if ($lower -eq 'website/next-env.d.ts') { return $false }
+    # The contract knowledge database is regenerated from project-local contracts and evidence.
+    # Track those source files, not the derived SQLite write that occurs during generation.
+    if ($lower -match '(^|/)05-contracts/contract_claims\.db$') { return $false }
     # Local preview logs and TypeScript build state are generated artifacts, not source changes.
     if ($lower -match '\.(log|tsbuildinfo)$') { return $false }
     if ($lower -match '(^|/)(\.env|\.env\.local)$') { return $false }

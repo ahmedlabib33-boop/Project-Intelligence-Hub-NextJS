@@ -1843,12 +1843,12 @@ def _generate() -> None:
     for stale in projects_dir.glob("*.json"):
         if stale.name not in active_project_files:
             stale.unlink()
-    # A generated, keyed module payload makes same-page project switching robust:
-    # it preserves project_id/project_key isolation without a fragile browser fetch.
-    write_json_if_changed(
-        WEBSITE_SOURCE_GENERATED / "project-workspace-payloads.json",
-        {project["project_key"]: project for project in project_records},
-    )
+    # The website loads the selected project JSON on demand and validates its
+    # project_id/project_key before rendering. Remove the old aggregate module
+    # payload so the repository does not carry a large duplicate of all projects.
+    legacy_workspace_payload = WEBSITE_SOURCE_GENERATED / "project-workspace-payloads.json"
+    if legacy_workspace_payload.exists():
+        legacy_workspace_payload.unlink()
     try:
         from pih_data_guardrails import run_guardrails
 
