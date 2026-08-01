@@ -111,6 +111,7 @@ function Get-WatchedItems {
         $generatorPath,
         $validatorPath,
         (Join-Path $PSScriptRoot "pih_data_guardrails.py"),
+        $PSCommandPath,
         (Join-Path $root "analytics\requirements-advanced.txt"),
         $githubSyncPath,
         (Join-Path $PSScriptRoot "github_sync_config.json"),
@@ -313,7 +314,23 @@ try {
                 Write-PipelineLog "A Project Intelligence Hub Vercel pipeline watcher is already running."
                 exit 0
             }
-            $lastFingerprint = Invoke-PublishPipeline
+            $lastFingerprint = Get-WatchedFingerprint
+            $stateMatchesWorkspace = $false
+            if (Test-Path -LiteralPath $statePath) {
+                try {
+                    $previousState = Get-Content -LiteralPath $statePath -Raw | ConvertFrom-Json
+                    $stateMatchesWorkspace = $previousState.status -eq "PASS" -and $previousState.source_fingerprint -eq $lastFingerprint
+                }
+                catch {
+                    $stateMatchesWorkspace = $false
+                }
+            }
+            if ($stateMatchesWorkspace) {
+                Write-PipelineLog "Using the last verified deployment state; no unchanged startup rebuild is required."
+            }
+            else {
+                $lastFingerprint = Invoke-PublishPipeline
+            }
             Write-PipelineLog "Watcher active. Polling tracked code and project folders every $IntervalSeconds seconds."
             while ($true) {
                 Start-Sleep -Seconds $IntervalSeconds
