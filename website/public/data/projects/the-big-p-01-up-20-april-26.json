@@ -291,8 +291,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-01T11:09:50",
-  "fingerprint": "0e355f34b2a6fcaf36e096493cedc496d44d6e15dff2df847d64359323c491b7",
+  "last_updated": "2026-08-01T11:39:07",
+  "fingerprint": "c5b4d046c3f5b90c266b976094d5f4e6585bd3649bc9e301461a9e4c97d6a83c",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -15808,6 +15808,36 @@
             "notes"
           ],
           "rows": []
+        },
+        {
+          "file": "16-fragnet_control_register.csv",
+          "exists": true,
+          "row_count": 0,
+          "column_count": 21,
+          "columns": [
+            "project_id",
+            "fragnet_id",
+            "event_id",
+            "fragnet_type",
+            "affected_activity_id",
+            "predecessor_activity_id",
+            "predecessor_relationship_type",
+            "predecessor_lag_days",
+            "successor_activity_id",
+            "successor_relationship_type",
+            "successor_lag_days",
+            "fragment_start",
+            "fragment_finish",
+            "fragment_duration_days",
+            "insert_at_status_date",
+            "evidence_reference",
+            "contract_clause_candidate",
+            "cpm_validation_status",
+            "concurrency_status",
+            "analyst_status",
+            "notes"
+          ],
+          "rows": []
         }
       ],
       "template_tables": [
@@ -25009,10 +25039,20 @@
           "rows": [],
           "truncated": false,
           "source_path": "15-tia_recovery_scenario.csv"
+        },
+        {
+          "file": "16-fragnet_control_register.csv",
+          "exists": true,
+          "row_count": 0,
+          "column_count": 0,
+          "columns": [],
+          "rows": [],
+          "truncated": false,
+          "source_path": "16-fragnet_control_register.csv"
         }
       ],
       "required_file_count": 11,
-      "recognized_file_count": 15,
+      "recognized_file_count": 16,
       "missing_required_files": [],
       "schedule_tables": {
         "MEP Activities": {
@@ -33678,7 +33718,7 @@
         {
           "name": "Delay TIA template detector",
           "status": "Ready",
-          "detail": "15 CSV files recognized in the selected project."
+          "detail": "16 CSV files recognized in the selected project."
         },
         {
           "name": "Column inspector",
@@ -33697,8 +33737,8 @@
       "project_key": "the-big-p-01-up-20-april-26",
       "project_display_name": "ROYA-BIG PROJECT PHASE01 (B1-4)",
       "project_folder_path": "D:\\one drive data\\OneDrive\\Documents\\Project Intelligence Hub\\projects\\Buildings\\The BIG - PH01",
-      "analysis_run_id": "af1413795faa37c2ce46",
-      "analysis_generated_at": "2026-08-01T08:38:47+00:00",
+      "analysis_run_id": "8a73f5bb18a8eaa10a7f",
+      "analysis_generated_at": "2026-08-01T08:41:40+00:00",
       "methodology_profile": "four_pipeline_v1",
       "assessment_profile": "evidence_backed",
       "assessment_status": "evidence_backed",
@@ -33708,7 +33748,7 @@
         "contract_source_count": 2,
         "evidence_source_count": 0,
         "letter_source_count": 18,
-        "delay_source_count": 16,
+        "delay_source_count": 17,
         "native_xer_count": 0,
         "relationship_rows": 791,
         "candidate_rows": 0,
@@ -33792,7 +33832,7 @@
           "pipeline": "schedule",
           "title": "Schedule, CPM logic, fragnets, float, and concurrency",
           "status": "qualified",
-          "source_count": 23,
+          "source_count": 25,
           "confidence": "Medium"
         },
         {
@@ -33800,7 +33840,7 @@
           "pipeline": "master",
           "title": "Master assessment, limits, confidence, and next actions",
           "status": "evidence_backed",
-          "source_count": 50,
+          "source_count": 54,
           "confidence": "Low"
         }
       ],
@@ -33901,6 +33941,20 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-19T06:24:12+00:00",
+          "evidence_status": "reference_only"
+        },
+        {
+          "project_id": "The Big -P.01-UP-20-April-26",
+          "project_key": "the-big-p-01-up-20-april-26",
+          "source_id": "The Big -P.01-UP-20-April-26:40bafb4bac1eb008",
+          "source_family": "evidence",
+          "source_file": "evidence_mapping_register.csv",
+          "source_relative_path": "06-evidence/evidence_mapping_register.csv",
+          "source_hash": "40bafb4bac1eb008e941db87c36ff069d52cf09df3d81747a54bdc09e8e6586b",
+          "source_revision": "Not declared",
+          "source_page_or_sheet": "Not indexed",
+          "source_row": "Not indexed",
+          "modified_at": "2026-08-01T08:39:07+00:00",
           "evidence_status": "reference_only"
         },
         {
@@ -34186,6 +34240,20 @@
         {
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26",
+          "source_id": "The Big -P.01-UP-20-April-26:931a1fe51ba3b46d",
+          "source_family": "letters",
+          "source_file": "notice_chronology_register.csv",
+          "source_relative_path": "07-letters_intelligence/notice_chronology_register.csv",
+          "source_hash": "931a1fe51ba3b46db17be59a87ec652f8ab685c1f8be0db6d352446f0f715839",
+          "source_revision": "Not declared",
+          "source_page_or_sheet": "Not indexed",
+          "source_row": "Not indexed",
+          "modified_at": "2026-08-01T08:39:07+00:00",
+          "evidence_status": "reference_only"
+        },
+        {
+          "project_id": "The Big -P.01-UP-20-April-26",
+          "project_key": "the-big-p-01-up-20-april-26",
           "source_id": "The Big -P.01-UP-20-April-26:13c9567516bfdd4e",
           "source_family": "delay",
           "source_file": "TIA methodology.docx",
@@ -34410,6 +34478,20 @@
         {
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26",
+          "source_id": "The Big -P.01-UP-20-April-26:fcc1296e80707032",
+          "source_family": "delay",
+          "source_file": "16-fragnet_control_register.csv",
+          "source_relative_path": "02-delay_analysis/steel_delay_tia_templates/16-fragnet_control_register.csv",
+          "source_hash": "fcc1296e807070327755981bc3d703d0652f62b6f96bcff99ff63ac602ec3cf0",
+          "source_revision": "Not declared",
+          "source_page_or_sheet": "Not indexed",
+          "source_row": "Not indexed",
+          "modified_at": "2026-08-01T08:39:07+00:00",
+          "evidence_status": "reference_only"
+        },
+        {
+          "project_id": "The Big -P.01-UP-20-April-26",
+          "project_key": "the-big-p-01-up-20-april-26",
           "source_id": "The Big -P.01-UP-20-April-26:327c7e00d862f64f",
           "source_family": "schedule",
           "source_file": "BL critical path.csv",
@@ -34504,6 +34586,20 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-15T19:54:56+00:00",
           "evidence_status": "verified_source"
+        },
+        {
+          "project_id": "The Big -P.01-UP-20-April-26",
+          "project_key": "the-big-p-01-up-20-april-26",
+          "source_id": "The Big -P.01-UP-20-April-26:6e07d7a125fa90d9",
+          "source_family": "schedule",
+          "source_file": "schedule_snapshot_register.csv",
+          "source_relative_path": "03-schedule/schedule_snapshot_register.csv",
+          "source_hash": "6e07d7a125fa90d9dfd66c019a6a6d43581ba9b4aaa4e7633064d5ed1d084f9e",
+          "source_revision": "Not declared",
+          "source_page_or_sheet": "Not indexed",
+          "source_row": "Not indexed",
+          "modified_at": "2026-08-01T08:39:07+00:00",
+          "evidence_status": "reference_only"
         }
       ],
       "evidence_ledger": [
@@ -34636,6 +34732,24 @@
         {
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26",
+          "source_id": "The Big -P.01-UP-20-April-26:40bafb4bac1eb008",
+          "source_family": "evidence",
+          "source_file": "evidence_mapping_register.csv",
+          "source_relative_path": "06-evidence/evidence_mapping_register.csv",
+          "source_hash": "40bafb4bac1eb008e941db87c36ff069d52cf09df3d81747a54bdc09e8e6586b",
+          "source_revision": "Not declared",
+          "source_page_or_sheet": "Not indexed",
+          "source_row": "Not indexed",
+          "modified_at": "2026-08-01T08:39:07+00:00",
+          "evidence_status": "reference_only",
+          "event_id": "Not linked",
+          "activity_id": "Not linked",
+          "clause_candidate": "Not assessed",
+          "mapping_status": "reference_only"
+        },
+        {
+          "project_id": "The Big -P.01-UP-20-April-26",
+          "project_key": "the-big-p-01-up-20-april-26",
           "source_id": "The Big -P.01-UP-20-April-26:042cb8c67f572bad",
           "source_family": "evidence",
           "source_file": "evidence_register_template.csv",
@@ -34996,6 +35110,24 @@
         {
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26",
+          "source_id": "The Big -P.01-UP-20-April-26:931a1fe51ba3b46d",
+          "source_family": "letters",
+          "source_file": "notice_chronology_register.csv",
+          "source_relative_path": "07-letters_intelligence/notice_chronology_register.csv",
+          "source_hash": "931a1fe51ba3b46db17be59a87ec652f8ab685c1f8be0db6d352446f0f715839",
+          "source_revision": "Not declared",
+          "source_page_or_sheet": "Not indexed",
+          "source_row": "Not indexed",
+          "modified_at": "2026-08-01T08:39:07+00:00",
+          "evidence_status": "reference_only",
+          "event_id": "Not linked",
+          "activity_id": "Not linked",
+          "clause_candidate": "Not assessed",
+          "mapping_status": "reference_only"
+        },
+        {
+          "project_id": "The Big -P.01-UP-20-April-26",
+          "project_key": "the-big-p-01-up-20-april-26",
           "source_id": "The Big -P.01-UP-20-April-26:13c9567516bfdd4e",
           "source_family": "delay",
           "source_file": "TIA methodology.docx",
@@ -35284,6 +35416,24 @@
         {
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26",
+          "source_id": "The Big -P.01-UP-20-April-26:fcc1296e80707032",
+          "source_family": "delay",
+          "source_file": "16-fragnet_control_register.csv",
+          "source_relative_path": "02-delay_analysis/steel_delay_tia_templates/16-fragnet_control_register.csv",
+          "source_hash": "fcc1296e807070327755981bc3d703d0652f62b6f96bcff99ff63ac602ec3cf0",
+          "source_revision": "Not declared",
+          "source_page_or_sheet": "Not indexed",
+          "source_row": "Not indexed",
+          "modified_at": "2026-08-01T08:39:07+00:00",
+          "evidence_status": "reference_only",
+          "event_id": "Not linked",
+          "activity_id": "Not linked",
+          "clause_candidate": "Not assessed",
+          "mapping_status": "reference_only"
+        },
+        {
+          "project_id": "The Big -P.01-UP-20-April-26",
+          "project_key": "the-big-p-01-up-20-april-26",
           "source_id": "The Big -P.01-UP-20-April-26:327c7e00d862f64f",
           "source_family": "schedule",
           "source_file": "BL critical path.csv",
@@ -35406,6 +35556,24 @@
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
           "mapping_status": "verified_source"
+        },
+        {
+          "project_id": "The Big -P.01-UP-20-April-26",
+          "project_key": "the-big-p-01-up-20-april-26",
+          "source_id": "The Big -P.01-UP-20-April-26:6e07d7a125fa90d9",
+          "source_family": "schedule",
+          "source_file": "schedule_snapshot_register.csv",
+          "source_relative_path": "03-schedule/schedule_snapshot_register.csv",
+          "source_hash": "6e07d7a125fa90d9dfd66c019a6a6d43581ba9b4aaa4e7633064d5ed1d084f9e",
+          "source_revision": "Not declared",
+          "source_page_or_sheet": "Not indexed",
+          "source_row": "Not indexed",
+          "modified_at": "2026-08-01T08:39:07+00:00",
+          "evidence_status": "reference_only",
+          "event_id": "Not linked",
+          "activity_id": "Not linked",
+          "clause_candidate": "Not assessed",
+          "mapping_status": "reference_only"
         }
       ],
       "limitations": [
@@ -35476,6 +35644,13 @@
           "extension": "csv",
           "size_kb": 0.1,
           "modified": "2026-06-19T09:24:12"
+        },
+        {
+          "name": "evidence_mapping_register.csv",
+          "relative_path": "06-evidence/evidence_mapping_register.csv",
+          "extension": "csv",
+          "size_kb": 0.3,
+          "modified": "2026-08-01T11:39:07"
         },
         {
           "name": "evidence_register_template.csv",
@@ -38030,85 +38205,85 @@
           "name": "01_executive_dashboard.html",
           "relative_path": "The BIG - PH01/01_executive_dashboard.html",
           "extension": "html",
-          "size_kb": 17.8,
-          "modified": "2026-07-20T15:45:12"
+          "size_kb": 1.8,
+          "modified": "2026-08-01T11:41:45"
         },
         {
           "name": "01_executive_dashboard.pdf",
           "relative_path": "The BIG - PH01/01_executive_dashboard.pdf",
           "extension": "pdf",
-          "size_kb": 62.8,
-          "modified": "2026-08-01T11:17:40"
+          "size_kb": 70.3,
+          "modified": "2026-08-01T11:41:46"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-01T11:17:40"
+          "modified": "2026-08-01T11:41:46"
         },
         {
           "name": "02_master_dashboard.html",
           "relative_path": "The BIG - PH01/02_master_dashboard.html",
           "extension": "html",
-          "size_kb": 115.2,
-          "modified": "2026-07-20T15:45:12"
+          "size_kb": 1.8,
+          "modified": "2026-08-01T11:41:46"
         },
         {
           "name": "02_master_dashboard.pdf",
           "relative_path": "The BIG - PH01/02_master_dashboard.pdf",
           "extension": "pdf",
-          "size_kb": 63.1,
-          "modified": "2026-08-01T11:17:41"
+          "size_kb": 70.7,
+          "modified": "2026-08-01T11:41:47"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "The BIG - PH01/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-01T11:17:42"
+          "modified": "2026-08-01T11:41:47"
         },
         {
           "name": "03_elite_svg_charts.html",
           "relative_path": "The BIG - PH01/03_elite_svg_charts.html",
           "extension": "html",
-          "size_kb": 51.7,
-          "modified": "2026-07-20T15:45:12"
+          "size_kb": 1.8,
+          "modified": "2026-08-01T11:41:47"
         },
         {
           "name": "03_elite_svg_charts.pdf",
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pdf",
           "extension": "pdf",
-          "size_kb": 62.4,
-          "modified": "2026-08-01T11:17:43"
+          "size_kb": 70.1,
+          "modified": "2026-08-01T11:41:48"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-01T11:17:43"
+          "modified": "2026-08-01T11:41:48"
         },
         {
           "name": "04_linked_executive_dashboard.html",
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.html",
           "extension": "html",
-          "size_kb": 54.7,
-          "modified": "2026-07-20T15:45:12"
+          "size_kb": 1.8,
+          "modified": "2026-08-01T11:41:48"
         },
         {
           "name": "04_linked_executive_dashboard.pdf",
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
-          "size_kb": 63.1,
-          "modified": "2026-08-01T11:17:44"
+          "size_kb": 70.6,
+          "modified": "2026-08-01T11:41:49"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-01T11:17:44"
+          "modified": "2026-08-01T11:41:49"
         }
       ],
       "watchers": [
@@ -38278,18 +38453,18 @@
       "files": {
         "html": {
           "name": "01_executive_dashboard.html",
-          "bytes": 1435,
-          "sha256": "b4246c2c696699f229af1898ba9fb90b7ff36814610f7933b38dff2dbbe2b59d"
+          "bytes": 1821,
+          "sha256": "aebb6abe6a4bf67664a7b693658d6627269542de81cb9ea3dcbf621180ece42a"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 64344,
-          "sha256": "98309daa676363b411021a82b114f51b1a98360fb31d5420bc2af83758cdee0c"
+          "bytes": 71991,
+          "sha256": "8be4e0b1a156ce569b36a15ce63012ff73ccb5e0d87874b28c3dae896d0d1677"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29140,
-          "sha256": "aba3b1356e5d6ffda95cf3c89c1b91247430f0e9b0cf4d6fe1b52df494d927f6"
+          "sha256": "d66cf3a868b9223d6f6b1edf0ba40fd6f8971a42c3ab2468ac5f08cb3b0fef02"
         }
       }
     },
@@ -38300,18 +38475,18 @@
       "files": {
         "html": {
           "name": "02_master_dashboard.html",
-          "bytes": 1429,
-          "sha256": "31fa28d4dccd13839e03c836801e12376e9f28c2c5db1da536d5a23c86446be4"
+          "bytes": 1815,
+          "sha256": "fa98705492a6840e4595371bf718a2a5bd391097a3dec843df78facdba18f63c"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
-          "bytes": 64583,
-          "sha256": "bbb671ded0346161bf74ee9cea45df04a9d88a6f4cd886bae6ab2440945431ef"
+          "bytes": 72426,
+          "sha256": "7ebf10f002c122ae712230bbe59ee4aeddfe841624920c4eb53f550b4c632687"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29137,
-          "sha256": "5e0ca794f8c7b168cd1ac7b75714ff131b56c29d20adcbcb8dc1dcef49cb05fc"
+          "sha256": "82135d348bcc67286495b60fff0d140421f7c2992c7572898ab6d5f5500a0131"
         }
       }
     },
@@ -38322,18 +38497,18 @@
       "files": {
         "html": {
           "name": "03_elite_svg_charts.html",
-          "bytes": 1429,
-          "sha256": "4d7804e275317a2b8365eadf14b594ce267bc02aa2cd74e4fd69a9c8d506e58d"
+          "bytes": 1815,
+          "sha256": "cda8a9bd1d6ed8f4298990c3b8f3971fd44d37a6a53f021395cb57cf626476b2"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
-          "bytes": 63903,
-          "sha256": "05f6a30550d48a04d03c669ceecec5979f6f0dc9ab5482880d5ad84538012753"
+          "bytes": 71786,
+          "sha256": "92202c557b84a3a49afb29ce15c26d5cc419ccd12263150662dea3ffc2a396f5"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29138,
-          "sha256": "37c0ae9e57041ec1f03995d6ad65f661453bfcac6f87d123b560b0684b6b9030"
+          "sha256": "1a1c87ce1a4b55662aeebf45266e72e79a7dcd72c2c8a6f81e53e6960a8d9939"
         }
       }
     },
@@ -38344,18 +38519,18 @@
       "files": {
         "html": {
           "name": "04_linked_executive_dashboard.html",
-          "bytes": 1449,
-          "sha256": "fcc6e271f03d0953beeede18063593d20781a959e3fae43bd1192d93f6ab72cf"
+          "bytes": 1835,
+          "sha256": "953ac830f7add0c7e3353b2b457d4e522087b48fe8b376b005a64b3208be17ce"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
-          "bytes": 64614,
-          "sha256": "4d6e3f198b072614f9a58288d772042987703c46eb7253d97eda58b11d58d7a5"
+          "bytes": 72256,
+          "sha256": "98b23972a4efc633cf6af4707f40ae5cfc5c2a3096663d8ea9e509ecb9e6ed95"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29147,
-          "sha256": "cb191026b7d66853722acf857ac0d2856a445bd38316391895d13cc2239abc9e"
+          "sha256": "fd7665c7a42c7369df1cbe9c007d8cb20c3779fa23e48fedb7dc3bddd6e0d5f0"
         }
       }
     }

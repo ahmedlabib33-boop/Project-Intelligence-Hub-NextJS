@@ -1,7 +1,7 @@
 {
   "project_id": "LMD-Bridge",
   "project_key": "LMD-Bridgs",
-  "project_fingerprint": "644123dcb16f1960252c9d7c32f1e261386c77bc87553634d39ee98fa469906e",
+  "project_fingerprint": "75fbbf8c5815e910ff28dc8d84c6a167a8eeb408dc06e2549d7a058e330534a1",
   "generator_version": "2026.08.project-scoped-html-pdf-pptx.v2",
   "chart_catalog_version": "2026-08-01",
   "chart_status": {
@@ -10,7 +10,7 @@
     "delay.type_distribution": "awaiting_data",
     "delay.tia_recovery_scenario": "awaiting_data"
   },
-  "generated_at": "2026-08-01T11:17:39",
+  "generated_at": "2026-08-01T11:41:45",
   "reports": {
     "executive_dashboard": {
       "html": "/generated/LMD-Bridgs/01_executive_dashboard.html",
@@ -19,18 +19,18 @@
       "files": {
         "html": {
           "name": "01_executive_dashboard.html",
-          "bytes": 1423,
-          "sha256": "b023feeb03334c9a4850abd97e94684444283c40109268f4f905366e6c7f02cb"
+          "bytes": 1807,
+          "sha256": "90360e3a35c71562d0af1d9349f9593a05094ff054cdbe5c55fb7796be14d10b"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 61782,
-          "sha256": "6db7b6bbdbe20df4d186ea817692072c877e24f51dae5f0323bc32a93fecad34"
+          "bytes": 69026,
+          "sha256": "010d97efb66e52674f1393880fc2a25b234663d61ddfebe90ba56a60deba7cd8"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29122,
-          "sha256": "1b9ef78a47a141765ae30c161f44ee4af4b4201ef58913eafa8b3ca95cb4f68a"
+          "sha256": "5af354b0e23a9750272d76a390e433bd58fa0d2312e4f20a92d648be276d87d1"
         }
       }
     },
@@ -41,18 +41,18 @@
       "files": {
         "html": {
           "name": "02_master_dashboard.html",
-          "bytes": 1417,
-          "sha256": "2e40cd7610205edad17037af0a4ae5a0a096a3f2650f599cc220342a4042de2a"
+          "bytes": 1801,
+          "sha256": "9a2d73ad345a7486712ea1f4e053c0ccf6cdeec2b942ab4c2bd51f47c6781777"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
-          "bytes": 61538,
-          "sha256": "02fba70680f2c6de1c03fccd31b395cccaa2f991e43d68885685c2c3091b8200"
+          "bytes": 69021,
+          "sha256": "0da42eb5724bbf94a62f9c4157f36400926ecd7f086884046845b53c8ac10028"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29119,
-          "sha256": "92caf5e101df0c84a387469129f5eae5af3040368e6bf1a6a45b9b87101ec4ed"
+          "sha256": "f577e736f8f1838be8699b9ef771a398f5f3ace9911f21f494f7482821664b17"
         }
       }
     },
@@ -63,18 +63,18 @@
       "files": {
         "html": {
           "name": "03_elite_svg_charts.html",
-          "bytes": 1417,
-          "sha256": "dd23605a93601dc0a8a2e84794d3f90585769a467023402c8e761c9433f65ae7"
+          "bytes": 1801,
+          "sha256": "10a1d0f8034e9a1b59559335ab11c214fba5dab2e6a1e3e46d32319470cd6a4d"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
-          "bytes": 61657,
-          "sha256": "af90fccbe2781f05149d9c20cec3e2fd67dc66a0437132ee8cb415c6c7fc9318"
+          "bytes": 69139,
+          "sha256": "4b510fbd74faa3246dc631bde7dfc1cbdb87b6ad642ab0d46c2bc8e14bb2f184"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29119,
-          "sha256": "b67bc33b95c22ca555a734ba3c59f0f7b9230b7fa515e2e8964923968ca87689"
+          "sha256": "e6b97a6f898e4aca887b56b27ed401bc2c425c588658adf7f933cedba78fadbd"
         }
       }
     },
@@ -85,18 +85,18 @@
       "files": {
         "html": {
           "name": "04_linked_executive_dashboard.html",
-          "bytes": 1437,
-          "sha256": "21a2685de456bf4438cb4b1dcff9b7ac4ac1c3fbfa36209c717f57ff4cd780f1"
+          "bytes": 1821,
+          "sha256": "30e2b08b2c498409c720ca1f97b437b77af59b84ebf5b5de85611c3a4ab15fbd"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
-          "bytes": 62068,
-          "sha256": "ff3ba2b3dc5c2b61b776435dbde29e1ff78b59d2c75b7af8b4ce52964c4c9c4f"
+          "bytes": 69295,
+          "sha256": "d46a0bf1702b1efff71d8fd0bf0e43432c10ba2d8ea71d3e7bf86e482507a2da"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29128,
-          "sha256": "ea61a51d2a94ce16ba3dbdcbb3cf5e1dd51519cc9cf611997519bfe4affc6d4d"
+          "sha256": "cdd312ba30ee1eb547e4b34a15bbb58c7fbf130592f4743c521bda9e3c7ce443"
         }
       }
     }

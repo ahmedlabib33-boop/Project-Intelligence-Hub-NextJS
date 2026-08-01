@@ -234,8 +234,8 @@
       "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
     },
     "decision_required": true,
-    "last_updated": "2026-08-01T11:09:50",
-    "fingerprint": "644123dcb16f1960252c9d7c32f1e261386c77bc87553634d39ee98fa469906e",
+    "last_updated": "2026-08-01T11:39:07",
+    "fingerprint": "75fbbf8c5815e910ff28dc8d84c6a167a8eeb408dc06e2549d7a058e330534a1",
     "source_files": {
       "projects": 1,
       "contracts": 2,
@@ -5401,6 +5401,36 @@
               "notes"
             ],
             "rows": []
+          },
+          {
+            "file": "16-fragnet_control_register.csv",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 21,
+            "columns": [
+              "project_id",
+              "fragnet_id",
+              "event_id",
+              "fragnet_type",
+              "affected_activity_id",
+              "predecessor_activity_id",
+              "predecessor_relationship_type",
+              "predecessor_lag_days",
+              "successor_activity_id",
+              "successor_relationship_type",
+              "successor_lag_days",
+              "fragment_start",
+              "fragment_finish",
+              "fragment_duration_days",
+              "insert_at_status_date",
+              "evidence_reference",
+              "contract_clause_candidate",
+              "cpm_validation_status",
+              "concurrency_status",
+              "analyst_status",
+              "notes"
+            ],
+            "rows": []
           }
         ],
         "template_tables": [
@@ -7130,10 +7160,20 @@
             "rows": [],
             "truncated": false,
             "source_path": "15-tia_recovery_scenario.csv"
+          },
+          {
+            "file": "16-fragnet_control_register.csv",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 0,
+            "columns": [],
+            "rows": [],
+            "truncated": false,
+            "source_path": "16-fragnet_control_register.csv"
           }
         ],
         "required_file_count": 11,
-        "recognized_file_count": 15,
+        "recognized_file_count": 16,
         "missing_required_files": [],
         "schedule_tables": {
           "MEP Activities": {
@@ -8936,7 +8976,7 @@
           {
             "name": "Delay TIA template detector",
             "status": "Ready",
-            "detail": "15 CSV files recognized in the selected project."
+            "detail": "16 CSV files recognized in the selected project."
           },
           {
             "name": "Column inspector",
@@ -8955,18 +8995,18 @@
         "project_key": "lmd-bridge",
         "project_display_name": "LMD Bridge & Road Interchange",
         "project_folder_path": "D:\\one drive data\\OneDrive\\Documents\\Project Intelligence Hub\\projects\\Bridges\\LMD-Bridgs",
-        "analysis_run_id": "10ab79d9b84d9a078ced",
-        "analysis_generated_at": "2026-08-01T08:38:43+00:00",
+        "analysis_run_id": "e251d0b48d40715e2a46",
+        "analysis_generated_at": "2026-08-01T08:41:37+00:00",
         "methodology_profile": "four_pipeline_v1",
-        "assessment_profile": "qualified",
-        "assessment_status": "qualified",
+        "assessment_profile": "readiness_only",
+        "assessment_status": "readiness_only",
         "determination_status": "p6_recalculation_required",
         "source_scope": "selected_project_only",
         "summary": {
           "contract_source_count": 1,
           "evidence_source_count": 0,
           "letter_source_count": 0,
-          "delay_source_count": 16,
+          "delay_source_count": 17,
           "native_xer_count": 0,
           "relationship_rows": 15,
           "candidate_rows": 0,
@@ -9051,15 +9091,15 @@
             "pipeline": "schedule",
             "title": "Schedule, CPM logic, fragnets, float, and concurrency",
             "status": "qualified",
-            "source_count": 23,
+            "source_count": 25,
             "confidence": "Medium"
           },
           {
             "project_id": "LMD-Bridge",
             "pipeline": "master",
             "title": "Master assessment, limits, confidence, and next actions",
-            "status": "qualified",
-            "source_count": 31,
+            "status": "readiness_only",
+            "source_count": 35,
             "confidence": "Low"
           }
         ],
@@ -9151,6 +9191,20 @@
           {
             "project_id": "LMD-Bridge",
             "project_key": "lmd-bridge",
+            "source_id": "LMD-Bridge:40bafb4bac1eb008",
+            "source_family": "evidence",
+            "source_file": "evidence_mapping_register.csv",
+            "source_relative_path": "06-evidence/evidence_mapping_register.csv",
+            "source_hash": "40bafb4bac1eb008e941db87c36ff069d52cf09df3d81747a54bdc09e8e6586b",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only"
+          },
+          {
+            "project_id": "LMD-Bridge",
+            "project_key": "lmd-bridge",
             "source_id": "LMD-Bridge:042cb8c67f572bad",
             "source_family": "evidence",
             "source_file": "evidence_register_template.csv",
@@ -9174,6 +9228,20 @@
             "source_page_or_sheet": "Not indexed",
             "source_row": "Not indexed",
             "modified_at": "2026-06-26T21:08:34+00:00",
+            "evidence_status": "reference_only"
+          },
+          {
+            "project_id": "LMD-Bridge",
+            "project_key": "lmd-bridge",
+            "source_id": "LMD-Bridge:931a1fe51ba3b46d",
+            "source_family": "letters",
+            "source_file": "notice_chronology_register.csv",
+            "source_relative_path": "07-letters_intelligence/notice_chronology_register.csv",
+            "source_hash": "931a1fe51ba3b46db17be59a87ec652f8ab685c1f8be0db6d352446f0f715839",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
             "evidence_status": "reference_only"
           },
           {
@@ -9403,6 +9471,20 @@
           {
             "project_id": "LMD-Bridge",
             "project_key": "lmd-bridge",
+            "source_id": "LMD-Bridge:fcc1296e80707032",
+            "source_family": "delay",
+            "source_file": "16-fragnet_control_register.csv",
+            "source_relative_path": "02-delay_analysis/steel_delay_tia_templates/16-fragnet_control_register.csv",
+            "source_hash": "fcc1296e807070327755981bc3d703d0652f62b6f96bcff99ff63ac602ec3cf0",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only"
+          },
+          {
+            "project_id": "LMD-Bridge",
+            "project_key": "lmd-bridge",
             "source_id": "LMD-Bridge:cab17ad9be92c298",
             "source_family": "schedule",
             "source_file": "BL critical path.csv",
@@ -9497,6 +9579,20 @@
             "source_row": "Not indexed",
             "modified_at": "2026-06-26T17:52:10+00:00",
             "evidence_status": "verified_source"
+          },
+          {
+            "project_id": "LMD-Bridge",
+            "project_key": "lmd-bridge",
+            "source_id": "LMD-Bridge:6e07d7a125fa90d9",
+            "source_family": "schedule",
+            "source_file": "schedule_snapshot_register.csv",
+            "source_relative_path": "03-schedule/schedule_snapshot_register.csv",
+            "source_hash": "6e07d7a125fa90d9dfd66c019a6a6d43581ba9b4aaa4e7633064d5ed1d084f9e",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only"
           }
         ],
         "evidence_ledger": [
@@ -9611,6 +9707,24 @@
           {
             "project_id": "LMD-Bridge",
             "project_key": "lmd-bridge",
+            "source_id": "LMD-Bridge:40bafb4bac1eb008",
+            "source_family": "evidence",
+            "source_file": "evidence_mapping_register.csv",
+            "source_relative_path": "06-evidence/evidence_mapping_register.csv",
+            "source_hash": "40bafb4bac1eb008e941db87c36ff069d52cf09df3d81747a54bdc09e8e6586b",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only",
+            "event_id": "Not linked",
+            "activity_id": "Not linked",
+            "clause_candidate": "Not assessed",
+            "mapping_status": "reference_only"
+          },
+          {
+            "project_id": "LMD-Bridge",
+            "project_key": "lmd-bridge",
             "source_id": "LMD-Bridge:042cb8c67f572bad",
             "source_family": "evidence",
             "source_file": "evidence_register_template.csv",
@@ -9638,6 +9752,24 @@
             "source_page_or_sheet": "Not indexed",
             "source_row": "Not indexed",
             "modified_at": "2026-06-26T21:08:34+00:00",
+            "evidence_status": "reference_only",
+            "event_id": "Not linked",
+            "activity_id": "Not linked",
+            "clause_candidate": "Not assessed",
+            "mapping_status": "reference_only"
+          },
+          {
+            "project_id": "LMD-Bridge",
+            "project_key": "lmd-bridge",
+            "source_id": "LMD-Bridge:931a1fe51ba3b46d",
+            "source_family": "letters",
+            "source_file": "notice_chronology_register.csv",
+            "source_relative_path": "07-letters_intelligence/notice_chronology_register.csv",
+            "source_hash": "931a1fe51ba3b46db17be59a87ec652f8ab685c1f8be0db6d352446f0f715839",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
             "evidence_status": "reference_only",
             "event_id": "Not linked",
             "activity_id": "Not linked",
@@ -9935,6 +10067,24 @@
           {
             "project_id": "LMD-Bridge",
             "project_key": "lmd-bridge",
+            "source_id": "LMD-Bridge:fcc1296e80707032",
+            "source_family": "delay",
+            "source_file": "16-fragnet_control_register.csv",
+            "source_relative_path": "02-delay_analysis/steel_delay_tia_templates/16-fragnet_control_register.csv",
+            "source_hash": "fcc1296e807070327755981bc3d703d0652f62b6f96bcff99ff63ac602ec3cf0",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only",
+            "event_id": "Not linked",
+            "activity_id": "Not linked",
+            "clause_candidate": "Not assessed",
+            "mapping_status": "reference_only"
+          },
+          {
+            "project_id": "LMD-Bridge",
+            "project_key": "lmd-bridge",
             "source_id": "LMD-Bridge:cab17ad9be92c298",
             "source_family": "schedule",
             "source_file": "BL critical path.csv",
@@ -10057,6 +10207,24 @@
             "activity_id": "Not linked",
             "clause_candidate": "Not assessed",
             "mapping_status": "verified_source"
+          },
+          {
+            "project_id": "LMD-Bridge",
+            "project_key": "lmd-bridge",
+            "source_id": "LMD-Bridge:6e07d7a125fa90d9",
+            "source_family": "schedule",
+            "source_file": "schedule_snapshot_register.csv",
+            "source_relative_path": "03-schedule/schedule_snapshot_register.csv",
+            "source_hash": "6e07d7a125fa90d9dfd66c019a6a6d43581ba9b4aaa4e7633064d5ed1d084f9e",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only",
+            "event_id": "Not linked",
+            "activity_id": "Not linked",
+            "clause_candidate": "Not assessed",
+            "mapping_status": "reference_only"
           }
         ],
         "limitations": [
@@ -10120,6 +10288,13 @@
             "extension": "csv",
             "size_kb": 0.1,
             "modified": "2026-06-27T00:08:34"
+          },
+          {
+            "name": "evidence_mapping_register.csv",
+            "relative_path": "06-evidence/evidence_mapping_register.csv",
+            "extension": "csv",
+            "size_kb": 0.3,
+            "modified": "2026-08-01T11:39:07"
           },
           {
             "name": "evidence_register_template.csv",
@@ -11634,85 +11809,85 @@
             "name": "01_executive_dashboard.html",
             "relative_path": "LMD-Bridgs/01_executive_dashboard.html",
             "extension": "html",
-            "size_kb": 17.9,
-            "modified": "2026-07-20T15:45:06"
+            "size_kb": 1.8,
+            "modified": "2026-08-01T11:41:41"
           },
           {
             "name": "01_executive_dashboard.pdf",
             "relative_path": "LMD-Bridgs/01_executive_dashboard.pdf",
             "extension": "pdf",
-            "size_kb": 60.3,
-            "modified": "2026-08-01T11:17:34"
+            "size_kb": 67.4,
+            "modified": "2026-08-01T11:41:42"
           },
           {
             "name": "01_executive_dashboard.pptx",
             "relative_path": "LMD-Bridgs/01_executive_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T11:17:35"
+            "modified": "2026-08-01T11:41:42"
           },
           {
             "name": "02_master_dashboard.html",
             "relative_path": "LMD-Bridgs/02_master_dashboard.html",
             "extension": "html",
-            "size_kb": 84.6,
-            "modified": "2026-07-20T15:45:06"
+            "size_kb": 1.8,
+            "modified": "2026-08-01T11:41:43"
           },
           {
             "name": "02_master_dashboard.pdf",
             "relative_path": "LMD-Bridgs/02_master_dashboard.pdf",
             "extension": "pdf",
-            "size_kb": 60.1,
-            "modified": "2026-08-01T11:17:36"
+            "size_kb": 67.4,
+            "modified": "2026-08-01T11:41:43"
           },
           {
             "name": "02_master_dashboard.pptx",
             "relative_path": "LMD-Bridgs/02_master_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T11:17:36"
+            "modified": "2026-08-01T11:41:43"
           },
           {
             "name": "03_elite_svg_charts.html",
             "relative_path": "LMD-Bridgs/03_elite_svg_charts.html",
             "extension": "html",
-            "size_kb": 50.8,
-            "modified": "2026-07-20T15:45:06"
+            "size_kb": 1.8,
+            "modified": "2026-08-01T11:41:43"
           },
           {
             "name": "03_elite_svg_charts.pdf",
             "relative_path": "LMD-Bridgs/03_elite_svg_charts.pdf",
             "extension": "pdf",
-            "size_kb": 60.2,
-            "modified": "2026-08-01T11:17:37"
+            "size_kb": 67.5,
+            "modified": "2026-08-01T11:41:44"
           },
           {
             "name": "03_elite_svg_charts.pptx",
             "relative_path": "LMD-Bridgs/03_elite_svg_charts.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T11:17:37"
+            "modified": "2026-08-01T11:41:44"
           },
           {
             "name": "04_linked_executive_dashboard.html",
             "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.html",
             "extension": "html",
-            "size_kb": 56.2,
-            "modified": "2026-07-20T15:45:06"
+            "size_kb": 1.8,
+            "modified": "2026-08-01T11:41:44"
           },
           {
             "name": "04_linked_executive_dashboard.pdf",
             "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.pdf",
             "extension": "pdf",
-            "size_kb": 60.6,
-            "modified": "2026-08-01T11:17:38"
+            "size_kb": 67.7,
+            "modified": "2026-08-01T11:41:45"
           },
           {
             "name": "04_linked_executive_dashboard.pptx",
             "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T11:17:39"
+            "modified": "2026-08-01T11:41:45"
           }
         ],
         "watchers": [
@@ -11856,18 +12031,18 @@
         "files": {
           "html": {
             "name": "01_executive_dashboard.html",
-            "bytes": 1423,
-            "sha256": "b023feeb03334c9a4850abd97e94684444283c40109268f4f905366e6c7f02cb"
+            "bytes": 1807,
+            "sha256": "90360e3a35c71562d0af1d9349f9593a05094ff054cdbe5c55fb7796be14d10b"
           },
           "pdf": {
             "name": "01_executive_dashboard.pdf",
-            "bytes": 61782,
-            "sha256": "6db7b6bbdbe20df4d186ea817692072c877e24f51dae5f0323bc32a93fecad34"
+            "bytes": 69026,
+            "sha256": "010d97efb66e52674f1393880fc2a25b234663d61ddfebe90ba56a60deba7cd8"
           },
           "pptx": {
             "name": "01_executive_dashboard.pptx",
             "bytes": 29122,
-            "sha256": "1b9ef78a47a141765ae30c161f44ee4af4b4201ef58913eafa8b3ca95cb4f68a"
+            "sha256": "5af354b0e23a9750272d76a390e433bd58fa0d2312e4f20a92d648be276d87d1"
           }
         }
       },
@@ -11878,18 +12053,18 @@
         "files": {
           "html": {
             "name": "02_master_dashboard.html",
-            "bytes": 1417,
-            "sha256": "2e40cd7610205edad17037af0a4ae5a0a096a3f2650f599cc220342a4042de2a"
+            "bytes": 1801,
+            "sha256": "9a2d73ad345a7486712ea1f4e053c0ccf6cdeec2b942ab4c2bd51f47c6781777"
           },
           "pdf": {
             "name": "02_master_dashboard.pdf",
-            "bytes": 61538,
-            "sha256": "02fba70680f2c6de1c03fccd31b395cccaa2f991e43d68885685c2c3091b8200"
+            "bytes": 69021,
+            "sha256": "0da42eb5724bbf94a62f9c4157f36400926ecd7f086884046845b53c8ac10028"
           },
           "pptx": {
             "name": "02_master_dashboard.pptx",
             "bytes": 29119,
-            "sha256": "92caf5e101df0c84a387469129f5eae5af3040368e6bf1a6a45b9b87101ec4ed"
+            "sha256": "f577e736f8f1838be8699b9ef771a398f5f3ace9911f21f494f7482821664b17"
           }
         }
       },
@@ -11900,18 +12075,18 @@
         "files": {
           "html": {
             "name": "03_elite_svg_charts.html",
-            "bytes": 1417,
-            "sha256": "dd23605a93601dc0a8a2e84794d3f90585769a467023402c8e761c9433f65ae7"
+            "bytes": 1801,
+            "sha256": "10a1d0f8034e9a1b59559335ab11c214fba5dab2e6a1e3e46d32319470cd6a4d"
           },
           "pdf": {
             "name": "03_elite_svg_charts.pdf",
-            "bytes": 61657,
-            "sha256": "af90fccbe2781f05149d9c20cec3e2fd67dc66a0437132ee8cb415c6c7fc9318"
+            "bytes": 69139,
+            "sha256": "4b510fbd74faa3246dc631bde7dfc1cbdb87b6ad642ab0d46c2bc8e14bb2f184"
           },
           "pptx": {
             "name": "03_elite_svg_charts.pptx",
             "bytes": 29119,
-            "sha256": "b67bc33b95c22ca555a734ba3c59f0f7b9230b7fa515e2e8964923968ca87689"
+            "sha256": "e6b97a6f898e4aca887b56b27ed401bc2c425c588658adf7f933cedba78fadbd"
           }
         }
       },
@@ -11922,18 +12097,18 @@
         "files": {
           "html": {
             "name": "04_linked_executive_dashboard.html",
-            "bytes": 1437,
-            "sha256": "21a2685de456bf4438cb4b1dcff9b7ac4ac1c3fbfa36209c717f57ff4cd780f1"
+            "bytes": 1821,
+            "sha256": "30e2b08b2c498409c720ca1f97b437b77af59b84ebf5b5de85611c3a4ab15fbd"
           },
           "pdf": {
             "name": "04_linked_executive_dashboard.pdf",
-            "bytes": 62068,
-            "sha256": "ff3ba2b3dc5c2b61b776435dbde29e1ff78b59d2c75b7af8b4ce52964c4c9c4f"
+            "bytes": 69295,
+            "sha256": "d46a0bf1702b1efff71d8fd0bf0e43432c10ba2d8ea71d3e7bf86e482507a2da"
           },
           "pptx": {
             "name": "04_linked_executive_dashboard.pptx",
             "bytes": 29128,
-            "sha256": "ea61a51d2a94ce16ba3dbdcbb3cf5e1dd51519cc9cf611997519bfe4affc6d4d"
+            "sha256": "cdd312ba30ee1eb547e4b34a15bbb58c7fbf130592f4743c521bda9e3c7ce443"
           }
         }
       }
@@ -12232,8 +12407,8 @@
       "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
     },
     "decision_required": true,
-    "last_updated": "2026-08-01T11:09:50",
-    "fingerprint": "0e355f34b2a6fcaf36e096493cedc496d44d6e15dff2df847d64359323c491b7",
+    "last_updated": "2026-08-01T11:39:07",
+    "fingerprint": "c5b4d046c3f5b90c266b976094d5f4e6585bd3649bc9e301461a9e4c97d6a83c",
     "source_files": {
       "projects": 1,
       "contracts": 2,
@@ -27749,6 +27924,36 @@
               "notes"
             ],
             "rows": []
+          },
+          {
+            "file": "16-fragnet_control_register.csv",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 21,
+            "columns": [
+              "project_id",
+              "fragnet_id",
+              "event_id",
+              "fragnet_type",
+              "affected_activity_id",
+              "predecessor_activity_id",
+              "predecessor_relationship_type",
+              "predecessor_lag_days",
+              "successor_activity_id",
+              "successor_relationship_type",
+              "successor_lag_days",
+              "fragment_start",
+              "fragment_finish",
+              "fragment_duration_days",
+              "insert_at_status_date",
+              "evidence_reference",
+              "contract_clause_candidate",
+              "cpm_validation_status",
+              "concurrency_status",
+              "analyst_status",
+              "notes"
+            ],
+            "rows": []
           }
         ],
         "template_tables": [
@@ -36950,10 +37155,20 @@
             "rows": [],
             "truncated": false,
             "source_path": "15-tia_recovery_scenario.csv"
+          },
+          {
+            "file": "16-fragnet_control_register.csv",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 0,
+            "columns": [],
+            "rows": [],
+            "truncated": false,
+            "source_path": "16-fragnet_control_register.csv"
           }
         ],
         "required_file_count": 11,
-        "recognized_file_count": 15,
+        "recognized_file_count": 16,
         "missing_required_files": [],
         "schedule_tables": {
           "MEP Activities": {
@@ -45619,7 +45834,7 @@
           {
             "name": "Delay TIA template detector",
             "status": "Ready",
-            "detail": "15 CSV files recognized in the selected project."
+            "detail": "16 CSV files recognized in the selected project."
           },
           {
             "name": "Column inspector",
@@ -45638,8 +45853,8 @@
         "project_key": "the-big-p-01-up-20-april-26",
         "project_display_name": "ROYA-BIG PROJECT PHASE01 (B1-4)",
         "project_folder_path": "D:\\one drive data\\OneDrive\\Documents\\Project Intelligence Hub\\projects\\Buildings\\The BIG - PH01",
-        "analysis_run_id": "af1413795faa37c2ce46",
-        "analysis_generated_at": "2026-08-01T08:38:47+00:00",
+        "analysis_run_id": "8a73f5bb18a8eaa10a7f",
+        "analysis_generated_at": "2026-08-01T08:41:40+00:00",
         "methodology_profile": "four_pipeline_v1",
         "assessment_profile": "evidence_backed",
         "assessment_status": "evidence_backed",
@@ -45649,7 +45864,7 @@
           "contract_source_count": 2,
           "evidence_source_count": 0,
           "letter_source_count": 18,
-          "delay_source_count": 16,
+          "delay_source_count": 17,
           "native_xer_count": 0,
           "relationship_rows": 791,
           "candidate_rows": 0,
@@ -45733,7 +45948,7 @@
             "pipeline": "schedule",
             "title": "Schedule, CPM logic, fragnets, float, and concurrency",
             "status": "qualified",
-            "source_count": 23,
+            "source_count": 25,
             "confidence": "Medium"
           },
           {
@@ -45741,7 +45956,7 @@
             "pipeline": "master",
             "title": "Master assessment, limits, confidence, and next actions",
             "status": "evidence_backed",
-            "source_count": 50,
+            "source_count": 54,
             "confidence": "Low"
           }
         ],
@@ -45842,6 +46057,20 @@
             "source_page_or_sheet": "Not indexed",
             "source_row": "Not indexed",
             "modified_at": "2026-06-19T06:24:12+00:00",
+            "evidence_status": "reference_only"
+          },
+          {
+            "project_id": "The Big -P.01-UP-20-April-26",
+            "project_key": "the-big-p-01-up-20-april-26",
+            "source_id": "The Big -P.01-UP-20-April-26:40bafb4bac1eb008",
+            "source_family": "evidence",
+            "source_file": "evidence_mapping_register.csv",
+            "source_relative_path": "06-evidence/evidence_mapping_register.csv",
+            "source_hash": "40bafb4bac1eb008e941db87c36ff069d52cf09df3d81747a54bdc09e8e6586b",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
             "evidence_status": "reference_only"
           },
           {
@@ -46127,6 +46356,20 @@
           {
             "project_id": "The Big -P.01-UP-20-April-26",
             "project_key": "the-big-p-01-up-20-april-26",
+            "source_id": "The Big -P.01-UP-20-April-26:931a1fe51ba3b46d",
+            "source_family": "letters",
+            "source_file": "notice_chronology_register.csv",
+            "source_relative_path": "07-letters_intelligence/notice_chronology_register.csv",
+            "source_hash": "931a1fe51ba3b46db17be59a87ec652f8ab685c1f8be0db6d352446f0f715839",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only"
+          },
+          {
+            "project_id": "The Big -P.01-UP-20-April-26",
+            "project_key": "the-big-p-01-up-20-april-26",
             "source_id": "The Big -P.01-UP-20-April-26:13c9567516bfdd4e",
             "source_family": "delay",
             "source_file": "TIA methodology.docx",
@@ -46351,6 +46594,20 @@
           {
             "project_id": "The Big -P.01-UP-20-April-26",
             "project_key": "the-big-p-01-up-20-april-26",
+            "source_id": "The Big -P.01-UP-20-April-26:fcc1296e80707032",
+            "source_family": "delay",
+            "source_file": "16-fragnet_control_register.csv",
+            "source_relative_path": "02-delay_analysis/steel_delay_tia_templates/16-fragnet_control_register.csv",
+            "source_hash": "fcc1296e807070327755981bc3d703d0652f62b6f96bcff99ff63ac602ec3cf0",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only"
+          },
+          {
+            "project_id": "The Big -P.01-UP-20-April-26",
+            "project_key": "the-big-p-01-up-20-april-26",
             "source_id": "The Big -P.01-UP-20-April-26:327c7e00d862f64f",
             "source_family": "schedule",
             "source_file": "BL critical path.csv",
@@ -46445,6 +46702,20 @@
             "source_row": "Not indexed",
             "modified_at": "2026-06-15T19:54:56+00:00",
             "evidence_status": "verified_source"
+          },
+          {
+            "project_id": "The Big -P.01-UP-20-April-26",
+            "project_key": "the-big-p-01-up-20-april-26",
+            "source_id": "The Big -P.01-UP-20-April-26:6e07d7a125fa90d9",
+            "source_family": "schedule",
+            "source_file": "schedule_snapshot_register.csv",
+            "source_relative_path": "03-schedule/schedule_snapshot_register.csv",
+            "source_hash": "6e07d7a125fa90d9dfd66c019a6a6d43581ba9b4aaa4e7633064d5ed1d084f9e",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only"
           }
         ],
         "evidence_ledger": [
@@ -46577,6 +46848,24 @@
           {
             "project_id": "The Big -P.01-UP-20-April-26",
             "project_key": "the-big-p-01-up-20-april-26",
+            "source_id": "The Big -P.01-UP-20-April-26:40bafb4bac1eb008",
+            "source_family": "evidence",
+            "source_file": "evidence_mapping_register.csv",
+            "source_relative_path": "06-evidence/evidence_mapping_register.csv",
+            "source_hash": "40bafb4bac1eb008e941db87c36ff069d52cf09df3d81747a54bdc09e8e6586b",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only",
+            "event_id": "Not linked",
+            "activity_id": "Not linked",
+            "clause_candidate": "Not assessed",
+            "mapping_status": "reference_only"
+          },
+          {
+            "project_id": "The Big -P.01-UP-20-April-26",
+            "project_key": "the-big-p-01-up-20-april-26",
             "source_id": "The Big -P.01-UP-20-April-26:042cb8c67f572bad",
             "source_family": "evidence",
             "source_file": "evidence_register_template.csv",
@@ -46937,6 +47226,24 @@
           {
             "project_id": "The Big -P.01-UP-20-April-26",
             "project_key": "the-big-p-01-up-20-april-26",
+            "source_id": "The Big -P.01-UP-20-April-26:931a1fe51ba3b46d",
+            "source_family": "letters",
+            "source_file": "notice_chronology_register.csv",
+            "source_relative_path": "07-letters_intelligence/notice_chronology_register.csv",
+            "source_hash": "931a1fe51ba3b46db17be59a87ec652f8ab685c1f8be0db6d352446f0f715839",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only",
+            "event_id": "Not linked",
+            "activity_id": "Not linked",
+            "clause_candidate": "Not assessed",
+            "mapping_status": "reference_only"
+          },
+          {
+            "project_id": "The Big -P.01-UP-20-April-26",
+            "project_key": "the-big-p-01-up-20-april-26",
             "source_id": "The Big -P.01-UP-20-April-26:13c9567516bfdd4e",
             "source_family": "delay",
             "source_file": "TIA methodology.docx",
@@ -47225,6 +47532,24 @@
           {
             "project_id": "The Big -P.01-UP-20-April-26",
             "project_key": "the-big-p-01-up-20-april-26",
+            "source_id": "The Big -P.01-UP-20-April-26:fcc1296e80707032",
+            "source_family": "delay",
+            "source_file": "16-fragnet_control_register.csv",
+            "source_relative_path": "02-delay_analysis/steel_delay_tia_templates/16-fragnet_control_register.csv",
+            "source_hash": "fcc1296e807070327755981bc3d703d0652f62b6f96bcff99ff63ac602ec3cf0",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only",
+            "event_id": "Not linked",
+            "activity_id": "Not linked",
+            "clause_candidate": "Not assessed",
+            "mapping_status": "reference_only"
+          },
+          {
+            "project_id": "The Big -P.01-UP-20-April-26",
+            "project_key": "the-big-p-01-up-20-april-26",
             "source_id": "The Big -P.01-UP-20-April-26:327c7e00d862f64f",
             "source_family": "schedule",
             "source_file": "BL critical path.csv",
@@ -47347,6 +47672,24 @@
             "activity_id": "Not linked",
             "clause_candidate": "Not assessed",
             "mapping_status": "verified_source"
+          },
+          {
+            "project_id": "The Big -P.01-UP-20-April-26",
+            "project_key": "the-big-p-01-up-20-april-26",
+            "source_id": "The Big -P.01-UP-20-April-26:6e07d7a125fa90d9",
+            "source_family": "schedule",
+            "source_file": "schedule_snapshot_register.csv",
+            "source_relative_path": "03-schedule/schedule_snapshot_register.csv",
+            "source_hash": "6e07d7a125fa90d9dfd66c019a6a6d43581ba9b4aaa4e7633064d5ed1d084f9e",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only",
+            "event_id": "Not linked",
+            "activity_id": "Not linked",
+            "clause_candidate": "Not assessed",
+            "mapping_status": "reference_only"
           }
         ],
         "limitations": [
@@ -47417,6 +47760,13 @@
             "extension": "csv",
             "size_kb": 0.1,
             "modified": "2026-06-19T09:24:12"
+          },
+          {
+            "name": "evidence_mapping_register.csv",
+            "relative_path": "06-evidence/evidence_mapping_register.csv",
+            "extension": "csv",
+            "size_kb": 0.3,
+            "modified": "2026-08-01T11:39:07"
           },
           {
             "name": "evidence_register_template.csv",
@@ -49971,85 +50321,85 @@
             "name": "01_executive_dashboard.html",
             "relative_path": "The BIG - PH01/01_executive_dashboard.html",
             "extension": "html",
-            "size_kb": 17.8,
-            "modified": "2026-07-20T15:45:12"
+            "size_kb": 1.8,
+            "modified": "2026-08-01T11:41:45"
           },
           {
             "name": "01_executive_dashboard.pdf",
             "relative_path": "The BIG - PH01/01_executive_dashboard.pdf",
             "extension": "pdf",
-            "size_kb": 62.8,
-            "modified": "2026-08-01T11:17:40"
+            "size_kb": 70.3,
+            "modified": "2026-08-01T11:41:46"
           },
           {
             "name": "01_executive_dashboard.pptx",
             "relative_path": "The BIG - PH01/01_executive_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.5,
-            "modified": "2026-08-01T11:17:40"
+            "modified": "2026-08-01T11:41:46"
           },
           {
             "name": "02_master_dashboard.html",
             "relative_path": "The BIG - PH01/02_master_dashboard.html",
             "extension": "html",
-            "size_kb": 115.2,
-            "modified": "2026-07-20T15:45:12"
+            "size_kb": 1.8,
+            "modified": "2026-08-01T11:41:46"
           },
           {
             "name": "02_master_dashboard.pdf",
             "relative_path": "The BIG - PH01/02_master_dashboard.pdf",
             "extension": "pdf",
-            "size_kb": 63.1,
-            "modified": "2026-08-01T11:17:41"
+            "size_kb": 70.7,
+            "modified": "2026-08-01T11:41:47"
           },
           {
             "name": "02_master_dashboard.pptx",
             "relative_path": "The BIG - PH01/02_master_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.5,
-            "modified": "2026-08-01T11:17:42"
+            "modified": "2026-08-01T11:41:47"
           },
           {
             "name": "03_elite_svg_charts.html",
             "relative_path": "The BIG - PH01/03_elite_svg_charts.html",
             "extension": "html",
-            "size_kb": 51.7,
-            "modified": "2026-07-20T15:45:12"
+            "size_kb": 1.8,
+            "modified": "2026-08-01T11:41:47"
           },
           {
             "name": "03_elite_svg_charts.pdf",
             "relative_path": "The BIG - PH01/03_elite_svg_charts.pdf",
             "extension": "pdf",
-            "size_kb": 62.4,
-            "modified": "2026-08-01T11:17:43"
+            "size_kb": 70.1,
+            "modified": "2026-08-01T11:41:48"
           },
           {
             "name": "03_elite_svg_charts.pptx",
             "relative_path": "The BIG - PH01/03_elite_svg_charts.pptx",
             "extension": "pptx",
             "size_kb": 28.5,
-            "modified": "2026-08-01T11:17:43"
+            "modified": "2026-08-01T11:41:48"
           },
           {
             "name": "04_linked_executive_dashboard.html",
             "relative_path": "The BIG - PH01/04_linked_executive_dashboard.html",
             "extension": "html",
-            "size_kb": 54.7,
-            "modified": "2026-07-20T15:45:12"
+            "size_kb": 1.8,
+            "modified": "2026-08-01T11:41:48"
           },
           {
             "name": "04_linked_executive_dashboard.pdf",
             "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pdf",
             "extension": "pdf",
-            "size_kb": 63.1,
-            "modified": "2026-08-01T11:17:44"
+            "size_kb": 70.6,
+            "modified": "2026-08-01T11:41:49"
           },
           {
             "name": "04_linked_executive_dashboard.pptx",
             "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.5,
-            "modified": "2026-08-01T11:17:44"
+            "modified": "2026-08-01T11:41:49"
           }
         ],
         "watchers": [
@@ -50219,18 +50569,18 @@
         "files": {
           "html": {
             "name": "01_executive_dashboard.html",
-            "bytes": 1435,
-            "sha256": "b4246c2c696699f229af1898ba9fb90b7ff36814610f7933b38dff2dbbe2b59d"
+            "bytes": 1821,
+            "sha256": "aebb6abe6a4bf67664a7b693658d6627269542de81cb9ea3dcbf621180ece42a"
           },
           "pdf": {
             "name": "01_executive_dashboard.pdf",
-            "bytes": 64344,
-            "sha256": "98309daa676363b411021a82b114f51b1a98360fb31d5420bc2af83758cdee0c"
+            "bytes": 71991,
+            "sha256": "8be4e0b1a156ce569b36a15ce63012ff73ccb5e0d87874b28c3dae896d0d1677"
           },
           "pptx": {
             "name": "01_executive_dashboard.pptx",
             "bytes": 29140,
-            "sha256": "aba3b1356e5d6ffda95cf3c89c1b91247430f0e9b0cf4d6fe1b52df494d927f6"
+            "sha256": "d66cf3a868b9223d6f6b1edf0ba40fd6f8971a42c3ab2468ac5f08cb3b0fef02"
           }
         }
       },
@@ -50241,18 +50591,18 @@
         "files": {
           "html": {
             "name": "02_master_dashboard.html",
-            "bytes": 1429,
-            "sha256": "31fa28d4dccd13839e03c836801e12376e9f28c2c5db1da536d5a23c86446be4"
+            "bytes": 1815,
+            "sha256": "fa98705492a6840e4595371bf718a2a5bd391097a3dec843df78facdba18f63c"
           },
           "pdf": {
             "name": "02_master_dashboard.pdf",
-            "bytes": 64583,
-            "sha256": "bbb671ded0346161bf74ee9cea45df04a9d88a6f4cd886bae6ab2440945431ef"
+            "bytes": 72426,
+            "sha256": "7ebf10f002c122ae712230bbe59ee4aeddfe841624920c4eb53f550b4c632687"
           },
           "pptx": {
             "name": "02_master_dashboard.pptx",
             "bytes": 29137,
-            "sha256": "5e0ca794f8c7b168cd1ac7b75714ff131b56c29d20adcbcb8dc1dcef49cb05fc"
+            "sha256": "82135d348bcc67286495b60fff0d140421f7c2992c7572898ab6d5f5500a0131"
           }
         }
       },
@@ -50263,18 +50613,18 @@
         "files": {
           "html": {
             "name": "03_elite_svg_charts.html",
-            "bytes": 1429,
-            "sha256": "4d7804e275317a2b8365eadf14b594ce267bc02aa2cd74e4fd69a9c8d506e58d"
+            "bytes": 1815,
+            "sha256": "cda8a9bd1d6ed8f4298990c3b8f3971fd44d37a6a53f021395cb57cf626476b2"
           },
           "pdf": {
             "name": "03_elite_svg_charts.pdf",
-            "bytes": 63903,
-            "sha256": "05f6a30550d48a04d03c669ceecec5979f6f0dc9ab5482880d5ad84538012753"
+            "bytes": 71786,
+            "sha256": "92202c557b84a3a49afb29ce15c26d5cc419ccd12263150662dea3ffc2a396f5"
           },
           "pptx": {
             "name": "03_elite_svg_charts.pptx",
             "bytes": 29138,
-            "sha256": "37c0ae9e57041ec1f03995d6ad65f661453bfcac6f87d123b560b0684b6b9030"
+            "sha256": "1a1c87ce1a4b55662aeebf45266e72e79a7dcd72c2c8a6f81e53e6960a8d9939"
           }
         }
       },
@@ -50285,18 +50635,18 @@
         "files": {
           "html": {
             "name": "04_linked_executive_dashboard.html",
-            "bytes": 1449,
-            "sha256": "fcc6e271f03d0953beeede18063593d20781a959e3fae43bd1192d93f6ab72cf"
+            "bytes": 1835,
+            "sha256": "953ac830f7add0c7e3353b2b457d4e522087b48fe8b376b005a64b3208be17ce"
           },
           "pdf": {
             "name": "04_linked_executive_dashboard.pdf",
-            "bytes": 64614,
-            "sha256": "4d6e3f198b072614f9a58288d772042987703c46eb7253d97eda58b11d58d7a5"
+            "bytes": 72256,
+            "sha256": "98b23972a4efc633cf6af4707f40ae5cfc5c2a3096663d8ea9e509ecb9e6ed95"
           },
           "pptx": {
             "name": "04_linked_executive_dashboard.pptx",
             "bytes": 29147,
-            "sha256": "cb191026b7d66853722acf857ac0d2856a445bd38316391895d13cc2239abc9e"
+            "sha256": "fd7665c7a42c7369df1cbe9c007d8cb20c3779fa23e48fedb7dc3bddd6e0d5f0"
           }
         }
       }
@@ -50510,8 +50860,8 @@
       "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
     },
     "decision_required": true,
-    "last_updated": "2026-08-01T11:09:50",
-    "fingerprint": "218e0fe7eed4542dd7bab59b3f174d9a428296cf65db3b211eb1afbc13bb7570",
+    "last_updated": "2026-08-01T11:39:07",
+    "fingerprint": "3613a17d61decf33943aa65bae90f522ad09c3f7bf7ae8bb14424601695b8392",
     "source_files": {
       "projects": 1,
       "contracts": 2,
@@ -55677,6 +56027,36 @@
               "notes"
             ],
             "rows": []
+          },
+          {
+            "file": "16-fragnet_control_register.csv",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 21,
+            "columns": [
+              "project_id",
+              "fragnet_id",
+              "event_id",
+              "fragnet_type",
+              "affected_activity_id",
+              "predecessor_activity_id",
+              "predecessor_relationship_type",
+              "predecessor_lag_days",
+              "successor_activity_id",
+              "successor_relationship_type",
+              "successor_lag_days",
+              "fragment_start",
+              "fragment_finish",
+              "fragment_duration_days",
+              "insert_at_status_date",
+              "evidence_reference",
+              "contract_clause_candidate",
+              "cpm_validation_status",
+              "concurrency_status",
+              "analyst_status",
+              "notes"
+            ],
+            "rows": []
           }
         ],
         "template_tables": [
@@ -57406,10 +57786,20 @@
             "rows": [],
             "truncated": false,
             "source_path": "15-tia_recovery_scenario.csv"
+          },
+          {
+            "file": "16-fragnet_control_register.csv",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 0,
+            "columns": [],
+            "rows": [],
+            "truncated": false,
+            "source_path": "16-fragnet_control_register.csv"
           }
         ],
         "required_file_count": 11,
-        "recognized_file_count": 15,
+        "recognized_file_count": 16,
         "missing_required_files": [],
         "schedule_tables": {
           "MEP Activities": {
@@ -59212,7 +59602,7 @@
           {
             "name": "Delay TIA template detector",
             "status": "Ready",
-            "detail": "15 CSV files recognized in the selected project."
+            "detail": "16 CSV files recognized in the selected project."
           },
           {
             "name": "Column inspector",
@@ -59231,18 +59621,18 @@
         "project_key": "sophia-mall",
         "project_display_name": "Sophia Mall Mixed-Use Development",
         "project_folder_path": "D:\\one drive data\\OneDrive\\Documents\\Project Intelligence Hub\\projects\\Buildings\\Sophia-Mall",
-        "analysis_run_id": "d0214c090ad6001d4a87",
-        "analysis_generated_at": "2026-08-01T08:38:48+00:00",
+        "analysis_run_id": "7b74a153fdbf31627b11",
+        "analysis_generated_at": "2026-08-01T08:41:41+00:00",
         "methodology_profile": "four_pipeline_v1",
-        "assessment_profile": "qualified",
-        "assessment_status": "qualified",
+        "assessment_profile": "readiness_only",
+        "assessment_status": "readiness_only",
         "determination_status": "p6_recalculation_required",
         "source_scope": "selected_project_only",
         "summary": {
           "contract_source_count": 1,
           "evidence_source_count": 0,
           "letter_source_count": 0,
-          "delay_source_count": 16,
+          "delay_source_count": 17,
           "native_xer_count": 0,
           "relationship_rows": 15,
           "candidate_rows": 0,
@@ -59327,15 +59717,15 @@
             "pipeline": "schedule",
             "title": "Schedule, CPM logic, fragnets, float, and concurrency",
             "status": "qualified",
-            "source_count": 23,
+            "source_count": 25,
             "confidence": "Medium"
           },
           {
             "project_id": "Sophia-Mall",
             "pipeline": "master",
             "title": "Master assessment, limits, confidence, and next actions",
-            "status": "qualified",
-            "source_count": 31,
+            "status": "readiness_only",
+            "source_count": 35,
             "confidence": "Low"
           }
         ],
@@ -59427,6 +59817,20 @@
           {
             "project_id": "Sophia-Mall",
             "project_key": "sophia-mall",
+            "source_id": "Sophia-Mall:40bafb4bac1eb008",
+            "source_family": "evidence",
+            "source_file": "evidence_mapping_register.csv",
+            "source_relative_path": "06-evidence/evidence_mapping_register.csv",
+            "source_hash": "40bafb4bac1eb008e941db87c36ff069d52cf09df3d81747a54bdc09e8e6586b",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only"
+          },
+          {
+            "project_id": "Sophia-Mall",
+            "project_key": "sophia-mall",
             "source_id": "Sophia-Mall:042cb8c67f572bad",
             "source_family": "evidence",
             "source_file": "evidence_register_template.csv",
@@ -59450,6 +59854,20 @@
             "source_page_or_sheet": "Not indexed",
             "source_row": "Not indexed",
             "modified_at": "2026-06-26T21:08:34+00:00",
+            "evidence_status": "reference_only"
+          },
+          {
+            "project_id": "Sophia-Mall",
+            "project_key": "sophia-mall",
+            "source_id": "Sophia-Mall:931a1fe51ba3b46d",
+            "source_family": "letters",
+            "source_file": "notice_chronology_register.csv",
+            "source_relative_path": "07-letters_intelligence/notice_chronology_register.csv",
+            "source_hash": "931a1fe51ba3b46db17be59a87ec652f8ab685c1f8be0db6d352446f0f715839",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
             "evidence_status": "reference_only"
           },
           {
@@ -59679,6 +60097,20 @@
           {
             "project_id": "Sophia-Mall",
             "project_key": "sophia-mall",
+            "source_id": "Sophia-Mall:fcc1296e80707032",
+            "source_family": "delay",
+            "source_file": "16-fragnet_control_register.csv",
+            "source_relative_path": "02-delay_analysis/steel_delay_tia_templates/16-fragnet_control_register.csv",
+            "source_hash": "fcc1296e807070327755981bc3d703d0652f62b6f96bcff99ff63ac602ec3cf0",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only"
+          },
+          {
+            "project_id": "Sophia-Mall",
+            "project_key": "sophia-mall",
             "source_id": "Sophia-Mall:8434ce05a5da64ef",
             "source_family": "schedule",
             "source_file": "BL critical path.csv",
@@ -59773,6 +60205,20 @@
             "source_row": "Not indexed",
             "modified_at": "2026-06-26T17:52:10+00:00",
             "evidence_status": "verified_source"
+          },
+          {
+            "project_id": "Sophia-Mall",
+            "project_key": "sophia-mall",
+            "source_id": "Sophia-Mall:6e07d7a125fa90d9",
+            "source_family": "schedule",
+            "source_file": "schedule_snapshot_register.csv",
+            "source_relative_path": "03-schedule/schedule_snapshot_register.csv",
+            "source_hash": "6e07d7a125fa90d9dfd66c019a6a6d43581ba9b4aaa4e7633064d5ed1d084f9e",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only"
           }
         ],
         "evidence_ledger": [
@@ -59887,6 +60333,24 @@
           {
             "project_id": "Sophia-Mall",
             "project_key": "sophia-mall",
+            "source_id": "Sophia-Mall:40bafb4bac1eb008",
+            "source_family": "evidence",
+            "source_file": "evidence_mapping_register.csv",
+            "source_relative_path": "06-evidence/evidence_mapping_register.csv",
+            "source_hash": "40bafb4bac1eb008e941db87c36ff069d52cf09df3d81747a54bdc09e8e6586b",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only",
+            "event_id": "Not linked",
+            "activity_id": "Not linked",
+            "clause_candidate": "Not assessed",
+            "mapping_status": "reference_only"
+          },
+          {
+            "project_id": "Sophia-Mall",
+            "project_key": "sophia-mall",
             "source_id": "Sophia-Mall:042cb8c67f572bad",
             "source_family": "evidence",
             "source_file": "evidence_register_template.csv",
@@ -59914,6 +60378,24 @@
             "source_page_or_sheet": "Not indexed",
             "source_row": "Not indexed",
             "modified_at": "2026-06-26T21:08:34+00:00",
+            "evidence_status": "reference_only",
+            "event_id": "Not linked",
+            "activity_id": "Not linked",
+            "clause_candidate": "Not assessed",
+            "mapping_status": "reference_only"
+          },
+          {
+            "project_id": "Sophia-Mall",
+            "project_key": "sophia-mall",
+            "source_id": "Sophia-Mall:931a1fe51ba3b46d",
+            "source_family": "letters",
+            "source_file": "notice_chronology_register.csv",
+            "source_relative_path": "07-letters_intelligence/notice_chronology_register.csv",
+            "source_hash": "931a1fe51ba3b46db17be59a87ec652f8ab685c1f8be0db6d352446f0f715839",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
             "evidence_status": "reference_only",
             "event_id": "Not linked",
             "activity_id": "Not linked",
@@ -60211,6 +60693,24 @@
           {
             "project_id": "Sophia-Mall",
             "project_key": "sophia-mall",
+            "source_id": "Sophia-Mall:fcc1296e80707032",
+            "source_family": "delay",
+            "source_file": "16-fragnet_control_register.csv",
+            "source_relative_path": "02-delay_analysis/steel_delay_tia_templates/16-fragnet_control_register.csv",
+            "source_hash": "fcc1296e807070327755981bc3d703d0652f62b6f96bcff99ff63ac602ec3cf0",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only",
+            "event_id": "Not linked",
+            "activity_id": "Not linked",
+            "clause_candidate": "Not assessed",
+            "mapping_status": "reference_only"
+          },
+          {
+            "project_id": "Sophia-Mall",
+            "project_key": "sophia-mall",
             "source_id": "Sophia-Mall:8434ce05a5da64ef",
             "source_family": "schedule",
             "source_file": "BL critical path.csv",
@@ -60333,6 +60833,24 @@
             "activity_id": "Not linked",
             "clause_candidate": "Not assessed",
             "mapping_status": "verified_source"
+          },
+          {
+            "project_id": "Sophia-Mall",
+            "project_key": "sophia-mall",
+            "source_id": "Sophia-Mall:6e07d7a125fa90d9",
+            "source_family": "schedule",
+            "source_file": "schedule_snapshot_register.csv",
+            "source_relative_path": "03-schedule/schedule_snapshot_register.csv",
+            "source_hash": "6e07d7a125fa90d9dfd66c019a6a6d43581ba9b4aaa4e7633064d5ed1d084f9e",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only",
+            "event_id": "Not linked",
+            "activity_id": "Not linked",
+            "clause_candidate": "Not assessed",
+            "mapping_status": "reference_only"
           }
         ],
         "limitations": [
@@ -60396,6 +60914,13 @@
             "extension": "csv",
             "size_kb": 0.1,
             "modified": "2026-06-27T00:08:34"
+          },
+          {
+            "name": "evidence_mapping_register.csv",
+            "relative_path": "06-evidence/evidence_mapping_register.csv",
+            "extension": "csv",
+            "size_kb": 0.3,
+            "modified": "2026-08-01T11:39:07"
           },
           {
             "name": "evidence_register_template.csv",
@@ -61936,85 +62461,85 @@
             "name": "01_executive_dashboard.html",
             "relative_path": "Sophia-Mall/01_executive_dashboard.html",
             "extension": "html",
-            "size_kb": 17.9,
-            "modified": "2026-07-20T15:45:13"
+            "size_kb": 1.8,
+            "modified": "2026-08-01T11:41:49"
           },
           {
             "name": "01_executive_dashboard.pdf",
             "relative_path": "Sophia-Mall/01_executive_dashboard.pdf",
             "extension": "pdf",
-            "size_kb": 61.3,
-            "modified": "2026-08-01T11:17:45"
+            "size_kb": 68.6,
+            "modified": "2026-08-01T11:41:50"
           },
           {
             "name": "01_executive_dashboard.pptx",
             "relative_path": "Sophia-Mall/01_executive_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T11:17:46"
+            "modified": "2026-08-01T11:41:50"
           },
           {
             "name": "02_master_dashboard.html",
             "relative_path": "Sophia-Mall/02_master_dashboard.html",
             "extension": "html",
-            "size_kb": 84.7,
-            "modified": "2026-07-20T15:45:13"
+            "size_kb": 1.8,
+            "modified": "2026-08-01T11:41:50"
           },
           {
             "name": "02_master_dashboard.pdf",
             "relative_path": "Sophia-Mall/02_master_dashboard.pdf",
             "extension": "pdf",
-            "size_kb": 61.3,
-            "modified": "2026-08-01T11:17:47"
+            "size_kb": 68.6,
+            "modified": "2026-08-01T11:41:51"
           },
           {
             "name": "02_master_dashboard.pptx",
             "relative_path": "Sophia-Mall/02_master_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T11:17:47"
+            "modified": "2026-08-01T11:41:51"
           },
           {
             "name": "03_elite_svg_charts.html",
             "relative_path": "Sophia-Mall/03_elite_svg_charts.html",
             "extension": "html",
-            "size_kb": 50.8,
-            "modified": "2026-07-20T15:45:13"
+            "size_kb": 1.8,
+            "modified": "2026-08-01T11:41:51"
           },
           {
             "name": "03_elite_svg_charts.pdf",
             "relative_path": "Sophia-Mall/03_elite_svg_charts.pdf",
             "extension": "pdf",
-            "size_kb": 61.4,
-            "modified": "2026-08-01T11:17:48"
+            "size_kb": 68.7,
+            "modified": "2026-08-01T11:41:52"
           },
           {
             "name": "03_elite_svg_charts.pptx",
             "relative_path": "Sophia-Mall/03_elite_svg_charts.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T11:17:48"
+            "modified": "2026-08-01T11:41:52"
           },
           {
             "name": "04_linked_executive_dashboard.html",
             "relative_path": "Sophia-Mall/04_linked_executive_dashboard.html",
             "extension": "html",
-            "size_kb": 56.2,
-            "modified": "2026-07-20T15:45:13"
+            "size_kb": 1.8,
+            "modified": "2026-08-01T11:41:52"
           },
           {
             "name": "04_linked_executive_dashboard.pdf",
             "relative_path": "Sophia-Mall/04_linked_executive_dashboard.pdf",
             "extension": "pdf",
-            "size_kb": 61.5,
-            "modified": "2026-08-01T11:17:50"
+            "size_kb": 68.9,
+            "modified": "2026-08-01T11:41:53"
           },
           {
             "name": "04_linked_executive_dashboard.pptx",
             "relative_path": "Sophia-Mall/04_linked_executive_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T11:17:50"
+            "modified": "2026-08-01T11:41:53"
           }
         ],
         "watchers": [
@@ -62158,18 +62683,18 @@
         "files": {
           "html": {
             "name": "01_executive_dashboard.html",
-            "bytes": 1437,
-            "sha256": "80485c5b0963d5f103889bcf2dc0e7bac13e1ee0c63eb6fc3a18ed8f5f489192"
+            "bytes": 1821,
+            "sha256": "838c2e19ad6e55aa9bd897a8989acdaf9629ba9d00ee6c15b662317028ba21ee"
           },
           "pdf": {
             "name": "01_executive_dashboard.pdf",
-            "bytes": 62738,
-            "sha256": "5daee4b1d8395c4b41a019c6a17ce77b6979f9301df289eb409f6fe255a70070"
+            "bytes": 70265,
+            "sha256": "b0bb056b41f32df492c08defd7ef8efd9c1138fbaf0d87462f58b7d56fa80c89"
           },
           "pptx": {
             "name": "01_executive_dashboard.pptx",
             "bytes": 29125,
-            "sha256": "89b1ba637f22054bff014384b2a7a5e3a0b6fba7d9d74a1681b2fe04c7683a37"
+            "sha256": "76b9221694eb01ec74a239226890c5649e6520f9854d191aa92091afa8764461"
           }
         }
       },
@@ -62180,18 +62705,18 @@
         "files": {
           "html": {
             "name": "02_master_dashboard.html",
-            "bytes": 1431,
-            "sha256": "ae73f451095ee40220f9700f3961beef1b230a068ab3e24c92d084e019de5901"
+            "bytes": 1815,
+            "sha256": "a76dc1edeb62400e0d5ee2cf8599b0fe843ffc9a70dba4bc5d40c55988e71151"
           },
           "pdf": {
             "name": "02_master_dashboard.pdf",
-            "bytes": 62737,
-            "sha256": "fe1604b9dce54eed0e6b6ea787ba68d99cd6c9eda5d36d720a88e334664e93d8"
+            "bytes": 70260,
+            "sha256": "8808854d6f34532889ed1d5813506de08abeafb819e60d82d230f6385b973cc0"
           },
           "pptx": {
             "name": "02_master_dashboard.pptx",
             "bytes": 29122,
-            "sha256": "63340d1302f43ae58b7c26ff5758ac4b1813c2ae6940a4d42f86213ca08de096"
+            "sha256": "52971a39b7c60a7f877a8b769cf8a01750c55ee5d418c9c20b190e836b38914f"
           }
         }
       },
@@ -62202,18 +62727,18 @@
         "files": {
           "html": {
             "name": "03_elite_svg_charts.html",
-            "bytes": 1431,
-            "sha256": "10e2d7a099cb582e54f9ec6c49e5cebe19ccf966890513d50476bcae4344277c"
+            "bytes": 1815,
+            "sha256": "cfee56a0978ad32dcd5ac4bb16e3e78eda2f6d211d057f76ad117eb7c65c9648"
           },
           "pdf": {
             "name": "03_elite_svg_charts.pdf",
-            "bytes": 62868,
-            "sha256": "83caa370b5fe20ff3d10f04c2b945077af190843275f39c1a7e4b013c5a7c6e1"
+            "bytes": 70382,
+            "sha256": "dbe69526cf7a0e695c7dd68ad640632f25b2ba8ea85c9c74d7dfd62ab0283abc"
           },
           "pptx": {
             "name": "03_elite_svg_charts.pptx",
             "bytes": 29123,
-            "sha256": "ea242b538b44979812e76655b1c940e751002acd4cb8a5c77f5111e1c669731d"
+            "sha256": "8fa8301396f598f402714f54605269f314e544f10f7c6af3ea365905de0d0ce3"
           }
         }
       },
@@ -62224,18 +62749,18 @@
         "files": {
           "html": {
             "name": "04_linked_executive_dashboard.html",
-            "bytes": 1451,
-            "sha256": "015bc72ab00c90f58397b84408e298cc8d68e1c0b6cf74c5152b4947e94f69e7"
+            "bytes": 1835,
+            "sha256": "7f23d5aefd2ac99717f8e58e8359cfbd0143399cc9ad5bb502f8d3c6e18bdf74"
           },
           "pdf": {
             "name": "04_linked_executive_dashboard.pdf",
-            "bytes": 63026,
-            "sha256": "b38351dfae7d706c178e4e4e2e6bdc011742b027f8ff9e91dc54e4d023ae59f2"
+            "bytes": 70540,
+            "sha256": "7870932d1d01462de032d14b866c596956219a644aa810ebcf0d76c39eebe07b"
           },
           "pptx": {
             "name": "04_linked_executive_dashboard.pptx",
             "bytes": 29131,
-            "sha256": "0f0e6b28621c6c3915ac3df220767839948b2b56bd8aae43fa7faaa43099a27c"
+            "sha256": "d025be98c0cc5fae2c61b6fe35940e0cceeecc74050cc653ead84d7f111fc301"
           }
         }
       }
@@ -62476,8 +63001,8 @@
       "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
     },
     "decision_required": true,
-    "last_updated": "2026-08-01T11:09:50",
-    "fingerprint": "405b02ce7a76d2eec6c9fd67342f351dee8fba3080cdb82579be873d16298e1a",
+    "last_updated": "2026-08-01T11:39:07",
+    "fingerprint": "059d93490d2ae864051f4cb715279ffde7cff3ca8cfbded4ade37c63e19cbe1e",
     "source_files": {
       "projects": 1,
       "contracts": 2,
@@ -67643,6 +68168,36 @@
               "notes"
             ],
             "rows": []
+          },
+          {
+            "file": "16-fragnet_control_register.csv",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 21,
+            "columns": [
+              "project_id",
+              "fragnet_id",
+              "event_id",
+              "fragnet_type",
+              "affected_activity_id",
+              "predecessor_activity_id",
+              "predecessor_relationship_type",
+              "predecessor_lag_days",
+              "successor_activity_id",
+              "successor_relationship_type",
+              "successor_lag_days",
+              "fragment_start",
+              "fragment_finish",
+              "fragment_duration_days",
+              "insert_at_status_date",
+              "evidence_reference",
+              "contract_clause_candidate",
+              "cpm_validation_status",
+              "concurrency_status",
+              "analyst_status",
+              "notes"
+            ],
+            "rows": []
           }
         ],
         "template_tables": [
@@ -69372,10 +69927,20 @@
             "rows": [],
             "truncated": false,
             "source_path": "15-tia_recovery_scenario.csv"
+          },
+          {
+            "file": "16-fragnet_control_register.csv",
+            "exists": true,
+            "row_count": 0,
+            "column_count": 0,
+            "columns": [],
+            "rows": [],
+            "truncated": false,
+            "source_path": "16-fragnet_control_register.csv"
           }
         ],
         "required_file_count": 11,
-        "recognized_file_count": 15,
+        "recognized_file_count": 16,
         "missing_required_files": [],
         "schedule_tables": {
           "MEP Activities": {
@@ -71178,7 +71743,7 @@
           {
             "name": "Delay TIA template detector",
             "status": "Ready",
-            "detail": "15 CSV files recognized in the selected project."
+            "detail": "16 CSV files recognized in the selected project."
           },
           {
             "name": "Column inspector",
@@ -71197,18 +71762,18 @@
         "project_key": "suez-tunnel",
         "project_display_name": "Suez Tunnel Civil & MEP Works",
         "project_folder_path": "D:\\one drive data\\OneDrive\\Documents\\Project Intelligence Hub\\projects\\Tunnels\\Suez-Tunnel",
-        "analysis_run_id": "62ab050851d9ae61b550",
-        "analysis_generated_at": "2026-08-01T08:38:48+00:00",
+        "analysis_run_id": "b888aba791a50cd7578e",
+        "analysis_generated_at": "2026-08-01T08:41:41+00:00",
         "methodology_profile": "four_pipeline_v1",
-        "assessment_profile": "qualified",
-        "assessment_status": "qualified",
+        "assessment_profile": "readiness_only",
+        "assessment_status": "readiness_only",
         "determination_status": "p6_recalculation_required",
         "source_scope": "selected_project_only",
         "summary": {
           "contract_source_count": 1,
           "evidence_source_count": 0,
           "letter_source_count": 0,
-          "delay_source_count": 16,
+          "delay_source_count": 17,
           "native_xer_count": 0,
           "relationship_rows": 15,
           "candidate_rows": 0,
@@ -71293,15 +71858,15 @@
             "pipeline": "schedule",
             "title": "Schedule, CPM logic, fragnets, float, and concurrency",
             "status": "qualified",
-            "source_count": 23,
+            "source_count": 25,
             "confidence": "Medium"
           },
           {
             "project_id": "Suez-Tunnel",
             "pipeline": "master",
             "title": "Master assessment, limits, confidence, and next actions",
-            "status": "qualified",
-            "source_count": 31,
+            "status": "readiness_only",
+            "source_count": 35,
             "confidence": "Low"
           }
         ],
@@ -71393,6 +71958,20 @@
           {
             "project_id": "Suez-Tunnel",
             "project_key": "suez-tunnel",
+            "source_id": "Suez-Tunnel:40bafb4bac1eb008",
+            "source_family": "evidence",
+            "source_file": "evidence_mapping_register.csv",
+            "source_relative_path": "06-evidence/evidence_mapping_register.csv",
+            "source_hash": "40bafb4bac1eb008e941db87c36ff069d52cf09df3d81747a54bdc09e8e6586b",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only"
+          },
+          {
+            "project_id": "Suez-Tunnel",
+            "project_key": "suez-tunnel",
             "source_id": "Suez-Tunnel:042cb8c67f572bad",
             "source_family": "evidence",
             "source_file": "evidence_register_template.csv",
@@ -71416,6 +71995,20 @@
             "source_page_or_sheet": "Not indexed",
             "source_row": "Not indexed",
             "modified_at": "2026-06-26T21:08:34+00:00",
+            "evidence_status": "reference_only"
+          },
+          {
+            "project_id": "Suez-Tunnel",
+            "project_key": "suez-tunnel",
+            "source_id": "Suez-Tunnel:931a1fe51ba3b46d",
+            "source_family": "letters",
+            "source_file": "notice_chronology_register.csv",
+            "source_relative_path": "07-letters_intelligence/notice_chronology_register.csv",
+            "source_hash": "931a1fe51ba3b46db17be59a87ec652f8ab685c1f8be0db6d352446f0f715839",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
             "evidence_status": "reference_only"
           },
           {
@@ -71645,6 +72238,20 @@
           {
             "project_id": "Suez-Tunnel",
             "project_key": "suez-tunnel",
+            "source_id": "Suez-Tunnel:fcc1296e80707032",
+            "source_family": "delay",
+            "source_file": "16-fragnet_control_register.csv",
+            "source_relative_path": "02-delay_analysis/steel_delay_tia_templates/16-fragnet_control_register.csv",
+            "source_hash": "fcc1296e807070327755981bc3d703d0652f62b6f96bcff99ff63ac602ec3cf0",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only"
+          },
+          {
+            "project_id": "Suez-Tunnel",
+            "project_key": "suez-tunnel",
             "source_id": "Suez-Tunnel:e5b4ebc0f3692c70",
             "source_family": "schedule",
             "source_file": "BL critical path.csv",
@@ -71739,6 +72346,20 @@
             "source_row": "Not indexed",
             "modified_at": "2026-06-26T17:52:10+00:00",
             "evidence_status": "verified_source"
+          },
+          {
+            "project_id": "Suez-Tunnel",
+            "project_key": "suez-tunnel",
+            "source_id": "Suez-Tunnel:6e07d7a125fa90d9",
+            "source_family": "schedule",
+            "source_file": "schedule_snapshot_register.csv",
+            "source_relative_path": "03-schedule/schedule_snapshot_register.csv",
+            "source_hash": "6e07d7a125fa90d9dfd66c019a6a6d43581ba9b4aaa4e7633064d5ed1d084f9e",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only"
           }
         ],
         "evidence_ledger": [
@@ -71853,6 +72474,24 @@
           {
             "project_id": "Suez-Tunnel",
             "project_key": "suez-tunnel",
+            "source_id": "Suez-Tunnel:40bafb4bac1eb008",
+            "source_family": "evidence",
+            "source_file": "evidence_mapping_register.csv",
+            "source_relative_path": "06-evidence/evidence_mapping_register.csv",
+            "source_hash": "40bafb4bac1eb008e941db87c36ff069d52cf09df3d81747a54bdc09e8e6586b",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only",
+            "event_id": "Not linked",
+            "activity_id": "Not linked",
+            "clause_candidate": "Not assessed",
+            "mapping_status": "reference_only"
+          },
+          {
+            "project_id": "Suez-Tunnel",
+            "project_key": "suez-tunnel",
             "source_id": "Suez-Tunnel:042cb8c67f572bad",
             "source_family": "evidence",
             "source_file": "evidence_register_template.csv",
@@ -71880,6 +72519,24 @@
             "source_page_or_sheet": "Not indexed",
             "source_row": "Not indexed",
             "modified_at": "2026-06-26T21:08:34+00:00",
+            "evidence_status": "reference_only",
+            "event_id": "Not linked",
+            "activity_id": "Not linked",
+            "clause_candidate": "Not assessed",
+            "mapping_status": "reference_only"
+          },
+          {
+            "project_id": "Suez-Tunnel",
+            "project_key": "suez-tunnel",
+            "source_id": "Suez-Tunnel:931a1fe51ba3b46d",
+            "source_family": "letters",
+            "source_file": "notice_chronology_register.csv",
+            "source_relative_path": "07-letters_intelligence/notice_chronology_register.csv",
+            "source_hash": "931a1fe51ba3b46db17be59a87ec652f8ab685c1f8be0db6d352446f0f715839",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
             "evidence_status": "reference_only",
             "event_id": "Not linked",
             "activity_id": "Not linked",
@@ -72177,6 +72834,24 @@
           {
             "project_id": "Suez-Tunnel",
             "project_key": "suez-tunnel",
+            "source_id": "Suez-Tunnel:fcc1296e80707032",
+            "source_family": "delay",
+            "source_file": "16-fragnet_control_register.csv",
+            "source_relative_path": "02-delay_analysis/steel_delay_tia_templates/16-fragnet_control_register.csv",
+            "source_hash": "fcc1296e807070327755981bc3d703d0652f62b6f96bcff99ff63ac602ec3cf0",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only",
+            "event_id": "Not linked",
+            "activity_id": "Not linked",
+            "clause_candidate": "Not assessed",
+            "mapping_status": "reference_only"
+          },
+          {
+            "project_id": "Suez-Tunnel",
+            "project_key": "suez-tunnel",
             "source_id": "Suez-Tunnel:e5b4ebc0f3692c70",
             "source_family": "schedule",
             "source_file": "BL critical path.csv",
@@ -72299,6 +72974,24 @@
             "activity_id": "Not linked",
             "clause_candidate": "Not assessed",
             "mapping_status": "verified_source"
+          },
+          {
+            "project_id": "Suez-Tunnel",
+            "project_key": "suez-tunnel",
+            "source_id": "Suez-Tunnel:6e07d7a125fa90d9",
+            "source_family": "schedule",
+            "source_file": "schedule_snapshot_register.csv",
+            "source_relative_path": "03-schedule/schedule_snapshot_register.csv",
+            "source_hash": "6e07d7a125fa90d9dfd66c019a6a6d43581ba9b4aaa4e7633064d5ed1d084f9e",
+            "source_revision": "Not declared",
+            "source_page_or_sheet": "Not indexed",
+            "source_row": "Not indexed",
+            "modified_at": "2026-08-01T08:39:07+00:00",
+            "evidence_status": "reference_only",
+            "event_id": "Not linked",
+            "activity_id": "Not linked",
+            "clause_candidate": "Not assessed",
+            "mapping_status": "reference_only"
           }
         ],
         "limitations": [
@@ -72362,6 +73055,13 @@
             "extension": "csv",
             "size_kb": 0.1,
             "modified": "2026-06-27T00:08:34"
+          },
+          {
+            "name": "evidence_mapping_register.csv",
+            "relative_path": "06-evidence/evidence_mapping_register.csv",
+            "extension": "csv",
+            "size_kb": 0.3,
+            "modified": "2026-08-01T11:39:07"
           },
           {
             "name": "evidence_register_template.csv",
@@ -73876,85 +74576,85 @@
             "name": "01_executive_dashboard.html",
             "relative_path": "Suez-Tunnel/01_executive_dashboard.html",
             "extension": "html",
-            "size_kb": 17.9,
-            "modified": "2026-07-20T15:45:14"
+            "size_kb": 1.8,
+            "modified": "2026-08-01T11:41:53"
           },
           {
             "name": "01_executive_dashboard.pdf",
             "relative_path": "Suez-Tunnel/01_executive_dashboard.pdf",
             "extension": "pdf",
-            "size_kb": 62.7,
-            "modified": "2026-08-01T11:17:51"
+            "size_kb": 70.0,
+            "modified": "2026-08-01T11:41:54"
           },
           {
             "name": "01_executive_dashboard.pptx",
             "relative_path": "Suez-Tunnel/01_executive_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T11:17:51"
+            "modified": "2026-08-01T11:41:54"
           },
           {
             "name": "02_master_dashboard.html",
             "relative_path": "Suez-Tunnel/02_master_dashboard.html",
             "extension": "html",
-            "size_kb": 84.8,
-            "modified": "2026-07-20T15:45:14"
+            "size_kb": 1.8,
+            "modified": "2026-08-01T11:41:54"
           },
           {
             "name": "02_master_dashboard.pdf",
             "relative_path": "Suez-Tunnel/02_master_dashboard.pdf",
             "extension": "pdf",
-            "size_kb": 62.7,
-            "modified": "2026-08-01T11:17:53"
+            "size_kb": 70.0,
+            "modified": "2026-08-01T11:41:55"
           },
           {
             "name": "02_master_dashboard.pptx",
             "relative_path": "Suez-Tunnel/02_master_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T11:17:53"
+            "modified": "2026-08-01T11:41:55"
           },
           {
             "name": "03_elite_svg_charts.html",
             "relative_path": "Suez-Tunnel/03_elite_svg_charts.html",
             "extension": "html",
-            "size_kb": 50.8,
-            "modified": "2026-07-20T15:45:14"
+            "size_kb": 1.8,
+            "modified": "2026-08-01T11:41:55"
           },
           {
             "name": "03_elite_svg_charts.pdf",
             "relative_path": "Suez-Tunnel/03_elite_svg_charts.pdf",
             "extension": "pdf",
-            "size_kb": 62.8,
-            "modified": "2026-08-01T11:17:54"
+            "size_kb": 70.1,
+            "modified": "2026-08-01T11:41:56"
           },
           {
             "name": "03_elite_svg_charts.pptx",
             "relative_path": "Suez-Tunnel/03_elite_svg_charts.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T11:17:54"
+            "modified": "2026-08-01T11:41:56"
           },
           {
             "name": "04_linked_executive_dashboard.html",
             "relative_path": "Suez-Tunnel/04_linked_executive_dashboard.html",
             "extension": "html",
-            "size_kb": 56.3,
-            "modified": "2026-07-20T15:45:14"
+            "size_kb": 1.8,
+            "modified": "2026-08-01T11:41:56"
           },
           {
             "name": "04_linked_executive_dashboard.pdf",
             "relative_path": "Suez-Tunnel/04_linked_executive_dashboard.pdf",
             "extension": "pdf",
-            "size_kb": 62.7,
-            "modified": "2026-08-01T11:17:55"
+            "size_kb": 70.0,
+            "modified": "2026-08-01T11:41:57"
           },
           {
             "name": "04_linked_executive_dashboard.pptx",
             "relative_path": "Suez-Tunnel/04_linked_executive_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T11:17:56"
+            "modified": "2026-08-01T11:41:57"
           }
         ],
         "watchers": [
@@ -74098,18 +74798,18 @@
         "files": {
           "html": {
             "name": "01_executive_dashboard.html",
-            "bytes": 1428,
-            "sha256": "2727bcb4652fe0ef637cbb5f9de0d3e3986d6d1dd9d8ec594db85e08a216b0d2"
+            "bytes": 1812,
+            "sha256": "3d014d554cb7c586bda300e8e371524c4e6b8250609a3a0308734c44ce4fcd39"
           },
           "pdf": {
             "name": "01_executive_dashboard.pdf",
-            "bytes": 64162,
-            "sha256": "240fb4f0bc28bd4b3fe6571310ad309037aeb35806532a38c7683f5100a1c6e2"
+            "bytes": 71690,
+            "sha256": "d80cc288d959eba2bbaaf58c38f1f9ac940faaee3fe926b054e82d8a5141b745"
           },
           "pptx": {
             "name": "01_executive_dashboard.pptx",
             "bytes": 29125,
-            "sha256": "265fbd6fefe9af01d831ce02f585da531c8097fd2d6587c27426361a34a50708"
+            "sha256": "53924a79478304e1825f6fd2be5a4d0772f698dc37515278677df34fa175ff56"
           }
         }
       },
@@ -74120,18 +74820,18 @@
         "files": {
           "html": {
             "name": "02_master_dashboard.html",
-            "bytes": 1422,
-            "sha256": "ff9475d1b8a2535cac8627fdb3ef1c08e4cd7df1b99938cb3ee837aa54e73d07"
+            "bytes": 1806,
+            "sha256": "9b0359f47073ed2b9becc7c5f3aba10bf92473c2d6e302b68c0e661f4c528010"
           },
           "pdf": {
             "name": "02_master_dashboard.pdf",
-            "bytes": 64156,
-            "sha256": "5ff854a4e4ff8fa49baad09ca7d8e740c32f85ef4cafda9459334e48d4089bd4"
+            "bytes": 71676,
+            "sha256": "33e43fada95d349e89956a24a7556e71b6f9826f7afb9e63a97c1a367ef1111f"
           },
           "pptx": {
             "name": "02_master_dashboard.pptx",
             "bytes": 29122,
-            "sha256": "045db1a7450ba2e5add0b3619f3d41a9f358c4314943698239c9735ad056ca6f"
+            "sha256": "6c888b6b9067e3c37b36e194e2d8b14e0043d2ea1818f6adf1eb2c1b866d9cb7"
           }
         }
       },
@@ -74142,18 +74842,18 @@
         "files": {
           "html": {
             "name": "03_elite_svg_charts.html",
-            "bytes": 1422,
-            "sha256": "0a00298b0657adaa6bcb6fac898e62b9f11b147df3bd01150b587435d8096cb5"
+            "bytes": 1806,
+            "sha256": "cc91f2f69e256e5c5b7148980899e584324416ff485b83229330a7fa97a96376"
           },
           "pdf": {
             "name": "03_elite_svg_charts.pdf",
-            "bytes": 64284,
-            "sha256": "e0b6e2bf17c521b135a2dcc7f1617d3437cc5ec1fc7b588b03cbf14ccf82a556"
+            "bytes": 71790,
+            "sha256": "47b17a31a91a02581b303ddd8e8237fe67ace3b9acee34af12a6304b3bf7aa24"
           },
           "pptx": {
             "name": "03_elite_svg_charts.pptx",
             "bytes": 29122,
-            "sha256": "a028afadde57e9ec497bd2a104f3377e680f6d09d42a0eced7e1be304be85e81"
+            "sha256": "a7fefa5f621faf4efa93e0f8a2cab66908c4859d4ea223aef668159b07ea04af"
           }
         }
       },
@@ -74164,18 +74864,18 @@
         "files": {
           "html": {
             "name": "04_linked_executive_dashboard.html",
-            "bytes": 1442,
-            "sha256": "e5873dcfd2a5ddd2cefefca05441380b25008bdcbdf0635290d1ec1c903a4578"
+            "bytes": 1826,
+            "sha256": "c85c4e4722c1b3554ad24632e5d721d44ce6050b1c8e97ba8610a8bed87da801"
           },
           "pdf": {
             "name": "04_linked_executive_dashboard.pdf",
-            "bytes": 64175,
-            "sha256": "f956f5f8c7bb6b0584d20e102cdb236599e4729c8e6a4438a31dcd5d106e875f"
+            "bytes": 71704,
+            "sha256": "732caeff0ec6e9397c4dc50745bb28c40771f6bb95533fb94b616a9e2cfe9328"
           },
           "pptx": {
             "name": "04_linked_executive_dashboard.pptx",
             "bytes": 29131,
-            "sha256": "aca488d703581dc21f502fb89f0ddc761a9ee735d5a5cf281f8bda6f24a82cc7"
+            "sha256": "3902b773d29329aec07b346270322f32e6a0225820098e43bddb46a95c09bc12"
           }
         }
       }

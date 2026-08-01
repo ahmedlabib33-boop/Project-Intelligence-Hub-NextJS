@@ -297,6 +297,13 @@ def ensure_project_report_artifacts(
             for item in (project.get("chart_payloads", {}).get("charts", []) if isinstance(project.get("chart_payloads"), dict) else [])
             if isinstance(item, dict) and item.get("id")
         },
+        "assessment": {
+            "analysis_run_id": assessment.get("analysis_run_id"),
+            "assessment_profile": assessment.get("assessment_profile"),
+            "assessment_status": assessment.get("assessment_status"),
+            "determination_status": assessment.get("determination_status"),
+            "source_scope": assessment.get("source_scope"),
+        },
         "generated_at": datetime.now().isoformat(timespec="seconds"),
         "reports": results,
     }
