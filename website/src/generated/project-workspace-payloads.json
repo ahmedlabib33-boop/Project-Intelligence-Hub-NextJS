@@ -234,8 +234,8 @@
       "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
     },
     "decision_required": true,
-    "last_updated": "2026-08-01T17:06:06",
-    "fingerprint": "f77ddf6ed66e84207990502024931b631f976630dfe6820c1cb966c8d0f6186f",
+    "last_updated": "2026-08-01T17:12:37",
+    "fingerprint": "460ef2001e04f12212997199170efc78068f80c188c61cc4d234a51dd766f11b",
     "source_files": {
       "projects": 1,
       "contracts": 2,
@@ -9026,7 +9026,7 @@
         "project_key": "lmd-bridge",
         "project_display_name": "LMD Bridge & Road Interchange",
         "analysis_run_id": "e251d0b48d40715e2a46",
-        "analysis_generated_at": "2026-08-01T14:06:06+00:00",
+        "analysis_generated_at": "2026-08-01T14:12:37+00:00",
         "methodology_profile": "four_pipeline_v1",
         "assessment_profile": "readiness_only",
         "assessment_status": "readiness_only",
@@ -10477,91 +10477,91 @@
                   "category_name": "EOT / Delay Claim",
                   "description": "Auto-seeded claim category for EOT / Delay Claim.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 2,
                   "category_name": "Variation Claim",
                   "description": "Auto-seeded claim category for Variation Claim.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 3,
                   "category_name": "Payment Claim",
                   "description": "Auto-seeded claim category for Payment Claim.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 4,
                   "category_name": "Suspension / Slowdown",
                   "description": "Auto-seeded claim category for Suspension / Slowdown.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 5,
                   "category_name": "Material Escalation",
                   "description": "Auto-seeded claim category for Material Escalation.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 6,
                   "category_name": "Late Drawings / Late Approvals",
                   "description": "Auto-seeded claim category for Late Drawings / Late Approvals.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 7,
                   "category_name": "Employer Free-Issue Material",
                   "description": "Auto-seeded claim category for Employer Free-Issue Material.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 8,
                   "category_name": "Site Access / Handover",
                   "description": "Auto-seeded claim category for Site Access / Handover.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 9,
                   "category_name": "Engineer Instruction",
                   "description": "Auto-seeded claim category for Engineer Instruction.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 10,
                   "category_name": "Defects / DLP",
                   "description": "Auto-seeded claim category for Defects / DLP.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 11,
                   "category_name": "Delay Damages Defense",
                   "description": "Auto-seeded claim category for Delay Damages Defense.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 12,
                   "category_name": "Dispute / Notice / Time-Bar",
                   "description": "Auto-seeded claim category for Dispute / Notice / Time-Bar.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 13,
                   "category_name": "General Contract Risk",
                   "description": "Auto-seeded claim category for General Contract Risk.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 }
               ],
               "truncated": false
@@ -10771,7 +10771,7 @@
                   "defense_keywords": "[\"no notice\", \"notice not submitted\", \"no formal notice\", \"no valid notice\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 2,
@@ -10780,7 +10780,7 @@
                   "defense_keywords": "[\"late notice\", \"notice was late\", \"notice submitted late\", \"out of time notice\", \"time bar\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 3,
@@ -10789,7 +10789,7 @@
                   "defense_keywords": "[\"no written instruction\", \"verbal instruction\", \"no formal instruction\", \"no instruction in writing\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 4,
@@ -10798,7 +10798,7 @@
                   "defense_keywords": "[\"not on critical path\", \"not critical\", \"float available\", \"not on longest path\", \"non critical\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 5,
@@ -10807,7 +10807,7 @@
                   "defense_keywords": "[\"concurrent delay\", \"overlapping delay\", \"parallel delay\", \"same period delay\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 6,
@@ -10816,7 +10816,7 @@
                   "defense_keywords": "[\"contractor delay\", \"contractor caused\", \"late by contractor\", \"contractor responsible delay\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 7,
@@ -10825,7 +10825,7 @@
                   "defense_keywords": "[\"fixed price\", \"lump sum\", \"no escalation\", \"firm price\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 8,
@@ -10834,7 +10834,7 @@
                   "defense_keywords": "[\"already included\", \"within original scope\", \"included in contract\", \"contract scope already covers\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 9,
@@ -10843,7 +10843,7 @@
                   "defense_keywords": "[\"insufficient substantiation\", \"not substantiated\", \"insufficient evidence\", \"unsupported claim\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 10,
@@ -10852,7 +10852,7 @@
                   "defense_keywords": "[\"no contemporaneous records\", \"no records at the time\", \"no site records\", \"no contemporaneous evidence\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 11,
@@ -10861,7 +10861,7 @@
                   "defense_keywords": "[\"engineer approval not entitlement\", \"approval does not mean entitlement\", \"approval is not claim\", \"approval only\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 12,
@@ -10870,7 +10870,7 @@
                   "defense_keywords": "[\"failed to mitigate\", \"failure to mitigate\", \"no mitigation\", \"insufficient mitigation\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 13,
@@ -10879,7 +10879,7 @@
                   "defense_keywords": "[\"no causation\", \"no causal link\", \"did not cause delay\", \"no cause and effect\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 14,
@@ -10888,7 +10888,7 @@
                   "defense_keywords": "[\"no cost breakdown\", \"cost not broken down\", \"no quantum support\", \"no supporting cost detail\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 },
                 {
                   "id": 15,
@@ -10897,7 +10897,7 @@
                   "defense_keywords": "[\"no programme impact\", \"no schedule impact\", \"no impact on programme\", \"no impact on completion\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:06+00:00"
+                  "updated_at": "2026-08-01T14:12:37+00:00"
                 }
               ],
               "truncated": false
@@ -11323,84 +11323,84 @@
             "relative_path": "LMD-Bridgs/01_executive_dashboard.html",
             "extension": "html",
             "size_kb": 1.2,
-            "modified": "2026-08-01T17:06:12"
+            "modified": "2026-08-01T17:12:42"
           },
           {
             "name": "01_executive_dashboard.pdf",
             "relative_path": "LMD-Bridgs/01_executive_dashboard.pdf",
             "extension": "pdf",
             "size_kb": 56.0,
-            "modified": "2026-08-01T17:06:13"
+            "modified": "2026-08-01T17:12:43"
           },
           {
             "name": "01_executive_dashboard.pptx",
             "relative_path": "LMD-Bridgs/01_executive_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T17:06:13"
+            "modified": "2026-08-01T17:12:44"
           },
           {
             "name": "02_master_dashboard.html",
             "relative_path": "LMD-Bridgs/02_master_dashboard.html",
             "extension": "html",
             "size_kb": 1.2,
-            "modified": "2026-08-01T17:06:13"
+            "modified": "2026-08-01T17:12:44"
           },
           {
             "name": "02_master_dashboard.pdf",
             "relative_path": "LMD-Bridgs/02_master_dashboard.pdf",
             "extension": "pdf",
             "size_kb": 55.3,
-            "modified": "2026-08-01T17:06:14"
+            "modified": "2026-08-01T17:12:44"
           },
           {
             "name": "02_master_dashboard.pptx",
             "relative_path": "LMD-Bridgs/02_master_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T17:06:14"
+            "modified": "2026-08-01T17:12:44"
           },
           {
             "name": "03_elite_svg_charts.html",
             "relative_path": "LMD-Bridgs/03_elite_svg_charts.html",
             "extension": "html",
             "size_kb": 1.2,
-            "modified": "2026-08-01T17:06:14"
+            "modified": "2026-08-01T17:12:45"
           },
           {
             "name": "03_elite_svg_charts.pdf",
             "relative_path": "LMD-Bridgs/03_elite_svg_charts.pdf",
             "extension": "pdf",
             "size_kb": 55.5,
-            "modified": "2026-08-01T17:06:15"
+            "modified": "2026-08-01T17:12:45"
           },
           {
             "name": "03_elite_svg_charts.pptx",
             "relative_path": "LMD-Bridgs/03_elite_svg_charts.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T17:06:15"
+            "modified": "2026-08-01T17:12:45"
           },
           {
             "name": "04_linked_executive_dashboard.html",
             "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.html",
             "extension": "html",
             "size_kb": 1.2,
-            "modified": "2026-08-01T17:06:15"
+            "modified": "2026-08-01T17:12:46"
           },
           {
             "name": "04_linked_executive_dashboard.pdf",
             "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.pdf",
             "extension": "pdf",
             "size_kb": 56.2,
-            "modified": "2026-08-01T17:06:16"
+            "modified": "2026-08-01T17:12:46"
           },
           {
             "name": "04_linked_executive_dashboard.pptx",
             "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T17:06:16"
+            "modified": "2026-08-01T17:12:46"
           },
           {
             "name": "05_delay_tia_governed_assessment.docx",
@@ -11414,28 +11414,28 @@
             "relative_path": "LMD-Bridgs/05_delay_tia_governed_assessment.html",
             "extension": "html",
             "size_kb": 2.5,
-            "modified": "2026-08-01T17:06:16"
+            "modified": "2026-08-01T17:12:46"
           },
           {
             "name": "05_delay_tia_governed_assessment.manifest.json",
             "relative_path": "LMD-Bridgs/05_delay_tia_governed_assessment.manifest.json",
             "extension": "json",
             "size_kb": 0.6,
-            "modified": "2026-08-01T17:06:16"
+            "modified": "2026-08-01T17:12:47"
           },
           {
             "name": "05_delay_tia_governed_assessment.pdf",
             "relative_path": "LMD-Bridgs/05_delay_tia_governed_assessment.pdf",
             "extension": "pdf",
             "size_kb": 2.0,
-            "modified": "2026-08-01T17:06:16"
+            "modified": "2026-08-01T17:12:47"
           },
           {
             "name": "05_delay_tia_governed_assessment.pptx",
             "relative_path": "LMD-Bridgs/05_delay_tia_governed_assessment.pptx",
             "extension": "pptx",
             "size_kb": 27.8,
-            "modified": "2026-08-01T17:06:16"
+            "modified": "2026-08-01T17:12:47"
           }
         ],
         "watchers": [
@@ -12207,17 +12207,17 @@
           "html": {
             "name": "01_executive_dashboard.html",
             "bytes": 1227,
-            "sha256": "5276d935162775e45a11a6dac79bc1cee20fbc2e3d927b351fa55cd1e1c7f00f"
+            "sha256": "84dccdd7d16673b949c11412c354fb12d6485d07ba65b52be53751d6fdf5b8dc"
           },
           "pdf": {
             "name": "01_executive_dashboard.pdf",
-            "bytes": 57305,
-            "sha256": "276706b6bb01956969e792a07d39d19cbffe67b33654117f58be6a512297e3df"
+            "bytes": 57307,
+            "sha256": "8b8bc4db59c56b4a9ab32f061469befd74d4bab6d8dfe754bfb5e91750041a9d"
           },
           "pptx": {
             "name": "01_executive_dashboard.pptx",
             "bytes": 29122,
-            "sha256": "1a9a9c6533d8f9314cd31ffc51d045db4a7f474f680f06c9180a7466b4532096"
+            "sha256": "0a8ce84016fd4939b57a8fb057fc4985b8df4383b30e08dcbb9ce2b29239e987"
           }
         }
       },
@@ -12229,17 +12229,17 @@
           "html": {
             "name": "02_master_dashboard.html",
             "bytes": 1221,
-            "sha256": "ebbee838716f42510076882b4241fac8726e1ea677699dc469dc787fa8d8cec9"
+            "sha256": "fbbffebcb42dc0589e8e95d03e1bc4e463ca0c71ff86fe20358dd8d8603bcf17"
           },
           "pdf": {
             "name": "02_master_dashboard.pdf",
-            "bytes": 56664,
-            "sha256": "fb20fe0fbd92605f436a9e9fb70973aa4b8dab009e471e0f15ea83964f21efbc"
+            "bytes": 56666,
+            "sha256": "7f51878fb8eaf3533ea1d4c6577c3c8fe798bdca7c1b65d919c2bcfd34f110d7"
           },
           "pptx": {
             "name": "02_master_dashboard.pptx",
             "bytes": 29119,
-            "sha256": "a2db906d119ce6cfd3f57b1cc07724a9eac10bdc13b4a42bd8939be968830368"
+            "sha256": "fa3025560f10b33aa0c5f032d9704253fbbe1685c1d7abd42ed79f2c6b79ebaa"
           }
         }
       },
@@ -12251,17 +12251,17 @@
           "html": {
             "name": "03_elite_svg_charts.html",
             "bytes": 1221,
-            "sha256": "40191cac17a08cf512bb0a0645900cb2607b3f49952ca8e893e5eb2fc97c5ee4"
+            "sha256": "e6445a4235f2bc2970d7ee71089c6bafa26c8e0c1b5cbdb7c55859fd23ad2e8e"
           },
           "pdf": {
             "name": "03_elite_svg_charts.pdf",
-            "bytes": 56782,
-            "sha256": "e88f33826f035cc5d60d33ab27195c35af73cbe0731c118e7c61ee0b07fd0ca2"
+            "bytes": 56784,
+            "sha256": "5afdc796ae1905e8c530a6511bcea0f77b1251488cc8a71850ac4272947b8f24"
           },
           "pptx": {
             "name": "03_elite_svg_charts.pptx",
             "bytes": 29119,
-            "sha256": "4924aa7340d95e795f7bcdb247a5e45581373577465d78610cf5d9ab62c7e59a"
+            "sha256": "923f096584076ba672ea7fa556dacfc8a32eb53e44450e65ad681e31c91b7f2c"
           }
         }
       },
@@ -12273,17 +12273,17 @@
           "html": {
             "name": "04_linked_executive_dashboard.html",
             "bytes": 1241,
-            "sha256": "996ce73dc2cbb101b2ecc11ffa45958ce57d1f9e2beb1c248e676c7f50d89a41"
+            "sha256": "e65a58d3c45b58f5cc1468adafebf9ac69e628e99a50e2d8ebc01e4d05c04c61"
           },
           "pdf": {
             "name": "04_linked_executive_dashboard.pdf",
-            "bytes": 57585,
-            "sha256": "7fcc418bc21c0a7a9bb0faa2d5618e83559ae715ee3dac153f5489aa45fd2c35"
+            "bytes": 57587,
+            "sha256": "e15094521a701a56dbe6f4ffe23d3edc4c69f7382678b6644cc42c49223ba247"
           },
           "pptx": {
             "name": "04_linked_executive_dashboard.pptx",
             "bytes": 29128,
-            "sha256": "f092ac42952f6f08f66f01466b1381197bd6aba5edd75b27c33457aaecb54fd1"
+            "sha256": "fa16d60a6dd12b6895926ae997aa218fa8fe84a66210970c2f6082397a6da89b"
           }
         }
       },
@@ -12296,17 +12296,17 @@
           "html": {
             "name": "05_delay_tia_governed_assessment.html",
             "bytes": 2556,
-            "sha256": "11d8ebfc441abcdd28fc4a3ad0690475ab8478f82b855009106379c5011d4a10"
+            "sha256": "c8a300ee2890fd5c0fe69691c3bcba865e89a41f36d5e5f02ba2e4d4f72cb925"
           },
           "pdf": {
             "name": "05_delay_tia_governed_assessment.pdf",
             "bytes": 2048,
-            "sha256": "18c01b7a2265289d31282071737abdc5beb7251e722f624282616828b7640982"
+            "sha256": "df6ddce14b565ecd1f73e8b69757eb02485bf5d0770c494a6af5ebde8a0a5514"
           },
           "pptx": {
             "name": "05_delay_tia_governed_assessment.pptx",
             "bytes": 28477,
-            "sha256": "c20299792189cebb2b3ddbd248f8e6a7220812ed4d2aa843e4056b70e6a4d471"
+            "sha256": "569627d521ef52a54acf426fa6ade6aea57a1b656ce3b93c623a6b38a583f063"
           },
           "docx": {
             "name": "05_delay_tia_governed_assessment.docx",
@@ -12612,8 +12612,8 @@
       "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
     },
     "decision_required": true,
-    "last_updated": "2026-08-01T17:06:10",
-    "fingerprint": "9adf12731c429e30622acc82afa1081e68f1ace70fc2285d72afa808980bc066",
+    "last_updated": "2026-08-01T17:12:41",
+    "fingerprint": "072a8ead0b5792feb684c7fa8722ec05b4aa6299ecb9f73ffbf18c3a1aaaadd7",
     "source_files": {
       "projects": 1,
       "contracts": 2,
@@ -121413,7 +121413,7 @@
         "project_key": "the-big-p-01-up-20-april-26",
         "project_display_name": "ROYA-BIG PROJECT PHASE01 (B1-4)",
         "analysis_run_id": "9d2c5b1e542b9c7e9b97",
-        "analysis_generated_at": "2026-08-01T14:06:10+00:00",
+        "analysis_generated_at": "2026-08-01T14:12:41+00:00",
         "methodology_profile": "four_pipeline_v1",
         "assessment_profile": "evidence_backed",
         "assessment_status": "qualified",
@@ -123753,91 +123753,91 @@
                   "category_name": "EOT / Delay Claim",
                   "description": "Auto-seeded claim category for EOT / Delay Claim.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 2,
                   "category_name": "Variation Claim",
                   "description": "Auto-seeded claim category for Variation Claim.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 3,
                   "category_name": "Payment Claim",
                   "description": "Auto-seeded claim category for Payment Claim.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 4,
                   "category_name": "Suspension / Slowdown",
                   "description": "Auto-seeded claim category for Suspension / Slowdown.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 5,
                   "category_name": "Material Escalation",
                   "description": "Auto-seeded claim category for Material Escalation.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 6,
                   "category_name": "Late Drawings / Late Approvals",
                   "description": "Auto-seeded claim category for Late Drawings / Late Approvals.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 7,
                   "category_name": "Employer Free-Issue Material",
                   "description": "Auto-seeded claim category for Employer Free-Issue Material.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 8,
                   "category_name": "Site Access / Handover",
                   "description": "Auto-seeded claim category for Site Access / Handover.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 9,
                   "category_name": "Engineer Instruction",
                   "description": "Auto-seeded claim category for Engineer Instruction.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 10,
                   "category_name": "Defects / DLP",
                   "description": "Auto-seeded claim category for Defects / DLP.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 11,
                   "category_name": "Delay Damages Defense",
                   "description": "Auto-seeded claim category for Delay Damages Defense.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 12,
                   "category_name": "Dispute / Notice / Time-Bar",
                   "description": "Auto-seeded claim category for Dispute / Notice / Time-Bar.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 13,
                   "category_name": "General Contract Risk",
                   "description": "Auto-seeded claim category for General Contract Risk.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 }
               ],
               "truncated": false
@@ -124047,7 +124047,7 @@
                   "defense_keywords": "[\"no notice\", \"notice not submitted\", \"no formal notice\", \"no valid notice\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 2,
@@ -124056,7 +124056,7 @@
                   "defense_keywords": "[\"late notice\", \"notice was late\", \"notice submitted late\", \"out of time notice\", \"time bar\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 3,
@@ -124065,7 +124065,7 @@
                   "defense_keywords": "[\"no written instruction\", \"verbal instruction\", \"no formal instruction\", \"no instruction in writing\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 4,
@@ -124074,7 +124074,7 @@
                   "defense_keywords": "[\"not on critical path\", \"not critical\", \"float available\", \"not on longest path\", \"non critical\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 5,
@@ -124083,7 +124083,7 @@
                   "defense_keywords": "[\"concurrent delay\", \"overlapping delay\", \"parallel delay\", \"same period delay\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 6,
@@ -124092,7 +124092,7 @@
                   "defense_keywords": "[\"contractor delay\", \"contractor caused\", \"late by contractor\", \"contractor responsible delay\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 7,
@@ -124101,7 +124101,7 @@
                   "defense_keywords": "[\"fixed price\", \"lump sum\", \"no escalation\", \"firm price\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 8,
@@ -124110,7 +124110,7 @@
                   "defense_keywords": "[\"already included\", \"within original scope\", \"included in contract\", \"contract scope already covers\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 9,
@@ -124119,7 +124119,7 @@
                   "defense_keywords": "[\"insufficient substantiation\", \"not substantiated\", \"insufficient evidence\", \"unsupported claim\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 10,
@@ -124128,7 +124128,7 @@
                   "defense_keywords": "[\"no contemporaneous records\", \"no records at the time\", \"no site records\", \"no contemporaneous evidence\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 11,
@@ -124137,7 +124137,7 @@
                   "defense_keywords": "[\"engineer approval not entitlement\", \"approval does not mean entitlement\", \"approval is not claim\", \"approval only\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 12,
@@ -124146,7 +124146,7 @@
                   "defense_keywords": "[\"failed to mitigate\", \"failure to mitigate\", \"no mitigation\", \"insufficient mitigation\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 13,
@@ -124155,7 +124155,7 @@
                   "defense_keywords": "[\"no causation\", \"no causal link\", \"did not cause delay\", \"no cause and effect\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 14,
@@ -124164,7 +124164,7 @@
                   "defense_keywords": "[\"no cost breakdown\", \"cost not broken down\", \"no quantum support\", \"no supporting cost detail\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 },
                 {
                   "id": 15,
@@ -124173,7 +124173,7 @@
                   "defense_keywords": "[\"no programme impact\", \"no schedule impact\", \"no impact on programme\", \"no impact on completion\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:10+00:00"
+                  "updated_at": "2026-08-01T14:12:41+00:00"
                 }
               ],
               "truncated": false
@@ -124599,84 +124599,84 @@
             "relative_path": "The BIG - PH01/01_executive_dashboard.html",
             "extension": "html",
             "size_kb": 1.2,
-            "modified": "2026-08-01T17:06:17"
+            "modified": "2026-08-01T17:12:47"
           },
           {
             "name": "01_executive_dashboard.pdf",
             "relative_path": "The BIG - PH01/01_executive_dashboard.pdf",
             "extension": "pdf",
             "size_kb": 59.8,
-            "modified": "2026-08-01T17:06:18"
+            "modified": "2026-08-01T17:12:47"
           },
           {
             "name": "01_executive_dashboard.pptx",
             "relative_path": "The BIG - PH01/01_executive_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.5,
-            "modified": "2026-08-01T17:06:18"
+            "modified": "2026-08-01T17:12:48"
           },
           {
             "name": "02_master_dashboard.html",
             "relative_path": "The BIG - PH01/02_master_dashboard.html",
             "extension": "html",
             "size_kb": 1.2,
-            "modified": "2026-08-01T17:06:18"
+            "modified": "2026-08-01T17:12:48"
           },
           {
             "name": "02_master_dashboard.pdf",
             "relative_path": "The BIG - PH01/02_master_dashboard.pdf",
             "extension": "pdf",
             "size_kb": 59.6,
-            "modified": "2026-08-01T17:06:19"
+            "modified": "2026-08-01T17:12:49"
           },
           {
             "name": "02_master_dashboard.pptx",
             "relative_path": "The BIG - PH01/02_master_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.5,
-            "modified": "2026-08-01T17:06:19"
+            "modified": "2026-08-01T17:12:49"
           },
           {
             "name": "03_elite_svg_charts.html",
             "relative_path": "The BIG - PH01/03_elite_svg_charts.html",
             "extension": "html",
             "size_kb": 1.2,
-            "modified": "2026-08-01T17:06:19"
+            "modified": "2026-08-01T17:12:49"
           },
           {
             "name": "03_elite_svg_charts.pdf",
             "relative_path": "The BIG - PH01/03_elite_svg_charts.pdf",
             "extension": "pdf",
             "size_kb": 59.0,
-            "modified": "2026-08-01T17:06:20"
+            "modified": "2026-08-01T17:12:49"
           },
           {
             "name": "03_elite_svg_charts.pptx",
             "relative_path": "The BIG - PH01/03_elite_svg_charts.pptx",
             "extension": "pptx",
             "size_kb": 28.5,
-            "modified": "2026-08-01T17:06:20"
+            "modified": "2026-08-01T17:12:50"
           },
           {
             "name": "04_linked_executive_dashboard.html",
             "relative_path": "The BIG - PH01/04_linked_executive_dashboard.html",
             "extension": "html",
             "size_kb": 1.2,
-            "modified": "2026-08-01T17:06:20"
+            "modified": "2026-08-01T17:12:50"
           },
           {
             "name": "04_linked_executive_dashboard.pdf",
             "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pdf",
             "extension": "pdf",
             "size_kb": 60.0,
-            "modified": "2026-08-01T17:06:21"
+            "modified": "2026-08-01T17:12:50"
           },
           {
             "name": "04_linked_executive_dashboard.pptx",
             "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.5,
-            "modified": "2026-08-01T17:06:21"
+            "modified": "2026-08-01T17:12:51"
           },
           {
             "name": "05_delay_tia_governed_assessment.docx",
@@ -124690,28 +124690,28 @@
             "relative_path": "The BIG - PH01/05_delay_tia_governed_assessment.html",
             "extension": "html",
             "size_kb": 9.5,
-            "modified": "2026-08-01T17:06:21"
+            "modified": "2026-08-01T17:12:51"
           },
           {
             "name": "05_delay_tia_governed_assessment.manifest.json",
             "relative_path": "The BIG - PH01/05_delay_tia_governed_assessment.manifest.json",
             "extension": "json",
             "size_kb": 0.6,
-            "modified": "2026-08-01T17:06:21"
+            "modified": "2026-08-01T17:12:51"
           },
           {
             "name": "05_delay_tia_governed_assessment.pdf",
             "relative_path": "The BIG - PH01/05_delay_tia_governed_assessment.pdf",
             "extension": "pdf",
             "size_kb": 2.4,
-            "modified": "2026-08-01T17:06:21"
+            "modified": "2026-08-01T17:12:51"
           },
           {
             "name": "05_delay_tia_governed_assessment.pptx",
             "relative_path": "The BIG - PH01/05_delay_tia_governed_assessment.pptx",
             "extension": "pptx",
             "size_kb": 28.0,
-            "modified": "2026-08-01T17:06:21"
+            "modified": "2026-08-01T17:12:51"
           }
         ],
         "watchers": [
@@ -125502,17 +125502,17 @@
           "html": {
             "name": "01_executive_dashboard.html",
             "bytes": 1240,
-            "sha256": "9906115733f50aeac8562851c249f79fff0caab8a01387dc425caedeb8ebb644"
+            "sha256": "85c51ab818f986b68c318bcc7983a9816fa9338e339d5d97854803865dfdb7cf"
           },
           "pdf": {
             "name": "01_executive_dashboard.pdf",
-            "bytes": 61206,
-            "sha256": "76ee76d7721a048e94cc4bd4296cf5b64a886da8a81935d7a1baf2862972697d"
+            "bytes": 61209,
+            "sha256": "2f076e803430326b85914b824fee75c7ab86066389d110e95d2bd74e4c6976c0"
           },
           "pptx": {
             "name": "01_executive_dashboard.pptx",
             "bytes": 29140,
-            "sha256": "fb72bbaafe5a8ca3e694cbaa568aac7a68ad531214bbfa774c68343b0ea2ec17"
+            "sha256": "15ffa623f0fac7f9df53d9aa13f0faed205a2414fd3d936d107fabc6a3939c14"
           }
         }
       },
@@ -125524,17 +125524,17 @@
           "html": {
             "name": "02_master_dashboard.html",
             "bytes": 1234,
-            "sha256": "2591a519c405cf262ee1e736a215305c017a75596c30e8ad6b98d03c0571a575"
+            "sha256": "ed9dd1f033ffd5aac3c124583c7249d987024e05539b90edc2aeb2579e82837f"
           },
           "pdf": {
             "name": "02_master_dashboard.pdf",
-            "bytes": 61053,
-            "sha256": "c8e5af90e0d0e8beb299a2733f72512e4a1341e6dbfe3c4a00d057f5366f374c"
+            "bytes": 61055,
+            "sha256": "f95d92f46e743b29124765d1de57ccaba06380e74083f4b6296250dc6e6d5273"
           },
           "pptx": {
             "name": "02_master_dashboard.pptx",
             "bytes": 29137,
-            "sha256": "57a018ca2aa9e4af93d20566720a7524dc81ddfdc5614c779522f372762b914d"
+            "sha256": "629a68262bae9d637a6a0a97c9823f1840982c973a5e0963f458e1f6a91407cd"
           }
         }
       },
@@ -125546,17 +125546,17 @@
           "html": {
             "name": "03_elite_svg_charts.html",
             "bytes": 1234,
-            "sha256": "3a2a8ae73c44930ac1f22bfd26acf6e1e5b67ba7a92fec41bea96e57b556efe3"
+            "sha256": "523ba1fabffa5c60a30aea109d5cd6622f4f3988d69dbbdacb80d717f0c52cda"
           },
           "pdf": {
             "name": "03_elite_svg_charts.pdf",
-            "bytes": 60370,
-            "sha256": "016e507fce1ee81e3249c8c6daccff711a97228c25322362b1e50ab2288845e9"
+            "bytes": 60373,
+            "sha256": "f0e716c04d0e7abcba8c3a744c253e9c19eedbf8d339d6642d112d0e14f49db0"
           },
           "pptx": {
             "name": "03_elite_svg_charts.pptx",
             "bytes": 29138,
-            "sha256": "4a9ed55410da70ba07542b9da6eeb58d2fd4eb961f16c18e0134c2afe90e5528"
+            "sha256": "96189f04edb75a8cb24458ff170fda3a5a46a7e2f71ef1462aae2eee96772d73"
           }
         }
       },
@@ -125568,17 +125568,17 @@
           "html": {
             "name": "04_linked_executive_dashboard.html",
             "bytes": 1254,
-            "sha256": "2c306054cdd7acca6496cf4be1c6ba124c18a4b4c143269c85449de16f2deea4"
+            "sha256": "b94bb6c15d564453d14906566db8e70a7f3934610d9face10cbdefaaab1fa6d1"
           },
           "pdf": {
             "name": "04_linked_executive_dashboard.pdf",
-            "bytes": 61469,
-            "sha256": "1ce5eba08ede9aee75d43fe36b1affa3cc8dcc83cebcc710fedf052d7e2a9ba3"
+            "bytes": 61472,
+            "sha256": "afce1688b2c899782e7ffa2d74a13c444e7b1b2b58279f2a00eccba2d4b35842"
           },
           "pptx": {
             "name": "04_linked_executive_dashboard.pptx",
             "bytes": 29147,
-            "sha256": "82d8758c483bb4b8862d305d8cef4a2fd2e1f0fbad701f257c49358e1c09f0c8"
+            "sha256": "1fd25de6669a4f27cb428b2d4f5535a12cd1fd8926a9f6eda034d8efe398c321"
           }
         }
       },
@@ -125591,17 +125591,17 @@
           "html": {
             "name": "05_delay_tia_governed_assessment.html",
             "bytes": 9686,
-            "sha256": "787a9ddd17978bbd0d1633ba157019e75f71bb36f75feeddece857fb484b1297"
+            "sha256": "552378ff74d35f98c75948b2f2d66a6d9a9743d563b07214c1c5006ee59f095f"
           },
           "pdf": {
             "name": "05_delay_tia_governed_assessment.pdf",
             "bytes": 2443,
-            "sha256": "0749243624ae67536937c3aa9df5039a2fd34720da8d1185f4f47a56afffaa67"
+            "sha256": "b4eb2b7e87561c4da809566c3d17bfb42687774f10c9323c6c5dfedd64071eed"
           },
           "pptx": {
             "name": "05_delay_tia_governed_assessment.pptx",
             "bytes": 28684,
-            "sha256": "7094fa64e3f9e2321488dd9aae25dabbad06e7406cd5d60f305955d21d639466"
+            "sha256": "1544b46b93488ee3f7bf0d56af847c2b08cbf6555e4d64237338bc6b623a6c0f"
           },
           "docx": {
             "name": "05_delay_tia_governed_assessment.docx",
@@ -125822,8 +125822,8 @@
       "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
     },
     "decision_required": true,
-    "last_updated": "2026-08-01T17:06:11",
-    "fingerprint": "9831958986edaca97ed95fc37de2e6f7f4a2269193e6260e63ee640edab4d4e7",
+    "last_updated": "2026-08-01T17:12:42",
+    "fingerprint": "04002e83125636f25a4ff20f7c2e98dbc500226a53e751693df8b1ff95ab049b",
     "source_files": {
       "projects": 1,
       "contracts": 2,
@@ -134614,7 +134614,7 @@
         "project_key": "sophia-mall",
         "project_display_name": "Sophia Mall Mixed-Use Development",
         "analysis_run_id": "7b74a153fdbf31627b11",
-        "analysis_generated_at": "2026-08-01T14:06:11+00:00",
+        "analysis_generated_at": "2026-08-01T14:12:42+00:00",
         "methodology_profile": "four_pipeline_v1",
         "assessment_profile": "readiness_only",
         "assessment_status": "readiness_only",
@@ -136065,91 +136065,91 @@
                   "category_name": "EOT / Delay Claim",
                   "description": "Auto-seeded claim category for EOT / Delay Claim.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 2,
                   "category_name": "Variation Claim",
                   "description": "Auto-seeded claim category for Variation Claim.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 3,
                   "category_name": "Payment Claim",
                   "description": "Auto-seeded claim category for Payment Claim.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 4,
                   "category_name": "Suspension / Slowdown",
                   "description": "Auto-seeded claim category for Suspension / Slowdown.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 5,
                   "category_name": "Material Escalation",
                   "description": "Auto-seeded claim category for Material Escalation.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 6,
                   "category_name": "Late Drawings / Late Approvals",
                   "description": "Auto-seeded claim category for Late Drawings / Late Approvals.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 7,
                   "category_name": "Employer Free-Issue Material",
                   "description": "Auto-seeded claim category for Employer Free-Issue Material.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 8,
                   "category_name": "Site Access / Handover",
                   "description": "Auto-seeded claim category for Site Access / Handover.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 9,
                   "category_name": "Engineer Instruction",
                   "description": "Auto-seeded claim category for Engineer Instruction.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 10,
                   "category_name": "Defects / DLP",
                   "description": "Auto-seeded claim category for Defects / DLP.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 11,
                   "category_name": "Delay Damages Defense",
                   "description": "Auto-seeded claim category for Delay Damages Defense.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 12,
                   "category_name": "Dispute / Notice / Time-Bar",
                   "description": "Auto-seeded claim category for Dispute / Notice / Time-Bar.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 13,
                   "category_name": "General Contract Risk",
                   "description": "Auto-seeded claim category for General Contract Risk.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 }
               ],
               "truncated": false
@@ -136359,7 +136359,7 @@
                   "defense_keywords": "[\"no notice\", \"notice not submitted\", \"no formal notice\", \"no valid notice\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 2,
@@ -136368,7 +136368,7 @@
                   "defense_keywords": "[\"late notice\", \"notice was late\", \"notice submitted late\", \"out of time notice\", \"time bar\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 3,
@@ -136377,7 +136377,7 @@
                   "defense_keywords": "[\"no written instruction\", \"verbal instruction\", \"no formal instruction\", \"no instruction in writing\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 4,
@@ -136386,7 +136386,7 @@
                   "defense_keywords": "[\"not on critical path\", \"not critical\", \"float available\", \"not on longest path\", \"non critical\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 5,
@@ -136395,7 +136395,7 @@
                   "defense_keywords": "[\"concurrent delay\", \"overlapping delay\", \"parallel delay\", \"same period delay\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 6,
@@ -136404,7 +136404,7 @@
                   "defense_keywords": "[\"contractor delay\", \"contractor caused\", \"late by contractor\", \"contractor responsible delay\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 7,
@@ -136413,7 +136413,7 @@
                   "defense_keywords": "[\"fixed price\", \"lump sum\", \"no escalation\", \"firm price\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 8,
@@ -136422,7 +136422,7 @@
                   "defense_keywords": "[\"already included\", \"within original scope\", \"included in contract\", \"contract scope already covers\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 9,
@@ -136431,7 +136431,7 @@
                   "defense_keywords": "[\"insufficient substantiation\", \"not substantiated\", \"insufficient evidence\", \"unsupported claim\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 10,
@@ -136440,7 +136440,7 @@
                   "defense_keywords": "[\"no contemporaneous records\", \"no records at the time\", \"no site records\", \"no contemporaneous evidence\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 11,
@@ -136449,7 +136449,7 @@
                   "defense_keywords": "[\"engineer approval not entitlement\", \"approval does not mean entitlement\", \"approval is not claim\", \"approval only\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 12,
@@ -136458,7 +136458,7 @@
                   "defense_keywords": "[\"failed to mitigate\", \"failure to mitigate\", \"no mitigation\", \"insufficient mitigation\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 13,
@@ -136467,7 +136467,7 @@
                   "defense_keywords": "[\"no causation\", \"no causal link\", \"did not cause delay\", \"no cause and effect\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 14,
@@ -136476,7 +136476,7 @@
                   "defense_keywords": "[\"no cost breakdown\", \"cost not broken down\", \"no quantum support\", \"no supporting cost detail\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 15,
@@ -136485,7 +136485,7 @@
                   "defense_keywords": "[\"no programme impact\", \"no schedule impact\", \"no impact on programme\", \"no impact on completion\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:11+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 }
               ],
               "truncated": false
@@ -136911,84 +136911,84 @@
             "relative_path": "Sophia-Mall/01_executive_dashboard.html",
             "extension": "html",
             "size_kb": 1.2,
-            "modified": "2026-08-01T17:06:22"
+            "modified": "2026-08-01T17:12:51"
           },
           {
             "name": "01_executive_dashboard.pdf",
             "relative_path": "Sophia-Mall/01_executive_dashboard.pdf",
             "extension": "pdf",
             "size_kb": 57.1,
-            "modified": "2026-08-01T17:06:23"
+            "modified": "2026-08-01T17:12:52"
           },
           {
             "name": "01_executive_dashboard.pptx",
             "relative_path": "Sophia-Mall/01_executive_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T17:06:23"
+            "modified": "2026-08-01T17:12:52"
           },
           {
             "name": "02_master_dashboard.html",
             "relative_path": "Sophia-Mall/02_master_dashboard.html",
             "extension": "html",
             "size_kb": 1.2,
-            "modified": "2026-08-01T17:06:23"
+            "modified": "2026-08-01T17:12:52"
           },
           {
             "name": "02_master_dashboard.pdf",
             "relative_path": "Sophia-Mall/02_master_dashboard.pdf",
             "extension": "pdf",
             "size_kb": 57.1,
-            "modified": "2026-08-01T17:06:24"
+            "modified": "2026-08-01T17:12:52"
           },
           {
             "name": "02_master_dashboard.pptx",
             "relative_path": "Sophia-Mall/02_master_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T17:06:24"
+            "modified": "2026-08-01T17:12:53"
           },
           {
             "name": "03_elite_svg_charts.html",
             "relative_path": "Sophia-Mall/03_elite_svg_charts.html",
             "extension": "html",
             "size_kb": 1.2,
-            "modified": "2026-08-01T17:06:24"
+            "modified": "2026-08-01T17:12:53"
           },
           {
             "name": "03_elite_svg_charts.pdf",
             "relative_path": "Sophia-Mall/03_elite_svg_charts.pdf",
             "extension": "pdf",
             "size_kb": 57.2,
-            "modified": "2026-08-01T17:06:25"
+            "modified": "2026-08-01T17:12:53"
           },
           {
             "name": "03_elite_svg_charts.pptx",
             "relative_path": "Sophia-Mall/03_elite_svg_charts.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T17:06:25"
+            "modified": "2026-08-01T17:12:54"
           },
           {
             "name": "04_linked_executive_dashboard.html",
             "relative_path": "Sophia-Mall/04_linked_executive_dashboard.html",
             "extension": "html",
             "size_kb": 1.2,
-            "modified": "2026-08-01T17:06:25"
+            "modified": "2026-08-01T17:12:54"
           },
           {
             "name": "04_linked_executive_dashboard.pdf",
             "relative_path": "Sophia-Mall/04_linked_executive_dashboard.pdf",
             "extension": "pdf",
             "size_kb": 57.4,
-            "modified": "2026-08-01T17:06:25"
+            "modified": "2026-08-01T17:12:54"
           },
           {
             "name": "04_linked_executive_dashboard.pptx",
             "relative_path": "Sophia-Mall/04_linked_executive_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T17:06:26"
+            "modified": "2026-08-01T17:12:54"
           },
           {
             "name": "05_delay_tia_governed_assessment.docx",
@@ -137002,28 +137002,28 @@
             "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.html",
             "extension": "html",
             "size_kb": 2.5,
-            "modified": "2026-08-01T17:06:26"
+            "modified": "2026-08-01T17:12:55"
           },
           {
             "name": "05_delay_tia_governed_assessment.manifest.json",
             "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.manifest.json",
             "extension": "json",
             "size_kb": 0.6,
-            "modified": "2026-08-01T17:06:26"
+            "modified": "2026-08-01T17:12:55"
           },
           {
             "name": "05_delay_tia_governed_assessment.pdf",
             "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.pdf",
             "extension": "pdf",
             "size_kb": 2.0,
-            "modified": "2026-08-01T17:06:26"
+            "modified": "2026-08-01T17:12:55"
           },
           {
             "name": "05_delay_tia_governed_assessment.pptx",
             "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.pptx",
             "extension": "pptx",
             "size_kb": 27.8,
-            "modified": "2026-08-01T17:06:26"
+            "modified": "2026-08-01T17:12:55"
           }
         ],
         "watchers": [
@@ -137793,17 +137793,17 @@
           "html": {
             "name": "01_executive_dashboard.html",
             "bytes": 1241,
-            "sha256": "4bb16f470fca359b5e6a28cb356b66ed0485d5bbe8356657519f8e33bc951deb"
+            "sha256": "07a6c01511103912fd4ca900b47000a6b8f8c82adad5abb1532ab943c8599102"
           },
           "pdf": {
             "name": "01_executive_dashboard.pdf",
-            "bytes": 58464,
-            "sha256": "5a2877bcdae2305149f514dd0053ea5b9739a9fd1d73cc7aa6a1bd6efd7081e4"
+            "bytes": 58458,
+            "sha256": "56c41855e98b340a85a77b1cab82bd8c9e1bf6e56efcbd65d934bcf2bb593075"
           },
           "pptx": {
             "name": "01_executive_dashboard.pptx",
             "bytes": 29125,
-            "sha256": "04a089fb90eef221bbc777650457b819825fc27dbce31bdb92d03360254af3e7"
+            "sha256": "ad5c66e0462809cfeec4487d6ede8a3969ca5d1d07c035d023f38e239d713427"
           }
         }
       },
@@ -137815,17 +137815,17 @@
           "html": {
             "name": "02_master_dashboard.html",
             "bytes": 1235,
-            "sha256": "9e82eebf1d30f84baf231b427fc9b1f5f3c693df597d220c448be83fd1dc7680"
+            "sha256": "96c854883bf25eaf5bec293868b3a339e2bc669adf73d9918a05ba0115521c57"
           },
           "pdf": {
             "name": "02_master_dashboard.pdf",
-            "bytes": 58455,
-            "sha256": "bb6918810dca6f30e817db1d8334d5abedd2d8cd56c8ab8cf54abbcd33442263"
+            "bytes": 58449,
+            "sha256": "45f9320ae9d5e0afbd0e01a4876a43e91ae80f764489aa60281a52cbd951757d"
           },
           "pptx": {
             "name": "02_master_dashboard.pptx",
             "bytes": 29122,
-            "sha256": "729c546b055aa2dfaad33574b1f87c8456715704b8d5eab1aba3406a9d4f8995"
+            "sha256": "73c9abd39e5c1efd72ee91f24c196f652c6ffe90f1f063db8d8257401c6d80f5"
           }
         }
       },
@@ -137837,17 +137837,17 @@
           "html": {
             "name": "03_elite_svg_charts.html",
             "bytes": 1235,
-            "sha256": "93a5725606701387fa1ac355782a524b246567a051dcee4a7abd1a53b34333cb"
+            "sha256": "efc96bcd65ce16b7daa319a0960e04a2da5ccb0dc0db4af0e16ddb98b038071f"
           },
           "pdf": {
             "name": "03_elite_svg_charts.pdf",
-            "bytes": 58583,
-            "sha256": "59fc55def87162f8e3dc5c0e631d0e5b174f9f73840bc96e72e5f83f483afcb3"
+            "bytes": 58578,
+            "sha256": "cd12e2c801e17a8034a1030ca070aa2fc8eabf40d89fd8afda1fc5a0990fb7e7"
           },
           "pptx": {
             "name": "03_elite_svg_charts.pptx",
             "bytes": 29123,
-            "sha256": "b638aede4363c1edfd63753404a1dce99f836aaa8fffea2ddde088f7b029ecca"
+            "sha256": "cdb28ffa6b12651f658661a7d34cb71eedd9e7cb4d54f371307941db5ea40ade"
           }
         }
       },
@@ -137859,17 +137859,17 @@
           "html": {
             "name": "04_linked_executive_dashboard.html",
             "bytes": 1255,
-            "sha256": "cc97c13a38619ff491830427df79605bcdec0331b6f75dedeabfe9ef7fea8d93"
+            "sha256": "71064187c3647135cd598a3bb9936b8020ce84bab7d1592c9d7c1e45dc5a8ca1"
           },
           "pdf": {
             "name": "04_linked_executive_dashboard.pdf",
-            "bytes": 58754,
-            "sha256": "9193868605adf3a755ca8b1b7c42fe7948b8d10a4e14987deef7b58f407fa34a"
+            "bytes": 58748,
+            "sha256": "29e6217649a64806ecedfc2696fd05adb5b52fd914932e1d4720fc2128767e46"
           },
           "pptx": {
             "name": "04_linked_executive_dashboard.pptx",
             "bytes": 29131,
-            "sha256": "9b85c66e530ef3e48f3477a844567ee2a39435cb31a6dae3aab6bf2db0a68c12"
+            "sha256": "90ba6c5612591662fb35b485b7f0a5e708d4a6014e5e78b8dba60d2f8fc98797"
           }
         }
       },
@@ -137882,17 +137882,17 @@
           "html": {
             "name": "05_delay_tia_governed_assessment.html",
             "bytes": 2557,
-            "sha256": "d245d73b76433b6c41e3782ad5fb8abe1b643b16ce9962bea73f5bb35060e27f"
+            "sha256": "6b5179b5af5822a51a4bfa43ad1c6bb698f2a43b5ac2cabd5cccaa0e2f76df78"
           },
           "pdf": {
             "name": "05_delay_tia_governed_assessment.pdf",
             "bytes": 2042,
-            "sha256": "68df19135b6e00bf99ec542059a63d7b5b4d93e8bf24da3faf4af87aa293fd9b"
+            "sha256": "9756bd8d6a192534a1a22c7310a7557d092b8097f4d16dbe769ae5abd6697053"
           },
           "pptx": {
             "name": "05_delay_tia_governed_assessment.pptx",
             "bytes": 28475,
-            "sha256": "79d0f7a52d903e826c069e5fff0933252ef14c130f510e23bffedd3863800566"
+            "sha256": "a20c0150a283d80aca6a170b73f90c0dbb4fa1d84c3bb476f01508b66c2602e3"
           },
           "docx": {
             "name": "05_delay_tia_governed_assessment.docx",
@@ -138140,8 +138140,8 @@
       "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
     },
     "decision_required": true,
-    "last_updated": "2026-08-01T17:06:12",
-    "fingerprint": "79b4bb10073b5955dc42ec849e69be6b893ac0500f8fe06f60e668e41ee603ee",
+    "last_updated": "2026-08-01T17:12:42",
+    "fingerprint": "cf0c6ce45034e08717c95c9732393564e59399a24c31e2e882214e2133e542d0",
     "source_files": {
       "projects": 1,
       "contracts": 2,
@@ -146932,7 +146932,7 @@
         "project_key": "suez-tunnel",
         "project_display_name": "Suez Tunnel Civil & MEP Works",
         "analysis_run_id": "b888aba791a50cd7578e",
-        "analysis_generated_at": "2026-08-01T14:06:12+00:00",
+        "analysis_generated_at": "2026-08-01T14:12:42+00:00",
         "methodology_profile": "four_pipeline_v1",
         "assessment_profile": "readiness_only",
         "assessment_status": "readiness_only",
@@ -148383,91 +148383,91 @@
                   "category_name": "EOT / Delay Claim",
                   "description": "Auto-seeded claim category for EOT / Delay Claim.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 2,
                   "category_name": "Variation Claim",
                   "description": "Auto-seeded claim category for Variation Claim.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 3,
                   "category_name": "Payment Claim",
                   "description": "Auto-seeded claim category for Payment Claim.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 4,
                   "category_name": "Suspension / Slowdown",
                   "description": "Auto-seeded claim category for Suspension / Slowdown.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 5,
                   "category_name": "Material Escalation",
                   "description": "Auto-seeded claim category for Material Escalation.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 6,
                   "category_name": "Late Drawings / Late Approvals",
                   "description": "Auto-seeded claim category for Late Drawings / Late Approvals.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 7,
                   "category_name": "Employer Free-Issue Material",
                   "description": "Auto-seeded claim category for Employer Free-Issue Material.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 8,
                   "category_name": "Site Access / Handover",
                   "description": "Auto-seeded claim category for Site Access / Handover.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 9,
                   "category_name": "Engineer Instruction",
                   "description": "Auto-seeded claim category for Engineer Instruction.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 10,
                   "category_name": "Defects / DLP",
                   "description": "Auto-seeded claim category for Defects / DLP.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 11,
                   "category_name": "Delay Damages Defense",
                   "description": "Auto-seeded claim category for Delay Damages Defense.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 12,
                   "category_name": "Dispute / Notice / Time-Bar",
                   "description": "Auto-seeded claim category for Dispute / Notice / Time-Bar.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 13,
                   "category_name": "General Contract Risk",
                   "description": "Auto-seeded claim category for General Contract Risk.",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 }
               ],
               "truncated": false
@@ -148677,7 +148677,7 @@
                   "defense_keywords": "[\"no notice\", \"notice not submitted\", \"no formal notice\", \"no valid notice\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 2,
@@ -148686,7 +148686,7 @@
                   "defense_keywords": "[\"late notice\", \"notice was late\", \"notice submitted late\", \"out of time notice\", \"time bar\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 3,
@@ -148695,7 +148695,7 @@
                   "defense_keywords": "[\"no written instruction\", \"verbal instruction\", \"no formal instruction\", \"no instruction in writing\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 4,
@@ -148704,7 +148704,7 @@
                   "defense_keywords": "[\"not on critical path\", \"not critical\", \"float available\", \"not on longest path\", \"non critical\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 5,
@@ -148713,7 +148713,7 @@
                   "defense_keywords": "[\"concurrent delay\", \"overlapping delay\", \"parallel delay\", \"same period delay\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 6,
@@ -148722,7 +148722,7 @@
                   "defense_keywords": "[\"contractor delay\", \"contractor caused\", \"late by contractor\", \"contractor responsible delay\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 7,
@@ -148731,7 +148731,7 @@
                   "defense_keywords": "[\"fixed price\", \"lump sum\", \"no escalation\", \"firm price\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 8,
@@ -148740,7 +148740,7 @@
                   "defense_keywords": "[\"already included\", \"within original scope\", \"included in contract\", \"contract scope already covers\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 9,
@@ -148749,7 +148749,7 @@
                   "defense_keywords": "[\"insufficient substantiation\", \"not substantiated\", \"insufficient evidence\", \"unsupported claim\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 10,
@@ -148758,7 +148758,7 @@
                   "defense_keywords": "[\"no contemporaneous records\", \"no records at the time\", \"no site records\", \"no contemporaneous evidence\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 11,
@@ -148767,7 +148767,7 @@
                   "defense_keywords": "[\"engineer approval not entitlement\", \"approval does not mean entitlement\", \"approval is not claim\", \"approval only\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 12,
@@ -148776,7 +148776,7 @@
                   "defense_keywords": "[\"failed to mitigate\", \"failure to mitigate\", \"no mitigation\", \"insufficient mitigation\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 13,
@@ -148785,7 +148785,7 @@
                   "defense_keywords": "[\"no causation\", \"no causal link\", \"did not cause delay\", \"no cause and effect\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 14,
@@ -148794,7 +148794,7 @@
                   "defense_keywords": "[\"no cost breakdown\", \"cost not broken down\", \"no quantum support\", \"no supporting cost detail\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 },
                 {
                   "id": 15,
@@ -148803,7 +148803,7 @@
                   "defense_keywords": "[\"no programme impact\", \"no schedule impact\", \"no impact on programme\", \"no impact on completion\"]",
                   "standard_risk": "High",
                   "created_at": "2026-06-19T01:56:36+00:00",
-                  "updated_at": "2026-08-01T14:06:12+00:00"
+                  "updated_at": "2026-08-01T14:12:42+00:00"
                 }
               ],
               "truncated": false
@@ -149229,84 +149229,84 @@
             "relative_path": "Suez-Tunnel/01_executive_dashboard.html",
             "extension": "html",
             "size_kb": 1.2,
-            "modified": "2026-08-01T17:06:26"
+            "modified": "2026-08-01T17:12:55"
           },
           {
             "name": "01_executive_dashboard.pdf",
             "relative_path": "Suez-Tunnel/01_executive_dashboard.pdf",
             "extension": "pdf",
             "size_kb": 58.5,
-            "modified": "2026-08-01T17:06:27"
+            "modified": "2026-08-01T17:12:55"
           },
           {
             "name": "01_executive_dashboard.pptx",
             "relative_path": "Suez-Tunnel/01_executive_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T17:06:27"
+            "modified": "2026-08-01T17:12:56"
           },
           {
             "name": "02_master_dashboard.html",
             "relative_path": "Suez-Tunnel/02_master_dashboard.html",
             "extension": "html",
             "size_kb": 1.2,
-            "modified": "2026-08-01T17:06:27"
+            "modified": "2026-08-01T17:12:56"
           },
           {
             "name": "02_master_dashboard.pdf",
             "relative_path": "Suez-Tunnel/02_master_dashboard.pdf",
             "extension": "pdf",
             "size_kb": 58.1,
-            "modified": "2026-08-01T17:06:28"
+            "modified": "2026-08-01T17:12:56"
           },
           {
             "name": "02_master_dashboard.pptx",
             "relative_path": "Suez-Tunnel/02_master_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T17:06:28"
+            "modified": "2026-08-01T17:12:57"
           },
           {
             "name": "03_elite_svg_charts.html",
             "relative_path": "Suez-Tunnel/03_elite_svg_charts.html",
             "extension": "html",
             "size_kb": 1.2,
-            "modified": "2026-08-01T17:06:28"
+            "modified": "2026-08-01T17:12:57"
           },
           {
             "name": "03_elite_svg_charts.pdf",
             "relative_path": "Suez-Tunnel/03_elite_svg_charts.pdf",
             "extension": "pdf",
             "size_kb": 58.2,
-            "modified": "2026-08-01T17:06:29"
+            "modified": "2026-08-01T17:12:57"
           },
           {
             "name": "03_elite_svg_charts.pptx",
             "relative_path": "Suez-Tunnel/03_elite_svg_charts.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T17:06:29"
+            "modified": "2026-08-01T17:12:58"
           },
           {
             "name": "04_linked_executive_dashboard.html",
             "relative_path": "Suez-Tunnel/04_linked_executive_dashboard.html",
             "extension": "html",
             "size_kb": 1.2,
-            "modified": "2026-08-01T17:06:29"
+            "modified": "2026-08-01T17:12:58"
           },
           {
             "name": "04_linked_executive_dashboard.pdf",
             "relative_path": "Suez-Tunnel/04_linked_executive_dashboard.pdf",
             "extension": "pdf",
             "size_kb": 58.5,
-            "modified": "2026-08-01T17:06:30"
+            "modified": "2026-08-01T17:12:58"
           },
           {
             "name": "04_linked_executive_dashboard.pptx",
             "relative_path": "Suez-Tunnel/04_linked_executive_dashboard.pptx",
             "extension": "pptx",
             "size_kb": 28.4,
-            "modified": "2026-08-01T17:06:30"
+            "modified": "2026-08-01T17:12:58"
           },
           {
             "name": "05_delay_tia_governed_assessment.docx",
@@ -149320,28 +149320,28 @@
             "relative_path": "Suez-Tunnel/05_delay_tia_governed_assessment.html",
             "extension": "html",
             "size_kb": 2.5,
-            "modified": "2026-08-01T17:06:30"
+            "modified": "2026-08-01T17:12:59"
           },
           {
             "name": "05_delay_tia_governed_assessment.manifest.json",
             "relative_path": "Suez-Tunnel/05_delay_tia_governed_assessment.manifest.json",
             "extension": "json",
             "size_kb": 0.6,
-            "modified": "2026-08-01T17:06:30"
+            "modified": "2026-08-01T17:12:59"
           },
           {
             "name": "05_delay_tia_governed_assessment.pdf",
             "relative_path": "Suez-Tunnel/05_delay_tia_governed_assessment.pdf",
             "extension": "pdf",
             "size_kb": 2.0,
-            "modified": "2026-08-01T17:06:30"
+            "modified": "2026-08-01T17:12:59"
           },
           {
             "name": "05_delay_tia_governed_assessment.pptx",
             "relative_path": "Suez-Tunnel/05_delay_tia_governed_assessment.pptx",
             "extension": "pptx",
             "size_kb": 27.8,
-            "modified": "2026-08-01T17:06:30"
+            "modified": "2026-08-01T17:12:59"
           }
         ],
         "watchers": [
@@ -150111,17 +150111,17 @@
           "html": {
             "name": "01_executive_dashboard.html",
             "bytes": 1232,
-            "sha256": "e4e03d57eeffaf12eef0a4b36565ccd62c4e3b968fa5a450d217a5b34bc22726"
+            "sha256": "d5eafd0166772c86540350f4f81ed8af56c7fa308172a1febb33ef5174e69711"
           },
           "pdf": {
             "name": "01_executive_dashboard.pdf",
             "bytes": 59867,
-            "sha256": "c4a54a7da85671574dbbdd0089aedef7484edb888b63d38950df40c390af4d62"
+            "sha256": "ea5c17ba61297ca756a7c38a912ebceb2ae3005b8d7b9baf0f0678650a167592"
           },
           "pptx": {
             "name": "01_executive_dashboard.pptx",
             "bytes": 29125,
-            "sha256": "e8d5c9da3d92dba501c124d2f4d6ca3e06696f35b635b2dd46ce8c20975afbac"
+            "sha256": "42801e61b1ed4466afa12dc4581424b4d7fc843331c2d554b78cd7a2c1fad682"
           }
         }
       },
@@ -150133,17 +150133,17 @@
           "html": {
             "name": "02_master_dashboard.html",
             "bytes": 1226,
-            "sha256": "54efa6e380072fd714684099327f10d7a7f68ff125cd20a3cae616eee19fe23d"
+            "sha256": "a9a40f0f2d7891346cd3f635bcb52bace24f2f3e333a5103c82dd7a3e8ef1c48"
           },
           "pdf": {
             "name": "02_master_dashboard.pdf",
-            "bytes": 59510,
-            "sha256": "30fd047563457e61e02556bbf6ecad60961a6c61d8ad8b59568bb537389de938"
+            "bytes": 59508,
+            "sha256": "56423e543d63c78a52db05b4394c4389b9a3729ab503ecbe60734b404a8e16ba"
           },
           "pptx": {
             "name": "02_master_dashboard.pptx",
             "bytes": 29122,
-            "sha256": "2bd18fb0f7c992c7f52218384a4449a4edae4c1d342d0b5efe239671096b90b0"
+            "sha256": "3eaa696608346e08dd73828e01ad87d38adbb61dc5c99ef90c483b4275a960ab"
           }
         }
       },
@@ -150155,17 +150155,17 @@
           "html": {
             "name": "03_elite_svg_charts.html",
             "bytes": 1226,
-            "sha256": "af25f77466ad7c2e86d8bd7aad88d13a14972f0955545617a737265499cace76"
+            "sha256": "d9536ea839fbbd4dc565d16d9048d2031ee9691cf13d6891325ac0131ea5e4fc"
           },
           "pdf": {
             "name": "03_elite_svg_charts.pdf",
-            "bytes": 59631,
-            "sha256": "75863cd92061fc7732b2c42bfb76b2552a32a2019e9672eafc44473a27930109"
+            "bytes": 59629,
+            "sha256": "7dac99496230947877ba4038c591f1622a1c06e59fb4291172f2f25df8bea14e"
           },
           "pptx": {
             "name": "03_elite_svg_charts.pptx",
             "bytes": 29122,
-            "sha256": "4a51550e88f8c70f9dd4686fc73f03a54c3fcd63126f8026b08f01cb6fccb31f"
+            "sha256": "2ca0000bdacee5b0c82ff6a9f5571f45d8225f16e92bf6e7c5d592492486a91c"
           }
         }
       },
@@ -150177,17 +150177,17 @@
           "html": {
             "name": "04_linked_executive_dashboard.html",
             "bytes": 1246,
-            "sha256": "19d80562a8d1b7c3cefa90dfd18789ec8da607ccca2949f2aadbcafc75248323"
+            "sha256": "a7f24b9bef5c9fb9c4525fabfe1f9a1d340d3b60fe8c2970edb87be3d627c559"
           },
           "pdf": {
             "name": "04_linked_executive_dashboard.pdf",
             "bytes": 59882,
-            "sha256": "1b7f87d4dee7f030ee3a62775a21e3fcc26968131be0eba7f1fc3e64f30011bb"
+            "sha256": "f3ce220a9df791eef39d7a832af9bde278fa4fc05a63fb68ccb7680847a860dc"
           },
           "pptx": {
             "name": "04_linked_executive_dashboard.pptx",
             "bytes": 29131,
-            "sha256": "3617e6af28b2011cff63c5db1e624f0e3677f63d779d627ce1d3e701cd801784"
+            "sha256": "c0ce62b99c74c21e36932ef6204b73d151c5989aef522d24e9b62d05ec0eee3c"
           }
         }
       },
@@ -150200,17 +150200,17 @@
           "html": {
             "name": "05_delay_tia_governed_assessment.html",
             "bytes": 2557,
-            "sha256": "d71dc020f03b8625065c12b21ce97bbcef199548b150bbfe2bd01dccd615366d"
+            "sha256": "594817a5d89be812aca585dc84a61f2420a67ff046af443aa91c5a8b04e10b34"
           },
           "pdf": {
             "name": "05_delay_tia_governed_assessment.pdf",
             "bytes": 2049,
-            "sha256": "d6e2994476aafa004ded7a9c055058bdb0cbf23d0f1eeb3b8dc538ef05c312c5"
+            "sha256": "45ba65ee098fbb37535d74201e493e0f03c0af3c4ee29ed328e070fdcc2e1c85"
           },
           "pptx": {
             "name": "05_delay_tia_governed_assessment.pptx",
             "bytes": 28478,
-            "sha256": "f6cff74967a6fdd17ce32f683498399c8e13229baf8234a21c6dfeeaac737e18"
+            "sha256": "68ba70d0f1c3b7f0231711320b81cab4d9dfea0e44ffc998b919dfb563d301dc"
           },
           "docx": {
             "name": "05_delay_tia_governed_assessment.docx",
