@@ -196,6 +196,38 @@ type XlsxSummary = {
   error?: string;
 };
 
+type FourPipelineAssessment = {
+  project_id: string;
+  project_key: string;
+  analysis_run_id?: string;
+  assessment_profile: "evidence_backed" | "qualified" | "readiness_only" | string;
+  assessment_status: string;
+  determination_status?: string;
+  source_scope: string;
+  summary?: Record<string, unknown>;
+  gates?: Array<Record<string, unknown>>;
+  missing_actions?: string[];
+  pipeline_rows?: Array<Record<string, unknown>>;
+  source_inventory?: Array<Record<string, unknown>>;
+  evidence_ledger?: Array<Record<string, unknown>>;
+};
+
+type ContractControlSnapshot = {
+  status?: Record<string, unknown>;
+  controls?: {
+    project_id: string;
+    project_key: string;
+    source_scope: string;
+    generic_guidance_status?: string;
+    contract_source_count?: number;
+    clause_control_count?: number;
+    evidence_mapping_count?: number;
+    contract_authority_register?: Array<Record<string, unknown>>;
+    clause_controls?: Array<Record<string, unknown>>;
+    evidence_ledger?: Array<Record<string, unknown>>;
+  };
+};
+
 type FeaturePayload = {
   overview: {
     data_sources: Record<string, number>;
@@ -230,6 +262,7 @@ type FeaturePayload = {
     schedule_workspace_tables?: Record<string, TablePreview>;
     detectors: DetectorRecord[];
   };
+  four_pipeline?: FourPipelineAssessment;
   contract_claims: {
     folder: string;
     source_files: FileRecord[];
@@ -246,6 +279,7 @@ type FeaturePayload = {
     };
     clause_library: XlsxSummary;
     clause_library_tables?: XlsxSummary;
+    controlled_assessment?: ContractControlSnapshot;
     detectors: DetectorRecord[];
   };
   outputs_and_watchers: {
@@ -437,6 +471,21 @@ function displayCell(value: unknown) {
   if (value === null || value === undefined || value === "") return "N/A";
   if (typeof value === "number") return numberValue(value, Number.isInteger(value) ? 0 : 2);
   return String(value);
+}
+
+function recordsToTable(file: string, rows: Array<Record<string, unknown>> | undefined): TablePreview {
+  const safeRows = rows || [];
+  const columns = Array.from(new Set(safeRows.flatMap((row) => Object.keys(row))));
+  return {
+    file,
+    exists: true,
+    row_count: safeRows.length,
+    column_count: columns.length,
+    columns,
+    rows: safeRows.slice(0, 200),
+    truncated: safeRows.length > 200,
+    source_path: file
+  };
 }
 
 function FeatureSvg({ mode }: { mode: "letters" | "delay" | "claims" | "watcher" | "portfolio" }) {
@@ -1215,6 +1264,50 @@ function CanonicalTiaPanel({ analysis }: { analysis: FeaturePayload["delay_analy
   );
 }
 
+function FourPipelineControlsPanel({
+  assessment,
+  title
+}: {
+  assessment: FourPipelineAssessment | undefined;
+  title: string;
+}) {
+  if (!assessment) return null;
+  const summary = assessment.summary || {};
+  const gates = assessment.gates || [];
+  const actions = assessment.missing_actions || [];
+  return (
+    <div className="feature-stack">
+      <section className="feature-card">
+        <div className="feature-card-head"><h3>{title}</h3><span>{assessment.assessment_profile.replaceAll("_", " ")}</span></div>
+        <p>Controlled selected-project assessment. It separates source readiness from final entitlement, EOT, and compensation conclusions.</p>
+        <div className="workspace-grid compact-grid">
+          <MiniMetric label="Assessment" value={displayCell(assessment.assessment_status)} note="Current evidence posture" />
+          <MiniMetric label="P6 Status" value={displayCell(assessment.determination_status)} note="Final TIA gate" />
+          <MiniMetric label="Contract Sources" value={displayCell(summary.contract_source_count)} note="Project-local files" />
+          <MiniMetric label="Evidence / Letters" value={`${displayCell(summary.evidence_source_count)} / ${displayCell(summary.letter_source_count)}`} note="Verified source count" />
+          <MiniMetric label="Relationships" value={displayCell(summary.relationship_rows)} note="CPM logic records" />
+          <MiniMetric label="Fragnets" value={displayCell(summary.fragnet_rows)} note="Suggested / modelled records" />
+        </div>
+      </section>
+      <section className="feature-card">
+        <div className="feature-card-head"><h3>Readiness Gates</h3><span>{assessment.source_scope.replaceAll("_", " ")}</span></div>
+        <div className="file-list">
+          {gates.map((gate, index) => (
+            <div key={`${displayCell(gate.gate)}-${index}`}>
+              <b>{displayCell(gate.gate)}: {displayCell(gate.status)}</b>
+              <span>{displayCell(gate.required_action)}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      {actions.length ? <section className="feature-card">
+        <div className="feature-card-head"><h3>Required Next Actions</h3><span>{actions.length} open</span></div>
+        <div className="file-list">{actions.map((action) => <div key={action}><span>{action}</span></div>)}</div>
+      </section> : null}
+    </div>
+  );
+}
+
 function DelayTiaParityPanel({ project }: { project: ProjectRecord }) {
   const [view, setView] = useState("Uploads");
   const [includeIfc, setIncludeIfc] = useState(true);
@@ -1222,6 +1315,7 @@ function DelayTiaParityPanel({ project }: { project: ProjectRecord }) {
   const [includePayments, setIncludePayments] = useState(true);
   const [includeMitigation, setIncludeMitigation] = useState(true);
   const delay = project.features.delay_analysis;
+  const fourPipeline = project.features.four_pipeline;
   const templateTables = Object.fromEntries((delay.template_tables || delay.templates).map((table) => [table.file, table]));
   const scheduleTables = delay.schedule_workspace_tables || delay.schedule_tables;
   const eventTables = Object.fromEntries(Object.entries(templateTables).filter(([name]) => /ifc|rfi|payment|concurrency|master|p6|relationship|contract/i.test(name)));
@@ -1241,6 +1335,7 @@ function DelayTiaParityPanel({ project }: { project: ProjectRecord }) {
         <FeatureSvg mode="delay" />
       </div>
       <ProjectSmartChart project={project} mode="delay" />
+      <FourPipelineControlsPanel assessment={fourPipeline} title="Four-Pipeline TIA Controls" />
       <ProjectSourceChartGrid project={project} tab="Delay Analysis - Time Impact Analysis" />
       <ModuleTabs label="Delay TIA views" tabs={["Uploads", "Tables & Conclusion", "MEP Activities", "AI - TIA", "Question", "Source Controls"]} activeTab={view} onChange={setView} />
       {view === "Uploads" ? <>
@@ -1251,19 +1346,17 @@ function DelayTiaParityPanel({ project }: { project: ProjectRecord }) {
           <label><input type="checkbox" checked={includePayments} onChange={(event) => setIncludePayments(event.target.checked)} /> Payment support events</label>
           <label><input type="checkbox" checked={includeMitigation} onChange={(event) => setIncludeMitigation(event.target.checked)} /> Contractor mitigation evidence</label>
         </div><p className="empty-note">These controls change the review scope only. They do not calculate or grant EOT, and contractor supply stays excluded from employer delay entitlement.</p></section>
-        <ProjectTableSelector title="Required Delay TIA Source Files" tables={templateTables} preferred={["01-project_metadata_template.csv", "02- master_activity_steel_analysis.csv", "04- p6_activity_export.csv", "11-concurrency_matrix_template.updated.csv"]} />
+        <ProjectTableSelector title="Required Delay TIA Source Files" tables={templateTables} preferred={["01-project_metadata_template.csv", "02- master_activity_steel_analysis.csv", "04- p6_activity_export.csv", "05- relationship_file.csv", "11-concurrency_matrix_template.updated.csv", "16-fragnet_control_register.csv"]} />
       </> : null}
       {view === "Tables & Conclusion" ? <>
         <AiInsightCard type="delay" projectKey={project.project_key} />
         <CanonicalTiaPanel analysis={delay.canonical_analysis} />
-        <SubmittedTiaVisualsPanel submitted={delay.submitted_visuals} />
-        <SubmittedTiaGuidePanel submitted={delay.submitted_tia || { available: false, status: "Missing", scope_note: "No submitted TIA guide detected." }} />
         <ProjectTableSelector title="TIA Evidence Tables" tables={eventTables} preferred={["11-concurrency_matrix_template.updated.csv", "04- p6_activity_export.csv", "02- master_activity_steel_analysis.csv"]} />
       </> : null}
       {view === "MEP Activities" ? <><ProjectTableSelector title="MEP Activities and Civil Interface Logic" tables={scheduleTables} preferred={["MEP Activities", "MEP Schedule", "MEP Civil Logic", "BL Schedule"]} /><WorkbookDataPanel workbook={project.features.letters_intelligence.workbook_tables} title="Related Letters Intelligence References" /></> : null}
-      {view === "AI - TIA" ? <><CanonicalTiaPanel analysis={delay.canonical_analysis} /><SubmittedTiaGuidePanel submitted={delay.submitted_tia || { available: false, status: "Missing", scope_note: "No submitted TIA guide detected." }} /><ProjectTableSelector title="Active TIA File Priority and Dependency Evidence" tables={templateTables} preferred={["01-project_metadata_template.csv", "02- master_activity_steel_analysis.csv", "04- p6_activity_export.csv", "05- relationship_file.csv", "11-concurrency_matrix_template.updated.csv"]} /></> : null}
+      {view === "AI - TIA" ? <><CanonicalTiaPanel analysis={delay.canonical_analysis} /><ProjectTableSelector title="Active TIA File Priority and Dependency Evidence" tables={templateTables} preferred={["01-project_metadata_template.csv", "02- master_activity_steel_analysis.csv", "04- p6_activity_export.csv", "05- relationship_file.csv", "11-concurrency_matrix_template.updated.csv", "16-fragnet_control_register.csv"]} /></> : null}
       {view === "Question" ? <div className="feature-stack"><AiInsightCard type="delay" projectKey={project.project_key} /><UnifiedIntelligenceSearch mode="project" projectKey={project.project_key} projectName={project.project_display_name} /><ProjectTableSelector title="Question Evidence Source" tables={eventTables} preferred={["11-concurrency_matrix_template.updated.csv", "09-rfi_status.csv", "07-ifc_conflict.csv"]} /></div> : null}
-      {view === "Source Controls" ? <section className="feature-card"><div className="feature-card-head"><h3>TIA Source Controls</h3><span>Selected project only</span></div><p>Formal reports and files are intentionally available only in Output Studio. This view keeps the active project&apos;s TIA source controls, file priority, and evidence tables inside the analysis workflow.</p><ProjectTableSelector title="TIA Template and Evidence Controls" tables={templateTables} preferred={["01-project_metadata_template.csv", "04- p6_activity_export.csv", "05- relationship_file.csv", "11-concurrency_matrix_template.updated.csv"]} /></section> : null}
+      {view === "Source Controls" ? <section className="feature-card"><div className="feature-card-head"><h3>TIA Source Controls</h3><span>Selected project only</span></div><p>Formal reports and downloads remain in Output Studio. This view retains source controls, file priority, and evidence tables only.</p><ProjectTableSelector title="TIA Template and Evidence Controls" tables={templateTables} preferred={["01-project_metadata_template.csv", "04- p6_activity_export.csv", "05- relationship_file.csv", "11-concurrency_matrix_template.updated.csv", "16-fragnet_control_register.csv"]} /></section> : null}
     </div>
   );
 }
@@ -1273,24 +1366,31 @@ function ContractClaimsParityPanel({ project }: { project: ProjectRecord }) {
   const [view, setView] = useState("Contract Library");
   const claims = project.features.contract_claims;
   const knowledgeTables = claims.knowledge_base?.tables || {};
+  const controlled = claims.controlled_assessment?.controls;
+  const controlledTables = {
+    "Project Clause Controls": recordsToTable("Project Clause Controls", controlled?.clause_controls),
+    "Controlled Evidence Ledger": recordsToTable("Controlled Evidence Ledger", controlled?.evidence_ledger),
+    "Contract Authority Register": recordsToTable("Contract Authority Register", controlled?.contract_authority_register)
+  };
   const clauseTable = knowledgeTables.contract_clauses || knowledgeTables[Object.keys(knowledgeTables).find((name) => /clause/i.test(name)) || ""];
   const evidenceTables = Object.fromEntries(Object.entries(knowledgeTables).filter(([name]) => /evidence|document|mapping/i.test(name)));
   const claimTables = Object.fromEntries(Object.entries(knowledgeTables).filter(([name]) => /claim|trigger|defense|rebuttal|draft/i.test(name)));
   return (
     <div className="feature-stack">
       <div className="workspace-two">
-        <section className="feature-card"><div className="feature-card-head"><h3>Contract & Claims Intelligence Center</h3><span>Selected project only</span></div><p>The library, evidence register, clause search, claim records, and AI analysis use only this project&apos;s contract folder and SQLite knowledge base.</p><div className="workspace-grid compact-grid"><MiniMetric label="Contract Files" value={numberValue(claims.source_files.length)} note="Project contract source" /><MiniMetric label="Evidence Files" value={numberValue(claims.evidence_files.length)} note="Project evidence source" /><MiniMetric label="Claims Rows" value={numberValue(project.source_files.claims)} note="Project claims register" /><MiniMetric label="Knowledge Tables" value={numberValue(Object.keys(knowledgeTables).length)} note="Project database only" /></div></section>
+        <section className="feature-card"><div className="feature-card-head"><h3>Contract & Claims Intelligence Center</h3><span>Selected project only</span></div><p>The library, evidence register, clause search, claim records, and AI analysis use only this project&apos;s contract folder and SQLite knowledge base.</p><div className="workspace-grid compact-grid"><MiniMetric label="Contract Files" value={numberValue(claims.source_files.length)} note="Project contract source" /><MiniMetric label="Evidence Files" value={numberValue(claims.evidence_files.length)} note="Project evidence source" /><MiniMetric label="Clause Controls" value={numberValue(controlled?.clause_control_count)} note="Source-linked clauses" /><MiniMetric label="Evidence Mappings" value={numberValue(controlled?.evidence_mapping_count)} note="Project ledger only" /></div></section>
         <FeatureSvg mode="claims" />
       </div>
       <ProjectSmartChart project={project} mode="claims" />
+      <FourPipelineControlsPanel assessment={project.features.four_pipeline} title="Four-Pipeline Contract and Claims Controls" />
       <ModuleTabs label="Contract claims center" tabs={["Contract Clauses", "Claims Intelligence Center"]} activeTab={center} onChange={setCenter} />
-      {center === "Contract Clauses" ? <div className="feature-stack"><ProjectDataTable table={clauseTable} title="Contract Clause Matching Engine" empty="No clause library is available for this selected project." /><WorkbookDataPanel workbook={claims.clause_library_tables} title="Overall Contract Clause Library" /></div> : null}
+      {center === "Contract Clauses" ? <div className="feature-stack"><ProjectDataTable table={clauseTable} title="Contract Clause Matching Engine" empty="No clause library is available for this selected project." /><ProjectTableSelector title="Controlled Clause Authority" tables={controlledTables} preferred={["Project Clause Controls", "Contract Authority Register"]} /><WorkbookDataPanel workbook={claims.clause_library_tables} title="Overall Contract Clause Library" /></div> : null}
       {center === "Claims Intelligence Center" ? <>
         <ModuleTabs label="Claims Intelligence views" tabs={["Upload & Extract", "Contract Library", "Ask Contract AI", "Evidence Mapping", "Client Rebuttal Engine", "Claim Builder", "Export Center"]} activeTab={view} onChange={setView} />
         {view === "Upload & Extract" ? <><DetectorGrid detectors={claims.detectors} /><div className="workspace-two"><FileList title="Contract Source Repository" files={claims.source_files} /><FileList title="Project Evidence Repository" files={claims.evidence_files} /></div><section className="feature-card"><div className="feature-card-head"><h3>Local Pipeline Status</h3><span>Read-only Vercel view</span></div><p>Add or replace source files in this project&apos;s local folder. The watcher rebuilds the project knowledge base and publishes the updated isolated data to Vercel. The public site does not write into another project or overwrite source files.</p></section></> : null}
-        {view === "Contract Library" ? <div className="feature-stack"><ProjectDataTable table={clauseTable} title="Searchable Contract Claims Library" /><WorkbookDataPanel workbook={claims.clause_library_tables} title="Contract Clause Library Workbook" /></div> : null}
+        {view === "Contract Library" ? <div className="feature-stack"><ProjectDataTable table={clauseTable} title="Searchable Contract Claims Library" /><ProjectTableSelector title="Authority, Time-Bar, and Entitlement Controls" tables={controlledTables} preferred={["Project Clause Controls", "Contract Authority Register"]} /><WorkbookDataPanel workbook={claims.clause_library_tables} title="Contract Clause Library Workbook" /></div> : null}
         {view === "Ask Contract AI" ? <div className="feature-stack"><AiInsightCard type="contract" projectKey={project.project_key} /><UnifiedIntelligenceSearch mode="project" projectKey={project.project_key} projectName={project.project_display_name} /></div> : null}
-        {view === "Evidence Mapping" ? <div className="feature-stack"><ProjectTableSelector title="Evidence-to-Clause Mapping" tables={Object.keys(evidenceTables).length ? evidenceTables : knowledgeTables} preferred={["evidence_mappings", "evidence_documents"]} /><FileList title="Evidence Files" files={claims.evidence_files} /></div> : null}
+        {view === "Evidence Mapping" ? <div className="feature-stack"><ProjectTableSelector title="Controlled Evidence Ledger" tables={controlledTables} preferred={["Controlled Evidence Ledger"]} /><ProjectTableSelector title="Evidence-to-Clause Mapping" tables={Object.keys(evidenceTables).length ? evidenceTables : knowledgeTables} preferred={["evidence_mappings", "evidence_documents"]} /><FileList title="Evidence Files" files={claims.evidence_files} /></div> : null}
         {view === "Client Rebuttal Engine" ? <div className="feature-stack"><AiInsightCard type="contract" projectKey={project.project_key} /><ProjectTableSelector title="Client Defenses and Contractor Rebuttals" tables={Object.keys(claimTables).length ? claimTables : knowledgeTables} preferred={["client_defenses", "contractor_rebuttals"]} /></div> : null}
         {view === "Claim Builder" ? <div className="feature-stack"><ProjectTableSelector title="Claim Categories, Triggers, and Drafts" tables={Object.keys(claimTables).length ? claimTables : knowledgeTables} preferred={["claim_categories", "claim_triggers", "claim_drafts"]} /><AiInsightCard type="contract" projectKey={project.project_key} /></div> : null}
         {view === "Export Center" ? <section className="feature-card"><div className="feature-card-head"><h3>Claim Source Controls</h3><span>Selected project only</span></div><p>Formal reports and files are intentionally available only in Output Studio. This view keeps the active project&apos;s clause, evidence, claim, and rebuttal source tables available for review.</p><ProjectTableSelector title="Claims Source Tables" tables={knowledgeTables} preferred={["contract_clauses", "evidence_mappings", "claim_categories", "claim_triggers"]} /></section> : null}
@@ -1556,6 +1656,7 @@ function WorkspaceTabContent({
         ))}
       </div>
       <ProjectSmartChart project={project} mode="outputs" />
+      <FourPipelineControlsPanel assessment={project.features.four_pipeline} title="Output Studio Source Controls" />
       <OutputStudioDownloadButton
         href={reportHtml(project, selectedReport)}
         label={`Download ${reportTabs.find((tab) => tab.key === selectedReport)?.label || "Report"}`}

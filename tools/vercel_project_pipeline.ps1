@@ -97,8 +97,10 @@ function Get-RelativePath([string]$FullName) {
 function Test-TrackedPath([string]$FullName) {
     $relative = Get-RelativePath $FullName
     $lower = $relative.ToLowerInvariant()
-    if ($lower -match '(^|/)(\.git|\.next|node_modules|\.vercel|12-logs|backups|\.sync_state|__pycache__)(/|$)') { return $false }
+    if ($lower -match '(^|/)(\.git|\.next|node_modules|\.vercel|11-outputs|12-logs|backups|\.sync_state|__pycache__)(/|$)') { return $false }
     if ($lower -match '^website/public/(data|generated)(/|$)') { return $false }
+    if ($lower -match '^website/src/generated(/|$)') { return $false }
+    if ($lower -eq 'website/next-env.d.ts') { return $false }
     if ($lower -match '(^|/)(\.env|\.env\.local)$') { return $false }
     return $true
 }

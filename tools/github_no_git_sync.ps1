@@ -118,6 +118,25 @@ function Get-WorkspaceManifest {
     return $entries
 }
 
+function Wait-ForProjectPayloadGeneration {
+    $generatorLockPath = Join-Path $root ".sync_state\generator.lock"
+    $maxWaitSeconds = 120
+    $elapsedSeconds = 0
+    $announced = $false
+
+    while (Test-Path -LiteralPath $generatorLockPath) {
+        if (-not $announced) {
+            Write-SyncLog "Waiting for project payload generation to complete before synchronizing."
+            $announced = $true
+        }
+        if ($elapsedSeconds -ge $maxWaitSeconds) {
+            throw "Project payload generation lock did not clear within $maxWaitSeconds seconds."
+        }
+        Start-Sleep -Seconds 2
+        $elapsedSeconds += 2
+    }
+}
+
 function Read-PreviousManifest {
     if (-not (Test-Path -LiteralPath $statePath)) { return @{} }
     try {
@@ -224,9 +243,11 @@ function Invoke-GitHubApi([string]$Method, [string]$Uri, [object]$Body = $null) 
     }
 }
 
-function Invoke-SyncCycle {
+function Invoke-SyncCycle([int]$StabilityAttempt = 1) {
+    Wait-ForProjectPayloadGeneration
     Ensure-EmptyDirectoryPlaceholders
     $current = Get-WorkspaceManifest
+    Wait-ForProjectPayloadGeneration
     $previous = Read-PreviousManifest
     $changed = @($current.Keys | Where-Object { -not $previous.ContainsKey($_) -or $previous[$_].sha256 -ne $current[$_].sha256 } | Sort-Object)
     $deleted = @($previous.Keys | Where-Object { -not $current.Contains($_) } | Sort-Object)
@@ -256,13 +277,23 @@ function Invoke-SyncCycle {
     $maxBytes = [int64]$config.max_file_size_mb * 1MB
     foreach ($path in $current.Keys) {
         $fullName = Join-Path $root ($path -replace "/", "\")
+        if (-not (Test-Path -LiteralPath $fullName)) {
+            if ($StabilityAttempt -lt 3) {
+                Write-SyncLog "Workspace changed during synchronization before upload: $path. Re-scanning (attempt $($StabilityAttempt + 1)/3)."
+                return Invoke-SyncCycle -StabilityAttempt ($StabilityAttempt + 1)
+            }
+            throw "Workspace changed repeatedly during synchronization before upload: $path"
+        }
         $info = Get-Item -LiteralPath $fullName
         if ($info.Length -gt $maxBytes) { Write-SyncLog "Skipped over-size file: $path"; continue }
         try {
             $bytes = [System.IO.File]::ReadAllBytes($fullName)
         } catch {
-            Write-SyncLog "Skipped unreadable or locked file during upload: $path"
-            continue
+            if ($StabilityAttempt -lt 3) {
+                Write-SyncLog "Workspace changed during file read: $path. Re-scanning (attempt $($StabilityAttempt + 1)/3)."
+                return Invoke-SyncCycle -StabilityAttempt ($StabilityAttempt + 1)
+            }
+            throw "Workspace file could not be read after three stable synchronization attempts: $path"
         }
         $localBlobSha = Get-GitBlobSha $bytes
         if ($remote.ContainsKey($path) -and $remote[$path] -eq $localBlobSha) { continue }

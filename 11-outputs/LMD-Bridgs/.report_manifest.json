@@ -1,8 +1,8 @@
 {
   "project_id": "LMD-Bridge",
   "project_key": "LMD-Bridgs",
-  "project_fingerprint": "75fbbf8c5815e910ff28dc8d84c6a167a8eeb408dc06e2549d7a058e330534a1",
-  "generator_version": "2026.08.project-scoped-html-pdf-pptx.v2",
+  "project_fingerprint": "2c18a982cc71bc2393ead4b67882668a8391320fddb5a7676a1a46175207cb1d",
+  "generator_version": "2026.08.project-scoped-html-pdf-pptx.v3",
   "chart_catalog_version": "2026-08-01",
   "chart_status": {
     "contracts.planned_vs_actual_cash_flow": "awaiting_data",
@@ -10,7 +10,14 @@
     "delay.type_distribution": "awaiting_data",
     "delay.tia_recovery_scenario": "awaiting_data"
   },
-  "generated_at": "2026-08-01T11:41:45",
+  "assessment": {
+    "analysis_run_id": "e251d0b48d40715e2a46",
+    "assessment_profile": "readiness_only",
+    "assessment_status": "readiness_only",
+    "determination_status": "p6_recalculation_required",
+    "source_scope": "selected_project_only"
+  },
+  "generated_at": "2026-08-01T12:04:29",
   "reports": {
     "executive_dashboard": {
       "html": "/generated/LMD-Bridgs/01_executive_dashboard.html",
@@ -20,17 +27,17 @@
         "html": {
           "name": "01_executive_dashboard.html",
           "bytes": 1807,
-          "sha256": "90360e3a35c71562d0af1d9349f9593a05094ff054cdbe5c55fb7796be14d10b"
+          "sha256": "6f1dbb1a3694a311804709ae7aa77b73efa11c1fa9ed6161f5577194c51ebeb1"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 69026,
-          "sha256": "010d97efb66e52674f1393880fc2a25b234663d61ddfebe90ba56a60deba7cd8"
+          "bytes": 69014,
+          "sha256": "7fa07c1b740390ad13f6fe2ba66667b047fed3cf68196c9da555b98269365769"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29122,
-          "sha256": "5af354b0e23a9750272d76a390e433bd58fa0d2312e4f20a92d648be276d87d1"
+          "sha256": "a52c606e10d9cb5166edacfa6604a8c900ef2bb75bc59a2e145b35eeea5a9a3b"
         }
       }
     },
@@ -42,17 +49,17 @@
         "html": {
           "name": "02_master_dashboard.html",
           "bytes": 1801,
-          "sha256": "9a2d73ad345a7486712ea1f4e053c0ccf6cdeec2b942ab4c2bd51f47c6781777"
+          "sha256": "4fb08452a7ef33e46869d8201da0fd4475c1411e798d5d14350b74c03bcf1c20"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
-          "bytes": 69021,
-          "sha256": "0da42eb5724bbf94a62f9c4157f36400926ecd7f086884046845b53c8ac10028"
+          "bytes": 69011,
+          "sha256": "8b5dd510b0fc560bfba73e59e1efe38017946cf77cce9f251b063a0e856b704e"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29119,
-          "sha256": "f577e736f8f1838be8699b9ef771a398f5f3ace9911f21f494f7482821664b17"
+          "sha256": "ca97310845f4ae47608f284ad81de60fdab3260fde5c1fddbe1188a819123e04"
         }
       }
     },
@@ -64,17 +71,17 @@
         "html": {
           "name": "03_elite_svg_charts.html",
           "bytes": 1801,
-          "sha256": "10a1d0f8034e9a1b59559335ab11c214fba5dab2e6a1e3e46d32319470cd6a4d"
+          "sha256": "3ef0b7f10c7a2ba2f5c527ed62612c4d3553c898157d0bdbede88c50ce714416"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
-          "bytes": 69139,
-          "sha256": "4b510fbd74faa3246dc631bde7dfc1cbdb87b6ad642ab0d46c2bc8e14bb2f184"
+          "bytes": 69129,
+          "sha256": "e3143a005ed430fdb0e36e06604a21bf12adf1ce8f87ad81d2262aefcbaf940d"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29119,
-          "sha256": "e6b97a6f898e4aca887b56b27ed401bc2c425c588658adf7f933cedba78fadbd"
+          "sha256": "34fc2f5eb8a40a78b550277088cdffb681dce875fc1efd688f8392683d069594"
         }
       }
     },
@@ -86,17 +93,17 @@
         "html": {
           "name": "04_linked_executive_dashboard.html",
           "bytes": 1821,
-          "sha256": "30e2b08b2c498409c720ca1f97b437b77af59b84ebf5b5de85611c3a4ab15fbd"
+          "sha256": "f69dec7e639ef6b5742c1ff41be9daee0258f2279793ec249b60e57e4aca434d"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
-          "bytes": 69295,
-          "sha256": "d46a0bf1702b1efff71d8fd0bf0e43432c10ba2d8ea71d3e7bf86e482507a2da"
+          "bytes": 69283,
+          "sha256": "0109b7bc33c8c33193e9d0696390139b8da544aba0eb0a73a39aebe65a93d447"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29128,
-          "sha256": "cdd312ba30ee1eb547e4b34a15bbb58c7fbf130592f4743c521bda9e3c7ce443"
+          "sha256": "7c9841596ffe4b587dca9d87bbe9db1b59c952790e6542d77500bfecce6ea724"
         }
       }
     }

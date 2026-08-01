@@ -683,7 +683,11 @@ def build_four_pipeline_snapshot(project: dict[str, Any], canonical_tia: dict[st
             sys.path.insert(0, str(source_src))
         from construction_system.four_pipeline_assessment import build_four_pipeline_assessment
 
-        return build_four_pipeline_assessment(project, canonical_tia)
+        assessment = build_four_pipeline_assessment(project, canonical_tia)
+        # Keep public lineage portable: source records already contain project-relative
+        # paths, so never publish the local workstation path in website JSON.
+        assessment.pop("project_folder_path", None)
+        return assessment
     except Exception as exc:
         return {
             "project_id": str(project.get("project_id") or ""),
@@ -697,6 +701,50 @@ def build_four_pipeline_snapshot(project: dict[str, Any], canonical_tia: dict[st
             "source_inventory": [],
             "evidence_ledger": [],
             "summary": {},
+        }
+
+
+def build_contract_controls_snapshot(
+    project: dict[str, Any], contracts_dir: Path, evidence_dir: Path
+) -> dict[str, Any]:
+    """Refresh and publish selected-project contract/evidence controls only."""
+
+    try:
+        if str(CANONICAL_ROOT) not in sys.path:
+            sys.path.insert(0, str(CANONICAL_ROOT))
+        from contract_claims_center import (  # type: ignore
+            build_project_contract_controls,
+            persist_contract_analysis,
+        )
+
+        db_path = contracts_dir / "contract_claims.db"
+        status = persist_contract_analysis(db_path, contracts_dir, rebuild=False)
+        controls = build_project_contract_controls(
+            db_path=db_path,
+            contracts_dir=contracts_dir,
+            evidence_dir=evidence_dir,
+            project_id=str(project.get("project_id") or ""),
+            project_key=str(project.get("project_key") or ""),
+        )
+        public_status = dict(status) if isinstance(status, dict) else {}
+        auto_library_status = public_status.get("auto_library_status")
+        if isinstance(auto_library_status, dict):
+            public_status["auto_library_status"] = {
+                key: value
+                for key, value in auto_library_status.items()
+                if key not in {"library_path", "database_path", "contracts_dir", "evidence_dir"}
+            }
+        return {"status": public_status, "controls": controls}
+    except Exception as exc:
+        return {
+            "status": {"knowledge_base_status": "Needs review", "error": str(exc)},
+            "controls": {
+                "project_id": str(project.get("project_id") or ""),
+                "project_key": str(project.get("project_key") or ""),
+                "source_scope": "selected_project_only",
+                "clause_controls": [],
+                "evidence_ledger": [],
+            },
         }
 
 
@@ -742,9 +790,7 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     submitted_tia_visuals = build_submitted_tia_visuals(project, base)
     canonical_tia = build_canonical_tia_snapshot(delay_dir)
     four_pipeline = build_four_pipeline_snapshot(project, canonical_tia)
-    if isinstance(four_pipeline, dict) and isinstance(four_pipeline.get("project_folder_path"), Path):
-        # Preserve project lineage in the public payload without leaking a non-serializable Path object.
-        four_pipeline["project_folder_path"] = str(four_pipeline["project_folder_path"])
+    contract_controls = build_contract_controls_snapshot(project, contracts_dir, evidence_dir)
     overview_paths = {
         "projects": data_dir / "projects.csv",
         "activities": data_dir / "activities.csv",
@@ -813,6 +859,7 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
             "evidence_files": evidence_files,
             "database": sqlite_table_counts(contracts_dir / "contract_claims.db"),
             "knowledge_base": sqlite_table_rows(contracts_dir / "contract_claims.db"),
+            "controlled_assessment": contract_controls,
             "clause_library": xlsx_summary(contracts_dir / "source" / "Overall_Contract_clause_library.xlsx"),
             "clause_library_tables": xlsx_workspace_tables(contracts_dir / "source" / "Overall_Contract_clause_library.xlsx"),
             "detectors": [
@@ -1483,9 +1530,19 @@ def copy_if_changed(source: Path, target: Path) -> None:
     shutil.copy2(source, target)
 
 
+def _json_default(value: Any) -> str:
+    """Keep generated payloads portable when local services return Path metadata."""
+
+    if isinstance(value, Path):
+        return str(value)
+    if hasattr(value, "isoformat"):
+        return value.isoformat()
+    return str(value)
+
+
 def write_json_if_changed(path: Path, payload: dict[str, Any]) -> bool:
     """Write generated data only when its content changes, preserving project freshness."""
-    content = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
+    content = json.dumps(payload, indent=2, ensure_ascii=False, default=_json_default) + "\n"
     if path.exists() and path.read_text(encoding="utf-8") == content:
         return False
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -1736,7 +1793,7 @@ def build_portfolio(projects: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
-def main() -> None:
+def _generate() -> None:
     DATA_ROOT.mkdir(parents=True, exist_ok=True)
     WEBSITE_SOURCE_GENERATED.mkdir(parents=True, exist_ok=True)
     raw_projects = discover_projects()
@@ -1747,10 +1804,12 @@ def main() -> None:
     write_json_if_changed(DATA_ROOT / "portfolio.json", portfolio)
     projects_dir = DATA_ROOT / "projects"
     projects_dir.mkdir(parents=True, exist_ok=True)
-    for stale in projects_dir.glob("*.json"):
-        stale.unlink()
+    active_project_files = {f"{project['project_key']}.json" for project in project_records}
     for project in project_records:
         write_json_if_changed(projects_dir / f"{project['project_key']}.json", project)
+    for stale in projects_dir.glob("*.json"):
+        if stale.name not in active_project_files:
+            stale.unlink()
     # A generated, keyed module payload makes same-page project switching robust:
     # it preserves project_id/project_key isolation without a fragile browser fetch.
     write_json_if_changed(
@@ -1808,6 +1867,23 @@ def main() -> None:
         write_json_if_changed(DATA_ROOT / "portfolio.json", portfolio)
         print(f"Guardrails: Error logged without blocking build: {exc}")
     print(f"Generated Next.js website data for {len(project_records)} projects.")
+
+
+def main() -> None:
+    """Prevent synchronizers from observing a partially regenerated payload set."""
+    lock_path = ROOT / ".sync_state" / "generator.lock"
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    lock_path.write_text(
+        json.dumps({"pid": os.getpid(), "started_at": datetime.now().isoformat(timespec="seconds")}),
+        encoding="utf-8",
+    )
+    try:
+        _generate()
+    finally:
+        try:
+            lock_path.unlink(missing_ok=True)
+        except OSError:
+            pass
 
 
 if __name__ == "__main__":

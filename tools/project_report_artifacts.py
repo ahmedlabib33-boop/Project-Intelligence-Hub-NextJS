@@ -23,7 +23,7 @@ REPORTS: tuple[tuple[str, str, str], ...] = (
     ("elite_svg_charts", "03_elite_svg_charts", "Elite SVG Charts"),
     ("linked_executive_dashboard", "04_linked_executive_dashboard", "Linked Executive Dashboard"),
 )
-REPORT_GENERATOR_VERSION = "2026.08.project-scoped-html-pdf-pptx.v2"
+REPORT_GENERATOR_VERSION = "2026.08.project-scoped-html-pdf-pptx.v3"
 
 
 def _sha256(path: Path) -> str:
@@ -282,6 +282,8 @@ def ensure_project_report_artifacts(
                 for extension, path in (("html", html_path), ("pdf", pdf_path), ("pptx", pptx_path))
             },
         }
+    feature_payload = project.get("features") if isinstance(project.get("features"), dict) else {}
+    assessment = feature_payload.get("four_pipeline") if isinstance(feature_payload.get("four_pipeline"), dict) else {}
     manifest = {
         "project_id": project.get("project_id"),
         "project_key": project_slug,

@@ -233,8 +233,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-01T11:39:07",
-  "fingerprint": "75fbbf8c5815e910ff28dc8d84c6a167a8eeb408dc06e2549d7a058e330534a1",
+  "last_updated": "2026-08-01T12:04:20",
+  "fingerprint": "2c18a982cc71bc2393ead4b67882668a8391320fddb5a7676a1a46175207cb1d",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -8993,9 +8993,8 @@
       "project_id": "LMD-Bridge",
       "project_key": "lmd-bridge",
       "project_display_name": "LMD Bridge & Road Interchange",
-      "project_folder_path": "D:\\one drive data\\OneDrive\\Documents\\Project Intelligence Hub\\projects\\Bridges\\LMD-Bridgs",
       "analysis_run_id": "e251d0b48d40715e2a46",
-      "analysis_generated_at": "2026-08-01T08:41:37+00:00",
+      "analysis_generated_at": "2026-08-01T09:04:20+00:00",
       "methodology_profile": "four_pipeline_v1",
       "assessment_profile": "readiness_only",
       "assessment_status": "readiness_only",
@@ -9115,7 +9114,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T18:03:24+00:00",
-          "evidence_status": "verified_source"
+          "evidence_status": "verified_source",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9129,7 +9129,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-27T02:23:52+00:00",
-          "evidence_status": "verified_source"
+          "evidence_status": "verified_source",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9143,7 +9144,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T21:08:34+00:00",
-          "evidence_status": "reference_only"
+          "evidence_status": "reference_only",
+          "contains_data_rows": false
         },
         {
           "project_id": "LMD-Bridge",
@@ -9157,7 +9159,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T21:08:34+00:00",
-          "evidence_status": "reference_only"
+          "evidence_status": "reference_only",
+          "contains_data_rows": false
         },
         {
           "project_id": "LMD-Bridge",
@@ -9171,7 +9174,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T21:08:34+00:00",
-          "evidence_status": "reference_only"
+          "evidence_status": "reference_only",
+          "contains_data_rows": false
         },
         {
           "project_id": "LMD-Bridge",
@@ -9185,7 +9189,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T21:08:34+00:00",
-          "evidence_status": "reference_only"
+          "evidence_status": "reference_only",
+          "contains_data_rows": false
         },
         {
           "project_id": "LMD-Bridge",
@@ -9199,7 +9204,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-08-01T08:39:07+00:00",
-          "evidence_status": "reference_only"
+          "evidence_status": "reference_only",
+          "contains_data_rows": false
         },
         {
           "project_id": "LMD-Bridge",
@@ -9213,7 +9219,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T21:08:34+00:00",
-          "evidence_status": "reference_only"
+          "evidence_status": "reference_only",
+          "contains_data_rows": false
         },
         {
           "project_id": "LMD-Bridge",
@@ -9227,7 +9234,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T21:08:34+00:00",
-          "evidence_status": "reference_only"
+          "evidence_status": "reference_only",
+          "contains_data_rows": false
         },
         {
           "project_id": "LMD-Bridge",
@@ -9241,7 +9249,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-08-01T08:39:07+00:00",
-          "evidence_status": "reference_only"
+          "evidence_status": "reference_only",
+          "contains_data_rows": false
         },
         {
           "project_id": "LMD-Bridge",
@@ -9255,7 +9264,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-05-20T16:13:03+00:00",
-          "evidence_status": "verified_source"
+          "evidence_status": "verified_source",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9269,7 +9279,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
-          "evidence_status": "reference_only"
+          "evidence_status": "reference_only",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9283,7 +9294,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
-          "evidence_status": "supporting"
+          "evidence_status": "supporting",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9297,7 +9309,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
-          "evidence_status": "supporting"
+          "evidence_status": "supporting",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9311,7 +9324,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
-          "evidence_status": "supporting"
+          "evidence_status": "supporting",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9325,7 +9339,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
-          "evidence_status": "supporting"
+          "evidence_status": "supporting",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9339,7 +9354,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
-          "evidence_status": "supporting"
+          "evidence_status": "supporting",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9353,7 +9369,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
-          "evidence_status": "supporting"
+          "evidence_status": "supporting",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9367,7 +9384,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
-          "evidence_status": "supporting"
+          "evidence_status": "supporting",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9381,7 +9399,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
-          "evidence_status": "supporting"
+          "evidence_status": "supporting",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9395,7 +9414,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
-          "evidence_status": "supporting"
+          "evidence_status": "supporting",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9409,7 +9429,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
-          "evidence_status": "reference_only"
+          "evidence_status": "reference_only",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9423,7 +9444,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
-          "evidence_status": "supporting"
+          "evidence_status": "supporting",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9437,7 +9459,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
-          "evidence_status": "supporting"
+          "evidence_status": "supporting",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9451,7 +9474,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-08-01T08:09:50+00:00",
-          "evidence_status": "supporting"
+          "evidence_status": "supporting",
+          "contains_data_rows": false
         },
         {
           "project_id": "LMD-Bridge",
@@ -9465,7 +9489,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-08-01T08:09:50+00:00",
-          "evidence_status": "supporting"
+          "evidence_status": "supporting",
+          "contains_data_rows": false
         },
         {
           "project_id": "LMD-Bridge",
@@ -9479,7 +9504,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-08-01T08:39:07+00:00",
-          "evidence_status": "reference_only"
+          "evidence_status": "reference_only",
+          "contains_data_rows": false
         },
         {
           "project_id": "LMD-Bridge",
@@ -9493,7 +9519,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:52:10+00:00",
-          "evidence_status": "verified_source"
+          "evidence_status": "verified_source",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9507,7 +9534,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:52:10+00:00",
-          "evidence_status": "verified_source"
+          "evidence_status": "verified_source",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9521,7 +9549,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:52:10+00:00",
-          "evidence_status": "verified_source"
+          "evidence_status": "verified_source",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9535,7 +9564,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:52:10+00:00",
-          "evidence_status": "verified_source"
+          "evidence_status": "verified_source",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9549,7 +9579,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:52:10+00:00",
-          "evidence_status": "verified_source"
+          "evidence_status": "verified_source",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9563,7 +9594,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:52:10+00:00",
-          "evidence_status": "verified_source"
+          "evidence_status": "verified_source",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9577,7 +9609,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:52:10+00:00",
-          "evidence_status": "verified_source"
+          "evidence_status": "verified_source",
+          "contains_data_rows": true
         },
         {
           "project_id": "LMD-Bridge",
@@ -9591,7 +9624,8 @@
           "source_page_or_sheet": "Not indexed",
           "source_row": "Not indexed",
           "modified_at": "2026-08-01T08:39:07+00:00",
-          "evidence_status": "reference_only"
+          "evidence_status": "reference_only",
+          "contains_data_rows": false
         }
       ],
       "evidence_ledger": [
@@ -9608,6 +9642,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T18:03:24+00:00",
           "evidence_status": "verified_source",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9626,6 +9661,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-27T02:23:52+00:00",
           "evidence_status": "verified_source",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9644,6 +9680,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T21:08:34+00:00",
           "evidence_status": "reference_only",
+          "contains_data_rows": false,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9662,6 +9699,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T21:08:34+00:00",
           "evidence_status": "reference_only",
+          "contains_data_rows": false,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9680,6 +9718,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T21:08:34+00:00",
           "evidence_status": "reference_only",
+          "contains_data_rows": false,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9698,6 +9737,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T21:08:34+00:00",
           "evidence_status": "reference_only",
+          "contains_data_rows": false,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9716,6 +9756,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-08-01T08:39:07+00:00",
           "evidence_status": "reference_only",
+          "contains_data_rows": false,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9734,6 +9775,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T21:08:34+00:00",
           "evidence_status": "reference_only",
+          "contains_data_rows": false,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9752,6 +9794,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T21:08:34+00:00",
           "evidence_status": "reference_only",
+          "contains_data_rows": false,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9770,6 +9813,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-08-01T08:39:07+00:00",
           "evidence_status": "reference_only",
+          "contains_data_rows": false,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9788,6 +9832,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-05-20T16:13:03+00:00",
           "evidence_status": "verified_source",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9806,6 +9851,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
           "evidence_status": "reference_only",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9824,6 +9870,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
           "evidence_status": "supporting",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9842,6 +9889,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
           "evidence_status": "supporting",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9860,6 +9908,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
           "evidence_status": "supporting",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9878,6 +9927,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
           "evidence_status": "supporting",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9896,6 +9946,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
           "evidence_status": "supporting",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9914,6 +9965,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
           "evidence_status": "supporting",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9932,6 +9984,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
           "evidence_status": "supporting",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9950,6 +10003,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
           "evidence_status": "supporting",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9968,6 +10022,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
           "evidence_status": "supporting",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -9986,6 +10041,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
           "evidence_status": "reference_only",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -10004,6 +10060,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
           "evidence_status": "supporting",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -10022,6 +10079,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:39:36+00:00",
           "evidence_status": "supporting",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -10040,6 +10098,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-08-01T08:09:50+00:00",
           "evidence_status": "supporting",
+          "contains_data_rows": false,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -10058,6 +10117,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-08-01T08:09:50+00:00",
           "evidence_status": "supporting",
+          "contains_data_rows": false,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -10076,6 +10136,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-08-01T08:39:07+00:00",
           "evidence_status": "reference_only",
+          "contains_data_rows": false,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -10094,6 +10155,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:52:10+00:00",
           "evidence_status": "verified_source",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -10112,6 +10174,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:52:10+00:00",
           "evidence_status": "verified_source",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -10130,6 +10193,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:52:10+00:00",
           "evidence_status": "verified_source",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -10148,6 +10212,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:52:10+00:00",
           "evidence_status": "verified_source",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -10166,6 +10231,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:52:10+00:00",
           "evidence_status": "verified_source",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -10184,6 +10250,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:52:10+00:00",
           "evidence_status": "verified_source",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -10202,6 +10269,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-06-26T17:52:10+00:00",
           "evidence_status": "verified_source",
+          "contains_data_rows": true,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -10220,6 +10288,7 @@
           "source_row": "Not indexed",
           "modified_at": "2026-08-01T08:39:07+00:00",
           "evidence_status": "reference_only",
+          "contains_data_rows": false,
           "event_id": "Not linked",
           "activity_id": "Not linked",
           "clause_candidate": "Not assessed",
@@ -10319,7 +10388,7 @@
           "claim_triggers": 17,
           "client_defenses": 15,
           "contract_analysis_status": 1,
-          "contract_clauses": 26,
+          "contract_clauses": 1,
           "contract_documents": 1,
           "contract_knowledge_base": 1,
           "contract_metadata": 2,
@@ -10376,91 +10445,91 @@
                 "category_name": "EOT / Delay Claim",
                 "description": "Auto-seeded claim category for EOT / Delay Claim.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 2,
                 "category_name": "Variation Claim",
                 "description": "Auto-seeded claim category for Variation Claim.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 3,
                 "category_name": "Payment Claim",
                 "description": "Auto-seeded claim category for Payment Claim.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 4,
                 "category_name": "Suspension / Slowdown",
                 "description": "Auto-seeded claim category for Suspension / Slowdown.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 5,
                 "category_name": "Material Escalation",
                 "description": "Auto-seeded claim category for Material Escalation.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 6,
                 "category_name": "Late Drawings / Late Approvals",
                 "description": "Auto-seeded claim category for Late Drawings / Late Approvals.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 7,
                 "category_name": "Employer Free-Issue Material",
                 "description": "Auto-seeded claim category for Employer Free-Issue Material.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 8,
                 "category_name": "Site Access / Handover",
                 "description": "Auto-seeded claim category for Site Access / Handover.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 9,
                 "category_name": "Engineer Instruction",
                 "description": "Auto-seeded claim category for Engineer Instruction.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 10,
                 "category_name": "Defects / DLP",
                 "description": "Auto-seeded claim category for Defects / DLP.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 11,
                 "category_name": "Delay Damages Defense",
                 "description": "Auto-seeded claim category for Delay Damages Defense.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 12,
                 "category_name": "Dispute / Notice / Time-Bar",
                 "description": "Auto-seeded claim category for Dispute / Notice / Time-Bar.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 13,
                 "category_name": "General Contract Risk",
                 "description": "Auto-seeded claim category for General Contract Risk.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               }
             ],
             "truncated": false
@@ -10670,7 +10739,7 @@
                 "defense_keywords": "[\"no notice\", \"notice not submitted\", \"no formal notice\", \"no valid notice\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 2,
@@ -10679,7 +10748,7 @@
                 "defense_keywords": "[\"late notice\", \"notice was late\", \"notice submitted late\", \"out of time notice\", \"time bar\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 3,
@@ -10688,7 +10757,7 @@
                 "defense_keywords": "[\"no written instruction\", \"verbal instruction\", \"no formal instruction\", \"no instruction in writing\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 4,
@@ -10697,7 +10766,7 @@
                 "defense_keywords": "[\"not on critical path\", \"not critical\", \"float available\", \"not on longest path\", \"non critical\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 5,
@@ -10706,7 +10775,7 @@
                 "defense_keywords": "[\"concurrent delay\", \"overlapping delay\", \"parallel delay\", \"same period delay\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 6,
@@ -10715,7 +10784,7 @@
                 "defense_keywords": "[\"contractor delay\", \"contractor caused\", \"late by contractor\", \"contractor responsible delay\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 7,
@@ -10724,7 +10793,7 @@
                 "defense_keywords": "[\"fixed price\", \"lump sum\", \"no escalation\", \"firm price\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 8,
@@ -10733,7 +10802,7 @@
                 "defense_keywords": "[\"already included\", \"within original scope\", \"included in contract\", \"contract scope already covers\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 9,
@@ -10742,7 +10811,7 @@
                 "defense_keywords": "[\"insufficient substantiation\", \"not substantiated\", \"insufficient evidence\", \"unsupported claim\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 10,
@@ -10751,7 +10820,7 @@
                 "defense_keywords": "[\"no contemporaneous records\", \"no records at the time\", \"no site records\", \"no contemporaneous evidence\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 11,
@@ -10760,7 +10829,7 @@
                 "defense_keywords": "[\"engineer approval not entitlement\", \"approval does not mean entitlement\", \"approval is not claim\", \"approval only\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 12,
@@ -10769,7 +10838,7 @@
                 "defense_keywords": "[\"failed to mitigate\", \"failure to mitigate\", \"no mitigation\", \"insufficient mitigation\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 13,
@@ -10778,7 +10847,7 @@
                 "defense_keywords": "[\"no causation\", \"no causal link\", \"did not cause delay\", \"no cause and effect\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 14,
@@ -10787,7 +10856,7 @@
                 "defense_keywords": "[\"no cost breakdown\", \"cost not broken down\", \"no quantum support\", \"no supporting cost detail\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               },
               {
                 "id": 15,
@@ -10796,7 +10865,7 @@
                 "defense_keywords": "[\"no programme impact\", \"no schedule impact\", \"no impact on programme\", \"no impact on completion\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T09:04:20+00:00"
               }
             ],
             "truncated": false
@@ -10820,16 +10889,16 @@
             ],
             "rows": [
               {
-                "id": 8,
-                "document_id": 4,
-                "file_hash": "279abaa9b28325bb3a90be4ac30aeeb6a99a971ea84b48df2c5922cf6c6ea1e5",
-                "last_analysis_date": "2026-06-27T02:23:52+00:00",
+                "id": 9,
+                "document_id": 5,
+                "file_hash": "e7ea30cedec5f7bd8c42646138736319430d5f59f2ee0d99a231ba9468b1a24b",
+                "last_analysis_date": "2026-08-01T08:53:40+00:00",
                 "processing_status": "Processed",
                 "knowledge_base_status": "Ready",
-                "total_clauses_extracted": 26,
+                "total_clauses_extracted": 1,
                 "error_message": "",
-                "created_at": "2026-06-27T02:23:52+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "created_at": "2026-08-01T08:53:40+00:00",
+                "updated_at": "2026-08-01T08:53:40+00:00"
               }
             ],
             "truncated": false
@@ -10837,7 +10906,7 @@
           "contract_clauses": {
             "file": "contract_claims.db:contract_clauses",
             "exists": true,
-            "row_count": 26,
+            "row_count": 1,
             "column_count": 24,
             "columns": [
               "id",
@@ -10867,38 +10936,12 @@
             ],
             "rows": [
               {
-                "id": 423,
-                "document_id": 4,
+                "id": 449,
+                "document_id": 5,
                 "clause_number": "",
-                "clause_title": "Agreement Summary",
-                "exact_clause_text": "Topic: Agreement Summary Location: 1.0 This clause falls under Contractor Counterarguments. In practical contractor terms, it means: 1. Agreement Summary This synthetic contract record is prepared for the LMD-Bridge Project comprising bridge substructure, superstructure, road approaches, retaining walls, drainage, and related civil works. The Employer is LMD Infrastructure, the Contractor is SAMCO Egypt, and the Engineer / PMO is BridgeWorks PMO. Th Tie the facts directly to the contractual exception or saving wording. Shared Unclear Possible Yes Exception facts, supporting letters, notices, approvals, and event records.",
-                "plain_english_meaning": "This clause falls under Contractor Counterarguments. In practical contractor terms, it means: 1. Agreement Summary This synthetic contract record is prepared for the LMD-Bridge Project comprising bridge substructure, superstructure, road approaches, retaining walls, drainage, and related civil works. The Employer is LMD Infrastructure, the Contractor is SAMCO Egypt, and the Engineer / PMO is BridgeWorks PMO. Th",
-                "section_name": "Notice Requirements",
-                "contractor_right": "",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Notice Compliance",
-                "required_evidence": "Exception facts, supporting letters, notices, approvals, and event records.",
-                "possible_client_rejection": "Notice was late, missing, or defective.",
-                "contractor_counterargument": "Tie the facts directly to the contractual exception or saving wording.",
-                "risk_level": "High",
-                "claim_strength": "Medium",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Exception facts, supporting letters, notices, approvals, and event records.",
-                "related_project_records_needed": "Exception facts, supporting letters, notices, approvals, and event records.",
-                "keywords_json": "[\"except\", \"notice\", \"records\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 424,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "months from the Commencement Date",
-                "exact_clause_text": "Topic: months from the Commencement Date Location: 20.0 This clause falls under Notice Requirements. In practical contractor terms, it means: 20 months from the Commencement Date Key Section Milestone main pier foundation and first deck segment readiness within 7 months from Commencement Governing Law Laws of the Arab Republic of Egypt Ruling Language English Demonstrate timely notice, continuing notice trail, or waiver / actual knowledge by the receiving party. Shared Unclear Possible Possible Notice letters, emails, meeting minutes, proof of submission and receipt.",
-                "plain_english_meaning": "This clause falls under Notice Requirements. In practical contractor terms, it means: 20 months from the Commencement Date Key Section Milestone main pier foundation and first deck segment readiness within 7 months from Commencement Governing Law Laws of the Arab Republic of Egypt Ruling Language English",
+                "clause_title": "project_id,contract_source_id,source_file,source_hash,document_type,contractual_precedence",
+                "exact_clause_text": "Topic: project_id,contract_source_id,source_file,source_hash,document_type,contractual_precedence Location: P001 This clause falls under Notice Requirements. In practical contractor terms, it means: project_id,contract_source_id,source_file,source_hash,document_type,contractual_precedence,authorized_status,execution_date,revision,applicable_clause_reference,page_or_section,notice_route,time_bar_days,time_entitlement_route,cost_entitlement_route,procedure_route,confidence,notes Demonstrate timely notice, continuing notice trail, or waiver / actual knowledge by the receiving party. Shared Yes Yes Possible Notice letters, emails, meeting minutes, proof of submission and receipt.",
+                "plain_english_meaning": "This clause falls under Notice Requirements. In practical contractor terms, it means: project_id,contract_source_id,source_file,source_hash,document_type,contractual_precedence,authorized_status,execution_date,revision,applicable_clause_reference,page_or_section,notice_route,time_bar_days,time_entitlement_route,cost_entitlement_route,procedure_route,confidence,notes",
                 "section_name": "Notice Requirements",
                 "contractor_right": "",
                 "employer_obligation": "Yes",
@@ -10914,633 +10957,9 @@
                 "notice_required": "Yes",
                 "recommended_action": "Notice letters, emails, meeting minutes, proof of submission and receipt.",
                 "related_project_records_needed": "Notice letters, emails, meeting minutes, proof of submission and receipt.",
-                "keywords_json": "[\"notice\", \"within\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 425,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "Document Priority",
-                "exact_clause_text": "Topic: Document Priority Location: 2.0 This clause falls under Risk Clauses. In practical contractor terms, it means: 2. Document Priority Tie the clause wording to the factual event with contemporaneous evidence. Shared Unclear Possible Possible Full clause context, event chronology, and project records.",
-                "plain_english_meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 2. Document Priority",
-                "section_name": "Evidence Requirements",
-                "contractor_right": "",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Evidence / Substantiation",
-                "required_evidence": "Full clause context, event chronology, and project records.",
-                "possible_client_rejection": "Claim is not substantiated.",
-                "contractor_counterargument": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                "risk_level": "High",
-                "claim_strength": "Medium",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Full clause context, event chronology, and project records.",
-                "related_project_records_needed": "Full clause context, event chronology, and project records.",
-                "keywords_json": "[\"evidence\", \"records\", \"risk\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 426,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "This Agreement",
-                "exact_clause_text": "Topic: This Agreement Location: 1.0 This clause falls under Risk Clauses. In practical contractor terms, it means: 1. This Agreement Tie the clause wording to the factual event with contemporaneous evidence. Shared Unclear Possible Possible Full clause context, event chronology, and project records.",
-                "plain_english_meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 1. This Agreement",
-                "section_name": "Evidence Requirements",
-                "contractor_right": "",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Evidence / Substantiation",
-                "required_evidence": "Full clause context, event chronology, and project records.",
-                "possible_client_rejection": "Claim is not substantiated.",
-                "contractor_counterargument": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                "risk_level": "High",
-                "claim_strength": "Medium",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Full clause context, event chronology, and project records.",
-                "related_project_records_needed": "Full clause context, event chronology, and project records.",
-                "keywords_json": "[\"evidence\", \"records\", \"risk\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 427,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "Appendix to Tender / Contract Data",
-                "exact_clause_text": "Topic: Appendix to Tender / Contract Data Location: 2.0 This clause falls under Risk Clauses. In practical contractor terms, it means: 2. Appendix to Tender / Contract Data Tie the clause wording to the factual event with contemporaneous evidence. Shared Unclear Possible Possible Full clause context, event chronology, and project records.",
-                "plain_english_meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 2. Appendix to Tender / Contract Data",
-                "section_name": "Evidence Requirements",
-                "contractor_right": "",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Evidence / Substantiation",
-                "required_evidence": "Full clause context, event chronology, and project records.",
-                "possible_client_rejection": "Claim is not substantiated.",
-                "contractor_counterargument": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                "risk_level": "High",
-                "claim_strength": "Medium",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Full clause context, event chronology, and project records.",
-                "related_project_records_needed": "Full clause context, event chronology, and project records.",
-                "keywords_json": "[\"evidence\", \"records\", \"risk\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 428,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "Particular Conditions",
-                "exact_clause_text": "Topic: Particular Conditions Location: 3.0 This clause falls under Risk Clauses. In practical contractor terms, it means: 3. Particular Conditions Tie the clause wording to the factual event with contemporaneous evidence. Shared Unclear Possible Possible Full clause context, event chronology, and project records.",
-                "plain_english_meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 3. Particular Conditions",
-                "section_name": "Evidence Requirements",
-                "contractor_right": "",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Evidence / Substantiation",
-                "required_evidence": "Full clause context, event chronology, and project records.",
-                "possible_client_rejection": "Claim is not substantiated.",
-                "contractor_counterargument": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                "risk_level": "High",
-                "claim_strength": "Medium",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Full clause context, event chronology, and project records.",
-                "related_project_records_needed": "Full clause context, event chronology, and project records.",
-                "keywords_json": "[\"evidence\", \"records\", \"risk\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 429,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "General Conditions",
-                "exact_clause_text": "Topic: General Conditions Location: 4.0 This clause falls under Risk Clauses. In practical contractor terms, it means: 4. General Conditions Tie the clause wording to the factual event with contemporaneous evidence. Shared Unclear Possible Possible Full clause context, event chronology, and project records.",
-                "plain_english_meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 4. General Conditions",
-                "section_name": "Evidence Requirements",
-                "contractor_right": "",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Evidence / Substantiation",
-                "required_evidence": "Full clause context, event chronology, and project records.",
-                "possible_client_rejection": "Claim is not substantiated.",
-                "contractor_counterargument": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                "risk_level": "High",
-                "claim_strength": "Medium",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Full clause context, event chronology, and project records.",
-                "related_project_records_needed": "Full clause context, event chronology, and project records.",
-                "keywords_json": "[\"evidence\", \"records\", \"risk\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 430,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "General Requirements",
-                "exact_clause_text": "Topic: General Requirements Location: 5.0 This clause falls under Risk Clauses. In practical contractor terms, it means: 5. General Requirements Tie the clause wording to the factual event with contemporaneous evidence. Shared Unclear Possible Possible Full clause context, event chronology, and project records.",
-                "plain_english_meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 5. General Requirements",
-                "section_name": "Evidence Requirements",
-                "contractor_right": "",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Evidence / Substantiation",
-                "required_evidence": "Full clause context, event chronology, and project records.",
-                "possible_client_rejection": "Claim is not substantiated.",
-                "contractor_counterargument": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                "risk_level": "High",
-                "claim_strength": "Medium",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Full clause context, event chronology, and project records.",
-                "related_project_records_needed": "Full clause context, event chronology, and project records.",
-                "keywords_json": "[\"evidence\", \"records\", \"risk\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 431,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "Bill of Quantities",
-                "exact_clause_text": "Topic: Bill of Quantities Location: 6.0 This clause falls under Risk Clauses. In practical contractor terms, it means: 6. Bill of Quantities Tie the clause wording to the factual event with contemporaneous evidence. Shared Unclear Possible Possible Full clause context, event chronology, and project records.",
-                "plain_english_meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 6. Bill of Quantities",
-                "section_name": "Evidence Requirements",
-                "contractor_right": "",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Evidence / Substantiation",
-                "required_evidence": "Full clause context, event chronology, and project records.",
-                "possible_client_rejection": "Claim is not substantiated.",
-                "contractor_counterargument": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                "risk_level": "High",
-                "claim_strength": "Medium",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Full clause context, event chronology, and project records.",
-                "related_project_records_needed": "Full clause context, event chronology, and project records.",
-                "keywords_json": "[\"evidence\", \"records\", \"risk\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 432,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "Drawings",
-                "exact_clause_text": "Topic: Drawings Location: 7.0 This clause falls under Risk Clauses. In practical contractor terms, it means: 7. Drawings Tie the clause wording to the factual event with contemporaneous evidence. Shared Unclear Possible Possible Full clause context, event chronology, and project records.",
-                "plain_english_meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 7. Drawings",
-                "section_name": "Evidence Requirements",
-                "contractor_right": "",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Evidence / Substantiation",
-                "required_evidence": "Full clause context, event chronology, and project records.",
-                "possible_client_rejection": "Claim is not substantiated.",
-                "contractor_counterargument": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                "risk_level": "High",
-                "claim_strength": "Medium",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Full clause context, event chronology, and project records.",
-                "related_project_records_needed": "Full clause context, event chronology, and project records.",
-                "keywords_json": "[\"evidence\", \"records\", \"risk\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 433,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "Soil report, permits matrix, and site layout",
-                "exact_clause_text": "Topic: Soil report, permits matrix, and site layout Location: 8.0 This clause falls under Risk Clauses. In practical contractor terms, it means: 8. Soil report, permits matrix, and site layout Tie the clause wording to the factual event with contemporaneous evidence. Shared Unclear Possible Possible Full clause context, event chronology, and project records.",
-                "plain_english_meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 8. Soil report, permits matrix, and site layout",
-                "section_name": "Evidence Requirements",
-                "contractor_right": "",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Evidence / Substantiation",
-                "required_evidence": "Full clause context, event chronology, and project records.",
-                "possible_client_rejection": "Claim is not substantiated.",
-                "contractor_counterargument": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                "risk_level": "High",
-                "claim_strength": "Medium",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Full clause context, event chronology, and project records.",
-                "related_project_records_needed": "Full clause context, event chronology, and project records.",
-                "keywords_json": "[\"evidence\", \"records\", \"risk\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 434,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "Commercial Data",
-                "exact_clause_text": "Topic: Commercial Data Location: 3.0 This clause falls under Payment Entitlements. In practical contractor terms, it means: 3. Commercial Data Commercial Topic Synthetic Contract Position Advance Payment Show the certified / due amounts, delayed release, and the resulting impact on progress or cost. Contractor Unclear Yes Possible Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "plain_english_meaning": "This clause falls under Payment Entitlements. In practical contractor terms, it means: 3. Commercial Data Commercial Topic Synthetic Contract Position Advance Payment",
-                "section_name": "Payment Entitlements",
-                "contractor_right": "Possible",
-                "employer_obligation": "",
-                "engineer_obligation": "",
-                "claim_type": "Payment / Certification",
-                "required_evidence": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "possible_client_rejection": "No due amount, no approval, or payment delay does not justify time/cost relief.",
-                "contractor_counterargument": "Show the certified / due amounts, delayed release, and the resulting impact on progress or cost.",
-                "risk_level": "High",
-                "claim_strength": "Strong",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "related_project_records_needed": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "keywords_json": "[\"certificate\", \"evidence\", \"invoice\", \"payment\", \"records\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 435,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "% structured as 35% cash advance and 65% Employer-supplied steel/material",
-                "exact_clause_text": "Topic: % structured as 35% cash advance and 65% Employer-supplied steel/material Location: 20.0 This clause falls under Risk Clauses. In practical contractor terms, it means: 20% structured as 35% cash advance and 65% Employer-supplied steel/material support according to the approved programme. Retention Tie the clause wording to the factual event with contemporaneous evidence. Shared Unclear Possible Possible Full clause context, event chronology, and project records.",
-                "plain_english_meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 20% structured as 35% cash advance and 65% Employer-supplied steel/material support according to the approved programme. Retention",
-                "section_name": "Evidence Requirements",
-                "contractor_right": "",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Evidence / Substantiation",
-                "required_evidence": "Full clause context, event chronology, and project records.",
-                "possible_client_rejection": "Claim is not substantiated.",
-                "contractor_counterargument": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                "risk_level": "High",
-                "claim_strength": "Medium",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Full clause context, event chronology, and project records.",
-                "related_project_records_needed": "Full clause context, event chronology, and project records.",
-                "keywords_json": "[\"evidence\", \"records\", \"risk\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 436,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "% of the Contract Price.",
-                "exact_clause_text": "Topic: % of the Contract Price. Location: 5.0 This clause falls under Risk Clauses. In practical contractor terms, it means: 5% of the Contract Price. Performance Security Tie the clause wording to the factual event with contemporaneous evidence. Shared Unclear Yes Possible Full clause context, event chronology, and project records.",
-                "plain_english_meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 5% of the Contract Price. Performance Security",
-                "section_name": "Evidence Requirements",
-                "contractor_right": "",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Evidence / Substantiation",
-                "required_evidence": "Full clause context, event chronology, and project records.",
-                "possible_client_rejection": "Claim is not substantiated.",
-                "contractor_counterargument": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                "risk_level": "High",
-                "claim_strength": "Medium",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Full clause context, event chronology, and project records.",
-                "related_project_records_needed": "Full clause context, event chronology, and project records.",
-                "keywords_json": "[\"evidence\", \"records\", \"risk\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 437,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "% of the Accepted Contract Amount unless waived by contract amendment.",
-                "exact_clause_text": "Topic: % of the Accepted Contract Amount unless waived by contract amendment. Location: 5.0 This clause falls under Contractor Counterarguments. In practical contractor terms, it means: 5% of the Accepted Contract Amount unless waived by contract amendment. Minimum IPC Tie the facts directly to the contractual exception or saving wording. Shared Unclear Possible Possible Exception facts, supporting letters, notices, approvals, and event records.",
-                "plain_english_meaning": "This clause falls under Contractor Counterarguments. In practical contractor terms, it means: 5% of the Accepted Contract Amount unless waived by contract amendment. Minimum IPC",
-                "section_name": "Contractor Counterarguments",
-                "contractor_right": "",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Counterargument / Exception",
-                "required_evidence": "Exception facts, supporting letters, notices, approvals, and event records.",
-                "possible_client_rejection": "The exception does not apply on the facts.",
-                "contractor_counterargument": "Tie the facts directly to the contractual exception or saving wording.",
-                "risk_level": "High",
-                "claim_strength": "Medium",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Exception facts, supporting letters, notices, approvals, and event records.",
-                "related_project_records_needed": "Exception facts, supporting letters, notices, approvals, and event records.",
-                "keywords_json": "[\"except\", \"notice\", \"records\", \"unless\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 438,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "% of monthly cash flow",
-                "exact_clause_text": "Topic: % of monthly cash flow Location: 65.0 This clause falls under Payment Entitlements. In practical contractor terms, it means: 65% of monthly cash flow Payment Period Show the certified / due amounts, delayed release, and the resulting impact on progress or cost. Contractor Unclear Yes Possible Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "plain_english_meaning": "This clause falls under Payment Entitlements. In practical contractor terms, it means: 65% of monthly cash flow Payment Period",
-                "section_name": "Payment Entitlements",
-                "contractor_right": "Possible",
-                "employer_obligation": "",
-                "engineer_obligation": "",
-                "claim_type": "Payment / Certification",
-                "required_evidence": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "possible_client_rejection": "No due amount, no approval, or payment delay does not justify time/cost relief.",
-                "contractor_counterargument": "Show the certified / due amounts, delayed release, and the resulting impact on progress or cost.",
-                "risk_level": "High",
-                "claim_strength": "Strong",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "related_project_records_needed": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "keywords_json": "[\"certificate\", \"evidence\", \"invoice\", \"payment\", \"records\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 439,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "days after Engineer receives the complete monthly statement",
-                "exact_clause_text": "Topic: days after Engineer receives the complete monthly statement Location: 45.0 This clause falls under Payment Entitlements. In practical contractor terms, it means: 45 days after Engineer receives the complete monthly statement Delay Damages Show the certified / due amounts, delayed release, and the resulting impact on progress or cost. Shared Unclear Yes Yes Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "plain_english_meaning": "This clause falls under Payment Entitlements. In practical contractor terms, it means: 45 days after Engineer receives the complete monthly statement Delay Damages",
-                "section_name": "Payment Entitlements",
-                "contractor_right": "Possible",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Payment / Certification",
-                "required_evidence": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "possible_client_rejection": "No due amount, no approval, or payment delay does not justify time/cost relief.",
-                "contractor_counterargument": "Show the certified / due amounts, delayed release, and the resulting impact on progress or cost.",
-                "risk_level": "Critical",
-                "claim_strength": "Strong",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "related_project_records_needed": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "keywords_json": "[\"certificate\", \"damage\", \"days after\", \"delay damages\", \"evidence\", \"invoice\", \"payment\", \"records\", \"statement\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 440,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "% of outstanding works per week of delay or part thereof, capped at 10% of",
-                "exact_clause_text": "Topic: % of outstanding works per week of delay or part thereof, capped at 10% of Location: 0.85 This clause falls under Evidence Requirements. In practical contractor terms, it means: 0.85% of outstanding works per week of delay or part thereof, capped at 10% of the Contract Price Material Adjustment Adjustment may apply only for approved material categories such as reinforcement steel, prestressing interfaces, bearing plates, concrete, and drainage materials where delay is not Contractor-caused and Show that the required records exist and directly support the claimed event and impact. Shared Unclear Yes Yes All records explicitly required by the clause plus supporting schedule and commercial evidence.",
-                "plain_english_meaning": "This clause falls under Evidence Requirements. In practical contractor terms, it means: 0.85% of outstanding works per week of delay or part thereof, capped at 10% of the Contract Price Material Adjustment Adjustment may apply only for approved material categories such as reinforcement steel, prestressing interfaces, bearing plates, concrete, and drainage materials where delay is not Contractor-caused and",
-                "section_name": "Evidence Requirements",
-                "contractor_right": "",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Evidence / Substantiation",
-                "required_evidence": "All records explicitly required by the clause plus supporting schedule and commercial evidence.",
-                "possible_client_rejection": "Claim is not substantiated.",
-                "contractor_counterargument": "Show that the required records exist and directly support the claimed event and impact.",
-                "risk_level": "Medium",
-                "claim_strength": "Strong",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "All records explicitly required by the clause plus supporting schedule and commercial evidence.",
-                "related_project_records_needed": "All records explicitly required by the clause plus supporting schedule and commercial evidence.",
-                "keywords_json": "[\"evidence\", \"records\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 441,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "Programme, Progress, and Delay Entitlement",
-                "exact_clause_text": "Topic: Programme, Progress, and Delay Entitlement Location: 4.0 This clause falls under EOT Entitlements. In practical contractor terms, it means: 4. Programme, Progress, and Delay Entitlement Programme Requirements. The Contractor shall submit and maintain a Primavera P6 baseline programme, monthly updates, narrative reports, cash flow, procurement curves, and recovery programmes where required. Extension of Time. EOT entitlement must demonstrate a delay on the Support the claim with TIA / window logic, path analysis, and event-specific schedule evidence. Contractor Yes Yes Yes Accepted programme basis, event window, contemporaneous records, CPM logic, notices.",
-                "plain_english_meaning": "This clause falls under EOT Entitlements. In practical contractor terms, it means: 4. Programme, Progress, and Delay Entitlement Programme Requirements. The Contractor shall submit and maintain a Primavera P6 baseline programme, monthly updates, narrative reports, cash flow, procurement curves, and recovery programmes where required. Extension of Time. EOT entitlement must demonstrate a delay on the",
-                "section_name": "EOT Entitlements",
-                "contractor_right": "Possible",
-                "employer_obligation": "",
-                "engineer_obligation": "",
-                "claim_type": "Extension of Time",
-                "required_evidence": "Accepted programme basis, event window, contemporaneous records, CPM logic, notices.",
-                "possible_client_rejection": "Delay is not critical, not on longest path, or not proven to affect completion.",
-                "contractor_counterargument": "Support the claim with TIA / window logic, path analysis, and event-specific schedule evidence.",
-                "risk_level": "High",
-                "claim_strength": "Strong",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Accepted programme basis, event window, contemporaneous records, CPM logic, notices.",
-                "related_project_records_needed": "Accepted programme basis, event window, contemporaneous records, CPM logic, notices.",
-                "keywords_json": "[\"eot\", \"evidence\", \"extension of time\", \"notice\", \"records\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 442,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "Site, Materials, Quality, and HSE",
-                "exact_clause_text": "Topic: Site, Materials, Quality, and HSE Location: 5.0 This clause falls under Payment Entitlements. In practical contractor terms, it means: 5. Site, Materials, Quality, and HSE Site access and possession must permit practical execution of the LMD-Bridge Project scope. Constraints relating to road diversions, deck erection sequencing, and interface access windows must be recorded with dates, photographs, obstruction logs, and daily reports. Employer free-is Show the certified / due amounts, delayed release, and the resulting impact on progress or cost. Shared Unclear Possible Possible Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "plain_english_meaning": "This clause falls under Payment Entitlements. In practical contractor terms, it means: 5. Site, Materials, Quality, and HSE Site access and possession must permit practical execution of the LMD-Bridge Project scope. Constraints relating to road diversions, deck erection sequencing, and interface access windows must be recorded with dates, photographs, obstruction logs, and daily reports. Employer free-is",
-                "section_name": "Payment Entitlements",
-                "contractor_right": "Possible",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Payment / Certification",
-                "required_evidence": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "possible_client_rejection": "No due amount, no approval, or payment delay does not justify time/cost relief.",
-                "contractor_counterargument": "Show the certified / due amounts, delayed release, and the resulting impact on progress or cost.",
-                "risk_level": "Medium",
-                "claim_strength": "Strong",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "related_project_records_needed": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "keywords_json": "[\"certificate\", \"evidence\", \"invoice\", \"payment\", \"records\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 443,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "Clause Intelligence Extract",
-                "exact_clause_text": "Topic: Clause Intelligence Extract Location: 6.0 This clause falls under Evidence Requirements. In practical contractor terms, it means: 6. Clause Intelligence Extract Clause / Topic Meaning Evidence Action Contract basics Project is the LMD-Bridge Project bridge substructure, superstructure, road approaches, retaining walls, drainage, and related civil works between LMD Infrastructure as Employer and SAMCO Egypt as Contractor, effective Show that the required records exist and directly support the claimed event and impact. Shared Unclear Possible Possible All records explicitly required by the clause plus supporting schedule and commercial evidence.",
-                "plain_english_meaning": "This clause falls under Evidence Requirements. In practical contractor terms, it means: 6. Clause Intelligence Extract Clause / Topic Meaning Evidence Action Contract basics Project is the LMD-Bridge Project bridge substructure, superstructure, road approaches, retaining walls, drainage, and related civil works between LMD Infrastructure as Employer and SAMCO Egypt as Contractor, effective",
-                "section_name": "Evidence Requirements",
-                "contractor_right": "",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Evidence / Substantiation",
-                "required_evidence": "All records explicitly required by the clause plus supporting schedule and commercial evidence.",
-                "possible_client_rejection": "Claim is not substantiated.",
-                "contractor_counterargument": "Show that the required records exist and directly support the claimed event and impact.",
-                "risk_level": "Medium",
-                "claim_strength": "Medium",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "All records explicitly required by the clause plus supporting schedule and commercial evidence.",
-                "related_project_records_needed": "All records explicitly required by the clause plus supporting schedule and commercial evidence.",
-                "keywords_json": "[\"evidence\", \"records\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 444,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "Mar-2026.",
-                "exact_clause_text": "Topic: Mar-2026. Location: 10.0 This clause falls under Evidence Requirements. In practical contractor terms, it means: 10-Mar-2026. Keep contract date, commencement record, project access evidence, amount, parties, and baseline programme in every claim file. Accepted Contract Amount Contract amount is EGP 512,900,000 including social insurance, duties, and taxes except VAT. For each extra cost, attach Engineer instruction, BOQ gap anal Show that the required records exist and directly support the claimed event and impact. Contractor Yes Yes Yes All records explicitly required by the clause plus supporting schedule and commercial evidence.",
-                "plain_english_meaning": "This clause falls under Evidence Requirements. In practical contractor terms, it means: 10-Mar-2026. Keep contract date, commencement record, project access evidence, amount, parties, and baseline programme in every claim file. Accepted Contract Amount Contract amount is EGP 512,900,000 including social insurance, duties, and taxes except VAT. For each extra cost, attach Engineer instruction, BOQ gap anal",
-                "section_name": "Evidence Requirements",
-                "contractor_right": "",
-                "employer_obligation": "",
-                "engineer_obligation": "",
-                "claim_type": "Evidence / Substantiation",
-                "required_evidence": "All records explicitly required by the clause plus supporting schedule and commercial evidence.",
-                "possible_client_rejection": "Claim is not substantiated.",
-                "contractor_counterargument": "Show that the required records exist and directly support the claimed event and impact.",
-                "risk_level": "High",
-                "claim_strength": "Medium",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "All records explicitly required by the clause plus supporting schedule and commercial evidence.",
-                "related_project_records_needed": "All records explicitly required by the clause plus supporting schedule and commercial evidence.",
-                "keywords_json": "[\"evidence\", \"except\", \"instruction\", \"records\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 445,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "month structural",
-                "exact_clause_text": "Topic: month structural Location: 8.0 This clause falls under Delay Damages Defense. In practical contractor terms, it means: 8-month structural milestone Section milestone: main pier foundation and first deck segment readiness within 7 months from Commencement. Track milestone fragnet, procurement constraints, concrete/steel delivery, and inspection readiness. Delay damages Delay damages are 0.85% of outstanding works per week of delay or pa Use excusable delay and concurrency analysis to defeat or reduce liquidated damages exposure. Shared Unclear Yes Yes Criticality analysis, entitlement basis, excusable delay record, concurrency review.",
-                "plain_english_meaning": "This clause falls under Delay Damages Defense. In practical contractor terms, it means: 8-month structural milestone Section milestone: main pier foundation and first deck segment readiness within 7 months from Commencement. Track milestone fragnet, procurement constraints, concrete/steel delivery, and inspection readiness. Delay damages Delay damages are 0.85% of outstanding works per week of delay or pa",
-                "section_name": "Delay Damages Defense",
-                "contractor_right": "",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Delay Damages Defense",
-                "required_evidence": "Criticality analysis, entitlement basis, excusable delay record, concurrency review.",
-                "possible_client_rejection": "Damages remain payable because excusable delay is not proven.",
-                "contractor_counterargument": "Use excusable delay and concurrency analysis to defeat or reduce liquidated damages exposure.",
-                "risk_level": "Critical",
-                "claim_strength": "Medium",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Criticality analysis, entitlement basis, excusable delay record, concurrency review.",
-                "related_project_records_needed": "Criticality analysis, entitlement basis, excusable delay record, concurrency review.",
-                "keywords_json": "[\"damage\", \"delay damages\", \"liquidated damages\", \"within\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 446,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "% of the Contract Price.",
-                "exact_clause_text": "Topic: % of the Contract Price. Location: 10.0 This clause falls under Evidence Requirements. In practical contractor terms, it means: 10% of the Contract Price. Protect with timely notices, critical-path delay analysis, mitigation records, and cause-effect evidence. Employer equipment and free-issue materials Employer free-issue/material support covers approved items including reinforcement steel, prestressing interfaces, bearing plates, concrete, an Show that the required records exist and directly support the claimed event and impact. Contractor Yes Yes Yes All records explicitly required by the clause plus supporting schedule and commercial evidence.",
-                "plain_english_meaning": "This clause falls under Evidence Requirements. In practical contractor terms, it means: 10% of the Contract Price. Protect with timely notices, critical-path delay analysis, mitigation records, and cause-effect evidence. Employer equipment and free-issue materials Employer free-issue/material support covers approved items including reinforcement steel, prestressing interfaces, bearing plates, concrete, an",
-                "section_name": "Evidence Requirements",
-                "contractor_right": "",
-                "employer_obligation": "",
-                "engineer_obligation": "",
-                "claim_type": "Evidence / Substantiation",
-                "required_evidence": "All records explicitly required by the clause plus supporting schedule and commercial evidence.",
-                "possible_client_rejection": "Claim is not substantiated.",
-                "contractor_counterargument": "Show that the required records exist and directly support the claimed event and impact.",
-                "risk_level": "High",
-                "claim_strength": "Medium",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "All records explicitly required by the clause plus supporting schedule and commercial evidence.",
-                "related_project_records_needed": "All records explicitly required by the clause plus supporting schedule and commercial evidence.",
-                "keywords_json": "[\"evidence\", \"notice\", \"records\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 447,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "Execution Control Matrix",
-                "exact_clause_text": "Topic: Execution Control Matrix Location: 7.0 This clause falls under Payment Entitlements. In practical contractor terms, it means: 7. Execution Control Matrix Control Area Required Evidence Dashboard Usage Contract Baseline Agreement data, contract amount, scope, commencement, baseline programme Feeds project metadata, contract risk profile, and executive dashboard baseline. Payment IPC submissions, measurement sheets, material-on-site records, En Show the certified / due amounts, delayed release, and the resulting impact on progress or cost. Contractor Yes Yes Yes Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "plain_english_meaning": "This clause falls under Payment Entitlements. In practical contractor terms, it means: 7. Execution Control Matrix Control Area Required Evidence Dashboard Usage Contract Baseline Agreement data, contract amount, scope, commencement, baseline programme Feeds project metadata, contract risk profile, and executive dashboard baseline. Payment IPC submissions, measurement sheets, material-on-site records, En",
-                "section_name": "Payment Entitlements",
-                "contractor_right": "Possible",
-                "employer_obligation": "",
-                "engineer_obligation": "",
-                "claim_type": "Payment / Certification",
-                "required_evidence": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "possible_client_rejection": "No due amount, no approval, or payment delay does not justify time/cost relief.",
-                "contractor_counterargument": "Show the certified / due amounts, delayed release, and the resulting impact on progress or cost.",
-                "risk_level": "High",
-                "claim_strength": "Strong",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "related_project_records_needed": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
-                "keywords_json": "[\"certificate\", \"evidence\", \"invoice\", \"payment\", \"records\", \"risk\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
-              },
-              {
-                "id": 448,
-                "document_id": 4,
-                "clause_number": "",
-                "clause_title": "Signature Placeholders",
-                "exact_clause_text": "Topic: Signature Placeholders Location: 8.0 This clause falls under Risk Clauses. In practical contractor terms, it means: 8. Signature Placeholders On behalf of the Employer On behalf of the Contractor Engineer / PMO Acknowledgement Company: LMD Infrastructure Name: ___________________ Title: ___________________ Date: ___________________ Signature: ___________________ Company: SAMCO Egypt Name: ___________________ Title: _________________ Tie the clause wording to the factual event with contemporaneous evidence. Shared Unclear Possible Possible Full clause context, event chronology, and project records.",
-                "plain_english_meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 8. Signature Placeholders On behalf of the Employer On behalf of the Contractor Engineer / PMO Acknowledgement Company: LMD Infrastructure Name: ___________________ Title: ___________________ Date: ___________________ Signature: ___________________ Company: SAMCO Egypt Name: ___________________ Title: _________________",
-                "section_name": "Evidence Requirements",
-                "contractor_right": "",
-                "employer_obligation": "Yes",
-                "engineer_obligation": "",
-                "claim_type": "Evidence / Substantiation",
-                "required_evidence": "Full clause context, event chronology, and project records.",
-                "possible_client_rejection": "Claim is not substantiated.",
-                "contractor_counterargument": "Tie the clause wording to the factual event with contemporaneous evidence.",
-                "risk_level": "High",
-                "claim_strength": "Medium",
-                "time_impact": "Yes",
-                "cost_impact": "Yes",
-                "notice_required": "Yes",
-                "recommended_action": "Full clause context, event chronology, and project records.",
-                "related_project_records_needed": "Full clause context, event chronology, and project records.",
-                "keywords_json": "[\"evidence\", \"records\", \"risk\"]",
-                "created_at": "2026-06-27T02:23:53+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
+                "keywords_json": "[\"notice\"]",
+                "created_at": "2026-08-01T08:53:40+00:00",
+                "updated_at": "2026-08-01T08:53:40+00:00"
               }
             ],
             "truncated": false
@@ -11567,19 +10986,19 @@
             ],
             "rows": [
               {
-                "id": 4,
+                "id": 5,
                 "file_name": "Overall_Contract_clause_library.xlsx",
-                "file_path": "C:\\Users\\pc\\OneDrive\\Documents\\Project Intelligence Hub\\projects\\Bridges\\LMD-Bridgs\\05-contracts\\source\\Overall_Contract_clause_library.xlsx",
-                "file_hash": "279abaa9b28325bb3a90be4ac30aeeb6a99a971ea84b48df2c5922cf6c6ea1e5",
+                "file_path": "D:\\one drive data\\OneDrive\\Documents\\Project Intelligence Hub\\projects\\Bridges\\LMD-Bridgs\\05-contracts\\Overall_Contract_clause_library.xlsx",
+                "file_hash": "e7ea30cedec5f7bd8c42646138736319430d5f59f2ee0d99a231ba9468b1a24b",
                 "file_type": ".xlsx",
-                "upload_date": "2026-06-27T02:23:53+00:00",
-                "analysis_date": "2026-06-27T02:23:53+00:00",
+                "upload_date": "2026-08-01T08:53:40+00:00",
+                "analysis_date": "2026-08-01T08:53:40+00:00",
                 "contract_version": "v1",
                 "processing_status": "Processed",
                 "knowledge_base_status": "Ready",
-                "content_text": "[Sheet: Contract Clause Library]\nClause / Topic,Location,Plain English Meaning,Beneath the Lines,Who Holds Leverage,Notice / Time Bar,Money Impact,Schedule Impact,Practical Action / Evidence,Source File,Claim Type,Risk Level,Claim Strength,Exact Clause Text\r\nAgreement Summary,1.0,\"This clause falls under Contractor Counterarguments. In practical contractor terms, it means: 1. Agreement Summary This synthetic contract record is prepared for the LMD-Bridge Project comprising bridge substructure, superstructure, road approaches, retaining walls, drainage, and related civil works. The Employer is LMD Infrastructure, the Contractor is SAMCO Egypt, and the Engineer / PMO is BridgeWorks PMO. Th\",Tie the facts directly to the contractual exception or saving wording.,Shared,Unclear,Possible,Yes,\"Exception facts, supporting letters, notices, approvals, and event records.\",Overall Contract.pdf,Counterargument / Exception,Medium,Medium,\"1. Agreement Summary This synthetic contract record is prepared for the LMD-Bridge Project comprising bridge substructure, superstructure, road approaches, retaining walls, drainage, and related civil works. The Employer is LMD Infrastructure, the Contractor is SAMCO Egypt, and the Engineer / PMO is BridgeWorks PMO. The Agreement Effective Date is 10-Mar-2026 and the Commencement Date is 25-Mar-2026. Item Value Project LMD-Bridge Project Contract Number LB-CTR-2026-003 Scope bridge substructure, superstructure, road approaches, retaining walls, drainage, and related civil works Accepted Contract Amount EGP 512,900,000 excluding VAT unless otherwise stated Time for Completion\"\r\nmonths from the Commencement Date,20.0,\"This clause falls under Notice Requirements. In practical contractor terms, it means: 20 months from the Commencement Date Key Section Milestone main pier foundation and first deck segment readiness within 7 months from Commencement Governing Law Laws of the Arab Republic of Egypt Ruling Language English\",\"Demonstrate timely notice, continuing notice trail, or waiver / actual knowledge by the receiving party.\",Shared,Unclear,Possible,Possible,\"Notice letters, emails, meeting minutes, proof of submission and receipt.\",Overall Contract.pdf,Notice Compliance,Medium,Medium,20 months from the Commencement Date Key Section Milestone main pier foundation and first deck segment readiness within 7 months from Commencement Governing Law Laws of the Arab Republic of Egypt Ruling Language English\r\nDocument Priority,2.0,\"This clause falls under Risk Clauses. In practical contractor terms, it means: 2. Document Priority\",Tie the clause wording to the factual event with contemporaneous evidence.,Shared,Unclear,Possible,Possible,\"Full clause context, event chronology, and project records.\",Overall Contract.pdf,General Contract Risk,Low,Weak,2. Document Priority\r\nThis Agreement,1.0,\"This clause falls under Risk Clauses. In practical contractor terms, it means: 1. This Agreement\",Tie the clause wording to the factual event with contemporaneous evidence.,Shared,Unclear,Possible,Possible,\"Full clause context, event chronology, and project records.\",Overall Contract.pdf,General Contract Risk,Low,Weak,1. This Agreement\r\nAppendix to Tender / Contract Data,2.0,\"This clause falls under Risk Clauses. In practical contractor terms, it means: 2. Appendix to Tender / Contract Data\",Tie the clause wording to the factual event with contemporaneous evidence.,Shared,Unclear,Possible,Possible,\"Full clause context, event chronology, and project records.\",Overall Contract.pdf,General Contract Risk,Low,Weak,2. Appendix to Tender / Contract Data\r\nParticular Conditions,3.0,\"This clause falls under Risk Clauses. In practical contractor terms, it means: 3. Particular Conditions\",Tie the clause wording to the factual event with contemporaneous evidence.,Shared,Unclear,Possible,Possible,\"Full clause context, event chronology, and project records.\",Overall Contract.pdf,General Contract Risk,Low,Weak,3. Particular Conditions\r\nGeneral Conditions,4.0,\"This clause falls under Risk Clauses. In practical contractor terms, it means: 4. General Conditions\",Tie the clause wording to the factual event with contemporaneous evidence.,Shared,Unclear,Possible,Possible,\"Full clause context, event chronology, and project records.\",Overall Contract.pdf,General Contract Risk,Low,Weak,4. General Conditions\r\nGeneral Requirements,5.0,\"This clause falls under Risk Clauses. In practical contractor terms, it means: 5. General Requirements\",Tie the clause wording to the factual event with contemporaneous evidence.,Shared,Unclear,Possible,Possible,\"Full clause context, event chronology, and project records.\",Overall Contract.pdf,General Contract Risk,Low,Weak,5. General Requirements\r\nBill of Quantities,6.0,\"This clause falls under Risk Clauses. In practical contractor terms, it means: 6. Bill of Quantities\",Tie the clause wording to the factual event with contemporaneous evidence.,Shared,Unclear,Possible,Possible,\"Full clause context, event chronology, and project records.\",Overall Contract.pdf,General Contract Risk,Low,Weak,6. Bill of Quantities\r\nDrawings,7.0,\"This clause falls under Risk Clauses. In practical contractor terms, it means: 7. Drawings\",Tie the clause wording to the factual event with contemporaneous evidence.,Shared,Unclear,Possible,Possible,\"Full clause context, event chronology, and project records.\",Overall Contract.pdf,General Contract Risk,Low,Weak,7. Drawings\r\n\"Soil report, permits matrix, and site layout\",8.0,\"This clause falls under Risk Clauses. In practical contractor terms, it means: 8. Soil report, permits matrix, and site layout\",Tie the clause wording to the factual event with contemporaneous evidence.,Shared,Unclear,Possible,Possible,\"Full clause context, event chronology, and project records.\",Overall Contract.pdf,General Contract Risk,Low,Weak,\"8. Soil report, permits matrix, and site layout\"\r\nCommercial Data,3.0,\"This clause falls under Payment Entitlements. In practical contractor terms, it means: 3. Commercial Data Commercial Topic Synthetic Contract Position Advance Payment\",\"Show the certified / due amounts, delayed release, and the resulting impact on progress or cost.\",Contractor,Unclear,Yes,Possible,\"Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.\",Overall Contract.pdf,Payment / Certification,Medium,Strong,3. Commercial Data Commercial Topic Synthetic Contract Position Advance Payment\r\n% structured as 35% cash advance and 65% Employer-supplied steel/material,20.0,\"This clause falls under Risk Clauses. In practical contractor terms, it means: 20% structured as 35% cash advance and 65% Employer-supplied steel/material support according to the approved programme. Retention\",Tie the clause wording to the factual event with contemporaneous evidence.,Shared,Unclear,Possible,Possible,\"Full clause context, event chronology, and project records.\",Overall Contract.pdf,General Contract Risk,Low,Weak,20% structured as 35% cash advance and 65% Employer-supplied steel/material support according to the approved programme. Retention\r\n% of the Contract Price.,5.0,\"This clause falls under Risk Clauses. In practical contractor terms, it means: 5% of the Contract Price. Performance Security\",Tie the clause wording to the factual event with contemporaneous evidence.,Shared,Unclear,Yes,Possible,\"Full clause context, event chronology, and project records.\",Overall Contract.pdf,General Contract Risk,Low,Weak,5% of the Contract Price. Performance Security\r\n% of the Accepted Contract Amount unless waived by contract amendment.,5.0,\"This clause falls under Contractor Counterarguments. In practical contractor terms, it means: 5% of the Accepted Contract Amount unless waived by contract amendment. Minimum IPC\",Tie the facts directly to the contractual exception or saving wording.,Shared,Unclear,Possible,Possible,\"Exception facts, supporting letters, notices, approvals, and event records.\",Overall Contract.pdf,Counterargument / Exception,Medium,Medium,5% of the Accepted Contract Amount unless waived by contract amendment. Minimum IPC\r\n% of monthly cash flow,65.0,\"This clause falls under Payment Entitlements. In practical contractor terms, it means: 65% of monthly cash flow Payment Period\",\"Show the certified / due amounts, delayed release, and the resulting impact on progress or cost.\",Contractor,Unclear,Yes,Possible,\"Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.\",Overall Contract.pdf,Payment / Certification,Medium,Strong,65% of monthly cash flow Payment Period\r\ndays after Engineer receives the complete monthly statement,45.0,\"This clause falls under Payment Entitlements. In practical contractor terms, it means: 45 days after Engineer receives the complete monthly statement Delay Damages\",\"Show the certified / due amounts, delayed release, and the resulting impact on progress or cost.\",Shared,Unclear,Yes,Yes,\"Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.\",Overall Contract.pdf,Payment / Certification,Critical,Medium,45 days after Engineer receives the complete monthly statement Delay Damages\r\n\"% of outstanding works per week of delay or part thereof, capped at 10% of\",0.85,\"This clause falls under Evidence Requirements. In practical contractor terms, it means: 0.85% of outstanding works per week of delay or part thereof, capped at 10% of the Contract Price Material Adjustment Adjustment may apply only for approved material categories such as reinforcement steel, prestressing interfaces, bearing plates, concrete, and drainage materials where delay is not Contractor-caused and\",Show that the required records exist and directly support the claimed event and impact.,Shared,Unclear,Yes,Yes,All records explicitly required by the clause plus supporting schedule and commercial evidence.,Overall Contract.pdf,Evidence / Substantiation,Medium,Strong,\"0.85% of outstanding works per week of delay or part thereof, capped at 10% of the Contract Price Material Adjustment Adjustment may apply only for approved material categories such as reinforcement steel, prestressing interfaces, bearing plates, concrete, and drainage materials where delay is not Contractor-caused and evidence is complete. LB-CTR-2026-003 | LMD-Bridge Project Page 3\"\r\n\"Programme, Progress, and Delay Entitlement\",4.0,\"This clause falls under EOT Entitlements. In practical contractor terms, it means: 4. Programme, Progress, and Delay Entitlement Programme Requirements. The Contractor shall submit and maintain a Primavera P6 baseline programme, monthly updates, narrative reports, cash flow, procurement curves, and recovery programmes where required. Extension of Time. EOT entitlement must demonstrate a delay on the \",\"Support the claim with TIA / window logic, path analysis, and event-specific schedule evidence.\",Contractor,Yes,Yes,Yes,\"Accepted programme basis, event window, contemporaneous records, CPM logic, notices.\",Overall Contract.pdf,Extension of Time,High,Strong,\"4. Programme, Progress, and Delay Entitlement Programme Requirements. The Contractor shall submit and maintain a Primavera P6 baseline programme, monthly updates, narrative reports, cash flow, procurement curves, and recovery programmes where required. Extension of Time. EOT entitlement must demonstrate a delay on the critical path using Time Impact Analysis, Windows Analysis, or another Engineer-approved method, supported by notices and contemporaneous records. Rate of Progress. If progress is slow against the approved programme, the Engineer may request a recovery programme. The Contractor must demonstrate mitigation, resequencing, and resource recovery measures. Concurrent Delay. Events must be split by responsibility, timing, affected activities, float, criticality, and actual schedule impact. Cost recovery may be reduced where Contractor concurrent delay exists. Notices and Claims. Delay, disruption, variation, and payment claims must be notified within the contractual period and fully substantiated by records, correspondence, measurement sheets, and cause-effect analysis.\"\r\n\"Site, Materials, Quality, and HSE\",5.0,\"This clause falls under Payment Entitlements. In practical contractor terms, it means: 5. Site, Materials, Quality, and HSE Site access and possession must permit practical execution of the LMD-Bridge Project scope. Constraints relating to road diversions, deck erection sequencing, and interface access windows must be recorded with dates, photographs, obstruction logs, and daily reports. Employer free-is\",\"Show the certified / due amounts, delayed release, and the resulting impact on progress or cost.\",Shared,Unclear,Possible,Possible,\"Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.\",Overall Contract.pdf,Payment / Certification,High,Medium,\"5. Site, Materials, Quality, and HSE Site access and possession must permit practical execution of the LMD-Bridge Project scope. Constraints relating to road diversions, deck erection sequencing, and interface access windows must be recorded with dates, photographs, obstruction logs, and daily reports. Employer free-issue/material support is limited to approved items and must be requested against the approved programme. Shortage, late delivery, or defect records must be supported by requisitions, delivery notes, inspection records, and consumption logs. The Contractor shall maintain QA/QC procedures, inspection records, method statements, material approvals, as-built records, and source files in the contractually required formats. The Contractor shall implement HSE controls, permit-to-work processes, induction logs, incident records, corrective actions, and risk assessments suitable for the project interfaces.\"\r\nClause Intelligence Extract,6.0,\"This clause falls under Evidence Requirements. In practical contractor terms, it means: 6. Clause Intelligence Extract Clause / Topic Meaning Evidence Action Contract basics Project is the LMD-Bridge Project bridge substructure, superstructure, road approaches, retaining walls, drainage, and related civil works between LMD Infrastructure as Employer and SAMCO Egypt as Contractor, effective\",Show that the required records exist and directly support the claimed event and impact.,Shared,Unclear,Possible,Possible,All records explicitly required by the clause plus supporting schedule and commercial evidence.,Overall Contract.pdf,Evidence / Substantiation,Medium,Medium,\"6. Clause Intelligence Extract Clause / Topic Meaning Evidence Action Contract basics Project is the LMD-Bridge Project bridge substructure, superstructure, road approaches, retaining walls, drainage, and related civil works between LMD Infrastructure as Employer and SAMCO Egypt as Contractor, effective\"\r\nMar-2026.,10.0,\"This clause falls under Evidence Requirements. In practical contractor terms, it means: 10-Mar-2026. Keep contract date, commencement record, project access evidence, amount, parties, and baseline programme in every claim file. Accepted Contract Amount Contract amount is EGP 512,900,000 including social insurance, duties, and taxes except VAT. For each extra cost, attach Engineer instruction, BOQ gap anal\",Show that the required records exist and directly support the claimed event and impact.,Contractor,Yes,Yes,Yes,All records explicitly required by the clause plus supporting schedule and commercial evidence.,Overall Contract.pdf,Evidence / Substantiation,High,Strong,\"10-Mar-2026. Keep contract date, commencement record, project access evidence, amount, parties, and baseline programme in every claim file. Accepted Contract Amount Contract amount is EGP 512,900,000 including social insurance, duties, and taxes except VAT. For each extra cost, attach Engineer instruction, BOQ gap analysis, cost build-up, and timely notice. Advance payment structure Advance payment is 20%; structured as 35% cash advance and 65% Employer-supplied steel/material support according to the approved programme. Keep approved programme, material requisitions, delivery notes, bank guarantee records, and impact analysis. Time for Completion Time for Completion is 20 months from the Commencement Date. Maintain baseline, monthly updates, contemporaneous progress records, and approved recovery plans.\"\r\nmonth structural,8.0,\"This clause falls under Delay Damages Defense. In practical contractor terms, it means: 8-month structural milestone Section milestone: main pier foundation and first deck segment readiness within 7 months from Commencement. Track milestone fragnet, procurement constraints, concrete/steel delivery, and inspection readiness. Delay damages Delay damages are 0.85% of outstanding works per week of delay or pa\",Use excusable delay and concurrency analysis to defeat or reduce liquidated damages exposure.,Shared,Unclear,Yes,Yes,\"Criticality analysis, entitlement basis, excusable delay record, concurrency review.\",Overall Contract.pdf,Delay Damages Defense,Critical,Medium,\"8-month structural milestone Section milestone: main pier foundation and first deck segment readiness within 7 months from Commencement. Track milestone fragnet, procurement constraints, concrete/steel delivery, and inspection readiness. Delay damages Delay damages are 0.85% of outstanding works per week of delay or part thereof, capped at\"\r\n% of the Contract Price.,10.0,\"This clause falls under Evidence Requirements. In practical contractor terms, it means: 10% of the Contract Price. Protect with timely notices, critical-path delay analysis, mitigation records, and cause-effect evidence. Employer equipment and free-issue materials Employer free-issue/material support covers approved items including reinforcement steel, prestressing interfaces, bearing plates, concrete, an\",Show that the required records exist and directly support the claimed event and impact.,Contractor,Yes,Yes,Yes,All records explicitly required by the clause plus supporting schedule and commercial evidence.,Overall Contract.pdf,Evidence / Substantiation,Critical,Strong,\"10% of the Contract Price. Protect with timely notices, critical-path delay analysis, mitigation records, and cause-effect evidence. Employer equipment and free-issue materials Employer free-issue/material support covers approved items including reinforcement steel, prestressing interfaces, bearing plates, concrete, and drainage materials where stated in the approved programme. Keep requisitions, delivery notes, inspection records, storage records, consumption logs, and fragnet analysis. LB-CTR-2026-003 | LMD-Bridge Project Page 4 Clause / Topic Meaning Evidence Action Extension of time EOT requires a delay demonstrated on the critical path using Time Impact, Windows Analysis, or another approved method. Prepare notice, event chronology, contemporaneous records, fragnet/window analysis, and mitigation evidence. Claims time bar Claims must be notified and supported within the contract time limits. Maintain notice register, claim register, event logs, correspondence, and full substantiation file. LB-CTR-2026-003 | LMD-Bridge Project Page 5\"\r\nExecution Control Matrix,7.0,\"This clause falls under Payment Entitlements. In practical contractor terms, it means: 7. Execution Control Matrix Control Area Required Evidence Dashboard Usage Contract Baseline Agreement data, contract amount, scope, commencement, baseline programme Feeds project metadata, contract risk profile, and executive dashboard baseline. Payment IPC submissions, measurement sheets, material-on-site records, En\",\"Show the certified / due amounts, delayed release, and the resulting impact on progress or cost.\",Contractor,Yes,Yes,Yes,\"Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.\",Overall Contract.pdf,Payment / Certification,High,Strong,\"7. Execution Control Matrix Control Area Required Evidence Dashboard Usage Contract Baseline Agreement data, contract amount, scope, commencement, baseline programme Feeds project metadata, contract risk profile, and executive dashboard baseline. Payment IPC submissions, measurement sheets, material-on-site records, Engineer certification Feeds payment status, cash-flow risk, and commercial KPIs. Delay / EOT Notices, delay events, P6 updates, fragnet/window analysis, daily reports Feeds TIA engine, EOT potential, critical-path alerts, and claim strength score. Materials Requisitions, delivery notes, shortage logs, inspection records, consumption log Feeds steel/material delay exposure, supply-demand gap, and affected activities. Quality / HSE IRs, NCRs, method statements, safety permits, incident logs Feeds risk register, readiness score, compliance alerts, and management action list.\"\r\nSignature Placeholders,8.0,\"This clause falls under Risk Clauses. In practical contractor terms, it means: 8. Signature Placeholders On behalf of the Employer On behalf of the Contractor Engineer / PMO Acknowledgement Company: LMD Infrastructure Name: ___________________ Title: ___________________ Date: ___________________ Signature: ___________________ Company: SAMCO Egypt Name: ___________________ Title: _________________\",Tie the clause wording to the factual event with contemporaneous evidence.,Shared,Unclear,Possible,Possible,\"Full clause context, event chronology, and project records.\",Overall Contract.pdf,General Contract Risk,Low,Weak,\"8. Signature Placeholders On behalf of the Employer On behalf of the Contractor Engineer / PMO Acknowledgement Company: LMD Infrastructure Name: ___________________ Title: ___________________ Date: ___________________ Signature: ___________________ Company: SAMCO Egypt Name: ___________________ Title: ___________________ Date: ___________________ Signature: ___________________ Entity: BridgeWorks PMO Name: ___________________ Title: ___________________ Date: ___________________ Signature: ___________________ This file is synthetic and intended for testing project-control dashboards, clause extraction, and contract-intelligence workflows. It should not be used as a binding contract or relied on as legal advice.\"\r\n",
-                "created_at": "2026-06-27T02:06:59+00:00",
-                "updated_at": "2026-06-27T02:23:53+00:00"
+                "content_text": "[Sheet: Contract Clause Library]\nClause / Topic,Location,Plain English Meaning,Beneath the Lines,Who Holds Leverage,Notice / Time Bar,Money Impact,Schedule Impact,Practical Action / Evidence,Source File,Claim Type,Risk Level,Claim Strength,Exact Clause Text\r\n\"project_id,contract_source_id,source_file,source_hash,document_type,contractual_precedence\",P001,\"This clause falls under Notice Requirements. In practical contractor terms, it means: project_id,contract_source_id,source_file,source_hash,document_type,contractual_precedence,authorized_status,execution_date,revision,applicable_clause_reference,page_or_section,notice_route,time_bar_days,time_entitlement_route,cost_entitlement_route,procedure_route,confidence,notes\",\"Demonstrate timely notice, continuing notice trail, or waiver / actual knowledge by the receiving party.\",Shared,Yes,Yes,Possible,\"Notice letters, emails, meeting minutes, proof of submission and receipt.\",contract_authority_register.csv,Notice Compliance,High,Medium,\"project_id,contract_source_id,source_file,source_hash,document_type,contractual_precedence,authorized_status,execution_date,revision,applicable_clause_reference,page_or_section,notice_route,time_bar_days,time_entitlement_route,cost_entitlement_route,procedure_route,confidence,notes\"\r\n",
+                "created_at": "2026-08-01T08:53:40+00:00",
+                "updated_at": "2026-08-01T08:53:40+00:00"
               }
             ],
             "truncated": false
@@ -11600,13 +11019,13 @@
             ],
             "rows": [
               {
-                "id": 8,
-                "document_id": 4,
-                "knowledge_json": "{\"document_id\": 4, \"file_name\": \"Overall_Contract_clause_library.xlsx\", \"contract_version\": \"v1\", \"total_clauses\": 26, \"sections\": [\"Evidence Requirements\", \"Payment Entitlements\", \"Notice Requirements\", \"Contractor Counterarguments\", \"EOT Entitlements\", \"Delay Damages Defense\"]}",
-                "summary_text": "Overall_Contract_clause_library.xlsx: 26 clauses extracted",
+                "id": 9,
+                "document_id": 5,
+                "knowledge_json": "{\"document_id\": 5, \"file_name\": \"Overall_Contract_clause_library.xlsx\", \"contract_version\": \"v1\", \"total_clauses\": 1, \"sections\": [\"Notice Requirements\"]}",
+                "summary_text": "Overall_Contract_clause_library.xlsx: 1 clauses extracted",
                 "knowledge_base_status": "Ready",
-                "created_at": "2026-06-27T02:23:52+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "created_at": "2026-08-01T08:53:40+00:00",
+                "updated_at": "2026-08-01T08:53:40+00:00"
               }
             ],
             "truncated": false
@@ -11629,14 +11048,14 @@
                 "meta_key": "knowledge_base_status",
                 "meta_value": "Ready",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "updated_at": "2026-08-01T08:53:40+00:00"
               },
               {
                 "id": 5,
                 "meta_key": "scope_cleanup",
-                "meta_value": "Removed 2 stale document(s) outside projects\\Bridges\\LMD-Bridgs\\05-contracts\\source",
+                "meta_value": "Removed 1 stale document(s) outside D:\\one drive data\\OneDrive\\Documents\\Project Intelligence Hub\\projects\\Bridges\\LMD-Bridgs\\05-contracts",
                 "created_at": "2026-06-27T02:06:59+00:00",
-                "updated_at": "2026-06-27T02:06:59+00:00"
+                "updated_at": "2026-08-01T08:53:40+00:00"
               }
             ],
             "truncated": false
@@ -11677,14 +11096,14 @@
             ],
             "rows": [
               {
-                "id": 8,
-                "document_id": 4,
-                "file_hash": "279abaa9b28325bb3a90be4ac30aeeb6a99a971ea84b48df2c5922cf6c6ea1e5",
+                "id": 9,
+                "document_id": 5,
+                "file_hash": "e7ea30cedec5f7bd8c42646138736319430d5f59f2ee0d99a231ba9468b1a24b",
                 "contract_version": "v1",
-                "analysis_date": "2026-06-27T02:23:52+00:00",
+                "analysis_date": "2026-08-01T08:53:40+00:00",
                 "is_active": 1,
-                "created_at": "2026-06-27T02:23:52+00:00",
-                "updated_at": "2026-06-27T02:23:52+00:00"
+                "created_at": "2026-08-01T08:53:40+00:00",
+                "updated_at": "2026-08-01T08:53:40+00:00"
               }
             ],
             "truncated": false
@@ -11771,6 +11190,69 @@
         },
         "error": null
       },
+      "controlled_assessment": {
+        "status": {
+          "contract_loaded": true,
+          "last_analysis_date": "2026-08-01T08:53:40+00:00",
+          "total_clauses": 1,
+          "contract_version": "v1",
+          "knowledge_base_status": "Ready",
+          "reprocessed": false,
+          "detected_files": [
+            "contract_authority_register.csv",
+            "Overall_Contract_clause_library.xlsx"
+          ],
+          "analysis_files": [
+            "Overall_Contract_clause_library.xlsx"
+          ],
+          "supporting_files": [
+            "contract_authority_register.csv"
+          ],
+          "source_warnings": [
+            "Curated contract clause library is the active analysis source; non-library contract files are retained as source references."
+          ],
+          "extraction_issue": "Curated contract clause library is the active analysis source; non-library contract files are retained as source references.",
+          "stale_documents_removed": 0,
+          "auto_library_status": {
+            "generated": false,
+            "source_files": [
+              "contract_authority_register.csv"
+            ],
+            "row_count": 0,
+            "message": "Existing clause library is current."
+          }
+        },
+        "controls": {
+          "project_id": "LMD-Bridge",
+          "project_key": "lmd-bridge",
+          "source_scope": "selected_project_only",
+          "generic_guidance_status": "Guidance only; not a project clause or entitlement without a cited project source.",
+          "contract_source_count": 3,
+          "clause_control_count": 1,
+          "evidence_mapping_count": 0,
+          "contract_authority_register": [],
+          "clause_controls": [
+            {
+              "project_id": "LMD-Bridge",
+              "project_key": "lmd-bridge",
+              "clause_reference": "Not indexed",
+              "clause_title": "project_id,contract_source_id,source_file,source_hash,document_type,contractual_precedence",
+              "source_file": "Overall_Contract_clause_library.xlsx",
+              "source_hash": "279abaa9b28325bb3a90be4ac30aeeb6a99a971ea84b48df2c5922cf6c6ea1e5",
+              "page_or_section": "Not indexed",
+              "contractual_precedence": "Not confirmed",
+              "authorized_status": "Not confirmed",
+              "notice_route": "Yes",
+              "time_entitlement_route": "Yes",
+              "cost_entitlement_route": "Yes",
+              "procedure_route": "Verify from contract",
+              "required_evidence": "Notice letters, emails, meeting minutes, proof of submission and receipt.",
+              "confidence": "Source-backed"
+            }
+          ],
+          "evidence_ledger": []
+        }
+      },
       "clause_library": {
         "file": "Overall_Contract_clause_library.xlsx",
         "exists": true,
@@ -11809,84 +11291,84 @@
           "relative_path": "LMD-Bridgs/01_executive_dashboard.html",
           "extension": "html",
           "size_kb": 1.8,
-          "modified": "2026-08-01T11:41:41"
+          "modified": "2026-08-01T12:04:25"
         },
         {
           "name": "01_executive_dashboard.pdf",
           "relative_path": "LMD-Bridgs/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 67.4,
-          "modified": "2026-08-01T11:41:42"
+          "modified": "2026-08-01T12:04:26"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "LMD-Bridgs/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-01T11:41:42"
+          "modified": "2026-08-01T12:04:26"
         },
         {
           "name": "02_master_dashboard.html",
           "relative_path": "LMD-Bridgs/02_master_dashboard.html",
           "extension": "html",
           "size_kb": 1.8,
-          "modified": "2026-08-01T11:41:43"
+          "modified": "2026-08-01T12:04:26"
         },
         {
           "name": "02_master_dashboard.pdf",
           "relative_path": "LMD-Bridgs/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 67.4,
-          "modified": "2026-08-01T11:41:43"
+          "modified": "2026-08-01T12:04:27"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "LMD-Bridgs/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-01T11:41:43"
+          "modified": "2026-08-01T12:04:27"
         },
         {
           "name": "03_elite_svg_charts.html",
           "relative_path": "LMD-Bridgs/03_elite_svg_charts.html",
           "extension": "html",
           "size_kb": 1.8,
-          "modified": "2026-08-01T11:41:43"
+          "modified": "2026-08-01T12:04:27"
         },
         {
           "name": "03_elite_svg_charts.pdf",
           "relative_path": "LMD-Bridgs/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 67.5,
-          "modified": "2026-08-01T11:41:44"
+          "modified": "2026-08-01T12:04:28"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "LMD-Bridgs/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-01T11:41:44"
+          "modified": "2026-08-01T12:04:28"
         },
         {
           "name": "04_linked_executive_dashboard.html",
           "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.html",
           "extension": "html",
           "size_kb": 1.8,
-          "modified": "2026-08-01T11:41:44"
+          "modified": "2026-08-01T12:04:28"
         },
         {
           "name": "04_linked_executive_dashboard.pdf",
           "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 67.7,
-          "modified": "2026-08-01T11:41:45"
+          "modified": "2026-08-01T12:04:29"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-01T11:41:45"
+          "modified": "2026-08-01T12:04:29"
         }
       ],
       "watchers": [
@@ -12031,17 +11513,17 @@
         "html": {
           "name": "01_executive_dashboard.html",
           "bytes": 1807,
-          "sha256": "90360e3a35c71562d0af1d9349f9593a05094ff054cdbe5c55fb7796be14d10b"
+          "sha256": "6f1dbb1a3694a311804709ae7aa77b73efa11c1fa9ed6161f5577194c51ebeb1"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 69026,
-          "sha256": "010d97efb66e52674f1393880fc2a25b234663d61ddfebe90ba56a60deba7cd8"
+          "bytes": 69014,
+          "sha256": "7fa07c1b740390ad13f6fe2ba66667b047fed3cf68196c9da555b98269365769"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29122,
-          "sha256": "5af354b0e23a9750272d76a390e433bd58fa0d2312e4f20a92d648be276d87d1"
+          "sha256": "a52c606e10d9cb5166edacfa6604a8c900ef2bb75bc59a2e145b35eeea5a9a3b"
         }
       }
     },
@@ -12053,17 +11535,17 @@
         "html": {
           "name": "02_master_dashboard.html",
           "bytes": 1801,
-          "sha256": "9a2d73ad345a7486712ea1f4e053c0ccf6cdeec2b942ab4c2bd51f47c6781777"
+          "sha256": "4fb08452a7ef33e46869d8201da0fd4475c1411e798d5d14350b74c03bcf1c20"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
-          "bytes": 69021,
-          "sha256": "0da42eb5724bbf94a62f9c4157f36400926ecd7f086884046845b53c8ac10028"
+          "bytes": 69011,
+          "sha256": "8b5dd510b0fc560bfba73e59e1efe38017946cf77cce9f251b063a0e856b704e"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29119,
-          "sha256": "f577e736f8f1838be8699b9ef771a398f5f3ace9911f21f494f7482821664b17"
+          "sha256": "ca97310845f4ae47608f284ad81de60fdab3260fde5c1fddbe1188a819123e04"
         }
       }
     },
@@ -12075,17 +11557,17 @@
         "html": {
           "name": "03_elite_svg_charts.html",
           "bytes": 1801,
-          "sha256": "10a1d0f8034e9a1b59559335ab11c214fba5dab2e6a1e3e46d32319470cd6a4d"
+          "sha256": "3ef0b7f10c7a2ba2f5c527ed62612c4d3553c898157d0bdbede88c50ce714416"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
-          "bytes": 69139,
-          "sha256": "4b510fbd74faa3246dc631bde7dfc1cbdb87b6ad642ab0d46c2bc8e14bb2f184"
+          "bytes": 69129,
+          "sha256": "e3143a005ed430fdb0e36e06604a21bf12adf1ce8f87ad81d2262aefcbaf940d"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29119,
-          "sha256": "e6b97a6f898e4aca887b56b27ed401bc2c425c588658adf7f933cedba78fadbd"
+          "sha256": "34fc2f5eb8a40a78b550277088cdffb681dce875fc1efd688f8392683d069594"
         }
       }
     },
@@ -12097,17 +11579,17 @@
         "html": {
           "name": "04_linked_executive_dashboard.html",
           "bytes": 1821,
-          "sha256": "30e2b08b2c498409c720ca1f97b437b77af59b84ebf5b5de85611c3a4ab15fbd"
+          "sha256": "f69dec7e639ef6b5742c1ff41be9daee0258f2279793ec249b60e57e4aca434d"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
-          "bytes": 69295,
-          "sha256": "d46a0bf1702b1efff71d8fd0bf0e43432c10ba2d8ea71d3e7bf86e482507a2da"
+          "bytes": 69283,
+          "sha256": "0109b7bc33c8c33193e9d0696390139b8da544aba0eb0a73a39aebe65a93d447"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29128,
-          "sha256": "cdd312ba30ee1eb547e4b34a15bbb58c7fbf130592f4743c521bda9e3c7ce443"
+          "sha256": "7c9841596ffe4b587dca9d87bbe9db1b59c952790e6542d77500bfecce6ea724"
         }
       }
     }

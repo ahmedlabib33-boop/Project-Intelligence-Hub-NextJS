@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import re
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -36,6 +37,7 @@ from generate_nextjs_website_data import (  # noqa: E402
 DATA_ROOT = ROOT / "website" / "public" / "data" / "projects"
 REPORT_PATH = ROOT / "12-logs" / "vercel_streamlit_pipeline_audit_latest.md"
 PAGE_PATH = ROOT / "website" / "src" / "app" / "page.tsx"
+STREAMLIT_DASHBOARD_PATH = ROOT.parent / "one drive data" / "OneDrive" / "Documents" / "Project Intelligence Hub" / "dashboard.py"
 
 PUBLIC_METRICS = (
     "contract_value",
@@ -228,6 +230,23 @@ def validate_project_workspace_surface(
             if not isinstance(canonical_tables, dict) or "relationship_logic_df" not in canonical_tables:
                 errors.append(f"{project_key}: canonical TIA analysis did not publish relationship logic evidence")
 
+    four_pipeline = features.get("four_pipeline")
+    if not isinstance(four_pipeline, dict):
+        errors.append(f"{project_key}: four-pipeline project assessment is missing")
+    else:
+        if four_pipeline.get("project_id") != output.get("project_id") or four_pipeline.get("project_key") != output.get("project_key"):
+            errors.append(f"{project_key}: four-pipeline assessment identity is not project-isolated")
+        if "project_folder_path" in four_pipeline:
+            errors.append(f"{project_key}: public four-pipeline payload exposes a local folder path")
+        if four_pipeline.get("assessment_profile") not in {"evidence_backed", "qualified", "readiness_only"}:
+            errors.append(f"{project_key}: four-pipeline assessment has an invalid readiness profile")
+        for source in four_pipeline.get("source_inventory", []):
+            if not isinstance(source, dict) or source.get("project_id") != output.get("project_id"):
+                errors.append(f"{project_key}: four-pipeline source lineage includes another project's record")
+                break
+        else:
+            checks.append(f"{project_key}: four-pipeline assessment and source lineage are project-isolated")
+
     claims = features.get("contract_claims")
     if not isinstance(claims, dict):
         errors.append(f"{project_key}: Contract & Claims payload is missing")
@@ -236,6 +255,19 @@ def validate_project_workspace_surface(
             errors.append(f"{project_key}: project-only Contract & Claims knowledge base payload is missing")
         if not isinstance(claims.get("clause_library_tables"), dict):
             errors.append(f"{project_key}: contract clause library workbook payload is missing")
+        controls = claims.get("controlled_assessment")
+        if not isinstance(controls, dict) or not isinstance(controls.get("controls"), dict):
+            errors.append(f"{project_key}: controlled contract/evidence assessment is missing")
+        else:
+            project_controls = controls["controls"]
+            if project_controls.get("project_id") != output.get("project_id") or project_controls.get("project_key") != output.get("project_key"):
+                errors.append(f"{project_key}: controlled contract/evidence assessment is not project-isolated")
+            else:
+                records = list(project_controls.get("clause_controls") or []) + list(project_controls.get("evidence_ledger") or [])
+                if any(isinstance(record, dict) and record.get("project_id") != output.get("project_id") for record in records):
+                    errors.append(f"{project_key}: controlled contract/evidence assessment includes another project's record")
+                else:
+                    checks.append(f"{project_key}: contract clauses and evidence mappings are project-isolated")
 
     reports = output.get("reports")
     expected_reports = {"executive_dashboard", "master_dashboard", "elite_svg_charts", "linked_executive_dashboard"}
@@ -283,6 +315,29 @@ def validate_workspace_tab_catalog(errors: list[str], checks: list[str]) -> None
     hidden_legacy = [tab for tab in ("Delays", "Time Impact") if f'"{tab}"' in tab_catalog]
     if hidden_legacy:
         errors.append(f"Next.js workspace still exposes legacy compatibility tabs: {', '.join(hidden_legacy)}")
+
+
+def validate_streamlit_tia_catalog(errors: list[str], checks: list[str]) -> None:
+    """Ensure legacy delay screens are consolidated rather than merely hidden."""
+    if not STREAMLIT_DASHBOARD_PATH.exists():
+        errors.append("canonical Streamlit dashboard.py is missing")
+        return
+    source = STREAMLIT_DASHBOARD_PATH.read_text(encoding="utf-8", errors="replace")
+    catalog_match = re.search(
+        r"PROJECT_HUB_SLIDE_NAMES\s*=\s*(\[[\s\S]*?\n\])",
+        source,
+    )
+    catalog = catalog_match.group(1) if catalog_match else ""
+    if not catalog:
+        errors.append("Streamlit project slide catalog could not be located")
+        return
+    exposed_legacy = [label for label in ("Delays", "Time Impact") if f'"{label}"' in catalog]
+    if exposed_legacy:
+        errors.append(f"Streamlit project slide catalog still exposes legacy TIA tabs: {', '.join(exposed_legacy)}")
+    elif '"Delay Analysis - Time Impact Analysis"' not in catalog:
+        errors.append("Streamlit project slide catalog is missing consolidated Delay Analysis - Time Impact Analysis")
+    else:
+        checks.append("Streamlit consolidates legacy Delays and Time Impact under Delay Analysis - Time Impact Analysis")
 
 
 def validate_advanced_analytics_output(
@@ -434,6 +489,7 @@ def main(argv: list[str] | None = None) -> int:
     portfolio: dict[str, Any] | None = None
 
     validate_workspace_tab_catalog(errors, checks)
+    validate_streamlit_tia_catalog(errors, checks)
 
     for project in discover_projects():
         project_key = str(project["project_key"])
