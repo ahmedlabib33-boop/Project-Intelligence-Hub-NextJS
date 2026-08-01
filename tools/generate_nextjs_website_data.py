@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from advanced_analytics import build_advanced_analytics
+from project_chart_payloads import build_project_chart_payloads
 from project_report_artifacts import ensure_project_report_artifacts
 
 
@@ -720,6 +721,7 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
         "claims": data_dir / "claims.csv",
         "contracts": data_dir / "contracts.csv",
         "payments": data_dir / "payments.csv",
+        "planned_cash_flow": data_dir / "planned_cash_flow.csv",
         "milestones": data_dir / "milestones.csv",
         "delay_events": data_dir / "delay_events.csv",
         "wbs": data_dir / "wbs.csv",
@@ -1194,6 +1196,7 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         "projects": read_csv_rows(data_dir / "projects.csv"),
         "contracts": read_csv_rows(data_dir / "contracts.csv"),
         "payments": read_csv_rows(data_dir / "payments.csv"),
+        "planned_cash_flow": read_csv_rows(data_dir / "planned_cash_flow.csv"),
         "progress": read_csv_rows(data_dir / "progress_updates.csv"),
         "evm": read_csv_rows(data_dir / "evm.csv"),
         "risks": read_csv_rows(data_dir / "risks.csv"),
@@ -1352,6 +1355,18 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         "advanced_analytics": advanced_analytics,
     })
 
+    features = build_feature_payload(project, rows)
+    chart_payloads = build_project_chart_payloads(
+        project_id=str(project["project_id"]),
+        project_key=str(project["project_key"]),
+        data_dir=data_dir,
+        delay_dir=base / "02-delay_analysis" / "steel_delay_tia_templates",
+        payment_rows=rows["payments"],
+        delay_event_rows=rows["delay_events"],
+        activity_rows=rows["activities"],
+        read_csv_rows=read_csv_rows,
+    )
+
     return {
         **{k: v for k, v in project.items() if k != "path"},
         "status": status,
@@ -1414,7 +1429,8 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
             "delay_days": {"source": "delay_events.csv:estimated or overlap-adjusted duration", "aggregation": "cumulative event exposure; not a verified EOT calculation"},
             "claims_exposure": {"source": "claims.csv:claimed_amount", "aggregation": "sum of selected project claim records"},
         },
-        "features": build_feature_payload(project, rows),
+        "features": features,
+        "chart_payloads": chart_payloads,
         "reports": {
             "executive_dashboard": f"/generated/{slugify(project['project_folder_name'])}/01_executive_dashboard.html",
             "master_dashboard": f"/generated/{slugify(project['project_folder_name'])}/02_master_dashboard.html",
