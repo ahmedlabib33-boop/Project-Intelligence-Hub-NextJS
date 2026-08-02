@@ -239,6 +239,101 @@ def xlsx_workspace_tables(path: Path, limit_per_sheet: int = WORKSPACE_TABLE_ROW
     return result
 
 
+def _project_scoped_letter_frame(frame: Any, project_id: str) -> tuple[Any, int]:
+    """Keep only rows belonging to the active project before publishing letters."""
+    import pandas as pd
+
+    scoped = frame.copy().where(frame.notna(), "") if isinstance(frame, pd.DataFrame) else pd.DataFrame()
+    project_column = next(
+        (column for column in scoped.columns if normalize_field_name(column) == "projectid"),
+        None,
+    )
+    rejected = 0
+    if project_column is not None:
+        normalized = scoped[project_column].astype(str).str.strip()
+        allowed = normalized.eq("") | normalized.eq(project_id)
+        rejected = int((~allowed).sum())
+        scoped = scoped.loc[allowed].copy()
+    scoped["project_id"] = project_id
+    return scoped, rejected
+
+
+def _frames_to_workspace_tables(
+    sheets: dict[str, Any], project_id: str, limit_per_sheet: int = WORKSPACE_TABLE_ROW_LIMIT
+) -> dict[str, Any]:
+    """Convert legacy Streamlit letter tables into selected-project JSON tables."""
+    result: dict[str, Any] = {"file": "letters_intelligence.xlsx", "exists": True, "sheets": []}
+    rejected_rows = 0
+    for sheet_name, frame in sheets.items():
+        scoped, rejected = _project_scoped_letter_frame(frame, project_id)
+        rejected_rows += rejected
+        columns = [str(column) for column in scoped.columns]
+        records = [
+            {column: excel_value(value) for column, value in row.items()}
+            for row in scoped.head(limit_per_sheet).to_dict("records")
+        ]
+        result["sheets"].append(
+            {
+                "name": str(sheet_name),
+                "row_count": int(len(scoped)),
+                "column_count": len(columns),
+                "columns": columns,
+                "rows": records,
+                "truncated": len(scoped) > limit_per_sheet,
+            }
+        )
+    result["rejected_cross_project_rows"] = rejected_rows
+    result["source_scope"] = "selected_project_only"
+    return result
+
+
+def build_letters_workspace_tables(
+    project: dict[str, Any], workbook_path: Path, inbox_dir: Path
+) -> dict[str, Any]:
+    """Run the existing Streamlit letters workflow without writing to source files.
+
+    Workbook registers and inbox files are merged in memory through the same
+    `merge_inbox_letters` engine that powers the canonical Streamlit workspace.
+    The result is then stamped and filtered to the selected `project_id` before
+    it is included in that project's Vercel payload.
+    """
+    project_id = str(project.get("project_id") or "").strip()
+    if not project_id:
+        return {"file": workbook_path.name, "exists": workbook_path.exists(), "sheets": [], "error": "Project ID is required."}
+    try:
+        import pandas as pd
+
+        source_sheets: dict[str, Any] = {}
+        if workbook_path.exists():
+            workbook = pd.ExcelFile(workbook_path)
+            source_sheets = {
+                str(sheet_name): pd.read_excel(workbook, sheet_name=sheet_name).fillna("")
+                for sheet_name in workbook.sheet_names
+            }
+        canonical_src = CANONICAL_ROOT / "src"
+        if canonical_src.exists() and str(canonical_src) not in sys.path:
+            sys.path.insert(0, str(canonical_src))
+        if str(CANONICAL_ROOT) not in sys.path:
+            sys.path.insert(0, str(CANONICAL_ROOT))
+        from construction_system.letters_auto_ingest import merge_inbox_letters
+        from contract_claims_center import extract_text_from_path
+
+        merged_sheets = merge_inbox_letters(source_sheets, inbox_dir, extract_text_from_path)
+        tables = _frames_to_workspace_tables(merged_sheets, project_id)
+        tables["file"] = workbook_path.name
+        tables["exists"] = workbook_path.exists() or inbox_dir.exists()
+        tables["inbox_auto_ingest"] = True
+        return tables
+    except Exception as exc:
+        return {
+            "file": workbook_path.name,
+            "exists": workbook_path.exists(),
+            "sheets": [],
+            "error": f"Letters workspace processing failed: {exc}",
+            "source_scope": "selected_project_only",
+        }
+
+
 def json_safe_sql_value(value: Any) -> Any:
     if isinstance(value, bytes):
         return f"[binary {len(value)} bytes]"
@@ -791,6 +886,7 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     letter_files = list_project_files(letters_dir / "inbox", base, 160)
     letter_workbook_path = letters_dir / "letters_intelligence.xlsx"
     letter_workbook = xlsx_summary(letter_workbook_path)
+    letter_workspace_tables = build_letters_workspace_tables(project, letter_workbook_path, letters_dir / "inbox")
     contract_files = list_project_files(contracts_dir / "source", base, 80)
     evidence_files = list_project_files(evidence_dir, base, 80)
     output_files = list_project_files(outputs_dir, OUTPUTS_ROOT, 20)
@@ -841,18 +937,18 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
             "inbox_files": letter_files,
             "inbox_file_count": len(letter_files),
             "workbook": letter_workbook,
-            "workbook_tables": xlsx_workspace_tables(letter_workbook_path),
+            "workbook_tables": letter_workspace_tables,
             "detectors": [
                 {"name": "Inbox folder detector", "status": "Active" if (letters_dir / "inbox").exists() else "Missing", "detail": "Recognizes new PDF, DOCX, XLSX, CSV, and message files under project letters inbox."},
-                {"name": "Letters workbook detector", "status": "Active" if (letters_dir / "letters_intelligence.xlsx").exists() else "Missing", "detail": "Reads the project-specific letters intelligence workbook when available."},
+                {"name": "Letters intelligence workflow", "status": "Active" if letter_workspace_tables.get("sheets") else "Awaiting Data", "detail": "Uses the Streamlit workbook, inbox ingestion, correspondence links, and issue-thread workflow for this project only."},
                 {"name": "Project isolation", "status": "Active", "detail": "Only files inside the selected project folder are listed."},
             ],
         },
         "delay_analysis": {
             "folder": "02-delay_analysis",
-            "visibility": "internal",
+            "visibility": "workspace",
             "internal_control": {
-                "ui_enabled": False,
+                "ui_enabled": True,
                 "source_scope": "selected_project_only",
                 "automatic_engine": "canonical_streamlit_tia",
                 "groq_assist": "on_demand_after_evidence_validation",

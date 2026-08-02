@@ -206,8 +206,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-02T04:53:51",
-  "fingerprint": "c875cc2a884cd635187542bf839bb428dd95dde23bdf8cd60b443ff7ef3d9ae4",
+  "last_updated": "2026-08-02T17:36:17",
+  "fingerprint": "caea5ba7220fd221493548f8127086ddf537d0949bc08ab853766c55c7c7e60a",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -3290,8 +3290,154 @@
       },
       "workbook_tables": {
         "file": "letters_intelligence.xlsx",
-        "exists": false,
-        "sheets": []
+        "exists": true,
+        "sheets": [
+          {
+            "name": "From Contractor",
+            "row_count": 0,
+            "column_count": 19,
+            "columns": [
+              "Ref No",
+              "Date",
+              "Type",
+              "Subject",
+              "Main Purpose",
+              "Key Requests",
+              "Scope Impact",
+              "Responsibility",
+              "Affected Activities",
+              "Start Dependency",
+              "Sequence Impact",
+              "Commercial Impact",
+              "Risk Type",
+              "Risk Owner",
+              "Delay Risk",
+              "EOT Potential",
+              "Claim Strength",
+              "Required Actions",
+              "project_id"
+            ],
+            "rows": [],
+            "truncated": false
+          },
+          {
+            "name": "From Consultant",
+            "row_count": 0,
+            "column_count": 19,
+            "columns": [
+              "Ref No",
+              "Date",
+              "Type",
+              "Subject",
+              "Main Purpose",
+              "Key Requests",
+              "Scope Impact",
+              "Responsibility",
+              "Affected Activities",
+              "Start Dependency",
+              "Sequence Impact",
+              "Commercial Impact",
+              "Risk Type",
+              "Risk Owner",
+              "Delay Risk",
+              "EOT Potential",
+              "Claim Strength",
+              "Required Actions",
+              "project_id"
+            ],
+            "rows": [],
+            "truncated": false
+          },
+          {
+            "name": "Contractor Links",
+            "row_count": 0,
+            "column_count": 18,
+            "columns": [
+              "Thread",
+              "SAMCO Ref No",
+              "SAMCO Sheet Row",
+              "SAMCO Date",
+              "SAMCO Type",
+              "SAMCO Subject",
+              "Related ACE Ref No(s)",
+              "ACE Sheet Row(s)",
+              "ACE Date(s)",
+              "ACE Subject(s)",
+              "Relationship",
+              "Confidence",
+              "SAMCO Claim Strength",
+              "ACE Claim Strength",
+              "SAMCO Delay Risk",
+              "ACE Delay Risk",
+              "Recommended Follow-up",
+              "project_id"
+            ],
+            "rows": [],
+            "truncated": false
+          },
+          {
+            "name": "Consultant Links",
+            "row_count": 0,
+            "column_count": 14,
+            "columns": [
+              "ACE Ref No",
+              "ACE Sheet Row",
+              "ACE Date",
+              "ACE Type",
+              "ACE Subject",
+              "Related SAMCO Ref No(s)",
+              "SAMCO Sheet Row(s)",
+              "SAMCO Subject(s)",
+              "Thread(s)",
+              "ACE Delay Risk",
+              "ACE EOT Potential",
+              "ACE Claim Strength",
+              "ACE Required Actions",
+              "project_id"
+            ],
+            "rows": [],
+            "truncated": false
+          },
+          {
+            "name": "Issue Threads",
+            "row_count": 0,
+            "column_count": 7,
+            "columns": [
+              "Thread",
+              "SAMCO Ref(s)",
+              "6",
+              "Main Link",
+              "Priority",
+              "Next Action",
+              "project_id"
+            ],
+            "rows": [],
+            "truncated": false
+          },
+          {
+            "name": "Auto Ingest Register",
+            "row_count": 0,
+            "column_count": 11,
+            "columns": [
+              "Source File",
+              "Direction",
+              "Reference",
+              "Date",
+              "Subject",
+              "Classification",
+              "Delay Risk",
+              "Issue Thread",
+              "Status",
+              "Message",
+              "project_id"
+            ],
+            "rows": [],
+            "truncated": false
+          }
+        ],
+        "rejected_cross_project_rows": 0,
+        "source_scope": "selected_project_only",
+        "inbox_auto_ingest": true
       },
       "detectors": [
         {
@@ -3300,9 +3446,9 @@
           "detail": "Recognizes new PDF, DOCX, XLSX, CSV, and message files under project letters inbox."
         },
         {
-          "name": "Letters workbook detector",
-          "status": "Missing",
-          "detail": "Reads the project-specific letters intelligence workbook when available."
+          "name": "Letters intelligence workflow",
+          "status": "Active",
+          "detail": "Uses the Streamlit workbook, inbox ingestion, correspondence links, and issue-thread workflow for this project only."
         },
         {
           "name": "Project isolation",
@@ -3313,9 +3459,9 @@
     },
     "delay_analysis": {
       "folder": "02-delay_analysis",
-      "visibility": "internal",
+      "visibility": "workspace",
       "internal_control": {
-        "ui_enabled": false,
+        "ui_enabled": true,
         "source_scope": "selected_project_only",
         "automatic_engine": "canonical_streamlit_tia",
         "groq_assist": "on_demand_after_evidence_validation",
@@ -8998,7 +9144,7 @@
       "project_key": "sophia-mall",
       "project_display_name": "Sophia Mall Mixed-Use Development",
       "analysis_run_id": "7b74a153fdbf31627b11",
-      "analysis_generated_at": "2026-08-02T01:53:51+00:00",
+      "analysis_generated_at": "2026-08-02T14:36:17+00:00",
       "methodology_profile": "four_pipeline_v1",
       "assessment_profile": "readiness_only",
       "assessment_status": "readiness_only",
@@ -10449,91 +10595,91 @@
                 "category_name": "EOT / Delay Claim",
                 "description": "Auto-seeded claim category for EOT / Delay Claim.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 2,
                 "category_name": "Variation Claim",
                 "description": "Auto-seeded claim category for Variation Claim.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 3,
                 "category_name": "Payment Claim",
                 "description": "Auto-seeded claim category for Payment Claim.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 4,
                 "category_name": "Suspension / Slowdown",
                 "description": "Auto-seeded claim category for Suspension / Slowdown.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 5,
                 "category_name": "Material Escalation",
                 "description": "Auto-seeded claim category for Material Escalation.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 6,
                 "category_name": "Late Drawings / Late Approvals",
                 "description": "Auto-seeded claim category for Late Drawings / Late Approvals.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 7,
                 "category_name": "Employer Free-Issue Material",
                 "description": "Auto-seeded claim category for Employer Free-Issue Material.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 8,
                 "category_name": "Site Access / Handover",
                 "description": "Auto-seeded claim category for Site Access / Handover.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 9,
                 "category_name": "Engineer Instruction",
                 "description": "Auto-seeded claim category for Engineer Instruction.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 10,
                 "category_name": "Defects / DLP",
                 "description": "Auto-seeded claim category for Defects / DLP.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 11,
                 "category_name": "Delay Damages Defense",
                 "description": "Auto-seeded claim category for Delay Damages Defense.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 12,
                 "category_name": "Dispute / Notice / Time-Bar",
                 "description": "Auto-seeded claim category for Dispute / Notice / Time-Bar.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 13,
                 "category_name": "General Contract Risk",
                 "description": "Auto-seeded claim category for General Contract Risk.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               }
             ],
             "truncated": false
@@ -10743,7 +10889,7 @@
                 "defense_keywords": "[\"no notice\", \"notice not submitted\", \"no formal notice\", \"no valid notice\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 2,
@@ -10752,7 +10898,7 @@
                 "defense_keywords": "[\"late notice\", \"notice was late\", \"notice submitted late\", \"out of time notice\", \"time bar\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 3,
@@ -10761,7 +10907,7 @@
                 "defense_keywords": "[\"no written instruction\", \"verbal instruction\", \"no formal instruction\", \"no instruction in writing\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 4,
@@ -10770,7 +10916,7 @@
                 "defense_keywords": "[\"not on critical path\", \"not critical\", \"float available\", \"not on longest path\", \"non critical\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 5,
@@ -10779,7 +10925,7 @@
                 "defense_keywords": "[\"concurrent delay\", \"overlapping delay\", \"parallel delay\", \"same period delay\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 6,
@@ -10788,7 +10934,7 @@
                 "defense_keywords": "[\"contractor delay\", \"contractor caused\", \"late by contractor\", \"contractor responsible delay\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 7,
@@ -10797,7 +10943,7 @@
                 "defense_keywords": "[\"fixed price\", \"lump sum\", \"no escalation\", \"firm price\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 8,
@@ -10806,7 +10952,7 @@
                 "defense_keywords": "[\"already included\", \"within original scope\", \"included in contract\", \"contract scope already covers\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 9,
@@ -10815,7 +10961,7 @@
                 "defense_keywords": "[\"insufficient substantiation\", \"not substantiated\", \"insufficient evidence\", \"unsupported claim\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 10,
@@ -10824,7 +10970,7 @@
                 "defense_keywords": "[\"no contemporaneous records\", \"no records at the time\", \"no site records\", \"no contemporaneous evidence\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 11,
@@ -10833,7 +10979,7 @@
                 "defense_keywords": "[\"engineer approval not entitlement\", \"approval does not mean entitlement\", \"approval is not claim\", \"approval only\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 12,
@@ -10842,7 +10988,7 @@
                 "defense_keywords": "[\"failed to mitigate\", \"failure to mitigate\", \"no mitigation\", \"insufficient mitigation\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 13,
@@ -10851,7 +10997,7 @@
                 "defense_keywords": "[\"no causation\", \"no causal link\", \"did not cause delay\", \"no cause and effect\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 14,
@@ -10860,7 +11006,7 @@
                 "defense_keywords": "[\"no cost breakdown\", \"cost not broken down\", \"no quantum support\", \"no supporting cost detail\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               },
               {
                 "id": 15,
@@ -10869,7 +11015,7 @@
                 "defense_keywords": "[\"no programme impact\", \"no schedule impact\", \"no impact on programme\", \"no impact on completion\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-02T01:53:51+00:00"
+                "updated_at": "2026-08-02T14:36:17+00:00"
               }
             ],
             "truncated": false
@@ -11260,14 +11406,621 @@
       "clause_library": {
         "file": "Overall_Contract_clause_library.xlsx",
         "exists": true,
-        "sheets": [],
-        "error": "No module named 'openpyxl'"
+        "sheets": [
+          {
+            "name": "Contract Clause Library",
+            "row_count": 27,
+            "column_count": 14,
+            "columns": [
+              "Clause / Topic",
+              "Location",
+              "Plain English Meaning",
+              "Beneath the Lines",
+              "Who Holds Leverage",
+              "Notice / Time Bar",
+              "Money Impact",
+              "Schedule Impact",
+              "Practical Action / Evidence",
+              "Source File",
+              "Claim Type",
+              "Risk Level",
+              "Claim Strength",
+              "Exact Clause Text"
+            ],
+            "rows": [
+              {
+                "Clause / Topic": "Agreement Summary",
+                "Location": "1",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 1. Agreement Summary This synthetic contract record is prepared for the Sophia-Mall Project comprising civil works, structural frame, finishing interfaces, mall service corridors, and enabling works. The Employer is Sophia Developments, the Contractor is SAMCO Egypt, and the Engineer / PMO is Urban Retail PMO. The Agre",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "1. Agreement Summary This synthetic contract record is prepared for the Sophia-Mall Project comprising civil works, structural frame, finishing interfaces, mall service corridors, and enabling works. The Employer is Sophia Developments, the Contractor is SAMCO Egypt, and the Engineer / PMO is Urban Retail PMO. The Agreement Effective Date is"
+              },
+              {
+                "Clause / Topic": "Feb-2026 and the Commencement Date is 15-Feb-2026.",
+                "Location": "01",
+                "Plain English Meaning": "This clause falls under Contractor Counterarguments. In practical contractor terms, it means: 01-Feb-2026 and the Commencement Date is 15-Feb-2026. Item Value Project Sophia-Mall Project Contract Number SM-CTR-2026-002 Scope civil works, structural frame, finishing interfaces, mall service corridors, and enabling works Accepted Contract Amount EGP 429,650,000 excluding VAT unless otherwise stated Time for Compl",
+                "Beneath the Lines": "Tie the facts directly to the contractual exception or saving wording.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Yes",
+                "Practical Action / Evidence": "Exception facts, supporting letters, notices, approvals, and event records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "Counterargument / Exception",
+                "Risk Level": "Medium",
+                "Claim Strength": "Medium",
+                "Exact Clause Text": "01-Feb-2026 and the Commencement Date is 15-Feb-2026. Item Value Project Sophia-Mall Project Contract Number SM-CTR-2026-002 Scope civil works, structural frame, finishing interfaces, mall service corridors, and enabling works Accepted Contract Amount EGP 429,650,000 excluding VAT unless otherwise stated Time for Completion"
+              },
+              {
+                "Clause / Topic": "months from the Commencement Date",
+                "Location": "18",
+                "Plain English Meaning": "This clause falls under Notice Requirements. In practical contractor terms, it means: 18 months from the Commencement Date Key Section Milestone ground floor slab and main retail podium structure within 8 months from Commencement Governing Law Laws of the Arab Republic of Egypt Ruling Language English",
+                "Beneath the Lines": "Demonstrate timely notice, continuing notice trail, or waiver / actual knowledge by the receiving party.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Notice letters, emails, meeting minutes, proof of submission and receipt.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "Notice Compliance",
+                "Risk Level": "Medium",
+                "Claim Strength": "Medium",
+                "Exact Clause Text": "18 months from the Commencement Date Key Section Milestone ground floor slab and main retail podium structure within 8 months from Commencement Governing Law Laws of the Arab Republic of Egypt Ruling Language English"
+              },
+              {
+                "Clause / Topic": "Document Priority",
+                "Location": "2",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 2. Document Priority",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "2. Document Priority"
+              },
+              {
+                "Clause / Topic": "This Agreement",
+                "Location": "1",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 1. This Agreement",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "1. This Agreement"
+              },
+              {
+                "Clause / Topic": "Appendix to Tender / Contract Data",
+                "Location": "2",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 2. Appendix to Tender / Contract Data",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "2. Appendix to Tender / Contract Data"
+              },
+              {
+                "Clause / Topic": "Particular Conditions",
+                "Location": "3",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 3. Particular Conditions",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "3. Particular Conditions"
+              },
+              {
+                "Clause / Topic": "General Conditions",
+                "Location": "4",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 4. General Conditions",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "4. General Conditions"
+              }
+            ]
+          }
+        ]
       },
       "clause_library_tables": {
         "file": "Overall_Contract_clause_library.xlsx",
         "exists": true,
-        "sheets": [],
-        "error": "No module named 'openpyxl'"
+        "sheets": [
+          {
+            "name": "Contract Clause Library",
+            "row_count": 27,
+            "column_count": 14,
+            "columns": [
+              "Clause / Topic",
+              "Location",
+              "Plain English Meaning",
+              "Beneath the Lines",
+              "Who Holds Leverage",
+              "Notice / Time Bar",
+              "Money Impact",
+              "Schedule Impact",
+              "Practical Action / Evidence",
+              "Source File",
+              "Claim Type",
+              "Risk Level",
+              "Claim Strength",
+              "Exact Clause Text"
+            ],
+            "rows": [
+              {
+                "Clause / Topic": "Agreement Summary",
+                "Location": "1",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 1. Agreement Summary This synthetic contract record is prepared for the Sophia-Mall Project comprising civil works, structural frame, finishing interfaces, mall service corridors, and enabling works. The Employer is Sophia Developments, the Contractor is SAMCO Egypt, and the Engineer / PMO is Urban Retail PMO. The Agre",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "1. Agreement Summary This synthetic contract record is prepared for the Sophia-Mall Project comprising civil works, structural frame, finishing interfaces, mall service corridors, and enabling works. The Employer is Sophia Developments, the Contractor is SAMCO Egypt, and the Engineer / PMO is Urban Retail PMO. The Agreement Effective Date is"
+              },
+              {
+                "Clause / Topic": "Feb-2026 and the Commencement Date is 15-Feb-2026.",
+                "Location": "01",
+                "Plain English Meaning": "This clause falls under Contractor Counterarguments. In practical contractor terms, it means: 01-Feb-2026 and the Commencement Date is 15-Feb-2026. Item Value Project Sophia-Mall Project Contract Number SM-CTR-2026-002 Scope civil works, structural frame, finishing interfaces, mall service corridors, and enabling works Accepted Contract Amount EGP 429,650,000 excluding VAT unless otherwise stated Time for Compl",
+                "Beneath the Lines": "Tie the facts directly to the contractual exception or saving wording.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Yes",
+                "Practical Action / Evidence": "Exception facts, supporting letters, notices, approvals, and event records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "Counterargument / Exception",
+                "Risk Level": "Medium",
+                "Claim Strength": "Medium",
+                "Exact Clause Text": "01-Feb-2026 and the Commencement Date is 15-Feb-2026. Item Value Project Sophia-Mall Project Contract Number SM-CTR-2026-002 Scope civil works, structural frame, finishing interfaces, mall service corridors, and enabling works Accepted Contract Amount EGP 429,650,000 excluding VAT unless otherwise stated Time for Completion"
+              },
+              {
+                "Clause / Topic": "months from the Commencement Date",
+                "Location": "18",
+                "Plain English Meaning": "This clause falls under Notice Requirements. In practical contractor terms, it means: 18 months from the Commencement Date Key Section Milestone ground floor slab and main retail podium structure within 8 months from Commencement Governing Law Laws of the Arab Republic of Egypt Ruling Language English",
+                "Beneath the Lines": "Demonstrate timely notice, continuing notice trail, or waiver / actual knowledge by the receiving party.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Notice letters, emails, meeting minutes, proof of submission and receipt.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "Notice Compliance",
+                "Risk Level": "Medium",
+                "Claim Strength": "Medium",
+                "Exact Clause Text": "18 months from the Commencement Date Key Section Milestone ground floor slab and main retail podium structure within 8 months from Commencement Governing Law Laws of the Arab Republic of Egypt Ruling Language English"
+              },
+              {
+                "Clause / Topic": "Document Priority",
+                "Location": "2",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 2. Document Priority",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "2. Document Priority"
+              },
+              {
+                "Clause / Topic": "This Agreement",
+                "Location": "1",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 1. This Agreement",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "1. This Agreement"
+              },
+              {
+                "Clause / Topic": "Appendix to Tender / Contract Data",
+                "Location": "2",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 2. Appendix to Tender / Contract Data",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "2. Appendix to Tender / Contract Data"
+              },
+              {
+                "Clause / Topic": "Particular Conditions",
+                "Location": "3",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 3. Particular Conditions",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "3. Particular Conditions"
+              },
+              {
+                "Clause / Topic": "General Conditions",
+                "Location": "4",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 4. General Conditions",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "4. General Conditions"
+              },
+              {
+                "Clause / Topic": "General Requirements",
+                "Location": "5",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 5. General Requirements",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "5. General Requirements"
+              },
+              {
+                "Clause / Topic": "Bill of Quantities",
+                "Location": "6",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 6. Bill of Quantities",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "6. Bill of Quantities"
+              },
+              {
+                "Clause / Topic": "Drawings",
+                "Location": "7",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 7. Drawings",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "7. Drawings"
+              },
+              {
+                "Clause / Topic": "Soil report, permits matrix, and site layout",
+                "Location": "8",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 8. Soil report, permits matrix, and site layout",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "8. Soil report, permits matrix, and site layout"
+              },
+              {
+                "Clause / Topic": "Commercial Data",
+                "Location": "3",
+                "Plain English Meaning": "This clause falls under Payment Entitlements. In practical contractor terms, it means: 3. Commercial Data Commercial Topic Synthetic Contract Position Advance Payment",
+                "Beneath the Lines": "Show the certified / due amounts, delayed release, and the resulting impact on progress or cost.",
+                "Who Holds Leverage": "Contractor",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Yes",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "Payment / Certification",
+                "Risk Level": "Medium",
+                "Claim Strength": "Strong",
+                "Exact Clause Text": "3. Commercial Data Commercial Topic Synthetic Contract Position Advance Payment"
+              },
+              {
+                "Clause / Topic": "% structured as 30% cash against bank guarantee and 70%",
+                "Location": "25",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 25% structured as 30% cash against bank guarantee and 70% Employer-supplied steel/material support according to the approved programme. Retention",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "25% structured as 30% cash against bank guarantee and 70% Employer-supplied steel/material support according to the approved programme. Retention"
+              },
+              {
+                "Clause / Topic": "% of the Contract Price.",
+                "Location": "5",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 5% of the Contract Price. Performance Security",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Yes",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "5% of the Contract Price. Performance Security"
+              },
+              {
+                "Clause / Topic": "% of the Accepted Contract Amount unless waived by contract amendment.",
+                "Location": "5",
+                "Plain English Meaning": "This clause falls under Contractor Counterarguments. In practical contractor terms, it means: 5% of the Accepted Contract Amount unless waived by contract amendment. Minimum IPC",
+                "Beneath the Lines": "Tie the facts directly to the contractual exception or saving wording.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Exception facts, supporting letters, notices, approvals, and event records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "Counterargument / Exception",
+                "Risk Level": "Medium",
+                "Claim Strength": "Medium",
+                "Exact Clause Text": "5% of the Accepted Contract Amount unless waived by contract amendment. Minimum IPC"
+              },
+              {
+                "Clause / Topic": "% of monthly cash flow",
+                "Location": "70",
+                "Plain English Meaning": "This clause falls under Payment Entitlements. In practical contractor terms, it means: 70% of monthly cash flow Payment Period",
+                "Beneath the Lines": "Show the certified / due amounts, delayed release, and the resulting impact on progress or cost.",
+                "Who Holds Leverage": "Contractor",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Yes",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "Payment / Certification",
+                "Risk Level": "Medium",
+                "Claim Strength": "Strong",
+                "Exact Clause Text": "70% of monthly cash flow Payment Period"
+              },
+              {
+                "Clause / Topic": "days after Engineer receives the complete monthly statement",
+                "Location": "45",
+                "Plain English Meaning": "This clause falls under Payment Entitlements. In practical contractor terms, it means: 45 days after Engineer receives the complete monthly statement Delay Damages",
+                "Beneath the Lines": "Show the certified / due amounts, delayed release, and the resulting impact on progress or cost.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Yes",
+                "Schedule Impact": "Yes",
+                "Practical Action / Evidence": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "Payment / Certification",
+                "Risk Level": "Critical",
+                "Claim Strength": "Medium",
+                "Exact Clause Text": "45 days after Engineer receives the complete monthly statement Delay Damages"
+              },
+              {
+                "Clause / Topic": "% of outstanding works per week of delay or part thereof, capped at 10% of the",
+                "Location": "1",
+                "Plain English Meaning": "This clause falls under Evidence Requirements. In practical contractor terms, it means: 1% of outstanding works per week of delay or part thereof, capped at 10% of the Contract Price Material Adjustment Adjustment may apply only for approved material categories such as reinforcement steel, concrete, blockwork, waterproofing, and façade interface materials where delay is not Contractor-caused and evidence ",
+                "Beneath the Lines": "Show that the required records exist and directly support the claimed event and impact.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Yes",
+                "Schedule Impact": "Yes",
+                "Practical Action / Evidence": "All records explicitly required by the clause plus supporting schedule and commercial evidence.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "Evidence / Substantiation",
+                "Risk Level": "Medium",
+                "Claim Strength": "Strong",
+                "Exact Clause Text": "1% of outstanding works per week of delay or part thereof, capped at 10% of the Contract Price Material Adjustment Adjustment may apply only for approved material categories such as reinforcement steel, concrete, blockwork, waterproofing, and façade interface materials where delay is not Contractor-caused and evidence is complete. SM-CTR-2026-002 | Sophia-Mall Project Page 3"
+              },
+              {
+                "Clause / Topic": "Programme, Progress, and Delay Entitlement",
+                "Location": "4",
+                "Plain English Meaning": "This clause falls under EOT Entitlements. In practical contractor terms, it means: 4. Programme, Progress, and Delay Entitlement Programme Requirements. The Contractor shall submit and maintain a Primavera P6 baseline programme, monthly updates, narrative reports, cash flow, procurement curves, and recovery programmes where required. Extension of Time. EOT entitlement must demonstrate a delay on the ",
+                "Beneath the Lines": "Support the claim with TIA / window logic, path analysis, and event-specific schedule evidence.",
+                "Who Holds Leverage": "Contractor",
+                "Notice / Time Bar": "Yes",
+                "Money Impact": "Yes",
+                "Schedule Impact": "Yes",
+                "Practical Action / Evidence": "Accepted programme basis, event window, contemporaneous records, CPM logic, notices.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "Extension of Time",
+                "Risk Level": "High",
+                "Claim Strength": "Strong",
+                "Exact Clause Text": "4. Programme, Progress, and Delay Entitlement Programme Requirements. The Contractor shall submit and maintain a Primavera P6 baseline programme, monthly updates, narrative reports, cash flow, procurement curves, and recovery programmes where required. Extension of Time. EOT entitlement must demonstrate a delay on the critical path using Time Impact Analysis, Windows Analysis, or another Engineer-approved method, supported by notices and contemporaneous records. Rate of Progress. If progress is slow against the approved programme, the Engineer may request a recovery programme. The Contractor must demonstrate mitigation, resequencing, and resource recovery measures. Concurrent Delay. Events must be split by responsibility, timing, affected activities, float, criticality, and actual schedule impact. Cost recovery may be reduced where Contractor concurrent delay exists. Notices and Claims. Delay, disruption, variation, and payment claims must be notified within the contractual period and fully substantiated by records, correspondence, measurement sheets, and cause-effect analysis."
+              },
+              {
+                "Clause / Topic": "Site, Materials, Quality, and HSE",
+                "Location": "5",
+                "Plain English Meaning": "This clause falls under Payment Entitlements. In practical contractor terms, it means: 5. Site, Materials, Quality, and HSE Site access and possession must permit practical execution of the Sophia-Mall Project scope. Constraints relating to tenant-interface changes, authority permits, and MEP coordination interfaces must be recorded with dates, photographs, obstruction logs, and daily reports. Employer f",
+                "Beneath the Lines": "Show the certified / due amounts, delayed release, and the resulting impact on progress or cost.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "Payment / Certification",
+                "Risk Level": "High",
+                "Claim Strength": "Medium",
+                "Exact Clause Text": "5. Site, Materials, Quality, and HSE Site access and possession must permit practical execution of the Sophia-Mall Project scope. Constraints relating to tenant-interface changes, authority permits, and MEP coordination interfaces must be recorded with dates, photographs, obstruction logs, and daily reports. Employer free-issue/material support is limited to approved items and must be requested against the approved programme. Shortage, late delivery, or defect records must be supported by requisitions, delivery notes, inspection records, and consumption logs. The Contractor shall maintain QA/QC procedures, inspection records, method statements, material approvals, as-built records, and source files in the contractually required formats. The Contractor shall implement HSE controls, permit-to-work processes, induction logs, incident records, corrective actions, and risk assessments suitable for the project interfaces."
+              },
+              {
+                "Clause / Topic": "Clause Intelligence Extract",
+                "Location": "6",
+                "Plain English Meaning": "This clause falls under Evidence Requirements. In practical contractor terms, it means: 6. Clause Intelligence Extract Clause / Topic Meaning Evidence Action Contract basics Project is the Sophia-Mall Project civil works, structural frame, finishing interfaces, mall service corridors, and enabling works between Sophia Developments as Employer and SAMCO Egypt as Contractor, effective",
+                "Beneath the Lines": "Show that the required records exist and directly support the claimed event and impact.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "All records explicitly required by the clause plus supporting schedule and commercial evidence.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "Evidence / Substantiation",
+                "Risk Level": "Medium",
+                "Claim Strength": "Medium",
+                "Exact Clause Text": "6. Clause Intelligence Extract Clause / Topic Meaning Evidence Action Contract basics Project is the Sophia-Mall Project civil works, structural frame, finishing interfaces, mall service corridors, and enabling works between Sophia Developments as Employer and SAMCO Egypt as Contractor, effective"
+              },
+              {
+                "Clause / Topic": "Feb-2026.",
+                "Location": "01",
+                "Plain English Meaning": "This clause falls under Evidence Requirements. In practical contractor terms, it means: 01-Feb-2026. Keep contract date, commencement record, project access evidence, amount, parties, and baseline programme in every claim file. Accepted Contract Amount Contract amount is EGP 429,650,000 including social insurance, duties, and taxes except VAT. For each extra cost, attach Engineer instruction, BOQ gap anal",
+                "Beneath the Lines": "Show that the required records exist and directly support the claimed event and impact.",
+                "Who Holds Leverage": "Contractor",
+                "Notice / Time Bar": "Yes",
+                "Money Impact": "Yes",
+                "Schedule Impact": "Yes",
+                "Practical Action / Evidence": "All records explicitly required by the clause plus supporting schedule and commercial evidence.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "Evidence / Substantiation",
+                "Risk Level": "High",
+                "Claim Strength": "Strong",
+                "Exact Clause Text": "01-Feb-2026. Keep contract date, commencement record, project access evidence, amount, parties, and baseline programme in every claim file. Accepted Contract Amount Contract amount is EGP 429,650,000 including social insurance, duties, and taxes except VAT. For each extra cost, attach Engineer instruction, BOQ gap analysis, cost build-up, and timely notice. Advance payment structure Advance payment is 25%; structured as 30% cash against bank guarantee and 70% Employer-supplied steel/material support according to the approved programme. Keep approved programme, material requisitions, delivery notes, bank guarantee records, and impact analysis. Time for Completion Time for Completion is 18 months from the Commencement Date. Maintain baseline, monthly updates, contemporaneous progress records, and approved recovery plans."
+              },
+              {
+                "Clause / Topic": "month structural",
+                "Location": "8",
+                "Plain English Meaning": "This clause falls under Delay Damages Defense. In practical contractor terms, it means: 8-month structural milestone Section milestone: ground floor slab and main retail podium structure within 8 months from Commencement. Track milestone fragnet, procurement constraints, concrete/steel delivery, and inspection readiness. Delay damages Delay damages are 1% of outstanding works per week of delay or part the",
+                "Beneath the Lines": "Use excusable delay and concurrency analysis to defeat or reduce liquidated damages exposure.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Yes",
+                "Schedule Impact": "Yes",
+                "Practical Action / Evidence": "Criticality analysis, entitlement basis, excusable delay record, concurrency review.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "Delay Damages Defense",
+                "Risk Level": "Critical",
+                "Claim Strength": "Medium",
+                "Exact Clause Text": "8-month structural milestone Section milestone: ground floor slab and main retail podium structure within 8 months from Commencement. Track milestone fragnet, procurement constraints, concrete/steel delivery, and inspection readiness. Delay damages Delay damages are 1% of outstanding works per week of delay or part thereof, capped at"
+              },
+              {
+                "Clause / Topic": "% of the Contract Price.",
+                "Location": "10",
+                "Plain English Meaning": "This clause falls under Evidence Requirements. In practical contractor terms, it means: 10% of the Contract Price. Protect with timely notices, critical-path delay analysis, mitigation records, and cause-effect evidence. Employer equipment and free-issue materials Employer free-issue/material support covers approved items including reinforcement steel, concrete, blockwork, waterproofing, and façade interf",
+                "Beneath the Lines": "Show that the required records exist and directly support the claimed event and impact.",
+                "Who Holds Leverage": "Contractor",
+                "Notice / Time Bar": "Yes",
+                "Money Impact": "Yes",
+                "Schedule Impact": "Yes",
+                "Practical Action / Evidence": "All records explicitly required by the clause plus supporting schedule and commercial evidence.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "Evidence / Substantiation",
+                "Risk Level": "Critical",
+                "Claim Strength": "Strong",
+                "Exact Clause Text": "10% of the Contract Price. Protect with timely notices, critical-path delay analysis, mitigation records, and cause-effect evidence. Employer equipment and free-issue materials Employer free-issue/material support covers approved items including reinforcement steel, concrete, blockwork, waterproofing, and façade interface materials where stated in the approved programme. Keep requisitions, delivery notes, inspection records, storage records, consumption logs, and fragnet analysis. SM-CTR-2026-002 | Sophia-Mall Project Page 4 Clause / Topic Meaning Evidence Action Extension of time EOT requires a delay demonstrated on the critical path using Time Impact, Windows Analysis, or another approved method. Prepare notice, event chronology, contemporaneous records, fragnet/window analysis, and mitigation evidence. Claims time bar Claims must be notified and supported within the contract time limits. Maintain notice register, claim register, event logs, correspondence, and full substantiation file. SM-CTR-2026-002 | Sophia-Mall Project Page 5"
+              },
+              {
+                "Clause / Topic": "Execution Control Matrix",
+                "Location": "7",
+                "Plain English Meaning": "This clause falls under Payment Entitlements. In practical contractor terms, it means: 7. Execution Control Matrix Control Area Required Evidence Dashboard Usage Contract Baseline Agreement data, contract amount, scope, commencement, baseline programme Feeds project metadata, contract risk profile, and executive dashboard baseline. Payment IPC submissions, measurement sheets, material-on-site records, En",
+                "Beneath the Lines": "Show the certified / due amounts, delayed release, and the resulting impact on progress or cost.",
+                "Who Holds Leverage": "Contractor",
+                "Notice / Time Bar": "Yes",
+                "Money Impact": "Yes",
+                "Schedule Impact": "Yes",
+                "Practical Action / Evidence": "Payment certificate, invoice, valuation, payment status records, and resulting disruption evidence.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "Payment / Certification",
+                "Risk Level": "High",
+                "Claim Strength": "Strong",
+                "Exact Clause Text": "7. Execution Control Matrix Control Area Required Evidence Dashboard Usage Contract Baseline Agreement data, contract amount, scope, commencement, baseline programme Feeds project metadata, contract risk profile, and executive dashboard baseline. Payment IPC submissions, measurement sheets, material-on-site records, Engineer certification Feeds payment status, cash-flow risk, and commercial KPIs. Delay / EOT Notices, delay events, P6 updates, fragnet/window analysis, daily reports Feeds TIA engine, EOT potential, critical-path alerts, and claim strength score. Materials Requisitions, delivery notes, shortage logs, inspection records, consumption log Feeds steel/material delay exposure, supply-demand gap, and affected activities. Quality / HSE IRs, NCRs, method statements, safety permits, incident logs Feeds risk register, readiness score, compliance alerts, and management action list."
+              },
+              {
+                "Clause / Topic": "Signature Placeholders",
+                "Location": "8",
+                "Plain English Meaning": "This clause falls under Risk Clauses. In practical contractor terms, it means: 8. Signature Placeholders On behalf of the Employer On behalf of the Contractor Engineer / PMO Acknowledgement Company: Sophia Developments Name: ___________________ Title: ___________________ Date: ___________________ Signature: ___________________ Company: SAMCO Egypt Name: ___________________ Title: ________________",
+                "Beneath the Lines": "Tie the clause wording to the factual event with contemporaneous evidence.",
+                "Who Holds Leverage": "Shared",
+                "Notice / Time Bar": "Unclear",
+                "Money Impact": "Possible",
+                "Schedule Impact": "Possible",
+                "Practical Action / Evidence": "Full clause context, event chronology, and project records.",
+                "Source File": "Overall Contract.pdf",
+                "Claim Type": "General Contract Risk",
+                "Risk Level": "Low",
+                "Claim Strength": "Weak",
+                "Exact Clause Text": "8. Signature Placeholders On behalf of the Employer On behalf of the Contractor Engineer / PMO Acknowledgement Company: Sophia Developments Name: ___________________ Title: ___________________ Date: ___________________ Signature: ___________________ Company: SAMCO Egypt Name: ___________________ Title: ___________________ Date: ___________________ Signature: ___________________ Entity: Urban Retail PMO Name: ___________________ Title: ___________________ Date: ___________________ Signature: ___________________ This file is synthetic and intended for testing project-control dashboards, clause extraction, and contract-intelligence workflows. It should not be used as a binding contract or relied on as legal advice."
+              }
+            ],
+            "truncated": false
+          }
+        ]
       },
       "detectors": [
         {
@@ -11294,85 +12047,85 @@
           "name": "01_executive_dashboard.html",
           "relative_path": "Sophia-Mall/01_executive_dashboard.html",
           "extension": "html",
-          "size_kb": 1.2,
-          "modified": "2026-08-02T04:53:58"
+          "size_kb": 17.8,
+          "modified": "2026-08-01T12:03:39"
         },
         {
           "name": "01_executive_dashboard.pdf",
           "relative_path": "Sophia-Mall/01_executive_dashboard.pdf",
           "extension": "pdf",
-          "size_kb": 57.1,
-          "modified": "2026-08-02T04:53:59"
+          "size_kb": 829.0,
+          "modified": "2026-08-02T17:37:03"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "Sophia-Mall/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-02T04:53:59"
+          "modified": "2026-08-02T17:37:03"
         },
         {
           "name": "02_master_dashboard.html",
           "relative_path": "Sophia-Mall/02_master_dashboard.html",
           "extension": "html",
-          "size_kb": 1.2,
-          "modified": "2026-08-02T04:53:59"
+          "size_kb": 84.9,
+          "modified": "2026-08-01T12:03:39"
         },
         {
           "name": "02_master_dashboard.pdf",
           "relative_path": "Sophia-Mall/02_master_dashboard.pdf",
           "extension": "pdf",
-          "size_kb": 57.1,
-          "modified": "2026-08-02T04:54:00"
+          "size_kb": 862.6,
+          "modified": "2026-08-02T17:37:07"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "Sophia-Mall/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-02T04:54:00"
+          "modified": "2026-08-02T17:37:07"
         },
         {
           "name": "03_elite_svg_charts.html",
           "relative_path": "Sophia-Mall/03_elite_svg_charts.html",
           "extension": "html",
-          "size_kb": 1.2,
-          "modified": "2026-08-02T04:54:00"
+          "size_kb": 50.8,
+          "modified": "2026-08-01T12:03:39"
         },
         {
           "name": "03_elite_svg_charts.pdf",
           "relative_path": "Sophia-Mall/03_elite_svg_charts.pdf",
           "extension": "pdf",
-          "size_kb": 57.2,
-          "modified": "2026-08-02T04:54:01"
+          "size_kb": 234.6,
+          "modified": "2026-08-02T17:37:09"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "Sophia-Mall/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-02T04:54:01"
+          "modified": "2026-08-02T17:37:09"
         },
         {
           "name": "04_linked_executive_dashboard.html",
           "relative_path": "Sophia-Mall/04_linked_executive_dashboard.html",
           "extension": "html",
-          "size_kb": 1.2,
-          "modified": "2026-08-02T04:54:01"
+          "size_kb": 56.4,
+          "modified": "2026-08-01T12:03:39"
         },
         {
           "name": "04_linked_executive_dashboard.pdf",
           "relative_path": "Sophia-Mall/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
-          "size_kb": 57.4,
-          "modified": "2026-08-02T04:54:01"
+          "size_kb": 1093.9,
+          "modified": "2026-08-02T17:37:15"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "Sophia-Mall/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-02T04:54:02"
+          "modified": "2026-08-02T17:37:15"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
@@ -11386,28 +12139,28 @@
           "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.html",
           "extension": "html",
           "size_kb": 2.5,
-          "modified": "2026-08-02T04:54:02"
+          "modified": "2026-08-02T17:37:19"
         },
         {
           "name": "05_delay_tia_governed_assessment.manifest.json",
           "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.manifest.json",
           "extension": "json",
           "size_kb": 0.6,
-          "modified": "2026-08-02T04:54:02"
+          "modified": "2026-08-02T17:37:19"
         },
         {
           "name": "05_delay_tia_governed_assessment.pdf",
           "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.pdf",
           "extension": "pdf",
           "size_kb": 2.0,
-          "modified": "2026-08-02T04:54:02"
+          "modified": "2026-08-02T17:37:19"
         },
         {
           "name": "05_delay_tia_governed_assessment.pptx",
           "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.pptx",
           "extension": "pptx",
           "size_kb": 27.8,
-          "modified": "2026-08-02T04:54:02"
+          "modified": "2026-08-02T17:37:19"
         }
       ],
       "watchers": [
@@ -12558,20 +13311,23 @@
       "files": {
         "html": {
           "name": "01_executive_dashboard.html",
-          "bytes": 1241,
-          "sha256": "6a5647a81690a19761164676e6cd7e87144f6a0e2b12847137388c4f7a4ba74d"
+          "bytes": 18264,
+          "sha256": "60d697bfa9096222daa218cf74fd7452998d2828b0ffe7488eecbe983b7a84a9"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 58457,
-          "sha256": "34006128e7cef721df4c06eaa3fa550be3675de22353051ff3322f99a70d373d"
+          "bytes": 848904,
+          "sha256": "bd655f7578691cec658bff6dd70f7a776cd7d428314e237ad8b47a02d69bd7c9"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29125,
-          "sha256": "3475b81df04778d3882e7cb689eb96a115bb684ed5e5f4aaae9d046ffcef8ae9"
+          "sha256": "0c5ea4dd6589c489bd177549db1aa943798a2294087b280c59e82f1b24a0aac8"
         }
-      }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Sophia-Mall",
+      "source_report_fingerprint": "6cc1e6ed4356fd60ae10462f9f3bf76f658212e0674279ecaee1f0864e7f7845"
     },
     "master_dashboard": {
       "html": "/generated/Sophia-Mall/02_master_dashboard.html",
@@ -12580,20 +13336,23 @@
       "files": {
         "html": {
           "name": "02_master_dashboard.html",
-          "bytes": 1235,
-          "sha256": "da99b85117529f0a96beff935696391d588b5e66d02896c576abe3e02bb669bf"
+          "bytes": 86946,
+          "sha256": "2d40c3c52ae67133df4e50c49c3e87c9bdedf8b0c57f95567990d09f5481488a"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
-          "bytes": 58449,
-          "sha256": "c3f1f55cbbfe24e85ffeee60b41cf32e3f32d21935553a4e6298464163671505"
+          "bytes": 883327,
+          "sha256": "1511181edfea6c3329f48642244d99d233de35411c0ce98447b025e39318c3fb"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29122,
-          "sha256": "b75a94575d86e94962a608c6edea155b1b3cff1447380a944ce58e40b0867c2b"
+          "sha256": "f907b7213ae5538993d3531227105b846751b1c3a5a50aac5125c92b3955f363"
         }
-      }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Sophia-Mall",
+      "source_report_fingerprint": "6cc1e6ed4356fd60ae10462f9f3bf76f658212e0674279ecaee1f0864e7f7845"
     },
     "elite_svg_charts": {
       "html": "/generated/Sophia-Mall/03_elite_svg_charts.html",
@@ -12602,20 +13361,23 @@
       "files": {
         "html": {
           "name": "03_elite_svg_charts.html",
-          "bytes": 1235,
-          "sha256": "117a717bfcb2e6ae4d2b334a3b0fd626d008dd9cd0713de8f3e2649136c78355"
+          "bytes": 52018,
+          "sha256": "422fdaaa49c0ac3fafa56a00cd6c0a302abeed5c9aedda7d4afbd5003d6885d7"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
-          "bytes": 58576,
-          "sha256": "fb2abd931bc89f5aaba726569698ab626fa95290388e25f111a52f9432ef76d7"
+          "bytes": 240246,
+          "sha256": "5d720ae8c5b5947301b4e6bc10a02055d135ba742a057c53f4432b1e4ebfeb1f"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29123,
-          "sha256": "59e9702549f415228db7658e20f6c9a06df967342036cd168cca490441a10bcc"
+          "sha256": "73193b749f9795364527a433367be4ca8cba614a9daa356ef5911bf304ac7bf2"
         }
-      }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Sophia-Mall",
+      "source_report_fingerprint": "6cc1e6ed4356fd60ae10462f9f3bf76f658212e0674279ecaee1f0864e7f7845"
     },
     "linked_executive_dashboard": {
       "html": "/generated/Sophia-Mall/04_linked_executive_dashboard.html",
@@ -12624,20 +13386,23 @@
       "files": {
         "html": {
           "name": "04_linked_executive_dashboard.html",
-          "bytes": 1255,
-          "sha256": "a9ddadb45ea7b78541d1827dc4b51fdd933ea180b7db27dce0db676641631237"
+          "bytes": 57776,
+          "sha256": "b5ad6545566af6dd990cabbbebdf7f2fca51eb561044213cf671efa3e1cf6885"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
-          "bytes": 58747,
-          "sha256": "02c67d29044d2b12ca075e1ebba021c60d3504818c6def9b91e85d77246a4d30"
+          "bytes": 1120145,
+          "sha256": "be9d5769aff951ad89908162e11e112fe4f5e78f1891a97f3e5651d635959303"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29131,
-          "sha256": "cbf3b4745bb82d72ed402239c98620fd1bec07d70c37ca19251ca3791e66c383"
+          "sha256": "c23c903eb3a6ce517c13dc346ba745dbdeb69cec40a0245d2d2089e2087e1786"
         }
-      }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Sophia-Mall",
+      "source_report_fingerprint": "6cc1e6ed4356fd60ae10462f9f3bf76f658212e0674279ecaee1f0864e7f7845"
     },
     "tia_governed_assessment": {
       "html": "/generated/Sophia-Mall/05_delay_tia_governed_assessment.html",
@@ -12648,17 +13413,17 @@
         "html": {
           "name": "05_delay_tia_governed_assessment.html",
           "bytes": 2557,
-          "sha256": "eb8e5521ab6b203f182e0ce03b9920b6c0a0af3668c787e9bfa7656df226eaac"
+          "sha256": "98e3c46a16a10dbbe1d63e55e7dd19f0dcb4124af3ff8297b21cac901875502e"
         },
         "pdf": {
           "name": "05_delay_tia_governed_assessment.pdf",
           "bytes": 2042,
-          "sha256": "a8471e92a73aac79adb72df453f3acf9dbc226fcff74b55e0cba7990bd1e6540"
+          "sha256": "98a97ae96bff9aba623b52dc855015fc926e3081ee9d001a969c8ab0a6a44053"
         },
         "pptx": {
           "name": "05_delay_tia_governed_assessment.pptx",
           "bytes": 28475,
-          "sha256": "4d6e24a5163cfb62d7b709d19e27940b460f5bbe945cc40f59ce3db9334f0e3b"
+          "sha256": "b991d675409eb2cb980939f06d50810c2bb2b4c392e5c752f16006f794a9799f"
         },
         "docx": {
           "name": "05_delay_tia_governed_assessment.docx",

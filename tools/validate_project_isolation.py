@@ -168,7 +168,8 @@ def main() -> int:
     root_output_files = [path.name for path in root_outputs.iterdir() if path.is_file()] if root_outputs.exists() else []
     results.check("28. Root 11-outputs contains only project folders", not root_output_files and actual_output_dirs.issubset(expected_output_dirs), f"files={root_output_files[:3]}")
     missing_auto_outputs = []
-    extra_generated_files = []
+    invalid_output_files = []
+    invalid_output_manifests = []
     for record in records:
         output_dir = project_output_dir(root_outputs, record)
         for file_name in AUTO_HTML_REPORTS:
@@ -176,11 +177,34 @@ def main() -> int:
                 missing_auto_outputs.append(f"{output_dir.name}/{file_name}")
         if not (output_dir / ".output_manifest.json").exists():
             missing_auto_outputs.append(f"{output_dir.name}/.output_manifest.json")
+        allowed_files = set(AUTO_HTML_REPORTS) | {
+            ".output_manifest.json",
+            ".report_manifest.json",
+            "05_delay_tia_governed_assessment.manifest.json",
+        }
+        report_manifest_path = output_dir / ".report_manifest.json"
+        if report_manifest_path.exists():
+            try:
+                report_manifest = json.loads(report_manifest_path.read_text(encoding="utf-8"))
+                if str(report_manifest.get("project_id") or "") != str(record.get("project_id") or ""):
+                    invalid_output_manifests.append(f"{output_dir.name}/.report_manifest.json project_id")
+                for artifact in (report_manifest.get("reports") or {}).values():
+                    if not isinstance(artifact, dict):
+                        continue
+                    for metadata in (artifact.get("files") or {}).values():
+                        if isinstance(metadata, dict) and metadata.get("name"):
+                            allowed_files.add(str(metadata["name"]))
+            except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+                invalid_output_manifests.append(f"{output_dir.name}/.report_manifest.json unreadable")
         for path in output_dir.iterdir() if output_dir.exists() else []:
-            if path.is_file() and path.name not in set(AUTO_HTML_REPORTS) | {".output_manifest.json"}:
-                extra_generated_files.append(f"{output_dir.name}/{path.name}")
+            if path.is_file() and path.name not in allowed_files:
+                invalid_output_files.append(f"{output_dir.name}/{path.name}")
     results.check("29. Project auto HTML outputs exist", not missing_auto_outputs, ", ".join(missing_auto_outputs[:3]))
-    results.check("30. Project output folders contain only HTML reports and manifest", not extra_generated_files, ", ".join(extra_generated_files[:3]))
+    results.check(
+        "30. Project Output Studio artifacts are complete and project-owned",
+        not invalid_output_files and not invalid_output_manifests,
+        ", ".join((invalid_output_files + invalid_output_manifests)[:3]),
+    )
 
     if args.sync_probe:
         probe = ROOT / "sync_validation_probe.validation"

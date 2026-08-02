@@ -1,8 +1,8 @@
 {
   "project_id": "Sophia-Mall",
   "project_key": "Sophia-Mall",
-  "project_fingerprint": "c875cc2a884cd635187542bf839bb428dd95dde23bdf8cd60b443ff7ef3d9ae4",
-  "generator_version": "2026.08.project-scoped-html-pdf-pptx.v5",
+  "project_fingerprint": "caea5ba7220fd221493548f8127086ddf537d0949bc08ab853766c55c7c7e60a",
+  "generator_version": "2026.08.project-scoped-html-pdf-pptx.v6-source-html",
   "chart_catalog_version": "2026-08-02-reference-36",
   "chart_status": {
     "overview.schedule_performance_s_curve": "ready",
@@ -49,7 +49,7 @@
     "determination_status": "p6_recalculation_required",
     "source_scope": "selected_project_only"
   },
-  "generated_at": "2026-08-02T04:54:02",
+  "generated_at": "2026-08-02T17:37:19",
   "reports": {
     "executive_dashboard": {
       "html": "/generated/Sophia-Mall/01_executive_dashboard.html",
@@ -58,20 +58,23 @@
       "files": {
         "html": {
           "name": "01_executive_dashboard.html",
-          "bytes": 1241,
-          "sha256": "6a5647a81690a19761164676e6cd7e87144f6a0e2b12847137388c4f7a4ba74d"
+          "bytes": 18264,
+          "sha256": "60d697bfa9096222daa218cf74fd7452998d2828b0ffe7488eecbe983b7a84a9"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 58457,
-          "sha256": "34006128e7cef721df4c06eaa3fa550be3675de22353051ff3322f99a70d373d"
+          "bytes": 848904,
+          "sha256": "bd655f7578691cec658bff6dd70f7a776cd7d428314e237ad8b47a02d69bd7c9"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29125,
-          "sha256": "3475b81df04778d3882e7cb689eb96a115bb684ed5e5f4aaae9d046ffcef8ae9"
+          "sha256": "0c5ea4dd6589c489bd177549db1aa943798a2294087b280c59e82f1b24a0aac8"
         }
-      }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Sophia-Mall",
+      "source_report_fingerprint": "6cc1e6ed4356fd60ae10462f9f3bf76f658212e0674279ecaee1f0864e7f7845"
     },
     "master_dashboard": {
       "html": "/generated/Sophia-Mall/02_master_dashboard.html",
@@ -80,20 +83,23 @@
       "files": {
         "html": {
           "name": "02_master_dashboard.html",
-          "bytes": 1235,
-          "sha256": "da99b85117529f0a96beff935696391d588b5e66d02896c576abe3e02bb669bf"
+          "bytes": 86946,
+          "sha256": "2d40c3c52ae67133df4e50c49c3e87c9bdedf8b0c57f95567990d09f5481488a"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
-          "bytes": 58449,
-          "sha256": "c3f1f55cbbfe24e85ffeee60b41cf32e3f32d21935553a4e6298464163671505"
+          "bytes": 883327,
+          "sha256": "1511181edfea6c3329f48642244d99d233de35411c0ce98447b025e39318c3fb"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29122,
-          "sha256": "b75a94575d86e94962a608c6edea155b1b3cff1447380a944ce58e40b0867c2b"
+          "sha256": "f907b7213ae5538993d3531227105b846751b1c3a5a50aac5125c92b3955f363"
         }
-      }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Sophia-Mall",
+      "source_report_fingerprint": "6cc1e6ed4356fd60ae10462f9f3bf76f658212e0674279ecaee1f0864e7f7845"
     },
     "elite_svg_charts": {
       "html": "/generated/Sophia-Mall/03_elite_svg_charts.html",
@@ -102,20 +108,23 @@
       "files": {
         "html": {
           "name": "03_elite_svg_charts.html",
-          "bytes": 1235,
-          "sha256": "117a717bfcb2e6ae4d2b334a3b0fd626d008dd9cd0713de8f3e2649136c78355"
+          "bytes": 52018,
+          "sha256": "422fdaaa49c0ac3fafa56a00cd6c0a302abeed5c9aedda7d4afbd5003d6885d7"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
-          "bytes": 58576,
-          "sha256": "fb2abd931bc89f5aaba726569698ab626fa95290388e25f111a52f9432ef76d7"
+          "bytes": 240246,
+          "sha256": "5d720ae8c5b5947301b4e6bc10a02055d135ba742a057c53f4432b1e4ebfeb1f"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29123,
-          "sha256": "59e9702549f415228db7658e20f6c9a06df967342036cd168cca490441a10bcc"
+          "sha256": "73193b749f9795364527a433367be4ca8cba614a9daa356ef5911bf304ac7bf2"
         }
-      }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Sophia-Mall",
+      "source_report_fingerprint": "6cc1e6ed4356fd60ae10462f9f3bf76f658212e0674279ecaee1f0864e7f7845"
     },
     "linked_executive_dashboard": {
       "html": "/generated/Sophia-Mall/04_linked_executive_dashboard.html",
@@ -124,20 +133,23 @@
       "files": {
         "html": {
           "name": "04_linked_executive_dashboard.html",
-          "bytes": 1255,
-          "sha256": "a9ddadb45ea7b78541d1827dc4b51fdd933ea180b7db27dce0db676641631237"
+          "bytes": 57776,
+          "sha256": "b5ad6545566af6dd990cabbbebdf7f2fca51eb561044213cf671efa3e1cf6885"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
-          "bytes": 58747,
-          "sha256": "02c67d29044d2b12ca075e1ebba021c60d3504818c6def9b91e85d77246a4d30"
+          "bytes": 1120145,
+          "sha256": "be9d5769aff951ad89908162e11e112fe4f5e78f1891a97f3e5651d635959303"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29131,
-          "sha256": "cbf3b4745bb82d72ed402239c98620fd1bec07d70c37ca19251ca3791e66c383"
+          "sha256": "c23c903eb3a6ce517c13dc346ba745dbdeb69cec40a0245d2d2089e2087e1786"
         }
-      }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Sophia-Mall",
+      "source_report_fingerprint": "6cc1e6ed4356fd60ae10462f9f3bf76f658212e0674279ecaee1f0864e7f7845"
     },
     "tia_governed_assessment": {
       "html": "/generated/Sophia-Mall/05_delay_tia_governed_assessment.html",
@@ -148,17 +160,17 @@
         "html": {
           "name": "05_delay_tia_governed_assessment.html",
           "bytes": 2557,
-          "sha256": "eb8e5521ab6b203f182e0ce03b9920b6c0a0af3668c787e9bfa7656df226eaac"
+          "sha256": "98e3c46a16a10dbbe1d63e55e7dd19f0dcb4124af3ff8297b21cac901875502e"
         },
         "pdf": {
           "name": "05_delay_tia_governed_assessment.pdf",
           "bytes": 2042,
-          "sha256": "a8471e92a73aac79adb72df453f3acf9dbc226fcff74b55e0cba7990bd1e6540"
+          "sha256": "98a97ae96bff9aba623b52dc855015fc926e3081ee9d001a969c8ab0a6a44053"
         },
         "pptx": {
           "name": "05_delay_tia_governed_assessment.pptx",
           "bytes": 28475,
-          "sha256": "4d6e24a5163cfb62d7b709d19e27940b460f5bbe945cc40f59ce3db9334f0e3b"
+          "sha256": "b991d675409eb2cb980939f06d50810c2bb2b4c392e5c752f16006f794a9799f"
         },
         "docx": {
           "name": "05_delay_tia_governed_assessment.docx",

@@ -7,13 +7,16 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 
-from project_report_artifacts import ensure_project_report_artifacts  # noqa: E402
+import project_report_artifacts as artifacts  # noqa: E402
+
+ensure_project_report_artifacts = artifacts.ensure_project_report_artifacts
 
 
 def sample_project() -> dict[str, object]:
     return {
         "project_id": "project-001",
         "project_key": "project-001",
+        "project_folder_name": "Project One",
         "project_display_name": "Project One",
         "sector": "Buildings",
         "status": "Active",
@@ -87,3 +90,38 @@ def test_changed_project_regenerates_without_rewriting_another_project(tmp_path:
 
     assert (first_dir / "01_executive_dashboard.pdf").stat().st_mtime_ns > 0
     assert (second_dir / "01_executive_dashboard.pdf").stat().st_mtime_ns == second_mtime
+
+
+def test_matching_canonical_html_is_used_without_cross_project_leakage(tmp_path: Path, monkeypatch) -> None:
+    canonical_outputs = tmp_path / "canonical-outputs"
+    source_dir = canonical_outputs / "Project One"
+    source_dir.mkdir(parents=True)
+    (source_dir / ".output_manifest.json").write_text(
+        json.dumps({"project_id": "project-001", "fingerprint": "legacy-fingerprint"}), encoding="utf-8"
+    )
+    for _, stem, _ in artifacts.REPORTS:
+        (source_dir / f"{stem}.html").write_text(
+            "<!doctype html><title>Approved report</title>" + (" source-backed" * 500), encoding="utf-8"
+        )
+    monkeypatch.setattr(artifacts, "CANONICAL_OUTPUTS_ROOT", canonical_outputs)
+
+    reports = ensure_project_report_artifacts(sample_project(), tmp_path / "published", public_slug="project-one")
+
+    assert all(report["html_origin"] == "canonical_project_html" for report in reports.values())
+    assert all(report["source_project_id"] == "project-001" for report in reports.values())
+    assert "Approved report" in (tmp_path / "published" / "02_master_dashboard.html").read_text(encoding="utf-8")
+
+
+def test_mismatched_canonical_html_is_rejected(tmp_path: Path, monkeypatch) -> None:
+    canonical_outputs = tmp_path / "canonical-outputs"
+    source_dir = canonical_outputs / "Project One"
+    source_dir.mkdir(parents=True)
+    (source_dir / ".output_manifest.json").write_text(json.dumps({"project_id": "project-999"}), encoding="utf-8")
+    for _, stem, _ in artifacts.REPORTS:
+        (source_dir / f"{stem}.html").write_text("<html>wrong project</html>" + ("x" * 5000), encoding="utf-8")
+    monkeypatch.setattr(artifacts, "CANONICAL_OUTPUTS_ROOT", canonical_outputs)
+
+    reports = ensure_project_report_artifacts(sample_project(), tmp_path / "published", public_slug="project-one")
+
+    assert all(report["html_origin"] == "controlled_fallback" for report in reports.values())
+    assert "wrong project" not in (tmp_path / "published" / "02_master_dashboard.html").read_text(encoding="utf-8")

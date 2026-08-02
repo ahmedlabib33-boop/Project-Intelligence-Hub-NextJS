@@ -328,8 +328,10 @@ const totals = portfolio.totals;
 const warningSummary = (portfolio as { warning_summary?: Record<string, number> }).warning_summary;
 const decisionBrief = ((portfolio as { decision_brief?: DecisionBriefItem[] }).decision_brief || []) as DecisionBriefItem[];
 const DECISION_DASHBOARD_KEY = "__decision_making_dashboard__";
-// TIA stays calculated and project-isolated in the canonical source folders, but is not a public workspace surface.
-const INTERNAL_TIA_SURFACE_ENABLED = false;
+// The complete project-scoped TIA workflow is a visible project tab. Its
+// data remains isolated to the selected project and its formal outputs remain
+// in Output Studio.
+const INTERNAL_TIA_SURFACE_ENABLED = true;
 
 const reportTabs: Array<{ key: ReportKey; label: string; note: string }> = [
   { key: "executive_dashboard", label: "Executive Dashboard", note: "Portfolio-style project summary" },

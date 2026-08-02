@@ -1,8 +1,8 @@
 {
   "project_id": "Suez-Tunnel",
   "project_key": "Suez-Tunnel",
-  "project_fingerprint": "6bfe4a85ae67d2e8772f398fd80611da00340886ca1e668a966f2c0ac173f549",
-  "generator_version": "2026.08.project-scoped-html-pdf-pptx.v5",
+  "project_fingerprint": "2ace284c8347133168b2cadb613c76a32bb514584917e51859ccf59a5673cc04",
+  "generator_version": "2026.08.project-scoped-html-pdf-pptx.v6-source-html",
   "chart_catalog_version": "2026-08-02-reference-36",
   "chart_status": {
     "overview.schedule_performance_s_curve": "ready",
@@ -49,7 +49,7 @@
     "determination_status": "p6_recalculation_required",
     "source_scope": "selected_project_only"
   },
-  "generated_at": "2026-08-02T04:54:05",
+  "generated_at": "2026-08-02T17:37:42",
   "reports": {
     "executive_dashboard": {
       "html": "/generated/Suez-Tunnel/01_executive_dashboard.html",
@@ -58,20 +58,23 @@
       "files": {
         "html": {
           "name": "01_executive_dashboard.html",
-          "bytes": 1232,
-          "sha256": "e96654ac63c2cfdb96f4ef377c2751454ab372a7a91e03c2c0e1dc36b4690dbb"
+          "bytes": 18243,
+          "sha256": "510b429eb8af37a45e920616a52695641b87ccd10650d6314650542b19e94ccd"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 59864,
-          "sha256": "a6742e2962e24a4ec8c08c36d6bc7ef978c6b21b18840fac561c6d31b90e5f0a"
+          "bytes": 918800,
+          "sha256": "d8b368252676c86c22e6b90fb867e5fd6fdf77254d5161595531f214a9991711"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29125,
-          "sha256": "fbafcd71a3b32879aa0d894db22aa7844832fa5b3e2909300bd2f9fbf5cdd193"
+          "sha256": "6ed125750a8122222bfbdbd95c533cb4a036c48a8c2c36f618530ebffe387fe8"
         }
-      }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Suez-Tunnel",
+      "source_report_fingerprint": "7edca5ab5c71cac026e5d36eefb3cd0fe426cf7d18f7510d5ca7877f7729bee4"
     },
     "master_dashboard": {
       "html": "/generated/Suez-Tunnel/02_master_dashboard.html",
@@ -80,20 +83,23 @@
       "files": {
         "html": {
           "name": "02_master_dashboard.html",
-          "bytes": 1226,
-          "sha256": "77eeaa6e6b24f454624ca3083a36a74da9f4d031314af89d8a03e6b020103bf5"
+          "bytes": 87011,
+          "sha256": "309aa8a622f2b0f673377feba8ddd2fc6a56622125c444048a0491b7462f83b5"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
-          "bytes": 59506,
-          "sha256": "90e52e41653e851f419bea25e696169ca0a1f46183252e107c27dac37dd83cdf"
+          "bytes": 884770,
+          "sha256": "1bf54444642ff8ee5aa33a50ec0566c51cd5340b9bb41eebd68c39dfb915c19e"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29121,
-          "sha256": "c0170181492e90fba1f5041eb75f7b1acbd08ecc23f7c66a04eaf9b772343ecb"
+          "sha256": "84f421825ffd0118eeb4b43e891f8c4c22784c8881b1eda98b88a59b69787ad4"
         }
-      }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Suez-Tunnel",
+      "source_report_fingerprint": "7edca5ab5c71cac026e5d36eefb3cd0fe426cf7d18f7510d5ca7877f7729bee4"
     },
     "elite_svg_charts": {
       "html": "/generated/Suez-Tunnel/03_elite_svg_charts.html",
@@ -102,20 +108,23 @@
       "files": {
         "html": {
           "name": "03_elite_svg_charts.html",
-          "bytes": 1226,
-          "sha256": "d4a3b151895bd47698b6d0477bc1dee1fd57eac588b6a369dc893808bc3616af"
+          "bytes": 52006,
+          "sha256": "1715ce5feded555db34e4f7ddcfd670d1227e63da0676746e095616dadde43e7"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
-          "bytes": 59627,
-          "sha256": "920d78c78c2b381188d2ee7f1af1d1fe6d2598b51ceaa90054050e6899a0e549"
+          "bytes": 241398,
+          "sha256": "8509ddf740476c7c18d3bf93f96444676ea9f03c3218394840328a0aa0650622"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29121,
-          "sha256": "88f8261a80971ec8bd9653cdc0d81d9d15fa0e78ab609b9da12c7edeef0ddfff"
+          "sha256": "91b870ebbf2ea2198ac53d5e24791df7776bc157a64847a33ab2a6962153b571"
         }
-      }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Suez-Tunnel",
+      "source_report_fingerprint": "7edca5ab5c71cac026e5d36eefb3cd0fe426cf7d18f7510d5ca7877f7729bee4"
     },
     "linked_executive_dashboard": {
       "html": "/generated/Suez-Tunnel/04_linked_executive_dashboard.html",
@@ -124,20 +133,23 @@
       "files": {
         "html": {
           "name": "04_linked_executive_dashboard.html",
-          "bytes": 1246,
-          "sha256": "7787b5dca967f70533b81cc36d2848cec07b9fc202fe0527dda159866ea5cd07"
+          "bytes": 57801,
+          "sha256": "89656a81a090cfb88f156f19c15ce4e6faf58c48cebf426acad06c0e9fc48cfd"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
-          "bytes": 59880,
-          "sha256": "9ac1bff66b8936741aef585d15f58deb01780c98039cb97de2c645f7c6150589"
+          "bytes": 1121973,
+          "sha256": "114d226b8a3ff9bbfa12608745c860d555a2acc1fb1790a2fdd386964b5c1a5c"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29131,
-          "sha256": "fed5569837fc58159b6c07bd4e9f204ec0a4bf5f9ace09c9ce3a1c37cbfa6328"
+          "sha256": "e80c57738a1a28fd7fd0ef4b71e81a6f524457789af393e9d04a94ff568478a2"
         }
-      }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Suez-Tunnel",
+      "source_report_fingerprint": "7edca5ab5c71cac026e5d36eefb3cd0fe426cf7d18f7510d5ca7877f7729bee4"
     },
     "tia_governed_assessment": {
       "html": "/generated/Suez-Tunnel/05_delay_tia_governed_assessment.html",
@@ -148,17 +160,17 @@
         "html": {
           "name": "05_delay_tia_governed_assessment.html",
           "bytes": 2557,
-          "sha256": "c22e3776e3a12e49b1f3647f77571a2c9647f5b8a8caa7eeb30fe6229c6ad0f6"
+          "sha256": "4bcd08e0f113f8c03c594860e5858aa7de960e9a0846e6cec5b3a3f8aa905c4d"
         },
         "pdf": {
           "name": "05_delay_tia_governed_assessment.pdf",
           "bytes": 2049,
-          "sha256": "18044076f326667ff422efb08d302d49f4efd9df4768d9ffb20dee7055548c61"
+          "sha256": "fd3a84111b153f21bede08e681f4828592ec19ca1d3096c8e8d230d29c179c8a"
         },
         "pptx": {
           "name": "05_delay_tia_governed_assessment.pptx",
           "bytes": 28478,
-          "sha256": "32975a8fed9a9b5a16f7e21ed70d2910d868629412a82bea4e9eefe8395dfeae"
+          "sha256": "13324ca798367fbdb844adbe2589f2d5a712777ec67d6d4e3191b9ff21e060dc"
         },
         "docx": {
           "name": "05_delay_tia_governed_assessment.docx",

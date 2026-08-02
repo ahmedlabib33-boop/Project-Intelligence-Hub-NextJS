@@ -1,8 +1,8 @@
 {
   "project_id": "The Big -P.01-UP-20-April-26",
   "project_key": "The-BIG-PH01",
-  "project_fingerprint": "7af84046a63c5abcdb744ed23a8cf15a8a4293707ec9d85ab1cbd3d796e0bf5b",
-  "generator_version": "2026.08.project-scoped-html-pdf-pptx.v5",
+  "project_fingerprint": "765dcd7d19bfebca99c457d7ecffdcb7bbc63db5363ea37d400c92c498396142",
+  "generator_version": "2026.08.project-scoped-html-pdf-pptx.v6-source-html",
   "chart_catalog_version": "2026-08-02-reference-36",
   "chart_status": {
     "overview.schedule_performance_s_curve": "ready",
@@ -49,7 +49,7 @@
     "determination_status": "controlled_xer_comparison_available",
     "source_scope": "selected_project_only"
   },
-  "generated_at": "2026-08-02T04:53:58",
+  "generated_at": "2026-08-02T17:36:57",
   "reports": {
     "executive_dashboard": {
       "html": "/generated/The-BIG-PH01/01_executive_dashboard.html",
@@ -58,20 +58,23 @@
       "files": {
         "html": {
           "name": "01_executive_dashboard.html",
-          "bytes": 1240,
-          "sha256": "e7971bc7fadf19e5bb3ca5e2fe6d5afd79d875a306979003298d2d584d3fd1d0"
+          "bytes": 18232,
+          "sha256": "6e842c96cb0caadb0e167f8e330e2242fe7f1433e67325b43e1f2594b0365c9b"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 61204,
-          "sha256": "de1a0acfae2a5b05672acdc6a2ad131d2715594c5c5a04c1258c029e1d60a437"
+          "bytes": 911076,
+          "sha256": "3ce7a6c7e0eda3c07f1e87cc580a2616bf9f23204b4e3895784279e75e836e62"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29140,
-          "sha256": "2f92188c59023341d100bb1734e8a105247d31db0eefe29fd410ec17d3fe12e9"
+          "sha256": "798743c91733b652dc1250eaf93b4baed9be2213bfd0183465fc0a8902b99ba6"
         }
-      }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "The Big -P.01-UP-20-April-26",
+      "source_report_fingerprint": "3a31bf0b0b885c1857ca25cbf312c1394ca679178c1295826c5da164269d671f"
     },
     "master_dashboard": {
       "html": "/generated/The-BIG-PH01/02_master_dashboard.html",
@@ -80,20 +83,23 @@
       "files": {
         "html": {
           "name": "02_master_dashboard.html",
-          "bytes": 1234,
-          "sha256": "3ec884ab35ad4982fc4aa27f9b10cf43d4c65d5e445e49e76c11a13490899b1d"
+          "bytes": 118382,
+          "sha256": "3767d3eb00cff4d15216ec184feb2607629c66b2fbb03698678d6f878b6b941d"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
-          "bytes": 61051,
-          "sha256": "5cab5f7e67a728408756eb4be16b612a08b152655144d8109c8988440527c385"
+          "bytes": 885433,
+          "sha256": "f658d0fc656ddb5494ff29eda4545fc12460e5a9954ee1a1d9121ffc176c7d79"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29137,
-          "sha256": "768d24f4c8abdadc2fd1986eadc961c2616a881773116cf823322a83c1a454fa"
+          "sha256": "4937700c1b74c884218ac30e9c95f2faab10eb09fd324464dc752f25e6dee872"
         }
-      }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "The Big -P.01-UP-20-April-26",
+      "source_report_fingerprint": "3a31bf0b0b885c1857ca25cbf312c1394ca679178c1295826c5da164269d671f"
     },
     "elite_svg_charts": {
       "html": "/generated/The-BIG-PH01/03_elite_svg_charts.html",
@@ -102,20 +108,23 @@
       "files": {
         "html": {
           "name": "03_elite_svg_charts.html",
-          "bytes": 1234,
-          "sha256": "41637c7d172c52421ff8e8adfa6ce3b401b65e61c0b893b95772d87ca95852cf"
+          "bytes": 52904,
+          "sha256": "7aff33f52a436768b06674713f373a26359a28b5ed082eb5d66a70b669a768d9"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
-          "bytes": 60369,
-          "sha256": "a6f7e2112689cdfe1a5195fbdf24953085e101d38985f1bd07452e9b24e1af06"
+          "bytes": 241841,
+          "sha256": "93d901f039430527305c1856cd02d23efe453f2a64e16478991f839f669bc92b"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29137,
-          "sha256": "0ab65d3273ea9fa85364ce8156710bfc34dd6ef49d92c3f2bc64d38401603fcb"
+          "sha256": "cc8f2546357b605bfadc25c492b1955013bf755a552bb60032fdbaf30eb46374"
         }
-      }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "The Big -P.01-UP-20-April-26",
+      "source_report_fingerprint": "3a31bf0b0b885c1857ca25cbf312c1394ca679178c1295826c5da164269d671f"
     },
     "linked_executive_dashboard": {
       "html": "/generated/The-BIG-PH01/04_linked_executive_dashboard.html",
@@ -124,20 +133,23 @@
       "files": {
         "html": {
           "name": "04_linked_executive_dashboard.html",
-          "bytes": 1254,
-          "sha256": "fbfc495b414a81a7058c8a80bf012818ecaa46417dbfedbe83683a738df4268c"
+          "bytes": 56229,
+          "sha256": "51c334b7e059a540a54230e02ea2f45c7c71293bbf48a8c3f74eda59108d8577"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
-          "bytes": 61468,
-          "sha256": "ee8a85c84dbb75e41f0778379d24c4d46a3b03039e82b3d1830c17c8bbe26513"
+          "bytes": 1307503,
+          "sha256": "5863fa61cc0f42ea0c0c0f82d964fc02442a555bb85088400163471d640135bf"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29147,
-          "sha256": "a2f5e4d32f6c9e248523e12150b5bc281c949eee24de9e5e4f28a8c0884fdc28"
+          "sha256": "f2fdda6ce4eebe9fb229a70c5bef860aef453f7e0e17afd62bba7f8698930f43"
         }
-      }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "The Big -P.01-UP-20-April-26",
+      "source_report_fingerprint": "3a31bf0b0b885c1857ca25cbf312c1394ca679178c1295826c5da164269d671f"
     },
     "tia_governed_assessment": {
       "html": "/generated/The-BIG-PH01/05_delay_tia_governed_assessment.html",
@@ -148,17 +160,17 @@
         "html": {
           "name": "05_delay_tia_governed_assessment.html",
           "bytes": 9686,
-          "sha256": "44e1b3e7de65304aa52ee2c6ec88db234c3dbb6fb163152267c90db137117302"
+          "sha256": "b6dd6938d35fe74b20743ee2d870ac949daa13e96be16011f2fc0492cb59c124"
         },
         "pdf": {
           "name": "05_delay_tia_governed_assessment.pdf",
           "bytes": 2443,
-          "sha256": "c02e03e01c507b465c086bfe11665fa642c1300c93364510468ede6ed50bfe50"
+          "sha256": "ec302c1171d7a4d4635aa9579097bb73205ba0e0410066bd612bc793bad353ee"
         },
         "pptx": {
           "name": "05_delay_tia_governed_assessment.pptx",
           "bytes": 28684,
-          "sha256": "8f9dbe814f0bb6568688b7dd53d9103d0209870b4c05bc2d2af7b9e0d2956520"
+          "sha256": "03a68429327a5c2a10d80ab75260014c89ba401bb1e7bb379843e7271b191e5a"
         },
         "docx": {
           "name": "05_delay_tia_governed_assessment.docx",

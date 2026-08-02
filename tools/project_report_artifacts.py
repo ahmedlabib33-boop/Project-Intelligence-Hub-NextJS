@@ -25,7 +25,10 @@ REPORTS: tuple[tuple[str, str, str], ...] = (
     ("elite_svg_charts", "03_elite_svg_charts", "Elite SVG Charts"),
     ("linked_executive_dashboard", "04_linked_executive_dashboard", "Linked Executive Dashboard"),
 )
-REPORT_GENERATOR_VERSION = "2026.08.project-scoped-html-pdf-pptx.v5"
+REPORT_GENERATOR_VERSION = "2026.08.project-scoped-html-pdf-pptx.v6-source-html"
+CANONICAL_OUTPUTS_ROOT = Path(
+    os.environ.get("PIH_SOURCE_ROOT") or r"D:\one drive data\OneDrive\Documents\Project Intelligence Hub"
+) / "11-outputs"
 
 
 def _sha256(path: Path) -> str:
@@ -71,7 +74,13 @@ def _metric_rows(project: dict[str, Any]) -> list[tuple[str, str]]:
     ]
 
 
-def _ensure_html(path: Path, title: str, project: dict[str, Any]) -> None:
+def _write_fallback_html(path: Path, title: str, project: dict[str, Any]) -> None:
+    """Create a controlled fallback when no approved source HTML exists.
+
+    The fallback is deliberately not presented as a replacement for an approved
+    report.  It keeps the selected-project output usable without publishing a
+    report that belongs to a different project.
+    """
     metrics = "".join(
         f"<tr><th>{html.escape(label)}</th><td>{html.escape(value)}</td></tr>"
         for label, value in _metric_rows(project)
@@ -86,6 +95,44 @@ def _ensure_html(path: Path, title: str, project: dict[str, Any]) -> None:
         f"<table>{metrics}</table><p><small>Generated from the selected project only.</small></p></body></html>",
         encoding="utf-8",
     )
+
+
+def _canonical_html_sources(project: dict[str, Any]) -> tuple[dict[str, Path], dict[str, Any]]:
+    """Return only the legacy HTML reports proven to belong to this project."""
+    folder_name = str(project.get("project_folder_name") or "").strip()
+    project_id = str(project.get("project_id") or "").strip()
+    if not folder_name or not project_id:
+        return {}, {}
+    source_dir = CANONICAL_OUTPUTS_ROOT / folder_name
+    manifest_path = source_dir / ".output_manifest.json"
+    try:
+        source_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        return {}, {}
+    if str(source_manifest.get("project_id") or "").strip() != project_id:
+        return {}, {}
+    sources: dict[str, Path] = {}
+    for key, stem, _ in REPORTS:
+        candidate = source_dir / f"{stem}.html"
+        if candidate.exists() and candidate.stat().st_size > 4096:
+            sources[key] = candidate
+    return sources, source_manifest
+
+
+def _publish_source_html_or_fallback(
+    html_path: Path,
+    key: str,
+    title: str,
+    project: dict[str, Any],
+    source_reports: dict[str, Path],
+) -> str:
+    """Publish an approved project-owned source report, never a shared report."""
+    source = source_reports.get(key)
+    if source is not None:
+        shutil.copy2(source, html_path)
+        return "canonical_project_html"
+    _write_fallback_html(html_path, title, project)
+    return "controlled_fallback"
 
 
 def _chrome_path() -> str | None:
@@ -299,12 +346,13 @@ def ensure_project_report_artifacts(
                 return existing_reports
         except Exception:
             pass
+    source_reports, source_manifest = _canonical_html_sources(project)
     results: dict[str, dict[str, Any]] = {}
     for key, stem, title in REPORTS:
         html_path = output_dir / f"{stem}.html"
         pdf_path = output_dir / f"{stem}.pdf"
         pptx_path = output_dir / f"{stem}.pptx"
-        _ensure_html(html_path, title, project)
+        html_origin = _publish_source_html_or_fallback(html_path, key, title, project, source_reports)
         _write_pdf(pdf_path, title, project, html_path)
         _write_pptx(pptx_path, title, project)
         results[key] = {
@@ -315,6 +363,9 @@ def ensure_project_report_artifacts(
                 extension: {"name": path.name, "bytes": path.stat().st_size, "sha256": _sha256(path)}
                 for extension, path in (("html", html_path), ("pdf", pdf_path), ("pptx", pptx_path))
             },
+            "html_origin": html_origin,
+            "source_project_id": source_manifest.get("project_id") if html_origin == "canonical_project_html" else project.get("project_id"),
+            "source_report_fingerprint": source_manifest.get("fingerprint") if html_origin == "canonical_project_html" else project.get("fingerprint"),
         }
     tia_artifacts = _ensure_governed_tia_artifacts(project, output_dir, project_slug)
     if tia_artifacts:

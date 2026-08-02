@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-02T04:54:05",
+  "generated_at": "2026-08-02T17:37:45",
   "project_count": 4,
   "sector_count": 3,
   "totals": {
@@ -41,7 +41,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting.",
-      "last_updated": "2026-08-02T04:53:47"
+      "last_updated": "2026-08-02T17:35:52"
     },
     {
       "decision_id": "DEC-the-big-p-01-up-20-april-26-01",
@@ -58,7 +58,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting.",
-      "last_updated": "2026-08-02T04:53:50"
+      "last_updated": "2026-08-02T17:36:15"
     },
     {
       "decision_id": "DEC-the-big-p-01-up-20-april-26-02",
@@ -75,7 +75,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness.",
-      "last_updated": "2026-08-02T04:53:50"
+      "last_updated": "2026-08-02T17:36:15"
     },
     {
       "decision_id": "DEC-sophia-mall-01",
@@ -92,7 +92,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness.",
-      "last_updated": "2026-08-02T04:53:51"
+      "last_updated": "2026-08-02T17:36:17"
     },
     {
       "decision_id": "DEC-sophia-mall-02",
@@ -109,7 +109,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review entitlement matrix, notice status, and supporting correspondence.",
-      "last_updated": "2026-08-02T04:53:51"
+      "last_updated": "2026-08-02T17:36:17"
     },
     {
       "decision_id": "DEC-suez-tunnel-01",
@@ -126,7 +126,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting.",
-      "last_updated": "2026-08-02T04:53:52"
+      "last_updated": "2026-08-02T17:36:18"
     },
     {
       "decision_id": "DEC-lmd-bridge-02",
@@ -143,7 +143,7 @@
       "evidence_status": "High",
       "urgency": "Medium",
       "recommended_action": "Validate actual cost and payment records against budget baseline.",
-      "last_updated": "2026-08-02T04:53:47"
+      "last_updated": "2026-08-02T17:35:52"
     },
     {
       "decision_id": "DEC-suez-tunnel-02",
@@ -160,7 +160,7 @@
       "evidence_status": "High",
       "urgency": "Medium",
       "recommended_action": "Validate actual cost and payment records against budget baseline.",
-      "last_updated": "2026-08-02T04:53:52"
+      "last_updated": "2026-08-02T17:36:18"
     }
   ],
   "sectors": [
@@ -309,7 +309,7 @@
       "milestone_count": 5,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-08-02T04:53:47",
+      "last_updated": "2026-08-02T17:35:52",
       "source_files": {
         "projects": 1,
         "contracts": 2,
@@ -465,7 +465,7 @@
       "milestone_count": 4,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-08-02T04:53:50",
+      "last_updated": "2026-08-02T17:36:15",
       "source_files": {
         "projects": 1,
         "contracts": 2,
@@ -603,7 +603,7 @@
       "milestone_count": 5,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-08-02T04:53:51",
+      "last_updated": "2026-08-02T17:36:17",
       "source_files": {
         "projects": 1,
         "contracts": 2,
@@ -768,7 +768,7 @@
       "milestone_count": 5,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-08-02T04:53:52",
+      "last_updated": "2026-08-02T17:36:18",
       "source_files": {
         "projects": 1,
         "contracts": 2,
@@ -850,8 +850,8 @@
     "warn_count": 0,
     "issue_count": 0,
     "report_path": "D:/Project Intelligence Hub NextJS/12-logs/guardrail_report_latest.md",
-    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260802_045405",
-    "last_checked": "2026-08-02T04:54:05",
+    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260802_173746",
+    "last_checked": "2026-08-02T17:37:46",
     "top_issues": []
   }
 }

@@ -67,3 +67,34 @@ def test_project_local_submitted_tia_visuals_are_scoped_and_prefer_revised_varia
     names = {item["name"] for item in payload["visuals"]}
     assert "04_Eventnew_Chronology_Timeline.svg" in names
     assert "15_EOT_Entitlement_Summary_Large_Font.svg" in names
+
+
+def test_letters_workspace_uses_streamlit_register_and_inbox_logic_per_project():
+    projects = discover_projects()
+    big = next((project for project in projects if project.get("project_id") == "The Big -P.01-UP-20-April-26"), None)
+    if big is None:
+        pytest.skip("The BIG project fixture is not available in this environment.")
+
+    payload = build_project_record(big)
+    tables = payload["features"]["letters_intelligence"]["workbook_tables"]
+    sheets = {sheet["name"]: sheet for sheet in tables["sheets"]}
+
+    assert tables["source_scope"] == "selected_project_only"
+    assert tables["inbox_auto_ingest"] is True
+    assert sheets["From Contractor"]["row_count"] > 0
+    assert sheets["Issue Threads"]["row_count"] > 0
+    for sheet in tables["sheets"]:
+        for row in sheet["rows"]:
+            assert row["project_id"] == big["project_id"]
+
+
+def test_delay_analysis_time_impact_is_a_visible_project_feature():
+    projects = discover_projects()
+    if not projects:
+        pytest.skip("No project folders are available in this environment.")
+
+    payload = build_project_record(projects[0])
+    delay = payload["features"]["delay_analysis"]
+
+    assert delay["visibility"] == "workspace"
+    assert delay["internal_control"]["ui_enabled"] is True

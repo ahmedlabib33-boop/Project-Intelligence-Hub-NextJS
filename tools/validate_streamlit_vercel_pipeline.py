@@ -72,6 +72,7 @@ REQUIRED_PROJECT_TABS = (
     "Contracts",
     "Letters Intelligence",
     "Risks",
+    "Delay Analysis - Time Impact Analysis",
     "Contract & Claims Intelligence Center",
     "Technical Advisor",
     "Conference",
@@ -316,13 +317,13 @@ def validate_workspace_tab_catalog(errors: list[str], checks: list[str]) -> None
     else:
         checks.append(f"Next.js project workspace exposes {len(REQUIRED_PROJECT_TABS)} visible project-control tabs")
     if (
-        'const INTERNAL_TIA_SURFACE_ENABLED = false;' not in page_source
+        'const INTERNAL_TIA_SURFACE_ENABLED = true;' not in page_source
         or 'visibleWorkspaceTabs.map((tab)' not in page_source
         or INTERNAL_PROJECT_TAB not in tab_catalog
     ):
-        errors.append("Next.js workspace does not preserve the full internal Delay Analysis - Time Impact Analysis control")
+        errors.append("Next.js workspace does not expose the selected-project Delay Analysis - Time Impact Analysis control")
     else:
-        checks.append("Delay Analysis - Time Impact Analysis remains internal and is not rendered as a public project tab")
+        checks.append("Delay Analysis - Time Impact Analysis is visible as a selected-project workspace tab")
     hidden_legacy = [tab for tab in ("Delays", "Time Impact") if f'"{tab}"' in tab_catalog]
     if hidden_legacy:
         errors.append(f"Next.js workspace still exposes legacy compatibility tabs: {', '.join(hidden_legacy)}")
