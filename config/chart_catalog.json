@@ -1,37 +1,42 @@
 {
-  "version": "2026-08-01",
+  "version": "2026-08-02-reference-36",
+  "description": "Source-governed selected-project chart inventory matching the SAMCO digital reference. Values are never supplied by this catalog.",
   "charts": [
-    {
-      "id": "contracts.planned_vs_actual_cash_flow",
-      "tab": "Contracts",
-      "title": "Planned vs Actual Cash Flow",
-      "type": "grouped_bar",
-      "sources": ["planned_cash_flow.csv", "payments.csv"],
-      "required_columns": ["project_id", "period_date", "planned_cash_out"]
-    },
-    {
-      "id": "delay.root_cause_pareto",
-      "tab": "Delay Analysis - Time Impact Analysis",
-      "title": "Delay by Root Cause",
-      "type": "horizontal_bar",
-      "sources": ["14-delay_event_classification.csv"],
-      "required_columns": ["project_id", "event_id", "root_cause", "delay_days", "analyst_status"]
-    },
-    {
-      "id": "delay.type_distribution",
-      "tab": "Delay Analysis - Time Impact Analysis",
-      "title": "Delay Type Distribution",
-      "type": "doughnut",
-      "sources": ["14-delay_event_classification.csv"],
-      "required_columns": ["project_id", "event_id", "delay_type", "analyst_status"]
-    },
-    {
-      "id": "delay.tia_recovery_scenario",
-      "tab": "Delay Analysis - Time Impact Analysis",
-      "title": "Baseline vs Impacted vs Recovery",
-      "type": "line",
-      "sources": ["15-tia_recovery_scenario.csv"],
-      "required_columns": ["project_id", "scenario_id", "activity_id", "status_date", "baseline_progress_percent", "impacted_progress_percent", "recovery_progress_percent", "analyst_status"]
-    }
+    {"id":"overview.schedule_performance_s_curve","tab":"Overview","title":"Schedule Performance (S-Curve)","type":"line","sources":["s_curve.csv"],"required_columns":["project_id","months"]},
+    {"id":"overview.overall_completion_gauge","tab":"Overview","title":"Overall Completion","type":"doughnut","sources":["projects.csv","progress_updates.csv"],"required_columns":["project_id"]},
+    {"id":"overview.activity_status","tab":"Overview","title":"Activity Status","type":"doughnut","sources":["activities.csv"],"required_columns":["project_id","actual_progress"]},
+    {"id":"overview.discipline_health","tab":"Overview","title":"Discipline Health","type":"radar","sources":["vercel/discipline_progress_history.csv"],"required_columns":["project_id","discipline","actual_progress_percent"]},
+    {"id":"overview.earned_value_trend","tab":"Overview","title":"Earned Value Trend","type":"line","sources":["evm.csv","vercel/evm_period_history.csv"],"required_columns":["project_id","period"]},
+    {"id":"overview.performance_indices","tab":"Overview","title":"Performance Indices","type":"line","sources":["evm.csv","vercel/evm_period_history.csv"],"required_columns":["project_id","spi","cpi"]},
+    {"id":"wbs.progress_distribution","tab":"WBS","title":"WBS Progress Distribution","type":"bar","sources":["wbs.csv"],"required_columns":["project_id","wbs_name"]},
+    {"id":"wbs.duration_breakdown","tab":"WBS","title":"WBS Duration Breakdown","type":"horizontal_bar","sources":["wbs.csv"],"required_columns":["project_id","wbs_name"]},
+    {"id":"activities.status_distribution","tab":"Activities","title":"Status Distribution","type":"doughnut","sources":["activities.csv"],"required_columns":["project_id","actual_progress"]},
+    {"id":"activities.critical_path","tab":"Activities","title":"Critical Path Activities","type":"doughnut","sources":["activities.csv"],"required_columns":["project_id","is_critical"]},
+    {"id":"activities.float_distribution","tab":"Activities","title":"Float Distribution","type":"bar","sources":["activities.csv"],"required_columns":["project_id","total_float_days"]},
+    {"id":"activities.monthly_completion","tab":"Activities","title":"Monthly Activity Completion","type":"bar","sources":["vercel/activity_completion_history.csv"],"required_columns":["project_id","period_date","completed_activity_count"]},
+    {"id":"activities.responsible_party_workload","tab":"Activities","title":"Responsible Party Workload","type":"horizontal_bar","sources":["activities.csv"],"required_columns":["project_id","responsible_party"]},
+    {"id":"milestones.schedule_health","tab":"Milestones","title":"Schedule Health","type":"doughnut","sources":["milestones.csv"],"required_columns":["project_id","planned_date"]},
+    {"id":"milestones.variance_trend","tab":"Milestones","title":"Milestone Variance Trend","type":"line","sources":["milestones.csv"],"required_columns":["project_id","planned_date","forecast_date"]},
+    {"id":"milestones.type_breakdown","tab":"Milestones","title":"Milestone Type Breakdown","type":"bar","sources":["milestones.csv"],"required_columns":["project_id","milestone_contractual_type"]},
+    {"id":"s_curve.master","tab":"S-Curve","title":"Master S-Curve - Cumulative Progress","type":"line","sources":["s_curve.csv"],"required_columns":["project_id","months"]},
+    {"id":"s_curve.discipline","tab":"S-Curve","title":"S-Curve by Discipline","type":"line","sources":["vercel/discipline_progress_history.csv"],"required_columns":["project_id","period_date","discipline"]},
+    {"id":"s_curve.variance","tab":"S-Curve","title":"Progress Variance Over Time","type":"bar","sources":["s_curve.csv"],"required_columns":["project_id","months"]},
+    {"id":"evm.burnup","tab":"EVM Analysis","title":"EVM Burn-Up Chart","type":"line","sources":["evm.csv","vercel/evm_period_history.csv"],"required_columns":["project_id","period"]},
+    {"id":"evm.variance_waterfall","tab":"EVM Analysis","title":"EVM Variance Waterfall","type":"bar","sources":["evm.csv","projects.csv"],"required_columns":["project_id"]},
+    {"id":"evm.spi_trend","tab":"EVM Analysis","title":"SPI Trend","type":"line","sources":["evm.csv","vercel/evm_period_history.csv"],"required_columns":["project_id","spi"]},
+    {"id":"evm.cpi_trend","tab":"EVM Analysis","title":"CPI Trend","type":"line","sources":["evm.csv","vercel/evm_period_history.csv"],"required_columns":["project_id","cpi"]},
+    {"id":"contracts.payment_history","tab":"Contracts","title":"Payment History","type":"bar","sources":["payments.csv"],"required_columns":["project_id"]},
+    {"id":"contracts.planned_vs_actual_cash_flow","tab":"Contracts","title":"Contract Cash Flow","type":"line","sources":["vercel/planned_cash_flow.csv","planned_cash_flow.csv","payments.csv"],"required_columns":["project_id","period_date"]},
+    {"id":"contracts.payment_status","tab":"Contracts","title":"Payment Status Breakdown","type":"doughnut","sources":["payments.csv"],"required_columns":["project_id"]},
+    {"id":"contracts.variations","tab":"Contracts","title":"Contract vs Variations","type":"bar","sources":["contracts.csv"],"required_columns":["project_id"]},
+    {"id":"risks.category","tab":"Risks","title":"Risk Category Breakdown","type":"bar","sources":["risks.csv"],"required_columns":["project_id","risk_category"]},
+    {"id":"risks.status","tab":"Risks","title":"Risk Status","type":"doughnut","sources":["risks.csv"],"required_columns":["project_id","status"]},
+    {"id":"risks.trend","tab":"Risks","title":"Risk Trend Over Time","type":"line","sources":["vercel/risk_assessment_history.csv"],"required_columns":["project_id","snapshot_date"]},
+    {"id":"risks.mitigation_effectiveness","tab":"Risks","title":"Mitigation Effectiveness","type":"bar","sources":["vercel/risk_assessment_history.csv"],"required_columns":["project_id","score_before_mitigation","score_after_mitigation"]},
+    {"id":"delay.events_timeline","tab":"Delay Analysis - Time Impact Analysis","title":"Delay Events Timeline","type":"bar","sources":["delay_events.csv"],"required_columns":["project_id"]},
+    {"id":"delay.root_cause_pareto","tab":"Delay Analysis - Time Impact Analysis","title":"Delay by Root Cause","type":"horizontal_bar","sources":["vercel/delay_event_classification.csv","14-delay_event_classification.csv"],"required_columns":["project_id","event_id","root_cause"]},
+    {"id":"delay.type_distribution","tab":"Delay Analysis - Time Impact Analysis","title":"Delay Type Distribution","type":"doughnut","sources":["vercel/delay_event_classification.csv","14-delay_event_classification.csv"],"required_columns":["project_id","event_id","delay_type"]},
+    {"id":"delay.monthly_accumulation","tab":"Delay Analysis - Time Impact Analysis","title":"Monthly Delay Accumulation","type":"line","sources":["vercel/delay_event_classification.csv","delay_events.csv"],"required_columns":["project_id"]},
+    {"id":"delay.tia_recovery_scenario","tab":"Delay Analysis - Time Impact Analysis","title":"Time Impact Analysis - Before vs After","type":"line","sources":["vercel/tia_recovery_scenario.csv","15-tia_recovery_scenario.csv"],"required_columns":["project_id","scenario_id","activity_id"]}
   ]
 }

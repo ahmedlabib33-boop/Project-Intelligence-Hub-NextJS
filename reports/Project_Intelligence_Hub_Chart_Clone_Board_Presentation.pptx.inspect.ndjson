@@ -1,0 +1,197 @@
+{"kind":"deck","id":"pr/qqfgff","name":"Deck"}
+{"kind":"layout","layoutId":"9a2e1086-791c-46f6-ab8d-205b3cdce459","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"5c0d0222-9c98-4d5d-8e54-aa81787695eb","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/h1laml","slide":1,"title":"SAMCO EGYPT","textShapes":7}
+{"kind":"textbox","id":"sh/d8zep8na","slide":1,"text":"SAMCO EGYPT","textPreview":"SAMCO EGYPT","textChars":11,"textLines":1,"bbox":[64,58,260,20]}
+{"kind":"textbox","id":"sh/q5ofudoz","slide":1,"text":"Project Intelligence Hub","textPreview":"Project Intelligence Hub","textChars":24,"textLines":1,"bbox":[64,152,880,70]}
+{"kind":"textbox","id":"sh/r6xwni54","slide":1,"text":"Board presentation: source-backed chart intelligence, project-local Vercel data, and governed analysis.","textPreview":"Board presentation: source-backed chart intelligence, project-local Vercel data, and governed analysis.","textChars":103,"textLines":1,"bbox":[68,248,920,62]}
+{"kind":"shape","id":"sh/0vqx0n61","slide":1,"bbox":[64,405,1045,124]}
+{"kind":"textbox","id":"sh/1wzetsnm","slide":1,"text":"A single project workspace can now publish the complete approved chart design without importing sample values or compromising project isolation.","textPreview":"A single project workspace can now publish the complete approved chart design without importing sample values or compromising project iso...","textChars":144,"textLines":1,"bbox":[96,438,945,60]}
+{"kind":"textbox","id":"sh/e98fydov","slide":1,"text":"Designed & Created |","textPreview":"Designed & Created |","textChars":20,"textLines":1,"bbox":[64,684,145,14]}
+{"kind":"textbox","id":"sh/zuhwri5g","slide":1,"text":"Engr. Ahmed Labib","textPreview":"Engr. Ahmed Labib","textChars":17,"textLines":1,"bbox":[205,684,170,14]}
+{"kind":"textbox","id":"sh/ozqx47mx","slide":1,"text":"Source-governed project controls","textPreview":"Source-governed project controls","textChars":32,"textLines":1,"bbox":[960,684,255,14]}
+{"kind":"notes","id":"nt/h1laml","slide":1,"text":"[Sources]\nconfig/chart_catalog.json\ntools/project_chart_payloads.py"}
+{"kind":"slide","id":"sl/kkjs2l","slide":2,"title":"RELEASE POSITION","textShapes":21}
+{"kind":"textbox","id":"sh/bmpsfqx4","slide":2,"text":"RELEASE POSITION","textPreview":"RELEASE POSITION","textChars":16,"textLines":1,"bbox":[64,42,340,18]}
+{"kind":"textbox","id":"sh/wny9ovyp","slide":2,"text":"36 reference chart slots, governed by project evidence","textPreview":"36 reference chart slots, governed by project evidence","textChars":54,"textLines":1,"bbox":[64,72,1035,44]}
+{"kind":"textbox","id":"sh/xo7ah0fa","slide":2,"text":"Every selected project receives the same visual inventory while remaining free to show readiness instead of false values.","textPreview":"Every selected project receives the same visual inventory while remaining free to show readiness instead of false values.","textChars":121,"textLines":1,"bbox":[64,132,1060,34]}
+{"kind":"textbox","id":"sh/mxwrilgn","slide":2,"text":"SAMCO PROJECT INTELLIGENCE HUB  |  02","textPreview":"SAMCO PROJECT INTELLIGENCE HUB  |  02","textChars":37,"textLines":1,"bbox":[950,45,265,16]}
+{"kind":"shape","id":"sh/ny5sbqx8","slide":2,"bbox":[64,180,1152,1]}
+{"kind":"shape","id":"sh/oze9kvyt","slide":2,"bbox":[64,230,255,124]}
+{"kind":"shape","id":"sh/9knad0fe","slide":2,"bbox":[82,248,42,3]}
+{"kind":"textbox","id":"sh/6t0bupgr","slide":2,"text":"CHART SLOTS","textPreview":"CHART SLOTS","textChars":11,"textLines":1,"bbox":[82,264,219,17]}
+{"kind":"textbox","id":"sh/7u9snuxc","slide":2,"text":"36","textPreview":"36","textChars":2,"textLines":1,"bbox":[82,287,219,36]}
+{"kind":"textbox","id":"sh/7ap4jyd8","slide":2,"text":"Reference inventory","textPreview":"Reference inventory","textChars":19,"textLines":1,"bbox":[82,330,219,15]}
+{"kind":"shape","id":"sh/m9g3atwn","slide":2,"bbox":[344,230,255,124]}
+{"kind":"shape","id":"sh/9crml8ve","slide":2,"bbox":[362,248,42,3]}
+{"kind":"textbox","id":"sh/8bilc3et","slide":2,"text":"PROJECT BOUNDARY","textPreview":"PROJECT BOUNDARY","textChars":16,"textLines":1,"bbox":[362,264,219,17]}
+{"kind":"textbox","id":"sh/ve94nydk","slide":2,"text":"project_id","textPreview":"project_id","textChars":10,"textLines":1,"bbox":[362,287,219,36]}
+{"kind":"textbox","id":"sh/ud03etwz","slide":2,"text":"Mandatory source filter","textPreview":"Mandatory source filter","textChars":23,"textLines":1,"bbox":[362,330,219,15]}
+{"kind":"shape","id":"sh/hgrmp8va","slide":2,"bbox":[624,230,255,124]}
+{"kind":"shape","id":"sh/wfilg3e5","slide":2,"bbox":[642,248,42,3]}
+{"kind":"textbox","id":"sh/j2t4ridg","slide":2,"text":"OPTIONAL INPUTS","textPreview":"OPTIONAL INPUTS","textChars":15,"textLines":1,"bbox":[642,264,219,17]}
+{"kind":"textbox","id":"sh/ih03idwv","slide":2,"text":"8","textPreview":"8","textChars":1,"textLines":1,"bbox":[642,287,219,36]}
+{"kind":"textbox","id":"sh/ex47qhg3","slide":2,"text":"Header-only Vercel templates","textPreview":"Header-only Vercel templates","textChars":28,"textLines":1,"bbox":[642,330,219,15]}
+{"kind":"shape","id":"sh/fydojmxo","slide":2,"bbox":[904,230,255,124]}
+{"kind":"shape","id":"sh/gzmpsry9","slide":2,"bbox":[922,248,42,3]}
+{"kind":"textbox","id":"sh/10v6lcfu","slide":2,"text":"FALLBACK POLICY","textPreview":"FALLBACK POLICY","textChars":15,"textLines":1,"bbox":[922,264,219,17]}
+{"kind":"textbox","id":"sh/69knmxg7","slide":2,"text":"Safe","textPreview":"Safe","textChars":4,"textLines":1,"bbox":[922,287,219,36]}
+{"kind":"textbox","id":"sh/radof2xs","slide":2,"text":"Blank template uses legacy source","textPreview":"Blank template uses legacy source","textChars":33,"textLines":1,"bbox":[922,330,219,15]}
+{"kind":"shape","id":"sh/svm5o7yd","slide":2,"bbox":[64,408,1096,125]}
+{"kind":"textbox","id":"sh/twv6hcfi","slide":2,"text":"What changed","textPreview":"What changed","textChars":12,"textLines":1,"bbox":[94,436,280,25]}
+{"kind":"textbox","id":"sh/a5o7y1gb","slide":2,"text":"The chart registry, payload generator, workspace renderer, and pipeline validator now agree on the same 36 chart identities. A populated project `vercel` input takes priority, an empty one does not suppress existing source data, and conflicts are reported.","textPreview":"The chart registry, payload generator, workspace renderer, and pipeline validator now agree on the same 36 chart identities. A populated ...","textChars":256,"textLines":1,"bbox":[94,480,1000,38]}
+{"kind":"textbox","id":"sh/b6xor6xw","slide":2,"text":"Designed & Created |","textPreview":"Designed & Created |","textChars":20,"textLines":1,"bbox":[64,684,145,14]}
+{"kind":"textbox","id":"sh/l0zah0zy","slide":2,"text":"Engr. Ahmed Labib","textPreview":"Engr. Ahmed Labib","textChars":17,"textLines":1,"bbox":[205,684,170,14]}
+{"kind":"textbox","id":"sh/kzq9ovid","slide":2,"text":"Source-governed project controls","textPreview":"Source-governed project controls","textChars":32,"textLines":1,"bbox":[960,684,255,14]}
+{"kind":"notes","id":"nt/kkjs2l","slide":2,"text":"[Sources]\nconfig/chart_catalog.json\ntools/generate_nextjs_website_data.py\ntools/validate_streamlit_vercel_pipeline.py"}
+{"kind":"slide","id":"sl/y8jzbg","slide":3,"title":"OPERATING PIPELINE","textShapes":19}
+{"kind":"textbox","id":"sh/s3i9ob2l","slide":3,"text":"OPERATING PIPELINE","textPreview":"OPERATING PIPELINE","textChars":18,"textLines":1,"bbox":[64,42,340,18]}
+{"kind":"textbox","id":"sh/r298v6l0","slide":3,"text":"Evidence flows once from project folders to board views","textPreview":"Evidence flows once from project folders to board views","textChars":55,"textLines":1,"bbox":[64,72,1035,44]}
+{"kind":"textbox","id":"sh/q10rm1kv","slide":3,"text":"The browser only displays controlled project payloads; calculation and evidence ownership remain in the project pipeline.","textPreview":"The browser only displays controlled project payloads; calculation and evidence ownership remain in the project pipeline.","textChars":121,"textLines":1,"bbox":[64,132,1060,34]}
+{"kind":"textbox","id":"sh/507qtw3a","slide":3,"text":"SAMCO PROJECT INTELLIGENCE HUB  |  03","textPreview":"SAMCO PROJECT INTELLIGENCE HUB  |  03","textChars":37,"textLines":1,"bbox":[950,45,265,16]}
+{"kind":"shape","id":"sh/4zypkr2p","slide":3,"bbox":[64,180,1152,1]}
+{"kind":"shape","id":"sh/3yp8rml4","slide":3,"bbox":[64,255,235,130]}
+{"kind":"shape","id":"sh/ixg7ih4j","slide":3,"bbox":[82,273,7,50]}
+{"kind":"textbox","id":"sh/pwbq5g3e","slide":3,"text":"Project sources","textPreview":"Project sources","textChars":15,"textLines":1,"bbox":[106,277,172,25]}
+{"kind":"textbox","id":"sh/ov29wv2t","slide":3,"text":"Data, schedule, contracts, letters, evidence, and controlled local templates","textPreview":"Data, schedule, contracts, letters, evidence, and controlled local templates","textChars":76,"textLines":1,"bbox":[106,315,166,46]}
+{"kind":"textbox","id":"sh/ipo36xwj","slide":3,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[306,300,42,40]}
+{"kind":"shape","id":"sh/3qh4z2d4","slide":3,"bbox":[350,255,235,130]}
+{"kind":"shape","id":"sh/4rq587ep","slide":3,"bbox":[368,273,7,50]}
+{"kind":"textbox","id":"sh/5szm1cva","slide":3,"text":"Canonical engines","textPreview":"Canonical engines","textChars":17,"textLines":1,"bbox":[392,277,172,25]}
+{"kind":"textbox","id":"sh/ulo32dwn","slide":3,"text":"Project calculations, validation, lineage, and governed time impact logic","textPreview":"Project calculations, validation, lineage, and governed time impact logic","textChars":73,"textLines":1,"bbox":[392,315,166,46]}
+{"kind":"textbox","id":"sh/vmx4vid8","slide":3,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[592,300,42,40]}
+{"kind":"shape","id":"sh/gn6l4net","slide":3,"bbox":[636,255,235,130]}
+{"kind":"shape","id":"sh/hofmxsve","slide":3,"bbox":[654,273,7,50]}
+{"kind":"textbox","id":"sh/eh8nyhwr","slide":3,"text":"Chart payloads","textPreview":"Chart payloads","textChars":14,"textLines":1,"bbox":[678,277,172,25]}
+{"kind":"textbox","id":"sh/zi147mdc","slide":3,"text":"One project JSON, one identity, 36 chart slots, readiness and source warnings","textPreview":"One project JSON, one identity, 36 chart slots, readiness and source warnings","textChars":77,"textLines":1,"bbox":[678,315,166,46]}
+{"kind":"textbox","id":"sh/b2t0zeto","slide":3,"text":"→","textPreview":"→","textChars":1,"textLines":1,"bbox":[878,300,42,40]}
+{"kind":"shape","id":"sh/a1kjq9cj","slide":3,"bbox":[922,255,235,130]}
+{"kind":"shape","id":"sh/xob21obu","slide":3,"bbox":[940,273,7,50]}
+{"kind":"textbox","id":"sh/w321sju9","slide":3,"text":"Vercel surface","textPreview":"Vercel surface","textChars":14,"textLines":1,"bbox":[964,277,172,25]}
+{"kind":"textbox","id":"sh/jqtk3et0","slide":3,"text":"Decision dashboard, selected project workspace, AI, and Output Studio","textPreview":"Decision dashboard, selected project workspace, AI, and Output Studio","textChars":69,"textLines":1,"bbox":[964,315,166,46]}
+{"kind":"shape","id":"sh/ypkjutcf","slide":3,"bbox":[64,490,1092,58]}
+{"kind":"textbox","id":"sh/lsv25ob6","slide":3,"text":"Protection: project_id and project_key are carried through source rows, derived metrics, chart payloads, AI context, report artifacts, and output manifests.","textPreview":"Protection: project_id and project_key are carried through source rows, derived metrics, chart payloads, AI context, report artifacts, an...","textChars":156,"textLines":1,"bbox":[91,509,1030,24]}
+{"kind":"textbox","id":"sh/krm1wjul","slide":3,"text":"Designed & Created |","textPreview":"Designed & Created |","textChars":20,"textLines":1,"bbox":[64,684,145,14]}
+{"kind":"textbox","id":"sh/7udk7ytw","slide":3,"text":"Engr. Ahmed Labib","textPreview":"Engr. Ahmed Labib","textChars":17,"textLines":1,"bbox":[205,684,170,14]}
+{"kind":"textbox","id":"sh/6t4jytcb","slide":3,"text":"Source-governed project controls","textPreview":"Source-governed project controls","textChars":32,"textLines":1,"bbox":[960,684,255,14]}
+{"kind":"notes","id":"nt/y8jzbg","slide":3,"text":"[Sources]\nsrc/construction_system/project_catalog.py\ntools/generate_nextjs_website_data.py\nwebsite/src/app/page.tsx"}
+{"kind":"slide","id":"sl/z74z44","slide":4,"title":"CHART INTELLIGENCE","textShapes":13}
+{"kind":"textbox","id":"sh/tg3q18ry","slide":4,"text":"CHART INTELLIGENCE","textPreview":"CHART INTELLIGENCE","textChars":18,"textLines":1,"bbox":[64,42,340,18]}
+{"kind":"textbox","id":"sh/6dc76d87","slide":4,"text":"Every operational tab receives its own source-backed chart set","textPreview":"Every operational tab receives its own source-backed chart set","textChars":62,"textLines":1,"bbox":[64,72,1035,44]}
+{"kind":"textbox","id":"sh/7el8zi9s","slide":4,"text":"Reference composition is preserved. Reports remain exclusively in Output Studio rather than appearing inside working tabs.","textPreview":"Reference composition is preserved. Reports remain exclusively in Output Studio rather than appearing inside working tabs.","textChars":122,"textLines":1,"bbox":[64,132,1060,34]}
+{"kind":"textbox","id":"sh/gjepcnq9","slide":4,"text":"SAMCO PROJECT INTELLIGENCE HUB  |  04","textPreview":"SAMCO PROJECT INTELLIGENCE HUB  |  04","textChars":37,"textLines":1,"bbox":[950,45,265,16]}
+{"kind":"shape","id":"sh/hknq5sru","slide":4,"bbox":[64,180,1152,1]}
+{"kind":"shape","id":"sh/uhc7ad83","slide":4,"bbox":[64,220,670,350]}
+{"kind":"textbox","id":"sh/fil83i9o","slide":4,"text":"Reference chart allocation","textPreview":"Reference chart allocation","textChars":26,"textLines":1,"bbox":[94,248,420,24]}
+{"kind":"shape","id":"sh/p8nq9srq","slide":4,"bbox":[770,220,388,350]}
+{"kind":"textbox","id":"sh/d8fytgva","slide":4,"text":"Readiness is meaningful","textPreview":"Readiness is meaningful","textChars":23,"textLines":1,"bbox":[800,251,315,26]}
+{"kind":"textbox","id":"sh/c76hkbup","slide":4,"text":"01  Ready: source-backed selected-project chart.","textPreview":"01  Ready: source-backed selected-project chart.","textChars":48,"textLines":1,"bbox":[802,312,322,38]}
+{"kind":"textbox","id":"sh/r6xgr6d4","slide":4,"text":"02  Partial: available subset with an explicit qualification.","textPreview":"02  Partial: available subset with an explicit qualification.","textChars":61,"textLines":1,"bbox":[802,364,322,38]}
+{"kind":"textbox","id":"sh/q5ozi1cz","slide":4,"text":"03  Draft: planning scenario, never a contractual conclusion.","textPreview":"03  Draft: planning scenario, never a contractual conclusion.","textChars":61,"textLines":1,"bbox":[802,416,322,38]}
+{"kind":"textbox","id":"sh/1czyxgvm","slide":4,"text":"04  Awaiting data: fixed-size card names the required project input.","textPreview":"04  Awaiting data: fixed-size card names the required project input.","textChars":68,"textLines":1,"bbox":[802,468,322,38]}
+{"kind":"textbox","id":"sh/0bqhobu1","slide":4,"text":"Designed & Created |","textPreview":"Designed & Created |","textChars":20,"textLines":1,"bbox":[64,684,145,14]}
+{"kind":"textbox","id":"sh/zaxgv6dg","slide":4,"text":"Engr. Ahmed Labib","textPreview":"Engr. Ahmed Labib","textChars":17,"textLines":1,"bbox":[205,684,170,14]}
+{"kind":"textbox","id":"sh/e9ozm1cv","slide":4,"text":"Source-governed project controls","textPreview":"Source-governed project controls","textChars":32,"textLines":1,"bbox":[960,684,255,14]}
+{"kind":"chart","id":"ch/8rahgzm9","slide":4,"name":"","chartType":"bar","bbox":[100,300,590,210]}
+{"kind":"notes","id":"nt/z74z44","slide":4,"text":"[Sources]\nCharts design/samco_dashboard_charts.html\nconfig/chart_catalog.json\nwebsite/src/app/globals.css"}
+{"kind":"slide","id":"sl/fd46lq","slide":5,"title":"DATA ONBOARDING","textShapes":32}
+{"kind":"textbox","id":"sh/7uhgjmho","slide":5,"text":"DATA ONBOARDING","textPreview":"DATA ONBOARDING","textChars":15,"textLines":1,"bbox":[64,42,340,18]}
+{"kind":"textbox","id":"sh/svqxcri9","slide":5,"text":"The `vercel` folder completes missing evidence without replacing source pipelines","textPreview":"The `vercel` folder completes missing evidence without replacing source pipelines","textChars":81,"textLines":1,"bbox":[64,72,1035,44]}
+{"kind":"textbox","id":"sh/twzylwzu","slide":5,"text":"Every current and future project receives the same empty templates; no rows are created automatically.","textPreview":"Every current and future project receives the same empty templates; no rows are created automatically.","textChars":102,"textLines":1,"bbox":[64,132,1060,34]}
+{"kind":"textbox","id":"sh/ipof6h07","slide":5,"text":"SAMCO PROJECT INTELLIGENCE HUB  |  05","textPreview":"SAMCO PROJECT INTELLIGENCE HUB  |  05","textChars":37,"textLines":1,"bbox":[950,45,265,16]}
+{"kind":"shape","id":"sh/jqhgfmhs","slide":5,"bbox":[64,180,1152,1]}
+{"kind":"shape","id":"sh/krqx8rix","slide":5,"bbox":[64,215,510,58]}
+{"kind":"textbox","id":"sh/5szyhczi","slide":5,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[82,232,34,20]}
+{"kind":"textbox","id":"sh/2lszi10b","slide":5,"text":"vercel/phase_progress.csv","textPreview":"vercel/phase_progress.csv","textChars":25,"textLines":1,"bbox":[132,229,315,22]}
+{"kind":"textbox","id":"sh/3m1gr6hw","slide":5,"text":"Project ID required","textPreview":"Project ID required","textChars":19,"textLines":1,"bbox":[444,232,110,16]}
+{"kind":"shape","id":"sh/725gv2lw","slide":5,"bbox":[614,215,510,58]}
+{"kind":"textbox","id":"sh/m1wz2xkb","slide":5,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[632,232,34,20]}
+{"kind":"textbox","id":"sh/947yxc32","slide":5,"text":"vercel/discipline_history.csv","textPreview":"vercel/discipline_history.csv","textChars":29,"textLines":1,"bbox":[682,229,315,22]}
+{"kind":"textbox","id":"sh/83eh472h","slide":5,"text":"Project ID required","textPreview":"Project ID required","textChars":19,"textLines":1,"bbox":[994,232,110,16]}
+{"kind":"shape","id":"sh/v6pgz2l8","slide":5,"bbox":[64,297,510,58]}
+{"kind":"textbox","id":"sh/u5gz6xkn","slide":5,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[82,314,34,20]}
+{"kind":"textbox","id":"sh/h87y1c3y","slide":5,"text":"vercel/activity_history.csv","textPreview":"vercel/activity_history.csv","textChars":27,"textLines":1,"bbox":[132,311,315,22]}
+{"kind":"textbox","id":"sh/w7yh872t","slide":5,"text":"Project ID required","textPreview":"Project ID required","textChars":19,"textLines":1,"bbox":[444,314,110,16]}
+{"kind":"shape","id":"sh/japg3ml4","slide":5,"bbox":[614,297,510,58]}
+{"kind":"textbox","id":"sh/i9gzahkj","slide":5,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[632,314,34,20]}
+{"kind":"textbox","id":"sh/epkj2l4r","slide":5,"text":"vercel/evm_history.csv","textPreview":"vercel/evm_history.csv","textChars":22,"textLines":1,"bbox":[682,311,315,22]}
+{"kind":"textbox","id":"sh/fqtkvq5c","slide":5,"text":"Project ID required","textPreview":"Project ID required","textChars":19,"textLines":1,"bbox":[994,314,110,16]}
+{"kind":"shape","id":"sh/0r214vmx","slide":5,"bbox":[64,379,510,58]}
+{"kind":"textbox","id":"sh/1sb2xgni","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[82,396,34,20]}
+{"kind":"textbox","id":"sh/q10jy14v","slide":5,"text":"vercel/planned_cash_flow.csv","textPreview":"vercel/planned_cash_flow.csv","textChars":28,"textLines":1,"bbox":[132,393,315,22]}
+{"kind":"textbox","id":"sh/r29kr65g","slide":5,"text":"Project ID required","textPreview":"Project ID required","textChars":19,"textLines":1,"bbox":[444,396,110,16]}
+{"kind":"shape","id":"sh/s3i10bm1","slide":5,"bbox":[614,379,510,58]}
+{"kind":"textbox","id":"sh/d4b2tgn6","slide":5,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[632,396,34,20]}
+{"kind":"textbox","id":"sh/ax4ja54z","slide":5,"text":"vercel/risk_history.csv","textPreview":"vercel/risk_history.csv","textChars":23,"textLines":1,"bbox":[682,393,315,22]}
+{"kind":"textbox","id":"sh/bydk3a5k","slide":5,"text":"Project ID required","textPreview":"Project ID required","textChars":19,"textLines":1,"bbox":[994,396,110,16]}
+{"kind":"shape","id":"sh/lsfm947m","slide":5,"bbox":[64,461,510,58]}
+{"kind":"textbox","id":"sh/kr650z61","slide":5,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[82,478,34,20]}
+{"kind":"textbox","id":"sh/zqx47upw","slide":5,"text":"vercel/delay_classification.csv","textPreview":"vercel/delay_classification.csv","textChars":31,"textLines":1,"bbox":[132,475,315,22]}
+{"kind":"textbox","id":"sh/yponypob","slide":5,"text":"Project ID required","textPreview":"Project ID required","textChars":19,"textLines":1,"bbox":[444,478,110,16]}
+{"kind":"shape","id":"sh/xofm5k7q","slide":5,"bbox":[614,461,510,58]}
+{"kind":"textbox","id":"sh/cn6lwf65","slide":5,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[632,478,34,20]}
+{"kind":"textbox","id":"sh/bmd43upk","slide":5,"text":"vercel/recovery_scenario.csv","textPreview":"vercel/recovery_scenario.csv","textChars":28,"textLines":1,"bbox":[682,475,315,22]}
+{"kind":"textbox","id":"sh/al43upoz","slide":5,"text":"Project ID required","textPreview":"Project ID required","textChars":19,"textLines":1,"bbox":[994,478,110,16]}
+{"kind":"textbox","id":"sh/hkzmhonu","slide":5,"text":"Source precedence: populated Vercel rows -> matching legacy project data -> controlled readiness card. Rows with another project_id are excluded and reported only to the owning project.","textPreview":"Source precedence: populated Vercel rows -> matching legacy project data -> controlled readiness card. Rows with another project_id are e...","textChars":185,"textLines":1,"bbox":[64,575,1090,34]}
+{"kind":"textbox","id":"sh/wjq58j69","slide":5,"text":"Designed & Created |","textPreview":"Designed & Created |","textChars":20,"textLines":1,"bbox":[64,684,145,14]}
+{"kind":"textbox","id":"sh/oned8j65","slide":5,"text":"Engr. Ahmed Labib","textPreview":"Engr. Ahmed Labib","textChars":17,"textLines":1,"bbox":[205,684,170,14]}
+{"kind":"textbox","id":"sh/ponu1o7q","slide":5,"text":"Source-governed project controls","textPreview":"Source-governed project controls","textChars":32,"textLines":1,"bbox":[960,684,255,14]}
+{"kind":"notes","id":"nt/fd46lq","slide":5,"text":"[Sources]\nsrc/construction_system/project_catalog.py\ntools/project_chart_payloads.py"}
+{"kind":"slide","id":"sl/c8y1bz","slide":6,"title":"TIME IMPACT GOVERNANCE","textShapes":20}
+{"kind":"textbox","id":"sh/9o7uh8ry","slide":6,"text":"TIME IMPACT GOVERNANCE","textPreview":"TIME IMPACT GOVERNANCE","textChars":22,"textLines":1,"bbox":[64,42,340,18]}
+{"kind":"textbox","id":"sh/mlgbmd87","slide":6,"text":"Automation assists the evidence review; it does not create contractual conclusions","textPreview":"Automation assists the evidence review; it does not create contractual conclusions","textChars":82,"textLines":1,"bbox":[64,72,1035,44]}
+{"kind":"textbox","id":"sh/nmpcfy9s","slide":6,"text":"Delay Analysis - Time Impact Analysis stays internal until explicitly recalled and is governed by selected-project schedule and evidence controls.","textPreview":"Delay Analysis - Time Impact Analysis stays internal until explicitly recalled and is governed by selected-project schedule and evidence ...","textChars":146,"textLines":1,"bbox":[64,132,1060,34]}
+{"kind":"textbox","id":"sh/wridsnq9","slide":6,"text":"SAMCO PROJECT INTELLIGENCE HUB  |  06","textPreview":"SAMCO PROJECT INTELLIGENCE HUB  |  06","textChars":37,"textLines":1,"bbox":[950,45,265,16]}
+{"kind":"shape","id":"sh/xsrulsru","slide":6,"bbox":[64,180,1152,1]}
+{"kind":"shape","id":"sh/apgvqd8j","slide":6,"bbox":[64,220,255,124]}
+{"kind":"shape","id":"sh/bqpcji9o","slide":6,"bbox":[82,238,42,3]}
+{"kind":"textbox","id":"sh/kvidwnql","slide":6,"text":"RELATIONSHIP LOGIC","textPreview":"RELATIONSHIP LOGIC","textChars":18,"textLines":1,"bbox":[82,254,219,17]}
+{"kind":"textbox","id":"sh/lwrupsr6","slide":6,"text":"P6-led","textPreview":"P6-led","textChars":6,"textLines":1,"bbox":[82,277,219,36]}
+{"kind":"textbox","id":"sh/1cbahkfq","slide":6,"text":"Predecessor, successor, type, and lag","textPreview":"Predecessor, successor, type, and lag","textChars":37,"textLines":1,"bbox":[82,320,219,15]}
+{"kind":"shape","id":"sh/0b2t8fyl","slide":6,"bbox":[344,220,255,124]}
+{"kind":"shape","id":"sh/zatsfax0","slide":6,"bbox":[362,238,42,3]}
+{"kind":"textbox","id":"sh/e90b65gf","slide":6,"text":"CRITICALITY","textPreview":"CRITICALITY","textChars":11,"textLines":1,"bbox":[362,254,219,17]}
+{"kind":"textbox","id":"sh/9gbalkf2","slide":6,"text":"Evidence-led","textPreview":"Evidence-led","textChars":12,"textLines":1,"bbox":[362,277,219,36]}
+{"kind":"textbox","id":"sh/of2tcfyh","slide":6,"text":"Float and path data required","textPreview":"Float and path data required","textChars":28,"textLines":1,"bbox":[362,320,219,15]}
+{"kind":"shape","id":"sh/netsjaxw","slide":6,"bbox":[624,220,255,124]}
+{"kind":"shape","id":"sh/mdkbapgb","slide":6,"bbox":[642,238,42,3]}
+{"kind":"textbox","id":"sh/pkra90zy","slide":6,"text":"RECOVERY","textPreview":"RECOVERY","textChars":8,"textLines":1,"bbox":[642,254,219,17]}
+{"kind":"textbox","id":"sh/4ji90vyd","slide":6,"text":"Scenario-gated","textPreview":"Scenario-gated","textChars":14,"textLines":1,"bbox":[642,277,219,36]}
+{"kind":"textbox","id":"sh/g32twv69","slide":6,"text":"Draft and verified are distinct","textPreview":"Draft and verified are distinct","textChars":31,"textLines":1,"bbox":[642,320,219,15]}
+{"kind":"shape","id":"sh/hovap07e","slide":6,"bbox":[904,220,255,124]}
+{"kind":"shape","id":"sh/u1kbulo3","slide":6,"bbox":[922,238,42,3]}
+{"kind":"textbox","id":"sh/v2tsnqpo","slide":6,"text":"ENTITLEMENT","textPreview":"ENTITLEMENT","textChars":11,"textLines":1,"bbox":[922,254,219,17]}
+{"kind":"textbox","id":"sh/4rmtkv65","slide":6,"text":"Not automatic","textPreview":"Not automatic","textChars":13,"textLines":1,"bbox":[922,277,219,36]}
+{"kind":"textbox","id":"sh/5svat07q","slide":6,"text":"P6, contract, concurrency, evidence","textPreview":"P6, contract, concurrency, evidence","textChars":35,"textLines":1,"bbox":[922,320,219,15]}
+{"kind":"shape","id":"sh/ip4bi5oz","slide":6,"bbox":[64,404,1092,130]}
+{"kind":"textbox","id":"sh/3qdsrapk","slide":6,"text":"AI can describe project evidence, link missing inputs, and recommend analyst follow-up. It cannot invent delay days, fragnet logic, EOT, compensation, concurrency, or claim strength.","textPreview":"AI can describe project evidence, link missing inputs, and recommend analyst follow-up. It cannot invent delay days, fragnet logic, EOT, ...","textChars":182,"textLines":1,"bbox":[94,445,1000,48]}
+{"kind":"textbox","id":"sh/sv6tof61","slide":6,"text":"Designed & Created |","textPreview":"Designed & Created |","textChars":20,"textLines":1,"bbox":[64,684,145,14]}
+{"kind":"textbox","id":"sh/dwfaxknm","slide":6,"text":"Engr. Ahmed Labib","textPreview":"Engr. Ahmed Labib","textChars":17,"textLines":1,"bbox":[205,684,170,14]}
+{"kind":"textbox","id":"sh/n2143id0","slide":6,"text":"Source-governed project controls","textPreview":"Source-governed project controls","textChars":32,"textLines":1,"bbox":[960,684,255,14]}
+{"kind":"notes","id":"nt/c8y1bz","slide":6,"text":"[Sources]\nsrc/construction_system/tia_source_governance.py\nsrc/construction_system/tia_report_engine.py\nwebsite/src/app/api/analyze-delay/route.ts"}
+{"kind":"slide","id":"sl/cyi3lp","slide":7,"title":"BOARD DECISION","textShapes":19}
+{"kind":"textbox","id":"sh/mhg7ex8n","slide":7,"text":"BOARD DECISION","textPreview":"BOARD DECISION","textChars":14,"textLines":1,"bbox":[64,42,340,18]}
+{"kind":"textbox","id":"sh/9krq9sry","slide":7,"text":"Protect the control loop: data ownership, P6 verification, and disciplined publication","textPreview":"Protect the control loop: data ownership, P6 verification, and disciplined publication","textChars":86,"textLines":1,"bbox":[64,72,1035,44]}
+{"kind":"textbox","id":"sh/8jipgnqt","slide":7,"text":"The next gain comes from completing identified evidence gaps, not from adding unsourced automation.","textPreview":"The next gain comes from completing identified evidence gaps, not from adding unsourced automation.","textChars":99,"textLines":1,"bbox":[64,132,1060,34]}
+{"kind":"textbox","id":"sh/zepo3i9w","slide":7,"text":"SAMCO PROJECT INTELLIGENCE HUB  |  07","textPreview":"SAMCO PROJECT INTELLIGENCE HUB  |  07","textChars":37,"textLines":1,"bbox":[950,45,265,16]}
+{"kind":"shape","id":"sh/edg7ad8b","slide":7,"bbox":[64,180,1152,1]}
+{"kind":"shape","id":"sh/1g7q5sr2","slide":7,"bbox":[64,215,1092,64]}
+{"kind":"textbox","id":"sh/0fypcnqh","slide":7,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[90,233,35,24]}
+{"kind":"textbox","id":"sh/ra5ozi90","slide":7,"text":"Nominate project data owners","textPreview":"Nominate project data owners","textChars":28,"textLines":1,"bbox":[145,228,345,24]}
+{"kind":"textbox","id":"sh/qpw76d8f","slide":7,"text":"Each project needs accountable owners for progress, cost, risk, delay, letters, and evidence data.","textPreview":"Each project needs accountable owners for progress, cost, risk, delay, letters, and evidence data.","textChars":98,"textLines":1,"bbox":[505,232,600,26]}
+{"kind":"shape","id":"sh/c7mx8zyd","slide":7,"bbox":[64,299,1092,64]}
+{"kind":"textbox","id":"sh/dsfyh4fy","slide":7,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[90,317,35,24]}
+{"kind":"textbox","id":"sh/q54f6pg7","slide":7,"text":"Complete only the needed Vercel templates","textPreview":"Complete only the needed Vercel templates","textChars":41,"textLines":1,"bbox":[145,312,345,24]}
+{"kind":"textbox","id":"sh/b6dgfuxs","slide":7,"text":"Use controlled local inputs when existing sources do not contain period-level or classification history.","textPreview":"Use controlled local inputs when existing sources do not contain period-level or classification history.","textChars":104,"textLines":1,"bbox":[505,316,600,26]}
+{"kind":"shape","id":"sh/o3mx4zy1","slide":7,"bbox":[64,383,1092,64]}
+{"kind":"textbox","id":"sh/p4vyd4fm","slide":7,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[90,401,35,24]}
+{"kind":"textbox","id":"sh/214f2pgb","slide":7,"text":"Approve a P6 verification protocol","textPreview":"Approve a P6 verification protocol","textChars":34,"textLines":1,"bbox":[145,396,345,24]}
+{"kind":"textbox","id":"sh/32dgbuxg","slide":7,"text":"No formal time impact conclusion should bypass validated schedule logic and evidence review.","textPreview":"No formal time impact conclusion should bypass validated schedule logic and evidence review.","textChars":92,"textLines":1,"bbox":[505,400,600,26]}
+{"kind":"shape","id":"sh/8zqhgjyl","slide":7,"bbox":[64,467,1092,64]}
+{"kind":"textbox","id":"sh/90zy9of6","slide":7,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[90,485,35,24]}
+{"kind":"textbox","id":"sh/x4b6dk3y","slide":7,"text":"Use Output Studio for formal issue","textPreview":"Use Output Studio for formal issue","textChars":34,"textLines":1,"bbox":[145,480,345,24]}
+{"kind":"textbox","id":"sh/w32p4fmd","slide":7,"text":"The live workspace supports control; formal HTML, PDF, PowerPoint, and supporting outputs remain project-scoped.","textPreview":"The live workspace supports control; formal HTML, PDF, PowerPoint, and supporting outputs remain project-scoped.","textChars":112,"textLines":1,"bbox":[505,484,600,26]}
+{"kind":"textbox","id":"sh/v2tobuls","slide":7,"text":"Designed & Created |","textPreview":"Designed & Created |","textChars":20,"textLines":1,"bbox":[64,684,145,14]}
+{"kind":"textbox","id":"sh/a1k72p47","slide":7,"text":"Engr. Ahmed Labib","textPreview":"Engr. Ahmed Labib","textChars":17,"textLines":1,"bbox":[205,684,170,14]}
+{"kind":"textbox","id":"sh/9gr69k3m","slide":7,"text":"Source-governed project controls","textPreview":"Source-governed project controls","textChars":32,"textLines":1,"bbox":[960,684,255,14]}
+{"kind":"notes","id":"nt/cyi3lp","slide":7,"text":"[Sources]\nreports/Project_Intelligence_Hub_Chart_Clone_Board_Report.docx\nreports/Project_Intelligence_Hub_Chart_Clone_Planner_Handover.docx"}

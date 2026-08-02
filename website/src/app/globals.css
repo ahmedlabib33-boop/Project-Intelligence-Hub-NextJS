@@ -3516,6 +3516,15 @@ h2 {
   gap: 20px;
 }
 .chart-reference-workspace .source-chart-grid > * { grid-column: span 6; }
+.chart-reference-workspace .source-chart-grid > .reference-chart-line { grid-column: span 8; }
+.chart-reference-workspace .source-chart-grid > .reference-chart-doughnut,
+.chart-reference-workspace .source-chart-grid > .reference-chart-radar { grid-column: span 4; }
+.chart-reference-workspace .source-chart-grid > [data-chart-id="overview.schedule_performance_s_curve"],
+.chart-reference-workspace .source-chart-grid > [data-chart-id="s_curve.master"],
+.chart-reference-workspace .source-chart-grid > [data-chart-id="evm.burnup"],
+.chart-reference-workspace .source-chart-grid > [data-chart-id="delay.tia_recovery_scenario"] { grid-column: span 8; }
+.chart-reference-workspace .source-chart-grid > [data-chart-id="overview.overall_completion_gauge"],
+.chart-reference-workspace .source-chart-grid > [data-chart-id="risks.status"] { grid-column: span 4; }
 .chart-reference-workspace .source-chart-grid > *:first-child:only-child { grid-column: span 12; }
 .chart-reference-workspace .source-chart-grid > *:first-child:nth-last-child(3),
 .chart-reference-workspace .source-chart-grid > *:first-child:nth-last-child(3) ~ * { grid-column: span 4; }
@@ -3524,6 +3533,9 @@ h2 {
 @media (max-width: 1200px) {
   .chart-reference-workspace .console-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .chart-reference-workspace .source-chart-grid > * { grid-column: span 6; }
+  .chart-reference-workspace .source-chart-grid > .reference-chart-line,
+  .chart-reference-workspace .source-chart-grid > .reference-chart-doughnut,
+  .chart-reference-workspace .source-chart-grid > .reference-chart-radar { grid-column: span 6; }
   .chart-reference-workspace .source-chart-grid > *:first-child:nth-last-child(3),
   .chart-reference-workspace .source-chart-grid > *:first-child:nth-last-child(3) ~ * { grid-column: span 6; }
 }
@@ -3583,6 +3595,11 @@ h2 {
 .reference-chart-canvas.large { min-height: 340px; }
 .reference-chart-canvas canvas { width: 100% !important; height: 100% !important; }
 .reference-chart-lineage { margin-top: 12px; color: #64748b; font-size: .68rem; line-height: 1.35; }
+.chart-readiness-card { min-height: 300px; display: flex; flex-direction: column; }
+.chart-readiness-content { flex: 1; display: grid; align-content: center; gap: 10px; border: 1px dashed rgba(99, 168, 255, .25); background: rgba(6, 182, 212, .035); padding: 18px; }
+.chart-readiness-content strong { color: #dbeafe; font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; }
+.chart-readiness-content p { margin: 0; color: #94a3b8; font-size: .82rem; line-height: 1.55; }
+.chart-readiness-content span { color: #38bdf8; font-size: .72rem; overflow-wrap: anywhere; }
 
 .project-smart-chart,
 .source-chart-card { background: transparent; border: 0; padding: 0; }

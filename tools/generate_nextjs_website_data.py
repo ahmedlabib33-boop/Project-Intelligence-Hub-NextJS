@@ -1266,7 +1266,14 @@ def discover_projects() -> list[dict[str, Any]]:
         return []
     if str(ROOT) not in sys.path:
         sys.path.insert(0, str(ROOT))
-    from src.construction_system.project_catalog import discover_projects as catalog_discover_projects
+    from src.construction_system.project_catalog import (
+        discover_projects as catalog_discover_projects,
+        ensure_project_structure,
+    )
+
+    template_dir = PROJECTS_ROOT / "_PROJECT_TEMPLATE"
+    if template_dir.exists():
+        ensure_project_structure(template_dir)
 
     projects: list[dict[str, Any]] = []
     for record in catalog_discover_projects(PROJECTS_ROOT):
@@ -1464,6 +1471,7 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         project_id=str(project["project_id"]),
         project_key=str(project["project_key"]),
         data_dir=data_dir,
+        vercel_dir=base / "vercel",
         delay_dir=base / "02-delay_analysis" / "steel_delay_tia_templates",
         payment_rows=rows["payments"],
         delay_event_rows=rows["delay_events"],
@@ -1476,6 +1484,10 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
             "ev": ev,
             "ac": ac,
             "eac": eac,
+            "planned_progress": planned_progress,
+            "actual_progress": actual_progress,
+            "spi": spi,
+            "cpi": cpi,
         },
     )
 

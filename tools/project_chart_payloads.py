@@ -130,6 +130,44 @@ def _project_rows(
     return accepted, issues
 
 
+def _read_preferred_rows(
+    *,
+    project_id: str,
+    file_name: str,
+    primary_path: Path,
+    fallback_path: Path | None,
+    read_csv_rows: Any,
+) -> tuple[list[dict[str, Any]], list[str], list[dict[str, str]], str]:
+    """Use a populated project-local Vercel source before its supported legacy source.
+
+    Header-only template files are deliberately ignored, so they cannot suppress a
+    valid existing project pipeline. Rows stay project-filtered later by _project_rows.
+    """
+    primary_rows = read_csv_rows(primary_path) if primary_path.exists() else []
+    fallback_rows = read_csv_rows(fallback_path) if fallback_path and fallback_path.exists() else []
+    primary_accepted, primary_issues = _project_rows(primary_rows, project_id, primary_path.name)
+    fallback_accepted, fallback_issues = _project_rows(
+        fallback_rows, project_id, fallback_path.name if fallback_path else file_name
+    )
+    issues = [*primary_issues, *fallback_issues]
+    if primary_accepted:
+        if fallback_accepted:
+            issues.append({
+                "file": file_name,
+                "source_row": "",
+                "field": "source_precedence",
+                "message": f"Both {primary_path.name} and the legacy source contain selected-project rows; the Vercel source was used.",
+            })
+        return [row for _, row in primary_accepted], [f"vercel/{primary_path.name}"], issues, "vercel"
+    if fallback_accepted:
+        return [row for _, row in fallback_accepted], [fallback_path.name] if fallback_path else [file_name], issues, "legacy"
+    return [], [f"vercel/{primary_path.name}", fallback_path.name if fallback_path else file_name], issues, "missing"
+
+
+def _awaiting(definition: dict[str, Any], message: str, validation: list[dict[str, str]] | None = None) -> dict[str, Any]:
+    return _chart(definition, status="awaiting_data", message=message, validation=validation)
+
+
 def _payment_by_month(rows: Iterable[dict[str, Any]], project_id: str) -> tuple[dict[str, float], dict[str, float], list[dict[str, str]]]:
     paid: dict[str, float] = defaultdict(float)
     certified: dict[str, float] = defaultdict(float)
@@ -187,11 +225,11 @@ def _delay_event_index(rows: Iterable[dict[str, Any]]) -> dict[str, dict[str, An
 
 
 def _classifications(
-    definition_by_id: dict[str, dict[str, Any]], project_id: str, classification_rows: list[dict[str, Any]], delay_rows: list[dict[str, Any]]
+    definition_by_id: dict[str, dict[str, Any]], project_id: str, classification_rows: list[dict[str, Any]], delay_rows: list[dict[str, Any]], source_file: str = "14-delay_event_classification.csv"
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     root_definition = definition_by_id["delay.root_cause_pareto"]
     type_definition = definition_by_id["delay.type_distribution"]
-    accepted, issues = _project_rows(classification_rows, project_id, "14-delay_event_classification.csv")
+    accepted, issues = _project_rows(classification_rows, project_id, source_file)
     event_index = _delay_event_index(delay_rows)
     causes: dict[str, float] = defaultdict(float)
     types: dict[str, float] = defaultdict(float)
@@ -199,27 +237,27 @@ def _classifications(
     for source_row, row in accepted:
         status = str(_value(row, "analyst_status") or "").strip().casefold()
         if status != "verified":
-            issues.append({"file": "14-delay_event_classification.csv", "source_row": str(source_row), "field": "analyst_status", "message": "Only Verified classifications are used for delay charts."})
+            issues.append({"file": source_file, "source_row": str(source_row), "field": "analyst_status", "message": "Only Verified classifications are used for delay charts."})
             continue
         event_id = str(_value(row, "event_id") or "").strip()
         matching_event = event_index.get(event_id.casefold())
         activity_id = str(_value(row, "activity_id") or "").strip()
         if not event_id or matching_event is None:
-            issues.append({"file": "14-delay_event_classification.csv", "source_row": str(source_row), "field": "event_id", "message": "Event ID is not present in this selected project's delay_events.csv."})
+            issues.append({"file": source_file, "source_row": str(source_row), "field": "event_id", "message": "Event ID is not present in this selected project's delay_events.csv."})
             continue
         event_activity = str(_value(matching_event, "Activity ID", "activity_id") or "").strip()
         if activity_id and event_activity and activity_id.casefold() != event_activity.casefold():
-            issues.append({"file": "14-delay_event_classification.csv", "source_row": str(source_row), "field": "activity_id", "message": "Activity ID does not match the linked selected-project delay event."})
+            issues.append({"file": source_file, "source_row": str(source_row), "field": "activity_id", "message": "Activity ID does not match the linked selected-project delay event."})
             continue
         cause = str(_value(row, "root_cause") or "").strip()
         delay_type = str(_value(row, "delay_type") or "").strip()
         entitlement = str(_value(row, "entitlement_status") or "").strip()
         delay_days = _number(_value(row, "delay_days"))
         if not cause or delay_days is None or delay_days < 0:
-            issues.append({"file": "14-delay_event_classification.csv", "source_row": str(source_row), "field": "root_cause/delay_days", "message": "Root cause and a non-negative delay_days value are required."})
+            issues.append({"file": source_file, "source_row": str(source_row), "field": "root_cause/delay_days", "message": "Root cause and a non-negative delay_days value are required."})
             continue
         if delay_type.casefold() not in VALID_DELAY_TYPES or entitlement.casefold() not in VALID_ENTITLEMENTS:
-            issues.append({"file": "14-delay_event_classification.csv", "source_row": str(source_row), "field": "delay_type/entitlement_status", "message": "Delay type or entitlement status is outside the approved controlled values."})
+            issues.append({"file": source_file, "source_row": str(source_row), "field": "delay_type/entitlement_status", "message": "Delay type or entitlement status is outside the approved controlled values."})
             continue
         causes[cause] += delay_days
         types[delay_type] += delay_days
@@ -236,7 +274,7 @@ def _classifications(
 
 
 def _recovery(definition: dict[str, Any], project_id: str, recovery_rows: list[dict[str, Any]], activity_rows: list[dict[str, Any]]) -> dict[str, Any]:
-    accepted, issues = _project_rows(recovery_rows, project_id, "15-tia_recovery_scenario.csv")
+    accepted, issues = _project_rows(recovery_rows, project_id, "tia_recovery_scenario.csv")
     activity_ids = {str(_value(row, "activity_id", "Activity ID") or "").strip().casefold() for row in activity_rows}
     scenarios: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for source_row, row in accepted:
@@ -464,11 +502,228 @@ def _workspace_reference_charts(
     return charts
 
 
+def _period_series(
+    rows: list[dict[str, Any]],
+    date_fields: tuple[str, ...],
+    value_fields: tuple[tuple[str, str], ...],
+) -> tuple[list[str], dict[str, list[float | None]]]:
+    """Aggregate project-owned records by period without inventing missing points."""
+    buckets: dict[str, dict[str, float]] = defaultdict(lambda: defaultdict(float))
+    counts: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
+    for row in rows:
+        period = _month(_value(row, *date_fields))
+        if not period:
+            continue
+        for field, label in value_fields:
+            value = _number(_value(row, field))
+            if value is not None:
+                buckets[period][label] += value
+                counts[period][label] += 1
+    labels = sorted(buckets)
+    return labels, {
+        label: [round(buckets[period][label], 4) if counts[period][label] else None for period in labels]
+        for _, label in value_fields
+    }
+
+
+def _supplement_reference_charts(
+    *,
+    definitions: dict[str, dict[str, Any]],
+    project_id: str,
+    workspace_rows: dict[str, list[dict[str, Any]]],
+    project_metrics: dict[str, Any],
+    discipline_rows: list[dict[str, Any]],
+    activity_history_rows: list[dict[str, Any]],
+    evm_history_rows: list[dict[str, Any]],
+    risk_history_rows: list[dict[str, Any]],
+    classification_rows: list[dict[str, Any]],
+    source_files: dict[str, list[str]],
+) -> list[dict[str, Any]]:
+    """Build remaining reference charts from selected-project source records only."""
+    charts: list[dict[str, Any]] = []
+    activities = _workspace_rows(workspace_rows.get("activities", []), project_id)
+    s_curve = _workspace_rows(workspace_rows.get("s_curve", []), project_id)
+    evm = _workspace_rows(evm_history_rows, project_id)
+    classifications = _workspace_rows(classification_rows, project_id)
+    discipline = _workspace_rows(discipline_rows, project_id)
+    activity_history = _workspace_rows(activity_history_rows, project_id)
+    risk_history = _workspace_rows(risk_history_rows, project_id)
+
+    def add(chart_id: str, *, labels: list[str], series: list[dict[str, Any]], message: str, status: str = "ready", validation: list[dict[str, str]] | None = None) -> None:
+        definition = definitions.get(chart_id)
+        if not definition:
+            return
+        charts.append(_chart(
+            definition,
+            status=status,
+            message=message,
+            labels=labels,
+            series=series,
+            source_files=source_files.get(chart_id),
+            validation=validation,
+        ))
+
+    curve_points: list[tuple[str, float | None, float | None, float | None]] = []
+    for row in s_curve:
+        period = str(_value(row, "months", "month", "period") or "").strip()
+        values = tuple(_number(_value(row, field)) for field in ("cumm_monthly_planned", "cumm_monthly_actual", "cumm_monthly_invoiced"))
+        if period and any(value is not None for value in values):
+            curve_points.append((period, *values))
+    if curve_points:
+        add(
+            "overview.schedule_performance_s_curve",
+            labels=[point[0] for point in curve_points],
+            series=[
+                {"label": "Planned", "color": "#06b6d4", "values": [point[1] for point in curve_points]},
+                {"label": "Actual", "color": "#10b981", "values": [point[2] for point in curve_points]},
+                {"label": "Invoiced", "color": "#f59e0b", "values": [point[3] for point in curve_points]},
+            ],
+            message="Cumulative selected-project S-curve data.",
+        )
+
+    actual_progress = _percent(project_metrics.get("actual_progress"))
+    planned_progress = _percent(project_metrics.get("planned_progress"))
+    if actual_progress is not None:
+        add(
+            "overview.overall_completion_gauge",
+            labels=["Complete", "Remaining"],
+            series=[{"label": "Actual progress", "color": "#06b6d4", "values": [actual_progress, max(0, 100 - actual_progress)]}],
+            message=(f"Actual {actual_progress:.1f}% compared with planned {planned_progress:.1f}%" if planned_progress is not None else f"Actual selected-project progress is {actual_progress:.1f}%"),
+        )
+
+    if activities:
+        complete = sum(1 for row in activities if (_percent(_value(row, "actual_progress")) or 0) >= 99.99)
+        in_progress = sum(1 for row in activities if 0 < (_percent(_value(row, "actual_progress")) or 0) < 99.99)
+        not_started = sum(1 for row in activities if (_percent(_value(row, "actual_progress")) or 0) <= 0)
+        add(
+            "overview.activity_status",
+            labels=["Complete", "In progress", "Not started"],
+            series=[{"label": "Activities", "color": "#f59e0b", "values": [complete, in_progress, not_started]}],
+            message="Activity status derived from selected-project actual progress values.",
+        )
+        float_groups = {"0 days": 0.0, "1-10 days": 0.0, "11-30 days": 0.0, "31-90 days": 0.0, ">90 days": 0.0}
+        for row in activities:
+            value = _number(_value(row, "total_float_days"))
+            if value is None:
+                continue
+            key = "0 days" if value <= 0 else "1-10 days" if value <= 10 else "11-30 days" if value <= 30 else "31-90 days" if value <= 90 else ">90 days"
+            float_groups[key] += 1
+        if any(float_groups.values()):
+            add(
+                "activities.float_distribution",
+                labels=list(float_groups),
+                series=[{"label": "Activities", "color": "#3b82f6", "values": list(float_groups.values())}],
+                message="Selected-project total float buckets from activities.csv.",
+            )
+
+    if discipline:
+        latest_by_discipline: dict[str, tuple[datetime, float | None, float | None, float | None]] = {}
+        for row in discipline:
+            name = str(_value(row, "discipline") or "").strip()
+            date = _date(_value(row, "period_date"))
+            values = tuple(_percent(_value(row, field)) for field in ("planned_progress_percent", "actual_progress_percent", "forecast_progress_percent"))
+            if not name or not date or all(value is None for value in values):
+                continue
+            previous = latest_by_discipline.get(name)
+            if previous is None or date >= previous[0]:
+                latest_by_discipline[name] = (date, *values)
+        if latest_by_discipline:
+            labels = sorted(latest_by_discipline, key=str.casefold)
+            add(
+                "overview.discipline_health",
+                labels=labels,
+                series=[
+                    {"label": "Planned", "color": "#06b6d4", "values": [latest_by_discipline[label][1] for label in labels]},
+                    {"label": "Actual", "color": "#10b981", "values": [latest_by_discipline[label][2] for label in labels]},
+                    {"label": "Forecast", "color": "#8b5cf6", "values": [latest_by_discipline[label][3] for label in labels]},
+                ],
+                message="Latest verified selected-project discipline progress snapshot.",
+            )
+            periods = sorted({_month(_value(row, "period_date")) for row in discipline if _month(_value(row, "period_date"))})
+            series: list[dict[str, Any]] = []
+            for name in labels:
+                by_period = {_month(_value(row, "period_date")): _percent(_value(row, "actual_progress_percent")) for row in discipline if str(_value(row, "discipline") or "").strip() == name}
+                series.append({"label": name, "color": ["#06b6d4", "#3b82f6", "#8b5cf6", "#f59e0b", "#10b981"][len(series) % 5], "values": [by_period.get(period) for period in periods]})
+            if periods and series:
+                add("s_curve.discipline", labels=periods, series=series, message="Selected-project discipline actual progress history.")
+
+    if activity_history:
+        labels, values = _period_series(activity_history, ("period_date",), (("completed_activity_count", "Completed"), ("started_activity_count", "Started")))
+        if labels:
+            add("activities.monthly_completion", labels=labels, series=[{"label": "Completed", "color": "#06b6d4", "values": values["Completed"]}, {"label": "Started", "color": "#10b981", "values": values["Started"]}], message="Selected-project monthly activity completion history.")
+
+    if evm:
+        labels, values = _period_series(evm, ("period_date", "period", "date"), (("pv", "PV"), ("ev", "EV"), ("ac", "AC"), ("spi", "SPI"), ("cpi", "CPI")))
+        if labels:
+            add("overview.earned_value_trend", labels=labels, series=[{"label": "PV", "color": "#f59e0b", "values": values["PV"]}, {"label": "EV", "color": "#06b6d4", "values": values["EV"]}, {"label": "AC", "color": "#f43f5e", "values": values["AC"]}], message="Period-based selected-project earned value records.")
+            add("overview.performance_indices", labels=labels, series=[{"label": "SPI", "color": "#f43f5e", "values": values["SPI"]}, {"label": "CPI", "color": "#10b981", "values": values["CPI"]}], message="Period-based selected-project SPI and CPI records.")
+            add("evm.spi_trend", labels=labels, series=[{"label": "SPI", "color": "#f43f5e", "values": values["SPI"]}], message="Selected-project schedule performance index trend.")
+            add("evm.cpi_trend", labels=labels, series=[{"label": "CPI", "color": "#10b981", "values": values["CPI"]}], message="Selected-project cost performance index trend.")
+
+    if risk_history:
+        timeline: dict[str, list[float]] = defaultdict(list)
+        before: dict[str, float] = defaultdict(float)
+        after: dict[str, float] = defaultdict(float)
+        for row in risk_history:
+            date = _month(_value(row, "snapshot_date"))
+            score = _number(_value(row, "score_after_mitigation", "impact"))
+            category = str(_value(row, "risk_category") or "Unclassified").strip()
+            before_score = _number(_value(row, "score_before_mitigation"))
+            after_score = _number(_value(row, "score_after_mitigation"))
+            if date and score is not None:
+                timeline[date].append(score)
+            if before_score is not None:
+                before[category] += before_score
+            if after_score is not None:
+                after[category] += after_score
+        if timeline:
+            labels = sorted(timeline)
+            add("risks.trend", labels=labels, series=[{"label": "Average residual score", "color": "#f43f5e", "values": [round(sum(timeline[label]) / len(timeline[label]), 4) for label in labels]}], message="Selected-project dated risk assessment history.")
+        if before or after:
+            labels = sorted(set(before) | set(after), key=str.casefold)
+            add("risks.mitigation_effectiveness", labels=labels, series=[{"label": "Before mitigation", "color": "#f43f5e", "values": [before.get(label) for label in labels]}, {"label": "After mitigation", "color": "#10b981", "values": [after.get(label) for label in labels]}], message="Selected-project risk scores before and after mitigation.")
+
+    if classifications:
+        monthly: dict[str, float] = defaultdict(float)
+        for row in classifications:
+            if str(_value(row, "analyst_status") or "").strip().casefold() != "verified":
+                continue
+            period = _month(_value(row, "event_start"))
+            days = _number(_value(row, "delay_days"))
+            if period and days is not None and days >= 0:
+                monthly[period] += days
+        if monthly:
+            labels = sorted(monthly)
+            cumulative = 0.0
+            values: list[float] = []
+            for label in labels:
+                cumulative += monthly[label]
+                values.append(round(cumulative, 4))
+            add("delay.monthly_accumulation", labels=labels, series=[{"label": "Cumulative verified delay days", "color": "#f43f5e", "values": values}], message="Verified selected-project delay classification dates and durations. Not a final EOT conclusion.")
+
+    return charts
+
+
+def _complete_catalog(
+    definitions: dict[str, dict[str, Any]], charts: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
+    """Return every reference slot once, adding a controlled readiness card when absent."""
+    by_id = {str(chart.get("id")): chart for chart in charts if chart.get("id")}
+    result: list[dict[str, Any]] = []
+    for chart_id, definition in definitions.items():
+        result.append(by_id.get(chart_id) or _awaiting(
+            definition,
+            f"Awaiting selected-project source data. Add or complete {definition.get('sources', ['the mapped input'])[0]}.",
+        ))
+    return result
+
+
 def build_project_chart_payloads(
     *,
     project_id: str,
     project_key: str,
     data_dir: Path,
+    vercel_dir: Path | None = None,
     delay_dir: Path,
     payment_rows: list[dict[str, Any]],
     delay_event_rows: list[dict[str, Any]],
@@ -478,25 +733,106 @@ def build_project_chart_payloads(
     project_metrics: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return only project-owned, data-gated chart datasets and validation findings."""
+    vercel_dir = vercel_dir or data_dir.parents[1] / "vercel"
     version, definitions = _catalog()
-    required_ids = (
-        "contracts.planned_vs_actual_cash_flow",
-        "delay.root_cause_pareto",
-        "delay.type_distribution",
-        "delay.tia_recovery_scenario",
-    )
+    required_ids = tuple(definitions)
     missing_definitions = [chart_id for chart_id in required_ids if chart_id not in definitions]
     if missing_definitions:
         return {"catalog_version": version, "project_id": project_id, "project_key": project_key, "charts": [], "validation": [{"file": "chart_catalog.json", "source_row": "", "field": "id", "message": f"Missing chart definitions: {', '.join(missing_definitions)}"}]}
-    planned_rows = read_csv_rows(data_dir / "planned_cash_flow.csv")
-    classification_rows = read_csv_rows(delay_dir / "14-delay_event_classification.csv")
-    recovery_rows = read_csv_rows(delay_dir / "15-tia_recovery_scenario.csv")
-    cash = _cash_flow(definitions[required_ids[0]], project_id, planned_rows, payment_rows)
-    root_cause, delay_type = _classifications(definitions, project_id, classification_rows, delay_event_rows)
-    recovery = _recovery(definitions[required_ids[3]], project_id, recovery_rows, activity_rows)
+    planned_rows, planned_sources, planned_issues, _ = _read_preferred_rows(
+        project_id=project_id,
+        file_name="planned_cash_flow.csv",
+        primary_path=vercel_dir / "planned_cash_flow.csv",
+        fallback_path=data_dir / "planned_cash_flow.csv",
+        read_csv_rows=read_csv_rows,
+    )
+    classification_rows, classification_sources, classification_issues, _ = _read_preferred_rows(
+        project_id=project_id,
+        file_name="delay_event_classification.csv",
+        primary_path=vercel_dir / "delay_event_classification.csv",
+        fallback_path=delay_dir / "14-delay_event_classification.csv",
+        read_csv_rows=read_csv_rows,
+    )
+    recovery_rows, recovery_sources, recovery_issues, _ = _read_preferred_rows(
+        project_id=project_id,
+        file_name="tia_recovery_scenario.csv",
+        primary_path=vercel_dir / "tia_recovery_scenario.csv",
+        fallback_path=delay_dir / "15-tia_recovery_scenario.csv",
+        read_csv_rows=read_csv_rows,
+    )
+    discipline_rows, discipline_sources, discipline_issues, _ = _read_preferred_rows(
+        project_id=project_id,
+        file_name="discipline_progress_history.csv",
+        primary_path=vercel_dir / "discipline_progress_history.csv",
+        fallback_path=None,
+        read_csv_rows=read_csv_rows,
+    )
+    activity_history_rows, activity_history_sources, activity_history_issues, _ = _read_preferred_rows(
+        project_id=project_id,
+        file_name="activity_completion_history.csv",
+        primary_path=vercel_dir / "activity_completion_history.csv",
+        fallback_path=None,
+        read_csv_rows=read_csv_rows,
+    )
+    evm_history_rows, evm_history_sources, evm_history_issues, evm_origin = _read_preferred_rows(
+        project_id=project_id,
+        file_name="evm_period_history.csv",
+        primary_path=vercel_dir / "evm_period_history.csv",
+        fallback_path=data_dir / "evm.csv",
+        read_csv_rows=read_csv_rows,
+    )
+    risk_history_rows, risk_history_sources, risk_history_issues, _ = _read_preferred_rows(
+        project_id=project_id,
+        file_name="risk_assessment_history.csv",
+        primary_path=vercel_dir / "risk_assessment_history.csv",
+        fallback_path=None,
+        read_csv_rows=read_csv_rows,
+    )
+    cash = _cash_flow(definitions["contracts.planned_vs_actual_cash_flow"], project_id, planned_rows, payment_rows)
+    cash["source_lineage"]["files"] = [*planned_sources, "payments.csv"]
+    cash["validation"].extend(planned_issues)
+    root_cause, delay_type = _classifications(
+        definitions, project_id, classification_rows, delay_event_rows, classification_sources[0]
+    )
+    for chart in (root_cause, delay_type):
+        chart["source_lineage"]["files"] = [*classification_sources, "delay_events.csv"]
+        chart["validation"].extend(classification_issues)
+    recovery = _recovery(definitions["delay.tia_recovery_scenario"], project_id, recovery_rows, activity_rows)
+    recovery["source_lineage"]["files"] = [*recovery_sources, "activities.csv"]
+    recovery["validation"].extend(recovery_issues)
     charts = [cash, root_cause, delay_type, recovery]
-    charts.extend(_workspace_reference_charts(project_id, workspace_rows or {"activities": activity_rows, "payments": payment_rows, "delay_events": delay_event_rows}, project_metrics or {}))
+    resolved_workspace_rows = dict(workspace_rows or {"activities": activity_rows, "payments": payment_rows, "delay_events": delay_event_rows})
+    # A populated Vercel EVM history intentionally replaces the legacy EVM series for charting only.
+    if evm_origin == "vercel":
+        resolved_workspace_rows["evm"] = evm_history_rows
+    charts.extend(_workspace_reference_charts(project_id, resolved_workspace_rows, project_metrics or {}))
+    source_files = {
+        "overview.discipline_health": discipline_sources,
+        "s_curve.discipline": discipline_sources,
+        "activities.monthly_completion": activity_history_sources,
+        "overview.earned_value_trend": evm_history_sources,
+        "overview.performance_indices": evm_history_sources,
+        "evm.spi_trend": evm_history_sources,
+        "evm.cpi_trend": evm_history_sources,
+        "risks.trend": risk_history_sources,
+        "risks.mitigation_effectiveness": risk_history_sources,
+        "delay.monthly_accumulation": classification_sources,
+    }
+    charts.extend(_supplement_reference_charts(
+        definitions=definitions,
+        project_id=project_id,
+        workspace_rows=resolved_workspace_rows,
+        project_metrics=project_metrics or {},
+        discipline_rows=discipline_rows,
+        activity_history_rows=activity_history_rows,
+        evm_history_rows=evm_history_rows,
+        risk_history_rows=risk_history_rows,
+        classification_rows=classification_rows,
+        source_files=source_files,
+    ))
+    charts = _complete_catalog(definitions, charts)
     validation = [issue for chart in charts for issue in chart.get("validation", [])]
+    validation.extend(discipline_issues + activity_history_issues + evm_history_issues + risk_history_issues)
     return {
         "catalog_version": version,
         "project_id": project_id,

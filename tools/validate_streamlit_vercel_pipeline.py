@@ -94,17 +94,17 @@ REQUIRED_WORKSPACE_TABLES = (
 )
 
 REQUIRED_CHART_INPUTS = {
-    "01-data/import_templates/planned_cash_flow.csv": "project_id",
-    "02-delay_analysis/steel_delay_tia_templates/14-delay_event_classification.csv": "project_id",
-    "02-delay_analysis/steel_delay_tia_templates/15-tia_recovery_scenario.csv": "project_id",
+    "vercel/phase_progress.csv": "project_id",
+    "vercel/discipline_progress_history.csv": "project_id",
+    "vercel/activity_completion_history.csv": "project_id",
+    "vercel/evm_period_history.csv": "project_id",
+    "vercel/planned_cash_flow.csv": "project_id",
+    "vercel/risk_assessment_history.csv": "project_id",
+    "vercel/delay_event_classification.csv": "project_id",
+    "vercel/tia_recovery_scenario.csv": "project_id",
 }
 
-REQUIRED_SOURCE_CHART_IDS = {
-    "contracts.planned_vs_actual_cash_flow",
-    "delay.root_cause_pareto",
-    "delay.type_distribution",
-    "delay.tia_recovery_scenario",
-}
+REFERENCE_CHART_COUNT = 36
 
 
 def close_enough(actual: Any, expected: float | None) -> bool:
@@ -175,8 +175,8 @@ def validate_project_workspace_surface(
             errors.append(f"{project_key}: project-scoped chart payload identity does not match selected project")
         charts = chart_payloads.get("charts")
         chart_ids = {str(item.get("id")) for item in charts if isinstance(item, dict)} if isinstance(charts, list) else set()
-        if not REQUIRED_SOURCE_CHART_IDS.issubset(chart_ids):
-            errors.append(f"{project_key}: source chart catalogue is missing required data-gated entries")
+        if len(chart_ids) != REFERENCE_CHART_COUNT:
+            errors.append(f"{project_key}: source chart catalogue must publish all {REFERENCE_CHART_COUNT} reference slots")
         elif len(chart_ids) != len(charts):
             errors.append(f"{project_key}: source chart catalogue contains duplicate chart IDs")
         elif any(

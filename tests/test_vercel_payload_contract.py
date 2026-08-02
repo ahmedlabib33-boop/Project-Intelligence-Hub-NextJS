@@ -9,6 +9,22 @@ sys.path.insert(0, str(ROOT / "tools"))
 from generate_nextjs_website_data import slugify  # noqa: E402
 
 
+REFERENCE_CHART_IDS = {
+    "overview.schedule_performance_s_curve", "overview.overall_completion_gauge",
+    "overview.activity_status", "overview.discipline_health", "overview.earned_value_trend",
+    "overview.performance_indices", "wbs.progress_distribution", "wbs.duration_breakdown",
+    "activities.status_distribution", "activities.critical_path", "activities.float_distribution",
+    "activities.monthly_completion", "activities.responsible_party_workload",
+    "milestones.schedule_health", "milestones.variance_trend", "milestones.type_breakdown",
+    "s_curve.master", "s_curve.discipline", "s_curve.variance", "evm.burnup",
+    "evm.variance_waterfall", "evm.spi_trend", "evm.cpi_trend", "contracts.payment_history",
+    "contracts.planned_vs_actual_cash_flow", "contracts.payment_status", "contracts.variations",
+    "risks.category", "risks.status", "risks.trend", "risks.mitigation_effectiveness",
+    "delay.events_timeline", "delay.root_cause_pareto", "delay.type_distribution",
+    "delay.monthly_accumulation", "delay.tia_recovery_scenario",
+}
+
+
 def test_generated_project_payloads_keep_identity_tia_and_artifacts_scoped() -> None:
     payload_dir = ROOT / "website" / "public" / "data" / "projects"
     payloads = [json.loads(path.read_text(encoding="utf-8")) for path in sorted(payload_dir.glob("*.json"))]
@@ -26,15 +42,8 @@ def test_generated_project_payloads_keep_identity_tia_and_artifacts_scoped() -> 
         assert charts.get("project_key") == payload["project_key"]
         chart_items = charts.get("charts", [])
         chart_ids = {chart.get("id") for chart in chart_items}
-        # The four data-gated charts must always be published, even when their
-        # project-local templates are still empty. The source-backed workspace
-        # charts are additive and vary with the selected project's inputs.
-        assert {
-            "contracts.planned_vs_actual_cash_flow",
-            "delay.root_cause_pareto",
-            "delay.type_distribution",
-            "delay.tia_recovery_scenario",
-        }.issubset(chart_ids)
+        assert chart_ids == REFERENCE_CHART_IDS
+        assert len(chart_items) == 36
         assert len(chart_ids) == len(chart_items)
         assert all(
             isinstance(chart.get("source_lineage"), dict)

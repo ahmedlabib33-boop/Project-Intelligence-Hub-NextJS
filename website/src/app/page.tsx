@@ -670,7 +670,7 @@ function ReferenceChartCard({ chart }: { chart: ReferenceChartSpec }) {
   }, [chart]);
 
   return (
-    <section className="reference-chart-card">
+    <section className={`reference-chart-card reference-chart-${chart.type}`} data-chart-id={chart.id}>
       <header className="reference-chart-header">
         <h3>{chart.title}</h3>
         <span className={`reference-chart-badge ${referenceChartTone(chart.status)}`}>{chart.status || "Source backed"}</span>
@@ -846,6 +846,22 @@ function sourceChartValue(chart: SourceChartPayload, value: number | null | unde
 }
 
 function SourceChartCard({ chart, project }: { chart: SourceChartPayload; project: ProjectRecord }) {
+  if (!chart.labels.length || !chart.series.length) {
+    return (
+      <section className="reference-chart-card chart-readiness-card">
+        <header className="reference-chart-header">
+          <h3>{chart.title}</h3>
+          <span className={`reference-chart-badge ${referenceChartTone(chart.status)}`}>{chart.status.replaceAll("_", " ")}</span>
+        </header>
+        <div className="chart-readiness-content">
+          <strong>Chart readiness</strong>
+          <p>{chart.message}</p>
+          <span>Required source: {chart.source_lineage.files.join(" or ")}</span>
+        </div>
+        <footer className="reference-chart-lineage">Project ID: {project.project_id}</footer>
+      </section>
+    );
+  }
   const referenceType: ReferenceChartType = chart.type === "grouped_bar" ? "bar" : chart.type;
   return <ReferenceChartCard chart={{
     id: chart.id,
@@ -933,9 +949,8 @@ function ProjectSourceChartGrid({ project, tab }: { project: ProjectRecord; tab:
     return null;
   }
   const tabCharts = payload.charts.filter((chart) => chart.tab === tab);
-  const visible = tabCharts.filter((chart) => ["ready", "partial"].includes(chart.status) && chart.labels.length && chart.series.length);
-  if (!visible.length) return null;
-  return <div className="feature-stack source-chart-stack"><div className="source-chart-grid">{visible.map((chart) => <SourceChartCard key={chart.id} chart={chart} project={project} />)}</div></div>;
+  if (!tabCharts.length) return null;
+  return <div className="feature-stack source-chart-stack"><div className="source-chart-grid">{tabCharts.map((chart) => <SourceChartCard key={chart.id} chart={chart} project={project} />)}</div></div>;
 }
 
 function reportHtml(project: ProjectRecord, reportKey: ReportKey) {
@@ -1473,7 +1488,6 @@ function WorkspaceTabContent({
           <FeatureSvg mode="portfolio" />
           <ProjectDataTable table={workspaceTables.projects} title="Project Overview Source" />
         </div>
-        <ProjectSmartChart project={project} mode="overview" />
         <ProjectSourceChartGrid project={project} tab="Overview" />
       </div>
     );
@@ -1489,7 +1503,6 @@ function WorkspaceTabContent({
         </div>
         <div className="workspace-two">
           <ProjectDataTable table={workspaceTables.wbs} title="WBS Source Table" />
-          <ProjectSmartChart project={project} mode="wbs" />
         </div>
         <ProjectSourceChartGrid project={project} tab="WBS" />
       </div>
@@ -1505,7 +1518,6 @@ function WorkspaceTabContent({
           <MiniMetric label="EVM Records" value={numberValue(project.source_files.evm)} note="Earned value rows" />
           <MiniMetric label="Delay Events" value={numberValue(project.source_files.delay_events)} note="Delay event records" />
         </div>
-        <ProjectSmartChart project={project} mode="activities" />
         <ProjectSourceChartGrid project={project} tab="Activities" />
         <ProjectDataTable table={workspaceTables.activities} title="Activities Register" />
       </div>
@@ -1520,7 +1532,6 @@ function WorkspaceTabContent({
           <MiniMetric label="Schedule Health" value={numberValue(project.spi, 2)} note="SPI schedule indicator" />
           <MiniMetric label="Delayed Days" value={numberValue(project.delay_days)} note="Delay days from project data" />
         </div>
-        <ProjectSmartChart project={project} mode="milestones" />
         <ProjectSourceChartGrid project={project} tab="Milestones" />
         <ProjectDataTable table={workspaceTables.milestones} title="Milestone Register" />
       </div>
@@ -1530,7 +1541,6 @@ function WorkspaceTabContent({
   if (activeTab === "S-Curve") {
     return (
       <div className="feature-stack">
-        <ProjectSmartChart project={project} mode="s-curve" />
         <ProjectSourceChartGrid project={project} tab="S-Curve" />
         <ProjectDataTable table={workspaceTables.s_curve} title="S-Curve Source" />
       </div>
@@ -1553,7 +1563,6 @@ function WorkspaceTabContent({
           <MiniMetric label="ETC" value={money(project.etc)} note="EAC less AC" />
           <MiniMetric label="VAC" value={money(project.vac)} note="BAC less EAC" />
         </div>
-        <ProjectSmartChart project={project} mode="evm" />
         <ProjectSourceChartGrid project={project} tab="EVM Analysis" />
         <ProjectDataTable table={workspaceTables.evm} title="EVM Source Table" />
       </div>
@@ -1575,7 +1584,6 @@ function WorkspaceTabContent({
           <MiniMetric label="Contract Rows" value={numberValue(project.source_files.contracts)} note="Contract records" />
           <MiniMetric label="Payment Rows" value={numberValue(project.source_files.payments)} note="Payment records" />
         </div>
-        <ProjectSmartChart project={project} mode="contracts" />
         <ProjectSourceChartGrid project={project} tab="Contracts" />
         <div className="workspace-two">
           <ProjectDataTable table={workspaceTables.contracts} title="Contracts Register" />
@@ -1595,7 +1603,6 @@ function WorkspaceTabContent({
           <MiniMetric label="Decision Required" value={project.decision_required ? "Yes" : "No"} note="Rule-based management trigger" />
           <MiniMetric label="Delay Days" value={numberValue(project.delay_days)} note="Delay exposure" />
         </div>
-        <ProjectSmartChart project={project} mode="risks" />
         <ProjectSourceChartGrid project={project} tab="Risks" />
         <ProjectDataTable table={workspaceTables.risks} title="Risk Register" />
       </div>

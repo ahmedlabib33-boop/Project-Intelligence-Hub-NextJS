@@ -291,8 +291,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-01T18:21:45",
-  "fingerprint": "47bcb0e26c9dba7e963885378894c13569a714929d8d561228f076d61975de28",
+  "last_updated": "2026-08-02T04:53:50",
+  "fingerprint": "7af84046a63c5abcdb744ed23a8cf15a8a4293707ec9d85ab1cbd3d796e0bf5b",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -109092,7 +109092,7 @@
       "project_key": "the-big-p-01-up-20-april-26",
       "project_display_name": "ROYA-BIG PROJECT PHASE01 (B1-4)",
       "analysis_run_id": "9d2c5b1e542b9c7e9b97",
-      "analysis_generated_at": "2026-08-01T15:21:45+00:00",
+      "analysis_generated_at": "2026-08-02T01:53:50+00:00",
       "methodology_profile": "four_pipeline_v1",
       "assessment_profile": "evidence_backed",
       "assessment_status": "qualified",
@@ -111432,91 +111432,91 @@
                 "category_name": "EOT / Delay Claim",
                 "description": "Auto-seeded claim category for EOT / Delay Claim.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 2,
                 "category_name": "Variation Claim",
                 "description": "Auto-seeded claim category for Variation Claim.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 3,
                 "category_name": "Payment Claim",
                 "description": "Auto-seeded claim category for Payment Claim.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 4,
                 "category_name": "Suspension / Slowdown",
                 "description": "Auto-seeded claim category for Suspension / Slowdown.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 5,
                 "category_name": "Material Escalation",
                 "description": "Auto-seeded claim category for Material Escalation.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 6,
                 "category_name": "Late Drawings / Late Approvals",
                 "description": "Auto-seeded claim category for Late Drawings / Late Approvals.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 7,
                 "category_name": "Employer Free-Issue Material",
                 "description": "Auto-seeded claim category for Employer Free-Issue Material.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 8,
                 "category_name": "Site Access / Handover",
                 "description": "Auto-seeded claim category for Site Access / Handover.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 9,
                 "category_name": "Engineer Instruction",
                 "description": "Auto-seeded claim category for Engineer Instruction.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 10,
                 "category_name": "Defects / DLP",
                 "description": "Auto-seeded claim category for Defects / DLP.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 11,
                 "category_name": "Delay Damages Defense",
                 "description": "Auto-seeded claim category for Delay Damages Defense.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 12,
                 "category_name": "Dispute / Notice / Time-Bar",
                 "description": "Auto-seeded claim category for Dispute / Notice / Time-Bar.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 13,
                 "category_name": "General Contract Risk",
                 "description": "Auto-seeded claim category for General Contract Risk.",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               }
             ],
             "truncated": false
@@ -111726,7 +111726,7 @@
                 "defense_keywords": "[\"no notice\", \"notice not submitted\", \"no formal notice\", \"no valid notice\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 2,
@@ -111735,7 +111735,7 @@
                 "defense_keywords": "[\"late notice\", \"notice was late\", \"notice submitted late\", \"out of time notice\", \"time bar\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 3,
@@ -111744,7 +111744,7 @@
                 "defense_keywords": "[\"no written instruction\", \"verbal instruction\", \"no formal instruction\", \"no instruction in writing\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 4,
@@ -111753,7 +111753,7 @@
                 "defense_keywords": "[\"not on critical path\", \"not critical\", \"float available\", \"not on longest path\", \"non critical\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 5,
@@ -111762,7 +111762,7 @@
                 "defense_keywords": "[\"concurrent delay\", \"overlapping delay\", \"parallel delay\", \"same period delay\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 6,
@@ -111771,7 +111771,7 @@
                 "defense_keywords": "[\"contractor delay\", \"contractor caused\", \"late by contractor\", \"contractor responsible delay\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 7,
@@ -111780,7 +111780,7 @@
                 "defense_keywords": "[\"fixed price\", \"lump sum\", \"no escalation\", \"firm price\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 8,
@@ -111789,7 +111789,7 @@
                 "defense_keywords": "[\"already included\", \"within original scope\", \"included in contract\", \"contract scope already covers\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 9,
@@ -111798,7 +111798,7 @@
                 "defense_keywords": "[\"insufficient substantiation\", \"not substantiated\", \"insufficient evidence\", \"unsupported claim\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 10,
@@ -111807,7 +111807,7 @@
                 "defense_keywords": "[\"no contemporaneous records\", \"no records at the time\", \"no site records\", \"no contemporaneous evidence\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 11,
@@ -111816,7 +111816,7 @@
                 "defense_keywords": "[\"engineer approval not entitlement\", \"approval does not mean entitlement\", \"approval is not claim\", \"approval only\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 12,
@@ -111825,7 +111825,7 @@
                 "defense_keywords": "[\"failed to mitigate\", \"failure to mitigate\", \"no mitigation\", \"insufficient mitigation\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 13,
@@ -111834,7 +111834,7 @@
                 "defense_keywords": "[\"no causation\", \"no causal link\", \"did not cause delay\", \"no cause and effect\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 14,
@@ -111843,7 +111843,7 @@
                 "defense_keywords": "[\"no cost breakdown\", \"cost not broken down\", \"no quantum support\", \"no supporting cost detail\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               },
               {
                 "id": 15,
@@ -111852,7 +111852,7 @@
                 "defense_keywords": "[\"no programme impact\", \"no schedule impact\", \"no impact on programme\", \"no impact on completion\"]",
                 "standard_risk": "High",
                 "created_at": "2026-06-19T01:56:36+00:00",
-                "updated_at": "2026-08-01T15:21:45+00:00"
+                "updated_at": "2026-08-02T01:53:50+00:00"
               }
             ],
             "truncated": false
@@ -112278,84 +112278,84 @@
           "relative_path": "The BIG - PH01/01_executive_dashboard.html",
           "extension": "html",
           "size_kb": 1.2,
-          "modified": "2026-08-01T18:21:55"
+          "modified": "2026-08-02T04:53:55"
         },
         {
           "name": "01_executive_dashboard.pdf",
           "relative_path": "The BIG - PH01/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 59.8,
-          "modified": "2026-08-01T18:21:56"
+          "modified": "2026-08-02T04:53:56"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-01T18:21:57"
+          "modified": "2026-08-02T04:53:56"
         },
         {
           "name": "02_master_dashboard.html",
           "relative_path": "The BIG - PH01/02_master_dashboard.html",
           "extension": "html",
           "size_kb": 1.2,
-          "modified": "2026-08-01T18:21:57"
+          "modified": "2026-08-02T04:53:56"
         },
         {
           "name": "02_master_dashboard.pdf",
           "relative_path": "The BIG - PH01/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 59.6,
-          "modified": "2026-08-01T18:21:58"
+          "modified": "2026-08-02T04:53:56"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "The BIG - PH01/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-01T18:21:58"
+          "modified": "2026-08-02T04:53:57"
         },
         {
           "name": "03_elite_svg_charts.html",
           "relative_path": "The BIG - PH01/03_elite_svg_charts.html",
           "extension": "html",
           "size_kb": 1.2,
-          "modified": "2026-08-01T18:21:58"
+          "modified": "2026-08-02T04:53:57"
         },
         {
           "name": "03_elite_svg_charts.pdf",
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 59.0,
-          "modified": "2026-08-01T18:21:59"
+          "modified": "2026-08-02T04:53:57"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-01T18:22:00"
+          "modified": "2026-08-02T04:53:57"
         },
         {
           "name": "04_linked_executive_dashboard.html",
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.html",
           "extension": "html",
           "size_kb": 1.2,
-          "modified": "2026-08-01T18:22:00"
+          "modified": "2026-08-02T04:53:57"
         },
         {
           "name": "04_linked_executive_dashboard.pdf",
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 60.0,
-          "modified": "2026-08-01T18:22:01"
+          "modified": "2026-08-02T04:53:58"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-01T18:22:02"
+          "modified": "2026-08-02T04:53:58"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
@@ -112369,28 +112369,28 @@
           "relative_path": "The BIG - PH01/05_delay_tia_governed_assessment.html",
           "extension": "html",
           "size_kb": 9.5,
-          "modified": "2026-08-01T18:22:02"
+          "modified": "2026-08-02T04:53:58"
         },
         {
           "name": "05_delay_tia_governed_assessment.manifest.json",
           "relative_path": "The BIG - PH01/05_delay_tia_governed_assessment.manifest.json",
           "extension": "json",
           "size_kb": 0.6,
-          "modified": "2026-08-01T18:22:02"
+          "modified": "2026-08-02T04:53:58"
         },
         {
           "name": "05_delay_tia_governed_assessment.pdf",
           "relative_path": "The BIG - PH01/05_delay_tia_governed_assessment.pdf",
           "extension": "pdf",
           "size_kb": 2.4,
-          "modified": "2026-08-01T18:22:02"
+          "modified": "2026-08-02T04:53:58"
         },
         {
           "name": "05_delay_tia_governed_assessment.pptx",
           "relative_path": "The BIG - PH01/05_delay_tia_governed_assessment.pptx",
           "extension": "pptx",
           "size_kb": 28.0,
-          "modified": "2026-08-01T18:22:02"
+          "modified": "2026-08-02T04:53:58"
         }
       ],
       "watchers": [
@@ -112413,115 +112413,341 @@
     }
   },
   "chart_payloads": {
-    "catalog_version": "2026-08-01",
+    "catalog_version": "2026-08-02-reference-36",
     "project_id": "The Big -P.01-UP-20-April-26",
     "project_key": "the-big-p-01-up-20-april-26",
     "charts": [
       {
-        "id": "contracts.planned_vs_actual_cash_flow",
-        "tab": "Contracts",
-        "title": "Planned vs Actual Cash Flow",
-        "type": "grouped_bar",
-        "status": "awaiting_data",
-        "message": "Add project-matched planned cash-flow periods to activate this chart.",
-        "labels": [],
-        "series": [],
-        "source_lineage": {
-          "files": [
-            "planned_cash_flow.csv",
-            "payments.csv"
-          ],
-          "required_columns": [
-            "project_id",
-            "period_date",
-            "planned_cash_out"
-          ]
-        },
-        "validation": [
+        "id": "overview.schedule_performance_s_curve",
+        "tab": "Overview",
+        "title": "Schedule Performance (S-Curve)",
+        "type": "line",
+        "status": "ready",
+        "message": "Cumulative selected-project S-curve data.",
+        "labels": [
+          "1-Oct-25",
+          "1-Nov-25",
+          "1-Dec-25",
+          "1-Jan-26",
+          "1-Feb-26",
+          "1-Mar-26",
+          "1-Apr-26",
+          "1-May-26",
+          "1-Jun-26",
+          "1-Jul-26",
+          "1-Aug-26",
+          "1-Sep-26",
+          "1-Oct-26",
+          "1-Nov-26",
+          "1-Dec-26",
+          "1-Jan-27",
+          "1-Feb-27",
+          "1-Mar-27"
+        ],
+        "series": [
           {
-            "file": "payments.csv",
-            "source_row": "8",
-            "field": "invoice date",
-            "message": "A valid payment date is required for cash-flow charting."
+            "label": "Planned",
+            "color": "#06b6d4",
+            "values": [
+              0.0,
+              8347296.45,
+              69752452.31,
+              137249096.3,
+              170883087.6,
+              208994201.1,
+              238715302.8,
+              258975038.6,
+              272465470.6,
+              287227867.8,
+              297152398.6,
+              309551728.1,
+              318201747.3,
+              332443858.1,
+              343211447.8,
+              357569371.8,
+              366725485.6,
+              367286025.0
+            ]
           },
           {
-            "file": "payments.csv",
-            "source_row": "9",
-            "field": "invoice date",
-            "message": "A valid payment date is required for cash-flow charting."
+            "label": "Actual",
+            "color": "#10b981",
+            "values": [
+              3974600.57,
+              12063631.47,
+              20584750.0,
+              55380868.93,
+              75586172.28,
+              89934357.34,
+              107807708.2,
+              113085034.8,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "label": "Invoiced",
+            "color": "#f59e0b",
+            "values": [
+              0.0,
+              0.0,
+              23485862.02,
+              69894825.53,
+              110288531.6,
+              127930150.5,
+              143405765.5,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
           }
         ],
+        "source_lineage": {
+          "files": [
+            "s_curve.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "months"
+          ]
+        },
+        "validation": [],
         "scenario": null
       },
       {
-        "id": "delay.root_cause_pareto",
-        "tab": "Delay Analysis - Time Impact Analysis",
-        "title": "Delay by Root Cause",
+        "id": "overview.overall_completion_gauge",
+        "tab": "Overview",
+        "title": "Overall Completion",
+        "type": "doughnut",
+        "status": "ready",
+        "message": "Actual 30.7% compared with planned 65.3%",
+        "labels": [
+          "Complete",
+          "Remaining"
+        ],
+        "series": [
+          {
+            "label": "Actual progress",
+            "color": "#06b6d4",
+            "values": [
+              30.680000000000003,
+              69.32
+            ]
+          }
+        ],
+        "source_lineage": {
+          "files": [
+            "projects.csv",
+            "progress_updates.csv"
+          ],
+          "required_columns": [
+            "project_id"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "overview.activity_status",
+        "tab": "Overview",
+        "title": "Activity Status",
+        "type": "doughnut",
+        "status": "ready",
+        "message": "Activity status derived from selected-project actual progress values.",
+        "labels": [
+          "Complete",
+          "In progress",
+          "Not started"
+        ],
+        "series": [
+          {
+            "label": "Activities",
+            "color": "#f59e0b",
+            "values": [
+              343,
+              10,
+              1010
+            ]
+          }
+        ],
+        "source_lineage": {
+          "files": [
+            "activities.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "actual_progress"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "overview.discipline_health",
+        "tab": "Overview",
+        "title": "Discipline Health",
+        "type": "radar",
+        "status": "awaiting_data",
+        "message": "Awaiting selected-project source data. Add or complete vercel/discipline_progress_history.csv.",
+        "labels": [],
+        "series": [],
+        "source_lineage": {
+          "files": [
+            "vercel/discipline_progress_history.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "discipline",
+            "actual_progress_percent"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "overview.earned_value_trend",
+        "tab": "Overview",
+        "title": "Earned Value Trend",
+        "type": "line",
+        "status": "ready",
+        "message": "Period-based selected-project earned value records.",
+        "labels": [
+          "2026-04",
+          "2026-05"
+        ],
+        "series": [
+          {
+            "label": "PV",
+            "color": "#f59e0b",
+            "values": [
+              0.0,
+              252796791.16
+            ]
+          },
+          {
+            "label": "EV",
+            "color": "#06b6d4",
+            "values": [
+              0.0,
+              113085034.82
+            ]
+          },
+          {
+            "label": "AC",
+            "color": "#f43f5e",
+            "values": [
+              0.0,
+              113085034.82
+            ]
+          }
+        ],
+        "source_lineage": {
+          "files": [
+            "evm.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "period"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "overview.performance_indices",
+        "tab": "Overview",
+        "title": "Performance Indices",
+        "type": "line",
+        "status": "ready",
+        "message": "Period-based selected-project SPI and CPI records.",
+        "labels": [
+          "2026-04",
+          "2026-05"
+        ],
+        "series": [
+          {
+            "label": "SPI",
+            "color": "#f43f5e",
+            "values": [
+              0.0,
+              55.1
+            ]
+          },
+          {
+            "label": "CPI",
+            "color": "#10b981",
+            "values": [
+              0.0,
+              59.0
+            ]
+          }
+        ],
+        "source_lineage": {
+          "files": [
+            "evm.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "spi",
+            "cpi"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "wbs.progress_distribution",
+        "tab": "WBS",
+        "title": "WBS Progress Distribution",
+        "type": "bar",
+        "status": "awaiting_data",
+        "message": "Awaiting selected-project source data. Add or complete wbs.csv.",
+        "labels": [],
+        "series": [],
+        "source_lineage": {
+          "files": [
+            "wbs.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "wbs_name"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "wbs.duration_breakdown",
+        "tab": "WBS",
+        "title": "WBS Duration Breakdown",
         "type": "horizontal_bar",
         "status": "awaiting_data",
-        "message": "Add Verified classifications linked to selected-project delay events to activate delay root-cause and type charts.",
+        "message": "Awaiting selected-project source data. Add or complete wbs.csv.",
         "labels": [],
         "series": [],
         "source_lineage": {
           "files": [
-            "14-delay_event_classification.csv"
+            "wbs.csv"
           ],
           "required_columns": [
             "project_id",
-            "event_id",
-            "root_cause",
-            "delay_days",
-            "analyst_status"
-          ]
-        },
-        "validation": [],
-        "scenario": null
-      },
-      {
-        "id": "delay.type_distribution",
-        "tab": "Delay Analysis - Time Impact Analysis",
-        "title": "Delay Type Distribution",
-        "type": "doughnut",
-        "status": "awaiting_data",
-        "message": "Add Verified classifications linked to selected-project delay events to activate delay root-cause and type charts.",
-        "labels": [],
-        "series": [],
-        "source_lineage": {
-          "files": [
-            "14-delay_event_classification.csv"
-          ],
-          "required_columns": [
-            "project_id",
-            "event_id",
-            "delay_type",
-            "analyst_status"
-          ]
-        },
-        "validation": [],
-        "scenario": null
-      },
-      {
-        "id": "delay.tia_recovery_scenario",
-        "tab": "Delay Analysis - Time Impact Analysis",
-        "title": "Baseline vs Impacted vs Recovery",
-        "type": "line",
-        "status": "awaiting_data",
-        "message": "Add a project-matched P6 recovery scenario to activate this chart.",
-        "labels": [],
-        "series": [],
-        "source_lineage": {
-          "files": [
-            "15-tia_recovery_scenario.csv"
-          ],
-          "required_columns": [
-            "project_id",
-            "scenario_id",
-            "activity_id",
-            "status_date",
-            "baseline_progress_percent",
-            "impacted_progress_percent",
-            "recovery_progress_percent",
-            "analyst_status"
+            "wbs_name"
           ]
         },
         "validation": [],
@@ -112596,6 +112822,88 @@
         "scenario": null
       },
       {
+        "id": "activities.float_distribution",
+        "tab": "Activities",
+        "title": "Float Distribution",
+        "type": "bar",
+        "status": "ready",
+        "message": "Selected-project total float buckets from activities.csv.",
+        "labels": [
+          "0 days",
+          "1-10 days",
+          "11-30 days",
+          "31-90 days",
+          ">90 days"
+        ],
+        "series": [
+          {
+            "label": "Activities",
+            "color": "#3b82f6",
+            "values": [
+              573.0,
+              27.0,
+              32.0,
+              68.0,
+              320.0
+            ]
+          }
+        ],
+        "source_lineage": {
+          "files": [
+            "activities.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "total_float_days"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "activities.monthly_completion",
+        "tab": "Activities",
+        "title": "Monthly Activity Completion",
+        "type": "bar",
+        "status": "awaiting_data",
+        "message": "Awaiting selected-project source data. Add or complete vercel/activity_completion_history.csv.",
+        "labels": [],
+        "series": [],
+        "source_lineage": {
+          "files": [
+            "vercel/activity_completion_history.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "period_date",
+            "completed_activity_count"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "activities.responsible_party_workload",
+        "tab": "Activities",
+        "title": "Responsible Party Workload",
+        "type": "horizontal_bar",
+        "status": "awaiting_data",
+        "message": "Awaiting selected-project source data. Add or complete activities.csv.",
+        "labels": [],
+        "series": [],
+        "source_lineage": {
+          "files": [
+            "activities.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "responsible_party"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
         "id": "milestones.schedule_health",
         "tab": "Milestones",
         "title": "Milestone Schedule Health",
@@ -112610,38 +112918,6 @@
           {
             "label": "Milestones",
             "color": "#10b981",
-            "values": [
-              3.0,
-              1.0
-            ]
-          }
-        ],
-        "source_lineage": {
-          "files": [
-            "milestones.csv"
-          ],
-          "required_columns": [
-            "project_id"
-          ]
-        },
-        "validation": [],
-        "scenario": null
-      },
-      {
-        "id": "milestones.type_breakdown",
-        "tab": "Milestones",
-        "title": "Milestone Type Breakdown",
-        "type": "bar",
-        "status": "ready",
-        "message": "Selected-project contractual milestone classifications.",
-        "labels": [
-          "Start milestone",
-          "Finish milestone"
-        ],
-        "series": [
-          {
-            "label": "Milestones",
-            "color": "#8b5cf6",
             "values": [
               3.0,
               1.0
@@ -112696,109 +112972,29 @@
         "scenario": null
       },
       {
-        "id": "scurve.master",
-        "tab": "S-Curve",
-        "title": "Master S-Curve",
-        "type": "line",
+        "id": "milestones.type_breakdown",
+        "tab": "Milestones",
+        "title": "Milestone Type Breakdown",
+        "type": "bar",
         "status": "ready",
-        "message": "Cumulative selected-project planned, actual, and invoiced progress.",
+        "message": "Selected-project contractual milestone classifications.",
         "labels": [
-          "1-Oct-25",
-          "1-Nov-25",
-          "1-Dec-25",
-          "1-Jan-26",
-          "1-Feb-26",
-          "1-Mar-26",
-          "1-Apr-26",
-          "1-May-26",
-          "1-Jun-26",
-          "1-Jul-26",
-          "1-Aug-26",
-          "1-Sep-26",
-          "1-Oct-26",
-          "1-Nov-26",
-          "1-Dec-26",
-          "1-Jan-27",
-          "1-Feb-27",
-          "1-Mar-27"
+          "Start milestone",
+          "Finish milestone"
         ],
         "series": [
           {
-            "label": "Planned",
-            "color": "#3b82f6",
+            "label": "Milestones",
+            "color": "#8b5cf6",
             "values": [
-              0.0,
-              8347296.45,
-              69752452.31,
-              137249096.3,
-              170883087.6,
-              208994201.1,
-              238715302.8,
-              258975038.6,
-              272465470.6,
-              287227867.8,
-              297152398.6,
-              309551728.1,
-              318201747.3,
-              332443858.1,
-              343211447.8,
-              357569371.8,
-              366725485.6,
-              367286025.0
-            ]
-          },
-          {
-            "label": "Actual",
-            "color": "#06b6d4",
-            "values": [
-              3974600.57,
-              12063631.47,
-              20584750.0,
-              55380868.93,
-              75586172.28,
-              89934357.34,
-              107807708.2,
-              113085034.8,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ]
-          },
-          {
-            "label": "Invoiced",
-            "color": "#f59e0b",
-            "values": [
-              0.0,
-              0.0,
-              23485862.02,
-              69894825.53,
-              110288531.6,
-              127930150.5,
-              143405765.5,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0
+              3.0,
+              1.0
             ]
           }
         ],
         "source_lineage": {
           "files": [
-            "s_curve.csv"
+            "milestones.csv"
           ],
           "required_columns": [
             "project_id"
@@ -112808,64 +113004,64 @@
         "scenario": null
       },
       {
-        "id": "scurve.variance",
+        "id": "s_curve.master",
         "tab": "S-Curve",
-        "title": "Progress Variance Over Time",
-        "type": "bar",
-        "status": "ready",
-        "message": "Selected-project actual less planned cumulative progress.",
-        "labels": [
-          "1-Oct-25",
-          "1-Nov-25",
-          "1-Dec-25",
-          "1-Jan-26",
-          "1-Feb-26",
-          "1-Mar-26",
-          "1-Apr-26",
-          "1-May-26",
-          "1-Jun-26",
-          "1-Jul-26",
-          "1-Aug-26",
-          "1-Sep-26",
-          "1-Oct-26",
-          "1-Nov-26",
-          "1-Dec-26",
-          "1-Jan-27",
-          "1-Feb-27",
-          "1-Mar-27"
-        ],
-        "series": [
-          {
-            "label": "Actual less planned",
-            "color": "#f43f5e",
-            "values": [
-              3974600.57,
-              3716335.02,
-              -49167702.31,
-              -81868227.37,
-              -95296915.32,
-              -119059843.76,
-              -130907594.6,
-              -145890003.8,
-              -272465470.6,
-              -287227867.8,
-              -297152398.6,
-              -309551728.1,
-              -318201747.3,
-              -332443858.1,
-              -343211447.8,
-              -357569371.8,
-              -366725485.6,
-              -367286025.0
-            ]
-          }
-        ],
+        "title": "Master S-Curve - Cumulative Progress",
+        "type": "line",
+        "status": "awaiting_data",
+        "message": "Awaiting selected-project source data. Add or complete s_curve.csv.",
+        "labels": [],
+        "series": [],
         "source_lineage": {
           "files": [
             "s_curve.csv"
           ],
           "required_columns": [
-            "project_id"
+            "project_id",
+            "months"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "s_curve.discipline",
+        "tab": "S-Curve",
+        "title": "S-Curve by Discipline",
+        "type": "line",
+        "status": "awaiting_data",
+        "message": "Awaiting selected-project source data. Add or complete vercel/discipline_progress_history.csv.",
+        "labels": [],
+        "series": [],
+        "source_lineage": {
+          "files": [
+            "vercel/discipline_progress_history.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "period_date",
+            "discipline"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "s_curve.variance",
+        "tab": "S-Curve",
+        "title": "Progress Variance Over Time",
+        "type": "bar",
+        "status": "awaiting_data",
+        "message": "Awaiting selected-project source data. Add or complete s_curve.csv.",
+        "labels": [],
+        "series": [],
+        "source_lineage": {
+          "files": [
+            "s_curve.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "months"
           ]
         },
         "validation": [],
@@ -112963,6 +113159,72 @@
         "scenario": null
       },
       {
+        "id": "evm.spi_trend",
+        "tab": "EVM Analysis",
+        "title": "SPI Trend",
+        "type": "line",
+        "status": "ready",
+        "message": "Selected-project schedule performance index trend.",
+        "labels": [
+          "2026-04",
+          "2026-05"
+        ],
+        "series": [
+          {
+            "label": "SPI",
+            "color": "#f43f5e",
+            "values": [
+              0.0,
+              55.1
+            ]
+          }
+        ],
+        "source_lineage": {
+          "files": [
+            "evm.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "spi"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "evm.cpi_trend",
+        "tab": "EVM Analysis",
+        "title": "CPI Trend",
+        "type": "line",
+        "status": "ready",
+        "message": "Selected-project cost performance index trend.",
+        "labels": [
+          "2026-04",
+          "2026-05"
+        ],
+        "series": [
+          {
+            "label": "CPI",
+            "color": "#10b981",
+            "values": [
+              0.0,
+              59.0
+            ]
+          }
+        ],
+        "source_lineage": {
+          "files": [
+            "evm.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "cpi"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
         "id": "contracts.payment_history",
         "tab": "Contracts",
         "title": "Payment History",
@@ -113009,6 +113271,42 @@
           ]
         },
         "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "contracts.planned_vs_actual_cash_flow",
+        "tab": "Contracts",
+        "title": "Contract Cash Flow",
+        "type": "line",
+        "status": "awaiting_data",
+        "message": "Add project-matched planned cash-flow periods to activate this chart.",
+        "labels": [],
+        "series": [],
+        "source_lineage": {
+          "files": [
+            "vercel/planned_cash_flow.csv",
+            "planned_cash_flow.csv",
+            "payments.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "period_date"
+          ]
+        },
+        "validation": [
+          {
+            "file": "payments.csv",
+            "source_row": "8",
+            "field": "invoice date",
+            "message": "A valid payment date is required for cash-flow charting."
+          },
+          {
+            "file": "payments.csv",
+            "source_row": "9",
+            "field": "invoice date",
+            "message": "A valid payment date is required for cash-flow charting."
+          }
+        ],
         "scenario": null
       },
       {
@@ -113082,6 +113380,27 @@
         "scenario": null
       },
       {
+        "id": "risks.category",
+        "tab": "Risks",
+        "title": "Risk Category Breakdown",
+        "type": "bar",
+        "status": "awaiting_data",
+        "message": "Awaiting selected-project source data. Add or complete risks.csv.",
+        "labels": [],
+        "series": [],
+        "source_lineage": {
+          "files": [
+            "risks.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "risk_category"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
         "id": "risks.status",
         "tab": "Risks",
         "title": "Risk Status",
@@ -113108,6 +113427,49 @@
           ],
           "required_columns": [
             "project_id"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "risks.trend",
+        "tab": "Risks",
+        "title": "Risk Trend Over Time",
+        "type": "line",
+        "status": "awaiting_data",
+        "message": "Awaiting selected-project source data. Add or complete vercel/risk_assessment_history.csv.",
+        "labels": [],
+        "series": [],
+        "source_lineage": {
+          "files": [
+            "vercel/risk_assessment_history.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "snapshot_date"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "risks.mitigation_effectiveness",
+        "tab": "Risks",
+        "title": "Mitigation Effectiveness",
+        "type": "bar",
+        "status": "awaiting_data",
+        "message": "Awaiting selected-project source data. Add or complete vercel/risk_assessment_history.csv.",
+        "labels": [],
+        "series": [],
+        "source_lineage": {
+          "files": [
+            "vercel/risk_assessment_history.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "score_before_mitigation",
+            "score_after_mitigation"
           ]
         },
         "validation": [],
@@ -113146,11 +113508,104 @@
         },
         "validation": [],
         "scenario": null
+      },
+      {
+        "id": "delay.root_cause_pareto",
+        "tab": "Delay Analysis - Time Impact Analysis",
+        "title": "Delay by Root Cause",
+        "type": "horizontal_bar",
+        "status": "awaiting_data",
+        "message": "Add Verified classifications linked to selected-project delay events to activate delay root-cause and type charts.",
+        "labels": [],
+        "series": [],
+        "source_lineage": {
+          "files": [
+            "vercel/delay_event_classification.csv",
+            "14-delay_event_classification.csv",
+            "delay_events.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "event_id",
+            "root_cause"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "delay.type_distribution",
+        "tab": "Delay Analysis - Time Impact Analysis",
+        "title": "Delay Type Distribution",
+        "type": "doughnut",
+        "status": "awaiting_data",
+        "message": "Add Verified classifications linked to selected-project delay events to activate delay root-cause and type charts.",
+        "labels": [],
+        "series": [],
+        "source_lineage": {
+          "files": [
+            "vercel/delay_event_classification.csv",
+            "14-delay_event_classification.csv",
+            "delay_events.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "event_id",
+            "delay_type"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "delay.monthly_accumulation",
+        "tab": "Delay Analysis - Time Impact Analysis",
+        "title": "Monthly Delay Accumulation",
+        "type": "line",
+        "status": "awaiting_data",
+        "message": "Awaiting selected-project source data. Add or complete vercel/delay_event_classification.csv.",
+        "labels": [],
+        "series": [],
+        "source_lineage": {
+          "files": [
+            "vercel/delay_event_classification.csv",
+            "delay_events.csv"
+          ],
+          "required_columns": [
+            "project_id"
+          ]
+        },
+        "validation": [],
+        "scenario": null
+      },
+      {
+        "id": "delay.tia_recovery_scenario",
+        "tab": "Delay Analysis - Time Impact Analysis",
+        "title": "Time Impact Analysis - Before vs After",
+        "type": "line",
+        "status": "awaiting_data",
+        "message": "Add a project-matched P6 recovery scenario to activate this chart.",
+        "labels": [],
+        "series": [],
+        "source_lineage": {
+          "files": [
+            "vercel/tia_recovery_scenario.csv",
+            "15-tia_recovery_scenario.csv",
+            "activities.csv"
+          ],
+          "required_columns": [
+            "project_id",
+            "scenario_id",
+            "activity_id"
+          ]
+        },
+        "validation": [],
+        "scenario": null
       }
     ],
-    "ready_count": 14,
+    "ready_count": 20,
     "draft_count": 0,
-    "awaiting_count": 4,
+    "awaiting_count": 16,
     "validation": [
       {
         "file": "payments.csv",
@@ -113181,17 +113636,17 @@
         "html": {
           "name": "01_executive_dashboard.html",
           "bytes": 1240,
-          "sha256": "83cbd27655413c7197947d71cd7d3dddf1ddad0a7a2bde324bf80ab0261712a2"
+          "sha256": "e7971bc7fadf19e5bb3ca5e2fe6d5afd79d875a306979003298d2d584d3fd1d0"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 61205,
-          "sha256": "cd54da88ee0c12a268053f93dd07c393114e2094e1ac64cd264b40e7b9314e85"
+          "bytes": 61204,
+          "sha256": "de1a0acfae2a5b05672acdc6a2ad131d2715594c5c5a04c1258c029e1d60a437"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29140,
-          "sha256": "3c8d39835245958dcc628a2dd48257a44c2c0e69a20737de2051ddc1036fea84"
+          "sha256": "2f92188c59023341d100bb1734e8a105247d31db0eefe29fd410ec17d3fe12e9"
         }
       }
     },
@@ -113203,17 +113658,17 @@
         "html": {
           "name": "02_master_dashboard.html",
           "bytes": 1234,
-          "sha256": "37b1f73c48f491c782c181c38d767f46319446856b5ea200ce102ccdc9953a89"
+          "sha256": "3ec884ab35ad4982fc4aa27f9b10cf43d4c65d5e445e49e76c11a13490899b1d"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
-          "bytes": 61052,
-          "sha256": "f7562c6bafcdaee7d19b3ee04cc67cddf2b1b76d35172fc416ad461f406a7664"
+          "bytes": 61051,
+          "sha256": "5cab5f7e67a728408756eb4be16b612a08b152655144d8109c8988440527c385"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29137,
-          "sha256": "cd18d7756d3a110776d1cf6cc4b23b94b1b056195a60caa671416627d5e03fb8"
+          "sha256": "768d24f4c8abdadc2fd1986eadc961c2616a881773116cf823322a83c1a454fa"
         }
       }
     },
@@ -113225,17 +113680,17 @@
         "html": {
           "name": "03_elite_svg_charts.html",
           "bytes": 1234,
-          "sha256": "15d9e9e034cf8639b8c064bfdda43dde627ff0f939ed9b345a788eb61175d1dc"
+          "sha256": "41637c7d172c52421ff8e8adfa6ce3b401b65e61c0b893b95772d87ca95852cf"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
-          "bytes": 60370,
-          "sha256": "006b4ff494acec836fa00398e279bb2d92aa41b0fdd628a596aa7aa4a4816c7f"
+          "bytes": 60369,
+          "sha256": "a6f7e2112689cdfe1a5195fbdf24953085e101d38985f1bd07452e9b24e1af06"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
-          "bytes": 29138,
-          "sha256": "fa24167a5c82c5c613fb273eaf00cd3ca75b38f984dda48a3167471d0355518f"
+          "bytes": 29137,
+          "sha256": "0ab65d3273ea9fa85364ce8156710bfc34dd6ef49d92c3f2bc64d38401603fcb"
         }
       }
     },
@@ -113247,17 +113702,17 @@
         "html": {
           "name": "04_linked_executive_dashboard.html",
           "bytes": 1254,
-          "sha256": "12f6f62309f5d2574c6becbf75db1ce51fe960185d703ed6f0d5c5ed35d6a27a"
+          "sha256": "fbfc495b414a81a7058c8a80bf012818ecaa46417dbfedbe83683a738df4268c"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
-          "bytes": 61469,
-          "sha256": "57f92b4b8fc933c10ceb05cd1e700b1876b78cbe7de9268d3b03114c1f0feea2"
+          "bytes": 61468,
+          "sha256": "ee8a85c84dbb75e41f0778379d24c4d46a3b03039e82b3d1830c17c8bbe26513"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29147,
-          "sha256": "1207491cfdc52e5b3336dba8e9bd41db97e8fc6e05562c3d41ad272d382b201b"
+          "sha256": "a2f5e4d32f6c9e248523e12150b5bc281c949eee24de9e5e4f28a8c0884fdc28"
         }
       }
     },
@@ -113270,17 +113725,17 @@
         "html": {
           "name": "05_delay_tia_governed_assessment.html",
           "bytes": 9686,
-          "sha256": "d4b26e691832848f4f4aebd49fea437eaaf317aa7c65e796b6a068e3d93960e6"
+          "sha256": "44e1b3e7de65304aa52ee2c6ec88db234c3dbb6fb163152267c90db137117302"
         },
         "pdf": {
           "name": "05_delay_tia_governed_assessment.pdf",
           "bytes": 2443,
-          "sha256": "f771a671cea03f48972291daa129b3dfc8ca224e9c0db104de412b2fc1005faf"
+          "sha256": "c02e03e01c507b465c086bfe11665fa642c1300c93364510468ede6ed50bfe50"
         },
         "pptx": {
           "name": "05_delay_tia_governed_assessment.pptx",
           "bytes": 28684,
-          "sha256": "9a9ce6aaea02f75d471d67e61b140e0dd22bf470a458a6b04206e9eccdf7408c"
+          "sha256": "8f9dbe814f0bb6568688b7dd53d9103d0209870b4c05bc2d2af7b9e0d2956520"
         },
         "docx": {
           "name": "05_delay_tia_governed_assessment.docx",

@@ -18,6 +18,12 @@ def _write_rows(path: Path, rows: list[dict[str, object]]) -> None:
         writer.writerows(rows)
 
 
+def _write_header(path: Path, headers: list[str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        csv.DictWriter(handle, fieldnames=headers).writeheader()
+
+
 def _read_rows(path: Path) -> list[dict[str, str]]:
     if not path.exists():
         return []
@@ -25,15 +31,32 @@ def _read_rows(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
-def _payload(tmp_path: Path, *, planned=None, classifications=None, recovery=None, payments=None):
+def _payload(
+    tmp_path: Path,
+    *,
+    planned=None,
+    classifications=None,
+    recovery=None,
+    payments=None,
+    vercel_planned=None,
+    vercel_header_only: bool = False,
+):
     data_dir = tmp_path / "01-data" / "import_templates"
     delay_dir = tmp_path / "02-delay_analysis" / "steel_delay_tia_templates"
+    vercel_dir = tmp_path / "vercel"
     if planned is not None:
         _write_rows(data_dir / "planned_cash_flow.csv", planned)
     if classifications is not None:
         _write_rows(delay_dir / "14-delay_event_classification.csv", classifications)
     if recovery is not None:
         _write_rows(delay_dir / "15-tia_recovery_scenario.csv", recovery)
+    if vercel_planned is not None:
+        _write_rows(vercel_dir / "planned_cash_flow.csv", vercel_planned)
+    elif vercel_header_only:
+        _write_header(
+            vercel_dir / "planned_cash_flow.csv",
+            ["project_id", "period_date", "planned_cash_out", "planned_cumulative_cash_out"],
+        )
     return build_project_chart_payloads(
         project_id="P-01",
         project_key="p-01",
@@ -43,6 +66,7 @@ def _payload(tmp_path: Path, *, planned=None, classifications=None, recovery=Non
         delay_event_rows=[{"event_id": "EV-01", "activity_id": "A-01"}],
         activity_rows=[{"activity_id": "A-01"}],
         read_csv_rows=_read_rows,
+        vercel_dir=vercel_dir,
     )
 
 
@@ -172,3 +196,36 @@ def test_recovery_requires_project_activity_and_marks_draft_not_contractual(tmp_
     assert verified_chart["status"] == "ready"
     assert verified_chart["scenario"]["scenario_id"] == "REC-02"
     assert verified_chart["series"][0]["values"] == [40.0]
+
+
+def test_reference_catalogue_publishes_all_36_chart_slots(tmp_path):
+    payload = _payload(tmp_path)
+    chart_ids = [chart["id"] for chart in payload["charts"]]
+
+    assert len(chart_ids) == 36
+    assert len(chart_ids) == len(set(chart_ids))
+    assert {chart["status"] for chart in payload["charts"]}.issubset(
+        {"ready", "partial", "draft", "awaiting_data"}
+    )
+    assert all(chart["source_lineage"] for chart in payload["charts"])
+
+
+def test_populated_vercel_cash_flow_wins_and_empty_vercel_falls_back(tmp_path):
+    preferred = _payload(
+        tmp_path / "preferred",
+        planned=[{"project_id": "P-01", "period_date": "2026-01", "planned_cash_out": "100"}],
+        vercel_planned=[{"project_id": "P-01", "period_date": "2026-01", "planned_cash_out": "125"}],
+    )
+    preferred_chart = _chart(preferred, "contracts.planned_vs_actual_cash_flow")
+    assert preferred_chart["series"][0]["values"] == [125.0]
+    assert preferred_chart["source_lineage"]["files"] == ["vercel/planned_cash_flow.csv", "payments.csv"]
+    assert any("Vercel source was used" in issue["message"] for issue in preferred_chart["validation"])
+
+    fallback = _payload(
+        tmp_path / "fallback",
+        planned=[{"project_id": "P-01", "period_date": "2026-01", "planned_cash_out": "100"}],
+        vercel_header_only=True,
+    )
+    fallback_chart = _chart(fallback, "contracts.planned_vs_actual_cash_flow")
+    assert fallback_chart["series"][0]["values"] == [100.0]
+    assert fallback_chart["source_lineage"]["files"] == ["planned_cash_flow.csv", "payments.csv"]
