@@ -36,6 +36,7 @@ if (Test-Path -LiteralPath $analyticsPython) {
 $logPath = Join-Path $root "12-logs\vercel_project_pipeline.log"
 $statePath = Join-Path $root ".sync_state\vercel_project_pipeline_state.json"
 $script:WatchMutex = $null
+$script:WatchMutexAcquired = $false
 $script:WatchHashCache = @{}
 
 New-Item -ItemType Directory -Force -Path (Split-Path -Parent $logPath), (Split-Path -Parent $statePath) | Out-Null
@@ -351,6 +352,7 @@ try {
                 Write-PipelineLog "A Project Intelligence Hub Vercel pipeline watcher is already running."
                 exit 0
             }
+            $script:WatchMutexAcquired = $true
             $lastFingerprint = Get-WatchedFingerprint
             $stateMatchesWorkspace = $false
             if (Test-Path -LiteralPath $statePath) {
@@ -391,7 +393,9 @@ catch {
 }
 finally {
     if ($null -ne $script:WatchMutex) {
-        $script:WatchMutex.ReleaseMutex() | Out-Null
+        if ($script:WatchMutexAcquired) {
+            $script:WatchMutex.ReleaseMutex() | Out-Null
+        }
         $script:WatchMutex.Dispose()
     }
 }
