@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05T14:41:13",
+  "generated_at": "2026-08-05T14:46:55",
   "project_count": 5,
   "sector_count": 3,
   "totals": {
@@ -58,7 +58,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting.",
-      "last_updated": "2026-08-05T14:40:36"
+      "last_updated": "2026-08-05T14:45:49"
     },
     {
       "decision_id": "DEC-the-big-p-01-up-20-april-26-02",
@@ -75,7 +75,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness.",
-      "last_updated": "2026-08-05T14:40:36"
+      "last_updated": "2026-08-05T14:45:49"
     },
     {
       "decision_id": "DEC-sophia-mall-01",
@@ -499,7 +499,7 @@
       "milestone_count": 4,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-08-05T14:40:36",
+      "last_updated": "2026-08-05T14:45:49",
       "source_files": {
         "projects": 1,
         "contracts": 2,
@@ -1049,8 +1049,8 @@
     "warn_count": 0,
     "issue_count": 0,
     "report_path": "D:/Project Intelligence Hub NextJS/12-logs/guardrail_report_latest.md",
-    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260805_144113",
-    "last_checked": "2026-08-05T14:41:13",
+    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260805_144655",
+    "last_checked": "2026-08-05T14:46:55",
     "top_issues": []
   }
 }
