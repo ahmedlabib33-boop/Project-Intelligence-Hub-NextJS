@@ -291,8 +291,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-05T16:04:43",
-  "fingerprint": "89aff1abf90d0bd3cdf240de02fb84e9c301de6afe973ae10999ede931596e9b",
+  "last_updated": "2026-08-05T13:49:05",
+  "fingerprint": "3332f9252e4b0089493eb8ebf5a2577c068c5f3a658cdcf4ba71ceea1f852121",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -46292,14 +46292,14 @@
           "relative_path": "The BIG - PH01/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 889.7,
-          "modified": "2026-08-05T16:05:13"
+          "modified": "2026-08-05T16:43:35"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-05T16:05:13"
+          "modified": "2026-08-05T16:43:35"
         },
         {
           "name": "02_master_dashboard.html",
@@ -46313,14 +46313,14 @@
           "relative_path": "The BIG - PH01/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 864.7,
-          "modified": "2026-08-05T16:05:16"
+          "modified": "2026-08-05T16:43:38"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "The BIG - PH01/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-05T16:05:16"
+          "modified": "2026-08-05T16:43:38"
         },
         {
           "name": "03_elite_svg_charts.html",
@@ -46334,14 +46334,14 @@
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 236.2,
-          "modified": "2026-08-05T16:05:17"
+          "modified": "2026-08-05T16:43:40"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-05T16:05:17"
+          "modified": "2026-08-05T16:43:40"
         },
         {
           "name": "04_linked_executive_dashboard.html",
@@ -46355,14 +46355,14 @@
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1276.9,
-          "modified": "2026-08-05T16:05:21"
+          "modified": "2026-08-05T16:43:43"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-05T16:05:22"
+          "modified": "2026-08-05T16:43:44"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
@@ -46865,10 +46865,36 @@
         "tab": "Activities",
         "title": "Monthly Activity Completion",
         "type": "bar",
-        "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/activity_completion_history.csv.",
-        "labels": [],
-        "series": [],
+        "status": "ready",
+        "message": "Selected-project monthly activity completion history.",
+        "labels": [
+          "2025-10",
+          "2025-11",
+          "2026-01",
+          "2026-03"
+        ],
+        "series": [
+          {
+            "label": "Completed",
+            "color": "#06b6d4",
+            "values": [
+              55.0,
+              220.0,
+              164.0,
+              329.0
+            ]
+          },
+          {
+            "label": "Started",
+            "color": "#10b981",
+            "values": [
+              37.0,
+              28.0,
+              33.0,
+              12.0
+            ]
+          }
+        ],
         "source_lineage": {
           "files": [
             "vercel/activity_completion_history.csv"
@@ -47584,7 +47610,6 @@
         "source_lineage": {
           "files": [
             "vercel/delay_event_classification.csv",
-            "14-delay_event_classification.csv",
             "delay_events.csv"
           ],
           "required_columns": [
@@ -47593,7 +47618,44 @@
             "root_cause"
           ]
         },
-        "validation": [],
+        "validation": [
+          {
+            "file": "vercel/delay_event_classification.csv",
+            "source_row": "2",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "vercel/delay_event_classification.csv",
+            "source_row": "3",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "vercel/delay_event_classification.csv",
+            "source_row": "4",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "vercel/delay_event_classification.csv",
+            "source_row": "5",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "vercel/delay_event_classification.csv",
+            "source_row": "6",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "vercel/delay_event_classification.csv",
+            "source_row": "7",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          }
+        ],
         "scenario": null
       },
       {
@@ -47608,7 +47670,6 @@
         "source_lineage": {
           "files": [
             "vercel/delay_event_classification.csv",
-            "14-delay_event_classification.csv",
             "delay_events.csv"
           ],
           "required_columns": [
@@ -47617,7 +47678,44 @@
             "delay_type"
           ]
         },
-        "validation": [],
+        "validation": [
+          {
+            "file": "vercel/delay_event_classification.csv",
+            "source_row": "2",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "vercel/delay_event_classification.csv",
+            "source_row": "3",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "vercel/delay_event_classification.csv",
+            "source_row": "4",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "vercel/delay_event_classification.csv",
+            "source_row": "5",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "vercel/delay_event_classification.csv",
+            "source_row": "6",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "vercel/delay_event_classification.csv",
+            "source_row": "7",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          }
+        ],
         "scenario": null
       },
       {
@@ -47653,7 +47751,6 @@
         "source_lineage": {
           "files": [
             "vercel/tia_recovery_scenario.csv",
-            "15-tia_recovery_scenario.csv",
             "activities.csv"
           ],
           "required_columns": [
@@ -47662,13 +47759,50 @@
             "activity_id"
           ]
         },
-        "validation": [],
+        "validation": [
+          {
+            "file": "15-tia_recovery_scenario.csv",
+            "source_row": "2",
+            "field": "scenario/activity/status_date/progress",
+            "message": "Scenario ID, Activity ID, status date, and all three progress values are required."
+          },
+          {
+            "file": "15-tia_recovery_scenario.csv",
+            "source_row": "3",
+            "field": "scenario/activity/status_date/progress",
+            "message": "Scenario ID, Activity ID, status date, and all three progress values are required."
+          },
+          {
+            "file": "15-tia_recovery_scenario.csv",
+            "source_row": "4",
+            "field": "scenario/activity/status_date/progress",
+            "message": "Scenario ID, Activity ID, status date, and all three progress values are required."
+          },
+          {
+            "file": "15-tia_recovery_scenario.csv",
+            "source_row": "5",
+            "field": "scenario/activity/status_date/progress",
+            "message": "Scenario ID, Activity ID, status date, and all three progress values are required."
+          },
+          {
+            "file": "15-tia_recovery_scenario.csv",
+            "source_row": "6",
+            "field": "scenario/activity/status_date/progress",
+            "message": "Scenario ID, Activity ID, status date, and all three progress values are required."
+          },
+          {
+            "file": "15-tia_recovery_scenario.csv",
+            "source_row": "7",
+            "field": "scenario/activity/status_date/progress",
+            "message": "Scenario ID, Activity ID, status date, and all three progress values are required."
+          }
+        ],
         "scenario": null
       }
     ],
-    "ready_count": 20,
+    "ready_count": 21,
     "draft_count": 0,
-    "awaiting_count": 16,
+    "awaiting_count": 15,
     "validation": [
       {
         "file": "payments.csv",
@@ -47687,6 +47821,114 @@
         "source_row": "",
         "field": "source_precedence",
         "message": "Both planned_cash_flow.csv and the legacy source contain selected-project rows; the Vercel source was used."
+      },
+      {
+        "file": "vercel/delay_event_classification.csv",
+        "source_row": "2",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "vercel/delay_event_classification.csv",
+        "source_row": "3",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "vercel/delay_event_classification.csv",
+        "source_row": "4",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "vercel/delay_event_classification.csv",
+        "source_row": "5",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "vercel/delay_event_classification.csv",
+        "source_row": "6",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "vercel/delay_event_classification.csv",
+        "source_row": "7",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "vercel/delay_event_classification.csv",
+        "source_row": "2",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "vercel/delay_event_classification.csv",
+        "source_row": "3",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "vercel/delay_event_classification.csv",
+        "source_row": "4",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "vercel/delay_event_classification.csv",
+        "source_row": "5",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "vercel/delay_event_classification.csv",
+        "source_row": "6",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "vercel/delay_event_classification.csv",
+        "source_row": "7",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "15-tia_recovery_scenario.csv",
+        "source_row": "2",
+        "field": "scenario/activity/status_date/progress",
+        "message": "Scenario ID, Activity ID, status date, and all three progress values are required."
+      },
+      {
+        "file": "15-tia_recovery_scenario.csv",
+        "source_row": "3",
+        "field": "scenario/activity/status_date/progress",
+        "message": "Scenario ID, Activity ID, status date, and all three progress values are required."
+      },
+      {
+        "file": "15-tia_recovery_scenario.csv",
+        "source_row": "4",
+        "field": "scenario/activity/status_date/progress",
+        "message": "Scenario ID, Activity ID, status date, and all three progress values are required."
+      },
+      {
+        "file": "15-tia_recovery_scenario.csv",
+        "source_row": "5",
+        "field": "scenario/activity/status_date/progress",
+        "message": "Scenario ID, Activity ID, status date, and all three progress values are required."
+      },
+      {
+        "file": "15-tia_recovery_scenario.csv",
+        "source_row": "6",
+        "field": "scenario/activity/status_date/progress",
+        "message": "Scenario ID, Activity ID, status date, and all three progress values are required."
+      },
+      {
+        "file": "15-tia_recovery_scenario.csv",
+        "source_row": "7",
+        "field": "scenario/activity/status_date/progress",
+        "message": "Scenario ID, Activity ID, status date, and all three progress values are required."
       },
       {
         "file": "evm_period_history.csv",
@@ -47716,12 +47958,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 911076,
-          "sha256": "6693c6fac9d7917ea2cb8313270a8ac342337113c363e6df9262a0c9e96f1e1c"
+          "sha256": "f9088166affa6058b1a1df1b77f96b5ecf8d047c3df37b902a24c196c9725d4d"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29140,
-          "sha256": "d2a1cdac157fb84698368a9d59c79e891130e3c0c65af8cc4287b3861684c5ba"
+          "sha256": "130de7f70ac365a3a5c68d3bb3647abd51ab22557a254ab50638de883b1ae5ab"
         }
       },
       "html_origin": "canonical_project_html",
@@ -47741,12 +47983,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 885433,
-          "sha256": "a3d8c3c570349939c8d0177715b5de13dcf0ef9696f19f4100fc9851643c4f27"
+          "sha256": "319156c497bdcf48d099045fd0cc40c73ea7c17bd655e21b940a4dcaefe0daa1"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29137,
-          "sha256": "191e97e3853b93b952761400813bf8f4e17664c0e3d16799c4582137fcd29b7e"
+          "sha256": "94e4009428415356beee58ab01e5a0a0f0795c4e3c81657dafa7dbea50c70a8e"
         }
       },
       "html_origin": "canonical_project_html",
@@ -47766,12 +48008,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 241841,
-          "sha256": "d74f5c72f963c3d0b7cf633f2d1fc76f6cd54f3fab29f28fdad0948047b504f3"
+          "sha256": "4714f4083d42a41eeb849fcad21ae598e2e0f5ab838abab10256fc6d609c2f95"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29138,
-          "sha256": "f694d2e613021cbf998ccf96b116c73c349fe52fbcfd3bb9e626262faf7f12cb"
+          "sha256": "94ae97934e606e1e7a91af0e771b461a88bcdfbddeb1438806daa478f3f22d6b"
         }
       },
       "html_origin": "canonical_project_html",
@@ -47791,12 +48033,12 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1307503,
-          "sha256": "988ff31b9b4a71e8ecf1606ccb460a3204d65103adacf2f55ab97c8c780177f2"
+          "sha256": "dbd402c845a7c1c2430f111767f799c7acd1eb713e1d5fd5636b07e5799ff19c"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29147,
-          "sha256": "472cfe496d851e25f2109587b72aa6b3391c2724386d27c87a48ea384273b667"
+          "sha256": "0ff4c282b432a2331faf06d22c35ad0095f84bba631c1addd5cf080dbc537f53"
         }
       },
       "html_origin": "canonical_project_html",
