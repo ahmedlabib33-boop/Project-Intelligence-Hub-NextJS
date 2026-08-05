@@ -291,8 +291,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-05T14:45:49",
-  "fingerprint": "f456056a4942a15da70737cc2eb66a5516eebb8d8e57d9366a4965bfa8ceb254",
+  "last_updated": "2026-08-05T16:04:43",
+  "fingerprint": "89aff1abf90d0bd3cdf240de02fb84e9c301de6afe973ae10999ede931596e9b",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -46292,14 +46292,14 @@
           "relative_path": "The BIG - PH01/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 889.7,
-          "modified": "2026-08-05T15:45:37"
+          "modified": "2026-08-05T16:05:13"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-05T15:45:38"
+          "modified": "2026-08-05T16:05:13"
         },
         {
           "name": "02_master_dashboard.html",
@@ -46313,14 +46313,14 @@
           "relative_path": "The BIG - PH01/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 864.7,
-          "modified": "2026-08-05T15:45:41"
+          "modified": "2026-08-05T16:05:16"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "The BIG - PH01/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-05T15:45:42"
+          "modified": "2026-08-05T16:05:16"
         },
         {
           "name": "03_elite_svg_charts.html",
@@ -46334,14 +46334,14 @@
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 236.2,
-          "modified": "2026-08-05T15:45:43"
+          "modified": "2026-08-05T16:05:17"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-05T15:45:43"
+          "modified": "2026-08-05T16:05:17"
         },
         {
           "name": "04_linked_executive_dashboard.html",
@@ -46355,14 +46355,14 @@
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1276.9,
-          "modified": "2026-08-05T15:45:47"
+          "modified": "2026-08-05T16:05:21"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-05T15:45:47"
+          "modified": "2026-08-05T16:05:22"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
@@ -47593,44 +47593,7 @@
             "root_cause"
           ]
         },
-        "validation": [
-          {
-            "file": "delay_event_classification.csv",
-            "source_row": "2",
-            "field": "project_id",
-            "message": "Project ID does not match the selected project; row was not used."
-          },
-          {
-            "file": "delay_event_classification.csv",
-            "source_row": "3",
-            "field": "project_id",
-            "message": "Project ID does not match the selected project; row was not used."
-          },
-          {
-            "file": "delay_event_classification.csv",
-            "source_row": "4",
-            "field": "project_id",
-            "message": "Project ID does not match the selected project; row was not used."
-          },
-          {
-            "file": "delay_event_classification.csv",
-            "source_row": "5",
-            "field": "project_id",
-            "message": "Project ID does not match the selected project; row was not used."
-          },
-          {
-            "file": "delay_event_classification.csv",
-            "source_row": "6",
-            "field": "project_id",
-            "message": "Project ID does not match the selected project; row was not used."
-          },
-          {
-            "file": "delay_event_classification.csv",
-            "source_row": "7",
-            "field": "project_id",
-            "message": "Project ID does not match the selected project; row was not used."
-          }
-        ],
+        "validation": [],
         "scenario": null
       },
       {
@@ -47654,44 +47617,7 @@
             "delay_type"
           ]
         },
-        "validation": [
-          {
-            "file": "delay_event_classification.csv",
-            "source_row": "2",
-            "field": "project_id",
-            "message": "Project ID does not match the selected project; row was not used."
-          },
-          {
-            "file": "delay_event_classification.csv",
-            "source_row": "3",
-            "field": "project_id",
-            "message": "Project ID does not match the selected project; row was not used."
-          },
-          {
-            "file": "delay_event_classification.csv",
-            "source_row": "4",
-            "field": "project_id",
-            "message": "Project ID does not match the selected project; row was not used."
-          },
-          {
-            "file": "delay_event_classification.csv",
-            "source_row": "5",
-            "field": "project_id",
-            "message": "Project ID does not match the selected project; row was not used."
-          },
-          {
-            "file": "delay_event_classification.csv",
-            "source_row": "6",
-            "field": "project_id",
-            "message": "Project ID does not match the selected project; row was not used."
-          },
-          {
-            "file": "delay_event_classification.csv",
-            "source_row": "7",
-            "field": "project_id",
-            "message": "Project ID does not match the selected project; row was not used."
-          }
-        ],
+        "validation": [],
         "scenario": null
       },
       {
@@ -47736,44 +47662,7 @@
             "activity_id"
           ]
         },
-        "validation": [
-          {
-            "file": "tia_recovery_scenario.csv",
-            "source_row": "2",
-            "field": "project_id",
-            "message": "Project ID does not match the selected project; row was not used."
-          },
-          {
-            "file": "tia_recovery_scenario.csv",
-            "source_row": "3",
-            "field": "project_id",
-            "message": "Project ID does not match the selected project; row was not used."
-          },
-          {
-            "file": "tia_recovery_scenario.csv",
-            "source_row": "4",
-            "field": "project_id",
-            "message": "Project ID does not match the selected project; row was not used."
-          },
-          {
-            "file": "tia_recovery_scenario.csv",
-            "source_row": "5",
-            "field": "project_id",
-            "message": "Project ID does not match the selected project; row was not used."
-          },
-          {
-            "file": "tia_recovery_scenario.csv",
-            "source_row": "6",
-            "field": "project_id",
-            "message": "Project ID does not match the selected project; row was not used."
-          },
-          {
-            "file": "tia_recovery_scenario.csv",
-            "source_row": "7",
-            "field": "project_id",
-            "message": "Project ID does not match the selected project; row was not used."
-          }
-        ],
+        "validation": [],
         "scenario": null
       }
     ],
@@ -47800,196 +47689,10 @@
         "message": "Both planned_cash_flow.csv and the legacy source contain selected-project rows; the Vercel source was used."
       },
       {
-        "file": "delay_event_classification.csv",
-        "source_row": "2",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "delay_event_classification.csv",
-        "source_row": "3",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "delay_event_classification.csv",
-        "source_row": "4",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "delay_event_classification.csv",
-        "source_row": "5",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "delay_event_classification.csv",
-        "source_row": "6",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "delay_event_classification.csv",
-        "source_row": "7",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "delay_event_classification.csv",
-        "source_row": "2",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "delay_event_classification.csv",
-        "source_row": "3",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "delay_event_classification.csv",
-        "source_row": "4",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "delay_event_classification.csv",
-        "source_row": "5",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "delay_event_classification.csv",
-        "source_row": "6",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "delay_event_classification.csv",
-        "source_row": "7",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "tia_recovery_scenario.csv",
-        "source_row": "2",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "tia_recovery_scenario.csv",
-        "source_row": "3",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "tia_recovery_scenario.csv",
-        "source_row": "4",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "tia_recovery_scenario.csv",
-        "source_row": "5",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "tia_recovery_scenario.csv",
-        "source_row": "6",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "tia_recovery_scenario.csv",
-        "source_row": "7",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "discipline_progress_history.csv",
-        "source_row": "2",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "discipline_progress_history.csv",
-        "source_row": "3",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "activity_completion_history.csv",
-        "source_row": "2",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "activity_completion_history.csv",
-        "source_row": "3",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "activity_completion_history.csv",
-        "source_row": "4",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "activity_completion_history.csv",
-        "source_row": "5",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "activity_completion_history.csv",
-        "source_row": "6",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
         "file": "evm_period_history.csv",
         "source_row": "",
         "field": "source_precedence",
         "message": "Both evm_period_history.csv and the legacy source contain selected-project rows; the Vercel source was used."
-      },
-      {
-        "file": "risk_assessment_history.csv",
-        "source_row": "2",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "risk_assessment_history.csv",
-        "source_row": "3",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "risk_assessment_history.csv",
-        "source_row": "4",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "risk_assessment_history.csv",
-        "source_row": "5",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "risk_assessment_history.csv",
-        "source_row": "6",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
-      },
-      {
-        "file": "risk_assessment_history.csv",
-        "source_row": "7",
-        "field": "project_id",
-        "message": "Project ID does not match the selected project; row was not used."
       }
     ]
   },
@@ -48013,12 +47716,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 911076,
-          "sha256": "a193f90a115e7538470095e9cca34e8d679d0378ba7839bd040d8a9d26baabe3"
+          "sha256": "6693c6fac9d7917ea2cb8313270a8ac342337113c363e6df9262a0c9e96f1e1c"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29140,
-          "sha256": "c503ed19117c8b702e5b4d79156f801d08e2337545a8f01e653461ac75603643"
+          "sha256": "d2a1cdac157fb84698368a9d59c79e891130e3c0c65af8cc4287b3861684c5ba"
         }
       },
       "html_origin": "canonical_project_html",
@@ -48038,12 +47741,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 885433,
-          "sha256": "47df83203a2abde7e3913b6862676b430b766da6dc0a3dd0dd835172f737958d"
+          "sha256": "a3d8c3c570349939c8d0177715b5de13dcf0ef9696f19f4100fc9851643c4f27"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29137,
-          "sha256": "ef95cb115df23a9d926281e5981a7368e9df309e7f35a3fd8cb8261fba6b2d90"
+          "sha256": "191e97e3853b93b952761400813bf8f4e17664c0e3d16799c4582137fcd29b7e"
         }
       },
       "html_origin": "canonical_project_html",
@@ -48063,12 +47766,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 241841,
-          "sha256": "9b9cc364e7a24427ea3a8095c803587ae3b52d2cfc348bb31ae58e0dd2b83f5f"
+          "sha256": "d74f5c72f963c3d0b7cf633f2d1fc76f6cd54f3fab29f28fdad0948047b504f3"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29138,
-          "sha256": "76f5ac9943975dd2fd5fea35886e53d05fa56ef1bb635157c93012a10c0ae09d"
+          "sha256": "f694d2e613021cbf998ccf96b116c73c349fe52fbcfd3bb9e626262faf7f12cb"
         }
       },
       "html_origin": "canonical_project_html",
@@ -48088,12 +47791,12 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1307503,
-          "sha256": "381c3892048863b40620e0f469ac2c86467fec799286e99a5e4df2912523b11e"
+          "sha256": "988ff31b9b4a71e8ecf1606ccb460a3204d65103adacf2f55ab97c8c780177f2"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29147,
-          "sha256": "55166a50ecb84bc80b17b48da23324d9fc0aeff4ac5be322efe18775804b4f38"
+          "sha256": "472cfe496d851e25f2109587b72aa6b3391c2724386d27c87a48ea384273b667"
         }
       },
       "html_origin": "canonical_project_html",
