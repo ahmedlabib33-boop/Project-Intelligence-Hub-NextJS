@@ -1,29 +1,29 @@
 {
-  "generated_at": "2026-08-05T01:08:59",
-  "project_count": 4,
+  "generated_at": "2026-08-05T14:33:40",
+  "project_count": 5,
   "sector_count": 3,
   "totals": {
-    "contract_value": 4567286025.0,
-    "paid_amount": 1728296531.5900002,
-    "spent_amount": 2094774866.13,
-    "remaining_value": 2838989493.41,
-    "average_progress": 0.3298859200459205,
-    "average_spi": 0.8039026642929985,
-    "average_cpi": 0.9742233657412726,
-    "average_risk_score": 45.3125,
-    "delayed_projects": 4,
-    "high_risk_projects": 3,
-    "claims_exposure": 63000000.0,
-    "decisions_required": 4,
+    "contract_value": 6412286025.0,
+    "paid_amount": 1905346531.5900002,
+    "spent_amount": 2301561022.8,
+    "remaining_value": 4506939493.41,
+    "average_progress": 0.31207955238865065,
+    "average_spi": 0.8397258072940479,
+    "average_cpi": 0.9690549937807866,
+    "average_risk_score": 45.0,
+    "delayed_projects": 5,
+    "high_risk_projects": 4,
+    "claims_exposure": 77550000.0,
+    "decisions_required": 5,
     "average_data_quality": 100.0
   },
   "warning_summary": {
     "schedule_critical": 3,
     "cost_critical": 0,
-    "delay_high": 4,
-    "claims_high": 3,
+    "delay_high": 5,
+    "claims_high": 4,
     "low_confidence": 0,
-    "high_priority": 4
+    "high_priority": 5
   },
   "decision_brief": [
     {
@@ -41,7 +41,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting.",
-      "last_updated": "2026-08-05T01:07:28"
+      "last_updated": "2026-08-02T17:31:40"
     },
     {
       "decision_id": "DEC-the-big-p-01-up-20-april-26-01",
@@ -58,7 +58,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting.",
-      "last_updated": "2026-08-05T01:07:49"
+      "last_updated": "2026-08-05T14:32:59"
     },
     {
       "decision_id": "DEC-the-big-p-01-up-20-april-26-02",
@@ -75,7 +75,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness.",
-      "last_updated": "2026-08-05T01:07:49"
+      "last_updated": "2026-08-05T14:32:59"
     },
     {
       "decision_id": "DEC-sophia-mall-01",
@@ -92,7 +92,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness.",
-      "last_updated": "2026-08-05T01:07:50"
+      "last_updated": "2026-08-02T17:31:40"
     },
     {
       "decision_id": "DEC-sophia-mall-02",
@@ -109,7 +109,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review entitlement matrix, notice status, and supporting correspondence.",
-      "last_updated": "2026-08-05T01:07:50"
+      "last_updated": "2026-08-02T17:31:40"
     },
     {
       "decision_id": "DEC-suez-tunnel-01",
@@ -126,7 +126,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting.",
-      "last_updated": "2026-08-05T01:07:51"
+      "last_updated": "2026-08-02T17:31:40"
     },
     {
       "decision_id": "DEC-lmd-bridge-02",
@@ -143,7 +143,41 @@
       "evidence_status": "High",
       "urgency": "Medium",
       "recommended_action": "Validate actual cost and payment records against budget baseline.",
-      "last_updated": "2026-08-05T01:07:28"
+      "last_updated": "2026-08-02T17:31:40"
+    },
+    {
+      "decision_id": "DEC-nasr-city-tunnel-01",
+      "project_key": "nasr-city-tunnel",
+      "project_id": "Nasr city-Tunnel",
+      "project_display_name": "Nasr city-Tunnel",
+      "project_folder_name": "Nasr city-Tunnel",
+      "sector": "Tunnels",
+      "priority": "High",
+      "issue": "Schedule performance on watchlist",
+      "trigger": "SPI 0.98",
+      "impact": "Schedule trend should be monitored before it becomes critical.",
+      "owner": "Planning Manager",
+      "evidence_status": "High",
+      "urgency": "Medium",
+      "recommended_action": "Validate planned versus actual progress and confirm near-critical activities.",
+      "last_updated": "2026-08-05T02:25:39"
+    },
+    {
+      "decision_id": "DEC-nasr-city-tunnel-02",
+      "project_key": "nasr-city-tunnel",
+      "project_id": "Nasr city-Tunnel",
+      "project_display_name": "Nasr city-Tunnel",
+      "project_folder_name": "Nasr city-Tunnel",
+      "sector": "Tunnels",
+      "priority": "High",
+      "issue": "Cost performance on watchlist",
+      "trigger": "CPI 0.95",
+      "impact": "Cost trend should be checked before commitment decisions.",
+      "owner": "Commercial Manager",
+      "evidence_status": "High",
+      "urgency": "Medium",
+      "recommended_action": "Validate actual cost and payment records against budget baseline.",
+      "last_updated": "2026-08-05T02:25:39"
     },
     {
       "decision_id": "DEC-suez-tunnel-02",
@@ -160,7 +194,7 @@
       "evidence_status": "High",
       "urgency": "Medium",
       "recommended_action": "Validate actual cost and payment records against budget baseline.",
-      "last_updated": "2026-08-05T01:07:51"
+      "last_updated": "2026-08-02T17:31:40"
     }
   ],
   "sectors": [
@@ -200,20 +234,20 @@
     },
     {
       "sector": "Tunnels",
-      "project_count": 1,
-      "contract_value": 1250000000.0,
-      "paid_amount": 481550000.0,
-      "spent_amount": 514546987.94,
-      "average_progress": 0.35,
-      "average_spi": 0.8618181818336116,
-      "average_cpi": 0.9433962264231616,
+      "project_count": 2,
+      "contract_value": 3095000000.0,
+      "paid_amount": 658600000.0,
+      "spent_amount": 721333144.61,
+      "average_progress": 0.309,
+      "average_spi": 0.9224182805659286,
+      "average_cpi": 0.945888866181002,
       "average_risk_score": 43.75,
-      "delayed_projects": 1,
-      "decisions_required": 1,
+      "delayed_projects": 2,
+      "decisions_required": 2,
       "average_data_quality": 100.0,
       "critical_schedule_projects": 1,
       "critical_cost_projects": 0,
-      "high_priority_projects": 1
+      "high_priority_projects": 2
     }
   ],
   "projects": [
@@ -309,7 +343,7 @@
       "milestone_count": 5,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-08-05T01:07:28",
+      "last_updated": "2026-08-02T17:31:40",
       "source_files": {
         "projects": 1,
         "contracts": 2,
@@ -465,12 +499,12 @@
       "milestone_count": 4,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-08-05T01:07:49",
+      "last_updated": "2026-08-05T14:32:59",
       "source_files": {
         "projects": 1,
         "contracts": 2,
         "payments": 8,
-        "planned_cash_flow": 0,
+        "planned_cash_flow": 18,
         "progress": 1363,
         "evm": 1363,
         "risks": 2,
@@ -603,7 +637,7 @@
       "milestone_count": 5,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-08-05T01:07:50",
+      "last_updated": "2026-08-02T17:31:40",
       "source_files": {
         "projects": 1,
         "contracts": 2,
@@ -674,6 +708,171 @@
         "master_dashboard": "/generated/Sophia-Mall/02_master_dashboard.html",
         "elite_svg_charts": "/generated/Sophia-Mall/03_elite_svg_charts.html",
         "linked_executive_dashboard": "/generated/Sophia-Mall/04_linked_executive_dashboard.html"
+      }
+    },
+    {
+      "project_id": "Nasr city-Tunnel",
+      "project_key": "nasr-city-tunnel",
+      "project_folder_name": "Nasr city-Tunnel",
+      "project_display_name": "Nasr city-Tunnel",
+      "sector": "Tunnels",
+      "status": "Delayed",
+      "contract_value": 1845000000.0,
+      "paid_amount": 177050000.0,
+      "spent_amount": 206786156.67,
+      "remaining_value": 1667950000.0,
+      "planned_progress": 0.315,
+      "actual_progress": 0.268,
+      "progress_variance": -0.046999999999999986,
+      "bac": 199500000.0,
+      "pv": 199500000.0,
+      "ev": 196112166.67,
+      "ac": 206786156.67,
+      "sv": -3387833.330000013,
+      "cv": -10673990.0,
+      "eac": 210358382.94053048,
+      "etc": 3572226.270530492,
+      "vac": -10858382.940530479,
+      "spi": 0.9830183792982455,
+      "cpi": 0.9483815059388424,
+      "risk_score": 43.75,
+      "high_risk_count": 1,
+      "risk_record_count": 3,
+      "delay_days": 72.0,
+      "delay_event_count": 5,
+      "claims_exposure": 14550000.0,
+      "claimed_days": 35.0,
+      "planned_start": "12-Jan-26",
+      "planned_finish": "30-Jun-28",
+      "forecast_finish": "18-Sep-28",
+      "schedule_health": "Watchlist",
+      "cost_health": "Watchlist",
+      "delay_exposure": "High",
+      "claim_exposure_level": "High",
+      "data_confidence": "High",
+      "decision_priority": "High",
+      "decision_reasons": [
+        {
+          "issue": "Schedule performance on watchlist",
+          "trigger": "SPI 0.98",
+          "impact": "Schedule trend should be monitored before it becomes critical.",
+          "owner": "Planning Manager",
+          "evidence_status": "High",
+          "urgency": "Medium",
+          "recommended_action": "Validate planned versus actual progress and confirm near-critical activities."
+        },
+        {
+          "issue": "Cost performance on watchlist",
+          "trigger": "CPI 0.95",
+          "impact": "Cost trend should be checked before commitment decisions.",
+          "owner": "Commercial Manager",
+          "evidence_status": "High",
+          "urgency": "Medium",
+          "recommended_action": "Validate actual cost and payment records against budget baseline."
+        },
+        {
+          "issue": "Delay exposure recorded",
+          "trigger": "72 cumulative delay-event days; EOT not yet verified",
+          "impact": "Indicative schedule exposure only until critical path, fragnet, and concurrency tests are verified.",
+          "owner": "Planning / Claims Team",
+          "evidence_status": "High",
+          "urgency": "High",
+          "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness."
+        },
+        {
+          "issue": "Claims / EOT exposure available",
+          "trigger": "Claim amount EGP 14,550,000 | Claimed days 35",
+          "impact": "Commercial strategy and entitlement evidence should be aligned.",
+          "owner": "Contracts Manager",
+          "evidence_status": "High",
+          "urgency": "High",
+          "recommended_action": "Review entitlement matrix, notice status, and supporting correspondence."
+        },
+        {
+          "issue": "High-risk records detected",
+          "trigger": "1 high-risk items",
+          "impact": "Risk exposure may require mitigation ownership and deadlines.",
+          "owner": "Project Manager",
+          "evidence_status": "High",
+          "urgency": "High",
+          "recommended_action": "Assign mitigation owners and confirm closure evidence for high-risk records."
+        }
+      ],
+      "activity_count": 17,
+      "milestone_count": 5,
+      "data_quality": 100.0,
+      "decision_required": true,
+      "last_updated": "2026-08-05T02:25:39",
+      "source_files": {
+        "projects": 1,
+        "contracts": 2,
+        "payments": 6,
+        "planned_cash_flow": 12,
+        "progress": 17,
+        "evm": 17,
+        "risks": 3,
+        "claims": 2,
+        "activities": 17,
+        "milestones": 5,
+        "delay_events": 5,
+        "s_curve": 10,
+        "historical_outcomes": 0
+      },
+      "metric_sources": {
+        "contract_value": {
+          "source": "projects.csv:contract_value",
+          "aggregation": "project summary or project-level fallback"
+        },
+        "paid_amount": {
+          "source": "payments.csv:paid amount total",
+          "aggregation": "sum of selected project records"
+        },
+        "spent_amount": {
+          "source": "evm.csv:AC total",
+          "aggregation": "sum of selected project records"
+        },
+        "planned_progress": {
+          "source": "projects.csv:planned_progress_percent",
+          "aggregation": "project summary or project-level calculation"
+        },
+        "actual_progress": {
+          "source": "projects.csv:actual_progress_percent",
+          "aggregation": "project summary or project-level calculation"
+        },
+        "bac": {
+          "source": "evm.csv:BAC total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "pv": {
+          "source": "evm.csv:PV total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "ev": {
+          "source": "evm.csv:EV total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "ac": {
+          "source": "evm.csv:AC total",
+          "aggregation": "sum of selected project EVM records"
+        },
+        "risk_score": {
+          "source": "risks.csv:active probability-impact risk matrix",
+          "aggregation": "project risk register"
+        },
+        "delay_days": {
+          "source": "delay_events.csv:estimated or overlap-adjusted duration",
+          "aggregation": "cumulative event exposure; not a verified EOT calculation"
+        },
+        "claims_exposure": {
+          "source": "claims.csv:claimed_amount",
+          "aggregation": "sum of selected project claim records"
+        }
+      },
+      "reports": {
+        "executive_dashboard": "/generated/Nasr-city-Tunnel/01_executive_dashboard.html",
+        "master_dashboard": "/generated/Nasr-city-Tunnel/02_master_dashboard.html",
+        "elite_svg_charts": "/generated/Nasr-city-Tunnel/03_elite_svg_charts.html",
+        "linked_executive_dashboard": "/generated/Nasr-city-Tunnel/04_linked_executive_dashboard.html"
       }
     },
     {
@@ -768,7 +967,7 @@
       "milestone_count": 5,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-08-05T01:07:51",
+      "last_updated": "2026-08-02T17:31:40",
       "source_files": {
         "projects": 1,
         "contracts": 2,
@@ -850,8 +1049,8 @@
     "warn_count": 0,
     "issue_count": 0,
     "report_path": "D:/Project Intelligence Hub NextJS/12-logs/guardrail_report_latest.md",
-    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260805_010900",
-    "last_checked": "2026-08-05T01:09:00",
+    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260805_143341",
+    "last_checked": "2026-08-05T14:33:41",
     "top_issues": []
   }
 }

@@ -1,18 +1,18 @@
 ﻿project_id,wbs_id,cost_code,activity_name,budget_cost,committed_cost,actual_cost,forecast_cost
-Suez-Tunnel,Suez-Tunnel.MILESTONE,M-MS-1000,Project Start Date,15060240.96,15060240.96,15512048.19,16114457.83
-Suez-Tunnel,Suez-Tunnel.MILESTONE,M-MS-1010,Contract Agreement,15060240.96,15060240.96,15512048.19,16114457.83
-Suez-Tunnel,Suez-Tunnel.MILESTONE,M-MS-1020,IFC Drawing Package,15060240.96,15060240.96,15512048.19,16114457.83
-Suez-Tunnel,Suez-Tunnel.MOBILIZATION,M-MOB-1000,Mobilization and temporary facilities,30120481.93,30120481.93,31024096.39,32228915.66
-Suez-Tunnel,Suez-Tunnel.SURVEY,SUR-ST-1010,Topographic survey and utility detection,30120481.93,30120481.93,31024096.39,32228915.66
-Suez-Tunnel,Suez-Tunnel.ENGINEERING,E-SUB-ST-1020,Tunnel alignment shop drawings,45180722.89,37500000.00,38625000.00,48343373.49
-Suez-Tunnel,Suez-Tunnel.ENGINEERING,E-APP-ST-1020,Approval of tunnel alignment shop drawings,45180722.89,30000000.00,30900000.00,48343373.49
-Suez-Tunnel,Suez-Tunnel.PROCUREMENT,P-MDEL-ST-1000,Delivery of waterproofing membrane and steel,75301204.82,45000000.00,46350000.00,80572289.16
-Suez-Tunnel,Suez-Tunnel.CONSTRUCTION,C-ST-EXC-1010,Open cut excavation and shoring,150602409.64,102500000.00,105575000.00,161144578.31
-Suez-Tunnel,Suez-Tunnel.CONSTRUCTION,C-ST-RFT-1020,RFT for base slab reinforcement,150602409.64,75000000.00,77250000.00,161144578.31
-Suez-Tunnel,Suez-Tunnel.CONSTRUCTION,C-ST-C-1030,Concrete casting for base slab,150602409.64,52500000.00,54075000.00,161144578.31
-Suez-Tunnel,Suez-Tunnel.CONSTRUCTION,C-ST-WALL-1040,Tunnel wall reinforcement and formwork,150602409.64,31250000.00,32187500.00,161144578.31
-Suez-Tunnel,Suez-Tunnel.CONSTRUCTION,C-ST-SLAB-1050,Roof slab reinforcement and concrete,150602409.64,22590361.45,6437500.00,161144578.31
-Suez-Tunnel,Suez-Tunnel.MEP,MEP-ST-DRN-1060,Drainage and pump station rough-in,90361445.78,13554216.87,0.00,96686746.99
-Suez-Tunnel,Suez-Tunnel.FINISHING,FIN-ST-RD-1070,Road reinstatement and asphalt works,90361445.78,13554216.87,0.00,96686746.99
-Suez-Tunnel,Suez-Tunnel.TESTING,TST-ST-1080,Integrated testing and commissioning,30120481.93,4518072.29,0.00,32228915.66
-Suez-Tunnel,Suez-Tunnel.MILESTONE,M-MS-9000,Substantial Completion,15060240.96,2259036.14,0.00,16114457.83
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.MILESTONE,CC-1000,Notice to Proceed,4500000.00,3870000.00,4635000.00,4905000.00
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.MILESTONE,CC-1001,Site Handover,5625000.00,5006250.00,5934375.00,6356250.00
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.ENGINEERING,CC-1002,Issue IFC Architectural Drawings,6750000.00,6210000.00,7290000.00,7897500.00
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.ENGINEERING,CC-1003,Approve Structural Shop Drawings,7125000.00,6768750.00,7338750.00,8086875.00
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.PROCUREMENT,CC-1004,Procure Reinforcement Steel,8250000.00,7095000.00,8703750.00,9198750.00
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.PROCUREMENT,CC-1005,Deliver Formwork Materials,9375000.00,8343750.00,10125000.00,10828125.00
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.BLDG-A.SUBSTRUCTURE,CC-1006,Building A Excavation,9750000.00,8970000.00,10042500.00,10920000.00
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.BLDG-A.SUBSTRUCTURE,CC-1007,Building A Plain Concrete,10875000.00,10331250.00,11473125.00,12615000.00
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.BLDG-A.SUBSTRUCTURE,CC-1008,Building A Raft Reinforcement,12000000.00,10320000.00,12960000.00,13680000.00
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.BLDG-A.SUBSTRUCTURE,CC-1009,Building A Raft Concrete,12375000.00,11013750.00,12746250.00,13674375.00
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.BLDG-B.SUBSTRUCTURE,CC-1010,Building B Excavation,13500000.00,12420000.00,14242500.00,15457500.00
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.BLDG-B.SUBSTRUCTURE,CC-1011,Building B Plain Concrete,14625000.00,13893750.00,15795000.00,17330625.00
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.BLDG-B.SUBSTRUCTURE,CC-1012,Building B Raft Reinforcement,15000000.00,12900000.00,15450000.00,16350000.00
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.BLDG-B.SUBSTRUCTURE,CC-1013,Building B Raft Concrete,16125000.00,14351250.00,17011875.00,18221250.00
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.UTILITIES,CC-1014,Underground Drainage Network,17250000.00,15870000.00,18630000.00,20182500.00
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.SUPERSTRUCTURE,CC-1015,Ground Floor Structural Frame,17625000.00,16743750.00,16209281.67,18594375.00
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.MILESTONE,CC-1016,Substructure Completion,18750000.00,16125000.00,18198750.00,19323750.00

@@ -1,10 +1,10 @@
 @echo off
 setlocal EnableExtensions
 
-rem Original Streamlit application launcher.
-set "APP_ROOT=D:\one drive data\OneDrive\Documents\Project Intelligence Hub"
+rem Original Streamlit application launcher from this self-contained workspace.
+set "APP_ROOT=%~dp0"
 set "PORT=8755"
-set "PY=%APP_ROOT%\.venv\Scripts\python.exe"
+set "PY=%APP_ROOT%\.venv-analytics\Scripts\python.exe"
 
 if not exist "%APP_ROOT%\dashboard.py" (
   echo [ERROR] Streamlit dashboard was not found: "%APP_ROOT%\dashboard.py"

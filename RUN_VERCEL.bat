@@ -1,16 +1,12 @@
 @echo off
 setlocal EnableExtensions
 
-rem Next.js/Vercel application launcher.
-rem Default: local website plus the 10-second GitHub/Vercel publisher.
-rem Optional: RUN_VERCEL.bat --no-sync starts only the local website.
+rem Next.js local application launcher.
+rem Use VERCEL_SYNC.bat separately to publish local changes to GitHub and Vercel.
 
 set "ROOT=%~dp0"
 set "WEBSITE=%ROOT%website"
 set "PORT=3000"
-set "START_SYNC=1"
-
-if /I "%~1"=="--no-sync" set "START_SYNC=0"
 
 if not exist "%WEBSITE%\package.json" (
   echo [ERROR] Next.js website folder was not found: "%WEBSITE%"
@@ -37,19 +33,8 @@ if errorlevel 1 (
   echo Local website is already running on port %PORT%.
 )
 
-if "%START_SYNC%"=="1" (
-  powershell.exe -NoProfile -Command "$publisher = Get-CimInstance Win32_Process -ErrorAction SilentlyContinue | Where-Object { $_.CommandLine -match 'vercel_project_pipeline\.ps1' -and $_.CommandLine -match 'Mode Watch' }; if ($publisher) { exit 0 } else { exit 1 }"
-  if errorlevel 1 (
-    powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Start-Process -FilePath 'cmd.exe' -ArgumentList '/k','call RUN_LIVE_VERCEL_SYNC.bat' -WorkingDirectory '%ROOT%'"
-  ) else (
-    echo Live Vercel publisher is already running.
-  )
-) else (
-  echo Live Vercel publisher skipped by --no-sync.
-)
-
 timeout /t 4 /nobreak >nul
 start "" "http://127.0.0.1:%PORT%"
 
-echo Launcher complete. Keep the opened command windows running while you work.
+echo Local site started. Run VERCEL_SYNC.bat to publish immediately, or VERCEL_SYNC.bat watch to publish changes automatically.
 exit /b 0

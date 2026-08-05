@@ -1,6 +1,6 @@
 ﻿project_id,Primary Event ID,Activity ID,Activity Name,BL Start,BL Finish,Start,Finish,Delayed duration,Overlap Start,Overlap Finish,BL Critical Path,Current Critical Path,Delayed duration after overlap
-Suez-Tunnel,Delay in employer free issue steel supply,CON-ST-EXC-1010,Open cut excavation and shoring,29-Oct-25,27-Jan-26,14-Nov-25,22-Feb-26,-26,14-Nov-25,22-Feb-26,Yes,Yes,26
-Suez-Tunnel,Late IFC / design clarification,CON-ST-RFT-1020,RFT for base slab reinforcement,28-Dec-25,25-Jan-26,18-Jan-26,26-Feb-26,-32,18-Jan-26,26-Feb-26,Yes,No,32
-Suez-Tunnel,Delayed RFI response,CON-ST-CON-1030,Concrete casting for base slab,28-Jan-26,21-Feb-26,23-Feb-26,31-Mar-26,-38,23-Feb-26,31-Mar-26,Yes,Yes,38
-Suez-Tunnel,Access constraint and traffic diversion,CON-ST-WALL-1040,Tunnel wall reinforcement and formwork,26-Feb-26,27-Apr-26,29-Mar-26,10-Jun-26,-44,29-Mar-26,10-Jun-26,No,No,44
-Suez-Tunnel,MEP sleeve coordination delay,CON-ST-SLAB-1050,Roof slab reinforcement and concrete,27-Apr-26,1-Jul-26,2-Jun-26,20-Aug-26,-50,2-Jun-26,20-Aug-26,No,Yes,43
+Nasr city-Tunnel,Late structural shop drawing approval,NCT-A-RFT-1080,Building A Raft Reinforcement,7-Mar-26,26-Mar-26,18-Mar-26,12-Apr-26,-17,18-Mar-26,12-Apr-26,Yes,Yes,17
+Nasr city-Tunnel,Restricted Building B access,NCT-B-EXC-1100,Building B Excavation,16-Feb-26,7-Mar-26,3-Mar-26,28-Mar-26,-21,3-Mar-26,28-Mar-26,No,Yes,15
+Nasr city-Tunnel,Late utility diversion instruction,NCT-UTL-1140,Underground Drainage Network,16-Mar-26,14-Apr-26,29-Mar-26,8-May-26,-24,29-Mar-26,8-May-26,Yes,Yes,24
+Nasr city-Tunnel,Concrete plant interruption,NCT-B-CON-1130,Building B Raft Concrete,6-Apr-26,11-Apr-26,14-Apr-26,22-Apr-26,-11,14-Apr-26,22-Apr-26,No,No,6
+Nasr city-Tunnel,Additional dewatering requirement,NCT-A-EXC-1060,Building A Excavation,9-Feb-26,26-Feb-26,14-Feb-26,8-Mar-26,-10,14-Feb-26,8-Mar-26,Yes,No,10

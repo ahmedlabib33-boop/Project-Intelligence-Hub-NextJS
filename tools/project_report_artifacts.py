@@ -26,9 +26,8 @@ REPORTS: tuple[tuple[str, str, str], ...] = (
     ("linked_executive_dashboard", "04_linked_executive_dashboard", "Linked Executive Dashboard"),
 )
 REPORT_GENERATOR_VERSION = "2026.08.project-scoped-html-pdf-pptx.v6-source-html"
-CANONICAL_OUTPUTS_ROOT = Path(
-    os.environ.get("PIH_SOURCE_ROOT") or r"D:\one drive data\OneDrive\Documents\Project Intelligence Hub"
-) / "11-outputs"
+WORKSPACE_ROOT = Path(__file__).resolve().parents[1]
+CANONICAL_OUTPUTS_ROOT = WORKSPACE_ROOT / "11-outputs"
 
 
 def _sha256(path: Path) -> str:
@@ -129,7 +128,10 @@ def _publish_source_html_or_fallback(
     """Publish an approved project-owned source report, never a shared report."""
     source = source_reports.get(key)
     if source is not None:
-        shutil.copy2(source, html_path)
+        # In the self-contained D: workspace the approved report can already
+        # be the target file.  Avoid SameFileError while retaining it intact.
+        if source.resolve() != html_path.resolve():
+            shutil.copy2(source, html_path)
         return "canonical_project_html"
     _write_fallback_html(html_path, title, project)
     return "controlled_fallback"
@@ -273,7 +275,7 @@ def _ensure_governed_tia_artifacts(project: dict[str, Any], output_dir: Path, pu
     assessment = canonical.get("source_governance") if isinstance(canonical.get("source_governance"), dict) else None
     if not assessment:
         return None
-    canonical_root = Path(os.environ.get("PIH_SOURCE_ROOT") or r"D:\one drive data\OneDrive\Documents\Project Intelligence Hub")
+    canonical_root = WORKSPACE_ROOT
     source_dir = canonical_root / "src"
     if source_dir.exists() and str(source_dir) not in sys.path:
         sys.path.insert(0, str(source_dir))

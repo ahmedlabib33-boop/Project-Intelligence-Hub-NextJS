@@ -19,14 +19,10 @@ from project_report_artifacts import ensure_project_report_artifacts
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_CANONICAL_ROOT = Path(r"D:\one drive data\OneDrive\Documents\Project Intelligence Hub")
-if os.environ.get("PIH_SOURCE_ROOT"):
-    CANONICAL_ROOT = Path(os.environ["PIH_SOURCE_ROOT"]).expanduser().resolve()
-elif (DEFAULT_CANONICAL_ROOT / "projects").exists():
-    # Keep direct local generation aligned with the watcher and avoid publishing the stale target copy.
-    CANONICAL_ROOT = DEFAULT_CANONICAL_ROOT.resolve()
-else:
-    CANONICAL_ROOT = ROOT
+# This delivery is self-contained.  Generated website data must always come
+# from this workspace, never from a second local checkout or an environment
+# override that could publish stale project data.
+CANONICAL_ROOT = ROOT
 PROJECTS_ROOT = CANONICAL_ROOT / "projects"
 SOURCE_OUTPUTS_ROOT = CANONICAL_ROOT / "11-outputs"
 OUTPUTS_ROOT = ROOT / "11-outputs"

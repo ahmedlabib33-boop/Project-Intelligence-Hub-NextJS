@@ -210,7 +210,9 @@ function Invoke-GitHubApi([string]$Method, [string]$Uri, [object]$Body = $null) 
         "X-GitHub-Api-Version" = "2022-11-28"
         "User-Agent" = "Project-Intelligence-Hub-NoGit-Sync"
     }
-    $params = @{ Method = $Method; Uri = $Uri; Headers = $headers }
+    # Prevent one stalled GitHub request from stopping the whole publisher.
+    # The retry block below safely retries transient timeouts.
+    $params = @{ Method = $Method; Uri = $Uri; Headers = $headers; TimeoutSec = 60 }
     if ($null -ne $Body) {
         $jsonBody = $Body | ConvertTo-Json -Depth 20 -Compress
         $params.Body = [System.Text.Encoding]::UTF8.GetBytes($jsonBody)

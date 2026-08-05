@@ -1,18 +1,18 @@
 ﻿project_id,wbs_id,activity_id,activity_name,planned_start,planned_finish,actual_start,actual_finish,forecast_start,forecast_finish,planned_weight,planned_progress,actual_progress,total_float_days,is_critical,responsible_party
-Suez-Tunnel,Suez-Tunnel.MILESTONE,KD-MS-1000,Project Start Date,1-Sep-25,,1-Sep-25 A,1-Sep-25 A,1-Sep-25,,0.0120,1.00,1.00,5,No,Project Controls
-Suez-Tunnel,Suez-Tunnel.MILESTONE,KD-MS-1010,Contract Agreement,1-Sep-25,,1-Sep-25 A,1-Sep-25 A,1-Sep-25,,0.0120,1.00,1.00,6,No,Commercial
-Suez-Tunnel,Suez-Tunnel.MILESTONE,KD-MS-1020,IFC Drawing Package,6-Sep-25,,6-Sep-25 A,6-Sep-25 A,6-Sep-25,,0.0120,1.00,1.00,,Yes,Engineering
-Suez-Tunnel,Suez-Tunnel.MOBILIZATION,KD-MOB-1000,Mobilization and temporary facilities,4-Sep-25,2-Oct-25,20-Sep-25 A,21-Oct-25 A,20-Sep-25,10-Oct-25,0.0241,1.00,1.00,8,No,Construction
-Suez-Tunnel,Suez-Tunnel.SURVEY,SUR-ST-1010,Topographic survey and utility detection,19-Sep-25,11-Oct-25,8-Oct-25 A,2-Nov-25 A,8-Oct-25,19-Oct-25,0.0241,1.00,1.00,9,No,Survey Team
-Suez-Tunnel,Suez-Tunnel.ENGINEERING,E-SUB-ST-1020,Tunnel alignment shop drawings,6-Oct-25,10-Nov-25,28-Oct-25 A,,28-Oct-25,30-Nov-25,0.0361,1.00,0.83,-26,Yes,Engineering
-Suez-Tunnel,Suez-Tunnel.ENGINEERING,E-APP-ST-1020,Approval of tunnel alignment shop drawings,12-Nov-25,7-Dec-25,28-Nov-25 A,,28-Nov-25,27-Dec-25,0.0361,0.80,0.66,-28,Yes,Engineer
-Suez-Tunnel,Suez-Tunnel.PROCUREMENT,P-MDEL-ST-1000,Delivery of waterproofing membrane and steel,2-Nov-25,27-Dec-25,21-Nov-25 A,,21-Nov-25,16-Jan-26,0.0602,0.72,0.60,-30,Yes,Employer/Procurement
-Suez-Tunnel,Suez-Tunnel.CONSTRUCTION,CON-ST-EXC-1010,Open cut excavation and shoring,29-Oct-25,27-Jan-26,20-Nov-25 A,,20-Nov-25,16-Feb-26,0.1205,0.82,0.68,-32,Yes,Construction
-Suez-Tunnel,Suez-Tunnel.CONSTRUCTION,CON-ST-RFT-1020,RFT for base slab reinforcement,28-Dec-25,25-Jan-26,13-Jan-26 A,,13-Jan-26,14-Feb-26,0.1205,0.60,0.50,-34,Yes,Construction
-Suez-Tunnel,Suez-Tunnel.CONSTRUCTION,CON-ST-CON-1030,Concrete casting for base slab,28-Jan-26,21-Feb-26,16-Feb-26 A,,16-Feb-26,13-Mar-26,0.1205,0.42,0.35,-36,Yes,Construction
-Suez-Tunnel,Suez-Tunnel.CONSTRUCTION,CON-ST-WALL-1040,Tunnel wall reinforcement and formwork,26-Feb-26,27-Apr-26,20-Mar-26 A,,20-Mar-26,17-May-26,0.1205,0.25,0.21,-38,Yes,Construction
-Suez-Tunnel,Suez-Tunnel.CONSTRUCTION,CON-ST-SLAB-1050,Roof slab reinforcement and concrete,27-Apr-26,1-Jul-26,13-May-26 A,,13-May-26,21-Jul-26,0.1205,0.05,0.04,-40,Yes,Construction
-Suez-Tunnel,Suez-Tunnel.MEP,MEP-ST-DRN-1060,Drainage and pump station rough-in,13-Jun-26,7-Aug-26,,,29-Jun-26,15-Aug-26,0.0723,0.00,0.00,18,No,MEP
-Suez-Tunnel,Suez-Tunnel.FINISHING,FIN-ST-RD-1070,Road reinstatement and asphalt works,12-Aug-26,11-Oct-26,,,28-Aug-26,19-Oct-26,0.0723,0.00,0.00,19,No,Roadworks
-Suez-Tunnel,Suez-Tunnel.TESTING,TST-ST-1080,Integrated testing and commissioning,5-Nov-26,10-Dec-26,,,21-Nov-26,18-Dec-26,0.0241,0.00,0.00,-46,Yes,QA/QC
-Suez-Tunnel,Suez-Tunnel.MILESTONE,KD-MS-9000,Substantial Completion,28-Feb-27,,,,16-Mar-27,,0.0120,0.00,0.00,-48,Yes,Project Controls
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.MILESTONE,NCT-MS-1000,Notice to Proceed,5-Jan-26,,5-Jan-26 A,5-Jan-26 A,5-Jan-26,,0.0200,1.00,1.00,8,No,Project Controls
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.MILESTONE,NCT-MS-1010,Site Handover,8-Jan-26,,9-Jan-26 A,9-Jan-26 A,9-Jan-26,,0.0280,1.00,1.00,10,No,Commercial
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.ENGINEERING,NCT-ENG-1020,Issue IFC Architectural Drawings,10-Jan-26,23-Jan-26,12-Jan-26 A,25-Jan-26 A,12-Jan-26,25-Jan-26,0.0360,1.00,1.00,12,No,Engineering
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.ENGINEERING,NCT-ENG-1030,Approve Structural Shop Drawings,17-Jan-26,6-Feb-26,17-Jan-26 A,9-Feb-26 A,17-Jan-26,9-Feb-26,0.0440,1.00,1.00,14,No,Engineering
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.PROCUREMENT,NCT-PRC-1040,Procure Reinforcement Steel,25-Jan-26,28-Feb-26,26-Jan-26 A,28-Feb-26 A,26-Jan-26,28-Feb-26,0.0520,1.00,1.00,16,No,Procurement
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.PROCUREMENT,NCT-PRC-1050,Deliver Formwork Materials,30-Jan-26,26-Feb-26,1-Feb-26 A,27-Feb-26 A,1-Feb-26,27-Feb-26,0.0600,1.00,1.00,18,No,Procurement
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.BLDG-A.SUBSTRUCTURE,NCT-A-EXC-1060,Building A Excavation,9-Feb-26,26-Feb-26,9-Feb-26 A,28-Feb-26 A,9-Feb-26,28-Feb-26,0.0200,1.00,1.00,20,No,Civil
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.BLDG-A.SUBSTRUCTURE,NCT-A-PC-1070,Building A Plain Concrete,27-Feb-26,6-Mar-26,28-Feb-26 A,9-Mar-26 A,28-Feb-26,9-Mar-26,0.0280,1.00,1.00,22,No,Civil
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.BLDG-A.SUBSTRUCTURE,NCT-A-RFT-1080,Building A Raft Reinforcement,7-Mar-26,26-Mar-26,9-Mar-26 A,26-Mar-26 A,9-Mar-26,26-Mar-26,0.0360,1.00,1.00,12,No,Civil
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.BLDG-A.SUBSTRUCTURE,NCT-A-CON-1090,Building A Raft Concrete,27-Mar-26,31-Mar-26,27-Mar-26 A,1-Apr-26 A,27-Mar-26,1-Apr-26,0.0440,1.00,1.00,15,No,Civil
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.BLDG-B.SUBSTRUCTURE,NCT-B-EXC-1100,Building B Excavation,16-Feb-26,7-Mar-26,17-Feb-26 A,9-Mar-26 A,17-Feb-26,9-Mar-26,0.0520,1.00,1.00,28,No,Civil
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.BLDG-B.SUBSTRUCTURE,NCT-B-PC-1110,Building B Plain Concrete,8-Mar-26,14-Mar-26,10-Mar-26 A,17-Mar-26 A,10-Mar-26,17-Mar-26,0.0600,1.00,1.00,30,No,Civil
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.BLDG-B.SUBSTRUCTURE,NCT-B-RFT-1120,Building B Raft Reinforcement,15-Mar-26,5-Apr-26,15-Mar-26 A,5-Apr-26 A,15-Mar-26,5-Apr-26,0.0200,1.00,1.00,24,No,Civil
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.BLDG-B.SUBSTRUCTURE,NCT-B-CON-1130,Building B Raft Concrete,6-Apr-26,11-Apr-26,7-Apr-26 A,12-Apr-26 A,7-Apr-26,12-Apr-26,0.0280,1.00,1.00,27,No,Civil
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.UTILITIES,NCT-UTL-1140,Underground Drainage Network,16-Mar-26,14-Apr-26,18-Mar-26 A,16-Apr-26 A,18-Mar-26,16-Apr-26,0.0360,1.00,1.00,36,No,MEP
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.SUPERSTRUCTURE,NCT-STR-1150,Ground Floor Structural Frame,13-Apr-26,27-May-26,13-Apr-26 A,,13-Apr-26,12-Jun-26,0.0440,1.00,0.89,33,No,Civil
+Nasr city-Tunnel,Nasr city-Tunnel.NCT.MILESTONE,NCT-MS-1160,Substructure Completion,28-May-26,,29-May-26 A,,29-May-26,,0.0520,1.00,0.92,36,No,Project Controls

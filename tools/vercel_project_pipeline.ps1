@@ -2,21 +2,17 @@ param(
     [ValidateSet("Watch", "Once", "Test", "DryRun")]
     [string]$Mode = "Watch",
     [int]$IntervalSeconds = 30,
-    [string]$PublicUrl = ""
+    [string]$PublicUrl = "",
+    [switch]$SkipInitialPublish
 )
 
 $ErrorActionPreference = "Stop"
 
 $root = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $websiteRoot = Join-Path $root "website"
+# This package is the single canonical source.  Do not publish from an
+# external checkout: it can omit new projects and make Vercel stale.
 $canonicalRoot = $root
-if (-not [string]::IsNullOrWhiteSpace($env:PIH_SOURCE_ROOT)) {
-    $canonicalRoot = (Resolve-Path $env:PIH_SOURCE_ROOT).Path
-}
-elseif (Test-Path -LiteralPath "D:\one drive data\OneDrive\Documents\Project Intelligence Hub\projects") {
-    # Local delivery default. CI and other machines retain the repository copy.
-    $canonicalRoot = (Resolve-Path "D:\one drive data\OneDrive\Documents\Project Intelligence Hub").Path
-}
 $env:PIH_SOURCE_ROOT = $canonicalRoot
 $generatorPath = Join-Path $PSScriptRoot "generate_nextjs_website_data.py"
 $validatorPath = Join-Path $PSScriptRoot "validate_streamlit_vercel_pipeline.py"
@@ -288,12 +284,14 @@ function Invoke-PublishPipeline {
     Invoke-PipelineStep "Generating project-scoped Next.js data" $pythonExecutable @($generatorPath) $root
     Invoke-PipelineStep "Validating Streamlit to Next.js source parity" $pythonExecutable @($validatorPath) $root
     Invoke-PipelineStep "Building Next.js production application" "npm.cmd" @("run", "build") $websiteRoot
+    # Deploy the validated D: workspace first.  The hosted app must not remain
+    # stale merely because the GitHub API mirror is temporarily slow.
+    Invoke-PipelineStep "Deploying validated production build to Vercel" "npx.cmd" @("vercel", "--prod", "--yes") $websiteRoot
     Invoke-PipelineStep "Publishing validated workspace changes to GitHub without Git CLI" "powershell.exe" @(
         "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", $githubSyncPath,
         "-Mode", "Once", "-IntervalSeconds", [string]$IntervalSeconds,
         "-Message", "Publish validated Next.js project pipeline"
     ) $root
-    Invoke-PipelineStep "Deploying validated production build to Vercel" "npx.cmd" @("vercel", "--prod", "--yes") $websiteRoot
 
     $verified = $false
     for ($attempt = 1; $attempt -le 8; $attempt++) {
@@ -364,7 +362,10 @@ try {
                     $stateMatchesWorkspace = $false
                 }
             }
-            if ($stateMatchesWorkspace) {
+            if ($SkipInitialPublish) {
+                Write-PipelineLog "Watcher starting from the current verified workspace state; initial publish skipped."
+            }
+            elseif ($stateMatchesWorkspace) {
                 Write-PipelineLog "Using the last verified deployment state; no unchanged startup rebuild is required."
             }
             else {

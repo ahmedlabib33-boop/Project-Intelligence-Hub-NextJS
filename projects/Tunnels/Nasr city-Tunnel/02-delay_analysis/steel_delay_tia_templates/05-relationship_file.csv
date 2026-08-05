@@ -1,16 +1,19 @@
 ﻿project_id,Activity ID,Activity Name,Predecessors,Predecessor Details,Successors
-Suez-Tunnel-P.01-UP-26-Jun-26,CON-ST-PE-FORM-1040,Formwork readiness before Portal raft reinforcement (Portal-East),E-APP-ST-PE-1020,E-APP-ST-PE-1020: FS 0,CON-ST-PE-RFT-1050
-Suez-Tunnel-P.01-UP-26-Jun-26,CON-ST-PE-RFT-1050,RFT for Portal raft reinforcement (Portal-East),CON-ST-PE-FORM-1040,CON-ST-PE-FORM-1040: FS 0,CON-ST-PE-CONC-1070
-Suez-Tunnel-P.01-UP-26-Jun-26,CON-ST-PE-CONC-1070,Concrete casting after Portal raft reinforcement (Portal-East),CON-ST-PE-RFT-1050,CON-ST-PE-RFT-1050: FS 0,ST-MS-1040
-Suez-Tunnel-P.01-UP-26-Jun-26,CON-ST-PW-FORM-1050,Formwork readiness before Cut-cover base slab RFT (Portal-West),E-APP-ST-PW-1030,E-APP-ST-PW-1030: FS 0,CON-ST-PW-RFT-1060
-Suez-Tunnel-P.01-UP-26-Jun-26,CON-ST-PW-RFT-1060,RFT for Cut-cover base slab RFT (Portal-West),CON-ST-PW-FORM-1050,CON-ST-PW-FORM-1050: FS 0,CON-ST-PW-CONC-1080
-Suez-Tunnel-P.01-UP-26-Jun-26,CON-ST-PW-CONC-1080,Concrete casting after Cut-cover base slab RFT (Portal-West),CON-ST-PW-RFT-1060,CON-ST-PW-RFT-1060: FS 0,ST-MS-1040
-Suez-Tunnel-P.01-UP-26-Jun-26,CON-ST-CC-FORM-1060,Formwork readiness before Vent shaft wall RFT (Cut-Cover),E-APP-ST-CC-1040,E-APP-ST-CC-1040: FS 0,CON-ST-CC-RFT-1070
-Suez-Tunnel-P.01-UP-26-Jun-26,CON-ST-CC-RFT-1070,RFT for Vent shaft wall RFT (Cut-Cover),CON-ST-CC-FORM-1060,CON-ST-CC-FORM-1060: FS 0,CON-ST-CC-CONC-1090
-Suez-Tunnel-P.01-UP-26-Jun-26,CON-ST-CC-CONC-1090,Concrete casting after Vent shaft wall RFT (Cut-Cover),CON-ST-CC-RFT-1070,CON-ST-CC-RFT-1070: FS 0,ST-MS-1040
-Suez-Tunnel-P.01-UP-26-Jun-26,CON-ST-VS-FORM-1070,Formwork readiness before Pump room slab RFT (Vent-Shaft),E-APP-ST-VS-1050,E-APP-ST-VS-1050: FS 0,CON-ST-VS-RFT-1080
-Suez-Tunnel-P.01-UP-26-Jun-26,CON-ST-VS-RFT-1080,RFT for Pump room slab RFT (Vent-Shaft),CON-ST-VS-FORM-1070,CON-ST-VS-FORM-1070: FS 0,CON-ST-VS-CONC-1100
-Suez-Tunnel-P.01-UP-26-Jun-26,CON-ST-VS-CONC-1100,Concrete casting after Pump room slab RFT (Vent-Shaft),CON-ST-VS-RFT-1080,CON-ST-VS-RFT-1080: FS 0,ST-MS-1040
-Suez-Tunnel-P.01-UP-26-Jun-26,CON-ST-PR-FORM-1080,Formwork readiness before Tunnel approach retaining wall RFT (Pump-Room),E-APP-ST-PR-1060,E-APP-ST-PR-1060: FS 0,CON-ST-PR-RFT-1090
-Suez-Tunnel-P.01-UP-26-Jun-26,CON-ST-PR-RFT-1090,RFT for Tunnel approach retaining wall RFT (Pump-Room),CON-ST-PR-FORM-1080,CON-ST-PR-FORM-1080: FS 0,CON-ST-PR-CONC-1110
-Suez-Tunnel-P.01-UP-26-Jun-26,CON-ST-PR-CONC-1110,Concrete casting after Tunnel approach retaining wall RFT (Pump-Room),CON-ST-PR-RFT-1090,CON-ST-PR-RFT-1090: FS 0,ST-MS-1040
+Nasr city-Tunnel,NCT-ST-CLB--1100FRM-1090,Formwork readiness before Raft reinforcement for Chlorination Building,NCT-MOB-1010,NCT-MOB-1010: FS 0,NCT-ST-CLB-RFT-1100
+Nasr city-Tunnel,NCT-ST-CLB-RFT-1100,Raft reinforcement for Chlorination Building,NCT-ST-CLB--1100FRM-1090,NCT-ST-CLB--1100FRM-1090: FS 0,NCT-ST-CLB--1100CONC-1110
+Nasr city-Tunnel,NCT-ST-CLB--1100CONC-1110,Concrete casting after Raft reinforcement for Chlorination Building,NCT-ST-CLB-RFT-1100,NCT-ST-CLB-RFT-1100: FS 0,NCT-ST-PMP-FRM-1200
+Nasr city-Tunnel,NCT-ST-PMP--1200FRM-1190,Formwork readiness before Raft reinforcement for Main Pump Hall,NCT-ST-CLB-CONC-1100,NCT-ST-CLB-CONC-1100: FS 0,NCT-ST-PMP-RFT-1200
+Nasr city-Tunnel,NCT-ST-PMP-RFT-1200,Raft reinforcement for Main Pump Hall,NCT-ST-PMP--1200FRM-1190,NCT-ST-PMP--1200FRM-1190: FS 0,NCT-ST-PMP--1200CONC-1210
+Nasr city-Tunnel,NCT-ST-PMP--1200CONC-1210,Concrete casting after Raft reinforcement for Main Pump Hall,NCT-ST-PMP-RFT-1200,NCT-ST-PMP-RFT-1200: FS 0,NCT-ST-CLR-FRM-1300
+Nasr city-Tunnel,NCT-ST-CLR--1300FRM-1290,Formwork readiness before Base slab reinforcement for Clarifier No. 1,NCT-ST-PMP-CONC-1200,NCT-ST-PMP-CONC-1200: FS 0,NCT-ST-CLR-RFT-1300
+Nasr city-Tunnel,NCT-ST-CLR-RFT-1300,Base slab reinforcement for Clarifier No. 1,NCT-ST-CLR--1300FRM-1290,NCT-ST-CLR--1300FRM-1290: FS 0,NCT-ST-CLR--1300CONC-1310
+Nasr city-Tunnel,NCT-ST-CLR--1300CONC-1310,Concrete casting after Base slab reinforcement for Clarifier No. 1,NCT-ST-CLR-RFT-1300,NCT-ST-CLR-RFT-1300: FS 0,NCT-ST-FLT-FRM-1400
+Nasr city-Tunnel,NCT-ST-FLT--1400FRM-1390,Formwork readiness before Wall reinforcement for Filter Gallery,NCT-ST-CLR-CONC-1300,NCT-ST-CLR-CONC-1300: FS 0,NCT-ST-FLT-RFT-1400
+Nasr city-Tunnel,NCT-ST-FLT-RFT-1400,Wall reinforcement for Filter Gallery,NCT-ST-FLT--1400FRM-1390,NCT-ST-FLT--1400FRM-1390: FS 0,NCT-ST-FLT--1400CONC-1410
+Nasr city-Tunnel,NCT-ST-FLT--1400CONC-1410,Concrete casting after Wall reinforcement for Filter Gallery,NCT-ST-FLT-RFT-1400,NCT-ST-FLT-RFT-1400: FS 0,NCT-ST-RES-FRM-1500
+Nasr city-Tunnel,NCT-ST-RES--1500FRM-1490,Formwork readiness before Wall reinforcement for Treated Water Reservoir,NCT-ST-FLT-CONC-1400,NCT-ST-FLT-CONC-1400: FS 0,NCT-ST-RES-RFT-1500
+Nasr city-Tunnel,NCT-ST-RES-RFT-1500,Wall reinforcement for Treated Water Reservoir,NCT-ST-RES--1500FRM-1490,NCT-ST-RES--1500FRM-1490: FS 0,NCT-ST-RES--1500CONC-1510
+Nasr city-Tunnel,NCT-ST-RES--1500CONC-1510,Concrete casting after Wall reinforcement for Treated Water Reservoir,NCT-ST-RES-RFT-1500,NCT-ST-RES-RFT-1500: FS 0,NCT-ST-ADM-FRM-1600
+Nasr city-Tunnel,NCT-ST-ADM--1600FRM-1590,Formwork readiness before Foundation reinforcement for Administration Building,NCT-ST-RES-CONC-1500,NCT-ST-RES-CONC-1500: FS 0,NCT-ST-ADM-RFT-1600
+Nasr city-Tunnel,NCT-ST-ADM-RFT-1600,Foundation reinforcement for Administration Building,NCT-ST-ADM--1600FRM-1590,NCT-ST-ADM--1600FRM-1590: FS 0,NCT-ST-ADM--1600CONC-1610
+Nasr city-Tunnel,NCT-ST-ADM--1600CONC-1610,Concrete casting after Foundation reinforcement for Administration Building,NCT-ST-ADM-RFT-1600,NCT-ST-ADM-RFT-1600: FS 0,NCT-MS-1040

@@ -1,20 +1,20 @@
 ﻿project_id,task_code,status_code,wbs_id,task_name,target_start_date,target_end_date
-Suez-Tunnel,ST-MS-1000,Completed,Suez-Tunnel.BL.MI,Project Start Milestone,5-Jan-26,
-Suez-Tunnel,ST-MOB-1010,Completed,Suez-Tunnel.BL.MOB,Site mobilization and temporary facilities,8-Jan-26,22-Jan-26
-Suez-Tunnel,ST-ENG-1010,Completed,Suez-Tunnel.BL.ENG.SUB,Structural shop drawing submittal and baseline approvals,15-Jan-26,2-Feb-26
-Suez-Tunnel,ST-PROC-1020,In Progress,Suez-Tunnel.BL.PROC,Long lead procurement and material approval cycle,30-Jan-26,19-Feb-26
-Suez-Tunnel,ST-Z01-EXC-1010,In Progress,Suez-Tunnel.BL.CW.Z01.EARTH,Excavation and formation works - East Portal,24-Feb-26,14-Mar-26
-Suez-Tunnel,ST-Z01-RFT-1020,Not Started,Suez-Tunnel.BL.CW.Z01.STR,Reinforcement and embedded item release - East Portal,14-Mar-26,26-Mar-26
-Suez-Tunnel,ST-Z01-CON-1030,Not Started,Suez-Tunnel.BL.CW.Z01.STR,Concrete casting and curing - East Portal,27-Mar-26,4-Apr-26
-Suez-Tunnel,ST-Z02-EXC-1010,Not Started,Suez-Tunnel.BL.CW.Z02.EARTH,Excavation and formation works - Cut & Cover,10-Apr-26,28-Apr-26
-Suez-Tunnel,ST-Z02-RFT-1020,Not Started,Suez-Tunnel.BL.CW.Z02.STR,Reinforcement and embedded item release - Cut & Cover,28-Apr-26,10-May-26
-Suez-Tunnel,ST-Z02-CON-1030,Not Started,Suez-Tunnel.BL.CW.Z02.STR,Concrete casting and curing - Cut & Cover,11-May-26,19-May-26
-Suez-Tunnel,ST-Z03-EXC-1010,Not Started,Suez-Tunnel.BL.CW.Z03.EARTH,Excavation and formation works - Tunnel Bore,25-May-26,12-Jun-26
-Suez-Tunnel,ST-Z03-RFT-1020,Not Started,Suez-Tunnel.BL.CW.Z03.STR,Reinforcement and embedded item release - Tunnel Bore,12-Jun-26,24-Jun-26
-Suez-Tunnel,ST-Z03-CON-1030,Not Started,Suez-Tunnel.BL.CW.Z03.STR,Concrete casting and curing - Tunnel Bore,25-Jun-26,3-Jul-26
-Suez-Tunnel,ST-Z04-EXC-1010,Not Started,Suez-Tunnel.BL.CW.Z04.EARTH,Excavation and formation works - West Portal,9-Jul-26,27-Jul-26
-Suez-Tunnel,ST-Z04-RFT-1020,Not Started,Suez-Tunnel.BL.CW.Z04.STR,Reinforcement and embedded item release - West Portal,27-Jul-26,8-Aug-26
-Suez-Tunnel,ST-Z04-CON-1030,Not Started,Suez-Tunnel.BL.CW.Z04.STR,Concrete casting and curing - West Portal,9-Aug-26,17-Aug-26
-Suez-Tunnel,ST-MEP-2010,Not Started,Suez-Tunnel.BL.MEP.COR,MEP first-fix coordination and embedded systems clearance,2-Sep-26,2-Oct-26
-Suez-Tunnel,ST-FIN-3010,Not Started,Suez-Tunnel.BL.T&C,"Testing, commissioning and handover preparation",7-Oct-26,27-Oct-26
-Suez-Tunnel,ST-MS-9000,Not Started,Suez-Tunnel.BL.MI,Project Finish Milestone,30-Jun-27,
+Nasr city-Tunnel,NCT-MS-1000,Completed,Nasr city-Tunnel.BL.MI,Project Start Milestone,12-Jan-26,
+Nasr city-Tunnel,NCT-MOB-1010,Completed,Nasr city-Tunnel.BL.MOB,Mobilization and underground site establishment,14-Jan-26,1-Feb-26
+Nasr city-Tunnel,NCT-ENG-1010,Completed,Nasr city-Tunnel.BL.ENG,Structural and MEP coordinated design submissions,15-Jan-26,8-Feb-26
+Nasr city-Tunnel,NCT-PROC-1020,In Progress,Nasr city-Tunnel.BL.PROC,Long-lead MEP equipment and embedded-item approvals,9-Feb-26,11-Mar-26
+Nasr city-Tunnel,NCT-Z01-EXC-1110,Completed,Nasr city-Tunnel.BL.CW.Z01,North Concourse excavation and support,2-Feb-26,8-Mar-26
+Nasr city-Tunnel,NCT-Z01-RFT-1120,Completed,Nasr city-Tunnel.BL.CW.Z01.STR,North Concourse raft reinforcement and embeds,9-Mar-26,25-Mar-26
+Nasr city-Tunnel,NCT-Z01-CON-1130,Completed,Nasr city-Tunnel.BL.CW.Z01.STR,North Concourse raft concrete,26-Mar-26,31-Mar-26
+Nasr city-Tunnel,NCT-Z02-EXC-1210,In Progress,Nasr city-Tunnel.BL.CW.Z02,South Concourse excavation and support,1-Apr-26,9-May-26
+Nasr city-Tunnel,NCT-Z02-RFT-1220,Not Started,Nasr city-Tunnel.BL.CW.Z02.STR,South Concourse raft reinforcement and embeds,10-May-26,28-May-26
+Nasr city-Tunnel,NCT-Z02-CON-1230,Not Started,Nasr city-Tunnel.BL.CW.Z02.STR,South Concourse raft concrete,29-May-26,4-Jun-26
+Nasr city-Tunnel,NCT-Z03-EXC-1310,Not Started,Nasr city-Tunnel.BL.CW.Z03,Utility Tunnel excavation and temporary works,5-Jun-26,17-Jul-26
+Nasr city-Tunnel,NCT-Z03-RFT-1320,Not Started,Nasr city-Tunnel.BL.CW.Z03.STR,Utility Tunnel slab reinforcement and service sleeves,18-Jul-26,2-Aug-26
+Nasr city-Tunnel,NCT-Z03-CON-1330,Not Started,Nasr city-Tunnel.BL.CW.Z03.STR,Utility Tunnel slab concrete,3-Aug-26,8-Aug-26
+Nasr city-Tunnel,NCT-Z04-EXC-1410,Not Started,Nasr city-Tunnel.BL.CW.Z04,Platform Hall excavation and dewatering,9-Aug-26,3-Oct-26
+Nasr city-Tunnel,NCT-Z04-RFT-1420,Not Started,Nasr city-Tunnel.BL.CW.Z04.STR,Platform Hall raft reinforcement and embedded systems,4-Oct-26,26-Oct-26
+Nasr city-Tunnel,NCT-Z04-CON-1430,Not Started,Nasr city-Tunnel.BL.CW.Z04.STR,Platform Hall raft concrete,27-Oct-26,3-Nov-26
+Nasr city-Tunnel,NCT-STR-1500,Not Started,Nasr city-Tunnel.BL.CW.SUP,Station superstructure and architectural shell,4-Nov-26,2-Jun-27
+Nasr city-Tunnel,NCT-MEP-1600,Not Started,Nasr city-Tunnel.BL.MEP,Permanent MEP systems installation and testing,3-Jun-27,7-Sep-27
+Nasr city-Tunnel,NCT-MS-1900,Not Started,Nasr city-Tunnel.BL.MI,Project Completion Milestone,30-Sep-27,
