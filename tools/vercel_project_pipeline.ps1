@@ -294,7 +294,9 @@ function Invoke-PublishPipeline {
     ) $root
     # GitHub is connected to Vercel.  Publish it first, then deploy this validated
     # local website so a Git-triggered deployment cannot replace the verified build.
-    $deployOutput = Invoke-PipelineStep "Deploying validated production build to Vercel" "npx.cmd" @("vercel", "--prod", "--yes") $websiteRoot
+    # The Vercel project is configured with Root Directory = website. Run the CLI
+    # from the repository root so Vercel resolves that directory exactly once.
+    $deployOutput = Invoke-PipelineStep "Deploying validated production build to Vercel" "npx.cmd" @("vercel", "--prod", "--yes") $root
     $deploymentUrl = @($deployOutput | Where-Object { $_ -match '^\s*Production\s+https://[^\s]+' } | ForEach-Object {
         if ($_ -match '(https://[^\s]+)') { $Matches[1] }
     } | Select-Object -Last 1)
