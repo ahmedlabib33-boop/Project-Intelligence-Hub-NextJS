@@ -296,7 +296,8 @@ function Invoke-PublishPipeline {
     # local website so a Git-triggered deployment cannot replace the verified build.
     # The Vercel project is configured with Root Directory = website. Run the CLI
     # from the repository root so Vercel resolves that directory exactly once.
-    $deployOutput = Invoke-PipelineStep "Deploying validated production build to Vercel" "npx.cmd" @("vercel", "--prod", "--yes") $root
+    # Archive avoids Vercel's per-file upload limit for the full local workspace.
+    $deployOutput = Invoke-PipelineStep "Deploying validated production build to Vercel" "npx.cmd" @("vercel", "--prod", "--yes", "--archive=tgz") $root
     $deploymentUrl = @($deployOutput | Where-Object { $_ -match '^\s*Production\s+https://[^\s]+' } | ForEach-Object {
         if ($_ -match '(https://[^\s]+)') { $Matches[1] }
     } | Select-Object -Last 1)
