@@ -291,8 +291,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-05T13:49:05",
-  "fingerprint": "cbe3cb73077e09acf8bda184d6dc54a30c2c58e2135f464bf65e0cbc860b5adb",
+  "last_updated": "2026-08-06T07:41:56",
+  "fingerprint": "9b5f45f822c347a70921d3e71da05acf06c8ae04f9ff8d88721b962fa0b1895f",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -46292,14 +46292,14 @@
           "relative_path": "The BIG - PH01/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 889.7,
-          "modified": "2026-08-05T16:55:48"
+          "modified": "2026-08-06T11:15:56"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-05T16:55:48"
+          "modified": "2026-08-06T11:15:56"
         },
         {
           "name": "02_master_dashboard.html",
@@ -46313,14 +46313,14 @@
           "relative_path": "The BIG - PH01/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 864.7,
-          "modified": "2026-08-05T16:55:51"
+          "modified": "2026-08-06T11:15:59"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "The BIG - PH01/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-05T16:55:51"
+          "modified": "2026-08-06T11:15:59"
         },
         {
           "name": "03_elite_svg_charts.html",
@@ -46334,14 +46334,14 @@
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 236.2,
-          "modified": "2026-08-05T16:55:52"
+          "modified": "2026-08-06T11:16:00"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-05T16:55:52"
+          "modified": "2026-08-06T11:16:00"
         },
         {
           "name": "04_linked_executive_dashboard.html",
@@ -46355,14 +46355,14 @@
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1276.9,
-          "modified": "2026-08-05T16:55:56"
+          "modified": "2026-08-06T11:16:05"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-05T16:55:56"
+          "modified": "2026-08-06T11:16:05"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
@@ -46610,10 +46610,34 @@
         "tab": "Overview",
         "title": "Discipline Health",
         "type": "radar",
-        "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/discipline_progress_history.csv.",
-        "labels": [],
-        "series": [],
+        "status": "ready",
+        "message": "Latest verified selected-project discipline progress snapshot.",
+        "labels": [
+          "Civil/Structural"
+        ],
+        "series": [
+          {
+            "label": "Planned",
+            "color": "#06b6d4",
+            "values": [
+              52.45
+            ]
+          },
+          {
+            "label": "Actual",
+            "color": "#10b981",
+            "values": [
+              19.78
+            ]
+          },
+          {
+            "label": "Forecast",
+            "color": "#8b5cf6",
+            "values": [
+              2.5
+            ]
+          }
+        ],
         "source_lineage": {
           "files": [
             "vercel/discipline_progress_history.csv"
@@ -46635,6 +46659,7 @@
         "status": "ready",
         "message": "Period-based selected-project earned value records.",
         "labels": [
+          "2026-04",
           "2026-05"
         ],
         "series": [
@@ -46642,27 +46667,30 @@
             "label": "PV",
             "color": "#f59e0b",
             "values": [
-              239837774.3
+              0.0,
+              252796791.16
             ]
           },
           {
             "label": "EV",
             "color": "#06b6d4",
             "values": [
-              112756809.7
+              0.0,
+              113085034.82
             ]
           },
           {
             "label": "AC",
             "color": "#f43f5e",
             "values": [
-              112756809.7
+              0.0,
+              113085034.82
             ]
           }
         ],
         "source_lineage": {
           "files": [
-            "vercel/evm_period_history.csv"
+            "evm.csv"
           ],
           "required_columns": [
             "project_id",
@@ -46680,6 +46708,7 @@
         "status": "ready",
         "message": "Period-based selected-project SPI and CPI records.",
         "labels": [
+          "2026-04",
           "2026-05"
         ],
         "series": [
@@ -46687,20 +46716,22 @@
             "label": "SPI",
             "color": "#f43f5e",
             "values": [
-              112756809.7
+              0.0,
+              55.1
             ]
           },
           {
             "label": "CPI",
             "color": "#10b981",
             "values": [
-              1.0
+              0.0,
+              59.0
             ]
           }
         ],
         "source_lineage": {
           "files": [
-            "vercel/evm_period_history.csv"
+            "evm.csv"
           ],
           "required_columns": [
             "project_id",
@@ -47055,10 +47086,20 @@
         "tab": "S-Curve",
         "title": "S-Curve by Discipline",
         "type": "line",
-        "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/discipline_progress_history.csv.",
-        "labels": [],
-        "series": [],
+        "status": "ready",
+        "message": "Selected-project discipline actual progress history.",
+        "labels": [
+          "2026-03"
+        ],
+        "series": [
+          {
+            "label": "Civil/Structural",
+            "color": "#06b6d4",
+            "values": [
+              19.78
+            ]
+          }
+        ],
         "source_lineage": {
           "files": [
             "vercel/discipline_progress_history.csv"
@@ -47096,20 +47137,50 @@
       {
         "id": "evm.burnup",
         "tab": "EVM Analysis",
-        "title": "EVM Burn-Up Chart",
+        "title": "EVM Burn-Up",
         "type": "line",
-        "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete evm.csv.",
-        "labels": [],
-        "series": [],
+        "status": "ready",
+        "message": "Period-based selected-project EVM values.",
+        "labels": [
+          "15-Apr-26",
+          "17-May-26",
+          "May-26"
+        ],
+        "series": [
+          {
+            "label": "PV",
+            "color": "#f59e0b",
+            "values": [
+              0.0,
+              252796791.15999988,
+              0.0
+            ]
+          },
+          {
+            "label": "EV",
+            "color": "#06b6d4",
+            "values": [
+              0.0,
+              113085034.82000002,
+              0.0
+            ]
+          },
+          {
+            "label": "AC",
+            "color": "#f43f5e",
+            "values": [
+              0.0,
+              113085034.82000002,
+              0.0
+            ]
+          }
+        ],
         "source_lineage": {
           "files": [
-            "evm.csv",
-            "vercel/evm_period_history.csv"
+            "evm.csv"
           ],
           "required_columns": [
-            "project_id",
-            "period"
+            "project_id"
           ]
         },
         "validation": [],
@@ -47162,6 +47233,7 @@
         "status": "ready",
         "message": "Selected-project schedule performance index trend.",
         "labels": [
+          "2026-04",
           "2026-05"
         ],
         "series": [
@@ -47169,13 +47241,14 @@
             "label": "SPI",
             "color": "#f43f5e",
             "values": [
-              112756809.7
+              0.0,
+              55.1
             ]
           }
         ],
         "source_lineage": {
           "files": [
-            "vercel/evm_period_history.csv"
+            "evm.csv"
           ],
           "required_columns": [
             "project_id",
@@ -47193,6 +47266,7 @@
         "status": "ready",
         "message": "Selected-project cost performance index trend.",
         "labels": [
+          "2026-04",
           "2026-05"
         ],
         "series": [
@@ -47200,13 +47274,14 @@
             "label": "CPI",
             "color": "#10b981",
             "values": [
-              1.0
+              0.0,
+              59.0
             ]
           }
         ],
         "source_lineage": {
           "files": [
-            "vercel/evm_period_history.csv"
+            "evm.csv"
           ],
           "required_columns": [
             "project_id",
@@ -47368,7 +47443,7 @@
         ],
         "source_lineage": {
           "files": [
-            "vercel/planned_cash_flow.csv",
+            "planned_cash_flow.csv",
             "payments.csv"
           ],
           "required_columns": [
@@ -47393,7 +47468,7 @@
             "file": "planned_cash_flow.csv",
             "source_row": "",
             "field": "source_precedence",
-            "message": "Both planned_cash_flow.csv and the legacy source contain selected-project rows; the Vercel source was used."
+            "message": "Both planned_cash_flow.csv and the supplemental Vercel source contain selected-project rows; canonical project data was used."
           }
         ],
         "scenario": null
@@ -47800,9 +47875,9 @@
         "scenario": null
       }
     ],
-    "ready_count": 21,
+    "ready_count": 24,
     "draft_count": 0,
-    "awaiting_count": 15,
+    "awaiting_count": 12,
     "validation": [
       {
         "file": "payments.csv",
@@ -47820,7 +47895,7 @@
         "file": "planned_cash_flow.csv",
         "source_row": "",
         "field": "source_precedence",
-        "message": "Both planned_cash_flow.csv and the legacy source contain selected-project rows; the Vercel source was used."
+        "message": "Both planned_cash_flow.csv and the supplemental Vercel source contain selected-project rows; canonical project data was used."
       },
       {
         "file": "vercel/delay_event_classification.csv",
@@ -47929,12 +48004,156 @@
         "source_row": "7",
         "field": "scenario/activity/status_date/progress",
         "message": "Scenario ID, Activity ID, status date, and all three progress values are required."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "3",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "4",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "5",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "6",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "7",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "8",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "9",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "10",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "11",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "12",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "13",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "14",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "15",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "16",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "17",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "18",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "19",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "20",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "21",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "22",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "23",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "24",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "25",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
+      },
+      {
+        "file": "discipline_progress_history.csv",
+        "source_row": "26",
+        "field": "project_id",
+        "message": "Missing project_id; row was not used."
       },
       {
         "file": "evm_period_history.csv",
         "source_row": "",
         "field": "source_precedence",
-        "message": "Both evm_period_history.csv and the legacy source contain selected-project rows; the Vercel source was used."
+        "message": "Both evm.csv and the supplemental Vercel source contain selected-project rows; canonical project data was used."
       }
     ]
   },
@@ -47958,12 +48177,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 911076,
-          "sha256": "46704f97933e813d6d6cf238f4c0e45108c68660cb408b341fbfe5bd936c2449"
+          "sha256": "088927e56e96ab7367644d6ac522c29a4be77383210b888f7a3e6854a9d8aa8b"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29140,
-          "sha256": "ca78593c6b27da1787b54de1edfa401916ae6cc1a724617e666be74151194bfc"
+          "sha256": "c503f53ff68168c52bf0e85aefef263664184acb491705d5e45baf1eb1b3563e"
         }
       },
       "html_origin": "canonical_project_html",
@@ -47983,12 +48202,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 885433,
-          "sha256": "309c543b2c60805227ecc139d04cc532fa42a0d1e9de24589dffdf83e0c4e014"
+          "sha256": "1b9c9f562dc45adb8416c28b25a06dd7a1f698aacea4caa0e91d7a4c7d8b5cbe"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29137,
-          "sha256": "500e5dc1b836d43270882189d784cce44244b7547f7c4adb18a20a63d80b4a90"
+          "sha256": "9fd42654eb9d6655ee7b13289f80d4056f82a344ccd2fb136e2149693fcbfa3f"
         }
       },
       "html_origin": "canonical_project_html",
@@ -48008,12 +48227,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 241841,
-          "sha256": "09a211974fd118fd54d61df185b9f8944ff1dc4f233b5fc0b580cd06cc518ee9"
+          "sha256": "77c9d72909532efc6156471c9c0d2fb3072084b69659db740fefa1e4888a5bd5"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29138,
-          "sha256": "5406b73f04f5e8427a76d8e3bdb029f0a4f63a1ab831261c0643c8f039091b90"
+          "sha256": "305a04105fe2fde3f0a8ee7dd18254523e119c0f1ea15ba93691882f94b75f52"
         }
       },
       "html_origin": "canonical_project_html",
@@ -48033,12 +48252,12 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1307503,
-          "sha256": "1bd4efe91b308143f5fb07dd2ca6e7bc9b675afd3189bc7bab80d1368b8a9edf"
+          "sha256": "283e104fc6d474dd5544bdb56a2c47be444f392c9aa3fba17d09be85ebad2095"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29147,
-          "sha256": "5fb628af68a2645503b72c72b47eab5531dc88d72f82c22cc80d2401b7dfe09a"
+          "sha256": "dd7c299fdac0ee130b8f917c10b40791177b5383fc643ad29cdc25c26a4149b6"
         }
       },
       "html_origin": "canonical_project_html",

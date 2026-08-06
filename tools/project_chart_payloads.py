@@ -130,7 +130,7 @@ def _project_rows(
     return accepted, issues
 
 
-def _read_preferred_rows(
+def _read_canonical_first_rows(
     *,
     project_id: str,
     file_name: str,
@@ -138,10 +138,12 @@ def _read_preferred_rows(
     fallback_path: Path | None,
     read_csv_rows: Any,
 ) -> tuple[list[dict[str, Any]], list[str], list[dict[str, str]], str]:
-    """Use a populated project-local Vercel source before its supported legacy source.
+    """Use canonical project data before optional project-local Vercel additions.
 
-    Header-only template files are deliberately ignored, so they cannot suppress a
-    valid existing project pipeline. Rows stay project-filtered later by _project_rows.
+    The normal project data pipeline remains authoritative.  The ``vercel`` folder
+    is only a supplemental input area for chart families with no native source
+    register.  Header-only templates never suppress populated source data, and all
+    rows remain filtered to the active project ID.
     """
     primary_rows = read_csv_rows(primary_path) if primary_path.exists() else []
     fallback_rows = read_csv_rows(fallback_path) if fallback_path and fallback_path.exists() else []
@@ -156,12 +158,12 @@ def _read_preferred_rows(
                 "file": file_name,
                 "source_row": "",
                 "field": "source_precedence",
-                "message": f"Both {primary_path.name} and the legacy source contain selected-project rows; the Vercel source was used.",
+                "message": f"Both {primary_path.name} and the supplemental Vercel source contain selected-project rows; canonical project data was used.",
             })
-        return [row for _, row in primary_accepted], [f"vercel/{primary_path.name}"], issues, "vercel"
+        return [row for _, row in primary_accepted], [primary_path.name], issues, "canonical"
     if fallback_accepted:
-        return [row for _, row in fallback_accepted], [fallback_path.name] if fallback_path else [file_name], issues, "legacy"
-    return [], [f"vercel/{primary_path.name}", fallback_path.name if fallback_path else file_name], issues, "missing"
+        return [row for _, row in fallback_accepted], [f"vercel/{fallback_path.name}"] if fallback_path else [file_name], issues, "vercel"
+    return [], [primary_path.name, f"vercel/{fallback_path.name}" if fallback_path else file_name], issues, "missing"
 
 
 def _awaiting(definition: dict[str, Any], message: str, validation: list[dict[str, str]] | None = None) -> dict[str, Any]:
@@ -739,53 +741,53 @@ def build_project_chart_payloads(
     missing_definitions = [chart_id for chart_id in required_ids if chart_id not in definitions]
     if missing_definitions:
         return {"catalog_version": version, "project_id": project_id, "project_key": project_key, "charts": [], "validation": [{"file": "chart_catalog.json", "source_row": "", "field": "id", "message": f"Missing chart definitions: {', '.join(missing_definitions)}"}]}
-    planned_rows, planned_sources, planned_issues, _ = _read_preferred_rows(
+    planned_rows, planned_sources, planned_issues, _ = _read_canonical_first_rows(
         project_id=project_id,
         file_name="planned_cash_flow.csv",
-        primary_path=vercel_dir / "planned_cash_flow.csv",
-        fallback_path=data_dir / "planned_cash_flow.csv",
+        primary_path=data_dir / "planned_cash_flow.csv",
+        fallback_path=vercel_dir / "planned_cash_flow.csv",
         read_csv_rows=read_csv_rows,
     )
-    classification_rows, classification_sources, classification_issues, _ = _read_preferred_rows(
+    classification_rows, classification_sources, classification_issues, _ = _read_canonical_first_rows(
         project_id=project_id,
         file_name="delay_event_classification.csv",
-        primary_path=vercel_dir / "delay_event_classification.csv",
-        fallback_path=delay_dir / "14-delay_event_classification.csv",
+        primary_path=delay_dir / "14-delay_event_classification.csv",
+        fallback_path=vercel_dir / "delay_event_classification.csv",
         read_csv_rows=read_csv_rows,
     )
-    recovery_rows, recovery_sources, recovery_issues, _ = _read_preferred_rows(
+    recovery_rows, recovery_sources, recovery_issues, _ = _read_canonical_first_rows(
         project_id=project_id,
         file_name="tia_recovery_scenario.csv",
-        primary_path=vercel_dir / "tia_recovery_scenario.csv",
-        fallback_path=delay_dir / "15-tia_recovery_scenario.csv",
+        primary_path=delay_dir / "15-tia_recovery_scenario.csv",
+        fallback_path=vercel_dir / "tia_recovery_scenario.csv",
         read_csv_rows=read_csv_rows,
     )
-    discipline_rows, discipline_sources, discipline_issues, _ = _read_preferred_rows(
+    discipline_rows, discipline_sources, discipline_issues, _ = _read_canonical_first_rows(
         project_id=project_id,
         file_name="discipline_progress_history.csv",
-        primary_path=vercel_dir / "discipline_progress_history.csv",
-        fallback_path=None,
+        primary_path=data_dir / "discipline_progress_history.csv",
+        fallback_path=vercel_dir / "discipline_progress_history.csv",
         read_csv_rows=read_csv_rows,
     )
-    activity_history_rows, activity_history_sources, activity_history_issues, _ = _read_preferred_rows(
+    activity_history_rows, activity_history_sources, activity_history_issues, _ = _read_canonical_first_rows(
         project_id=project_id,
         file_name="activity_completion_history.csv",
-        primary_path=vercel_dir / "activity_completion_history.csv",
-        fallback_path=None,
+        primary_path=data_dir / "activity_completion_history.csv",
+        fallback_path=vercel_dir / "activity_completion_history.csv",
         read_csv_rows=read_csv_rows,
     )
-    evm_history_rows, evm_history_sources, evm_history_issues, evm_origin = _read_preferred_rows(
+    evm_history_rows, evm_history_sources, evm_history_issues, evm_origin = _read_canonical_first_rows(
         project_id=project_id,
         file_name="evm_period_history.csv",
-        primary_path=vercel_dir / "evm_period_history.csv",
-        fallback_path=data_dir / "evm.csv",
+        primary_path=data_dir / "evm.csv",
+        fallback_path=vercel_dir / "evm_period_history.csv",
         read_csv_rows=read_csv_rows,
     )
-    risk_history_rows, risk_history_sources, risk_history_issues, _ = _read_preferred_rows(
+    risk_history_rows, risk_history_sources, risk_history_issues, _ = _read_canonical_first_rows(
         project_id=project_id,
         file_name="risk_assessment_history.csv",
-        primary_path=vercel_dir / "risk_assessment_history.csv",
-        fallback_path=None,
+        primary_path=data_dir / "risk_assessment_history.csv",
+        fallback_path=vercel_dir / "risk_assessment_history.csv",
         read_csv_rows=read_csv_rows,
     )
     cash = _cash_flow(definitions["contracts.planned_vs_actual_cash_flow"], project_id, planned_rows, payment_rows)
@@ -802,7 +804,7 @@ def build_project_chart_payloads(
     recovery["validation"].extend(recovery_issues)
     charts = [cash, root_cause, delay_type, recovery]
     resolved_workspace_rows = dict(workspace_rows or {"activities": activity_rows, "payments": payment_rows, "delay_events": delay_event_rows})
-    # A populated Vercel EVM history intentionally replaces the legacy EVM series for charting only.
+    # Supplemental history is used only if the native EVM register has no valid rows.
     if evm_origin == "vercel":
         resolved_workspace_rows["evm"] = evm_history_rows
     charts.extend(_workspace_reference_charts(project_id, resolved_workspace_rows, project_metrics or {}))
