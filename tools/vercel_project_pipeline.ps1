@@ -215,6 +215,7 @@ function Invoke-PipelineStep(
     [string]$WorkingDirectory
 ) {
     Write-PipelineLog "$Label"
+    $outputLines = New-Object System.Collections.Generic.List[string]
     Push-Location $WorkingDirectory
     try {
         $global:LASTEXITCODE = 0
@@ -223,6 +224,7 @@ function Invoke-PipelineStep(
         try {
             & $Executable @Arguments 2>&1 | ForEach-Object {
                 $line = Protect-SensitiveText ([string]$_)
+                $outputLines.Add($line)
                 Write-Host $line
                 Add-Content -LiteralPath $logPath -Value $line
             }
@@ -238,6 +240,7 @@ function Invoke-PipelineStep(
     finally {
         Pop-Location
     }
+    return @($outputLines)
 }
 
 function Write-PipelineState([string]$Fingerprint) {
@@ -284,14 +287,23 @@ function Invoke-PublishPipeline {
     Invoke-PipelineStep "Generating project-scoped Next.js data" $pythonExecutable @($generatorPath) $root
     Invoke-PipelineStep "Validating Streamlit to Next.js source parity" $pythonExecutable @($validatorPath) $root
     Invoke-PipelineStep "Building Next.js production application" "npm.cmd" @("run", "build") $websiteRoot
-    # Deploy the validated D: workspace first.  The hosted app must not remain
-    # stale merely because the GitHub API mirror is temporarily slow.
-    Invoke-PipelineStep "Deploying validated production build to Vercel" "npx.cmd" @("vercel", "--prod", "--yes") $websiteRoot
     Invoke-PipelineStep "Publishing validated workspace changes to GitHub without Git CLI" "powershell.exe" @(
         "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", $githubSyncPath,
         "-Mode", "Once", "-IntervalSeconds", [string]$IntervalSeconds,
         "-Message", "Publish validated Next.js project pipeline"
     ) $root
+    # GitHub is connected to Vercel.  Publish it first, then deploy this validated
+    # local website so a Git-triggered deployment cannot replace the verified build.
+    $deployOutput = Invoke-PipelineStep "Deploying validated production build to Vercel" "npx.cmd" @("vercel", "--prod", "--yes") $websiteRoot
+    $deploymentUrl = @($deployOutput | Where-Object { $_ -match '^\s*Production\s+https://[^\s]+' } | ForEach-Object {
+        if ($_ -match '(https://[^\s]+)') { $Matches[1] }
+    } | Select-Object -Last 1)
+    if ($deploymentUrl.Count -ne 1 -or [string]::IsNullOrWhiteSpace($deploymentUrl[0])) {
+        throw "Vercel deployment completed but its production URL could not be determined for promotion."
+    }
+    # A manually rolled-back Vercel project stages new deployments.  Explicitly
+    # promote the validated release so the primary project domain is never stale.
+    Invoke-PipelineStep "Promoting validated Vercel deployment" "npx.cmd" @("vercel", "promote", $deploymentUrl[0], "--yes") $websiteRoot
 
     $verified = $false
     for ($attempt = 1; $attempt -le 8; $attempt++) {
