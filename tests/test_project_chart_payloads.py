@@ -210,16 +210,15 @@ def test_reference_catalogue_publishes_all_36_chart_slots(tmp_path):
     assert all(chart["source_lineage"] for chart in payload["charts"])
 
 
-def test_populated_vercel_cash_flow_wins_and_empty_vercel_falls_back(tmp_path):
-    preferred = _payload(
+def test_canonical_cash_flow_wins_over_legacy_vercel_copy(tmp_path):
+    canonical = _payload(
         tmp_path / "preferred",
         planned=[{"project_id": "P-01", "period_date": "2026-01", "planned_cash_out": "100"}],
         vercel_planned=[{"project_id": "P-01", "period_date": "2026-01", "planned_cash_out": "125"}],
     )
-    preferred_chart = _chart(preferred, "contracts.planned_vs_actual_cash_flow")
-    assert preferred_chart["series"][0]["values"] == [125.0]
-    assert preferred_chart["source_lineage"]["files"] == ["vercel/planned_cash_flow.csv", "payments.csv"]
-    assert any("Vercel source was used" in issue["message"] for issue in preferred_chart["validation"])
+    canonical_chart = _chart(canonical, "contracts.planned_vs_actual_cash_flow")
+    assert canonical_chart["series"][0]["values"] == [100.0]
+    assert canonical_chart["source_lineage"]["files"] == ["planned_cash_flow.csv", "payments.csv"]
 
     fallback = _payload(
         tmp_path / "fallback",

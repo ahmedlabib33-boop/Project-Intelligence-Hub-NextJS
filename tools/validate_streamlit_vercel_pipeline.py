@@ -95,14 +95,13 @@ REQUIRED_WORKSPACE_TABLES = (
 )
 
 REQUIRED_CHART_INPUTS = {
-    "vercel/phase_progress.csv": "project_id",
-    "vercel/discipline_progress_history.csv": "project_id",
-    "vercel/activity_completion_history.csv": "project_id",
-    "vercel/evm_period_history.csv": "project_id",
-    "vercel/planned_cash_flow.csv": "project_id",
-    "vercel/risk_assessment_history.csv": "project_id",
-    "vercel/delay_event_classification.csv": "project_id",
-    "vercel/tia_recovery_scenario.csv": "project_id",
+    "01-data/import_templates/activities.csv": "project_id",
+    "01-data/import_templates/progress_updates.csv": "project_id",
+    "01-data/import_templates/evm.csv": "project_id",
+    "01-data/import_templates/risks.csv": "project_id",
+    "01-data/import_templates/planned_cash_flow.csv": "project_id",
+    "02-delay_analysis/steel_delay_tia_templates/14-delay_event_classification.csv": "project_id",
+    "02-delay_analysis/steel_delay_tia_templates/15-tia_recovery_scenario.csv": "project_id",
 }
 
 REFERENCE_CHART_COUNT = 36
@@ -218,21 +217,19 @@ def validate_project_workspace_surface(
     if not isinstance(delay, dict):
         errors.append(f"{project_key}: Delay TIA payload is missing")
     else:
-        templates = delay.get("templates")
-        full_templates = delay.get("template_tables")
-        if not isinstance(templates, list) or not isinstance(full_templates, list):
-            errors.append(f"{project_key}: Delay TIA template table payload is incomplete")
-        elif len(templates) != len(full_templates):
-            errors.append(f"{project_key}: Delay TIA template table count differs from template inventory")
-        if not isinstance(delay.get("schedule_workspace_tables"), dict):
-            errors.append(f"{project_key}: Delay TIA MEP and baseline schedule payload is missing")
-        canonical = delay.get("canonical_analysis")
-        if not isinstance(canonical, dict):
-            errors.append(f"{project_key}: canonical TIA analysis payload is missing")
-        elif canonical.get("status") == "ready":
-            canonical_tables = canonical.get("tables")
-            if not isinstance(canonical_tables, dict) or "relationship_logic_df" not in canonical_tables:
-                errors.append(f"{project_key}: canonical TIA analysis did not publish relationship logic evidence")
+        controlled = delay.get("controlled_tia")
+        if not isinstance(controlled, dict):
+            errors.append(f"{project_key}: controlled Delay TIA run is missing")
+        elif controlled.get("project_id") != output.get("project_id") or controlled.get("project_key") != output.get("project_key"):
+            errors.append(f"{project_key}: controlled Delay TIA identity is not project-isolated")
+        elif controlled.get("status") not in {"SETUP_REQUIRED", "CONDITIONAL_RESULT", "RECONCILIATION_REQUIRED", "READY_AND_CALCULATED"}:
+            errors.append(f"{project_key}: controlled Delay TIA has an invalid status")
+        elif not isinstance(controlled.get("workflow_tabs"), list) or len(controlled.get("workflow_tabs", [])) != 6:
+            errors.append(f"{project_key}: controlled Delay TIA workflow tabs are incomplete")
+        elif not isinstance(controlled.get("source_integrity"), dict):
+            errors.append(f"{project_key}: controlled Delay TIA source-integrity payload is missing")
+        else:
+            checks.append(f"{project_key}: controlled Delay TIA run is project-isolated")
 
     four_pipeline = features.get("four_pipeline")
     if not isinstance(four_pipeline, dict):
@@ -242,7 +239,7 @@ def validate_project_workspace_surface(
             errors.append(f"{project_key}: four-pipeline assessment identity is not project-isolated")
         if "project_folder_path" in four_pipeline:
             errors.append(f"{project_key}: public four-pipeline payload exposes a local folder path")
-        if four_pipeline.get("assessment_profile") not in {"evidence_backed", "qualified", "readiness_only"}:
+        if four_pipeline.get("assessment_profile") not in {"evidence_backed", "qualified", "readiness_only", "controlled_tia_readiness"}:
             errors.append(f"{project_key}: four-pipeline assessment has an invalid readiness profile")
         for source in four_pipeline.get("source_inventory", []):
             if not isinstance(source, dict) or source.get("project_id") != output.get("project_id"):

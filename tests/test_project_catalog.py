@@ -100,29 +100,18 @@ def test_standard_structure_and_samples_are_non_destructive(tmp_path):
     assert (project / "02-delay_analysis" / "steel_delay_tia_templates" / "15-tia_recovery_scenario.csv").exists()
 
 
-def test_vercel_chart_input_templates_are_project_local_and_header_only(tmp_path):
+def test_chart_inputs_use_canonical_project_locations_without_vercel_duplicates(tmp_path):
     project = tmp_path / "P-01"
     ensure_project_structure(project)
 
     expected = {
-        "phase_progress.csv",
-        "discipline_progress_history.csv",
-        "activity_completion_history.csv",
-        "evm_period_history.csv",
-        "planned_cash_flow.csv",
-        "risk_assessment_history.csv",
-        "delay_event_classification.csv",
-        "tia_recovery_scenario.csv",
+        project / "01-data" / "import_templates" / "planned_cash_flow.csv",
+        project / "02-delay_analysis" / "steel_delay_tia_templates" / "14-delay_event_classification.csv",
+        project / "02-delay_analysis" / "steel_delay_tia_templates" / "15-tia_recovery_scenario.csv",
     }
-    vercel_dir = project / "vercel"
-
-    assert {path.name for path in vercel_dir.glob("*.csv")} == expected
-    for path in vercel_dir.glob("*.csv"):
+    assert not (project / "vercel").exists()
+    for path in expected:
+        assert path.exists()
         lines = path.read_text(encoding="utf-8").splitlines()
         assert len(lines) == 1
         assert "project_id" in lines[0].split(",")
-
-    owned = vercel_dir / "phase_progress.csv"
-    owned.write_text("user-owned", encoding="utf-8")
-    ensure_project_structure(project)
-    assert owned.read_text(encoding="utf-8") == "user-owned"

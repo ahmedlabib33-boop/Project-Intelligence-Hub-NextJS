@@ -702,7 +702,7 @@ def dataframe_workspace_table(frame: Any, file_name: str, limit: int = WORKSPACE
         return {"file": file_name, "exists": False, "row_count": 0, "column_count": 0, "columns": [], "rows": [], "error": str(exc)}
 
 
-def build_canonical_tia_snapshot(delay_dir: Path, project: dict[str, Any] | None = None) -> dict[str, Any]:
+def build_legacy_generic_tia_snapshot_archived(delay_dir: Path, project: dict[str, Any] | None = None) -> dict[str, Any]:
     """Run the Streamlit TIA engine for one project and publish only its results.
 
     A TIA failure is a visible readiness state, never a replacement result from
@@ -770,37 +770,83 @@ def build_canonical_tia_snapshot(delay_dir: Path, project: dict[str, Any] | None
         return {"status": "needs_review", "message": f"Canonical TIA engine could not complete: {exc}", "tables": {}}
 
 
-def build_four_pipeline_snapshot(project: dict[str, Any], canonical_tia: dict[str, Any]) -> dict[str, Any]:
-    """Publish the canonical selected-project governance assessment.
+def build_controlled_tia_snapshot(project: dict[str, Any]) -> dict[str, Any]:
+    """Publish only the selected project's controlled TIA run.
 
-    The Next.js site renders this payload and does not derive a second TIA or
-    claims calculation in the browser.
+    The former generic CSV engine is intentionally not called here.  The
+    controlled adapter creates an unreviewed project-local draft when an
+    approved source changes, or a setup state when no project package exists.
     """
     try:
         source_src = CANONICAL_ROOT / "src"
         if str(source_src) not in sys.path:
             sys.path.insert(0, str(source_src))
-        from construction_system.four_pipeline_assessment import build_four_pipeline_assessment
+        from construction_system.controlled_tia import refresh_controlled_tia_run
 
-        assessment = build_four_pipeline_assessment(project, canonical_tia)
-        # Keep public lineage portable: source records already contain project-relative
-        # paths, so never publish the local workstation path in website JSON.
-        assessment.pop("project_folder_path", None)
-        return assessment
+        return refresh_controlled_tia_run(project)
     except Exception as exc:
         return {
+            "engine": "controlled-project-tia",
             "project_id": str(project.get("project_id") or ""),
             "project_key": str(project.get("project_key") or ""),
-            "assessment_profile": "readiness_only",
-            "assessment_status": "needs_review",
-            "source_scope": "selected_project_only",
-            "gates": [],
-            "missing_actions": [f"Four-pipeline assessment could not complete: {exc}"],
-            "pipeline_rows": [],
-            "source_inventory": [],
-            "evidence_ledger": [],
-            "summary": {},
+            "status": "SETUP_REQUIRED",
+            "approval_status": "not_submitted",
+            "message": f"Controlled TIA setup could not be inspected: {exc}",
+            "workflow_tabs": [],
+            "source_integrity": {"files": [], "signature": {"status": "not_checked"}},
+            "schedule_cpm": {"xer_pairs": []},
+            "events_and_fragnets": {"events": []},
+            "concurrency_and_entitlement": {"controls": []},
+            "eot_position": {"label": "Not available"},
+            "ai_scope": {"status": "guidance_only"},
+            "missing_evidence": ["Resolve the controlled TIA setup error before publishing a result."],
+            "reconciliation_items": [],
         }
+
+
+def public_controlled_tia_payload(snapshot: dict[str, Any]) -> dict[str, Any]:
+    """Remove workstation paths while retaining evidence file lineage."""
+    public = json.loads(json.dumps(snapshot, default=str))
+    public.pop("run_path", None)
+    integrity = public.get("source_integrity")
+    if isinstance(integrity, dict):
+        integrity.pop("release_path", None)
+        for item in integrity.get("files", []):
+            if isinstance(item, dict):
+                item.pop("path", None)
+    return public
+
+
+def build_four_pipeline_snapshot(project: dict[str, Any], controlled_tia: dict[str, Any]) -> dict[str, Any]:
+    """Publish a compact read-only governance view from the controlled run.
+
+    The former generic four-pipeline evaluator remains historic material.  It
+    must not reintroduce generic TIA inputs into the active project payload.
+    """
+    integrity = controlled_tia.get("source_integrity", {}) if isinstance(controlled_tia, dict) else {}
+    return {
+        "project_id": str(project.get("project_id") or ""),
+        "project_key": str(project.get("project_key") or ""),
+        "assessment_profile": "controlled_tia_readiness",
+        "assessment_status": str(controlled_tia.get("status") or "SETUP_REQUIRED"),
+        "source_scope": "selected_project_only",
+        "gates": [
+            {"name": "Source integrity", "status": str(integrity.get("signature", {}).get("status") or "not_checked")},
+            {"name": "Schedule and CPM", "status": str(controlled_tia.get("schedule_cpm", {}).get("status") or "awaiting_evidence")},
+            {"name": "Event and fragnet", "status": str(controlled_tia.get("events_and_fragnets", {}).get("status") or "awaiting_evidence")},
+            {"name": "Concurrency and entitlement", "status": str(controlled_tia.get("concurrency_and_entitlement", {}).get("status") or "awaiting_evidence")},
+            {"name": "P6 approval", "status": str(controlled_tia.get("approval_status") or "not_submitted")},
+        ],
+        "missing_actions": list(controlled_tia.get("missing_evidence") or []),
+        "pipeline_rows": [],
+        "source_inventory": [
+            {**item, "project_id": str(project.get("project_id") or ""), "project_key": str(project.get("project_key") or "")}
+            for item in (integrity.get("files") or [])
+            if isinstance(item, dict)
+        ],
+        "evidence_ledger": list(controlled_tia.get("events_and_fragnets", {}).get("events") or []),
+        "summary": {"eot_position": controlled_tia.get("eot_position", {}).get("label")},
+    }
 
 
 def build_contract_controls_snapshot(
@@ -857,28 +903,6 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     letters_dir = base / "07-letters_intelligence"
     outputs_dir = OUTPUTS_ROOT / project["project_folder_name"]
 
-    delay_template_paths = sorted(delay_dir.glob("*.csv"))
-    delay_templates = [preview_table(path) for path in delay_template_paths]
-    delay_template_tables = [workspace_table(path) for path in delay_template_paths]
-    delay_required_names = [
-        "01-project_metadata_template.csv",
-        "02-master_activity_steel_analysis.csv",
-        "03-employer_steel_supply_at_site.csv",
-        "04-p6_activity_export.csv",
-        "05-relationship_file.csv",
-        "06-contract_library.csv",
-        "07-ifc_conflict.csv",
-        "08-payments.csv",
-        "09-rfi_status.csv",
-        "10-contractor_steel_supplied_at_site.csv",
-        "11-concurrency_matrix_template.updated.csv",
-    ]
-    normalized_delay_files = {re.sub(r"\s+", "", item["file"].lower()): item for item in delay_templates}
-    missing_delay = [
-        name for name in delay_required_names
-        if re.sub(r"\s+", "", name.lower()) not in normalized_delay_files
-    ]
-
     letter_files = list_project_files(letters_dir / "inbox", base, 160)
     letter_workbook_path = letters_dir / "letters_intelligence.xlsx"
     letter_workbook = xlsx_summary(letter_workbook_path)
@@ -886,17 +910,8 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     contract_files = list_project_files(contracts_dir / "source", base, 80)
     evidence_files = list_project_files(evidence_dir, base, 80)
     output_files = list_project_files(outputs_dir, OUTPUTS_ROOT, 20)
-    submitted_tia = build_submitted_tia_payload(project, base)
-    submitted_tia_visuals = build_submitted_tia_visuals(project, base)
-    canonical_tia = build_canonical_tia_snapshot(delay_dir, project)
-    source_governance = canonical_tia.get("source_governance", {}) if isinstance(canonical_tia, dict) else {}
-    governed_events = source_governance.get("event_register", []) if isinstance(source_governance, dict) else []
-    tia_evidence_ready = bool(
-        canonical_tia.get("status") == "ready"
-        and isinstance(governed_events, list)
-        and len(governed_events) > 0
-    )
-    four_pipeline = build_four_pipeline_snapshot(project, canonical_tia)
+    controlled_tia = public_controlled_tia_payload(build_controlled_tia_snapshot(project))
+    four_pipeline = build_four_pipeline_snapshot(project, controlled_tia)
     contract_controls = build_contract_controls_snapshot(project, contracts_dir, evidence_dir)
     overview_paths = {
         "projects": data_dir / "projects.csv",
@@ -912,12 +927,6 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
         "delay_events": data_dir / "delay_events.csv",
         "wbs": data_dir / "wbs.csv",
         "s_curve": data_dir / "s_curve.csv",
-    }
-    schedule_paths = {
-        "MEP Activities": schedule_dir / "MEP Activities.csv",
-        "MEP Schedule": schedule_dir / "MEP Schedule.csv",
-        "MEP Civil Logic": schedule_dir / "MEP Civil Logic.csv",
-        "BL Schedule": schedule_dir / "BL Schedule.csv",
     }
 
     return {
@@ -946,27 +955,18 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
             "internal_control": {
                 "ui_enabled": True,
                 "source_scope": "selected_project_only",
-                "automatic_engine": "canonical_streamlit_tia",
-                "groq_assist": "on_demand_after_evidence_validation",
-                "evidence_ready": tia_evidence_ready,
-                "evidence_status": str(source_governance.get("status") or "awaiting_evidence"),
-                "activation_rule": "Apply fragnet and CPM recommendations only from the active project's validated TIA evidence; do not use another project's TIA data.",
+                "automatic_engine": "controlled_project_tia",
+                "groq_assist": "active_project_evidence_explanation_only",
+                "evidence_status": str(controlled_tia.get("status") or "SETUP_REQUIRED"),
+                "activation_rule": "Only the active project's approved release may create a controlled run. No other project's XER, event, contract, evidence, or output is used.",
             },
-            "logic_mode": "Submitted TIA Level 1-4 assessment" if submitted_tia.get("available") else "Generic project TIA readiness",
-            "submitted_tia": submitted_tia,
-            "submitted_visuals": submitted_tia_visuals,
-            "canonical_analysis": canonical_tia,
-            "templates": delay_templates,
-            "template_tables": delay_template_tables,
-            "required_file_count": len(delay_required_names),
-            "recognized_file_count": len(delay_templates),
-            "missing_required_files": missing_delay,
-            "schedule_tables": {key: preview_table(path) for key, path in schedule_paths.items()},
-            "schedule_workspace_tables": {key: workspace_table(path) for key, path in schedule_paths.items()},
+            "logic_mode": "Controlled project-local Time Impact Analysis",
+            "controlled_tia": controlled_tia,
+            "legacy_status": "Archived and excluded from the active TIA workflow.",
             "detectors": [
-                {"name": "Delay TIA template detector", "status": "Ready" if not missing_delay else "Needs files", "detail": f"{len(delay_templates)} CSV files recognized in the selected project."},
-                {"name": "Column inspector", "status": "Active", "detail": "Every detected CSV includes row count, column count, and preview rows."},
-                {"name": "MEP schedule detector", "status": "Active" if (schedule_dir / "MEP Schedule.csv").exists() else "Missing", "detail": "Recognizes project-specific MEP schedule and civil logic tables."},
+                {"name": "Approved release detector", "status": "Active" if controlled_tia.get("source_integrity", {}).get("release_configured") else "Awaiting package", "detail": "Checks only the active project's declared approved TIA release."},
+                {"name": "Source integrity control", "status": str(controlled_tia.get("source_integrity", {}).get("signature", {}).get("status") or "not_checked"), "detail": "Validates signed-manifest and source-hash controls without executing the submitted package."},
+                {"name": "Run isolation", "status": "Active", "detail": "Automatic drafts and any approved run are written only under this project's 02-delay_analysis/controlled_runs folder."},
             ],
         },
         "four_pipeline": four_pipeline,
@@ -1725,7 +1725,7 @@ def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
                 copy_if_changed(artifact, target / artifact.name)
 
 
-def copy_tia_submitted_assets(projects: list[dict[str, Any]]) -> None:
+def copy_legacy_tia_submitted_assets_archived(projects: list[dict[str, Any]]) -> None:
     for project in projects:
         delay_analysis = project.get("features", {}).get("delay_analysis", {})
         submitted = delay_analysis.get("submitted_tia", {})
@@ -1936,7 +1936,9 @@ def _generate() -> None:
     raw_projects = discover_projects()
     project_records = [build_project_record(project) for project in raw_projects]
     copy_generated_outputs(project_records)
-    copy_tia_submitted_assets(project_records)
+    # Historic submitted-guide assets remain recoverable on disk but are not
+    # copied into active website payloads or reports.  Controlled TIA runs are
+    # published through each project's approved source contract instead.
     portfolio = build_portfolio(project_records)
     write_json_if_changed(DATA_ROOT / "portfolio.json", portfolio)
     projects_dir = DATA_ROOT / "projects"

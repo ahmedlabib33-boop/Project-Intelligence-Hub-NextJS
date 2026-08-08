@@ -231,22 +231,34 @@ type FeaturePayload = {
   delay_analysis: {
     folder: string;
     logic_mode?: string;
-    submitted_tia?: SubmittedTiaPayload;
-    submitted_visuals?: SubmittedTiaVisualPayload;
-    canonical_analysis?: {
+    controlled_tia: {
       status: string;
+      approval_status: string;
       message: string;
-      kpis?: Record<string, unknown>;
-      tables?: Record<string, TablePreview>;
-      source_governance?: SubmittedTiaPayload["source_governance"];
+      workflow_tabs: string[];
+      source_integrity?: {
+        release_configured?: boolean;
+        release_type?: string;
+        files?: Array<Record<string, unknown>>;
+        missing_files?: string[];
+        signature?: Record<string, unknown>;
+        master?: Record<string, unknown>;
+        embedded_payload?: Record<string, unknown>;
+        project_match?: boolean;
+      };
+      schedule_cpm?: { status?: string; xer_pairs?: Array<Record<string, unknown>>; cpm_controls?: string[] };
+      events_and_fragnets?: { status?: string; events?: Array<Record<string, unknown>>; fragnet_controls?: string[] };
+      concurrency_and_entitlement?: { status?: string; controls?: string[] };
+      eot_position?: { status?: string; label?: string; message?: string };
+      ai_scope?: { status?: string; message?: string };
+      missing_evidence?: string[];
+      reconciliation_items?: Array<Record<string, unknown>>;
+      source_fingerprint?: string | null;
+      automatic_draft?: boolean;
+      last_run_at?: string | null;
+      run_id?: string;
     };
-    templates: TablePreview[];
-    template_tables?: TablePreview[];
-    required_file_count: number;
-    recognized_file_count: number;
-    missing_required_files: string[];
-    schedule_tables: Record<string, TablePreview>;
-    schedule_workspace_tables?: Record<string, TablePreview>;
+    legacy_status?: string;
     detectors: DetectorRecord[];
   };
   four_pipeline?: FourPipelineAssessment;
@@ -1302,79 +1314,43 @@ function LettersIntelligencePanel({ project }: { project: ProjectRecord }) {
   );
 }
 
-function CanonicalTiaPanel({ analysis, governance }: {
-  analysis: FeaturePayload["delay_analysis"]["canonical_analysis"];
-  governance?: SubmittedTiaPayload["source_governance"];
-}) {
-  if (!analysis) return null;
-  const kpis = Object.entries(analysis.kpis || {}).slice(0, 8);
-  const tables = analysis.tables || {};
-  const governedEvents = governance?.event_register || [];
-  const blockedEvents = governedEvents.filter((event) => String(event.analysis_status || "").toLowerCase() === "blocked");
-  const governanceTables = {
-    "Native XER Event Register": recordsToTable("Native XER Event Register", governedEvents),
-    "Fragnet Register": recordsToTable("Fragnet Register", governance?.fragnet_register),
-    "Boundary Relationships": recordsToTable("Boundary Relationships", governance?.relationship_register),
-    "Evidence Gaps": recordsToTable("Evidence Gaps", governance?.evidence_gaps),
-    "Reconciliation Warnings": recordsToTable("Reconciliation Warnings", governance?.reconciliation_warnings)
-  };
-  return (
-    <div className="feature-stack">
-      <section className="feature-card">
-        <div className="feature-card-head"><h3>Time Impact Analysis</h3></div>
-        {kpis.length ? <div className="workspace-grid compact-grid">
-          {kpis.map(([label, value]) => <MiniMetric key={label} label={label} value={displayCell(value)} note="Project TIA analysis" />)}
-        </div> : null}
-      </section>
-      {Object.keys(tables).length ? <ProjectTableSelector title="TIA Analysis Tables" tables={tables} preferred={["relationship_logic_df", "candidates_df", "fragnet_df", "assessment_df"]} /> : null}
-      {governance ? <section className="feature-card">
-        <div className="feature-card-head"><div><h3>Native XER Source Governance</h3><small>Selected project only. Schedule movements remain indicative until P6, concurrency, and contractual verification are complete.</small></div><span>{governance.status.replaceAll("_", " ")}</span></div>
-        <div className="workspace-grid compact-grid">
-          <MiniMetric label="Governed Events" value={numberValue(governedEvents.length)} note="Native before and after XER pairs" />
-          <MiniMetric label="Blocked Events" value={numberValue(blockedEvents.length)} note="Data-date or source-pair control" />
-          <MiniMetric label="Fragnets" value={numberValue(governance.fragnet_register?.length)} note="Inserted fragnet activities" />
-          <MiniMetric label="Logic Links" value={numberValue(governance.relationship_register?.length)} note="Boundary CPM relationships" />
-        </div>
-        <ProjectTableSelector title="XER, Fragnet, Logic, and Evidence Controls" tables={governanceTables} preferred={["Native XER Event Register", "Fragnet Register", "Boundary Relationships", "Reconciliation Warnings", "Evidence Gaps"]} />
-      </section> : null}
-    </div>
-  );
-}
-
 function DelayTiaParityPanel({ project }: { project: ProjectRecord }) {
-  const [view, setView] = useState("Uploads");
+  const [view, setView] = useState("Source Integrity");
   const delay = project.features.delay_analysis;
-  const templateTables = Object.fromEntries((delay.template_tables || delay.templates).map((table) => [table.file, table]));
-  const scheduleTables = delay.schedule_workspace_tables || delay.schedule_tables;
-  const eventTables = Object.fromEntries(Object.entries(templateTables).filter(([name]) => /ifc|rfi|payment|concurrency|master|p6|relationship|contract/i.test(name)));
-  const governance = delay.canonical_analysis?.source_governance ?? delay.submitted_tia?.source_governance;
+  const run = delay.controlled_tia;
+  const integrity = run.source_integrity || {};
+  const schedule = run.schedule_cpm || {};
+  const events = run.events_and_fragnets || {};
+  const concurrency = run.concurrency_and_entitlement || {};
+  const eot = run.eot_position || {};
+  const sourceTables = {
+    "Approved Release Files": recordsToTable("Approved Release Files", integrity.files),
+    "Native XER Pair Register": recordsToTable("Native XER Pair Register", schedule.xer_pairs),
+    "Event and Fragnet Register": recordsToTable("Event and Fragnet Register", events.events),
+    "Reconciliation Register": recordsToTable("Reconciliation Register", run.reconciliation_items),
+    "Evidence Gaps": recordsToTable("Evidence Gaps", (run.missing_evidence || []).map((item) => ({ missing_evidence: item })))
+  };
   return (
     <div className="feature-stack">
       <div className="workspace-two">
         <section className="feature-card">
-          <div className="feature-card-head"><h3>Delay Analysis - Time Impact Analysis</h3></div>
+          <div className="feature-card-head"><div><h3>Delay Analysis - Time Impact Analysis</h3><small>Controlled run for the selected project only. Historic generic TIA inputs are excluded.</small></div><span>{run.status.replaceAll("_", " ")}</span></div>
           <div className="workspace-grid compact-grid">
-            <MiniMetric label="Source Files" value={numberValue(delay.recognized_file_count)} note="Project TIA source register" />
-            <MiniMetric label="Delay Events" value={numberValue(project.delay_event_count)} note="Project event register" />
-            <MiniMetric label="Delay Days" value={numberValue(project.delay_days)} note="Project delay register" />
+            <MiniMetric label="Controlled Status" value={run.status.replaceAll("_", " ")} note={run.message} />
+            <MiniMetric label="Approval" value={run.approval_status.replaceAll("_", " ")} note="Manual approval is required for publication" />
+            <MiniMetric label="Native XER Pairs" value={numberValue(schedule.xer_pairs?.length)} note="Native before and after schedule pairs" />
+            <MiniMetric label="Reconciliation Items" value={numberValue(run.reconciliation_items?.length)} note="Open controls block a final EOT position" />
           </div>
         </section>
-        <FeatureSvg mode="delay" />
+        <section className="feature-card"><div className="feature-card-head"><h3>Evidence Boundary</h3><span>project_id enforced</span></div><p>Only this project&apos;s approved release, XER pairs, relationships, evidence references, controlled run, and project-scoped AI context are available. Another project&apos;s source package is never used as a fallback.</p></section>
       </div>
-      <ProjectSourceChartGrid project={project} tab="Delay Analysis - Time Impact Analysis" />
-      <ModuleTabs label="Delay Analysis - Time Impact Analysis views" tabs={["Uploads", "Tables & Conclusion", "MEP Activities", "AI - TIA", "Question", "Download Reports"]} activeTab={view} onChange={setView} />
-      {view === "Uploads" ? <>
-        <ProjectTableSelector title="Required Delay Analysis - Time Impact Analysis Source Files" tables={templateTables} preferred={["01-project_metadata_template.csv", "02- master_activity_steel_analysis.csv", "04- p6_activity_export.csv", "05- relationship_file.csv", "11-concurrency_matrix_template.updated.csv", "16-fragnet_control_register.csv"]} />
-      </> : null}
-      {view === "Tables & Conclusion" ? <>
-        <AiInsightCard type="delay" projectKey={project.project_key} />
-        <CanonicalTiaPanel analysis={delay.canonical_analysis} governance={governance} />
-        <ProjectTableSelector title="TIA Evidence Tables" tables={eventTables} preferred={["11-concurrency_matrix_template.updated.csv", "04- p6_activity_export.csv", "02- master_activity_steel_analysis.csv"]} />
-      </> : null}
-      {view === "MEP Activities" ? <><ProjectTableSelector title="MEP Activities and Civil Interface Logic" tables={scheduleTables} preferred={["MEP Activities", "MEP Schedule", "MEP Civil Logic", "BL Schedule"]} /><WorkbookDataPanel workbook={project.features.letters_intelligence.workbook_tables} title="Related Letters Intelligence References" /></> : null}
-      {view === "AI - TIA" ? <><CanonicalTiaPanel analysis={delay.canonical_analysis} governance={governance} /><ProjectTableSelector title="Active TIA File Priority and Dependency Evidence" tables={templateTables} preferred={["01-project_metadata_template.csv", "02- master_activity_steel_analysis.csv", "04- p6_activity_export.csv", "05- relationship_file.csv", "11-concurrency_matrix_template.updated.csv", "16-fragnet_control_register.csv"]} /></> : null}
-      {view === "Question" ? <div className="feature-stack"><AiInsightCard type="delay" projectKey={project.project_key} /><UnifiedIntelligenceSearch mode="project" projectKey={project.project_key} projectName={project.project_display_name} /><ProjectTableSelector title="Question Evidence Source" tables={eventTables} preferred={["11-concurrency_matrix_template.updated.csv", "09-rfi_status.csv", "07-ifc_conflict.csv"]} /></div> : null}
-      {view === "Download Reports" ? <section className="feature-card"><div className="feature-card-head"><h3>Report Delivery</h3><span>Output Studio only</span></div><p>The governed Delay TIA engine generates project-scoped HTML, PDF, PowerPoint, and Word outputs only in Output Studio. This keeps report artifacts out of the analysis workflow.</p><ProjectTableSelector title="TIA Template and Evidence Controls" tables={templateTables} preferred={["01-project_metadata_template.csv", "04- p6_activity_export.csv", "05- relationship_file.csv", "11-concurrency_matrix_template.updated.csv", "16-fragnet_control_register.csv"]} /></section> : null}
+      <ModuleTabs label="Controlled TIA workflow" tabs={run.workflow_tabs} activeTab={view} onChange={setView} />
+      {view === "Source Integrity" ? <ProjectTableSelector title="Approved Source Integrity" tables={sourceTables} preferred={["Approved Release Files", "Evidence Gaps"]} /> : null}
+      {view === "Schedule and CPM" ? <div className="feature-stack"><section className="feature-card"><div className="feature-card-head"><h3>Schedule and CPM Controls</h3><span>{displayCell(schedule.status)}</span></div><ul>{(schedule.cpm_controls || []).map((control) => <li key={control}>{control}</li>)}</ul></section><ProjectTableSelector title="Native XER and CPM Evidence" tables={sourceTables} preferred={["Native XER Pair Register"]} /></div> : null}
+      {view === "Events and Fragnets" ? <div className="feature-stack"><section className="feature-card"><div className="feature-card-head"><h3>Event and Fragnet Controls</h3><span>{displayCell(events.status)}</span></div><ul>{(events.fragnet_controls || []).map((control) => <li key={control}>{control}</li>)}</ul></section><ProjectTableSelector title="Project Event and Fragnet Register" tables={sourceTables} preferred={["Event and Fragnet Register"]} /></div> : null}
+      {view === "Concurrency and Entitlement" ? <div className="feature-stack"><section className="feature-card"><div className="feature-card-head"><h3>Concurrency and Entitlement Controls</h3><span>{displayCell(concurrency.status)}</span></div><ul>{(concurrency.controls || []).map((control) => <li key={control}>{control}</li>)}</ul></section><ProjectTableSelector title="Reconciliation and Evidence Controls" tables={sourceTables} preferred={["Reconciliation Register", "Evidence Gaps"]} /></div> : null}
+      {view === "EOT Position" ? <section className="feature-card"><div className="feature-card-head"><div><h3>{displayCell(eot.label)}</h3><small>{displayCell(eot.message)}</small></div><span>{displayCell(eot.status)}</span></div><ProjectTableSelector title="EOT Publication Gates" tables={sourceTables} preferred={["Reconciliation Register", "Evidence Gaps", "Native XER Pair Register"]} /></section> : null}
+      {view === "AI Review and Run Control" ? <div className="feature-stack"><section className="feature-card"><div className="feature-card-head"><h3>AI Scope and Run Control</h3><span>{displayCell(run.ai_scope?.status)}</span></div><p>{displayCell(run.ai_scope?.message)}</p><p>Run ID: {displayCell(run.run_id)} | Last controlled draft: {displayCell(run.last_run_at)}</p></section><AiInsightCard type="delay" projectKey={project.project_key} /><UnifiedIntelligenceSearch mode="project" projectKey={project.project_key} projectName={project.project_display_name} /></div> : null}
     </div>
   );
 }

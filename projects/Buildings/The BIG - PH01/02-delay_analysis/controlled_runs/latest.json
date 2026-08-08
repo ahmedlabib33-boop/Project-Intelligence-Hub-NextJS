@@ -1,0 +1,365 @@
+{
+  "engine": "2026.08.controlled-project-tia.v1",
+  "project_id": "The Big -P.01-UP-20-April-26",
+  "project_key": "the-big-p-01-up-20-april-26",
+  "status": "RECONCILIATION_REQUIRED",
+  "approval_status": "unreviewed_draft",
+  "message": "Native evidence is available, but reconciliation findings block a final EOT position.",
+  "workflow_tabs": [
+    "Source Integrity",
+    "Schedule and CPM",
+    "Events and Fragnets",
+    "Concurrency and Entitlement",
+    "EOT Position",
+    "AI Review and Run Control"
+  ],
+  "source_integrity": {
+    "release_configured": true,
+    "release_type": "brain_labib_v34baba_signed_release",
+    "release_path": "D:\\Project Intelligence Hub NextJS\\Delay Analysis - Time Impact Analysis\\BRAIN_LABIB_V34baba_SIGNED_RELEASE",
+    "files": [
+      {
+        "file": "BRAIN_LABIB_V34baba_manifest.json",
+        "path": "D:\\Project Intelligence Hub NextJS\\Delay Analysis - Time Impact Analysis\\BRAIN_LABIB_V34baba_SIGNED_RELEASE\\BRAIN_LABIB_V34baba_manifest.json",
+        "required": true,
+        "exists": true,
+        "sha256": "af33ecc5f3c38c0947902ac9bfe0514e6ef4607c6f95b9d5855ec83373ca348b",
+        "size_bytes": 5594
+      },
+      {
+        "file": "Project_Control_Machine_V34baba_Preserved_Master.py",
+        "path": "D:\\Project Intelligence Hub NextJS\\Delay Analysis - Time Impact Analysis\\BRAIN_LABIB_V34baba_SIGNED_RELEASE\\Project_Control_Machine_V34baba_Preserved_Master.py",
+        "required": true,
+        "exists": true,
+        "sha256": "d0bbae44effdc4f4de7bf12fb834a04939770176505d6ac4915086fcd0a7a7df",
+        "size_bytes": 22611731
+      },
+      {
+        "file": "labib_core_V34baba.py",
+        "path": "D:\\Project Intelligence Hub NextJS\\Delay Analysis - Time Impact Analysis\\BRAIN_LABIB_V34baba_SIGNED_RELEASE\\labib_core_V34baba.py",
+        "required": true,
+        "exists": true,
+        "sha256": "8cac7b8fa03417b21267032a76db5e5a3ca369923336c7f7c4584149015a0f37",
+        "size_bytes": 22313366
+      },
+      {
+        "file": "labib_source_agent_V34baba.py",
+        "path": "D:\\Project Intelligence Hub NextJS\\Delay Analysis - Time Impact Analysis\\BRAIN_LABIB_V34baba_SIGNED_RELEASE\\labib_source_agent_V34baba.py",
+        "required": true,
+        "exists": true,
+        "sha256": "5595c0fc44070ff197a9abf0b77cab303a00b0bc275ce9a7c4dca76a1b11d0ad",
+        "size_bytes": 28700
+      },
+      {
+        "file": "labib_universal_handshake_V34baba.py",
+        "path": "D:\\Project Intelligence Hub NextJS\\Delay Analysis - Time Impact Analysis\\BRAIN_LABIB_V34baba_SIGNED_RELEASE\\labib_universal_handshake_V34baba.py",
+        "required": true,
+        "exists": true,
+        "sha256": "0876b5782fe8683450b5588247c81f8bbe19037aee79039d10479d7b70c8cdc7",
+        "size_bytes": 29959
+      },
+      {
+        "file": "labib_quality_V34baba.py",
+        "path": "D:\\Project Intelligence Hub NextJS\\Delay Analysis - Time Impact Analysis\\BRAIN_LABIB_V34baba_SIGNED_RELEASE\\labib_quality_V34baba.py",
+        "required": true,
+        "exists": true,
+        "sha256": "1a517f6ec66e2503547d6de6b91373476fc0406885574fb95eb6b4fcce034d97",
+        "size_bytes": 28991
+      },
+      {
+        "file": "labib_tia_cpm_V34baba.py",
+        "path": "D:\\Project Intelligence Hub NextJS\\Delay Analysis - Time Impact Analysis\\BRAIN_LABIB_V34baba_SIGNED_RELEASE\\labib_tia_cpm_V34baba.py",
+        "required": true,
+        "exists": true,
+        "sha256": "b1e1640c5655eb92c7757a65df771d15d1e8d58d526a0ff8769eac31424fe463",
+        "size_bytes": 76060
+      },
+      {
+        "file": "labib_tia_production_ml_V34baba.py",
+        "path": "D:\\Project Intelligence Hub NextJS\\Delay Analysis - Time Impact Analysis\\BRAIN_LABIB_V34baba_SIGNED_RELEASE\\labib_tia_production_ml_V34baba.py",
+        "required": true,
+        "exists": true,
+        "sha256": "1b0276e2665851553281a35ad1c606eeab1475430786235a8e6066d0a2ddd20e",
+        "size_bytes": 230771
+      },
+      {
+        "file": "brain_labib_V34baba.py",
+        "path": "D:\\Project Intelligence Hub NextJS\\Delay Analysis - Time Impact Analysis\\BRAIN_LABIB_V34baba_SIGNED_RELEASE\\brain_labib_V34baba.py",
+        "required": true,
+        "exists": true,
+        "sha256": "5705cb5ae96e304ab9d689af2e284234dd8e10b978b21c68e2b7f4af917a9a20",
+        "size_bytes": 23944
+      },
+      {
+        "file": "embedded_payload",
+        "path": "inside signed release",
+        "required": true,
+        "exists": true,
+        "sha256": "28da7e38b7ad15f951b19d7149228e583afee7f89cc9b749265346769602470e",
+        "size_bytes": 17687420
+      }
+    ],
+    "missing_files": [],
+    "signature": {
+      "status": "not_checked",
+      "message": "cryptography is unavailable; file hashes were still checked."
+    },
+    "master": {
+      "status": "verified",
+      "expected_sha256": "d0bbae44effdc4f4de7bf12fb834a04939770176505d6ac4915086fcd0a7a7df",
+      "actual_sha256": "d0bbae44effdc4f4de7bf12fb834a04939770176505d6ac4915086fcd0a7a7df"
+    },
+    "embedded_payload": {
+      "status": "verified",
+      "expected_sha256": "28da7e38b7ad15f951b19d7149228e583afee7f89cc9b749265346769602470e",
+      "actual_sha256": "28da7e38b7ad15f951b19d7149228e583afee7f89cc9b749265346769602470e",
+      "error": null
+    },
+    "project_match": false
+  },
+  "schedule_cpm": {
+    "status": "Native XER pairs parsed; P6 parity is pending.",
+    "xer_pairs": [
+      {
+        "event_id": "EV01-BATCH-01",
+        "before_file": "payload/alabib_ai/data/project/xer/EV01_BATCH_01_before.xer",
+        "after_file": "payload/alabib_ai/data/project/xer/EV01_BATCH_01_after.xer",
+        "before_exists": true,
+        "after_exists": true,
+        "before_data_date": "2025-10-31",
+        "after_data_date": "2025-10-31",
+        "before_finish": "2027-04-14",
+        "after_finish": "2027-04-14",
+        "native_finish_movement_days": 0,
+        "before_task_count": 1363,
+        "after_task_count": 1370,
+        "before_relationship_count": 3009,
+        "after_relationship_count": 3038,
+        "critical_task_count": 182,
+        "longest_path_task_count": 121,
+        "status": "pair_available",
+        "conclusion": "Native finish movement is a reconciliation input only; it is not an EOT conclusion."
+      },
+      {
+        "event_id": "EV01-BATCH-02",
+        "before_file": "payload/alabib_ai/data/project/xer/EV01_BATCH_02_before.xer",
+        "after_file": "payload/alabib_ai/data/project/xer/EV01_BATCH_02_after.xer",
+        "before_exists": true,
+        "after_exists": true,
+        "before_data_date": "2025-11-26",
+        "after_data_date": "2025-11-26",
+        "before_finish": "2027-05-12",
+        "after_finish": "2027-09-06",
+        "native_finish_movement_days": 117,
+        "before_task_count": 1363,
+        "after_task_count": 1387,
+        "before_relationship_count": 3009,
+        "after_relationship_count": 3141,
+        "critical_task_count": 599,
+        "longest_path_task_count": 108,
+        "status": "pair_available",
+        "conclusion": "Native finish movement is a reconciliation input only; it is not an EOT conclusion."
+      },
+      {
+        "event_id": "EV01-BATCH-03",
+        "before_file": "payload/alabib_ai/data/project/xer/EV01_BATCH_03_before.xer",
+        "after_file": "payload/alabib_ai/data/project/xer/EV01_BATCH_03_after.xer",
+        "before_exists": true,
+        "after_exists": true,
+        "before_data_date": "2026-01-12",
+        "after_data_date": "2026-01-12",
+        "before_finish": "2027-05-27",
+        "after_finish": "2027-07-03",
+        "native_finish_movement_days": 37,
+        "before_task_count": 1363,
+        "after_task_count": 1380,
+        "before_relationship_count": 3009,
+        "after_relationship_count": 3114,
+        "critical_task_count": 547,
+        "longest_path_task_count": 77,
+        "status": "pair_available",
+        "conclusion": "Native finish movement is a reconciliation input only; it is not an EOT conclusion."
+      },
+      {
+        "event_id": "EV02",
+        "before_file": "payload/alabib_ai/data/project/xer/EV02_before.xer",
+        "after_file": "payload/alabib_ai/data/project/xer/EV02_after.xer",
+        "before_exists": true,
+        "after_exists": true,
+        "before_data_date": "2026-03-17",
+        "after_data_date": "2026-03-17",
+        "before_finish": "2027-07-06",
+        "after_finish": "2027-09-15",
+        "native_finish_movement_days": 71,
+        "before_task_count": 1363,
+        "after_task_count": 1398,
+        "before_relationship_count": 3008,
+        "after_relationship_count": 3148,
+        "critical_task_count": 623,
+        "longest_path_task_count": 79,
+        "status": "pair_available",
+        "conclusion": "Native finish movement is a reconciliation input only; it is not an EOT conclusion."
+      },
+      {
+        "event_id": "EV03",
+        "before_file": "payload/alabib_ai/data/project/xer/EV03_before.xer",
+        "after_file": "payload/alabib_ai/data/project/xer/EV03_after.xer",
+        "before_exists": true,
+        "after_exists": true,
+        "before_data_date": "2025-11-16",
+        "after_data_date": "2025-11-16",
+        "before_finish": "2027-04-29",
+        "after_finish": "2027-04-29",
+        "native_finish_movement_days": 0,
+        "before_task_count": 1363,
+        "after_task_count": 1381,
+        "before_relationship_count": 3009,
+        "after_relationship_count": 3046,
+        "critical_task_count": 326,
+        "longest_path_task_count": 115,
+        "status": "pair_available",
+        "conclusion": "Native finish movement is a reconciliation input only; it is not an EOT conclusion."
+      }
+    ],
+    "cpm_controls": [
+      "Relationships and lags are read from native TASKPRED records.",
+      "Critical and longest-path indicators are schedule evidence, not an EOT grant.",
+      "Calendars, constraints, open ends, and out-of-sequence settings require reviewer parity confirmation."
+    ]
+  },
+  "events_and_fragnets": {
+    "events": [
+      {
+        "event_id": "EV01_BATCH_01",
+        "event_name": "Employer Late Supply of Free-Issue Reinforcement Steel - Batch 01",
+        "event_type": null,
+        "responsible_party": "Employer risk subject to delivery records, approved programme need and contractual compliance.",
+        "source_reference": null,
+        "native_xer_pairs": 0,
+        "assessment": "No matched native before/after XER pair was found.",
+        "fragnet_status": "Evidence gap",
+        "project_id": ""
+      },
+      {
+        "event_id": "EV01_BATCH_02",
+        "event_name": "Employer Late Supply of Free-Issue Reinforcement Steel - Batch 02",
+        "event_type": null,
+        "responsible_party": "Employer risk subject to programme need, Contractor look-ahead, receipt/inspection, mitigation and concurrency.",
+        "source_reference": null,
+        "native_xer_pairs": 0,
+        "assessment": "No matched native before/after XER pair was found.",
+        "fragnet_status": "Evidence gap",
+        "project_id": ""
+      },
+      {
+        "event_id": "EV01_BATCH_03",
+        "event_name": "Employer Late Supply of Free-Issue Reinforcement Steel - Batch 03",
+        "event_type": null,
+        "responsible_party": "Employer risk subject to continuing-event proof, actual delivery and cumulative concurrency review.",
+        "source_reference": null,
+        "native_xer_pairs": 0,
+        "assessment": "No matched native before/after XER pair was found.",
+        "fragnet_status": "Evidence gap",
+        "project_id": ""
+      },
+      {
+        "event_id": "EV02",
+        "event_name": "Issuance of Revised IFC Drawings Causing Rework and Delay",
+        "event_type": null,
+        "responsible_party": "Employer/Engineer design-information risk subject to actual issue dates, rework causation, notices and mitigation.",
+        "source_reference": null,
+        "native_xer_pairs": 1,
+        "assessment": "Native XER pair available; controlled reconciliation remains required.",
+        "fragnet_status": "P6 design required",
+        "project_id": ""
+      },
+      {
+        "event_id": "EV03",
+        "event_name": "Engineer-Instructed Additional MEP Embedded Works - Variation",
+        "event_type": null,
+        "responsible_party": "Engineer/Employer variation risk for proven scope/cost; current native time impact is zero days.",
+        "source_reference": null,
+        "native_xer_pairs": 1,
+        "assessment": "Native XER pair available; controlled reconciliation remains required.",
+        "fragnet_status": "P6 design required",
+        "project_id": ""
+      },
+      {
+        "event_id": "EV04",
+        "event_name": "Engineer Delayed Response to RFI and Required Technical Clarification",
+        "event_type": null,
+        "responsible_party": "Engineer/Employer information-response risk subject to required-by dates, actual responses and affected critical activities.",
+        "source_reference": null,
+        "native_xer_pairs": 0,
+        "assessment": "No matched native before/after XER pair was found.",
+        "fragnet_status": "Evidence gap",
+        "project_id": ""
+      }
+    ],
+    "status": "Event-to-XER links are controlled by native pair availability.",
+    "fragnet_controls": [
+      "Each fragnet must be linked to a project event and affected activity.",
+      "A fragnet remains draft until predecessor, successor, relationship, lag, calendar, and evidence are verified in P6."
+    ]
+  },
+  "concurrency_and_entitlement": {
+    "status": "Not concluded until project-specific concurrency and contract evidence are approved.",
+    "controls": [
+      "EOT and compensation are assessed separately.",
+      "Concurrent contractor delay prevents automatic compensation.",
+      "No critical-path conclusion is accepted without verified schedule evidence."
+    ]
+  },
+  "eot_position": {
+    "status": "Indicative - P6 verification required",
+    "label": "Final EOT not publishable",
+    "message": "The controlled adapter reports native schedule movement only as reconciliation evidence. It does not sum, grant, or publish EOT days."
+  },
+  "ai_scope": {
+    "status": "evidence_explanation_only",
+    "message": "Groq receives only this active project's controlled run. It may explain evidence and gaps but cannot create EOT, fragnet, criticality, entitlement, or compensation conclusions."
+  },
+  "missing_evidence": [
+    "Resolution of source reconciliation items before publishing EOT or entitlement.",
+    "Project calendar, constraints, open ends, out-of-sequence, and relationship parity evidence.",
+    "Event-specific contract entitlement, notices, and contemporaneous evidence.",
+    "Concurrency analysis and independent Primavera P6 reviewer approval."
+  ],
+  "reconciliation_items": [
+    {
+      "id": "RC-01",
+      "issue": "Event02 workbook narrative states 76 days",
+      "resolution": "Resolve against native schedule and evidence."
+    },
+    {
+      "id": "RC-02",
+      "issue": "EV03 summary workbook data date states 25-Dec-2025",
+      "resolution": "Resolve against native schedule and evidence."
+    },
+    {
+      "id": "RC-03",
+      "issue": "Event01 Batch02 package states all 1363 existing activities changed",
+      "resolution": "Resolve against native schedule and evidence."
+    },
+    {
+      "id": "RC-04",
+      "issue": "Claim narrative describes the Contract as fixed-price/lump-sum",
+      "resolution": "Resolve against native schedule and evidence."
+    },
+    {
+      "id": "RC-05",
+      "issue": "126-day EOT stated to revise 11-Apr-2027 to 16-Sep-2027",
+      "resolution": "Resolve against native schedule and evidence."
+    },
+    {
+      "id": "RC-06",
+      "issue": "Baseline embedded snapshot has 3017 relationships while event status XERs have around 3008-3009",
+      "resolution": "Resolve against native schedule and evidence."
+    }
+  ],
+  "source_fingerprint": "0ab29c52254bf8169b9a75c40f9ce94965d19b1e9b2e2c754a76620afec53fd1",
+  "automatic_draft": true,
+  "last_run_at": "2026-08-06T18:09:51.647690+00:00",
+  "run_id": "95a3c74dc040dc23",
+  "run_path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\controlled_runs\\latest.json"
+}

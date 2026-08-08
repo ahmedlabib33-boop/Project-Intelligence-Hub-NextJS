@@ -267,44 +267,22 @@ def _write_pptx(path: Path, title: str, project: dict[str, Any]) -> None:
     presentation.save(path)
 
 
-def _ensure_governed_tia_artifacts(project: dict[str, Any], output_dir: Path, public_slug: str) -> dict[str, Any] | None:
-    """Use the canonical project TIA assessment; never rerun or reinterpret it here."""
+def _ensure_controlled_tia_artifacts(project: dict[str, Any], output_dir: Path, public_slug: str) -> dict[str, Any] | None:
+    """Publish a TIA report only from an approved controlled project run.
+
+    Historic generic and submitted-guide TIA outputs are deliberately excluded
+    from new Output Studio manifests.  A controlled run that is setup,
+    conditional, or awaiting reconciliation is evidence review material, not a
+    publishable EOT report.
+    """
     features = project.get("features") if isinstance(project.get("features"), dict) else {}
     delay = features.get("delay_analysis") if isinstance(features.get("delay_analysis"), dict) else {}
-    canonical = delay.get("canonical_analysis") if isinstance(delay.get("canonical_analysis"), dict) else {}
-    assessment = canonical.get("source_governance") if isinstance(canonical.get("source_governance"), dict) else None
-    if not assessment:
+    controlled = delay.get("controlled_tia") if isinstance(delay.get("controlled_tia"), dict) else {}
+    if controlled.get("status") != "READY_AND_CALCULATED" or controlled.get("approval_status") != "approved":
         return None
-    canonical_root = WORKSPACE_ROOT
-    source_dir = canonical_root / "src"
-    if source_dir.exists() and str(source_dir) not in sys.path:
-        sys.path.insert(0, str(source_dir))
-    try:
-        from construction_system.tia_report_engine import ensure_tia_report_artifacts
-
-        result = ensure_tia_report_artifacts(project, output_dir, assessment=assessment)
-        files = result.get("manifest", {}).get("files", {})
-        if not files:
-            return None
-        return {
-            extension: f"/generated/{public_slug}/{name}"
-            for extension, name in files.items()
-            if extension in {"html", "pdf", "pptx", "docx"}
-        } | {
-            "files": {
-                extension: {"name": name, "bytes": (output_dir / name).stat().st_size, "sha256": _sha256(output_dir / name)}
-                for extension, name in files.items()
-                if (output_dir / name).exists()
-            },
-            "assessment_status": assessment.get("status"),
-            "source_scope": "selected_project_only",
-        }
-    except Exception as exc:
-        return {
-            "generation_error": str(exc),
-            "assessment_status": assessment.get("status"),
-            "source_scope": "selected_project_only",
-        }
+    # A later controlled-report template can consume this same run.  Until a
+    # project passes all gates, it is safer not to emit a client-facing report.
+    return None
 
 
 def ensure_project_report_artifacts(
@@ -318,22 +296,6 @@ def ensure_project_report_artifacts(
         try:
             existing = json.loads(manifest_path.read_text(encoding="utf-8"))
             existing_reports = existing.get("reports", {})
-            existing_tia = existing_reports.get("tia_governed_assessment", {}) if isinstance(existing_reports, dict) else {}
-            governance_available = (
-                isinstance(project.get("features"), dict)
-                and isinstance(project["features"].get("delay_analysis"), dict)
-                and isinstance(project["features"]["delay_analysis"].get("canonical_analysis"), dict)
-                and project["features"]["delay_analysis"]["canonical_analysis"].get("source_governance")
-            )
-            tia_is_current = (not governance_available) or (
-                isinstance(existing_tia, dict)
-                and {"html", "pdf", "pptx", "docx"}.issubset(set(existing_tia.get("files", {})))
-                and all(
-                    (output_dir / metadata.get("name", "")).exists()
-                    for metadata in (existing_tia.get("files", {}) or {}).values()
-                    if isinstance(metadata, dict)
-                )
-            )
             if (
                 existing.get("project_fingerprint") == project.get("fingerprint")
                 and existing.get("generator_version") == REPORT_GENERATOR_VERSION
@@ -343,7 +305,6 @@ def ensure_project_report_artifacts(
                     for extension in ("html", "pdf", "pptx")
                 )
                 and existing_reports
-                and tia_is_current
             ):
                 return existing_reports
         except Exception:
@@ -369,9 +330,9 @@ def ensure_project_report_artifacts(
             "source_project_id": source_manifest.get("project_id") if html_origin == "canonical_project_html" else project.get("project_id"),
             "source_report_fingerprint": source_manifest.get("fingerprint") if html_origin == "canonical_project_html" else project.get("fingerprint"),
         }
-    tia_artifacts = _ensure_governed_tia_artifacts(project, output_dir, project_slug)
+    tia_artifacts = _ensure_controlled_tia_artifacts(project, output_dir, project_slug)
     if tia_artifacts:
-        results["tia_governed_assessment"] = tia_artifacts
+        results["tia_controlled_assessment"] = tia_artifacts
     feature_payload = project.get("features") if isinstance(project.get("features"), dict) else {}
     assessment = feature_payload.get("four_pipeline") if isinstance(feature_payload.get("four_pipeline"), dict) else {}
     manifest = {

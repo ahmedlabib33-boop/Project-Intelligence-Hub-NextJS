@@ -1,0 +1,56 @@
+{
+  "engine": "2026.08.controlled-project-tia.v1",
+  "project_id": "Sophia-Mall",
+  "project_key": "sophia-mall",
+  "status": "SETUP_REQUIRED",
+  "approval_status": "not_submitted",
+  "message": "No project-local approved TIA release is configured in project_manifest.json.",
+  "workflow_tabs": [
+    "Source Integrity",
+    "Schedule and CPM",
+    "Events and Fragnets",
+    "Concurrency and Entitlement",
+    "EOT Position",
+    "AI Review and Run Control"
+  ],
+  "source_integrity": {
+    "release_configured": false,
+    "files": [],
+    "signature": {
+      "status": "not_checked"
+    }
+  },
+  "schedule_cpm": {
+    "xer_pairs": [],
+    "status": "Awaiting project-local approved XER baseline and impacted update."
+  },
+  "events_and_fragnets": {
+    "events": [],
+    "status": "Awaiting project-local event register and affected activity mapping."
+  },
+  "concurrency_and_entitlement": {
+    "status": "Awaiting project-local concurrency, contract, and evidence controls."
+  },
+  "eot_position": {
+    "status": "No EOT position",
+    "label": "Not available",
+    "message": "No final EOT conclusion can be produced until the project supplies its own approved evidence."
+  },
+  "ai_scope": {
+    "status": "guidance_only",
+    "message": "AI may explain the missing evidence but cannot calculate or infer an EOT."
+  },
+  "missing_evidence": [
+    "Approved baseline and impacted XER pair with data dates.",
+    "Relationship, calendar, constraint, and open-end validation.",
+    "Project event register with affected activity mapping.",
+    "Contract entitlement, notices, and event evidence.",
+    "Concurrency assessment and Primavera P6 parity review."
+  ],
+  "reconciliation_items": [],
+  "source_fingerprint": null,
+  "automatic_draft": false,
+  "last_run_at": null,
+  "run_id": "9fba748a206acd8b",
+  "run_path": "02-delay_analysis\\controlled_runs\\latest.json"
+}

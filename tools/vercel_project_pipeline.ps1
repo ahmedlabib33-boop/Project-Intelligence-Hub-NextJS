@@ -292,32 +292,22 @@ function Invoke-PublishPipeline {
         "-Mode", "Once", "-IntervalSeconds", [string]$IntervalSeconds,
         "-Message", "Publish validated Next.js project pipeline"
     ) $root
-    # GitHub is connected to Vercel.  Publish it first, then deploy this validated
-    # local website so a Git-triggered deployment cannot replace the verified build.
-    # The Vercel project is configured with Root Directory = website. Run the CLI
-    # from the repository root so Vercel resolves that directory exactly once.
-    # Archive avoids Vercel's per-file upload limit for the full local workspace.
-    $deployOutput = Invoke-PipelineStep "Deploying validated production build to Vercel" "npx.cmd" @("vercel", "--prod", "--yes", "--archive=tgz") $root
-    $deploymentUrl = @($deployOutput | Where-Object { $_ -match '^\s*Production\s+https://[^\s]+' } | ForEach-Object {
-        if ($_ -match '(https://[^\s]+)') { $Matches[1] }
-    } | Select-Object -Last 1)
-    if ($deploymentUrl.Count -ne 1 -or [string]::IsNullOrWhiteSpace($deploymentUrl[0])) {
-        throw "Vercel deployment completed but its production URL could not be determined for promotion."
-    }
-    # A manually rolled-back Vercel project stages new deployments.  Explicitly
-    # promote the validated release so the primary project domain is never stale.
-    Invoke-PipelineStep "Promoting validated Vercel deployment" "npx.cmd" @("vercel", "promote", $deploymentUrl[0], "--yes") $websiteRoot
+    # GitHub is the sole deployment trigger.  Vercel is connected to the main
+    # branch and deploys the pushed commit itself.  Do not run Vercel CLI here:
+    # a second deployment path can race the GitHub deployment or publish a stale
+    # local working tree.
+    Write-PipelineLog "GitHub publish complete. Waiting for the GitHub-connected Vercel deployment."
 
     $verified = $false
     for ($attempt = 1; $attempt -le 8; $attempt++) {
         try {
-            Invoke-PipelineStep "Verifying public Vercel project data (attempt $attempt of 8)" $pythonExecutable @($validatorPath, "--public-url", $PublicUrl) $root
+            Invoke-PipelineStep "Verifying GitHub-triggered Vercel deployment (attempt $attempt of 8)" $pythonExecutable @($validatorPath, "--public-url", $PublicUrl) $root
             $verified = $true
             break
         }
         catch {
             if ($attempt -eq 8) { throw }
-            Write-PipelineLog "Public Vercel data is still propagating. Retrying in 10 seconds."
+            Write-PipelineLog "GitHub-triggered Vercel deployment is still propagating. Retrying in 10 seconds."
             Start-Sleep -Seconds 10
         }
     }

@@ -8,39 +8,40 @@ import { aiRequestFailure, aiTextList, formatAiText, readAiJson } from "../../..
 
 export const runtime = "nodejs";
 
-const PROMPT = withSamcoDirectorPrompt(`You are a senior delay analyst and project controls advisor.
-Use only the selected project's Delay Analysis / Time Impact Analysis context.
-Return ONLY valid JSON with keys: evidenceDecision, automationStatus, delayEvents, criticalPathImpact, fragnetRecommendation, logicRecommendation, recoveryOptions, riskExposure, evidenceGaps.
-Use "ready_with_gates", "awaiting_evidence", or "blocked" for evidenceDecision.
-Set automationStatus to "recommendation_only" unless validated source evidence supports the recommendation.
-Do not fabricate EOT days, criticality, float, concurrency, entitlement, or compensation when data is missing.
-Never use information from another project.`);
+const PROMPT = withSamcoDirectorPrompt(`You are a controlled Time Impact Analysis evidence reviewer.
+Use only the selected project's controlled TIA run. The run status is authoritative.
+Return ONLY valid JSON with keys: runStatus, evidenceDecision, sourceIntegrity, scheduleCpm, eventAndFragnet, concurrencyAndEntitlement, eotPosition, reconciliationItems, missingEvidence, nextActions.
+If the controlled run is SETUP_REQUIRED, CONDITIONAL_RESULT, or RECONCILIATION_REQUIRED, preserve that status and explain only the documented gaps or controls.
+Do not calculate, sum, grant, infer, or invent EOT days, delay days, criticality, float, concurrency, fragnet logic, entitlement, or compensation.
+Set evidenceDecision to "ready_with_gates", "awaiting_evidence", or "blocked". Never use information from another project.`);
 
 function parseDelay(answer: string) {
   try {
     const parsed = JSON.parse(answer);
     return {
+      runStatus: formatAiText(parsed.runStatus) || "awaiting_evidence",
       evidenceDecision: formatAiText(parsed.evidenceDecision) || "awaiting_evidence",
-      automationStatus: formatAiText(parsed.automationStatus) || "recommendation_only",
-      delayEvents: aiTextList(parsed.delayEvents),
-      criticalPathImpact: formatAiText(parsed.criticalPathImpact) || "Not enough data to confirm critical path impact.",
-      fragnetRecommendation: aiTextList(parsed.fragnetRecommendation),
-      logicRecommendation: aiTextList(parsed.logicRecommendation),
-      recoveryOptions: aiTextList(parsed.recoveryOptions),
-      riskExposure: formatAiText(parsed.riskExposure) || "Not enough data",
-      evidenceGaps: aiTextList(parsed.evidenceGaps)
+      sourceIntegrity: formatAiText(parsed.sourceIntegrity) || "Not enough source evidence to confirm integrity.",
+      scheduleCpm: formatAiText(parsed.scheduleCpm) || "Not enough schedule evidence to confirm CPM conclusions.",
+      eventAndFragnet: formatAiText(parsed.eventAndFragnet) || "No fragnet conclusion may be made without controlled evidence.",
+      concurrencyAndEntitlement: formatAiText(parsed.concurrencyAndEntitlement) || "Not enough evidence to confirm concurrency or entitlement.",
+      eotPosition: formatAiText(parsed.eotPosition) || "No final EOT position is publishable.",
+      reconciliationItems: aiTextList(parsed.reconciliationItems),
+      missingEvidence: aiTextList(parsed.missingEvidence),
+      nextActions: aiTextList(parsed.nextActions)
     };
   } catch {
     return {
+      runStatus: "awaiting_evidence",
       evidenceDecision: "awaiting_evidence",
-      automationStatus: "recommendation_only",
-      delayEvents: [answer],
-      criticalPathImpact: "Not enough data to confirm critical path impact.",
-      fragnetRecommendation: [],
-      logicRecommendation: [],
-      recoveryOptions: [],
-      riskExposure: "Not enough data",
-      evidenceGaps: []
+      sourceIntegrity: "Not enough source evidence to confirm integrity.",
+      scheduleCpm: "Not enough schedule evidence to confirm CPM conclusions.",
+      eventAndFragnet: "No fragnet conclusion may be made without controlled evidence.",
+      concurrencyAndEntitlement: "Not enough evidence to confirm concurrency or entitlement.",
+      eotPosition: "No final EOT position is publishable.",
+      reconciliationItems: [answer],
+      missingEvidence: [],
+      nextActions: []
     };
   }
 }

@@ -56,7 +56,7 @@ def _percent(value: Any) -> float | None:
 
 
 def _date(value: Any) -> datetime | None:
-    text = str(value or "").strip()
+    text = re.sub(r"\s+[A-Za-z]$", "", str(value or "").strip())
     if not text:
         return None
     for fmt in DATE_FORMATS:
@@ -73,6 +73,76 @@ def _date(value: Any) -> datetime | None:
 def _month(value: Any) -> str | None:
     parsed = _date(value)
     return parsed.strftime("%Y-%m") if parsed else None
+
+
+def _derive_activity_completion_history(
+    activities: Iterable[dict[str, Any]], project_id: str
+) -> list[dict[str, Any]]:
+    """Derive dated activity starts and finishes from the canonical register."""
+    history: dict[str, dict[str, float]] = defaultdict(lambda: {"Completed": 0.0, "Started": 0.0})
+    for _, row in _project_rows(activities, project_id, "activities.csv")[0]:
+        completed = _month(_value(row, "actual_finish"))
+        started = _month(_value(row, "actual_start"))
+        if completed:
+            history[completed]["Completed"] += 1
+        if started:
+            history[started]["Started"] += 1
+    return [
+        {
+            "project_id": project_id,
+            "period_date": period,
+            "completed_activity_count": values["Completed"],
+            "started_activity_count": values["Started"],
+        }
+        for period, values in sorted(history.items())
+    ]
+
+
+def _derive_discipline_progress_history(
+    activities: Iterable[dict[str, Any]], progress_rows: Iterable[dict[str, Any]], project_id: str
+) -> list[dict[str, Any]]:
+    """Join optional activity discipline values to the normal progress register.
+
+    A project does not need a second history CSV when `activities.csv` contains a
+    `discipline` column and `progress_updates.csv` carries dated activity progress.
+    """
+    discipline_by_activity: dict[str, str] = {}
+    for _, row in _project_rows(activities, project_id, "activities.csv")[0]:
+        activity_id = str(_value(row, "activity_id") or "").strip().casefold()
+        discipline = str(_value(row, "discipline", "discipline_name", "trade") or "").strip()
+        if activity_id and discipline:
+            discipline_by_activity[activity_id] = discipline
+    if not discipline_by_activity:
+        return []
+
+    derived: list[dict[str, Any]] = []
+    for _, row in _project_rows(progress_rows, project_id, "progress_updates.csv")[0]:
+        activity_id = str(_value(row, "activity_id") or "").strip().casefold()
+        discipline = discipline_by_activity.get(activity_id)
+        period_date = _value(row, "update_date", "period_date", "date")
+        if not discipline or not _date(period_date):
+            continue
+        derived.append(
+            {
+                "project_id": project_id,
+                "period_date": period_date,
+                "discipline": discipline,
+                "planned_progress_percent": _value(row, "planned_progress", "planned_progress_percent"),
+                "actual_progress_percent": _value(row, "actual_progress", "actual_progress_percent"),
+                "forecast_progress_percent": _value(row, "forecast_progress", "forecast_progress_percent"),
+            }
+        )
+    return derived
+
+
+def _native_risk_history(risks: Iterable[dict[str, Any]], project_id: str) -> list[dict[str, Any]]:
+    """Use dated risk snapshots embedded in risks.csv when supplied."""
+    history: list[dict[str, Any]] = []
+    for _, row in _project_rows(risks, project_id, "risks.csv")[0]:
+        if not _date(_value(row, "snapshot_date", "assessment_date", "update_date")):
+            continue
+        history.append(row)
+    return history
 
 
 def _catalog() -> tuple[str, dict[str, dict[str, Any]]]:
@@ -544,12 +614,22 @@ def _supplement_reference_charts(
     """Build remaining reference charts from selected-project source records only."""
     charts: list[dict[str, Any]] = []
     activities = _workspace_rows(workspace_rows.get("activities", []), project_id)
+    progress_updates = _workspace_rows(workspace_rows.get("progress", []), project_id)
     s_curve = _workspace_rows(workspace_rows.get("s_curve", []), project_id)
     evm = _workspace_rows(evm_history_rows, project_id)
     classifications = _workspace_rows(classification_rows, project_id)
-    discipline = _workspace_rows(discipline_rows, project_id)
-    activity_history = _workspace_rows(activity_history_rows, project_id)
-    risk_history = _workspace_rows(risk_history_rows, project_id)
+    derived_discipline = _derive_discipline_progress_history(activities, progress_updates, project_id)
+    discipline = derived_discipline or _workspace_rows(discipline_rows, project_id)
+    derived_activity_history = _derive_activity_completion_history(activities, project_id)
+    activity_history = derived_activity_history or _workspace_rows(activity_history_rows, project_id)
+    derived_risk_history = _native_risk_history(_workspace_rows(workspace_rows.get("risks", []), project_id), project_id)
+    risk_history = derived_risk_history or _workspace_rows(risk_history_rows, project_id)
+    if derived_discipline:
+        source_files = {**source_files, "overview.discipline_health": ["activities.csv", "progress_updates.csv"], "s_curve.discipline": ["activities.csv", "progress_updates.csv"]}
+    if derived_activity_history:
+        source_files = {**source_files, "activities.monthly_completion": ["activities.csv"]}
+    if derived_risk_history:
+        source_files = {**source_files, "risks.trend": ["risks.csv"], "risks.mitigation_effectiveness": ["risks.csv"]}
 
     def add(chart_id: str, *, labels: list[str], series: list[dict[str, Any]], message: str, status: str = "ready", validation: list[dict[str, str]] | None = None) -> None:
         definition = definitions.get(chart_id)
@@ -639,7 +719,10 @@ def _supplement_reference_charts(
                     {"label": "Actual", "color": "#10b981", "values": [latest_by_discipline[label][2] for label in labels]},
                     {"label": "Forecast", "color": "#8b5cf6", "values": [latest_by_discipline[label][3] for label in labels]},
                 ],
-                message="Latest verified selected-project discipline progress snapshot.",
+                message=(
+                    "Latest selected-project discipline snapshot derived from activities.csv and progress_updates.csv."
+                    if derived_discipline else "Latest selected-project discipline progress snapshot."
+                ),
             )
             periods = sorted({_month(_value(row, "period_date")) for row in discipline if _month(_value(row, "period_date"))})
             series: list[dict[str, Any]] = []
@@ -647,12 +730,18 @@ def _supplement_reference_charts(
                 by_period = {_month(_value(row, "period_date")): _percent(_value(row, "actual_progress_percent")) for row in discipline if str(_value(row, "discipline") or "").strip() == name}
                 series.append({"label": name, "color": ["#06b6d4", "#3b82f6", "#8b5cf6", "#f59e0b", "#10b981"][len(series) % 5], "values": [by_period.get(period) for period in periods]})
             if periods and series:
-                add("s_curve.discipline", labels=periods, series=series, message="Selected-project discipline actual progress history.")
+                add("s_curve.discipline", labels=periods, series=series, message=(
+                    "Selected-project discipline history derived from activities.csv and progress_updates.csv."
+                    if derived_discipline else "Selected-project discipline actual progress history."
+                ))
 
     if activity_history:
         labels, values = _period_series(activity_history, ("period_date",), (("completed_activity_count", "Completed"), ("started_activity_count", "Started")))
         if labels:
-            add("activities.monthly_completion", labels=labels, series=[{"label": "Completed", "color": "#06b6d4", "values": values["Completed"]}, {"label": "Started", "color": "#10b981", "values": values["Started"]}], message="Selected-project monthly activity completion history.")
+            add("activities.monthly_completion", labels=labels, series=[{"label": "Completed", "color": "#06b6d4", "values": values["Completed"]}, {"label": "Started", "color": "#10b981", "values": values["Started"]}], message=(
+                "Selected-project monthly completion derived from activities.csv actual dates."
+                if derived_activity_history else "Selected-project monthly activity completion history."
+            ))
 
     if evm:
         labels, values = _period_series(evm, ("period_date", "period", "date"), (("pv", "PV"), ("ev", "EV"), ("ac", "AC"), ("spi", "SPI"), ("cpi", "CPI")))
@@ -680,10 +769,16 @@ def _supplement_reference_charts(
                 after[category] += after_score
         if timeline:
             labels = sorted(timeline)
-            add("risks.trend", labels=labels, series=[{"label": "Average residual score", "color": "#f43f5e", "values": [round(sum(timeline[label]) / len(timeline[label]), 4) for label in labels]}], message="Selected-project dated risk assessment history.")
+            add("risks.trend", labels=labels, series=[{"label": "Average residual score", "color": "#f43f5e", "values": [round(sum(timeline[label]) / len(timeline[label]), 4) for label in labels]}], message=(
+                "Selected-project dated risk history from risks.csv."
+                if derived_risk_history else "Selected-project dated risk assessment history."
+            ))
         if before or after:
             labels = sorted(set(before) | set(after), key=str.casefold)
-            add("risks.mitigation_effectiveness", labels=labels, series=[{"label": "Before mitigation", "color": "#f43f5e", "values": [before.get(label) for label in labels]}, {"label": "After mitigation", "color": "#10b981", "values": [after.get(label) for label in labels]}], message="Selected-project risk scores before and after mitigation.")
+            add("risks.mitigation_effectiveness", labels=labels, series=[{"label": "Before mitigation", "color": "#f43f5e", "values": [before.get(label) for label in labels]}, {"label": "After mitigation", "color": "#10b981", "values": [after.get(label) for label in labels]}], message=(
+                "Selected-project before and after mitigation scores from risks.csv."
+                if derived_risk_history else "Selected-project risk scores before and after mitigation."
+            ))
 
     if classifications:
         monthly: dict[str, float] = defaultdict(float)
@@ -745,21 +840,21 @@ def build_project_chart_payloads(
         project_id=project_id,
         file_name="planned_cash_flow.csv",
         primary_path=data_dir / "planned_cash_flow.csv",
-        fallback_path=vercel_dir / "planned_cash_flow.csv",
+        fallback_path=None,
         read_csv_rows=read_csv_rows,
     )
     classification_rows, classification_sources, classification_issues, _ = _read_canonical_first_rows(
         project_id=project_id,
         file_name="delay_event_classification.csv",
         primary_path=delay_dir / "14-delay_event_classification.csv",
-        fallback_path=vercel_dir / "delay_event_classification.csv",
+        fallback_path=None,
         read_csv_rows=read_csv_rows,
     )
     recovery_rows, recovery_sources, recovery_issues, _ = _read_canonical_first_rows(
         project_id=project_id,
         file_name="tia_recovery_scenario.csv",
         primary_path=delay_dir / "15-tia_recovery_scenario.csv",
-        fallback_path=vercel_dir / "tia_recovery_scenario.csv",
+        fallback_path=None,
         read_csv_rows=read_csv_rows,
     )
     discipline_rows, discipline_sources, discipline_issues, _ = _read_canonical_first_rows(
@@ -773,21 +868,21 @@ def build_project_chart_payloads(
         project_id=project_id,
         file_name="activity_completion_history.csv",
         primary_path=data_dir / "activity_completion_history.csv",
-        fallback_path=vercel_dir / "activity_completion_history.csv",
+        fallback_path=None,
         read_csv_rows=read_csv_rows,
     )
     evm_history_rows, evm_history_sources, evm_history_issues, evm_origin = _read_canonical_first_rows(
         project_id=project_id,
         file_name="evm_period_history.csv",
         primary_path=data_dir / "evm.csv",
-        fallback_path=vercel_dir / "evm_period_history.csv",
+        fallback_path=None,
         read_csv_rows=read_csv_rows,
     )
     risk_history_rows, risk_history_sources, risk_history_issues, _ = _read_canonical_first_rows(
         project_id=project_id,
         file_name="risk_assessment_history.csv",
         primary_path=data_dir / "risk_assessment_history.csv",
-        fallback_path=vercel_dir / "risk_assessment_history.csv",
+        fallback_path=None,
         read_csv_rows=read_csv_rows,
     )
     cash = _cash_flow(definitions["contracts.planned_vs_actual_cash_flow"], project_id, planned_rows, payment_rows)

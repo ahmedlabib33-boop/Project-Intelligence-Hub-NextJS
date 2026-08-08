@@ -6,5 +6,13 @@
   "created_at": "2026-06-19T06:24:12.173499+00:00",
   "updated_at": "2026-07-27T20:22:25.286799+00:00",
   "status": "Active",
-  "submitted_tia_guide_path": "../../../TIA submitted Guide"
+  "submitted_tia_guide_path": "../../../TIA submitted Guide",
+  "approved_tia_release": {
+    "active": true,
+    "project_id": "The Big -P.01-UP-20-April-26",
+    "source_type": "brain_labib_v34baba_signed_release",
+    "source_path": "../../../Delay Analysis - Time Impact Analysis/BRAIN_LABIB_V34baba_SIGNED_RELEASE",
+    "approval_status": "source_approved_pending_reconciliation",
+    "note": "The signed ROYA The BIG source release is project-owned evidence. Its native XER pairs are authoritative inputs; embedded reports remain reconciliation references only."
+  }
 }

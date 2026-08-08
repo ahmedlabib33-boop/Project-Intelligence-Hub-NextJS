@@ -18,6 +18,9 @@ PROJECT_SUBDIRECTORIES = (
     "01-data/import_templates",
     "02-delay_analysis/steel_delay_tia_templates",
     "02-delay_analysis/methodology",
+    "02-delay_analysis/approved_release",
+    "02-delay_analysis/controlled_runs",
+    "02-delay_analysis/_legacy_archive",
     "03-schedule",
     "04-source_excel",
     "05-contracts/source",
@@ -30,7 +33,6 @@ PROJECT_SUBDIRECTORIES = (
     "10-deliverables",
     "11-outputs",
     "12-logs",
-    "vercel",
 )
 
 
@@ -221,17 +223,12 @@ def ensure_project_samples(project_dir: Path) -> None:
         except (OSError, UnicodeDecodeError, json.JSONDecodeError, AttributeError):
             pass
     samples = {
-        "vercel/phase_progress.csv": "project_id,phase_id,phase_name,progress_percent,status_date,source_file,source_sheet,source_row,verified_by,notes\n",
-        "vercel/discipline_progress_history.csv": "project_id,period_date,discipline,planned_progress_percent,actual_progress_percent,forecast_progress_percent,source_file,source_sheet,source_row,verified_by,notes\n",
-        "vercel/activity_completion_history.csv": "project_id,period_date,completed_activity_count,started_activity_count,source_file,source_sheet,source_row,verified_by,notes\n",
-        "vercel/evm_period_history.csv": "project_id,period_date,bac,pv,ev,ac,spi,cpi,source_file,source_sheet,source_row,verified_by,notes\n",
-        "vercel/planned_cash_flow.csv": "project_id,period_date,planned_cash_out,planned_cumulative_cash_out,currency,basis,source_file,source_sheet,source_row,notes\n",
-        "vercel/risk_assessment_history.csv": "project_id,risk_id,snapshot_date,risk_category,probability,impact,score_before_mitigation,score_after_mitigation,mitigation_status,source_file,source_sheet,source_row,verified_by,notes\n",
-        "vercel/delay_event_classification.csv": "project_id,event_id,activity_id,root_cause,delay_type,entitlement_status,responsible_party,event_start,event_finish,delay_days,evidence_reference,source_file,source_sheet,source_row,analyst_status,notes\n",
-        "vercel/tia_recovery_scenario.csv": "project_id,scenario_id,scenario_name,analyst_status,activity_id,status_date,baseline_progress_percent,impacted_progress_percent,recovery_progress_percent,baseline_finish,impacted_finish,recovery_finish,predecessor_activity_id,successor_activity_id,relationship_type,lag_days,p6_update_reference,evidence_reference,source_file,source_sheet,source_row,notes\n",
         "01-data/import_templates/planned_cash_flow.csv": "project_id,period_date,planned_cash_out,planned_cumulative_cash_out,currency,basis,source_file,source_sheet,source_row,notes\n",
         "02-delay_analysis/steel_delay_tia_templates/14-delay_event_classification.csv": "project_id,event_id,activity_id,root_cause,delay_type,entitlement_status,responsible_party,event_start,event_finish,delay_days,evidence_reference,source_file,source_sheet,source_row,analyst_status,notes\n",
         "02-delay_analysis/steel_delay_tia_templates/15-tia_recovery_scenario.csv": "project_id,scenario_id,scenario_name,analyst_status,activity_id,status_date,baseline_progress_percent,impacted_progress_percent,recovery_progress_percent,baseline_finish,impacted_finish,recovery_finish,predecessor_activity_id,successor_activity_id,relationship_type,lag_days,p6_update_reference,evidence_reference,source_file,source_sheet,source_row,notes\n",
+        "02-delay_analysis/approved_release/README.md": "# Approved TIA Release\n\nStore only this project's approved source package here, or declare its controlled external source in project_manifest.json. Do not copy another project's XER, contract, event, or evidence package into this folder.\n",
+        "02-delay_analysis/controlled_runs/README.md": "# Controlled TIA Runs\n\nThis folder stores generated project-local draft and approved control records. Do not manually copy runs between projects.\n",
+        "02-delay_analysis/_legacy_archive/README.md": "# Legacy TIA Archive\n\nHistoric generic TIA templates and outputs may remain recoverable outside the active controlled workflow. They are not an active evidence source.\n",
         "08-branding/README.md": "# Branding\n\nReplace example files with project-approved brand assets. Existing files are never overwritten.\n",
         "08-branding/project_identity_template.json": json.dumps({"project_name": "Example Project", "client": "Example Client", "contractor": "Example Contractor", "consultant": "Example Consultant"}, indent=2) + "\n",
         "08-branding/color_palette_template.csv": f"project_id,role,color_hex\n{project_id},primary,#123B5D\n{project_id},secondary,#5B6870\n{project_id},accent,#C7A34B\n{project_id},background,#FFFFFF\n",
