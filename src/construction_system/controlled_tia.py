@@ -28,7 +28,7 @@ CONDITIONAL_RESULT = "CONDITIONAL_RESULT"
 RECONCILIATION_REQUIRED = "RECONCILIATION_REQUIRED"
 READY_AND_CALCULATED = "READY_AND_CALCULATED"
 WORKFLOW_TABS = (
-    "Source Integrity",
+    "Time Impact Methodology",
     "Schedule and CPM",
     "Events and Fragnets",
     "Concurrency and Entitlement",
@@ -374,8 +374,9 @@ def _setup_snapshot(project: dict[str, Any], detail: str) -> dict[str, Any]:
         "message": detail,
         "workflow_tabs": list(WORKFLOW_TABS),
         "source_integrity": {"release_configured": False, "files": [], "signature": {"status": "not_checked"}},
+        "view_exhibits": [],
         "schedule_cpm": {"xer_pairs": [], "status": "Awaiting project-local approved XER baseline and impacted update."},
-        "events_and_fragnets": {"events": [], "status": "Awaiting project-local event register and affected activity mapping."},
+        "events_and_fragnets": {"events": [], "event_exhibits": [], "status": "Awaiting project-local event register and affected activity mapping."},
         "concurrency_and_entitlement": {"status": "Awaiting project-local concurrency, contract, and evidence controls."},
         "eot_position": {"status": "No EOT position", "label": "Not available", "message": "No final EOT conclusion can be produced until the project supplies its own approved evidence."},
         "ai_scope": {"status": "guidance_only", "message": "AI may explain the missing evidence but cannot calculate or infer an EOT."},
@@ -473,6 +474,152 @@ def _submission_matrix_rows(
     return normalized, findings
 
 
+def _submission_event_exhibits(
+    project: dict[str, Any],
+    submission: dict[str, Any],
+    source_dir: Path,
+    event_metadata: dict[str, dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    """Return only approved, project-local event-map exhibits.
+
+    Exhibit images are visual evidence references. They never participate in
+    CPM, fragnet, float, concurrency, or EOT calculations. Each submission
+    declares its own files so no project can inherit The BIG's images.
+    """
+    records: list[dict[str, Any]] = []
+    files: list[dict[str, Any]] = []
+    findings: list[dict[str, Any]] = []
+    source_root = source_dir.resolve()
+    expected_project_id = _text(project.get("project_id"))
+    expected_project_key = _text(project.get("project_key"))
+    raw_exhibits = submission.get("event_exhibits")
+    if not isinstance(raw_exhibits, list):
+        return records, files, findings
+
+    for index, raw in enumerate(raw_exhibits, start=1):
+        if not isinstance(raw, dict):
+            findings.append({
+                "source_row": f"event_exhibit:{index}",
+                "issue": "Submitted event exhibit entry is not an object.",
+                "detail": "The entry was excluded from the selected-project workspace.",
+            })
+            continue
+        event_id = _text(raw.get("event_id"))
+        raw_variants = raw.get("event_variants")
+        variants = [_text(value) for value in raw_variants if _text(value)] if isinstance(raw_variants, list) else []
+        source_relative_path = _text(raw.get("file"))
+        if not event_id or not source_relative_path:
+            findings.append({
+                "source_row": f"event_exhibit:{index}",
+                "issue": "Submitted event exhibit is missing an event ID or a file path.",
+                "detail": "The entry was excluded from the selected-project workspace.",
+            })
+            continue
+        if variants and any(variant not in event_metadata for variant in variants):
+            findings.append({
+                "source_row": f"event_exhibit:{index}",
+                "issue": "Submitted event exhibit references an event variant not declared in this project submission.",
+                "detail": ", ".join(variants),
+            })
+            continue
+        try:
+            source_path = (source_dir / source_relative_path).resolve()
+            relative_path = source_path.relative_to(source_root).as_posix()
+        except ValueError:
+            findings.append({
+                "source_row": f"event_exhibit:{index}",
+                "issue": "Submitted event exhibit path escapes the project-local approved submission folder.",
+                "detail": source_relative_path,
+            })
+            continue
+        file_record = _file_record(source_path, required=False)
+        files.append(file_record)
+        if not file_record["exists"]:
+            findings.append({
+                "source_row": f"event_exhibit:{index}",
+                "issue": "Submitted event exhibit file is missing.",
+                "detail": source_relative_path,
+            })
+            continue
+        records.append({
+            "project_id": expected_project_id,
+            "project_key": expected_project_key,
+            "event_id": event_id,
+            "event_variants": variants,
+            "title": _text(raw.get("title")) or f"{event_id} submitted event mapping",
+            "display_order": _int_value(raw.get("display_order")) or index,
+            "evidence_use": _text(raw.get("evidence_use")) or "Submitted event mapping exhibit only",
+            "control_note": _text(raw.get("control_note")) or "The approved project-local matrix controls active schedule and EOT values.",
+            "source_file": source_path.name,
+            "source_relative_path": relative_path,
+            "sha256": file_record["sha256"],
+        })
+    records.sort(key=lambda item: (int(item["display_order"]), item["event_id"], item["source_file"]))
+    return records, files, findings
+
+
+def _submission_view_exhibits(
+    project: dict[str, Any],
+    submission: dict[str, Any],
+    source_dir: Path,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    """Return project-local methodology, concurrency, and EOT exhibits.
+
+    A submission must declare each asset under its own approved-release folder.
+    These display-only files cannot enter schedule calculations or be inherited
+    by another project's TIA run.
+    """
+    records: list[dict[str, Any]] = []
+    files: list[dict[str, Any]] = []
+    findings: list[dict[str, Any]] = []
+    source_root = source_dir.resolve()
+    expected_project_id = _text(project.get("project_id"))
+    expected_project_key = _text(project.get("project_key"))
+    raw_exhibits = submission.get("view_exhibits")
+    allowed_views = {"Time Impact Methodology", "Concurrency and Entitlement", "EOT Position"}
+    allowed_suffixes = {".svg", ".png", ".jpg", ".jpeg", ".webp"}
+    if not isinstance(raw_exhibits, list):
+        return records, files, findings
+
+    for index, raw in enumerate(raw_exhibits, start=1):
+        if not isinstance(raw, dict):
+            findings.append({"source_row": f"view_exhibit:{index}", "issue": "Submitted TIA view exhibit entry is not an object.", "detail": "The entry was excluded from the selected-project workspace."})
+            continue
+        view = _text(raw.get("view"))
+        source_relative_path = _text(raw.get("file"))
+        if view not in allowed_views or not source_relative_path:
+            findings.append({"source_row": f"view_exhibit:{index}", "issue": "Submitted TIA view exhibit has an unsupported view or missing file path.", "detail": view or source_relative_path or "not recorded"})
+            continue
+        try:
+            source_path = (source_dir / source_relative_path).resolve()
+            relative_path = source_path.relative_to(source_root).as_posix()
+        except ValueError:
+            findings.append({"source_row": f"view_exhibit:{index}", "issue": "Submitted TIA view exhibit path escapes the project-local approved submission folder.", "detail": source_relative_path})
+            continue
+        if source_path.suffix.lower() not in allowed_suffixes:
+            findings.append({"source_row": f"view_exhibit:{index}", "issue": "Submitted TIA view exhibit uses an unsupported file type.", "detail": source_relative_path})
+            continue
+        file_record = _file_record(source_path, required=False)
+        files.append(file_record)
+        if not file_record["exists"]:
+            findings.append({"source_row": f"view_exhibit:{index}", "issue": "Submitted TIA view exhibit file is missing.", "detail": source_relative_path})
+            continue
+        records.append({
+            "project_id": expected_project_id,
+            "project_key": expected_project_key,
+            "view": view,
+            "title": _text(raw.get("title")) or view,
+            "display_order": _int_value(raw.get("display_order")) or index,
+            "evidence_use": _text(raw.get("evidence_use")) or "Submitted display exhibit only",
+            "control_note": _text(raw.get("control_note")) or "The project-local approved matrix remains the calculation authority.",
+            "source_file": source_path.name,
+            "source_relative_path": relative_path,
+            "sha256": file_record["sha256"],
+        })
+    records.sort(key=lambda item: (int(item["display_order"]), item["view"], item["source_file"]))
+    return records, files, findings
+
+
 def _approved_submission_snapshot(project: dict[str, Any], config: dict[str, Any], source_dir: Path) -> dict[str, Any]:
     """Read one approved EOT submission register for its owning project only.
 
@@ -511,6 +658,12 @@ def _approved_submission_snapshot(project: dict[str, Any], config: dict[str, Any
         for item in submission.get("events", [])
         if isinstance(item, dict) and _text(item.get("event_variant"))
     }
+    event_exhibits, exhibit_files, exhibit_findings = _submission_event_exhibits(
+        project, submission, source_dir, event_metadata
+    )
+    view_exhibits, view_exhibit_files, view_exhibit_findings = _submission_view_exhibits(
+        project, submission, source_dir
+    )
 
     rows_by_variant: dict[str, list[dict[str, Any]]] = {}
     for row in matrix_rows:
@@ -578,6 +731,8 @@ def _approved_submission_snapshot(project: dict[str, Any], config: dict[str, Any
         for index, item in enumerate(historic_items, start=1)
     ]
     reconciliation_items.extend(validation_findings)
+    reconciliation_items.extend(exhibit_findings)
+    reconciliation_items.extend(view_exhibit_findings)
     evidence_matrix = [
         {
             **item,
@@ -660,7 +815,7 @@ def _approved_submission_snapshot(project: dict[str, Any], config: dict[str, Any
         ),
     ]
 
-    files = [archive_record, manifest_record, matrix_record]
+    files = [archive_record, manifest_record, matrix_record, *exhibit_files, *view_exhibit_files]
     source_fingerprint = _source_fingerprint(source_dir, files)
     valid_arithmetic = not validation_findings
     archive_message = "Archive hash matches the approved submission register." if archive_integrity == "verified" else "Archive hash does not match the approved submission register."
@@ -683,6 +838,7 @@ def _approved_submission_snapshot(project: dict[str, Any], config: dict[str, Any
             "project_match": True,
             "validation_findings": validation_findings,
         },
+        "view_exhibits": view_exhibits,
         "schedule_cpm": {
             "status": "Submitted milestone matrix and XER-pair register available; Primavera P6 parity is pending.",
             "xer_pairs": xer_pairs,
@@ -696,12 +852,14 @@ def _approved_submission_snapshot(project: dict[str, Any], config: dict[str, Any
         },
         "events_and_fragnets": {
             "events": evidence_matrix,
+            "event_exhibits": event_exhibits,
             "status": "Event movement is sourced from the approved before/after comparison matrix.",
             "fragnet_controls": [
                 "EV01 Batch 02 and EV02 are included in the submitted integrated EOT position.",
                 "EV01 Batch 03 remains a visible 37-day event position but is excluded from the submitted 126-day consolidation pending a documented consolidation rule.",
                 "EV03 is non-comparable because its before/after XER pair has inconsistent data dates; its submitted result remains no demonstrated impact.",
                 "EV04 is incomplete because its matching pre-impact XER is unavailable; its submitted result remains no demonstrated impact.",
+                "Event mapping exhibits are project-local visual evidence only. The approved matrix controls active float, finish-movement, concurrency, and EOT positions.",
             ],
         },
         "concurrency_and_entitlement": {
@@ -849,6 +1007,7 @@ def build_controlled_tia_snapshot(project: dict[str, Any]) -> dict[str, Any]:
             "embedded_payload": {"status": payload_status, "expected_sha256": expected_payload_hash, "actual_sha256": payload_hash, "error": embedded_error},
             "project_match": project_match,
         },
+        "view_exhibits": [],
         "schedule_cpm": {
             "status": "Native XER pairs parsed; P6 parity is pending." if complete_pairs else "No complete verified XER pair.",
             "xer_pairs": pairs,
@@ -860,6 +1019,7 @@ def build_controlled_tia_snapshot(project: dict[str, Any]) -> dict[str, Any]:
         },
         "events_and_fragnets": {
             "events": event_records,
+            "event_exhibits": [],
             "status": "Event-to-XER links are controlled by native pair availability.",
             "fragnet_controls": [
                 "Each fragnet must be linked to a project event and affected activity.",

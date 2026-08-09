@@ -795,7 +795,7 @@ def build_controlled_tia_snapshot(project: dict[str, Any]) -> dict[str, Any]:
             "workflow_tabs": [],
             "source_integrity": {"files": [], "signature": {"status": "not_checked"}},
             "schedule_cpm": {"xer_pairs": []},
-            "events_and_fragnets": {"events": []},
+            "events_and_fragnets": {"events": [], "event_exhibits": []},
             "concurrency_and_entitlement": {"controls": []},
             "eot_position": {"label": "Not available"},
             "ai_scope": {"status": "guidance_only"},
@@ -804,7 +804,7 @@ def build_controlled_tia_snapshot(project: dict[str, Any]) -> dict[str, Any]:
         }
 
 
-def public_controlled_tia_payload(snapshot: dict[str, Any]) -> dict[str, Any]:
+def public_controlled_tia_payload(snapshot: dict[str, Any], public_slug: str) -> dict[str, Any]:
     """Remove workstation paths while retaining evidence file lineage."""
     public = json.loads(json.dumps(snapshot, default=str))
     public.pop("run_path", None)
@@ -817,6 +817,36 @@ def public_controlled_tia_payload(snapshot: dict[str, Any]) -> dict[str, Any]:
         for item in integrity.get("files", []):
             if isinstance(item, dict):
                 item.pop("path", None)
+    event_section = public.get("events_and_fragnets")
+    if isinstance(event_section, dict):
+        exhibits = event_section.get("event_exhibits")
+        if isinstance(exhibits, list):
+            for exhibit in exhibits:
+                if not isinstance(exhibit, dict):
+                    continue
+                relative_path = str(exhibit.get("source_relative_path") or "").strip()
+                if not relative_path:
+                    continue
+                source_path = Path(relative_path)
+                exhibit["url"] = (
+                    f"/generated/{public_slug}/tia-controlled-event-exhibits/"
+                    f"{slugify(source_path.stem)}{source_path.suffix.lower()}"
+                )
+                exhibit.pop("sha256", None)
+    view_exhibits = public.get("view_exhibits")
+    if isinstance(view_exhibits, list):
+        for exhibit in view_exhibits:
+            if not isinstance(exhibit, dict):
+                continue
+            relative_path = str(exhibit.get("source_relative_path") or "").strip()
+            if not relative_path:
+                continue
+            source_path = Path(relative_path)
+            exhibit["url"] = (
+                f"/generated/{public_slug}/tia-controlled-view-exhibits/"
+                f"{slugify(source_path.stem)}{source_path.suffix.lower()}"
+            )
+            exhibit.pop("sha256", None)
     return public
 
 
@@ -913,7 +943,9 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     contract_files = list_project_files(contracts_dir / "source", base, 80)
     evidence_files = list_project_files(evidence_dir, base, 80)
     output_files = list_project_files(outputs_dir, OUTPUTS_ROOT, 20)
-    controlled_tia = public_controlled_tia_payload(build_controlled_tia_snapshot(project))
+    controlled_tia = public_controlled_tia_payload(
+        build_controlled_tia_snapshot(project), slugify(project["project_folder_name"])
+    )
     four_pipeline = build_four_pipeline_snapshot(project, controlled_tia)
     contract_controls = build_contract_controls_snapshot(project, contracts_dir, evidence_dir)
     overview_paths = {
@@ -1728,6 +1760,66 @@ def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
                 copy_if_changed(artifact, target / artifact.name)
 
 
+def copy_controlled_tia_exhibits(projects: list[dict[str, Any]]) -> None:
+    """Publish only the active project's declared controlled TIA exhibits.
+
+    The submission manifest supplies the relative path for each exhibit. The
+    path is resolved below the owning project's approved release folder and
+    the browser payload receives a static public URL, never a workstation path.
+    """
+    for project in projects:
+        delay_analysis = project.get("features", {}).get("delay_analysis", {})
+        controlled = delay_analysis.get("controlled_tia", {})
+        event_section = controlled.get("events_and_fragnets", {}) if isinstance(controlled, dict) else {}
+        event_exhibits = event_section.get("event_exhibits", []) if isinstance(event_section, dict) else []
+        view_exhibits = controlled.get("view_exhibits", []) if isinstance(controlled, dict) else []
+        if not isinstance(event_exhibits, list):
+            event_exhibits = []
+        if not isinstance(view_exhibits, list):
+            view_exhibits = []
+        if not event_exhibits and not view_exhibits:
+            continue
+
+        # Browser records intentionally omit local paths. Reconstruct the
+        # owning workspace from the discovered sector/folder identity instead
+        # of using a hidden fallback or another project's release folder.
+        project_dir = PROJECTS_ROOT / str(project.get("sector") or "") / str(project.get("project_folder_name") or "")
+        if not project_dir.is_dir():
+            continue
+        manifest = read_json(project_dir / "project_manifest.json")
+        release = manifest.get("approved_tia_release") if isinstance(manifest.get("approved_tia_release"), dict) else {}
+        source_path = Path(str(release.get("source_path") or ""))
+        source_dir = source_path if source_path.is_absolute() else (project_dir / source_path)
+        try:
+            source_dir = source_dir.resolve()
+            source_dir.relative_to(project_dir.resolve())
+        except (OSError, ValueError):
+            continue
+
+        for exhibit_set, target_name in (
+            (event_exhibits, "tia-controlled-event-exhibits"),
+            (view_exhibits, "tia-controlled-view-exhibits"),
+        ):
+            target = GENERATED_ROOT / slugify(project["project_folder_name"]) / target_name
+            for exhibit in exhibit_set:
+                if not isinstance(exhibit, dict):
+                    continue
+                relative_path = str(exhibit.get("source_relative_path") or "").strip()
+                if not relative_path:
+                    continue
+                try:
+                    source = (source_dir / relative_path).resolve()
+                    source.relative_to(source_dir)
+                except (OSError, ValueError):
+                    continue
+                if source.exists() and source.is_file():
+                    public_name = f"{slugify(source.stem)}{source.suffix.lower()}"
+                    copy_if_changed(source, target / public_name)
+                # The file name remains traceable, but the filesystem-relative path
+                # is unnecessary after publication and is removed from browser data.
+                exhibit.pop("source_relative_path", None)
+
+
 def copy_legacy_tia_submitted_assets_archived(projects: list[dict[str, Any]]) -> None:
     for project in projects:
         delay_analysis = project.get("features", {}).get("delay_analysis", {})
@@ -1939,6 +2031,7 @@ def _generate() -> None:
     raw_projects = discover_projects()
     project_records = [build_project_record(project) for project in raw_projects]
     copy_generated_outputs(project_records)
+    copy_controlled_tia_exhibits(project_records)
     # Historic submitted-guide assets remain recoverable on disk but are not
     # copied into active website payloads or reports.  Controlled TIA runs are
     # published through each project's approved source contract instead.

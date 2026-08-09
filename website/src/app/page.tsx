@@ -256,7 +256,34 @@ type FeaturePayload = {
         relationship_evidence?: Array<Record<string, unknown>>;
         cpm_controls?: string[];
       };
-      events_and_fragnets?: { status?: string; events?: Array<Record<string, unknown>>; fragnet_controls?: string[] };
+      events_and_fragnets?: {
+        status?: string;
+        events?: Array<Record<string, unknown>>;
+        fragnet_controls?: string[];
+        event_exhibits?: Array<{
+          project_id?: string;
+          project_key?: string;
+          event_id?: string;
+          event_variants?: string[];
+          title?: string;
+          display_order?: number;
+          evidence_use?: string;
+          control_note?: string;
+          source_file?: string;
+          url?: string;
+        }>;
+      };
+      view_exhibits?: Array<{
+        project_id?: string;
+        project_key?: string;
+        view?: string;
+        title?: string;
+        display_order?: number;
+        evidence_use?: string;
+        control_note?: string;
+        source_file?: string;
+        url?: string;
+      }>;
       concurrency_and_entitlement?: {
         status?: string;
         gross_included_event_movement_days?: number | null;
@@ -1375,8 +1402,78 @@ function ControlledTiaChartGrid({
   return <div className="reference-chart-grid">{visibleCharts.map((chart) => <ReferenceChartCard key={chart.id} chart={chart} />)}</div>;
 }
 
+function ControlledTiaEventExhibits({
+  exhibits
+}: {
+  exhibits: NonNullable<FeaturePayload["delay_analysis"]["controlled_tia"]["events_and_fragnets"]>["event_exhibits"];
+}) {
+  const approvedExhibits = [...(exhibits || [])]
+    .filter((exhibit) => Boolean(exhibit.url))
+    .sort((left, right) => (left.display_order || 0) - (right.display_order || 0));
+  const [selectedEventId, setSelectedEventId] = useState("");
+
+  if (!approvedExhibits.length) {
+    return (
+      <section className="feature-card controlled-tia-exhibit-readiness">
+        <div className="feature-card-head"><h3>Submitted Event Mapping Exhibits</h3><span>Awaiting project evidence</span></div>
+        <p>No approved event-map exhibit is available for this selected project. Add its own approved mapping file under <code>02-delay_analysis/approved_submission/exhibits</code> and declare it in that project&apos;s <code>submission_manifest.json</code>. Another project&apos;s exhibit is never used.</p>
+      </section>
+    );
+  }
+
+  const selectedExhibit = approvedExhibits.find((exhibit) => exhibit.event_id === selectedEventId) || approvedExhibits[0];
+
+  return (
+    <section className="feature-card controlled-tia-exhibits">
+      <div className="feature-card-head"><div><h3>Submitted Event Mapping</h3><small>Project-local visual evidence. The controlled matrix remains the calculation authority.</small></div><span>{approvedExhibits.length} approved exhibits</span></div>
+      <label className="controlled-tia-event-select" htmlFor="controlled-tia-event-select">
+        <span>Select delay event</span>
+        <select id="controlled-tia-event-select" value={selectedExhibit.event_id || ""} onChange={(event) => setSelectedEventId(event.target.value)}>
+          {approvedExhibits.map((exhibit) => <option key={exhibit.event_id} value={exhibit.event_id}>{exhibit.event_id} - {exhibit.title}</option>)}
+        </select>
+      </label>
+      <figure className="controlled-tia-event-exhibit" key={selectedExhibit.url}>
+        <a href={selectedExhibit.url} target="_blank" rel="noreferrer" aria-label={`Open ${selectedExhibit.title || selectedExhibit.event_id || "event"} exhibit`}>
+          <Image src={selectedExhibit.url || ""} alt={`${selectedExhibit.event_id || "TIA event"}: ${selectedExhibit.title || "submitted mapping exhibit"}`} width={1680} height={945} sizes="(max-width: 860px) 96vw, 1120px" priority={false} />
+        </a>
+        <figcaption>
+          <strong>{displayCell(selectedExhibit.event_id)}: {displayCell(selectedExhibit.title)}</strong>
+          <span>{displayCell(selectedExhibit.evidence_use)}</span>
+          <small>{displayCell(selectedExhibit.control_note)}</small>
+        </figcaption>
+      </figure>
+    </section>
+  );
+}
+
+function ControlledTiaViewExhibit({
+  exhibits,
+  view,
+  emptyText
+}: {
+  exhibits: NonNullable<FeaturePayload["delay_analysis"]["controlled_tia"]>["view_exhibits"];
+  view: string;
+  emptyText: string;
+}) {
+  const exhibit = (exhibits || []).find((item) => item.view === view && item.url);
+  const exhibitUrl = typeof exhibit?.url === "string" ? exhibit.url : "";
+  if (!exhibit || !exhibitUrl) {
+    return <section className="feature-card controlled-tia-exhibit-readiness"><div className="feature-card-head"><h3>{view}</h3><span>Awaiting project evidence</span></div><p>{emptyText}</p></section>;
+  }
+  return (
+    <section className="feature-card controlled-tia-view-exhibit">
+      <figure>
+        <a href={exhibitUrl} target="_blank" rel="noreferrer" aria-label={`Open ${exhibit.title || view}`}>
+          <Image src={exhibitUrl} alt={exhibit.title || view} width={1680} height={945} sizes="(max-width: 860px) 96vw, 1240px" priority={false} />
+        </a>
+        <figcaption><strong>{displayCell(exhibit.title)}</strong><span>{displayCell(exhibit.evidence_use)}</span><small>{displayCell(exhibit.control_note)}</small></figcaption>
+      </figure>
+    </section>
+  );
+}
+
 function DelayTiaParityPanel({ project }: { project: ProjectRecord }) {
-  const [view, setView] = useState("Source Integrity");
+  const [view, setView] = useState("Time Impact Methodology");
   const delay = project.features.delay_analysis;
   const run = delay.controlled_tia;
   const integrity = run.source_integrity || {};
@@ -1411,11 +1508,11 @@ function DelayTiaParityPanel({ project }: { project: ProjectRecord }) {
         <section className="feature-card"><div className="feature-card-head"><h3>Evidence Boundary</h3><span>project_id enforced</span></div><p>Only this project&apos;s approved release, XER pairs, relationships, evidence references, controlled run, and project-scoped AI context are available. Another project&apos;s source package is never used as a fallback.</p></section>
       </div>
       <ModuleTabs label="Controlled TIA workflow" tabs={run.workflow_tabs} activeTab={view} onChange={setView} />
-      {view === "Source Integrity" ? <div className="feature-stack"><ControlledTiaChartGrid charts={run.charts} view={view} /><section className="feature-card"><div className="feature-card-head"><h3>Controlled Archive</h3><span>{displayCell(integrity.archive?.integrity)}</span></div><p>{displayCell(integrity.archive?.message)}</p></section><ProjectTableSelector title="Approved Source Integrity" tables={sourceTables} preferred={["Approved Release Files", "Archive Evidence Inventory", "Evidence Gaps"]} /></div> : null}
+      {view === "Time Impact Methodology" ? <ControlledTiaViewExhibit exhibits={run.view_exhibits} view={view} emptyText="No approved Time Impact Methodology exhibit is available for this selected project. Add its own project-local methodology file to the approved submission manifest." /> : null}
       {view === "Schedule and CPM" ? <div className="feature-stack"><ControlledTiaChartGrid charts={run.charts} view={view} /><section className="feature-card"><div className="feature-card-head"><h3>Schedule and CPM Controls</h3><span>{displayCell(schedule.status)}</span></div><ul>{(schedule.cpm_controls || []).map((control) => <li key={control}>{control}</li>)}</ul></section><ProjectTableSelector title="Approved Matrix, Native XER, and CPM Evidence" tables={sourceTables} preferred={["Approved Before / After Matrix", "Native XER Pair Register", "Relationship and Lag Evidence"]} /></div> : null}
-      {view === "Events and Fragnets" ? <div className="feature-stack"><ControlledTiaChartGrid charts={run.charts} view={view} /><section className="feature-card"><div className="feature-card-head"><h3>Event and Fragnet Controls</h3><span>{displayCell(events.status)}</span></div><ul>{(events.fragnet_controls || []).map((control) => <li key={control}>{control}</li>)}</ul></section><ProjectTableSelector title="Project Event and Fragnet Register" tables={sourceTables} preferred={["Event and Fragnet Register", "Approved Before / After Matrix"]} /></div> : null}
-      {view === "Concurrency and Entitlement" ? <div className="feature-stack"><ControlledTiaChartGrid charts={run.charts} view={view} /><div className="workspace-grid compact-grid"><MiniMetric label="Gross Included Movement" value={concurrency.gross_included_event_movement_days === undefined ? "N/A" : `${numberValue(concurrency.gross_included_event_movement_days)} days`} note="EV01 Batch 02 plus EV02" /><MiniMetric label="Concurrency Adjustment" value={concurrency.concurrency_adjustment_days === undefined ? "N/A" : `${numberValue(concurrency.concurrency_adjustment_days)} days`} note="Submitted deduction" /><MiniMetric label="Integrated Submitted EOT" value={concurrency.integrated_eot_calendar_days === undefined ? "N/A" : `${numberValue(concurrency.integrated_eot_calendar_days)} days`} note="No automatic compensation conclusion" /></div><section className="feature-card"><div className="feature-card-head"><h3>Concurrency and Entitlement Controls</h3><span>{displayCell(concurrency.status)}</span></div><ul>{(concurrency.controls || []).map((control) => <li key={control}>{control}</li>)}</ul></section><ProjectTableSelector title="Concurrency and Entitlement Evidence" tables={sourceTables} preferred={["Concurrency Event Position", "Entitlement and Evidence Matrix", "Reconciliation Register"]} /></div> : null}
-      {view === "EOT Position" ? <div className="feature-stack"><ControlledTiaChartGrid charts={run.charts} view={view} /><section className="feature-card"><div className="feature-card-head"><div><h3>{displayCell(eot.label)}</h3><small>{displayCell(eot.message)}</small></div><span>{displayCell(eot.status)}</span></div><div className="workspace-grid compact-grid"><MiniMetric label="EOT Milestone" value={displayCell(eot.project_finish_milestone_id)} note="Submitted EOT-driving project finish" /><MiniMetric label="Before Finish" value={displayCell(eot.baseline_project_finish)} note="Approved matrix" /><MiniMetric label="After Finish" value={displayCell(eot.impacted_project_finish)} note="Approved matrix" /><MiniMetric label="Integrated Position" value={eot.integrated_eot_calendar_days === undefined ? "N/A" : `${numberValue(eot.integrated_eot_calendar_days)} days`} note="Indicative - P6 verification required" /></div></section><ProjectTableSelector title="EOT Position and Publication Gates" tables={sourceTables} preferred={["Concurrency Event Position", "Reconciliation Register", "Evidence Gaps", "Native XER Pair Register"]} /></div> : null}
+      {view === "Events and Fragnets" ? <div className="feature-stack"><ControlledTiaChartGrid charts={run.charts} view={view} /><ControlledTiaEventExhibits exhibits={events.event_exhibits} /><section className="feature-card"><div className="feature-card-head"><h3>Event and Fragnet Controls</h3><span>{displayCell(events.status)}</span></div><ul>{(events.fragnet_controls || []).map((control) => <li key={control}>{control}</li>)}</ul></section><ProjectTableSelector title="Project Event and Fragnet Register" tables={sourceTables} preferred={["Event and Fragnet Register", "Approved Before / After Matrix"]} /></div> : null}
+      {view === "Concurrency and Entitlement" ? <div className="feature-stack"><ControlledTiaViewExhibit exhibits={run.view_exhibits} view={view} emptyText="No approved concurrency exhibit is available for this selected project. Add its own controlled overlap analysis to the approved submission manifest." /><section className="feature-card"><div className="feature-card-head"><h3>Concurrency and Entitlement Controls</h3><span>{displayCell(concurrency.status)}</span></div><ul>{(concurrency.controls || []).map((control) => <li key={control}>{control}</li>)}</ul></section><ProjectTableSelector title="Concurrency and Entitlement Evidence" tables={sourceTables} preferred={["Concurrency Event Position", "Entitlement and Evidence Matrix", "Reconciliation Register"]} /></div> : null}
+      {view === "EOT Position" ? <div className="feature-stack"><ControlledTiaViewExhibit exhibits={run.view_exhibits} view={view} emptyText="No approved EOT summary exhibit is available for this selected project. Add its own project-local EOT summary to the approved submission manifest." /><section className="feature-card"><div className="feature-card-head"><div><h3>{displayCell(eot.label)}</h3><small>{displayCell(eot.message)}</small></div><span>{displayCell(eot.status)}</span></div><div className="workspace-grid compact-grid"><MiniMetric label="EOT Milestone" value={displayCell(eot.project_finish_milestone_id)} note="Submitted EOT-driving project finish" /><MiniMetric label="Before Finish" value={displayCell(eot.baseline_project_finish)} note="Approved matrix" /><MiniMetric label="After Finish" value={displayCell(eot.impacted_project_finish)} note="Approved matrix" /><MiniMetric label="Integrated Position" value={eot.integrated_eot_calendar_days === undefined ? "N/A" : `${numberValue(eot.integrated_eot_calendar_days)} days`} note="Indicative - P6 verification required" /></div></section><ProjectTableSelector title="EOT Position and Publication Gates" tables={sourceTables} preferred={["Concurrency Event Position", "Reconciliation Register", "Evidence Gaps", "Native XER Pair Register"]} /></div> : null}
       {view === "AI Review and Run Control" ? <div className="feature-stack"><section className="feature-card"><div className="feature-card-head"><h3>AI Scope and Run Control</h3><span>{displayCell(run.ai_scope?.status)}</span></div><p>{displayCell(run.ai_scope?.message)}</p><p>Run ID: {displayCell(run.run_id)} | Last controlled draft: {displayCell(run.last_run_at)}</p></section><AiInsightCard type="delay" projectKey={project.project_key} /><UnifiedIntelligenceSearch mode="project" projectKey={project.project_key} projectName={project.project_display_name} /></div> : null}
     </div>
   );

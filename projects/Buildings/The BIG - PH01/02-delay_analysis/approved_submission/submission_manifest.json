@@ -33,7 +33,71 @@
     {"source": "05-relationship_file.csv", "role": "Predecessor, successor, relationship type, and lag evidence", "status": "P6 parity required"},
     {"source": "Native XER TASKPRED records", "role": "Native relationship and lag evidence", "status": "P6 parity required"}
   ],
-  "events": [
+    "event_exhibits": [
+    {
+      "event_id": "EV01",
+      "event_variants": ["EV01-BATCH01", "EV01-BATCH02", "EV01-BATCH03"],
+      "title": "Event 01 - Steel Supply Delay: Cause, Effect and EOT Impact",
+      "file": "exhibits/Event_01_Steel_Supply_TIA_EOT_Mapping.png",
+      "display_order": 1,
+      "evidence_use": "Submitted event mapping exhibit only",
+      "control_note": "The approved before/after matrix controls active float and finish-movement values. This exhibit does not create or alter an EOT calculation."
+    },
+    {
+      "event_id": "EV02",
+      "event_variants": ["EV02"],
+      "title": "Event 02 - Revised IFC Drawings: Cause, Effect and EOT Impact",
+      "file": "exhibits/Event_02_IFC_Revised_Drawings_TIA_EOT_Mapping.png",
+      "display_order": 2,
+      "evidence_use": "Submitted event mapping exhibit only",
+      "control_note": "The approved before/after matrix controls the active 71-day project-finish movement. Archived 76-day wording remains reconciliation-only."
+    },
+    {
+      "event_id": "EV03",
+      "event_variants": ["EV03"],
+      "title": "Event 03 - MEP Variation: Cause, Effect and EOT Logic",
+      "file": "exhibits/Event_03_MEP_Variation_TIA_EOT_Mapping.png",
+      "display_order": 3,
+      "evidence_use": "Submitted event mapping exhibit only",
+      "control_note": "The event remains non-comparable because its before/after XER data dates are inconsistent. The approved matrix controls the no-demonstrated-impact position."
+    },
+    {
+      "event_id": "EV04",
+      "event_variants": ["EV04"],
+      "title": "Event 04 - RFI Delay: Cause, Effect and EOT Logic",
+      "file": "exhibits/Event_04_RFI_Delay_TIA_EOT_Mapping.png",
+      "display_order": 4,
+      "evidence_use": "Submitted event mapping exhibit only",
+      "control_note": "The event has no matching pre-impact XER. The approved matrix controls the no-demonstrated-impact position until native schedule evidence is complete."
+        }
+    ],
+    "view_exhibits": [
+        {
+            "view": "Time Impact Methodology",
+            "title": "Time Impact Analysis Methodology Flowchart",
+            "file": "exhibits/13_TIA_Methodology_Flowchart.svg",
+            "display_order": 1,
+            "evidence_use": "Submitted methodology exhibit only",
+            "control_note": "This exhibit presents the submitted methodology sequence. The approved before/after comparison matrix remains the authority for active project-finish movement."
+        },
+        {
+            "view": "Concurrency and Entitlement",
+            "title": "Concurrency Overlap Analysis",
+            "file": "exhibits/07_Concurrency_Overlap_Analysis_Large_Font.svg",
+            "display_order": 2,
+            "evidence_use": "Submitted concurrency exhibit only",
+            "control_note": "The submitted integrated reconciliation remains 117 + 71 - 62 = 126 calendar days. Entitlement and compensation require contract and P6 verification."
+        },
+        {
+            "view": "EOT Position",
+            "title": "EOT Summary Dashboard",
+            "file": "exhibits/10_EOT_Summary_Dashboard.svg",
+            "display_order": 3,
+            "evidence_use": "Submitted EOT summary exhibit only",
+            "control_note": "The active submitted position is 126 calendar days, subject to Primavera P6 verification and the controlled reconciliation register."
+        }
+    ],
+    "events": [
     {"event_variant": "EV01-BATCH01", "event_name": "EV01 - Employer's Late Supply of Free-Issue Reinforcement Steel - Batch 01", "inclusion_in_integrated_eot": "Excluded - no demonstrated impact", "impact_status": "No demonstrated impact", "p6_pair_status": "pair_registered", "notice_status": "Evidence review required", "causation_status": "No demonstrated impact in submitted matrix", "criticality_status": "No demonstrated impact in submitted matrix", "compensation_status": "Not concluded", "evidence_completeness": "P6 verification required"},
     {"event_variant": "EV01-BATCH02", "event_name": "EV01 - Employer's Late Supply of Free-Issue Reinforcement Steel - Batch 02", "inclusion_in_integrated_eot": "Included", "impact_status": "EOT-driving project impact", "p6_pair_status": "pair_registered", "notice_status": "Evidence review required", "causation_status": "Submitted project-finish movement", "criticality_status": "P6 verification required", "compensation_status": "Not concluded", "evidence_completeness": "P6 verification required"},
     {"event_variant": "EV01-BATCH03", "event_name": "EV01 - Employer's Late Supply of Free-Issue Reinforcement Steel - Batch 03", "inclusion_in_integrated_eot": "Excluded - consolidation rule required", "impact_status": "EOT-driving project impact", "p6_pair_status": "pair_registered", "notice_status": "Evidence review required", "causation_status": "Submitted project-finish movement", "criticality_status": "P6 verification required", "compensation_status": "Not concluded", "evidence_completeness": "P6 verification required"},

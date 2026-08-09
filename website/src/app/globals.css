@@ -2406,6 +2406,157 @@ h2 {
   background: #eef6fb;
 }
 
+.controlled-tia-exhibits,
+.controlled-tia-exhibit-readiness {
+  border-color: rgba(42, 209, 220, 0.34);
+  background: linear-gradient(145deg, rgba(8, 32, 52, 0.92), rgba(5, 16, 31, 0.9));
+}
+
+.controlled-tia-exhibits .feature-card-head small {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.controlled-tia-exhibit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.controlled-tia-exhibit-grid figure {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(78, 145, 182, 0.38);
+  border-radius: 12px;
+  background: #071425;
+}
+
+.controlled-tia-exhibit-grid a {
+  display: block;
+  background: #ffffff;
+}
+
+.controlled-tia-exhibit-grid a:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: -2px;
+}
+
+.controlled-tia-exhibit-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #ffffff;
+}
+
+.controlled-tia-exhibit-grid figcaption {
+  display: grid;
+  gap: 6px;
+  padding: 13px;
+}
+
+.controlled-tia-exhibit-grid strong {
+  color: #f5fbff;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.controlled-tia-exhibit-grid span {
+  color: var(--cyan);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.controlled-tia-exhibit-grid small,
+.controlled-tia-exhibit-readiness p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.controlled-tia-event-select {
+  display: grid;
+  gap: 7px;
+  max-width: 620px;
+  margin: 18px 0 14px;
+  color: #94a3b8;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.controlled-tia-event-select select {
+  width: 100%;
+  border: 1px solid rgba(6, 182, 212, .32);
+  border-radius: 9px;
+  background: #071425;
+  color: #e2e8f0;
+  padding: 11px 38px 11px 13px;
+  font: inherit;
+  letter-spacing: .02em;
+  text-transform: none;
+}
+
+.controlled-tia-event-exhibit,
+.controlled-tia-view-exhibit figure {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(78, 145, 182, .38);
+  border-radius: 12px;
+  background: #071425;
+}
+
+.controlled-tia-event-exhibit a,
+.controlled-tia-view-exhibit a {
+  display: block;
+  background: #071425;
+}
+
+.controlled-tia-event-exhibit a:focus-visible,
+.controlled-tia-view-exhibit a:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: -2px;
+}
+
+.controlled-tia-event-exhibit img,
+.controlled-tia-view-exhibit img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #071425;
+}
+
+.controlled-tia-event-exhibit figcaption,
+.controlled-tia-view-exhibit figcaption {
+  display: grid;
+  gap: 6px;
+  padding: 13px 15px;
+  background: #071425;
+}
+
+.controlled-tia-event-exhibit strong,
+.controlled-tia-view-exhibit strong {
+  color: #f5fbff;
+  font-size: .9rem;
+  overflow-wrap: anywhere;
+}
+
+.controlled-tia-event-exhibit span,
+.controlled-tia-view-exhibit span {
+  color: var(--cyan);
+  font-size: .76rem;
+  font-weight: 800;
+}
+
+.controlled-tia-event-exhibit small,
+.controlled-tia-view-exhibit small {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
 .submitted-tia-exhibits {
   border-color: rgba(214, 162, 58, 0.42);
 }
@@ -2461,6 +2612,10 @@ h2 {
   .tia-event-grid,
   .tia-visual-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .controlled-tia-exhibit-grid {
+    grid-template-columns: 1fr;
   }
 
   .technical-advisor-grid {

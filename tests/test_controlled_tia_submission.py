@@ -42,6 +42,18 @@ def test_the_big_submission_matrix_is_the_active_position() -> None:
     assert movements["EV01-BATCH03"] == 37
 
 
+def test_the_big_event_mapping_exhibits_are_evidence_only_and_project_scoped() -> None:
+    snapshot = build_controlled_tia_snapshot(the_big_project())
+    exhibits = snapshot["events_and_fragnets"]["event_exhibits"]
+
+    assert [exhibit["event_id"] for exhibit in exhibits] == ["EV01", "EV02", "EV03", "EV04"]
+    assert all(exhibit["project_id"] == THE_BIG_ID for exhibit in exhibits)
+    assert all(exhibit["project_key"] == THE_BIG_KEY for exhibit in exhibits)
+    assert all(exhibit["source_file"].endswith(".png") for exhibit in exhibits)
+    assert all("mapping exhibit" in exhibit["evidence_use"].lower() for exhibit in exhibits)
+    assert snapshot["eot_position"]["integrated_eot_calendar_days"] == 126
+
+
 def test_historic_values_are_reconciliation_only() -> None:
     snapshot = build_controlled_tia_snapshot(the_big_project())
     active = json.dumps({
@@ -78,3 +90,4 @@ def test_project_without_submission_never_receives_the_big_data(tmp_path: Path) 
     assert snapshot["status"] == SETUP_REQUIRED
     assert snapshot["eot_position"]["label"] == "Not available"
     assert snapshot["schedule_cpm"]["xer_pairs"] == []
+    assert snapshot["events_and_fragnets"]["event_exhibits"] == []

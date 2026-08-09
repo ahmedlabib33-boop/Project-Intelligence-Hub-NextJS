@@ -291,8 +291,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-09T07:58:24",
-  "fingerprint": "7c6bb74da8e256a7914c1d7d9e80d379a2fe4f42a132157dccd9ed0759fa83e5",
+  "last_updated": "2026-08-09T16:23:11",
+  "fingerprint": "14a03ee5b7f3e857fa6117ebf3d7c4d7e637fe94d4451437375e97dd070f9f4d",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -22975,7 +22975,7 @@
         "approval_status": "submitted_position_pending_p6_verification",
         "message": "The approved submitted EOT position is published with P6 verification gates.",
         "workflow_tabs": [
-          "Source Integrity",
+          "Time Impact Methodology",
           "Schedule and CPM",
           "Events and Fragnets",
           "Concurrency and Entitlement",
@@ -23007,8 +23007,8 @@
               "file": "submission_manifest.json",
               "required": true,
               "exists": true,
-              "sha256": "8e63b1fecff585d7c234ed4c44064ba3e872906eb5c2ad7a171c1a2f98219b08",
-              "size_bytes": 7666
+              "sha256": "c1892a64e8e6b56bc2de288254465ad8278cf24aba024c9734669e6ca4f81b56",
+              "size_bytes": 11069
             },
             {
               "file": "approved_before_after_fragnet_comparison.csv",
@@ -23016,6 +23016,55 @@
               "exists": true,
               "sha256": "5368dd6dd7f72648b1f124aabcc686425cc61c3ad4d0b81c97d5ea3fd6bb81c4",
               "size_bytes": 4849
+            },
+            {
+              "file": "Event_01_Steel_Supply_TIA_EOT_Mapping.png",
+              "required": false,
+              "exists": true,
+              "sha256": "759ae5934ea266f733cdfd4c7a88cfd9edcea5306ddd1b164dfab37f025e980c",
+              "size_bytes": 2440280
+            },
+            {
+              "file": "Event_02_IFC_Revised_Drawings_TIA_EOT_Mapping.png",
+              "required": false,
+              "exists": true,
+              "sha256": "cd4c3dde657bf0630e2ae468407969151b53fe8c702ea2f0cd7cd7ad8f779e1a",
+              "size_bytes": 1579621
+            },
+            {
+              "file": "Event_03_MEP_Variation_TIA_EOT_Mapping.png",
+              "required": false,
+              "exists": true,
+              "sha256": "ea96272568d7abf760e3a65b1f49e581aed034a16244ccc4c8bee49f0182e26f",
+              "size_bytes": 808145
+            },
+            {
+              "file": "Event_04_RFI_Delay_TIA_EOT_Mapping.png",
+              "required": false,
+              "exists": true,
+              "sha256": "3f2359727323f4130bb6233fa5b75c45f4bc26493d9eb3dd63d545afb598a6b5",
+              "size_bytes": 762940
+            },
+            {
+              "file": "13_TIA_Methodology_Flowchart.svg",
+              "required": false,
+              "exists": true,
+              "sha256": "5f726b61160d9016da0aada1a40faa98b7472af901b8703bc0cced1f9e1eed2d",
+              "size_bytes": 133499
+            },
+            {
+              "file": "07_Concurrency_Overlap_Analysis_Large_Font.svg",
+              "required": false,
+              "exists": true,
+              "sha256": "9fd89762c2709fb40abd22e6a79ba2051b2519b21a41883c69b563c9d7e2bc3d",
+              "size_bytes": 86761
+            },
+            {
+              "file": "10_EOT_Summary_Dashboard.svg",
+              "required": false,
+              "exists": true,
+              "sha256": "3fe6e12ff2c9637e462156211f90ca8e5882060e4e1e04e305a4caa112f4c789",
+              "size_bytes": 153584
             }
           ],
           "inventory": [
@@ -23057,6 +23106,41 @@
           "project_match": true,
           "validation_findings": []
         },
+        "view_exhibits": [
+          {
+            "project_id": "The Big -P.01-UP-20-April-26",
+            "project_key": "the-big-p-01-up-20-april-26",
+            "view": "Time Impact Methodology",
+            "title": "Time Impact Analysis Methodology Flowchart",
+            "display_order": 1,
+            "evidence_use": "Submitted methodology exhibit only",
+            "control_note": "This exhibit presents the submitted methodology sequence. The approved before/after comparison matrix remains the authority for active project-finish movement.",
+            "source_file": "13_TIA_Methodology_Flowchart.svg",
+            "url": "/generated/The-BIG-PH01/tia-controlled-view-exhibits/13-TIA-Methodology-Flowchart.svg"
+          },
+          {
+            "project_id": "The Big -P.01-UP-20-April-26",
+            "project_key": "the-big-p-01-up-20-april-26",
+            "view": "Concurrency and Entitlement",
+            "title": "Concurrency Overlap Analysis",
+            "display_order": 2,
+            "evidence_use": "Submitted concurrency exhibit only",
+            "control_note": "The submitted integrated reconciliation remains 117 + 71 - 62 = 126 calendar days. Entitlement and compensation require contract and P6 verification.",
+            "source_file": "07_Concurrency_Overlap_Analysis_Large_Font.svg",
+            "url": "/generated/The-BIG-PH01/tia-controlled-view-exhibits/07-Concurrency-Overlap-Analysis-Large-Font.svg"
+          },
+          {
+            "project_id": "The Big -P.01-UP-20-April-26",
+            "project_key": "the-big-p-01-up-20-april-26",
+            "view": "EOT Position",
+            "title": "EOT Summary Dashboard",
+            "display_order": 3,
+            "evidence_use": "Submitted EOT summary exhibit only",
+            "control_note": "The active submitted position is 126 calendar days, subject to Primavera P6 verification and the controlled reconciliation register.",
+            "source_file": "10_EOT_Summary_Dashboard.svg",
+            "url": "/generated/The-BIG-PH01/tia-controlled-view-exhibits/10-EOT-Summary-Dashboard.svg"
+          }
+        ],
         "schedule_cpm": {
           "status": "Submitted milestone matrix and XER-pair register available; Primavera P6 parity is pending.",
           "xer_pairs": [
@@ -23516,12 +23600,73 @@
               "criticality_status": "Not verified"
             }
           ],
+          "event_exhibits": [
+            {
+              "project_id": "The Big -P.01-UP-20-April-26",
+              "project_key": "the-big-p-01-up-20-april-26",
+              "event_id": "EV01",
+              "event_variants": [
+                "EV01-BATCH01",
+                "EV01-BATCH02",
+                "EV01-BATCH03"
+              ],
+              "title": "Event 01 - Steel Supply Delay: Cause, Effect and EOT Impact",
+              "display_order": 1,
+              "evidence_use": "Submitted event mapping exhibit only",
+              "control_note": "The approved before/after matrix controls active float and finish-movement values. This exhibit does not create or alter an EOT calculation.",
+              "source_file": "Event_01_Steel_Supply_TIA_EOT_Mapping.png",
+              "url": "/generated/The-BIG-PH01/tia-controlled-event-exhibits/Event-01-Steel-Supply-TIA-EOT-Mapping.png"
+            },
+            {
+              "project_id": "The Big -P.01-UP-20-April-26",
+              "project_key": "the-big-p-01-up-20-april-26",
+              "event_id": "EV02",
+              "event_variants": [
+                "EV02"
+              ],
+              "title": "Event 02 - Revised IFC Drawings: Cause, Effect and EOT Impact",
+              "display_order": 2,
+              "evidence_use": "Submitted event mapping exhibit only",
+              "control_note": "The approved before/after matrix controls the active 71-day project-finish movement. Archived 76-day wording remains reconciliation-only.",
+              "source_file": "Event_02_IFC_Revised_Drawings_TIA_EOT_Mapping.png",
+              "url": "/generated/The-BIG-PH01/tia-controlled-event-exhibits/Event-02-IFC-Revised-Drawings-TIA-EOT-Mapping.png"
+            },
+            {
+              "project_id": "The Big -P.01-UP-20-April-26",
+              "project_key": "the-big-p-01-up-20-april-26",
+              "event_id": "EV03",
+              "event_variants": [
+                "EV03"
+              ],
+              "title": "Event 03 - MEP Variation: Cause, Effect and EOT Logic",
+              "display_order": 3,
+              "evidence_use": "Submitted event mapping exhibit only",
+              "control_note": "The event remains non-comparable because its before/after XER data dates are inconsistent. The approved matrix controls the no-demonstrated-impact position.",
+              "source_file": "Event_03_MEP_Variation_TIA_EOT_Mapping.png",
+              "url": "/generated/The-BIG-PH01/tia-controlled-event-exhibits/Event-03-MEP-Variation-TIA-EOT-Mapping.png"
+            },
+            {
+              "project_id": "The Big -P.01-UP-20-April-26",
+              "project_key": "the-big-p-01-up-20-april-26",
+              "event_id": "EV04",
+              "event_variants": [
+                "EV04"
+              ],
+              "title": "Event 04 - RFI Delay: Cause, Effect and EOT Logic",
+              "display_order": 4,
+              "evidence_use": "Submitted event mapping exhibit only",
+              "control_note": "The event has no matching pre-impact XER. The approved matrix controls the no-demonstrated-impact position until native schedule evidence is complete.",
+              "source_file": "Event_04_RFI_Delay_TIA_EOT_Mapping.png",
+              "url": "/generated/The-BIG-PH01/tia-controlled-event-exhibits/Event-04-RFI-Delay-TIA-EOT-Mapping.png"
+            }
+          ],
           "status": "Event movement is sourced from the approved before/after comparison matrix.",
           "fragnet_controls": [
             "EV01 Batch 02 and EV02 are included in the submitted integrated EOT position.",
             "EV01 Batch 03 remains a visible 37-day event position but is excluded from the submitted 126-day consolidation pending a documented consolidation rule.",
             "EV03 is non-comparable because its before/after XER pair has inconsistent data dates; its submitted result remains no demonstrated impact.",
-            "EV04 is incomplete because its matching pre-impact XER is unavailable; its submitted result remains no demonstrated impact."
+            "EV04 is incomplete because its matching pre-impact XER is unavailable; its submitted result remains no demonstrated impact.",
+            "Event mapping exhibits are project-local visual evidence only. The approved matrix controls active float, finish-movement, concurrency, and EOT positions."
           ]
         },
         "concurrency_and_entitlement": {
@@ -24056,10 +24201,10 @@
             "resolution": "Reconciliation-only record. The approved matrix project-finish movement for EV02 is 71 calendar days."
           }
         ],
-        "source_fingerprint": "29041e5b6401d293958da96aa8a83c91a6cce74b8a2a74d9a9b6c304a9e3e23a",
+        "source_fingerprint": "6b26e6deb33387a95b018c0911ee8d908f847f04c5d82c73720af50048623a07",
         "automatic_draft": true,
-        "last_run_at": "2026-08-09T04:58:24.458256+00:00",
-        "run_id": "3c43930a26c2f67e"
+        "last_run_at": "2026-08-09T13:23:11.374403+00:00",
+        "run_id": "5b95057697e418b0"
       },
       "legacy_status": "Archived and excluded from the active TIA workflow.",
       "detectors": [
@@ -24128,8 +24273,8 @@
           "file": "submission_manifest.json",
           "required": true,
           "exists": true,
-          "sha256": "8e63b1fecff585d7c234ed4c44064ba3e872906eb5c2ad7a171c1a2f98219b08",
-          "size_bytes": 7666,
+          "sha256": "c1892a64e8e6b56bc2de288254465ad8278cf24aba024c9734669e6ca4f81b56",
+          "size_bytes": 11069,
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26"
         },
@@ -24139,6 +24284,69 @@
           "exists": true,
           "sha256": "5368dd6dd7f72648b1f124aabcc686425cc61c3ad4d0b81c97d5ea3fd6bb81c4",
           "size_bytes": 4849,
+          "project_id": "The Big -P.01-UP-20-April-26",
+          "project_key": "the-big-p-01-up-20-april-26"
+        },
+        {
+          "file": "Event_01_Steel_Supply_TIA_EOT_Mapping.png",
+          "required": false,
+          "exists": true,
+          "sha256": "759ae5934ea266f733cdfd4c7a88cfd9edcea5306ddd1b164dfab37f025e980c",
+          "size_bytes": 2440280,
+          "project_id": "The Big -P.01-UP-20-April-26",
+          "project_key": "the-big-p-01-up-20-april-26"
+        },
+        {
+          "file": "Event_02_IFC_Revised_Drawings_TIA_EOT_Mapping.png",
+          "required": false,
+          "exists": true,
+          "sha256": "cd4c3dde657bf0630e2ae468407969151b53fe8c702ea2f0cd7cd7ad8f779e1a",
+          "size_bytes": 1579621,
+          "project_id": "The Big -P.01-UP-20-April-26",
+          "project_key": "the-big-p-01-up-20-april-26"
+        },
+        {
+          "file": "Event_03_MEP_Variation_TIA_EOT_Mapping.png",
+          "required": false,
+          "exists": true,
+          "sha256": "ea96272568d7abf760e3a65b1f49e581aed034a16244ccc4c8bee49f0182e26f",
+          "size_bytes": 808145,
+          "project_id": "The Big -P.01-UP-20-April-26",
+          "project_key": "the-big-p-01-up-20-april-26"
+        },
+        {
+          "file": "Event_04_RFI_Delay_TIA_EOT_Mapping.png",
+          "required": false,
+          "exists": true,
+          "sha256": "3f2359727323f4130bb6233fa5b75c45f4bc26493d9eb3dd63d545afb598a6b5",
+          "size_bytes": 762940,
+          "project_id": "The Big -P.01-UP-20-April-26",
+          "project_key": "the-big-p-01-up-20-april-26"
+        },
+        {
+          "file": "13_TIA_Methodology_Flowchart.svg",
+          "required": false,
+          "exists": true,
+          "sha256": "5f726b61160d9016da0aada1a40faa98b7472af901b8703bc0cced1f9e1eed2d",
+          "size_bytes": 133499,
+          "project_id": "The Big -P.01-UP-20-April-26",
+          "project_key": "the-big-p-01-up-20-april-26"
+        },
+        {
+          "file": "07_Concurrency_Overlap_Analysis_Large_Font.svg",
+          "required": false,
+          "exists": true,
+          "sha256": "9fd89762c2709fb40abd22e6a79ba2051b2519b21a41883c69b563c9d7e2bc3d",
+          "size_bytes": 86761,
+          "project_id": "The Big -P.01-UP-20-April-26",
+          "project_key": "the-big-p-01-up-20-april-26"
+        },
+        {
+          "file": "10_EOT_Summary_Dashboard.svg",
+          "required": false,
+          "exists": true,
+          "sha256": "3fe6e12ff2c9637e462156211f90ca8e5882060e4e1e04e305a4caa112f4c789",
+          "size_bytes": 153584,
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26"
         }
@@ -27837,14 +28045,14 @@
           "relative_path": "The BIG - PH01/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 889.7,
-          "modified": "2026-08-09T07:58:27"
+          "modified": "2026-08-09T16:23:15"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-09T07:58:28"
+          "modified": "2026-08-09T16:23:16"
         },
         {
           "name": "02_master_dashboard.html",
@@ -27858,14 +28066,14 @@
           "relative_path": "The BIG - PH01/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 864.7,
-          "modified": "2026-08-09T07:58:30"
+          "modified": "2026-08-09T16:23:21"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "The BIG - PH01/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-09T07:58:30"
+          "modified": "2026-08-09T16:23:23"
         },
         {
           "name": "03_elite_svg_charts.html",
@@ -27879,14 +28087,14 @@
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 236.2,
-          "modified": "2026-08-09T07:58:31"
+          "modified": "2026-08-09T16:23:24"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-09T07:58:31"
+          "modified": "2026-08-09T16:23:25"
         },
         {
           "name": "04_linked_executive_dashboard.html",
@@ -27900,14 +28108,14 @@
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1276.9,
-          "modified": "2026-08-09T07:58:35"
+          "modified": "2026-08-09T16:23:39"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-09T07:58:35"
+          "modified": "2026-08-09T16:23:40"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
@@ -29551,12 +29759,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 911076,
-          "sha256": "9d152b5e8ac8d845e1c14719668ff0f118875e472eb711568915b9396d4a3db4"
+          "sha256": "39dead237c994279a2bafe9f136efcbec5fa3d16c6664c721434edf569d8a974"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29140,
-          "sha256": "495eab9dab97367be2603d11c52fc236d4f67d341d72aeb3a5caa9d29e4704c6"
+          "sha256": "c9b9ce61edf1c548ae7b4aa2d239eaa724bfd457859b58d9497ce32b7d886be5"
         }
       },
       "html_origin": "canonical_project_html",
@@ -29576,12 +29784,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 885433,
-          "sha256": "525c56847a3d59e6906147bf4c4cf125561846f18285e7d06cd513c4e2daacc6"
+          "sha256": "1f386996930a34727b5b5b745f9e0d89d32c96d4a80c7a281da857924f81c569"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29137,
-          "sha256": "86d88a9e7ec984b0a7d86a70966b7202be0ea69e26d096d8789206a0dd0d181b"
+          "sha256": "404bf7e6c8f3bb86b575dded30bc5b47d26a1e9862f118e49669b26a7e1f1da7"
         }
       },
       "html_origin": "canonical_project_html",
@@ -29601,12 +29809,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 241841,
-          "sha256": "7de58dfb0603dcebf0169da31c319850de9bb2b540d35b1967818dc7bec85854"
+          "sha256": "69c5a3630e95d279676ed4d79a58a7b00d034fcf97c06a0588a2cf200419e606"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29138,
-          "sha256": "ddf68b62c1eb03d574b0d367c744fc11a3344f13b2004d29b39a09fb7ed848b3"
+          "sha256": "716a4238bda9a72c047ca274e6180051a94ff50ed2fb41bb1c11ed889a1fe17a"
         }
       },
       "html_origin": "canonical_project_html",
@@ -29626,12 +29834,12 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1307503,
-          "sha256": "5a7ea3b2cbd6b1a51a7062a2b1a75f23d9a634b1c17508731220876382ccf8cd"
+          "sha256": "28226639682a23b492e28a989dbe1c841b49cb8a8651e497e60ec49b56292120"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29148,
-          "sha256": "ee5ed37c0c1bda90e22d2c1d4d7909ef78927137b3937bde501440da39fefc04"
+          "sha256": "27abc214ec8bc73ecdc0e2b561ba3e88d2bf7b2448ffe56694fae26fe39f498d"
         }
       },
       "html_origin": "canonical_project_html",

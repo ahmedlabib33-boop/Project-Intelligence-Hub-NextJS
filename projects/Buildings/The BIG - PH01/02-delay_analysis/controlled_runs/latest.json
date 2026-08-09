@@ -6,7 +6,7 @@
   "approval_status": "submitted_position_pending_p6_verification",
   "message": "The approved submitted EOT position is published with P6 verification gates.",
   "workflow_tabs": [
-    "Source Integrity",
+    "Time Impact Methodology",
     "Schedule and CPM",
     "Events and Fragnets",
     "Concurrency and Entitlement",
@@ -42,8 +42,8 @@
         "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\submission_manifest.json",
         "required": true,
         "exists": true,
-        "sha256": "8e63b1fecff585d7c234ed4c44064ba3e872906eb5c2ad7a171c1a2f98219b08",
-        "size_bytes": 7666
+        "sha256": "c1892a64e8e6b56bc2de288254465ad8278cf24aba024c9734669e6ca4f81b56",
+        "size_bytes": 11069
       },
       {
         "file": "approved_before_after_fragnet_comparison.csv",
@@ -52,6 +52,62 @@
         "exists": true,
         "sha256": "5368dd6dd7f72648b1f124aabcc686425cc61c3ad4d0b81c97d5ea3fd6bb81c4",
         "size_bytes": 4849
+      },
+      {
+        "file": "Event_01_Steel_Supply_TIA_EOT_Mapping.png",
+        "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\Event_01_Steel_Supply_TIA_EOT_Mapping.png",
+        "required": false,
+        "exists": true,
+        "sha256": "759ae5934ea266f733cdfd4c7a88cfd9edcea5306ddd1b164dfab37f025e980c",
+        "size_bytes": 2440280
+      },
+      {
+        "file": "Event_02_IFC_Revised_Drawings_TIA_EOT_Mapping.png",
+        "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\Event_02_IFC_Revised_Drawings_TIA_EOT_Mapping.png",
+        "required": false,
+        "exists": true,
+        "sha256": "cd4c3dde657bf0630e2ae468407969151b53fe8c702ea2f0cd7cd7ad8f779e1a",
+        "size_bytes": 1579621
+      },
+      {
+        "file": "Event_03_MEP_Variation_TIA_EOT_Mapping.png",
+        "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\Event_03_MEP_Variation_TIA_EOT_Mapping.png",
+        "required": false,
+        "exists": true,
+        "sha256": "ea96272568d7abf760e3a65b1f49e581aed034a16244ccc4c8bee49f0182e26f",
+        "size_bytes": 808145
+      },
+      {
+        "file": "Event_04_RFI_Delay_TIA_EOT_Mapping.png",
+        "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\Event_04_RFI_Delay_TIA_EOT_Mapping.png",
+        "required": false,
+        "exists": true,
+        "sha256": "3f2359727323f4130bb6233fa5b75c45f4bc26493d9eb3dd63d545afb598a6b5",
+        "size_bytes": 762940
+      },
+      {
+        "file": "13_TIA_Methodology_Flowchart.svg",
+        "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\13_TIA_Methodology_Flowchart.svg",
+        "required": false,
+        "exists": true,
+        "sha256": "5f726b61160d9016da0aada1a40faa98b7472af901b8703bc0cced1f9e1eed2d",
+        "size_bytes": 133499
+      },
+      {
+        "file": "07_Concurrency_Overlap_Analysis_Large_Font.svg",
+        "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\07_Concurrency_Overlap_Analysis_Large_Font.svg",
+        "required": false,
+        "exists": true,
+        "sha256": "9fd89762c2709fb40abd22e6a79ba2051b2519b21a41883c69b563c9d7e2bc3d",
+        "size_bytes": 86761
+      },
+      {
+        "file": "10_EOT_Summary_Dashboard.svg",
+        "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\10_EOT_Summary_Dashboard.svg",
+        "required": false,
+        "exists": true,
+        "sha256": "3fe6e12ff2c9637e462156211f90ca8e5882060e4e1e04e305a4caa112f4c789",
+        "size_bytes": 153584
       }
     ],
     "inventory": [
@@ -93,6 +149,44 @@
     "project_match": true,
     "validation_findings": []
   },
+  "view_exhibits": [
+    {
+      "project_id": "The Big -P.01-UP-20-April-26",
+      "project_key": "the-big-p-01-up-20-april-26",
+      "view": "Time Impact Methodology",
+      "title": "Time Impact Analysis Methodology Flowchart",
+      "display_order": 1,
+      "evidence_use": "Submitted methodology exhibit only",
+      "control_note": "This exhibit presents the submitted methodology sequence. The approved before/after comparison matrix remains the authority for active project-finish movement.",
+      "source_file": "13_TIA_Methodology_Flowchart.svg",
+      "source_relative_path": "exhibits/13_TIA_Methodology_Flowchart.svg",
+      "sha256": "5f726b61160d9016da0aada1a40faa98b7472af901b8703bc0cced1f9e1eed2d"
+    },
+    {
+      "project_id": "The Big -P.01-UP-20-April-26",
+      "project_key": "the-big-p-01-up-20-april-26",
+      "view": "Concurrency and Entitlement",
+      "title": "Concurrency Overlap Analysis",
+      "display_order": 2,
+      "evidence_use": "Submitted concurrency exhibit only",
+      "control_note": "The submitted integrated reconciliation remains 117 + 71 - 62 = 126 calendar days. Entitlement and compensation require contract and P6 verification.",
+      "source_file": "07_Concurrency_Overlap_Analysis_Large_Font.svg",
+      "source_relative_path": "exhibits/07_Concurrency_Overlap_Analysis_Large_Font.svg",
+      "sha256": "9fd89762c2709fb40abd22e6a79ba2051b2519b21a41883c69b563c9d7e2bc3d"
+    },
+    {
+      "project_id": "The Big -P.01-UP-20-April-26",
+      "project_key": "the-big-p-01-up-20-april-26",
+      "view": "EOT Position",
+      "title": "EOT Summary Dashboard",
+      "display_order": 3,
+      "evidence_use": "Submitted EOT summary exhibit only",
+      "control_note": "The active submitted position is 126 calendar days, subject to Primavera P6 verification and the controlled reconciliation register.",
+      "source_file": "10_EOT_Summary_Dashboard.svg",
+      "source_relative_path": "exhibits/10_EOT_Summary_Dashboard.svg",
+      "sha256": "3fe6e12ff2c9637e462156211f90ca8e5882060e4e1e04e305a4caa112f4c789"
+    }
+  ],
   "schedule_cpm": {
     "status": "Submitted milestone matrix and XER-pair register available; Primavera P6 parity is pending.",
     "xer_pairs": [
@@ -552,12 +646,77 @@
         "criticality_status": "Not verified"
       }
     ],
+    "event_exhibits": [
+      {
+        "project_id": "The Big -P.01-UP-20-April-26",
+        "project_key": "the-big-p-01-up-20-april-26",
+        "event_id": "EV01",
+        "event_variants": [
+          "EV01-BATCH01",
+          "EV01-BATCH02",
+          "EV01-BATCH03"
+        ],
+        "title": "Event 01 - Steel Supply Delay: Cause, Effect and EOT Impact",
+        "display_order": 1,
+        "evidence_use": "Submitted event mapping exhibit only",
+        "control_note": "The approved before/after matrix controls active float and finish-movement values. This exhibit does not create or alter an EOT calculation.",
+        "source_file": "Event_01_Steel_Supply_TIA_EOT_Mapping.png",
+        "source_relative_path": "exhibits/Event_01_Steel_Supply_TIA_EOT_Mapping.png",
+        "sha256": "759ae5934ea266f733cdfd4c7a88cfd9edcea5306ddd1b164dfab37f025e980c"
+      },
+      {
+        "project_id": "The Big -P.01-UP-20-April-26",
+        "project_key": "the-big-p-01-up-20-april-26",
+        "event_id": "EV02",
+        "event_variants": [
+          "EV02"
+        ],
+        "title": "Event 02 - Revised IFC Drawings: Cause, Effect and EOT Impact",
+        "display_order": 2,
+        "evidence_use": "Submitted event mapping exhibit only",
+        "control_note": "The approved before/after matrix controls the active 71-day project-finish movement. Archived 76-day wording remains reconciliation-only.",
+        "source_file": "Event_02_IFC_Revised_Drawings_TIA_EOT_Mapping.png",
+        "source_relative_path": "exhibits/Event_02_IFC_Revised_Drawings_TIA_EOT_Mapping.png",
+        "sha256": "cd4c3dde657bf0630e2ae468407969151b53fe8c702ea2f0cd7cd7ad8f779e1a"
+      },
+      {
+        "project_id": "The Big -P.01-UP-20-April-26",
+        "project_key": "the-big-p-01-up-20-april-26",
+        "event_id": "EV03",
+        "event_variants": [
+          "EV03"
+        ],
+        "title": "Event 03 - MEP Variation: Cause, Effect and EOT Logic",
+        "display_order": 3,
+        "evidence_use": "Submitted event mapping exhibit only",
+        "control_note": "The event remains non-comparable because its before/after XER data dates are inconsistent. The approved matrix controls the no-demonstrated-impact position.",
+        "source_file": "Event_03_MEP_Variation_TIA_EOT_Mapping.png",
+        "source_relative_path": "exhibits/Event_03_MEP_Variation_TIA_EOT_Mapping.png",
+        "sha256": "ea96272568d7abf760e3a65b1f49e581aed034a16244ccc4c8bee49f0182e26f"
+      },
+      {
+        "project_id": "The Big -P.01-UP-20-April-26",
+        "project_key": "the-big-p-01-up-20-april-26",
+        "event_id": "EV04",
+        "event_variants": [
+          "EV04"
+        ],
+        "title": "Event 04 - RFI Delay: Cause, Effect and EOT Logic",
+        "display_order": 4,
+        "evidence_use": "Submitted event mapping exhibit only",
+        "control_note": "The event has no matching pre-impact XER. The approved matrix controls the no-demonstrated-impact position until native schedule evidence is complete.",
+        "source_file": "Event_04_RFI_Delay_TIA_EOT_Mapping.png",
+        "source_relative_path": "exhibits/Event_04_RFI_Delay_TIA_EOT_Mapping.png",
+        "sha256": "3f2359727323f4130bb6233fa5b75c45f4bc26493d9eb3dd63d545afb598a6b5"
+      }
+    ],
     "status": "Event movement is sourced from the approved before/after comparison matrix.",
     "fragnet_controls": [
       "EV01 Batch 02 and EV02 are included in the submitted integrated EOT position.",
       "EV01 Batch 03 remains a visible 37-day event position but is excluded from the submitted 126-day consolidation pending a documented consolidation rule.",
       "EV03 is non-comparable because its before/after XER pair has inconsistent data dates; its submitted result remains no demonstrated impact.",
-      "EV04 is incomplete because its matching pre-impact XER is unavailable; its submitted result remains no demonstrated impact."
+      "EV04 is incomplete because its matching pre-impact XER is unavailable; its submitted result remains no demonstrated impact.",
+      "Event mapping exhibits are project-local visual evidence only. The approved matrix controls active float, finish-movement, concurrency, and EOT positions."
     ]
   },
   "concurrency_and_entitlement": {
@@ -1092,9 +1251,9 @@
       "resolution": "Reconciliation-only record. The approved matrix project-finish movement for EV02 is 71 calendar days."
     }
   ],
-  "source_fingerprint": "29041e5b6401d293958da96aa8a83c91a6cce74b8a2a74d9a9b6c304a9e3e23a",
+  "source_fingerprint": "6b26e6deb33387a95b018c0911ee8d908f847f04c5d82c73720af50048623a07",
   "automatic_draft": true,
-  "last_run_at": "2026-08-09T04:58:24.458256+00:00",
-  "run_id": "3c43930a26c2f67e",
+  "last_run_at": "2026-08-09T13:23:11.374403+00:00",
+  "run_id": "5b95057697e418b0",
   "run_path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\controlled_runs\\latest.json"
 }

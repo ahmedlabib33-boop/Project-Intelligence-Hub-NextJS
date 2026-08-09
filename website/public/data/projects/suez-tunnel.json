@@ -3504,7 +3504,7 @@
         "approval_status": "not_submitted",
         "message": "No project-local approved TIA release is configured in project_manifest.json.",
         "workflow_tabs": [
-          "Source Integrity",
+          "Time Impact Methodology",
           "Schedule and CPM",
           "Events and Fragnets",
           "Concurrency and Entitlement",
@@ -3518,12 +3518,14 @@
             "status": "not_checked"
           }
         },
+        "view_exhibits": [],
         "schedule_cpm": {
           "xer_pairs": [],
           "status": "Awaiting project-local approved XER baseline and impacted update."
         },
         "events_and_fragnets": {
           "events": [],
+          "event_exhibits": [],
           "status": "Awaiting project-local event register and affected activity mapping."
         },
         "concurrency_and_entitlement": {
