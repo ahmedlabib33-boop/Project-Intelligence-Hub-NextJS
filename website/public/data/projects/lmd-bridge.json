@@ -3497,7 +3497,7 @@
       },
       "logic_mode": "Controlled project-local Time Impact Analysis",
       "controlled_tia": {
-        "engine": "2026.08.controlled-project-tia.v1",
+        "engine": "2026.08.controlled-project-tia.v2.1",
         "project_id": "LMD-Bridge",
         "project_key": "lmd-bridge",
         "status": "SETUP_REQUIRED",

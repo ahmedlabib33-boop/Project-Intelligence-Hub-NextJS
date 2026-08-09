@@ -811,6 +811,9 @@ def public_controlled_tia_payload(snapshot: dict[str, Any]) -> dict[str, Any]:
     integrity = public.get("source_integrity")
     if isinstance(integrity, dict):
         integrity.pop("release_path", None)
+        archive = integrity.get("archive")
+        if isinstance(archive, dict):
+            archive.pop("path", None)
         for item in integrity.get("files", []):
             if isinstance(item, dict):
                 item.pop("path", None)

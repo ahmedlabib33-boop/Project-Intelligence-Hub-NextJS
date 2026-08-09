@@ -10,9 +10,12 @@
   "approved_tia_release": {
     "active": true,
     "project_id": "The Big -P.01-UP-20-April-26",
-    "source_type": "brain_labib_v34baba_signed_release",
-    "source_path": "../../../Delay Analysis - Time Impact Analysis/BRAIN_LABIB_V34baba_SIGNED_RELEASE",
-    "approval_status": "source_approved_pending_reconciliation",
-    "note": "The signed ROYA The BIG source release is project-owned evidence. Its native XER pairs are authoritative inputs; embedded reports remain reconciliation references only."
+    "source_type": "approved_eot_submission_archive",
+    "source_path": "02-delay_analysis/approved_submission",
+    "source_manifest": "submission_manifest.json",
+    "approved_matrix": "approved_before_after_fragnet_comparison.csv",
+    "archive_file": "Sub02-Delay Analysis (TIA) - Workbook to dashboard.rar",
+    "approval_status": "submitted_position_pending_p6_verification",
+    "note": "The approved project-local before/after fragnet matrix controls the active submitted EOT position. Historic BRAIN material remains reconciliation-only and cannot overwrite active TIA metrics, charts, AI facts, or outputs."
   }
 }

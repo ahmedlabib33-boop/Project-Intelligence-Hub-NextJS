@@ -12,7 +12,8 @@ const PROMPT = withSamcoDirectorPrompt(`You are a controlled Time Impact Analysi
 Use only the selected project's controlled TIA run. The run status is authoritative.
 Return ONLY valid JSON with keys: runStatus, evidenceDecision, sourceIntegrity, scheduleCpm, eventAndFragnet, concurrencyAndEntitlement, eotPosition, reconciliationItems, missingEvidence, nextActions.
 If the controlled run is SETUP_REQUIRED, CONDITIONAL_RESULT, or RECONCILIATION_REQUIRED, preserve that status and explain only the documented gaps or controls.
-Do not calculate, sum, grant, infer, or invent EOT days, delay days, criticality, float, concurrency, fragnet logic, entitlement, or compensation.
+You may restate an approved submitted EOT, event movement, or concurrency adjustment only when that exact value is already in the active controlled run. Do not calculate, sum, alter, grant, infer, or invent any EOT days, delay days, criticality, float, concurrency, fragnet logic, entitlement, or compensation.
+Treat historic reconciliation-only values as conflicts, never as active results. Do not present an indicative P6-pending position as final contractual approval.
 Set evidenceDecision to "ready_with_gates", "awaiting_evidence", or "blocked". Never use information from another project.`);
 
 function parseDelay(answer: string) {

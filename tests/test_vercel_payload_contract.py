@@ -51,10 +51,25 @@ def test_generated_project_payloads_keep_identity_tia_and_artifacts_scoped() -> 
             for chart in chart_items
         )
         assert payload["features"]["outputs_and_watchers"]["outputs_folder"].endswith(payload["project_folder_name"])
-        canonical_tia = payload["features"]["delay_analysis"]["canonical_analysis"]
-        assert canonical_tia["status"] in {"ready", "missing", "needs_review"}
-        if canonical_tia["status"] == "ready":
-            assert "relationship_logic_df" in canonical_tia["tables"]
+        controlled_tia = payload["features"]["delay_analysis"]["controlled_tia"]
+        assert controlled_tia["project_id"] == payload["project_id"]
+        assert controlled_tia["project_key"] == payload["project_key"]
+        assert controlled_tia["status"] in {
+            "SETUP_REQUIRED",
+            "CONDITIONAL_RESULT",
+            "RECONCILIATION_REQUIRED",
+            "READY_AND_CALCULATED",
+        }
+        assert controlled_tia["workflow_tabs"] == [
+            "Source Integrity",
+            "Schedule and CPM",
+            "Events and Fragnets",
+            "Concurrency and Entitlement",
+            "EOT Position",
+            "AI Review and Run Control",
+        ]
+        if payload["project_id"] != "The Big -P.01-UP-20-April-26":
+            assert controlled_tia["status"] == "SETUP_REQUIRED"
 
         submitted_visuals = payload["features"]["delay_analysis"].get("submitted_visuals", {})
         if submitted_visuals.get("available"):

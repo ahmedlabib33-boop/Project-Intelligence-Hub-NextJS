@@ -1,0 +1,59 @@
+{
+  "schema": "samco.controlled-eot-submission/1.0",
+  "project_id": "The Big -P.01-UP-20-April-26",
+  "project_key": "the-big-p-01-up-20-april-26",
+  "submission_title": "ROYA The BIG - Controlled EOT / Time Impact Analysis Submission",
+  "approval": {
+    "status": "submitted_position_pending_p6_verification",
+    "reviewer": "Eng. Ahmed Labib",
+    "approval_basis": "Approved Before/After Fragnet Comparison matrix",
+    "p6_parity_status": "pending_independent_primavera_verification"
+  },
+  "archive": {
+    "file": "Sub02-Delay Analysis (TIA) - Workbook to dashboard.rar",
+    "sha256": "8c4d95fe6af8c4ae4a54ce26b803d68b30494c13baba36e439960a178492bbee",
+    "source_role": "Controlled EOT evidence package; archived source material is not executed by the application."
+  },
+  "source_inventory": [
+    {"category": "XER schedules", "count": 11, "status": "registered", "purpose": "Native schedule and CPM evidence"},
+    {"category": "Excel workbooks", "count": 9, "status": "registered", "purpose": "Mappings, delay registers, and evidence schedules"},
+    {"category": "Correspondence PDFs", "count": 14, "status": "registered", "purpose": "Notice, instruction, and causation evidence"},
+    {"category": "DOCX submissions", "count": 2, "status": "registered", "purpose": "Claim and executive submission narrative"},
+    {"category": "Formal visuals", "count": 15, "status": "registered", "purpose": "Historical submission visual inventory; not live dashboard conclusions"}
+  ],
+  "xer_pairs": [
+    {"event_variant": "EV01-BATCH01", "status": "pair_registered", "data_date": "2025-10-31", "comparison_status": "approved_matrix_controls", "note": "Submitted matrix records no demonstrated impact."},
+    {"event_variant": "EV01-BATCH02", "status": "pair_registered", "data_date": "2025-11-26", "comparison_status": "approved_matrix_controls", "note": "Included in submitted integrated EOT position."},
+    {"event_variant": "EV01-BATCH03", "status": "pair_registered", "data_date": "2026-01-13", "comparison_status": "approved_matrix_controls", "note": "37-day project-finish movement is visible but excluded from the 126-day consolidation."},
+    {"event_variant": "EV02", "status": "pair_registered_reconciliation_required", "data_date": "2026-03-17", "comparison_status": "approved_matrix_controls", "note": "Active approved matrix movement is 71 days; archived 76-day wording is reconciliation-only."},
+    {"event_variant": "EV03", "status": "pair_non_comparable", "data_date": "2025-12-25", "comparison_status": "evidence_limitation", "note": "Before/after XER data dates are inconsistent. Submitted matrix records no demonstrated impact."},
+    {"event_variant": "EV04", "status": "pair_incomplete", "data_date": "2026-02-14", "comparison_status": "evidence_limitation", "note": "Matching pre-impact XER is missing. Submitted matrix records no demonstrated impact."}
+  ],
+  "relationship_evidence": [
+    {"source": "05-relationship_file.csv", "role": "Predecessor, successor, relationship type, and lag evidence", "status": "P6 parity required"},
+    {"source": "Native XER TASKPRED records", "role": "Native relationship and lag evidence", "status": "P6 parity required"}
+  ],
+  "events": [
+    {"event_variant": "EV01-BATCH01", "event_name": "EV01 - Employer's Late Supply of Free-Issue Reinforcement Steel - Batch 01", "inclusion_in_integrated_eot": "Excluded - no demonstrated impact", "impact_status": "No demonstrated impact", "p6_pair_status": "pair_registered", "notice_status": "Evidence review required", "causation_status": "No demonstrated impact in submitted matrix", "criticality_status": "No demonstrated impact in submitted matrix", "compensation_status": "Not concluded", "evidence_completeness": "P6 verification required"},
+    {"event_variant": "EV01-BATCH02", "event_name": "EV01 - Employer's Late Supply of Free-Issue Reinforcement Steel - Batch 02", "inclusion_in_integrated_eot": "Included", "impact_status": "EOT-driving project impact", "p6_pair_status": "pair_registered", "notice_status": "Evidence review required", "causation_status": "Submitted project-finish movement", "criticality_status": "P6 verification required", "compensation_status": "Not concluded", "evidence_completeness": "P6 verification required"},
+    {"event_variant": "EV01-BATCH03", "event_name": "EV01 - Employer's Late Supply of Free-Issue Reinforcement Steel - Batch 03", "inclusion_in_integrated_eot": "Excluded - consolidation rule required", "impact_status": "EOT-driving project impact", "p6_pair_status": "pair_registered", "notice_status": "Evidence review required", "causation_status": "Submitted project-finish movement", "criticality_status": "P6 verification required", "compensation_status": "Not concluded", "evidence_completeness": "P6 verification required"},
+    {"event_variant": "EV02", "event_name": "EV02 - Issuance of Revised IFC Drawings Causing Rework and Delay", "inclusion_in_integrated_eot": "Included", "impact_status": "EOT-driving project impact", "p6_pair_status": "pair_registered_reconciliation_required", "notice_status": "Evidence review required", "causation_status": "Submitted project-finish movement", "criticality_status": "P6 verification required", "compensation_status": "Not concluded", "evidence_completeness": "P6 verification required"},
+    {"event_variant": "EV03", "event_name": "EV03 - Engineer Instructed Additional MEP Embedded Works", "inclusion_in_integrated_eot": "Excluded - no demonstrated impact", "impact_status": "No demonstrated impact", "p6_pair_status": "pair_non_comparable", "notice_status": "Evidence review required", "causation_status": "No demonstrated impact in submitted matrix", "criticality_status": "Not comparable", "compensation_status": "Not concluded", "evidence_completeness": "Incomplete XER pair"},
+    {"event_variant": "EV04", "event_name": "EV04 - Engineer's Delayed Response to RFI and Required Technical Clarification", "inclusion_in_integrated_eot": "Excluded - no demonstrated impact", "impact_status": "No demonstrated impact", "p6_pair_status": "pair_incomplete", "notice_status": "Evidence review required", "causation_status": "No demonstrated impact in submitted matrix", "criticality_status": "Not verified", "compensation_status": "Not concluded", "evidence_completeness": "Missing pre-impact XER"}
+  ],
+  "submitted_eot_position": {
+    "ground_works_milestone_id": "KD-MS-1040",
+    "project_finish_milestone_id": "KD-MS-1050",
+    "baseline_project_finish": "2027-05-12",
+    "impacted_project_finish": "2027-09-15",
+    "included_event_variants": ["EV01-BATCH02", "EV02"],
+    "gross_included_event_movement_days": 188,
+    "concurrency_adjustment_days": 62,
+    "integrated_eot_calendar_days": 126
+  },
+  "historic_reconciliation": [
+    {"id": "HIST-131", "issue": "Archived historical material contains a 131-day EOT position.", "historical_value": "131 calendar days", "active_position": "126 calendar days", "resolution": "Reconciliation-only record. The approved before/after comparison matrix controls the active dashboard position."},
+    {"id": "HIST-164", "issue": "Archived historical material contains a 164-day gross-delay or claim narrative figure.", "historical_value": "164 calendar days", "active_position": "126 calendar days", "resolution": "Reconciliation-only record. It is excluded from active KPIs, charts, AI context, and outputs."},
+    {"id": "HIST-EV02-76", "issue": "Archived EV02 wording references 76 days.", "historical_value": "76 calendar days", "active_position": "71 calendar days", "resolution": "Reconciliation-only record. The approved matrix project-finish movement for EV02 is 71 calendar days."}
+  ]
+}

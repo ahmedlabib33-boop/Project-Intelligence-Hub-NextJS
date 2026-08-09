@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import ast
 import base64
+import csv
 import hashlib
 import io
 import json
@@ -21,7 +22,7 @@ from pathlib import Path
 from typing import Any
 
 
-ENGINE_VERSION = "2026.08.controlled-project-tia.v1"
+ENGINE_VERSION = "2026.08.controlled-project-tia.v2.1"
 SETUP_REQUIRED = "SETUP_REQUIRED"
 CONDITIONAL_RESULT = "CONDITIONAL_RESULT"
 RECONCILIATION_REQUIRED = "RECONCILIATION_REQUIRED"
@@ -33,6 +34,27 @@ WORKFLOW_TABS = (
     "Concurrency and Entitlement",
     "EOT Position",
     "AI Review and Run Control",
+)
+
+APPROVED_SUBMISSION_SOURCE_TYPE = "approved_eot_submission_archive"
+APPROVED_MATRIX_COLUMNS = (
+    "project_id",
+    "project_key",
+    "event_id",
+    "event_variant",
+    "data_date",
+    "activity_id",
+    "milestone_activity_name",
+    "before_total_float_days",
+    "before_forecast_finish",
+    "after_total_float_days",
+    "after_forecast_finish",
+    "float_change_days",
+    "finish_movement_calendar_days",
+    "impact_assessment",
+    "inclusion_in_integrated_eot",
+    "evidence_reference",
+    "verification_status",
 )
 
 
@@ -54,6 +76,21 @@ def _load_json(path: Path) -> dict[str, Any]:
     except (OSError, UnicodeDecodeError, json.JSONDecodeError):
         return {}
     return loaded if isinstance(loaded, dict) else {}
+
+
+def _read_csv_rows(path: Path) -> list[dict[str, str]]:
+    """Read a project-local CSV without falling back to another dataset."""
+    if not path.exists() or not path.is_file():
+        return []
+    for encoding in ("utf-8-sig", "utf-8", "cp1252"):
+        try:
+            with path.open("r", encoding=encoding, newline="") as handle:
+                return [{_text(key): _text(value) for key, value in row.items()} for row in csv.DictReader(handle)]
+        except UnicodeDecodeError:
+            continue
+        except OSError:
+            return []
+    return []
 
 
 def _manifest(project: dict[str, Any]) -> tuple[dict[str, Any], Path]:
@@ -181,6 +218,12 @@ def _int_value(value: Any) -> int | None:
         return int(float(_text(value)))
     except ValueError:
         return None
+
+
+def _date_difference_days(before: Any, after: Any) -> int | None:
+    before_date = _parse_xer_date(before)
+    after_date = _parse_xer_date(after)
+    return (after_date - before_date).days if before_date and after_date else None
 
 
 def _xer_summary(name: str, content: bytes) -> dict[str, Any]:
@@ -350,6 +393,361 @@ def _setup_snapshot(project: dict[str, Any], detail: str) -> dict[str, Any]:
     }
 
 
+def _submission_chart(
+    view: str,
+    chart_id: str,
+    title: str,
+    chart_type: str,
+    labels: list[str],
+    series: list[dict[str, Any]],
+    status: str,
+    note: str,
+) -> dict[str, Any]:
+    """Create a serialisable chart contract for the Vercel reference cards."""
+    return {
+        "view": view,
+        "id": chart_id,
+        "title": title,
+        "type": chart_type,
+        "labels": labels,
+        "series": series,
+        "status": status,
+        "note": note,
+        "lineage": "Approved project-local EOT submission register",
+    }
+
+
+def _submission_matrix_rows(
+    project: dict[str, Any], matrix_path: Path
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Validate the approved comparison matrix without creating schedule facts."""
+    expected_project_id = _text(project.get("project_id"))
+    expected_project_key = _text(project.get("project_key"))
+    raw_rows = _read_csv_rows(matrix_path)
+    findings: list[dict[str, Any]] = []
+    normalized: list[dict[str, Any]] = []
+    for source_row, raw in enumerate(raw_rows, start=2):
+        missing_columns = [column for column in APPROVED_MATRIX_COLUMNS if column not in raw]
+        if missing_columns:
+            findings.append({
+                "source_row": source_row,
+                "issue": "Required approved-matrix columns are missing.",
+                "detail": ", ".join(missing_columns),
+            })
+            continue
+        if raw["project_id"] != expected_project_id or raw["project_key"] != expected_project_key:
+            findings.append({
+                "source_row": source_row,
+                "issue": "Matrix row excluded because its project identity does not match the active project.",
+                "detail": f"row project_id={raw['project_id'] or 'blank'}; row project_key={raw['project_key'] or 'blank'}",
+            })
+            continue
+        before_float = _int_value(raw["before_total_float_days"])
+        after_float = _int_value(raw["after_total_float_days"])
+        reported_float_change = _int_value(raw["float_change_days"])
+        reported_movement = _int_value(raw["finish_movement_calendar_days"])
+        derived_float_change = after_float - before_float if before_float is not None and after_float is not None else None
+        derived_movement = _date_difference_days(raw["before_forecast_finish"], raw["after_forecast_finish"])
+        if derived_float_change is None or reported_float_change is None or derived_float_change != reported_float_change:
+            findings.append({
+                "source_row": source_row,
+                "issue": "Reported float change does not reconcile to the before/after float values.",
+                "detail": f"reported={raw['float_change_days'] or 'blank'}; derived={derived_float_change}",
+            })
+        if derived_movement is None or reported_movement is None or derived_movement != reported_movement:
+            findings.append({
+                "source_row": source_row,
+                "issue": "Reported finish movement does not reconcile to the before/after forecast dates.",
+                "detail": f"reported={raw['finish_movement_calendar_days'] or 'blank'}; derived={derived_movement}",
+            })
+        normalized.append({
+            **raw,
+            "source_row": source_row,
+            "before_total_float_days": before_float,
+            "after_total_float_days": after_float,
+            "float_change_days": reported_float_change,
+            "finish_movement_calendar_days": reported_movement,
+            "derived_float_change_days": derived_float_change,
+            "derived_finish_movement_calendar_days": derived_movement,
+        })
+    return normalized, findings
+
+
+def _approved_submission_snapshot(project: dict[str, Any], config: dict[str, Any], source_dir: Path) -> dict[str, Any]:
+    """Read one approved EOT submission register for its owning project only.
+
+    The adapter intentionally treats values in the matrix and manifest as the
+    submitted position. It validates their arithmetic and lineage but does not
+    insert a fragnet, rerun P6, or turn a submitted EOT position into a final
+    contractual entitlement.
+    """
+    expected_project_id = _text(project.get("project_id"))
+    expected_project_key = _text(project.get("project_key"))
+    manifest_path = source_dir / _text(config.get("source_manifest") or "submission_manifest.json")
+    matrix_path = source_dir / _text(config.get("approved_matrix") or "approved_before_after_fragnet_comparison.csv")
+    submission = _load_json(manifest_path)
+    if not submission:
+        return _setup_snapshot(project, "The project-local approved EOT submission manifest is missing or invalid.")
+    if _text(submission.get("project_id")) != expected_project_id or _text(submission.get("project_key")) != expected_project_key:
+        return _setup_snapshot(project, "The approved EOT submission register belongs to a different project and has been excluded.")
+
+    archive = submission.get("archive") if isinstance(submission.get("archive"), dict) else {}
+    archive_file = source_dir / _text(archive.get("file") or config.get("archive_file"))
+    archive_record = _file_record(archive_file)
+    expected_archive_hash = _text(archive.get("sha256")) or None
+    archive_integrity = "verified" if archive_record["exists"] and archive_record["sha256"] == expected_archive_hash else "failed"
+    matrix_rows, validation_findings = _submission_matrix_rows(project, matrix_path)
+    matrix_record = _file_record(matrix_path)
+    manifest_record = _file_record(manifest_path)
+    if not matrix_rows:
+        return _setup_snapshot(project, "The project-local approved before/after fragnet comparison matrix has no valid rows for this project.")
+
+    source_inventory = [item for item in submission.get("source_inventory", []) if isinstance(item, dict)]
+    xer_pairs = [item for item in submission.get("xer_pairs", []) if isinstance(item, dict)]
+    relationship_evidence = [item for item in submission.get("relationship_evidence", []) if isinstance(item, dict)]
+    submitted_position = submission.get("submitted_eot_position") if isinstance(submission.get("submitted_eot_position"), dict) else {}
+    event_metadata = {
+        _text(item.get("event_variant")): item
+        for item in submission.get("events", [])
+        if isinstance(item, dict) and _text(item.get("event_variant"))
+    }
+
+    rows_by_variant: dict[str, list[dict[str, Any]]] = {}
+    for row in matrix_rows:
+        rows_by_variant.setdefault(_text(row.get("event_variant")), []).append(row)
+    eot_milestone_id = _text(submitted_position.get("project_finish_milestone_id") or "KD-MS-1050")
+    event_positions: list[dict[str, Any]] = []
+    for event_variant, rows in rows_by_variant.items():
+        project_finish_row = next((row for row in rows if _text(row.get("activity_id")) == eot_milestone_id), None)
+        metadata = event_metadata.get(event_variant, {})
+        event_positions.append({
+            "project_id": expected_project_id,
+            "project_key": expected_project_key,
+            "event_id": _text((project_finish_row or rows[0]).get("event_id")),
+            "event_variant": event_variant,
+            "event_name": _text(metadata.get("event_name") or (project_finish_row or rows[0]).get("event_name")),
+            "project_finish_movement_calendar_days": (project_finish_row or {}).get("finish_movement_calendar_days"),
+            "project_finish_before": (project_finish_row or {}).get("before_forecast_finish"),
+            "project_finish_after": (project_finish_row or {}).get("after_forecast_finish"),
+            "inclusion_in_integrated_eot": _text(metadata.get("inclusion_in_integrated_eot") or (project_finish_row or rows[0]).get("inclusion_in_integrated_eot")),
+            "impact_status": _text(metadata.get("impact_status") or (project_finish_row or rows[0]).get("impact_assessment")),
+            "evidence_reference": _text(metadata.get("evidence_reference") or (project_finish_row or rows[0]).get("evidence_reference")),
+            "p6_pair_status": _text(metadata.get("p6_pair_status")) or "not_recorded",
+            "compensation_status": _text(metadata.get("compensation_status")) or "Not concluded",
+            "evidence_completeness": _text(metadata.get("evidence_completeness")) or "Pending P6 verification",
+        })
+    event_positions.sort(key=lambda item: (_text(item.get("event_id")), _text(item.get("event_variant"))))
+
+    included_variants = [_text(value) for value in submitted_position.get("included_event_variants", []) if _text(value)]
+    included_positions = [item for item in event_positions if item["event_variant"] in included_variants]
+    calculated_gross = sum(_int_value(item.get("project_finish_movement_calendar_days")) or 0 for item in included_positions)
+    gross_days = _int_value(submitted_position.get("gross_included_event_movement_days"))
+    concurrency_adjustment_days = _int_value(submitted_position.get("concurrency_adjustment_days"))
+    integrated_eot_days = _int_value(submitted_position.get("integrated_eot_calendar_days"))
+    if gross_days is None or calculated_gross != gross_days:
+        validation_findings.append({
+            "source_row": "summary",
+            "issue": "Included event movements do not reconcile to the submitted gross movement.",
+            "detail": f"submitted={gross_days}; derived={calculated_gross}",
+        })
+    if concurrency_adjustment_days is None or integrated_eot_days is None or gross_days is None or gross_days - concurrency_adjustment_days != integrated_eot_days:
+        validation_findings.append({
+            "source_row": "summary",
+            "issue": "Submitted concurrency adjustment does not reconcile to the integrated EOT position.",
+            "detail": f"gross={gross_days}; concurrency_adjustment={concurrency_adjustment_days}; integrated_eot={integrated_eot_days}",
+        })
+    baseline_finish = _text(submitted_position.get("baseline_project_finish"))
+    impacted_finish = _text(submitted_position.get("impacted_project_finish"))
+    derived_integrated_finish_movement = _date_difference_days(baseline_finish, impacted_finish)
+    if derived_integrated_finish_movement is None or integrated_eot_days is None or derived_integrated_finish_movement != integrated_eot_days:
+        validation_findings.append({
+            "source_row": "summary",
+            "issue": "Submitted EOT days do not reconcile to the submitted before/after project finish dates.",
+            "detail": f"submitted={integrated_eot_days}; derived={derived_integrated_finish_movement}",
+        })
+
+    historic_items = [item for item in submission.get("historic_reconciliation", []) if isinstance(item, dict)]
+    reconciliation_items = [
+        {
+            "id": _text(item.get("id")) or f"RC-{index:02d}",
+            "issue": _text(item.get("issue")) or "Historic reconciliation item",
+            "historical_value": item.get("historical_value"),
+            "active_position": item.get("active_position"),
+            "resolution": _text(item.get("resolution")) or "Reconciliation only; excluded from active EOT output.",
+        }
+        for index, item in enumerate(historic_items, start=1)
+    ]
+    reconciliation_items.extend(validation_findings)
+    evidence_matrix = [
+        {
+            **item,
+            "notice_status": _text(event_metadata.get(item["event_variant"], {}).get("notice_status")) or "Evidence review required",
+            "causation_status": _text(event_metadata.get(item["event_variant"], {}).get("causation_status")) or "P6 verification required",
+            "criticality_status": _text(event_metadata.get(item["event_variant"], {}).get("criticality_status")) or "P6 verification required",
+        }
+        for item in event_positions
+    ]
+
+    pair_statuses: dict[str, int] = {}
+    for pair in xer_pairs:
+        status = _text(pair.get("status")) or "not_recorded"
+        pair_statuses[status] = pair_statuses.get(status, 0) + 1
+    matrix_project_finish_rows = [row for row in matrix_rows if _text(row.get("activity_id")) == eot_milestone_id]
+    float_rows = [row for row in matrix_rows if (_int_value(row.get("float_change_days")) or 0) < 0]
+    event_labels = [f"{item['event_id']} {item['event_variant'].replace('EV01-', '')}".strip() for item in event_positions]
+    event_movements = [_int_value(item.get("project_finish_movement_calendar_days")) or 0 for item in event_positions]
+    float_labels = [f"{_text(row.get('event_variant'))} | {_text(row.get('milestone_activity_name'))}" for row in float_rows]
+    float_reductions = [abs(_int_value(row.get("float_change_days")) or 0) for row in float_rows]
+    charts = [
+        _submission_chart(
+            "Source Integrity",
+            "tia.source-pair-status",
+            "Native XER Pair Readiness",
+            "doughnut",
+            list(pair_statuses.keys()),
+            [{"label": "Registered XER pairs", "color": "#06b6d4", "values": list(pair_statuses.values())}],
+            "Submitted evidence inventory",
+            "Pair status is source-register evidence. Native Primavera parity remains a separate approval gate.",
+        ),
+        _submission_chart(
+            "Schedule and CPM",
+            "tia.float-degradation",
+            "Float Degradation by Submitted Fragnet",
+            "horizontal_bar",
+            float_labels,
+            [{"label": "Float reduction (days)", "color": "#f43f5e", "values": float_reductions}],
+            "Approved comparison matrix",
+            "Negative float changes are displayed as reduction magnitudes; schedule logic still requires P6 parity confirmation.",
+        ),
+        _submission_chart(
+            "Events and Fragnets",
+            "tia.event-impact",
+            "Project Finish Movement by Event",
+            "bar",
+            event_labels,
+            [{"label": "Project finish movement (calendar days)", "color": "#06b6d4", "values": event_movements}],
+            "Approved comparison matrix",
+            "The 37-day EV01 Batch 03 position remains visible but is not included in the submitted integrated EOT.",
+        ),
+        _submission_chart(
+            "Concurrency and Entitlement",
+            "tia.concurrency-reconciliation",
+            "Concurrency Reconciliation Waterfall",
+            "bar",
+            ["EV01 Batch 02", "EV02 Revised IFC", "Concurrency adjustment", "Submitted EOT"],
+            [
+                {"label": "Event movement", "color": "#06b6d4", "values": [
+                    _int_value(next((item.get("project_finish_movement_calendar_days") for item in event_positions if item["event_variant"] == included_variants[0]), None)) if included_variants else None,
+                    _int_value(next((item.get("project_finish_movement_calendar_days") for item in event_positions if len(included_variants) > 1 and item["event_variant"] == included_variants[1]), None)) if len(included_variants) > 1 else None,
+                    None,
+                    None,
+                ]},
+                {"label": "Concurrency adjustment", "color": "#f43f5e", "values": [None, None, concurrency_adjustment_days, None]},
+                {"label": "Integrated submitted EOT", "color": "#10b981", "values": [None, None, None, integrated_eot_days]},
+            ],
+            "Submitted position - P6 verification required",
+            "117 + 71 - 62 = 126 calendar days. This is an approved submission position, not an automatic compensation determination.",
+        ),
+        _submission_chart(
+            "EOT Position",
+            "tia.eot-finish-movement",
+            "Submitted Project Finish Movement",
+            "line",
+            ["Before EV01 Batch 02", "After EV01 Batch 02", "After EV02 / submitted position"],
+            [{"label": "Cumulative movement (calendar days)", "color": "#10b981", "values": [0, _int_value(next((item.get("project_finish_movement_calendar_days") for item in event_positions if included_variants and item["event_variant"] == included_variants[0]), None)), integrated_eot_days]}],
+            "Indicative - P6 verification required",
+            f"Submitted project finish: {baseline_finish or 'not recorded'} to {impacted_finish or 'not recorded'}.",
+        ),
+    ]
+
+    files = [archive_record, manifest_record, matrix_record]
+    source_fingerprint = _source_fingerprint(source_dir, files)
+    valid_arithmetic = not validation_findings
+    archive_message = "Archive hash matches the approved submission register." if archive_integrity == "verified" else "Archive hash does not match the approved submission register."
+    return {
+        "engine": ENGINE_VERSION,
+        "project_id": expected_project_id,
+        "project_key": expected_project_key,
+        "status": CONDITIONAL_RESULT if valid_arithmetic and archive_integrity == "verified" else RECONCILIATION_REQUIRED,
+        "approval_status": _text(submission.get("approval", {}).get("status")) or "submitted_position_pending_p6_verification",
+        "message": "The approved submitted EOT position is published with P6 verification gates." if valid_arithmetic and archive_integrity == "verified" else "The submitted EOT register contains evidence or arithmetic reconciliation findings.",
+        "workflow_tabs": list(WORKFLOW_TABS),
+        "source_integrity": {
+            "release_configured": True,
+            "release_type": APPROVED_SUBMISSION_SOURCE_TYPE,
+            "release_path": str(source_dir),
+            "archive": {**archive_record, "expected_sha256": expected_archive_hash, "integrity": archive_integrity, "message": archive_message},
+            "files": files,
+            "inventory": source_inventory,
+            "signature": {"status": "hash_verified" if archive_integrity == "verified" else "hash_failed", "message": archive_message},
+            "project_match": True,
+            "validation_findings": validation_findings,
+        },
+        "schedule_cpm": {
+            "status": "Submitted milestone matrix and XER-pair register available; Primavera P6 parity is pending.",
+            "xer_pairs": xer_pairs,
+            "approved_matrix": matrix_rows,
+            "relationship_evidence": relationship_evidence,
+            "cpm_controls": [
+                "KD-MS-1040 is the submitted Ground Works milestone.",
+                f"{eot_milestone_id} is the submitted EOT-driving Project Finish milestone.",
+                "Native XER relationships, lags, calendars, constraints, open ends, and out-of-sequence settings require Primavera P6 parity review before final approval.",
+            ],
+        },
+        "events_and_fragnets": {
+            "events": evidence_matrix,
+            "status": "Event movement is sourced from the approved before/after comparison matrix.",
+            "fragnet_controls": [
+                "EV01 Batch 02 and EV02 are included in the submitted integrated EOT position.",
+                "EV01 Batch 03 remains a visible 37-day event position but is excluded from the submitted 126-day consolidation pending a documented consolidation rule.",
+                "EV03 is non-comparable because its before/after XER pair has inconsistent data dates; its submitted result remains no demonstrated impact.",
+                "EV04 is incomplete because its matching pre-impact XER is unavailable; its submitted result remains no demonstrated impact.",
+            ],
+        },
+        "concurrency_and_entitlement": {
+            "status": "Submitted concurrency adjustment is visible; entitlement and compensation remain subject to contract and P6 verification.",
+            "gross_included_event_movement_days": gross_days,
+            "concurrency_adjustment_days": concurrency_adjustment_days,
+            "integrated_eot_calendar_days": integrated_eot_days,
+            "event_positions": event_positions,
+            "evidence_matrix": evidence_matrix,
+            "controls": [
+                "The submitted reconciliation is 117 + 71 - 62 = 126 calendar days.",
+                "EOT and compensation are assessed separately; no compensation conclusion is automated.",
+                "Contract notice, causation, criticality, and concurrency evidence must be verified for each event.",
+            ],
+        },
+        "eot_position": {
+            "status": "Indicative - P6 verification required",
+            "label": f"Submitted EOT position: {integrated_eot_days if integrated_eot_days is not None else 'not available'} calendar days",
+            "message": "The active submitted position is derived from the approved project-local matrix and requires verified Primavera P6 recalculation before final contractual approval.",
+            "project_finish_milestone_id": eot_milestone_id,
+            "ground_works_milestone_id": _text(submitted_position.get("ground_works_milestone_id") or "KD-MS-1040"),
+            "baseline_project_finish": baseline_finish or None,
+            "impacted_project_finish": impacted_finish or None,
+            "integrated_eot_calendar_days": integrated_eot_days,
+            "gross_included_event_movement_days": gross_days,
+            "concurrency_adjustment_days": concurrency_adjustment_days,
+            "included_event_positions": included_positions,
+            "excluded_event_positions": [item for item in event_positions if item not in included_positions],
+        },
+        "charts": charts,
+        "ai_scope": {
+            "status": "active_project_evidence_explanation_only",
+            "message": "Groq receives only this active project's structured approved submission run. It may explain submitted evidence, conflicts, and gaps; it cannot invent or alter EOT, fragnet, critical-path, entitlement, or compensation results.",
+        },
+        "missing_evidence": [
+            "Verified Primavera P6 recalculation and independent schedule-parity review.",
+            "Verified relationship, lag, calendar, constraint, open-end, and out-of-sequence controls for the relied-upon XER pairs.",
+            "Event-specific contract notice, causation, concurrency, and compensation evidence for any contractual entitlement decision.",
+        ],
+        "reconciliation_items": reconciliation_items,
+        "source_fingerprint": source_fingerprint,
+        "automatic_draft": True,
+        "last_run_at": datetime.now(timezone.utc).isoformat(),
+    }
+
+
 def build_controlled_tia_snapshot(project: dict[str, Any]) -> dict[str, Any]:
     """Build the active project's controlled TIA read model without mutation."""
     config, release_dir = _resolve_release(project)
@@ -360,6 +758,8 @@ def build_controlled_tia_snapshot(project: dict[str, Any]) -> dict[str, Any]:
         return _setup_snapshot(project, f"Configured approved TIA release is not available: {release_dir}")
     if _text(config.get("project_id")) and _text(config.get("project_id")) != expected_project_id:
         return _setup_snapshot(project, "The configured TIA release project_id does not match the active project.")
+    if _text(config.get("source_type")) == APPROVED_SUBMISSION_SOURCE_TYPE:
+        return _approved_submission_snapshot(project, config, release_dir)
 
     manifest_path = release_dir / "BRAIN_LABIB_V34baba_manifest.json"
     manifest_raw = manifest_path.read_bytes() if manifest_path.exists() else b""
@@ -513,7 +913,11 @@ def refresh_controlled_tia_run(project: dict[str, Any], approve: bool = False) -
     if approve and snapshot.get("status") == READY_AND_CALCULATED:
         snapshot["approval_status"] = "approved"
     elif snapshot.get("status") != SETUP_REQUIRED:
-        snapshot["approval_status"] = "unreviewed_draft"
+        # A controlled submission can be an approved *position* while still
+        # awaiting P6 parity. Preserve that qualified status instead of
+        # replacing it with the generic automatic-draft label.
+        if not _text(snapshot.get("approval_status")):
+            snapshot["approval_status"] = "unreviewed_draft"
     snapshot["run_id"] = hashlib.sha256(f"{snapshot.get('project_id')}|{snapshot.get('source_fingerprint')}".encode("utf-8")).hexdigest()[:16]
     snapshot["run_path"] = str(run_path)
     run_path.write_text(json.dumps(snapshot, indent=2, ensure_ascii=True) + "\n", encoding="utf-8")

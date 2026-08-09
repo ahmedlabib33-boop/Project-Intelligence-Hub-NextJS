@@ -220,7 +220,14 @@ function Invoke-GitHubApi([string]$Method, [string]$Uri, [object]$Body = $null) 
     }
     for ($attempt = 1; $attempt -le 4; $attempt++) {
         try {
-            return Invoke-RestMethod @params
+            # Invoke-RestMethod intermittently sends malformed binary blob payloads
+            # from Windows PowerShell 5.1. Use the lower-level HTTP response path
+            # and parse the JSON explicitly so XLSX/PDF source files sync reliably.
+            $response = Invoke-WebRequest @params -UseBasicParsing
+            if ([string]::IsNullOrWhiteSpace([string]$response.Content)) {
+                return $null
+            }
+            return ($response.Content | ConvertFrom-Json)
         } catch {
             $statusCode = $null
             $responseBody = ""
