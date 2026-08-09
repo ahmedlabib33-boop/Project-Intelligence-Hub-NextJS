@@ -6,7 +6,7 @@
   "approval_status": "submitted_position_pending_p6_verification",
   "message": "The approved submitted EOT position is published with P6 verification gates.",
   "workflow_tabs": [
-    "Time Impact Methodology",
+    "Source Integrity",
     "Schedule and CPM",
     "Events and Fragnets",
     "Concurrency and Entitlement",
@@ -42,8 +42,8 @@
         "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\submission_manifest.json",
         "required": true,
         "exists": true,
-        "sha256": "c1892a64e8e6b56bc2de288254465ad8278cf24aba024c9734669e6ca4f81b56",
-        "size_bytes": 11069
+        "sha256": "7de8949a18d8c1f5318916077b46b12ef6ff67a46908ae0d1b59dba959b67afa",
+        "size_bytes": 11056
       },
       {
         "file": "approved_before_after_fragnet_comparison.csv",
@@ -153,7 +153,7 @@
     {
       "project_id": "The Big -P.01-UP-20-April-26",
       "project_key": "the-big-p-01-up-20-april-26",
-      "view": "Time Impact Methodology",
+      "view": "Source Integrity",
       "title": "Time Impact Analysis Methodology Flowchart",
       "display_order": 1,
       "evidence_use": "Submitted methodology exhibit only",
@@ -1251,9 +1251,9 @@
       "resolution": "Reconciliation-only record. The approved matrix project-finish movement for EV02 is 71 calendar days."
     }
   ],
-  "source_fingerprint": "6b26e6deb33387a95b018c0911ee8d908f847f04c5d82c73720af50048623a07",
+  "source_fingerprint": "2acfec69041fe32289a95bb87c2beef9656d591f81cd689e45ad80f04ecb9af9",
   "automatic_draft": true,
-  "last_run_at": "2026-08-09T13:23:11.374403+00:00",
-  "run_id": "5b95057697e418b0",
+  "last_run_at": "2026-08-09T13:57:11.855732+00:00",
+  "run_id": "ad5651ff0102fd3b",
   "run_path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\controlled_runs\\latest.json"
 }

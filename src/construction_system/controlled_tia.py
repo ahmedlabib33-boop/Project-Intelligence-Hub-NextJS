@@ -28,7 +28,7 @@ CONDITIONAL_RESULT = "CONDITIONAL_RESULT"
 RECONCILIATION_REQUIRED = "RECONCILIATION_REQUIRED"
 READY_AND_CALCULATED = "READY_AND_CALCULATED"
 WORKFLOW_TABS = (
-    "Time Impact Methodology",
+    "Source Integrity",
     "Schedule and CPM",
     "Events and Fragnets",
     "Concurrency and Entitlement",
@@ -576,7 +576,7 @@ def _submission_view_exhibits(
     expected_project_id = _text(project.get("project_id"))
     expected_project_key = _text(project.get("project_key"))
     raw_exhibits = submission.get("view_exhibits")
-    allowed_views = {"Time Impact Methodology", "Concurrency and Entitlement", "EOT Position"}
+    allowed_views = {"Source Integrity", "Concurrency and Entitlement", "EOT Position"}
     allowed_suffixes = {".svg", ".png", ".jpg", ".jpeg", ".webp"}
     if not isinstance(raw_exhibits, list):
         return records, files, findings

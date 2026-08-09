@@ -291,8 +291,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-09T16:23:11",
-  "fingerprint": "14a03ee5b7f3e857fa6117ebf3d7c4d7e637fe94d4451437375e97dd070f9f4d",
+  "last_updated": "2026-08-09T16:57:11",
+  "fingerprint": "4161c6ad788660931833bb12d0a4a297850021dc05a6f08b052562e7a997fba9",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -22975,7 +22975,7 @@
         "approval_status": "submitted_position_pending_p6_verification",
         "message": "The approved submitted EOT position is published with P6 verification gates.",
         "workflow_tabs": [
-          "Time Impact Methodology",
+          "Source Integrity",
           "Schedule and CPM",
           "Events and Fragnets",
           "Concurrency and Entitlement",
@@ -23007,8 +23007,8 @@
               "file": "submission_manifest.json",
               "required": true,
               "exists": true,
-              "sha256": "c1892a64e8e6b56bc2de288254465ad8278cf24aba024c9734669e6ca4f81b56",
-              "size_bytes": 11069
+              "sha256": "7de8949a18d8c1f5318916077b46b12ef6ff67a46908ae0d1b59dba959b67afa",
+              "size_bytes": 11056
             },
             {
               "file": "approved_before_after_fragnet_comparison.csv",
@@ -23110,7 +23110,7 @@
           {
             "project_id": "The Big -P.01-UP-20-April-26",
             "project_key": "the-big-p-01-up-20-april-26",
-            "view": "Time Impact Methodology",
+            "view": "Source Integrity",
             "title": "Time Impact Analysis Methodology Flowchart",
             "display_order": 1,
             "evidence_use": "Submitted methodology exhibit only",
@@ -24201,10 +24201,10 @@
             "resolution": "Reconciliation-only record. The approved matrix project-finish movement for EV02 is 71 calendar days."
           }
         ],
-        "source_fingerprint": "6b26e6deb33387a95b018c0911ee8d908f847f04c5d82c73720af50048623a07",
+        "source_fingerprint": "2acfec69041fe32289a95bb87c2beef9656d591f81cd689e45ad80f04ecb9af9",
         "automatic_draft": true,
-        "last_run_at": "2026-08-09T13:23:11.374403+00:00",
-        "run_id": "5b95057697e418b0"
+        "last_run_at": "2026-08-09T13:57:11.855732+00:00",
+        "run_id": "ad5651ff0102fd3b"
       },
       "legacy_status": "Archived and excluded from the active TIA workflow.",
       "detectors": [
@@ -24273,8 +24273,8 @@
           "file": "submission_manifest.json",
           "required": true,
           "exists": true,
-          "sha256": "c1892a64e8e6b56bc2de288254465ad8278cf24aba024c9734669e6ca4f81b56",
-          "size_bytes": 11069,
+          "sha256": "7de8949a18d8c1f5318916077b46b12ef6ff67a46908ae0d1b59dba959b67afa",
+          "size_bytes": 11056,
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26"
         },
@@ -28045,14 +28045,14 @@
           "relative_path": "The BIG - PH01/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 889.7,
-          "modified": "2026-08-09T16:23:15"
+          "modified": "2026-08-09T16:57:19"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-09T16:23:16"
+          "modified": "2026-08-09T16:57:19"
         },
         {
           "name": "02_master_dashboard.html",
@@ -28066,14 +28066,14 @@
           "relative_path": "The BIG - PH01/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 864.7,
-          "modified": "2026-08-09T16:23:21"
+          "modified": "2026-08-09T16:57:23"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "The BIG - PH01/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-09T16:23:23"
+          "modified": "2026-08-09T16:57:23"
         },
         {
           "name": "03_elite_svg_charts.html",
@@ -28087,14 +28087,14 @@
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 236.2,
-          "modified": "2026-08-09T16:23:24"
+          "modified": "2026-08-09T16:57:25"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-09T16:23:25"
+          "modified": "2026-08-09T16:57:25"
         },
         {
           "name": "04_linked_executive_dashboard.html",
@@ -28108,14 +28108,14 @@
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1276.9,
-          "modified": "2026-08-09T16:23:39"
+          "modified": "2026-08-09T16:57:30"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-09T16:23:40"
+          "modified": "2026-08-09T16:57:30"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
@@ -29759,12 +29759,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 911076,
-          "sha256": "39dead237c994279a2bafe9f136efcbec5fa3d16c6664c721434edf569d8a974"
+          "sha256": "4ddd8141bef880d61c6ce1c778e583a09c33d23ab251435424902ee49447c120"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29140,
-          "sha256": "c9b9ce61edf1c548ae7b4aa2d239eaa724bfd457859b58d9497ce32b7d886be5"
+          "sha256": "b5441855f904a7a1c5298cb3b54a6b2265a40084dcdeb2696d2832183e0ac1be"
         }
       },
       "html_origin": "canonical_project_html",
@@ -29784,12 +29784,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 885433,
-          "sha256": "1f386996930a34727b5b5b745f9e0d89d32c96d4a80c7a281da857924f81c569"
+          "sha256": "7f266129f8df5672a1531275df06e37416da42cc4f7f2f83d897dfb17b7f5301"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29137,
-          "sha256": "404bf7e6c8f3bb86b575dded30bc5b47d26a1e9862f118e49669b26a7e1f1da7"
+          "sha256": "05a476e84f4dc483c7c0e27c612e13e042c56da55b73a242f23c58ac6f05e0f1"
         }
       },
       "html_origin": "canonical_project_html",
@@ -29809,12 +29809,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 241841,
-          "sha256": "69c5a3630e95d279676ed4d79a58a7b00d034fcf97c06a0588a2cf200419e606"
+          "sha256": "7fb364abc83f88652b14bab80c0056d294ca8a12a38cc761e32062d9065043d3"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29138,
-          "sha256": "716a4238bda9a72c047ca274e6180051a94ff50ed2fb41bb1c11ed889a1fe17a"
+          "sha256": "26aad69a6bf6dfe06db4067d2ffa80e0b30f9fc028f75b8b85378c53f5a08250"
         }
       },
       "html_origin": "canonical_project_html",
@@ -29834,12 +29834,12 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1307503,
-          "sha256": "28226639682a23b492e28a989dbe1c841b49cb8a8651e497e60ec49b56292120"
+          "sha256": "4e10cc4a7f2685ddbbb13793918b69809d0d108977bb20f8e1588ef3438dab48"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29148,
-          "sha256": "27abc214ec8bc73ecdc0e2b561ba3e88d2bf7b2448ffe56694fae26fe39f498d"
+          "sha256": "5c1a96e0b86963220574b5aed5a429279c19d6f207429c0b7ce09e19b832a085"
         }
       },
       "html_origin": "canonical_project_html",

@@ -419,6 +419,52 @@ def fetch_public_page(public_url: str) -> None:
         raise RuntimeError(f"{public_url}: {error}") from error
 
 
+def controlled_tia_delivery_contract(project: dict[str, Any]) -> dict[str, Any]:
+    """Return the public, project-scoped TIA fields that must not become stale.
+
+    This deliberately compares the controlled submission position and exhibit
+    links, rather than raw evidence files or workstation paths. It lets the
+    deployment gate catch an old Vercel build without exposing source material.
+    """
+    controlled = project.get("features", {}).get("delay_analysis", {}).get("controlled_tia", {})
+    if not isinstance(controlled, dict):
+        return {}
+    eot = controlled.get("eot_position", {})
+    events = controlled.get("events_and_fragnets", {})
+    eot = eot if isinstance(eot, dict) else {}
+    events = events if isinstance(events, dict) else {}
+    exhibits = events.get("event_exhibits", [])
+    normalized_exhibits = []
+    for exhibit in exhibits if isinstance(exhibits, list) else []:
+        if not isinstance(exhibit, dict):
+            continue
+        normalized_exhibits.append(
+            {
+                "event_id": exhibit.get("event_id"),
+                "project_id": exhibit.get("project_id"),
+                "project_key": exhibit.get("project_key"),
+                "url": exhibit.get("url"),
+            }
+        )
+    return {
+        "project_id": controlled.get("project_id"),
+        "project_key": controlled.get("project_key"),
+        "status": controlled.get("status"),
+        "workflow_tabs": controlled.get("workflow_tabs"),
+        "eot_position": {
+            key: eot.get(key)
+            for key in (
+                "integrated_eot_calendar_days",
+                "gross_included_event_movement_days",
+                "concurrency_adjustment_days",
+                "baseline_project_finish",
+                "impacted_project_finish",
+            )
+        },
+        "event_exhibits": normalized_exhibits,
+    }
+
+
 def validate_public_delivery(
     public_url: str,
     local_portfolio: dict[str, Any] | None,
@@ -482,6 +528,11 @@ def validate_public_delivery(
             errors.append(f"{project_key}: public advanced analytics does not match the selected-project local result")
         else:
             checks.append(f"{project_key}: public advanced analytics matches the selected-project local result")
+
+        if controlled_tia_delivery_contract(public_project) != controlled_tia_delivery_contract(local_project):
+            errors.append(f"{project_key}: public controlled TIA delivery contract does not match the selected-project local result")
+        else:
+            checks.append(f"{project_key}: public controlled TIA delivery contract matches local generation")
 
 
 def main(argv: list[str] | None = None) -> int:
