@@ -15,7 +15,6 @@ import ManagementDecisionBrief, { type ActionItem, type DecisionBriefItem } from
 import PredictiveWarningPanel from "../components/executive/PredictiveWarningPanel";
 import ScenarioPlanner from "../components/executive/ScenarioPlanner";
 import UnifiedIntelligenceSearch from "../components/executive/UnifiedIntelligenceSearch";
-import OutputStudioDownloadButton from "../components/OutputStudioDownloadButton";
 import ScheduleIntelligencePanel from "../components/schedule/ScheduleIntelligencePanel";
 type ReportKey = "executive_dashboard" | "master_dashboard" | "elite_svg_charts" | "linked_executive_dashboard";
 
@@ -1108,10 +1107,76 @@ function ReportFormatDownloads({ project, reportKey }: { project: ProjectRecord;
     <div className="report-format-downloads" aria-label="Direct report downloads">
       {formats.map(([label, href]) => (
         <a key={label} href={href} download={href.split("/").pop()} rel="noopener">
-          {label}
+          Download {label}
         </a>
       ))}
     </div>
+  );
+}
+
+function ReportArtifactReviewTabs({
+  reportTitle,
+  html,
+  pdf
+}: {
+  reportTitle: string;
+  html?: string;
+  pdf?: string;
+}) {
+  const [selectedPreview, setSelectedPreview] = useState<"html" | "pdf">("html");
+  const hasHtml = Boolean(html);
+  const hasPdf = Boolean(pdf);
+  const preview = selectedPreview === "pdf" && hasPdf ? "pdf" : "html";
+  const source = preview === "pdf" ? pdf : html;
+  const idBase = `report-preview-${reportTitle.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`;
+
+  if (!source) return null;
+
+  return (
+    <section className="artifact-review-workspace">
+      <header className="artifact-review-header">
+        <div>
+          <p className="eyebrow">Review in browser</p>
+          <h4>Interactive report workspace</h4>
+          <span>Read the complete report here. Downloads are only for handover, archive, or offline use.</span>
+        </div>
+        <div className="artifact-review-open-actions">
+          {hasHtml ? <a href={html} target="_blank" rel="noopener noreferrer">Open interactive HTML</a> : null}
+          {hasPdf ? <a href={pdf} target="_blank" rel="noopener noreferrer">Open PDF</a> : null}
+        </div>
+      </header>
+      <div className="artifact-review-tabs" role="tablist" aria-label={`${reportTitle} preview formats`}>
+        {hasHtml ? (
+          <button
+            type="button"
+            role="tab"
+            id={`${idBase}-html-tab`}
+            aria-controls={`${idBase}-panel`}
+            aria-selected={preview === "html"}
+            className={preview === "html" ? "active" : ""}
+            onClick={() => setSelectedPreview("html")}
+          >
+            Interactive HTML
+          </button>
+        ) : null}
+        {hasPdf ? (
+          <button
+            type="button"
+            role="tab"
+            id={`${idBase}-pdf-tab`}
+            aria-controls={`${idBase}-panel`}
+            aria-selected={preview === "pdf"}
+            className={preview === "pdf" ? "active" : ""}
+            onClick={() => setSelectedPreview("pdf")}
+          >
+            PDF Review
+          </button>
+        ) : null}
+      </div>
+      <div id={`${idBase}-panel`} role="tabpanel" aria-labelledby={`${idBase}-${preview}-tab`} className="artifact-review-frame-wrap">
+        <iframe key={`${reportTitle}-${preview}-${source}`} src={source} title={`${reportTitle} - ${preview === "html" ? "interactive HTML" : "PDF preview"}`} className="artifact-review-frame" />
+      </div>
+    </section>
   );
 }
 
@@ -1140,7 +1205,7 @@ function GovernedTiaReportDownloads({ project }: { project: ProjectRecord }) {
       <div className="report-format-downloads" aria-label="Governed Delay TIA report downloads">
         {availableFormats.map(([label, href]) => (
           <a key={label} href={href} download={href.split("/").pop()} rel="noopener">
-            {label}
+            Download {label}
           </a>
         ))}
       </div>
@@ -1235,7 +1300,7 @@ function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
           </div>
           {releasedFormats.length ? (
             <div className="report-format-downloads" aria-label="Universal report package downloads">
-              {releasedFormats.map(([label, href]) => <a key={label} href={href} download={href.split("/").pop()} rel="noopener">{label}</a>)}
+              {releasedFormats.map(([label, href]) => <a key={label} href={href} download={href.split("/").pop()} rel="noopener">Download {label}</a>)}
             </div>
           ) : selectedFamily?.status === "DRAFT_REVIEW_REQUIRED" ? (
             <p className="universal-local-note">A local draft exists but failed its release gate. Resolve the listed source gaps and rerun the controlled engine before this package can be published or downloaded.</p>
@@ -1243,7 +1308,12 @@ function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
             <p className="universal-local-note">Generate this package through the local controlled pipeline. The public website never executes the report engine or reads source files directly.</p>
           )}
           {selectedFamily.status === "GENERATED" && selectedFamily.artifacts.html ? (
-            <iframe src={selectedFamily.artifacts.html} title={`${project.project_display_name} - ${selectedFamily.title}`} />
+            <ReportArtifactReviewTabs
+              key={selectedFamily.key}
+              reportTitle={`${project.project_display_name} - ${selectedFamily.title}`}
+              html={selectedFamily.artifacts.html}
+              pdf={selectedFamily.artifacts.pdf}
+            />
           ) : null}
         </section>
       ) : null}
@@ -1284,7 +1354,7 @@ function OutputStudioPanel({
           <p className="eyebrow">Output Studio</p>
           <h2>{project.project_display_name}</h2>
         </div>
-        <span>Same-page generated outputs</span>
+        <span>Review in app - downloads optional</span>
       </div>
       <div className="output-studio-tabs" role="tablist" aria-label="Output Studio tabs">
         <button type="button" className={studioTab === "dashboards" ? "active" : ""} onClick={() => setStudioTab("dashboards")}>Dashboards</button>
@@ -1299,11 +1369,15 @@ function OutputStudioPanel({
               </button>
             ))}
           </div>
-          <OutputStudioDownloadButton href={reportHtml(project, selectedReport)} label={`Download ${reportTabs.find((tab) => tab.key === selectedReport)?.label || "Report"}`} />
           <ReportFormatDownloads project={project} reportKey={selectedReport} />
+          <ReportArtifactReviewTabs
+            key={selectedReport}
+            reportTitle={`${project.project_display_name} - ${reportTabs.find((tab) => tab.key === selectedReport)?.label || "Report"}`}
+            html={reportHtml(project, selectedReport)}
+            pdf={project.report_artifacts?.[selectedReport]?.pdf}
+          />
           {INTERNAL_TIA_SURFACE_ENABLED ? <GovernedTiaReportDownloads project={project} /> : null}
           <FileList title="Automatic Project Outputs" files={project.features.outputs_and_watchers.output_files} />
-          <iframe src={reportHtml(project, selectedReport)} title={`${project.project_display_name} - ${selectedReport}`} />
         </>
       ) : <UniversalReportEnginePanel project={project} />}
     </section>

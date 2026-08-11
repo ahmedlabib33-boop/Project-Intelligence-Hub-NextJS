@@ -3985,6 +3985,110 @@ h2 {
   color: var(--text);
 }
 
+/* Generated artifacts stay reviewable in the public workspace; export is optional. */
+.artifact-review-workspace {
+  margin: 18px 0;
+  overflow: hidden;
+  border: 1px solid rgba(57, 215, 210, 0.3);
+  border-radius: 18px;
+  background: rgba(3, 13, 25, 0.78);
+}
+
+.artifact-review-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 17px 18px 14px;
+  background: linear-gradient(135deg, rgba(14, 55, 82, 0.54), rgba(5, 20, 35, 0.68));
+}
+
+.artifact-review-header h4 {
+  margin: 4px 0 6px;
+  color: var(--text);
+  font-size: 1.02rem;
+}
+
+.artifact-review-header > div:first-child > span {
+  display: block;
+  max-width: 680px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.artifact-review-open-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.artifact-review-open-actions a {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(99, 168, 255, 0.44);
+  border-radius: 8px;
+  background: rgba(99, 168, 255, 0.1);
+  color: #b8d7ff;
+  padding: 7px 10px;
+  font-size: 0.73rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.artifact-review-open-actions a:hover,
+.artifact-review-open-actions a:focus-visible {
+  border-color: var(--cyan);
+  background: rgba(57, 215, 210, 0.16);
+  color: var(--text);
+}
+
+.artifact-review-tabs {
+  display: flex;
+  gap: 7px;
+  border-top: 1px solid rgba(132, 183, 217, 0.14);
+  border-bottom: 1px solid rgba(132, 183, 217, 0.2);
+  background: rgba(4, 15, 28, 0.82);
+  padding: 9px 14px;
+}
+
+.artifact-review-tabs button {
+  min-height: 37px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  padding: 7px 12px;
+  font-size: 0.78rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.artifact-review-tabs button:hover,
+.artifact-review-tabs button.active {
+  border-color: rgba(57, 215, 210, 0.46);
+  background: rgba(57, 215, 210, 0.12);
+  color: var(--text);
+}
+
+.artifact-review-frame-wrap {
+  min-height: 72vh;
+  background: #fff;
+}
+
+.artifact-review-workspace .artifact-review-frame {
+  display: block;
+  width: 100%;
+  min-height: 72vh;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: #fff;
+}
+
 @media (max-width: 1160px) {
   .operations-command-bar { grid-template-columns: 1fr minmax(280px, 1fr); }
   .command-status { display: none; }
@@ -4033,6 +4137,9 @@ h2 {
   .project-view-switch button { min-width: 0; flex: 1 1 calc(50% - 2px); white-space: normal; padding: 8px 10px; }
   .operations-footer { display: grid; line-height: 1.5; }
   .report-format-downloads a { flex: 1 1 0; }
+  .artifact-review-header { display: grid; }
+  .artifact-review-open-actions { justify-content: flex-start; }
+  .artifact-review-open-actions a { flex: 1 1 0; }
 }
 
 /* Schedule Intelligence ? browser-local Primavera XER analysis. */
