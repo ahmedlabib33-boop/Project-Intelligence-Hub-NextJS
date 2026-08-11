@@ -16,7 +16,7 @@ import PredictiveWarningPanel from "../components/executive/PredictiveWarningPan
 import ScenarioPlanner from "../components/executive/ScenarioPlanner";
 import UnifiedIntelligenceSearch from "../components/executive/UnifiedIntelligenceSearch";
 import OutputStudioDownloadButton from "../components/OutputStudioDownloadButton";
-
+import ScheduleIntelligencePanel from "../components/schedule/ScheduleIntelligencePanel";
 type ReportKey = "executive_dashboard" | "master_dashboard" | "elite_svg_charts" | "linked_executive_dashboard";
 
 type ReportArtifact = {
@@ -487,13 +487,13 @@ const workspaceTabs = [
   "Contracts",
   "Letters Intelligence",
   "Risks",
+  "Schedule Intelligence",
   "Delay Analysis - Time Impact Analysis",
   "Contract & Claims Intelligence Center",
   "Technical Advisor",
   "Conference",
   "Output Studio"
 ] as const;
-
 type WorkspaceTab = (typeof workspaceTabs)[number];
 const visibleWorkspaceTabs: WorkspaceTab[] = workspaceTabs.filter(
   (tab) => INTERNAL_TIA_SURFACE_ENABLED || tab !== "Delay Analysis - Time Impact Analysis"
@@ -1969,6 +1969,7 @@ function WorkspaceTabContent({
 
   if (activeTab === "Letters Intelligence") return <LettersIntelligencePanel project={project} />;
 
+  if (activeTab === "Schedule Intelligence") return <ScheduleIntelligencePanel projectName={project.project_display_name} />;
   if (INTERNAL_TIA_SURFACE_ENABLED && activeTab === "Delay Analysis - Time Impact Analysis") return <DelayTiaParityPanel project={project} />;
 
   if (activeTab === "Contract & Claims Intelligence Center") return <ContractClaimsParityPanel project={project} />;
