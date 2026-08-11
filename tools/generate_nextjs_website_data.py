@@ -16,6 +16,11 @@ from typing import Any
 from advanced_analytics import build_advanced_analytics
 from project_chart_payloads import build_project_chart_payloads
 from project_report_artifacts import ensure_project_report_artifacts
+from universal_report_engine_adapter import (
+    FAMILY_MANIFEST_NAME,
+    ensure_universal_report_engine_catalog,
+    is_released_artifact,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -1751,6 +1756,15 @@ def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
         public_slug = slugify(project_folder)
         artifacts = ensure_project_report_artifacts(project, output_dir, public_slug=public_slug)
         project["report_artifacts"] = artifacts
+
+        # The Universal Report Engine is a local controlled tool.  Its catalogue
+        # is always generated for the owning project, while report packages are
+        # published only after a local, source-bound engine run creates them.
+        project_dir = PROJECTS_ROOT / str(project.get("sector") or "") / str(project_folder)
+        if project_dir.is_dir():
+            project["universal_report_engine"] = ensure_universal_report_engine_catalog(
+                project, project_dir, output_dir, public_slug
+            )
         project["features"]["outputs_and_watchers"]["output_files"] = list_project_files(output_dir, OUTPUTS_ROOT, 80)
 
         target = GENERATED_ROOT / public_slug
@@ -1758,6 +1772,27 @@ def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
         for artifact in sorted(output_dir.iterdir()):
             if artifact.is_file() and artifact.suffix.lower() in {".html", ".pdf", ".pptx", ".docx"}:
                 copy_if_changed(artifact, target / artifact.name)
+
+        # Publish only release-approved Universal Report Engine artifacts.
+        # Context, raw source inventory, validation internals, and draft/failed
+        # packages stay on the local workstation under the selected project's
+        # output folder.
+        universal_root = output_dir / "universal-report-engine"
+        if universal_root.is_dir():
+            for manifest_path in sorted(universal_root.rglob(FAMILY_MANIFEST_NAME)):
+                manifest = read_json(manifest_path)
+                if not isinstance(manifest, dict) or not is_released_artifact(manifest):
+                    continue
+                if manifest.get("project_id") != project.get("project_id"):
+                    continue
+                if manifest.get("project_key") != project.get("project_key"):
+                    continue
+                for relative_path in (manifest.get("artifacts") or {}).values():
+                    if not isinstance(relative_path, str):
+                        continue
+                    artifact = output_dir / relative_path
+                    if artifact.is_file() and artifact.suffix.lower() in {".html", ".pdf", ".pptx", ".zip"}:
+                        copy_if_changed(artifact, target / relative_path)
 
 
 def copy_controlled_tia_exhibits(projects: list[dict[str, Any]]) -> None:

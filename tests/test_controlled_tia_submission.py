@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from construction_system.controlled_tia import CONDITIONAL_RESULT, SETUP_REQUIRED, build_controlled_tia_snapshot
+from construction_system.controlled_tia import RECONCILIATION_REQUIRED, SETUP_REQUIRED, build_controlled_tia_snapshot
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,7 +21,9 @@ def the_big_project() -> dict[str, str]:
 def test_the_big_submission_matrix_is_the_active_position() -> None:
     snapshot = build_controlled_tia_snapshot(the_big_project())
 
-    assert snapshot["status"] == CONDITIONAL_RESULT
+    # The submitted 126-day position is active, but archived 131/164-day and
+    # EV02 76-day figures remain open reconciliation records by design.
+    assert snapshot["status"] == RECONCILIATION_REQUIRED
     assert snapshot["approval_status"] == "submitted_position_pending_p6_verification"
     assert len(snapshot["schedule_cpm"]["approved_matrix"]) == 12
 

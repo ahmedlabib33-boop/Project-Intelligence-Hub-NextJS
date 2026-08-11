@@ -29,6 +29,60 @@ type ReportArtifact = {
   files?: Record<string, { name: string; bytes: number; sha256: string }>;
 };
 
+type UniversalReportArtifactLinks = Partial<{
+  html: string;
+  pdf: string;
+  pptx: string;
+  png_pptx: string;
+  package_zip: string;
+  engine_manifest: string;
+  validation: string;
+  project_model: string;
+  source_inventory: string;
+  evidence_assessment: string;
+}>;
+
+type UniversalReportFamily = {
+  key: string;
+  title: string;
+  summary: string;
+  native_schedule_required: boolean;
+  requires: string[];
+  status: "GENERATED" | "DRAFT_REVIEW_REQUIRED" | "STALE" | "READY_TO_GENERATE" | "MISSING_EVIDENCE" | "MISSING_SCHEDULE_EVIDENCE";
+  detail: string;
+  artifacts: UniversalReportArtifactLinks;
+  generated_at?: string | null;
+  release_status?: string | null;
+  validation_status?: string | null;
+};
+
+type UniversalReportEnginePayload = {
+  project_id: string;
+  project_key: string;
+  source_fingerprint: string;
+  source_file_count: number;
+  engine: {
+    available: boolean;
+    package_name?: string;
+    package_version?: string;
+    wrapper_version?: string;
+    author?: string;
+    rules?: number;
+    report_families?: number;
+    layers?: number;
+    capability_note?: string;
+  };
+  summary: { catalog_count: number; generated_count: number; ready_count: number; blocked_count: number };
+  report_families: UniversalReportFamily[];
+  ml_capability: {
+    task_count: number;
+    status: string;
+    detail: string;
+    ai_governance: string;
+    tasks: Array<{ key?: string; title?: string; description?: string }>;
+  };
+};
+
 type SourceChartSeries = {
   label: string;
   color: string;
@@ -120,6 +174,7 @@ type ProjectRecord = {
   features: FeaturePayload;
   reports: Record<ReportKey, string>;
   report_artifacts?: Partial<Record<ReportKey, ReportArtifact>> & Record<string, ReportArtifact | undefined>;
+  universal_report_engine?: UniversalReportEnginePayload;
 };
 
 // The portfolio payload deliberately excludes large feature tables. Those are loaded
@@ -1093,6 +1148,168 @@ function GovernedTiaReportDownloads({ project }: { project: ProjectRecord }) {
   );
 }
 
+function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
+  const engine = project.universal_report_engine;
+  const [selectedKey, setSelectedKey] = useState<string | null>(null);
+  const reportFamilies = engine?.report_families || [];
+  const selectedFamily = reportFamilies.find((item) => item.key === selectedKey)
+    || reportFamilies.find((item) => item.status === "GENERATED")
+    || reportFamilies[0];
+
+  useEffect(() => {
+    const firstGenerated = reportFamilies.find((item) => item.status === "GENERATED");
+    setSelectedKey(firstGenerated?.key || reportFamilies[0]?.key || null);
+  }, [project.project_id, project.project_key, reportFamilies.length]);
+
+  if (!engine || engine.project_id !== project.project_id || engine.project_key !== project.project_key) {
+    return (
+      <section className="feature-card universal-empty-state">
+        <div className="feature-card-head"><h3>Universal Report Engine - ML</h3><span>Project-scoped only</span></div>
+        <p>The controlled report-engine catalogue is not yet available for this selected project. Regenerate the project payload locally; no report from another project will be used as a fallback.</p>
+      </section>
+    );
+  }
+
+  const generatedFormats: Array<[string, string | undefined]> = selectedFamily
+    ? [
+        ["HTML", selectedFamily.artifacts.html],
+        ["PDF", selectedFamily.artifacts.pdf],
+        ["PowerPoint", selectedFamily.artifacts.pptx],
+        ["Full Package", selectedFamily.artifacts.package_zip],
+      ]
+    : [];
+  const activeFormats = generatedFormats.filter((item): item is [string, string] => Boolean(item[1]));
+  const releasedFormats = selectedFamily?.status === "GENERATED" ? activeFormats : [];
+
+  return (
+    <div className="universal-engine-stack">
+      <section className="universal-engine-hero">
+        <div>
+          <p className="eyebrow">Controlled Local Production Engine</p>
+          <h3>{engine.engine.package_name || "Universal Report Engine - ML"}</h3>
+          <p>{engine.engine.capability_note}</p>
+        </div>
+        <div className="universal-engine-stats">
+          <span><b>{numberValue(engine.engine.rules)}</b> Rules</span>
+          <span><b>{numberValue(engine.engine.report_families)}</b> Families</span>
+          <span><b>{numberValue(engine.engine.layers)}</b> Layers</span>
+          <span><b>{numberValue(engine.source_file_count)}</b> Project sources</span>
+        </div>
+      </section>
+
+      <section className="universal-engine-controls">
+        <div className="feature-card-head">
+          <div><h3>Report Family Catalogue</h3><small>Every package is bound to Project ID: {project.project_id}</small></div>
+          <span>{engine.summary.generated_count} generated / {engine.summary.catalog_count} available</span>
+        </div>
+        <div className="universal-report-grid" role="list" aria-label="Universal report families">
+          {reportFamilies.map((item) => (
+            <button
+              key={item.key}
+              type="button"
+              className={`universal-report-card ${selectedFamily?.key === item.key ? "active" : ""}`}
+              onClick={() => setSelectedKey(item.key)}
+            >
+              <span className={`universal-status ${item.status.toLowerCase()}`}>{item.status.replaceAll("_", " ")}</span>
+              <b>{item.title}</b>
+              <small>{item.summary}</small>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {selectedFamily ? (
+        <section className="feature-card universal-family-detail">
+          <div className="feature-card-head">
+            <div>
+              <p className="eyebrow">Selected Report Family</p>
+              <h3>{selectedFamily.title}</h3>
+            </div>
+            <span className={`universal-status ${selectedFamily.status.toLowerCase()}`}>{selectedFamily.status.replaceAll("_", " ")}</span>
+          </div>
+          <p>{selectedFamily.detail}</p>
+          <div className="universal-family-meta">
+            <span><b>Requirements:</b> {selectedFamily.requires.length ? selectedFamily.requires.join(", ") : "Project-controlled source evidence"}</span>
+            <span><b>Native schedule:</b> {selectedFamily.native_schedule_required ? "Required" : "Not mandatory"}</span>
+            <span><b>Release:</b> {selectedFamily.release_status?.replaceAll("_", " ") || "Not generated"}</span>
+          </div>
+          {releasedFormats.length ? (
+            <div className="report-format-downloads" aria-label="Universal report package downloads">
+              {releasedFormats.map(([label, href]) => <a key={label} href={href} download={href.split("/").pop()} rel="noopener">{label}</a>)}
+            </div>
+          ) : selectedFamily?.status === "DRAFT_REVIEW_REQUIRED" ? (
+            <p className="universal-local-note">A local draft exists but failed its release gate. Resolve the listed source gaps and rerun the controlled engine before this package can be published or downloaded.</p>
+          ) : (
+            <p className="universal-local-note">Generate this package through the local controlled pipeline. The public website never executes the report engine or reads source files directly.</p>
+          )}
+          {selectedFamily.status === "GENERATED" && selectedFamily.artifacts.html ? (
+            <iframe src={selectedFamily.artifacts.html} title={`${project.project_display_name} - ${selectedFamily.title}`} />
+          ) : null}
+        </section>
+      ) : null}
+
+      <section className="feature-card universal-ml-panel">
+        <div className="feature-card-head">
+          <div><h3>ML and AI Governance</h3><small>{engine.ml_capability.detail}</small></div>
+          <span>{engine.ml_capability.status.replaceAll("_", " ")}</span>
+        </div>
+        <p>{engine.ml_capability.ai_governance}</p>
+        <div className="universal-ml-grid">
+          {engine.ml_capability.tasks.map((task) => (
+            <div key={task.key || task.title} className="universal-ml-task">
+              <b>{task.title || task.key || "ML task"}</b>
+              <small>{task.description || "Source-backed local task."}</small>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function OutputStudioPanel({
+  project,
+  selectedReport,
+  setSelectedReport
+}: {
+  project: ProjectRecord;
+  selectedReport: ReportKey;
+  setSelectedReport: (key: ReportKey) => void;
+}) {
+  const [studioTab, setStudioTab] = useState<"dashboards" | "universal">("dashboards");
+  return (
+    <section className="glass-panel report-hologram output-studio-panel">
+      <div className="section-header">
+        <div>
+          <p className="eyebrow">Output Studio</p>
+          <h2>{project.project_display_name}</h2>
+        </div>
+        <span>Same-page generated outputs</span>
+      </div>
+      <div className="output-studio-tabs" role="tablist" aria-label="Output Studio tabs">
+        <button type="button" className={studioTab === "dashboards" ? "active" : ""} onClick={() => setStudioTab("dashboards")}>Dashboards</button>
+        <button type="button" className={studioTab === "universal" ? "active" : ""} onClick={() => setStudioTab("universal")}>Universal Report Engine - ML</button>
+      </div>
+      {studioTab === "dashboards" ? (
+        <>
+          <div className="report-switcher">
+            {reportTabs.map((tab) => (
+              <button type="button" key={tab.key} className={tab.key === selectedReport ? "report-tab active" : "report-tab"} onClick={() => setSelectedReport(tab.key)}>
+                <b>{tab.label}</b><span>{tab.note}</span>
+              </button>
+            ))}
+          </div>
+          <OutputStudioDownloadButton href={reportHtml(project, selectedReport)} label={`Download ${reportTabs.find((tab) => tab.key === selectedReport)?.label || "Report"}`} />
+          <ReportFormatDownloads project={project} reportKey={selectedReport} />
+          {INTERNAL_TIA_SURFACE_ENABLED ? <GovernedTiaReportDownloads project={project} /> : null}
+          <FileList title="Automatic Project Outputs" files={project.features.outputs_and_watchers.output_files} />
+          <iframe src={reportHtml(project, selectedReport)} title={`${project.project_display_name} - ${selectedReport}`} />
+        </>
+      ) : <UniversalReportEnginePanel project={project} />}
+    </section>
+  );
+}
+
 function downloadTableCsv(table: TablePreview, name: string) {
   const headers = table.columns;
   const escapeCsv = (value: unknown) => `"${String(value ?? "").replace(/"/g, '""')}"`;
@@ -1473,7 +1690,7 @@ function ControlledTiaViewExhibit({
 }
 
 function DelayTiaParityPanel({ project }: { project: ProjectRecord }) {
-  const [view, setView] = useState("Source Integrity");
+  const [view, setView] = useState("Time Impact Methodology");
   const delay = project.features.delay_analysis;
   const run = delay.controlled_tia;
   const integrity = run.source_integrity || {};
@@ -1508,7 +1725,7 @@ function DelayTiaParityPanel({ project }: { project: ProjectRecord }) {
         <section className="feature-card"><div className="feature-card-head"><h3>Evidence Boundary</h3><span>project_id enforced</span></div><p>Only this project&apos;s approved release, XER pairs, relationships, evidence references, controlled run, and project-scoped AI context are available. Another project&apos;s source package is never used as a fallback.</p></section>
       </div>
       <ModuleTabs label="Controlled TIA workflow" tabs={run.workflow_tabs} activeTab={view} onChange={setView} />
-      {view === "Source Integrity" ? <ControlledTiaViewExhibit exhibits={run.view_exhibits} view={view} emptyText="No approved methodology or source-integrity exhibit is available for this selected project. Add its own project-local methodology file to the approved submission manifest." /> : null}
+      {view === "Time Impact Methodology" ? <ControlledTiaViewExhibit exhibits={run.view_exhibits} view={view} emptyText="No approved methodology exhibit is available for this selected project. Add its own project-local methodology file to the approved submission manifest." /> : null}
       {view === "Schedule and CPM" ? <div className="feature-stack"><ControlledTiaChartGrid charts={run.charts} view={view} /><section className="feature-card"><div className="feature-card-head"><h3>Schedule and CPM Controls</h3><span>{displayCell(schedule.status)}</span></div><ul>{(schedule.cpm_controls || []).map((control) => <li key={control}>{control}</li>)}</ul></section><ProjectTableSelector title="Approved Matrix, Native XER, and CPM Evidence" tables={sourceTables} preferred={["Approved Before / After Matrix", "Native XER Pair Register", "Relationship and Lag Evidence"]} /></div> : null}
       {view === "Events and Fragnets" ? <div className="feature-stack"><ControlledTiaChartGrid charts={run.charts} view={view} /><ControlledTiaEventExhibits exhibits={events.event_exhibits} /><section className="feature-card"><div className="feature-card-head"><h3>Event and Fragnet Controls</h3><span>{displayCell(events.status)}</span></div><ul>{(events.fragnet_controls || []).map((control) => <li key={control}>{control}</li>)}</ul></section><ProjectTableSelector title="Project Event and Fragnet Register" tables={sourceTables} preferred={["Event and Fragnet Register", "Approved Before / After Matrix"]} /></div> : null}
       {view === "Concurrency and Entitlement" ? <div className="feature-stack"><ControlledTiaViewExhibit exhibits={run.view_exhibits} view={view} emptyText="No approved concurrency exhibit is available for this selected project. Add its own controlled overlap analysis to the approved submission manifest." /><section className="feature-card"><div className="feature-card-head"><h3>Concurrency and Entitlement Controls</h3><span>{displayCell(concurrency.status)}</span></div><ul>{(concurrency.controls || []).map((control) => <li key={control}>{control}</li>)}</ul></section><ProjectTableSelector title="Concurrency and Entitlement Evidence" tables={sourceTables} preferred={["Concurrency Event Position", "Entitlement and Evidence Matrix", "Reconciliation Register"]} /></div> : null}
@@ -1779,38 +1996,7 @@ function WorkspaceTabContent({
     return <ConferencePanel project={project} />;
   }
 
-  return (
-    <section className="glass-panel report-hologram output-studio-panel">
-      <div className="section-header">
-        <div>
-          <p className="eyebrow">Output Studio</p>
-          <h2>{project.project_display_name}</h2>
-        </div>
-        <span>Same-page generated outputs</span>
-      </div>
-      <div className="report-switcher">
-        {reportTabs.map((tab) => (
-          <button
-            type="button"
-            key={tab.key}
-            className={tab.key === selectedReport ? "report-tab active" : "report-tab"}
-            onClick={() => setSelectedReport(tab.key)}
-          >
-            <b>{tab.label}</b>
-            <span>{tab.note}</span>
-          </button>
-        ))}
-      </div>
-      <OutputStudioDownloadButton
-        href={reportHtml(project, selectedReport)}
-        label={`Download ${reportTabs.find((tab) => tab.key === selectedReport)?.label || "Report"}`}
-      />
-      <ReportFormatDownloads project={project} reportKey={selectedReport} />
-      {INTERNAL_TIA_SURFACE_ENABLED ? <GovernedTiaReportDownloads project={project} /> : null}
-      <FileList title="Automatic Project Outputs" files={project.features.outputs_and_watchers.output_files} />
-      <iframe src={reportHtml(project, selectedReport)} title={`${project.project_display_name} - ${selectedReport}`} />
-    </section>
-  );
+  return <OutputStudioPanel project={project} selectedReport={selectedReport} setSelectedReport={setSelectedReport} />;
 }
 
 function ProjectWorkspace({

@@ -169,15 +169,15 @@
     },
     "s_curve_forecast": {
       "status": "ready",
-      "method": "statsmodels damped Holt trend",
+      "method": "numpy linear trend fallback",
       "periods_available": 8,
       "current_actual_value": 113085034.8,
       "current_planned_value": 258975038.6,
       "completion_target_value": 367286025.0,
       "excluded_cumulative_reset_periods": 10,
       "recent_period_change": 5277326.6,
-      "projected_completion_date": "2027-12-01",
-      "months_to_target": 19,
+      "projected_completion_date": "2027-07-01",
+      "months_to_target": 14,
       "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
     },
     "s_curve_chart_url": "/data/analytics/the-big-p-01-up-20-april-26-s-curve-analytics.png",
@@ -248,25 +248,25 @@
           "installed": true
         },
         "seaborn": {
-          "installed": true
+          "installed": false
         },
         "scikit_learn": {
           "installed": true
         },
         "statsmodels": {
-          "installed": true
+          "installed": false
         },
         "spacy": {
           "installed": true
         },
         "xgboost": {
-          "installed": true
+          "installed": false
         },
         "pytorch": {
           "installed": true
         },
         "tensorflow": {
-          "installed": true
+          "installed": false
         }
       },
       "xgboost": {
@@ -291,8 +291,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-09T16:57:11",
-  "fingerprint": "4161c6ad788660931833bb12d0a4a297850021dc05a6f08b052562e7a997fba9",
+  "last_updated": "2026-08-11T07:03:56",
+  "fingerprint": "b281d1e3d68bd7cf28ef67026ea2661f400fac90b770c898028578ef668f4b74",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -12004,119 +12004,119 @@
           "relative_path": "07-letters_intelligence/inbox/From ACE/032.pdf",
           "extension": "pdf",
           "size_kb": 126.3,
-          "modified": "2026-05-05T11:31:44"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "033.pdf",
           "relative_path": "07-letters_intelligence/inbox/From ACE/033.pdf",
           "extension": "pdf",
           "size_kb": 126.3,
-          "modified": "2026-05-05T11:31:44"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "034-Submission of proof of payment for engineering stamps due on contractual works..pdf",
           "relative_path": "07-letters_intelligence/inbox/From ACE/034-Submission of proof of payment for engineering stamps due on contractual works..pdf",
           "extension": "pdf",
           "size_kb": 118.2,
-          "modified": "2026-05-06T10:30:56"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "035-Re Notification of Reinforcement Steel Supply Status and Entitlement to Tim Extensions.pdf",
           "relative_path": "07-letters_intelligence/inbox/From ACE/035-Re Notification of Reinforcement Steel Supply Status and Entitlement to Tim Extensions.pdf",
           "extension": "pdf",
           "size_kb": 87.2,
-          "modified": "2026-05-11T09:20:14"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "036-Failure to Achieve Section (1) Milestone within the contractual Due Date.pdf",
           "relative_path": "07-letters_intelligence/inbox/From ACE/036-Failure to Achieve Section (1) Milestone within the contractual Due Date.pdf",
           "extension": "pdf",
           "size_kb": 77.5,
-          "modified": "2026-05-11T11:28:22"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "037-Notice of Slow Progress Rate and Comments on Monthly Progress Report - April 2026.pdf",
           "relative_path": "07-letters_intelligence/inbox/From ACE/037-Notice of Slow Progress Rate and Comments on Monthly Progress Report - April 2026.pdf",
           "extension": "pdf",
           "size_kb": 254.1,
-          "modified": "2026-05-17T12:22:30"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-072.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-072.pdf",
           "extension": "pdf",
           "size_kb": 1479.1,
-          "modified": "2026-04-28T11:09:41"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-073.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-073.pdf",
           "extension": "pdf",
           "size_kb": 179.2,
-          "modified": "2026-04-30T09:14:46"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-074.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-074.pdf",
           "extension": "pdf",
           "size_kb": 197.8,
-          "modified": "2026-04-29T16:21:58"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-075.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-075.pdf",
           "extension": "pdf",
           "size_kb": 114.4,
-          "modified": "2026-04-30T09:14:28"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-076.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-076.pdf",
           "extension": "pdf",
           "size_kb": 161.8,
-          "modified": "2026-05-11T05:20:32"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-077.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-077.pdf",
           "extension": "pdf",
           "size_kb": 286.4,
-          "modified": "2026-05-11T15:08:33"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-078.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-078.pdf",
           "extension": "pdf",
           "size_kb": 225.4,
-          "modified": "2026-05-12T10:42:26"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-079.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-079.pdf",
           "extension": "pdf",
           "size_kb": 119.5,
-          "modified": "2026-05-24T15:56:39"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-080.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-080.pdf",
           "extension": "pdf",
           "size_kb": 127.6,
-          "modified": "2026-05-24T15:56:58"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-081.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-081.pdf",
           "extension": "pdf",
           "size_kb": 41.7,
-          "modified": "2026-05-24T10:04:56"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-082.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-082.pdf",
           "extension": "pdf",
           "size_kb": 390.2,
-          "modified": "2026-06-01T11:33:03"
+          "modified": "2026-08-11T06:54:29"
         }
       ],
       "inbox_file_count": 17,
@@ -22963,7 +22963,7 @@
         "source_scope": "selected_project_only",
         "automatic_engine": "controlled_project_tia",
         "groq_assist": "active_project_evidence_explanation_only",
-        "evidence_status": "CONDITIONAL_RESULT",
+        "evidence_status": "RECONCILIATION_REQUIRED",
         "activation_rule": "Only the active project's approved release may create a controlled run. No other project's XER, event, contract, evidence, or output is used."
       },
       "logic_mode": "Controlled project-local Time Impact Analysis",
@@ -22971,9 +22971,9 @@
         "engine": "2026.08.controlled-project-tia.v2.1",
         "project_id": "The Big -P.01-UP-20-April-26",
         "project_key": "the-big-p-01-up-20-april-26",
-        "status": "CONDITIONAL_RESULT",
+        "status": "RECONCILIATION_REQUIRED",
         "approval_status": "submitted_position_pending_p6_verification",
-        "message": "The approved submitted EOT position is published with P6 verification gates.",
+        "message": "The submitted EOT register contains evidence or arithmetic reconciliation findings.",
         "workflow_tabs": [
           "Source Integrity",
           "Schedule and CPM",
@@ -22988,34 +22988,34 @@
           "archive": {
             "file": "Sub02-Delay Analysis (TIA) - Workbook to dashboard.rar",
             "required": true,
-            "exists": true,
-            "sha256": "8c4d95fe6af8c4ae4a54ce26b803d68b30494c13baba36e439960a178492bbee",
-            "size_bytes": 56693839,
+            "exists": false,
+            "sha256": null,
+            "size_bytes": 0,
             "expected_sha256": "8c4d95fe6af8c4ae4a54ce26b803d68b30494c13baba36e439960a178492bbee",
-            "integrity": "verified",
-            "message": "Archive hash matches the approved submission register."
+            "integrity": "failed",
+            "message": "Archive hash does not match the approved submission register."
           },
           "files": [
             {
               "file": "Sub02-Delay Analysis (TIA) - Workbook to dashboard.rar",
               "required": true,
-              "exists": true,
-              "sha256": "8c4d95fe6af8c4ae4a54ce26b803d68b30494c13baba36e439960a178492bbee",
-              "size_bytes": 56693839
+              "exists": false,
+              "sha256": null,
+              "size_bytes": 0
             },
             {
               "file": "submission_manifest.json",
               "required": true,
               "exists": true,
-              "sha256": "7de8949a18d8c1f5318916077b46b12ef6ff67a46908ae0d1b59dba959b67afa",
-              "size_bytes": 11056
+              "sha256": "7f779ba80445bfb9e51a09bde80f64dc3cd3484af6ef5cd039c6d1084cf3391d",
+              "size_bytes": 11179
             },
             {
               "file": "approved_before_after_fragnet_comparison.csv",
               "required": true,
               "exists": true,
-              "sha256": "5368dd6dd7f72648b1f124aabcc686425cc61c3ad4d0b81c97d5ea3fd6bb81c4",
-              "size_bytes": 4849
+              "sha256": "06fcba409d1bb108bef12cda67d4a0c27483ba46885fd8337688b09b451385ce",
+              "size_bytes": 4862
             },
             {
               "file": "Event_01_Steel_Supply_TIA_EOT_Mapping.png",
@@ -23049,22 +23049,22 @@
               "file": "13_TIA_Methodology_Flowchart.svg",
               "required": false,
               "exists": true,
-              "sha256": "5f726b61160d9016da0aada1a40faa98b7472af901b8703bc0cced1f9e1eed2d",
-              "size_bytes": 133499
+              "sha256": "d7c2f72fb97c834f603e1961440cf6876d2d2186f8cbfa396077b80058887538",
+              "size_bytes": 137200
             },
             {
               "file": "07_Concurrency_Overlap_Analysis_Large_Font.svg",
               "required": false,
               "exists": true,
-              "sha256": "9fd89762c2709fb40abd22e6a79ba2051b2519b21a41883c69b563c9d7e2bc3d",
-              "size_bytes": 86761
+              "sha256": "f3e5d832767a294292bc6e3377f051ee3609fb7bb82068a5005ee432b76f149e",
+              "size_bytes": 89409
             },
             {
               "file": "10_EOT_Summary_Dashboard.svg",
               "required": false,
               "exists": true,
-              "sha256": "3fe6e12ff2c9637e462156211f90ca8e5882060e4e1e04e305a4caa112f4c789",
-              "size_bytes": 153584
+              "sha256": "bba5179ca66d7dbcbffb8bf5d0778a63aff3a860e733e284350660095f667bae",
+              "size_bytes": 157922
             }
           ],
           "inventory": [
@@ -23100,8 +23100,8 @@
             }
           ],
           "signature": {
-            "status": "hash_verified",
-            "message": "Archive hash matches the approved submission register."
+            "status": "hash_failed",
+            "message": "Archive hash does not match the approved submission register."
           },
           "project_match": true,
           "validation_findings": []
@@ -24201,10 +24201,10 @@
             "resolution": "Reconciliation-only record. The approved matrix project-finish movement for EV02 is 71 calendar days."
           }
         ],
-        "source_fingerprint": "2acfec69041fe32289a95bb87c2beef9656d591f81cd689e45ad80f04ecb9af9",
+        "source_fingerprint": "5cbcdabeab209c62b4301bca8ff7b835ed78cea731c5797bdb660b1d9a0b47ef",
         "automatic_draft": true,
-        "last_run_at": "2026-08-09T13:57:11.855732+00:00",
-        "run_id": "ad5651ff0102fd3b"
+        "last_run_at": "2026-08-11T04:03:56.898472+00:00",
+        "run_id": "1538d78284614182"
       },
       "legacy_status": "Archived and excluded from the active TIA workflow.",
       "detectors": [
@@ -24215,7 +24215,7 @@
         },
         {
           "name": "Source integrity control",
-          "status": "hash_verified",
+          "status": "hash_failed",
           "detail": "Validates signed-manifest and source-hash controls without executing the submitted package."
         },
         {
@@ -24229,12 +24229,12 @@
       "project_id": "The Big -P.01-UP-20-April-26",
       "project_key": "the-big-p-01-up-20-april-26",
       "assessment_profile": "controlled_tia_readiness",
-      "assessment_status": "CONDITIONAL_RESULT",
+      "assessment_status": "RECONCILIATION_REQUIRED",
       "source_scope": "selected_project_only",
       "gates": [
         {
           "name": "Source integrity",
-          "status": "hash_verified"
+          "status": "hash_failed"
         },
         {
           "name": "Schedule and CPM",
@@ -24263,9 +24263,9 @@
         {
           "file": "Sub02-Delay Analysis (TIA) - Workbook to dashboard.rar",
           "required": true,
-          "exists": true,
-          "sha256": "8c4d95fe6af8c4ae4a54ce26b803d68b30494c13baba36e439960a178492bbee",
-          "size_bytes": 56693839,
+          "exists": false,
+          "sha256": null,
+          "size_bytes": 0,
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26"
         },
@@ -24273,8 +24273,8 @@
           "file": "submission_manifest.json",
           "required": true,
           "exists": true,
-          "sha256": "7de8949a18d8c1f5318916077b46b12ef6ff67a46908ae0d1b59dba959b67afa",
-          "size_bytes": 11056,
+          "sha256": "7f779ba80445bfb9e51a09bde80f64dc3cd3484af6ef5cd039c6d1084cf3391d",
+          "size_bytes": 11179,
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26"
         },
@@ -24282,8 +24282,8 @@
           "file": "approved_before_after_fragnet_comparison.csv",
           "required": true,
           "exists": true,
-          "sha256": "5368dd6dd7f72648b1f124aabcc686425cc61c3ad4d0b81c97d5ea3fd6bb81c4",
-          "size_bytes": 4849,
+          "sha256": "06fcba409d1bb108bef12cda67d4a0c27483ba46885fd8337688b09b451385ce",
+          "size_bytes": 4862,
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26"
         },
@@ -24327,8 +24327,8 @@
           "file": "13_TIA_Methodology_Flowchart.svg",
           "required": false,
           "exists": true,
-          "sha256": "5f726b61160d9016da0aada1a40faa98b7472af901b8703bc0cced1f9e1eed2d",
-          "size_bytes": 133499,
+          "sha256": "d7c2f72fb97c834f603e1961440cf6876d2d2186f8cbfa396077b80058887538",
+          "size_bytes": 137200,
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26"
         },
@@ -24336,8 +24336,8 @@
           "file": "07_Concurrency_Overlap_Analysis_Large_Font.svg",
           "required": false,
           "exists": true,
-          "sha256": "9fd89762c2709fb40abd22e6a79ba2051b2519b21a41883c69b563c9d7e2bc3d",
-          "size_bytes": 86761,
+          "sha256": "f3e5d832767a294292bc6e3377f051ee3609fb7bb82068a5005ee432b76f149e",
+          "size_bytes": 89409,
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26"
         },
@@ -24345,8 +24345,8 @@
           "file": "10_EOT_Summary_Dashboard.svg",
           "required": false,
           "exists": true,
-          "sha256": "3fe6e12ff2c9637e462156211f90ca8e5882060e4e1e04e305a4caa112f4c789",
-          "size_bytes": 153584,
+          "sha256": "bba5179ca66d7dbcbffb8bf5d0778a63aff3a860e733e284350660095f667bae",
+          "size_bytes": 157922,
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26"
         }
@@ -24479,28 +24479,21 @@
           "relative_path": "05-contracts/source/Overall Contract.pdf",
           "extension": "pdf",
           "size_kb": 4169.5,
-          "modified": "2026-04-20T13:33:50"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "Overall_Contract_clause_library.xlsx",
           "relative_path": "05-contracts/source/Overall_Contract_clause_library.xlsx",
           "extension": "xlsx",
           "size_kb": 26.5,
-          "modified": "2026-05-06T15:31:15"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "README.md",
           "relative_path": "05-contracts/source/README.md",
           "extension": "md",
           "size_kb": 0.2,
-          "modified": "2026-06-06T04:50:20"
-        },
-        {
-          "name": "~$erall Contract.pdf",
-          "relative_path": "05-contracts/source/~$erall Contract.pdf",
-          "extension": "pdf",
-          "size_kb": 0.2,
-          "modified": "2026-06-27T10:58:47"
+          "modified": "2026-08-11T06:54:29"
         }
       ],
       "evidence_files": [
@@ -24509,42 +24502,42 @@
           "relative_path": "06-evidence/clause_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-06-19T09:24:12"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "contract_evidence_register_template.csv",
           "relative_path": "06-evidence/contract_evidence_register_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-06-19T09:24:12"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "correspondence_reference_template.csv",
           "relative_path": "06-evidence/correspondence_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-06-19T09:24:12"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "document_reference_template.csv",
           "relative_path": "06-evidence/document_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-06-19T09:24:12"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "evidence_register_template.csv",
           "relative_path": "06-evidence/evidence_register_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-06-19T09:24:12"
+          "modified": "2026-08-11T06:54:29"
         },
         {
           "name": "photo_log_template.csv",
           "relative_path": "06-evidence/photo_log_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-06-19T09:24:12"
+          "modified": "2026-08-11T06:54:29"
         }
       ],
       "database": {
@@ -27051,7 +27044,7 @@
       "controlled_assessment": {
         "status": {
           "knowledge_base_status": "Needs review",
-          "error": "cannot import name 'build_project_contract_controls' from 'contract_claims_center' (D:\\Project Intelligence Hub NextJS\\contract_claims_center.py)"
+          "error": "cannot import name 'build_project_contract_controls' from 'contract_claims_center' (D:\\Project Intelligence Hub NextJS-publish-output-studio\\contract_claims_center.py)"
         },
         "controls": {
           "project_id": "The Big -P.01-UP-20-April-26",
@@ -28038,119 +28031,126 @@
           "relative_path": "The BIG - PH01/01_executive_dashboard.html",
           "extension": "html",
           "size_kb": 17.8,
-          "modified": "2026-08-01T12:03:37"
+          "modified": "2026-08-11T06:54:27"
         },
         {
           "name": "01_executive_dashboard.pdf",
           "relative_path": "The BIG - PH01/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 889.7,
-          "modified": "2026-08-09T16:57:19"
+          "modified": "2026-08-11T07:04:12"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/01_executive_dashboard.pptx",
           "extension": "pptx",
-          "size_kb": 28.5,
-          "modified": "2026-08-09T16:57:19"
+          "size_kb": 28.6,
+          "modified": "2026-08-11T07:04:13"
         },
         {
           "name": "02_master_dashboard.html",
           "relative_path": "The BIG - PH01/02_master_dashboard.html",
           "extension": "html",
           "size_kb": 115.6,
-          "modified": "2026-08-01T12:03:37"
+          "modified": "2026-08-11T06:54:27"
         },
         {
           "name": "02_master_dashboard.pdf",
           "relative_path": "The BIG - PH01/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 864.7,
-          "modified": "2026-08-09T16:57:23"
+          "modified": "2026-08-11T07:04:15"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "The BIG - PH01/02_master_dashboard.pptx",
           "extension": "pptx",
-          "size_kb": 28.5,
-          "modified": "2026-08-09T16:57:23"
+          "size_kb": 28.6,
+          "modified": "2026-08-11T07:04:15"
         },
         {
           "name": "03_elite_svg_charts.html",
           "relative_path": "The BIG - PH01/03_elite_svg_charts.html",
           "extension": "html",
           "size_kb": 51.7,
-          "modified": "2026-08-01T12:03:37"
+          "modified": "2026-08-11T06:54:27"
         },
         {
           "name": "03_elite_svg_charts.pdf",
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 236.2,
-          "modified": "2026-08-09T16:57:25"
+          "modified": "2026-08-11T07:04:16"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pptx",
           "extension": "pptx",
-          "size_kb": 28.5,
-          "modified": "2026-08-09T16:57:25"
+          "size_kb": 28.6,
+          "modified": "2026-08-11T07:04:16"
         },
         {
           "name": "04_linked_executive_dashboard.html",
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.html",
           "extension": "html",
           "size_kb": 54.9,
-          "modified": "2026-08-01T12:03:37"
+          "modified": "2026-08-11T06:54:27"
         },
         {
           "name": "04_linked_executive_dashboard.pdf",
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1276.9,
-          "modified": "2026-08-09T16:57:30"
+          "modified": "2026-08-11T07:04:20"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
-          "size_kb": 28.5,
-          "modified": "2026-08-09T16:57:30"
+          "size_kb": 28.6,
+          "modified": "2026-08-11T07:04:20"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
           "relative_path": "The BIG - PH01/05_delay_tia_governed_assessment.docx",
           "extension": "docx",
           "size_kb": 35.1,
-          "modified": "2026-08-01T15:48:43"
+          "modified": "2026-08-11T06:54:27"
         },
         {
           "name": "05_delay_tia_governed_assessment.html",
           "relative_path": "The BIG - PH01/05_delay_tia_governed_assessment.html",
           "extension": "html",
           "size_kb": 9.5,
-          "modified": "2026-08-05T01:08:35"
+          "modified": "2026-08-11T06:54:27"
         },
         {
           "name": "05_delay_tia_governed_assessment.manifest.json",
           "relative_path": "The BIG - PH01/05_delay_tia_governed_assessment.manifest.json",
           "extension": "json",
           "size_kb": 0.6,
-          "modified": "2026-08-05T01:08:35"
+          "modified": "2026-08-11T06:54:27"
         },
         {
           "name": "05_delay_tia_governed_assessment.pdf",
           "relative_path": "The BIG - PH01/05_delay_tia_governed_assessment.pdf",
           "extension": "pdf",
-          "size_kb": 2.4,
-          "modified": "2026-08-05T01:08:35"
+          "size_kb": 2.5,
+          "modified": "2026-08-11T06:54:27"
         },
         {
           "name": "05_delay_tia_governed_assessment.pptx",
           "relative_path": "The BIG - PH01/05_delay_tia_governed_assessment.pptx",
           "extension": "pptx",
           "size_kb": 28.0,
-          "modified": "2026-08-05T01:08:35"
+          "modified": "2026-08-11T06:54:27"
+        },
+        {
+          "name": "universal_report_engine_manifest.json",
+          "relative_path": "The BIG - PH01/universal-report-engine/universal_report_engine_manifest.json",
+          "extension": "json",
+          "size_kb": 39.0,
+          "modified": "2026-08-11T07:04:21"
         }
       ],
       "watchers": [
@@ -29759,12 +29759,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 911076,
-          "sha256": "4ddd8141bef880d61c6ce1c778e583a09c33d23ab251435424902ee49447c120"
+          "sha256": "f7751c1411e4754a23f2cc263f3b823be335ed1b6433157ff8488f1ae144da89"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
-          "bytes": 29140,
-          "sha256": "b5441855f904a7a1c5298cb3b54a6b2265a40084dcdeb2696d2832183e0ac1be"
+          "bytes": 29250,
+          "sha256": "f0f7e77ba25b57c78ab9cfcb1a1b256a73a0b70be1468e480ae1b9b20c598b1b"
         }
       },
       "html_origin": "canonical_project_html",
@@ -29784,12 +29784,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 885433,
-          "sha256": "7f266129f8df5672a1531275df06e37416da42cc4f7f2f83d897dfb17b7f5301"
+          "sha256": "b193e89bc3bd5ae5a7a8d436aa3667254a943384f9de4840751f28d29341ed65"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
-          "bytes": 29137,
-          "sha256": "05a476e84f4dc483c7c0e27c612e13e042c56da55b73a242f23c58ac6f05e0f1"
+          "bytes": 29247,
+          "sha256": "559b32d1c9582f6a930e2745f5e4312481a13bcebe337a1e4aca8b218f3cac79"
         }
       },
       "html_origin": "canonical_project_html",
@@ -29809,12 +29809,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 241841,
-          "sha256": "7fb364abc83f88652b14bab80c0056d294ca8a12a38cc761e32062d9065043d3"
+          "sha256": "e234c3b114cd5f24987a94e95ca1aff37a10dea8725dfe83d9b275e99f159b21"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
-          "bytes": 29138,
-          "sha256": "26aad69a6bf6dfe06db4067d2ffa80e0b30f9fc028f75b8b85378c53f5a08250"
+          "bytes": 29247,
+          "sha256": "d228a8b51ad430b7f7125add1130b805add3922fc083faa369b4a23ddcaa219e"
         }
       },
       "html_origin": "canonical_project_html",
@@ -29833,18 +29833,1072 @@
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
-          "bytes": 1307503,
-          "sha256": "4e10cc4a7f2685ddbbb13793918b69809d0d108977bb20f8e1588ef3438dab48"
+          "bytes": 1307548,
+          "sha256": "2b623795cca3d8de2bbab89e746d661a78d70a8424374911f520575e33fe1f10"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
-          "bytes": 29148,
-          "sha256": "5c1a96e0b86963220574b5aed5a429279c19d6f207429c0b7ce09e19b832a085"
+          "bytes": 29256,
+          "sha256": "7f38e25a4f3d05f300aeb837c4ce69c7a26c47942e26add29aab7fd8a32947ac"
         }
       },
       "html_origin": "canonical_project_html",
       "source_project_id": "The Big -P.01-UP-20-April-26",
       "source_report_fingerprint": "0fc145f5b7eb71953b74c4ab117dac26b4cbf01e71473be6d70b26efef6da0bf"
     }
+  },
+  "universal_report_engine": {
+    "project_id": "The Big -P.01-UP-20-April-26",
+    "project_key": "the-big-p-01-up-20-april-26",
+    "source_fingerprint": "1db31f1fac79325db8f07ba5327c9e1a3633358a4f3b440dd5fa3989ac71facd",
+    "source_scope": "active project folder only",
+    "source_file_count": 79,
+    "source_inventory": [
+      {
+        "relative_path": "01-data/import_templates/activities.csv",
+        "extension": ".csv",
+        "size_bytes": 318917,
+        "sha256": "4c1547351e4569be95d274cedfdcd58a391fab56ad0f221904177c2a31c2600f"
+      },
+      {
+        "relative_path": "01-data/import_templates/change_orders.csv",
+        "extension": ".csv",
+        "size_bytes": 298,
+        "sha256": "acfbdb0dcb9fd06caace72465fe61b567e5be5eeae3ee5d6bf30813de5f1a03c"
+      },
+      {
+        "relative_path": "01-data/import_templates/claims.csv",
+        "extension": ".csv",
+        "size_bytes": 270,
+        "sha256": "062d6b6a98f4a5273fc48ec78144ff1fe3a858ebdd7d0f3bfb2358dbd54872f6"
+      },
+      {
+        "relative_path": "01-data/import_templates/contracts.csv",
+        "extension": ".csv",
+        "size_bytes": 331,
+        "sha256": "61432a3a8ed63e2dae803a7bf217b0edb04fd772e552b9b2a542608360420318"
+      },
+      {
+        "relative_path": "01-data/import_templates/cost_items.csv",
+        "extension": ".csv",
+        "size_bytes": 237431,
+        "sha256": "513c2d332d2c20c1be55487582de7e3cd7e45b8aad3e01243966654bc8c9773c"
+      },
+      {
+        "relative_path": "01-data/import_templates/delay_events.csv",
+        "extension": ".csv",
+        "size_bytes": 5016,
+        "sha256": "ed2d8de3c133105f0edb94506a578969a192bb512fbc48d7ece5612ee9fe9e06"
+      },
+      {
+        "relative_path": "01-data/import_templates/Delivered_steel_site.csv",
+        "extension": ".csv",
+        "size_bytes": 2230,
+        "sha256": "f85c4f090eab4bdb1ccb082b4e8d41175d24617ed0aadbbdb62aeedfb1405e4a"
+      },
+      {
+        "relative_path": "01-data/import_templates/engineering_log.csv",
+        "extension": ".csv",
+        "size_bytes": 413,
+        "sha256": "ca6fe8b364f23b5b3650228370029859e8733e49f944e1d39446f828cf1ecfa2"
+      },
+      {
+        "relative_path": "01-data/import_templates/evm.csv",
+        "extension": ".csv",
+        "size_bytes": 198689,
+        "sha256": "d51e7cf3ee8055b4aa95ed6a9afc8cf26ecb4dfa78f1a621becbc0a8f6d0be43"
+      },
+      {
+        "relative_path": "01-data/import_templates/ifc_conflict.csv",
+        "extension": ".csv",
+        "size_bytes": 6048,
+        "sha256": "49c2ac382b462b477bff72061bc4c06911b5283539a6a5234b8e6bd7e23320a8"
+      },
+      {
+        "relative_path": "01-data/import_templates/milestones.csv",
+        "extension": ".csv",
+        "size_bytes": 531,
+        "sha256": "6fb57c383030a05019f4e7e4a42f49a53b30318717b9a266b565b86583247a82"
+      },
+      {
+        "relative_path": "01-data/import_templates/payments.csv",
+        "extension": ".csv",
+        "size_bytes": 1285,
+        "sha256": "e158a587d7d2f920eb716e0781803a5ef504d379febe77ef71c1c761e710f8a1"
+      },
+      {
+        "relative_path": "01-data/import_templates/planned_cash_flow.csv",
+        "extension": ".csv",
+        "size_bytes": 1391,
+        "sha256": "4dd5eec2c65d6dead295d6ea2f15e65f89b81cc8b5c2b5dc0bb918b502ea2eec"
+      },
+      {
+        "relative_path": "01-data/import_templates/progress_updates.csv",
+        "extension": ".csv",
+        "size_bytes": 126830,
+        "sha256": "d26940f4855f67dbb2985414054b42dec8aedef5279b0627189032a0c9c444db"
+      },
+      {
+        "relative_path": "01-data/import_templates/projects.csv",
+        "extension": ".csv",
+        "size_bytes": 369,
+        "sha256": "f5596d9c94974cfedfe37998ff37b4e9a33e5b507023617ace8bc3f9a6c0dec8"
+      },
+      {
+        "relative_path": "01-data/import_templates/rfi_ status.csv",
+        "extension": ".csv",
+        "size_bytes": 1122,
+        "sha256": "cac6c818a0dcb333479f383c07c2a227a73790f035f698eb9e5fd9c0484bcb3a"
+      },
+      {
+        "relative_path": "01-data/import_templates/rft_qtys.csv",
+        "extension": ".csv",
+        "size_bytes": 25690,
+        "sha256": "62f63f182be98d5b254c996d697d66d40832cc4c8b2e9e56e136e02e13a2a41b"
+      },
+      {
+        "relative_path": "01-data/import_templates/risks.csv",
+        "extension": ".csv",
+        "size_bytes": 365,
+        "sha256": "171a7aa0bcf06885bfd73b7b4c8102d2a4a5ebca74f97f289cee780275be279b"
+      },
+      {
+        "relative_path": "01-data/import_templates/s_curve.csv",
+        "extension": ".csv",
+        "size_bytes": 1730,
+        "sha256": "37c7c3984f7719338a30052084fe62f4df71e7a9c1ed2c758ac7480cfe6c3f6a"
+      },
+      {
+        "relative_path": "01-data/import_templates/steel_activities_relationship.csv",
+        "extension": ".csv",
+        "size_bytes": 35087,
+        "sha256": "90b2de495f2e08ff8cb004b92de99d81a2b911fd55f12d7b70d89226b266bacf"
+      },
+      {
+        "relative_path": "01-data/import_templates/steel_delay_status_mployer_free_issue_material.csv",
+        "extension": ".csv",
+        "size_bytes": 5524,
+        "sha256": "655491e3b3f296981a4e2bca1acf67645a22091252c5e1609b3cd5843695aba5"
+      },
+      {
+        "relative_path": "01-data/import_templates/wbs.csv",
+        "extension": ".csv",
+        "size_bytes": 2584,
+        "sha256": "89d0dc2a065dc96eedc66509d4e08ab99cc82efa0f5298b7eb617c7587ab831e"
+      },
+      {
+        "relative_path": "02-delay_analysis/approved_submission/approved_before_after_fragnet_comparison.csv",
+        "extension": ".csv",
+        "size_bytes": 4862,
+        "sha256": "06fcba409d1bb108bef12cda67d4a0c27483ba46885fd8337688b09b451385ce"
+      },
+      {
+        "relative_path": "02-delay_analysis/approved_submission/submission_manifest.json",
+        "extension": ".json",
+        "size_bytes": 11179,
+        "sha256": "7f779ba80445bfb9e51a09bde80f64dc3cd3484af6ef5cd039c6d1084cf3391d"
+      },
+      {
+        "relative_path": "02-delay_analysis/controlled_runs/latest.json",
+        "extension": ".json",
+        "size_bytes": 59104,
+        "sha256": "bc95b2645fe9a7ac439ae02ba8513eb988491df953f7d61b6835f10e07bb9470"
+      },
+      {
+        "relative_path": "02-delay_analysis/methodology/TIA methodology.docx",
+        "extension": ".docx",
+        "size_bytes": 3699219,
+        "sha256": "13c9567516bfdd4e14376a595de426c0abb2e892505d0bdb52db7c148c86735f"
+      },
+      {
+        "relative_path": "02-delay_analysis/steel_delay_tia_templates/01-project_metadata_template.csv",
+        "extension": ".csv",
+        "size_bytes": 680,
+        "sha256": "a32ef1628efa5fdc2a11fe6623cb39f7fef73d30b9373977e03a58f3f58ec540"
+      },
+      {
+        "relative_path": "02-delay_analysis/steel_delay_tia_templates/02- master_activity_steel_analysis.csv",
+        "extension": ".csv",
+        "size_bytes": 3789,
+        "sha256": "0f16a8841399e2180fb9dcd13a83cbb4c633d10235157be53ef72c6729ed2e2a"
+      },
+      {
+        "relative_path": "02-delay_analysis/steel_delay_tia_templates/03- employer_steel_supply_at_site.csv",
+        "extension": ".csv",
+        "size_bytes": 687,
+        "sha256": "4f51280112d9329bf977cfcbb3c406342e95c65d58d1d6ff61d318298e103441"
+      },
+      {
+        "relative_path": "02-delay_analysis/steel_delay_tia_templates/04- p6_activity_export.csv",
+        "extension": ".csv",
+        "size_bytes": 421459,
+        "sha256": "0cbd5f7b24ab9dd7c180b7142dd3ff58c7c6ae98ef65ba0102e83ed1d91f2bf1"
+      },
+      {
+        "relative_path": "02-delay_analysis/steel_delay_tia_templates/05- relationship_file.csv",
+        "extension": ".csv",
+        "size_bytes": 187884,
+        "sha256": "013f26eba31393040868db92c81d124b30d637944fb2709d24c2dcb342fb1c97"
+      },
+      {
+        "relative_path": "02-delay_analysis/steel_delay_tia_templates/06- contract_library.csv",
+        "extension": ".csv",
+        "size_bytes": 48181,
+        "sha256": "7eca8f45ef5733298f468b16c0010d9adb2ab54e8c1f97180141ee27f71aa65b"
+      },
+      {
+        "relative_path": "02-delay_analysis/steel_delay_tia_templates/07- ifc_conflict.csv",
+        "extension": ".csv",
+        "size_bytes": 6048,
+        "sha256": "49c2ac382b462b477bff72061bc4c06911b5283539a6a5234b8e6bd7e23320a8"
+      },
+      {
+        "relative_path": "02-delay_analysis/steel_delay_tia_templates/08- payments.csv",
+        "extension": ".csv",
+        "size_bytes": 1325,
+        "sha256": "a34b3ed257845b3e65bb8b30bd064313abc9c3eea565d004fe17238b2b3fa07c"
+      },
+      {
+        "relative_path": "02-delay_analysis/steel_delay_tia_templates/09- rfi_status.csv",
+        "extension": ".csv",
+        "size_bytes": 1040,
+        "sha256": "f3147cf1a4bf4117fed9bb89562362e55f7faaa67f24ed1cd8736875e2571b3f"
+      },
+      {
+        "relative_path": "02-delay_analysis/steel_delay_tia_templates/10- contractor_steel_supplied_at_site.csv",
+        "extension": ".csv",
+        "size_bytes": 1739,
+        "sha256": "e00802ce6231019a53f254eb62344c3d1e98a253071038218a93d8d44d94c94f"
+      },
+      {
+        "relative_path": "02-delay_analysis/steel_delay_tia_templates/11-concurrency_matrix_template.updated.csv",
+        "extension": ".csv",
+        "size_bytes": 9064,
+        "sha256": "ce234417e15a87ec787fee43c8b489cc4efb4722ccf54df1afeee80e742245a8"
+      },
+      {
+        "relative_path": "02-delay_analysis/steel_delay_tia_templates/12-client_steel_demand_by_dia_wide.csv",
+        "extension": ".csv",
+        "size_bytes": 1178,
+        "sha256": "ea00309c42972641866e913dc7a1a4000b54d41e905d769d2617fbb42330d2a6"
+      },
+      {
+        "relative_path": "02-delay_analysis/steel_delay_tia_templates/13-client_steel_supply_by_dia_wide.csv",
+        "extension": ".csv",
+        "size_bytes": 419,
+        "sha256": "b929495845b17a3dee1284966c2d47ba5fac0afdb4f5b428a4e67eb237a8c7ae"
+      },
+      {
+        "relative_path": "02-delay_analysis/steel_delay_tia_templates/14-delay_event_classification.csv",
+        "extension": ".csv",
+        "size_bytes": 204,
+        "sha256": "ae95fac637a5a4cc21519fe9cff117c4957586c33a34b2242816d6457df0409d"
+      },
+      {
+        "relative_path": "02-delay_analysis/steel_delay_tia_templates/15-tia_recovery_scenario.csv",
+        "extension": ".csv",
+        "size_bytes": 357,
+        "sha256": "186b52e9473e855acbc9918e329ddedc09a076284849e5329bdcf2ef25d176c6"
+      },
+      {
+        "relative_path": "03-schedule/BL critical path.csv",
+        "extension": ".csv",
+        "size_bytes": 115547,
+        "sha256": "327c7e00d862f64f1d9687d75569fb2a420594dc9002550891a9bdfdb4dcd55c"
+      },
+      {
+        "relative_path": "03-schedule/BL float bath.csv",
+        "extension": ".csv",
+        "size_bytes": 239156,
+        "sha256": "15386abc218105222083e223513af3210a505643db9ec199d07009f39c7fbccd"
+      },
+      {
+        "relative_path": "03-schedule/Bl Longest bath.csv",
+        "extension": ".csv",
+        "size_bytes": 164426,
+        "sha256": "b53335e700ed148f3badc06a7a02bd6fdfbeff9297a5ca4e69f7457ac300759b"
+      },
+      {
+        "relative_path": "03-schedule/BL Schedule.csv",
+        "extension": ".csv",
+        "size_bytes": 441638,
+        "sha256": "2b9dbea00423eeb6cb4a79fc5ff187840e2e17f65178f117a97ad11893941699"
+      },
+      {
+        "relative_path": "03-schedule/MEP Activities.csv",
+        "extension": ".csv",
+        "size_bytes": 10675,
+        "sha256": "0ead713671d5d5bc12cdc513ee84176461a4a2d85d9762db3862900513a075f2"
+      },
+      {
+        "relative_path": "03-schedule/MEP Civil Logic.csv",
+        "extension": ".csv",
+        "size_bytes": 8674,
+        "sha256": "d65b14fbde390150b79e375ed1cd39dd3547bfca3dcfaaab5db17d429865de2d"
+      },
+      {
+        "relative_path": "03-schedule/MEP Schedule.csv",
+        "extension": ".csv",
+        "size_bytes": 45453,
+        "sha256": "d4cab99e699d0cf3052822791fcdf13182f78629be6989c3a538948c3dde5072"
+      },
+      {
+        "relative_path": "05-contracts/source/Overall Contract.pdf",
+        "extension": ".pdf",
+        "size_bytes": 4269534,
+        "sha256": "02b7ee3cae84bd852bccd67fc80df0424ee6e52a0ccf5883140568f45a03c977"
+      },
+      {
+        "relative_path": "05-contracts/source/Overall_Contract_clause_library.xlsx",
+        "extension": ".xlsx",
+        "size_bytes": 27181,
+        "sha256": "ae5d1b225a298e446bb49454bbbd45d8312464b39ad9eff7e46876f0714a2dc2"
+      },
+      {
+        "relative_path": "06-evidence/clause_reference_template.csv",
+        "extension": ".csv",
+        "size_bytes": 83,
+        "sha256": "74dd0911b56557f99d69da91785720224415069b87940123ac10af42d400a933"
+      },
+      {
+        "relative_path": "06-evidence/contract_evidence_register_template.csv",
+        "extension": ".csv",
+        "size_bytes": 87,
+        "sha256": "ba69efcc942df67d80c5337b34d5011b9cdfeabe794bf2f98c96d111d69de16d"
+      },
+      {
+        "relative_path": "06-evidence/correspondence_reference_template.csv",
+        "extension": ".csv",
+        "size_bytes": 88,
+        "sha256": "05d4e533616ee4acf11082d3bdf68aacb5eaa1fc2b65ffc29a58a2f8509f8715"
+      },
+      {
+        "relative_path": "06-evidence/document_reference_template.csv",
+        "extension": ".csv",
+        "size_bytes": 88,
+        "sha256": "3916147cb738e2a97df2a87c91cb5eb33f3d627de90f479b626101df03a894e1"
+      },
+      {
+        "relative_path": "06-evidence/evidence_register_template.csv",
+        "extension": ".csv",
+        "size_bytes": 104,
+        "sha256": "042cb8c67f572bad49d07319674c845a79ce9b6fe3e01a0f00f05998df719c28"
+      },
+      {
+        "relative_path": "06-evidence/photo_log_template.csv",
+        "extension": ".csv",
+        "size_bytes": 83,
+        "sha256": "bffe9199e03aaded0fc664949c20b9fbdefab8ae7e2f0fd7aa57de4ec513763b"
+      },
+      {
+        "relative_path": "07-letters_intelligence/inbox/From ACE/032.pdf",
+        "extension": ".pdf",
+        "size_bytes": 129324,
+        "sha256": "9f590b160ecd1a9ae5f66c76192d46659b338d8ecd5c26c8da2ea7fdece9a7d5"
+      },
+      {
+        "relative_path": "07-letters_intelligence/inbox/From ACE/033.pdf",
+        "extension": ".pdf",
+        "size_bytes": 129324,
+        "sha256": "9f590b160ecd1a9ae5f66c76192d46659b338d8ecd5c26c8da2ea7fdece9a7d5"
+      },
+      {
+        "relative_path": "07-letters_intelligence/inbox/From ACE/034-Submission of proof of payment for engineering stamps due on contractual works..pdf",
+        "extension": ".pdf",
+        "size_bytes": 121049,
+        "sha256": "ecd3239b4cbc827d216eff4635cc82ad8b36b3373d2d8074358dbbb9430e0a3d"
+      },
+      {
+        "relative_path": "07-letters_intelligence/inbox/From ACE/035-Re Notification of Reinforcement Steel Supply Status and Entitlement to Tim Extensions.pdf",
+        "extension": ".pdf",
+        "size_bytes": 89278,
+        "sha256": "c2a2de01d8d1d45feea1f433b2f7b2e76642504b667a10afde1b52b90fb1cbac"
+      },
+      {
+        "relative_path": "07-letters_intelligence/inbox/From ACE/036-Failure to Achieve Section (1) Milestone within the contractual Due Date.pdf",
+        "extension": ".pdf",
+        "size_bytes": 79347,
+        "sha256": "9550bbb4f94954bf12624a3b57c4150758070f489bf933eaca61a447d1247d99"
+      },
+      {
+        "relative_path": "07-letters_intelligence/inbox/From ACE/037-Notice of Slow Progress Rate and Comments on Monthly Progress Report - April 2026.pdf",
+        "extension": ".pdf",
+        "size_bytes": 260226,
+        "sha256": "0c3dcde2fb354602f680e1d09980cc5de7e6c713a2e6e48da7a8b0629643ae34"
+      },
+      {
+        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-072.pdf",
+        "extension": ".pdf",
+        "size_bytes": 1514612,
+        "sha256": "52ec893683ca57324813e67cd1d89a3fbe3669ce61a5efff7ea828d4b05969cd"
+      },
+      {
+        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-073.pdf",
+        "extension": ".pdf",
+        "size_bytes": 183472,
+        "sha256": "88607530292d184083eebbd35a3cc14984a83701807b78f0f5c050c83b5dbef1"
+      },
+      {
+        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-074.pdf",
+        "extension": ".pdf",
+        "size_bytes": 202575,
+        "sha256": "e57dc31ec8a276024575890a58f2d03f124954df2c68dd2412e5cec9284c87f2"
+      },
+      {
+        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-075.pdf",
+        "extension": ".pdf",
+        "size_bytes": 117145,
+        "sha256": "4f0580f61a5e12e01f25d3b6733bd16c5803c636fafda485ee96b35928373983"
+      },
+      {
+        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-076.pdf",
+        "extension": ".pdf",
+        "size_bytes": 165633,
+        "sha256": "7168f77e1e1624f7ed1650f898eea24dd1f5d9033544d6b0376ffec42f641e5d"
+      },
+      {
+        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-077.pdf",
+        "extension": ".pdf",
+        "size_bytes": 293286,
+        "sha256": "be9dd570d4c62dade99e731ae0028736ac9879a02597b542274746e1304591e4"
+      },
+      {
+        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-078.pdf",
+        "extension": ".pdf",
+        "size_bytes": 230803,
+        "sha256": "e4579ee3fbd851f57e2bfec44d9eef8ca74da815bd37498c7db198c594383380"
+      },
+      {
+        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-079.pdf",
+        "extension": ".pdf",
+        "size_bytes": 122399,
+        "sha256": "f3179ea344420f4e64a215f0b586f8746e495257cd8e75c9216b873ea1013e97"
+      },
+      {
+        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-080.pdf",
+        "extension": ".pdf",
+        "size_bytes": 130631,
+        "sha256": "60ccedb3ff9365713c0e908ae438aafea6b15ced3d4ad3243a9ca195fac7ded7"
+      },
+      {
+        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-081.pdf",
+        "extension": ".pdf",
+        "size_bytes": 42665,
+        "sha256": "0343884834639372c2f4c4ce257d370a4e6cd3b104650a18a0cd39ff176accf5"
+      },
+      {
+        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-082.pdf",
+        "extension": ".pdf",
+        "size_bytes": 399536,
+        "sha256": "30246763da0d2b9b5885befda44463381b1fa451322da9d58214b408cb452652"
+      },
+      {
+        "relative_path": "07-letters_intelligence/letters_intelligence.xlsx",
+        "extension": ".xlsx",
+        "size_bytes": 54699,
+        "sha256": "0bea0ac4b6f67a9a93c07043fe6e9bbd2d0a509caf92e743a38f65786e61eefa"
+      },
+      {
+        "relative_path": "08-branding/color_palette_template.csv",
+        "extension": ".csv",
+        "size_bytes": 215,
+        "sha256": "8516cd2fbbaae18e9c4961c0032bbdd3c222701fde9d8fb3d5dbd647d7c8e6f9"
+      },
+      {
+        "relative_path": "08-branding/project_identity_template.json",
+        "extension": ".json",
+        "size_bytes": 152,
+        "sha256": "c0fdfd714fd683cb7847c8931466185af5d8cab3cacf715c52c36c0f9049a684"
+      },
+      {
+        "relative_path": "08-branding/report_branding_template.json",
+        "extension": ".json",
+        "size_bytes": 104,
+        "sha256": "6f8cded1949476f4abf3c848422a5723b751ebb0e72279265ad1d7000068a26d"
+      },
+      {
+        "relative_path": "project.json",
+        "extension": ".json",
+        "size_bytes": 205,
+        "sha256": "38496b8fcd9c172fc57ac036794a41b1e21ac3407627b1112dcbee8aa739cf6d"
+      },
+      {
+        "relative_path": "project_manifest.json",
+        "extension": ".json",
+        "size_bytes": 1209,
+        "sha256": "5277e240e254fb89cb848fed6c2acd6dd8773ebeebe3236f46e54a49d8eed19b"
+      }
+    ],
+    "engine": {
+      "available": false,
+      "runtime_location": "local controlled runtime",
+      "package_name": "Universal Project Report Engine",
+      "package_version": "2.0.0",
+      "wrapper_version": null,
+      "author": "Eng. Ahmed Labib",
+      "attribution": "Python AI Programming by Eng. Ahmed Labib",
+      "rules": null,
+      "report_families": null,
+      "layers": null,
+      "capability_note": "Runs locally against the active project's controlled source files. The public Vercel site displays generated artifacts only."
+    },
+    "report_families": [
+      {
+        "key": "eot",
+        "title": "Extension of Time / Time Impact Analysis Report",
+        "summary": "Controlled report family with 12 validation rules.",
+        "native_schedule_required": true,
+        "requires": [
+          "Native schedule / XER",
+          "relationship logic"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "delay",
+        "title": "Delay Analysis Report",
+        "summary": "Controlled report family with 10 validation rules.",
+        "native_schedule_required": true,
+        "requires": [
+          "Native schedule / XER",
+          "relationship logic"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "progress",
+        "title": "Project Progress Report",
+        "summary": "Controlled report family with 10 validation rules.",
+        "native_schedule_required": true,
+        "requires": [
+          "Native schedule / XER",
+          "relationship logic"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "recovery",
+        "title": "Recovery & Mitigation Report",
+        "summary": "Controlled report family with 10 validation rules.",
+        "native_schedule_required": true,
+        "requires": [
+          "Native schedule / XER",
+          "relationship logic"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "variation",
+        "title": "Variation / Change Impact Report",
+        "summary": "Controlled report family with 10 validation rules.",
+        "native_schedule_required": true,
+        "requires": [
+          "Native schedule / XER",
+          "relationship logic"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "hybrid",
+        "title": "Integrated Project Controls Report",
+        "summary": "Controlled report family with 7 validation rules.",
+        "native_schedule_required": false,
+        "requires": [
+          "Project-local source evidence"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "resource",
+        "title": "Resource / Manpower Report",
+        "summary": "Controlled report family with 10 validation rules.",
+        "native_schedule_required": true,
+        "requires": [
+          "Native schedule / XER",
+          "relationship logic"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "equipment",
+        "title": "Equipment Resource Report",
+        "summary": "Controlled report family with 7 validation rules.",
+        "native_schedule_required": false,
+        "requires": [
+          "Project-local source evidence"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "cost",
+        "title": "Cost Control Report",
+        "summary": "Controlled report family with 8 validation rules.",
+        "native_schedule_required": false,
+        "requires": [
+          "Project-local source evidence"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "evm",
+        "title": "Earned Value Management Report",
+        "summary": "Controlled report family with 6 validation rules.",
+        "native_schedule_required": false,
+        "requires": [
+          "Project-local source evidence"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "cashflow",
+        "title": "Cash Flow Report",
+        "summary": "Controlled report family with 6 validation rules.",
+        "native_schedule_required": false,
+        "requires": [
+          "Project-local source evidence"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "scurve",
+        "title": "S-Curve Performance Report",
+        "summary": "Controlled report family with 6 validation rules.",
+        "native_schedule_required": false,
+        "requires": [
+          "Project-local source evidence"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "procurement",
+        "title": "Procurement Status & Schedule Impact Report",
+        "summary": "Controlled report family with 8 validation rules.",
+        "native_schedule_required": true,
+        "requires": [
+          "Native schedule / XER",
+          "relationship logic"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "material",
+        "title": "Material Tracking Report",
+        "summary": "Controlled report family with 7 validation rules.",
+        "native_schedule_required": false,
+        "requires": [
+          "Project-local source evidence"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "lookahead",
+        "title": "Look-Ahead Planning Report",
+        "summary": "Controlled report family with 6 validation rules.",
+        "native_schedule_required": true,
+        "requires": [
+          "Native schedule / XER",
+          "relationship logic"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "critical_path",
+        "title": "Critical / Longest Path Report",
+        "summary": "Controlled report family with 8 validation rules.",
+        "native_schedule_required": true,
+        "requires": [
+          "Native schedule / XER",
+          "relationship logic"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "float",
+        "title": "Float Analysis Report",
+        "summary": "Controlled report family with 5 validation rules.",
+        "native_schedule_required": true,
+        "requires": [
+          "Native schedule / XER",
+          "relationship logic"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "milestone",
+        "title": "Milestone Status Report",
+        "summary": "Controlled report family with 5 validation rules.",
+        "native_schedule_required": true,
+        "requires": [
+          "Native schedule / XER",
+          "relationship logic"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "risk",
+        "title": "Project Risk Report",
+        "summary": "Controlled report family with 6 validation rules.",
+        "native_schedule_required": false,
+        "requires": [
+          "Project-local source evidence"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "rfi_submittal",
+        "title": "RFI / Submittal Performance Report",
+        "summary": "Controlled report family with 6 validation rules.",
+        "native_schedule_required": true,
+        "requires": [
+          "Native schedule / XER",
+          "relationship logic"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "qaqc",
+        "title": "QA/QC Performance Report",
+        "summary": "Controlled report family with 5 validation rules.",
+        "native_schedule_required": false,
+        "requires": [
+          "Project-local source evidence"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "productivity",
+        "title": "Productivity Performance Report",
+        "summary": "Controlled report family with 5 validation rules.",
+        "native_schedule_required": false,
+        "requires": [
+          "Project-local source evidence"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "executive",
+        "title": "Weekly / Monthly Executive Project Report",
+        "summary": "Controlled report family with 6 validation rules.",
+        "native_schedule_required": false,
+        "requires": [
+          "Project-local source evidence"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "baseline_current",
+        "title": "Baseline vs Current Schedule Report",
+        "summary": "Controlled report family with 6 validation rules.",
+        "native_schedule_required": true,
+        "requires": [
+          "Native schedule / XER",
+          "relationship logic"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "forecast_completion",
+        "title": "Forecast Completion Report",
+        "summary": "Controlled report family with 6 validation rules.",
+        "native_schedule_required": true,
+        "requires": [
+          "Native schedule / XER",
+          "relationship logic"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "ml_project_controls",
+        "title": "Machine Learning Project Controls Report",
+        "summary": "Controlled report family with 9 validation rules.",
+        "native_schedule_required": false,
+        "requires": [
+          "Project-local source evidence"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "contract_admin",
+        "title": "Contract Administration Report",
+        "summary": "Controlled report family with 5 validation rules.",
+        "native_schedule_required": false,
+        "requires": [
+          "Project-local source evidence"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "change_control",
+        "title": "Change Control Register Report",
+        "summary": "Controlled report family with 5 validation rules.",
+        "native_schedule_required": false,
+        "requires": [
+          "Project-local source evidence"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "document_control",
+        "title": "Document Control Performance Report",
+        "summary": "Controlled report family with 5 validation rules.",
+        "native_schedule_required": false,
+        "requires": [
+          "Project-local source evidence"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      },
+      {
+        "key": "interface_management",
+        "title": "Interface Management Report",
+        "summary": "Controlled report family with 5 validation rules.",
+        "native_schedule_required": true,
+        "requires": [
+          "Native schedule / XER",
+          "relationship logic"
+        ],
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
+      }
+    ],
+    "summary": {
+      "catalog_count": 30,
+      "generated_count": 0,
+      "draft_review_count": 0,
+      "ready_count": 30,
+      "blocked_count": 0
+    },
+    "ml_capability": {
+      "task_count": 15,
+      "tasks": [
+        {
+          "key": "event_classification",
+          "title": "ML01",
+          "description": "Classify delay/change/project-control events from verified features/evidence."
+        },
+        {
+          "key": "delay_risk_prediction",
+          "title": "ML02",
+          "description": "Estimate verified activity/event delay-risk class or probability."
+        },
+        {
+          "key": "forecast_finish_deviation_prediction",
+          "title": "ML03",
+          "description": "Predict analytical deviation days; native CPM forecast remains governing."
+        },
+        {
+          "key": "activity_anomaly_detection",
+          "title": "ML04",
+          "description": "Detect unusual activity records using Isolation Forest novelty scoring."
+        },
+        {
+          "key": "resource_demand_prediction",
+          "title": "ML05",
+          "description": "Predict analytical manpower/equipment demand from verified historical features."
+        },
+        {
+          "key": "cost_overrun_risk_prediction",
+          "title": "ML06",
+          "description": "Estimate cost-overrun risk; does not replace approved cost-control calculations."
+        },
+        {
+          "key": "productivity_prediction",
+          "title": "ML07",
+          "description": "Predict productivity from verified quantities/resource inputs."
+        },
+        {
+          "key": "schedule_health_anomaly_detection",
+          "title": "ML08",
+          "description": "Detect schedule-health anomalies; native P6 logic audit remains governing."
+        },
+        {
+          "key": "similar_event_evidence_retrieval",
+          "title": "ML09",
+          "description": "Retrieve similar events/evidence using TF-IDF cosine similarity with traceability."
+        },
+        {
+          "key": "risk_prioritization",
+          "title": "ML10",
+          "description": "Prioritize risk classes from available verified risk features."
+        },
+        {
+          "key": "procurement_delay_risk",
+          "title": "ML11",
+          "description": "Estimate procurement delay risk from verified procurement history."
+        },
+        {
+          "key": "progress_slippage_prediction",
+          "title": "ML12",
+          "description": "Estimate progress-slippage risk from verified period/status data."
+        },
+        {
+          "key": "model_confidence_ood_detection",
+          "title": "ML13",
+          "description": "Return prediction confidence and real Isolation-Forest OOD score/flag."
+        },
+        {
+          "key": "model_drift_monitoring",
+          "title": "ML14",
+          "description": "Measure population drift with PSI/KS/categorical distribution distance."
+        },
+        {
+          "key": "native_cpm_vs_ml_comparison",
+          "title": "ML15",
+          "description": "Compare ML analytical output with native CPM while explicitly preserving native supremacy."
+        }
+      ],
+      "status": "LOCAL_CONTROLLED_EXECUTION",
+      "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
+      "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
+    },
+    "updated_at": "2026-08-11T04:04:21+00:00"
   }
 }
