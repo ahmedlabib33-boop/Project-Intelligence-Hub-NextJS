@@ -94,21 +94,6 @@ export async function checkGroqHealth() {
   if (!groq) {
     return { name: "groq", available: false, error: "GROQ_API_KEY not configured" };
   }
-  const started = Date.now();
-  try {
-    await groq.chat.completions.create({
-      model: GROQ_MODEL_FALLBACK,
-      messages: [{ role: "user", content: "Say ok" }],
-      max_tokens: 5,
-      temperature: 0
-    });
-    return {
-      name: "groq",
-      available: true,
-      latency_ms: Date.now() - started,
-      model: GROQ_MODEL_FALLBACK
-    };
-  } catch {
-    return { name: "groq", available: false, error: "AI health check failed" };
-  }
+  // This public endpoint must never spend model tokens just to render the chat UI.
+  return { name: "groq", available: true, configured: true, model: GROQ_MODEL_FALLBACK };
 }

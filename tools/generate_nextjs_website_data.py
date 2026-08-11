@@ -4,6 +4,7 @@ import csv
 import hashlib
 import json
 import math
+import os
 import re
 import shutil
 import sqlite3
@@ -12,14 +13,33 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from advanced_analytics import build_advanced_analytics
+from project_chart_payloads import build_project_chart_payloads
+from project_report_artifacts import ensure_project_report_artifacts
+from universal_report_engine_adapter import (
+    FAMILY_MANIFEST_NAME,
+    ensure_universal_report_engine_catalog,
+    is_released_artifact,
+)
+
 
 ROOT = Path(__file__).resolve().parents[1]
-PROJECTS_ROOT = ROOT / "projects"
+# This delivery is self-contained.  Generated website data must always come
+# from this workspace, never from a second local checkout or an environment
+# override that could publish stale project data.
+CANONICAL_ROOT = ROOT
+PROJECTS_ROOT = CANONICAL_ROOT / "projects"
+SOURCE_OUTPUTS_ROOT = CANONICAL_ROOT / "11-outputs"
 OUTPUTS_ROOT = ROOT / "11-outputs"
 WEBSITE_PUBLIC = ROOT / "website" / "public"
 DATA_ROOT = WEBSITE_PUBLIC / "data"
 GENERATED_ROOT = WEBSITE_PUBLIC / "generated"
-ROOT_TIA_SUBMITTED_GUIDE = ROOT / "TIA submitted Guide"
+WEBSITE_SOURCE_GENERATED = ROOT / "website" / "src" / "generated"
+
+# Project workspaces show source-backed, paginated previews. Keeping every raw row
+# in browser payloads makes selected-project navigation unreliable on mobile and
+# does not add report capability; complete report artifacts stay in Output Studio.
+WORKSPACE_TABLE_ROW_LIMIT = 200
 
 
 def slugify(value: str) -> str:
@@ -132,6 +152,27 @@ def preview_table(path: Path, limit: int = 8) -> dict[str, Any]:
     }
 
 
+def workspace_table(path: Path, limit: int = WORKSPACE_TABLE_ROW_LIMIT) -> dict[str, Any]:
+    """Return a project-scoped table suitable for the digital workspace.
+
+    The portfolio remains a compact executive payload. Full rows travel only in
+    the selected project's JSON file so one project's source evidence cannot be
+    rendered in another project's workspace.
+    """
+    rows = read_csv_rows(path)
+    columns = list(rows[0].keys()) if rows else []
+    return {
+        "file": path.name,
+        "exists": path.exists(),
+        "row_count": len(rows),
+        "column_count": len(columns),
+        "columns": columns,
+        "rows": rows[:limit],
+        "truncated": len(rows) > limit,
+        "source_path": path.name,
+    }
+
+
 def xlsx_summary(path: Path, limit: int = 8) -> dict[str, Any]:
     summary = {"file": path.name, "exists": path.exists(), "sheets": []}
     if not path.exists():
@@ -162,6 +203,178 @@ def xlsx_summary(path: Path, limit: int = 8) -> dict[str, Any]:
     except Exception as exc:
         summary["error"] = str(exc)
     return summary
+
+
+def xlsx_workspace_tables(path: Path, limit_per_sheet: int = WORKSPACE_TABLE_ROW_LIMIT) -> dict[str, Any]:
+    """Expose full project-owned workbook sheets with an explicit safety cap."""
+    result: dict[str, Any] = {"file": path.name, "exists": path.exists(), "sheets": []}
+    if not path.exists():
+        return result
+    try:
+        from openpyxl import load_workbook  # type: ignore
+
+        workbook = load_workbook(path, read_only=True, data_only=True)
+        for sheet_name in workbook.sheetnames:
+            sheet = workbook[sheet_name]
+            rows_iter = sheet.iter_rows(values_only=True)
+            headers = [str(value or "").strip() for value in next(rows_iter, [])]
+            headers = [header or f"Column {index + 1}" for index, header in enumerate(headers)]
+            records: list[dict[str, Any]] = []
+            row_count = 0
+            for row in rows_iter:
+                row_count += 1
+                if len(records) < limit_per_sheet:
+                    records.append({headers[index]: excel_value(value) for index, value in enumerate(row[:len(headers)])})
+            result["sheets"].append(
+                {
+                    "name": sheet_name,
+                    "row_count": row_count,
+                    "column_count": len(headers),
+                    "columns": headers,
+                    "rows": records,
+                    "truncated": row_count > limit_per_sheet,
+                }
+            )
+    except Exception as exc:
+        result["error"] = str(exc)
+    return result
+
+
+def _project_scoped_letter_frame(frame: Any, project_id: str) -> tuple[Any, int]:
+    """Keep only rows belonging to the active project before publishing letters."""
+    import pandas as pd
+
+    scoped = frame.copy().where(frame.notna(), "") if isinstance(frame, pd.DataFrame) else pd.DataFrame()
+    project_column = next(
+        (column for column in scoped.columns if normalize_field_name(column) == "projectid"),
+        None,
+    )
+    rejected = 0
+    if project_column is not None:
+        normalized = scoped[project_column].astype(str).str.strip()
+        allowed = normalized.eq("") | normalized.eq(project_id)
+        rejected = int((~allowed).sum())
+        scoped = scoped.loc[allowed].copy()
+    scoped["project_id"] = project_id
+    return scoped, rejected
+
+
+def _frames_to_workspace_tables(
+    sheets: dict[str, Any], project_id: str, limit_per_sheet: int = WORKSPACE_TABLE_ROW_LIMIT
+) -> dict[str, Any]:
+    """Convert legacy Streamlit letter tables into selected-project JSON tables."""
+    result: dict[str, Any] = {"file": "letters_intelligence.xlsx", "exists": True, "sheets": []}
+    rejected_rows = 0
+    for sheet_name, frame in sheets.items():
+        scoped, rejected = _project_scoped_letter_frame(frame, project_id)
+        rejected_rows += rejected
+        columns = [str(column) for column in scoped.columns]
+        records = [
+            {column: excel_value(value) for column, value in row.items()}
+            for row in scoped.head(limit_per_sheet).to_dict("records")
+        ]
+        result["sheets"].append(
+            {
+                "name": str(sheet_name),
+                "row_count": int(len(scoped)),
+                "column_count": len(columns),
+                "columns": columns,
+                "rows": records,
+                "truncated": len(scoped) > limit_per_sheet,
+            }
+        )
+    result["rejected_cross_project_rows"] = rejected_rows
+    result["source_scope"] = "selected_project_only"
+    return result
+
+
+def build_letters_workspace_tables(
+    project: dict[str, Any], workbook_path: Path, inbox_dir: Path
+) -> dict[str, Any]:
+    """Run the existing Streamlit letters workflow without writing to source files.
+
+    Workbook registers and inbox files are merged in memory through the same
+    `merge_inbox_letters` engine that powers the canonical Streamlit workspace.
+    The result is then stamped and filtered to the selected `project_id` before
+    it is included in that project's Vercel payload.
+    """
+    project_id = str(project.get("project_id") or "").strip()
+    if not project_id:
+        return {"file": workbook_path.name, "exists": workbook_path.exists(), "sheets": [], "error": "Project ID is required."}
+    try:
+        import pandas as pd
+
+        source_sheets: dict[str, Any] = {}
+        if workbook_path.exists():
+            workbook = pd.ExcelFile(workbook_path)
+            source_sheets = {
+                str(sheet_name): pd.read_excel(workbook, sheet_name=sheet_name).fillna("")
+                for sheet_name in workbook.sheet_names
+            }
+        canonical_src = CANONICAL_ROOT / "src"
+        if canonical_src.exists() and str(canonical_src) not in sys.path:
+            sys.path.insert(0, str(canonical_src))
+        if str(CANONICAL_ROOT) not in sys.path:
+            sys.path.insert(0, str(CANONICAL_ROOT))
+        from construction_system.letters_auto_ingest import merge_inbox_letters
+        from contract_claims_center import extract_text_from_path
+
+        merged_sheets = merge_inbox_letters(source_sheets, inbox_dir, extract_text_from_path)
+        tables = _frames_to_workspace_tables(merged_sheets, project_id)
+        tables["file"] = workbook_path.name
+        tables["exists"] = workbook_path.exists() or inbox_dir.exists()
+        tables["inbox_auto_ingest"] = True
+        return tables
+    except Exception as exc:
+        return {
+            "file": workbook_path.name,
+            "exists": workbook_path.exists(),
+            "sheets": [],
+            "error": f"Letters workspace processing failed: {exc}",
+            "source_scope": "selected_project_only",
+        }
+
+
+def json_safe_sql_value(value: Any) -> Any:
+    if isinstance(value, bytes):
+        return f"[binary {len(value)} bytes]"
+    return excel_value(value)
+
+
+def sqlite_table_rows(path: Path, limit_per_table: int = WORKSPACE_TABLE_ROW_LIMIT) -> dict[str, Any]:
+    """Read project-local claims records without exposing files from other projects."""
+    result: dict[str, Any] = {"exists": path.exists(), "tables": {}, "error": None}
+    if not path.exists():
+        return result
+    try:
+        connection = sqlite3.connect(path)
+        table_names = [
+            str(row[0])
+            for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name")
+            if not str(row[0]).startswith("sqlite_")
+        ]
+        for table_name in table_names:
+            quoted_name = table_name.replace('"', '""')
+            cursor = connection.execute(f'SELECT * FROM "{quoted_name}" LIMIT ?', (limit_per_table,))
+            columns = [str(column[0]) for column in cursor.description or []]
+            records = [
+                {columns[index]: json_safe_sql_value(value) for index, value in enumerate(row)}
+                for row in cursor.fetchall()
+            ]
+            total = connection.execute(f'SELECT COUNT(*) FROM "{quoted_name}"').fetchone()[0]
+            result["tables"][table_name] = {
+                "file": f"{path.name}:{table_name}",
+                "exists": True,
+                "row_count": total,
+                "column_count": len(columns),
+                "columns": columns,
+                "rows": records,
+                "truncated": total > limit_per_table,
+            }
+        connection.close()
+    except Exception as exc:
+        result["error"] = str(exc)
+    return result
 
 
 def normalize_markdown_text(text: str) -> str:
@@ -213,10 +426,91 @@ def submitted_tia_guide_root(base: Path, project: dict[str, Any]) -> Path | None
     for candidate in candidates:
         if candidate.exists():
             return candidate
-    searchable_name = f"{project.get('project_folder_name', '')} {project.get('project_display_name', '')} {project.get('project_id', '')}".lower()
-    if "big" in searchable_name and ROOT_TIA_SUBMITTED_GUIDE.exists():
-        return ROOT_TIA_SUBMITTED_GUIDE
+
+    # A project may explicitly point to a legacy guide during a staged migration.
+    # The path is declared in that project's manifest, never inferred from its name.
+    configured_path = str(project.get("submitted_tia_guide_path") or "").strip()
+    if configured_path:
+        configured = Path(configured_path)
+        candidate = configured if configured.is_absolute() else (base / configured)
+        try:
+            candidate.resolve().relative_to(CANONICAL_ROOT.resolve())
+        except ValueError:
+            return None
+        if candidate.is_dir():
+            return candidate
     return None
+
+
+def submitted_tia_visual_category(name: str) -> str:
+    """Classify a submitted exhibit by its topic, without deriving any schedule result."""
+    normalized = name.lower().replace("_", " ").replace("-", " ")
+    if any(term in normalized for term in ("timeline", "chronology", "finish movement")):
+        return "Timeline & Events"
+    if any(term in normalized for term in ("float", "critical path", "fragnet", "concurrency", "affected activities")):
+        return "Path, Float & Fragnets"
+    if any(term in normalized for term in ("ev01", "ev02", "fishbone")):
+        return "Event Detail"
+    if any(term in normalized for term in ("methodology", "waterfall", "entitlement")):
+        return "Methodology & Entitlement"
+    return "Submitted Exhibits"
+
+
+def submitted_tia_visual_key(path: Path) -> str:
+    """Collapse alternate source variants while preferring revised and large-font exhibits."""
+    stem = path.stem.lower()
+    stem = stem.replace("_large_font", "").replace("_inkscape", "")
+    return stem.replace("eventnew", "event")
+
+
+def submitted_tia_visual_priority(path: Path) -> int:
+    name = path.stem.lower()
+    return (2 if "large_font" in name else 0) + (1 if "eventnew" in name else 0)
+
+
+def build_submitted_tia_visuals(project: dict[str, Any], base: Path) -> dict[str, Any]:
+    """Expose only selected-project submitted TIA exhibits stored with project evidence."""
+    visual_root = base / "02-delay_analysis" / "submitted_visuals"
+    if not visual_root.exists():
+        return {
+            "available": False,
+            "status": "No submitted visual exhibits detected",
+            "scope_note": "Add client or consultant TIA SVG/PNG exhibits under this selected project's 02-delay_analysis/submitted_visuals folder.",
+            "evidentiary_note": "No submitted exhibit is available for this selected project.",
+            "visuals": [],
+        }
+
+    supported = {".svg", ".png"}
+    candidates = [
+        item for item in sorted(visual_root.rglob("*"))
+        if item.is_file() and item.suffix.lower() in supported and not item.name.startswith(".")
+    ]
+    selected: dict[str, Path] = {}
+    for item in candidates:
+        key = submitted_tia_visual_key(item)
+        current = selected.get(key)
+        if current is None or submitted_tia_visual_priority(item) > submitted_tia_visual_priority(current):
+            selected[key] = item
+
+    project_slug = slugify(project["project_folder_name"])
+    visuals = []
+    for item in sorted(selected.values(), key=lambda path: (submitted_tia_visual_category(path.stem), path.name.lower())):
+        relative_path = item.relative_to(visual_root).as_posix()
+        visuals.append({
+            "name": item.name,
+            "label": re.sub(r"[_-]+", " ", item.stem).strip(),
+            "category": submitted_tia_visual_category(item.stem),
+            "relative_path": relative_path,
+            "url": f"/generated/{project_slug}/tia-submitted-exhibits/{slugify(item.stem)}{item.suffix.lower()}",
+        })
+
+    return {
+        "available": bool(visuals),
+        "status": "Submitted visual exhibits available" if visuals else "No supported submitted visual exhibits detected",
+        "scope_note": "These client-submission exhibits are available only in this selected project's Delay Analysis workspace.",
+        "evidentiary_note": "Figures and values within submitted exhibits are source material, not a Vercel recalculation. Confirm EOT, concurrency, and compensation in Primavera P6 and the project evidence record.",
+        "visuals": visuals,
+    }
 
 
 def parse_fragnet_comparison(path: Path) -> list[dict[str, Any]]:
@@ -378,6 +672,265 @@ def sqlite_table_counts(path: Path) -> dict[str, Any]:
     return result
 
 
+def dataframe_workspace_table(frame: Any, file_name: str, limit: int = WORKSPACE_TABLE_ROW_LIMIT) -> dict[str, Any]:
+    """Convert a canonical pandas result into the same safe table contract as CSV data."""
+    if frame is None:
+        return {"file": file_name, "exists": False, "row_count": 0, "column_count": 0, "columns": [], "rows": []}
+    try:
+        import pandas as pd  # type: ignore
+
+        columns = [str(column) for column in frame.columns]
+        rows: list[dict[str, Any]] = []
+        for record in frame.head(limit).to_dict(orient="records"):
+            cleaned: dict[str, Any] = {}
+            for key, value in record.items():
+                if pd.isna(value):
+                    cleaned[str(key)] = None
+                elif hasattr(value, "isoformat"):
+                    cleaned[str(key)] = value.isoformat()
+                elif isinstance(value, (str, int, float, bool)):
+                    cleaned[str(key)] = value
+                else:
+                    cleaned[str(key)] = str(value)
+            rows.append(cleaned)
+        return {
+            "file": file_name,
+            "exists": True,
+            "row_count": int(len(frame)),
+            "column_count": len(columns),
+            "columns": columns,
+            "rows": rows,
+            "truncated": len(frame) > limit,
+            "source_path": file_name,
+        }
+    except Exception as exc:
+        return {"file": file_name, "exists": False, "row_count": 0, "column_count": 0, "columns": [], "rows": [], "error": str(exc)}
+
+
+def build_legacy_generic_tia_snapshot_archived(delay_dir: Path, project: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Run the Streamlit TIA engine for one project and publish only its results.
+
+    A TIA failure is a visible readiness state, never a replacement result from
+    another project or a guessed EOT value.
+    """
+    if not delay_dir.exists():
+        return {"status": "missing", "message": "Delay TIA source folder is missing.", "tables": {}}
+    try:
+        import pandas as pd  # type: ignore
+
+        source_src = CANONICAL_ROOT / "src"
+        if str(source_src) not in sys.path:
+            sys.path.insert(0, str(source_src))
+        from construction_system.steel_delay_tia import SteelTiaSettings, run_steel_delay_tia_analysis
+        from construction_system.tia_source_governance import build_tia_source_assessment
+
+        lookup = {re.sub(r"[^a-z0-9]+", "", path.name.lower()): path for path in delay_dir.glob("*.csv")}
+
+        def frame(fragment: str) -> Any:
+            path = lookup.get(re.sub(r"[^a-z0-9]+", "", fragment.lower()))
+            return pd.read_csv(path, dtype=object) if path and path.exists() else pd.DataFrame()
+
+        event_frames = [frame(name) for name in ("07-ifc_conflict.csv", "08-payments.csv", "09-rfi_status.csv")]
+        event_frames = [item for item in event_frames if not item.empty]
+        event_df = pd.concat(event_frames, ignore_index=True, sort=False) if event_frames else pd.DataFrame()
+        analysis = run_steel_delay_tia_analysis(
+            p6_df=frame("04-p6_activity_export.csv"),
+            steel_df=frame("03-employer_steel_supply_at_site.csv"),
+            requirement_df=frame("02-master_activity_steel_analysis.csv"),
+            relationship_df=frame("05-relationship_file.csv"),
+            contract_library_df=frame("06-contract_library.csv"),
+            delay_events_df=event_df,
+            settings=SteelTiaSettings(),
+        )
+        tables = {
+            key: dataframe_workspace_table(value, f"TIA engine - {key}")
+            for key, value in analysis.items()
+            if hasattr(value, "columns")
+        }
+        raw_kpis = analysis.get("kpis", {}) if isinstance(analysis.get("kpis"), dict) else {}
+        kpis: dict[str, Any] = {}
+        for key, value in raw_kpis.items():
+            if pd.isna(value):
+                kpis[str(key)] = None
+            elif hasattr(value, "isoformat"):
+                kpis[str(key)] = value.isoformat()
+            elif isinstance(value, (str, int, float, bool)):
+                kpis[str(key)] = value
+            else:
+                kpis[str(key)] = str(value)
+        governed = build_tia_source_assessment(project) if project else {
+            "status": "awaiting_project_context",
+            "source_scope": "selected_project_only",
+            "event_register": [],
+            "summary": {"final_eot_days": None, "final_eot_status": "Not calculated"},
+        }
+        return {
+            "status": "ready",
+            "message": "Canonical Streamlit TIA engine completed for the selected project. Results remain indicative until P6 recalculation is verified.",
+            "kpis": kpis,
+            "tables": tables,
+            "source_governance": governed,
+        }
+    except Exception as exc:
+        return {"status": "needs_review", "message": f"Canonical TIA engine could not complete: {exc}", "tables": {}}
+
+
+def build_controlled_tia_snapshot(project: dict[str, Any]) -> dict[str, Any]:
+    """Publish only the selected project's controlled TIA run.
+
+    The former generic CSV engine is intentionally not called here.  The
+    controlled adapter creates an unreviewed project-local draft when an
+    approved source changes, or a setup state when no project package exists.
+    """
+    try:
+        source_src = CANONICAL_ROOT / "src"
+        if str(source_src) not in sys.path:
+            sys.path.insert(0, str(source_src))
+        from construction_system.controlled_tia import refresh_controlled_tia_run
+
+        return refresh_controlled_tia_run(project)
+    except Exception as exc:
+        return {
+            "engine": "controlled-project-tia",
+            "project_id": str(project.get("project_id") or ""),
+            "project_key": str(project.get("project_key") or ""),
+            "status": "SETUP_REQUIRED",
+            "approval_status": "not_submitted",
+            "message": f"Controlled TIA setup could not be inspected: {exc}",
+            "workflow_tabs": [],
+            "source_integrity": {"files": [], "signature": {"status": "not_checked"}},
+            "schedule_cpm": {"xer_pairs": []},
+            "events_and_fragnets": {"events": [], "event_exhibits": []},
+            "concurrency_and_entitlement": {"controls": []},
+            "eot_position": {"label": "Not available"},
+            "ai_scope": {"status": "guidance_only"},
+            "missing_evidence": ["Resolve the controlled TIA setup error before publishing a result."],
+            "reconciliation_items": [],
+        }
+
+
+def public_controlled_tia_payload(snapshot: dict[str, Any], public_slug: str) -> dict[str, Any]:
+    """Remove workstation paths while retaining evidence file lineage."""
+    public = json.loads(json.dumps(snapshot, default=str))
+    public.pop("run_path", None)
+    integrity = public.get("source_integrity")
+    if isinstance(integrity, dict):
+        integrity.pop("release_path", None)
+        archive = integrity.get("archive")
+        if isinstance(archive, dict):
+            archive.pop("path", None)
+        for item in integrity.get("files", []):
+            if isinstance(item, dict):
+                item.pop("path", None)
+    event_section = public.get("events_and_fragnets")
+    if isinstance(event_section, dict):
+        exhibits = event_section.get("event_exhibits")
+        if isinstance(exhibits, list):
+            for exhibit in exhibits:
+                if not isinstance(exhibit, dict):
+                    continue
+                relative_path = str(exhibit.get("source_relative_path") or "").strip()
+                if not relative_path:
+                    continue
+                source_path = Path(relative_path)
+                exhibit["url"] = (
+                    f"/generated/{public_slug}/tia-controlled-event-exhibits/"
+                    f"{slugify(source_path.stem)}{source_path.suffix.lower()}"
+                )
+                exhibit.pop("sha256", None)
+    view_exhibits = public.get("view_exhibits")
+    if isinstance(view_exhibits, list):
+        for exhibit in view_exhibits:
+            if not isinstance(exhibit, dict):
+                continue
+            relative_path = str(exhibit.get("source_relative_path") or "").strip()
+            if not relative_path:
+                continue
+            source_path = Path(relative_path)
+            exhibit["url"] = (
+                f"/generated/{public_slug}/tia-controlled-view-exhibits/"
+                f"{slugify(source_path.stem)}{source_path.suffix.lower()}"
+            )
+            exhibit.pop("sha256", None)
+    return public
+
+
+def build_four_pipeline_snapshot(project: dict[str, Any], controlled_tia: dict[str, Any]) -> dict[str, Any]:
+    """Publish a compact read-only governance view from the controlled run.
+
+    The former generic four-pipeline evaluator remains historic material.  It
+    must not reintroduce generic TIA inputs into the active project payload.
+    """
+    integrity = controlled_tia.get("source_integrity", {}) if isinstance(controlled_tia, dict) else {}
+    return {
+        "project_id": str(project.get("project_id") or ""),
+        "project_key": str(project.get("project_key") or ""),
+        "assessment_profile": "controlled_tia_readiness",
+        "assessment_status": str(controlled_tia.get("status") or "SETUP_REQUIRED"),
+        "source_scope": "selected_project_only",
+        "gates": [
+            {"name": "Source integrity", "status": str(integrity.get("signature", {}).get("status") or "not_checked")},
+            {"name": "Schedule and CPM", "status": str(controlled_tia.get("schedule_cpm", {}).get("status") or "awaiting_evidence")},
+            {"name": "Event and fragnet", "status": str(controlled_tia.get("events_and_fragnets", {}).get("status") or "awaiting_evidence")},
+            {"name": "Concurrency and entitlement", "status": str(controlled_tia.get("concurrency_and_entitlement", {}).get("status") or "awaiting_evidence")},
+            {"name": "P6 approval", "status": str(controlled_tia.get("approval_status") or "not_submitted")},
+        ],
+        "missing_actions": list(controlled_tia.get("missing_evidence") or []),
+        "pipeline_rows": [],
+        "source_inventory": [
+            {**item, "project_id": str(project.get("project_id") or ""), "project_key": str(project.get("project_key") or "")}
+            for item in (integrity.get("files") or [])
+            if isinstance(item, dict)
+        ],
+        "evidence_ledger": list(controlled_tia.get("events_and_fragnets", {}).get("events") or []),
+        "summary": {"eot_position": controlled_tia.get("eot_position", {}).get("label")},
+    }
+
+
+def build_contract_controls_snapshot(
+    project: dict[str, Any], contracts_dir: Path, evidence_dir: Path
+) -> dict[str, Any]:
+    """Refresh and publish selected-project contract/evidence controls only."""
+
+    try:
+        if str(CANONICAL_ROOT) not in sys.path:
+            sys.path.insert(0, str(CANONICAL_ROOT))
+        from contract_claims_center import (  # type: ignore
+            build_project_contract_controls,
+            persist_contract_analysis,
+        )
+
+        db_path = contracts_dir / "contract_claims.db"
+        status = persist_contract_analysis(db_path, contracts_dir, rebuild=False)
+        controls = build_project_contract_controls(
+            db_path=db_path,
+            contracts_dir=contracts_dir,
+            evidence_dir=evidence_dir,
+            project_id=str(project.get("project_id") or ""),
+            project_key=str(project.get("project_key") or ""),
+        )
+        public_status = dict(status) if isinstance(status, dict) else {}
+        auto_library_status = public_status.get("auto_library_status")
+        if isinstance(auto_library_status, dict):
+            public_status["auto_library_status"] = {
+                key: value
+                for key, value in auto_library_status.items()
+                if key not in {"library_path", "database_path", "contracts_dir", "evidence_dir"}
+            }
+        return {"status": public_status, "controls": controls}
+    except Exception as exc:
+        return {
+            "status": {"knowledge_base_status": "Needs review", "error": str(exc)},
+            "controls": {
+                "project_id": str(project.get("project_id") or ""),
+                "project_key": str(project.get("project_key") or ""),
+                "source_scope": "selected_project_only",
+                "clause_controls": [],
+                "evidence_ledger": [],
+            },
+        }
+
+
 def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str, str]]]) -> dict[str, Any]:
     base = Path(project["path"])
     data_dir = base / "01-data" / "import_templates"
@@ -388,91 +941,84 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     letters_dir = base / "07-letters_intelligence"
     outputs_dir = OUTPUTS_ROOT / project["project_folder_name"]
 
-    delay_templates = [
-        preview_table(path)
-        for path in sorted(delay_dir.glob("*.csv"))
-    ]
-    delay_required_names = [
-        "01-project_metadata_template.csv",
-        "02-master_activity_steel_analysis.csv",
-        "03-employer_steel_supply_at_site.csv",
-        "04-p6_activity_export.csv",
-        "05-relationship_file.csv",
-        "06-contract_library.csv",
-        "07-ifc_conflict.csv",
-        "08-payments.csv",
-        "09-rfi_status.csv",
-        "10-contractor_steel_supplied_at_site.csv",
-        "11-concurrency_matrix_template.updated.csv",
-    ]
-    normalized_delay_files = {re.sub(r"\s+", "", item["file"].lower()): item for item in delay_templates}
-    missing_delay = [
-        name for name in delay_required_names
-        if re.sub(r"\s+", "", name.lower()) not in normalized_delay_files
-    ]
-
     letter_files = list_project_files(letters_dir / "inbox", base, 160)
-    letter_workbook = xlsx_summary(letters_dir / "letters_intelligence.xlsx")
+    letter_workbook_path = letters_dir / "letters_intelligence.xlsx"
+    letter_workbook = xlsx_summary(letter_workbook_path)
+    letter_workspace_tables = build_letters_workspace_tables(project, letter_workbook_path, letters_dir / "inbox")
     contract_files = list_project_files(contracts_dir / "source", base, 80)
     evidence_files = list_project_files(evidence_dir, base, 80)
     output_files = list_project_files(outputs_dir, OUTPUTS_ROOT, 20)
-    submitted_tia = build_submitted_tia_payload(project, base)
+    controlled_tia = public_controlled_tia_payload(
+        build_controlled_tia_snapshot(project), slugify(project["project_folder_name"])
+    )
+    four_pipeline = build_four_pipeline_snapshot(project, controlled_tia)
+    contract_controls = build_contract_controls_snapshot(project, contracts_dir, evidence_dir)
+    overview_paths = {
+        "projects": data_dir / "projects.csv",
+        "activities": data_dir / "activities.csv",
+        "progress_updates": data_dir / "progress_updates.csv",
+        "evm": data_dir / "evm.csv",
+        "risks": data_dir / "risks.csv",
+        "claims": data_dir / "claims.csv",
+        "contracts": data_dir / "contracts.csv",
+        "payments": data_dir / "payments.csv",
+        "planned_cash_flow": data_dir / "planned_cash_flow.csv",
+        "milestones": data_dir / "milestones.csv",
+        "delay_events": data_dir / "delay_events.csv",
+        "wbs": data_dir / "wbs.csv",
+        "s_curve": data_dir / "s_curve.csv",
+    }
 
     return {
         "overview": {
             "data_sources": {key: len(value) for key, value in rows.items()},
             "source_tables": {
-                "projects": preview_table(data_dir / "projects.csv"),
-                "activities": preview_table(data_dir / "activities.csv"),
-                "progress_updates": preview_table(data_dir / "progress_updates.csv"),
-                "evm": preview_table(data_dir / "evm.csv"),
-                "risks": preview_table(data_dir / "risks.csv"),
-                "claims": preview_table(data_dir / "claims.csv"),
-                "contracts": preview_table(data_dir / "contracts.csv"),
-                "payments": preview_table(data_dir / "payments.csv"),
-                "milestones": preview_table(data_dir / "milestones.csv"),
-                "delay_events": preview_table(data_dir / "delay_events.csv"),
-                "wbs": preview_table(data_dir / "wbs.csv"),
-                "s_curve": preview_table(data_dir / "s_curve.csv"),
+                key: preview_table(path) for key, path in overview_paths.items()
             },
+            "workspace_tables": {key: workspace_table(path) for key, path in overview_paths.items()},
         },
         "letters_intelligence": {
             "folder": "07-letters_intelligence",
             "inbox_files": letter_files,
             "inbox_file_count": len(letter_files),
             "workbook": letter_workbook,
+            "workbook_tables": letter_workspace_tables,
             "detectors": [
                 {"name": "Inbox folder detector", "status": "Active" if (letters_dir / "inbox").exists() else "Missing", "detail": "Recognizes new PDF, DOCX, XLSX, CSV, and message files under project letters inbox."},
-                {"name": "Letters workbook detector", "status": "Active" if (letters_dir / "letters_intelligence.xlsx").exists() else "Missing", "detail": "Reads the project-specific letters intelligence workbook when available."},
+                {"name": "Letters intelligence workflow", "status": "Active" if letter_workspace_tables.get("sheets") else "Awaiting Data", "detail": "Uses the Streamlit workbook, inbox ingestion, correspondence links, and issue-thread workflow for this project only."},
                 {"name": "Project isolation", "status": "Active", "detail": "Only files inside the selected project folder are listed."},
             ],
         },
         "delay_analysis": {
             "folder": "02-delay_analysis",
-            "logic_mode": "Submitted TIA Level 1-4 assessment" if submitted_tia.get("available") else "Generic project TIA readiness",
-            "submitted_tia": submitted_tia,
-            "templates": delay_templates,
-            "required_file_count": len(delay_required_names),
-            "recognized_file_count": len(delay_templates),
-            "missing_required_files": missing_delay,
-            "schedule_tables": {
-                "MEP Activities": preview_table(schedule_dir / "MEP Activities.csv"),
-                "MEP Schedule": preview_table(schedule_dir / "MEP Schedule.csv"),
-                "MEP Civil Logic": preview_table(schedule_dir / "MEP Civil Logic.csv"),
-                "BL Schedule": preview_table(schedule_dir / "BL Schedule.csv"),
+            "visibility": "workspace",
+            "internal_control": {
+                "ui_enabled": True,
+                "source_scope": "selected_project_only",
+                "automatic_engine": "controlled_project_tia",
+                "groq_assist": "active_project_evidence_explanation_only",
+                "evidence_status": str(controlled_tia.get("status") or "SETUP_REQUIRED"),
+                "activation_rule": "Only the active project's approved release may create a controlled run. No other project's XER, event, contract, evidence, or output is used.",
             },
+            "logic_mode": "Controlled project-local Time Impact Analysis",
+            "controlled_tia": controlled_tia,
+            "legacy_status": "Archived and excluded from the active TIA workflow.",
             "detectors": [
-                {"name": "Delay TIA template detector", "status": "Ready" if not missing_delay else "Needs files", "detail": f"{len(delay_templates)} CSV files recognized in the selected project."},
-                {"name": "Column inspector", "status": "Active", "detail": "Every detected CSV includes row count, column count, and preview rows."},
-                {"name": "MEP schedule detector", "status": "Active" if (schedule_dir / "MEP Schedule.csv").exists() else "Missing", "detail": "Recognizes project-specific MEP schedule and civil logic tables."},
+                {"name": "Approved release detector", "status": "Active" if controlled_tia.get("source_integrity", {}).get("release_configured") else "Awaiting package", "detail": "Checks only the active project's declared approved TIA release."},
+                {"name": "Source integrity control", "status": str(controlled_tia.get("source_integrity", {}).get("signature", {}).get("status") or "not_checked"), "detail": "Validates signed-manifest and source-hash controls without executing the submitted package."},
+                {"name": "Run isolation", "status": "Active", "detail": "Automatic drafts and any approved run are written only under this project's 02-delay_analysis/controlled_runs folder."},
             ],
         },
+        "four_pipeline": four_pipeline,
         "contract_claims": {
             "folder": "05-contracts",
             "source_files": contract_files,
             "evidence_files": evidence_files,
             "database": sqlite_table_counts(contracts_dir / "contract_claims.db"),
+            "knowledge_base": sqlite_table_rows(contracts_dir / "contract_claims.db"),
+            "controlled_assessment": contract_controls,
             "clause_library": xlsx_summary(contracts_dir / "source" / "Overall_Contract_clause_library.xlsx"),
+            "clause_library_tables": xlsx_workspace_tables(contracts_dir / "source" / "Overall_Contract_clause_library.xlsx"),
             "detectors": [
                 {"name": "Contract source detector", "status": "Active" if contract_files else "Missing", "detail": "Finds contract PDFs and clause libraries inside the selected project only."},
                 {"name": "Knowledge base detector", "status": "Active" if (contracts_dir / "contract_claims.db").exists() else "Missing", "detail": "Uses the selected project's own SQLite knowledge base."},
@@ -485,7 +1031,7 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
             "watchers": [
                 {"name": "Project data detector", "status": "Active", "detail": "Website data generator fingerprints every selected project folder."},
                 {"name": "No-Git sync watcher", "status": "Configured" if (ROOT / "RUN_FULL_PROJECT_NO_GIT_SYNC.bat").exists() else "Missing", "detail": "Syncs local code, project folders, generated HTML, and website files to GitHub."},
-                {"name": "Generated HTML output watcher", "status": "Configured" if outputs_dir.exists() else "Missing", "detail": "Publishes project-specific HTML outputs from 11-outputs."},
+                {"name": "Generated report watcher", "status": "Configured" if outputs_dir.exists() else "Missing", "detail": "Publishes project-specific HTML, PDF, and PowerPoint outputs from 11-outputs."},
             ],
         },
     }
@@ -546,26 +1092,101 @@ def weighted_activity_progress(rows: list[dict[str, Any]], progress_fields: list
     return weighted_value / total_weight if total_weight > 0 else None
 
 
+def risk_factor(value: Any, *, numeric_kind: str = "rating") -> float | None:
+    """Normalize common qualitative or numeric risk values to a 0-1 factor."""
+    text = str(value or "").strip().lower()
+    if not text:
+        return None
+    labels = {
+        "very low": 0.1,
+        "low": 0.25,
+        "medium": 0.5,
+        "moderate": 0.5,
+        "high": 0.75,
+        "very high": 1.0,
+        "critical": 1.0,
+        "severe": 1.0,
+        "yes": 0.75,
+        "true": 0.75,
+        "no": 0.0,
+        "false": 0.0,
+    }
+    if text in labels:
+        return labels[text]
+
+    number = safe_float(value)
+    if number is None:
+        return None
+    number = abs(number)
+    if numeric_kind == "days":
+        if number <= 0:
+            return 0.0
+        if number <= 7:
+            return 0.25
+        if number <= 30:
+            return 0.5
+        if number <= 90:
+            return 0.75
+        return 1.0
+    if number <= 1:
+        return number
+    if number <= 5:
+        return number / 5.0
+    if number <= 25:
+        return number / 25.0
+    return min(number / 100.0, 1.0)
+
+
+def active_risk(row: dict[str, Any]) -> bool:
+    status = str(pick(row, ["status", "risk_status", "current_status"]) or "").strip().lower()
+    return status not in {"closed", "resolved", "cancelled", "canceled", "inactive", "withdrawn"}
+
+
 def qualitative_risk_metrics(rows: list[dict[str, Any]]) -> tuple[float | None, int, str]:
-    """Use an explicit numeric score when supplied, otherwise mirror the legacy risk-count heuristic."""
-    explicit = [
-        safe_float(pick(row, ["risk_score", "risk rating", "risk_rating", "score", "severity_score"]))
-        for row in rows
-    ]
-    numeric_scores = [value for value in explicit if value is not None]
-    high_terms = {"high", "critical", "severe", "very high"}
+    """Derive an active-risk score from explicit scores or probability/impact fields.
+
+    Closed records are excluded. This is intentionally a transparent management
+    indicator, not a replacement for a project-approved risk matrix.
+    """
+    scores: list[float] = []
     high_count = 0
+    high_terms = {"high", "very high", "critical", "severe"}
+
     for row in rows:
-        terms = {
-            str(pick(row, ["probability"]) or "").strip().lower(),
-            str(pick(row, ["severity", "impact", "status"]) or "").strip().lower(),
+        if not active_risk(row):
+            continue
+
+        explicit = risk_factor(pick(row, ["risk_score", "risk rating", "risk_rating", "score", "severity_score"]))
+        probability = risk_factor(pick(row, ["probability", "likelihood", "chance"]))
+        impact_values = [
+            risk_factor(pick(row, ["severity", "impact", "impact_rating", "impact level"])),
+            risk_factor(pick(row, ["time_impact_days", "schedule_impact_days", "delay_days"]), numeric_kind="days"),
+            risk_factor(pick(row, ["cost_impact", "cost impact", "financial_impact"])),
+        ]
+        impacts = [value for value in impact_values if value is not None]
+        impact = max(impacts) if impacts else None
+
+        if explicit is not None:
+            score = explicit * 100.0
+        elif probability is not None and impact is not None:
+            score = probability * impact * 100.0
+        elif probability is not None:
+            score = probability * 100.0
+        elif impact is not None:
+            score = impact * 100.0
+        else:
+            continue
+
+        scores.append(score)
+        qualitative_terms = {
+            str(pick(row, ["probability", "likelihood", "chance"]) or "").strip().lower(),
+            str(pick(row, ["severity", "impact", "impact_rating", "impact level"]) or "").strip().lower(),
         }
-        if terms & high_terms:
+        if score >= 70.0 or qualitative_terms & high_terms:
             high_count += 1
-    if numeric_scores:
-        return average(numeric_scores), high_count, "risks.csv:numeric risk score average"
-    if rows:
-        return min(100.0, float(len(rows)) * 20.0), high_count, "risks.csv:legacy record-count heuristic"
+
+    if scores:
+        return average(scores), high_count, "risks.csv:active probability-impact risk matrix"
     return None, high_count, "Unavailable"
 
 
@@ -686,8 +1307,8 @@ def build_decision_reasons(args: dict[str, Any]) -> list[dict[str, str]]:
     if delay_days:
         reasons.append({
             "issue": "Delay exposure recorded",
-            "trigger": f"{delay_days:.0f} delay days from delay event records",
-            "impact": "Potential effect on delivery, mitigation, or EOT position.",
+            "trigger": f"{delay_days:.0f} cumulative delay-event days; EOT not yet verified",
+            "impact": "Indicative schedule exposure only until critical path, fragnet, and concurrency tests are verified.",
             "owner": "Planning / Claims Team",
             "evidence_status": data_confidence,
             "urgency": "High" if delay_days >= 30 else "Medium",
@@ -767,42 +1388,47 @@ def fingerprint(path: Path) -> str:
             continue
         digest.update(rel.encode("utf-8"))
         digest.update(str(child.stat().st_size).encode("ascii"))
-        digest.update(str(int(child.stat().st_mtime)).encode("ascii"))
+        digest.update(str(child.stat().st_mtime_ns).encode("ascii"))
     return digest.hexdigest()
 
 
 def discover_projects() -> list[dict[str, Any]]:
-    projects: list[dict[str, Any]] = []
+    """Discover project folders through the shared non-destructive catalog."""
     if not PROJECTS_ROOT.exists():
-        return projects
-    for sector_dir in sorted(p for p in PROJECTS_ROOT.iterdir() if p.is_dir() and not p.name.startswith("_")):
-        for project_dir in sorted(p for p in sector_dir.iterdir() if p.is_dir() and not p.name.startswith("_")):
-            manifest = read_json(project_dir / "project_manifest.json")
-            project_json = read_json(project_dir / "project.json")
-            project_id = manifest.get("project_id") or project_json.get("project_id") or slugify(project_dir.name).lower()
-            display_name = (
-                manifest.get("project_display_name")
-                or project_json.get("project_display_name")
-                or project_json.get("name")
-                or project_dir.name
-            )
-            projects.append(
-                {
-                    "project_id": str(project_id),
-                    "project_key": slugify(str(project_id)).lower(),
-                    "project_folder_name": project_dir.name,
-                    "project_display_name": str(display_name),
-                    "sector": sector_dir.name,
-                    "meeting_url": (
-                        project_json.get("meeting_url")
-                        or project_json.get("conference_url")
-                        or project_json.get("teams_url")
-                        or project_json.get("zoom_url")
-                        or project_json.get("google_meet_url")
-                    ),
-                    "path": project_dir,
-                }
-            )
+        return []
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
+    from src.construction_system.project_catalog import (
+        discover_projects as catalog_discover_projects,
+        ensure_project_structure,
+    )
+
+    template_dir = PROJECTS_ROOT / "_PROJECT_TEMPLATE"
+    if template_dir.exists():
+        ensure_project_structure(template_dir)
+
+    projects: list[dict[str, Any]] = []
+    for record in catalog_discover_projects(PROJECTS_ROOT):
+        project_dir = Path(str(record["project_dir"]))
+        project_json = read_json(project_dir / "project.json")
+        project_id = str(record["project_id"])
+        projects.append(
+            {
+                "project_id": project_id,
+                "project_key": slugify(project_id).lower(),
+                "project_folder_name": project_dir.name,
+                "project_display_name": str(record.get("project_display_name") or project_dir.name),
+                "sector": str(record.get("sector_name") or "Unassigned"),
+                "meeting_url": (
+                    project_json.get("meeting_url")
+                    or project_json.get("conference_url")
+                    or project_json.get("teams_url")
+                    or project_json.get("zoom_url")
+                    or project_json.get("google_meet_url")
+                ),
+                "path": project_dir,
+            }
+        )
     return projects
 
 
@@ -813,6 +1439,7 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         "projects": read_csv_rows(data_dir / "projects.csv"),
         "contracts": read_csv_rows(data_dir / "contracts.csv"),
         "payments": read_csv_rows(data_dir / "payments.csv"),
+        "planned_cash_flow": read_csv_rows(data_dir / "planned_cash_flow.csv"),
         "progress": read_csv_rows(data_dir / "progress_updates.csv"),
         "evm": read_csv_rows(data_dir / "evm.csv"),
         "risks": read_csv_rows(data_dir / "risks.csv"),
@@ -820,6 +1447,8 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         "activities": read_csv_rows(data_dir / "activities.csv"),
         "milestones": read_csv_rows(data_dir / "milestones.csv"),
         "delay_events": read_csv_rows(data_dir / "delay_events.csv"),
+        "s_curve": read_csv_rows(data_dir / "s_curve.csv"),
+        "historical_outcomes": read_csv_rows(data_dir / "historical_outcomes.csv"),
     }
 
     project_meta = rows["projects"][0] if rows["projects"] else {}
@@ -917,7 +1546,10 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         cpi,
         risk_score,
     ]
-    completeness = sum(value is not None for value in data_quality_fields) / len(data_quality_fields)
+    metric_completeness = sum(value is not None for value in data_quality_fields) / len(data_quality_fields)
+    required_source_sets = ("projects", "activities", "evm", "risks")
+    source_completeness = sum(bool(rows[name]) for name in required_source_sets) / len(required_source_sets)
+    data_quality = round((metric_completeness * 0.75 + source_completeness * 0.25) * 100, 1)
 
     if (spi is not None and spi < 0.9) or (cpi is not None and cpi < 0.9) or high_risk_count > 0:
         decision_required = True
@@ -928,7 +1560,13 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
     cost_health = health_from_ratio(cpi)
     delay_exposure = exposure_from_value(delay_days, medium=1, high=30)
     claim_exposure_level = exposure_from_value(claims_exposure, medium=1, high=1000000)
-    data_confidence = confidence_from_quality(round(completeness * 100, 1))
+    data_confidence = confidence_from_quality(data_quality)
+    advanced_analytics = build_advanced_analytics(
+        project_key=str(project["project_key"]),
+        rows=rows,
+        contract_value=contract_value,
+        output_dir=DATA_ROOT / "analytics",
+    )
     priority_inputs = [
         "High" if decision_required else "Low",
         "High" if schedule_health == "Critical" else schedule_health,
@@ -939,7 +1577,6 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         "High" if data_confidence == "Low" else data_confidence,
     ]
     decision_priority = sorted(priority_inputs, key=priority_rank)[0]
-    data_quality = round(completeness * 100, 1)
     decision_reasons = build_decision_reasons({
         "project_display_name": project["project_display_name"],
         "schedule_health": schedule_health,
@@ -947,12 +1584,44 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         "spi": spi,
         "cpi": cpi,
         "delay_days": delay_days,
+        "delay_assessment": "Indicative schedule exposure only. Verify critical path, fragnet logic, and concurrency in Primavera P6 before using as EOT.",
         "claims_exposure": claims_exposure,
         "claimed_days": claimed_days,
         "high_risk_count": high_risk_count,
         "data_confidence": data_confidence,
         "data_quality": data_quality,
+        "data_quality_components": {
+            "metric_completeness": round(metric_completeness * 100, 1),
+            "required_source_completeness": round(source_completeness * 100, 1),
+            "required_source_sets": list(required_source_sets),
+        },
+        "advanced_analytics": advanced_analytics,
     })
+
+    features = build_feature_payload(project, rows)
+    chart_payloads = build_project_chart_payloads(
+        project_id=str(project["project_id"]),
+        project_key=str(project["project_key"]),
+        data_dir=data_dir,
+        vercel_dir=base / "vercel",
+        delay_dir=base / "02-delay_analysis" / "steel_delay_tia_templates",
+        payment_rows=rows["payments"],
+        delay_event_rows=rows["delay_events"],
+        activity_rows=rows["activities"],
+        read_csv_rows=read_csv_rows,
+        workspace_rows=rows,
+        project_metrics={
+            "bac": bac,
+            "pv": pv,
+            "ev": ev,
+            "ac": ac,
+            "eac": eac,
+            "planned_progress": planned_progress,
+            "actual_progress": actual_progress,
+            "spi": spi,
+            "cpi": cpi,
+        },
+    )
 
     return {
         **{k: v for k, v in project.items() if k != "path"},
@@ -995,6 +1664,7 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         "activity_count": len(rows["activities"]),
         "milestone_count": len(rows["milestones"]),
         "data_quality": data_quality,
+        "advanced_analytics": advanced_analytics,
         "decision_required": decision_required,
         "last_updated": latest_mtime(base),
         "fingerprint": fingerprint(base),
@@ -1012,10 +1682,11 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
             "ev": {"source": ev_source, "aggregation": "sum of selected project EVM records"},
             "ac": {"source": ac_source, "aggregation": "sum of selected project EVM records"},
             "risk_score": {"source": risk_source, "aggregation": "project risk register"},
-            "delay_days": {"source": "delay_events.csv:Delayed duration after overlap", "aggregation": "sum of selected project delay events"},
+            "delay_days": {"source": "delay_events.csv:estimated or overlap-adjusted duration", "aggregation": "cumulative event exposure; not a verified EOT calculation"},
             "claims_exposure": {"source": "claims.csv:claimed_amount", "aggregation": "sum of selected project claim records"},
         },
-        "features": build_feature_payload(project, rows),
+        "features": features,
+        "chart_payloads": chart_payloads,
         "reports": {
             "executive_dashboard": f"/generated/{slugify(project['project_folder_name'])}/01_executive_dashboard.html",
             "master_dashboard": f"/generated/{slugify(project['project_folder_name'])}/02_master_dashboard.html",
@@ -1025,36 +1696,192 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def copy_if_changed(source: Path, target: Path) -> None:
+    if target.exists() and target.stat().st_size == source.stat().st_size:
+        try:
+            if _sha256_file(target) == _sha256_file(source):
+                return
+        except OSError:
+            pass
+    target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(source, target)
+
+
+def _json_default(value: Any) -> str:
+    """Keep generated payloads portable when local services return Path metadata."""
+
+    if isinstance(value, Path):
+        return str(value)
+    if hasattr(value, "isoformat"):
+        return value.isoformat()
+    return str(value)
+
+
+def write_json_if_changed(path: Path, payload: dict[str, Any]) -> bool:
+    """Write generated data only when its content changes, preserving project freshness."""
+    content = json.dumps(payload, indent=2, ensure_ascii=False, default=_json_default) + "\n"
+    if path.exists() and path.read_text(encoding="utf-8") == content:
+        return False
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="utf-8")
+    return True
+
+
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
+    """Publish selected-project report artifacts without rewriting unchanged projects."""
     GENERATED_ROOT.mkdir(parents=True, exist_ok=True)
-    for child in GENERATED_ROOT.iterdir():
-        if child.is_dir():
-            shutil.rmtree(child)
+    OUTPUTS_ROOT.mkdir(parents=True, exist_ok=True)
+    active_public_dirs = {slugify(project["project_folder_name"]) for project in projects}
+    for orphan in GENERATED_ROOT.iterdir():
+        if orphan.is_dir() and orphan.name not in active_public_dirs:
+            shutil.rmtree(orphan)
+
     for project in projects:
-        source = OUTPUTS_ROOT / project["project_folder_name"]
-        target = GENERATED_ROOT / slugify(project["project_folder_name"])
+        project_folder = project["project_folder_name"]
+        source = SOURCE_OUTPUTS_ROOT / project_folder
+        output_dir = OUTPUTS_ROOT / project_folder
+        output_dir.mkdir(parents=True, exist_ok=True)
+        if source.exists() and source.resolve() != output_dir.resolve():
+            for html_report in sorted(source.glob("*.html")):
+                copy_if_changed(html_report, output_dir / html_report.name)
+
+        public_slug = slugify(project_folder)
+        artifacts = ensure_project_report_artifacts(project, output_dir, public_slug=public_slug)
+        project["report_artifacts"] = artifacts
+
+        # The Universal Report Engine is a local controlled tool.  Its catalogue
+        # is always generated for the owning project, while report packages are
+        # published only after a local, source-bound engine run creates them.
+        project_dir = PROJECTS_ROOT / str(project.get("sector") or "") / str(project_folder)
+        if project_dir.is_dir():
+            project["universal_report_engine"] = ensure_universal_report_engine_catalog(
+                project, project_dir, output_dir, public_slug
+            )
+        project["features"]["outputs_and_watchers"]["output_files"] = list_project_files(output_dir, OUTPUTS_ROOT, 80)
+
+        target = GENERATED_ROOT / public_slug
         target.mkdir(parents=True, exist_ok=True)
-        if not source.exists():
-            continue
-        for html in sorted(source.glob("*.html")):
-            shutil.copy2(html, target / html.name)
+        for artifact in sorted(output_dir.iterdir()):
+            if artifact.is_file() and artifact.suffix.lower() in {".html", ".pdf", ".pptx", ".docx"}:
+                copy_if_changed(artifact, target / artifact.name)
+
+        # Publish only release-approved Universal Report Engine artifacts.
+        # Context, raw source inventory, validation internals, and draft/failed
+        # packages stay on the local workstation under the selected project's
+        # output folder.
+        universal_root = output_dir / "universal-report-engine"
+        if universal_root.is_dir():
+            for manifest_path in sorted(universal_root.rglob(FAMILY_MANIFEST_NAME)):
+                manifest = read_json(manifest_path)
+                if not isinstance(manifest, dict) or not is_released_artifact(manifest):
+                    continue
+                if manifest.get("project_id") != project.get("project_id"):
+                    continue
+                if manifest.get("project_key") != project.get("project_key"):
+                    continue
+                for relative_path in (manifest.get("artifacts") or {}).values():
+                    if not isinstance(relative_path, str):
+                        continue
+                    artifact = output_dir / relative_path
+                    if artifact.is_file() and artifact.suffix.lower() in {".html", ".pdf", ".pptx", ".zip"}:
+                        copy_if_changed(artifact, target / relative_path)
 
 
-def copy_tia_submitted_assets(projects: list[dict[str, Any]]) -> None:
+def copy_controlled_tia_exhibits(projects: list[dict[str, Any]]) -> None:
+    """Publish only the active project's declared controlled TIA exhibits.
+
+    The submission manifest supplies the relative path for each exhibit. The
+    path is resolved below the owning project's approved release folder and
+    the browser payload receives a static public URL, never a workstation path.
+    """
     for project in projects:
-        submitted = project.get("features", {}).get("delay_analysis", {}).get("submitted_tia", {})
+        delay_analysis = project.get("features", {}).get("delay_analysis", {})
+        controlled = delay_analysis.get("controlled_tia", {})
+        event_section = controlled.get("events_and_fragnets", {}) if isinstance(controlled, dict) else {}
+        event_exhibits = event_section.get("event_exhibits", []) if isinstance(event_section, dict) else []
+        view_exhibits = controlled.get("view_exhibits", []) if isinstance(controlled, dict) else []
+        if not isinstance(event_exhibits, list):
+            event_exhibits = []
+        if not isinstance(view_exhibits, list):
+            view_exhibits = []
+        if not event_exhibits and not view_exhibits:
+            continue
+
+        # Browser records intentionally omit local paths. Reconstruct the
+        # owning workspace from the discovered sector/folder identity instead
+        # of using a hidden fallback or another project's release folder.
+        project_dir = PROJECTS_ROOT / str(project.get("sector") or "") / str(project.get("project_folder_name") or "")
+        if not project_dir.is_dir():
+            continue
+        manifest = read_json(project_dir / "project_manifest.json")
+        release = manifest.get("approved_tia_release") if isinstance(manifest.get("approved_tia_release"), dict) else {}
+        source_path = Path(str(release.get("source_path") or ""))
+        source_dir = source_path if source_path.is_absolute() else (project_dir / source_path)
+        try:
+            source_dir = source_dir.resolve()
+            source_dir.relative_to(project_dir.resolve())
+        except (OSError, ValueError):
+            continue
+
+        for exhibit_set, target_name in (
+            (event_exhibits, "tia-controlled-event-exhibits"),
+            (view_exhibits, "tia-controlled-view-exhibits"),
+        ):
+            target = GENERATED_ROOT / slugify(project["project_folder_name"]) / target_name
+            for exhibit in exhibit_set:
+                if not isinstance(exhibit, dict):
+                    continue
+                relative_path = str(exhibit.get("source_relative_path") or "").strip()
+                if not relative_path:
+                    continue
+                try:
+                    source = (source_dir / relative_path).resolve()
+                    source.relative_to(source_dir)
+                except (OSError, ValueError):
+                    continue
+                if source.exists() and source.is_file():
+                    public_name = f"{slugify(source.stem)}{source.suffix.lower()}"
+                    copy_if_changed(source, target / public_name)
+                # The file name remains traceable, but the filesystem-relative path
+                # is unnecessary after publication and is removed from browser data.
+                exhibit.pop("source_relative_path", None)
+
+
+def copy_legacy_tia_submitted_assets_archived(projects: list[dict[str, Any]]) -> None:
+    for project in projects:
+        delay_analysis = project.get("features", {}).get("delay_analysis", {})
+        submitted = delay_analysis.get("submitted_tia", {})
         if not submitted.get("available"):
-            continue
+            submitted = {}
         guide_root = Path(str(submitted.get("guide_folder") or ""))
-        if not guide_root.exists():
+        if guide_root.exists():
+            target = GENERATED_ROOT / slugify(project["project_folder_name"]) / "tia-submitted-guide"
+            target.mkdir(parents=True, exist_ok=True)
+            for visual in submitted.get("visuals", []):
+                source = guide_root / str(visual.get("relative_path", ""))
+                if source.exists() and source.is_file():
+                    target_name = f"{slugify(source.stem)}{source.suffix.lower()}"
+                    copy_if_changed(source, target / target_name)
+
+        submitted_visuals = delay_analysis.get("submitted_visuals", {})
+        visual_root = PROJECTS_ROOT / project["sector"] / project["project_folder_name"] / "02-delay_analysis" / "submitted_visuals"
+        if not submitted_visuals.get("available") or not visual_root.exists():
             continue
-        target = GENERATED_ROOT / slugify(project["project_folder_name"]) / "tia-submitted-guide"
+        target = GENERATED_ROOT / slugify(project["project_folder_name"]) / "tia-submitted-exhibits"
         target.mkdir(parents=True, exist_ok=True)
-        for visual in submitted.get("visuals", []):
-            source = guide_root / str(visual.get("relative_path", ""))
+        for visual in submitted_visuals.get("visuals", []):
+            source = visual_root / str(visual.get("relative_path", ""))
             if source.exists() and source.is_file():
                 target_name = f"{slugify(source.stem)}{source.suffix.lower()}"
-                shutil.copy2(source, target / target_name)
+                copy_if_changed(source, target / target_name)
 
 
 def build_portfolio_decision_brief(projects: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -1090,6 +1917,62 @@ def build_portfolio_decision_brief(projects: list[dict[str, Any]]) -> list[dict[
             item.get("project_display_name") or "",
         ),
     )[:18]
+
+
+def portfolio_project_summary(project: dict[str, Any]) -> dict[str, Any]:
+    """Keep portfolio JSON executive-sized; detailed evidence remains per project."""
+    fields = (
+        "project_id",
+        "project_key",
+        "project_folder_name",
+        "project_display_name",
+        "sector",
+        "status",
+        "contract_value",
+        "paid_amount",
+        "spent_amount",
+        "remaining_value",
+        "planned_progress",
+        "actual_progress",
+        "progress_variance",
+        "bac",
+        "pv",
+        "ev",
+        "ac",
+        "sv",
+        "cv",
+        "eac",
+        "etc",
+        "vac",
+        "spi",
+        "cpi",
+        "risk_score",
+        "high_risk_count",
+        "risk_record_count",
+        "delay_days",
+        "delay_event_count",
+        "claims_exposure",
+        "claimed_days",
+        "planned_start",
+        "planned_finish",
+        "forecast_finish",
+        "schedule_health",
+        "cost_health",
+        "delay_exposure",
+        "claim_exposure_level",
+        "data_confidence",
+        "decision_priority",
+        "decision_reasons",
+        "activity_count",
+        "milestone_count",
+        "data_quality",
+        "decision_required",
+        "last_updated",
+        "source_files",
+        "metric_sources",
+        "reports",
+    )
+    return {field: project.get(field) for field in fields}
 
 
 def build_portfolio(projects: list[dict[str, Any]]) -> dict[str, Any]:
@@ -1170,24 +2053,39 @@ def build_portfolio(projects: list[dict[str, Any]]) -> dict[str, Any]:
         "warning_summary": warning_summary,
         "decision_brief": build_portfolio_decision_brief(projects),
         "sectors": sorted(sectors.values(), key=lambda item: item["sector"]),
-        "projects": sorted(projects, key=lambda item: (item["sector"], item["project_display_name"])),
+        "projects": sorted(
+            (portfolio_project_summary(project) for project in projects),
+            key=lambda item: (item["sector"], item["project_display_name"]),
+        ),
     }
 
 
-def main() -> None:
+def _generate() -> None:
     DATA_ROOT.mkdir(parents=True, exist_ok=True)
+    WEBSITE_SOURCE_GENERATED.mkdir(parents=True, exist_ok=True)
     raw_projects = discover_projects()
     project_records = [build_project_record(project) for project in raw_projects]
     copy_generated_outputs(project_records)
-    copy_tia_submitted_assets(project_records)
+    copy_controlled_tia_exhibits(project_records)
+    # Historic submitted-guide assets remain recoverable on disk but are not
+    # copied into active website payloads or reports.  Controlled TIA runs are
+    # published through each project's approved source contract instead.
     portfolio = build_portfolio(project_records)
-    (DATA_ROOT / "portfolio.json").write_text(json.dumps(portfolio, indent=2, ensure_ascii=False), encoding="utf-8")
+    write_json_if_changed(DATA_ROOT / "portfolio.json", portfolio)
     projects_dir = DATA_ROOT / "projects"
     projects_dir.mkdir(parents=True, exist_ok=True)
-    for stale in projects_dir.glob("*.json"):
-        stale.unlink()
+    active_project_files = {f"{project['project_key']}.json" for project in project_records}
     for project in project_records:
-        (projects_dir / f"{project['project_key']}.json").write_text(json.dumps(project, indent=2, ensure_ascii=False), encoding="utf-8")
+        write_json_if_changed(projects_dir / f"{project['project_key']}.json", project)
+    for stale in projects_dir.glob("*.json"):
+        if stale.name not in active_project_files:
+            stale.unlink()
+    # The website loads the selected project JSON on demand and validates its
+    # project_id/project_key before rendering. Remove the old aggregate module
+    # payload so the repository does not carry a large duplicate of all projects.
+    legacy_workspace_payload = WEBSITE_SOURCE_GENERATED / "project-workspace-payloads.json"
+    if legacy_workspace_payload.exists():
+        legacy_workspace_payload.unlink()
     try:
         from pih_data_guardrails import run_guardrails
 
@@ -1202,7 +2100,7 @@ def main() -> None:
             block_on_issues=block_on_issues,
         )
         portfolio["guardrails"] = guardrails
-        (DATA_ROOT / "portfolio.json").write_text(json.dumps(portfolio, indent=2, ensure_ascii=False), encoding="utf-8")
+        write_json_if_changed(DATA_ROOT / "portfolio.json", portfolio)
         print(
             "Guardrails: "
             f"{guardrails['status']} "
@@ -1236,9 +2134,26 @@ def main() -> None:
                 }
             ],
         }
-        (DATA_ROOT / "portfolio.json").write_text(json.dumps(portfolio, indent=2, ensure_ascii=False), encoding="utf-8")
+        write_json_if_changed(DATA_ROOT / "portfolio.json", portfolio)
         print(f"Guardrails: Error logged without blocking build: {exc}")
     print(f"Generated Next.js website data for {len(project_records)} projects.")
+
+
+def main() -> None:
+    """Prevent synchronizers from observing a partially regenerated payload set."""
+    lock_path = ROOT / ".sync_state" / "generator.lock"
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    lock_path.write_text(
+        json.dumps({"pid": os.getpid(), "started_at": datetime.now().isoformat(timespec="seconds")}),
+        encoding="utf-8",
+    )
+    try:
+        _generate()
+    finally:
+        try:
+            lock_path.unlink(missing_ok=True)
+        except OSError:
+            pass
 
 
 if __name__ == "__main__":

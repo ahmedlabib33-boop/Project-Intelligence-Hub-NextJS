@@ -35,8 +35,8 @@ export default function AiChatPanel({ projectKey, projectName, sector }: AiChatP
     fetch("/api/health/ai")
       .then((response) => response.json())
       .then((data) => {
-        const groq = data.providers?.find((provider: { name: string }) => provider.name === "groq");
-        setStatus(groq?.available ? "online" : "offline");
+        const available = Array.isArray(data.providers) && data.providers.some((provider: { available?: boolean }) => provider.available);
+        setStatus(available ? "online" : "offline");
       })
       .catch(() => setStatus("offline"));
   }, []);

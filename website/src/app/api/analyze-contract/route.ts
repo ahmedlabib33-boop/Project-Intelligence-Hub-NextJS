@@ -4,6 +4,7 @@ import { buildProjectContext, contextToPrompt } from "../../../lib/ai/project-co
 import { checkRateLimit } from "../../../lib/ai/rate-limit";
 import { sanitizeText } from "../../../lib/ai/provider";
 import { withSamcoDirectorPrompt } from "../../../lib/ai/samco-director";
+import { aiRequestFailure, aiTextList, formatAiText, readAiJson } from "../../../lib/ai/request";
 
 export const runtime = "nodejs";
 
@@ -16,10 +17,10 @@ function parseContract(answer: string) {
   try {
     const parsed = JSON.parse(answer);
     return {
-      summary: String(parsed.summary || "No contract summary available from current data."),
-      keyClauses: Array.isArray(parsed.keyClauses) ? parsed.keyClauses.map(String).slice(0, 8) : [],
-      claimExposure: String(parsed.claimExposure || "Not enough data"),
-      recommendations: Array.isArray(parsed.recommendations) ? parsed.recommendations.map(String).slice(0, 8) : []
+      summary: formatAiText(parsed.summary) || "No contract summary available from current data.",
+      keyClauses: aiTextList(parsed.keyClauses),
+      claimExposure: formatAiText(parsed.claimExposure) || "Not enough data",
+      recommendations: aiTextList(parsed.recommendations)
     };
   } catch {
     return { summary: answer, keyClauses: [], claimExposure: "Not enough data", recommendations: [] };
@@ -31,7 +32,7 @@ export async function POST(req: NextRequest) {
   if (!limit.allowed) return NextResponse.json({ error: "Too many AI requests." }, { status: 429 });
 
   try {
-    const body = await req.json();
+    const body = await readAiJson(req);
     const projectKey = sanitizeText(body?.projectKey || body?.projectId, 120);
     const clauseQuery = sanitizeText(body?.clauseQuery, 600);
     if (!projectKey) return NextResponse.json({ error: "projectKey is required." }, { status: 400 });
@@ -40,7 +41,9 @@ export async function POST(req: NextRequest) {
     const prompt = `${contextToPrompt(context)}\n\nClause question, if any:\n${clauseQuery || "None"}`;
     const result = await askConfiguredAI(PROMPT, prompt, { json: true, maxTokens: 1600, temperature: 0.2 });
     return NextResponse.json({ ...parseContract(result.answer), provider: result.provider, model: result.model, status: result.status, latencyMs: result.latencyMs });
-  } catch {
+  } catch (error) {
+    const failure = aiRequestFailure(error);
+    if (failure) return NextResponse.json({ error: failure.error }, { status: failure.status });
     return NextResponse.json({ error: "Contract analysis failed." }, { status: 500 });
   }
 }

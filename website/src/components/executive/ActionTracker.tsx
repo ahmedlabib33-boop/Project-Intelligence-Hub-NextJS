@@ -27,21 +27,27 @@ export default function ActionTracker({
   const [draft, setDraft] = useState<ActionItem>(emptyAction);
 
   useEffect(() => {
-    try {
-      setActions(JSON.parse(localStorage.getItem(storageKey) || "[]"));
-    } catch {
-      setActions([]);
-    }
+    const timer = window.setTimeout(() => {
+      try {
+        setActions(JSON.parse(localStorage.getItem(storageKey) || "[]"));
+      } catch {
+        setActions([]);
+      }
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, [storageKey]);
 
   useEffect(() => {
     if (!seedActions.length) return;
-    setActions((current) => {
-      const existing = new Set(current.map((item) => item.decisionId));
-      const merged = [...seedActions.filter((item) => !existing.has(item.decisionId)), ...current];
-      localStorage.setItem(storageKey, JSON.stringify(merged));
-      return merged;
-    });
+    const timer = window.setTimeout(() => {
+      setActions((current) => {
+        const existing = new Set(current.map((item) => item.decisionId));
+        const merged = [...seedActions.filter((item) => !existing.has(item.decisionId)), ...current];
+        localStorage.setItem(storageKey, JSON.stringify(merged));
+        return merged;
+      });
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, [seedActions, storageKey]);
 
   const openCount = useMemo(() => actions.filter((item) => item.status !== "Closed").length, [actions]);

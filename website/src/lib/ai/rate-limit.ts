@@ -4,9 +4,16 @@ type Bucket = {
 };
 
 const buckets = new Map<string, Bucket>();
+let lastCleanup = 0;
 
 export function checkRateLimit(key: string, maxRequests: number, windowMs = 60_000) {
   const now = Date.now();
+  if (now - lastCleanup > windowMs) {
+    for (const [bucketKey, bucket] of buckets) {
+      if (bucket.resetAt <= now) buckets.delete(bucketKey);
+    }
+    lastCleanup = now;
+  }
   const current = buckets.get(key);
   if (!current || current.resetAt <= now) {
     buckets.set(key, { count: 1, resetAt: now + windowMs });

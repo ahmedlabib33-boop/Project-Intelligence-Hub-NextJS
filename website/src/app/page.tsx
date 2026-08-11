@@ -1,20 +1,118 @@
-"use client";
+﻿"use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
+import Chart from "chart.js/auto";
 import portfolio from "../../public/data/portfolio.json";
 import MermaidDiagram from "../components/MermaidDiagram";
 import AiChatPanel from "../components/ai/AiChatPanel";
 import AiInsightCard from "../components/ai/AiInsightCard";
 import TechnicalKnowledgeAdvisor from "../components/ai/TechnicalKnowledgeAdvisor";
 import ActionTracker from "../components/executive/ActionTracker";
+import AdvancedAnalyticsPanel, { type AdvancedAnalyticsPayload } from "../components/executive/AdvancedAnalyticsPanel";
 import ExecutiveLightModeToggle from "../components/executive/ExecutiveLightModeToggle";
 import ManagementDecisionBrief, { type ActionItem, type DecisionBriefItem } from "../components/executive/ManagementDecisionBrief";
 import PredictiveWarningPanel from "../components/executive/PredictiveWarningPanel";
 import ScenarioPlanner from "../components/executive/ScenarioPlanner";
-import SourceConfidenceBadge from "../components/executive/SourceConfidenceBadge";
 import UnifiedIntelligenceSearch from "../components/executive/UnifiedIntelligenceSearch";
+import OutputStudioDownloadButton from "../components/OutputStudioDownloadButton";
 
 type ReportKey = "executive_dashboard" | "master_dashboard" | "elite_svg_charts" | "linked_executive_dashboard";
+
+type ReportArtifact = {
+  html: string;
+  pdf: string;
+  pptx: string;
+  docx?: string;
+  assessment_status?: string;
+  source_scope?: string;
+  files?: Record<string, { name: string; bytes: number; sha256: string }>;
+};
+
+type UniversalReportArtifactLinks = Partial<{
+  html: string;
+  pdf: string;
+  pptx: string;
+  png_pptx: string;
+  package_zip: string;
+  engine_manifest: string;
+  validation: string;
+  project_model: string;
+  source_inventory: string;
+  evidence_assessment: string;
+}>;
+
+type UniversalReportFamily = {
+  key: string;
+  title: string;
+  summary: string;
+  native_schedule_required: boolean;
+  requires: string[];
+  status: "GENERATED" | "DRAFT_REVIEW_REQUIRED" | "STALE" | "READY_TO_GENERATE" | "MISSING_EVIDENCE" | "MISSING_SCHEDULE_EVIDENCE";
+  detail: string;
+  artifacts: UniversalReportArtifactLinks;
+  generated_at?: string | null;
+  release_status?: string | null;
+  validation_status?: string | null;
+};
+
+type UniversalReportEnginePayload = {
+  project_id: string;
+  project_key: string;
+  source_fingerprint: string;
+  source_file_count: number;
+  engine: {
+    available: boolean;
+    package_name?: string;
+    package_version?: string;
+    wrapper_version?: string;
+    author?: string;
+    rules?: number;
+    report_families?: number;
+    layers?: number;
+    capability_note?: string;
+  };
+  summary: { catalog_count: number; generated_count: number; ready_count: number; blocked_count: number };
+  report_families: UniversalReportFamily[];
+  ml_capability: {
+    task_count: number;
+    status: string;
+    detail: string;
+    ai_governance: string;
+    tasks: Array<{ key?: string; title?: string; description?: string }>;
+  };
+};
+
+type SourceChartSeries = {
+  label: string;
+  color: string;
+  values: Array<number | null>;
+};
+
+type SourceChartPayload = {
+  id: string;
+  tab: string;
+  title: string;
+  type: "grouped_bar" | ReferenceChartType;
+  status: "ready" | "partial" | "draft" | "awaiting_data";
+  message: string;
+  labels: string[];
+  series: SourceChartSeries[];
+  source_lineage: { files: string[]; required_columns: string[] };
+  validation: Array<{ file: string; source_row: string; field: string; message: string }>;
+  scenario?: { scenario_id: string; analyst_status: string; activity_count: number } | null;
+};
+
+type ProjectChartPayloads = {
+  catalog_version: string;
+  project_id: string;
+  project_key: string;
+  charts: SourceChartPayload[];
+  ready_count: number;
+  draft_count: number;
+  awaiting_count: number;
+  validation: Array<{ file: string; source_row: string; field: string; message: string }>;
+};
 
 type ProjectRecord = {
   project_id: string;
@@ -44,6 +142,7 @@ type ProjectRecord = {
   risk_score: number | null;
   risk_record_count?: number;
   delay_days: number | null;
+  delay_assessment?: string | null;
   delay_event_count?: number;
   claims_exposure: number | null;
   claimed_days?: number | null;
@@ -58,6 +157,11 @@ type ProjectRecord = {
   decision_priority?: string | null;
   decision_reasons?: Array<Record<string, string>>;
   data_quality: number | null;
+  data_quality_components?: {
+    metric_completeness?: number;
+    required_source_completeness?: number;
+    required_source_sets?: string[];
+  };
   decision_required: boolean;
   activity_count: number;
   milestone_count: number;
@@ -65,9 +169,17 @@ type ProjectRecord = {
   meeting_url?: string | null;
   source_files: Record<string, number>;
   metric_sources?: Record<string, { source: string; aggregation: string }>;
+  chart_payloads?: ProjectChartPayloads;
+  advanced_analytics?: AdvancedAnalyticsPayload;
   features: FeaturePayload;
   reports: Record<ReportKey, string>;
+  report_artifacts?: Partial<Record<ReportKey, ReportArtifact>> & Record<string, ReportArtifact | undefined>;
+  universal_report_engine?: UniversalReportEnginePayload;
 };
+
+// The portfolio payload deliberately excludes large feature tables. Those are loaded
+// only after the user selects a project, keeping the executive dashboard responsive.
+type ProjectSummary = Omit<ProjectRecord, "features" | "advanced_analytics">;
 
 type SectorRecord = {
   sector: string;
@@ -81,23 +193,6 @@ type SectorRecord = {
   average_risk_score: number | null;
   delayed_projects: number;
   decisions_required: number;
-};
-
-type GuardrailSummary = {
-  status: string;
-  mode: string;
-  ok: boolean;
-  block_count: number;
-  warn_count: number;
-  issue_count: number;
-  report_path: string;
-  last_checked: string;
-  top_issues?: Array<{
-    effective_severity: string;
-    project_display_name: string;
-    field: string;
-    message: string;
-  }>;
 };
 
 type FileRecord = {
@@ -121,7 +216,12 @@ type TablePreview = {
   column_count: number;
   columns: string[];
   rows: Record<string, unknown>[];
+  truncated?: boolean;
+  source_path?: string;
 };
+
+const EMPTY_TABLE_ROWS: Record<string, unknown>[] = [];
+const EMPTY_TABLE_COLUMNS: string[] = [];
 
 type XlsxSummary = {
   file: string;
@@ -132,33 +232,160 @@ type XlsxSummary = {
     column_count: number;
     columns: string[];
     rows: Record<string, unknown>[];
+    truncated?: boolean;
   }>;
   error?: string;
+};
+
+type FourPipelineAssessment = {
+  project_id: string;
+  project_key: string;
+  analysis_run_id?: string;
+  assessment_profile: "evidence_backed" | "qualified" | "readiness_only" | string;
+  assessment_status: string;
+  determination_status?: string;
+  source_scope: string;
+  summary?: Record<string, unknown>;
+  gates?: Array<Record<string, unknown>>;
+  missing_actions?: string[];
+  pipeline_rows?: Array<Record<string, unknown>>;
+  source_inventory?: Array<Record<string, unknown>>;
+  evidence_ledger?: Array<Record<string, unknown>>;
+};
+
+type ContractControlSnapshot = {
+  status?: Record<string, unknown>;
+  controls?: {
+    project_id: string;
+    project_key: string;
+    source_scope: string;
+    generic_guidance_status?: string;
+    contract_source_count?: number;
+    clause_control_count?: number;
+    evidence_mapping_count?: number;
+    contract_authority_register?: Array<Record<string, unknown>>;
+    clause_controls?: Array<Record<string, unknown>>;
+    evidence_ledger?: Array<Record<string, unknown>>;
+  };
 };
 
 type FeaturePayload = {
   overview: {
     data_sources: Record<string, number>;
     source_tables: Record<string, TablePreview>;
+    workspace_tables?: Record<string, TablePreview>;
   };
   letters_intelligence: {
     folder: string;
     inbox_files: FileRecord[];
     inbox_file_count: number;
     workbook: XlsxSummary;
+    workbook_tables?: XlsxSummary;
     detectors: DetectorRecord[];
   };
   delay_analysis: {
     folder: string;
     logic_mode?: string;
-    submitted_tia?: SubmittedTiaPayload;
-    templates: TablePreview[];
-    required_file_count: number;
-    recognized_file_count: number;
-    missing_required_files: string[];
-    schedule_tables: Record<string, TablePreview>;
+    controlled_tia: {
+      status: string;
+      approval_status: string;
+      message: string;
+      workflow_tabs: string[];
+      source_integrity?: {
+        release_configured?: boolean;
+        release_type?: string;
+        files?: Array<Record<string, unknown>>;
+        inventory?: Array<Record<string, unknown>>;
+        archive?: Record<string, unknown>;
+        validation_findings?: Array<Record<string, unknown>>;
+        missing_files?: string[];
+        signature?: Record<string, unknown>;
+        master?: Record<string, unknown>;
+        embedded_payload?: Record<string, unknown>;
+        project_match?: boolean;
+      };
+      schedule_cpm?: {
+        status?: string;
+        xer_pairs?: Array<Record<string, unknown>>;
+        approved_matrix?: Array<Record<string, unknown>>;
+        relationship_evidence?: Array<Record<string, unknown>>;
+        cpm_controls?: string[];
+      };
+      events_and_fragnets?: {
+        status?: string;
+        events?: Array<Record<string, unknown>>;
+        fragnet_controls?: string[];
+        event_exhibits?: Array<{
+          project_id?: string;
+          project_key?: string;
+          event_id?: string;
+          event_variants?: string[];
+          title?: string;
+          display_order?: number;
+          evidence_use?: string;
+          control_note?: string;
+          source_file?: string;
+          url?: string;
+        }>;
+      };
+      view_exhibits?: Array<{
+        project_id?: string;
+        project_key?: string;
+        view?: string;
+        title?: string;
+        display_order?: number;
+        evidence_use?: string;
+        control_note?: string;
+        source_file?: string;
+        url?: string;
+      }>;
+      concurrency_and_entitlement?: {
+        status?: string;
+        gross_included_event_movement_days?: number | null;
+        concurrency_adjustment_days?: number | null;
+        integrated_eot_calendar_days?: number | null;
+        event_positions?: Array<Record<string, unknown>>;
+        evidence_matrix?: Array<Record<string, unknown>>;
+        controls?: string[];
+      };
+      eot_position?: {
+        status?: string;
+        label?: string;
+        message?: string;
+        project_finish_milestone_id?: string;
+        ground_works_milestone_id?: string;
+        baseline_project_finish?: string | null;
+        impacted_project_finish?: string | null;
+        integrated_eot_calendar_days?: number | null;
+        gross_included_event_movement_days?: number | null;
+        concurrency_adjustment_days?: number | null;
+        included_event_positions?: Array<Record<string, unknown>>;
+        excluded_event_positions?: Array<Record<string, unknown>>;
+      };
+      charts?: Array<{
+        view: string;
+        id: string;
+        title: string;
+        type: ReferenceChartType;
+        labels: string[];
+        series: SourceChartSeries[];
+        status?: string;
+        note?: string;
+        lineage?: string;
+        size?: "small" | "medium" | "large";
+      }>;
+      ai_scope?: { status?: string; message?: string };
+      missing_evidence?: string[];
+      reconciliation_items?: Array<Record<string, unknown>>;
+      source_fingerprint?: string | null;
+      automatic_draft?: boolean;
+      last_run_at?: string | null;
+      run_id?: string;
+    };
+    legacy_status?: string;
     detectors: DetectorRecord[];
   };
+  four_pipeline?: FourPipelineAssessment;
   contract_claims: {
     folder: string;
     source_files: FileRecord[];
@@ -168,7 +395,14 @@ type FeaturePayload = {
       tables: Record<string, number | null>;
       error: string | null;
     };
+    knowledge_base?: {
+      exists: boolean;
+      tables: Record<string, TablePreview>;
+      error: string | null;
+    };
     clause_library: XlsxSummary;
+    clause_library_tables?: XlsxSummary;
+    controlled_assessment?: ContractControlSnapshot;
     detectors: DetectorRecord[];
   };
   outputs_and_watchers: {
@@ -195,16 +429,45 @@ type SubmittedTiaPayload = {
   visuals?: Array<{ name: string; relative_path: string; url: string }>;
   source_files?: FileRecord[];
   recommended_next_moves?: string[];
+  source_governance?: {
+    assessment_version?: string;
+    project_id: string;
+    project_display_name?: string;
+    source_scope: string;
+    status: string;
+    summary?: Record<string, unknown>;
+    event_register?: Record<string, unknown>[];
+    fragnet_register?: Record<string, unknown>[];
+    relationship_register?: Record<string, unknown>[];
+    evidence_gaps?: Array<Record<string, unknown>>;
+    reconciliation_warnings?: Array<Record<string, unknown>>;
+  };
 };
 
-const projects = portfolio.projects as ProjectRecord[];
+type SubmittedTiaVisualPayload = {
+  available: boolean;
+  status: string;
+  scope_note: string;
+  evidentiary_note: string;
+  visuals: Array<{
+    name: string;
+    label: string;
+    category: string;
+    relative_path: string;
+    url: string;
+  }>;
+};
+
+const projects = portfolio.projects as unknown as ProjectSummary[];
 const sectors = portfolio.sectors as SectorRecord[];
 const totals = portfolio.totals;
 const warningSummary = (portfolio as { warning_summary?: Record<string, number> }).warning_summary;
 const decisionBrief = ((portfolio as { decision_brief?: DecisionBriefItem[] }).decision_brief || []) as DecisionBriefItem[];
-const guardrails = (portfolio as { guardrails?: GuardrailSummary }).guardrails;
 const DECISION_DASHBOARD_KEY = "__decision_making_dashboard__";
-const STREAMLIT_APP_URL = "https://samco-project-intelegent-dashboard.streamlit.app/?embed=true";
+// The complete project-scoped TIA workflow is a visible project tab. Its
+// data remains isolated to the selected project and its formal outputs remain
+// in Output Studio.
+const INTERNAL_TIA_SURFACE_ENABLED = true;
 
 const reportTabs: Array<{ key: ReportKey; label: string; note: string }> = [
   { key: "executive_dashboard", label: "Executive Dashboard", note: "Portfolio-style project summary" },
@@ -220,10 +483,9 @@ const workspaceTabs = [
   "Milestones",
   "S-Curve",
   "EVM Analysis",
+  "Analytics Intelligence",
   "Contracts",
   "Letters Intelligence",
-  "Delays",
-  "Time Impact",
   "Risks",
   "Delay Analysis - Time Impact Analysis",
   "Contract & Claims Intelligence Center",
@@ -233,6 +495,9 @@ const workspaceTabs = [
 ] as const;
 
 type WorkspaceTab = (typeof workspaceTabs)[number];
+const visibleWorkspaceTabs: WorkspaceTab[] = workspaceTabs.filter(
+  (tab) => INTERNAL_TIA_SURFACE_ENABLED || tab !== "Delay Analysis - Time Impact Analysis"
+);
 
 function numberValue(value: number | null | undefined, digits = 0) {
   if (value === null || value === undefined || Number.isNaN(value) || !Number.isFinite(value)) return "N/A";
@@ -251,11 +516,6 @@ function percent(value: number | null | undefined) {
 
 function metricSource(project: ProjectRecord, metric: string, fallback: string) {
   return project.metric_sources?.[metric]?.source || fallback;
-}
-
-function safeRatio(value: number | null | undefined, target = 1) {
-  if (value === null || value === undefined || !Number.isFinite(value)) return 0;
-  return Math.max(0.03, Math.min(1, value / target));
 }
 
 function statusTone(value: number | null | undefined, target = 1) {
@@ -286,42 +546,7 @@ function HoloKpi({
   );
 }
 
-function ProjectNetwork({ selectedProject }: { selectedProject: ProjectRecord }) {
-  return (
-    <svg className="network-map" viewBox="0 0 720 390" role="img" aria-label="Interactive project network">
-      <defs>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="5" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-      <path className="network-line dashed" d="M76 300 C174 130 302 292 420 106 C510 8 566 142 640 72" />
-      <path className="network-line" d="M95 292 L285 214 L432 120 L636 78" />
-      <path className="network-line soft" d="M285 214 L360 318 L636 78" />
-      {projects.map((project, index) => {
-        const points = [
-          { x: 95, y: 292, color: "#39d7d2" },
-          { x: 285, y: 214, color: "#d6a23a" },
-          { x: 432, y: 120, color: "#63a8ff" },
-          { x: 636, y: 78, color: "#a78bfa" }
-        ];
-        const point = points[index % points.length];
-        const active = project.project_key === selectedProject.project_key;
-        return (
-          <g key={project.project_key} className={active ? "network-node active" : "network-node"}>
-            <circle cx={point.x} cy={point.y} r={active ? 43 : 32} fill={point.color} filter="url(#glow)" />
-            <text x={point.x + 48} y={point.y + 5}>{project.project_folder_name}</text>
-          </g>
-        );
-      })}
-    </svg>
-  );
-}
-
-function portfolioDecisionMermaid(selectedProject: ProjectRecord) {
+function portfolioDecisionMermaid() {
   const projectCount = numberValue(portfolio.project_count);
   const sectorCount = numberValue(portfolio.sector_count);
   const decisionCount = numberValue(totals.decisions_required);
@@ -329,7 +554,6 @@ function portfolioDecisionMermaid(selectedProject: ProjectRecord) {
   const highRiskCount = numberValue(totals.high_risk_projects);
   const averageSpi = numberValue(totals.average_spi, 2);
   const averageCpi = numberValue(totals.average_cpi, 2);
-  const selected = selectedProject.project_folder_name.replace(/"/g, "'");
   return `flowchart LR
     A["Project Folders\\n${projectCount} projects / ${sectorCount} sectors"] --> B["Generated Data Layer\\nPortfolio JSON + project JSON"]
     B --> C["Executive Controls\\nSPI ${averageSpi} / CPI ${averageCpi}"]
@@ -337,40 +561,7 @@ function portfolioDecisionMermaid(selectedProject: ProjectRecord) {
     C --> E{"Management Decision Gate\\n${decisionCount} decisions required"}
     D --> E
     E --> F["Technical Knowledge Advisor\\nQuestion bank + portfolio evidence"]
-    F --> G["Decision Brief\\nOwner / evidence / impact / deadline"]
-    G --> H["Same Page Project Deep Dive\\nSelected: ${selected}"]
-    H --> I["Project Workspace Tabs\\nOverview / EVM / Letters / Delay / Claims / Outputs"]
-    I --> J["Action Closure\\nUpdate source files and regenerate outputs"]`;
-}
-
-function SignalBar({ label, value, tone }: { label: string; value: number | null | undefined; tone: string }) {
-  const width = `${Math.round(safeRatio(value, 1) * 100)}%`;
-  return (
-    <div className="signal-bar">
-      <span>{label}</span>
-      <div><i className={`tone-${tone}`} style={{ width }} /></div>
-      <b>{percent(value)}</b>
-    </div>
-  );
-}
-
-function Gauge({ label, value, tone }: { label: string; value: number | null | undefined; tone: string }) {
-  const percentValue = Math.round(safeRatio(value, 1) * 100);
-  return (
-    <article className={`gauge tone-${tone}`}>
-      <svg viewBox="0 0 160 100">
-        <path d="M24 78 A56 56 0 0 1 136 78" className="gauge-track" />
-        <path
-          d="M24 78 A56 56 0 0 1 136 78"
-          className="gauge-fill"
-          pathLength="100"
-          strokeDasharray={`${percentValue} ${100 - percentValue}`}
-        />
-      </svg>
-      <strong>{numberValue(value, 2)}</strong>
-      <span>{label}</span>
-    </article>
-  );
+    F --> G["Decision Brief\\nOwner / evidence / impact / deadline"]`;
 }
 
 function ProjectConsole({ selectedProject }: { selectedProject: ProjectRecord }) {
@@ -392,26 +583,6 @@ function ProjectConsole({ selectedProject }: { selectedProject: ProjectRecord })
         <HoloKpi title="SPI" value={numberValue(selectedProject.spi, 2)} note="Schedule performance" tone={statusTone(selectedProject.spi) as "good" | "watch" | "critical" | "neutral"} />
         <HoloKpi title="CPI" value={numberValue(selectedProject.cpi, 2)} note="Cost performance" tone={statusTone(selectedProject.cpi) as "good" | "watch" | "critical" | "neutral"} />
         <HoloKpi title="Activities" value={numberValue(selectedProject.activity_count)} note="Activity records loaded" tone="blue" />
-        <HoloKpi title="Data Quality" value={`${numberValue(selectedProject.data_quality, 1)}%`} note="Source completeness" tone="violet" />
-      </div>
-    </section>
-  );
-}
-
-function SourceRegister({ project }: { project: ProjectRecord }) {
-  return (
-    <section className="glass-panel source-register">
-      <div className="section-header">
-        <div>
-          <p className="eyebrow">Source Register</p>
-          <h2>Selected Project Data Feed</h2>
-        </div>
-        <span>{Object.values(project.source_files).reduce((sum, count) => sum + count, 0)} rows recognized</span>
-      </div>
-      <div className="source-grid">
-        {Object.entries(project.source_files).map(([name, count]) => (
-          <span key={name}>{name}<b>{count}</b></span>
-        ))}
       </div>
     </section>
   );
@@ -427,19 +598,25 @@ function MiniMetric({ label, value, note }: { label: string; value: string; note
   );
 }
 
-function DataStatus({ label, count }: { label: string; count: number | undefined }) {
-  const available = Boolean(count && count > 0);
-  return (
-    <span className={available ? "data-status available" : "data-status missing"}>
-      {label}<b>{available ? `${count} rows` : "No data"}</b>
-    </span>
-  );
-}
-
 function displayCell(value: unknown) {
   if (value === null || value === undefined || value === "") return "N/A";
   if (typeof value === "number") return numberValue(value, Number.isInteger(value) ? 0 : 2);
   return String(value);
+}
+
+function recordsToTable(file: string, rows: Array<Record<string, unknown>> | undefined): TablePreview {
+  const safeRows = rows || [];
+  const columns = Array.from(new Set(safeRows.flatMap((row) => Object.keys(row))));
+  return {
+    file,
+    exists: true,
+    row_count: safeRows.length,
+    column_count: columns.length,
+    columns,
+    rows: safeRows.slice(0, 200),
+    truncated: safeRows.length > 200,
+    source_path: file
+  };
 }
 
 function FeatureSvg({ mode }: { mode: "letters" | "delay" | "claims" | "watcher" | "portfolio" }) {
@@ -475,24 +652,8 @@ function FeatureSvg({ mode }: { mode: "letters" | "delay" | "claims" | "watcher"
         </g>
       ))}
       <text x="44" y="58" fill="#f4fbff" fontSize="18" fontWeight="800">{mode.toUpperCase()}</text>
-      <text x="44" y="180" fill="#9bb8ca" fontSize="13">Project-scoped detector and analytics flow</text>
+      <text x="44" y="180" fill="#9bb8ca" fontSize="13">Project-scoped data and analytics flow</text>
     </svg>
-  );
-}
-
-function DetectorGrid({ detectors }: { detectors: DetectorRecord[] }) {
-  return (
-    <div className="detector-grid">
-      {detectors.map((detector) => (
-        <article className="detector-card" key={detector.name}>
-          <span className={detector.status.toLowerCase().includes("missing") || detector.status.toLowerCase().includes("needs") ? "detector-badge alert" : "detector-badge"}>
-            {detector.status}
-          </span>
-          <h3>{detector.name}</h3>
-          <p>{detector.detail}</p>
-        </article>
-      ))}
-    </div>
   );
 }
 
@@ -550,6 +711,742 @@ function TablePreviewPanel({ table, title }: { table: TablePreview | undefined; 
         </table>
       </div>
     </section>
+  );
+}
+
+type ProjectChartMode =
+  | "overview"
+  | "wbs"
+  | "activities"
+  | "milestones"
+  | "s-curve"
+  | "evm"
+  | "analytics"
+  | "contracts"
+  | "letters"
+  | "risks"
+  | "claims"
+  | "technical";
+
+type ProjectChartPoint = {
+  label: string;
+  value: number | null | undefined;
+  display: string;
+  color: string;
+};
+
+type ReferenceChartType = "line" | "bar" | "horizontal_bar" | "doughnut" | "radar";
+type ReferenceChartSpec = {
+  id: string;
+  title: string;
+  type: ReferenceChartType;
+  labels: string[];
+  series: SourceChartSeries[];
+  status?: string;
+  note?: string;
+  lineage?: string;
+  size?: "small" | "medium" | "large";
+};
+
+function referenceChartTone(status?: string) {
+  const normalized = (status || "info").toLowerCase();
+  if (normalized.includes("critical") || normalized.includes("blocked")) return "critical";
+  if (normalized.includes("warning") || normalized.includes("draft") || normalized.includes("partial")) return "warning";
+  if (normalized.includes("ready") || normalized.includes("healthy") || normalized.includes("verified")) return "success";
+  return "info";
+}
+
+function ReferenceChartCard({ chart }: { chart: ReferenceChartSpec }) {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const instanceRef = useRef<Chart | null>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return undefined;
+    instanceRef.current?.destroy();
+    const isDoughnut = chart.type === "doughnut";
+    const isRadar = chart.type === "radar";
+    const isHorizontal = chart.type === "horizontal_bar";
+    const isLine = chart.type === "line";
+    const palette = ["#06b6d4", "#10b981", "#f59e0b", "#8b5cf6", "#f43f5e", "#3b82f6"];
+    instanceRef.current = new Chart(canvas, {
+      type: isDoughnut ? "doughnut" : isRadar ? "radar" : isLine ? "line" : "bar",
+      data: {
+        labels: chart.labels,
+        datasets: chart.series.map((series, index) => ({
+          label: series.label,
+          data: series.values,
+          borderColor: series.color || palette[index % palette.length],
+          backgroundColor: isDoughnut ? chart.labels.map((_, item) => palette[item % palette.length]) : `${series.color || palette[index % palette.length]}${isLine ? "22" : "B8"}`,
+          pointBackgroundColor: series.color || palette[index % palette.length],
+          pointRadius: isLine ? 3 : 0,
+          pointHoverRadius: 5,
+          borderWidth: isLine || isRadar ? 2.5 : 0,
+          tension: 0.35,
+          fill: isLine ? false : isRadar,
+          borderRadius: isDoughnut ? 0 : 6,
+          maxBarThickness: 42,
+        })),
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: isHorizontal ? "y" : "x",
+        cutout: isDoughnut ? "68%" : undefined,
+        plugins: {
+          legend: { display: true, position: "bottom", labels: { color: "#94a3b8", usePointStyle: true, pointStyle: "circle", padding: 14, font: { family: "Inter, Arial, sans-serif", size: 11, weight: 500 } } },
+          tooltip: { backgroundColor: "rgba(15, 23, 42, 0.96)", titleColor: "#f1f5f9", bodyColor: "#cbd5e1", borderColor: "rgba(6, 182, 212, 0.28)", borderWidth: 1, padding: 11 },
+        },
+        scales: isDoughnut ? undefined : {
+          x: { grid: { color: "rgba(148, 163, 184, 0.10)" }, ticks: { color: "#94a3b8", maxRotation: 34, font: { size: 10 } }, border: { color: "rgba(148, 163, 184, 0.12)" } },
+          y: { grid: { color: "rgba(148, 163, 184, 0.10)" }, ticks: { color: "#94a3b8", font: { size: 10 } }, border: { color: "rgba(148, 163, 184, 0.12)" }, beginAtZero: true },
+          r: { grid: { color: "rgba(148, 163, 184, 0.16)" }, angleLines: { color: "rgba(148, 163, 184, 0.16)" }, pointLabels: { color: "#94a3b8", font: { size: 10 } }, ticks: { display: false, backdropColor: "transparent" } },
+        },
+      },
+    });
+    return () => instanceRef.current?.destroy();
+  }, [chart]);
+
+  return (
+    <section className={`reference-chart-card reference-chart-${chart.type}`} data-chart-id={chart.id}>
+      <header className="reference-chart-header">
+        <h3>{chart.title}</h3>
+        <span className={`reference-chart-badge ${referenceChartTone(chart.status)}`}>{chart.status || "Source backed"}</span>
+      </header>
+      {chart.note ? <p className="reference-chart-note">{chart.note}</p> : null}
+      <div className={`reference-chart-canvas ${chart.size || "medium"}`}><canvas ref={canvasRef} aria-label={chart.title} role="img" /></div>
+      {chart.lineage ? <footer className="reference-chart-lineage">{chart.lineage}</footer> : null}
+    </section>
+  );
+}
+
+function compactCurrency(value: number | null | undefined) {
+  if (value === null || value === undefined || !Number.isFinite(value)) return "N/A";
+  if (Math.abs(value) >= 1_000_000_000) return `EGP ${(value / 1_000_000_000).toFixed(2)}B`;
+  if (Math.abs(value) >= 1_000_000) return `EGP ${(value / 1_000_000).toFixed(1)}M`;
+  if (Math.abs(value) >= 1_000) return `EGP ${(value / 1_000).toFixed(1)}K`;
+  return money(value);
+}
+
+function ProjectSmartChart({ project, mode }: { project: ProjectRecord; mode: ProjectChartMode }) {
+  const claims = project.features.contract_claims;
+  const pointsByMode: Record<ProjectChartMode, { title: string; note: string; points: ProjectChartPoint[] }> = {
+    overview: {
+      title: "Project Position",
+      note: "Progress and earned-value indices from the selected project.",
+      points: [
+        { label: "Planned", value: project.planned_progress === null ? null : project.planned_progress * 100, display: percent(project.planned_progress), color: "#63a8ff" },
+        { label: "Actual", value: project.actual_progress === null ? null : project.actual_progress * 100, display: percent(project.actual_progress), color: "#39d7d2" },
+        { label: "SPI", value: project.spi === null ? null : project.spi * 100, display: numberValue(project.spi, 2), color: "#d6a23a" },
+        { label: "CPI", value: project.cpi === null ? null : project.cpi * 100, display: numberValue(project.cpi, 2), color: "#a78bfa" }
+      ]
+    },
+    wbs: {
+      title: "Work Breakdown Coverage",
+      note: "Record availability in the selected project planning structure.",
+      points: [
+        { label: "WBS", value: project.features.overview.source_tables.wbs?.row_count, display: numberValue(project.features.overview.source_tables.wbs?.row_count), color: "#63a8ff" },
+        { label: "Activities", value: project.activity_count, display: numberValue(project.activity_count), color: "#39d7d2" },
+        { label: "Milestones", value: project.milestone_count, display: numberValue(project.milestone_count), color: "#d6a23a" },
+        { label: "Progress rows", value: project.source_files.progress, display: numberValue(project.source_files.progress), color: "#a78bfa" }
+      ]
+    },
+    activities: {
+      title: "Activity Control Signals",
+      note: "Selected-project schedule and control record counts.",
+      points: [
+        { label: "Activities", value: project.activity_count, display: numberValue(project.activity_count), color: "#39d7d2" },
+        { label: "Progress", value: project.source_files.progress, display: numberValue(project.source_files.progress), color: "#63a8ff" },
+        { label: "EVM", value: project.source_files.evm, display: numberValue(project.source_files.evm), color: "#d6a23a" },
+        { label: "Delay events", value: project.source_files.delay_events, display: numberValue(project.source_files.delay_events), color: "#fb7185" }
+      ]
+    },
+    milestones: {
+      title: "Milestone Delivery Position",
+      note: "Progress and schedule performance for the selected project.",
+      points: [
+        { label: "Planned", value: project.planned_progress === null ? null : project.planned_progress * 100, display: percent(project.planned_progress), color: "#63a8ff" },
+        { label: "Actual", value: project.actual_progress === null ? null : project.actual_progress * 100, display: percent(project.actual_progress), color: "#39d7d2" },
+        { label: "SPI", value: project.spi === null ? null : project.spi * 100, display: numberValue(project.spi, 2), color: "#d6a23a" },
+        { label: "Milestones", value: project.milestone_count, display: numberValue(project.milestone_count), color: "#a78bfa" }
+      ]
+    },
+    "s-curve": {
+      title: "Progress Position",
+      note: "This compares the currently available planned and actual progress values; it is not a reconstructed time-series curve.",
+      points: [
+        { label: "Planned", value: project.planned_progress === null ? null : project.planned_progress * 100, display: percent(project.planned_progress), color: "#63a8ff" },
+        { label: "Actual", value: project.actual_progress === null ? null : project.actual_progress * 100, display: percent(project.actual_progress), color: "#39d7d2" },
+        { label: "Variance", value: project.progress_variance === null ? null : Math.abs(project.progress_variance) * 100, display: percent(project.progress_variance), color: "#d6a23a" }
+      ]
+    },
+    evm: {
+      title: "Earned Value Position",
+      note: "BAC, PV, EV, and AC from the selected-project control data.",
+      points: [
+        { label: "BAC", value: project.bac, display: compactCurrency(project.bac), color: "#63a8ff" },
+        { label: "PV", value: project.pv, display: compactCurrency(project.pv), color: "#d6a23a" },
+        { label: "EV", value: project.ev, display: compactCurrency(project.ev), color: "#39d7d2" },
+        { label: "AC", value: project.ac, display: compactCurrency(project.ac), color: "#fb7185" }
+      ]
+    },
+    analytics: {
+      title: "Analytics Health Indicators",
+      note: "Progress and earned-value indicators from the selected project.",
+      points: [
+        { label: "Actual", value: project.actual_progress === null ? null : project.actual_progress * 100, display: percent(project.actual_progress), color: "#39d7d2" },
+        { label: "SPI", value: project.spi === null ? null : project.spi * 100, display: numberValue(project.spi, 2), color: "#d6a23a" },
+        { label: "CPI", value: project.cpi === null ? null : project.cpi * 100, display: numberValue(project.cpi, 2), color: "#63a8ff" },
+        { label: "Risk score", value: project.risk_score, display: numberValue(project.risk_score, 1), color: "#a78bfa" }
+      ]
+    },
+    contracts: {
+      title: "Commercial Position",
+      note: "Contract, paid, spent, and remaining values from the selected project.",
+      points: [
+        { label: "Contract", value: project.contract_value, display: compactCurrency(project.contract_value), color: "#63a8ff" },
+        { label: "Paid", value: project.paid_amount, display: compactCurrency(project.paid_amount), color: "#39d7d2" },
+        { label: "Spent", value: project.spent_amount, display: compactCurrency(project.spent_amount), color: "#fb7185" },
+        { label: "Remaining", value: project.remaining_value, display: compactCurrency(project.remaining_value), color: "#d6a23a" }
+      ]
+    },
+    letters: {
+      title: "Correspondence Intelligence Coverage",
+      note: "Counts are taken only from the selected project letter, claim, and delay registers.",
+      points: [
+        { label: "Inbox", value: project.features.letters_intelligence.inbox_file_count, display: numberValue(project.features.letters_intelligence.inbox_file_count), color: "#39d7d2" },
+        { label: "Workbook sheets", value: project.features.letters_intelligence.workbook_tables?.sheets?.length, display: numberValue(project.features.letters_intelligence.workbook_tables?.sheets?.length), color: "#63a8ff" },
+        { label: "Claims", value: project.source_files.claims, display: numberValue(project.source_files.claims), color: "#d6a23a" },
+        { label: "Delay events", value: project.source_files.delay_events, display: numberValue(project.source_files.delay_events), color: "#fb7185" }
+      ]
+    },
+    risks: {
+      title: "Risk Exposure Signals",
+      note: "Risk score and source-backed control record counts for the selected project.",
+      points: [
+        { label: "Risk score", value: project.risk_score, display: numberValue(project.risk_score, 1), color: "#fb7185" },
+        { label: "Risk rows", value: project.risk_record_count ?? project.source_files.risks, display: numberValue(project.risk_record_count ?? project.source_files.risks), color: "#d6a23a" },
+        { label: "Delay events", value: project.delay_event_count ?? project.source_files.delay_events, display: numberValue(project.delay_event_count ?? project.source_files.delay_events), color: "#a78bfa" },
+        { label: "Claims", value: project.source_files.claims, display: numberValue(project.source_files.claims), color: "#63a8ff" }
+      ]
+    },
+    claims: {
+      title: "Contract & Claims Summary",
+      note: "Contract, evidence, claim, and knowledge-base records from the selected project.",
+      points: [
+        { label: "Contract files", value: claims.source_files.length, display: numberValue(claims.source_files.length), color: "#63a8ff" },
+        { label: "Evidence files", value: claims.evidence_files.length, display: numberValue(claims.evidence_files.length), color: "#39d7d2" },
+        { label: "Claims", value: project.source_files.claims, display: numberValue(project.source_files.claims), color: "#d6a23a" },
+        { label: "Knowledge", value: Object.keys(claims.knowledge_base?.tables || {}).length, display: numberValue(Object.keys(claims.knowledge_base?.tables || {}).length), color: "#a78bfa" }
+      ]
+    },
+    technical: {
+      title: "Technical Advisory Context",
+      note: "Source-backed project information available to the Technical Advisor.",
+      points: [
+        { label: "Activities", value: project.activity_count, display: numberValue(project.activity_count), color: "#39d7d2" },
+        { label: "Risks", value: project.risk_record_count ?? project.source_files.risks, display: numberValue(project.risk_record_count ?? project.source_files.risks), color: "#fb7185" },
+        { label: "Delays", value: project.delay_event_count ?? project.source_files.delay_events, display: numberValue(project.delay_event_count ?? project.source_files.delay_events), color: "#d6a23a" },
+        { label: "Letters", value: project.features.letters_intelligence.inbox_file_count, display: numberValue(project.features.letters_intelligence.inbox_file_count), color: "#63a8ff" }
+      ]
+    }
+  };
+  const chart = pointsByMode[mode];
+  const visiblePoints = chart.points.filter((point) => point.value !== null && point.value !== undefined && Number.isFinite(point.value));
+  if (!visiblePoints.length) return null;
+  const chartTypes: Record<ProjectChartMode, ReferenceChartType> = {
+    overview: "line", wbs: "bar", activities: "doughnut", milestones: "line", "s-curve": "line", evm: "bar",
+    analytics: "radar", contracts: "bar", letters: "bar", risks: "doughnut", claims: "horizontal_bar", technical: "bar",
+  };
+  return <ReferenceChartCard chart={{
+    id: `project.${mode}`,
+    title: chart.title,
+    type: chartTypes[mode],
+    labels: visiblePoints.map((point) => point.label),
+    series: [{ label: "Selected project", color: "#06b6d4", values: visiblePoints.map((point) => Number(point.value)) }],
+    status: "Source backed",
+    note: chart.note,
+    lineage: `Selected project only | ${project.project_id}`,
+    size: mode === "overview" || mode === "s-curve" || mode === "evm" ? "large" : "medium",
+  }} />;
+}
+
+function sourceChartNumber(value: number | null | undefined) {
+  return value === null || value === undefined || !Number.isFinite(value) ? null : value;
+}
+
+function sourceChartValue(chart: SourceChartPayload, value: number | null | undefined) {
+  const numeric = sourceChartNumber(value);
+  if (numeric === null) return "N/A";
+  if (chart.id === "contracts.planned_vs_actual_cash_flow") return compactCurrency(numeric);
+  if (chart.id === "delay.tia_recovery_scenario") return `${numeric.toFixed(1)}%`;
+  return `${numberValue(numeric, 1)} days`;
+}
+
+function SourceChartCard({ chart, project }: { chart: SourceChartPayload; project: ProjectRecord }) {
+  if (!chart.labels.length || !chart.series.length) {
+    return (
+      <section className="reference-chart-card chart-readiness-card">
+        <header className="reference-chart-header">
+          <h3>{chart.title}</h3>
+          <span className={`reference-chart-badge ${referenceChartTone(chart.status)}`}>{chart.status.replaceAll("_", " ")}</span>
+        </header>
+        <div className="chart-readiness-content">
+          <strong>Chart readiness</strong>
+          <p>{chart.message}</p>
+          <span>Required source: {chart.source_lineage.files.join(" or ")}</span>
+        </div>
+        <footer className="reference-chart-lineage">Project ID: {project.project_id}</footer>
+      </section>
+    );
+  }
+  const referenceType: ReferenceChartType = chart.type === "grouped_bar" ? "bar" : chart.type;
+  return <ReferenceChartCard chart={{
+    id: chart.id,
+    title: chart.title,
+    type: referenceType,
+    labels: chart.labels,
+    series: chart.series,
+    status: chart.status,
+    note: chart.message,
+    lineage: `Source: ${chart.source_lineage.files.join(" + ")} | Project ID: ${project.project_id}`,
+    size: chart.type === "line" ? "large" : "medium",
+  }} />;
+  /* Legacy SVG implementation kept unreachable temporarily to avoid changing chart payload behaviour while the Chart.js reference component is verified. */
+  const values = chart.series.flatMap((series) => series.values.map(sourceChartNumber).filter((value): value is number => value !== null));
+  const maxValue = Math.max(...values.map((value) => Math.abs(value)), 1);
+  const primarySeries = chart.series[0];
+  const doughnutValues = primarySeries?.values.map(sourceChartNumber) || [];
+  const doughnutTotal = doughnutValues.reduce<number>((total, value) => total + (value ?? 0), 0);
+  const doughnutColors = ["#a78bfa", "#39d7d2", "#63a8ff", "#d6a23a", "#fb7185"];
+  let doughnutCursor = 0;
+  const doughnutStops = doughnutValues.map((value, index) => {
+    const start = doughnutCursor;
+    doughnutCursor += doughnutTotal ? ((value || 0) / doughnutTotal) * 100 : 0;
+    const color = doughnutColors[index % doughnutColors.length];
+    return `${color} ${start}% ${doughnutCursor}%`;
+  });
+  const lineHeight = 142;
+  const lineWidth = 620;
+  const linePoints = (series: SourceChartSeries) => series.values
+    .map((value, index) => {
+      const numeric = sourceChartNumber(value);
+      if (numeric === null) return null;
+      const x = 36 + (index * (lineWidth - 72)) / Math.max(1, chart.labels.length - 1);
+      const y = 22 + lineHeight - (Math.max(0, numeric) / maxValue) * lineHeight;
+      return `${x},${y}`;
+    })
+    .filter((point): point is string => point !== null)
+    .join(" ");
+
+  return (
+    <section className="feature-card source-chart-card">
+      <div className="feature-card-head"><h3>{chart.title}</h3></div>
+      {chart.type === "doughnut" ? (
+        <div className="source-chart-doughnut-layout">
+          <div className="source-chart-doughnut" style={{ background: `conic-gradient(${doughnutStops.join(", ") || "#334155 0 100%"})` }}>
+            <div><strong>{numberValue(doughnutTotal, 1)}</strong><span>days</span></div>
+          </div>
+          <div className="source-chart-legend">
+            {chart.labels.map((label, index) => <div key={label}><span style={{ background: doughnutColors[index % doughnutColors.length] }} />{label}<b>{sourceChartValue(chart, chart.series[0]?.values[index])}</b></div>)}
+          </div>
+        </div>
+      ) : chart.type === "line" ? (
+        <div className="source-chart-line-wrap">
+          <svg viewBox={`0 0 ${lineWidth} 220`} role="img" aria-label={`${chart.title} for ${project.project_display_name}`}>
+            {[0, 1, 2, 3].map((line) => <line key={line} x1="30" y1={22 + line * (lineHeight / 3)} x2={lineWidth - 24} y2={22 + line * (lineHeight / 3)} className="project-chart-gridline" />)}
+            {chart.series.map((series) => <polyline key={series.label} fill="none" stroke={series.color} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" points={linePoints(series)} />)}
+            {chart.labels.map((label, index) => <text key={label} x={36 + (index * (lineWidth - 72)) / Math.max(1, chart.labels.length - 1)} y="194" textAnchor="middle" className="project-chart-label">{label}</text>)}
+          </svg>
+          <div className="source-chart-series">{chart.series.map((series) => <span key={series.label}><i style={{ background: series.color }} />{series.label}</span>)}</div>
+        </div>
+      ) : (
+        <div className="source-chart-bars">
+          {chart.labels.map((label, index) => (
+            <div className="source-chart-bar-row" key={label}>
+              <div className="source-chart-bar-label">{label}</div>
+              <div className="source-chart-bar-tracks">
+                {chart.series.map((series) => {
+                  const value = sourceChartNumber(series.values[index]);
+                  return <div className="source-chart-bar-track" key={series.label}><span style={{ width: `${value === null ? 0 : Math.max(2, (Math.abs(value) / maxValue) * 100)}%`, background: series.color }} /><b>{sourceChartValue(chart, value)}</b></div>;
+                })}
+              </div>
+            </div>
+          ))}
+          <div className="source-chart-series">{chart.series.map((series) => <span key={series.label}><i style={{ background: series.color }} />{series.label}</span>)}</div>
+        </div>
+      )}
+      <footer className="source-chart-lineage">Source: {chart.source_lineage.files.join(" + ")} | Project ID: {project.project_id}</footer>
+    </section>
+  );
+}
+
+function ProjectSourceChartGrid({ project, tab }: { project: ProjectRecord; tab: string }) {
+  const payload = project.chart_payloads;
+  if (!payload || payload.project_id !== project.project_id || payload.project_key !== project.project_key) {
+    return null;
+  }
+  const tabCharts = payload.charts.filter((chart) => chart.tab === tab);
+  if (!tabCharts.length) return null;
+  return <div className="feature-stack source-chart-stack"><div className="source-chart-grid">{tabCharts.map((chart) => <SourceChartCard key={chart.id} chart={chart} project={project} />)}</div></div>;
+}
+
+function reportHtml(project: ProjectRecord, reportKey: ReportKey) {
+  return project.report_artifacts?.[reportKey]?.html || project.reports[reportKey];
+}
+
+function ReportFormatDownloads({ project, reportKey }: { project: ProjectRecord; reportKey: ReportKey }) {
+  const artifact = project.report_artifacts?.[reportKey];
+  const formats = artifact
+    ? ([
+        ["HTML", artifact.html, "text/html"],
+        ["PDF", artifact.pdf, "application/pdf"],
+        ["PowerPoint", artifact.pptx, "application/vnd.openxmlformats-officedocument.presentationml.presentation"],
+      ] as const)
+    : ([ ["HTML", project.reports[reportKey], "text/html"] ] as const);
+  return (
+    <div className="report-format-downloads" aria-label="Direct report downloads">
+      {formats.map(([label, href]) => (
+        <a key={label} href={href} download={href.split("/").pop()} rel="noopener">
+          {label}
+        </a>
+      ))}
+    </div>
+  );
+}
+
+function GovernedTiaReportDownloads({ project }: { project: ProjectRecord }) {
+  const artifact = project.report_artifacts?.tia_governed_assessment;
+  if (!artifact?.html) return null;
+  const formats: Array<[string, string | undefined, string]> = [
+    ["HTML", artifact.html, "text/html"],
+    ["PDF", artifact.pdf, "application/pdf"],
+    ["PowerPoint", artifact.pptx, "application/vnd.openxmlformats-officedocument.presentationml.presentation"],
+    ["Word", artifact.docx, "application/vnd.openxmlformats-officedocument.wordprocessingml.document"],
+  ];
+  const availableFormats = formats.filter((item): item is [string, string, string] => typeof item[1] === "string" && item[1].length > 0);
+  return (
+    <section className="feature-card output-studio-tia-report">
+      <div className="feature-card-head">
+        <div>
+          <h3>Governed Delay Analysis - Time Impact Analysis Assessment</h3>
+          <small>Native XER source pairs, fragnets, relationships, evidence gaps, and reconciliation controls.</small>
+        </div>
+        <span>{artifact.assessment_status?.replaceAll("_", " ") || "Project scoped"}</span>
+      </div>
+      <p>
+        Schedule movements are indicative only. This report does not present a final EOT, compensation, or entitlement conclusion without validated P6, concurrency, and contractual evidence.
+      </p>
+      <div className="report-format-downloads" aria-label="Governed Delay TIA report downloads">
+        {availableFormats.map(([label, href]) => (
+          <a key={label} href={href} download={href.split("/").pop()} rel="noopener">
+            {label}
+          </a>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
+  const engine = project.universal_report_engine;
+  const [selectedKey, setSelectedKey] = useState<string | null>(null);
+  const reportFamilies = engine?.report_families || [];
+  const selectedFamily = reportFamilies.find((item) => item.key === selectedKey)
+    || reportFamilies.find((item) => item.status === "GENERATED")
+    || reportFamilies[0];
+
+  useEffect(() => {
+    const firstGenerated = reportFamilies.find((item) => item.status === "GENERATED");
+    setSelectedKey(firstGenerated?.key || reportFamilies[0]?.key || null);
+  }, [project.project_id, project.project_key, reportFamilies.length]);
+
+  if (!engine || engine.project_id !== project.project_id || engine.project_key !== project.project_key) {
+    return (
+      <section className="feature-card universal-empty-state">
+        <div className="feature-card-head"><h3>Universal Report Engine - ML</h3><span>Project-scoped only</span></div>
+        <p>The controlled report-engine catalogue is not yet available for this selected project. Regenerate the project payload locally; no report from another project will be used as a fallback.</p>
+      </section>
+    );
+  }
+
+  const generatedFormats: Array<[string, string | undefined]> = selectedFamily
+    ? [
+        ["HTML", selectedFamily.artifacts.html],
+        ["PDF", selectedFamily.artifacts.pdf],
+        ["PowerPoint", selectedFamily.artifacts.pptx],
+        ["Full Package", selectedFamily.artifacts.package_zip],
+      ]
+    : [];
+  const activeFormats = generatedFormats.filter((item): item is [string, string] => Boolean(item[1]));
+  const releasedFormats = selectedFamily?.status === "GENERATED" ? activeFormats : [];
+
+  return (
+    <div className="universal-engine-stack">
+      <section className="universal-engine-hero">
+        <div>
+          <p className="eyebrow">Controlled Local Production Engine</p>
+          <h3>{engine.engine.package_name || "Universal Report Engine - ML"}</h3>
+          <p>{engine.engine.capability_note}</p>
+        </div>
+        <div className="universal-engine-stats">
+          <span><b>{numberValue(engine.engine.rules)}</b> Rules</span>
+          <span><b>{numberValue(engine.engine.report_families)}</b> Families</span>
+          <span><b>{numberValue(engine.engine.layers)}</b> Layers</span>
+          <span><b>{numberValue(engine.source_file_count)}</b> Project sources</span>
+        </div>
+      </section>
+
+      <section className="universal-engine-controls">
+        <div className="feature-card-head">
+          <div><h3>Report Family Catalogue</h3><small>Every package is bound to Project ID: {project.project_id}</small></div>
+          <span>{engine.summary.generated_count} generated / {engine.summary.catalog_count} available</span>
+        </div>
+        <div className="universal-report-grid" role="list" aria-label="Universal report families">
+          {reportFamilies.map((item) => (
+            <button
+              key={item.key}
+              type="button"
+              className={`universal-report-card ${selectedFamily?.key === item.key ? "active" : ""}`}
+              onClick={() => setSelectedKey(item.key)}
+            >
+              <span className={`universal-status ${item.status.toLowerCase()}`}>{item.status.replaceAll("_", " ")}</span>
+              <b>{item.title}</b>
+              <small>{item.summary}</small>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {selectedFamily ? (
+        <section className="feature-card universal-family-detail">
+          <div className="feature-card-head">
+            <div>
+              <p className="eyebrow">Selected Report Family</p>
+              <h3>{selectedFamily.title}</h3>
+            </div>
+            <span className={`universal-status ${selectedFamily.status.toLowerCase()}`}>{selectedFamily.status.replaceAll("_", " ")}</span>
+          </div>
+          <p>{selectedFamily.detail}</p>
+          <div className="universal-family-meta">
+            <span><b>Requirements:</b> {selectedFamily.requires.length ? selectedFamily.requires.join(", ") : "Project-controlled source evidence"}</span>
+            <span><b>Native schedule:</b> {selectedFamily.native_schedule_required ? "Required" : "Not mandatory"}</span>
+            <span><b>Release:</b> {selectedFamily.release_status?.replaceAll("_", " ") || "Not generated"}</span>
+          </div>
+          {releasedFormats.length ? (
+            <div className="report-format-downloads" aria-label="Universal report package downloads">
+              {releasedFormats.map(([label, href]) => <a key={label} href={href} download={href.split("/").pop()} rel="noopener">{label}</a>)}
+            </div>
+          ) : selectedFamily?.status === "DRAFT_REVIEW_REQUIRED" ? (
+            <p className="universal-local-note">A local draft exists but failed its release gate. Resolve the listed source gaps and rerun the controlled engine before this package can be published or downloaded.</p>
+          ) : (
+            <p className="universal-local-note">Generate this package through the local controlled pipeline. The public website never executes the report engine or reads source files directly.</p>
+          )}
+          {selectedFamily.status === "GENERATED" && selectedFamily.artifacts.html ? (
+            <iframe src={selectedFamily.artifacts.html} title={`${project.project_display_name} - ${selectedFamily.title}`} />
+          ) : null}
+        </section>
+      ) : null}
+
+      <section className="feature-card universal-ml-panel">
+        <div className="feature-card-head">
+          <div><h3>ML and AI Governance</h3><small>{engine.ml_capability.detail}</small></div>
+          <span>{engine.ml_capability.status.replaceAll("_", " ")}</span>
+        </div>
+        <p>{engine.ml_capability.ai_governance}</p>
+        <div className="universal-ml-grid">
+          {engine.ml_capability.tasks.map((task) => (
+            <div key={task.key || task.title} className="universal-ml-task">
+              <b>{task.title || task.key || "ML task"}</b>
+              <small>{task.description || "Source-backed local task."}</small>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function OutputStudioPanel({
+  project,
+  selectedReport,
+  setSelectedReport
+}: {
+  project: ProjectRecord;
+  selectedReport: ReportKey;
+  setSelectedReport: (key: ReportKey) => void;
+}) {
+  const [studioTab, setStudioTab] = useState<"dashboards" | "universal">("dashboards");
+  return (
+    <section className="glass-panel report-hologram output-studio-panel">
+      <div className="section-header">
+        <div>
+          <p className="eyebrow">Output Studio</p>
+          <h2>{project.project_display_name}</h2>
+        </div>
+        <span>Same-page generated outputs</span>
+      </div>
+      <div className="output-studio-tabs" role="tablist" aria-label="Output Studio tabs">
+        <button type="button" className={studioTab === "dashboards" ? "active" : ""} onClick={() => setStudioTab("dashboards")}>Dashboards</button>
+        <button type="button" className={studioTab === "universal" ? "active" : ""} onClick={() => setStudioTab("universal")}>Universal Report Engine - ML</button>
+      </div>
+      {studioTab === "dashboards" ? (
+        <>
+          <div className="report-switcher">
+            {reportTabs.map((tab) => (
+              <button type="button" key={tab.key} className={tab.key === selectedReport ? "report-tab active" : "report-tab"} onClick={() => setSelectedReport(tab.key)}>
+                <b>{tab.label}</b><span>{tab.note}</span>
+              </button>
+            ))}
+          </div>
+          <OutputStudioDownloadButton href={reportHtml(project, selectedReport)} label={`Download ${reportTabs.find((tab) => tab.key === selectedReport)?.label || "Report"}`} />
+          <ReportFormatDownloads project={project} reportKey={selectedReport} />
+          {INTERNAL_TIA_SURFACE_ENABLED ? <GovernedTiaReportDownloads project={project} /> : null}
+          <FileList title="Automatic Project Outputs" files={project.features.outputs_and_watchers.output_files} />
+          <iframe src={reportHtml(project, selectedReport)} title={`${project.project_display_name} - ${selectedReport}`} />
+        </>
+      ) : <UniversalReportEnginePanel project={project} />}
+    </section>
+  );
+}
+
+function downloadTableCsv(table: TablePreview, name: string) {
+  const headers = table.columns;
+  const escapeCsv = (value: unknown) => `"${String(value ?? "").replace(/"/g, '""')}"`;
+  const csv = [headers.map(escapeCsv).join(","), ...table.rows.map((row) => headers.map((header) => escapeCsv(row[header])).join(","))].join("\n");
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = name.endsWith(".csv") ? name : `${name}.csv`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function ProjectDataTable({
+  table,
+  title,
+  fileName,
+  empty = "No project data is available for this view."
+}: {
+  table: TablePreview | undefined;
+  title: string;
+  fileName?: string;
+  empty?: string;
+}) {
+  const [query, setQuery] = useState("");
+  const [page, setPage] = useState(0);
+  const pageSize = 25;
+  const rows = table?.rows ?? EMPTY_TABLE_ROWS;
+  const columns = table?.columns ?? EMPTY_TABLE_COLUMNS;
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredRows = useMemo(
+    () => normalizedQuery
+      ? rows.filter((row) => columns.some((column) => String(row[column] ?? "").toLowerCase().includes(normalizedQuery)))
+      : rows,
+    [columns, normalizedQuery, rows]
+  );
+  const pageCount = Math.max(1, Math.ceil(filteredRows.length / pageSize));
+  const safePage = Math.min(page, pageCount - 1);
+  const displayRows = filteredRows.slice(safePage * pageSize, safePage * pageSize + pageSize);
+
+  if (!table || !table.exists) {
+    return <TablePreviewPanel table={table} title={title} />;
+  }
+
+  return (
+    <section className="feature-card project-data-table">
+      <div className="feature-card-head">
+        <div><h3>{title}</h3><small>{table.file} / {table.row_count} rows / {table.column_count} columns</small></div>
+        <div className="data-table-actions">
+          <button type="button" onClick={() => downloadTableCsv(table, fileName || table.file)}>Download CSV</button>
+        </div>
+      </div>
+      <div className="data-table-toolbar">
+        <input
+          aria-label={`Search ${title}`}
+          placeholder="Search this project data"
+          value={query}
+          onChange={(event) => { setQuery(event.target.value); setPage(0); }}
+        />
+        <span>{filteredRows.length} matching rows{table.truncated ? " / safety cap applied" : ""}</span>
+      </div>
+      {displayRows.length && columns.length ? (
+        <div className="table-scroll project-data-table-scroll">
+          <table>
+            <thead><tr>{columns.map((column) => <th key={column}>{column}</th>)}</tr></thead>
+            <tbody>{displayRows.map((row, index) => <tr key={safePage * pageSize + index}>{columns.map((column) => <td key={column}>{displayCell(row[column])}</td>)}</tr>)}</tbody>
+          </table>
+        </div>
+      ) : <p className="empty-note">{empty}</p>}
+      {filteredRows.length > pageSize ? (
+        <div className="data-table-pagination">
+          <button type="button" disabled={safePage === 0} onClick={() => setPage((current) => Math.max(0, current - 1))}>Previous</button>
+          <span>Page {safePage + 1} of {pageCount}</span>
+          <button type="button" disabled={safePage >= pageCount - 1} onClick={() => setPage((current) => Math.min(pageCount - 1, current + 1))}>Next</button>
+        </div>
+      ) : null}
+    </section>
+  );
+}
+
+function ProjectTableSelector({
+  title,
+  tables,
+  preferred = []
+}: {
+  title: string;
+  tables: Record<string, TablePreview>;
+  preferred?: string[];
+}) {
+  const names = Object.keys(tables);
+  const initial = preferred.find((name) => names.includes(name)) || names[0] || "";
+  const [selectedName, setSelectedName] = useState(initial);
+  const table = tables[selectedName] || tables[names[0]];
+  return (
+    <div className="feature-stack">
+      <div className="subview-select-row">
+        <label>{title}<select value={selectedName} onChange={(event) => setSelectedName(event.target.value)}>{names.map((name) => <option key={name}>{name}</option>)}</select></label>
+      </div>
+      <ProjectDataTable table={table} title={selectedName || title} />
+    </div>
+  );
+}
+
+function WorkbookDataPanel({ workbook, title, preferred = [] }: { workbook: XlsxSummary | undefined; title: string; preferred?: string[] }) {
+  const sheets = workbook?.sheets || [];
+  const tableMap = Object.fromEntries(sheets.map((sheet) => [sheet.name, {
+    file: `${workbook?.file || title} / ${sheet.name}`,
+    exists: Boolean(workbook?.exists),
+    row_count: sheet.row_count,
+    column_count: sheet.column_count,
+    columns: sheet.columns,
+    rows: sheet.rows,
+    truncated: sheet.truncated,
+  }]));
+  if (!sheets.length) {
+    return <section className="feature-card"><div className="feature-card-head"><h3>{title}</h3><span>Missing</span></div><p className="empty-note">No workbook records are available for this selected project.</p></section>;
+  }
+  return <ProjectTableSelector title={title} tables={tableMap} preferred={preferred} />;
+}
+
+function ModuleTabs({
+  label,
+  tabs,
+  activeTab,
+  onChange
+}: {
+  label: string;
+  tabs: string[];
+  activeTab: string;
+  onChange: (tab: string) => void;
+}) {
+  return (
+    <nav className="module-tabs" aria-label={label}>
+      {tabs.map((tab) => <button type="button" className={tab === activeTab ? "active" : ""} onClick={() => onChange(tab)} key={tab}>{tab}</button>)}
+    </nav>
   );
 }
 
@@ -639,58 +1536,239 @@ function SubmittedTiaGuidePanel({ submitted }: { submitted: SubmittedTiaPayload 
         <div className="feature-card-head"><h3>Recommended Engineer Next Moves</h3><span>{submitted.recommended_next_moves?.length || 0}</span></div>
         <ol className="compact-list">{(submitted.recommended_next_moves || []).map((item) => <li key={item}>{item}</li>)}</ol>
       </section>
-      <section className="feature-card">
-        <div className="feature-card-head"><h3>Submitted TIA Visual Audit</h3><span>{submitted.visuals?.length || 0}</span></div>
-        <div className="tia-visual-grid">
-          {(submitted.visuals || []).slice(0, 6).map((visual) => (
-            <figure key={visual.url}>
-              <img src={visual.url} alt={visual.name} />
-              <figcaption>{visual.name}</figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
     </div>
   );
 }
 
-function TemplateInventory({ templates }: { templates: TablePreview[] }) {
+function SubmittedTiaVisualsPanel({ submitted }: { submitted?: SubmittedTiaVisualPayload }) {
+  const [category, setCategory] = useState("");
+  const visuals = submitted?.visuals || [];
+  const categories = Array.from(new Set(visuals.map((visual) => visual.category)));
+  const activeCategory = categories.includes(category) ? category : categories[0];
+  const visibleVisuals = visuals.filter((visual) => visual.category === activeCategory);
+  if (!submitted?.available || !visuals.length) return null;
   return (
-    <section className="feature-card">
-      <div className="feature-card-head">
-        <h3>Recognized TIA Template Files</h3>
-        <span>{templates.length} files</span>
-      </div>
-      <div className="template-grid">
-        {templates.map((template) => (
-          <div key={template.file}>
-            <b>{template.file}</b>
-            <span>{template.row_count} rows / {template.column_count} columns</span>
-          </div>
+    <section className="feature-card submitted-tia-exhibits">
+      <div className="feature-card-head"><h3>Submitted TIA Exhibit Visuals</h3><span>{visuals.length} source figures</span></div>
+      <p>{submitted.evidentiary_note}</p>
+      {categories.length > 1 ? <ModuleTabs label="Submitted TIA exhibit categories" tabs={categories} activeTab={activeCategory} onChange={setCategory} /> : null}
+      <div className="tia-visual-grid">
+        {visibleVisuals.map((visual) => (
+          <figure key={visual.url}>
+            <Image src={visual.url} alt={visual.label} width={1280} height={720} sizes="(max-width: 760px) 92vw, (max-width: 1240px) 45vw, 30vw" />
+            <figcaption>{visual.label}</figcaption>
+          </figure>
         ))}
       </div>
+      <small className="submitted-tia-exhibits__scope">{submitted.scope_note}</small>
     </section>
   );
 }
 
-function WorkbookSummary({ workbook, title }: { workbook: XlsxSummary; title: string }) {
+function selectedProjectTables(project: ProjectRecord) {
+  return project.features.overview.workspace_tables || project.features.overview.source_tables;
+}
+
+function LettersIntelligencePanel({ project }: { project: ProjectRecord }) {
+  const [view, setView] = useState("Inbox & Auto Ingest");
+  const letters = project.features.letters_intelligence;
+  const sheets = letters.workbook_tables?.sheets || [];
+  const matchingSheets = (terms: string[]) => sheets.filter((sheet) => terms.some((term) => sheet.name.toLowerCase().includes(term)));
+  const selectedWorkbook = { ...letters.workbook_tables, sheets: view === "Issue Threads" ? matchingSheets(["thread", "alert"]) : view === "Linked Correspondence" ? matchingSheets(["link", "relationship"]) : matchingSheets(["contractor", "consultant", "ace", "samco", "letter"]) } as XlsxSummary;
   return (
-    <section className="feature-card">
-      <div className="feature-card-head">
-        <h3>{title}</h3>
-        <span>{workbook.exists ? `${workbook.sheets?.length || 0} sheets` : "Missing"}</span>
-      </div>
-      {!workbook.exists ? <p className="empty-note">Workbook not available for this project.</p> : null}
-      {workbook.error ? <p className="empty-note">{workbook.error}</p> : null}
-      <div className="template-grid">
-        {(workbook.sheets || []).map((sheet) => (
-          <div key={sheet.name}>
-            <b>{sheet.name}</b>
-            <span>{sheet.row_count} rows / {sheet.column_count} columns</span>
+    <div className="feature-stack">
+      <div className="workspace-two">
+        <section className="feature-card">
+          <div className="feature-card-head"><h3>Letters Intelligence</h3><span>Selected project only</span></div>
+          <p>Correspondence is classified from the selected project&apos;s inbox and workbook. New files are collected by the local pipeline, then published to Vercel through the generated project JSON.</p>
+          <div className="workspace-grid compact-grid">
+            <MiniMetric label="Inbox Files" value={numberValue(letters.inbox_file_count)} note="Recognized project letters" />
+            <MiniMetric label="Claims Rows" value={numberValue(project.source_files.claims)} note="Project claims register" />
+            <MiniMetric label="Delay Events" value={numberValue(project.source_files.delay_events)} note="Project delay register" />
           </div>
-        ))}
+        </section>
+        <FeatureSvg mode="letters" />
       </div>
+      <ProjectSmartChart project={project} mode="letters" />
+      <ModuleTabs label="Letters Intelligence views" tabs={["Inbox & Auto Ingest", "Letter Registers", "Issue Threads", "Linked Correspondence", "AI Letter Review"]} activeTab={view} onChange={setView} />
+      {view === "Inbox & Auto Ingest" ? <FileList title="Automatic Letter Inbox" files={letters.inbox_files} emptyText="No correspondence files were detected in this project inbox." /> : null}
+      {view === "Letter Registers" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="Letters Registers" preferred={["From Contractor", "From Consultant", "ACE", "SAMCO"]} /> : null}
+      {view === "Issue Threads" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="Issue Threads & Alerts" preferred={["Issue Threads", "Alerts"]} /> : null}
+      {view === "Linked Correspondence" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="Linked Correspondence Engine" preferred={["Contractor Links", "Consultant Links"]} /> : null}
+      {view === "AI Letter Review" ? <div className="feature-stack"><AiInsightCard type="letters" projectKey={project.project_key} /><UnifiedIntelligenceSearch mode="project" projectKey={project.project_key} projectName={project.project_display_name} /></div> : null}
+    </div>
+  );
+}
+
+function ControlledTiaChartGrid({
+  charts,
+  view
+}: {
+  charts: NonNullable<FeaturePayload["delay_analysis"]["controlled_tia"]["charts"]> | undefined;
+  view: string;
+}) {
+  const visibleCharts = (charts || []).filter((chart) => chart.view === view);
+  if (!visibleCharts.length) {
+    return (
+      <section className="feature-card">
+        <div className="feature-card-head"><h3>Chart Readiness</h3><span>Awaiting project evidence</span></div>
+        <p>No source-backed chart is available for this controlled TIA view. The application does not substitute zero values, sample curves, or another project&apos;s data.</p>
+      </section>
+    );
+  }
+  return <div className="reference-chart-grid">{visibleCharts.map((chart) => <ReferenceChartCard key={chart.id} chart={chart} />)}</div>;
+}
+
+function ControlledTiaEventExhibits({
+  exhibits
+}: {
+  exhibits: NonNullable<FeaturePayload["delay_analysis"]["controlled_tia"]["events_and_fragnets"]>["event_exhibits"];
+}) {
+  const approvedExhibits = [...(exhibits || [])]
+    .filter((exhibit) => Boolean(exhibit.url))
+    .sort((left, right) => (left.display_order || 0) - (right.display_order || 0));
+  const [selectedEventId, setSelectedEventId] = useState("");
+
+  if (!approvedExhibits.length) {
+    return (
+      <section className="feature-card controlled-tia-exhibit-readiness">
+        <div className="feature-card-head"><h3>Submitted Event Mapping Exhibits</h3><span>Awaiting project evidence</span></div>
+        <p>No approved event-map exhibit is available for this selected project. Add its own approved mapping file under <code>02-delay_analysis/approved_submission/exhibits</code> and declare it in that project&apos;s <code>submission_manifest.json</code>. Another project&apos;s exhibit is never used.</p>
+      </section>
+    );
+  }
+
+  const selectedExhibit = approvedExhibits.find((exhibit) => exhibit.event_id === selectedEventId) || approvedExhibits[0];
+
+  return (
+    <section className="feature-card controlled-tia-exhibits">
+      <div className="feature-card-head"><div><h3>Submitted Event Mapping</h3><small>Project-local visual evidence. The controlled matrix remains the calculation authority.</small></div><span>{approvedExhibits.length} approved exhibits</span></div>
+      <label className="controlled-tia-event-select" htmlFor="controlled-tia-event-select">
+        <span>Select delay event</span>
+        <select id="controlled-tia-event-select" value={selectedExhibit.event_id || ""} onChange={(event) => setSelectedEventId(event.target.value)}>
+          {approvedExhibits.map((exhibit) => <option key={exhibit.event_id} value={exhibit.event_id}>{exhibit.event_id} - {exhibit.title}</option>)}
+        </select>
+      </label>
+      <figure className="controlled-tia-event-exhibit" key={selectedExhibit.url}>
+        <a href={selectedExhibit.url} target="_blank" rel="noreferrer" aria-label={`Open ${selectedExhibit.title || selectedExhibit.event_id || "event"} exhibit`}>
+          <Image src={selectedExhibit.url || ""} alt={`${selectedExhibit.event_id || "TIA event"}: ${selectedExhibit.title || "submitted mapping exhibit"}`} width={1680} height={945} sizes="(max-width: 860px) 96vw, 1120px" priority={false} />
+        </a>
+        <figcaption>
+          <strong>{displayCell(selectedExhibit.event_id)}: {displayCell(selectedExhibit.title)}</strong>
+          <span>{displayCell(selectedExhibit.evidence_use)}</span>
+          <small>{displayCell(selectedExhibit.control_note)}</small>
+        </figcaption>
+      </figure>
     </section>
+  );
+}
+
+function ControlledTiaViewExhibit({
+  exhibits,
+  view,
+  emptyText
+}: {
+  exhibits: NonNullable<FeaturePayload["delay_analysis"]["controlled_tia"]>["view_exhibits"];
+  view: string;
+  emptyText: string;
+}) {
+  const exhibit = (exhibits || []).find((item) => item.view === view && item.url);
+  const exhibitUrl = typeof exhibit?.url === "string" ? exhibit.url : "";
+  if (!exhibit || !exhibitUrl) {
+    return <section className="feature-card controlled-tia-exhibit-readiness"><div className="feature-card-head"><h3>{view}</h3><span>Awaiting project evidence</span></div><p>{emptyText}</p></section>;
+  }
+  return (
+    <section className="feature-card controlled-tia-view-exhibit">
+      <figure>
+        <a href={exhibitUrl} target="_blank" rel="noreferrer" aria-label={`Open ${exhibit.title || view}`}>
+          <Image src={exhibitUrl} alt={exhibit.title || view} width={1680} height={945} sizes="(max-width: 860px) 96vw, 1240px" priority={false} />
+        </a>
+        <figcaption><strong>{displayCell(exhibit.title)}</strong><span>{displayCell(exhibit.evidence_use)}</span><small>{displayCell(exhibit.control_note)}</small></figcaption>
+      </figure>
+    </section>
+  );
+}
+
+function DelayTiaParityPanel({ project }: { project: ProjectRecord }) {
+  const [view, setView] = useState("Time Impact Methodology");
+  const delay = project.features.delay_analysis;
+  const run = delay.controlled_tia;
+  const integrity = run.source_integrity || {};
+  const schedule = run.schedule_cpm || {};
+  const events = run.events_and_fragnets || {};
+  const concurrency = run.concurrency_and_entitlement || {};
+  const eot = run.eot_position || {};
+  const sourceTables = {
+    "Approved Release Files": recordsToTable("Approved Release Files", integrity.files),
+    "Archive Evidence Inventory": recordsToTable("Archive Evidence Inventory", integrity.inventory),
+    "Approved Before / After Matrix": recordsToTable("Approved Before / After Matrix", schedule.approved_matrix),
+    "Native XER Pair Register": recordsToTable("Native XER Pair Register", schedule.xer_pairs),
+    "Relationship and Lag Evidence": recordsToTable("Relationship and Lag Evidence", schedule.relationship_evidence),
+    "Event and Fragnet Register": recordsToTable("Event and Fragnet Register", events.events),
+    "Concurrency Event Position": recordsToTable("Concurrency Event Position", concurrency.event_positions),
+    "Entitlement and Evidence Matrix": recordsToTable("Entitlement and Evidence Matrix", concurrency.evidence_matrix),
+    "Reconciliation Register": recordsToTable("Reconciliation Register", run.reconciliation_items),
+    "Evidence Gaps": recordsToTable("Evidence Gaps", (run.missing_evidence || []).map((item) => ({ missing_evidence: item })))
+  };
+  return (
+    <div className="feature-stack">
+      <div className="workspace-two">
+        <section className="feature-card">
+          <div className="feature-card-head"><div><h3>Delay Analysis - Time Impact Analysis</h3><small>Controlled run for the selected project only. Historic generic TIA inputs are excluded.</small></div><span>{run.status.replaceAll("_", " ")}</span></div>
+          <div className="workspace-grid compact-grid">
+            <MiniMetric label="Controlled Status" value={run.status.replaceAll("_", " ")} note={run.message} />
+            <MiniMetric label="Approval" value={run.approval_status.replaceAll("_", " ")} note="Manual approval is required for publication" />
+            <MiniMetric label="Submitted EOT" value={eot.integrated_eot_calendar_days === undefined ? "N/A" : `${numberValue(eot.integrated_eot_calendar_days)} days`} note="Indicative - P6 verification required" />
+            <MiniMetric label="Concurrency Adjustment" value={concurrency.concurrency_adjustment_days === undefined ? "N/A" : `${numberValue(concurrency.concurrency_adjustment_days)} days`} note="Submitted reconciliation only" />
+          </div>
+        </section>
+        <section className="feature-card"><div className="feature-card-head"><h3>Evidence Boundary</h3><span>project_id enforced</span></div><p>Only this project&apos;s approved release, XER pairs, relationships, evidence references, controlled run, and project-scoped AI context are available. Another project&apos;s source package is never used as a fallback.</p></section>
+      </div>
+      <ModuleTabs label="Controlled TIA workflow" tabs={run.workflow_tabs} activeTab={view} onChange={setView} />
+      {view === "Time Impact Methodology" ? <ControlledTiaViewExhibit exhibits={run.view_exhibits} view={view} emptyText="No approved methodology exhibit is available for this selected project. Add its own project-local methodology file to the approved submission manifest." /> : null}
+      {view === "Schedule and CPM" ? <div className="feature-stack"><ControlledTiaChartGrid charts={run.charts} view={view} /><section className="feature-card"><div className="feature-card-head"><h3>Schedule and CPM Controls</h3><span>{displayCell(schedule.status)}</span></div><ul>{(schedule.cpm_controls || []).map((control) => <li key={control}>{control}</li>)}</ul></section><ProjectTableSelector title="Approved Matrix, Native XER, and CPM Evidence" tables={sourceTables} preferred={["Approved Before / After Matrix", "Native XER Pair Register", "Relationship and Lag Evidence"]} /></div> : null}
+      {view === "Events and Fragnets" ? <div className="feature-stack"><ControlledTiaChartGrid charts={run.charts} view={view} /><ControlledTiaEventExhibits exhibits={events.event_exhibits} /><section className="feature-card"><div className="feature-card-head"><h3>Event and Fragnet Controls</h3><span>{displayCell(events.status)}</span></div><ul>{(events.fragnet_controls || []).map((control) => <li key={control}>{control}</li>)}</ul></section><ProjectTableSelector title="Project Event and Fragnet Register" tables={sourceTables} preferred={["Event and Fragnet Register", "Approved Before / After Matrix"]} /></div> : null}
+      {view === "Concurrency and Entitlement" ? <div className="feature-stack"><ControlledTiaViewExhibit exhibits={run.view_exhibits} view={view} emptyText="No approved concurrency exhibit is available for this selected project. Add its own controlled overlap analysis to the approved submission manifest." /><section className="feature-card"><div className="feature-card-head"><h3>Concurrency and Entitlement Controls</h3><span>{displayCell(concurrency.status)}</span></div><ul>{(concurrency.controls || []).map((control) => <li key={control}>{control}</li>)}</ul></section><ProjectTableSelector title="Concurrency and Entitlement Evidence" tables={sourceTables} preferred={["Concurrency Event Position", "Entitlement and Evidence Matrix", "Reconciliation Register"]} /></div> : null}
+      {view === "EOT Position" ? <div className="feature-stack"><ControlledTiaViewExhibit exhibits={run.view_exhibits} view={view} emptyText="No approved EOT summary exhibit is available for this selected project. Add its own project-local EOT summary to the approved submission manifest." /><section className="feature-card"><div className="feature-card-head"><div><h3>{displayCell(eot.label)}</h3><small>{displayCell(eot.message)}</small></div><span>{displayCell(eot.status)}</span></div><div className="workspace-grid compact-grid"><MiniMetric label="EOT Milestone" value={displayCell(eot.project_finish_milestone_id)} note="Submitted EOT-driving project finish" /><MiniMetric label="Before Finish" value={displayCell(eot.baseline_project_finish)} note="Approved matrix" /><MiniMetric label="After Finish" value={displayCell(eot.impacted_project_finish)} note="Approved matrix" /><MiniMetric label="Integrated Position" value={eot.integrated_eot_calendar_days === undefined ? "N/A" : `${numberValue(eot.integrated_eot_calendar_days)} days`} note="Indicative - P6 verification required" /></div></section><ProjectTableSelector title="EOT Position and Publication Gates" tables={sourceTables} preferred={["Concurrency Event Position", "Reconciliation Register", "Evidence Gaps", "Native XER Pair Register"]} /></div> : null}
+      {view === "AI Review and Run Control" ? <div className="feature-stack"><section className="feature-card"><div className="feature-card-head"><h3>AI Scope and Run Control</h3><span>{displayCell(run.ai_scope?.status)}</span></div><p>{displayCell(run.ai_scope?.message)}</p><p>Run ID: {displayCell(run.run_id)} | Last controlled draft: {displayCell(run.last_run_at)}</p></section><AiInsightCard type="delay" projectKey={project.project_key} /><UnifiedIntelligenceSearch mode="project" projectKey={project.project_key} projectName={project.project_display_name} /></div> : null}
+    </div>
+  );
+}
+
+function ContractClaimsParityPanel({ project }: { project: ProjectRecord }) {
+  const [center, setCenter] = useState("Contract Clauses");
+  const [view, setView] = useState("Contract Library");
+  const claims = project.features.contract_claims;
+  const knowledgeTables = claims.knowledge_base?.tables || {};
+  const controlled = claims.controlled_assessment?.controls;
+  const controlledTables = {
+    "Project Clause Controls": recordsToTable("Project Clause Controls", controlled?.clause_controls),
+    "Controlled Evidence Ledger": recordsToTable("Controlled Evidence Ledger", controlled?.evidence_ledger),
+    "Contract Authority Register": recordsToTable("Contract Authority Register", controlled?.contract_authority_register)
+  };
+  const clauseTable = knowledgeTables.contract_clauses || knowledgeTables[Object.keys(knowledgeTables).find((name) => /clause/i.test(name)) || ""];
+  const evidenceTables = Object.fromEntries(Object.entries(knowledgeTables).filter(([name]) => /evidence|document|mapping/i.test(name)));
+  const claimTables = Object.fromEntries(Object.entries(knowledgeTables).filter(([name]) => /claim|trigger|defense|rebuttal|draft/i.test(name)));
+  return (
+    <div className="feature-stack">
+      <div className="workspace-two">
+        <section className="feature-card"><div className="feature-card-head"><h3>Contract & Claims Intelligence Center</h3></div><p>Contract clauses, evidence mappings, claim records, and AI analysis for the selected project.</p><div className="workspace-grid compact-grid"><MiniMetric label="Contract Files" value={numberValue(claims.source_files.length)} note="Contract source files" /><MiniMetric label="Evidence Files" value={numberValue(claims.evidence_files.length)} note="Evidence source files" /><MiniMetric label="Clauses" value={numberValue(controlled?.clause_control_count)} note="Clause records" /><MiniMetric label="Evidence Mappings" value={numberValue(controlled?.evidence_mapping_count)} note="Evidence ledger records" /></div></section>
+        <FeatureSvg mode="claims" />
+      </div>
+      <ProjectSmartChart project={project} mode="claims" />
+      <ModuleTabs label="Contract claims center" tabs={["Contract Clauses", "Claims Intelligence Center"]} activeTab={center} onChange={setCenter} />
+      {center === "Contract Clauses" ? <div className="feature-stack"><ProjectDataTable table={clauseTable} title="Contract Clause Matching Engine" empty="No clause library is available for this selected project." /><ProjectTableSelector title="Clause Authority Register" tables={controlledTables} preferred={["Project Clause Controls", "Contract Authority Register"]} /><WorkbookDataPanel workbook={claims.clause_library_tables} title="Overall Contract Clause Library" /></div> : null}
+      {center === "Claims Intelligence Center" ? <>
+        <ModuleTabs label="Claims Intelligence views" tabs={["Upload & Extract", "Contract Library", "Ask Contract AI", "Evidence Mapping", "Client Rebuttal Engine", "Claim Builder", "Export Center"]} activeTab={view} onChange={setView} />
+        {view === "Upload & Extract" ? <div className="workspace-two"><FileList title="Contract Source Repository" files={claims.source_files} /><FileList title="Project Evidence Repository" files={claims.evidence_files} /></div> : null}
+        {view === "Contract Library" ? <div className="feature-stack"><ProjectDataTable table={clauseTable} title="Searchable Contract Claims Library" /><ProjectTableSelector title="Authority, Time-Bar, and Entitlement Controls" tables={controlledTables} preferred={["Project Clause Controls", "Contract Authority Register"]} /><WorkbookDataPanel workbook={claims.clause_library_tables} title="Contract Clause Library Workbook" /></div> : null}
+        {view === "Ask Contract AI" ? <div className="feature-stack"><AiInsightCard type="contract" projectKey={project.project_key} /><UnifiedIntelligenceSearch mode="project" projectKey={project.project_key} projectName={project.project_display_name} /></div> : null}
+        {view === "Evidence Mapping" ? <div className="feature-stack"><ProjectTableSelector title="Evidence Ledger" tables={controlledTables} preferred={["Controlled Evidence Ledger"]} /><ProjectTableSelector title="Evidence-to-Clause Mapping" tables={Object.keys(evidenceTables).length ? evidenceTables : knowledgeTables} preferred={["evidence_mappings", "evidence_documents"]} /><FileList title="Evidence Files" files={claims.evidence_files} /></div> : null}
+        {view === "Client Rebuttal Engine" ? <div className="feature-stack"><AiInsightCard type="contract" projectKey={project.project_key} /><ProjectTableSelector title="Client Defenses and Contractor Rebuttals" tables={Object.keys(claimTables).length ? claimTables : knowledgeTables} preferred={["client_defenses", "contractor_rebuttals"]} /></div> : null}
+        {view === "Claim Builder" ? <div className="feature-stack"><ProjectTableSelector title="Claim Categories, Triggers, and Drafts" tables={Object.keys(claimTables).length ? claimTables : knowledgeTables} preferred={["claim_categories", "claim_triggers", "claim_drafts"]} /><AiInsightCard type="contract" projectKey={project.project_key} /></div> : null}
+        {view === "Export Center" ? <section className="feature-card"><div className="feature-card-head"><h3>Claim Source Controls</h3><span>Selected project only</span></div><p>Formal reports and files are intentionally available only in Output Studio. This view keeps the active project&apos;s clause, evidence, claim, and rebuttal source tables available for review.</p><ProjectTableSelector title="Claims Source Tables" tables={knowledgeTables} preferred={["contract_clauses", "evidence_mappings", "claim_categories", "claim_triggers"]} /></section> : null}
+      </> : null}
+    </div>
   );
 }
 
@@ -706,8 +1784,6 @@ function ConferencePanel({ project }: { project: ProjectRecord }) {
             Use this panel during review meetings while the project tabs remain available on the same page.
             The call link is project-specific and can be changed in the selected project `project.json`.
           </p>
-          <DataStatus label="Meeting Link" count={meetingUrl ? 1 : 0} />
-          <DataStatus label="Project Tabs Available" count={workspaceTabs.length} />
         </div>
         <section className="conference-card">
           <FeatureSvg mode="watcher" />
@@ -715,13 +1791,15 @@ function ConferencePanel({ project }: { project: ProjectRecord }) {
             {meetingUrl ? (
               <a href={meetingUrl} target="_blank" rel="noreferrer">Join Conference</a>
             ) : (
-              <span>Add `meeting_url` to this project's `project.json` to activate the join button.</span>
+              <span>Add `meeting_url` to this project&apos;s `project.json` to activate the join button.</span>
             )}
           </div>
         </section>
       </div>
       {meetingUrl && canEmbed ? (
-        <iframe className="wide-embed conference-embed" src={meetingUrl} title={`${project.project_display_name} conference`} />
+        <>
+          <iframe className="wide-embed conference-embed" src={meetingUrl} title={`${project.project_display_name} conference`} />
+        </>
       ) : (
         <section className="feature-card">
           <div className="feature-card-head">
@@ -750,6 +1828,7 @@ function WorkspaceTabContent({
   selectedReport: ReportKey;
   setSelectedReport: (key: ReportKey) => void;
 }) {
+  const workspaceTables = selectedProjectTables(project);
   if (activeTab === "Overview") {
     return (
       <div className="feature-stack">
@@ -765,8 +1844,9 @@ function WorkspaceTabContent({
         </div>
         <div className="workspace-two">
           <FeatureSvg mode="portfolio" />
-          <TablePreviewPanel table={project.features.overview.source_tables.projects} title="Project Overview Source" />
+          <ProjectDataTable table={workspaceTables.projects} title="Project Overview Source" />
         </div>
+        <ProjectSourceChartGrid project={project} tab="Overview" />
       </div>
     );
   }
@@ -780,9 +1860,9 @@ function WorkspaceTabContent({
           <MiniMetric label="Project Scope" value={project.sector} note="Sector-based project grouping" />
         </div>
         <div className="workspace-two">
-          <TablePreviewPanel table={project.features.overview.source_tables.wbs} title="WBS Source Table" />
-          <iframe src={project.reports.master_dashboard} title={`${project.project_display_name} master dashboard WBS`} />
+          <ProjectDataTable table={workspaceTables.wbs} title="WBS Source Table" />
         </div>
+        <ProjectSourceChartGrid project={project} tab="WBS" />
       </div>
     );
   }
@@ -796,7 +1876,8 @@ function WorkspaceTabContent({
           <MiniMetric label="EVM Records" value={numberValue(project.source_files.evm)} note="Earned value rows" />
           <MiniMetric label="Delay Events" value={numberValue(project.source_files.delay_events)} note="Delay event records" />
         </div>
-        <TablePreviewPanel table={project.features.overview.source_tables.activities} title="Activities Register Preview" />
+        <ProjectSourceChartGrid project={project} tab="Activities" />
+        <ProjectDataTable table={workspaceTables.activities} title="Activities Register" />
       </div>
     );
   }
@@ -809,22 +1890,17 @@ function WorkspaceTabContent({
           <MiniMetric label="Schedule Health" value={numberValue(project.spi, 2)} note="SPI schedule indicator" />
           <MiniMetric label="Delayed Days" value={numberValue(project.delay_days)} note="Delay days from project data" />
         </div>
-        <TablePreviewPanel table={project.features.overview.source_tables.milestones} title="Milestone Register Preview" />
+        <ProjectSourceChartGrid project={project} tab="Milestones" />
+        <ProjectDataTable table={workspaceTables.milestones} title="Milestone Register" />
       </div>
     );
   }
 
   if (activeTab === "S-Curve") {
     return (
-      <div className="workspace-two">
-        <div>
-          <h3>S-Curve</h3>
-          <p>Uses the selected project progress and generated dashboard outputs. If the source S-curve file is missing, the report remains available with controlled source notes.</p>
-          <DataStatus label="S-Curve Rows" count={project.features.overview.source_tables.s_curve?.row_count} />
-          <DataStatus label="Progress Updates" count={project.source_files.progress} />
-          <TablePreviewPanel table={project.features.overview.source_tables.s_curve} title="S-Curve Source" />
-        </div>
-        <iframe src={project.reports.linked_executive_dashboard} title={`${project.project_display_name} linked dashboard`} />
+      <div className="feature-stack">
+        <ProjectSourceChartGrid project={project} tab="S-Curve" />
+        <ProjectDataTable table={workspaceTables.s_curve} title="S-Curve Source" />
       </div>
     );
   }
@@ -845,9 +1921,14 @@ function WorkspaceTabContent({
           <MiniMetric label="ETC" value={money(project.etc)} note="EAC less AC" />
           <MiniMetric label="VAC" value={money(project.vac)} note="BAC less EAC" />
         </div>
-        <TablePreviewPanel table={project.features.overview.source_tables.evm} title="EVM Source Table" />
+        <ProjectSourceChartGrid project={project} tab="EVM Analysis" />
+        <ProjectDataTable table={workspaceTables.evm} title="EVM Source Table" />
       </div>
     );
+  }
+
+  if (activeTab === "Analytics Intelligence") {
+    return <div className="feature-stack"><ProjectSmartChart project={project} mode="analytics" /><ProjectSourceChartGrid project={project} tab="Analytics Intelligence" /><AdvancedAnalyticsPanel analytics={project.advanced_analytics} /></div>;
   }
 
   if (activeTab === "Contracts") {
@@ -861,47 +1942,11 @@ function WorkspaceTabContent({
           <MiniMetric label="Contract Rows" value={numberValue(project.source_files.contracts)} note="Contract records" />
           <MiniMetric label="Payment Rows" value={numberValue(project.source_files.payments)} note="Payment records" />
         </div>
+        <ProjectSourceChartGrid project={project} tab="Contracts" />
         <div className="workspace-two">
-          <TablePreviewPanel table={project.features.overview.source_tables.contracts} title="Contracts Register Preview" />
-          <TablePreviewPanel table={project.features.overview.source_tables.payments} title="Payments Register Preview" />
+          <ProjectDataTable table={workspaceTables.contracts} title="Contracts Register" />
+          <ProjectDataTable table={workspaceTables.payments} title="Payments Register" />
         </div>
-      </div>
-    );
-  }
-
-  if (activeTab === "Delays") {
-    return (
-      <div className="feature-stack">
-        <AiInsightCard type="delay" projectKey={project.project_key} />
-        <div className="workspace-grid">
-          <MiniMetric label="Delay Days" value={numberValue(project.delay_days)} note={metricSource(project, "delay_days", "Delay exposure from project data")} />
-          <MiniMetric label="Delay Events" value={numberValue(project.delay_event_count ?? project.source_files.delay_events)} note="Delay event rows loaded" />
-          <MiniMetric label="SPI" value={numberValue(project.spi, 2)} note="Schedule performance signal" />
-          <MiniMetric label="Decision Required" value={project.decision_required ? "Yes" : "No"} note="Delay or performance trigger" />
-        </div>
-        <div className="workspace-two">
-          <FeatureSvg mode="delay" />
-          <TablePreviewPanel table={project.features.overview.source_tables.delay_events} title="Delay Events Source Table" />
-        </div>
-      </div>
-    );
-  }
-
-  if (activeTab === "Time Impact") {
-    return (
-      <div className="feature-stack">
-        <div className="workspace-two">
-          <section className="feature-card">
-            <div className="feature-card-head"><h3>Time Impact Position</h3><span>{project.features.delay_analysis.logic_mode || "Project-scoped"}</span></div>
-            <p>Shows the selected project's time-impact evidence, recognized TIA inputs, and generated time-impact outputs without mixing data from other projects.</p>
-            <DataStatus label="Recognized TIA Files" count={project.features.delay_analysis.recognized_file_count} />
-            <DataStatus label="Required TIA Files" count={project.features.delay_analysis.required_file_count} />
-            <DataStatus label="Delay Events" count={project.source_files.delay_events} />
-          </section>
-          <FeatureSvg mode="delay" />
-        </div>
-        <TemplateInventory templates={project.features.delay_analysis.templates} />
-        <iframe className="wide-embed" src={project.reports.elite_svg_charts} title={`${project.project_display_name} time impact charts`} />
       </div>
     );
   }
@@ -916,120 +1961,22 @@ function WorkspaceTabContent({
           <MiniMetric label="Decision Required" value={project.decision_required ? "Yes" : "No"} note="Rule-based management trigger" />
           <MiniMetric label="Delay Days" value={numberValue(project.delay_days)} note="Delay exposure" />
         </div>
-        <TablePreviewPanel table={project.features.overview.source_tables.risks} title="Risks Source Table" />
+        <ProjectSourceChartGrid project={project} tab="Risks" />
+        <ProjectDataTable table={workspaceTables.risks} title="Risk Register" />
       </div>
     );
   }
 
-  if (activeTab === "Letters Intelligence") {
-    return (
-      <div className="feature-stack">
-        <AiInsightCard type="letters" projectKey={project.project_key} />
-        <div className="workspace-two">
-          <div>
-            <h3>Letters Intelligence</h3>
-            <p>Correspondence is project-isolated. New letters added inside this project's inbox folder are recognized by the generator and reflected after sync/deploy.</p>
-            <DataStatus label="Inbox Files" count={project.features.letters_intelligence.inbox_file_count} />
-            <DataStatus label="Claims Rows" count={project.source_files.claims} />
-            <DataStatus label="Delay Events" count={project.source_files.delay_events} />
-          </div>
-          <FeatureSvg mode="letters" />
-        </div>
-        <DetectorGrid detectors={project.features.letters_intelligence.detectors} />
-        <div className="workspace-two">
-          <WorkbookSummary workbook={project.features.letters_intelligence.workbook} title="Letters Intelligence Workbook" />
-          <FileList title="Detected Letter Files" files={project.features.letters_intelligence.inbox_files} />
-        </div>
-        <iframe className="wide-embed" src={project.reports.master_dashboard} title={`${project.project_display_name} letters intelligence`} />
-      </div>
-    );
-  }
+  if (activeTab === "Letters Intelligence") return <LettersIntelligencePanel project={project} />;
 
-  if (activeTab === "Delay Analysis - Time Impact Analysis") {
-    return (
-      <div className="feature-stack">
-        <AiInsightCard type="delay" projectKey={project.project_key} />
-        <div className="workspace-two">
-          <div>
-            <h3>Delay Analysis - Time Impact Analysis</h3>
-            <p>Applies the selected project's Delay Analysis logic. Submitted TIA packages are assessed through authority, evidence, procedure, causation, schedule, concurrency, mitigation, and determination gates.</p>
-            <DataStatus label="Logic Mode" count={project.features.delay_analysis.submitted_tia?.available ? 1 : 0} />
-            <DataStatus label="Recognized TIA Files" count={project.features.delay_analysis.recognized_file_count} />
-            <DataStatus label="Required TIA Files" count={project.features.delay_analysis.required_file_count} />
-            <DataStatus label="Delay Events" count={project.source_files.delay_events} />
-          </div>
-          <FeatureSvg mode="delay" />
-        </div>
-        <DetectorGrid detectors={project.features.delay_analysis.detectors} />
-        <SubmittedTiaGuidePanel submitted={project.features.delay_analysis.submitted_tia || { available: false, status: "Missing", scope_note: "No submitted TIA guide detected." }} />
-        {project.features.delay_analysis.missing_required_files.length ? (
-          <section className="feature-card warning-card">
-            <div className="feature-card-head"><h3>Missing Required TIA Files</h3><span>{project.features.delay_analysis.missing_required_files.length}</span></div>
-            <p>{project.features.delay_analysis.missing_required_files.join(", ")}</p>
-          </section>
-        ) : null}
-        <section className="feature-card">
-          <div className="feature-card-head"><h3>Supporting Source Inputs</h3><span>{project.features.delay_analysis.logic_mode || "TIA readiness"}</span></div>
-          <p className="empty-note">These tables remain available for audit and future project onboarding. The submitted TIA logic above controls the event assessment where a submitted guide exists.</p>
-        </section>
-        <TemplateInventory templates={project.features.delay_analysis.templates} />
-        <div className="workspace-two">
-          <TablePreviewPanel table={project.features.delay_analysis.schedule_tables["MEP Activities"]} title="MEP Activities" />
-          <TablePreviewPanel table={project.features.delay_analysis.schedule_tables["MEP Schedule"]} title="MEP Schedule" />
-        </div>
-        <div className="workspace-two">
-          <TablePreviewPanel table={project.features.delay_analysis.schedule_tables["MEP Civil Logic"]} title="MEP Civil Logic" />
-          <TablePreviewPanel table={project.features.delay_analysis.schedule_tables["BL Schedule"]} title="BL Schedule" />
-        </div>
-        <iframe className="wide-embed" src={project.reports.elite_svg_charts} title={`${project.project_display_name} delay analysis charts`} />
-      </div>
-    );
-  }
+  if (INTERNAL_TIA_SURFACE_ENABLED && activeTab === "Delay Analysis - Time Impact Analysis") return <DelayTiaParityPanel project={project} />;
 
-  if (activeTab === "Contract & Claims Intelligence Center") {
-    return (
-      <div className="feature-stack">
-        <AiInsightCard type="contract" projectKey={project.project_key} />
-        <div className="workspace-two">
-          <div>
-            <h3>Contract & Claims Intelligence Center</h3>
-            <p>Uses the selected project's contract source folder, evidence folder, and project-specific SQLite knowledge base. It does not read another project's claim library.</p>
-            <DataStatus label="Contract Files" count={project.features.contract_claims.source_files.length} />
-            <DataStatus label="Evidence Files" count={project.features.contract_claims.evidence_files.length} />
-            <DataStatus label="Knowledge Tables" count={Object.keys(project.features.contract_claims.database.tables || {}).length} />
-          </div>
-          <FeatureSvg mode="claims" />
-        </div>
-        <div className="workspace-grid">
-          <MiniMetric label="Claims Exposure" value={money(project.claims_exposure)} note={metricSource(project, "claims_exposure", "Claims source exposure")} />
-          <MiniMetric label="Claimed Days" value={numberValue(project.claimed_days)} note="claims.csv claimed_days total" />
-          <MiniMetric label="Claims Rows" value={numberValue(project.source_files.claims)} note="Claims records loaded" />
-          <MiniMetric label="Contracts Rows" value={numberValue(project.source_files.contracts)} note="Contract source rows" />
-          <MiniMetric label="Evidence Readiness" value={`${numberValue(project.data_quality, 1)}%`} note="Source completeness indicator" />
-        </div>
-        <DetectorGrid detectors={project.features.contract_claims.detectors} />
-        <div className="workspace-two">
-          <WorkbookSummary workbook={project.features.contract_claims.clause_library} title="Overall Contract Clause Library" />
-          <section className="feature-card">
-            <div className="feature-card-head"><h3>Knowledge Base Tables</h3><span>{project.features.contract_claims.database.exists ? "SQLite" : "Missing"}</span></div>
-            <div className="template-grid">
-              {Object.entries(project.features.contract_claims.database.tables || {}).map(([table, count]) => (
-                <div key={table}><b>{table}</b><span>{count ?? "N/A"} rows</span></div>
-              ))}
-            </div>
-          </section>
-        </div>
-        <div className="workspace-two">
-          <FileList title="Contract Source Files" files={project.features.contract_claims.source_files} />
-          <FileList title="Evidence Files" files={project.features.contract_claims.evidence_files} />
-        </div>
-      </div>
-    );
-  }
+  if (activeTab === "Contract & Claims Intelligence Center") return <ContractClaimsParityPanel project={project} />;
 
   if (activeTab === "Technical Advisor") {
     return (
       <div className="feature-stack">
+        <ProjectSmartChart project={project} mode="technical" />
         <UnifiedIntelligenceSearch
           mode="project"
           projectKey={project.project_key}
@@ -1049,33 +1996,7 @@ function WorkspaceTabContent({
     return <ConferencePanel project={project} />;
   }
 
-  return (
-    <section className="glass-panel report-hologram output-studio-panel">
-      <div className="section-header">
-        <div>
-          <p className="eyebrow">Output Studio</p>
-          <h2>{project.project_display_name}</h2>
-        </div>
-        <span>Same-page generated outputs</span>
-      </div>
-      <div className="report-switcher">
-        {reportTabs.map((tab) => (
-          <button
-            type="button"
-            key={tab.key}
-            className={tab.key === selectedReport ? "report-tab active" : "report-tab"}
-            onClick={() => setSelectedReport(tab.key)}
-          >
-            <b>{tab.label}</b>
-            <span>{tab.note}</span>
-          </button>
-        ))}
-      </div>
-      <DetectorGrid detectors={project.features.outputs_and_watchers.watchers} />
-      <FileList title="Automatic HTML Outputs" files={project.features.outputs_and_watchers.output_files} />
-      <iframe src={project.reports[selectedReport]} title={`${project.project_display_name} - ${selectedReport}`} />
-    </section>
-  );
+  return <OutputStudioPanel project={project} selectedReport={selectedReport} setSelectedReport={setSelectedReport} />;
 }
 
 function ProjectWorkspace({
@@ -1089,7 +2010,7 @@ function ProjectWorkspace({
 }) {
   const [activeTab, setActiveTab] = useState<WorkspaceTab>("Overview");
   return (
-    <section className="project-workspace">
+    <section className="project-workspace chart-reference-workspace">
       <ProjectConsole selectedProject={project} />
       <div className="section-header workspace-subhead">
         <div>
@@ -1099,7 +2020,7 @@ function ProjectWorkspace({
         <span>{project.sector} / {project.project_folder_name}</span>
       </div>
       <div className="workspace-tabs" role="tablist" aria-label="Project workspace tabs">
-        {workspaceTabs.map((tab) => (
+        {visibleWorkspaceTabs.map((tab) => (
           <button
             type="button"
             key={tab}
@@ -1122,18 +2043,6 @@ function ProjectWorkspace({
   );
 }
 
-function StreamlitFullClone() {
-  return (
-    <section className="streamlit-clone-shell">
-      <iframe
-        src={STREAMLIT_APP_URL}
-        title="SAMCO Project Intelligence Hub Streamlit full clone"
-        allow="camera; microphone; clipboard-read; clipboard-write; fullscreen"
-      />
-    </section>
-  );
-}
-
 type OperationsPanel = "portfolio" | "delivery" | "decisions" | "intelligence";
 
 function clampPercent(value: number | null | undefined) {
@@ -1146,7 +2055,7 @@ function PortfolioVisuals({
   sectors: visibleSectors,
   panel
 }: {
-  projects: ProjectRecord[];
+  projects: ProjectSummary[];
   sectors: SectorRecord[];
   panel: OperationsPanel;
 }) {
@@ -1224,7 +2133,7 @@ function PortfolioVisuals({
               return <g key={project.project_key}><circle cx={x} cy={y} r={13 + index * 2} fill={color} /><text x={x + 16} y={y + 4}>{project.project_folder_name}</text></g>;
             })}
           </svg>
-          <p className="chart-note">Markers use the actual project SPI and reported actual progress. Out-of-range values are retained in source data and monitored through guardrails.</p>
+          <p className="chart-note">Markers use the actual project SPI and reported actual progress.</p>
         </section>
       </div>
     );
@@ -1244,16 +2153,12 @@ function PortfolioVisuals({
         </div>
         <p className="chart-note">Vertical position reflects decision trigger; horizontal position reflects reported data confidence. This is an evidence awareness view, not a risk calculation replacement.</p>
       </section>
-      <MermaidDiagram chart={portfolioDecisionMermaid(chartProjects[0] || projects[0])} title="Portfolio Decision Flow" />
+      <MermaidDiagram chart={portfolioDecisionMermaid()} title="Portfolio Decision Flow" />
     </div>
   );
 }
 
-function DecisionOperationsDashboard({
-  onChooseProject
-}: {
-  onChooseProject: (projectKey: string) => void;
-}) {
+function DecisionOperationsDashboard() {
   const [panel, setPanel] = useState<OperationsPanel>("portfolio");
   const [sectorFilter, setSectorFilter] = useState("All sectors");
   const [lightMode, setLightMode] = useState(false);
@@ -1270,7 +2175,7 @@ function DecisionOperationsDashboard({
   return (
     <div className={lightMode ? "digital-operations executive-light-mode" : "digital-operations"}>
       <section className="operations-hero">
-        <div className="operations-brand"><img src="/assets/logo.png" alt="SAMCO Egypt" /><div><span>Samco Egypt</span><b>Decision Making Dashboard</b><small>Portfolio command layer | source-backed management intelligence</small></div></div>
+        <div className="operations-brand"><Image src="/assets/logo.png" alt="SAMCO Egypt" width={58} height={58} priority /><div><span>Samco Egypt</span><b>Decision Making Dashboard</b><small>Portfolio command layer | source-backed management intelligence</small></div></div>
         <div className="operations-hero-controls">
           <label><span>Portfolio lens</span><select value={sectorFilter} onChange={(event) => setSectorFilter(event.target.value)}><option>All sectors</option>{sectors.map((sector) => <option key={sector.sector}>{sector.sector}</option>)}</select></label>
           <ExecutiveLightModeToggle enabled={lightMode} onChange={setLightMode} />
@@ -1282,7 +2187,6 @@ function DecisionOperationsDashboard({
         <HoloKpi title="Delivery Position" value={percent(visibleProjects.reduce((sum, project) => sum + (project.actual_progress || 0), 0) / Math.max(visibleProjects.length, 1))} note="Reported actual progress" tone="blue" />
         <HoloKpi title="Delayed Projects" value={numberValue(visibleProjects.filter((project) => project.status === "Delayed" || (project.delay_days || 0) > 0).length)} note="Schedule attention signals" tone="red" />
         <HoloKpi title="Decisions Required" value={numberValue(visibleProjects.filter((project) => project.decision_required).length)} note="Threshold-based management gates" tone="violet" />
-        <HoloKpi title="Data Trust" value={`${numberValue(visibleProjects.reduce((sum, project) => sum + (project.data_quality || 0), 0) / Math.max(visibleProjects.length, 1), 1)}%`} note={guardrails?.status || "Data guardrails"} tone="green" />
       </div>
       <nav className="operations-tabs" aria-label="Decision dashboard views">
         {([
@@ -1295,10 +2199,6 @@ function DecisionOperationsDashboard({
       {panel === "portfolio" || panel === "delivery" ? <PortfolioVisuals projects={visibleProjects} sectors={visibleSectors} panel={panel} /> : null}
       {panel === "decisions" ? <div className="operations-stack"><PortfolioVisuals projects={visibleProjects} sectors={visibleSectors} panel={panel} /><PredictiveWarningPanel projects={visibleProjects} warningSummary={warningSummary} /><ManagementDecisionBrief items={decisionBrief.filter((item) => sectorFilter === "All sectors" || item.sector === sectorFilter)} onAddAction={(item) => setActions((current) => [...current, item])} /><ActionTracker scopeKey="portfolio" seedActions={actions} /></div> : null}
       {panel === "intelligence" ? <div className="operations-stack"><UnifiedIntelligenceSearch mode="portfolio" /><TechnicalKnowledgeAdvisor mode="portfolio" /><ScenarioPlanner projects={visibleProjects} portfolioContractValue={visibleProjects.reduce((sum, project) => sum + (project.contract_value || 0), 0)} /></div> : null}
-      <section className="operations-project-rail">
-        <div><span>Project Deep Dive</span><b>Open any project in the same page</b><small>Each selection remains bound to its own generated project JSON, data sources, reports, letters, Delay TIA, and claims context.</small></div>
-        <div className="project-rail-buttons">{visibleProjects.map((project) => <button type="button" key={project.project_key} onClick={() => onChooseProject(project.project_key)}>{project.project_display_name}<small>{project.sector} | {project.status}</small></button>)}</div>
-      </section>
     </div>
   );
 }
@@ -1306,25 +2206,73 @@ function DecisionOperationsDashboard({
 function DigitalOperationsApp() {
   const [scope, setScope] = useState(DECISION_DASHBOARD_KEY);
   const [selectedReport, setSelectedReport] = useState<ReportKey>("executive_dashboard");
-  const [showFullWorkspace, setShowFullWorkspace] = useState(false);
-  const selectedProject = projects.find((project) => project.project_key === scope) || projects[0];
+  const [projectDetails, setProjectDetails] = useState<ProjectRecord | null>(null);
+  const [projectLoadState, setProjectLoadState] = useState<"idle" | "loading" | "ready" | "error">("idle");
+  const selectedProjectSummary = projects.find((project) => project.project_key === scope) || projects[0];
   const isDecisionDashboard = scope === DECISION_DASHBOARD_KEY;
+  const selectScope = (nextScope: string) => {
+    setScope(nextScope);
+  };
+
+  useEffect(() => {
+    const requestedProject = new URLSearchParams(window.location.search).get("project");
+    if (requestedProject && projects.some((project) => project.project_key === requestedProject)) {
+      setScope(requestedProject);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isDecisionDashboard || !selectedProjectSummary) {
+      setProjectDetails(null);
+      setProjectLoadState("idle");
+      return;
+    }
+
+    let cancelled = false;
+    setProjectDetails(null);
+    setProjectLoadState("loading");
+    const projectKey = selectedProjectSummary.project_key;
+
+    fetch(`/data/projects/${encodeURIComponent(projectKey)}.json`, { cache: "no-store" })
+      .then(async (response) => {
+        if (!response.ok) throw new Error(`Project payload request failed (${response.status}).`);
+        return response.json() as Promise<ProjectRecord>;
+      })
+      .then((payload) => {
+        if (payload.project_key !== projectKey || payload.project_id !== selectedProjectSummary.project_id) {
+          throw new Error("Project payload identity validation failed.");
+        }
+        if (!cancelled) {
+          setProjectDetails(payload);
+          setProjectLoadState("ready");
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setProjectDetails(null);
+          setProjectLoadState("error");
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isDecisionDashboard, selectedProjectSummary]);
 
   return (
     <main className="future-shell operations-shell">
       <header className="operations-command-bar">
         <div className="command-identity"><span>PIH / 01</span><b>Digital Operations</b></div>
-        <label className="scope-control"><span>Operating scope</span><select value={scope} onChange={(event) => { setScope(event.target.value); setShowFullWorkspace(false); }}><option value={DECISION_DASHBOARD_KEY}>Decision Making Dashboard</option>{projects.map((project) => <option value={project.project_key} key={project.project_key}>{project.sector} / {project.project_display_name}</option>)}</select></label>
-        <div className="command-status"><i /><span>{isDecisionDashboard ? "Portfolio mode" : `${selectedProject.sector} project mode`}</span></div>
+        <label className="scope-control"><span>Operating scope</span><select value={scope} onChange={(event) => selectScope(event.target.value)}><option value={DECISION_DASHBOARD_KEY}>Decision Making Dashboard</option>{projects.map((project) => <option value={project.project_key} key={project.project_key}>{project.sector} / {project.project_display_name}</option>)}</select></label>
+        <div className="command-status"><i /><span>{isDecisionDashboard ? "Portfolio mode" : `${selectedProjectSummary.sector} project mode`}</span></div>
       </header>
-      {isDecisionDashboard ? <DecisionOperationsDashboard onChooseProject={setScope} /> : (
-        <>
-          <div className="project-view-switch"><button type="button" className={!showFullWorkspace ? "active" : ""} onClick={() => setShowFullWorkspace(false)}>Digital project workspace</button><button type="button" className={showFullWorkspace ? "active" : ""} onClick={() => setShowFullWorkspace(true)}>Complete controls workspace</button></div>
-          {showFullWorkspace ? <StreamlitFullClone /> : <ProjectWorkspace project={selectedProject} selectedReport={selectedReport} setSelectedReport={setSelectedReport} />}
-        </>
+      {isDecisionDashboard ? <DecisionOperationsDashboard /> : (
+        projectLoadState === "loading" ? <section className="feature-card project-load-state"><h2>Loading {selectedProjectSummary.project_display_name}</h2><p>Validating the selected project payload and source boundary.</p></section>
+          : projectDetails ? <ProjectWorkspace project={projectDetails} selectedReport={selectedReport} setSelectedReport={setSelectedReport} />
+            : <section className="feature-card project-load-state"><h2>{selectedProjectSummary.project_display_name}</h2><p>{projectLoadState === "error" ? "The selected project payload failed its identity or availability check. Regenerate the verified project pipeline." : "Project workspace data is not available. Regenerate the verified website data pipeline for this selected project."}</p></section>
       )}
       <footer className="operations-footer">Designed &amp; Created | <strong>Engr. Ahmed Labib</strong><span>Source-backed controls | Project-isolated intelligence</span></footer>
-      <AiChatPanel projectKey={isDecisionDashboard ? undefined : selectedProject.project_key} projectName={isDecisionDashboard ? "Decision Making Dashboard" : selectedProject.project_display_name} sector={isDecisionDashboard ? undefined : selectedProject.sector} />
+      <AiChatPanel projectKey={isDecisionDashboard ? undefined : selectedProjectSummary.project_key} projectName={isDecisionDashboard ? "Decision Making Dashboard" : selectedProjectSummary.project_display_name} sector={isDecisionDashboard ? undefined : selectedProjectSummary.sector} />
     </main>
   );
 }
