@@ -4034,3 +4034,217 @@ h2 {
   .operations-footer { display: grid; line-height: 1.5; }
   .report-format-downloads a { flex: 1 1 0; }
 }
+
+/* Schedule Intelligence ? browser-local Primavera XER analysis. */
+.schedule-intelligence {
+  display: grid;
+  gap: 18px;
+}
+
+.schedule-intelligence-hero,
+.schedule-intelligence-card,
+.schedule-intelligence-status,
+.schedule-intelligence-workflow,
+.schedule-intelligence-empty {
+  border: 1px solid rgba(99, 168, 255, 0.18);
+  background: linear-gradient(135deg, rgba(11, 27, 49, 0.95), rgba(10, 18, 33, 0.92));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.045), 0 14px 36px rgba(0,0,0,.14);
+}
+
+.schedule-intelligence-hero {
+  position: relative;
+  display: flex;
+  min-height: 184px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  overflow: hidden;
+  border-color: rgba(57,215,210,.34);
+  border-radius: 18px;
+  padding: 28px;
+}
+
+.schedule-intelligence-hero::after {
+  position: absolute;
+  top: -140px;
+  right: 8%;
+  width: 340px;
+  height: 340px;
+  border: 1px solid rgba(57,215,210,.16);
+  border-radius: 50%;
+  box-shadow: 0 0 70px rgba(57,215,210,.10), inset 0 0 70px rgba(57,215,210,.05);
+  content: "";
+}
+
+.schedule-intelligence-hero > div:first-child { position: relative; z-index: 1; max-width: 860px; }
+.schedule-intelligence-hero p,
+.schedule-intelligence-card-head p,
+.schedule-intelligence-workflow-copy > p,
+.schedule-intelligence-status p {
+  margin: 0 0 7px;
+  color: var(--cyan);
+  font-size: .67rem;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.schedule-intelligence-hero h2 { max-width: 820px; margin: 0 0 10px; font-size: clamp(1.45rem, 2.5vw, 2.35rem); line-height: 1.1; }
+.schedule-intelligence-hero > div:first-child > span { display: block; color: #a9c1d4; font-size: .9rem; line-height: 1.55; }
+
+.schedule-intelligence-hero-badge {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-width: 198px;
+  gap: 5px;
+  border: 1px solid rgba(57,215,210,.34);
+  border-radius: 14px;
+  background: rgba(2,10,20,.62);
+  padding: 17px;
+}
+.schedule-intelligence-hero-badge b { color: var(--cyan); font-size: .76rem; letter-spacing: .06em; text-transform: uppercase; }
+.schedule-intelligence-hero-badge span { color: #9bb8ca; font-size: .72rem; line-height: 1.45; }
+
+.schedule-intelligence-card { border-radius: 15px; padding: 21px; }
+.schedule-intelligence-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; margin-bottom: 16px; }
+.schedule-intelligence-card-head h3 { margin: 0; color: #eef8ff; font-size: 1rem; }
+.schedule-intelligence-card-head > span {
+  flex: 0 0 auto;
+  border: 1px solid rgba(99,168,255,.25);
+  border-radius: 20px;
+  background: rgba(99,168,255,.09);
+  color: #9cc6ff;
+  padding: 4px 9px;
+  font-size: .62rem;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.schedule-intelligence-loader-row { display: flex; align-items: center; gap: 15px; }
+.schedule-intelligence-loader-row input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.schedule-intelligence-loader-row p { flex: 1; margin: 0; color: #9bb8ca; font-size: .82rem; line-height: 1.45; overflow-wrap: anywhere; }
+.schedule-intelligence-primary,
+.schedule-intelligence-downloads button {
+  min-height: 40px;
+  border: 1px solid rgba(57,215,210,.54);
+  border-radius: 9px;
+  background: linear-gradient(135deg, rgba(57,215,210,.19), rgba(99,168,255,.15));
+  color: #e8ffff;
+  padding: 9px 14px;
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .035em;
+  cursor: pointer;
+}
+.schedule-intelligence-primary:hover:not(:disabled),
+.schedule-intelligence-downloads button:hover { border-color: var(--cyan); background: rgba(57,215,210,.25); }
+.schedule-intelligence-primary:disabled { cursor: not-allowed; opacity: .45; }
+.schedule-intelligence-error { margin: 13px 0 0; color: #fecdd3; font-size: .78rem; line-height: 1.45; }
+
+.schedule-intelligence-profile,
+.schedule-intelligence-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.schedule-intelligence-profile article,
+.schedule-intelligence-kpis article {
+  display: grid;
+  min-height: 102px;
+  align-content: start;
+  gap: 8px;
+  border: 1px solid rgba(99,168,255,.16);
+  border-radius: 12px;
+  background: rgba(6,16,31,.75);
+  padding: 15px;
+}
+.schedule-intelligence-profile span,
+.schedule-intelligence-kpis span { color: #83a7c7; font-size: .62rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.schedule-intelligence-profile strong,
+.schedule-intelligence-kpis strong { color: #edf9ff; font-size: 1.08rem; overflow-wrap: anywhere; }
+.schedule-intelligence-profile small,
+.schedule-intelligence-kpis small { color: #718ca5; font-size: .68rem; line-height: 1.35; overflow-wrap: anywhere; }
+
+.schedule-intelligence-tabs { display: flex; flex-wrap: wrap; gap: 7px; border: 1px solid rgba(99,168,255,.16); border-radius: 14px; background: rgba(7,17,32,.72); padding: 7px; }
+.schedule-intelligence-tabs button {
+  display: grid;
+  min-width: 184px;
+  flex: 1 1 0;
+  gap: 4px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: #94aabd;
+  padding: 11px 13px;
+  font-size: .79rem;
+  font-weight: 900;
+  text-align: left;
+  cursor: pointer;
+}
+.schedule-intelligence-tabs button span { color: #5f7f9c; font-size: .59rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.schedule-intelligence-tabs button:hover,
+.schedule-intelligence-tabs button.active { border-color: rgba(57,215,210,.3); background: linear-gradient(135deg, rgba(57,215,210,.14), rgba(99,168,255,.08)); color: #e8ffff; }
+.schedule-intelligence-tabs button.active span { color: var(--cyan); }
+
+.schedule-intelligence-workflow { display: flex; align-items: center; justify-content: space-between; gap: 25px; border-radius: 15px; padding: 21px; }
+.schedule-intelligence-workflow-copy { max-width: 780px; }
+.schedule-intelligence-workflow-copy h3 { margin: 0 0 8px; color: #eaf7ff; font-size: 1.12rem; }
+.schedule-intelligence-workflow-copy > span { color: #a5bdd0; font-size: .84rem; line-height: 1.55; }
+.schedule-intelligence-run-controls { display: flex; align-items: end; justify-content: end; gap: 10px; }
+.schedule-intelligence-run-controls label { display: grid; min-width: 198px; gap: 6px; }
+.schedule-intelligence-run-controls label span { color: #9bb8ca; font-size: .64rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.schedule-intelligence-run-controls label i { color: #6684a2; font-style: normal; text-transform: none; }
+.schedule-intelligence-run-controls input { width: 100%; border: 1px solid rgba(99,168,255,.25); border-radius: 8px; outline: 0; background: rgba(2,10,20,.72); color: #edf9ff; padding: 10px; font: inherit; font-size: .82rem; }
+.schedule-intelligence-run-controls input:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(57,215,210,.10); }
+
+.schedule-intelligence-results { display: grid; gap: 16px; }
+.schedule-intelligence-status { display: flex; align-items: center; justify-content: space-between; gap: 18px; border-radius: 14px; padding: 17px 20px; }
+.schedule-intelligence-status b { display: block; margin-bottom: 4px; color: #eefaff; font-size: .94rem; }
+.schedule-intelligence-status span { color: #86a3bb; font-size: .72rem; }
+.schedule-intelligence-downloads { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 7px; }
+.schedule-intelligence-downloads button { min-height: 34px; border-color: rgba(99,168,255,.32); background: rgba(99,168,255,.08); color: #cfe5ff; font-size: .64rem; }
+.schedule-intelligence-progress { display: grid; gap: 8px; border: 1px solid rgba(57,215,210,.16); border-radius: 12px; background: rgba(5,17,29,.72); padding: 14px 16px; }
+.schedule-intelligence-progress > div { display: flex; justify-content: space-between; gap: 10px; color: #9ab7cc; font-size: .72rem; }
+.schedule-intelligence-progress b { color: var(--cyan); }
+.schedule-intelligence-progress > i { display: block; height: 7px; overflow: hidden; border-radius: 20px; background: rgba(255,255,255,.08); }
+.schedule-intelligence-progress em { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--cyan), var(--blue)); box-shadow: 0 0 15px rgba(57,215,210,.48); }
+
+.schedule-intelligence-scroll { overflow-x: auto; }
+.schedule-intelligence-table { width: 100%; min-width: 960px; border-collapse: collapse; }
+.schedule-intelligence-table th { border-bottom: 1px solid rgba(99,168,255,.2); color: #77a1c5; padding: 0 11px 10px; font-size: .61rem; letter-spacing: .08em; text-align: left; text-transform: uppercase; }
+.schedule-intelligence-table td { border-bottom: 1px solid rgba(255,255,255,.055); color: #b2c8d9; padding: 12px 11px; font-size: .71rem; line-height: 1.45; vertical-align: top; }
+.schedule-intelligence-table tbody tr:last-child td { border-bottom: 0; }
+.schedule-intelligence-table b { display: block; color: #e8f5ff; font-size: .72rem; font-weight: 800; }
+.schedule-intelligence-table small { display: block; margin-top: 4px; color: #7894ac; font-size: .64rem; }
+.schedule-risk { display: inline-flex; border: 1px solid currentColor; border-radius: 20px; padding: 2px 7px; font-size: .61rem; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
+.schedule-risk-high { color: #fda4af; background: rgba(251,113,133,.08); }
+.schedule-risk-medium { color: #fbd38d; background: rgba(214,162,58,.08); }
+.schedule-risk-low { color: #86efac; background: rgba(74,222,128,.08); }
+.schedule-intelligence-governance ol { display: grid; gap: 9px; margin: 0; padding-left: 20px; color: #afc3d4; font-size: .76rem; line-height: 1.5; }
+.schedule-intelligence-governance li::marker { color: var(--cyan); font-weight: 900; }
+
+.schedule-intelligence-empty { display: grid; gap: 7px; justify-items: center; border-style: dashed; border-radius: 14px; padding: 20px; color: #8da9bf; font-size: .8rem; text-align: center; }
+.schedule-intelligence-empty b { color: #d9efff; }
+.schedule-intelligence-empty-large { min-height: 130px; align-content: center; }
+
+@media (max-width: 1100px) {
+  .schedule-intelligence-profile,
+  .schedule-intelligence-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .schedule-intelligence-workflow { align-items: flex-start; flex-direction: column; }
+  .schedule-intelligence-run-controls { width: 100%; justify-content: flex-start; }
+}
+
+@media (max-width: 720px) {
+  .schedule-intelligence-hero,
+  .schedule-intelligence-status,
+  .schedule-intelligence-loader-row { align-items: flex-start; flex-direction: column; }
+  .schedule-intelligence-hero { padding: 20px; }
+  .schedule-intelligence-hero-badge { width: 100%; }
+  .schedule-intelligence-profile,
+  .schedule-intelligence-kpis { grid-template-columns: 1fr; }
+  .schedule-intelligence-tabs { flex-wrap: nowrap; overflow-x: auto; }
+  .schedule-intelligence-tabs button { min-width: 175px; flex: 0 0 175px; }
+  .schedule-intelligence-workflow { padding: 18px; }
+  .schedule-intelligence-run-controls { align-items: stretch; flex-direction: column; }
+  .schedule-intelligence-run-controls label,
+  .schedule-intelligence-primary { width: 100%; }
+  .schedule-intelligence-downloads { justify-content: flex-start; }
+  .schedule-intelligence-card { padding: 16px; }
+}
