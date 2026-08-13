@@ -9,12 +9,15 @@ It never pushes when validation or the production build fails.
 [CmdletBinding()]
 param(
     [string]$SourceProjectsRoot = 'D:\Project Intelligence Hub NextJS\projects',
-    [string]$PublisherRoot = (Split-Path -Parent $PSScriptRoot),
+    [string]$PublisherRoot = '',
     [string]$ProductionBranch = 'main',
     [int]$DebounceSeconds = 8
 )
 
 $ErrorActionPreference = 'Stop'
+if ([string]::IsNullOrWhiteSpace($PublisherRoot)) {
+    $PublisherRoot = Split-Path -Parent $PSScriptRoot
+}
 $sourceRoot = (Resolve-Path -LiteralPath $SourceProjectsRoot).Path
 $publisherRoot = (Resolve-Path -LiteralPath $PublisherRoot).Path
 $logDirectory = Join-Path $publisherRoot '12-logs'
