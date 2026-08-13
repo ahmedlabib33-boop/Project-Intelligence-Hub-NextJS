@@ -233,8 +233,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-13T06:52:17",
-  "fingerprint": "0cca320cc62d4e10ea747fb20eb8a10d85a8997b43cd24fc583e80bda1bc15c5",
+  "last_updated": "2026-08-13T22:08:30",
+  "fingerprint": "d9c865cef7afa55242898eafbf96879bed48df8a7b82cd8c2d29fff78b2e7858",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -3874,21 +3874,21 @@
           "relative_path": "05-contracts/source/Overall Contract.pdf",
           "extension": "pdf",
           "size_kb": 12.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:38"
         },
         {
           "name": "Overall_Contract_clause_library.xlsx",
           "relative_path": "05-contracts/source/Overall_Contract_clause_library.xlsx",
           "extension": "xlsx",
           "size_kb": 8.9,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:38"
         },
         {
           "name": "README.md",
           "relative_path": "05-contracts/source/README.md",
           "extension": "md",
           "size_kb": 0.2,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:38"
         }
       ],
       "evidence_files": [
@@ -3897,42 +3897,42 @@
           "relative_path": "06-evidence/clause_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:38"
         },
         {
           "name": "contract_evidence_register_template.csv",
           "relative_path": "06-evidence/contract_evidence_register_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:38"
         },
         {
           "name": "correspondence_reference_template.csv",
           "relative_path": "06-evidence/correspondence_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:38"
         },
         {
           "name": "document_reference_template.csv",
           "relative_path": "06-evidence/document_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:38"
         },
         {
           "name": "evidence_register_template.csv",
           "relative_path": "06-evidence/evidence_register_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:38"
         },
         {
           "name": "photo_log_template.csv",
           "relative_path": "06-evidence/photo_log_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:38"
         }
       ],
       "database": {
@@ -6037,91 +6037,112 @@
           "relative_path": "Nasr city-Tunnel/01_executive_dashboard.html",
           "extension": "html",
           "size_kb": 1.2,
-          "modified": "2026-08-13T06:55:24"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "01_executive_dashboard.pdf",
           "relative_path": "Nasr city-Tunnel/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 53.4,
-          "modified": "2026-08-13T06:55:25"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "Nasr city-Tunnel/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-13T06:55:31"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "02_master_dashboard.html",
           "relative_path": "Nasr city-Tunnel/02_master_dashboard.html",
           "extension": "html",
           "size_kb": 1.1,
-          "modified": "2026-08-13T06:55:31"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "02_master_dashboard.pdf",
           "relative_path": "Nasr city-Tunnel/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 53.2,
-          "modified": "2026-08-13T06:55:32"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "Nasr city-Tunnel/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-13T06:55:39"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "03_elite_svg_charts.html",
           "relative_path": "Nasr city-Tunnel/03_elite_svg_charts.html",
           "extension": "html",
           "size_kb": 1.1,
-          "modified": "2026-08-13T06:55:39"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "03_elite_svg_charts.pdf",
           "relative_path": "Nasr city-Tunnel/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 52.9,
-          "modified": "2026-08-13T06:55:39"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "Nasr city-Tunnel/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-13T06:55:46"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "04_linked_executive_dashboard.html",
           "relative_path": "Nasr city-Tunnel/04_linked_executive_dashboard.html",
           "extension": "html",
           "size_kb": 1.2,
-          "modified": "2026-08-13T06:55:46"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "04_linked_executive_dashboard.pdf",
           "relative_path": "Nasr city-Tunnel/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 53.7,
-          "modified": "2026-08-13T06:55:47"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "Nasr city-Tunnel/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-13T06:55:53"
+          "modified": "2026-08-13T21:54:10"
+        },
+        {
+          "name": "05_samco_pco_31_slide_report.html",
+          "relative_path": "Nasr city-Tunnel/05_samco_pco_31_slide_report.html",
+          "extension": "html",
+          "size_kb": 113.3,
+          "modified": "2026-08-13T22:10:48"
+        },
+        {
+          "name": "05_samco_pco_31_slide_report.pdf",
+          "relative_path": "Nasr city-Tunnel/05_samco_pco_31_slide_report.pdf",
+          "extension": "pdf",
+          "size_kb": 55.0,
+          "modified": "2026-08-13T22:10:48"
+        },
+        {
+          "name": "05_samco_pco_31_slide_report.pptx",
+          "relative_path": "Nasr city-Tunnel/05_samco_pco_31_slide_report.pptx",
+          "extension": "pptx",
+          "size_kb": 83.3,
+          "modified": "2026-08-13T22:10:48"
         },
         {
           "name": "universal_report_engine_manifest.json",
           "relative_path": "Nasr city-Tunnel/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
-          "size_kb": 37.1,
-          "modified": "2026-08-13T06:55:54"
+          "size_kb": 35.1,
+          "modified": "2026-08-13T22:10:48"
         }
       ],
       "watchers": [
@@ -7255,7 +7276,7 @@
         "series": [],
         "source_lineage": {
           "files": [
-            "14-delay_event_classification.csv",
+            "12_delay_event_classification.csv",
             "delay_events.csv"
           ],
           "required_columns": [
@@ -7266,37 +7287,37 @@
         },
         "validation": [
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "12_delay_event_classification.csv",
             "source_row": "2",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "12_delay_event_classification.csv",
             "source_row": "3",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "12_delay_event_classification.csv",
             "source_row": "4",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "12_delay_event_classification.csv",
             "source_row": "5",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "12_delay_event_classification.csv",
             "source_row": "6",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "12_delay_event_classification.csv",
             "source_row": "7",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
@@ -7315,7 +7336,7 @@
         "series": [],
         "source_lineage": {
           "files": [
-            "14-delay_event_classification.csv",
+            "12_delay_event_classification.csv",
             "delay_events.csv"
           ],
           "required_columns": [
@@ -7326,37 +7347,37 @@
         },
         "validation": [
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "12_delay_event_classification.csv",
             "source_row": "2",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "12_delay_event_classification.csv",
             "source_row": "3",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "12_delay_event_classification.csv",
             "source_row": "4",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "12_delay_event_classification.csv",
             "source_row": "5",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "12_delay_event_classification.csv",
             "source_row": "6",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "12_delay_event_classification.csv",
             "source_row": "7",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
@@ -7396,7 +7417,7 @@
         "series": [],
         "source_lineage": {
           "files": [
-            "15-tia_recovery_scenario.csv",
+            "13_tia_recovery_scenario.csv",
             "activities.csv"
           ],
           "required_columns": [
@@ -7451,73 +7472,73 @@
     "awaiting_count": 17,
     "validation": [
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "12_delay_event_classification.csv",
         "source_row": "2",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "12_delay_event_classification.csv",
         "source_row": "3",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "12_delay_event_classification.csv",
         "source_row": "4",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "12_delay_event_classification.csv",
         "source_row": "5",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "12_delay_event_classification.csv",
         "source_row": "6",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "12_delay_event_classification.csv",
         "source_row": "7",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "12_delay_event_classification.csv",
         "source_row": "2",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "12_delay_event_classification.csv",
         "source_row": "3",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "12_delay_event_classification.csv",
         "source_row": "4",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "12_delay_event_classification.csv",
         "source_row": "5",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "12_delay_event_classification.csv",
         "source_row": "6",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "12_delay_event_classification.csv",
         "source_row": "7",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
@@ -7575,17 +7596,17 @@
         "html": {
           "name": "01_executive_dashboard.html",
           "bytes": 1183,
-          "sha256": "79a977868eb7f1f7cb03c7e8c3121a97dd084d9d0f69eeab1e52eb93236657fb"
+          "sha256": "e88f0cee0337d2d07622757ab9856bf2d8e20989c71b79058bd58ece999ff124"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 54683,
-          "sha256": "fa797425a8a0e44e476435a3e3fdf557d6a244e68edb39c7b6c95c5301604f06"
+          "bytes": 54684,
+          "sha256": "c07ce94f4d12838cf093c85bf2faba75a6609f587330ec8051f8495ee380035a"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29206,
-          "sha256": "307e6bddb2048fd111fe66dfe76f1e7fcacefe27324fac889b46b6f7d29b3dca"
+          "sha256": "e753d3cdb52b16fb61fdd76c7dc62a2e9a54988a52333c32d9f06eb9560093f4"
         }
       },
       "html_origin": "controlled_fallback",
@@ -7600,17 +7621,17 @@
         "html": {
           "name": "02_master_dashboard.html",
           "bytes": 1177,
-          "sha256": "e0a55f45de21d6bae3de409b5fb4d5e7b2a83bc5ba6f694a74611d2eea07727c"
+          "sha256": "5335ba7096a6ba4789100ca02fc126fb08e43aae0b7ea26426bd57642837c3fd"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
-          "bytes": 54526,
-          "sha256": "88bc00c7a23706e234b82e7b70bee893b8d9f0eae6f2f5b24ff600e1d2b066b4"
+          "bytes": 54525,
+          "sha256": "00ae4b32b7cb90cd4232570a2ef840cd19519c190a6cc85ef02c063c2d7d9fad"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29203,
-          "sha256": "73222ad84bc8428371d0866751073eba0ca1926ac6a713e24e314ebcc96267a4"
+          "sha256": "e013bbd13393fe366644be2ed7b17442bf4725cc8fde44b1a816a7bb0b251b3f"
         }
       },
       "html_origin": "controlled_fallback",
@@ -7625,17 +7646,17 @@
         "html": {
           "name": "03_elite_svg_charts.html",
           "bytes": 1177,
-          "sha256": "232b47e3679f00c1771c165b4be7855f047abecfbadd00e8c0b999814897982e"
+          "sha256": "ef1d4d5db7fe184302bfc015a1344cb79ace9f55d576a51afebd2492b8427554"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
-          "bytes": 54169,
-          "sha256": "627b768e4f0ccba2d695428478b26043d9bcc8f6be3949156804354668fdc378"
+          "bytes": 54170,
+          "sha256": "0bef5e2950d6c14d6ebd17afa3efb1b1494101c61d5d50e89426a7a7e2607858"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29203,
-          "sha256": "d37a56bed10c1a120ce1342ac78195a95283a04278fadeda391ef489066da948"
+          "sha256": "621a66e2f646904ce005f63371d13e4996092046330e3ea4ad308d918a50f9eb"
         }
       },
       "html_origin": "controlled_fallback",
@@ -7650,42 +7671,66 @@
         "html": {
           "name": "04_linked_executive_dashboard.html",
           "bytes": 1197,
-          "sha256": "5e342072253528d7cf807e95a07c891e643d6ba280bd44cd213ec5f9ce4e5556"
+          "sha256": "c73f8a7068ff0f55570ef568cb9bcf8fed125f807bb91300b0f23f35d2b373b7"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
-          "bytes": 54976,
-          "sha256": "b3e6643b30ef63dca7834cf5f6160912652d2333061728ce528ca26759c36bc9"
+          "bytes": 54975,
+          "sha256": "e7bb5cedb82c7811f64126f04b0459ed3087a38e5555b045d37cbb6ffdc3faf4"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29212,
-          "sha256": "1a5190744e59f40ed012bb6af88fcdd130b4c53535be9c202c8589b58d15aee1"
+          "sha256": "46411e45505084c4123169f894d79678b72efdd3b0f855aa13571cc71b6130df"
         }
       },
       "html_origin": "controlled_fallback",
       "source_project_id": "Nasr city-Tunnel",
       "source_report_fingerprint": "0cca320cc62d4e10ea747fb20eb8a10d85a8997b43cd24fc583e80bda1bc15c5"
+    },
+    "samco_pco_31_slide_report": {
+      "html": "/generated/Nasr-city-Tunnel/05_samco_pco_31_slide_report.html",
+      "pdf": "/generated/Nasr-city-Tunnel/05_samco_pco_31_slide_report.pdf",
+      "pptx": "/generated/Nasr-city-Tunnel/05_samco_pco_31_slide_report.pptx",
+      "files": {
+        "html": {
+          "name": "05_samco_pco_31_slide_report.html",
+          "bytes": 116013,
+          "sha256": "6fef24d88f4ef882e72f267dcb347ff58cd96f89db1ef2fca433d5b48c692e45"
+        },
+        "pdf": {
+          "name": "05_samco_pco_31_slide_report.pdf",
+          "bytes": 56347,
+          "sha256": "2e9fca2eb8512b90d9a43d05105ff00a6a4e6aa18bfab2af1f4b865851fd56e5"
+        },
+        "pptx": {
+          "name": "05_samco_pco_31_slide_report.pptx",
+          "bytes": 85291,
+          "sha256": "df60fc526d29ed67c1b6e84f690d3cdfcdd365837065feabc8331adec8bb4560"
+        }
+      },
+      "source_project_id": "Nasr city-Tunnel",
+      "source_report_fingerprint": "d9c865cef7afa55242898eafbf96879bed48df8a7b82cd8c2d29fff78b2e7858",
+      "generator": {
+        "name": "SAMCO-PCO Report Generator",
+        "mode": "data-driven project CSV adapter",
+        "template_sha256": "11ca0efc7649dc04361cc47fa80c473c1d0fe4251420113fc00e79c47d547aed",
+        "version": "2026.08.samco-pco-data-driven.v1"
+      }
     }
   },
   "universal_report_engine": {
     "project_id": "Nasr city-Tunnel",
     "project_key": "nasr-city-tunnel",
-    "source_fingerprint": "d0369c69aa44e189c6777956ae8983a076c7f40596a63bfbaa7dab45e4cf9b37",
+    "source_fingerprint": "7d081b0574ad45a5f49bcded90760b0a2d646a239fcce5de31f52f5dedf3e990",
     "source_scope": "active project folder only",
-    "source_file_count": 73,
+    "source_file_count": 64,
     "source_inventory": [
       {
         "relative_path": "01-data/import_templates/activities.csv",
         "extension": ".csv",
         "size_bytes": 3349,
         "sha256": "99135d26f957b006a376f7ed605c950b8ddea6468d1be1d7b33bb3efe806e182"
-      },
-      {
-        "relative_path": "01-data/import_templates/change_orders.csv",
-        "extension": ".csv",
-        "size_bytes": 539,
-        "sha256": "671add31199a52f264fb96f706704cdaf5783d96b29fa545cc66202de4d0e4b0"
       },
       {
         "relative_path": "01-data/import_templates/claims.csv",
@@ -7700,28 +7745,10 @@
         "sha256": "b9ae25390a33f338577febafef31a107f162c009f5d7abbdf67c60111546af6b"
       },
       {
-        "relative_path": "01-data/import_templates/cost_items.csv",
-        "extension": ".csv",
-        "size_bytes": 2395,
-        "sha256": "af490cef283f5ef927389107617048735e0a4a475d9b272875b079f297833c23"
-      },
-      {
         "relative_path": "01-data/import_templates/delay_events.csv",
         "extension": ".csv",
         "size_bytes": 1021,
         "sha256": "1c019d09c9c45c73f9bac4ffe6d0ca8f0a7556f4caf98c51a8a353a65b77070b"
-      },
-      {
-        "relative_path": "01-data/import_templates/Delivered_steel_site.csv",
-        "extension": ".csv",
-        "size_bytes": 633,
-        "sha256": "a1cf9f7ea604faadafba6c94dc05c05780e4d047c713d6c1657bf818b41cda2b"
-      },
-      {
-        "relative_path": "01-data/import_templates/engineering_log.csv",
-        "extension": ".csv",
-        "size_bytes": 359,
-        "sha256": "831560ea436dff437d227c0d2d5445de3880da817592f298fb290b1d54a9c94f"
       },
       {
         "relative_path": "01-data/import_templates/evm.csv",
@@ -7772,12 +7799,6 @@
         "sha256": "3773c9fb6712a52ef79f3590a55cef4c39464de1b6cea0d1602920b69eb0eca9"
       },
       {
-        "relative_path": "01-data/import_templates/rft_qtys.csv",
-        "extension": ".csv",
-        "size_bytes": 1509,
-        "sha256": "11ac3bf07bb08a732d42db4de96efd27343db5ed3531bc4ae522d6eb194c1964"
-      },
-      {
         "relative_path": "01-data/import_templates/risks.csv",
         "extension": ".csv",
         "size_bytes": 550,
@@ -7788,18 +7809,6 @@
         "extension": ".csv",
         "size_bytes": 1084,
         "sha256": "531d1be05ae31be724982b5dbf2577b0a602b3d0c9eb1cb88fa9f4c3098d0936"
-      },
-      {
-        "relative_path": "01-data/import_templates/steel_activities_relationship.csv",
-        "extension": ".csv",
-        "size_bytes": 1312,
-        "sha256": "f0807d8aaa265acd4ac03876a99697022249f58b2abb86cab95f4399d87db829"
-      },
-      {
-        "relative_path": "01-data/import_templates/steel_delay_status_mployer_free_issue_material.csv",
-        "extension": ".csv",
-        "size_bytes": 4928,
-        "sha256": "ea30dd2e36921fb7e0f8484cd2744cf66d872053ce2a150a61687f696025e074"
       },
       {
         "relative_path": "01-data/import_templates/wbs.csv",
@@ -7954,8 +7963,8 @@
       {
         "relative_path": "02-delay_analysis/unified_tia_csv/12_delay_event_classification.csv",
         "extension": ".csv",
-        "size_bytes": 204,
-        "sha256": "ae95fac637a5a4cc21519fe9cff117c4957586c33a34b2242816d6457df0409d"
+        "size_bytes": 1984,
+        "sha256": "7bf04c012e1c9259fcba157c8eaa31f4e05b4c9cf52c0bf798d64bb2a1e9cd38"
       },
       {
         "relative_path": "02-delay_analysis/unified_tia_csv/13-client_steel_supply_by_dia_wide.csv",
@@ -7966,26 +7975,14 @@
       {
         "relative_path": "02-delay_analysis/unified_tia_csv/13_tia_recovery_scenario.csv",
         "extension": ".csv",
-        "size_bytes": 357,
-        "sha256": "186b52e9473e855acbc9918e329ddedc09a076284849e5329bdcf2ef25d176c6"
-      },
-      {
-        "relative_path": "02-delay_analysis/unified_tia_csv/14-delay_event_classification.csv",
-        "extension": ".csv",
-        "size_bytes": 1972,
-        "sha256": "ca45eb9a39fab922a51d042fbfa3da770d04a32d62acaff24f5ee796b5b405d1"
+        "size_bytes": 2470,
+        "sha256": "5572b081137ff4b54c9ca4a97f6a0ae004cff7030d9dd3fc7f4f1324c9172c8e"
       },
       {
         "relative_path": "02-delay_analysis/unified_tia_csv/14_controlled_release_register.csv",
         "extension": ".csv",
         "size_bytes": 337,
         "sha256": "cd1b7add3bfd18d9b2c518dfe3ff03ba4130c4d3968b5a3c365e2e2b30844bdf"
-      },
-      {
-        "relative_path": "02-delay_analysis/unified_tia_csv/15-tia_recovery_scenario.csv",
-        "extension": ".csv",
-        "size_bytes": 2446,
-        "sha256": "18307c218fd849cf835713733feadbe738ffe261131b316de9aea60355e8d0d0"
       },
       {
         "relative_path": "02-delay_analysis/unified_tia_csv/15_reconciliation_register.csv",
@@ -8110,8 +8107,8 @@
       {
         "relative_path": "project_manifest.json",
         "extension": ".json",
-        "size_bytes": 379,
-        "sha256": "9b4ecd9bde45739c554ea326edf72f795e307b8acd84ae612c49d69e5fe311cd"
+        "size_bytes": 384,
+        "sha256": "8cea97b64e021f75e7229df7c0d20936419b98fd8bf551bfc95a09f305017b87"
       }
     ],
     "engine": {
@@ -8684,6 +8681,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-13T03:55:54+00:00"
+    "updated_at": "2026-08-13T19:10:48+00:00"
   }
 }

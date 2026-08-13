@@ -61,13 +61,11 @@ def _complete_project_pack(directory: Path) -> None:
         _write_rows(directory, filename, file_rows)
 
 
-def test_published_and_project_template_packs_are_schema_valid_and_identical() -> None:
+def test_project_template_pack_is_schema_valid_and_no_public_generic_pack_is_published() -> None:
     public_pack = ROOT / "website" / "public" / "tia-unified-csv"
     project_template_pack = ROOT / "projects" / "_PROJECT_TEMPLATE" / "02-delay_analysis" / "unified_tia_csv"
-    assert validate_pack(public_pack, template_mode=True)["passed"]
     assert validate_pack(project_template_pack, template_mode=True)["passed"]
-    for contract in CSV_CONTRACTS:
-        assert (public_pack / contract.filename).read_bytes() == (project_template_pack / contract.filename).read_bytes()
+    assert not public_pack.exists()
 
 
 def test_unified_matrix_preserves_controlled_submission_matrix_contract() -> None:

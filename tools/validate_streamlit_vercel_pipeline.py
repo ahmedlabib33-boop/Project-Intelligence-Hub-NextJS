@@ -33,6 +33,7 @@ from generate_nextjs_website_data import (  # noqa: E402
     sum_column,
     summed_delay_days,
 )
+from project_input_contracts import load_logical_rows, load_payment_rows  # noqa: E402
 from construction_system.unified_tia_csv import CSV_CONTRACTS, validate_pack  # noqa: E402
 
 
@@ -98,13 +99,10 @@ REQUIRED_WORKSPACE_TABLES = (
 )
 
 REQUIRED_CHART_INPUTS = {
-    "01-data/import_templates/activities.csv": "project_id",
-    "01-data/import_templates/progress_updates.csv": "project_id",
-    "01-data/import_templates/evm.csv": "project_id",
     "01-data/import_templates/risks.csv": "project_id",
     "01-data/import_templates/planned_cash_flow.csv": "project_id",
-    "02-delay_analysis/unified_tia_csv/14-delay_event_classification.csv": "project_id",
-    "02-delay_analysis/unified_tia_csv/15-tia_recovery_scenario.csv": "project_id",
+    "02-delay_analysis/unified_tia_csv/12_delay_event_classification.csv": "project_id",
+    "02-delay_analysis/unified_tia_csv/13_tia_recovery_scenario.csv": "project_id",
 }
 
 REFERENCE_CHART_COUNT = 36
@@ -153,11 +151,11 @@ def validate_unified_tia_template_pack(errors: list[str], checks: list[str]) -> 
         checks.append(f"Universal TIA CSV contract validates in {len(packs)} project-local workspaces with {len(CSV_CONTRACTS)} CSV contracts")
 
 
-def expected_source_metrics(data_dir: Path) -> dict[str, float | None]:
+def expected_source_metrics(data_dir: Path, delay_dir: Path) -> dict[str, float | None]:
     rows = {
         "projects": read_csv_rows(data_dir / "projects.csv"),
-        "payments": read_csv_rows(data_dir / "payments.csv"),
-        "evm": read_csv_rows(data_dir / "evm.csv"),
+        "payments": load_payment_rows(data_dir, delay_dir),
+        "evm": load_logical_rows(data_dir, delay_dir, "evm"),
         "risks": read_csv_rows(data_dir / "risks.csv"),
         "claims": read_csv_rows(data_dir / "claims.csv"),
         "delay_events": read_csv_rows(data_dir / "delay_events.csv"),
@@ -194,6 +192,17 @@ def validate_project_workspace_surface(
     """Verify feature payloads are complete and remain inside one project boundary."""
     if payload_exposes_local_path(output):
         errors.append(f"{project_key}: public project payload exposes a local workstation path")
+    data_dir = project_path / "01-data" / "import_templates"
+    delay_dir = project_path / "02-delay_analysis" / "unified_tia_csv"
+    master = data_dir / "activity_master.csv"
+    if master.exists():
+        for logical_name in ("activities", "progress_updates", "evm"):
+            if not load_logical_rows(data_dir, delay_dir, logical_name):
+                errors.append(f"{project_key}: activity master cannot rebuild {logical_name}")
+    else:
+        for filename in ("activities.csv", "progress_updates.csv", "evm.csv"):
+            if not (data_dir / filename).exists():
+                errors.append(f"{project_key}: missing aligned activity input {filename}")
     for relative_path, required_column in REQUIRED_CHART_INPUTS.items():
         input_path = project_path / relative_path
         if not input_path.exists():
@@ -241,8 +250,15 @@ def validate_project_workspace_surface(
             if not isinstance(table, dict):
                 errors.append(f"{project_key}: workspace table '{table_name}' is missing")
                 continue
-            source_path = project_path / "01-data" / "import_templates" / f"{table_name}.csv"
-            expected_rows = len(read_csv_rows(source_path))
+            if table_name == "activities":
+                expected_rows = len(load_logical_rows(data_dir, delay_dir, "activities"))
+            elif table_name == "evm":
+                expected_rows = len(load_logical_rows(data_dir, delay_dir, "evm"))
+            elif table_name == "payments":
+                expected_rows = len(load_payment_rows(data_dir, delay_dir))
+            else:
+                source_path = data_dir / f"{table_name}.csv"
+                expected_rows = len(read_csv_rows(source_path))
             if int(table.get("row_count") or 0) != expected_rows:
                 errors.append(f"{project_key}: workspace table '{table_name}' does not match selected-project source rows")
 
@@ -621,7 +637,9 @@ def main(argv: list[str] | None = None) -> int:
             continue
         output = json.loads(output_path.read_text(encoding="utf-8"))
         generated_projects.append(output)
-        expected = expected_source_metrics(Path(project["path"]) / "01-data" / "import_templates")
+        data_dir = Path(project["path"]) / "01-data" / "import_templates"
+        delay_dir = Path(project["path"]) / "02-delay_analysis" / "unified_tia_csv"
+        expected = expected_source_metrics(data_dir, delay_dir)
 
         if output.get("project_id") != project["project_id"]:
             errors.append(f"{project_key}: project_id does not match the discovered project manifest")
@@ -638,7 +656,7 @@ def main(argv: list[str] | None = None) -> int:
                 checks.append(f"{project_key}: {metric} matches source")
 
         expected_counts = {
-            "activities": len(read_csv_rows(Path(project["path"]) / "01-data" / "import_templates" / "activities.csv")),
+            "activities": len(load_logical_rows(data_dir, delay_dir, "activities")),
             "milestones": len(read_csv_rows(Path(project["path"]) / "01-data" / "import_templates" / "milestones.csv")),
             "risks": len(read_csv_rows(Path(project["path"]) / "01-data" / "import_templates" / "risks.csv")),
             "claims": len(read_csv_rows(Path(project["path"]) / "01-data" / "import_templates" / "claims.csv")),

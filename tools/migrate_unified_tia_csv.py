@@ -163,7 +163,7 @@ def hydrate_standard_registers(unified_dir: Path, key: str) -> None:
             "source_id": "SRC-P6-ACTIVITY",
         } for row in source_rows])
 
-    event_source = unified_dir / "14-delay_event_classification.csv"
+    event_source = unified_dir / "12_delay_event_classification.csv"
     if event_source.exists():
         _, source_rows = read_rows(event_source)
         write_if_empty(unified_dir / "06_delay_event_register.csv", [{
@@ -185,7 +185,7 @@ def hydrate_standard_registers(unified_dir: Path, key: str) -> None:
         if header_only(target):
             shutil.copy2(event_source, target)
 
-    recovery_source = unified_dir / "15-tia_recovery_scenario.csv"
+    recovery_source = unified_dir / "13_tia_recovery_scenario.csv"
     if recovery_source.exists() and header_only(unified_dir / "13_tia_recovery_scenario.csv"):
         shutil.copy2(recovery_source, unified_dir / "13_tia_recovery_scenario.csv")
 

@@ -827,6 +827,7 @@ def build_project_chart_payloads(
     activity_rows: list[dict[str, Any]],
     read_csv_rows: Any,
     workspace_rows: dict[str, list[dict[str, Any]]] | None = None,
+    logical_table_rows: dict[str, list[dict[str, Any]]] | None = None,
     project_metrics: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return only project-owned, data-gated chart datasets and validation findings."""
@@ -846,14 +847,14 @@ def build_project_chart_payloads(
     classification_rows, classification_sources, classification_issues, _ = _read_canonical_first_rows(
         project_id=project_id,
         file_name="delay_event_classification.csv",
-        primary_path=delay_dir / "14-delay_event_classification.csv",
+        primary_path=delay_dir / "12_delay_event_classification.csv",
         fallback_path=None,
         read_csv_rows=read_csv_rows,
     )
     recovery_rows, recovery_sources, recovery_issues, _ = _read_canonical_first_rows(
         project_id=project_id,
         file_name="tia_recovery_scenario.csv",
-        primary_path=delay_dir / "15-tia_recovery_scenario.csv",
+        primary_path=delay_dir / "13_tia_recovery_scenario.csv",
         fallback_path=None,
         read_csv_rows=read_csv_rows,
     )
@@ -878,6 +879,15 @@ def build_project_chart_payloads(
         fallback_path=None,
         read_csv_rows=read_csv_rows,
     )
+    if logical_table_rows is not None and "evm" in logical_table_rows:
+        logical_evm_accepted, logical_evm_issues = _project_rows(
+            logical_table_rows["evm"], project_id, "activity_master.csv"
+        )
+        if logical_evm_accepted:
+            evm_history_rows = [row for _, row in logical_evm_accepted]
+            evm_history_sources = ["activity_master.csv"]
+            evm_history_issues = logical_evm_issues
+            evm_origin = "activity_master"
     risk_history_rows, risk_history_sources, risk_history_issues, _ = _read_canonical_first_rows(
         project_id=project_id,
         file_name="risk_assessment_history.csv",

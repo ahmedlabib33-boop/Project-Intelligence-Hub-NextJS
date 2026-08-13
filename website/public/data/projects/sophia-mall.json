@@ -206,8 +206,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-13T06:52:17",
-  "fingerprint": "a2240eae3dff9f4584fd61d6cfc0d369c2af053c6066456d5400f81570794384",
+  "last_updated": "2026-08-13T22:08:30",
+  "fingerprint": "e33cb792872fe936532009e1767ed3012d9d09ad1b2ffd5d59faee1f16befd60",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -1051,19 +1051,8 @@
           "file": "planned_cash_flow.csv",
           "exists": true,
           "row_count": 0,
-          "column_count": 10,
-          "columns": [
-            "project_id",
-            "period_date",
-            "planned_cash_out",
-            "planned_cumulative_cash_out",
-            "currency",
-            "basis",
-            "source_file",
-            "source_sheet",
-            "source_row",
-            "notes"
-          ],
+          "column_count": 0,
+          "columns": [],
           "rows": []
         },
         "milestones": {
@@ -3594,21 +3583,21 @@
           "relative_path": "05-contracts/source/Overall Contract.pdf",
           "extension": "pdf",
           "size_kb": 11.9,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "Overall_Contract_clause_library.xlsx",
           "relative_path": "05-contracts/source/Overall_Contract_clause_library.xlsx",
           "extension": "xlsx",
           "size_kb": 10.6,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "README.md",
           "relative_path": "05-contracts/source/README.md",
           "extension": "md",
           "size_kb": 0.2,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         }
       ],
       "evidence_files": [
@@ -3617,42 +3606,42 @@
           "relative_path": "06-evidence/clause_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "contract_evidence_register_template.csv",
           "relative_path": "06-evidence/contract_evidence_register_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "correspondence_reference_template.csv",
           "relative_path": "06-evidence/correspondence_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "document_reference_template.csv",
           "relative_path": "06-evidence/document_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "evidence_register_template.csv",
           "relative_path": "06-evidence/evidence_register_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "photo_log_template.csv",
           "relative_path": "06-evidence/photo_log_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         }
       ],
       "database": {
@@ -5799,126 +5788,147 @@
           "relative_path": "Sophia-Mall/01_executive_dashboard.html",
           "extension": "html",
           "size_kb": 17.8,
-          "modified": "2026-08-13T06:25:40"
+          "modified": "2026-08-13T21:54:08"
         },
         {
           "name": "01_executive_dashboard.pdf",
           "relative_path": "Sophia-Mall/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 829.0,
-          "modified": "2026-08-13T06:54:51"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "Sophia-Mall/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.6,
-          "modified": "2026-08-13T06:54:57"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "02_master_dashboard.html",
           "relative_path": "Sophia-Mall/02_master_dashboard.html",
           "extension": "html",
           "size_kb": 84.9,
-          "modified": "2026-08-13T06:25:40"
+          "modified": "2026-08-13T21:54:08"
         },
         {
           "name": "02_master_dashboard.pdf",
           "relative_path": "Sophia-Mall/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 862.6,
-          "modified": "2026-08-13T06:55:05"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "Sophia-Mall/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-13T06:55:06"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "03_elite_svg_charts.html",
           "relative_path": "Sophia-Mall/03_elite_svg_charts.html",
           "extension": "html",
           "size_kb": 50.8,
-          "modified": "2026-08-13T06:25:40"
+          "modified": "2026-08-13T21:54:08"
         },
         {
           "name": "03_elite_svg_charts.pdf",
           "relative_path": "Sophia-Mall/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 234.6,
-          "modified": "2026-08-13T06:55:08"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "Sophia-Mall/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-13T06:55:14"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "04_linked_executive_dashboard.html",
           "relative_path": "Sophia-Mall/04_linked_executive_dashboard.html",
           "extension": "html",
           "size_kb": 56.4,
-          "modified": "2026-08-13T06:25:40"
+          "modified": "2026-08-13T21:54:08"
         },
         {
           "name": "04_linked_executive_dashboard.pdf",
           "relative_path": "Sophia-Mall/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1093.9,
-          "modified": "2026-08-13T06:55:22"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "Sophia-Mall/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.6,
-          "modified": "2026-08-13T06:55:23"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
           "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.docx",
           "extension": "docx",
           "size_kb": 34.8,
-          "modified": "2026-08-13T06:25:40"
+          "modified": "2026-08-13T21:25:35"
         },
         {
           "name": "05_delay_tia_governed_assessment.html",
           "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.html",
           "extension": "html",
           "size_kb": 2.5,
-          "modified": "2026-08-13T06:25:40"
+          "modified": "2026-08-13T21:25:35"
         },
         {
           "name": "05_delay_tia_governed_assessment.manifest.json",
           "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.manifest.json",
           "extension": "json",
           "size_kb": 0.6,
-          "modified": "2026-08-13T06:25:40"
+          "modified": "2026-08-13T21:25:35"
         },
         {
           "name": "05_delay_tia_governed_assessment.pdf",
           "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.pdf",
           "extension": "pdf",
           "size_kb": 2.1,
-          "modified": "2026-08-13T06:25:40"
+          "modified": "2026-08-13T21:25:35"
         },
         {
           "name": "05_delay_tia_governed_assessment.pptx",
           "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.pptx",
           "extension": "pptx",
           "size_kb": 27.8,
-          "modified": "2026-08-13T06:25:40"
+          "modified": "2026-08-13T21:25:35"
+        },
+        {
+          "name": "05_samco_pco_31_slide_report.html",
+          "relative_path": "Sophia-Mall/05_samco_pco_31_slide_report.html",
+          "extension": "html",
+          "size_kb": 107.8,
+          "modified": "2026-08-13T22:10:46"
+        },
+        {
+          "name": "05_samco_pco_31_slide_report.pdf",
+          "relative_path": "Sophia-Mall/05_samco_pco_31_slide_report.pdf",
+          "extension": "pdf",
+          "size_kb": 56.3,
+          "modified": "2026-08-13T22:10:46"
+        },
+        {
+          "name": "05_samco_pco_31_slide_report.pptx",
+          "relative_path": "Sophia-Mall/05_samco_pco_31_slide_report.pptx",
+          "extension": "pptx",
+          "size_kb": 84.1,
+          "modified": "2026-08-13T22:10:47"
         },
         {
           "name": "universal_report_engine_manifest.json",
           "relative_path": "Sophia-Mall/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
-          "size_kb": 37.3,
-          "modified": "2026-08-13T06:55:24"
+          "size_kb": 35.3,
+          "modified": "2026-08-13T22:10:47"
         }
       ],
       "watchers": [
@@ -7008,7 +7018,7 @@
         "series": [],
         "source_lineage": {
           "files": [
-            "14-delay_event_classification.csv",
+            "12_delay_event_classification.csv",
             "delay_event_classification.csv",
             "delay_events.csv"
           ],
@@ -7032,7 +7042,7 @@
         "series": [],
         "source_lineage": {
           "files": [
-            "14-delay_event_classification.csv",
+            "12_delay_event_classification.csv",
             "delay_event_classification.csv",
             "delay_events.csv"
           ],
@@ -7077,7 +7087,7 @@
         "series": [],
         "source_lineage": {
           "files": [
-            "15-tia_recovery_scenario.csv",
+            "13_tia_recovery_scenario.csv",
             "tia_recovery_scenario.csv",
             "activities.csv"
           ],
@@ -7116,12 +7126,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 848904,
-          "sha256": "7d45e5f211f3d3ac26bbac0f02204b4a12042933260456cb01806096f7790457"
+          "sha256": "d961a3e1a5a786c6d2e7c7f10cab5fd6fa82748709c04da811029266d710140a"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29236,
-          "sha256": "efe1b6d23540406d6e6cdaa04c1c9f5b0addf25a83fe025bed7877eba72d9661"
+          "sha256": "b3cfd51945e82c77d7b5bfb12279766af9c5d5234238fca958053ef063575103"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7141,12 +7151,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 883327,
-          "sha256": "20c7da41487359be4e8ea45ed299648b868d9ff1131656403f1d9228bcaa1248"
+          "sha256": "35b5a99068f2c4b876d8f4107e053a56753cfc50dd27ddbe2438147eda6fb74b"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29232,
-          "sha256": "fc539add82f20378cf3536104b43dbb92219b8fc37a4c37265a3ad41f728d0dd"
+          "sha256": "5db29f89a4737f4d87bc33c1c2b247ba8beab678a6f1ab3a12af5bee2fa4a353"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7166,12 +7176,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 240246,
-          "sha256": "4db2c67e7bf20c3bd045b590f4c4fdf315373af7a8ad0194798db1ff88d6c9ce"
+          "sha256": "f506a3e708de545291a9656b1275e978dbbc23e3830a327cd2f223d646c809a2"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29233,
-          "sha256": "29e934e2b66c76503247c9d95ca6d98a8100c3675059619d6361b65aee929dbc"
+          "sha256": "c4a9ced491f7ddcb9d30f2a81b106ae67c3a8f9f596ca2134302603f2c24bccf"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7191,37 +7201,61 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1120164,
-          "sha256": "9164435ff43c5362a222948b698fe6c1d6a6986e1395bef1d883c1a1bf59ebf7"
+          "sha256": "2e3818f0d80495751a3999e51a1fdc2bf0e88fd8b2448a478419c6ef3b2019fb"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29241,
-          "sha256": "1ab9d9f5224a8a256c34d1b86370c71d5542fedee7851b6afc6ba3959cf00ff0"
+          "sha256": "8f384ef07d07f01679de179aa45dc165d20e7754229efe5cf13f23f3c6a0d58f"
         }
       },
       "html_origin": "canonical_project_html",
       "source_project_id": "Sophia-Mall",
       "source_report_fingerprint": "4f3cebb0591f853ce2c464e9c28dfa70b5ce06b94f6c79304cd2905c0d559ea1"
+    },
+    "samco_pco_31_slide_report": {
+      "html": "/generated/Sophia-Mall/05_samco_pco_31_slide_report.html",
+      "pdf": "/generated/Sophia-Mall/05_samco_pco_31_slide_report.pdf",
+      "pptx": "/generated/Sophia-Mall/05_samco_pco_31_slide_report.pptx",
+      "files": {
+        "html": {
+          "name": "05_samco_pco_31_slide_report.html",
+          "bytes": 110416,
+          "sha256": "0d31bda015ab43373f0e037ee5abbeb110f0eeed171dfa6bd8db4757cdf06260"
+        },
+        "pdf": {
+          "name": "05_samco_pco_31_slide_report.pdf",
+          "bytes": 57683,
+          "sha256": "e8d8b6127ff94a009d6949d366f7dcfa052500f30a54684b24475aa2e7b08eea"
+        },
+        "pptx": {
+          "name": "05_samco_pco_31_slide_report.pptx",
+          "bytes": 86080,
+          "sha256": "6520ffab497a67715ab310da33bd946eef7ac315bbb7aad495fd670feccdc321"
+        }
+      },
+      "source_project_id": "Sophia-Mall",
+      "source_report_fingerprint": "e33cb792872fe936532009e1767ed3012d9d09ad1b2ffd5d59faee1f16befd60",
+      "generator": {
+        "name": "SAMCO-PCO Report Generator",
+        "mode": "data-driven project CSV adapter",
+        "template_sha256": "11ca0efc7649dc04361cc47fa80c473c1d0fe4251420113fc00e79c47d547aed",
+        "version": "2026.08.samco-pco-data-driven.v1"
+      }
     }
   },
   "universal_report_engine": {
     "project_id": "Sophia-Mall",
     "project_key": "sophia-mall",
-    "source_fingerprint": "be258dbe1211633cbdc574d4ea4cea153b92a8b11ae17ef5211384d41c73ae03",
+    "source_fingerprint": "8a5e1519c8e006633f2a7744906cb6c20dc64f9875d293933c28d63ddafaae69",
     "source_scope": "active project folder only",
-    "source_file_count": 74,
+    "source_file_count": 65,
     "source_inventory": [
       {
         "relative_path": "01-data/import_templates/activities.csv",
         "extension": ".csv",
         "size_bytes": 3064,
         "sha256": "41a19f9dc64f88e3c2b7d128e13a95072f75076d8365163f513d2944c0c2d234"
-      },
-      {
-        "relative_path": "01-data/import_templates/change_orders.csv",
-        "extension": ".csv",
-        "size_bytes": 554,
-        "sha256": "356937db82aa1edece4a0eb80c013423d97a5fa42fd72f95d05a56228a27a114"
       },
       {
         "relative_path": "01-data/import_templates/claims.csv",
@@ -7236,28 +7270,10 @@
         "sha256": "719e5ba575305c8d03a214b23577eeeb659647b3d201406ce757d57f2b4cb1cf"
       },
       {
-        "relative_path": "01-data/import_templates/cost_items.csv",
-        "extension": ".csv",
-        "size_bytes": 2293,
-        "sha256": "7598955853ba8625e1cbf102a60cc2da81244debbfdc7fa4cfaf60f0eb156c07"
-      },
-      {
         "relative_path": "01-data/import_templates/delay_events.csv",
         "extension": ".csv",
         "size_bytes": 1023,
         "sha256": "94acd6440eceb53d53f2c01e8fa6eb0ed2081f05e1f0b68b3aa19071ac4cdbc5"
-      },
-      {
-        "relative_path": "01-data/import_templates/Delivered_steel_site.csv",
-        "extension": ".csv",
-        "size_bytes": 608,
-        "sha256": "b2ad8eeeb787cf3c3ff366a68cf423cffd0d5782cc8f9fdb5d2454e4a0698d1c"
-      },
-      {
-        "relative_path": "01-data/import_templates/engineering_log.csv",
-        "extension": ".csv",
-        "size_bytes": 341,
-        "sha256": "5a5628f3790157302b21be81ce1adc1215d6208b4ef9f87fb1b00f588ea9c23e"
       },
       {
         "relative_path": "01-data/import_templates/evm.csv",
@@ -7308,12 +7324,6 @@
         "sha256": "cb6846e8468b9e4dc8cc0467c0d4b3a6064f3db1184ec198a13b96194b96c6d8"
       },
       {
-        "relative_path": "01-data/import_templates/rft_qtys.csv",
-        "extension": ".csv",
-        "size_bytes": 1370,
-        "sha256": "b7df569dd31e85eff39795ccd09000a74a553bbdfe93215bf9aff2fcad310fec"
-      },
-      {
         "relative_path": "01-data/import_templates/risks.csv",
         "extension": ".csv",
         "size_bytes": 512,
@@ -7324,18 +7334,6 @@
         "extension": ".csv",
         "size_bytes": 1107,
         "sha256": "8f6e811670ca2f1bf42deaf383826069ed79e6793d25a86493dc7df50a038e28"
-      },
-      {
-        "relative_path": "01-data/import_templates/steel_activities_relationship.csv",
-        "extension": ".csv",
-        "size_bytes": 1221,
-        "sha256": "2a02c77fdda71e1d8ae3179306b0c9d732c96d297e217cf07a2c1a45777548fd"
-      },
-      {
-        "relative_path": "01-data/import_templates/steel_delay_status_mployer_free_issue_material.csv",
-        "extension": ".csv",
-        "size_bytes": 5039,
-        "sha256": "d3f6775f4fce7fff8e72bfcd102f0315ee60a6426e2c4a83640a0576698c3075"
       },
       {
         "relative_path": "01-data/import_templates/wbs.csv",
@@ -7506,22 +7504,10 @@
         "sha256": "186b52e9473e855acbc9918e329ddedc09a076284849e5329bdcf2ef25d176c6"
       },
       {
-        "relative_path": "02-delay_analysis/unified_tia_csv/14-delay_event_classification.csv",
-        "extension": ".csv",
-        "size_bytes": 204,
-        "sha256": "ae95fac637a5a4cc21519fe9cff117c4957586c33a34b2242816d6457df0409d"
-      },
-      {
         "relative_path": "02-delay_analysis/unified_tia_csv/14_controlled_release_register.csv",
         "extension": ".csv",
         "size_bytes": 337,
         "sha256": "cd1b7add3bfd18d9b2c518dfe3ff03ba4130c4d3968b5a3c365e2e2b30844bdf"
-      },
-      {
-        "relative_path": "02-delay_analysis/unified_tia_csv/15-tia_recovery_scenario.csv",
-        "extension": ".csv",
-        "size_bytes": 357,
-        "sha256": "186b52e9473e855acbc9918e329ddedc09a076284849e5329bdcf2ef25d176c6"
       },
       {
         "relative_path": "02-delay_analysis/unified_tia_csv/15_reconciliation_register.csv",
@@ -7652,8 +7638,8 @@
       {
         "relative_path": "project_manifest.json",
         "extension": ".json",
-        "size_bytes": 384,
-        "sha256": "ab1a887a5bc8b0984053cb230be6af33cb3d757bb2b6c66122031a952b2d35f5"
+        "size_bytes": 389,
+        "sha256": "96bd0a0b862948f1fbdeb7af44a5c73acb71d87b1c95732ad45717c0a87098a9"
       }
     ],
     "engine": {
@@ -8226,6 +8212,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-13T03:55:24+00:00"
+    "updated_at": "2026-08-13T19:10:47+00:00"
   }
 }

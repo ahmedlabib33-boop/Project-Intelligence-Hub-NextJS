@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from advanced_analytics import build_advanced_analytics
+from project_input_contracts import load_logical_rows, load_payment_rows, logical_source_path
 from project_chart_payloads import build_project_chart_payloads
 from project_report_artifacts import ensure_project_report_artifacts
 from universal_report_engine_adapter import (
@@ -193,6 +194,19 @@ def preview_table(path: Path, limit: int = 8) -> dict[str, Any]:
     }
 
 
+def preview_logical_table(path: Path, rows: list[dict[str, str]], limit: int = 8) -> dict[str, Any]:
+    """Publish a logical table reconstructed from its validated canonical input."""
+    columns = list(rows[0].keys()) if rows else []
+    return {
+        "file": path.name,
+        "exists": path.exists(),
+        "row_count": len(rows),
+        "column_count": len(columns),
+        "columns": columns,
+        "rows": rows[:limit],
+    }
+
+
 def workspace_table(path: Path, limit: int = WORKSPACE_TABLE_ROW_LIMIT) -> dict[str, Any]:
     """Return a project-scoped table suitable for the digital workspace.
 
@@ -201,6 +215,21 @@ def workspace_table(path: Path, limit: int = WORKSPACE_TABLE_ROW_LIMIT) -> dict[
     rendered in another project's workspace.
     """
     rows = read_csv_rows(path)
+    columns = list(rows[0].keys()) if rows else []
+    return {
+        "file": path.name,
+        "exists": path.exists(),
+        "row_count": len(rows),
+        "column_count": len(columns),
+        "columns": columns,
+        "rows": rows[:limit],
+        "truncated": len(rows) > limit,
+        "source_path": path.name,
+    }
+
+
+def workspace_logical_table(path: Path, rows: list[dict[str, str]], limit: int = WORKSPACE_TABLE_ROW_LIMIT) -> dict[str, Any]:
+    """Keep workspace rows unchanged while exposing their physical source path."""
     columns = list(rows[0].keys()) if rows else []
     return {
         "file": path.name,
@@ -996,9 +1025,9 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     contract_controls = build_contract_controls_snapshot(project, contracts_dir, evidence_dir)
     overview_paths = {
         "projects": data_dir / "projects.csv",
-        "activities": data_dir / "activities.csv",
-        "progress_updates": data_dir / "progress_updates.csv",
-        "evm": data_dir / "evm.csv",
+        "activities": logical_source_path(data_dir, delay_dir, "activities"),
+        "progress_updates": logical_source_path(data_dir, delay_dir, "progress_updates"),
+        "evm": logical_source_path(data_dir, delay_dir, "evm"),
         "risks": data_dir / "risks.csv",
         "claims": data_dir / "claims.csv",
         "contracts": data_dir / "contracts.csv",
@@ -1009,14 +1038,31 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
         "wbs": data_dir / "wbs.csv",
         "s_curve": data_dir / "s_curve.csv",
     }
+    overview_rows = {
+        "projects": rows.get("projects", []),
+        "activities": rows.get("activities", []),
+        "progress_updates": rows.get("progress", []),
+        "evm": rows.get("evm", []),
+        "risks": rows.get("risks", []),
+        "claims": rows.get("claims", []),
+        "contracts": rows.get("contracts", []),
+        "payments": rows.get("payments", []),
+        "planned_cash_flow": rows.get("planned_cash_flow", []),
+        "milestones": rows.get("milestones", []),
+        "delay_events": rows.get("delay_events", []),
+        "wbs": read_csv_rows(data_dir / "wbs.csv"),
+        "s_curve": rows.get("s_curve", []),
+    }
 
     return {
         "overview": {
             "data_sources": {key: len(value) for key, value in rows.items()},
             "source_tables": {
-                key: preview_table(path) for key, path in overview_paths.items()
+                key: preview_logical_table(path, overview_rows.get(key, [])) for key, path in overview_paths.items()
             },
-            "workspace_tables": {key: workspace_table(path) for key, path in overview_paths.items()},
+            "workspace_tables": {
+                key: workspace_logical_table(path, overview_rows.get(key, [])) for key, path in overview_paths.items()
+            },
         },
         "letters_intelligence": {
             "folder": "07-letters_intelligence",
@@ -1407,24 +1453,30 @@ def build_decision_reasons(args: dict[str, Any]) -> list[dict[str, str]]:
     return reasons[:5]
 
 
-def latest_mtime(path: Path) -> str | None:
+def latest_mtime(path: Path, ignored_relative_roots: tuple[str, ...] = ()) -> str | None:
+    """Return latest operational-source timestamp, excluding generated state."""
     if not path.exists():
         return None
     latest = 0.0
     for child in path.rglob("*"):
         if child.is_file():
+            relative = child.relative_to(path).as_posix()
+            if any(relative == root or relative.startswith(f"{root}/") for root in ignored_relative_roots):
+                continue
             latest = max(latest, child.stat().st_mtime)
     if latest == 0:
         return None
     return datetime.fromtimestamp(latest).isoformat(timespec="seconds")
 
 
-def fingerprint(path: Path) -> str:
+def fingerprint(path: Path, ignored_relative_roots: tuple[str, ...] = ()) -> str:
     digest = hashlib.sha256()
     if not path.exists():
         return ""
     for child in sorted(p for p in path.rglob("*") if p.is_file()):
         rel = child.relative_to(path).as_posix()
+        if any(rel == root or rel.startswith(f"{root}/") for root in ignored_relative_roots):
+            continue
         if any(part in {".git", ".venv", "node_modules", "__pycache__"} for part in child.parts):
             continue
         digest.update(rel.encode("utf-8"))
@@ -1476,16 +1528,20 @@ def discover_projects() -> list[dict[str, Any]]:
 def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
     base = Path(project["path"])
     data_dir = base / "01-data" / "import_templates"
+    delay_dir = base / "02-delay_analysis" / "unified_tia_csv"
     rows = {
         "projects": read_csv_rows(data_dir / "projects.csv"),
         "contracts": read_csv_rows(data_dir / "contracts.csv"),
-        "payments": read_csv_rows(data_dir / "payments.csv"),
+        # The normal payment input is used until the minimization proof has
+        # archived it.  In that case the validated TIA payment register is the
+        # only physical source and is projected back into the same logical table.
+        "payments": load_payment_rows(data_dir, delay_dir),
         "planned_cash_flow": read_csv_rows(data_dir / "planned_cash_flow.csv"),
-        "progress": read_csv_rows(data_dir / "progress_updates.csv"),
-        "evm": read_csv_rows(data_dir / "evm.csv"),
+        "progress": load_logical_rows(data_dir, delay_dir, "progress_updates"),
+        "evm": load_logical_rows(data_dir, delay_dir, "evm"),
         "risks": read_csv_rows(data_dir / "risks.csv"),
         "claims": read_csv_rows(data_dir / "claims.csv"),
-        "activities": read_csv_rows(data_dir / "activities.csv"),
+        "activities": load_logical_rows(data_dir, delay_dir, "activities"),
         "milestones": read_csv_rows(data_dir / "milestones.csv"),
         "delay_events": read_csv_rows(data_dir / "delay_events.csv"),
         "s_curve": read_csv_rows(data_dir / "s_curve.csv"),
@@ -1645,11 +1701,14 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         project_key=str(project["project_key"]),
         data_dir=data_dir,
         vercel_dir=base / "vercel",
-        delay_dir=base / "02-delay_analysis" / "unified_tia_csv",
+        delay_dir=delay_dir,
         payment_rows=rows["payments"],
         delay_event_rows=rows["delay_events"],
         activity_rows=rows["activities"],
         read_csv_rows=read_csv_rows,
+        logical_table_rows={
+            "evm": rows["evm"],
+        },
         workspace_rows=rows,
         project_metrics={
             "bac": bac,
@@ -1707,8 +1766,8 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         "data_quality": data_quality,
         "advanced_analytics": advanced_analytics,
         "decision_required": decision_required,
-        "last_updated": latest_mtime(base),
-        "fingerprint": fingerprint(base),
+        "last_updated": latest_mtime(base, ("02-delay_analysis/controlled_runs", "11-outputs", "12-logs")),
+        "fingerprint": fingerprint(base, ("02-delay_analysis/controlled_runs", "11-outputs", "12-logs")),
         "source_files": {
             key: len(value) for key, value in rows.items()
         },
@@ -1778,26 +1837,72 @@ def _sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def established_public_output_slug(project: dict[str, Any]) -> str:
+    """Return the already-published artifact directory for this project.
+
+    Project keys identify payload JSON files, while historic approved reports
+    can use a different stable directory name.  Input minimization must never
+    rewrite those public download URLs.
+    """
+    payload_key = str(project.get("project_key") or "").strip()
+    if payload_key:
+        payload_path = DATA_ROOT / "projects" / f"{payload_key}.json"
+        try:
+            payload = read_json(payload_path)
+            artifacts = payload.get("report_artifacts", {}) if isinstance(payload, dict) else {}
+            if isinstance(artifacts, dict):
+                for artifact in artifacts.values():
+                    if not isinstance(artifact, dict):
+                        continue
+                    candidate = str(artifact.get("html") or "")
+                    match = re.fullmatch(r"/generated/([^/]+)/[^/]+\\.html", candidate)
+                    if match:
+                        return match.group(1)
+        except (OSError, TypeError, ValueError):
+            pass
+    return slugify(str(project.get("project_folder_name") or payload_key or "project"))
+
+
 def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
     """Publish selected-project report artifacts without rewriting unchanged projects."""
     GENERATED_ROOT.mkdir(parents=True, exist_ok=True)
     OUTPUTS_ROOT.mkdir(parents=True, exist_ok=True)
-    active_public_dirs = {slugify(project["project_folder_name"]) for project in projects}
-    for orphan in GENERATED_ROOT.iterdir():
-        if orphan.is_dir() and orphan.name not in active_public_dirs:
-            shutil.rmtree(orphan)
+    active_public_dirs = {established_public_output_slug(project) for project in projects}
+    # Do not delete a published artifact directory during a data rebuild.
+    # Removed projects require an explicit archival workflow, not an implicit
+    # side effect of generating a different project.
 
     for project in projects:
         project_folder = project["project_folder_name"]
         source = SOURCE_OUTPUTS_ROOT / project_folder
         output_dir = OUTPUTS_ROOT / project_folder
         output_dir.mkdir(parents=True, exist_ok=True)
+        public_slug = established_public_output_slug(project)
+        target = GENERATED_ROOT / public_slug
+        target.mkdir(parents=True, exist_ok=True)
+        # Preserve an already published report triplet while input sources are
+        # consolidated.  The reporting engine creates a new artifact only when
+        # a file is genuinely absent, never as a side effect of this cleanup.
+        for _, stem, _ in (
+            ("executive_dashboard", "01_executive_dashboard", ""),
+            ("master_dashboard", "02_master_dashboard", ""),
+            ("elite_svg_charts", "03_elite_svg_charts", ""),
+            ("linked_executive_dashboard", "04_linked_executive_dashboard", ""),
+        ):
+            for extension in ("html", "pdf", "pptx"):
+                published = target / f"{stem}.{extension}"
+                local_artifact = output_dir / f"{stem}.{extension}"
+                # The public directory holds the established artifact byte
+                # stream.  Rehydrate the local mirror from it before metadata
+                # generation; a CSV cleanup must never overwrite an approved
+                # report with a differently-rendered local copy.
+                if published.exists():
+                    copy_if_changed(published, local_artifact)
         if source.exists() and source.resolve() != output_dir.resolve():
             for html_report in sorted(source.glob("*.html")):
                 copy_if_changed(html_report, output_dir / html_report.name)
 
-        public_slug = slugify(project_folder)
-        artifacts = ensure_project_report_artifacts(project, output_dir, public_slug=public_slug)
+        artifacts = ensure_project_report_artifacts(project, output_dir, public_slug=public_slug, served_dir=target)
         project["report_artifacts"] = artifacts
 
         # The Universal Report Engine is a local controlled tool.  Its catalogue
@@ -1810,8 +1915,6 @@ def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
             )
         project["features"]["outputs_and_watchers"]["output_files"] = list_project_files(output_dir, OUTPUTS_ROOT, 80)
 
-        target = GENERATED_ROOT / public_slug
-        target.mkdir(parents=True, exist_ok=True)
         for artifact in sorted(output_dir.iterdir()):
             if artifact.is_file() and artifact.suffix.lower() in {".html", ".pdf", ".pptx", ".docx"}:
                 copy_if_changed(artifact, target / artifact.name)

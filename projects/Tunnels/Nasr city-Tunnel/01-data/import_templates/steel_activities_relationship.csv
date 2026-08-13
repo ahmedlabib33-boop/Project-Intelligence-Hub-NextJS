@@ -1,6 +1,0 @@
-﻿project_id,activity_id,activity_name,predecessor_details,successor_details,activity_status,total_float,original_duration,bl_project_start,bl_project_finish,start,finish,schedule_%_complete,activity_%_complete,performance_%_complete,budgeted_total_cost,earned_value_cost
-Nasr city-Tunnel,nct-dep-exc-1100,depot_bulk_excavation_and_disposal,nct-mob-1000:_fs,nct-dep-pil-1210:_fs,completed,-18,75,12-Feb-26,28-Apr-26,20-Feb-26,8-May-26,1.00,1.00,1.00,172500000.00,172500000.00
-Nasr city-Tunnel,nct-dep-pil-1210,depot_pile_cap_reinforcement,nct-dep-exc-1100:_fs,nct-dep-slb-1420:_fs,in_progress,-24,40,29-Apr-26,8-Jun-26,9-May-26,24-Jun-26,0.76,0.64,0.64,168000000.00,107520000.00
-Nasr city-Tunnel,nct-dep-slb-1420,depot_ground_slab_reinforcement_and_casting,nct-dep-pil-1210:_fs,nct-via-pie-2310:_fs,in_progress,-29,36,9-Jun-26,15-Jul-26,25-Jun-26,8-Aug-26,0.55,0.43,0.43,184500000.00,79335000.00
-Nasr city-Tunnel,nct-via-pie-2310,viaduct_pier_reinforcement_and_formwork,nct-dep-slb-1420:_fs,nct-via-dek-2520:_fs,in_progress,-35,68,16-Jul-26,22-Sep-26,9-Aug-26,19-Oct-26,0.34,0.27,0.27,221400000.00,59778000.00
-Nasr city-Tunnel,nct-via-dek-2520,viaduct_deck_reinforcement_and_concrete,nct-via-pie-2310:_fs,,not_started,-41,80,23-Sep-26,12-Dec-26,20-Oct-26,18-Jan-27,0.12,0.09,0.09,246000000.00,22140000.00

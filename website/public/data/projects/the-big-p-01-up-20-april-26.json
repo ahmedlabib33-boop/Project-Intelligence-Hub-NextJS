@@ -291,8 +291,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-13T06:52:17",
-  "fingerprint": "c976492cf069ae457c0588d5bf85dd64ec9ec35fd1db8c8eea08455722d9c48a",
+  "last_updated": "2026-08-13T22:08:30",
+  "fingerprint": "e77c3dadf033abcc04df8ee55bdb2753c1a38442a6dc27651ed79c4af60910da",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -417,7 +417,7 @@
           ]
         },
         "activities": {
-          "file": "activities.csv",
+          "file": "activity_master.csv",
           "exists": true,
           "row_count": 1363,
           "column_count": 16,
@@ -587,7 +587,7 @@
           ]
         },
         "progress_updates": {
-          "file": "progress_updates.csv",
+          "file": "activity_master.csv",
           "exists": true,
           "row_count": 1363,
           "column_count": 9,
@@ -694,7 +694,7 @@
           ]
         },
         "evm": {
-          "file": "evm.csv",
+          "file": "activity_master.csv",
           "exists": true,
           "row_count": 1363,
           "column_count": 12,
@@ -959,7 +959,7 @@
         },
         "payments": {
           "file": "payments.csv",
-          "exists": true,
+          "exists": false,
           "row_count": 8,
           "column_count": 18,
           "columns": [
@@ -1779,7 +1779,7 @@
           "source_path": "projects.csv"
         },
         "activities": {
-          "file": "activities.csv",
+          "file": "activity_master.csv",
           "exists": true,
           "row_count": 1363,
           "column_count": 16,
@@ -5404,10 +5404,10 @@
             }
           ],
           "truncated": true,
-          "source_path": "activities.csv"
+          "source_path": "activity_master.csv"
         },
         "progress_updates": {
-          "file": "progress_updates.csv",
+          "file": "activity_master.csv",
           "exists": true,
           "row_count": 1363,
           "column_count": 9,
@@ -7625,10 +7625,10 @@
             }
           ],
           "truncated": true,
-          "source_path": "progress_updates.csv"
+          "source_path": "activity_master.csv"
         },
         "evm": {
-          "file": "evm.csv",
+          "file": "activity_master.csv",
           "exists": true,
           "row_count": 1363,
           "column_count": 12,
@@ -10449,7 +10449,7 @@
             }
           ],
           "truncated": true,
-          "source_path": "evm.csv"
+          "source_path": "activity_master.csv"
         },
         "risks": {
           "file": "risks.csv",
@@ -10589,7 +10589,7 @@
         },
         "payments": {
           "file": "payments.csv",
-          "exists": true,
+          "exists": false,
           "row_count": 8,
           "column_count": 18,
           "columns": [
@@ -12004,119 +12004,119 @@
           "relative_path": "07-letters_intelligence/inbox/From ACE/032.pdf",
           "extension": "pdf",
           "size_kb": 126.3,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "033.pdf",
           "relative_path": "07-letters_intelligence/inbox/From ACE/033.pdf",
           "extension": "pdf",
           "size_kb": 126.3,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "034-Submission of proof of payment for engineering stamps due on contractual works..pdf",
           "relative_path": "07-letters_intelligence/inbox/From ACE/034-Submission of proof of payment for engineering stamps due on contractual works..pdf",
           "extension": "pdf",
           "size_kb": 118.2,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "035-Re Notification of Reinforcement Steel Supply Status and Entitlement to Tim Extensions.pdf",
           "relative_path": "07-letters_intelligence/inbox/From ACE/035-Re Notification of Reinforcement Steel Supply Status and Entitlement to Tim Extensions.pdf",
           "extension": "pdf",
           "size_kb": 87.2,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "036-Failure to Achieve Section (1) Milestone within the contractual Due Date.pdf",
           "relative_path": "07-letters_intelligence/inbox/From ACE/036-Failure to Achieve Section (1) Milestone within the contractual Due Date.pdf",
           "extension": "pdf",
           "size_kb": 77.5,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "037-Notice of Slow Progress Rate and Comments on Monthly Progress Report - April 2026.pdf",
           "relative_path": "07-letters_intelligence/inbox/From ACE/037-Notice of Slow Progress Rate and Comments on Monthly Progress Report - April 2026.pdf",
           "extension": "pdf",
           "size_kb": 254.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-072.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-072.pdf",
           "extension": "pdf",
           "size_kb": 1479.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-073.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-073.pdf",
           "extension": "pdf",
           "size_kb": 179.2,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-074.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-074.pdf",
           "extension": "pdf",
           "size_kb": 197.8,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-075.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-075.pdf",
           "extension": "pdf",
           "size_kb": 114.4,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-076.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-076.pdf",
           "extension": "pdf",
           "size_kb": 161.8,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-077.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-077.pdf",
           "extension": "pdf",
           "size_kb": 286.4,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-078.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-078.pdf",
           "extension": "pdf",
           "size_kb": 225.4,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-079.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-079.pdf",
           "extension": "pdf",
           "size_kb": 119.5,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-080.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-080.pdf",
           "extension": "pdf",
           "size_kb": 127.6,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:38"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-081.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-081.pdf",
           "extension": "pdf",
           "size_kb": 41.7,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:38"
         },
         {
           "name": "BD-CW-SAMCO-ACE-LET-STR-082.pdf",
           "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-082.pdf",
           "extension": "pdf",
           "size_kb": 390.2,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:38"
         }
       ],
       "inbox_file_count": 17,
@@ -17709,7 +17709,7 @@
           },
           {
             "name": "Issue Threads",
-            "row_count": 19,
+            "row_count": 18,
             "column_count": 7,
             "columns": [
               "Thread",
@@ -17881,15 +17881,6 @@
                 "Main Link": "ACE requested proof of engineering-stamp payment and reserved deduction from future certificates if proof is not submitted.",
                 "Priority": "Medium",
                 "Next Action": "Submit the supporting receipts or confirm how deductions will be handled in the next certificate workflow.",
-                "project_id": "The Big -P.01-UP-20-April-26"
-              },
-              {
-                "Thread": "General correspondence",
-                "SAMCO Ref(s)": "",
-                "6": "032",
-                "Main Link": "Automatically classified from 032.pdf",
-                "Priority": "Low",
-                "Next Action": "Review the correspondence and confirm required action and activity linkage.",
                 "project_id": "The Big -P.01-UP-20-April-26"
               }
             ],
@@ -19648,7 +19639,7 @@
           },
           {
             "name": "From Consultant",
-            "row_count": 37,
+            "row_count": 36,
             "column_count": 19,
             "columns": [
               "Ref No",
@@ -20426,27 +20417,6 @@
                 "EOT Potential": "Low / Conditional",
                 "Claim Strength": "Contractor weak",
                 "Required Actions": "Correct the April report, improve resource allocation, and submit mitigation measures",
-                "project_id": "The Big -P.01-UP-20-April-26"
-              },
-              {
-                "Ref No": "BD-ACEPM-SAMCO-LET-032",
-                "Date": "",
-                "Type": "General Correspondence",
-                "Subject": "032",
-                "Main Purpose": "032",
-                "Key Requests": "Review the correspondence and confirm required action and activity linkage.",
-                "Scope Impact": "Review required from source correspondence",
-                "Responsibility": "Contractor",
-                "Affected Activities": "Programme linkage to be confirmed",
-                "Start Dependency": "To be confirmed against programme logic",
-                "Sequence Impact": "Low",
-                "Commercial Impact": "Not identified",
-                "Risk Type": "General correspondence",
-                "Risk Owner": "Contractor",
-                "Delay Risk": "Low",
-                "EOT Potential": "Low",
-                "Claim Strength": "Preliminary",
-                "Required Actions": "Review the correspondence and confirm required action and activity linkage.",
                 "project_id": "The Big -P.01-UP-20-April-26"
               }
             ],
@@ -22122,7 +22092,7 @@
           },
           {
             "name": "Consultant Links",
-            "row_count": 37,
+            "row_count": 36,
             "column_count": 14,
             "columns": [
               "ACE Ref No",
@@ -22716,22 +22686,6 @@
                 "ACE Claim Strength": "Contractor weak",
                 "ACE Required Actions": "Correct the monthly report, improve progress, and submit mitigation / recovery actions",
                 "project_id": "The Big -P.01-UP-20-April-26"
-              },
-              {
-                "ACE Ref No": "BD-ACEPM-SAMCO-LET-032",
-                "ACE Sheet Row": 38,
-                "ACE Date": "",
-                "ACE Type": "General Correspondence",
-                "ACE Subject": "032",
-                "Related SAMCO Ref No(s)": "",
-                "SAMCO Sheet Row(s)": "",
-                "SAMCO Subject(s)": "",
-                "Thread(s)": "General correspondence",
-                "ACE Delay Risk": "Low",
-                "ACE EOT Potential": "Low",
-                "ACE Claim Strength": "Preliminary",
-                "ACE Required Actions": "Review the correspondence and confirm required action and activity linkage.",
-                "project_id": "The Big -P.01-UP-20-April-26"
               }
             ],
             "truncated": false
@@ -22757,14 +22711,14 @@
               {
                 "Source File": "From ACE/032.pdf",
                 "Direction": "Consultant to Contractor",
-                "Reference": "BD-ACEPM-SAMCO-LET-032",
-                "Date": "",
-                "Subject": "032",
+                "Reference": "BD-ACEPM-SAMCO-LET-033",
+                "Date": "24-Feb-2026",
+                "Subject": "Re: Early Warning & Notification of Fact (pursuant to Sub-Clause 20.1)- Site Progress and Constraints for Buildings BI-B4",
                 "Classification": "General Correspondence",
                 "Delay Risk": "Low",
                 "Issue Thread": "General correspondence",
-                "Status": "Added Automatically",
-                "Message": "Added to the letter, link, and issue-thread tables.",
+                "Status": "Already Registered",
+                "Message": "The reference already exists in the intelligence workbook.",
                 "project_id": "The Big -P.01-UP-20-April-26"
               },
               {
@@ -24247,10 +24201,10 @@
             "resolution": "Reconciliation-only record. The approved matrix project-finish movement for EV02 is 71 calendar days."
           }
         ],
-        "source_fingerprint": "ba4a739b8a1b153faeb1faab2aff0f4d19f518b35ca6bbcac1f6a7de34781006",
+        "source_fingerprint": "6a566153309a8772f6f2edd5c7bb7635be32e68688f110726132c553ed852878",
         "automatic_draft": true,
-        "last_run_at": "2026-08-13T03:46:57.681449+00:00",
-        "run_id": "50951a83ae4c93ca"
+        "last_run_at": "2026-08-13T19:08:45.387128+00:00",
+        "run_id": "549c68d21700e165"
       },
       "legacy_status": "Archived and excluded from the active TIA workflow.",
       "detectors": [
@@ -24525,21 +24479,21 @@
           "relative_path": "05-contracts/source/Overall Contract.pdf",
           "extension": "pdf",
           "size_kb": 4169.5,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "Overall_Contract_clause_library.xlsx",
           "relative_path": "05-contracts/source/Overall_Contract_clause_library.xlsx",
           "extension": "xlsx",
           "size_kb": 26.5,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "README.md",
           "relative_path": "05-contracts/source/README.md",
           "extension": "md",
           "size_kb": 0.2,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         }
       ],
       "evidence_files": [
@@ -24548,42 +24502,42 @@
           "relative_path": "06-evidence/clause_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "contract_evidence_register_template.csv",
           "relative_path": "06-evidence/contract_evidence_register_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "correspondence_reference_template.csv",
           "relative_path": "06-evidence/correspondence_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "document_reference_template.csv",
           "relative_path": "06-evidence/document_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "evidence_register_template.csv",
           "relative_path": "06-evidence/evidence_register_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         },
         {
           "name": "photo_log_template.csv",
           "relative_path": "06-evidence/photo_log_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T06:25:43"
+          "modified": "2026-08-13T21:25:37"
         }
       ],
       "database": {
@@ -28076,126 +28030,147 @@
           "relative_path": "The BIG - PH01/01_executive_dashboard.html",
           "extension": "html",
           "size_kb": 17.8,
-          "modified": "2026-08-13T06:25:40"
+          "modified": "2026-08-13T21:54:08"
         },
         {
           "name": "01_executive_dashboard.pdf",
           "relative_path": "The BIG - PH01/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 889.7,
-          "modified": "2026-08-13T06:54:15"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.6,
-          "modified": "2026-08-13T06:54:20"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "02_master_dashboard.html",
           "relative_path": "The BIG - PH01/02_master_dashboard.html",
           "extension": "html",
           "size_kb": 115.6,
-          "modified": "2026-08-13T06:25:40"
+          "modified": "2026-08-13T21:54:08"
         },
         {
           "name": "02_master_dashboard.pdf",
           "relative_path": "The BIG - PH01/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 864.7,
-          "modified": "2026-08-13T06:54:28"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "The BIG - PH01/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.6,
-          "modified": "2026-08-13T06:54:29"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "03_elite_svg_charts.html",
           "relative_path": "The BIG - PH01/03_elite_svg_charts.html",
           "extension": "html",
           "size_kb": 51.7,
-          "modified": "2026-08-13T06:25:40"
+          "modified": "2026-08-13T21:54:08"
         },
         {
           "name": "03_elite_svg_charts.pdf",
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 236.2,
-          "modified": "2026-08-13T06:54:31"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.6,
-          "modified": "2026-08-13T06:54:37"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "04_linked_executive_dashboard.html",
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.html",
           "extension": "html",
           "size_kb": 54.9,
-          "modified": "2026-08-13T06:25:40"
+          "modified": "2026-08-13T21:54:08"
         },
         {
           "name": "04_linked_executive_dashboard.pdf",
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1276.9,
-          "modified": "2026-08-13T06:54:46"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.6,
-          "modified": "2026-08-13T06:54:49"
+          "modified": "2026-08-13T21:54:10"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
           "relative_path": "The BIG - PH01/05_delay_tia_governed_assessment.docx",
           "extension": "docx",
           "size_kb": 35.1,
-          "modified": "2026-08-13T06:25:40"
+          "modified": "2026-08-13T21:25:35"
         },
         {
           "name": "05_delay_tia_governed_assessment.html",
           "relative_path": "The BIG - PH01/05_delay_tia_governed_assessment.html",
           "extension": "html",
           "size_kb": 9.5,
-          "modified": "2026-08-13T06:25:40"
+          "modified": "2026-08-13T21:25:35"
         },
         {
           "name": "05_delay_tia_governed_assessment.manifest.json",
           "relative_path": "The BIG - PH01/05_delay_tia_governed_assessment.manifest.json",
           "extension": "json",
           "size_kb": 0.6,
-          "modified": "2026-08-13T06:25:40"
+          "modified": "2026-08-13T21:25:35"
         },
         {
           "name": "05_delay_tia_governed_assessment.pdf",
           "relative_path": "The BIG - PH01/05_delay_tia_governed_assessment.pdf",
           "extension": "pdf",
           "size_kb": 2.5,
-          "modified": "2026-08-13T06:25:40"
+          "modified": "2026-08-13T21:25:35"
         },
         {
           "name": "05_delay_tia_governed_assessment.pptx",
           "relative_path": "The BIG - PH01/05_delay_tia_governed_assessment.pptx",
           "extension": "pptx",
           "size_kb": 28.0,
-          "modified": "2026-08-13T06:25:40"
+          "modified": "2026-08-13T21:25:35"
+        },
+        {
+          "name": "05_samco_pco_31_slide_report.html",
+          "relative_path": "The BIG - PH01/05_samco_pco_31_slide_report.html",
+          "extension": "html",
+          "size_kb": 344.1,
+          "modified": "2026-08-13T22:10:43"
+        },
+        {
+          "name": "05_samco_pco_31_slide_report.pdf",
+          "relative_path": "The BIG - PH01/05_samco_pco_31_slide_report.pdf",
+          "extension": "pdf",
+          "size_kb": 58.2,
+          "modified": "2026-08-13T22:10:43"
+        },
+        {
+          "name": "05_samco_pco_31_slide_report.pptx",
+          "relative_path": "The BIG - PH01/05_samco_pco_31_slide_report.pptx",
+          "extension": "pptx",
+          "size_kb": 84.8,
+          "modified": "2026-08-13T22:10:44"
         },
         {
           "name": "universal_report_engine_manifest.json",
           "relative_path": "The BIG - PH01/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
-          "size_kb": 42.8,
-          "modified": "2026-08-13T06:54:50"
+          "size_kb": 40.1,
+          "modified": "2026-08-13T22:10:44"
         }
       ],
       "watchers": [
@@ -28488,7 +28463,7 @@
         ],
         "source_lineage": {
           "files": [
-            "evm.csv"
+            "activity_master.csv"
           ],
           "required_columns": [
             "project_id",
@@ -28529,7 +28504,7 @@
         ],
         "source_lineage": {
           "files": [
-            "evm.csv"
+            "activity_master.csv"
           ],
           "required_columns": [
             "project_id",
@@ -29109,7 +29084,7 @@
         ],
         "source_lineage": {
           "files": [
-            "evm.csv"
+            "activity_master.csv"
           ],
           "required_columns": [
             "project_id",
@@ -29142,7 +29117,7 @@
         ],
         "source_lineage": {
           "files": [
-            "evm.csv"
+            "activity_master.csv"
           ],
           "required_columns": [
             "project_id",
@@ -29539,7 +29514,7 @@
         "series": [],
         "source_lineage": {
           "files": [
-            "14-delay_event_classification.csv",
+            "12_delay_event_classification.csv",
             "delay_event_classification.csv",
             "delay_events.csv"
           ],
@@ -29563,7 +29538,7 @@
         "series": [],
         "source_lineage": {
           "files": [
-            "14-delay_event_classification.csv",
+            "12_delay_event_classification.csv",
             "delay_event_classification.csv",
             "delay_events.csv"
           ],
@@ -29608,7 +29583,7 @@
         "series": [],
         "source_lineage": {
           "files": [
-            "15-tia_recovery_scenario.csv",
+            "13_tia_recovery_scenario.csv",
             "tia_recovery_scenario.csv",
             "activities.csv"
           ],
@@ -29804,12 +29779,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 911076,
-          "sha256": "e3d9e247d88c55104238318368e2c20fe44e2d32f9b4f1a51cdc6b2020ad8cc5"
+          "sha256": "7c113d7d3ad868c8585d6ec0d0332af74d9a2333e0fbb67e05a683f3dd82cf0f"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29249,
-          "sha256": "e2c200d78cc1ebfa37492965dc5a3faa35769daa7922351db3e7fe3b7bbc97b9"
+          "sha256": "85be9f68ff4412e26920ce1633b72ffc9c5e52332973d1310dd7733d3da3d733"
         }
       },
       "html_origin": "canonical_project_html",
@@ -29829,12 +29804,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 885433,
-          "sha256": "8f89da85c7c7fabef998d1355fa35b92dee012ffc915b91bb5719f1e939d9498"
+          "sha256": "fdbba9cc2d2c13ffdb001fa30e8c284e3091a548c604af434d6cbef8f1b3776e"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29246,
-          "sha256": "b3c9c21cb49d99d6beee9c185775139a4c1a9b1c00737e213f49a84cd929eabe"
+          "sha256": "46ccb13053d7fb7f6af1dc04849f146a4756b4701c8372007521d67a4d660451"
         }
       },
       "html_origin": "canonical_project_html",
@@ -29854,12 +29829,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 241841,
-          "sha256": "33d85efa9bf88d24e76edcb3e8128b6c43dfd2d59e2d2d5e02ac35541c594241"
+          "sha256": "15236d1a32539d3a86f17175b27ea2eda83f776e11eb1825276bc99e568f8d39"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29247,
-          "sha256": "019baf71b4a09c1e68a3ab5f2026ab3cb91bc6dc1bcc7d0fc11294768711d1eb"
+          "sha256": "278857e638c86c1a17be2c880363d9b016dc9c9308637e9f5b5ff6f8ddaf955e"
         }
       },
       "html_origin": "canonical_project_html",
@@ -29879,37 +29854,61 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1307548,
-          "sha256": "cb4d488d7cf6a5b38e0ce465fa9a59c31f224a13d9a8f3fe130c641452245bd6"
+          "sha256": "e68ed2e879ac1c23a25be4d568dc8c15050f422b4c797b58a5ade9f3cf6c2cff"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29256,
-          "sha256": "1b951a518ddb7670e081543fd981d1c763574dae4206cce6f6c9ae60e095af9e"
+          "sha256": "4de23379554c81c35bea283efdd4af3c315b6772855f1b19804a40ffdecaebc9"
         }
       },
       "html_origin": "canonical_project_html",
       "source_project_id": "The Big -P.01-UP-20-April-26",
       "source_report_fingerprint": "0fc145f5b7eb71953b74c4ab117dac26b4cbf01e71473be6d70b26efef6da0bf"
+    },
+    "samco_pco_31_slide_report": {
+      "html": "/generated/The-BIG-PH01/05_samco_pco_31_slide_report.html",
+      "pdf": "/generated/The-BIG-PH01/05_samco_pco_31_slide_report.pdf",
+      "pptx": "/generated/The-BIG-PH01/05_samco_pco_31_slide_report.pptx",
+      "files": {
+        "html": {
+          "name": "05_samco_pco_31_slide_report.html",
+          "bytes": 352328,
+          "sha256": "4a09b095b48a42cb01f4e9e6de77374ee722d8427fea0a54fb59b5fad0dcd231"
+        },
+        "pdf": {
+          "name": "05_samco_pco_31_slide_report.pdf",
+          "bytes": 59575,
+          "sha256": "23b03df30f41ffb5dea61fb8936697c7898c74078de8b2a097f6352ca19f207f"
+        },
+        "pptx": {
+          "name": "05_samco_pco_31_slide_report.pptx",
+          "bytes": 86880,
+          "sha256": "cb93bf2ca555bbae0cec428fccaf572605407337e506526823e75fc9c9a48824"
+        }
+      },
+      "source_project_id": "The Big -P.01-UP-20-April-26",
+      "source_report_fingerprint": "e77c3dadf033abcc04df8ee55bdb2753c1a38442a6dc27651ed79c4af60910da",
+      "generator": {
+        "name": "SAMCO-PCO Report Generator",
+        "mode": "data-driven project CSV adapter",
+        "template_sha256": "11ca0efc7649dc04361cc47fa80c473c1d0fe4251420113fc00e79c47d547aed",
+        "version": "2026.08.samco-pco-data-driven.v1"
+      }
     }
   },
   "universal_report_engine": {
     "project_id": "The Big -P.01-UP-20-April-26",
     "project_key": "the-big-p-01-up-20-april-26",
-    "source_fingerprint": "cb83243b7e225fe3ce69b70055f48264aaed4678fab3f27ea446430b703e7b1c",
+    "source_fingerprint": "79a8e01cdb8a678272c0c971ef044ac36d13406cad8fb72d6faa3d4718764d7e",
     "source_scope": "active project folder only",
-    "source_file_count": 95,
+    "source_file_count": 83,
     "source_inventory": [
       {
-        "relative_path": "01-data/import_templates/activities.csv",
+        "relative_path": "01-data/import_templates/activity_master.csv",
         "extension": ".csv",
-        "size_bytes": 318917,
-        "sha256": "4c1547351e4569be95d274cedfdcd58a391fab56ad0f221904177c2a31c2600f"
-      },
-      {
-        "relative_path": "01-data/import_templates/change_orders.csv",
-        "extension": ".csv",
-        "size_bytes": 298,
-        "sha256": "acfbdb0dcb9fd06caace72465fe61b567e5be5eeae3ee5d6bf30813de5f1a03c"
+        "size_bytes": 723765,
+        "sha256": "45a47938eaf6db9f2335f581024a3cd10952911ad0047854caca072b95c1bb75"
       },
       {
         "relative_path": "01-data/import_templates/claims.csv",
@@ -29924,40 +29923,10 @@
         "sha256": "61432a3a8ed63e2dae803a7bf217b0edb04fd772e552b9b2a542608360420318"
       },
       {
-        "relative_path": "01-data/import_templates/cost_items.csv",
-        "extension": ".csv",
-        "size_bytes": 237431,
-        "sha256": "513c2d332d2c20c1be55487582de7e3cd7e45b8aad3e01243966654bc8c9773c"
-      },
-      {
         "relative_path": "01-data/import_templates/delay_events.csv",
         "extension": ".csv",
         "size_bytes": 5016,
         "sha256": "ed2d8de3c133105f0edb94506a578969a192bb512fbc48d7ece5612ee9fe9e06"
-      },
-      {
-        "relative_path": "01-data/import_templates/Delivered_steel_site.csv",
-        "extension": ".csv",
-        "size_bytes": 2230,
-        "sha256": "f85c4f090eab4bdb1ccb082b4e8d41175d24617ed0aadbbdb62aeedfb1405e4a"
-      },
-      {
-        "relative_path": "01-data/import_templates/engineering_log.csv",
-        "extension": ".csv",
-        "size_bytes": 413,
-        "sha256": "ca6fe8b364f23b5b3650228370029859e8733e49f944e1d39446f828cf1ecfa2"
-      },
-      {
-        "relative_path": "01-data/import_templates/evm.csv",
-        "extension": ".csv",
-        "size_bytes": 198689,
-        "sha256": "d51e7cf3ee8055b4aa95ed6a9afc8cf26ecb4dfa78f1a621becbc0a8f6d0be43"
-      },
-      {
-        "relative_path": "01-data/import_templates/ifc_conflict.csv",
-        "extension": ".csv",
-        "size_bytes": 6048,
-        "sha256": "49c2ac382b462b477bff72061bc4c06911b5283539a6a5234b8e6bd7e23320a8"
       },
       {
         "relative_path": "01-data/import_templates/milestones.csv",
@@ -29966,22 +29935,16 @@
         "sha256": "6fb57c383030a05019f4e7e4a42f49a53b30318717b9a266b565b86583247a82"
       },
       {
-        "relative_path": "01-data/import_templates/payments.csv",
-        "extension": ".csv",
-        "size_bytes": 1285,
-        "sha256": "e158a587d7d2f920eb716e0781803a5ef504d379febe77ef71c1c761e710f8a1"
+        "relative_path": "01-data/import_templates/payment_projection.json",
+        "extension": ".json",
+        "size_bytes": 841,
+        "sha256": "220750dd4660215756f4a3c762308cff0a391c4beb5f29032ee5577ae62eacf0"
       },
       {
         "relative_path": "01-data/import_templates/planned_cash_flow.csv",
         "extension": ".csv",
         "size_bytes": 1391,
         "sha256": "4dd5eec2c65d6dead295d6ea2f15e65f89b81cc8b5c2b5dc0bb918b502ea2eec"
-      },
-      {
-        "relative_path": "01-data/import_templates/progress_updates.csv",
-        "extension": ".csv",
-        "size_bytes": 126830,
-        "sha256": "d26940f4855f67dbb2985414054b42dec8aedef5279b0627189032a0c9c444db"
       },
       {
         "relative_path": "01-data/import_templates/projects.csv",
@@ -29996,12 +29959,6 @@
         "sha256": "cac6c818a0dcb333479f383c07c2a227a73790f035f698eb9e5fd9c0484bcb3a"
       },
       {
-        "relative_path": "01-data/import_templates/rft_qtys.csv",
-        "extension": ".csv",
-        "size_bytes": 25690,
-        "sha256": "62f63f182be98d5b254c996d697d66d40832cc4c8b2e9e56e136e02e13a2a41b"
-      },
-      {
         "relative_path": "01-data/import_templates/risks.csv",
         "extension": ".csv",
         "size_bytes": 365,
@@ -30012,18 +29969,6 @@
         "extension": ".csv",
         "size_bytes": 1730,
         "sha256": "37c7c3984f7719338a30052084fe62f4df71e7a9c1ed2c758ac7480cfe6c3f6a"
-      },
-      {
-        "relative_path": "01-data/import_templates/steel_activities_relationship.csv",
-        "extension": ".csv",
-        "size_bytes": 35087,
-        "sha256": "90b2de495f2e08ff8cb004b92de99d81a2b911fd55f12d7b70d89226b266bacf"
-      },
-      {
-        "relative_path": "01-data/import_templates/steel_delay_status_mployer_free_issue_material.csv",
-        "extension": ".csv",
-        "size_bytes": 5524,
-        "sha256": "655491e3b3f296981a4e2bca1acf67645a22091252c5e1609b3cd5843695aba5"
       },
       {
         "relative_path": "01-data/import_templates/wbs.csv",
@@ -30046,8 +29991,8 @@
       {
         "relative_path": "02-delay_analysis/controlled_runs/latest.json",
         "extension": ".json",
-        "size_bytes": 58974,
-        "sha256": "039c2f7a1e090ff48269bcc8495270c93683cd1d92b7d1562024378f1840b9e6"
+        "size_bytes": 59039,
+        "sha256": "9324be91c0427e6ccba5ac66652748c8a01c87d6c45448e02a9add336bd854bd"
       },
       {
         "relative_path": "02-delay_analysis/methodology/TIA methodology.docx",
@@ -30212,22 +30157,10 @@
         "sha256": "186b52e9473e855acbc9918e329ddedc09a076284849e5329bdcf2ef25d176c6"
       },
       {
-        "relative_path": "02-delay_analysis/unified_tia_csv/14-delay_event_classification.csv",
-        "extension": ".csv",
-        "size_bytes": 204,
-        "sha256": "ae95fac637a5a4cc21519fe9cff117c4957586c33a34b2242816d6457df0409d"
-      },
-      {
         "relative_path": "02-delay_analysis/unified_tia_csv/14_controlled_release_register.csv",
         "extension": ".csv",
         "size_bytes": 337,
         "sha256": "cd1b7add3bfd18d9b2c518dfe3ff03ba4130c4d3968b5a3c365e2e2b30844bdf"
-      },
-      {
-        "relative_path": "02-delay_analysis/unified_tia_csv/15-tia_recovery_scenario.csv",
-        "extension": ".csv",
-        "size_bytes": 357,
-        "sha256": "186b52e9473e855acbc9918e329ddedc09a076284849e5329bdcf2ef25d176c6"
       },
       {
         "relative_path": "02-delay_analysis/unified_tia_csv/15_reconciliation_register.csv",
@@ -30466,8 +30399,8 @@
       {
         "relative_path": "project_manifest.json",
         "extension": ".json",
-        "size_bytes": 1199,
-        "sha256": "317efcddb43bc6cae2a3ed32f4ad1ccf31e09854ee13e58dc744c32e8bab5e70"
+        "size_bytes": 1204,
+        "sha256": "318056f06dcd932e6c07d933eb19280a5183d85a6faee71a1308e3415a6b0de7"
       }
     ],
     "engine": {
@@ -31040,6 +30973,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-13T03:54:50+00:00"
+    "updated_at": "2026-08-13T19:10:44+00:00"
   }
 }
