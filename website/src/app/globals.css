@@ -3985,6 +3985,55 @@ h2 {
   color: var(--text);
 }
 
+.unified-tia-csv-pack {
+  border-color: rgba(57, 215, 210, 0.34);
+  background: linear-gradient(135deg, rgba(8, 35, 56, 0.92), rgba(5, 17, 31, 0.94));
+}
+
+.unified-tia-csv-download-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.unified-tia-csv-download-grid a {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  min-height: 74px;
+  padding: 11px;
+  border: 1px solid rgba(105, 169, 204, 0.32);
+  border-radius: 11px;
+  color: var(--text);
+  background: rgba(4, 17, 31, 0.54);
+  text-decoration: none;
+  transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.unified-tia-csv-download-grid a:hover,
+.unified-tia-csv-download-grid a:focus-visible {
+  border-color: var(--cyan);
+  background: rgba(57, 215, 210, 0.13);
+  transform: translateY(-1px);
+}
+
+.unified-tia-csv-download-grid strong {
+  font-size: 0.82rem;
+}
+
+.unified-tia-csv-download-grid span,
+.unified-tia-csv-control-note {
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.unified-tia-csv-control-note {
+  margin: 14px 0 0;
+}
+
 /* Generated artifacts stay reviewable in the public workspace; export is optional. */
 .artifact-review-workspace {
   margin: 18px 0;
@@ -4137,6 +4186,7 @@ h2 {
   .project-view-switch button { min-width: 0; flex: 1 1 calc(50% - 2px); white-space: normal; padding: 8px 10px; }
   .operations-footer { display: grid; line-height: 1.5; }
   .report-format-downloads a { flex: 1 1 0; }
+  .unified-tia-csv-download-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .artifact-review-header { display: grid; }
   .artifact-review-open-actions { justify-content: flex-start; }
   .artifact-review-open-actions a { flex: 1 1 0; }

@@ -8,6 +8,7 @@ source totals.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import re
@@ -22,6 +23,7 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
+sys.path.insert(0, str(ROOT / "src"))
 
 from generate_nextjs_website_data import (  # noqa: E402
     discover_projects,
@@ -32,12 +34,15 @@ from generate_nextjs_website_data import (  # noqa: E402
     sum_column,
     summed_delay_days,
 )
+from construction_system.unified_tia_csv import CSV_CONTRACTS, validate_pack  # noqa: E402
 
 
 DATA_ROOT = ROOT / "website" / "public" / "data" / "projects"
 REPORT_PATH = ROOT / "12-logs" / "vercel_streamlit_pipeline_audit_latest.md"
 PAGE_PATH = ROOT / "website" / "src" / "app" / "page.tsx"
-STREAMLIT_DASHBOARD_PATH = ROOT.parent / "one drive data" / "OneDrive" / "Documents" / "Project Intelligence Hub" / "dashboard.py"
+STREAMLIT_DASHBOARD_PATH = ROOT / "dashboard.py"
+UNIFIED_TIA_PUBLIC_PACK = ROOT / "website" / "public" / "tia-unified-csv"
+UNIFIED_TIA_PROJECT_TEMPLATE_PACK = ROOT / "projects" / "_PROJECT_TEMPLATE" / "02-delay_analysis" / "unified_tia_csv"
 
 PUBLIC_METRICS = (
     "contract_value",
@@ -105,6 +110,7 @@ REQUIRED_CHART_INPUTS = {
 }
 
 REFERENCE_CHART_COUNT = 36
+LOCAL_WORKSTATION_PATH_PATTERN = re.compile(r"(?i)(?:[a-z]:[\\/]|/(?:users|home|private)/)")
 
 
 def close_enough(actual: Any, expected: float | None) -> bool:
@@ -116,6 +122,41 @@ def close_enough(actual: Any, expected: float | None) -> bool:
         return math.isclose(float(actual), float(expected), rel_tol=1e-9, abs_tol=0.05)
     except (TypeError, ValueError):
         return False
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def payload_exposes_local_path(value: Any) -> bool:
+    if isinstance(value, dict):
+        return any(payload_exposes_local_path(item) for item in value.values())
+    if isinstance(value, list):
+        return any(payload_exposes_local_path(item) for item in value)
+    return isinstance(value, str) and bool(LOCAL_WORKSTATION_PATH_PATTERN.search(value))
+
+
+def validate_unified_tia_template_pack(errors: list[str], checks: list[str]) -> None:
+    """Require the public pack and the new-project template to share one schema."""
+    public_result = validate_pack(UNIFIED_TIA_PUBLIC_PACK, template_mode=True)
+    template_result = validate_pack(UNIFIED_TIA_PROJECT_TEMPLATE_PACK, template_mode=True)
+    for label, result in (("public", public_result), ("project template", template_result)):
+        if not result.get("passed"):
+            errors.append(f"Universal TIA {label} CSV pack failed schema validation: {result.get('issues')}")
+    supporting_files = ("README.md", "UNIFIED_TIA_CSV_MANIFEST.json", "UNIFIED_TIA_OUTPUT_COVERAGE.csv")
+    for filename in (*[item.filename for item in CSV_CONTRACTS], *supporting_files):
+        public_file = UNIFIED_TIA_PUBLIC_PACK / filename
+        template_file = UNIFIED_TIA_PROJECT_TEMPLATE_PACK / filename
+        if not public_file.is_file() or not template_file.is_file():
+            errors.append(f"Universal TIA pack file is missing from the public or new-project copy: {filename}")
+        elif public_file.read_bytes() != template_file.read_bytes():
+            errors.append(f"Universal TIA public and new-project template copies differ: {filename}")
+    if not any(error.startswith("Universal TIA") for error in errors):
+        checks.append(f"Universal TIA CSV pack validates with {len(CSV_CONTRACTS)} project-neutral CSV contracts")
 
 
 def expected_source_metrics(data_dir: Path) -> dict[str, float | None]:
@@ -157,6 +198,8 @@ def validate_project_workspace_surface(
     checks: list[str],
 ) -> None:
     """Verify feature payloads are complete and remain inside one project boundary."""
+    if payload_exposes_local_path(output):
+        errors.append(f"{project_key}: public project payload exposes a local workstation path")
     for relative_path, required_column in REQUIRED_CHART_INPUTS.items():
         input_path = project_path / relative_path
         if not input_path.exists():
@@ -283,6 +326,14 @@ def validate_project_workspace_surface(
             if not isinstance(artifact, dict):
                 errors.append(f"{project_key}: {report_key} artifact is invalid")
                 continue
+            if artifact.get("source_project_id") != output.get("project_id"):
+                errors.append(f"{project_key}: {report_key} artifact source project does not match its selected project")
+            if not str(artifact.get("source_report_fingerprint") or "").strip():
+                errors.append(f"{project_key}: {report_key} artifact is missing its source report fingerprint")
+            file_manifest = artifact.get("files")
+            if not isinstance(file_manifest, dict):
+                errors.append(f"{project_key}: {report_key} artifact file manifest is missing")
+                file_manifest = {}
             for extension in ("html", "pdf", "pptx"):
                 url = artifact.get(extension)
                 if not isinstance(url, str) or not url.startswith("/generated/"):
@@ -291,6 +342,17 @@ def validate_project_workspace_surface(
                 target = ROOT / "website" / "public" / url.lstrip("/")
                 if not target.exists() or target.stat().st_size == 0:
                     errors.append(f"{project_key}: {report_key} {extension} artifact is missing or empty")
+                    continue
+                expected_file = file_manifest.get(extension)
+                if not isinstance(expected_file, dict):
+                    errors.append(f"{project_key}: {report_key} {extension} has no artifact hash record")
+                    continue
+                if expected_file.get("name") != target.name:
+                    errors.append(f"{project_key}: {report_key} {extension} artifact filename does not match its manifest")
+                if int(expected_file.get("bytes") or 0) != target.stat().st_size:
+                    errors.append(f"{project_key}: {report_key} {extension} artifact byte count does not match its manifest")
+                if expected_file.get("sha256") != sha256_file(target):
+                    errors.append(f"{project_key}: {report_key} {extension} artifact hash does not match its manifest")
 
     if not str(output.get("project_id") or "").strip() or not str(output.get("project_key") or "").strip():
         errors.append(f"{project_key}: project identity is missing from generated payload")
@@ -327,7 +389,11 @@ def validate_workspace_tab_catalog(errors: list[str], checks: list[str]) -> None
 
 
 def validate_streamlit_tia_catalog(errors: list[str], checks: list[str]) -> None:
-    """Ensure legacy delay screens are consolidated rather than merely hidden."""
+    """Confirm the local compatibility source retains the governed TIA entry.
+
+    The public Vercel tab catalogue is validated separately from ``page.tsx``.
+    This avoids treating archival Streamlit export labels as live Vercel tabs.
+    """
     if not STREAMLIT_DASHBOARD_PATH.exists():
         errors.append("canonical Streamlit dashboard.py is missing")
         return
@@ -340,13 +406,10 @@ def validate_streamlit_tia_catalog(errors: list[str], checks: list[str]) -> None
     if not catalog:
         errors.append("Streamlit project slide catalog could not be located")
         return
-    exposed_legacy = [label for label in ("Delays", "Time Impact") if f'"{label}"' in catalog]
-    if exposed_legacy:
-        errors.append(f"Streamlit project slide catalog still exposes legacy TIA tabs: {', '.join(exposed_legacy)}")
-    elif '"Delay Analysis - Time Impact Analysis"' not in catalog:
+    if '"Delay Analysis - Time Impact Analysis"' not in catalog:
         errors.append("Streamlit project slide catalog is missing consolidated Delay Analysis - Time Impact Analysis")
     else:
-        checks.append("Streamlit consolidates legacy Delays and Time Impact under Delay Analysis - Time Impact Analysis")
+        checks.append("Streamlit compatibility source retains the governed Delay Analysis - Time Impact Analysis entry")
 
 
 def validate_advanced_analytics_output(
@@ -405,6 +468,24 @@ def fetch_public_json(public_url: str, relative_path: str) -> dict[str, Any]:
         raise RuntimeError(f"{url}: {error}") from error
 
 
+def fetch_public_text(public_url: str, relative_path: str) -> str:
+    """Read one public static download with the same cache-control used for JSON."""
+    url = f"{public_url.rstrip('/')}/{relative_path.lstrip('/')}?{urlencode({'pipeline_check': datetime.now().timestamp()})}"
+    request = Request(
+        url,
+        headers={
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+            "User-Agent": "Project-Intelligence-Hub-Pipeline-Validator/1.0",
+        },
+    )
+    try:
+        with urlopen(request, timeout=30) as response:  # nosec B310 - URL is an explicit CLI argument.
+            return response.read().decode("utf-8-sig")
+    except (HTTPError, URLError, TimeoutError, UnicodeDecodeError) as error:
+        raise RuntimeError(f"{url}: {error}") from error
+
+
 def fetch_public_page(public_url: str) -> None:
     request = Request(
         public_url.rstrip("/") + "/",
@@ -417,6 +498,26 @@ def fetch_public_page(public_url: str) -> None:
                 raise RuntimeError("empty HTTP response")
     except (HTTPError, URLError, TimeoutError, RuntimeError) as error:
         raise RuntimeError(f"{public_url}: {error}") from error
+
+
+def validate_public_unified_tia_pack(public_url: str, checks: list[str], errors: list[str]) -> None:
+    """Confirm every public CSV link is downloadable and retains its exact header."""
+    try:
+        manifest = fetch_public_json(public_url, "tia-unified-csv/UNIFIED_TIA_CSV_MANIFEST.json")
+        if manifest.get("schema_version") != "1.0.0" or len(manifest.get("files", [])) != len(CSV_CONTRACTS):
+            raise RuntimeError("public TIA pack manifest has an unexpected schema version or file count")
+        guide = fetch_public_text(public_url, "tia-unified-csv/README.md")
+        coverage = fetch_public_text(public_url, "tia-unified-csv/UNIFIED_TIA_OUTPUT_COVERAGE.csv")
+        if "Native P6/XER" not in guide or not coverage.startswith("controlled_output,"):
+            raise RuntimeError("public TIA guide or output coverage is incomplete")
+        for contract in CSV_CONTRACTS:
+            header = fetch_public_text(public_url, f"tia-unified-csv/{contract.filename}").splitlines()
+            if not header or header[0] != ",".join(contract.columns):
+                raise RuntimeError(f"public TIA CSV header does not match contract: {contract.filename}")
+    except RuntimeError as error:
+        errors.append(f"public Universal TIA CSV downloads cannot be verified: {error}")
+    else:
+        checks.append(f"public Universal TIA CSV downloads expose all {len(CSV_CONTRACTS)} schema-validated templates")
 
 
 def controlled_tia_delivery_contract(project: dict[str, Any]) -> dict[str, Any]:
@@ -480,6 +581,8 @@ def validate_public_delivery(
     except RuntimeError as error:
         errors.append(f"public Vercel application cannot be verified: {error}")
         return
+
+    validate_public_unified_tia_pack(public_url, checks, errors)
 
     if local_portfolio is None:
         errors.append("public Vercel parity cannot run because local portfolio.json is missing")
@@ -550,6 +653,7 @@ def main(argv: list[str] | None = None) -> int:
 
     validate_workspace_tab_catalog(errors, checks)
     validate_streamlit_tia_catalog(errors, checks)
+    validate_unified_tia_template_pack(errors, checks)
 
     for project in discover_projects():
         project_key = str(project["project_key"])
@@ -602,6 +706,8 @@ def main(argv: list[str] | None = None) -> int:
         errors.append("portfolio.json is missing")
     else:
         portfolio = json.loads(portfolio_path.read_text(encoding="utf-8"))
+        if payload_exposes_local_path(portfolio):
+            errors.append("portfolio.json exposes a local workstation path")
         totals = portfolio.get("totals", {})
         portfolio_keys = {str(item.get("project_key")) for item in portfolio.get("projects", [])}
         if portfolio_keys != project_keys:

@@ -206,8 +206,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-11T07:03:43",
-  "fingerprint": "1008e6c27d797c8c72c7f93d9755acadc210e526bfefdb668f9807c8939d70e3",
+  "last_updated": "2026-08-13T04:55:55",
+  "fingerprint": "41558b5be905fec0e10301df991cf563bcdfacb59709c44cddd886c215fa9edc",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -3594,21 +3594,21 @@
           "relative_path": "05-contracts/source/Overall Contract.pdf",
           "extension": "pdf",
           "size_kb": 11.9,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:40"
         },
         {
           "name": "Overall_Contract_clause_library.xlsx",
           "relative_path": "05-contracts/source/Overall_Contract_clause_library.xlsx",
           "extension": "xlsx",
           "size_kb": 10.6,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:40"
         },
         {
           "name": "README.md",
           "relative_path": "05-contracts/source/README.md",
           "extension": "md",
           "size_kb": 0.2,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:40"
         }
       ],
       "evidence_files": [
@@ -3617,42 +3617,42 @@
           "relative_path": "06-evidence/clause_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:40"
         },
         {
           "name": "contract_evidence_register_template.csv",
           "relative_path": "06-evidence/contract_evidence_register_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:40"
         },
         {
           "name": "correspondence_reference_template.csv",
           "relative_path": "06-evidence/correspondence_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:40"
         },
         {
           "name": "document_reference_template.csv",
           "relative_path": "06-evidence/document_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:40"
         },
         {
           "name": "evidence_register_template.csv",
           "relative_path": "06-evidence/evidence_register_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:40"
         },
         {
           "name": "photo_log_template.csv",
           "relative_path": "06-evidence/photo_log_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:40"
         }
       ],
       "database": {
@@ -4940,7 +4940,6 @@
               {
                 "id": 3,
                 "file_name": "Overall_Contract_clause_library.xlsx",
-                "file_path": "C:\\Users\\pc\\OneDrive\\Documents\\Project Intelligence Hub\\projects\\Buildings\\Sophia-Mall\\05-contracts\\source\\Overall_Contract_clause_library.xlsx",
                 "file_hash": "f39eda8437cd93e5e7f6dc5486ded941391b74a40d90e9d562be354ae59840b0",
                 "file_type": ".xlsx",
                 "upload_date": "2026-06-27T02:23:54+00:00",
@@ -5145,7 +5144,7 @@
       "controlled_assessment": {
         "status": {
           "knowledge_base_status": "Needs review",
-          "error": "cannot import name 'build_project_contract_controls' from 'contract_claims_center' (D:\\Project Intelligence Hub NextJS-publish-output-studio\\contract_claims_center.py)"
+          "error": "cannot import name 'build_project_contract_controls' from 'contract_claims_center' ([local path removed])"
         },
         "controls": {
           "project_id": "Sophia-Mall",
@@ -5800,126 +5799,126 @@
           "relative_path": "Sophia-Mall/01_executive_dashboard.html",
           "extension": "html",
           "size_kb": 17.8,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "01_executive_dashboard.pdf",
           "relative_path": "Sophia-Mall/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 829.0,
-          "modified": "2026-08-11T07:04:23"
+          "modified": "2026-08-13T04:57:46"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "Sophia-Mall/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.6,
-          "modified": "2026-08-11T07:04:23"
+          "modified": "2026-08-13T04:57:47"
         },
         {
           "name": "02_master_dashboard.html",
           "relative_path": "Sophia-Mall/02_master_dashboard.html",
           "extension": "html",
           "size_kb": 84.9,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "02_master_dashboard.pdf",
           "relative_path": "Sophia-Mall/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 862.6,
-          "modified": "2026-08-11T07:04:26"
+          "modified": "2026-08-13T04:57:53"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "Sophia-Mall/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-11T07:04:26"
+          "modified": "2026-08-13T04:57:53"
         },
         {
           "name": "03_elite_svg_charts.html",
           "relative_path": "Sophia-Mall/03_elite_svg_charts.html",
           "extension": "html",
           "size_kb": 50.8,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "03_elite_svg_charts.pdf",
           "relative_path": "Sophia-Mall/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 234.6,
-          "modified": "2026-08-11T07:04:27"
+          "modified": "2026-08-13T04:57:55"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "Sophia-Mall/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-11T07:04:27"
+          "modified": "2026-08-13T04:57:55"
         },
         {
           "name": "04_linked_executive_dashboard.html",
           "relative_path": "Sophia-Mall/04_linked_executive_dashboard.html",
           "extension": "html",
           "size_kb": 56.4,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "04_linked_executive_dashboard.pdf",
           "relative_path": "Sophia-Mall/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1093.9,
-          "modified": "2026-08-11T07:04:31"
+          "modified": "2026-08-13T04:58:01"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "Sophia-Mall/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.6,
-          "modified": "2026-08-11T07:04:31"
+          "modified": "2026-08-13T04:58:01"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
           "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.docx",
           "extension": "docx",
           "size_kb": 34.8,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "05_delay_tia_governed_assessment.html",
           "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.html",
           "extension": "html",
           "size_kb": 2.5,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "05_delay_tia_governed_assessment.manifest.json",
           "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.manifest.json",
           "extension": "json",
           "size_kb": 0.6,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "05_delay_tia_governed_assessment.pdf",
           "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.pdf",
           "extension": "pdf",
           "size_kb": 2.1,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "05_delay_tia_governed_assessment.pptx",
           "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.pptx",
           "extension": "pptx",
           "size_kb": 27.8,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "universal_report_engine_manifest.json",
           "relative_path": "Sophia-Mall/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 33.6,
-          "modified": "2026-08-11T07:04:32"
+          "modified": "2026-08-13T05:07:13"
         }
       ],
       "watchers": [
@@ -7117,12 +7116,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 848904,
-          "sha256": "6932eeb1b114e3a081d60ee605314216e39ae3ebe880eedc28193f88334e91ac"
+          "sha256": "d961a3e1a5a786c6d2e7c7f10cab5fd6fa82748709c04da811029266d710140a"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29236,
-          "sha256": "5ba0a456cde358631a692db4796e189c35c877ff8ef71cb2462163547c33c871"
+          "sha256": "b3cfd51945e82c77d7b5bfb12279766af9c5d5234238fca958053ef063575103"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7142,12 +7141,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 883327,
-          "sha256": "5bb5063aba9787df02e3867dedae57efce1c9e3be235327d18078d988cc44137"
+          "sha256": "35b5a99068f2c4b876d8f4107e053a56753cfc50dd27ddbe2438147eda6fb74b"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29232,
-          "sha256": "d2a17e01de7261e1c75abadbb5a158eaf29a0120a9f08a6314a00786429fedb9"
+          "sha256": "5db29f89a4737f4d87bc33c1c2b247ba8beab678a6f1ab3a12af5bee2fa4a353"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7167,12 +7166,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 240246,
-          "sha256": "83efc8133d100fd7115989f17a7cafedecb3ba9327ee491b4fc245f522631a77"
+          "sha256": "f506a3e708de545291a9656b1275e978dbbc23e3830a327cd2f223d646c809a2"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29233,
-          "sha256": "21567d15ef5f3208d0d7629b88a9ceffc51251156385ac57d02652b85ba1d312"
+          "sha256": "c4a9ced491f7ddcb9d30f2a81b106ae67c3a8f9f596ca2134302603f2c24bccf"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7192,12 +7191,12 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1120164,
-          "sha256": "d2c6f2481c9a6bdd5b42654ad1d7ece0b9cbeedc71539430519fd31c58fddbe2"
+          "sha256": "2e3818f0d80495751a3999e51a1fdc2bf0e88fd8b2448a478419c6ef3b2019fb"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29241,
-          "sha256": "13d9420b3ca35701498c2c1d148f6a36e5cadc9420b5d8171bd8a9617b987561"
+          "sha256": "8f384ef07d07f01679de179aa45dc165d20e7754229efe5cf13f23f3c6a0d58f"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7208,7 +7207,7 @@
   "universal_report_engine": {
     "project_id": "Sophia-Mall",
     "project_key": "sophia-mall",
-    "source_fingerprint": "4c2bde0114738be10889f340309acfb484e3c42ec6d77a60b3379c8bf3f09a69",
+    "source_fingerprint": "e464bcc4aba07c818b259a3f816c8ad074e81ec21d10ef0061f4388a693fabf4",
     "source_scope": "active project folder only",
     "source_file_count": 58,
     "source_inventory": [
@@ -7557,8 +7556,8 @@
       {
         "relative_path": "project_manifest.json",
         "extension": ".json",
-        "size_bytes": 394,
-        "sha256": "f5eac7839c11d1b3d652e9b7719b1887ddf0efba09b48ce347d3f505926691e7"
+        "size_bytes": 398,
+        "sha256": "864edb1502e03b286e996c4df0d1d7f212d73d20bc8bb406f6ad68c75e182606"
       }
     ],
     "engine": {
@@ -8131,6 +8130,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-11T04:04:32+00:00"
+    "updated_at": "2026-08-13T02:07:13+00:00"
   }
 }

@@ -233,8 +233,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-11T07:03:43",
-  "fingerprint": "da30cf77ff78072938a4e82886efed9cb70635f5d159e473d265e1b441a976f0",
+  "last_updated": "2026-08-13T04:55:55",
+  "fingerprint": "280a70e2dda02e41398358b5110b60738e0d8ecc782ec742285121e4cbb228ef",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -3621,21 +3621,21 @@
           "relative_path": "05-contracts/source/Overall Contract.pdf",
           "extension": "pdf",
           "size_kb": 11.9,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:41"
         },
         {
           "name": "Overall_Contract_clause_library.xlsx",
           "relative_path": "05-contracts/source/Overall_Contract_clause_library.xlsx",
           "extension": "xlsx",
           "size_kb": 10.5,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:41"
         },
         {
           "name": "README.md",
           "relative_path": "05-contracts/source/README.md",
           "extension": "md",
           "size_kb": 0.2,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:41"
         }
       ],
       "evidence_files": [
@@ -3644,42 +3644,42 @@
           "relative_path": "06-evidence/clause_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:41"
         },
         {
           "name": "contract_evidence_register_template.csv",
           "relative_path": "06-evidence/contract_evidence_register_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:41"
         },
         {
           "name": "correspondence_reference_template.csv",
           "relative_path": "06-evidence/correspondence_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:41"
         },
         {
           "name": "document_reference_template.csv",
           "relative_path": "06-evidence/document_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:41"
         },
         {
           "name": "evidence_register_template.csv",
           "relative_path": "06-evidence/evidence_register_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:41"
         },
         {
           "name": "photo_log_template.csv",
           "relative_path": "06-evidence/photo_log_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:41"
         }
       ],
       "database": {
@@ -4941,7 +4941,6 @@
               {
                 "id": 3,
                 "file_name": "Overall_Contract_clause_library.xlsx",
-                "file_path": "C:\\Users\\pc\\OneDrive\\Documents\\Project Intelligence Hub\\projects\\Tunnels\\Suez-Tunnel\\05-contracts\\source\\Overall_Contract_clause_library.xlsx",
                 "file_hash": "b977c2cbca9385310712ddc6f0f2c70c46865c901330f10f0339327276ea2f44",
                 "file_type": ".xlsx",
                 "upload_date": "2026-06-27T02:23:55+00:00",
@@ -5146,7 +5145,7 @@
       "controlled_assessment": {
         "status": {
           "knowledge_base_status": "Needs review",
-          "error": "cannot import name 'build_project_contract_controls' from 'contract_claims_center' (D:\\Project Intelligence Hub NextJS-publish-output-studio\\contract_claims_center.py)"
+          "error": "cannot import name 'build_project_contract_controls' from 'contract_claims_center' ([local path removed])"
         },
         "controls": {
           "project_id": "Suez-Tunnel",
@@ -5785,126 +5784,126 @@
           "relative_path": "Suez-Tunnel/01_executive_dashboard.html",
           "extension": "html",
           "size_kb": 17.8,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "01_executive_dashboard.pdf",
           "relative_path": "Suez-Tunnel/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 897.3,
-          "modified": "2026-08-11T07:04:37"
+          "modified": "2026-08-13T04:58:10"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "Suez-Tunnel/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-11T07:04:38"
+          "modified": "2026-08-13T04:58:10"
         },
         {
           "name": "02_master_dashboard.html",
           "relative_path": "Suez-Tunnel/02_master_dashboard.html",
           "extension": "html",
           "size_kb": 85.0,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "02_master_dashboard.pdf",
           "relative_path": "Suez-Tunnel/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 864.0,
-          "modified": "2026-08-11T07:04:40"
+          "modified": "2026-08-13T04:58:14"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "Suez-Tunnel/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-11T07:04:40"
+          "modified": "2026-08-13T04:58:14"
         },
         {
           "name": "03_elite_svg_charts.html",
           "relative_path": "Suez-Tunnel/03_elite_svg_charts.html",
           "extension": "html",
           "size_kb": 50.8,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "03_elite_svg_charts.pdf",
           "relative_path": "Suez-Tunnel/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 235.7,
-          "modified": "2026-08-11T07:04:41"
+          "modified": "2026-08-13T04:58:16"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "Suez-Tunnel/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-11T07:04:41"
+          "modified": "2026-08-13T04:58:16"
         },
         {
           "name": "04_linked_executive_dashboard.html",
           "relative_path": "Suez-Tunnel/04_linked_executive_dashboard.html",
           "extension": "html",
           "size_kb": 56.4,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "04_linked_executive_dashboard.pdf",
           "relative_path": "Suez-Tunnel/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1095.7,
-          "modified": "2026-08-11T07:04:45"
+          "modified": "2026-08-13T04:58:23"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "Suez-Tunnel/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.6,
-          "modified": "2026-08-11T07:04:45"
+          "modified": "2026-08-13T04:58:23"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
           "relative_path": "Suez-Tunnel/05_delay_tia_governed_assessment.docx",
           "extension": "docx",
           "size_kb": 34.8,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "05_delay_tia_governed_assessment.html",
           "relative_path": "Suez-Tunnel/05_delay_tia_governed_assessment.html",
           "extension": "html",
           "size_kb": 2.5,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "05_delay_tia_governed_assessment.manifest.json",
           "relative_path": "Suez-Tunnel/05_delay_tia_governed_assessment.manifest.json",
           "extension": "json",
           "size_kb": 0.6,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "05_delay_tia_governed_assessment.pdf",
           "relative_path": "Suez-Tunnel/05_delay_tia_governed_assessment.pdf",
           "extension": "pdf",
           "size_kb": 2.1,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "05_delay_tia_governed_assessment.pptx",
           "relative_path": "Suez-Tunnel/05_delay_tia_governed_assessment.pptx",
           "extension": "pptx",
           "size_kb": 27.8,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "universal_report_engine_manifest.json",
           "relative_path": "Suez-Tunnel/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 33.6,
-          "modified": "2026-08-11T07:04:46"
+          "modified": "2026-08-13T05:07:13"
         }
       ],
       "watchers": [
@@ -7096,12 +7095,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 918800,
-          "sha256": "e86bd29a2f6bc9ab65dd01b49a62b3c0cb76c20325e4cd825aa9aeea9672fd6a"
+          "sha256": "c1549a8987eb35433296ef21db2b0ac4b1d1e137a9541446b195fdb453b70e44"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29234,
-          "sha256": "3060f9061721796f140106a4ebe9fc8cf44c4e8e20cf518829461d1e4b507650"
+          "sha256": "7f59f798a881a4dbecf529035d5195e820c58d1b8e0425a006ee5bc8494f7e58"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7121,12 +7120,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 884770,
-          "sha256": "2373222d9b63b9021acbfd36c71a85f23032b1372deb8039e9e177813e66a391"
+          "sha256": "7ccc72a68dc22e8d0fc6b531cb823a3b47857ab7ace2717de45b5477264ced04"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29230,
-          "sha256": "efd8b6f52d59fcf622f3e252e5f1e568b646571984da2661c2b8d77cfbcd075a"
+          "sha256": "87754e372b0d86f8e7ca207ba66a0e678b615cc628b501e0280f085374395463"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7146,12 +7145,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 241398,
-          "sha256": "a1c18afabda9e230f65ccf7aefcfdd829b112c5da20ceacdb6d7c4bea0a89bf0"
+          "sha256": "b7779a9a646a687d2536ee95d9fdc8d92e438b7e6dfb4209997fbce5b605bbed"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29231,
-          "sha256": "e1c928a19d9d6c8627ffd3b983db339b622e8e6bbc4dc93cbc7a2a51a26819b6"
+          "sha256": "3fe10065859acba8a1a1b2ff161674580d86f5289f1f21794e4c5bcc7350750f"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7171,12 +7170,12 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1121976,
-          "sha256": "0aafad7927d699361d294f23f330ed67650eb55cb897127679eff1a7b8efea31"
+          "sha256": "42b1574a279101d46b3d6fac19600907a9ec5236450be38a52274c4d40c593f0"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29240,
-          "sha256": "4d59ee5b53644fbcc59e42853b08775cd75782aa1ef16e3cd134b2afcea280cf"
+          "sha256": "b05d9d98ce3ac531d192001ca6cc08a59b6254dbc8e4cc9b8bfb98f65890d44b"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7187,7 +7186,7 @@
   "universal_report_engine": {
     "project_id": "Suez-Tunnel",
     "project_key": "suez-tunnel",
-    "source_fingerprint": "98c68c23b27a0dc14c2974d9be40f529bc91ff0a05cc4b690de2cc4bab99fedf",
+    "source_fingerprint": "82bbc18e21778a1cb267651fff66b216a6c457bf278f186c1d54bd733c6152c7",
     "source_scope": "active project folder only",
     "source_file_count": 58,
     "source_inventory": [
@@ -7536,8 +7535,8 @@
       {
         "relative_path": "project_manifest.json",
         "extension": ".json",
-        "size_bytes": 387,
-        "sha256": "dedead8aec96bf191141c7112be646f65b0830d6bbe03a60cfea3819e2768638"
+        "size_bytes": 391,
+        "sha256": "6efd07ece28936a4772972fbe105e158db0c52d6bd9b36717ce828c6c0b9c7a3"
       }
     ],
     "engine": {
@@ -8110,6 +8109,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-11T04:04:46+00:00"
+    "updated_at": "2026-08-13T02:07:13+00:00"
   }
 }

@@ -40,6 +40,19 @@ WEBSITE_SOURCE_GENERATED = ROOT / "website" / "src" / "generated"
 # in browser payloads makes selected-project navigation unreliable on mobile and
 # does not add report capability; complete report artifacts stay in Output Studio.
 WORKSPACE_TABLE_ROW_LIMIT = 200
+PUBLIC_LOCAL_PATH_KEYS = {
+    "path",
+    "file_path",
+    "project_dir",
+    "project_folder_path",
+    "database_path",
+    "contracts_dir",
+    "evidence_dir",
+    "run_path",
+    "snapshot_dir",
+    "report_path",
+}
+LOCAL_PATH_TEXT_PATTERN = re.compile(r"(?i)(?:[a-z]:[\\/]|/(?:users|home|private)/)[^\r\n\"')]+")
 
 
 def slugify(value: str) -> str:
@@ -50,6 +63,34 @@ def slugify(value: str) -> str:
 def normalize_field_name(value: Any) -> str:
     """Match CSV headers despite spaces, punctuation, case, or underscores."""
     return re.sub(r"[^a-z0-9]+", "", str(value or "").strip().lower())
+
+
+def _is_absolute_local_path(value: Any) -> bool:
+    text = str(value or "").strip()
+    return bool(re.match(r"^[a-zA-Z]:[\\/]", text) or text.startswith("/Users/") or text.startswith("/home/") or text.startswith("/private/"))
+
+
+def public_safe_payload(value: Any) -> Any:
+    """Remove workstation paths from browser payloads without removing lineage.
+
+    Relative source names and published ``/generated`` URLs remain visible. Only
+    absolute local paths and their occurrence inside diagnostics are removed.
+    """
+    if isinstance(value, dict):
+        result: dict[str, Any] = {}
+        for key, item in value.items():
+            key_text = str(key)
+            if key_text in PUBLIC_LOCAL_PATH_KEYS and _is_absolute_local_path(item):
+                continue
+            result[key_text] = public_safe_payload(item)
+        return result
+    if isinstance(value, list):
+        return [public_safe_payload(item) for item in value]
+    if isinstance(value, tuple):
+        return [public_safe_payload(item) for item in value]
+    if isinstance(value, str):
+        return LOCAL_PATH_TEXT_PATTERN.sub("[local path removed]", value)
+    return value
 
 
 def safe_float(value: Any) -> float | None:
@@ -1720,10 +1761,12 @@ def _json_default(value: Any) -> str:
 def write_json_if_changed(path: Path, payload: dict[str, Any]) -> bool:
     """Write generated data only when its content changes, preserving project freshness."""
     content = json.dumps(payload, indent=2, ensure_ascii=False, default=_json_default) + "\n"
-    if path.exists() and path.read_text(encoding="utf-8") == content:
+    encoded = content.encode("utf-8")
+    if path.exists() and path.read_bytes() == encoded:
         return False
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(content, encoding="utf-8")
+    with path.open("w", encoding="utf-8", newline="\n") as stream:
+        stream.write(content)
     return True
 
 
@@ -2070,12 +2113,13 @@ def _generate() -> None:
     # Historic submitted-guide assets remain recoverable on disk but are not
     # copied into active website payloads or reports.  Controlled TIA runs are
     # published through each project's approved source contract instead.
-    portfolio = build_portfolio(project_records)
+    public_project_records = [public_safe_payload(project) for project in project_records]
+    portfolio = build_portfolio(public_project_records)
     write_json_if_changed(DATA_ROOT / "portfolio.json", portfolio)
     projects_dir = DATA_ROOT / "projects"
     projects_dir.mkdir(parents=True, exist_ok=True)
-    active_project_files = {f"{project['project_key']}.json" for project in project_records}
-    for project in project_records:
+    active_project_files = {f"{project['project_key']}.json" for project in public_project_records}
+    for project in public_project_records:
         write_json_if_changed(projects_dir / f"{project['project_key']}.json", project)
     for stale in projects_dir.glob("*.json"):
         if stale.name not in active_project_files:
@@ -2099,7 +2143,7 @@ def _generate() -> None:
             report_path=ROOT / "12-logs" / "guardrail_report_latest.md",
             block_on_issues=block_on_issues,
         )
-        portfolio["guardrails"] = guardrails
+        portfolio["guardrails"] = public_safe_payload(guardrails)
         write_json_if_changed(DATA_ROOT / "portfolio.json", portfolio)
         print(
             "Guardrails: "

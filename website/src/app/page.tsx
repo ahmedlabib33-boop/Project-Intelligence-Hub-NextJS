@@ -1213,6 +1213,59 @@ function GovernedTiaReportDownloads({ project }: { project: ProjectRecord }) {
   );
 }
 
+const unifiedTiaCsvDownloads = [
+  ["Project metadata", "01_project_metadata.csv"],
+  ["Source files", "02_source_file_register.csv"],
+  ["Native XER pairs", "03_native_xer_pair_register.csv"],
+  ["P6 activities", "04_p6_activity_register.csv"],
+  ["P6 relationships", "05_p6_relationship_register.csv"],
+  ["Delay events", "06_delay_event_register.csv"],
+  ["Fragnet activities", "07_fragnet_activity_register.csv"],
+  ["Fragnet relationships", "08_fragnet_relationship_register.csv"],
+  ["Before / after matrix", "09_before_after_fragnet_comparison.csv"],
+  ["Concurrency / entitlement", "10_concurrency_entitlement_register.csv"],
+  ["Evidence and notices", "11_entitlement_evidence_register.csv"],
+  ["Event classification", "12_delay_event_classification.csv"],
+  ["Recovery scenario", "13_tia_recovery_scenario.csv"],
+  ["Controlled release", "14_controlled_release_register.csv"],
+  ["Reconciliation", "15_reconciliation_register.csv"],
+  ["Output artifacts", "16_output_artifact_register.csv"],
+] as const;
+
+function UnifiedTiaCsvDownloadPack() {
+  const root = "/tia-unified-csv";
+  return (
+    <section className="feature-card unified-tia-csv-pack">
+      <div className="feature-card-head">
+        <div>
+          <h3>Universal Controlled TIA CSV Pack</h3>
+          <small>Project-neutral input contract aligned to the controlled TIA workflow.</small>
+        </div>
+        <span>16 CSV files</span>
+      </div>
+      <p>
+        Download an empty pack for a new project. It carries the same source-integrity, CPM/XER, fragnet, concurrency, EOT-reconciliation, and artifact controls used by the governed workflow, but never copies another project&apos;s data or conclusion.
+      </p>
+      <div className="report-format-downloads" aria-label="Universal controlled TIA CSV documentation downloads">
+        <a href={`${root}/README.md`} download="README.md" rel="noopener">Download guide</a>
+        <a href={`${root}/UNIFIED_TIA_CSV_MANIFEST.json`} download="UNIFIED_TIA_CSV_MANIFEST.json" rel="noopener">Download full schema</a>
+        <a href={`${root}/UNIFIED_TIA_OUTPUT_COVERAGE.csv`} download="UNIFIED_TIA_OUTPUT_COVERAGE.csv" rel="noopener">Download output coverage</a>
+      </div>
+      <div className="unified-tia-csv-download-grid" aria-label="Universal controlled TIA CSV templates">
+        {unifiedTiaCsvDownloads.map(([label, filename]) => (
+          <a key={filename} href={`${root}/${filename}`} download={filename} rel="noopener">
+            <strong>{label}</strong>
+            <span>{filename}</span>
+          </a>
+        ))}
+      </div>
+      <p className="unified-tia-csv-control-note">
+        A completed pack must be validated against its own selected project before controlled review. A valid CSV structure is not a calculated or approved contractual EOT; native P6/XER, project evidence, reconciliation closure, and formal approval remain mandatory.
+      </p>
+    </section>
+  );
+}
+
 function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
   const engine = project.universal_report_engine;
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
@@ -1798,6 +1851,7 @@ function DelayTiaParityPanel({ project }: { project: ProjectRecord }) {
         </section>
         <section className="feature-card"><div className="feature-card-head"><h3>Evidence Boundary</h3><span>project_id enforced</span></div><p>Only this project&apos;s approved release, XER pairs, relationships, evidence references, controlled run, and project-scoped AI context are available. Another project&apos;s source package is never used as a fallback.</p></section>
       </div>
+      <UnifiedTiaCsvDownloadPack />
       <ModuleTabs label="Controlled TIA workflow" tabs={run.workflow_tabs} activeTab={view} onChange={setView} />
       {view === "Time Impact Methodology" ? <ControlledTiaViewExhibit exhibits={run.view_exhibits} view={view} emptyText="No approved methodology exhibit is available for this selected project. Add its own project-local methodology file to the approved submission manifest." /> : null}
       {view === "Schedule and CPM" ? <div className="feature-stack"><ControlledTiaChartGrid charts={run.charts} view={view} /><section className="feature-card"><div className="feature-card-head"><h3>Schedule and CPM Controls</h3><span>{displayCell(schedule.status)}</span></div><ul>{(schedule.cpm_controls || []).map((control) => <li key={control}>{control}</li>)}</ul></section><ProjectTableSelector title="Approved Matrix, Native XER, and CPM Evidence" tables={sourceTables} preferred={["Approved Before / After Matrix", "Native XER Pair Register", "Relationship and Lag Evidence"]} /></div> : null}

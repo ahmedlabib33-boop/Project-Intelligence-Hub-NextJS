@@ -233,8 +233,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-11T07:03:43",
-  "fingerprint": "a284cea338cb8225219e954e13d5c3f47c5911d5fcb09e3f59c2a077013f0aa8",
+  "last_updated": "2026-08-13T04:55:55",
+  "fingerprint": "f0ad4068abff74dbc30fcd662edeb6e4123a55152d8494e8afe58dd8b7a3deb6",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -3621,21 +3621,21 @@
           "relative_path": "05-contracts/source/Overall Contract.pdf",
           "extension": "pdf",
           "size_kb": 11.9,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:40"
         },
         {
           "name": "Overall_Contract_clause_library.xlsx",
           "relative_path": "05-contracts/source/Overall_Contract_clause_library.xlsx",
           "extension": "xlsx",
           "size_kb": 10.5,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:40"
         },
         {
           "name": "README.md",
           "relative_path": "05-contracts/source/README.md",
           "extension": "md",
           "size_kb": 0.2,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:40"
         }
       ],
       "evidence_files": [
@@ -3644,42 +3644,42 @@
           "relative_path": "06-evidence/clause_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:40"
         },
         {
           "name": "contract_evidence_register_template.csv",
           "relative_path": "06-evidence/contract_evidence_register_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:40"
         },
         {
           "name": "correspondence_reference_template.csv",
           "relative_path": "06-evidence/correspondence_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:40"
         },
         {
           "name": "document_reference_template.csv",
           "relative_path": "06-evidence/document_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:40"
         },
         {
           "name": "evidence_register_template.csv",
           "relative_path": "06-evidence/evidence_register_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:40"
         },
         {
           "name": "photo_log_template.csv",
           "relative_path": "06-evidence/photo_log_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:40"
         }
       ],
       "database": {
@@ -4941,7 +4941,6 @@
               {
                 "id": 4,
                 "file_name": "Overall_Contract_clause_library.xlsx",
-                "file_path": "C:\\Users\\pc\\OneDrive\\Documents\\Project Intelligence Hub\\projects\\Bridges\\LMD-Bridgs\\05-contracts\\source\\Overall_Contract_clause_library.xlsx",
                 "file_hash": "279abaa9b28325bb3a90be4ac30aeeb6a99a971ea84b48df2c5922cf6c6ea1e5",
                 "file_type": ".xlsx",
                 "upload_date": "2026-06-27T02:23:53+00:00",
@@ -5146,7 +5145,7 @@
       "controlled_assessment": {
         "status": {
           "knowledge_base_status": "Needs review",
-          "error": "cannot import name 'build_project_contract_controls' from 'contract_claims_center' (D:\\Project Intelligence Hub NextJS-publish-output-studio\\contract_claims_center.py)"
+          "error": "cannot import name 'build_project_contract_controls' from 'contract_claims_center' ([local path removed])"
         },
         "controls": {
           "project_id": "LMD-Bridge",
@@ -5785,126 +5784,126 @@
           "relative_path": "LMD-Bridgs/01_executive_dashboard.html",
           "extension": "html",
           "size_kb": 17.8,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "01_executive_dashboard.pdf",
           "relative_path": "LMD-Bridgs/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 930.7,
-          "modified": "2026-08-11T07:04:01"
+          "modified": "2026-08-13T04:57:17"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "LMD-Bridgs/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-11T07:04:01"
+          "modified": "2026-08-13T04:57:17"
         },
         {
           "name": "02_master_dashboard.html",
           "relative_path": "LMD-Bridgs/02_master_dashboard.html",
           "extension": "html",
           "size_kb": 84.8,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "02_master_dashboard.pdf",
           "relative_path": "LMD-Bridgs/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 862.9,
-          "modified": "2026-08-11T07:04:04"
+          "modified": "2026-08-13T04:57:21"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "LMD-Bridgs/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-11T07:04:04"
+          "modified": "2026-08-13T04:57:22"
         },
         {
           "name": "03_elite_svg_charts.html",
           "relative_path": "LMD-Bridgs/03_elite_svg_charts.html",
           "extension": "html",
           "size_kb": 50.8,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "03_elite_svg_charts.pdf",
           "relative_path": "LMD-Bridgs/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 236.0,
-          "modified": "2026-08-11T07:04:05"
+          "modified": "2026-08-13T04:57:23"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "LMD-Bridgs/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-11T07:04:05"
+          "modified": "2026-08-13T04:57:23"
         },
         {
           "name": "04_linked_executive_dashboard.html",
           "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.html",
           "extension": "html",
           "size_kb": 56.4,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "04_linked_executive_dashboard.pdf",
           "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1096.1,
-          "modified": "2026-08-11T07:04:09"
+          "modified": "2026-08-13T04:57:29"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.6,
-          "modified": "2026-08-11T07:04:09"
+          "modified": "2026-08-13T04:57:29"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
           "relative_path": "LMD-Bridgs/05_delay_tia_governed_assessment.docx",
           "extension": "docx",
           "size_kb": 34.8,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "05_delay_tia_governed_assessment.html",
           "relative_path": "LMD-Bridgs/05_delay_tia_governed_assessment.html",
           "extension": "html",
           "size_kb": 2.5,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "05_delay_tia_governed_assessment.manifest.json",
           "relative_path": "LMD-Bridgs/05_delay_tia_governed_assessment.manifest.json",
           "extension": "json",
           "size_kb": 0.6,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "05_delay_tia_governed_assessment.pdf",
           "relative_path": "LMD-Bridgs/05_delay_tia_governed_assessment.pdf",
           "extension": "pdf",
           "size_kb": 2.1,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "05_delay_tia_governed_assessment.pptx",
           "relative_path": "LMD-Bridgs/05_delay_tia_governed_assessment.pptx",
           "extension": "pptx",
           "size_kb": 27.8,
-          "modified": "2026-08-11T06:54:27"
+          "modified": "2026-08-13T04:43:37"
         },
         {
           "name": "universal_report_engine_manifest.json",
           "relative_path": "LMD-Bridgs/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 33.6,
-          "modified": "2026-08-11T07:04:11"
+          "modified": "2026-08-13T05:07:12"
         }
       ],
       "watchers": [
@@ -7101,12 +7100,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 953015,
-          "sha256": "f557286d18ed0e906c4bbde52647c75425bb6ed2451e0e1df2dc46bf925e469a"
+          "sha256": "9b3c1126e7ba816385190f50fe5da1d03072e8310ec0469ed1fbdaa75d39098b"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29232,
-          "sha256": "1b2794a1caaaa230af730d7ec808eb496c492a3fef34e94a0a2ada7ccebb5f84"
+          "sha256": "66dc9a7abb5217d79e075a017d5831925f17a048f0b48906b054921ba6760da0"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7126,12 +7125,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 883572,
-          "sha256": "90eecb2de8ab98cce6d8c6ac54df3ad95a282853c0830733eeea7f041da9c219"
+          "sha256": "a0fb3500405e808b2d5bdc671c5413f8f64301f4dfa9d9e5e05325ff083ba47d"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29229,
-          "sha256": "df38ebae3ae0622511d0758437e4a2f1daca314bc4dc204a96a233b52d023895"
+          "sha256": "6e384b8f19c7ec6cf4d96b7b60a8671b4fe2d2c498c2c7fe8564c3ed8d27aac3"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7151,12 +7150,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 241628,
-          "sha256": "66840676f18e1a59250d1e689b9836bd18d2ab52ec95b49e06adc8ec31e9df12"
+          "sha256": "29ea8f88e583f9590340ff013ddda5c95a81024c6782db8d9f7669a5131d1f1a"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29229,
-          "sha256": "33461337c556fac06759605c50bf872f8088a580a67753f34aae65f6c8e82b90"
+          "sha256": "ea2afa736a5114332c0e6f511b128324532cd36888b112035e77ea240fa6b9ea"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7176,12 +7175,12 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1122400,
-          "sha256": "8b0ecc06f60c4ab453748871303f66a9829aa0a07d36b45ddfe7f77567c58afe"
+          "sha256": "f2189eaf338939de4010001e811d337869121d5807b32891f3058ca130a02038"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29237,
-          "sha256": "f456eeab9a7ba5bf6a80d22360c7cfbfeaeb5e05e1c38858f06ba1ee68a40f62"
+          "sha256": "bf6ea0f2a66faa5e1cb63ffdcb811b05282e25ad52751c0d97761eaf8dcea94f"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7192,7 +7191,7 @@
   "universal_report_engine": {
     "project_id": "LMD-Bridge",
     "project_key": "lmd-bridge",
-    "source_fingerprint": "451ee23ea8378415ad9d75256282e91dc8991bc0330bf866faedd3cba0339424",
+    "source_fingerprint": "a909e27d4bbb6a7887d7dded92952f5f93ccaeba975ebc37ef120c78a9c9682a",
     "source_scope": "active project folder only",
     "source_file_count": 58,
     "source_inventory": [
@@ -7541,8 +7540,8 @@
       {
         "relative_path": "project_manifest.json",
         "extension": ".json",
-        "size_bytes": 384,
-        "sha256": "8582a69e48ad8d4a943d9ff271600dfb7081f59038c085465cb0d3ce35bcc83f"
+        "size_bytes": 388,
+        "sha256": "5e7c63b9b18f2bb02c0ad086dd9b142247e6a0adbfd7ef631cf71214d58cbcb2"
       }
     ],
     "engine": {
@@ -8115,6 +8114,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-11T04:04:11+00:00"
+    "updated_at": "2026-08-13T02:07:12+00:00"
   }
 }

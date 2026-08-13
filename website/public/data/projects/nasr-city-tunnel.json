@@ -233,8 +233,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-11T07:03:43",
-  "fingerprint": "4ec0973142856279e89ae74456887520cdb55c361429211bb6a4611ac6112972",
+  "last_updated": "2026-08-13T04:55:55",
+  "fingerprint": "2a18c4c254a413d5ef9b8d77440326a517c1e7d64bd7d0779db86668d14207f3",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -3874,21 +3874,21 @@
           "relative_path": "05-contracts/source/Overall Contract.pdf",
           "extension": "pdf",
           "size_kb": 12.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:41"
         },
         {
           "name": "Overall_Contract_clause_library.xlsx",
           "relative_path": "05-contracts/source/Overall_Contract_clause_library.xlsx",
           "extension": "xlsx",
           "size_kb": 8.9,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:41"
         },
         {
           "name": "README.md",
           "relative_path": "05-contracts/source/README.md",
           "extension": "md",
           "size_kb": 0.2,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:41"
         }
       ],
       "evidence_files": [
@@ -3897,42 +3897,42 @@
           "relative_path": "06-evidence/clause_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:41"
         },
         {
           "name": "contract_evidence_register_template.csv",
           "relative_path": "06-evidence/contract_evidence_register_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:41"
         },
         {
           "name": "correspondence_reference_template.csv",
           "relative_path": "06-evidence/correspondence_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:41"
         },
         {
           "name": "document_reference_template.csv",
           "relative_path": "06-evidence/document_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:41"
         },
         {
           "name": "evidence_register_template.csv",
           "relative_path": "06-evidence/evidence_register_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:41"
         },
         {
           "name": "photo_log_template.csv",
           "relative_path": "06-evidence/photo_log_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-11T06:54:29"
+          "modified": "2026-08-13T04:43:41"
         }
       ],
       "database": {
@@ -5194,7 +5194,6 @@
               {
                 "id": 3,
                 "file_name": "Overall_Contract_clause_library.xlsx",
-                "file_path": "C:\\Users\\pc\\OneDrive\\Documents\\Project Intelligence Hub\\projects\\Tunnels\\Suez-Tunnel\\05-contracts\\source\\Overall_Contract_clause_library.xlsx",
                 "file_hash": "b977c2cbca9385310712ddc6f0f2c70c46865c901330f10f0339327276ea2f44",
                 "file_type": ".xlsx",
                 "upload_date": "2026-06-27T02:23:55+00:00",
@@ -5399,7 +5398,7 @@
       "controlled_assessment": {
         "status": {
           "knowledge_base_status": "Needs review",
-          "error": "cannot import name 'build_project_contract_controls' from 'contract_claims_center' (D:\\Project Intelligence Hub NextJS-publish-output-studio\\contract_claims_center.py)"
+          "error": "cannot import name 'build_project_contract_controls' from 'contract_claims_center' ([local path removed])"
         },
         "controls": {
           "project_id": "Nasr city-Tunnel",
@@ -6038,91 +6037,91 @@
           "relative_path": "Nasr city-Tunnel/01_executive_dashboard.html",
           "extension": "html",
           "size_kb": 1.2,
-          "modified": "2026-08-11T07:04:33"
+          "modified": "2026-08-13T04:58:03"
         },
         {
           "name": "01_executive_dashboard.pdf",
           "relative_path": "Nasr city-Tunnel/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 53.4,
-          "modified": "2026-08-11T07:04:33"
+          "modified": "2026-08-13T04:58:03"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "Nasr city-Tunnel/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-11T07:04:33"
+          "modified": "2026-08-13T04:58:04"
         },
         {
           "name": "02_master_dashboard.html",
           "relative_path": "Nasr city-Tunnel/02_master_dashboard.html",
           "extension": "html",
           "size_kb": 1.1,
-          "modified": "2026-08-11T07:04:33"
+          "modified": "2026-08-13T04:58:04"
         },
         {
           "name": "02_master_dashboard.pdf",
           "relative_path": "Nasr city-Tunnel/02_master_dashboard.pdf",
           "extension": "pdf",
-          "size_kb": 53.3,
-          "modified": "2026-08-11T07:04:34"
+          "size_kb": 53.2,
+          "modified": "2026-08-13T04:58:05"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "Nasr city-Tunnel/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-11T07:04:34"
+          "modified": "2026-08-13T04:58:05"
         },
         {
           "name": "03_elite_svg_charts.html",
           "relative_path": "Nasr city-Tunnel/03_elite_svg_charts.html",
           "extension": "html",
           "size_kb": 1.1,
-          "modified": "2026-08-11T07:04:34"
+          "modified": "2026-08-13T04:58:05"
         },
         {
           "name": "03_elite_svg_charts.pdf",
           "relative_path": "Nasr city-Tunnel/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 52.9,
-          "modified": "2026-08-11T07:04:35"
+          "modified": "2026-08-13T04:58:06"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "Nasr city-Tunnel/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-11T07:04:35"
+          "modified": "2026-08-13T04:58:06"
         },
         {
           "name": "04_linked_executive_dashboard.html",
           "relative_path": "Nasr city-Tunnel/04_linked_executive_dashboard.html",
           "extension": "html",
           "size_kb": 1.2,
-          "modified": "2026-08-11T07:04:35"
+          "modified": "2026-08-13T04:58:06"
         },
         {
           "name": "04_linked_executive_dashboard.pdf",
           "relative_path": "Nasr city-Tunnel/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 53.7,
-          "modified": "2026-08-11T07:04:35"
+          "modified": "2026-08-13T04:58:07"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "Nasr city-Tunnel/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.5,
-          "modified": "2026-08-11T07:04:35"
+          "modified": "2026-08-13T04:58:07"
         },
         {
           "name": "universal_report_engine_manifest.json",
           "relative_path": "Nasr city-Tunnel/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 33.4,
-          "modified": "2026-08-11T07:04:36"
+          "modified": "2026-08-13T05:07:13"
         }
       ],
       "watchers": [
@@ -6138,7 +6137,7 @@
         },
         {
           "name": "Generated report watcher",
-          "status": "Missing",
+          "status": "Configured",
           "detail": "Publishes project-specific HTML, PDF, and PowerPoint outputs from 11-outputs."
         }
       ]
@@ -7576,22 +7575,22 @@
         "html": {
           "name": "01_executive_dashboard.html",
           "bytes": 1183,
-          "sha256": "53d1e757d4f29e0660d83b6f802c0b15c760426db733fbba8cf5deffdb5e38c3"
+          "sha256": "e88f0cee0337d2d07622757ab9856bf2d8e20989c71b79058bd58ece999ff124"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 54690,
-          "sha256": "1c769b43f2041ff5a75390a9a569520397307bfad741b05b65e08b3ad11dbbee"
+          "bytes": 54684,
+          "sha256": "c07ce94f4d12838cf093c85bf2faba75a6609f587330ec8051f8495ee380035a"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29206,
-          "sha256": "750abddaf3392b9e1c3341c87a8f9dc85d63f57395afcfe7ac64a066761e121c"
+          "sha256": "e753d3cdb52b16fb61fdd76c7dc62a2e9a54988a52333c32d9f06eb9560093f4"
         }
       },
       "html_origin": "controlled_fallback",
       "source_project_id": "Nasr city-Tunnel",
-      "source_report_fingerprint": "4ec0973142856279e89ae74456887520cdb55c361429211bb6a4611ac6112972"
+      "source_report_fingerprint": "2a18c4c254a413d5ef9b8d77440326a517c1e7d64bd7d0779db86668d14207f3"
     },
     "master_dashboard": {
       "html": "/generated/Nasr-city-Tunnel/02_master_dashboard.html",
@@ -7601,22 +7600,22 @@
         "html": {
           "name": "02_master_dashboard.html",
           "bytes": 1177,
-          "sha256": "65c0864fdb30742a647836946be3a125ea3772edb0e22104bffc20f342a9ad62"
+          "sha256": "5335ba7096a6ba4789100ca02fc126fb08e43aae0b7ea26426bd57642837c3fd"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
-          "bytes": 54532,
-          "sha256": "78ff4409d32512a5f3af17d0b3fba44e566556cbb363e5cdf1eb7734c05b93a5"
+          "bytes": 54525,
+          "sha256": "00ae4b32b7cb90cd4232570a2ef840cd19519c190a6cc85ef02c063c2d7d9fad"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29203,
-          "sha256": "e3c5ed4767a92080d4ca38159178b7e6dbb32bacba903a8e883c726fa9329e64"
+          "sha256": "e013bbd13393fe366644be2ed7b17442bf4725cc8fde44b1a816a7bb0b251b3f"
         }
       },
       "html_origin": "controlled_fallback",
       "source_project_id": "Nasr city-Tunnel",
-      "source_report_fingerprint": "4ec0973142856279e89ae74456887520cdb55c361429211bb6a4611ac6112972"
+      "source_report_fingerprint": "2a18c4c254a413d5ef9b8d77440326a517c1e7d64bd7d0779db86668d14207f3"
     },
     "elite_svg_charts": {
       "html": "/generated/Nasr-city-Tunnel/03_elite_svg_charts.html",
@@ -7626,22 +7625,22 @@
         "html": {
           "name": "03_elite_svg_charts.html",
           "bytes": 1177,
-          "sha256": "373e4a9c27e262bdb47012e1cd08aea01973628bc86dc6f6bfc949de6c8d2573"
+          "sha256": "ef1d4d5db7fe184302bfc015a1344cb79ace9f55d576a51afebd2492b8427554"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
-          "bytes": 54177,
-          "sha256": "c06324aa51c79bc3f9be53ee9152704c4cf7c370598bf44c79753dfacccbf439"
+          "bytes": 54170,
+          "sha256": "0bef5e2950d6c14d6ebd17afa3efb1b1494101c61d5d50e89426a7a7e2607858"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29203,
-          "sha256": "cd012972dc105084f5a5d0ffb86a1a9bc086d17d8cec1755add42eeb7c83b396"
+          "sha256": "621a66e2f646904ce005f63371d13e4996092046330e3ea4ad308d918a50f9eb"
         }
       },
       "html_origin": "controlled_fallback",
       "source_project_id": "Nasr city-Tunnel",
-      "source_report_fingerprint": "4ec0973142856279e89ae74456887520cdb55c361429211bb6a4611ac6112972"
+      "source_report_fingerprint": "2a18c4c254a413d5ef9b8d77440326a517c1e7d64bd7d0779db86668d14207f3"
     },
     "linked_executive_dashboard": {
       "html": "/generated/Nasr-city-Tunnel/04_linked_executive_dashboard.html",
@@ -7651,28 +7650,28 @@
         "html": {
           "name": "04_linked_executive_dashboard.html",
           "bytes": 1197,
-          "sha256": "0601f0baccd4a17d6d62beb1a8d27551f8a075c66cbf6ff1dcb39b6b36f7818a"
+          "sha256": "c73f8a7068ff0f55570ef568cb9bcf8fed125f807bb91300b0f23f35d2b373b7"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
-          "bytes": 54984,
-          "sha256": "79636a1ae2b529fe480c2b3de33220ac6e1a5c48ba2ddb13e4901b793f329a24"
+          "bytes": 54975,
+          "sha256": "e7bb5cedb82c7811f64126f04b0459ed3087a38e5555b045d37cbb6ffdc3faf4"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29212,
-          "sha256": "f77152de45d52dc83037ef79990e575d37c5f6b898aa964904a13e2777d7b38e"
+          "sha256": "46411e45505084c4123169f894d79678b72efdd3b0f855aa13571cc71b6130df"
         }
       },
       "html_origin": "controlled_fallback",
       "source_project_id": "Nasr city-Tunnel",
-      "source_report_fingerprint": "4ec0973142856279e89ae74456887520cdb55c361429211bb6a4611ac6112972"
+      "source_report_fingerprint": "2a18c4c254a413d5ef9b8d77440326a517c1e7d64bd7d0779db86668d14207f3"
     }
   },
   "universal_report_engine": {
     "project_id": "Nasr city-Tunnel",
     "project_key": "nasr-city-tunnel",
-    "source_fingerprint": "520971033ac3f8be5830badd772e62f1fdc729fa1e4dba7d913e89f5d32799a0",
+    "source_fingerprint": "40e59a7445dc33f2c9605a41ba5d6dcc53d5583a4f8934047bfdc6c8558cb03c",
     "source_scope": "active project folder only",
     "source_file_count": 57,
     "source_inventory": [
@@ -8015,8 +8014,8 @@
       {
         "relative_path": "project_manifest.json",
         "extension": ".json",
-        "size_bytes": 389,
-        "sha256": "5f125cf2291e6a9dbb79e2721d221d1fc0f4b41e83db23eef35a5954692d72d1"
+        "size_bytes": 393,
+        "sha256": "09a427e3821b1dc9be25341b92781e9563f9359dbd8aefd7edd2ce36b7d16b2b"
       }
     ],
     "engine": {
@@ -8589,6 +8588,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-11T04:04:36+00:00"
+    "updated_at": "2026-08-13T02:07:13+00:00"
   }
 }

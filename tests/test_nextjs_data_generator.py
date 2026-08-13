@@ -12,9 +12,27 @@ from generate_nextjs_website_data import (  # noqa: E402
     build_project_record,
     build_submitted_tia_visuals,
     discover_projects,
+    public_safe_payload,
     qualitative_risk_metrics,
     submitted_tia_guide_root,
 )
+
+
+def test_public_payload_removes_workstation_paths_but_preserves_relative_lineage():
+    payload = public_safe_payload(
+        {
+            "project_id": "project-001",
+            "file_path": r"C:\\private\\project\\contract.pdf",
+            "source_path": "contracts.csv",
+            "diagnostic": r"Could not open C:\\private\\project\\contract.pdf",
+            "artifacts": [{"url": "/generated/project-001/report.pdf"}],
+        }
+    )
+
+    assert "file_path" not in payload
+    assert payload["source_path"] == "contracts.csv"
+    assert "C:\\" not in payload["diagnostic"]
+    assert payload["artifacts"][0]["url"] == "/generated/project-001/report.pdf"
 
 
 def test_discovered_project_payload_is_json_serializable():
