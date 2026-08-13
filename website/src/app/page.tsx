@@ -1246,11 +1246,6 @@ function UnifiedTiaCsvDownloadPack() {
       <p>
         Download an empty pack for a new project. It carries the same source-integrity, CPM/XER, fragnet, concurrency, EOT-reconciliation, and artifact controls used by the governed workflow, but never copies another project&apos;s data or conclusion.
       </p>
-      <div className="report-format-downloads" aria-label="Universal controlled TIA CSV documentation downloads">
-        <a href={`${root}/README.md`} download="README.md" rel="noopener">Download guide</a>
-        <a href={`${root}/UNIFIED_TIA_CSV_MANIFEST.json`} download="UNIFIED_TIA_CSV_MANIFEST.json" rel="noopener">Download full schema</a>
-        <a href={`${root}/UNIFIED_TIA_OUTPUT_COVERAGE.csv`} download="UNIFIED_TIA_OUTPUT_COVERAGE.csv" rel="noopener">Download output coverage</a>
-      </div>
       <div className="unified-tia-csv-download-grid" aria-label="Universal controlled TIA CSV templates">
         {unifiedTiaCsvDownloads.map(([label, filename]) => (
           <a key={filename} href={`${root}/${filename}`} download={filename} rel="noopener">

@@ -147,8 +147,7 @@ def validate_unified_tia_template_pack(errors: list[str], checks: list[str]) -> 
     for label, result in (("public", public_result), ("project template", template_result)):
         if not result.get("passed"):
             errors.append(f"Universal TIA {label} CSV pack failed schema validation: {result.get('issues')}")
-    supporting_files = ("README.md", "UNIFIED_TIA_CSV_MANIFEST.json", "UNIFIED_TIA_OUTPUT_COVERAGE.csv")
-    for filename in (*[item.filename for item in CSV_CONTRACTS], *supporting_files):
+    for filename in (item.filename for item in CSV_CONTRACTS):
         public_file = UNIFIED_TIA_PUBLIC_PACK / filename
         template_file = UNIFIED_TIA_PROJECT_TEMPLATE_PACK / filename
         if not public_file.is_file() or not template_file.is_file():
@@ -501,19 +500,18 @@ def fetch_public_page(public_url: str) -> None:
 
 
 def validate_public_unified_tia_pack(public_url: str, checks: list[str], errors: list[str]) -> None:
-    """Confirm every public CSV link is downloadable and retains its exact header."""
+    """Confirm Vercel exposes only the template CSV downloads with exact headers."""
     try:
-        manifest = fetch_public_json(public_url, "tia-unified-csv/UNIFIED_TIA_CSV_MANIFEST.json")
-        if manifest.get("schema_version") != "1.0.0" or len(manifest.get("files", [])) != len(CSV_CONTRACTS):
-            raise RuntimeError("public TIA pack manifest has an unexpected schema version or file count")
-        guide = fetch_public_text(public_url, "tia-unified-csv/README.md")
-        coverage = fetch_public_text(public_url, "tia-unified-csv/UNIFIED_TIA_OUTPUT_COVERAGE.csv")
-        if "native p6/xer" not in guide.casefold() or not coverage.startswith("controlled_output,"):
-            raise RuntimeError("public TIA guide or output coverage is incomplete")
         for contract in CSV_CONTRACTS:
             header = fetch_public_text(public_url, f"tia-unified-csv/{contract.filename}").splitlines()
             if not header or header[0] != ",".join(contract.columns):
                 raise RuntimeError(f"public TIA CSV header does not match contract: {contract.filename}")
+        for removed_file in ("README.md", "UNIFIED_TIA_CSV_MANIFEST.json", "UNIFIED_TIA_OUTPUT_COVERAGE.csv"):
+            try:
+                fetch_public_text(public_url, f"tia-unified-csv/{removed_file}")
+            except RuntimeError:
+                continue
+            raise RuntimeError(f"public non-CSV file is still published: {removed_file}")
     except RuntimeError as error:
         errors.append(f"public Universal TIA CSV downloads cannot be verified: {error}")
     else:
