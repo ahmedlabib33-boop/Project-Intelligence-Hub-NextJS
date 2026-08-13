@@ -508,7 +508,7 @@ def validate_public_unified_tia_pack(public_url: str, checks: list[str], errors:
             raise RuntimeError("public TIA pack manifest has an unexpected schema version or file count")
         guide = fetch_public_text(public_url, "tia-unified-csv/README.md")
         coverage = fetch_public_text(public_url, "tia-unified-csv/UNIFIED_TIA_OUTPUT_COVERAGE.csv")
-        if "Native P6/XER" not in guide or not coverage.startswith("controlled_output,"):
+        if "native p6/xer" not in guide.casefold() or not coverage.startswith("controlled_output,"):
             raise RuntimeError("public TIA guide or output coverage is incomplete")
         for contract in CSV_CONTRACTS:
             header = fetch_public_text(public_url, f"tia-unified-csv/{contract.filename}").splitlines()
