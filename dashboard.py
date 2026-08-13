@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 # pyright: reportGeneralTypeIssues=false, reportCallIssue=false, reportArgumentType=false, reportAttributeAccessIssue=false, reportOptionalCall=false, reportOptionalSubscript=false, reportOperatorIssue=false, reportOptionalMemberAccess=false
 import base64
@@ -142,7 +142,7 @@ LOGO_PATH = APP_DIR / "assets" / "logo.png"
 PROJECTS_DIR = APP_DIR / "projects"
 PATH_TOKENS_DIR = APP_DIR / ".project_paths"
 IMPORT_TEMPLATES_DIR = PATH_TOKENS_DIR / "01-data" / "import_templates"
-STEEL_TIA_DIR = PATH_TOKENS_DIR / "02-delay_analysis" / "steel_delay_tia_templates"
+STEEL_TIA_DIR = PATH_TOKENS_DIR / "02-delay_analysis" / "unified_tia_csv"
 BL_FIXED_DIR = PATH_TOKENS_DIR / "03-schedule"
 PROJECTS_CSV_PATH = IMPORT_TEMPLATES_DIR / "projects.csv"
 ACTIVITIES_CSV_PATH = IMPORT_TEMPLATES_DIR / "activities.csv"
@@ -975,7 +975,7 @@ def render_decision_making_dashboard(projects_catalog_df: pd.DataFrame) -> None:
         .decision-kpi-icon{flex:0 0 auto}
         .decision-kpi-value{font-size:23px;font-weight:900;color:#061A2D;margin:16px 0 10px;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
         .decision-badge{display:inline-block;border-radius:999px;padding:5px 9px;font-size:10px;font-weight:900!important;white-space:nowrap;max-width:118px;overflow:hidden;text-overflow:ellipsis;color:#FFFFFF!important;-webkit-text-fill-color:#FFFFFF!important;text-shadow:0 1px 1px rgba(0,0,0,.35)}
-        
+
         /* DECISION_BADGE_WHITE_BOLD_FINAL_OVERRIDE */
         .decision-badge,
         .decision-badge *{
@@ -6106,7 +6106,7 @@ def load_delay_tia_question_frames() -> dict[str, pd.DataFrame]:
     scoped_tia_dir = project_scoped_file(STEEL_TIA_DIR / "01-project_metadata_template.csv").parent
     if scoped_tia_dir.exists():
         for path in sorted(scoped_tia_dir.glob("*.csv")):
-            key = f"steel_delay_tia_templates/{path.name}"
+            key = f"unified_tia_csv/{path.name}"
             frames[key] = delay_tia_question_read_csv(path)
     return frames
 
@@ -6164,31 +6164,31 @@ def build_delay_tia_question_kpis(frames: dict[str, pd.DataFrame]) -> dict[str, 
     concurrency_df = delay_tia_frames_get_first(
         frames,
         [
-            "steel_delay_tia_templates/11-concurrency_matrix_template.updated.csv",
-            "steel_delay_tia_templates/11-concurrency_matrix_template.csv",
+            "unified_tia_csv/11-concurrency_matrix_template.updated.csv",
+            "unified_tia_csv/11-concurrency_matrix_template.csv",
         ],
     )
     claimed_df = pd.DataFrame()
     fragnet_df = concurrency_df.copy()
-    rfi_claim_df = frames.get("steel_delay_tia_templates/09- rfi_status.csv", pd.DataFrame())
-    events_df = frames.get("steel_delay_tia_templates/07- ifc_conflict.csv", pd.DataFrame())
-    activity_df = delay_tia_frames_get_first(frames, ["steel_delay_tia_templates/02- master_activity_steel_analysis.csv", "steel_delay_tia_templates/04- p6_activity_export.csv"])
-    evidence_df = frames.get("steel_delay_tia_templates/06- contract_library.csv", pd.DataFrame())
-    p6_df = delay_tia_frames_get_first(frames, ["steel_delay_tia_templates/04- p6_activity_export.csv", "steel_delay_tia_templates/03- p6_activity_export.csv"])
+    rfi_claim_df = frames.get("unified_tia_csv/09- rfi_status.csv", pd.DataFrame())
+    events_df = frames.get("unified_tia_csv/07- ifc_conflict.csv", pd.DataFrame())
+    activity_df = delay_tia_frames_get_first(frames, ["unified_tia_csv/02- master_activity_steel_analysis.csv", "unified_tia_csv/04- p6_activity_export.csv"])
+    evidence_df = frames.get("unified_tia_csv/06- contract_library.csv", pd.DataFrame())
+    p6_df = delay_tia_frames_get_first(frames, ["unified_tia_csv/04- p6_activity_export.csv", "unified_tia_csv/03- p6_activity_export.csv"])
     employer_df = delay_tia_frames_get_first(
         frames,
         [
-            "steel_delay_tia_templates/03- employer_steel_supply_at_site.csv",
-            "steel_delay_tia_templates/03- employer_steel_supply.csv",
-            "steel_delay_tia_templates/02- employer_steel_supply.csv",
+            "unified_tia_csv/03- employer_steel_supply_at_site.csv",
+            "unified_tia_csv/03- employer_steel_supply.csv",
+            "unified_tia_csv/02- employer_steel_supply.csv",
         ],
     )
     samco_df = delay_tia_frames_get_first(
         frames,
         [
-            "steel_delay_tia_templates/10- contractor_steel_supplied_at_site.csv",
-            "steel_delay_tia_templates/10- samco_steel_supplied_at_site.csv",
-            "steel_delay_tia_templates/09- samco_steel_supplied_at_site.csv",
+            "unified_tia_csv/10- contractor_steel_supplied_at_site.csv",
+            "unified_tia_csv/10- samco_steel_supplied_at_site.csv",
+            "unified_tia_csv/09- samco_steel_supplied_at_site.csv",
         ],
     )
 
@@ -6263,8 +6263,8 @@ def answer_delay_tia_question(question: str, frames: dict[str, pd.DataFrame]) ->
         concurrency_df = delay_tia_frames_get_first(
             frames,
             [
-                "steel_delay_tia_templates/11-concurrency_matrix_template.updated.csv",
-                "steel_delay_tia_templates/11-concurrency_matrix_template.csv",
+                "unified_tia_csv/11-concurrency_matrix_template.updated.csv",
+                "unified_tia_csv/11-concurrency_matrix_template.csv",
             ],
         )
         for title, df in [
@@ -6282,7 +6282,7 @@ def answer_delay_tia_question(question: str, frames: dict[str, pd.DataFrame]) ->
         return answer, tables, kpis
 
     if any(word in q for word in ["rfi", "reply", "consultant"]):
-        for key in ["steel_delay_tia_templates/09- rfi_status.csv"]:
+        for key in ["unified_tia_csv/09- rfi_status.csv"]:
             df = frames.get(key, pd.DataFrame())
             if not df.empty:
                 tables.append((key, df))
@@ -6297,8 +6297,8 @@ def answer_delay_tia_question(question: str, frames: dict[str, pd.DataFrame]) ->
         concurrency_df = delay_tia_frames_get_first(
             frames,
             [
-                "steel_delay_tia_templates/11-concurrency_matrix_template.updated.csv",
-                "steel_delay_tia_templates/11-concurrency_matrix_template.csv",
+                "unified_tia_csv/11-concurrency_matrix_template.updated.csv",
+                "unified_tia_csv/11-concurrency_matrix_template.csv",
             ],
         )
         if not concurrency_df.empty:
@@ -6311,7 +6311,7 @@ def answer_delay_tia_question(question: str, frames: dict[str, pd.DataFrame]) ->
         )
 
     if any(word in q for word in ["evidence", "proof", "notice", "letter"]):
-        for key in ["steel_delay_tia_templates/06- contract_library.csv", "steel_delay_tia_templates/09- rfi_status.csv", "steel_delay_tia_templates/07- ifc_conflict.csv"]:
+        for key in ["unified_tia_csv/06- contract_library.csv", "unified_tia_csv/09- rfi_status.csv", "unified_tia_csv/07- ifc_conflict.csv"]:
             df = frames.get(key, pd.DataFrame())
             if not df.empty:
                 tables.append((key, df))
@@ -6323,7 +6323,7 @@ def answer_delay_tia_question(question: str, frames: dict[str, pd.DataFrame]) ->
         )
 
     if any(word in q for word in ["critical", "longest", "float", "activity", "path"]):
-        for key in ["steel_delay_tia_templates/04- p6_activity_export.csv", "steel_delay_tia_templates/11-concurrency_matrix_template.updated.csv"]:
+        for key in ["unified_tia_csv/04- p6_activity_export.csv", "unified_tia_csv/11-concurrency_matrix_template.updated.csv"]:
             df = frames.get(key, pd.DataFrame())
             if not df.empty:
                 tables.append((key, df.head(80)))
@@ -9106,7 +9106,7 @@ if active_slide_name == PROJECT_HUB_SLIDE_NAMES[11]:
         ]
 
         st.markdown("#### Required Delay TIA Source Files")
-        st.caption(f"Source: projects/{active_project_context.project_folder_name}/02-delay_analysis/steel_delay_tia_templates")
+        st.caption(f"Source: projects/{active_project_context.project_folder_name}/02-delay_analysis/unified_tia_csv")
         steel_template_inventory_df = build_steel_delay_template_inventory_df()
         if not steel_template_inventory_df.empty:
             st.markdown("#### Recognized Delay TIA Files")
@@ -9287,7 +9287,7 @@ if active_slide_name == PROJECT_HUB_SLIDE_NAMES[11]:
             active_delay_tia_analysis = {}
             active_concurrent_delay_review_df = pd.DataFrame()
             st.error(
-                "Delay TIA analysis is blocked. Add the required files to `steel_delay_tia_templates` first: "
+                "Delay TIA analysis is blocked. Add the required files to `unified_tia_csv` first: "
                 + ", ".join(missing_required_delay_tia_files)
             )
 
@@ -9308,7 +9308,7 @@ if active_slide_name == PROJECT_HUB_SLIDE_NAMES[11]:
 
     if tia_view == "Tables & Conclusion":
         st.markdown("#### Source Tables & Calculated Conclusion")
-        st.caption("This slide reads the 11 Delay Analysis - Time Impact Analysis files from `steel_delay_tia_templates`, inspects their columns, and shows the calculated conclusion from the active TIA logic.")
+        st.caption("This slide reads the 11 Delay Analysis - Time Impact Analysis files from `unified_tia_csv`, inspects their columns, and shows the calculated conclusion from the active TIA logic.")
         if not delay_tia_ready:
             st.warning("Tables and conclusion are blocked until all 11 required files are available.")
             st.dataframe(upload_status_df, width="stretch", hide_index=True)
@@ -9657,7 +9657,7 @@ if active_slide_name == PROJECT_HUB_SLIDE_NAMES[11]:
             """
             **Flow**
 
-            `steel_delay_tia_templates Source Files`
+            `unified_tia_csv Source Files`
 
             -> `Delay TIA Loader`
 
@@ -9827,7 +9827,7 @@ if active_slide_name == PROJECT_HUB_SLIDE_NAMES[11]:
 
     if tia_view == "Download Reports":
         if not delay_tia_ready:
-            st.warning("Delay TIA report outputs are blocked until all required Delay TIA files exist in `steel_delay_tia_templates`.")
+            st.warning("Delay TIA report outputs are blocked until all required Delay TIA files exist in `unified_tia_csv`.")
         else:
             delay_report_df = build_delay_tia_delay_report_df(active_delay_tia_context, active_delay_tia_analysis)
             primavera_fragnet_df = build_delay_tia_primavera_fragnet_df(active_delay_tia_context, active_delay_tia_analysis)
@@ -11088,5 +11088,4 @@ if active_slide_name == PROJECT_HUB_SLIDE_NAMES[12]:
 
 st.divider()
 st.markdown("<p style='text-align:center;color:#667085;font-size:12px;'>Construction Project Control Platform | Designed and Developed By Eng. Ahmed Labib © Planning Department</p>", unsafe_allow_html=True)
-
 

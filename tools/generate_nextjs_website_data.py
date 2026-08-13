@@ -975,7 +975,7 @@ def build_contract_controls_snapshot(
 def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str, str]]]) -> dict[str, Any]:
     base = Path(project["path"])
     data_dir = base / "01-data" / "import_templates"
-    delay_dir = base / "02-delay_analysis" / "steel_delay_tia_templates"
+    delay_dir = base / "02-delay_analysis" / "unified_tia_csv"
     schedule_dir = base / "03-schedule"
     contracts_dir = base / "05-contracts"
     evidence_dir = base / "06-evidence"
@@ -1645,7 +1645,7 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         project_key=str(project["project_key"]),
         data_dir=data_dir,
         vercel_dir=base / "vercel",
-        delay_dir=base / "02-delay_analysis" / "steel_delay_tia_templates",
+        delay_dir=base / "02-delay_analysis" / "unified_tia_csv",
         payment_rows=rows["payments"],
         delay_event_rows=rows["delay_events"],
         activity_rows=rows["activities"],

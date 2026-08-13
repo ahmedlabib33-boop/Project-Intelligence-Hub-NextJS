@@ -17,7 +17,6 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 
@@ -41,7 +40,6 @@ DATA_ROOT = ROOT / "website" / "public" / "data" / "projects"
 REPORT_PATH = ROOT / "12-logs" / "vercel_streamlit_pipeline_audit_latest.md"
 PAGE_PATH = ROOT / "website" / "src" / "app" / "page.tsx"
 STREAMLIT_DASHBOARD_PATH = ROOT / "dashboard.py"
-UNIFIED_TIA_PUBLIC_PACK = ROOT / "website" / "public" / "tia-unified-csv"
 UNIFIED_TIA_PROJECT_TEMPLATE_PACK = ROOT / "projects" / "_PROJECT_TEMPLATE" / "02-delay_analysis" / "unified_tia_csv"
 
 PUBLIC_METRICS = (
@@ -105,8 +103,8 @@ REQUIRED_CHART_INPUTS = {
     "01-data/import_templates/evm.csv": "project_id",
     "01-data/import_templates/risks.csv": "project_id",
     "01-data/import_templates/planned_cash_flow.csv": "project_id",
-    "02-delay_analysis/steel_delay_tia_templates/14-delay_event_classification.csv": "project_id",
-    "02-delay_analysis/steel_delay_tia_templates/15-tia_recovery_scenario.csv": "project_id",
+    "02-delay_analysis/unified_tia_csv/14-delay_event_classification.csv": "project_id",
+    "02-delay_analysis/unified_tia_csv/15-tia_recovery_scenario.csv": "project_id",
 }
 
 REFERENCE_CHART_COUNT = 36
@@ -141,21 +139,18 @@ def payload_exposes_local_path(value: Any) -> bool:
 
 
 def validate_unified_tia_template_pack(errors: list[str], checks: list[str]) -> None:
-    """Require the public pack and the new-project template to share one schema."""
-    public_result = validate_pack(UNIFIED_TIA_PUBLIC_PACK, template_mode=True)
-    template_result = validate_pack(UNIFIED_TIA_PROJECT_TEMPLATE_PACK, template_mode=True)
-    for label, result in (("public", public_result), ("project template", template_result)):
+    """Require every local project to hold the same project-local TIA contract."""
+    packs = [("project template", UNIFIED_TIA_PROJECT_TEMPLATE_PACK)]
+    packs.extend(
+        (str(project["project_key"]), Path(project["path"]) / "02-delay_analysis" / "unified_tia_csv")
+        for project in discover_projects()
+    )
+    for label, path in packs:
+        result = validate_pack(path, template_mode=True)
         if not result.get("passed"):
             errors.append(f"Universal TIA {label} CSV pack failed schema validation: {result.get('issues')}")
-    for filename in (item.filename for item in CSV_CONTRACTS):
-        public_file = UNIFIED_TIA_PUBLIC_PACK / filename
-        template_file = UNIFIED_TIA_PROJECT_TEMPLATE_PACK / filename
-        if not public_file.is_file() or not template_file.is_file():
-            errors.append(f"Universal TIA pack file is missing from the public or new-project copy: {filename}")
-        elif public_file.read_bytes() != template_file.read_bytes():
-            errors.append(f"Universal TIA public and new-project template copies differ: {filename}")
     if not any(error.startswith("Universal TIA") for error in errors):
-        checks.append(f"Universal TIA CSV pack validates with {len(CSV_CONTRACTS)} project-neutral CSV contracts")
+        checks.append(f"Universal TIA CSV contract validates in {len(packs)} project-local workspaces with {len(CSV_CONTRACTS)} CSV contracts")
 
 
 def expected_source_metrics(data_dir: Path) -> dict[str, float | None]:
@@ -467,24 +462,6 @@ def fetch_public_json(public_url: str, relative_path: str) -> dict[str, Any]:
         raise RuntimeError(f"{url}: {error}") from error
 
 
-def fetch_public_text(public_url: str, relative_path: str) -> str:
-    """Read one public static download with the same cache-control used for JSON."""
-    url = f"{public_url.rstrip('/')}/{relative_path.lstrip('/')}?{urlencode({'pipeline_check': datetime.now().timestamp()})}"
-    request = Request(
-        url,
-        headers={
-            "Cache-Control": "no-cache",
-            "Pragma": "no-cache",
-            "User-Agent": "Project-Intelligence-Hub-Pipeline-Validator/1.0",
-        },
-    )
-    try:
-        with urlopen(request, timeout=30) as response:  # nosec B310 - URL is an explicit CLI argument.
-            return response.read().decode("utf-8-sig")
-    except (HTTPError, URLError, TimeoutError, UnicodeDecodeError) as error:
-        raise RuntimeError(f"{url}: {error}") from error
-
-
 def fetch_public_page(public_url: str) -> None:
     request = Request(
         public_url.rstrip("/") + "/",
@@ -497,25 +474,6 @@ def fetch_public_page(public_url: str) -> None:
                 raise RuntimeError("empty HTTP response")
     except (HTTPError, URLError, TimeoutError, RuntimeError) as error:
         raise RuntimeError(f"{public_url}: {error}") from error
-
-
-def validate_public_unified_tia_pack(public_url: str, checks: list[str], errors: list[str]) -> None:
-    """Confirm Vercel exposes only the template CSV downloads with exact headers."""
-    try:
-        for contract in CSV_CONTRACTS:
-            header = fetch_public_text(public_url, f"tia-unified-csv/{contract.filename}").splitlines()
-            if not header or header[0] != ",".join(contract.columns):
-                raise RuntimeError(f"public TIA CSV header does not match contract: {contract.filename}")
-        for removed_file in ("README.md", "UNIFIED_TIA_CSV_MANIFEST.json", "UNIFIED_TIA_OUTPUT_COVERAGE.csv"):
-            try:
-                fetch_public_text(public_url, f"tia-unified-csv/{removed_file}")
-            except RuntimeError:
-                continue
-            raise RuntimeError(f"public non-CSV file is still published: {removed_file}")
-    except RuntimeError as error:
-        errors.append(f"public Universal TIA CSV downloads cannot be verified: {error}")
-    else:
-        checks.append(f"public Universal TIA CSV downloads expose all {len(CSV_CONTRACTS)} schema-validated templates")
 
 
 def controlled_tia_delivery_contract(project: dict[str, Any]) -> dict[str, Any]:
@@ -579,8 +537,6 @@ def validate_public_delivery(
     except RuntimeError as error:
         errors.append(f"public Vercel application cannot be verified: {error}")
         return
-
-    validate_public_unified_tia_pack(public_url, checks, errors)
 
     if local_portfolio is None:
         errors.append("public Vercel parity cannot run because local portfolio.json is missing")

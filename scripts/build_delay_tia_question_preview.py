@@ -11,7 +11,7 @@ PROJECTS_DIR = ROOT / "projects"
 PROJECT_DIRS = [path for path in PROJECTS_DIR.iterdir() if path.is_dir() and not path.name.startswith("_")]
 PROJECT_DIR = max(PROJECT_DIRS, key=lambda path: sum(file.stat().st_size for file in path.rglob("*") if file.is_file()), default=PROJECTS_DIR / "_PROJECT_TEMPLATE")
 IMPROVEMENT_DIR = PROJECT_DIR / "delay_analysis" / "improvement_files"
-STEEL_DIR = PROJECT_DIR / "delay_analysis" / "steel_delay_tia_templates"
+STEEL_DIR = PROJECT_DIR / "delay_analysis" / "unified_tia_csv"
 OUT_DIR = ROOT / "generated_outputs" / "delay_tia_question"
 OUT_FILE = OUT_DIR / "question_preview.html"
 
@@ -59,20 +59,20 @@ def kpis(frames: dict[str, pd.DataFrame]) -> dict[str, float | int]:
     claimed_df = frames.get("Delay tia improvement files/05-claimed_delay_register_template.csv", pd.DataFrame())
     fragnet_df = frames.get("Delay tia improvement files/04-fragnet_logic_register_template.csv", pd.DataFrame())
     concurrency_df = frames.get(
-        "steel_delay_tia_templates/11-concurrency_matrix_template.updated.csv",
+        "unified_tia_csv/11-concurrency_matrix_template.updated.csv",
         frames.get("Delay tia improvement files/07-concurrency_matrix_template.csv", pd.DataFrame()),
     )
     rfi_df = frames.get("Delay tia improvement files/18-rfi_delay_claim6_normalized.csv", pd.DataFrame())
     events_df = frames.get("Delay tia improvement files/02-delay_event_register_template.csv", pd.DataFrame())
     evidence_df = frames.get("Delay tia improvement files/08-evidence_register_template.csv", pd.DataFrame())
-    p6_df = frames.get("steel_delay_tia_templates/04- p6_activity_export.csv", pd.DataFrame())
+    p6_df = frames.get("unified_tia_csv/04- p6_activity_export.csv", pd.DataFrame())
     employer_df = frames.get(
-        "steel_delay_tia_templates/03- employer_steel_supply_at_site.csv",
-        frames.get("steel_delay_tia_templates/03- employer_steel_supply.csv", pd.DataFrame()),
+        "unified_tia_csv/03- employer_steel_supply_at_site.csv",
+        frames.get("unified_tia_csv/03- employer_steel_supply.csv", pd.DataFrame()),
     )
     samco_df = frames.get(
-        "steel_delay_tia_templates/10- contractor_steel_supplied_at_site.csv",
-        frames.get("steel_delay_tia_templates/10- samco_steel_supplied_at_site.csv", pd.DataFrame()),
+        "unified_tia_csv/10- contractor_steel_supplied_at_site.csv",
+        frames.get("unified_tia_csv/10- samco_steel_supplied_at_site.csv", pd.DataFrame()),
     )
 
     claimed_days = number(claimed_df, "Claimed Delay Duration (days)")
@@ -137,7 +137,7 @@ def main() -> None:
     claimed = frames.get("Delay tia improvement files/05-claimed_delay_register_template.csv", pd.DataFrame())
     fragnet = frames.get("Delay tia improvement files/04-fragnet_logic_register_template.csv", pd.DataFrame())
     concurrency = frames.get(
-        "steel_delay_tia_templates/11-concurrency_matrix_template.updated.csv",
+        "unified_tia_csv/11-concurrency_matrix_template.updated.csv",
         frames.get("Delay tia improvement files/07-concurrency_matrix_template.csv", pd.DataFrame()),
     )
     answer = (

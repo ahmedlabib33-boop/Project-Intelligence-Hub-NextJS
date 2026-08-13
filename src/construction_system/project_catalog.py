@@ -16,7 +16,7 @@ PROJECT_TEMPLATE_DIRNAME = "_PROJECT_TEMPLATE"
 DEFAULT_SECTOR_NAME = "Unassigned"
 PROJECT_SUBDIRECTORIES = (
     "01-data/import_templates",
-    "02-delay_analysis/steel_delay_tia_templates",
+    "02-delay_analysis/unified_tia_csv",
     "02-delay_analysis/methodology",
     "02-delay_analysis/approved_release",
     "02-delay_analysis/controlled_runs",
@@ -184,7 +184,7 @@ def project_directory(projects_root: Path, project_id: str) -> Path:
 def project_data_path(projects_root: Path, project_id: str, family: str, relative_path: Path | str) -> Path:
     family_roots = {
         "core": Path("01-data/import_templates"),
-        "delay_analysis": Path("02-delay_analysis/steel_delay_tia_templates"),
+        "delay_analysis": Path("02-delay_analysis/unified_tia_csv"),
         "bl": Path("03-schedule"),
         "fixed": Path("03-schedule"),
         "letters": Path("07-letters_intelligence"),
@@ -224,8 +224,8 @@ def ensure_project_samples(project_dir: Path) -> None:
             pass
     samples = {
         "01-data/import_templates/planned_cash_flow.csv": "project_id,period_date,planned_cash_out,planned_cumulative_cash_out,currency,basis,source_file,source_sheet,source_row,notes\n",
-        "02-delay_analysis/steel_delay_tia_templates/14-delay_event_classification.csv": "project_id,event_id,activity_id,root_cause,delay_type,entitlement_status,responsible_party,event_start,event_finish,delay_days,evidence_reference,source_file,source_sheet,source_row,analyst_status,notes\n",
-        "02-delay_analysis/steel_delay_tia_templates/15-tia_recovery_scenario.csv": "project_id,scenario_id,scenario_name,analyst_status,activity_id,status_date,baseline_progress_percent,impacted_progress_percent,recovery_progress_percent,baseline_finish,impacted_finish,recovery_finish,predecessor_activity_id,successor_activity_id,relationship_type,lag_days,p6_update_reference,evidence_reference,source_file,source_sheet,source_row,notes\n",
+        "02-delay_analysis/unified_tia_csv/14-delay_event_classification.csv": "project_id,event_id,activity_id,root_cause,delay_type,entitlement_status,responsible_party,event_start,event_finish,delay_days,evidence_reference,source_file,source_sheet,source_row,analyst_status,notes\n",
+        "02-delay_analysis/unified_tia_csv/15-tia_recovery_scenario.csv": "project_id,scenario_id,scenario_name,analyst_status,activity_id,status_date,baseline_progress_percent,impacted_progress_percent,recovery_progress_percent,baseline_finish,impacted_finish,recovery_finish,predecessor_activity_id,successor_activity_id,relationship_type,lag_days,p6_update_reference,evidence_reference,source_file,source_sheet,source_row,notes\n",
         "02-delay_analysis/approved_release/README.md": "# Approved TIA Release\n\nStore only this project's approved source package here, or declare its controlled external source in project_manifest.json. Do not copy another project's XER, contract, event, or evidence package into this folder.\n",
         "02-delay_analysis/controlled_runs/README.md": "# Controlled TIA Runs\n\nThis folder stores generated project-local draft and approved control records. Do not manually copy runs between projects.\n",
         "02-delay_analysis/_legacy_archive/README.md": "# Legacy TIA Archive\n\nHistoric generic TIA templates and outputs may remain recoverable outside the active controlled workflow. They are not an active evidence source.\n",

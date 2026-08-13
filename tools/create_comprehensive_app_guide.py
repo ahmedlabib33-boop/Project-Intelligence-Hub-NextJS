@@ -102,7 +102,7 @@ def build_markdown(portfolio: dict, sync_config: dict) -> str:
     folder_rows = [
         ["projects/{Sector}/{Project}", "Main project workspace", "Add future projects here under sector folders. The generator detects them automatically."],
         ["01-data/import_templates", "Core project data", "CSV files for projects, activities, progress, EVM, payments, contracts, claims, risks, milestones, WBS, S-curve."],
-        ["02-delay_analysis", "TIA workspace", "Methodology documents and steel_delay_tia_templates CSVs used by Delay Analysis."],
+        ["02-delay_analysis", "TIA workspace", "Methodology documents and unified_tia_csv CSVs used by Delay Analysis."],
         ["03-schedule", "Schedule support", "BL Schedule, MEP Schedule, MEP Activities, and civil logic files."],
         ["04-source_excel", "Raw Excel source", "Original Excel files before conversion into controlled CSV inputs."],
         ["05-contracts", "Contract intelligence", "Contract source PDFs, clause libraries, contract_claims.db, and clauses."],
@@ -216,7 +216,7 @@ Minimum files:
 - `project.json`
 - `project_manifest.json`
 - `01-data/import_templates/*.csv`
-- `02-delay_analysis/steel_delay_tia_templates/*.csv`
+- `02-delay_analysis/unified_tia_csv/*.csv`
 - `03-schedule/*.csv`
 - `05-contracts/source/*`
 - `07-letters_intelligence/inbox/*`
@@ -264,7 +264,7 @@ To add new letters, place them in the selected project inbox folder, then regene
 
 Delay Analysis reads project-specific TIA templates from:
 
-`02-delay_analysis/steel_delay_tia_templates`
+`02-delay_analysis/unified_tia_csv`
 
 The website detects the file inventory, row count, column count, missing required files, MEP activities, MEP schedule, MEP civil logic, and BL schedule. The original Streamlit app remains the full calculation engine for deep TIA exports and report generation.
 
@@ -334,7 +334,7 @@ Production URL:
 3. Rename the copied folder to the project name.
 4. Edit `project.json` and `project_manifest.json`.
 5. Add project CSVs under `01-data/import_templates`.
-6. Add TIA files under `02-delay_analysis/steel_delay_tia_templates`.
+6. Add TIA files under `02-delay_analysis/unified_tia_csv`.
 7. Add schedule support under `03-schedule`.
 8. Add contracts under `05-contracts/source`.
 9. Add letters under `07-letters_intelligence/inbox`.
@@ -359,7 +359,7 @@ When project files change:
 | Website shows old data | JSON not regenerated or GitHub/Vercel not updated | Run generator, sync, redeploy |
 | Conference button missing | `meeting_url` missing in `project.json` | Add meeting URL and regenerate |
 | Letters not detected | Files not in project inbox | Add files under `07-letters_intelligence/inbox` |
-| Delay tab missing files | Required TIA CSVs absent or named differently | Add files to `02-delay_analysis/steel_delay_tia_templates` |
+| Delay tab missing files | Required TIA CSVs absent or named differently | Add files to `02-delay_analysis/unified_tia_csv` |
 | Claims data looks empty | Contract source or DB missing | Add contract source files and rebuild contract library in Streamlit |
 | Sync fails 401 | Token not available in process scope | Set `GITHUB_TOKEN` or `GH_TOKEN` in the active Windows environment |
 | Vercel build warning about audit | Dev-package audit noise | Check production audit with `npm audit --omit=dev` |
