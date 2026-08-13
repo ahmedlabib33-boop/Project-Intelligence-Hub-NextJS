@@ -5,7 +5,8 @@
   "scripts": {
     "generate-data": "python ../tools/generate_nextjs_website_data.py",
     "dev": "next dev",
-    "build": "next build",
+    "sync:tia-csv": "node scripts/sync-tia-csv.mjs",
+    "build": "npm run sync:tia-csv && next build",
     "start": "next start",
     "lint": "eslint ."
   },

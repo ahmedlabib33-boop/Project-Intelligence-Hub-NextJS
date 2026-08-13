@@ -1,7 +1,0 @@
-controlled_output,required_unified_csvs,validation_gate,authority
-Source Integrity,"01,02,03,11,14","Project identity, source register, XER pair lineage, evidence references, release record",Project-local source files and release manifest
-Schedule and CPM,"03,04,05,07,08,09","Native XER pairing, logic links, before/after CPM and float reconciliation",Native Primavera P6/XER
-Events and Fragnets,"06,07,08,09,12","Event, affected activity, fragnet links, evidence and matrix consistency",Project-local event and fragnet evidence
-Concurrency and Entitlement,"06,09,10,11,15","Overlap adjustment, notice, entitlement, evidence, unresolved reconciliation",Contract and project evidence; formal decision required
-EOT Position,"09,10,14,15",Gross less concurrency equals integrated days; date movement reconciliation,Approved project-local submission and P6 verification
-Publication Artifacts,"14,16","Artifact source project, release, fingerprint, review and publication status",Generated project-specific report artifact manifest
