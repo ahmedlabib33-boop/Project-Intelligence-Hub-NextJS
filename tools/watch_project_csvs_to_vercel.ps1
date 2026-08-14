@@ -66,9 +66,18 @@ function Invoke-ProjectPublish {
         Invoke-Checked 'npm' @('--prefix', 'website', 'run', 'build') 'Next.js production build'
 
         # Vercel serves website/public; local 11-outputs copies never belong in
-        # the deployment commit.
+        # the deployment commit. Complete public report packages are intentionally
+        # force-added because the repository ignores generic archive files.
         & git add -- projects website/public
         if ($LASTEXITCODE -ne 0) { throw 'Git staging failed.' }
+        $publicGenerated = Join-Path $publisherRoot 'website\public\generated'
+        if (Test-Path -LiteralPath $publicGenerated) {
+            Get-ChildItem -LiteralPath $publicGenerated -Filter '*.zip' -Recurse -File | ForEach-Object {
+                $relativeZip = $_.FullName.Substring($publisherRoot.Length).TrimStart('\')
+                & git add -f -- $relativeZip
+                if ($LASTEXITCODE -ne 0) { throw "Git staging failed for complete report package: $relativeZip" }
+            }
+        }
         & git diff --cached --quiet
         if ($LASTEXITCODE -eq 0) {
             Write-SyncLog 'No publishable project-data change was produced.'
