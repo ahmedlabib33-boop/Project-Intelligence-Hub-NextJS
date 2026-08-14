@@ -206,8 +206,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-13T22:08:30",
-  "fingerprint": "e33cb792872fe936532009e1767ed3012d9d09ad1b2ffd5d59faee1f16befd60",
+  "last_updated": "2026-08-14T06:05:10",
+  "fingerprint": "f8ac77fd5a532c3b7607a7acfcec4af0f8b53cf4c08e261152b731cc10e545f7",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -5907,28 +5907,665 @@
           "relative_path": "Sophia-Mall/05_samco_pco_31_slide_report.html",
           "extension": "html",
           "size_kb": 107.8,
-          "modified": "2026-08-13T22:10:46"
+          "modified": "2026-08-14T06:05:35"
         },
         {
           "name": "05_samco_pco_31_slide_report.pdf",
           "relative_path": "Sophia-Mall/05_samco_pco_31_slide_report.pdf",
           "extension": "pdf",
           "size_kb": 56.3,
-          "modified": "2026-08-13T22:10:46"
+          "modified": "2026-08-14T06:05:35"
         },
         {
           "name": "05_samco_pco_31_slide_report.pptx",
           "relative_path": "Sophia-Mall/05_samco_pco_31_slide_report.pptx",
           "extension": "pptx",
           "size_kb": 84.1,
-          "modified": "2026-08-13T22:10:47"
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
+          "extension": "html",
+          "size_kb": 3.6,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
+          "extension": "pdf",
+          "size_kb": 2.4,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx",
+          "extension": "pptx",
+          "size_kb": 29.4,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_02_pro_dly_02_delay_analysis.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_02_pro_dly_02_delay_analysis.html",
+          "extension": "html",
+          "size_kb": 5.1,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
+          "extension": "pdf",
+          "size_kb": 3.0,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_02_pro_dly_02_delay_analysis.pptx",
+          "extension": "pptx",
+          "size_kb": 29.9,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_03_pro_prg_03_project_progress.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_03_pro_prg_03_project_progress.html",
+          "extension": "html",
+          "size_kb": 8.7,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_03_pro_prg_03_project_progress.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_03_pro_prg_03_project_progress.pdf",
+          "extension": "pdf",
+          "size_kb": 3.4,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_03_pro_prg_03_project_progress.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_03_pro_prg_03_project_progress.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
+          "extension": "html",
+          "size_kb": 8.8,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
+          "extension": "pdf",
+          "size_kb": 3.5,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx",
+          "extension": "pptx",
+          "size_kb": 30.2,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_05_pro_var_05_variation_report.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_05_pro_var_05_variation_report.html",
+          "extension": "html",
+          "size_kb": 3.9,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_05_pro_var_05_variation_report.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_05_pro_var_05_variation_report.pdf",
+          "extension": "pdf",
+          "size_kb": 2.5,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_05_pro_var_05_variation_report.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_05_pro_var_05_variation_report.pptx",
+          "extension": "pptx",
+          "size_kb": 29.6,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_06_pro_ipc_06_interim_payment.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_06_pro_ipc_06_interim_payment.html",
+          "extension": "html",
+          "size_kb": 5.2,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
+          "extension": "pdf",
+          "size_kb": 2.6,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_06_pro_ipc_06_interim_payment.pptx",
+          "extension": "pptx",
+          "size_kb": 29.7,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_07_pro_res_07_resource_manpower.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_07_pro_res_07_resource_manpower.html",
+          "extension": "html",
+          "size_kb": 8.6,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_07_pro_res_07_resource_manpower.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_07_pro_res_07_resource_manpower.pdf",
+          "extension": "pdf",
+          "size_kb": 3.3,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_07_pro_res_07_resource_manpower.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_07_pro_res_07_resource_manpower.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_08_pro_eqp_08_equipment_plant.html",
+          "extension": "html",
+          "size_kb": 3.1,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
+          "extension": "pdf",
+          "size_kb": 2.0,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_08_pro_eqp_08_equipment_plant.pptx",
+          "extension": "pptx",
+          "size_kb": 29.3,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_09_pro_cst_09_cost_control.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_09_pro_cst_09_cost_control.html",
+          "extension": "html",
+          "size_kb": 7.4,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_09_pro_cst_09_cost_control.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_09_pro_cst_09_cost_control.pdf",
+          "extension": "pdf",
+          "size_kb": 3.3,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_09_pro_cst_09_cost_control.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_09_pro_cst_09_cost_control.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_10_pro_evm_10_earned_value.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_10_pro_evm_10_earned_value.html",
+          "extension": "html",
+          "size_kb": 7.4,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_10_pro_evm_10_earned_value.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_10_pro_evm_10_earned_value.pdf",
+          "extension": "pdf",
+          "size_kb": 3.3,
+          "modified": "2026-08-14T06:05:35"
+        },
+        {
+          "name": "06_samco_pco_10_pro_evm_10_earned_value.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_10_pro_evm_10_earned_value.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_11_pro_cfs_11_cash_flow.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_11_pro_cfs_11_cash_flow.html",
+          "extension": "html",
+          "size_kb": 5.4,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
+          "extension": "pdf",
+          "size_kb": 2.7,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_11_pro_cfs_11_cash_flow.pptx",
+          "extension": "pptx",
+          "size_kb": 29.7,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_12_pro_scv_12_s_curve.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_12_pro_scv_12_s_curve.html",
+          "extension": "html",
+          "size_kb": 5.0,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_12_pro_scv_12_s_curve.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_12_pro_scv_12_s_curve.pdf",
+          "extension": "pdf",
+          "size_kb": 2.9,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_12_pro_scv_12_s_curve.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_12_pro_scv_12_s_curve.pptx",
+          "extension": "pptx",
+          "size_kb": 29.8,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_13_pro_prc_13_procurement_status.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_13_pro_prc_13_procurement_status.html",
+          "extension": "html",
+          "size_kb": 8.6,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_13_pro_prc_13_procurement_status.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_13_pro_prc_13_procurement_status.pdf",
+          "extension": "pdf",
+          "size_kb": 3.3,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_13_pro_prc_13_procurement_status.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_13_pro_prc_13_procurement_status.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_14_pro_mat_14_material_status.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_14_pro_mat_14_material_status.html",
+          "extension": "html",
+          "size_kb": 8.6,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_14_pro_mat_14_material_status.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_14_pro_mat_14_material_status.pdf",
+          "extension": "pdf",
+          "size_kb": 3.3,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_14_pro_mat_14_material_status.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_14_pro_mat_14_material_status.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_15_pro_lah_15_labour_hours.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_15_pro_lah_15_labour_hours.html",
+          "extension": "html",
+          "size_kb": 8.6,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_15_pro_lah_15_labour_hours.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_15_pro_lah_15_labour_hours.pdf",
+          "extension": "pdf",
+          "size_kb": 3.3,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_15_pro_lah_15_labour_hours.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_15_pro_lah_15_labour_hours.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_16_pro_cpm_16_critical_path.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_16_pro_cpm_16_critical_path.html",
+          "extension": "html",
+          "size_kb": 8.7,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_16_pro_cpm_16_critical_path.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_16_pro_cpm_16_critical_path.pdf",
+          "extension": "pdf",
+          "size_kb": 3.4,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_16_pro_cpm_16_critical_path.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_16_pro_cpm_16_critical_path.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_17_pro_flt_17_float_analysis.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_17_pro_flt_17_float_analysis.html",
+          "extension": "html",
+          "size_kb": 8.7,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_17_pro_flt_17_float_analysis.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_17_pro_flt_17_float_analysis.pdf",
+          "extension": "pdf",
+          "size_kb": 3.4,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_17_pro_flt_17_float_analysis.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_17_pro_flt_17_float_analysis.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_18_pro_mil_18_milestone_status.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_18_pro_mil_18_milestone_status.html",
+          "extension": "html",
+          "size_kb": 4.1,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_18_pro_mil_18_milestone_status.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_18_pro_mil_18_milestone_status.pdf",
+          "extension": "pdf",
+          "size_kb": 2.7,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_18_pro_mil_18_milestone_status.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_18_pro_mil_18_milestone_status.pptx",
+          "extension": "pptx",
+          "size_kb": 29.7,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_19_pro_rsk_19_risk_report.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_19_pro_rsk_19_risk_report.html",
+          "extension": "html",
+          "size_kb": 4.0,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_19_pro_rsk_19_risk_report.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_19_pro_rsk_19_risk_report.pdf",
+          "extension": "pdf",
+          "size_kb": 2.6,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_19_pro_rsk_19_risk_report.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_19_pro_rsk_19_risk_report.pptx",
+          "extension": "pptx",
+          "size_kb": 29.7,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
+          "extension": "html",
+          "size_kb": 3.2,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
+          "extension": "pdf",
+          "size_kb": 2.1,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx",
+          "extension": "pptx",
+          "size_kb": 29.3,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
+          "extension": "html",
+          "size_kb": 3.1,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
+          "extension": "pdf",
+          "size_kb": 2.0,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx",
+          "extension": "pptx",
+          "size_kb": 29.3,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_22_pro_prod_22_productivity.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_22_pro_prod_22_productivity.html",
+          "extension": "html",
+          "size_kb": 8.7,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_22_pro_prod_22_productivity.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_22_pro_prod_22_productivity.pdf",
+          "extension": "pdf",
+          "size_kb": 3.4,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_22_pro_prod_22_productivity.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_22_pro_prod_22_productivity.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_23_pro_exe_23_executive_report.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_23_pro_exe_23_executive_report.html",
+          "extension": "html",
+          "size_kb": 4.2,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_23_pro_exe_23_executive_report.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_23_pro_exe_23_executive_report.pdf",
+          "extension": "pdf",
+          "size_kb": 2.7,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_23_pro_exe_23_executive_report.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_23_pro_exe_23_executive_report.pptx",
+          "extension": "pptx",
+          "size_kb": 29.6,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
+          "extension": "html",
+          "size_kb": 8.7,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
+          "extension": "pdf",
+          "size_kb": 3.4,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx",
+          "extension": "pptx",
+          "size_kb": 30.2,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_25_pro_fcf_25_forecast_completion.html",
+          "extension": "html",
+          "size_kb": 8.7,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
+          "extension": "pdf",
+          "size_kb": 3.4,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_25_pro_fcf_25_forecast_completion.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_26_pro_ml_26_ml_project_controls.html",
+          "extension": "html",
+          "size_kb": 8.9,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
+          "extension": "pdf",
+          "size_kb": 3.5,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_26_pro_ml_26_ml_project_controls.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:36"
+        },
+        {
+          "name": "06_samco_pco_27_pro_cad_27_contract_administration.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_27_pro_cad_27_contract_administration.html",
+          "extension": "html",
+          "size_kb": 4.0,
+          "modified": "2026-08-14T06:05:37"
+        },
+        {
+          "name": "06_samco_pco_27_pro_cad_27_contract_administration.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_27_pro_cad_27_contract_administration.pdf",
+          "extension": "pdf",
+          "size_kb": 2.5,
+          "modified": "2026-08-14T06:05:37"
+        },
+        {
+          "name": "06_samco_pco_27_pro_cad_27_contract_administration.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_27_pro_cad_27_contract_administration.pptx",
+          "extension": "pptx",
+          "size_kb": 29.6,
+          "modified": "2026-08-14T06:05:37"
+        },
+        {
+          "name": "06_samco_pco_28_pro_chg_28_change_control.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_28_pro_chg_28_change_control.html",
+          "extension": "html",
+          "size_kb": 3.9,
+          "modified": "2026-08-14T06:05:37"
+        },
+        {
+          "name": "06_samco_pco_28_pro_chg_28_change_control.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_28_pro_chg_28_change_control.pdf",
+          "extension": "pdf",
+          "size_kb": 2.5,
+          "modified": "2026-08-14T06:05:37"
+        },
+        {
+          "name": "06_samco_pco_28_pro_chg_28_change_control.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_28_pro_chg_28_change_control.pptx",
+          "extension": "pptx",
+          "size_kb": 29.6,
+          "modified": "2026-08-14T06:05:37"
+        },
+        {
+          "name": "06_samco_pco_29_pro_doc_29_document_control.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_29_pro_doc_29_document_control.html",
+          "extension": "html",
+          "size_kb": 3.1,
+          "modified": "2026-08-14T06:05:37"
+        },
+        {
+          "name": "06_samco_pco_29_pro_doc_29_document_control.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_29_pro_doc_29_document_control.pdf",
+          "extension": "pdf",
+          "size_kb": 2.0,
+          "modified": "2026-08-14T06:05:37"
+        },
+        {
+          "name": "06_samco_pco_29_pro_doc_29_document_control.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_29_pro_doc_29_document_control.pptx",
+          "extension": "pptx",
+          "size_kb": 29.3,
+          "modified": "2026-08-14T06:05:37"
+        },
+        {
+          "name": "06_samco_pco_30_pro_ifc_30_interface_management.html",
+          "relative_path": "Sophia-Mall/06_samco_pco_30_pro_ifc_30_interface_management.html",
+          "extension": "html",
+          "size_kb": 3.2,
+          "modified": "2026-08-14T06:05:37"
+        },
+        {
+          "name": "06_samco_pco_30_pro_ifc_30_interface_management.pdf",
+          "relative_path": "Sophia-Mall/06_samco_pco_30_pro_ifc_30_interface_management.pdf",
+          "extension": "pdf",
+          "size_kb": 2.1,
+          "modified": "2026-08-14T06:05:37"
+        },
+        {
+          "name": "06_samco_pco_30_pro_ifc_30_interface_management.pptx",
+          "relative_path": "Sophia-Mall/06_samco_pco_30_pro_ifc_30_interface_management.pptx",
+          "extension": "pptx",
+          "size_kb": 29.3,
+          "modified": "2026-08-14T06:05:37"
+        },
+        {
+          "name": "06_samco_pco_complete_project_report_package.zip",
+          "relative_path": "Sophia-Mall/06_samco_pco_complete_project_report_package.zip",
+          "extension": "zip",
+          "size_kb": 963.2,
+          "modified": "2026-08-14T06:05:37"
         },
         {
           "name": "universal_report_engine_manifest.json",
           "relative_path": "Sophia-Mall/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 35.3,
-          "modified": "2026-08-13T22:10:47"
+          "modified": "2026-08-14T06:05:37"
         }
       ],
       "watchers": [
@@ -7214,28 +7851,877 @@
       "source_report_fingerprint": "4f3cebb0591f853ce2c464e9c28dfa70b5ce06b94f6c79304cd2905c0d559ea1"
     },
     "samco_pco_31_slide_report": {
+      "generated_at": "2026-08-14T03:05:35+00:00",
       "html": "/generated/Sophia-Mall/05_samco_pco_31_slide_report.html",
       "pdf": "/generated/Sophia-Mall/05_samco_pco_31_slide_report.pdf",
       "pptx": "/generated/Sophia-Mall/05_samco_pco_31_slide_report.pptx",
+      "complete_package_zip": "/generated/Sophia-Mall/06_samco_pco_complete_project_report_package.zip",
       "files": {
         "html": {
           "name": "05_samco_pco_31_slide_report.html",
-          "bytes": 110416,
-          "sha256": "0d31bda015ab43373f0e037ee5abbeb110f0eeed171dfa6bd8db4757cdf06260"
+          "bytes": 110412,
+          "sha256": "425da9034474ddc5c202c9ee8a85ae888bf05d555e721edfed68e24638d2ecf0"
         },
         "pdf": {
           "name": "05_samco_pco_31_slide_report.pdf",
-          "bytes": 57683,
-          "sha256": "e8d8b6127ff94a009d6949d366f7dcfa052500f30a54684b24475aa2e7b08eea"
+          "bytes": 57674,
+          "sha256": "0b09f242db5fb6a42ac6df0352e321d3f89142ed49bc8d7f38cc38e20c340bb3"
         },
         "pptx": {
           "name": "05_samco_pco_31_slide_report.pptx",
-          "bytes": 86080,
-          "sha256": "6520ffab497a67715ab310da33bd946eef7ac315bbb7aad495fd670feccdc321"
+          "bytes": 86079,
+          "sha256": "57cdd265e3d2be5f320615738b196e21135e2598fb97410e3245740b2f0c9cf2"
+        },
+        "complete_package_zip": {
+          "name": "06_samco_pco_complete_project_report_package.zip",
+          "bytes": 986317,
+          "sha256": "ff7ca567a02c243dce2f32f49e21ae1d5f6d39dbe7be26548e27e0f9b155817b"
+        }
+      },
+      "individual_reports": {
+        "eot": {
+          "code": "PRO-TIA-01",
+          "title": "Time Impact & Extension of Time",
+          "status": "AWAITING CONTROLLED CSV DATA",
+          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
+              "bytes": 3681,
+              "sha256": "eeba6ca58be08cb0ff43f8612c80ec781aebc48de51ca80ccd158bc492039360"
+            },
+            "pdf": {
+              "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
+              "bytes": 2435,
+              "sha256": "f7e7b619ddaa07b07f45f7ce1d79a1d099cea988c3ea8eafd4ac9581ac647e16"
+            },
+            "pptx": {
+              "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx",
+              "bytes": 30118,
+              "sha256": "a8ac6aaee7826ec48d99f53f861cab7ee24f5c7fa8854148f01a0c2401aeae37"
+            }
+          }
+        },
+        "delay": {
+          "code": "PRO-DLY-02",
+          "title": "Delay Analysis",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_02_pro_dly_02_delay_analysis.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_02_pro_dly_02_delay_analysis.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_02_pro_dly_02_delay_analysis.html",
+              "bytes": 5200,
+              "sha256": "a924a3eff1147528a67243063e2be32a5b248ff3c2253c517f1541027d0739cb"
+            },
+            "pdf": {
+              "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
+              "bytes": 3084,
+              "sha256": "16ccfe452bf9473dabfc5cfeb0036ad5ae5a5ea5ea709044a4461e43a6664ca6"
+            },
+            "pptx": {
+              "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pptx",
+              "bytes": 30630,
+              "sha256": "895f7522a28c608eb90f6e373d1a4cb86601bde9ee204c1e138daf2ed53da9b0"
+            }
+          }
+        },
+        "progress": {
+          "code": "PRO-PRG-03",
+          "title": "Project Progress",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_03_pro_prg_03_project_progress.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_03_pro_prg_03_project_progress.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_03_pro_prg_03_project_progress.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_03_pro_prg_03_project_progress.html",
+              "bytes": 8936,
+              "sha256": "8142b9f5b7d13bb25bbf8b28b23da720e7925e699815e4ff3db1e48a03003b59"
+            },
+            "pdf": {
+              "name": "06_samco_pco_03_pro_prg_03_project_progress.pdf",
+              "bytes": 3487,
+              "sha256": "2960cdf4e92a5a1842163aeb834cceef7748a60ebbd715932986fb64c5124407"
+            },
+            "pptx": {
+              "name": "06_samco_pco_03_pro_prg_03_project_progress.pptx",
+              "bytes": 30833,
+              "sha256": "521ace25ec9a50f2fba101c1b1ba9ad6412ff67d7ec8678c30e50c5f8e7c9089"
+            }
+          }
+        },
+        "recovery": {
+          "code": "PRO-REC-04",
+          "title": "Recovery & Mitigation",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
+              "bytes": 8983,
+              "sha256": "0c0c96a6b713533716f581f897895b53afcfd26e47eee951ec4fc98e74a0bdd2"
+            },
+            "pdf": {
+              "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
+              "bytes": 3549,
+              "sha256": "6031421cdec1c4b1e97127de4f11312b1ee8cc526ef14adb39c3c229f12d9cca"
+            },
+            "pptx": {
+              "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx",
+              "bytes": 30886,
+              "sha256": "be0d1e26469289da51af52442f77a285a0aacbed356a78f3faf9351677852af7"
+            }
+          }
+        },
+        "variation": {
+          "code": "PRO-VAR-05",
+          "title": "Variation Report",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_05_pro_var_05_variation_report.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_05_pro_var_05_variation_report.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_05_pro_var_05_variation_report.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_05_pro_var_05_variation_report.html",
+              "bytes": 4035,
+              "sha256": "c731cfff9f70832b5924b0d5666dc835045543120ca06a0c2f222adbde34d8ca"
+            },
+            "pdf": {
+              "name": "06_samco_pco_05_pro_var_05_variation_report.pdf",
+              "bytes": 2565,
+              "sha256": "5c68383045c28994b5b442d7626d6f50aaa0544d6a1573766709e257c34e76a3"
+            },
+            "pptx": {
+              "name": "06_samco_pco_05_pro_var_05_variation_report.pptx",
+              "bytes": 30338,
+              "sha256": "39f5db12744748add483b710504e16ac961965f3caa3d4c7ce289c4815093134"
+            }
+          }
+        },
+        "hybrid": {
+          "code": "PRO-IPC-06",
+          "title": "Interim Payment",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_06_pro_ipc_06_interim_payment.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_06_pro_ipc_06_interim_payment.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_06_pro_ipc_06_interim_payment.html",
+              "bytes": 5360,
+              "sha256": "032700f8f6ca86c43a711b617998380c54e37cb0522f20e269e130aa439a8668"
+            },
+            "pdf": {
+              "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
+              "bytes": 2670,
+              "sha256": "4b7afdc4fd72a51a6ed53964b466b77e517df9c9b1c0924a1fef986459022b89"
+            },
+            "pptx": {
+              "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pptx",
+              "bytes": 30362,
+              "sha256": "4d2c365dc0ba08144402b0f580b3ec5d466a36fe33b15655e256d1c7ef82cb79"
+            }
+          }
+        },
+        "resource": {
+          "code": "PRO-RES-07",
+          "title": "Resource & Manpower",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_07_pro_res_07_resource_manpower.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_07_pro_res_07_resource_manpower.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_07_pro_res_07_resource_manpower.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_07_pro_res_07_resource_manpower.html",
+              "bytes": 8794,
+              "sha256": "1e751425ccf9a4986d4e97f5fae5037f6f974dca08dc553f3c6ebeac29ef4240"
+            },
+            "pdf": {
+              "name": "06_samco_pco_07_pro_res_07_resource_manpower.pdf",
+              "bytes": 3400,
+              "sha256": "80f37f85a717f0f41dfd97d425a40aa50c3823e12ee6001cbca1b446d3201397"
+            },
+            "pptx": {
+              "name": "06_samco_pco_07_pro_res_07_resource_manpower.pptx",
+              "bytes": 30834,
+              "sha256": "d4f343671e7610fbbf397e424e027dae67505d6a065dc54461db9ea49eff7333"
+            }
+          }
+        },
+        "equipment": {
+          "code": "PRO-EQP-08",
+          "title": "Equipment & Plant",
+          "status": "AWAITING CONTROLLED CSV DATA",
+          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_08_pro_eqp_08_equipment_plant.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_08_pro_eqp_08_equipment_plant.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.html",
+              "bytes": 3207,
+              "sha256": "9e9d9a33938cc88350e2aef521b3e1b7df583efc4b18ba92b49ed8ba3ea3521c"
+            },
+            "pdf": {
+              "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
+              "bytes": 2084,
+              "sha256": "10de052ef272ac2461d11d60f645ee15ecc78742a6234437e10adf41c60bbe91"
+            },
+            "pptx": {
+              "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pptx",
+              "bytes": 30013,
+              "sha256": "3fcef08665e236aa78a024b45e764e12f7d2b6997e88600727275ecc6aacde2c"
+            }
+          }
+        },
+        "cost": {
+          "code": "PRO-CST-09",
+          "title": "Cost Control",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_09_pro_cst_09_cost_control.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_09_pro_cst_09_cost_control.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_09_pro_cst_09_cost_control.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_09_pro_cst_09_cost_control.html",
+              "bytes": 7545,
+              "sha256": "aa220ae8a9c18a9799d96a3cb03fda6082ceeea02f197c8bf8829dbdfa887bab"
+            },
+            "pdf": {
+              "name": "06_samco_pco_09_pro_cst_09_cost_control.pdf",
+              "bytes": 3332,
+              "sha256": "f3e64b4445e88b03b81bf59cbaebf72bc625f95a5727477ed60c8b3060cf9ea8"
+            },
+            "pptx": {
+              "name": "06_samco_pco_09_pro_cst_09_cost_control.pptx",
+              "bytes": 30780,
+              "sha256": "1b35cd77aa0025d37acba9257dd30c2210bd889d7143d6e0117c2e4aab801f37"
+            }
+          }
+        },
+        "evm": {
+          "code": "PRO-EVM-10",
+          "title": "Earned Value",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_10_pro_evm_10_earned_value.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_10_pro_evm_10_earned_value.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_10_pro_evm_10_earned_value.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_10_pro_evm_10_earned_value.html",
+              "bytes": 7545,
+              "sha256": "41887a81364f11c300442992bcadf50f1a7f613a21733d525895fe3ab01a745c"
+            },
+            "pdf": {
+              "name": "06_samco_pco_10_pro_evm_10_earned_value.pdf",
+              "bytes": 3333,
+              "sha256": "baeb64f3db01f8bc4954ab52067a21617629bbff78c1be0cd817d0c2b479ee51"
+            },
+            "pptx": {
+              "name": "06_samco_pco_10_pro_evm_10_earned_value.pptx",
+              "bytes": 30787,
+              "sha256": "f081408c0cc3462e2d4d84e799cd195994cc5774bfd040a0d28826490e9f5a19"
+            }
+          }
+        },
+        "cashflow": {
+          "code": "PRO-CFS-11",
+          "title": "Cash Flow",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_11_pro_cfs_11_cash_flow.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_11_pro_cfs_11_cash_flow.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_11_pro_cfs_11_cash_flow.html",
+              "bytes": 5514,
+              "sha256": "4ca0ff16f269963eeee3c52b42fc78d9e4446560c1dd3d0ac34e5228d978fdfc"
+            },
+            "pdf": {
+              "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
+              "bytes": 2772,
+              "sha256": "32382dcbb2982e77019f1eb1bb0fb9e151b14ec36d5297db12b667ea601a511e"
+            },
+            "pptx": {
+              "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pptx",
+              "bytes": 30381,
+              "sha256": "4418d9b4ba777ae818abcb5d7d1eb574b09a2b98214683f4d6ecc33d4b0ce073"
+            }
+          }
+        },
+        "scurve": {
+          "code": "PRO-SCV-12",
+          "title": "S-Curve",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_12_pro_scv_12_s_curve.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_12_pro_scv_12_s_curve.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_12_pro_scv_12_s_curve.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_12_pro_scv_12_s_curve.html",
+              "bytes": 5131,
+              "sha256": "61162881c901e76278c7b8c9f0cd69ebe7fd0b8f60a0860ec00591d12a9d5522"
+            },
+            "pdf": {
+              "name": "06_samco_pco_12_pro_scv_12_s_curve.pdf",
+              "bytes": 2945,
+              "sha256": "cba7094b0d9afad932513b62035ad2137d402cac3a3cccc6ee59ec431cdb45f9"
+            },
+            "pptx": {
+              "name": "06_samco_pco_12_pro_scv_12_s_curve.pptx",
+              "bytes": 30560,
+              "sha256": "efb3132159d94f05624fe6a5437cc323ce973322f93343ae28c82767f049acca"
+            }
+          }
+        },
+        "procurement": {
+          "code": "PRO-PRC-13",
+          "title": "Procurement Status",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_13_pro_prc_13_procurement_status.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_13_pro_prc_13_procurement_status.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_13_pro_prc_13_procurement_status.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_13_pro_prc_13_procurement_status.html",
+              "bytes": 8779,
+              "sha256": "9d5fc7e84b4919d7b9bc6bfa33bf9a6e3bff4fdd5fdf340b0d73bf5b53a8ef2f"
+            },
+            "pdf": {
+              "name": "06_samco_pco_13_pro_prc_13_procurement_status.pdf",
+              "bytes": 3384,
+              "sha256": "04e20fe66ea4c1a4553d85612ae730e846a09162ba2b8a3fc700f079a7690fba"
+            },
+            "pptx": {
+              "name": "06_samco_pco_13_pro_prc_13_procurement_status.pptx",
+              "bytes": 30820,
+              "sha256": "771eb5bf9156091d764a97caf27cb1142688afca00062f2f9338cf49df2b4938"
+            }
+          }
+        },
+        "material": {
+          "code": "PRO-MAT-14",
+          "title": "Material Status",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_14_pro_mat_14_material_status.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_14_pro_mat_14_material_status.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_14_pro_mat_14_material_status.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_14_pro_mat_14_material_status.html",
+              "bytes": 8770,
+              "sha256": "09fb8e691356641abc8c9f9c4671954c8d7f1ccda73c41b2236044f2ca483797"
+            },
+            "pdf": {
+              "name": "06_samco_pco_14_pro_mat_14_material_status.pdf",
+              "bytes": 3383,
+              "sha256": "f1b0feee1e3857692702639eb26c94df578d9b2774693d5c3ba385bcb696acb3"
+            },
+            "pptx": {
+              "name": "06_samco_pco_14_pro_mat_14_material_status.pptx",
+              "bytes": 30820,
+              "sha256": "fa5744e9d653727b5b02b5e9ecc32f08420e8c74972fe6381a827df3c5836a8d"
+            }
+          }
+        },
+        "lookahead": {
+          "code": "PRO-LAH-15",
+          "title": "Labour Hours",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_15_pro_lah_15_labour_hours.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_15_pro_lah_15_labour_hours.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_15_pro_lah_15_labour_hours.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_15_pro_lah_15_labour_hours.html",
+              "bytes": 8761,
+              "sha256": "ab01a32c41a96afaa137c0928fb7d2e037af3d8a3258806257638bc3f641149f"
+            },
+            "pdf": {
+              "name": "06_samco_pco_15_pro_lah_15_labour_hours.pdf",
+              "bytes": 3387,
+              "sha256": "caa7cf988c0e69585ccb656c9cd31d5af9af4bfae8163ccfc39ec6b66268ff6d"
+            },
+            "pptx": {
+              "name": "06_samco_pco_15_pro_lah_15_labour_hours.pptx",
+              "bytes": 30819,
+              "sha256": "1339d8c0470812c89d5e2ba20c7965a62923c7612c125adbf6e58242bbf9413c"
+            }
+          }
+        },
+        "critical_path": {
+          "code": "PRO-CPM-16",
+          "title": "Critical Path",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_16_pro_cpm_16_critical_path.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_16_pro_cpm_16_critical_path.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_16_pro_cpm_16_critical_path.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_16_pro_cpm_16_critical_path.html",
+              "bytes": 8880,
+              "sha256": "909ff94291b33039be837033bb94ff72c565cf0f1955ea0074d97bccf8645545"
+            },
+            "pdf": {
+              "name": "06_samco_pco_16_pro_cpm_16_critical_path.pdf",
+              "bytes": 3477,
+              "sha256": "86946b16f1fac9e0e2c14cff5a6be53e6b5ee737c75e01032d96ff0e2a7648dc"
+            },
+            "pptx": {
+              "name": "06_samco_pco_16_pro_cpm_16_critical_path.pptx",
+              "bytes": 30866,
+              "sha256": "4cd17112fd6722aa67e8077eca051121993ea0061b7cf7805652b2f7f0461fb8"
+            }
+          }
+        },
+        "float": {
+          "code": "PRO-FLT-17",
+          "title": "Float Analysis",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_17_pro_flt_17_float_analysis.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_17_pro_flt_17_float_analysis.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_17_pro_flt_17_float_analysis.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_17_pro_flt_17_float_analysis.html",
+              "bytes": 8883,
+              "sha256": "c418f2eb24a38f16d5dce9160719912955f4ea787f7152269fb88cd4bd1c36d2"
+            },
+            "pdf": {
+              "name": "06_samco_pco_17_pro_flt_17_float_analysis.pdf",
+              "bytes": 3475,
+              "sha256": "b52ceae41273a35ecc922879a8743e8b699574e7fc0111aea0448c024a5af0f7"
+            },
+            "pptx": {
+              "name": "06_samco_pco_17_pro_flt_17_float_analysis.pptx",
+              "bytes": 30864,
+              "sha256": "879d08fb9269044d781512ee6c0aad611363b9212779f275b6dc8a59b3ae8f73"
+            }
+          }
+        },
+        "milestone": {
+          "code": "PRO-MIL-18",
+          "title": "Milestone Status",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_18_pro_mil_18_milestone_status.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_18_pro_mil_18_milestone_status.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_18_pro_mil_18_milestone_status.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_18_pro_mil_18_milestone_status.html",
+              "bytes": 4197,
+              "sha256": "7d41451ab59cf6615c31ab513e85a7188c856c726a011abd3638086d42cfd9d9"
+            },
+            "pdf": {
+              "name": "06_samco_pco_18_pro_mil_18_milestone_status.pdf",
+              "bytes": 2732,
+              "sha256": "7b6f6c16cdf97d65a1d1958f450ff61d9fc378c3da6c0345d669c91c1104626b"
+            },
+            "pptx": {
+              "name": "06_samco_pco_18_pro_mil_18_milestone_status.pptx",
+              "bytes": 30433,
+              "sha256": "35c69b7269cf98895e144f579ed9611b89b3bacdb1db56ebe2f5af35c6a8f7d6"
+            }
+          }
+        },
+        "risk": {
+          "code": "PRO-RSK-19",
+          "title": "Risk Report",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_19_pro_rsk_19_risk_report.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_19_pro_rsk_19_risk_report.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_19_pro_rsk_19_risk_report.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_19_pro_rsk_19_risk_report.html",
+              "bytes": 4134,
+              "sha256": "a1bdf6da5cbf4035ae1672bec9e7e6772b1fa939f81f717625356f8b6788d4e1"
+            },
+            "pdf": {
+              "name": "06_samco_pco_19_pro_rsk_19_risk_report.pdf",
+              "bytes": 2645,
+              "sha256": "704974394ebad33192ad1d6841157213f19610a9244ba3e6a11d517d6d2700bb"
+            },
+            "pptx": {
+              "name": "06_samco_pco_19_pro_rsk_19_risk_report.pptx",
+              "bytes": 30393,
+              "sha256": "c8f39c18819d17d7e7ef20ffb2c9517605667d6157b59820560b13b66563b689"
+            }
+          }
+        },
+        "rfi_submittal": {
+          "code": "PRO-RFI-20",
+          "title": "RFI & Submittals",
+          "status": "AWAITING CONTROLLED CSV DATA",
+          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
+              "bytes": 3250,
+              "sha256": "5f374cd76a1b13c7d2da7e4f394404a090d4c0765ce0551deb9cdbf9f15d6e19"
+            },
+            "pdf": {
+              "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
+              "bytes": 2184,
+              "sha256": "54a6b82202fc227dfab2df01ebf79411850e7976770417612ae22a8908002cba"
+            },
+            "pptx": {
+              "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx",
+              "bytes": 30047,
+              "sha256": "96fab771876da6ea0b4b0387e0e2233369931552c80c7fadf536b68300cf9bd7"
+            }
+          }
+        },
+        "qaqc": {
+          "code": "PRO-QAQC-21",
+          "title": "QA/QC Performance",
+          "status": "AWAITING CONTROLLED CSV DATA",
+          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
+              "bytes": 3199,
+              "sha256": "f2adc6fafb9be2630175e30ba407940e6335ff8dbdd56932ba20dba246f73d34"
+            },
+            "pdf": {
+              "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
+              "bytes": 2079,
+              "sha256": "7731218faa72e2e483a0bba56134b79fb799dc2063cc7e6e84aa53e454939f20"
+            },
+            "pptx": {
+              "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx",
+              "bytes": 30006,
+              "sha256": "7f15338d2df665c96621bcc10365bb850fdfb53de8bceab3e250326714ea287b"
+            }
+          }
+        },
+        "productivity": {
+          "code": "PRO-PROD-22",
+          "title": "Productivity",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_22_pro_prod_22_productivity.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_22_pro_prod_22_productivity.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_22_pro_prod_22_productivity.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_22_pro_prod_22_productivity.html",
+              "bytes": 8928,
+              "sha256": "3fac4904162e1833878db0f51c3530ec262419651ea80fadfd06f7258d4d5dd3"
+            },
+            "pdf": {
+              "name": "06_samco_pco_22_pro_prod_22_productivity.pdf",
+              "bytes": 3489,
+              "sha256": "a271e891bbf342156d29696d44ed5a4f0f6e095e1be0822f4bae86a036494f4c"
+            },
+            "pptx": {
+              "name": "06_samco_pco_22_pro_prod_22_productivity.pptx",
+              "bytes": 30837,
+              "sha256": "c27cb5a8b34eb198987d66b8fd3e26fba216df94c2e17f6b9cfd9848db8653eb"
+            }
+          }
+        },
+        "executive": {
+          "code": "PRO-EXE-23",
+          "title": "Executive Report",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_23_pro_exe_23_executive_report.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_23_pro_exe_23_executive_report.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_23_pro_exe_23_executive_report.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_23_pro_exe_23_executive_report.html",
+              "bytes": 4336,
+              "sha256": "6d2efe20a9581e1bdc34af79a6aa6ec3e4acecd13b4bb4bdb244cc8df8f44a15"
+            },
+            "pdf": {
+              "name": "06_samco_pco_23_pro_exe_23_executive_report.pdf",
+              "bytes": 2774,
+              "sha256": "0ca6dcfc2fe1643e1278a9fe3e03441d86953267c80ce0e4404488fab17bccbd"
+            },
+            "pptx": {
+              "name": "06_samco_pco_23_pro_exe_23_executive_report.pptx",
+              "bytes": 30359,
+              "sha256": "1d81bc6c2d5cbce085d80c7cc81bc00b2851e5283795ddd81fbf562d1407a9cc"
+            }
+          }
+        },
+        "baseline_current": {
+          "code": "PRO-BLC-24",
+          "title": "Baseline vs Current",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
+              "bytes": 8898,
+              "sha256": "f8d7f5b9d7c30c890e1927b8a30b681a2363c6686bde880c53bd39507f892189"
+            },
+            "pdf": {
+              "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
+              "bytes": 3479,
+              "sha256": "3d80252abf9be9473abd1c2b6f4b7c71de30cf4732b2fd795857c829299f7cec"
+            },
+            "pptx": {
+              "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx",
+              "bytes": 30876,
+              "sha256": "52d9f192d1493158c26da4ca148b10b7582405e095685fb6981ef39633df4235"
+            }
+          }
+        },
+        "forecast_completion": {
+          "code": "PRO-FCF-25",
+          "title": "Forecast Completion",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_25_pro_fcf_25_forecast_completion.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_25_pro_fcf_25_forecast_completion.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.html",
+              "bytes": 8927,
+              "sha256": "4fbb4975a5177fae932de04d2574915fdceef21f78543d575c8045045174ee3c"
+            },
+            "pdf": {
+              "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
+              "bytes": 3492,
+              "sha256": "d93deff57cadcc3addcc041d55adde9248906ef7d96d4b22e2047a606d84950f"
+            },
+            "pptx": {
+              "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pptx",
+              "bytes": 30834,
+              "sha256": "52a626b76bac3738c05edebad5616bdbafe6d8b1055fd00283fc5557c3c06cee"
+            }
+          }
+        },
+        "ml_project_controls": {
+          "code": "PRO-ML-26",
+          "title": "ML Project Controls",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_26_pro_ml_26_ml_project_controls.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_26_pro_ml_26_ml_project_controls.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.html",
+              "bytes": 9071,
+              "sha256": "86694304ab05c1767520693cbde35d3053fbb27cb07eb613cdde47b550b07469"
+            },
+            "pdf": {
+              "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
+              "bytes": 3583,
+              "sha256": "a1bf73ae2478344a299d19b090484def4bc3185e42cbbd00f3cbd15d38bdd077"
+            },
+            "pptx": {
+              "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pptx",
+              "bytes": 30848,
+              "sha256": "fb8f023c1a8d9d861a530a1a44b8000a4b768cbb7903b900b9c739b2663b434f"
+            }
+          }
+        },
+        "contract_admin": {
+          "code": "PRO-CAD-27",
+          "title": "Contract Administration",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_27_pro_cad_27_contract_administration.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_27_pro_cad_27_contract_administration.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_27_pro_cad_27_contract_administration.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_27_pro_cad_27_contract_administration.html",
+              "bytes": 4081,
+              "sha256": "bdb834176aa283559e4371a10dd61463395481c71c685c80ba8b6804458bca8b"
+            },
+            "pdf": {
+              "name": "06_samco_pco_27_pro_cad_27_contract_administration.pdf",
+              "bytes": 2602,
+              "sha256": "44e165ab28455226724dcba8c92f8c3d4ef16d7d46b7b1468af1ad74437c04a3"
+            },
+            "pptx": {
+              "name": "06_samco_pco_27_pro_cad_27_contract_administration.pptx",
+              "bytes": 30333,
+              "sha256": "355905926d865f25ae2b31fa184eb25e4075a13331e9263a94416a290fed81ad"
+            }
+          }
+        },
+        "change_control": {
+          "code": "PRO-CHG-28",
+          "title": "Change Control",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_28_pro_chg_28_change_control.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_28_pro_chg_28_change_control.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_28_pro_chg_28_change_control.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_28_pro_chg_28_change_control.html",
+              "bytes": 4029,
+              "sha256": "45a40b46fa813f55acc66f12704e0061e52fbb2e7c8003e25164c20760977b10"
+            },
+            "pdf": {
+              "name": "06_samco_pco_28_pro_chg_28_change_control.pdf",
+              "bytes": 2564,
+              "sha256": "4dbc55c632706842ea150a3f6542e15058d6de38b8dd52cea3f647723c770900"
+            },
+            "pptx": {
+              "name": "06_samco_pco_28_pro_chg_28_change_control.pptx",
+              "bytes": 30341,
+              "sha256": "f5a8839d8a41841bd129121a8f6873b4e3bcb34f47e50bf5a66d549bc9cdcc84"
+            }
+          }
+        },
+        "document_control": {
+          "code": "PRO-DOC-29",
+          "title": "Document Control",
+          "status": "AWAITING CONTROLLED CSV DATA",
+          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_29_pro_doc_29_document_control.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_29_pro_doc_29_document_control.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_29_pro_doc_29_document_control.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_29_pro_doc_29_document_control.html",
+              "bytes": 3192,
+              "sha256": "5595e6c12d20ad5004784a69c2f45581cb2224cfdde75ade9c78ea041956522c"
+            },
+            "pdf": {
+              "name": "06_samco_pco_29_pro_doc_29_document_control.pdf",
+              "bytes": 2073,
+              "sha256": "9914e46ce6a608fb47a6c00d21d2161e7dc8c47a8dbb0ca51b786a1ba4b4f396"
+            },
+            "pptx": {
+              "name": "06_samco_pco_29_pro_doc_29_document_control.pptx",
+              "bytes": 29992,
+              "sha256": "66777f0187086876d76021012c36d359770d855c75950c54f538bb00d4182299"
+            }
+          }
+        },
+        "interface_management": {
+          "code": "PRO-IFC-30",
+          "title": "Interface Management",
+          "status": "AWAITING CONTROLLED CSV DATA",
+          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+          "artifacts": {
+            "html": "/generated/Sophia-Mall/06_samco_pco_30_pro_ifc_30_interface_management.html",
+            "pdf": "/generated/Sophia-Mall/06_samco_pco_30_pro_ifc_30_interface_management.pdf",
+            "pptx": "/generated/Sophia-Mall/06_samco_pco_30_pro_ifc_30_interface_management.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_30_pro_ifc_30_interface_management.html",
+              "bytes": 3252,
+              "sha256": "c9d6fc60af325c18b6c0614e529fab90aa12d151892fe6d7cb0d538b69870b95"
+            },
+            "pdf": {
+              "name": "06_samco_pco_30_pro_ifc_30_interface_management.pdf",
+              "bytes": 2179,
+              "sha256": "19ca6157d58fb6653a786af9d1c456cdeabf8a2615de35d7ce68c8a291aa4872"
+            },
+            "pptx": {
+              "name": "06_samco_pco_30_pro_ifc_30_interface_management.pptx",
+              "bytes": 30043,
+              "sha256": "73eabad6137a818c04db267224a31616fffe30c77a7adf46095fb2c05f84bc93"
+            }
+          }
         }
       },
       "source_project_id": "Sophia-Mall",
-      "source_report_fingerprint": "e33cb792872fe936532009e1767ed3012d9d09ad1b2ffd5d59faee1f16befd60",
+      "source_report_fingerprint": "f8ac77fd5a532c3b7607a7acfcec4af0f8b53cf4c08e261152b731cc10e545f7",
       "generator": {
         "name": "SAMCO-PCO Report Generator",
         "mode": "data-driven project CSV adapter",
@@ -7247,7 +8733,7 @@
   "universal_report_engine": {
     "project_id": "Sophia-Mall",
     "project_key": "sophia-mall",
-    "source_fingerprint": "8a5e1519c8e006633f2a7744906cb6c20dc64f9875d293933c28d63ddafaae69",
+    "source_fingerprint": "8b880817114eeb0acf8cfb515c8ac450be5129ba986db3b885e9bcb4798457d3",
     "source_scope": "active project folder only",
     "source_file_count": 65,
     "source_inventory": [
@@ -7639,7 +9125,7 @@
         "relative_path": "project_manifest.json",
         "extension": ".json",
         "size_bytes": 389,
-        "sha256": "96bd0a0b862948f1fbdeb7af44a5c73acb71d87b1c95732ad45717c0a87098a9"
+        "sha256": "30e349bdee4da6f55a7d1ce39a89f64db859f555f0c122b833a139b42300cbd6"
       }
     ],
     "engine": {
@@ -7665,12 +9151,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "AWAITING CONTROLLED CSV DATA"
       },
       {
         "key": "delay",
@@ -7681,12 +9171,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_02_pro_dly_02_delay_analysis.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_02_pro_dly_02_delay_analysis.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "progress",
@@ -7697,12 +9191,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_03_pro_prg_03_project_progress.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_03_pro_prg_03_project_progress.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_03_pro_prg_03_project_progress.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "recovery",
@@ -7713,12 +9211,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "variation",
@@ -7729,12 +9231,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_05_pro_var_05_variation_report.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_05_pro_var_05_variation_report.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_05_pro_var_05_variation_report.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "hybrid",
@@ -7744,12 +9250,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_06_pro_ipc_06_interim_payment.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_06_pro_ipc_06_interim_payment.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "resource",
@@ -7760,12 +9270,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_07_pro_res_07_resource_manpower.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_07_pro_res_07_resource_manpower.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_07_pro_res_07_resource_manpower.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "equipment",
@@ -7775,12 +9289,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_08_pro_eqp_08_equipment_plant.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_08_pro_eqp_08_equipment_plant.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "AWAITING CONTROLLED CSV DATA"
       },
       {
         "key": "cost",
@@ -7790,12 +9308,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_09_pro_cst_09_cost_control.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_09_pro_cst_09_cost_control.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_09_pro_cst_09_cost_control.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "evm",
@@ -7805,12 +9327,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_10_pro_evm_10_earned_value.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_10_pro_evm_10_earned_value.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_10_pro_evm_10_earned_value.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "cashflow",
@@ -7820,12 +9346,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_11_pro_cfs_11_cash_flow.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_11_pro_cfs_11_cash_flow.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "scurve",
@@ -7835,12 +9365,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_12_pro_scv_12_s_curve.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_12_pro_scv_12_s_curve.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_12_pro_scv_12_s_curve.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "procurement",
@@ -7851,12 +9385,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_13_pro_prc_13_procurement_status.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_13_pro_prc_13_procurement_status.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_13_pro_prc_13_procurement_status.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "material",
@@ -7866,12 +9404,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_14_pro_mat_14_material_status.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_14_pro_mat_14_material_status.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_14_pro_mat_14_material_status.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "lookahead",
@@ -7882,12 +9424,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_15_pro_lah_15_labour_hours.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_15_pro_lah_15_labour_hours.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_15_pro_lah_15_labour_hours.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "critical_path",
@@ -7898,12 +9444,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_16_pro_cpm_16_critical_path.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_16_pro_cpm_16_critical_path.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_16_pro_cpm_16_critical_path.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "float",
@@ -7914,12 +9464,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_17_pro_flt_17_float_analysis.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_17_pro_flt_17_float_analysis.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_17_pro_flt_17_float_analysis.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "milestone",
@@ -7930,12 +9484,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_18_pro_mil_18_milestone_status.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_18_pro_mil_18_milestone_status.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_18_pro_mil_18_milestone_status.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "risk",
@@ -7945,12 +9503,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_19_pro_rsk_19_risk_report.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_19_pro_rsk_19_risk_report.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_19_pro_rsk_19_risk_report.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "rfi_submittal",
@@ -7961,12 +9523,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "AWAITING CONTROLLED CSV DATA"
       },
       {
         "key": "qaqc",
@@ -7976,12 +9542,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "AWAITING CONTROLLED CSV DATA"
       },
       {
         "key": "productivity",
@@ -7991,12 +9561,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_22_pro_prod_22_productivity.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_22_pro_prod_22_productivity.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_22_pro_prod_22_productivity.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "executive",
@@ -8006,12 +9580,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_23_pro_exe_23_executive_report.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_23_pro_exe_23_executive_report.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_23_pro_exe_23_executive_report.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "baseline_current",
@@ -8022,12 +9600,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "forecast_completion",
@@ -8038,12 +9620,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_25_pro_fcf_25_forecast_completion.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_25_pro_fcf_25_forecast_completion.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "ml_project_controls",
@@ -8053,12 +9639,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_26_pro_ml_26_ml_project_controls.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_26_pro_ml_26_ml_project_controls.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "contract_admin",
@@ -8068,12 +9658,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_27_pro_cad_27_contract_administration.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_27_pro_cad_27_contract_administration.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_27_pro_cad_27_contract_administration.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "change_control",
@@ -8083,12 +9677,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_28_pro_chg_28_change_control.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_28_pro_chg_28_change_control.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_28_pro_chg_28_change_control.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "document_control",
@@ -8098,12 +9696,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_29_pro_doc_29_document_control.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_29_pro_doc_29_document_control.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_29_pro_doc_29_document_control.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "AWAITING CONTROLLED CSV DATA"
       },
       {
         "key": "interface_management",
@@ -8114,19 +9716,23 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/06_samco_pco_30_pro_ifc_30_interface_management.html",
+          "pdf": "/generated/Sophia-Mall/06_samco_pco_30_pro_ifc_30_interface_management.pdf",
+          "pptx": "/generated/Sophia-Mall/06_samco_pco_30_pro_ifc_30_interface_management.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:35+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "AWAITING CONTROLLED CSV DATA"
       }
     ],
     "summary": {
       "catalog_count": 30,
-      "generated_count": 0,
+      "generated_count": 30,
       "draft_review_count": 0,
-      "ready_count": 30,
+      "ready_count": 0,
       "blocked_count": 0
     },
     "ml_capability": {
@@ -8212,6 +9818,12 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-13T19:10:47+00:00"
+    "updated_at": "2026-08-14T03:05:37+00:00",
+    "overall_artifacts": {
+      "html": "/generated/Sophia-Mall/05_samco_pco_31_slide_report.html",
+      "pdf": "/generated/Sophia-Mall/05_samco_pco_31_slide_report.pdf",
+      "pptx": "/generated/Sophia-Mall/05_samco_pco_31_slide_report.pptx",
+      "package_zip": "/generated/Sophia-Mall/06_samco_pco_complete_project_report_package.zip"
+    }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-13T22:10:51",
+  "generated_at": "2026-08-14T06:05:45",
   "project_count": 5,
   "sector_count": 3,
   "totals": {
@@ -41,7 +41,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting.",
-      "last_updated": "2026-08-13T22:08:30"
+      "last_updated": "2026-08-14T06:05:10"
     },
     {
       "decision_id": "DEC-the-big-p-01-up-20-april-26-01",
@@ -58,7 +58,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting.",
-      "last_updated": "2026-08-13T22:08:30"
+      "last_updated": "2026-08-14T06:05:10"
     },
     {
       "decision_id": "DEC-the-big-p-01-up-20-april-26-02",
@@ -75,7 +75,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness.",
-      "last_updated": "2026-08-13T22:08:30"
+      "last_updated": "2026-08-14T06:05:10"
     },
     {
       "decision_id": "DEC-sophia-mall-01",
@@ -92,7 +92,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review delay causation, critical path status, concurrency, and evidence completeness.",
-      "last_updated": "2026-08-13T22:08:30"
+      "last_updated": "2026-08-14T06:05:10"
     },
     {
       "decision_id": "DEC-sophia-mall-02",
@@ -109,7 +109,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review entitlement matrix, notice status, and supporting correspondence.",
-      "last_updated": "2026-08-13T22:08:30"
+      "last_updated": "2026-08-14T06:05:10"
     },
     {
       "decision_id": "DEC-suez-tunnel-01",
@@ -126,7 +126,7 @@
       "evidence_status": "High",
       "urgency": "High",
       "recommended_action": "Review recovery plan, driving activities, and schedule mitigation before the next management meeting.",
-      "last_updated": "2026-08-13T22:08:30"
+      "last_updated": "2026-08-14T06:05:10"
     },
     {
       "decision_id": "DEC-lmd-bridge-02",
@@ -143,7 +143,7 @@
       "evidence_status": "High",
       "urgency": "Medium",
       "recommended_action": "Validate actual cost and payment records against budget baseline.",
-      "last_updated": "2026-08-13T22:08:30"
+      "last_updated": "2026-08-14T06:05:10"
     },
     {
       "decision_id": "DEC-nasr-city-tunnel-01",
@@ -160,7 +160,7 @@
       "evidence_status": "High",
       "urgency": "Medium",
       "recommended_action": "Validate planned versus actual progress and confirm near-critical activities.",
-      "last_updated": "2026-08-13T22:08:30"
+      "last_updated": "2026-08-14T06:05:10"
     },
     {
       "decision_id": "DEC-nasr-city-tunnel-02",
@@ -177,7 +177,7 @@
       "evidence_status": "High",
       "urgency": "Medium",
       "recommended_action": "Validate actual cost and payment records against budget baseline.",
-      "last_updated": "2026-08-13T22:08:30"
+      "last_updated": "2026-08-14T06:05:10"
     },
     {
       "decision_id": "DEC-suez-tunnel-02",
@@ -194,7 +194,7 @@
       "evidence_status": "High",
       "urgency": "Medium",
       "recommended_action": "Validate actual cost and payment records against budget baseline.",
-      "last_updated": "2026-08-13T22:08:30"
+      "last_updated": "2026-08-14T06:05:10"
     }
   ],
   "sectors": [
@@ -343,7 +343,7 @@
       "milestone_count": 5,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-08-13T22:08:30",
+      "last_updated": "2026-08-14T06:05:10",
       "source_files": {
         "projects": 1,
         "contracts": 2,
@@ -499,7 +499,7 @@
       "milestone_count": 4,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-08-13T22:08:30",
+      "last_updated": "2026-08-14T06:05:10",
       "source_files": {
         "projects": 1,
         "contracts": 2,
@@ -637,7 +637,7 @@
       "milestone_count": 5,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-08-13T22:08:30",
+      "last_updated": "2026-08-14T06:05:10",
       "source_files": {
         "projects": 1,
         "contracts": 2,
@@ -802,7 +802,7 @@
       "milestone_count": 5,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-08-13T22:08:30",
+      "last_updated": "2026-08-14T06:05:10",
       "source_files": {
         "projects": 1,
         "contracts": 2,
@@ -967,7 +967,7 @@
       "milestone_count": 5,
       "data_quality": 100.0,
       "decision_required": true,
-      "last_updated": "2026-08-13T22:08:30",
+      "last_updated": "2026-08-14T06:05:10",
       "source_files": {
         "projects": 1,
         "contracts": 2,
@@ -1048,7 +1048,7 @@
     "block_count": 0,
     "warn_count": 0,
     "issue_count": 0,
-    "last_checked": "2026-08-13T22:10:51",
+    "last_checked": "2026-08-14T06:05:45",
     "top_issues": []
   }
 }

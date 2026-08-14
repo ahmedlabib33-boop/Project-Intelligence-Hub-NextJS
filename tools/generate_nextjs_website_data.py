@@ -1913,10 +1913,43 @@ def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
             project["universal_report_engine"] = ensure_universal_report_engine_catalog(
                 project, project_dir, output_dir, public_slug
             )
-        project["features"]["outputs_and_watchers"]["output_files"] = list_project_files(output_dir, OUTPUTS_ROOT, 80)
+
+        # The supplied SAMCO-PCO template is the public Output Studio report
+        # format.  Publish its 30 source-bound sections directly into the
+        # Universal Report Engine catalogue so every visible family has real
+        # HTML, PDF and editable PowerPoint downloads.  A section with no rows
+        # stays explicit about that gap; no value or conclusion is fabricated.
+        samco_pco = artifacts.get("samco_pco_31_slide_report", {})
+        individual_reports = samco_pco.get("individual_reports", {}) if isinstance(samco_pco, dict) else {}
+        universal_catalog = project.get("universal_report_engine")
+        if isinstance(universal_catalog, dict) and isinstance(individual_reports, dict):
+            generated_count = 0
+            for family in universal_catalog.get("report_families", []):
+                report = individual_reports.get(family.get("key")) if isinstance(family, dict) else None
+                if not isinstance(report, dict):
+                    continue
+                family["status"] = "GENERATED"
+                family["detail"] = report.get("detail") or family.get("detail")
+                family["artifacts"] = report.get("artifacts") or {}
+                family["generated_at"] = samco_pco.get("generated_at")
+                family["release_status"] = "CSV_BOUND_TEMPLATE"
+                family["validation_status"] = report.get("status") or "AWAITING_CONTROLLED_CSV_DATA"
+                generated_count += 1
+            summary = universal_catalog.get("summary")
+            if isinstance(summary, dict):
+                summary["generated_count"] = generated_count
+                summary["ready_count"] = max(0, int(summary.get("catalog_count") or 0) - generated_count)
+            universal_catalog["overall_artifacts"] = {
+                "html": samco_pco.get("html"),
+                "pdf": samco_pco.get("pdf"),
+                "pptx": samco_pco.get("pptx"),
+                "package_zip": samco_pco.get("complete_package_zip"),
+            }
+
+        project["features"]["outputs_and_watchers"]["output_files"] = list_project_files(output_dir, OUTPUTS_ROOT, 180)
 
         for artifact in sorted(output_dir.iterdir()):
-            if artifact.is_file() and artifact.suffix.lower() in {".html", ".pdf", ".pptx", ".docx"}:
+            if artifact.is_file() and artifact.suffix.lower() in {".html", ".pdf", ".pptx", ".docx", ".zip"}:
                 copy_if_changed(artifact, target / artifact.name)
 
         # Publish only release-approved Universal Report Engine artifacts.

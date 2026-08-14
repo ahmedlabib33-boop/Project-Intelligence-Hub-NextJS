@@ -10,6 +10,8 @@ from __future__ import annotations
 
 import hashlib
 import html
+import re
+import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -56,6 +58,18 @@ REPORT_SECTIONS: tuple[tuple[str, str, tuple[str, ...]], ...] = (
     ("PRO-CHG-28", "Change Control", ("claims",)),
     ("PRO-DOC-29", "Document Control", tuple()),
     ("PRO-IFC-30", "Interface Management", ("ifc",)),
+)
+
+# Aligned with the Output Studio catalogue. The report files remain generated
+# by the supplied SAMCO-PCO template adapter from the active project only.
+REPORT_FAMILY_KEYS: tuple[str, ...] = (
+    "eot", "delay", "progress", "recovery", "variation", "hybrid",
+    "resource", "equipment", "cost", "evm", "cashflow", "scurve",
+    "procurement", "material", "lookahead", "critical_path", "float",
+    "milestone", "risk", "rfi_submittal", "qaqc", "productivity",
+    "executive", "baseline_current", "forecast_completion",
+    "ml_project_controls", "contract_admin", "change_control",
+    "document_control", "interface_management",
 )
 
 
@@ -150,7 +164,14 @@ def _table_html(rows: list[dict[str, str]]) -> str:
     return f"<div class='table-wrap'><table><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table></div>"
 
 
-def _write_html(path: Path, project: dict[str, Any], sections: list[dict[str, Any]], generated_at: str) -> None:
+def _write_html(
+    path: Path,
+    project: dict[str, Any],
+    sections: list[dict[str, Any]],
+    generated_at: str,
+    *,
+    report_label: str | None = None,
+) -> None:
     tabs = "".join(
         f"<button role='tab' aria-selected={'true' if index == 0 else 'false'} data-tab='{index}'>{html.escape(item['code'])}</button>"
         for index, item in enumerate(sections)
@@ -172,7 +193,8 @@ def _write_html(path: Path, project: dict[str, Any], sections: list[dict[str, An
             f"<p>Primary table: {item['total_rows']} controlled rows. Values below are from the selected project only.</p>"
             f"<h3>CSV provenance</h3><ul>{source_rows}</ul><h3>Controlled data preview</h3>{_table_html(item['rows'])}</section>"
         )
-    title = f"SAMCO-PCO 31-Slide Project Controls Report — {project.get('project_display_name') or project.get('project_id')}"
+    report_name = report_label or "SAMCO-PCO 31-Slide Project Controls Report"
+    title = f"{report_name} - {project.get('project_display_name') or project.get('project_id')}"
     metrics = [
         ("Project ID", project.get("project_id")),
         ("Status", project.get("status")),
@@ -226,7 +248,14 @@ def _write_pdf(path: Path, project: dict[str, Any], sections: list[dict[str, Any
     SimpleDocTemplate(str(path), pagesize=landscape(letter), leftMargin=12 * mm, rightMargin=12 * mm, topMargin=12 * mm, bottomMargin=12 * mm).build(story)
 
 
-def _write_pptx(path: Path, project: dict[str, Any], sections: list[dict[str, Any]], generated_at: str) -> None:
+def _write_pptx(
+    path: Path,
+    project: dict[str, Any],
+    sections: list[dict[str, Any]],
+    generated_at: str,
+    *,
+    report_label: str | None = None,
+) -> None:
     from pptx import Presentation
     from pptx.dml.color import RGBColor
     from pptx.enum.shapes import MSO_SHAPE
@@ -243,11 +272,12 @@ def _write_pptx(path: Path, project: dict[str, Any], sections: list[dict[str, An
     background.solid(); background.fore_color.rgb = navy
     title_box = title_slide.shapes.add_textbox(Inches(0.55), Inches(2.2), Inches(12.2), Inches(1.1))
     title_p = title_box.text_frame.paragraphs[0]
-    title_p.text = "SAMCO-PCO Project Controls Report"
+    title_p.text = report_label or "SAMCO-PCO Project Controls Report"
     title_p.font.size = Pt(38); title_p.font.bold = True; title_p.font.color.rgb = white
     subtitle = title_slide.shapes.add_textbox(Inches(0.58), Inches(3.45), Inches(12.0), Inches(0.8))
     subtitle_p = subtitle.text_frame.paragraphs[0]
-    subtitle_p.text = f"{project.get('project_display_name') or project.get('project_id')} | 30 data-driven control sections | {generated_at}"
+    scope = f"{len(sections)} data-driven control section{'s' if len(sections) != 1 else ''}"
+    subtitle_p.text = f"{project.get('project_display_name') or project.get('project_id')} | {scope} | {generated_at}"
     subtitle_p.font.size = Pt(16); subtitle_p.font.color.rgb = RGBColor(205, 224, 240)
     for item in sections:
         slide = deck.slides.add_slide(deck.slide_layouts[6])
@@ -285,25 +315,83 @@ def _write_pptx(path: Path, project: dict[str, Any], sections: list[dict[str, An
     deck.save(path)
 
 
+def _safe_stem(value: str) -> str:
+    """Create a stable Windows/Vercel-safe filename stem from a report title."""
+    return re.sub(r"[^a-z0-9]+", "_", value.lower()).strip("_")
+
+
+def _artifact_metadata(path: Path) -> dict[str, Any]:
+    return {"name": path.name, "bytes": path.stat().st_size, "sha256": _sha256(path)}
+
+
+def _write_complete_package(path: Path, files: list[Path]) -> None:
+    """Build one public package without exposing controlled source files."""
+    with zipfile.ZipFile(path, "w", compression=zipfile.ZIP_DEFLATED) as package:
+        for artifact in files:
+            package.write(artifact, arcname=artifact.name)
+
+
 def ensure_samco_pco_project_report(project: dict[str, Any], output_dir: Path, public_slug: str) -> dict[str, Any]:
-    """Generate an HTML/PDF/PPTX report triplet from selected-project CSV data."""
+    """Generate individual and complete SAMCO-PCO reports from project CSV data."""
     output_dir.mkdir(parents=True, exist_ok=True)
     generated_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
     sections = _section_data(project)
+    if len(sections) != len(REPORT_FAMILY_KEYS):
+        raise RuntimeError("SAMCO-PCO section catalogue and Output Studio family catalogue are out of sync.")
+
     html_path = output_dir / f"{REPORT_STEM}.html"
     pdf_path = output_dir / f"{REPORT_STEM}.pdf"
     pptx_path = output_dir / f"{REPORT_STEM}.pptx"
     _write_html(html_path, project, sections, generated_at)
     _write_pdf(pdf_path, project, sections, generated_at)
     _write_pptx(pptx_path, project, sections, generated_at)
+
+    published_files = [html_path, pdf_path, pptx_path]
+    individual_reports: dict[str, dict[str, Any]] = {}
+    for index, (family_key, section) in enumerate(zip(REPORT_FAMILY_KEYS, sections), start=1):
+        section_stem = f"06_samco_pco_{index:02d}_{_safe_stem(section['code'])}_{_safe_stem(section['title'])}"
+        section_label = f"SAMCO-PCO {section['code']} {section['title']} Report"
+        section_html = output_dir / f"{section_stem}.html"
+        section_pdf = output_dir / f"{section_stem}.pdf"
+        section_pptx = output_dir / f"{section_stem}.pptx"
+        _write_html(section_html, project, [section], generated_at, report_label=section_label)
+        _write_pdf(section_pdf, project, [section], generated_at)
+        _write_pptx(section_pptx, project, [section], generated_at, report_label=section_label)
+        section_files = [section_html, section_pdf, section_pptx]
+        published_files.extend(section_files)
+        individual_reports[family_key] = {
+            "code": section["code"],
+            "title": section["title"],
+            "status": section["status"],
+            "detail": (
+                "Generated from the selected project's controlled CSV inputs."
+                if section["rows"]
+                else "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred."
+            ),
+            "artifacts": {
+                "html": f"/generated/{public_slug}/{section_html.name}",
+                "pdf": f"/generated/{public_slug}/{section_pdf.name}",
+                "pptx": f"/generated/{public_slug}/{section_pptx.name}",
+            },
+            "files": {
+                extension: _artifact_metadata(path)
+                for extension, path in (("html", section_html), ("pdf", section_pdf), ("pptx", section_pptx))
+            },
+        }
+
+    package_path = output_dir / "06_samco_pco_complete_project_report_package.zip"
+    _write_complete_package(package_path, published_files)
     return {
+        "generated_at": generated_at,
         "html": f"/generated/{public_slug}/{html_path.name}",
         "pdf": f"/generated/{public_slug}/{pdf_path.name}",
         "pptx": f"/generated/{public_slug}/{pptx_path.name}",
+        "complete_package_zip": f"/generated/{public_slug}/{package_path.name}",
         "files": {
-            extension: {"name": path.name, "bytes": path.stat().st_size, "sha256": _sha256(path)}
-            for extension, path in (("html", html_path), ("pdf", pdf_path), ("pptx", pptx_path))
+            extension: _artifact_metadata(path)
+            for extension, path in (("html", html_path), ("pdf", pdf_path), ("pptx", pptx_path), ("complete_package_zip", package_path))
         },
+        "individual_reports": individual_reports,
         "source_project_id": project.get("project_id"),
         "source_report_fingerprint": project.get("fingerprint"),
         "generator": {

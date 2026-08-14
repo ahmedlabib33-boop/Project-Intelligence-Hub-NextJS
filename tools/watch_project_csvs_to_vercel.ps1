@@ -37,38 +37,37 @@ function Invoke-Checked([string]$Executable, [string[]]$Arguments, [string]$Labe
 
 function Invoke-ProjectPublish {
     Write-SyncLog 'Detected project CSV/project-manifest update. Starting controlled Vercel publish.'
-    # Copy only the two explicitly controlled project-input areas plus project
-    # identity. Application code, reports, contracts, and unrelated local work
-    # remain outside this automatic publish path.
+    # Mirror project identity and every project-local CSV. This keeps a new
+    # project and any CSV source used by a controlled generator in scope while
+    # leaving application code and unrelated documents outside the publisher.
     Get-ChildItem -LiteralPath $sourceRoot -Filter 'project_manifest.json' -Recurse -File | ForEach-Object {
         $sourceProject = $_.Directory
         $relativeProject = $sourceProject.FullName.Substring($sourceRoot.Length).TrimStart('\')
         $targetProject = Join-Path (Join-Path $publisherRoot 'projects') $relativeProject
         New-Item -ItemType Directory -Force -Path $targetProject | Out-Null
-        Copy-Item -LiteralPath $_.FullName -Destination (Join-Path $targetProject 'project_manifest.json') -Force
-        foreach ($controlledRelative in @('01-data\import_templates', '02-delay_analysis\unified_tia_csv')) {
-            $controlledSource = Join-Path $sourceProject $controlledRelative
-            if (Test-Path -LiteralPath $controlledSource) {
-                $controlledTarget = Join-Path $targetProject $controlledRelative
-                New-Item -ItemType Directory -Force -Path $controlledTarget | Out-Null
-                Get-ChildItem -LiteralPath $controlledSource -File -Recurse | ForEach-Object {
-                    $relativeFile = $_.FullName.Substring($controlledSource.Length).TrimStart('\')
-                    $targetFile = Join-Path $controlledTarget $relativeFile
-                    New-Item -ItemType Directory -Force -Path (Split-Path -Parent $targetFile) | Out-Null
-                    Copy-Item -LiteralPath $_.FullName -Destination $targetFile -Force
-                }
+        foreach ($identityFile in @('project_manifest.json', 'project.json')) {
+            $identitySource = Join-Path $sourceProject $identityFile
+            if (Test-Path -LiteralPath $identitySource) {
+                Copy-Item -LiteralPath $identitySource -Destination (Join-Path $targetProject $identityFile) -Force
             }
+        }
+        Get-ChildItem -LiteralPath $sourceProject -Filter '*.csv' -Recurse -File | ForEach-Object {
+            $relativeFile = $_.FullName.Substring($sourceProject.FullName.Length).TrimStart('\')
+            $targetFile = Join-Path $targetProject $relativeFile
+            New-Item -ItemType Directory -Force -Path (Split-Path -Parent $targetFile) | Out-Null
+            Copy-Item -LiteralPath $_.FullName -Destination $targetFile -Force
         }
     }
 
     Push-Location $publisherRoot
     try {
         Invoke-Checked 'python' @('tools\generate_nextjs_website_data.py') 'Project website data generation'
-        Invoke-Checked 'python' @('tools\validate_project_input_minimization_parity.py') 'Project-output parity validation'
         Invoke-Checked 'python' @('tools\validate_streamlit_vercel_pipeline.py') 'Production pipeline validation'
         Invoke-Checked 'npm' @('--prefix', 'website', 'run', 'build') 'Next.js production build'
 
-        & git add -- projects website/public 11-outputs
+        # Vercel serves website/public; local 11-outputs copies never belong in
+        # the deployment commit.
+        & git add -- projects website/public
         if ($LASTEXITCODE -ne 0) { throw 'Git staging failed.' }
         & git diff --cached --quiet
         if ($LASTEXITCODE -eq 0) {

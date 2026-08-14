@@ -291,8 +291,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-13T22:08:30",
-  "fingerprint": "e77c3dadf033abcc04df8ee55bdb2753c1a38442a6dc27651ed79c4af60910da",
+  "last_updated": "2026-08-14T06:05:10",
+  "fingerprint": "882e409549a6b6791ee55b22dadf8e84481176a6df52484d7c3731f04a7d0384",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -24203,7 +24203,7 @@
         ],
         "source_fingerprint": "6a566153309a8772f6f2edd5c7bb7635be32e68688f110726132c553ed852878",
         "automatic_draft": true,
-        "last_run_at": "2026-08-13T19:08:45.387128+00:00",
+        "last_run_at": "2026-08-14T03:05:24.139556+00:00",
         "run_id": "549c68d21700e165"
       },
       "legacy_status": "Archived and excluded from the active TIA workflow.",
@@ -28149,28 +28149,672 @@
           "relative_path": "The BIG - PH01/05_samco_pco_31_slide_report.html",
           "extension": "html",
           "size_kb": 344.1,
-          "modified": "2026-08-13T22:10:43"
+          "modified": "2026-08-14T06:05:31"
         },
         {
           "name": "05_samco_pco_31_slide_report.pdf",
           "relative_path": "The BIG - PH01/05_samco_pco_31_slide_report.pdf",
           "extension": "pdf",
           "size_kb": 58.2,
-          "modified": "2026-08-13T22:10:43"
+          "modified": "2026-08-14T06:05:31"
         },
         {
           "name": "05_samco_pco_31_slide_report.pptx",
           "relative_path": "The BIG - PH01/05_samco_pco_31_slide_report.pptx",
           "extension": "pptx",
           "size_kb": 84.8,
-          "modified": "2026-08-13T22:10:44"
+          "modified": "2026-08-14T06:05:31"
+        },
+        {
+          "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
+          "extension": "html",
+          "size_kb": 30.9,
+          "modified": "2026-08-14T06:05:31"
+        },
+        {
+          "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
+          "extension": "pdf",
+          "size_kb": 3.5,
+          "modified": "2026-08-14T06:05:31"
+        },
+        {
+          "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:31"
+        },
+        {
+          "name": "06_samco_pco_02_pro_dly_02_delay_analysis.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_02_pro_dly_02_delay_analysis.html",
+          "extension": "html",
+          "size_kb": 11.4,
+          "modified": "2026-08-14T06:05:31"
+        },
+        {
+          "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
+          "extension": "pdf",
+          "size_kb": 3.3,
+          "modified": "2026-08-14T06:05:31"
+        },
+        {
+          "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_02_pro_dly_02_delay_analysis.pptx",
+          "extension": "pptx",
+          "size_kb": 30.0,
+          "modified": "2026-08-14T06:05:31"
+        },
+        {
+          "name": "06_samco_pco_03_pro_prg_03_project_progress.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_03_pro_prg_03_project_progress.html",
+          "extension": "html",
+          "size_kb": 21.0,
+          "modified": "2026-08-14T06:05:31"
+        },
+        {
+          "name": "06_samco_pco_03_pro_prg_03_project_progress.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_03_pro_prg_03_project_progress.pdf",
+          "extension": "pdf",
+          "size_kb": 3.2,
+          "modified": "2026-08-14T06:05:31"
+        },
+        {
+          "name": "06_samco_pco_03_pro_prg_03_project_progress.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_03_pro_prg_03_project_progress.pptx",
+          "extension": "pptx",
+          "size_kb": 30.0,
+          "modified": "2026-08-14T06:05:31"
+        },
+        {
+          "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
+          "extension": "html",
+          "size_kb": 21.1,
+          "modified": "2026-08-14T06:05:31"
+        },
+        {
+          "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
+          "extension": "pdf",
+          "size_kb": 3.4,
+          "modified": "2026-08-14T06:05:31"
+        },
+        {
+          "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_05_pro_var_05_variation_report.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_05_pro_var_05_variation_report.html",
+          "extension": "html",
+          "size_kb": 3.6,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_05_pro_var_05_variation_report.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_05_pro_var_05_variation_report.pdf",
+          "extension": "pdf",
+          "size_kb": 2.4,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_05_pro_var_05_variation_report.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_05_pro_var_05_variation_report.pptx",
+          "extension": "pptx",
+          "size_kb": 29.6,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_06_pro_ipc_06_interim_payment.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_06_pro_ipc_06_interim_payment.html",
+          "extension": "html",
+          "size_kb": 5.8,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
+          "extension": "pdf",
+          "size_kb": 2.7,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_06_pro_ipc_06_interim_payment.pptx",
+          "extension": "pptx",
+          "size_kb": 29.7,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_07_pro_res_07_resource_manpower.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_07_pro_res_07_resource_manpower.html",
+          "extension": "html",
+          "size_kb": 20.9,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_07_pro_res_07_resource_manpower.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_07_pro_res_07_resource_manpower.pdf",
+          "extension": "pdf",
+          "size_kb": 3.2,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_07_pro_res_07_resource_manpower.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_07_pro_res_07_resource_manpower.pptx",
+          "extension": "pptx",
+          "size_kb": 30.0,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_08_pro_eqp_08_equipment_plant.html",
+          "extension": "html",
+          "size_kb": 3.1,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
+          "extension": "pdf",
+          "size_kb": 2.0,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_08_pro_eqp_08_equipment_plant.pptx",
+          "extension": "pptx",
+          "size_kb": 29.3,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_09_pro_cst_09_cost_control.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_09_pro_cst_09_cost_control.html",
+          "extension": "html",
+          "size_kb": 15.0,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_09_pro_cst_09_cost_control.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_09_pro_cst_09_cost_control.pdf",
+          "extension": "pdf",
+          "size_kb": 3.0,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_09_pro_cst_09_cost_control.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_09_pro_cst_09_cost_control.pptx",
+          "extension": "pptx",
+          "size_kb": 29.9,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_10_pro_evm_10_earned_value.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_10_pro_evm_10_earned_value.html",
+          "extension": "html",
+          "size_kb": 15.0,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_10_pro_evm_10_earned_value.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_10_pro_evm_10_earned_value.pdf",
+          "extension": "pdf",
+          "size_kb": 3.0,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_10_pro_evm_10_earned_value.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_10_pro_evm_10_earned_value.pptx",
+          "extension": "pptx",
+          "size_kb": 29.9,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_11_pro_cfs_11_cash_flow.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_11_pro_cfs_11_cash_flow.html",
+          "extension": "html",
+          "size_kb": 6.3,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
+          "extension": "pdf",
+          "size_kb": 3.2,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_11_pro_cfs_11_cash_flow.pptx",
+          "extension": "pptx",
+          "size_kb": 29.9,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_12_pro_scv_12_s_curve.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_12_pro_scv_12_s_curve.html",
+          "extension": "html",
+          "size_kb": 6.2,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_12_pro_scv_12_s_curve.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_12_pro_scv_12_s_curve.pdf",
+          "extension": "pdf",
+          "size_kb": 3.1,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_12_pro_scv_12_s_curve.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_12_pro_scv_12_s_curve.pptx",
+          "extension": "pptx",
+          "size_kb": 30.0,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_13_pro_prc_13_procurement_status.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_13_pro_prc_13_procurement_status.html",
+          "extension": "html",
+          "size_kb": 20.9,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_13_pro_prc_13_procurement_status.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_13_pro_prc_13_procurement_status.pdf",
+          "extension": "pdf",
+          "size_kb": 3.2,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_13_pro_prc_13_procurement_status.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_13_pro_prc_13_procurement_status.pptx",
+          "extension": "pptx",
+          "size_kb": 30.0,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_14_pro_mat_14_material_status.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_14_pro_mat_14_material_status.html",
+          "extension": "html",
+          "size_kb": 20.8,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_14_pro_mat_14_material_status.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_14_pro_mat_14_material_status.pdf",
+          "extension": "pdf",
+          "size_kb": 3.2,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_14_pro_mat_14_material_status.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_14_pro_mat_14_material_status.pptx",
+          "extension": "pptx",
+          "size_kb": 30.0,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_15_pro_lah_15_labour_hours.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_15_pro_lah_15_labour_hours.html",
+          "extension": "html",
+          "size_kb": 20.8,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_15_pro_lah_15_labour_hours.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_15_pro_lah_15_labour_hours.pdf",
+          "extension": "pdf",
+          "size_kb": 3.2,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_15_pro_lah_15_labour_hours.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_15_pro_lah_15_labour_hours.pptx",
+          "extension": "pptx",
+          "size_kb": 30.0,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_16_pro_cpm_16_critical_path.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_16_pro_cpm_16_critical_path.html",
+          "extension": "html",
+          "size_kb": 30.7,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_16_pro_cpm_16_critical_path.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_16_pro_cpm_16_critical_path.pdf",
+          "extension": "pdf",
+          "size_kb": 3.4,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_16_pro_cpm_16_critical_path.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_16_pro_cpm_16_critical_path.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_17_pro_flt_17_float_analysis.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_17_pro_flt_17_float_analysis.html",
+          "extension": "html",
+          "size_kb": 30.7,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_17_pro_flt_17_float_analysis.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_17_pro_flt_17_float_analysis.pdf",
+          "extension": "pdf",
+          "size_kb": 3.4,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_17_pro_flt_17_float_analysis.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_17_pro_flt_17_float_analysis.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_18_pro_mil_18_milestone_status.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_18_pro_mil_18_milestone_status.html",
+          "extension": "html",
+          "size_kb": 4.0,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_18_pro_mil_18_milestone_status.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_18_pro_mil_18_milestone_status.pdf",
+          "extension": "pdf",
+          "size_kb": 2.6,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_18_pro_mil_18_milestone_status.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_18_pro_mil_18_milestone_status.pptx",
+          "extension": "pptx",
+          "size_kb": 29.7,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_19_pro_rsk_19_risk_report.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_19_pro_rsk_19_risk_report.html",
+          "extension": "html",
+          "size_kb": 3.8,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_19_pro_rsk_19_risk_report.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_19_pro_rsk_19_risk_report.pdf",
+          "extension": "pdf",
+          "size_kb": 2.5,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_19_pro_rsk_19_risk_report.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_19_pro_rsk_19_risk_report.pptx",
+          "extension": "pptx",
+          "size_kb": 29.6,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
+          "extension": "html",
+          "size_kb": 4.6,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
+          "extension": "pdf",
+          "size_kb": 2.7,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx",
+          "extension": "pptx",
+          "size_kb": 29.8,
+          "modified": "2026-08-14T06:05:32"
+        },
+        {
+          "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
+          "extension": "html",
+          "size_kb": 3.1,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
+          "extension": "pdf",
+          "size_kb": 2.0,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx",
+          "extension": "pptx",
+          "size_kb": 29.3,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_22_pro_prod_22_productivity.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_22_pro_prod_22_productivity.html",
+          "extension": "html",
+          "size_kb": 21.0,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_22_pro_prod_22_productivity.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_22_pro_prod_22_productivity.pdf",
+          "extension": "pdf",
+          "size_kb": 3.2,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_22_pro_prod_22_productivity.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_22_pro_prod_22_productivity.pptx",
+          "extension": "pptx",
+          "size_kb": 30.0,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_23_pro_exe_23_executive_report.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_23_pro_exe_23_executive_report.html",
+          "extension": "html",
+          "size_kb": 4.2,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_23_pro_exe_23_executive_report.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_23_pro_exe_23_executive_report.pdf",
+          "extension": "pdf",
+          "size_kb": 2.7,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_23_pro_exe_23_executive_report.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_23_pro_exe_23_executive_report.pptx",
+          "extension": "pptx",
+          "size_kb": 29.7,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
+          "extension": "html",
+          "size_kb": 30.7,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
+          "extension": "pdf",
+          "size_kb": 3.4,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_25_pro_fcf_25_forecast_completion.html",
+          "extension": "html",
+          "size_kb": 21.0,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
+          "extension": "pdf",
+          "size_kb": 3.3,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_25_pro_fcf_25_forecast_completion.pptx",
+          "extension": "pptx",
+          "size_kb": 30.0,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_26_pro_ml_26_ml_project_controls.html",
+          "extension": "html",
+          "size_kb": 21.2,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
+          "extension": "pdf",
+          "size_kb": 3.3,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_26_pro_ml_26_ml_project_controls.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_27_pro_cad_27_contract_administration.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_27_pro_cad_27_contract_administration.html",
+          "extension": "html",
+          "size_kb": 4.0,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_27_pro_cad_27_contract_administration.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_27_pro_cad_27_contract_administration.pdf",
+          "extension": "pdf",
+          "size_kb": 2.6,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_27_pro_cad_27_contract_administration.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_27_pro_cad_27_contract_administration.pptx",
+          "extension": "pptx",
+          "size_kb": 29.6,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_28_pro_chg_28_change_control.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_28_pro_chg_28_change_control.html",
+          "extension": "html",
+          "size_kb": 3.6,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_28_pro_chg_28_change_control.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_28_pro_chg_28_change_control.pdf",
+          "extension": "pdf",
+          "size_kb": 2.4,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_28_pro_chg_28_change_control.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_28_pro_chg_28_change_control.pptx",
+          "extension": "pptx",
+          "size_kb": 29.6,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_29_pro_doc_29_document_control.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_29_pro_doc_29_document_control.html",
+          "extension": "html",
+          "size_kb": 3.1,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_29_pro_doc_29_document_control.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_29_pro_doc_29_document_control.pdf",
+          "extension": "pdf",
+          "size_kb": 2.0,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_29_pro_doc_29_document_control.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_29_pro_doc_29_document_control.pptx",
+          "extension": "pptx",
+          "size_kb": 29.3,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_30_pro_ifc_30_interface_management.html",
+          "relative_path": "The BIG - PH01/06_samco_pco_30_pro_ifc_30_interface_management.html",
+          "extension": "html",
+          "size_kb": 10.8,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_30_pro_ifc_30_interface_management.pdf",
+          "relative_path": "The BIG - PH01/06_samco_pco_30_pro_ifc_30_interface_management.pdf",
+          "extension": "pdf",
+          "size_kb": 3.1,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_30_pro_ifc_30_interface_management.pptx",
+          "relative_path": "The BIG - PH01/06_samco_pco_30_pro_ifc_30_interface_management.pptx",
+          "extension": "pptx",
+          "size_kb": 29.9,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "06_samco_pco_complete_project_report_package.zip",
+          "relative_path": "The BIG - PH01/06_samco_pco_complete_project_report_package.zip",
+          "extension": "zip",
+          "size_kb": 991.8,
+          "modified": "2026-08-14T06:05:33"
+        },
+        {
+          "name": "PIH_PROJECT_CONTEXT.json",
+          "relative_path": "The BIG - PH01/universal-report-engine/eot/run-20260814T025401Z-98d7a4ded1/PIH_PROJECT_CONTEXT.json",
+          "extension": "json",
+          "size_kb": 0.7,
+          "modified": "2026-08-14T05:54:01"
         },
         {
           "name": "universal_report_engine_manifest.json",
           "relative_path": "The BIG - PH01/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 40.1,
-          "modified": "2026-08-13T22:10:44"
+          "modified": "2026-08-14T06:05:33"
         }
       ],
       "watchers": [
@@ -29867,28 +30511,877 @@
       "source_report_fingerprint": "0fc145f5b7eb71953b74c4ab117dac26b4cbf01e71473be6d70b26efef6da0bf"
     },
     "samco_pco_31_slide_report": {
+      "generated_at": "2026-08-14T03:05:31+00:00",
       "html": "/generated/The-BIG-PH01/05_samco_pco_31_slide_report.html",
       "pdf": "/generated/The-BIG-PH01/05_samco_pco_31_slide_report.pdf",
       "pptx": "/generated/The-BIG-PH01/05_samco_pco_31_slide_report.pptx",
+      "complete_package_zip": "/generated/The-BIG-PH01/06_samco_pco_complete_project_report_package.zip",
       "files": {
         "html": {
           "name": "05_samco_pco_31_slide_report.html",
-          "bytes": 352328,
-          "sha256": "4a09b095b48a42cb01f4e9e6de77374ee722d8427fea0a54fb59b5fad0dcd231"
+          "bytes": 352324,
+          "sha256": "690a76729464e6f29ea64c46ad8cb897adba1ccb311c67e5089e067986636a85"
         },
         "pdf": {
           "name": "05_samco_pco_31_slide_report.pdf",
-          "bytes": 59575,
-          "sha256": "23b03df30f41ffb5dea61fb8936697c7898c74078de8b2a097f6352ca19f207f"
+          "bytes": 59570,
+          "sha256": "123092a45aa4561281b09f40268421f04966c9d8dfb516860128edda1fc0acec"
         },
         "pptx": {
           "name": "05_samco_pco_31_slide_report.pptx",
           "bytes": 86880,
-          "sha256": "cb93bf2ca555bbae0cec428fccaf572605407337e506526823e75fc9c9a48824"
+          "sha256": "4d4ae51e054f4a45737c217a41b5f98d4a844fb4c3f7deeb51414d9f3039da61"
+        },
+        "complete_package_zip": {
+          "name": "06_samco_pco_complete_project_report_package.zip",
+          "bytes": 1015557,
+          "sha256": "e607881d0b9762e6cf75d9d98a3bafc3ec9c2701e548b03777df3355d148da67"
+        }
+      },
+      "individual_reports": {
+        "eot": {
+          "code": "PRO-TIA-01",
+          "title": "Time Impact & Extension of Time",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
+              "bytes": 31670,
+              "sha256": "18b4584c7d7acc9e4e042d9046095875d32b308dc4b5cdd0621c2267dc11420e"
+            },
+            "pdf": {
+              "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
+              "bytes": 3579,
+              "sha256": "fc9b15c8980671a8639696052c88bbc3f282f2877f34dfc682f8e601eedd022c"
+            },
+            "pptx": {
+              "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx",
+              "bytes": 30852,
+              "sha256": "1936f6133aa74fa54aa5fb2d2ec150b179afc488340b6ae9bbe781e2182b2b18"
+            }
+          }
+        },
+        "delay": {
+          "code": "PRO-DLY-02",
+          "title": "Delay Analysis",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_02_pro_dly_02_delay_analysis.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_02_pro_dly_02_delay_analysis.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_02_pro_dly_02_delay_analysis.html",
+              "bytes": 11677,
+              "sha256": "ac2eb15521f9dda24bae7015f74cc2b31600eebfb897a4b4237358dec3a4bff5"
+            },
+            "pdf": {
+              "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
+              "bytes": 3400,
+              "sha256": "5390d96f74c6e5a57ae8fef030ee68d8c02b467199999e254419739267562d0c"
+            },
+            "pptx": {
+              "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pptx",
+              "bytes": 30755,
+              "sha256": "86d58c9607625b576644eeeb9fd5ed838b1cebecdd127365da0d6e3c6075eb3f"
+            }
+          }
+        },
+        "progress": {
+          "code": "PRO-PRG-03",
+          "title": "Project Progress",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_03_pro_prg_03_project_progress.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_03_pro_prg_03_project_progress.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_03_pro_prg_03_project_progress.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_03_pro_prg_03_project_progress.html",
+              "bytes": 21512,
+              "sha256": "401c4ed4a158edde231a4468c64c72b269d8cb17bcbf6d5e4eebdf9d0d19b405"
+            },
+            "pdf": {
+              "name": "06_samco_pco_03_pro_prg_03_project_progress.pdf",
+              "bytes": 3325,
+              "sha256": "2971d0dfea6a5b0412c3e81ade121d6258d76d2c5e93cdd9599e88617b3fa338"
+            },
+            "pptx": {
+              "name": "06_samco_pco_03_pro_prg_03_project_progress.pptx",
+              "bytes": 30754,
+              "sha256": "f70011f74656421313bd3c53493bae1888c19859e54e569c0a094464df8224b8"
+            }
+          }
+        },
+        "recovery": {
+          "code": "PRO-REC-04",
+          "title": "Recovery & Mitigation",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
+              "bytes": 21558,
+              "sha256": "f441923dc7c2da1ecb8b8cbb8e09ada170631e1d611a704117e6571e19518994"
+            },
+            "pdf": {
+              "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
+              "bytes": 3453,
+              "sha256": "843dabe73d4b06953b0e5ef1980ebef705df6b210b6074b92918e7d00bbd9e36"
+            },
+            "pptx": {
+              "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx",
+              "bytes": 30810,
+              "sha256": "6ba6a57220b3fa74582dd97b47a038d8ee01f483020b8ae320df176e60b798c1"
+            }
+          }
+        },
+        "variation": {
+          "code": "PRO-VAR-05",
+          "title": "Variation Report",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_05_pro_var_05_variation_report.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_05_pro_var_05_variation_report.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_05_pro_var_05_variation_report.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_05_pro_var_05_variation_report.html",
+              "bytes": 3731,
+              "sha256": "dc6fc930d6255f3a07d77ac498a65d24d3dab9144803dc53e47a465ae837aa5c"
+            },
+            "pdf": {
+              "name": "06_samco_pco_05_pro_var_05_variation_report.pdf",
+              "bytes": 2480,
+              "sha256": "4111474133b8b907fb1d5ae4f48cee67f500df2abe43c111ce2d5bbd39f2387a"
+            },
+            "pptx": {
+              "name": "06_samco_pco_05_pro_var_05_variation_report.pptx",
+              "bytes": 30297,
+              "sha256": "cc223fc6735ccebdc0ba1188877f109145b74a37b076f964370a33350a1c80ce"
+            }
+          }
+        },
+        "hybrid": {
+          "code": "PRO-IPC-06",
+          "title": "Interim Payment",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_06_pro_ipc_06_interim_payment.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_06_pro_ipc_06_interim_payment.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_06_pro_ipc_06_interim_payment.html",
+              "bytes": 5920,
+              "sha256": "4fdab1500bfe0d817a5918262e289f90175a6b70c070212f29ca22fcfff82942"
+            },
+            "pdf": {
+              "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
+              "bytes": 2775,
+              "sha256": "6aeca4e024c99d4e9be2e7220eb6097fe3ec9089e704cdf0c7d09798bf254544"
+            },
+            "pptx": {
+              "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pptx",
+              "bytes": 30405,
+              "sha256": "41cc7c1acaa15be302c71c81a5279f5a238ceb2e614226884ad11f49ef77cb02"
+            }
+          }
+        },
+        "resource": {
+          "code": "PRO-RES-07",
+          "title": "Resource & Manpower",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_07_pro_res_07_resource_manpower.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_07_pro_res_07_resource_manpower.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_07_pro_res_07_resource_manpower.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_07_pro_res_07_resource_manpower.html",
+              "bytes": 21369,
+              "sha256": "9e826816758cb1f2ff092878f45ed74fce647b59d2158a5a423aead4068d4793"
+            },
+            "pdf": {
+              "name": "06_samco_pco_07_pro_res_07_resource_manpower.pdf",
+              "bytes": 3310,
+              "sha256": "8e36d4fe07a1cd1acf142cb3fa9b37c47792b67f3530d41962b776536c5c0a46"
+            },
+            "pptx": {
+              "name": "06_samco_pco_07_pro_res_07_resource_manpower.pptx",
+              "bytes": 30757,
+              "sha256": "08d32abd5a0aa62c72a97c33b1c3281979b6116661677c3ec1c19eb7689247bc"
+            }
+          }
+        },
+        "equipment": {
+          "code": "PRO-EQP-08",
+          "title": "Equipment & Plant",
+          "status": "AWAITING CONTROLLED CSV DATA",
+          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_08_pro_eqp_08_equipment_plant.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_08_pro_eqp_08_equipment_plant.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.html",
+              "bytes": 3205,
+              "sha256": "047835e509028f50379325ece7c03cf9f4069e3773c40a224bbda6cd48c6beee"
+            },
+            "pdf": {
+              "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
+              "bytes": 2089,
+              "sha256": "2efd13cff63defddcd417cd3a709fd71106888baa05be7dd3d43b6ebffab510c"
+            },
+            "pptx": {
+              "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pptx",
+              "bytes": 30021,
+              "sha256": "401a2244ffc0785c1ef5d292b5c021ff4c7e479bd2a230118614ae0481f043f4"
+            }
+          }
+        },
+        "cost": {
+          "code": "PRO-CST-09",
+          "title": "Cost Control",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_09_pro_cst_09_cost_control.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_09_pro_cst_09_cost_control.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_09_pro_cst_09_cost_control.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_09_pro_cst_09_cost_control.html",
+              "bytes": 15390,
+              "sha256": "eff5d5173635ebb1358584c37f9c28fa30505b7ff4607e695d755460cd562be9"
+            },
+            "pdf": {
+              "name": "06_samco_pco_09_pro_cst_09_cost_control.pdf",
+              "bytes": 3119,
+              "sha256": "cdcf5ddfacb715f8d071c2bcbfc11ce1d3aa328f9d2f2514f502ad17bd35e22b"
+            },
+            "pptx": {
+              "name": "06_samco_pco_09_pro_cst_09_cost_control.pptx",
+              "bytes": 30604,
+              "sha256": "28d7825a7032446dd45bf1f220bde938ee9307210b2c61cfe6c72e012361b2a1"
+            }
+          }
+        },
+        "evm": {
+          "code": "PRO-EVM-10",
+          "title": "Earned Value",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_10_pro_evm_10_earned_value.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_10_pro_evm_10_earned_value.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_10_pro_evm_10_earned_value.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_10_pro_evm_10_earned_value.html",
+              "bytes": 15390,
+              "sha256": "5fa8f2ecb17278a41f615c967fba67c75b184ab52662b5ab1f171724cee23a73"
+            },
+            "pdf": {
+              "name": "06_samco_pco_10_pro_evm_10_earned_value.pdf",
+              "bytes": 3120,
+              "sha256": "dd77068d9d323b87a4d7e5efe1fb9fe4bc93697482c0d74c3b36cc635ecf5fda"
+            },
+            "pptx": {
+              "name": "06_samco_pco_10_pro_evm_10_earned_value.pptx",
+              "bytes": 30610,
+              "sha256": "315a1494828ce5afedbc182d942b2a81e95efdec31b582ebb0a83c3cdfc05375"
+            }
+          }
+        },
+        "cashflow": {
+          "code": "PRO-CFS-11",
+          "title": "Cash Flow",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_11_pro_cfs_11_cash_flow.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_11_pro_cfs_11_cash_flow.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_11_pro_cfs_11_cash_flow.html",
+              "bytes": 6489,
+              "sha256": "2b5f6b725d388625f6009a20d3a5edf05bdca19d5ac477d46388f6d293307808"
+            },
+            "pdf": {
+              "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
+              "bytes": 3228,
+              "sha256": "a1cbd23ca6656781b411482225d678e378bbc1d18e475bfedb83e9d8dd6f3108"
+            },
+            "pptx": {
+              "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pptx",
+              "bytes": 30662,
+              "sha256": "3e26ffe18305d2674b1548ea98025e6cb8eef360b869eedcae8a01384f74802d"
+            }
+          }
+        },
+        "scurve": {
+          "code": "PRO-SCV-12",
+          "title": "S-Curve",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_12_pro_scv_12_s_curve.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_12_pro_scv_12_s_curve.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_12_pro_scv_12_s_curve.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_12_pro_scv_12_s_curve.html",
+              "bytes": 6328,
+              "sha256": "2d636b38bf295624e9a27c67b33aaabc1b2ba08ca1440db05ef00d6d7c867a74"
+            },
+            "pdf": {
+              "name": "06_samco_pco_12_pro_scv_12_s_curve.pdf",
+              "bytes": 3193,
+              "sha256": "1051f0ca2ce6f5a324cd533dd54687e69f8734d9389ad1c59a47cde24e262cf8"
+            },
+            "pptx": {
+              "name": "06_samco_pco_12_pro_scv_12_s_curve.pptx",
+              "bytes": 30728,
+              "sha256": "a9cf679370397c760f9a8935f51bba533f3ffa65c377ebc47d895bd3e15c2341"
+            }
+          }
+        },
+        "procurement": {
+          "code": "PRO-PRC-13",
+          "title": "Procurement Status",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_13_pro_prc_13_procurement_status.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_13_pro_prc_13_procurement_status.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_13_pro_prc_13_procurement_status.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_13_pro_prc_13_procurement_status.html",
+              "bytes": 21354,
+              "sha256": "ae7742e3849154719c90a52c2bceefd717755623fd255cb767570cacce02dd39"
+            },
+            "pdf": {
+              "name": "06_samco_pco_13_pro_prc_13_procurement_status.pdf",
+              "bytes": 3297,
+              "sha256": "9facef59b1b2ee8b0494ea19fd626679af980eb718b3305b44420a9bbcd5ab76"
+            },
+            "pptx": {
+              "name": "06_samco_pco_13_pro_prc_13_procurement_status.pptx",
+              "bytes": 30748,
+              "sha256": "08a3e1515e0a1771ff59c23900105c3cca286625186b910120742ca35cd9d0d7"
+            }
+          }
+        },
+        "material": {
+          "code": "PRO-MAT-14",
+          "title": "Material Status",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_14_pro_mat_14_material_status.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_14_pro_mat_14_material_status.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_14_pro_mat_14_material_status.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_14_pro_mat_14_material_status.html",
+              "bytes": 21345,
+              "sha256": "706380a632892e16ec3d46c0fe04a5dbd364431c15fbdb6ee2190711c7cb9ae0"
+            },
+            "pdf": {
+              "name": "06_samco_pco_14_pro_mat_14_material_status.pdf",
+              "bytes": 3294,
+              "sha256": "609fe0e7dfbd362104d71b437e2bf8c6699116e7dd167b2cc168ff1e3dfde762"
+            },
+            "pptx": {
+              "name": "06_samco_pco_14_pro_mat_14_material_status.pptx",
+              "bytes": 30748,
+              "sha256": "14d91f8ec8aba40af1819783ab9cf416aeeba98e058c8fbc6971b978b77c10c1"
+            }
+          }
+        },
+        "lookahead": {
+          "code": "PRO-LAH-15",
+          "title": "Labour Hours",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_15_pro_lah_15_labour_hours.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_15_pro_lah_15_labour_hours.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_15_pro_lah_15_labour_hours.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_15_pro_lah_15_labour_hours.html",
+              "bytes": 21336,
+              "sha256": "68fd1c60ae876ca4be94caf12034fd1aaff323f626a319938ba718944ae3490d"
+            },
+            "pdf": {
+              "name": "06_samco_pco_15_pro_lah_15_labour_hours.pdf",
+              "bytes": 3297,
+              "sha256": "9c3fcb30e7d09bd98736b4d4f0ee3ffd2bf8f42f8e1443a3f340a4fc1bc61f0d"
+            },
+            "pptx": {
+              "name": "06_samco_pco_15_pro_lah_15_labour_hours.pptx",
+              "bytes": 30748,
+              "sha256": "281152a519d2d14aa628a8f144e9a4b74974a0852b86988d5477d553dda02d19"
+            }
+          }
+        },
+        "critical_path": {
+          "code": "PRO-CPM-16",
+          "title": "Critical Path",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_16_pro_cpm_16_critical_path.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_16_pro_cpm_16_critical_path.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_16_pro_cpm_16_critical_path.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_16_pro_cpm_16_critical_path.html",
+              "bytes": 31391,
+              "sha256": "39ddedaba4be53bbfc52a75dcb8ad5ab324514b42e185e29f57b285f4a09f5a1"
+            },
+            "pdf": {
+              "name": "06_samco_pco_16_pro_cpm_16_critical_path.pdf",
+              "bytes": 3445,
+              "sha256": "ec550b2af44a0214f0d4135abeba169911ee18afe41411f1c0541d08a01f4eeb"
+            },
+            "pptx": {
+              "name": "06_samco_pco_16_pro_cpm_16_critical_path.pptx",
+              "bytes": 30798,
+              "sha256": "334b339164983f3dbaf360f34b971caaa813b53fedfb2037049c7ce67d3a3829"
+            }
+          }
+        },
+        "float": {
+          "code": "PRO-FLT-17",
+          "title": "Float Analysis",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_17_pro_flt_17_float_analysis.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_17_pro_flt_17_float_analysis.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_17_pro_flt_17_float_analysis.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_17_pro_flt_17_float_analysis.html",
+              "bytes": 31394,
+              "sha256": "e3f6f4e466d4ea6e8fb7303cee78809919e894ccf7ff56d6a2d61648f036d7b6"
+            },
+            "pdf": {
+              "name": "06_samco_pco_17_pro_flt_17_float_analysis.pdf",
+              "bytes": 3447,
+              "sha256": "b2a267a474c3329a4b6ce9fbd9009961182d126285920b93d9a94fa7760ea41d"
+            },
+            "pptx": {
+              "name": "06_samco_pco_17_pro_flt_17_float_analysis.pptx",
+              "bytes": 30798,
+              "sha256": "79bcc8ec23b8a8f62ff2b86c397a9a648c8e549a3b4db435aa7449c06d9db59c"
+            }
+          }
+        },
+        "milestone": {
+          "code": "PRO-MIL-18",
+          "title": "Milestone Status",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_18_pro_mil_18_milestone_status.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_18_pro_mil_18_milestone_status.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_18_pro_mil_18_milestone_status.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_18_pro_mil_18_milestone_status.html",
+              "bytes": 4113,
+              "sha256": "b6bcba1cde2e5339dd60302ff0537cc12abcef19e7335e8c38ff1244bdd50df1"
+            },
+            "pdf": {
+              "name": "06_samco_pco_18_pro_mil_18_milestone_status.pdf",
+              "bytes": 2685,
+              "sha256": "e0156c8028c92a0b3adf76dee74476dd3f2edb15035f00fcfa34065e9f723fea"
+            },
+            "pptx": {
+              "name": "06_samco_pco_18_pro_mil_18_milestone_status.pptx",
+              "bytes": 30411,
+              "sha256": "3160bd91c77f20423a44fed025d9ccc1639e9354c08053804406c679a7665498"
+            }
+          }
+        },
+        "risk": {
+          "code": "PRO-RSK-19",
+          "title": "Risk Report",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_19_pro_rsk_19_risk_report.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_19_pro_rsk_19_risk_report.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_19_pro_rsk_19_risk_report.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_19_pro_rsk_19_risk_report.html",
+              "bytes": 3889,
+              "sha256": "6433cac14693057440261f9b9146941b75001f3428b9af6f8cbc061ea5e28f90"
+            },
+            "pdf": {
+              "name": "06_samco_pco_19_pro_rsk_19_risk_report.pdf",
+              "bytes": 2563,
+              "sha256": "e485448f18bb1bfa5eb456dfb3b691fdeaa66bc5773044b4bd65f62943cad325"
+            },
+            "pptx": {
+              "name": "06_samco_pco_19_pro_rsk_19_risk_report.pptx",
+              "bytes": 30343,
+              "sha256": "db1111ed40f7e5e1058ccf1603989dbdf287d4870db43fc59d0f0dde5f012959"
+            }
+          }
+        },
+        "rfi_submittal": {
+          "code": "PRO-RFI-20",
+          "title": "RFI & Submittals",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
+              "bytes": 4677,
+              "sha256": "9a2a5a858cdafad681d1385dae7b553ba4dfef2047e51c35d2afe7e082d1eb09"
+            },
+            "pdf": {
+              "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
+              "bytes": 2769,
+              "sha256": "c4c1471e69f91dbffa466adc773f6a5a75172b5f2263b7ddcdd6513479b4ae8c"
+            },
+            "pptx": {
+              "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx",
+              "bytes": 30471,
+              "sha256": "eff3a0785602d88692e89003636bfc84e3006056e82489f3a169ca6686a5d07b"
+            }
+          }
+        },
+        "qaqc": {
+          "code": "PRO-QAQC-21",
+          "title": "QA/QC Performance",
+          "status": "AWAITING CONTROLLED CSV DATA",
+          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
+              "bytes": 3197,
+              "sha256": "4f84d6b9e15bdb211373c2d48ecfcc59f2973cbf2f776591a7e952be00fba0df"
+            },
+            "pdf": {
+              "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
+              "bytes": 2081,
+              "sha256": "749b67f3e382aa0ef4de00c4136bf2ee7e0c084a49ffa098d657fe0a5fdcf45a"
+            },
+            "pptx": {
+              "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx",
+              "bytes": 30013,
+              "sha256": "0ece8929227833871d1aeea636f8bdb3ec42f7aa74424661c585b36de3c1aaca"
+            }
+          }
+        },
+        "productivity": {
+          "code": "PRO-PROD-22",
+          "title": "Productivity",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_22_pro_prod_22_productivity.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_22_pro_prod_22_productivity.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_22_pro_prod_22_productivity.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_22_pro_prod_22_productivity.html",
+              "bytes": 21504,
+              "sha256": "5a9e3c54f935345287f771800262a7e4f0af95bf46eff5d19fba33870708608f"
+            },
+            "pdf": {
+              "name": "06_samco_pco_22_pro_prod_22_productivity.pdf",
+              "bytes": 3328,
+              "sha256": "f616dbfa0667674250cc6a0ce1186b96e115a14d33c6a9c35c7c3e1764ea5b3c"
+            },
+            "pptx": {
+              "name": "06_samco_pco_22_pro_prod_22_productivity.pptx",
+              "bytes": 30755,
+              "sha256": "7b9ef9532e6c96252899d0c7250f380b9ea85d514caca51053461ec04c7a51f7"
+            }
+          }
+        },
+        "executive": {
+          "code": "PRO-EXE-23",
+          "title": "Executive Report",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_23_pro_exe_23_executive_report.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_23_pro_exe_23_executive_report.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_23_pro_exe_23_executive_report.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_23_pro_exe_23_executive_report.html",
+              "bytes": 4337,
+              "sha256": "6701e5cf17b401dafa469adec9e6f729bb6b46f94e43654f79dbbef772e31caa"
+            },
+            "pdf": {
+              "name": "06_samco_pco_23_pro_exe_23_executive_report.pdf",
+              "bytes": 2732,
+              "sha256": "b74fb8cf0be5924622fa24a3dfce5665869fb28e2299b861eb7d1667a1edbbf8"
+            },
+            "pptx": {
+              "name": "06_samco_pco_23_pro_exe_23_executive_report.pptx",
+              "bytes": 30371,
+              "sha256": "20a39dd950975d180e461b3edb5bcdb0af23bfdc542ba7e508eea8b0ae7071c2"
+            }
+          }
+        },
+        "baseline_current": {
+          "code": "PRO-BLC-24",
+          "title": "Baseline vs Current",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
+              "bytes": 31409,
+              "sha256": "3a849b330e4547185c0d1bea9939ec9fad299340dc214ac2af4a226d9c7b4c89"
+            },
+            "pdf": {
+              "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
+              "bytes": 3450,
+              "sha256": "70dc444762bb0f014c7e96a4feef6023bb88bdc9788762ec359e061e20d6477b"
+            },
+            "pptx": {
+              "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx",
+              "bytes": 30805,
+              "sha256": "12903e821cb6bbd0d9c3d450255af5409f4584c62e448caeaded9e91edfeb0bb"
+            }
+          }
+        },
+        "forecast_completion": {
+          "code": "PRO-FCF-25",
+          "title": "Forecast Completion",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_25_pro_fcf_25_forecast_completion.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_25_pro_fcf_25_forecast_completion.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.html",
+              "bytes": 21516,
+              "sha256": "6f09e276d177dd458d1a68ce700904b0cb86b1ed87454b719f7dcf3279ce06fc"
+            },
+            "pdf": {
+              "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
+              "bytes": 3333,
+              "sha256": "7ab03b860a3fbf0739e2aedc9724148a9b97f797d30775f3c6ef8bc4233f639b"
+            },
+            "pptx": {
+              "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pptx",
+              "bytes": 30758,
+              "sha256": "1a6321b8a83572f459a54b68b2436d3674d9b5241253221b8117a5c813fc9c3f"
+            }
+          }
+        },
+        "ml_project_controls": {
+          "code": "PRO-ML-26",
+          "title": "ML Project Controls",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_26_pro_ml_26_ml_project_controls.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_26_pro_ml_26_ml_project_controls.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.html",
+              "bytes": 21660,
+              "sha256": "4c654cccb1361c257c66a59a2b62ce2b109ad159280c8bd9a1a2db227b5a1532"
+            },
+            "pdf": {
+              "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
+              "bytes": 3427,
+              "sha256": "4ee011c3907bb063031cb03e87ee314d49aa63211abc7bd8dbac7a23344596bf"
+            },
+            "pptx": {
+              "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pptx",
+              "bytes": 30772,
+              "sha256": "e688d829c3710a7d14073249f55389b231d0eb0105dd253469ba39bbcc731dd4"
+            }
+          }
+        },
+        "contract_admin": {
+          "code": "PRO-CAD-27",
+          "title": "Contract Administration",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_27_pro_cad_27_contract_administration.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_27_pro_cad_27_contract_administration.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_27_pro_cad_27_contract_administration.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_27_pro_cad_27_contract_administration.html",
+              "bytes": 4049,
+              "sha256": "a76d625e2b50a7b5280a4093327e7da409afe6152dfb455d7bdeb7d1bbf847bd"
+            },
+            "pdf": {
+              "name": "06_samco_pco_27_pro_cad_27_contract_administration.pdf",
+              "bytes": 2613,
+              "sha256": "a3f794b400890b2064f4301b473c37860526278b75b3c0351045ae1fec36335a"
+            },
+            "pptx": {
+              "name": "06_samco_pco_27_pro_cad_27_contract_administration.pptx",
+              "bytes": 30344,
+              "sha256": "b7d5c21559c3e194cc04f5c8466c59f82812f1e0fc5807e0d55e9ef1292c27e9"
+            }
+          }
+        },
+        "change_control": {
+          "code": "PRO-CHG-28",
+          "title": "Change Control",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_28_pro_chg_28_change_control.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_28_pro_chg_28_change_control.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_28_pro_chg_28_change_control.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_28_pro_chg_28_change_control.html",
+              "bytes": 3725,
+              "sha256": "dc6e3af9b1429e735374b83b5b80632ec97d1fb56972c5ea3ee1994a88398449"
+            },
+            "pdf": {
+              "name": "06_samco_pco_28_pro_chg_28_change_control.pdf",
+              "bytes": 2480,
+              "sha256": "09ed0e900764d8c1691a7d393a7850abf7bd9c2acab00ab496675c14ec19b310"
+            },
+            "pptx": {
+              "name": "06_samco_pco_28_pro_chg_28_change_control.pptx",
+              "bytes": 30298,
+              "sha256": "f8eddd959cc1a1d635075bbad867192e6e0495ee2c61ff98d4c3420dfb30cd7c"
+            }
+          }
+        },
+        "document_control": {
+          "code": "PRO-DOC-29",
+          "title": "Document Control",
+          "status": "AWAITING CONTROLLED CSV DATA",
+          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_29_pro_doc_29_document_control.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_29_pro_doc_29_document_control.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_29_pro_doc_29_document_control.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_29_pro_doc_29_document_control.html",
+              "bytes": 3190,
+              "sha256": "477d40309177ba4a73a538913eae73ef59bef61c530f17e3539824f5f1cc5e30"
+            },
+            "pdf": {
+              "name": "06_samco_pco_29_pro_doc_29_document_control.pdf",
+              "bytes": 2074,
+              "sha256": "ae55090b6a076223318fbf97dae1fbbc8186c8edd1097e7e5f05eec58cc03419"
+            },
+            "pptx": {
+              "name": "06_samco_pco_29_pro_doc_29_document_control.pptx",
+              "bytes": 30000,
+              "sha256": "09dc151d4bad29ffd542f38ee88b15ff1708befdb334ae04ddacf3d7c0e49b6a"
+            }
+          }
+        },
+        "interface_management": {
+          "code": "PRO-IFC-30",
+          "title": "Interface Management",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/The-BIG-PH01/06_samco_pco_30_pro_ifc_30_interface_management.html",
+            "pdf": "/generated/The-BIG-PH01/06_samco_pco_30_pro_ifc_30_interface_management.pdf",
+            "pptx": "/generated/The-BIG-PH01/06_samco_pco_30_pro_ifc_30_interface_management.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_30_pro_ifc_30_interface_management.html",
+              "bytes": 11027,
+              "sha256": "c83c2abac92295dd3728eb85f1b09b9cc2764908af01916a981c8b51a6d3206b"
+            },
+            "pdf": {
+              "name": "06_samco_pco_30_pro_ifc_30_interface_management.pdf",
+              "bytes": 3147,
+              "sha256": "0f4161c7e1d5c6d4c11eaa4f99a0543755ed05d8c52ac4a80d8997c7dab6e7ba"
+            },
+            "pptx": {
+              "name": "06_samco_pco_30_pro_ifc_30_interface_management.pptx",
+              "bytes": 30621,
+              "sha256": "586bea3054f32c0344b259d225383c321ad581cf654c78efdd9e07b3546f8ac5"
+            }
+          }
         }
       },
       "source_project_id": "The Big -P.01-UP-20-April-26",
-      "source_report_fingerprint": "e77c3dadf033abcc04df8ee55bdb2753c1a38442a6dc27651ed79c4af60910da",
+      "source_report_fingerprint": "882e409549a6b6791ee55b22dadf8e84481176a6df52484d7c3731f04a7d0384",
       "generator": {
         "name": "SAMCO-PCO Report Generator",
         "mode": "data-driven project CSV adapter",
@@ -29900,7 +31393,7 @@
   "universal_report_engine": {
     "project_id": "The Big -P.01-UP-20-April-26",
     "project_key": "the-big-p-01-up-20-april-26",
-    "source_fingerprint": "79a8e01cdb8a678272c0c971ef044ac36d13406cad8fb72d6faa3d4718764d7e",
+    "source_fingerprint": "5bb931e55883b870911144f912a8edd79ad7b026be4e0ce6341509e0fe655b7a",
     "source_scope": "active project folder only",
     "source_file_count": 83,
     "source_inventory": [
@@ -29992,7 +31485,7 @@
         "relative_path": "02-delay_analysis/controlled_runs/latest.json",
         "extension": ".json",
         "size_bytes": 59039,
-        "sha256": "9324be91c0427e6ccba5ac66652748c8a01c87d6c45448e02a9add336bd854bd"
+        "sha256": "147330c2ca0cd99ff448f1c93fc312a4558f1542dbc248ccd05f5494f1862cd0"
       },
       {
         "relative_path": "02-delay_analysis/methodology/TIA methodology.docx",
@@ -30400,7 +31893,7 @@
         "relative_path": "project_manifest.json",
         "extension": ".json",
         "size_bytes": 1204,
-        "sha256": "318056f06dcd932e6c07d933eb19280a5183d85a6faee71a1308e3415a6b0de7"
+        "sha256": "23505e92a8d106a4effeeda4efda7c99857d2e20d8aca58956de26a4e302cb7f"
       }
     ],
     "engine": {
@@ -30426,12 +31919,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "delay",
@@ -30442,12 +31939,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_02_pro_dly_02_delay_analysis.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_02_pro_dly_02_delay_analysis.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "progress",
@@ -30458,12 +31959,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_03_pro_prg_03_project_progress.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_03_pro_prg_03_project_progress.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_03_pro_prg_03_project_progress.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "recovery",
@@ -30474,12 +31979,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "variation",
@@ -30490,12 +31999,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_05_pro_var_05_variation_report.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_05_pro_var_05_variation_report.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_05_pro_var_05_variation_report.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "hybrid",
@@ -30505,12 +32018,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_06_pro_ipc_06_interim_payment.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_06_pro_ipc_06_interim_payment.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "resource",
@@ -30521,12 +32038,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_07_pro_res_07_resource_manpower.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_07_pro_res_07_resource_manpower.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_07_pro_res_07_resource_manpower.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "equipment",
@@ -30536,12 +32057,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_08_pro_eqp_08_equipment_plant.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_08_pro_eqp_08_equipment_plant.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "AWAITING CONTROLLED CSV DATA"
       },
       {
         "key": "cost",
@@ -30551,12 +32076,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_09_pro_cst_09_cost_control.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_09_pro_cst_09_cost_control.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_09_pro_cst_09_cost_control.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "evm",
@@ -30566,12 +32095,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_10_pro_evm_10_earned_value.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_10_pro_evm_10_earned_value.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_10_pro_evm_10_earned_value.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "cashflow",
@@ -30581,12 +32114,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_11_pro_cfs_11_cash_flow.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_11_pro_cfs_11_cash_flow.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "scurve",
@@ -30596,12 +32133,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_12_pro_scv_12_s_curve.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_12_pro_scv_12_s_curve.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_12_pro_scv_12_s_curve.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "procurement",
@@ -30612,12 +32153,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_13_pro_prc_13_procurement_status.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_13_pro_prc_13_procurement_status.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_13_pro_prc_13_procurement_status.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "material",
@@ -30627,12 +32172,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_14_pro_mat_14_material_status.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_14_pro_mat_14_material_status.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_14_pro_mat_14_material_status.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "lookahead",
@@ -30643,12 +32192,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_15_pro_lah_15_labour_hours.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_15_pro_lah_15_labour_hours.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_15_pro_lah_15_labour_hours.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "critical_path",
@@ -30659,12 +32212,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_16_pro_cpm_16_critical_path.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_16_pro_cpm_16_critical_path.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_16_pro_cpm_16_critical_path.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "float",
@@ -30675,12 +32232,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_17_pro_flt_17_float_analysis.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_17_pro_flt_17_float_analysis.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_17_pro_flt_17_float_analysis.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "milestone",
@@ -30691,12 +32252,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_18_pro_mil_18_milestone_status.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_18_pro_mil_18_milestone_status.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_18_pro_mil_18_milestone_status.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "risk",
@@ -30706,12 +32271,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_19_pro_rsk_19_risk_report.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_19_pro_rsk_19_risk_report.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_19_pro_rsk_19_risk_report.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "rfi_submittal",
@@ -30722,12 +32291,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "qaqc",
@@ -30737,12 +32310,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "AWAITING CONTROLLED CSV DATA"
       },
       {
         "key": "productivity",
@@ -30752,12 +32329,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_22_pro_prod_22_productivity.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_22_pro_prod_22_productivity.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_22_pro_prod_22_productivity.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "executive",
@@ -30767,12 +32348,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_23_pro_exe_23_executive_report.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_23_pro_exe_23_executive_report.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_23_pro_exe_23_executive_report.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "baseline_current",
@@ -30783,12 +32368,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "forecast_completion",
@@ -30799,12 +32388,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_25_pro_fcf_25_forecast_completion.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_25_pro_fcf_25_forecast_completion.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "ml_project_controls",
@@ -30814,12 +32407,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_26_pro_ml_26_ml_project_controls.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_26_pro_ml_26_ml_project_controls.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "contract_admin",
@@ -30829,12 +32426,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_27_pro_cad_27_contract_administration.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_27_pro_cad_27_contract_administration.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_27_pro_cad_27_contract_administration.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "change_control",
@@ -30844,12 +32445,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_28_pro_chg_28_change_control.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_28_pro_chg_28_change_control.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_28_pro_chg_28_change_control.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "document_control",
@@ -30859,12 +32464,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_29_pro_doc_29_document_control.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_29_pro_doc_29_document_control.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_29_pro_doc_29_document_control.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "AWAITING CONTROLLED CSV DATA"
       },
       {
         "key": "interface_management",
@@ -30875,19 +32484,23 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/06_samco_pco_30_pro_ifc_30_interface_management.html",
+          "pdf": "/generated/The-BIG-PH01/06_samco_pco_30_pro_ifc_30_interface_management.pdf",
+          "pptx": "/generated/The-BIG-PH01/06_samco_pco_30_pro_ifc_30_interface_management.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:31+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       }
     ],
     "summary": {
       "catalog_count": 30,
-      "generated_count": 0,
+      "generated_count": 30,
       "draft_review_count": 0,
-      "ready_count": 30,
+      "ready_count": 0,
       "blocked_count": 0
     },
     "ml_capability": {
@@ -30973,6 +32586,12 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-13T19:10:44+00:00"
+    "updated_at": "2026-08-14T03:05:33+00:00",
+    "overall_artifacts": {
+      "html": "/generated/The-BIG-PH01/05_samco_pco_31_slide_report.html",
+      "pdf": "/generated/The-BIG-PH01/05_samco_pco_31_slide_report.pdf",
+      "pptx": "/generated/The-BIG-PH01/05_samco_pco_31_slide_report.pptx",
+      "package_zip": "/generated/The-BIG-PH01/06_samco_pco_complete_project_report_package.zip"
+    }
   }
 }

@@ -233,8 +233,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-13T22:08:30",
-  "fingerprint": "e042ee968ab171eb4af21e95dd8b029893e33449e3ab66c01a2c06a22fc97c8a",
+  "last_updated": "2026-08-14T06:05:10",
+  "fingerprint": "1e769c63875be28b7da50cba4b7acd4eeca1d5873a017a9bfe266698b9ba8921",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -5892,28 +5892,665 @@
           "relative_path": "LMD-Bridgs/05_samco_pco_31_slide_report.html",
           "extension": "html",
           "size_kb": 107.4,
-          "modified": "2026-08-13T22:10:40"
+          "modified": "2026-08-14T06:05:27"
         },
         {
           "name": "05_samco_pco_31_slide_report.pdf",
           "relative_path": "LMD-Bridgs/05_samco_pco_31_slide_report.pdf",
           "extension": "pdf",
           "size_kb": 56.5,
-          "modified": "2026-08-13T22:10:40"
+          "modified": "2026-08-14T06:05:27"
         },
         {
           "name": "05_samco_pco_31_slide_report.pptx",
           "relative_path": "LMD-Bridgs/05_samco_pco_31_slide_report.pptx",
           "extension": "pptx",
           "size_kb": 84.1,
-          "modified": "2026-08-13T22:10:41"
+          "modified": "2026-08-14T06:05:27"
+        },
+        {
+          "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
+          "extension": "html",
+          "size_kb": 3.6,
+          "modified": "2026-08-14T06:05:27"
+        },
+        {
+          "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
+          "extension": "pdf",
+          "size_kb": 2.4,
+          "modified": "2026-08-14T06:05:27"
+        },
+        {
+          "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx",
+          "extension": "pptx",
+          "size_kb": 29.4,
+          "modified": "2026-08-14T06:05:27"
+        },
+        {
+          "name": "06_samco_pco_02_pro_dly_02_delay_analysis.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_02_pro_dly_02_delay_analysis.html",
+          "extension": "html",
+          "size_kb": 5.1,
+          "modified": "2026-08-14T06:05:27"
+        },
+        {
+          "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
+          "extension": "pdf",
+          "size_kb": 3.0,
+          "modified": "2026-08-14T06:05:27"
+        },
+        {
+          "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_02_pro_dly_02_delay_analysis.pptx",
+          "extension": "pptx",
+          "size_kb": 29.9,
+          "modified": "2026-08-14T06:05:27"
+        },
+        {
+          "name": "06_samco_pco_03_pro_prg_03_project_progress.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_03_pro_prg_03_project_progress.html",
+          "extension": "html",
+          "size_kb": 8.7,
+          "modified": "2026-08-14T06:05:27"
+        },
+        {
+          "name": "06_samco_pco_03_pro_prg_03_project_progress.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_03_pro_prg_03_project_progress.pdf",
+          "extension": "pdf",
+          "size_kb": 3.4,
+          "modified": "2026-08-14T06:05:27"
+        },
+        {
+          "name": "06_samco_pco_03_pro_prg_03_project_progress.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_03_pro_prg_03_project_progress.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:27"
+        },
+        {
+          "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
+          "extension": "html",
+          "size_kb": 8.7,
+          "modified": "2026-08-14T06:05:27"
+        },
+        {
+          "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
+          "extension": "pdf",
+          "size_kb": 3.5,
+          "modified": "2026-08-14T06:05:27"
+        },
+        {
+          "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx",
+          "extension": "pptx",
+          "size_kb": 30.2,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_05_pro_var_05_variation_report.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_05_pro_var_05_variation_report.html",
+          "extension": "html",
+          "size_kb": 3.9,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_05_pro_var_05_variation_report.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_05_pro_var_05_variation_report.pdf",
+          "extension": "pdf",
+          "size_kb": 2.5,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_05_pro_var_05_variation_report.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_05_pro_var_05_variation_report.pptx",
+          "extension": "pptx",
+          "size_kb": 29.6,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_06_pro_ipc_06_interim_payment.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_06_pro_ipc_06_interim_payment.html",
+          "extension": "html",
+          "size_kb": 5.2,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
+          "extension": "pdf",
+          "size_kb": 2.6,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_06_pro_ipc_06_interim_payment.pptx",
+          "extension": "pptx",
+          "size_kb": 29.6,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_07_pro_res_07_resource_manpower.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_07_pro_res_07_resource_manpower.html",
+          "extension": "html",
+          "size_kb": 8.6,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_07_pro_res_07_resource_manpower.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_07_pro_res_07_resource_manpower.pdf",
+          "extension": "pdf",
+          "size_kb": 3.3,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_07_pro_res_07_resource_manpower.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_07_pro_res_07_resource_manpower.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_08_pro_eqp_08_equipment_plant.html",
+          "extension": "html",
+          "size_kb": 3.1,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
+          "extension": "pdf",
+          "size_kb": 2.0,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_08_pro_eqp_08_equipment_plant.pptx",
+          "extension": "pptx",
+          "size_kb": 29.3,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_09_pro_cst_09_cost_control.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_09_pro_cst_09_cost_control.html",
+          "extension": "html",
+          "size_kb": 7.3,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_09_pro_cst_09_cost_control.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_09_pro_cst_09_cost_control.pdf",
+          "extension": "pdf",
+          "size_kb": 3.3,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_09_pro_cst_09_cost_control.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_09_pro_cst_09_cost_control.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_10_pro_evm_10_earned_value.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_10_pro_evm_10_earned_value.html",
+          "extension": "html",
+          "size_kb": 7.3,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_10_pro_evm_10_earned_value.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_10_pro_evm_10_earned_value.pdf",
+          "extension": "pdf",
+          "size_kb": 3.3,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_10_pro_evm_10_earned_value.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_10_pro_evm_10_earned_value.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_11_pro_cfs_11_cash_flow.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_11_pro_cfs_11_cash_flow.html",
+          "extension": "html",
+          "size_kb": 5.4,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
+          "extension": "pdf",
+          "size_kb": 2.7,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_11_pro_cfs_11_cash_flow.pptx",
+          "extension": "pptx",
+          "size_kb": 29.7,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_12_pro_scv_12_s_curve.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_12_pro_scv_12_s_curve.html",
+          "extension": "html",
+          "size_kb": 5.0,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_12_pro_scv_12_s_curve.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_12_pro_scv_12_s_curve.pdf",
+          "extension": "pdf",
+          "size_kb": 2.9,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_12_pro_scv_12_s_curve.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_12_pro_scv_12_s_curve.pptx",
+          "extension": "pptx",
+          "size_kb": 29.8,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_13_pro_prc_13_procurement_status.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_13_pro_prc_13_procurement_status.html",
+          "extension": "html",
+          "size_kb": 8.5,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_13_pro_prc_13_procurement_status.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_13_pro_prc_13_procurement_status.pdf",
+          "extension": "pdf",
+          "size_kb": 3.3,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_13_pro_prc_13_procurement_status.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_13_pro_prc_13_procurement_status.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_14_pro_mat_14_material_status.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_14_pro_mat_14_material_status.html",
+          "extension": "html",
+          "size_kb": 8.5,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_14_pro_mat_14_material_status.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_14_pro_mat_14_material_status.pdf",
+          "extension": "pdf",
+          "size_kb": 3.3,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_14_pro_mat_14_material_status.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_14_pro_mat_14_material_status.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_15_pro_lah_15_labour_hours.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_15_pro_lah_15_labour_hours.html",
+          "extension": "html",
+          "size_kb": 8.5,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_15_pro_lah_15_labour_hours.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_15_pro_lah_15_labour_hours.pdf",
+          "extension": "pdf",
+          "size_kb": 3.3,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_15_pro_lah_15_labour_hours.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_15_pro_lah_15_labour_hours.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_16_pro_cpm_16_critical_path.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_16_pro_cpm_16_critical_path.html",
+          "extension": "html",
+          "size_kb": 8.6,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_16_pro_cpm_16_critical_path.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_16_pro_cpm_16_critical_path.pdf",
+          "extension": "pdf",
+          "size_kb": 3.4,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_16_pro_cpm_16_critical_path.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_16_pro_cpm_16_critical_path.pptx",
+          "extension": "pptx",
+          "size_kb": 30.2,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_17_pro_flt_17_float_analysis.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_17_pro_flt_17_float_analysis.html",
+          "extension": "html",
+          "size_kb": 8.6,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_17_pro_flt_17_float_analysis.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_17_pro_flt_17_float_analysis.pdf",
+          "extension": "pdf",
+          "size_kb": 3.4,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_17_pro_flt_17_float_analysis.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_17_pro_flt_17_float_analysis.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_18_pro_mil_18_milestone_status.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_18_pro_mil_18_milestone_status.html",
+          "extension": "html",
+          "size_kb": 4.1,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_18_pro_mil_18_milestone_status.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_18_pro_mil_18_milestone_status.pdf",
+          "extension": "pdf",
+          "size_kb": 2.7,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_18_pro_mil_18_milestone_status.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_18_pro_mil_18_milestone_status.pptx",
+          "extension": "pptx",
+          "size_kb": 29.7,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_19_pro_rsk_19_risk_report.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_19_pro_rsk_19_risk_report.html",
+          "extension": "html",
+          "size_kb": 4.0,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_19_pro_rsk_19_risk_report.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_19_pro_rsk_19_risk_report.pdf",
+          "extension": "pdf",
+          "size_kb": 2.6,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_19_pro_rsk_19_risk_report.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_19_pro_rsk_19_risk_report.pptx",
+          "extension": "pptx",
+          "size_kb": 29.7,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
+          "extension": "html",
+          "size_kb": 3.2,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
+          "extension": "pdf",
+          "size_kb": 2.1,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx",
+          "extension": "pptx",
+          "size_kb": 29.3,
+          "modified": "2026-08-14T06:05:28"
+        },
+        {
+          "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
+          "extension": "html",
+          "size_kb": 3.1,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
+          "extension": "pdf",
+          "size_kb": 2.0,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx",
+          "extension": "pptx",
+          "size_kb": 29.3,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_22_pro_prod_22_productivity.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_22_pro_prod_22_productivity.html",
+          "extension": "html",
+          "size_kb": 8.7,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_22_pro_prod_22_productivity.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_22_pro_prod_22_productivity.pdf",
+          "extension": "pdf",
+          "size_kb": 3.4,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_22_pro_prod_22_productivity.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_22_pro_prod_22_productivity.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_23_pro_exe_23_executive_report.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_23_pro_exe_23_executive_report.html",
+          "extension": "html",
+          "size_kb": 4.2,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_23_pro_exe_23_executive_report.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_23_pro_exe_23_executive_report.pdf",
+          "extension": "pdf",
+          "size_kb": 2.7,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_23_pro_exe_23_executive_report.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_23_pro_exe_23_executive_report.pptx",
+          "extension": "pptx",
+          "size_kb": 29.7,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
+          "extension": "html",
+          "size_kb": 8.7,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
+          "extension": "pdf",
+          "size_kb": 3.4,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx",
+          "extension": "pptx",
+          "size_kb": 30.2,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_25_pro_fcf_25_forecast_completion.html",
+          "extension": "html",
+          "size_kb": 8.7,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
+          "extension": "pdf",
+          "size_kb": 3.4,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_25_pro_fcf_25_forecast_completion.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_26_pro_ml_26_ml_project_controls.html",
+          "extension": "html",
+          "size_kb": 8.8,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
+          "extension": "pdf",
+          "size_kb": 3.5,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_26_pro_ml_26_ml_project_controls.pptx",
+          "extension": "pptx",
+          "size_kb": 30.1,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_27_pro_cad_27_contract_administration.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_27_pro_cad_27_contract_administration.html",
+          "extension": "html",
+          "size_kb": 4.0,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_27_pro_cad_27_contract_administration.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_27_pro_cad_27_contract_administration.pdf",
+          "extension": "pdf",
+          "size_kb": 2.5,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_27_pro_cad_27_contract_administration.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_27_pro_cad_27_contract_administration.pptx",
+          "extension": "pptx",
+          "size_kb": 29.6,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_28_pro_chg_28_change_control.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_28_pro_chg_28_change_control.html",
+          "extension": "html",
+          "size_kb": 3.9,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_28_pro_chg_28_change_control.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_28_pro_chg_28_change_control.pdf",
+          "extension": "pdf",
+          "size_kb": 2.5,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_28_pro_chg_28_change_control.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_28_pro_chg_28_change_control.pptx",
+          "extension": "pptx",
+          "size_kb": 29.6,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_29_pro_doc_29_document_control.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_29_pro_doc_29_document_control.html",
+          "extension": "html",
+          "size_kb": 3.1,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_29_pro_doc_29_document_control.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_29_pro_doc_29_document_control.pdf",
+          "extension": "pdf",
+          "size_kb": 2.0,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_29_pro_doc_29_document_control.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_29_pro_doc_29_document_control.pptx",
+          "extension": "pptx",
+          "size_kb": 29.3,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_30_pro_ifc_30_interface_management.html",
+          "relative_path": "LMD-Bridgs/06_samco_pco_30_pro_ifc_30_interface_management.html",
+          "extension": "html",
+          "size_kb": 3.2,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_30_pro_ifc_30_interface_management.pdf",
+          "relative_path": "LMD-Bridgs/06_samco_pco_30_pro_ifc_30_interface_management.pdf",
+          "extension": "pdf",
+          "size_kb": 2.1,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_30_pro_ifc_30_interface_management.pptx",
+          "relative_path": "LMD-Bridgs/06_samco_pco_30_pro_ifc_30_interface_management.pptx",
+          "extension": "pptx",
+          "size_kb": 29.3,
+          "modified": "2026-08-14T06:05:29"
+        },
+        {
+          "name": "06_samco_pco_complete_project_report_package.zip",
+          "relative_path": "LMD-Bridgs/06_samco_pco_complete_project_report_package.zip",
+          "extension": "zip",
+          "size_kb": 964.3,
+          "modified": "2026-08-14T06:05:29"
         },
         {
           "name": "universal_report_engine_manifest.json",
           "relative_path": "LMD-Bridgs/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 35.3,
-          "modified": "2026-08-13T22:10:41"
+          "modified": "2026-08-14T06:05:30"
         }
       ],
       "watchers": [
@@ -7198,28 +7835,877 @@
       "source_report_fingerprint": "a950723cf57c6ec4d34e590657c9ed87499851ae7dbf6a9006829608c9b5cb59"
     },
     "samco_pco_31_slide_report": {
+      "generated_at": "2026-08-14T03:05:27+00:00",
       "html": "/generated/LMD-Bridgs/05_samco_pco_31_slide_report.html",
       "pdf": "/generated/LMD-Bridgs/05_samco_pco_31_slide_report.pdf",
       "pptx": "/generated/LMD-Bridgs/05_samco_pco_31_slide_report.pptx",
+      "complete_package_zip": "/generated/LMD-Bridgs/06_samco_pco_complete_project_report_package.zip",
       "files": {
         "html": {
           "name": "05_samco_pco_31_slide_report.html",
-          "bytes": 109963,
-          "sha256": "158995a2b333ded8aa6b4d0d278e7eed48ec66ba69b4ee752c0278723b07a1f9"
+          "bytes": 109959,
+          "sha256": "9da56210eb33b873cbee4cb20ca0844c639a34be3ed5b4f6a6c51a597949e142"
         },
         "pdf": {
           "name": "05_samco_pco_31_slide_report.pdf",
-          "bytes": 57851,
-          "sha256": "f8cfb1f021499fcb28e93f73fcfa0a6974a3a79a3d6767696bcdf3c39cf737fd"
+          "bytes": 57848,
+          "sha256": "6a70e8e835d8558b0dc433b27fb87e0a600a5248a53fd3949ccd5d31eea607b5"
         },
         "pptx": {
           "name": "05_samco_pco_31_slide_report.pptx",
           "bytes": 86158,
-          "sha256": "a50b557de0b131e22090322b478bd9c8ea6f0e4dbdbe0d4c311acb6b5e6eb207"
+          "sha256": "d79ced06d41b052c6bc56da757a82831d2b285075b869e4b5652b9138886795b"
+        },
+        "complete_package_zip": {
+          "name": "06_samco_pco_complete_project_report_package.zip",
+          "bytes": 987479,
+          "sha256": "44f2ac09864a14ff37e8ca1f1e66eb20b95582a4f0fbc93ad206c683f344cf23"
+        }
+      },
+      "individual_reports": {
+        "eot": {
+          "code": "PRO-TIA-01",
+          "title": "Time Impact & Extension of Time",
+          "status": "AWAITING CONTROLLED CSV DATA",
+          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
+              "bytes": 3678,
+              "sha256": "1370b300ff54f06e7aa89a68063e18dcfc6990578c03e0a99f59d5fd4cf3e6f7"
+            },
+            "pdf": {
+              "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
+              "bytes": 2425,
+              "sha256": "08481cca8bdfcd8470c97623e753005df51ecc30270927de42cd83c14de0484c"
+            },
+            "pptx": {
+              "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx",
+              "bytes": 30118,
+              "sha256": "1f39e97680b02ce767f2e64727aca93018d4352dd648e27027934112d5d1a415"
+            }
+          }
+        },
+        "delay": {
+          "code": "PRO-DLY-02",
+          "title": "Delay Analysis",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_02_pro_dly_02_delay_analysis.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_02_pro_dly_02_delay_analysis.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_02_pro_dly_02_delay_analysis.html",
+              "bytes": 5226,
+              "sha256": "892d2a5a329bdd0a73715ed3e6ef26a8e1dde8d5bee68620bfbf85f40bbbc700"
+            },
+            "pdf": {
+              "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
+              "bytes": 3095,
+              "sha256": "588eabb6afd305f2d757b3a869e2048331396100945615370bf81d3c2de0a9bc"
+            },
+            "pptx": {
+              "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pptx",
+              "bytes": 30648,
+              "sha256": "e1183f97abb148ffcafa73f213b1b92ac47ad544d00adbac62dc07afa31f54e3"
+            }
+          }
+        },
+        "progress": {
+          "code": "PRO-PRG-03",
+          "title": "Project Progress",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_03_pro_prg_03_project_progress.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_03_pro_prg_03_project_progress.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_03_pro_prg_03_project_progress.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_03_pro_prg_03_project_progress.html",
+              "bytes": 8901,
+              "sha256": "07f764f565abea393da487f7fe55c64054816c28059383b82b9e2b4805b0f474"
+            },
+            "pdf": {
+              "name": "06_samco_pco_03_pro_prg_03_project_progress.pdf",
+              "bytes": 3498,
+              "sha256": "b8aa9a4be6ba7668fcbdd9f56bd3797b1f50ba99d2c799221b91078e145d669c"
+            },
+            "pptx": {
+              "name": "06_samco_pco_03_pro_prg_03_project_progress.pptx",
+              "bytes": 30843,
+              "sha256": "a3ff0b4487fb22afbee60526ab08507d68454b21ede1a4fd3bf33394ec08f5de"
+            }
+          }
+        },
+        "recovery": {
+          "code": "PRO-REC-04",
+          "title": "Recovery & Mitigation",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
+              "bytes": 8948,
+              "sha256": "09f05500b49ee06e540918970f7ac116654944f27f9ad3aa3b989d36310b98f1"
+            },
+            "pdf": {
+              "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
+              "bytes": 3545,
+              "sha256": "7fd98f3060b96cf6c949d2f25990fb4c69bba31b3d453d8f00d4fec939758b5f"
+            },
+            "pptx": {
+              "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx",
+              "bytes": 30888,
+              "sha256": "aba105ecb79c68a0e8fbe001ed42391a1832ebf186e44506c49cd552a4e7e5c9"
+            }
+          }
+        },
+        "variation": {
+          "code": "PRO-VAR-05",
+          "title": "Variation Report",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_05_pro_var_05_variation_report.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_05_pro_var_05_variation_report.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_05_pro_var_05_variation_report.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_05_pro_var_05_variation_report.html",
+              "bytes": 4028,
+              "sha256": "92ed7341bd11ac746b61fbf72360bdeeb274626f20bda984301b419370e2787a"
+            },
+            "pdf": {
+              "name": "06_samco_pco_05_pro_var_05_variation_report.pdf",
+              "bytes": 2565,
+              "sha256": "366252750b642e0fd60b7d84db391b63d501abfda9b7b468f333b005316f7673"
+            },
+            "pptx": {
+              "name": "06_samco_pco_05_pro_var_05_variation_report.pptx",
+              "bytes": 30337,
+              "sha256": "1beaaee18427dc4eaba5564f208614df3993e73c31028997159b5acc9460e35d"
+            }
+          }
+        },
+        "hybrid": {
+          "code": "PRO-IPC-06",
+          "title": "Interim Payment",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_06_pro_ipc_06_interim_payment.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_06_pro_ipc_06_interim_payment.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_06_pro_ipc_06_interim_payment.html",
+              "bytes": 5365,
+              "sha256": "b5590c4426317b159ad991b16dfa57cbb39377268d0ff12d058b6e7a6d26587f"
+            },
+            "pdf": {
+              "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
+              "bytes": 2669,
+              "sha256": "3823a24079d3008fad558b87c1da24f71e2e8f22d9cb20c2399340d5f1926597"
+            },
+            "pptx": {
+              "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pptx",
+              "bytes": 30361,
+              "sha256": "00558c4980ef1cdb23db9d1a100b6fe776fe6f21eb4ab87f3e0543ff4902cb7f"
+            }
+          }
+        },
+        "resource": {
+          "code": "PRO-RES-07",
+          "title": "Resource & Manpower",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_07_pro_res_07_resource_manpower.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_07_pro_res_07_resource_manpower.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_07_pro_res_07_resource_manpower.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_07_pro_res_07_resource_manpower.html",
+              "bytes": 8759,
+              "sha256": "59ee8acde898152b4dc092f23e316c147bb365630d301d403835f88092661294"
+            },
+            "pdf": {
+              "name": "06_samco_pco_07_pro_res_07_resource_manpower.pdf",
+              "bytes": 3399,
+              "sha256": "fcab172ddc441cb71083a484f337c421e232d94c52a79a62e190c4e250bbb309"
+            },
+            "pptx": {
+              "name": "06_samco_pco_07_pro_res_07_resource_manpower.pptx",
+              "bytes": 30838,
+              "sha256": "b6f417c14ed7b58044b84137409d5773fd2a80ded73488f98ed8a6ef91a8c654"
+            }
+          }
+        },
+        "equipment": {
+          "code": "PRO-EQP-08",
+          "title": "Equipment & Plant",
+          "status": "AWAITING CONTROLLED CSV DATA",
+          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_08_pro_eqp_08_equipment_plant.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_08_pro_eqp_08_equipment_plant.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.html",
+              "bytes": 3204,
+              "sha256": "bd58d4360f914116b202b2a38117a07b9dff38e812be166144dc6663791b5377"
+            },
+            "pdf": {
+              "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
+              "bytes": 2078,
+              "sha256": "82e837ae5140892cf6ef5999ff192f76d3b082f739f3b2073f06cd43913e3eb8"
+            },
+            "pptx": {
+              "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pptx",
+              "bytes": 30015,
+              "sha256": "6b2136ab236434f46ad0cbd50ff8713bdcd2aeef1ac2eed70878c476cca17549"
+            }
+          }
+        },
+        "cost": {
+          "code": "PRO-CST-09",
+          "title": "Cost Control",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_09_pro_cst_09_cost_control.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_09_pro_cst_09_cost_control.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_09_pro_cst_09_cost_control.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_09_pro_cst_09_cost_control.html",
+              "bytes": 7524,
+              "sha256": "bc2bb344569ff122a7eda4256959cda6bdd6f44adfa26b931ad5054ae1985ace"
+            },
+            "pdf": {
+              "name": "06_samco_pco_09_pro_cst_09_cost_control.pdf",
+              "bytes": 3340,
+              "sha256": "86048fe77a817629bbbf6f8c677732881c052df121517a9bc06a9c36f70aff38"
+            },
+            "pptx": {
+              "name": "06_samco_pco_09_pro_cst_09_cost_control.pptx",
+              "bytes": 30797,
+              "sha256": "c9159442c3f7e103a63b05f9ab3dc3c7e925056cfc001538c8b04b1abefee9eb"
+            }
+          }
+        },
+        "evm": {
+          "code": "PRO-EVM-10",
+          "title": "Earned Value",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_10_pro_evm_10_earned_value.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_10_pro_evm_10_earned_value.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_10_pro_evm_10_earned_value.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_10_pro_evm_10_earned_value.html",
+              "bytes": 7524,
+              "sha256": "a073dadc09da115121185e5dff5f525e97594e544652ffb47a919834ea619cda"
+            },
+            "pdf": {
+              "name": "06_samco_pco_10_pro_evm_10_earned_value.pdf",
+              "bytes": 3343,
+              "sha256": "2619016898b2d3534c4f790086f9483220d13383660f301d2eb951139d8cd882"
+            },
+            "pptx": {
+              "name": "06_samco_pco_10_pro_evm_10_earned_value.pptx",
+              "bytes": 30802,
+              "sha256": "9e8337318a6ef9916e8728eb1792576b3a82df8230b1a2409164e6eb856604ab"
+            }
+          }
+        },
+        "cashflow": {
+          "code": "PRO-CFS-11",
+          "title": "Cash Flow",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_11_pro_cfs_11_cash_flow.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_11_pro_cfs_11_cash_flow.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_11_pro_cfs_11_cash_flow.html",
+              "bytes": 5519,
+              "sha256": "142cf7ceecf8cc6f352801789e7ec56a7392aa566d0d23af5c175b4caa0a0f33"
+            },
+            "pdf": {
+              "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
+              "bytes": 2770,
+              "sha256": "b9528bb361c181f8672a9731b983ae083735dac3768edce67c2c9c2b33687443"
+            },
+            "pptx": {
+              "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pptx",
+              "bytes": 30382,
+              "sha256": "356364a4c5e181cb2ecdd7abc16d59d37584d2ebb89dfe342f792affb92d763e"
+            }
+          }
+        },
+        "scurve": {
+          "code": "PRO-SCV-12",
+          "title": "S-Curve",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_12_pro_scv_12_s_curve.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_12_pro_scv_12_s_curve.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_12_pro_scv_12_s_curve.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_12_pro_scv_12_s_curve.html",
+              "bytes": 5081,
+              "sha256": "05fd1e70a55d20c6fcafcd017c25f6b3d26fc2e8a111df87e372c4bdaf412050"
+            },
+            "pdf": {
+              "name": "06_samco_pco_12_pro_scv_12_s_curve.pdf",
+              "bytes": 2944,
+              "sha256": "a989d0ce2bc2855629fa3c7220ba2c65d886c9a32ad831809a35cf5d038b9721"
+            },
+            "pptx": {
+              "name": "06_samco_pco_12_pro_scv_12_s_curve.pptx",
+              "bytes": 30553,
+              "sha256": "fb4674e6722b6aff8281321091b15dcb9b79e0b49acf83bba3275f385977bbea"
+            }
+          }
+        },
+        "procurement": {
+          "code": "PRO-PRC-13",
+          "title": "Procurement Status",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_13_pro_prc_13_procurement_status.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_13_pro_prc_13_procurement_status.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_13_pro_prc_13_procurement_status.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_13_pro_prc_13_procurement_status.html",
+              "bytes": 8744,
+              "sha256": "30fe98558f1c8eabfc2f141347f1ca4d1672d9d76afe24430af5b1f043732af8"
+            },
+            "pdf": {
+              "name": "06_samco_pco_13_pro_prc_13_procurement_status.pdf",
+              "bytes": 3402,
+              "sha256": "62324e9a2627e276763de20165a30013938bfa6b8ad8c6bf3989441095fef784"
+            },
+            "pptx": {
+              "name": "06_samco_pco_13_pro_prc_13_procurement_status.pptx",
+              "bytes": 30834,
+              "sha256": "e11397744f11240eaa52bb46a9790ca2a8e3453e7990fda7d005a4d9ddcd78c2"
+            }
+          }
+        },
+        "material": {
+          "code": "PRO-MAT-14",
+          "title": "Material Status",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_14_pro_mat_14_material_status.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_14_pro_mat_14_material_status.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_14_pro_mat_14_material_status.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_14_pro_mat_14_material_status.html",
+              "bytes": 8735,
+              "sha256": "bd935cd644b1a183cb5b495e7900e7fb1384248f375595165f2680e5260722d1"
+            },
+            "pdf": {
+              "name": "06_samco_pco_14_pro_mat_14_material_status.pdf",
+              "bytes": 3395,
+              "sha256": "714be8dfe33845fe311a62aa4cedb0f409ab751f23284a4769bfa0daf0edaaec"
+            },
+            "pptx": {
+              "name": "06_samco_pco_14_pro_mat_14_material_status.pptx",
+              "bytes": 30830,
+              "sha256": "4287c939144aa511f3ddf0fa13d3cef757d9c7f0197a5982259ad0fb74d96b47"
+            }
+          }
+        },
+        "lookahead": {
+          "code": "PRO-LAH-15",
+          "title": "Labour Hours",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_15_pro_lah_15_labour_hours.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_15_pro_lah_15_labour_hours.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_15_pro_lah_15_labour_hours.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_15_pro_lah_15_labour_hours.html",
+              "bytes": 8726,
+              "sha256": "38f5ae202be6e9de886390d90951da8e6f2332f8c4aeded66abbddf210fa2e07"
+            },
+            "pdf": {
+              "name": "06_samco_pco_15_pro_lah_15_labour_hours.pdf",
+              "bytes": 3398,
+              "sha256": "8544551b282a7e4f07633494e0bd84a4c0a580873aaa63f8f6a6f4da37cc53d6"
+            },
+            "pptx": {
+              "name": "06_samco_pco_15_pro_lah_15_labour_hours.pptx",
+              "bytes": 30829,
+              "sha256": "3b29dd22085047e4f222cb1e7ce6bc85b63d0d2a9ffb12b61b65e16cafa4dc4b"
+            }
+          }
+        },
+        "critical_path": {
+          "code": "PRO-CPM-16",
+          "title": "Critical Path",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_16_pro_cpm_16_critical_path.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_16_pro_cpm_16_critical_path.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_16_pro_cpm_16_critical_path.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_16_pro_cpm_16_critical_path.html",
+              "bytes": 8845,
+              "sha256": "d9ba3cd5d3ed3e1c240a64fe53fddbb332113119503ebc68c581a49018b3eaa2"
+            },
+            "pdf": {
+              "name": "06_samco_pco_16_pro_cpm_16_critical_path.pdf",
+              "bytes": 3489,
+              "sha256": "47208a9db1a1abccb7f448ba9f30a8982106cd94686bdab290d2ced80111e5ff"
+            },
+            "pptx": {
+              "name": "06_samco_pco_16_pro_cpm_16_critical_path.pptx",
+              "bytes": 30875,
+              "sha256": "2bce0d0387af78e174492479eec89be72e293e01383061533d2671d7492f0978"
+            }
+          }
+        },
+        "float": {
+          "code": "PRO-FLT-17",
+          "title": "Float Analysis",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_17_pro_flt_17_float_analysis.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_17_pro_flt_17_float_analysis.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_17_pro_flt_17_float_analysis.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_17_pro_flt_17_float_analysis.html",
+              "bytes": 8848,
+              "sha256": "468d0c5e254fc697a694e8fe0433e77331002a713ab4d041a2d6ac198f2ebf09"
+            },
+            "pdf": {
+              "name": "06_samco_pco_17_pro_flt_17_float_analysis.pdf",
+              "bytes": 3489,
+              "sha256": "db221d87f2b6822d57b8b12d430b5e4f8bc8bbc00f99e286baa02b5e7625cf5b"
+            },
+            "pptx": {
+              "name": "06_samco_pco_17_pro_flt_17_float_analysis.pptx",
+              "bytes": 30873,
+              "sha256": "2b046f528f143277355e03c21320b98ce3e380b179e643a855978d0a7b811912"
+            }
+          }
+        },
+        "milestone": {
+          "code": "PRO-MIL-18",
+          "title": "Milestone Status",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_18_pro_mil_18_milestone_status.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_18_pro_mil_18_milestone_status.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_18_pro_mil_18_milestone_status.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_18_pro_mil_18_milestone_status.html",
+              "bytes": 4179,
+              "sha256": "0a4cbad8f056ac554228afec5f0a4e042d71f46b003983b31119cabf1a80565e"
+            },
+            "pdf": {
+              "name": "06_samco_pco_18_pro_mil_18_milestone_status.pdf",
+              "bytes": 2739,
+              "sha256": "4ae296b8e7fe26d853f173e9216d5863c7df4ae190bf456a3e96a5b3ea2efe40"
+            },
+            "pptx": {
+              "name": "06_samco_pco_18_pro_mil_18_milestone_status.pptx",
+              "bytes": 30439,
+              "sha256": "7850ae4f92a851daaede3690f63fd2a4a6707f730d5f26174b23022044e15978"
+            }
+          }
+        },
+        "risk": {
+          "code": "PRO-RSK-19",
+          "title": "Risk Report",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_19_pro_rsk_19_risk_report.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_19_pro_rsk_19_risk_report.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_19_pro_rsk_19_risk_report.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_19_pro_rsk_19_risk_report.html",
+              "bytes": 4126,
+              "sha256": "2b210fc053dd4651cf0151d9316e41638cb7e1acf191e8348df5fad3f390f82b"
+            },
+            "pdf": {
+              "name": "06_samco_pco_19_pro_rsk_19_risk_report.pdf",
+              "bytes": 2658,
+              "sha256": "85e38e85462ba3f9f59db3121e0284772c24b696cae9d7e98c99bcebb15b094b"
+            },
+            "pptx": {
+              "name": "06_samco_pco_19_pro_rsk_19_risk_report.pptx",
+              "bytes": 30405,
+              "sha256": "f0bcf2a8ab6a2022426971e1338551f6847b6809cccffab6e06135048a3ea111"
+            }
+          }
+        },
+        "rfi_submittal": {
+          "code": "PRO-RFI-20",
+          "title": "RFI & Submittals",
+          "status": "AWAITING CONTROLLED CSV DATA",
+          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
+              "bytes": 3247,
+              "sha256": "a4ba3c2bb3666eaaf457d7cc486d27c04f34af8b3334849071e18d495734f693"
+            },
+            "pdf": {
+              "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
+              "bytes": 2179,
+              "sha256": "bcfb97aad728c7417d29b2767ee946ec4f03d93452bf4b4dbd8c44b32f65f7dd"
+            },
+            "pptx": {
+              "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx",
+              "bytes": 30047,
+              "sha256": "e9e6097e98797193c0aca8da79f923214f969efebfd5a836d8db0a975a593ef6"
+            }
+          }
+        },
+        "qaqc": {
+          "code": "PRO-QAQC-21",
+          "title": "QA/QC Performance",
+          "status": "AWAITING CONTROLLED CSV DATA",
+          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
+              "bytes": 3196,
+              "sha256": "2dc75d1c0e9e2a0f10cf1a5a19958779bb26934a01015041bdd11760cce127a3"
+            },
+            "pdf": {
+              "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
+              "bytes": 2082,
+              "sha256": "90d002722dcfc9cdd96028ba5f87e611d11a4e8cd2553e62493caeb4f562b415"
+            },
+            "pptx": {
+              "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx",
+              "bytes": 30011,
+              "sha256": "dcbb5454917b0ba5df96739876c258f4089eabcc837c8b906eee055400b8dd8f"
+            }
+          }
+        },
+        "productivity": {
+          "code": "PRO-PROD-22",
+          "title": "Productivity",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_22_pro_prod_22_productivity.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_22_pro_prod_22_productivity.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_22_pro_prod_22_productivity.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_22_pro_prod_22_productivity.html",
+              "bytes": 8893,
+              "sha256": "ebc6c03c491121b91cdbdab318ef3fbde7ce72990055ed47f45a89e8a657d365"
+            },
+            "pdf": {
+              "name": "06_samco_pco_22_pro_prod_22_productivity.pdf",
+              "bytes": 3500,
+              "sha256": "6ada8b22f47e60ca7202f2fcba0baa0624030822603a2caf499b1a28d6ca60dd"
+            },
+            "pptx": {
+              "name": "06_samco_pco_22_pro_prod_22_productivity.pptx",
+              "bytes": 30845,
+              "sha256": "40a8a47a68db01c020792fc541ef458a3e5d2d04084f90c27b2b2a1731c78c46"
+            }
+          }
+        },
+        "executive": {
+          "code": "PRO-EXE-23",
+          "title": "Executive Report",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_23_pro_exe_23_executive_report.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_23_pro_exe_23_executive_report.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_23_pro_exe_23_executive_report.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_23_pro_exe_23_executive_report.html",
+              "bytes": 4332,
+              "sha256": "ef656dff8c6b8531541bcad6e29d17ae653149e7a17b4745958e3beaafd4a400"
+            },
+            "pdf": {
+              "name": "06_samco_pco_23_pro_exe_23_executive_report.pdf",
+              "bytes": 2787,
+              "sha256": "72f17d17eb38cbdcfa99470dbdfe5cdf081162bb8b6146b7784d068a155f616b"
+            },
+            "pptx": {
+              "name": "06_samco_pco_23_pro_exe_23_executive_report.pptx",
+              "bytes": 30366,
+              "sha256": "078d05411fe6e0c371305e38f245a222bee4dc75d065f8d695523b4e3cdc50ca"
+            }
+          }
+        },
+        "baseline_current": {
+          "code": "PRO-BLC-24",
+          "title": "Baseline vs Current",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
+              "bytes": 8863,
+              "sha256": "0495356ea49899216eb0b9d6568f8922dc137e6e9d3c7addfb08ea8988563751"
+            },
+            "pdf": {
+              "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
+              "bytes": 3497,
+              "sha256": "a2904bb8a92b66510cb87ded8122ecfbe9afa29958fa44bd05cd1b8e8de0ccbb"
+            },
+            "pptx": {
+              "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx",
+              "bytes": 30884,
+              "sha256": "da67c59c86313c0f6ddb7c2065fc0fa709434b2d1658697265aa9621d4c05f0f"
+            }
+          }
+        },
+        "forecast_completion": {
+          "code": "PRO-FCF-25",
+          "title": "Forecast Completion",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_25_pro_fcf_25_forecast_completion.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_25_pro_fcf_25_forecast_completion.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.html",
+              "bytes": 8892,
+              "sha256": "d0407cdd9aa50651a7605a8717b98dcb61a443aa1a4b3d5f66de16e5c126092a"
+            },
+            "pdf": {
+              "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
+              "bytes": 3502,
+              "sha256": "d65e74554f35662e43916a16eaca2922c7902c5d070ac4d839c31930342f0388"
+            },
+            "pptx": {
+              "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pptx",
+              "bytes": 30845,
+              "sha256": "a79aa8cf30ca90c28a0b020882f90d020367250b121ed8e1cbd5925b4cce1af4"
+            }
+          }
+        },
+        "ml_project_controls": {
+          "code": "PRO-ML-26",
+          "title": "ML Project Controls",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_26_pro_ml_26_ml_project_controls.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_26_pro_ml_26_ml_project_controls.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.html",
+              "bytes": 9036,
+              "sha256": "b7a2747ceac0eb02bf8a810cf82e6323af6741f31f155461ee343beb4881e24f"
+            },
+            "pdf": {
+              "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
+              "bytes": 3593,
+              "sha256": "e073949bf78f34b8f8c84adbe804c90ea0a8175588d4e7dbb0ea6977ae3d7663"
+            },
+            "pptx": {
+              "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pptx",
+              "bytes": 30854,
+              "sha256": "5350a524b8f347a2567d399207d11869305d274cf2821bb300f892811d15b0e5"
+            }
+          }
+        },
+        "contract_admin": {
+          "code": "PRO-CAD-27",
+          "title": "Contract Administration",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_27_pro_cad_27_contract_administration.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_27_pro_cad_27_contract_administration.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_27_pro_cad_27_contract_administration.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_27_pro_cad_27_contract_administration.html",
+              "bytes": 4079,
+              "sha256": "b93cab3f031eff9e28f2c092ea4dfe5b6abc8cd772d2d98e37c3db5d059196b8"
+            },
+            "pdf": {
+              "name": "06_samco_pco_27_pro_cad_27_contract_administration.pdf",
+              "bytes": 2609,
+              "sha256": "2e83d8026cb833fcb7bbed6ee8db9dbcd0593a3e929ce55672571f582120b4c3"
+            },
+            "pptx": {
+              "name": "06_samco_pco_27_pro_cad_27_contract_administration.pptx",
+              "bytes": 30341,
+              "sha256": "da1369bbb1bcc5ed9b2b3310f8add9311c0f97828c6174fa40e83f4a5d673cc8"
+            }
+          }
+        },
+        "change_control": {
+          "code": "PRO-CHG-28",
+          "title": "Change Control",
+          "status": "DATA AVAILABLE",
+          "detail": "Generated from the selected project's controlled CSV inputs.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_28_pro_chg_28_change_control.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_28_pro_chg_28_change_control.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_28_pro_chg_28_change_control.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_28_pro_chg_28_change_control.html",
+              "bytes": 4022,
+              "sha256": "c449a7875e180ce86478f1fa1ef31ed5c5cc063633e47e5db78d8b24f8be2d91"
+            },
+            "pdf": {
+              "name": "06_samco_pco_28_pro_chg_28_change_control.pdf",
+              "bytes": 2562,
+              "sha256": "c083d2539b0053e4e0f98bc50d0db9cde67b9e5564081cb511192110549fe1f1"
+            },
+            "pptx": {
+              "name": "06_samco_pco_28_pro_chg_28_change_control.pptx",
+              "bytes": 30339,
+              "sha256": "0ca3b9b4aa6edb4dc612808e4cb920b1db0ff8551436bc1d69085ff6e2197806"
+            }
+          }
+        },
+        "document_control": {
+          "code": "PRO-DOC-29",
+          "title": "Document Control",
+          "status": "AWAITING CONTROLLED CSV DATA",
+          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_29_pro_doc_29_document_control.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_29_pro_doc_29_document_control.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_29_pro_doc_29_document_control.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_29_pro_doc_29_document_control.html",
+              "bytes": 3189,
+              "sha256": "351ee688e9037422cfe84b734bd971f8103c40706b9ec8872bccfad5afc399fc"
+            },
+            "pdf": {
+              "name": "06_samco_pco_29_pro_doc_29_document_control.pdf",
+              "bytes": 2077,
+              "sha256": "7a6e99a95f037bc93e7978676858a040a39d099b5143a9914a5a77a8152415b0"
+            },
+            "pptx": {
+              "name": "06_samco_pco_29_pro_doc_29_document_control.pptx",
+              "bytes": 29998,
+              "sha256": "18f36be46332f2a958a6db0e47ea49faca056ed25d994a0590e33cc6488f2677"
+            }
+          }
+        },
+        "interface_management": {
+          "code": "PRO-IFC-30",
+          "title": "Interface Management",
+          "status": "AWAITING CONTROLLED CSV DATA",
+          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+          "artifacts": {
+            "html": "/generated/LMD-Bridgs/06_samco_pco_30_pro_ifc_30_interface_management.html",
+            "pdf": "/generated/LMD-Bridgs/06_samco_pco_30_pro_ifc_30_interface_management.pdf",
+            "pptx": "/generated/LMD-Bridgs/06_samco_pco_30_pro_ifc_30_interface_management.pptx"
+          },
+          "files": {
+            "html": {
+              "name": "06_samco_pco_30_pro_ifc_30_interface_management.html",
+              "bytes": 3249,
+              "sha256": "e775db83af3a1553ef1eb2160adfd2b0f737926bd960b59522f6358bf4b06bb5"
+            },
+            "pdf": {
+              "name": "06_samco_pco_30_pro_ifc_30_interface_management.pdf",
+              "bytes": 2182,
+              "sha256": "490aca143f9705352f169f198d004574a4ca9071f188285a00db9d6ea03af262"
+            },
+            "pptx": {
+              "name": "06_samco_pco_30_pro_ifc_30_interface_management.pptx",
+              "bytes": 30046,
+              "sha256": "7df8b0e64b3963e43f2cd87ad856b7e76f4d70b26686792c4bf92184e14a0d10"
+            }
+          }
         }
       },
       "source_project_id": "LMD-Bridge",
-      "source_report_fingerprint": "e042ee968ab171eb4af21e95dd8b029893e33449e3ab66c01a2c06a22fc97c8a",
+      "source_report_fingerprint": "1e769c63875be28b7da50cba4b7acd4eeca1d5873a017a9bfe266698b9ba8921",
       "generator": {
         "name": "SAMCO-PCO Report Generator",
         "mode": "data-driven project CSV adapter",
@@ -7231,7 +8717,7 @@
   "universal_report_engine": {
     "project_id": "LMD-Bridge",
     "project_key": "lmd-bridge",
-    "source_fingerprint": "a279c55d21110a12e4741abe3fc20003d51054200daae05e21a1948d6ff1b699",
+    "source_fingerprint": "c128cf4b5781408cf72f6a08928568c2159df093980723c134ae3bab84f8a2db",
     "source_scope": "active project folder only",
     "source_file_count": 65,
     "source_inventory": [
@@ -7623,7 +9109,7 @@
         "relative_path": "project_manifest.json",
         "extension": ".json",
         "size_bytes": 379,
-        "sha256": "ff6ebf7d438adab352f7bd29309046d4f6cfa540dc9cb794183d6815d4d68faa"
+        "sha256": "df058d6e4050ce83d5671bb461331901b2d52334c3810cffb94552847a9f2c96"
       }
     ],
     "engine": {
@@ -7649,12 +9135,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "AWAITING CONTROLLED CSV DATA"
       },
       {
         "key": "delay",
@@ -7665,12 +9155,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_02_pro_dly_02_delay_analysis.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_02_pro_dly_02_delay_analysis.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "progress",
@@ -7681,12 +9175,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_03_pro_prg_03_project_progress.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_03_pro_prg_03_project_progress.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_03_pro_prg_03_project_progress.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "recovery",
@@ -7697,12 +9195,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "variation",
@@ -7713,12 +9215,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_05_pro_var_05_variation_report.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_05_pro_var_05_variation_report.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_05_pro_var_05_variation_report.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "hybrid",
@@ -7728,12 +9234,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_06_pro_ipc_06_interim_payment.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_06_pro_ipc_06_interim_payment.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "resource",
@@ -7744,12 +9254,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_07_pro_res_07_resource_manpower.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_07_pro_res_07_resource_manpower.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_07_pro_res_07_resource_manpower.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "equipment",
@@ -7759,12 +9273,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_08_pro_eqp_08_equipment_plant.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_08_pro_eqp_08_equipment_plant.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "AWAITING CONTROLLED CSV DATA"
       },
       {
         "key": "cost",
@@ -7774,12 +9292,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_09_pro_cst_09_cost_control.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_09_pro_cst_09_cost_control.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_09_pro_cst_09_cost_control.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "evm",
@@ -7789,12 +9311,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_10_pro_evm_10_earned_value.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_10_pro_evm_10_earned_value.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_10_pro_evm_10_earned_value.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "cashflow",
@@ -7804,12 +9330,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_11_pro_cfs_11_cash_flow.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_11_pro_cfs_11_cash_flow.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "scurve",
@@ -7819,12 +9349,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_12_pro_scv_12_s_curve.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_12_pro_scv_12_s_curve.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_12_pro_scv_12_s_curve.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "procurement",
@@ -7835,12 +9369,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_13_pro_prc_13_procurement_status.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_13_pro_prc_13_procurement_status.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_13_pro_prc_13_procurement_status.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "material",
@@ -7850,12 +9388,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_14_pro_mat_14_material_status.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_14_pro_mat_14_material_status.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_14_pro_mat_14_material_status.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "lookahead",
@@ -7866,12 +9408,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_15_pro_lah_15_labour_hours.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_15_pro_lah_15_labour_hours.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_15_pro_lah_15_labour_hours.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "critical_path",
@@ -7882,12 +9428,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_16_pro_cpm_16_critical_path.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_16_pro_cpm_16_critical_path.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_16_pro_cpm_16_critical_path.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "float",
@@ -7898,12 +9448,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_17_pro_flt_17_float_analysis.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_17_pro_flt_17_float_analysis.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_17_pro_flt_17_float_analysis.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "milestone",
@@ -7914,12 +9468,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_18_pro_mil_18_milestone_status.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_18_pro_mil_18_milestone_status.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_18_pro_mil_18_milestone_status.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "risk",
@@ -7929,12 +9487,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_19_pro_rsk_19_risk_report.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_19_pro_rsk_19_risk_report.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_19_pro_rsk_19_risk_report.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "rfi_submittal",
@@ -7945,12 +9507,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "AWAITING CONTROLLED CSV DATA"
       },
       {
         "key": "qaqc",
@@ -7960,12 +9526,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "AWAITING CONTROLLED CSV DATA"
       },
       {
         "key": "productivity",
@@ -7975,12 +9545,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_22_pro_prod_22_productivity.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_22_pro_prod_22_productivity.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_22_pro_prod_22_productivity.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "executive",
@@ -7990,12 +9564,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_23_pro_exe_23_executive_report.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_23_pro_exe_23_executive_report.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_23_pro_exe_23_executive_report.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "baseline_current",
@@ -8006,12 +9584,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "forecast_completion",
@@ -8022,12 +9604,16 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_25_pro_fcf_25_forecast_completion.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_25_pro_fcf_25_forecast_completion.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "ml_project_controls",
@@ -8037,12 +9623,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_26_pro_ml_26_ml_project_controls.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_26_pro_ml_26_ml_project_controls.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "contract_admin",
@@ -8052,12 +9642,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_27_pro_cad_27_contract_administration.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_27_pro_cad_27_contract_administration.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_27_pro_cad_27_contract_administration.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "change_control",
@@ -8067,12 +9661,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated from the selected project's controlled CSV inputs.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_28_pro_chg_28_change_control.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_28_pro_chg_28_change_control.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_28_pro_chg_28_change_control.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "DATA AVAILABLE"
       },
       {
         "key": "document_control",
@@ -8082,12 +9680,16 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_29_pro_doc_29_document_control.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_29_pro_doc_29_document_control.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_29_pro_doc_29_document_control.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "AWAITING CONTROLLED CSV DATA"
       },
       {
         "key": "interface_management",
@@ -8098,19 +9700,23 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "GENERATED",
+        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
+        "artifacts": {
+          "html": "/generated/LMD-Bridgs/06_samco_pco_30_pro_ifc_30_interface_management.html",
+          "pdf": "/generated/LMD-Bridgs/06_samco_pco_30_pro_ifc_30_interface_management.pdf",
+          "pptx": "/generated/LMD-Bridgs/06_samco_pco_30_pro_ifc_30_interface_management.pptx"
+        },
+        "generated_at": "2026-08-14T03:05:27+00:00",
+        "release_status": "CSV_BOUND_TEMPLATE",
+        "validation_status": "AWAITING CONTROLLED CSV DATA"
       }
     ],
     "summary": {
       "catalog_count": 30,
-      "generated_count": 0,
+      "generated_count": 30,
       "draft_review_count": 0,
-      "ready_count": 30,
+      "ready_count": 0,
       "blocked_count": 0
     },
     "ml_capability": {
@@ -8196,6 +9802,12 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-13T19:10:41+00:00"
+    "updated_at": "2026-08-14T03:05:30+00:00",
+    "overall_artifacts": {
+      "html": "/generated/LMD-Bridgs/05_samco_pco_31_slide_report.html",
+      "pdf": "/generated/LMD-Bridgs/05_samco_pco_31_slide_report.pdf",
+      "pptx": "/generated/LMD-Bridgs/05_samco_pco_31_slide_report.pptx",
+      "package_zip": "/generated/LMD-Bridgs/06_samco_pco_complete_project_report_package.zip"
+    }
   }
 }

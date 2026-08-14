@@ -23,6 +23,9 @@ type ReportArtifact = {
   pdf: string;
   pptx: string;
   docx?: string;
+  complete_package_zip?: string;
+  individual_reports?: Record<string, unknown>;
+  generated_at?: string;
   assessment_status?: string;
   source_scope?: string;
   files?: Record<string, { name: string; bytes: number; sha256: string }>;
@@ -73,6 +76,7 @@ type UniversalReportEnginePayload = {
   };
   summary: { catalog_count: number; generated_count: number; ready_count: number; blocked_count: number };
   report_families: UniversalReportFamily[];
+  overall_artifacts?: UniversalReportArtifactLinks;
   ml_capability: {
     task_count: number;
     status: string;
@@ -1184,7 +1188,8 @@ function SamcoPcoReportDownloads({ project }: { project: ProjectRecord }) {
   const artifact = project.report_artifacts?.samco_pco_31_slide_report;
   if (!artifact?.html) return null;
   const formats: Array<[string, string | undefined]> = [
-    ["HTML", artifact.html],
+    ["Complete package (ZIP)", artifact.complete_package_zip],
+    ["Interactive HTML", artifact.html],
     ["PDF", artifact.pdf],
     ["PowerPoint", artifact.pptx],
   ];
@@ -1261,56 +1266,88 @@ function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
     return (
       <section className="feature-card universal-empty-state">
         <div className="feature-card-head"><h3>Universal Report Engine - ML</h3><span>Project-scoped only</span></div>
-        <p>The controlled report-engine catalogue is not yet available for this selected project. Regenerate the project payload locally; no report from another project will be used as a fallback.</p>
+        <p>The controlled report-engine catalogue is not available for this selected project. No report from another project is used as a fallback.</p>
       </section>
     );
   }
 
-  const generatedFormats: Array<[string, string | undefined]> = selectedFamily
-    ? [
-        ["HTML", selectedFamily.artifacts.html],
-        ["PDF", selectedFamily.artifacts.pdf],
-        ["PowerPoint", selectedFamily.artifacts.pptx],
-        ["Full Package", selectedFamily.artifacts.package_zip],
-      ]
+  const formatLinks = (artifacts: UniversalReportArtifactLinks): Array<[string, string]> => (
+    [
+      ["HTML", artifacts.html],
+      ["PDF", artifacts.pdf],
+      ["PowerPoint", artifacts.pptx],
+      ["Package ZIP", artifacts.package_zip],
+    ].filter((item): item is [string, string] => Boolean(item[1]))
+  );
+  const releasedFormats = selectedFamily?.status === "GENERATED"
+    ? formatLinks(selectedFamily.artifacts)
     : [];
-  const activeFormats = generatedFormats.filter((item): item is [string, string] => Boolean(item[1]));
-  const releasedFormats = selectedFamily?.status === "GENERATED" ? activeFormats : [];
+  const overallFormats = formatLinks(engine.overall_artifacts || {});
 
   return (
     <div className="universal-engine-stack">
       <section className="universal-engine-hero">
         <div>
-          <p className="eyebrow">Controlled Local Production Engine</p>
+          <p className="eyebrow">Controlled project report downloads</p>
           <h3>{engine.engine.package_name || "Universal Report Engine - ML"}</h3>
-          <p>{engine.engine.capability_note}</p>
+          <p>Every download is generated from this selected project&apos;s controlled CSV inputs using the supplied SAMCO-PCO template. Missing source areas are labelled inside the report; they are never estimated.</p>
         </div>
         <div className="universal-engine-stats">
           <span><b>{numberValue(engine.engine.rules)}</b> Rules</span>
           <span><b>{numberValue(engine.engine.report_families)}</b> Families</span>
-          <span><b>{numberValue(engine.engine.layers)}</b> Layers</span>
+          <span><b>{numberValue(engine.summary.generated_count)}</b> Generated</span>
           <span><b>{numberValue(engine.source_file_count)}</b> Project sources</span>
         </div>
       </section>
 
+      {overallFormats.length ? (
+        <section className="universal-engine-controls universal-overall-downloads">
+          <div className="feature-card-head">
+            <div>
+              <p className="eyebrow">Overall report package</p>
+              <h3>All 30 reports + 31-slide SAMCO-PCO report</h3>
+              <small>One complete ZIP package, plus the overall interactive HTML, PDF and editable PowerPoint.</small>
+            </div>
+            <span>Ready to download</span>
+          </div>
+          <div className="report-format-downloads" aria-label="Complete project report downloads">
+            {overallFormats.map(([label, href]) => (
+              <a key={label} href={href} download={href.split("/").pop()} rel="noopener">Download {label}</a>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       <section className="universal-engine-controls">
         <div className="feature-card-head">
-          <div><h3>Report Family Catalogue</h3><small>Every package is bound to Project ID: {project.project_id}</small></div>
+          <div><h3>Individual report downloads</h3><small>Every package is bound to Project ID: {project.project_id}</small></div>
           <span>{engine.summary.generated_count} generated / {engine.summary.catalog_count} available</span>
         </div>
         <div className="universal-report-grid" role="list" aria-label="Universal report families">
-          {reportFamilies.map((item) => (
-            <button
-              key={item.key}
-              type="button"
-              className={`universal-report-card ${selectedFamily?.key === item.key ? "active" : ""}`}
-              onClick={() => setSelectedKey(item.key)}
-            >
-              <span className={`universal-status ${item.status.toLowerCase()}`}>{item.status.replaceAll("_", " ")}</span>
-              <b>{item.title}</b>
-              <small>{item.summary}</small>
-            </button>
-          ))}
+          {reportFamilies.map((item) => {
+            const cardFormats = item.status === "GENERATED" ? formatLinks(item.artifacts) : [];
+            return (
+              <article key={item.key} role="listitem" className={`universal-report-card-shell ${selectedFamily?.key === item.key ? "active" : ""}`}>
+                <button
+                  type="button"
+                  className="universal-report-card"
+                  onClick={() => setSelectedKey(item.key)}
+                  aria-pressed={selectedFamily?.key === item.key}
+                >
+                  <span className={`universal-status ${item.status.toLowerCase()}`}>{item.status.replaceAll("_", " ")}</span>
+                  <b>{item.title}</b>
+                  <small>{item.summary}</small>
+                </button>
+                {cardFormats.length ? (
+                  <div className="universal-card-downloads" aria-label={`${item.title} downloads`}>
+                    {cardFormats.map(([label, href]) => (
+                      <a key={label} href={href} download={href.split("/").pop()} rel="noopener" onClick={(event) => event.stopPropagation()}>{label}</a>
+                    ))}
+                  </div>
+                ) : null}
+              </article>
+            );
+          })}
         </div>
       </section>
 
@@ -1330,13 +1367,11 @@ function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
             <span><b>Release:</b> {selectedFamily.release_status?.replaceAll("_", " ") || "Not generated"}</span>
           </div>
           {releasedFormats.length ? (
-            <div className="report-format-downloads" aria-label="Universal report package downloads">
+            <div className="report-format-downloads" aria-label="Selected report downloads">
               {releasedFormats.map(([label, href]) => <a key={label} href={href} download={href.split("/").pop()} rel="noopener">Download {label}</a>)}
             </div>
-          ) : selectedFamily?.status === "DRAFT_REVIEW_REQUIRED" ? (
-            <p className="universal-local-note">A local draft exists but failed its release gate. Resolve the listed source gaps and rerun the controlled engine before this package can be published or downloaded.</p>
           ) : (
-            <p className="universal-local-note">Generate this package through the local controlled pipeline. The public website never executes the report engine or reads source files directly.</p>
+            <p className="universal-local-note">This package is not yet available for public download.</p>
           )}
           {selectedFamily.status === "GENERATED" && selectedFamily.artifacts.html ? (
             <ReportArtifactReviewTabs
@@ -1385,7 +1420,7 @@ function OutputStudioPanel({
           <p className="eyebrow">Output Studio</p>
           <h2>{project.project_display_name}</h2>
         </div>
-        <span>Review in app - downloads optional</span>
+        <span>Download each report or the complete project package</span>
       </div>
       <div className="output-studio-tabs" role="tablist" aria-label="Output Studio tabs">
         <button type="button" className={studioTab === "dashboards" ? "active" : ""} onClick={() => setStudioTab("dashboards")}>Dashboards</button>
