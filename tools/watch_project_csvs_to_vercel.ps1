@@ -64,6 +64,7 @@ function Invoke-ProjectPublish {
     # Mirror project identity and every project-local CSV. This keeps a new
     # project and any CSV source used by a controlled generator in scope while
     # leaving application code and unrelated documents outside the publisher.
+    $stageTargets = @()
     Get-ChildItem -LiteralPath $sourceRoot -Filter 'project_manifest.json' -Recurse -File | ForEach-Object {
         $sourceProject = $_.Directory
         $relativeProject = $sourceProject.FullName.Substring($sourceRoot.Length).TrimStart('\')
@@ -77,6 +78,9 @@ function Invoke-ProjectPublish {
         }
         Sync-CanonicalInputFolder $sourceProject $targetProject '01-data\import_templates'
         Sync-CanonicalInputFolder $sourceProject $targetProject '02-delay_analysis\unified_tia_csv'
+        $stageTargets += (Join-Path (Join-Path 'projects' $relativeProject) 'project_manifest.json')
+        $stageTargets += (Join-Path (Join-Path 'projects' $relativeProject) '01-data\import_templates')
+        $stageTargets += (Join-Path (Join-Path 'projects' $relativeProject) '02-delay_analysis\unified_tia_csv')
     }
 
     Push-Location $publisherRoot
@@ -85,19 +89,15 @@ function Invoke-ProjectPublish {
         Invoke-Checked 'python' @('tools\validate_streamlit_vercel_pipeline.py') 'Production pipeline validation'
         Invoke-Checked 'npm' @('--prefix', 'website', 'run', 'build') 'Next.js production build'
 
-        # Vercel serves website/public; local 11-outputs copies never belong in
-        # the deployment commit. Complete public report packages are intentionally
-        # force-added because the repository ignores generic archive files.
-        & git add -- projects website/public
-        if ($LASTEXITCODE -ne 0) { throw 'Git staging failed.' }
-        $publicGenerated = Join-Path $publisherRoot 'website\public\generated'
-        if (Test-Path -LiteralPath $publicGenerated) {
-            Get-ChildItem -LiteralPath $publicGenerated -Filter '*.zip' -Recurse -File | ForEach-Object {
-                $relativeZip = $_.FullName.Substring($publisherRoot.Length).TrimStart('\')
-                & git add -f -- $relativeZip
-                if ($LASTEXITCODE -ne 0) { throw "Git staging failed for complete report package: $relativeZip" }
-            }
+        # Commit only the active canonical inputs and generated public payloads.
+        # Never absorb unrelated local reports or documents from this dirty publisher worktree.
+        $stageTargets = @($stageTargets | Select-Object -Unique)
+        if ($stageTargets.Count -gt 0) {
+            & git add -A -- $stageTargets
+            if ($LASTEXITCODE -ne 0) { throw 'Canonical project-input staging failed.' }
         }
+        & git add -- website/public/data
+        if ($LASTEXITCODE -ne 0) { throw 'Public data staging failed.' }
         & git diff --cached --quiet
         if ($LASTEXITCODE -eq 0) {
             Write-SyncLog 'No publishable project-data change was produced.'
