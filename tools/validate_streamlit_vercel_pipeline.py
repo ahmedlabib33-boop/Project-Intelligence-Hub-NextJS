@@ -8,11 +8,13 @@ source totals.
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import math
 import re
 import sys
+import tempfile
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -33,7 +35,7 @@ from generate_nextjs_website_data import (  # noqa: E402
     sum_column,
     summed_delay_days,
 )
-from project_input_contracts import load_logical_rows, load_payment_rows  # noqa: E402
+from project_input_contracts import csv_headers, has_bundle_table, load_logical_rows, load_payment_rows, read_csv_matrix  # noqa: E402
 from construction_system.unified_tia_csv import CSV_CONTRACTS, validate_pack  # noqa: E402
 
 
@@ -137,19 +139,29 @@ def payload_exposes_local_path(value: Any) -> bool:
 
 
 def validate_unified_tia_template_pack(errors: list[str], checks: list[str]) -> None:
-    """Require every local project to hold the same project-local TIA contract."""
-    packs = [("project template", UNIFIED_TIA_PROJECT_TEMPLATE_PACK)]
+    """Validate physical or bundled project-local TIA contract tables."""
+    packs = [("project template", UNIFIED_TIA_PROJECT_TEMPLATE_PACK, None)]
     packs.extend(
-        (str(project["project_key"]), Path(project["path"]) / "02-delay_analysis" / "unified_tia_csv")
+        (str(project["project_key"]), Path(project["path"]) / "02-delay_analysis" / "unified_tia_csv", Path(project["path"]) / "01-data" / "import_templates" / "project_input_bundle.csv")
         for project in discover_projects()
     )
-    for label, path in packs:
-        result = validate_pack(path, template_mode=True)
+    for label, path, bundle in packs:
+        if bundle is None or not bundle.exists():
+            result = validate_pack(path, template_mode=True)
+        else:
+            with tempfile.TemporaryDirectory(prefix="tia-bundle-contract-") as temp:
+                contract_dir = Path(temp)
+                for contract in CSV_CONTRACTS:
+                    headers, rows = read_csv_matrix(path / contract.filename)
+                    with (contract_dir / contract.filename).open("w", encoding="utf-8", newline="") as stream:
+                        writer = csv.writer(stream)
+                        writer.writerow(headers)
+                        writer.writerows(rows)
+                result = validate_pack(contract_dir, template_mode=True)
         if not result.get("passed"):
             errors.append(f"Universal TIA {label} CSV pack failed schema validation: {result.get('issues')}")
     if not any(error.startswith("Universal TIA") for error in errors):
         checks.append(f"Universal TIA CSV contract validates in {len(packs)} project-local workspaces with {len(CSV_CONTRACTS)} CSV contracts")
-
 
 def expected_source_metrics(data_dir: Path, delay_dir: Path) -> dict[str, float | None]:
     rows = {
@@ -194,22 +206,22 @@ def validate_project_workspace_surface(
         errors.append(f"{project_key}: public project payload exposes a local workstation path")
     data_dir = project_path / "01-data" / "import_templates"
     delay_dir = project_path / "02-delay_analysis" / "unified_tia_csv"
+    bundle = data_dir / "project_input_bundle.csv"
     master = data_dir / "activity_master.csv"
-    if master.exists():
+    if bundle.exists() or master.exists():
         for logical_name in ("activities", "progress_updates", "evm"):
             if not load_logical_rows(data_dir, delay_dir, logical_name):
-                errors.append(f"{project_key}: activity master cannot rebuild {logical_name}")
+                errors.append(f"{project_key}: canonical input bundle cannot rebuild {logical_name}")
     else:
         for filename in ("activities.csv", "progress_updates.csv", "evm.csv"):
             if not (data_dir / filename).exists():
                 errors.append(f"{project_key}: missing aligned activity input {filename}")
     for relative_path, required_column in REQUIRED_CHART_INPUTS.items():
         input_path = project_path / relative_path
-        if not input_path.exists():
+        if not input_path.exists() and not has_bundle_table(input_path):
             errors.append(f"{project_key}: project chart input template is missing: {relative_path}")
             continue
-        header = input_path.read_text(encoding="utf-8-sig", errors="replace").splitlines()
-        columns = {column.strip().casefold() for column in header[0].split(",")} if header else set()
+        columns = {column.strip().casefold() for column in csv_headers(input_path)}
         if required_column.casefold() not in columns:
             errors.append(f"{project_key}: project chart input is missing required {required_column}: {relative_path}")
 

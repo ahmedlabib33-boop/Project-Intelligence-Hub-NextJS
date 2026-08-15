@@ -258,3 +258,65 @@ def load_payment_rows(data_dir: Path, delay_dir: Path) -> list[dict[str, str]]:
         {header: row[source_index] if source_index < len(row) else "" for header, source_index in zip(headers, indexes)}
         for row in source_rows
     ]
+
+# Maximum-input contract: a project may keep every logical CSV table in one
+# lossless physical CSV. Legacy paths remain valid virtual sources for every
+# existing generator, report, chart, and validator.
+from project_input_bundle import BUNDLE_FILENAME as PROJECT_INPUT_BUNDLE_FILENAME, bundle_table as _bundle_table, has_bundle_table, headers as _bundle_headers, read_matrix as _bundle_matrix, read_rows as _bundle_rows
+
+_read_csv_rows_physical = read_csv_rows
+_read_csv_matrix_physical = read_csv_matrix
+_csv_headers_physical = csv_headers
+_load_payment_rows_legacy = load_payment_rows
+_logical_source_path_legacy = logical_source_path
+
+
+def read_csv_rows(path: Path) -> list[dict[str, str]]:
+    if path.exists():
+        return _read_csv_rows_physical(path)
+    return _bundle_rows(path) or []
+
+
+def read_csv_matrix(path: Path) -> tuple[list[str], list[list[str]]]:
+    if path.exists():
+        return _read_csv_matrix_physical(path)
+    return _bundle_matrix(path) or ([], [])
+
+
+def csv_headers(path: Path) -> list[str]:
+    if path.exists():
+        return _csv_headers_physical(path)
+    return _bundle_headers(path) or []
+
+
+def load_payment_rows(data_dir: Path, delay_dir: Path) -> list[dict[str, str]]:
+    normal = data_dir / "payments.csv"
+    if normal.exists() or has_bundle_table(normal):
+        return read_csv_rows(normal)
+    return _load_payment_rows_legacy(data_dir, delay_dir)
+
+
+def logical_source_path(data_dir: Path, delay_dir: Path, logical_name: str) -> Path:
+    legacy = _logical_source_path_legacy(data_dir, delay_dir, logical_name)
+    if has_bundle_table(legacy):
+        return data_dir / PROJECT_INPUT_BUNDLE_FILENAME
+    return legacy
+
+_load_logical_rows_legacy = load_logical_rows
+
+
+def load_logical_rows(data_dir: Path, delay_dir: Path, logical_name: str) -> list[dict[str, str]]:
+    master = activity_master_path(data_dir)
+    if logical_name in ACTIVITY_LOGICAL_TABLES and (master.exists() or has_bundle_table(master)):
+        return load_master_table(master, logical_name)
+    return _load_logical_rows_legacy(data_dir, delay_dir, logical_name)
+
+
+def logical_source_path(data_dir: Path, delay_dir: Path, logical_name: str) -> Path:
+    master = activity_master_path(data_dir)
+    if logical_name in ACTIVITY_LOGICAL_TABLES and has_bundle_table(master):
+        return data_dir / PROJECT_INPUT_BUNDLE_FILENAME
+    legacy = _logical_source_path_legacy(data_dir, delay_dir, logical_name)
+    if has_bundle_table(legacy):
+        return data_dir / PROJECT_INPUT_BUNDLE_FILENAME
+    return legacy

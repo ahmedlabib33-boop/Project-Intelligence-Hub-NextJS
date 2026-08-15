@@ -215,8 +215,8 @@ def _read_canonical_first_rows(
     register.  Header-only templates never suppress populated source data, and all
     rows remain filtered to the active project ID.
     """
-    primary_rows = read_csv_rows(primary_path) if primary_path.exists() else []
-    fallback_rows = read_csv_rows(fallback_path) if fallback_path and fallback_path.exists() else []
+    primary_rows = read_csv_rows(primary_path)
+    fallback_rows = read_csv_rows(fallback_path) if fallback_path else []
     primary_accepted, primary_issues = _project_rows(primary_rows, project_id, primary_path.name)
     fallback_accepted, fallback_issues = _project_rows(
         fallback_rows, project_id, fallback_path.name if fallback_path else file_name

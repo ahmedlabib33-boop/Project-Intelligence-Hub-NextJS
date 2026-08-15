@@ -35,6 +35,30 @@ function Invoke-Checked([string]$Executable, [string[]]$Arguments, [string]$Labe
     if ($LASTEXITCODE -ne 0) { throw "$Label failed with exit code $LASTEXITCODE." }
 }
 
+function Sync-CanonicalInputFolder([string]$SourceProject, [string]$TargetProject, [string]$RelativeFolder) {
+    $sourceFolder = Join-Path $SourceProject $RelativeFolder
+    $targetFolder = Join-Path $TargetProject $RelativeFolder
+    if (-not (Test-Path -LiteralPath $sourceFolder)) { return }
+    New-Item -ItemType Directory -Force -Path $targetFolder | Out-Null
+    # Remove only retired canonical inputs from the publisher. Project reports,
+    # approved controlled TIA packages, and all other project content remain intact.
+    Get-ChildItem -LiteralPath $targetFolder -Recurse -File -ErrorAction SilentlyContinue | Where-Object {
+        $_.Extension -ieq '.csv' -or $_.Name -in @('payment_projection.json', '.gitkeep')
+    } | ForEach-Object {
+        $relative = $_.FullName.Substring($targetFolder.Length).TrimStart('\')
+        if (-not (Test-Path -LiteralPath (Join-Path $sourceFolder $relative))) {
+            Remove-Item -LiteralPath $_.FullName -Force
+        }
+    }
+    Get-ChildItem -LiteralPath $sourceFolder -Recurse -File | Where-Object {
+        $_.Extension -ieq '.csv' -or $_.Name -in @('payment_projection.json', '.gitkeep')
+    } | ForEach-Object {
+        $relative = $_.FullName.Substring($sourceFolder.Length).TrimStart('\')
+        $destination = Join-Path $targetFolder $relative
+        New-Item -ItemType Directory -Force -Path (Split-Path -Parent $destination) | Out-Null
+        Copy-Item -LiteralPath $_.FullName -Destination $destination -Force
+    }
+}
 function Invoke-ProjectPublish {
     Write-SyncLog 'Detected project CSV/project-manifest update. Starting controlled Vercel publish.'
     # Mirror project identity and every project-local CSV. This keeps a new
@@ -51,12 +75,8 @@ function Invoke-ProjectPublish {
                 Copy-Item -LiteralPath $identitySource -Destination (Join-Path $targetProject $identityFile) -Force
             }
         }
-        Get-ChildItem -LiteralPath $sourceProject -Filter '*.csv' -Recurse -File | ForEach-Object {
-            $relativeFile = $_.FullName.Substring($sourceProject.FullName.Length).TrimStart('\')
-            $targetFile = Join-Path $targetProject $relativeFile
-            New-Item -ItemType Directory -Force -Path (Split-Path -Parent $targetFile) | Out-Null
-            Copy-Item -LiteralPath $_.FullName -Destination $targetFile -Force
-        }
+        Sync-CanonicalInputFolder $sourceProject $targetProject '01-data\import_templates'
+        Sync-CanonicalInputFolder $sourceProject $targetProject '02-delay_analysis\unified_tia_csv'
     }
 
     Push-Location $publisherRoot
@@ -103,6 +123,7 @@ $watcher.NotifyFilter = [System.IO.NotifyFilters]'FileName, LastWrite, Size'
 $null = Register-ObjectEvent -InputObject $watcher -EventName Changed -SourceIdentifier 'PIH.CsvChanged'
 $null = Register-ObjectEvent -InputObject $watcher -EventName Created -SourceIdentifier 'PIH.CsvCreated'
 $null = Register-ObjectEvent -InputObject $watcher -EventName Renamed -SourceIdentifier 'PIH.CsvRenamed'
+$null = Register-ObjectEvent -InputObject $watcher -EventName Deleted -SourceIdentifier 'PIH.CsvDeleted'
 
 Write-SyncLog "Watching $sourceRoot. CSV saves and project_manifest.json changes will publish through $publisherRoot."
 while ($true) {

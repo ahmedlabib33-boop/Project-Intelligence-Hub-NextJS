@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from advanced_analytics import build_advanced_analytics
-from project_input_contracts import load_logical_rows, load_payment_rows, logical_source_path
+from project_input_contracts import csv_headers, has_bundle_table, load_logical_rows, load_payment_rows, logical_source_path, read_csv_rows as read_project_csv_rows
 from project_chart_payloads import build_project_chart_payloads
 from project_report_artifacts import ensure_project_report_artifacts
 from universal_report_engine_adapter import (
@@ -139,15 +139,8 @@ def read_json(path: Path) -> dict[str, Any]:
 
 
 def read_csv_rows(path: Path) -> list[dict[str, str]]:
-    if not path.exists():
-        return []
-    for encoding in ("utf-8-sig", "utf-8", "cp1256", "cp1252"):
-        try:
-            with path.open("r", encoding=encoding, newline="") as handle:
-                return list(csv.DictReader(handle))
-        except Exception:
-            continue
-    return []
+    """Read physical or lossless-bundled project data through one contract."""
+    return read_project_csv_rows(path)
 
 
 def compact_file_record(path: Path, base: Path) -> dict[str, Any]:
@@ -177,16 +170,11 @@ def preview_table(path: Path, limit: int = 8) -> dict[str, Any]:
     columns: list[str] = []
     if rows:
         columns = list(rows[0].keys())
-    elif path.exists():
-        try:
-            with path.open("r", encoding="utf-8-sig", newline="") as handle:
-                reader = csv.reader(handle)
-                columns = next(reader, [])
-        except Exception:
-            columns = []
+    elif path.exists() or has_bundle_table(path):
+        columns = csv_headers(path)
     return {
         "file": path.name,
-        "exists": path.exists(),
+        "exists": path.exists() or has_bundle_table(path),
         "row_count": len(rows),
         "column_count": len(columns),
         "columns": columns,
@@ -199,7 +187,7 @@ def preview_logical_table(path: Path, rows: list[dict[str, str]], limit: int = 8
     columns = list(rows[0].keys()) if rows else []
     return {
         "file": path.name,
-        "exists": path.exists(),
+        "exists": path.exists() or has_bundle_table(path),
         "row_count": len(rows),
         "column_count": len(columns),
         "columns": columns,
@@ -218,7 +206,7 @@ def workspace_table(path: Path, limit: int = WORKSPACE_TABLE_ROW_LIMIT) -> dict[
     columns = list(rows[0].keys()) if rows else []
     return {
         "file": path.name,
-        "exists": path.exists(),
+        "exists": path.exists() or has_bundle_table(path),
         "row_count": len(rows),
         "column_count": len(columns),
         "columns": columns,
@@ -233,7 +221,7 @@ def workspace_logical_table(path: Path, rows: list[dict[str, str]], limit: int =
     columns = list(rows[0].keys()) if rows else []
     return {
         "file": path.name,
-        "exists": path.exists(),
+        "exists": path.exists() or has_bundle_table(path),
         "row_count": len(rows),
         "column_count": len(columns),
         "columns": columns,
