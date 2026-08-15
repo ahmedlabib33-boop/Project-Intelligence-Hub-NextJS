@@ -93,7 +93,18 @@ function Get-RelativePath([string]$FullName) {
 }
 
 function Test-TrackedPath([string]$FullName) {
-    $relative = Get-RelativePath $FullName
+    # FileSystemWatcher can return an empty path for an overflow/error notification.
+    # Reject it safely; the 60-second full scan remains the missed-event fallback.
+    if ([string]::IsNullOrWhiteSpace($FullName)) { return $false }
+    try {
+        $resolved = [System.IO.Path]::GetFullPath($FullName)
+    }
+    catch {
+        return $false
+    }
+    $workspacePrefix = $canonicalRoot.TrimEnd('\') + '\'
+    if (-not $resolved.StartsWith($workspacePrefix, [System.StringComparison]::OrdinalIgnoreCase)) { return $false }
+    $relative = Get-RelativePath $resolved
     $lower = $relative.ToLowerInvariant()
     if ($lower -match '(^|/)(\.git|\.next|node_modules|\.vercel|\.venv|\.venv-analytics|venv|__pycache__|\.pytest_cache|\.mypy_cache|\.ruff_cache|\.tmp|\.pip-cache|\.pip-tmp|11-outputs|12-logs|backups|\.sync_state|out)(/|$)') { return $false }
     if ($lower -match '^website/public/(data|generated)(/|$)') { return $false }
@@ -104,7 +115,7 @@ function Test-TrackedPath([string]$FullName) {
     if ($lower -match '(^|/)05-contracts/contract_claims\.db$') { return $false }
     # Local preview logs and TypeScript build state are generated artifacts, not source changes.
     if ($lower -match '\.(log|tsbuildinfo)$') { return $false }
-    $name = [System.IO.Path]::GetFileName($FullName)
+    $name = [System.IO.Path]::GetFileName($resolved)
     if ($name -like '.env*' -or $name -like '*.token' -or $name -like '*.secret' -or $name -like '*.pem' -or $name -like '*.key') { return $false }
     return $true
 }

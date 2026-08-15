@@ -5827,7 +5827,7 @@
           "relative_path": "Nasr city-Tunnel/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 27.9,
-          "modified": "2026-08-15T18:39:33"
+          "modified": "2026-08-15T18:47:35"
         }
       ],
       "watchers": [
@@ -7944,6 +7944,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-15T15:39:33+00:00"
+    "updated_at": "2026-08-15T15:47:35+00:00"
   }
 }
