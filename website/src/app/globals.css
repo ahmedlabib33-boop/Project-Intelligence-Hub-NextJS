@@ -1046,45 +1046,6 @@ h2 {
   background: linear-gradient(145deg, rgba(13, 61, 99, 0.88), rgba(6, 20, 36, 0.94));
 }
 
-.universal-report-card-shell.active .universal-report-card {
-  border-color: var(--cyan);
-  background: linear-gradient(145deg, rgba(13, 61, 99, 0.88), rgba(6, 20, 36, 0.94));
-}
-
-.universal-card-downloads {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 6px;
-  padding: 8px;
-  border: 1px solid rgba(104, 164, 202, 0.24);
-  border-top: 0;
-  border-radius: 0 0 12px 12px;
-  background: rgba(4, 14, 25, 0.82);
-}
-
-.universal-card-downloads a {
-  display: inline-flex;
-  min-height: 32px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(57, 215, 210, 0.42);
-  border-radius: 7px;
-  color: var(--cyan);
-  font-size: 0.72rem;
-  font-weight: 800;
-  text-decoration: none;
-}
-
-.universal-card-downloads a:hover,
-.universal-card-downloads a:focus-visible {
-  background: rgba(57, 215, 210, 0.18);
-  color: var(--text);
-}
-
-.universal-overall-downloads {
-  background: linear-gradient(135deg, rgba(7, 50, 76, 0.92), rgba(9, 27, 43, 0.9));
-}
-
 .universal-report-card small,
 .universal-local-note,
 .universal-ml-panel > p {
@@ -3731,7 +3692,19 @@ h2 {
   .operations-chart-grid > .mermaid-card { min-height: 320px; }
 }
 
-.operations-footer strong { color: var(--cyan); }
+.operations-footer .footer-credit {
+  color: #9db8ca;
+  font-weight: 600;
+}
+
+.operations-footer strong {
+  color: #f2bf4b;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.04em;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-shadow: 0 0 14px rgba(242, 191, 75, 0.22);
+}
 .operations-footer span { color: #7491a4; }
 
 /* Exact visual baseline for selected-project charts: Charts design/samco_dashboard_charts.html. */
@@ -4024,159 +3997,6 @@ h2 {
   color: var(--text);
 }
 
-.unified-tia-csv-pack {
-  border-color: rgba(57, 215, 210, 0.34);
-  background: linear-gradient(135deg, rgba(8, 35, 56, 0.92), rgba(5, 17, 31, 0.94));
-}
-
-.unified-tia-csv-download-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
-  margin-top: 14px;
-}
-
-.unified-tia-csv-download-grid a {
-  display: grid;
-  gap: 4px;
-  min-width: 0;
-  min-height: 74px;
-  padding: 11px;
-  border: 1px solid rgba(105, 169, 204, 0.32);
-  border-radius: 11px;
-  color: var(--text);
-  background: rgba(4, 17, 31, 0.54);
-  text-decoration: none;
-  transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
-}
-
-.unified-tia-csv-download-grid a:hover,
-.unified-tia-csv-download-grid a:focus-visible {
-  border-color: var(--cyan);
-  background: rgba(57, 215, 210, 0.13);
-  transform: translateY(-1px);
-}
-
-.unified-tia-csv-download-grid strong {
-  font-size: 0.82rem;
-}
-
-.unified-tia-csv-download-grid span,
-.unified-tia-csv-control-note {
-  color: var(--muted);
-  font-size: 0.76rem;
-  line-height: 1.45;
-  overflow-wrap: anywhere;
-}
-
-.unified-tia-csv-control-note {
-  margin: 14px 0 0;
-}
-
-/* Generated artifacts stay reviewable in the public workspace; export is optional. */
-.artifact-review-workspace {
-  margin: 18px 0;
-  overflow: hidden;
-  border: 1px solid rgba(57, 215, 210, 0.3);
-  border-radius: 18px;
-  background: rgba(3, 13, 25, 0.78);
-}
-
-.artifact-review-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 17px 18px 14px;
-  background: linear-gradient(135deg, rgba(14, 55, 82, 0.54), rgba(5, 20, 35, 0.68));
-}
-
-.artifact-review-header h4 {
-  margin: 4px 0 6px;
-  color: var(--text);
-  font-size: 1.02rem;
-}
-
-.artifact-review-header > div:first-child > span {
-  display: block;
-  max-width: 680px;
-  color: var(--muted);
-  font-size: 0.82rem;
-  line-height: 1.5;
-}
-
-.artifact-review-open-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 8px;
-}
-
-.artifact-review-open-actions a {
-  display: inline-flex;
-  min-height: 36px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(99, 168, 255, 0.44);
-  border-radius: 8px;
-  background: rgba(99, 168, 255, 0.1);
-  color: #b8d7ff;
-  padding: 7px 10px;
-  font-size: 0.73rem;
-  font-weight: 900;
-  text-decoration: none;
-}
-
-.artifact-review-open-actions a:hover,
-.artifact-review-open-actions a:focus-visible {
-  border-color: var(--cyan);
-  background: rgba(57, 215, 210, 0.16);
-  color: var(--text);
-}
-
-.artifact-review-tabs {
-  display: flex;
-  gap: 7px;
-  border-top: 1px solid rgba(132, 183, 217, 0.14);
-  border-bottom: 1px solid rgba(132, 183, 217, 0.2);
-  background: rgba(4, 15, 28, 0.82);
-  padding: 9px 14px;
-}
-
-.artifact-review-tabs button {
-  min-height: 37px;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  background: transparent;
-  color: var(--muted);
-  padding: 7px 12px;
-  font-size: 0.78rem;
-  font-weight: 900;
-  cursor: pointer;
-}
-
-.artifact-review-tabs button:hover,
-.artifact-review-tabs button.active {
-  border-color: rgba(57, 215, 210, 0.46);
-  background: rgba(57, 215, 210, 0.12);
-  color: var(--text);
-}
-
-.artifact-review-frame-wrap {
-  min-height: 72vh;
-  background: #fff;
-}
-
-.artifact-review-workspace .artifact-review-frame {
-  display: block;
-  width: 100%;
-  min-height: 72vh;
-  margin: 0;
-  border: 0;
-  border-radius: 0;
-  background: #fff;
-}
-
 @media (max-width: 1160px) {
   .operations-command-bar { grid-template-columns: 1fr minmax(280px, 1fr); }
   .command-status { display: none; }
@@ -4225,14 +4045,9 @@ h2 {
   .project-view-switch button { min-width: 0; flex: 1 1 calc(50% - 2px); white-space: normal; padding: 8px 10px; }
   .operations-footer { display: grid; line-height: 1.5; }
   .report-format-downloads a { flex: 1 1 0; }
-  .universal-card-downloads { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .unified-tia-csv-download-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .artifact-review-header { display: grid; }
-  .artifact-review-open-actions { justify-content: flex-start; }
-  .artifact-review-open-actions a { flex: 1 1 0; }
 }
 
-/* Schedule Intelligence ? browser-local Primavera XER analysis. */
+/* Schedule Intelligence — browser-local Primavera XER analysis. */
 .schedule-intelligence {
   display: grid;
   gap: 18px;
