@@ -1,6 +1,0 @@
-﻿"Name","Command"
-"generate-data","python ../tools/generate_nextjs_website_data.py"
-"dev","next dev"
-"build","next build"
-"start","next start"
-"lint","eslint ."

@@ -1,3 +1,0 @@
-﻿"Risk","Severity","EvidenceCount","EvidenceFiles","Recommendation"
-"TODO / unfinished implementation","Medium","4","src\components\ai\AiChatPanel.tsx; src\components\ai\TechnicalKnowledgeAdvisor.tsx; src\components\executive\ActionTracker.tsx; src\components\executive\UnifiedIntelligenceSearch.tsx","Classify unfinished items before presenting features as complete."
-"Dangerous HTML rendering","High","1","src\components\MermaidDiagram.tsx","Confirm all rendered HTML is sanitized."
