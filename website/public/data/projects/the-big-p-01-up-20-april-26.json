@@ -291,8 +291,8 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-15T08:30:29",
-  "fingerprint": "13195d67b3de99702d2d72083ffcc4a1908c2aeb85d208ccb861a976892320dd",
+  "last_updated": "2026-08-15T09:49:05",
+  "fingerprint": "2a4cf48f5ff51300a6bbc4f65ff8726f7168375fbcb63f470dd71f1d264e8c96",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -417,8 +417,8 @@
           ]
         },
         "activities": {
-          "file": "project_input_bundle.csv",
-          "exists": true,
+          "file": "activities.csv",
+          "exists": false,
           "row_count": 1363,
           "column_count": 16,
           "columns": [
@@ -587,8 +587,8 @@
           ]
         },
         "progress_updates": {
-          "file": "project_input_bundle.csv",
-          "exists": true,
+          "file": "progress_updates.csv",
+          "exists": false,
           "row_count": 1363,
           "column_count": 9,
           "columns": [
@@ -694,8 +694,8 @@
           ]
         },
         "evm": {
-          "file": "project_input_bundle.csv",
-          "exists": true,
+          "file": "evm.csv",
+          "exists": false,
           "row_count": 1363,
           "column_count": 12,
           "columns": [
@@ -1779,8 +1779,8 @@
           "source_path": "projects.csv"
         },
         "activities": {
-          "file": "project_input_bundle.csv",
-          "exists": true,
+          "file": "activities.csv",
+          "exists": false,
           "row_count": 1363,
           "column_count": 16,
           "columns": [
@@ -5404,11 +5404,11 @@
             }
           ],
           "truncated": true,
-          "source_path": "project_input_bundle.csv"
+          "source_path": "activities.csv"
         },
         "progress_updates": {
-          "file": "project_input_bundle.csv",
-          "exists": true,
+          "file": "progress_updates.csv",
+          "exists": false,
           "row_count": 1363,
           "column_count": 9,
           "columns": [
@@ -7625,11 +7625,11 @@
             }
           ],
           "truncated": true,
-          "source_path": "project_input_bundle.csv"
+          "source_path": "progress_updates.csv"
         },
         "evm": {
-          "file": "project_input_bundle.csv",
-          "exists": true,
+          "file": "evm.csv",
+          "exists": false,
           "row_count": 1363,
           "column_count": 12,
           "columns": [
@@ -10449,7 +10449,7 @@
             }
           ],
           "truncated": true,
-          "source_path": "project_input_bundle.csv"
+          "source_path": "evm.csv"
         },
         "risks": {
           "file": "risks.csv",
@@ -22963,7 +22963,7 @@
         "source_scope": "selected_project_only",
         "automatic_engine": "controlled_project_tia",
         "groq_assist": "active_project_evidence_explanation_only",
-        "evidence_status": "RECONCILIATION_REQUIRED",
+        "evidence_status": "CONDITIONAL_RESULT",
         "activation_rule": "Only the active project's approved release may create a controlled run. No other project's XER, event, contract, evidence, or output is used."
       },
       "logic_mode": "Controlled project-local Time Impact Analysis",
@@ -22971,9 +22971,9 @@
         "engine": "2026.08.controlled-project-tia.v2.1",
         "project_id": "The Big -P.01-UP-20-April-26",
         "project_key": "the-big-p-01-up-20-april-26",
-        "status": "RECONCILIATION_REQUIRED",
+        "status": "CONDITIONAL_RESULT",
         "approval_status": "submitted_position_pending_p6_verification",
-        "message": "The submitted EOT register contains evidence or arithmetic reconciliation findings.",
+        "message": "The approved submitted EOT position is published with P6 verification gates.",
         "workflow_tabs": [
           "Source Integrity",
           "Schedule and CPM",
@@ -22988,34 +22988,34 @@
           "archive": {
             "file": "Sub02-Delay Analysis (TIA) - Workbook to dashboard.rar",
             "required": true,
-            "exists": false,
-            "sha256": null,
-            "size_bytes": 0,
+            "exists": true,
+            "sha256": "8c4d95fe6af8c4ae4a54ce26b803d68b30494c13baba36e439960a178492bbee",
+            "size_bytes": 56693839,
             "expected_sha256": "8c4d95fe6af8c4ae4a54ce26b803d68b30494c13baba36e439960a178492bbee",
-            "integrity": "failed",
-            "message": "Archive hash does not match the approved submission register."
+            "integrity": "verified",
+            "message": "Archive hash matches the approved submission register."
           },
           "files": [
             {
               "file": "Sub02-Delay Analysis (TIA) - Workbook to dashboard.rar",
               "required": true,
-              "exists": false,
-              "sha256": null,
-              "size_bytes": 0
+              "exists": true,
+              "sha256": "8c4d95fe6af8c4ae4a54ce26b803d68b30494c13baba36e439960a178492bbee",
+              "size_bytes": 56693839
             },
             {
               "file": "submission_manifest.json",
               "required": true,
               "exists": true,
-              "sha256": "7f779ba80445bfb9e51a09bde80f64dc3cd3484af6ef5cd039c6d1084cf3391d",
-              "size_bytes": 11179
+              "sha256": "57225e7fd4be70274ca6c7fa705e405d324a70f1c4984c73eef621919553d6b7",
+              "size_bytes": 11063
             },
             {
               "file": "approved_before_after_fragnet_comparison.csv",
               "required": true,
               "exists": true,
-              "sha256": "06fcba409d1bb108bef12cda67d4a0c27483ba46885fd8337688b09b451385ce",
-              "size_bytes": 4862
+              "sha256": "5368dd6dd7f72648b1f124aabcc686425cc61c3ad4d0b81c97d5ea3fd6bb81c4",
+              "size_bytes": 4849
             },
             {
               "file": "Event_01_Steel_Supply_TIA_EOT_Mapping.png",
@@ -23046,25 +23046,18 @@
               "size_bytes": 762940
             },
             {
-              "file": "13_TIA_Methodology_Flowchart.svg",
-              "required": false,
-              "exists": true,
-              "sha256": "d7c2f72fb97c834f603e1961440cf6876d2d2186f8cbfa396077b80058887538",
-              "size_bytes": 137200
-            },
-            {
               "file": "07_Concurrency_Overlap_Analysis_Large_Font.svg",
               "required": false,
               "exists": true,
-              "sha256": "f3e5d832767a294292bc6e3377f051ee3609fb7bb82068a5005ee432b76f149e",
-              "size_bytes": 89409
+              "sha256": "9fd89762c2709fb40abd22e6a79ba2051b2519b21a41883c69b563c9d7e2bc3d",
+              "size_bytes": 86761
             },
             {
               "file": "10_EOT_Summary_Dashboard.svg",
               "required": false,
               "exists": true,
-              "sha256": "bba5179ca66d7dbcbffb8bf5d0778a63aff3a860e733e284350660095f667bae",
-              "size_bytes": 157922
+              "sha256": "3fe6e12ff2c9637e462156211f90ca8e5882060e4e1e04e305a4caa112f4c789",
+              "size_bytes": 153584
             }
           ],
           "inventory": [
@@ -23100,24 +23093,13 @@
             }
           ],
           "signature": {
-            "status": "hash_failed",
-            "message": "Archive hash does not match the approved submission register."
+            "status": "hash_verified",
+            "message": "Archive hash matches the approved submission register."
           },
           "project_match": true,
           "validation_findings": []
         },
         "view_exhibits": [
-          {
-            "project_id": "The Big -P.01-UP-20-April-26",
-            "project_key": "the-big-p-01-up-20-april-26",
-            "view": "Source Integrity",
-            "title": "Time Impact Analysis Methodology Flowchart",
-            "display_order": 1,
-            "evidence_use": "Submitted methodology exhibit only",
-            "control_note": "This exhibit presents the submitted methodology sequence. The approved before/after comparison matrix remains the authority for active project-finish movement.",
-            "source_file": "13_TIA_Methodology_Flowchart.svg",
-            "url": "/generated/The-BIG-PH01/tia-controlled-view-exhibits/13-TIA-Methodology-Flowchart.svg"
-          },
           {
             "project_id": "The Big -P.01-UP-20-April-26",
             "project_key": "the-big-p-01-up-20-april-26",
@@ -24199,12 +24181,17 @@
             "historical_value": "76 calendar days",
             "active_position": "71 calendar days",
             "resolution": "Reconciliation-only record. The approved matrix project-finish movement for EV02 is 71 calendar days."
+          },
+          {
+            "source_row": "view_exhibit:1",
+            "issue": "Submitted TIA view exhibit has an unsupported view or missing file path.",
+            "detail": "Time Impact Methodology"
           }
         ],
-        "source_fingerprint": "6a566153309a8772f6f2edd5c7bb7635be32e68688f110726132c553ed852878",
+        "source_fingerprint": "a73086f47a66476aef21a06001879b74f4fdfc512d0e4cec3f398904d3fee408",
         "automatic_draft": true,
-        "last_run_at": "2026-08-14T03:05:24.139556+00:00",
-        "run_id": "549c68d21700e165"
+        "last_run_at": "2026-08-15T06:46:28.612989+00:00",
+        "run_id": "1f3cd9fccc769a07"
       },
       "legacy_status": "Archived and excluded from the active TIA workflow.",
       "detectors": [
@@ -24215,7 +24202,7 @@
         },
         {
           "name": "Source integrity control",
-          "status": "hash_failed",
+          "status": "hash_verified",
           "detail": "Validates signed-manifest and source-hash controls without executing the submitted package."
         },
         {
@@ -24229,12 +24216,12 @@
       "project_id": "The Big -P.01-UP-20-April-26",
       "project_key": "the-big-p-01-up-20-april-26",
       "assessment_profile": "controlled_tia_readiness",
-      "assessment_status": "RECONCILIATION_REQUIRED",
+      "assessment_status": "CONDITIONAL_RESULT",
       "source_scope": "selected_project_only",
       "gates": [
         {
           "name": "Source integrity",
-          "status": "hash_failed"
+          "status": "hash_verified"
         },
         {
           "name": "Schedule and CPM",
@@ -24263,9 +24250,9 @@
         {
           "file": "Sub02-Delay Analysis (TIA) - Workbook to dashboard.rar",
           "required": true,
-          "exists": false,
-          "sha256": null,
-          "size_bytes": 0,
+          "exists": true,
+          "sha256": "8c4d95fe6af8c4ae4a54ce26b803d68b30494c13baba36e439960a178492bbee",
+          "size_bytes": 56693839,
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26"
         },
@@ -24273,8 +24260,8 @@
           "file": "submission_manifest.json",
           "required": true,
           "exists": true,
-          "sha256": "7f779ba80445bfb9e51a09bde80f64dc3cd3484af6ef5cd039c6d1084cf3391d",
-          "size_bytes": 11179,
+          "sha256": "57225e7fd4be70274ca6c7fa705e405d324a70f1c4984c73eef621919553d6b7",
+          "size_bytes": 11063,
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26"
         },
@@ -24282,8 +24269,8 @@
           "file": "approved_before_after_fragnet_comparison.csv",
           "required": true,
           "exists": true,
-          "sha256": "06fcba409d1bb108bef12cda67d4a0c27483ba46885fd8337688b09b451385ce",
-          "size_bytes": 4862,
+          "sha256": "5368dd6dd7f72648b1f124aabcc686425cc61c3ad4d0b81c97d5ea3fd6bb81c4",
+          "size_bytes": 4849,
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26"
         },
@@ -24324,20 +24311,11 @@
           "project_key": "the-big-p-01-up-20-april-26"
         },
         {
-          "file": "13_TIA_Methodology_Flowchart.svg",
-          "required": false,
-          "exists": true,
-          "sha256": "d7c2f72fb97c834f603e1961440cf6876d2d2186f8cbfa396077b80058887538",
-          "size_bytes": 137200,
-          "project_id": "The Big -P.01-UP-20-April-26",
-          "project_key": "the-big-p-01-up-20-april-26"
-        },
-        {
           "file": "07_Concurrency_Overlap_Analysis_Large_Font.svg",
           "required": false,
           "exists": true,
-          "sha256": "f3e5d832767a294292bc6e3377f051ee3609fb7bb82068a5005ee432b76f149e",
-          "size_bytes": 89409,
+          "sha256": "9fd89762c2709fb40abd22e6a79ba2051b2519b21a41883c69b563c9d7e2bc3d",
+          "size_bytes": 86761,
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26"
         },
@@ -24345,8 +24323,8 @@
           "file": "10_EOT_Summary_Dashboard.svg",
           "required": false,
           "exists": true,
-          "sha256": "bba5179ca66d7dbcbffb8bf5d0778a63aff3a860e733e284350660095f667bae",
-          "size_bytes": 157922,
+          "sha256": "3fe6e12ff2c9637e462156211f90ca8e5882060e4e1e04e305a4caa112f4c789",
+          "size_bytes": 153584,
           "project_id": "The Big -P.01-UP-20-April-26",
           "project_key": "the-big-p-01-up-20-april-26"
         }
@@ -24479,21 +24457,28 @@
           "relative_path": "05-contracts/source/Overall Contract.pdf",
           "extension": "pdf",
           "size_kb": 4169.5,
-          "modified": "2026-08-13T21:25:37"
+          "modified": "2026-04-20T13:33:50"
         },
         {
           "name": "Overall_Contract_clause_library.xlsx",
           "relative_path": "05-contracts/source/Overall_Contract_clause_library.xlsx",
           "extension": "xlsx",
           "size_kb": 26.5,
-          "modified": "2026-08-13T21:25:37"
+          "modified": "2026-05-06T15:31:15"
         },
         {
           "name": "README.md",
           "relative_path": "05-contracts/source/README.md",
           "extension": "md",
           "size_kb": 0.2,
-          "modified": "2026-08-13T21:25:37"
+          "modified": "2026-06-06T04:50:20"
+        },
+        {
+          "name": "~$erall Contract.pdf",
+          "relative_path": "05-contracts/source/~$erall Contract.pdf",
+          "extension": "pdf",
+          "size_kb": 0.2,
+          "modified": "2026-06-27T10:58:47"
         }
       ],
       "evidence_files": [
@@ -24502,42 +24487,42 @@
           "relative_path": "06-evidence/clause_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T21:25:37"
+          "modified": "2026-06-19T09:24:12"
         },
         {
           "name": "contract_evidence_register_template.csv",
           "relative_path": "06-evidence/contract_evidence_register_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T21:25:37"
+          "modified": "2026-06-19T09:24:12"
         },
         {
           "name": "correspondence_reference_template.csv",
           "relative_path": "06-evidence/correspondence_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T21:25:37"
+          "modified": "2026-06-19T09:24:12"
         },
         {
           "name": "document_reference_template.csv",
           "relative_path": "06-evidence/document_reference_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T21:25:37"
+          "modified": "2026-06-19T09:24:12"
         },
         {
           "name": "evidence_register_template.csv",
           "relative_path": "06-evidence/evidence_register_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T21:25:37"
+          "modified": "2026-06-19T09:24:12"
         },
         {
           "name": "photo_log_template.csv",
           "relative_path": "06-evidence/photo_log_template.csv",
           "extension": "csv",
           "size_kb": 0.1,
-          "modified": "2026-08-13T21:25:37"
+          "modified": "2026-06-19T09:24:12"
         }
       ],
       "database": {
@@ -28148,659 +28133,659 @@
           "name": "05_samco_pco_31_slide_report.html",
           "relative_path": "The BIG - PH01/05_samco_pco_31_slide_report.html",
           "extension": "html",
-          "size_kb": 342.8,
-          "modified": "2026-08-15T08:31:00"
+          "size_kb": 341.6,
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "05_samco_pco_31_slide_report.pdf",
           "relative_path": "The BIG - PH01/05_samco_pco_31_slide_report.pdf",
           "extension": "pdf",
-          "size_kb": 57.0,
-          "modified": "2026-08-15T08:31:00"
+          "size_kb": 56.1,
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "05_samco_pco_31_slide_report.pptx",
           "relative_path": "The BIG - PH01/05_samco_pco_31_slide_report.pptx",
           "extension": "pptx",
-          "size_kb": 84.9,
-          "modified": "2026-08-15T08:31:00"
+          "size_kb": 84.8,
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
           "relative_path": "The BIG - PH01/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
           "extension": "html",
           "size_kb": 30.8,
-          "modified": "2026-08-15T08:31:00"
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
           "extension": "pdf",
           "size_kb": 3.3,
-          "modified": "2026-08-15T08:31:00"
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx",
           "extension": "pptx",
           "size_kb": 30.1,
-          "modified": "2026-08-15T08:31:00"
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "06_samco_pco_02_pro_dly_02_delay_analysis.html",
           "relative_path": "The BIG - PH01/06_samco_pco_02_pro_dly_02_delay_analysis.html",
           "extension": "html",
           "size_kb": 11.3,
-          "modified": "2026-08-15T08:31:00"
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
           "extension": "pdf",
           "size_kb": 3.2,
-          "modified": "2026-08-15T08:31:00"
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_02_pro_dly_02_delay_analysis.pptx",
           "extension": "pptx",
           "size_kb": 30.0,
-          "modified": "2026-08-15T08:31:00"
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "06_samco_pco_03_pro_prg_03_project_progress.html",
           "relative_path": "The BIG - PH01/06_samco_pco_03_pro_prg_03_project_progress.html",
           "extension": "html",
-          "size_kb": 21.0,
-          "modified": "2026-08-15T08:31:00"
+          "size_kb": 20.9,
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "06_samco_pco_03_pro_prg_03_project_progress.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_03_pro_prg_03_project_progress.pdf",
           "extension": "pdf",
-          "size_kb": 3.3,
-          "modified": "2026-08-15T08:31:00"
+          "size_kb": 3.2,
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "06_samco_pco_03_pro_prg_03_project_progress.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_03_pro_prg_03_project_progress.pptx",
           "extension": "pptx",
           "size_kb": 30.0,
-          "modified": "2026-08-15T08:31:00"
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
           "relative_path": "The BIG - PH01/06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
           "extension": "html",
-          "size_kb": 21.0,
-          "modified": "2026-08-15T08:31:00"
+          "size_kb": 20.9,
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
           "extension": "pdf",
           "size_kb": 3.3,
-          "modified": "2026-08-15T08:31:00"
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx",
           "extension": "pptx",
           "size_kb": 30.1,
-          "modified": "2026-08-15T08:31:00"
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "06_samco_pco_05_pro_var_05_variation_report.html",
           "relative_path": "The BIG - PH01/06_samco_pco_05_pro_var_05_variation_report.html",
           "extension": "html",
           "size_kb": 3.6,
-          "modified": "2026-08-15T08:31:00"
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "06_samco_pco_05_pro_var_05_variation_report.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_05_pro_var_05_variation_report.pdf",
           "extension": "pdf",
           "size_kb": 2.4,
-          "modified": "2026-08-15T08:31:00"
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "06_samco_pco_05_pro_var_05_variation_report.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_05_pro_var_05_variation_report.pptx",
           "extension": "pptx",
           "size_kb": 29.6,
-          "modified": "2026-08-15T08:31:00"
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "06_samco_pco_06_pro_ipc_06_interim_payment.html",
           "relative_path": "The BIG - PH01/06_samco_pco_06_pro_ipc_06_interim_payment.html",
           "extension": "html",
           "size_kb": 5.7,
-          "modified": "2026-08-15T08:31:00"
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
           "extension": "pdf",
           "size_kb": 2.7,
-          "modified": "2026-08-15T08:31:00"
+          "modified": "2026-08-15T09:50:15"
         },
         {
           "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_06_pro_ipc_06_interim_payment.pptx",
           "extension": "pptx",
           "size_kb": 29.7,
-          "modified": "2026-08-15T08:31:00"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_07_pro_res_07_resource_manpower.html",
           "relative_path": "The BIG - PH01/06_samco_pco_07_pro_res_07_resource_manpower.html",
           "extension": "html",
-          "size_kb": 20.9,
-          "modified": "2026-08-15T08:31:01"
+          "size_kb": 20.8,
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_07_pro_res_07_resource_manpower.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_07_pro_res_07_resource_manpower.pdf",
           "extension": "pdf",
           "size_kb": 3.2,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_07_pro_res_07_resource_manpower.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_07_pro_res_07_resource_manpower.pptx",
           "extension": "pptx",
           "size_kb": 30.0,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.html",
           "relative_path": "The BIG - PH01/06_samco_pco_08_pro_eqp_08_equipment_plant.html",
           "extension": "html",
           "size_kb": 3.1,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
           "extension": "pdf",
           "size_kb": 2.0,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_08_pro_eqp_08_equipment_plant.pptx",
           "extension": "pptx",
           "size_kb": 29.3,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_09_pro_cst_09_cost_control.html",
           "relative_path": "The BIG - PH01/06_samco_pco_09_pro_cst_09_cost_control.html",
           "extension": "html",
           "size_kb": 15.0,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_09_pro_cst_09_cost_control.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_09_pro_cst_09_cost_control.pdf",
           "extension": "pdf",
-          "size_kb": 3.1,
-          "modified": "2026-08-15T08:31:01"
+          "size_kb": 3.0,
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_09_pro_cst_09_cost_control.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_09_pro_cst_09_cost_control.pptx",
           "extension": "pptx",
           "size_kb": 29.9,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_10_pro_evm_10_earned_value.html",
           "relative_path": "The BIG - PH01/06_samco_pco_10_pro_evm_10_earned_value.html",
           "extension": "html",
           "size_kb": 15.0,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_10_pro_evm_10_earned_value.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_10_pro_evm_10_earned_value.pdf",
           "extension": "pdf",
-          "size_kb": 3.1,
-          "modified": "2026-08-15T08:31:01"
+          "size_kb": 3.0,
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_10_pro_evm_10_earned_value.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_10_pro_evm_10_earned_value.pptx",
           "extension": "pptx",
           "size_kb": 29.9,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_11_pro_cfs_11_cash_flow.html",
           "relative_path": "The BIG - PH01/06_samco_pco_11_pro_cfs_11_cash_flow.html",
           "extension": "html",
           "size_kb": 6.2,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
           "extension": "pdf",
           "size_kb": 3.0,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_11_pro_cfs_11_cash_flow.pptx",
           "extension": "pptx",
           "size_kb": 29.9,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_12_pro_scv_12_s_curve.html",
           "relative_path": "The BIG - PH01/06_samco_pco_12_pro_scv_12_s_curve.html",
           "extension": "html",
           "size_kb": 6.1,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_12_pro_scv_12_s_curve.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_12_pro_scv_12_s_curve.pdf",
           "extension": "pdf",
           "size_kb": 3.1,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_12_pro_scv_12_s_curve.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_12_pro_scv_12_s_curve.pptx",
           "extension": "pptx",
           "size_kb": 30.0,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_13_pro_prc_13_procurement_status.html",
           "relative_path": "The BIG - PH01/06_samco_pco_13_pro_prc_13_procurement_status.html",
           "extension": "html",
-          "size_kb": 20.9,
-          "modified": "2026-08-15T08:31:01"
+          "size_kb": 20.8,
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_13_pro_prc_13_procurement_status.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_13_pro_prc_13_procurement_status.pdf",
           "extension": "pdf",
           "size_kb": 3.2,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_13_pro_prc_13_procurement_status.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_13_pro_prc_13_procurement_status.pptx",
           "extension": "pptx",
           "size_kb": 30.0,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_14_pro_mat_14_material_status.html",
           "relative_path": "The BIG - PH01/06_samco_pco_14_pro_mat_14_material_status.html",
           "extension": "html",
           "size_kb": 20.8,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_14_pro_mat_14_material_status.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_14_pro_mat_14_material_status.pdf",
           "extension": "pdf",
           "size_kb": 3.2,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_14_pro_mat_14_material_status.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_14_pro_mat_14_material_status.pptx",
           "extension": "pptx",
           "size_kb": 30.0,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_15_pro_lah_15_labour_hours.html",
           "relative_path": "The BIG - PH01/06_samco_pco_15_pro_lah_15_labour_hours.html",
           "extension": "html",
           "size_kb": 20.8,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_15_pro_lah_15_labour_hours.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_15_pro_lah_15_labour_hours.pdf",
           "extension": "pdf",
           "size_kb": 3.2,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_15_pro_lah_15_labour_hours.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_15_pro_lah_15_labour_hours.pptx",
           "extension": "pptx",
           "size_kb": 30.0,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_16_pro_cpm_16_critical_path.html",
           "relative_path": "The BIG - PH01/06_samco_pco_16_pro_cpm_16_critical_path.html",
           "extension": "html",
-          "size_kb": 30.6,
-          "modified": "2026-08-15T08:31:01"
+          "size_kb": 30.5,
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_16_pro_cpm_16_critical_path.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_16_pro_cpm_16_critical_path.pdf",
           "extension": "pdf",
           "size_kb": 3.3,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_16_pro_cpm_16_critical_path.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_16_pro_cpm_16_critical_path.pptx",
           "extension": "pptx",
           "size_kb": 30.1,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_17_pro_flt_17_float_analysis.html",
           "relative_path": "The BIG - PH01/06_samco_pco_17_pro_flt_17_float_analysis.html",
           "extension": "html",
-          "size_kb": 30.6,
-          "modified": "2026-08-15T08:31:01"
+          "size_kb": 30.5,
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_17_pro_flt_17_float_analysis.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_17_pro_flt_17_float_analysis.pdf",
           "extension": "pdf",
           "size_kb": 3.3,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_17_pro_flt_17_float_analysis.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_17_pro_flt_17_float_analysis.pptx",
           "extension": "pptx",
           "size_kb": 30.1,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_18_pro_mil_18_milestone_status.html",
           "relative_path": "The BIG - PH01/06_samco_pco_18_pro_mil_18_milestone_status.html",
           "extension": "html",
           "size_kb": 4.0,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_18_pro_mil_18_milestone_status.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_18_pro_mil_18_milestone_status.pdf",
           "extension": "pdf",
           "size_kb": 2.6,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_18_pro_mil_18_milestone_status.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_18_pro_mil_18_milestone_status.pptx",
           "extension": "pptx",
           "size_kb": 29.7,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_19_pro_rsk_19_risk_report.html",
           "relative_path": "The BIG - PH01/06_samco_pco_19_pro_rsk_19_risk_report.html",
           "extension": "html",
           "size_kb": 3.7,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_19_pro_rsk_19_risk_report.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_19_pro_rsk_19_risk_report.pdf",
           "extension": "pdf",
           "size_kb": 2.5,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_19_pro_rsk_19_risk_report.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_19_pro_rsk_19_risk_report.pptx",
           "extension": "pptx",
           "size_kb": 29.6,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
           "relative_path": "The BIG - PH01/06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
           "extension": "html",
           "size_kb": 4.5,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
           "extension": "pdf",
           "size_kb": 2.7,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx",
           "extension": "pptx",
           "size_kb": 29.8,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
           "relative_path": "The BIG - PH01/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
           "extension": "html",
           "size_kb": 3.1,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
           "extension": "pdf",
           "size_kb": 2.0,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx",
           "extension": "pptx",
           "size_kb": 29.3,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_22_pro_prod_22_productivity.html",
           "relative_path": "The BIG - PH01/06_samco_pco_22_pro_prod_22_productivity.html",
           "extension": "html",
-          "size_kb": 21.0,
-          "modified": "2026-08-15T08:31:01"
+          "size_kb": 20.9,
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_22_pro_prod_22_productivity.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_22_pro_prod_22_productivity.pdf",
           "extension": "pdf",
-          "size_kb": 3.3,
-          "modified": "2026-08-15T08:31:01"
+          "size_kb": 3.2,
+          "modified": "2026-08-15T09:50:16"
         },
         {
           "name": "06_samco_pco_22_pro_prod_22_productivity.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_22_pro_prod_22_productivity.pptx",
           "extension": "pptx",
           "size_kb": 30.0,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_23_pro_exe_23_executive_report.html",
           "relative_path": "The BIG - PH01/06_samco_pco_23_pro_exe_23_executive_report.html",
           "extension": "html",
-          "size_kb": 4.1,
-          "modified": "2026-08-15T08:31:01"
+          "size_kb": 4.0,
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_23_pro_exe_23_executive_report.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_23_pro_exe_23_executive_report.pdf",
           "extension": "pdf",
-          "size_kb": 2.6,
-          "modified": "2026-08-15T08:31:01"
+          "size_kb": 2.5,
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_23_pro_exe_23_executive_report.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_23_pro_exe_23_executive_report.pptx",
           "extension": "pptx",
           "size_kb": 29.7,
-          "modified": "2026-08-15T08:31:01"
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
           "relative_path": "The BIG - PH01/06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
           "extension": "html",
           "size_kb": 30.6,
-          "modified": "2026-08-15T08:31:02"
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
           "extension": "pdf",
           "size_kb": 3.3,
-          "modified": "2026-08-15T08:31:02"
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx",
           "extension": "pptx",
           "size_kb": 30.1,
-          "modified": "2026-08-15T08:31:02"
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.html",
           "relative_path": "The BIG - PH01/06_samco_pco_25_pro_fcf_25_forecast_completion.html",
           "extension": "html",
-          "size_kb": 21.0,
-          "modified": "2026-08-15T08:31:02"
+          "size_kb": 20.9,
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
           "extension": "pdf",
-          "size_kb": 3.3,
-          "modified": "2026-08-15T08:31:02"
+          "size_kb": 3.2,
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_25_pro_fcf_25_forecast_completion.pptx",
           "extension": "pptx",
           "size_kb": 30.0,
-          "modified": "2026-08-15T08:31:02"
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.html",
           "relative_path": "The BIG - PH01/06_samco_pco_26_pro_ml_26_ml_project_controls.html",
           "extension": "html",
-          "size_kb": 21.1,
-          "modified": "2026-08-15T08:31:02"
+          "size_kb": 21.0,
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
           "extension": "pdf",
-          "size_kb": 3.3,
-          "modified": "2026-08-15T08:31:02"
+          "size_kb": 3.2,
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_26_pro_ml_26_ml_project_controls.pptx",
           "extension": "pptx",
-          "size_kb": 30.1,
-          "modified": "2026-08-15T08:31:02"
+          "size_kb": 30.0,
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_27_pro_cad_27_contract_administration.html",
           "relative_path": "The BIG - PH01/06_samco_pco_27_pro_cad_27_contract_administration.html",
           "extension": "html",
           "size_kb": 3.8,
-          "modified": "2026-08-15T08:31:02"
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_27_pro_cad_27_contract_administration.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_27_pro_cad_27_contract_administration.pdf",
           "extension": "pdf",
           "size_kb": 2.5,
-          "modified": "2026-08-15T08:31:02"
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_27_pro_cad_27_contract_administration.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_27_pro_cad_27_contract_administration.pptx",
           "extension": "pptx",
           "size_kb": 29.6,
-          "modified": "2026-08-15T08:31:02"
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_28_pro_chg_28_change_control.html",
           "relative_path": "The BIG - PH01/06_samco_pco_28_pro_chg_28_change_control.html",
           "extension": "html",
           "size_kb": 3.6,
-          "modified": "2026-08-15T08:31:02"
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_28_pro_chg_28_change_control.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_28_pro_chg_28_change_control.pdf",
           "extension": "pdf",
           "size_kb": 2.4,
-          "modified": "2026-08-15T08:31:02"
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_28_pro_chg_28_change_control.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_28_pro_chg_28_change_control.pptx",
           "extension": "pptx",
           "size_kb": 29.6,
-          "modified": "2026-08-15T08:31:02"
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_29_pro_doc_29_document_control.html",
           "relative_path": "The BIG - PH01/06_samco_pco_29_pro_doc_29_document_control.html",
           "extension": "html",
           "size_kb": 3.1,
-          "modified": "2026-08-15T08:31:02"
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_29_pro_doc_29_document_control.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_29_pro_doc_29_document_control.pdf",
           "extension": "pdf",
           "size_kb": 2.0,
-          "modified": "2026-08-15T08:31:02"
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_29_pro_doc_29_document_control.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_29_pro_doc_29_document_control.pptx",
           "extension": "pptx",
           "size_kb": 29.3,
-          "modified": "2026-08-15T08:31:02"
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_30_pro_ifc_30_interface_management.html",
           "relative_path": "The BIG - PH01/06_samco_pco_30_pro_ifc_30_interface_management.html",
           "extension": "html",
           "size_kb": 10.7,
-          "modified": "2026-08-15T08:31:02"
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_30_pro_ifc_30_interface_management.pdf",
           "relative_path": "The BIG - PH01/06_samco_pco_30_pro_ifc_30_interface_management.pdf",
           "extension": "pdf",
           "size_kb": 3.0,
-          "modified": "2026-08-15T08:31:02"
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_30_pro_ifc_30_interface_management.pptx",
           "relative_path": "The BIG - PH01/06_samco_pco_30_pro_ifc_30_interface_management.pptx",
           "extension": "pptx",
           "size_kb": 29.9,
-          "modified": "2026-08-15T08:31:02"
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "06_samco_pco_complete_project_report_package.zip",
           "relative_path": "The BIG - PH01/06_samco_pco_complete_project_report_package.zip",
           "extension": "zip",
-          "size_kb": 989.8,
-          "modified": "2026-08-15T08:31:02"
+          "size_kb": 987.5,
+          "modified": "2026-08-15T09:50:17"
         },
         {
           "name": "PIH_PROJECT_CONTEXT.json",
@@ -28813,8 +28798,8 @@
           "name": "universal_report_engine_manifest.json",
           "relative_path": "The BIG - PH01/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
-          "size_kb": 30.7,
-          "modified": "2026-08-15T08:31:02"
+          "size_kb": 28.3,
+          "modified": "2026-08-15T09:50:18"
         }
       ],
       "watchers": [
@@ -30511,7 +30496,7 @@
       "source_report_fingerprint": "0fc145f5b7eb71953b74c4ab117dac26b4cbf01e71473be6d70b26efef6da0bf"
     },
     "samco_pco_31_slide_report": {
-      "generated_at": "2026-08-15T05:31:00+00:00",
+      "generated_at": "2026-08-15T06:50:15+00:00",
       "html": "/generated/The-BIG-PH01/05_samco_pco_31_slide_report.html",
       "pdf": "/generated/The-BIG-PH01/05_samco_pco_31_slide_report.pdf",
       "pptx": "/generated/The-BIG-PH01/05_samco_pco_31_slide_report.pptx",
@@ -30519,23 +30504,23 @@
       "files": {
         "html": {
           "name": "05_samco_pco_31_slide_report.html",
-          "bytes": 351078,
-          "sha256": "7e62e7200e3393f08e8b3ddaedaa60a181aa8da1e5ac79f0ca1ee1ea180440b5"
+          "bytes": 349755,
+          "sha256": "f759869547b674fb2b1cc1174fcc3ddbe1de59a529c079f51a084ed3ebc940b2"
         },
         "pdf": {
           "name": "05_samco_pco_31_slide_report.pdf",
-          "bytes": 58414,
-          "sha256": "01872f433b63c269fdddd1b8d8753572a9ca5a2dbcaaf07528e472a89725bb70"
+          "bytes": 57473,
+          "sha256": "e6d6b7e70fbb362efbebb7fbf0fb5bb3634297f9b0fc996b054a92981a622774"
         },
         "pptx": {
           "name": "05_samco_pco_31_slide_report.pptx",
-          "bytes": 86907,
-          "sha256": "a77fd4147ae5827c9ca1cdc560c9d452cfba751ca5652c23962ea1c209401e30"
+          "bytes": 86803,
+          "sha256": "dd6d4f88952bf4dc8ecb5759123fdbb058a7d0c942ff17a103f897973d1ec61f"
         },
         "complete_package_zip": {
           "name": "06_samco_pco_complete_project_report_package.zip",
-          "bytes": 1013600,
-          "sha256": "ef9a3bc911d132d017125fb7b901db57e72cfd63e8bc1f5f45bea6ac2608c224"
+          "bytes": 1011208,
+          "sha256": "672482c87f39a8d963d8e69e9dae74482210bc4ccbb582c604b78e8758da2f93"
         }
       },
       "individual_reports": {
@@ -30553,17 +30538,17 @@
             "html": {
               "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
               "bytes": 31505,
-              "sha256": "0473ab6fe7ac8d65d2e729908d5f4e644dfe0dfb1876817d22dbe75d7eda1950"
+              "sha256": "433f53483634378d628a72d7fff322824d4bba99799fda914a51d61542c095da"
             },
             "pdf": {
               "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
-              "bytes": 3414,
-              "sha256": "06bb03090d2361da44aae3cc9ef8b1f2c67c94bc7c0687c9f19d4f5ead172d6f"
+              "bytes": 3413,
+              "sha256": "78ddfb04747dc478ade5eb1b296bf6407659e8bf6cfbd0264e0e5581a08c3973"
             },
             "pptx": {
               "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx",
               "bytes": 30852,
-              "sha256": "a4bed83323b2a6685021ec19eb68b1ed5b0f6e485e1f8ae4282dbf44f47c3eb1"
+              "sha256": "e8202bedff8b56ea52a50154ea25305992c0a7744a4773305d62334a1303b7a3"
             }
           }
         },
@@ -30581,17 +30566,17 @@
             "html": {
               "name": "06_samco_pco_02_pro_dly_02_delay_analysis.html",
               "bytes": 11567,
-              "sha256": "818509dd9a66e1e643dcbfd168ca1b9733b4e4924d939121092991004868d549"
+              "sha256": "694b2db2f0e61ed8ce07c1841c5d22ed17e4fd040176037843b144104926540a"
             },
             "pdf": {
               "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
-              "bytes": 3295,
-              "sha256": "6c955b44b71154b77bbb30cd83c73a49bd4fd16133d339a7f5fb033688a2ce90"
+              "bytes": 3294,
+              "sha256": "d1984aa3ccb77aa7c215f3953d0aef60df48955bfd790a6d9fad5eaa15526089"
             },
             "pptx": {
               "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pptx",
               "bytes": 30755,
-              "sha256": "1ad0fd7bca526f31ee9778010f05bee9deeea96356bc9a591656c7acd22f9dff"
+              "sha256": "04d02d3d4b176d4701adc6efa77fa915f2fb89bc112c145a47177f3bc2605a74"
             }
           }
         },
@@ -30608,18 +30593,18 @@
           "files": {
             "html": {
               "name": "06_samco_pco_03_pro_prg_03_project_progress.html",
-              "bytes": 21522,
-              "sha256": "c9785c35e4dd6268405b075be356a80434c1a64a354dc70f25fd2dcfbae7c846"
+              "bytes": 21398,
+              "sha256": "8b1d7174914d149284e06015e5b1b71e7f8fbbfa09c352c5611fd83804205618"
             },
             "pdf": {
               "name": "06_samco_pco_03_pro_prg_03_project_progress.pdf",
-              "bytes": 3332,
-              "sha256": "a4e1ff63be5e7c0ddac781032cdc97705ddd95aea747558a65603e79a4c93cb8"
+              "bytes": 3279,
+              "sha256": "482f44c3ae682d496bfef4c21262daf46fade94f72acfa16323e73c2b36c2fa1"
             },
             "pptx": {
               "name": "06_samco_pco_03_pro_prg_03_project_progress.pptx",
-              "bytes": 30759,
-              "sha256": "336fb1695814f76dc061d350788f383e69cb1842bdad61239f1b57fbaad02073"
+              "bytes": 30757,
+              "sha256": "831794b9389e2442c46076ef00a7be1a70fac133014dcad713d27d8c80a10a91"
             }
           }
         },
@@ -30636,18 +30621,18 @@
           "files": {
             "html": {
               "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
-              "bytes": 21508,
-              "sha256": "d9ef3854e2be8c71cada9b40fafb27a7250753524aca15c585283313ea3654f8"
+              "bytes": 21443,
+              "sha256": "4158f33ec3eca146d1a9d64e4c2451c58ba0fcf7ad817699b8b4f8268988f936"
             },
             "pdf": {
               "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
-              "bytes": 3410,
-              "sha256": "afa5694c721a7718212851ffac1e8c07e466928c132001e12127bfb7d65caed0"
+              "bytes": 3342,
+              "sha256": "28bdc2698bf8695abfceba26cc9deee1b8cfd03ec76a1f9bec57278356472c24"
             },
             "pptx": {
               "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx",
-              "bytes": 30814,
-              "sha256": "ce296ef30f5db690b8ea84b79fcc496fd22fb8cca4818b99f0c982cded5d3db3"
+              "bytes": 30803,
+              "sha256": "ff17f365989094d82764b3fc968e0c2512f2273cd5fc558db90ae310d28bc609"
             }
           }
         },
@@ -30665,17 +30650,17 @@
             "html": {
               "name": "06_samco_pco_05_pro_var_05_variation_report.html",
               "bytes": 3676,
-              "sha256": "64b6e5872c4fa5e24610b962205e3e2e8e7103919b70df889d165430398d1aed"
+              "sha256": "277b01cfab3a0380eeb9607b2ffdead44ad3ed5c5f0914cd4f384a116edab491"
             },
             "pdf": {
               "name": "06_samco_pco_05_pro_var_05_variation_report.pdf",
-              "bytes": 2433,
-              "sha256": "e4b4cf6b5f84b47591de0ce83516b5ce8cd98891644add2f854bed4bc7210677"
+              "bytes": 2434,
+              "sha256": "5f0ab8c70ba5af3755ba3c08b095d9e94b1cf48d0c61930c3cf1b6ba8714c601"
             },
             "pptx": {
               "name": "06_samco_pco_05_pro_var_05_variation_report.pptx",
               "bytes": 30297,
-              "sha256": "f6b1dba37c955a9792f75fb596d665eef60721031c2323f9a8b113913880ebca"
+              "sha256": "53fca2aa3c7a7af4e0f49e2502889aeb6170ac47f4ce0da4410d01a00a1b9b95"
             }
           }
         },
@@ -30693,17 +30678,17 @@
             "html": {
               "name": "06_samco_pco_06_pro_ipc_06_interim_payment.html",
               "bytes": 5852,
-              "sha256": "4b5ea8702ae50defcd88c22b8a00e5d2f28ce887d205e0eec0456501ec01f472"
+              "sha256": "d379d8d2ab01926cfe224d3370f2256730a6641993eaf5934c539d92943fa9a7"
             },
             "pdf": {
               "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
               "bytes": 2715,
-              "sha256": "53af9e80a0c10824226932ca6b9904044dab22bb5c98ce0105ce10801f5bdc8d"
+              "sha256": "6d1a44251dab9654df2fe4d5f6a46ce74dde8f512b9655f8d9fc1e514f3262a8"
             },
             "pptx": {
               "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pptx",
-              "bytes": 30395,
-              "sha256": "e93aee573002db83e917a5a44c3ff43e41c9e54568edfd3e7f8faf319fe57d13"
+              "bytes": 30394,
+              "sha256": "fd33a6c7b8dd26f4584201ba91d9a065c68bd8320ebe8cf5f79136699ba741c0"
             }
           }
         },
@@ -30720,18 +30705,18 @@
           "files": {
             "html": {
               "name": "06_samco_pco_07_pro_res_07_resource_manpower.html",
-              "bytes": 21374,
-              "sha256": "716c26c02948d3c6c3d4706683463990d6e71df91d14fb9bce8da40baad78b20"
+              "bytes": 21309,
+              "sha256": "2c4549519a86d5afa12ff7a74c88c830a1f484d890b9947d6b828e11b92f03f2"
             },
             "pdf": {
               "name": "06_samco_pco_07_pro_res_07_resource_manpower.pdf",
-              "bytes": 3314,
-              "sha256": "54652e2ed298a030b8c7e5be3fc63e16fd5693c6211c902961c08a68bd3d60e0"
+              "bytes": 3254,
+              "sha256": "9770a5063ab15aaf3bf26dc217ae2be68d2d6379702e5a8429846dab13218008"
             },
             "pptx": {
               "name": "06_samco_pco_07_pro_res_07_resource_manpower.pptx",
-              "bytes": 30763,
-              "sha256": "e7a6a7db7676e591a470f15f8cc715b325dfde141ab54d69ed65c9ac43ad454b"
+              "bytes": 30752,
+              "sha256": "36da065e7bace2cd2c1c5c193128efc8df2298744ba458cdfe021b370b8eeb8f"
             }
           }
         },
@@ -30749,17 +30734,17 @@
             "html": {
               "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.html",
               "bytes": 3205,
-              "sha256": "0ab5c2ac8d055089a35b4a095eecdb6ea3165e92628d29a965a67334e1b63e57"
+              "sha256": "792698cb518816f9361b944f367643fd0f9b43ce0b6df385e801592b9059b173"
             },
             "pdf": {
               "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
               "bytes": 2089,
-              "sha256": "1f95abdb061e4c7d4a7bd34d6beb58d446559329bc353a0b83129acd6359b4f6"
+              "sha256": "2a817677a8de1f30b0cf015afcee5ce65b7324c24c87d25e68de40144bcc85c0"
             },
             "pptx": {
               "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pptx",
               "bytes": 30021,
-              "sha256": "83fa0edb28a98205c2f2814c154f57de117190f1cba0c5fc574e68d7078e2b85"
+              "sha256": "8c20ec0828b2b08294358db88eb92dcd983538229319c289a6627a019c8abaf3"
             }
           }
         },
@@ -30776,18 +30761,18 @@
           "files": {
             "html": {
               "name": "06_samco_pco_09_pro_cst_09_cost_control.html",
-              "bytes": 15395,
-              "sha256": "5ed64223fa01edb49c7b0f17a360848ffaf4e63bc7b2db27ecf16e07174ba3eb"
+              "bytes": 15323,
+              "sha256": "59ee165ead7d7ef5323957497dd4d7bdf0bb099458c4ed5f3791f141b8206ff5"
             },
             "pdf": {
               "name": "06_samco_pco_09_pro_cst_09_cost_control.pdf",
-              "bytes": 3125,
-              "sha256": "6e6dd5a0753f2b8274e88a7523423420afb054f206756d6a0ec1ec6265dfd0ea"
+              "bytes": 3068,
+              "sha256": "cb1dcfde34983ad13c8e853516c75f70f5acc2dacd96c7310d331c7d9bc56374"
             },
             "pptx": {
               "name": "06_samco_pco_09_pro_cst_09_cost_control.pptx",
-              "bytes": 30608,
-              "sha256": "780521bc17ce9fdb16a6b894c94ecf8cf8de229067f9cda0adaa47c3b69317c0"
+              "bytes": 30600,
+              "sha256": "0bca8a2b79d8bb69f7211c9ee8379f609d0b1d446d28c702a63f2f2a635e2a30"
             }
           }
         },
@@ -30804,18 +30789,18 @@
           "files": {
             "html": {
               "name": "06_samco_pco_10_pro_evm_10_earned_value.html",
-              "bytes": 15395,
-              "sha256": "f8134a9a5eccfdd40970741c726e67450c64e030c6cefe53480202c1b6336541"
+              "bytes": 15323,
+              "sha256": "80ef8cffc1f3b7cc81772d85e6de5317dd72bea8f16b5308fa0d8c552458f7f3"
             },
             "pdf": {
               "name": "06_samco_pco_10_pro_evm_10_earned_value.pdf",
-              "bytes": 3128,
-              "sha256": "ac056eb8bcc42c9285295d9d72111e76582d91cf9c28828bcd07df7a1751bc43"
+              "bytes": 3069,
+              "sha256": "b2e3b9872eb94d10ff41a749f2cc73d6fc839d626c38bd8690c7f8b4ad7bd88c"
             },
             "pptx": {
               "name": "06_samco_pco_10_pro_evm_10_earned_value.pptx",
-              "bytes": 30613,
-              "sha256": "7bb9e994e840c36409ee1f4a92054c2b968f49e08121ac14832faf880ce1c5f2"
+              "bytes": 30605,
+              "sha256": "105d1b249c50996b23593ed1f8917d4fe2a300d3f2deaf8bc7c3a2de8e80515b"
             }
           }
         },
@@ -30833,17 +30818,17 @@
             "html": {
               "name": "06_samco_pco_11_pro_cfs_11_cash_flow.html",
               "bytes": 6366,
-              "sha256": "0407d3e36bf1d45291bc0171c8f116e736825c4cd69c26a953884326a1f2e108"
+              "sha256": "61a956554af72b05a46602e6297807a73b8cd4afcfe7aab03d7927374379024a"
             },
             "pdf": {
               "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
               "bytes": 3087,
-              "sha256": "3230e32e10da9f0bb732cbb28351b6a4502cd64f46017686867fa7d0ab9ec7e3"
+              "sha256": "e64bb338d6ae3062c405329be8940701ba8c9453765806360d6cb5ebff2e32bb"
             },
             "pptx": {
               "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pptx",
               "bytes": 30635,
-              "sha256": "b1379be9fe70e35f223b1a6513639cb49937023a75f1d6c2dc3df6902ceaac4e"
+              "sha256": "d467bfdc610cd02a116b69a04bf0796c8246443c5914329e2a0db24882b7dd0e"
             }
           }
         },
@@ -30861,17 +30846,17 @@
             "html": {
               "name": "06_samco_pco_12_pro_scv_12_s_curve.html",
               "bytes": 6273,
-              "sha256": "60307507ca4dd571c7b8086997a79a1c64cf2181ffe482bae9e5c06aa20c97be"
+              "sha256": "7cce8cfe33bfd86e6badb3269ec1feb12390a4e68c6cd0c7574efc328045e64b"
             },
             "pdf": {
               "name": "06_samco_pco_12_pro_scv_12_s_curve.pdf",
               "bytes": 3148,
-              "sha256": "5a7ac30e46253508fca43040007a1a67c7dc8f7c6b17cf87242d05e52ef06010"
+              "sha256": "ac48f747049b5ff357b0c1414a7cc84633bade1405b89a3fbb2847ee6b21e180"
             },
             "pptx": {
               "name": "06_samco_pco_12_pro_scv_12_s_curve.pptx",
               "bytes": 30727,
-              "sha256": "6c7df12dfeab362435eba207bd6f8a56704fa52bfa50c507a997d016cdc4bdf1"
+              "sha256": "5e9123badab4ca68aae58e25e72942f7b151bacd2e68fa7cf586215a9de46c27"
             }
           }
         },
@@ -30888,18 +30873,18 @@
           "files": {
             "html": {
               "name": "06_samco_pco_13_pro_prc_13_procurement_status.html",
-              "bytes": 21359,
-              "sha256": "c5e8e9d48e7cfc7553ce610f8551d42e9d062124768c397e662d3af471fe1e02"
+              "bytes": 21294,
+              "sha256": "5e81334d4f27821c87d9afcacf9f3adfc56d071f40e4979f6e995add7454a601"
             },
             "pdf": {
               "name": "06_samco_pco_13_pro_prc_13_procurement_status.pdf",
-              "bytes": 3302,
-              "sha256": "aa08292680f2a9eea0459c07a86727f1a482e1f00da17ef2331075e57bf83854"
+              "bytes": 3240,
+              "sha256": "98a618aa5aeda9b442a9c17322de159560db9228fdafe67b51aa1366f972beda"
             },
             "pptx": {
               "name": "06_samco_pco_13_pro_prc_13_procurement_status.pptx",
-              "bytes": 30752,
-              "sha256": "9b8cd6af6946ac75015e4249f1633c0c0bf9851ee391693835c3637389450639"
+              "bytes": 30743,
+              "sha256": "c2288a22a5777a8fb9dab40433b2dce8d69d25b88b39e0dae963e72e84472068"
             }
           }
         },
@@ -30916,18 +30901,18 @@
           "files": {
             "html": {
               "name": "06_samco_pco_14_pro_mat_14_material_status.html",
-              "bytes": 21350,
-              "sha256": "469ce985ae2831187a5932ea1f45edc51f65d9f5503607ea3850a5ab3c512d58"
+              "bytes": 21285,
+              "sha256": "b5a67802cc8401ae271eabc93ac640ed0423f595143ac57cd35b24402219ed29"
             },
             "pdf": {
               "name": "06_samco_pco_14_pro_mat_14_material_status.pdf",
-              "bytes": 3300,
-              "sha256": "bde8bdf089342f43b645b3f741e12324b5ce95944038f8dfe90ac8eb1cd944e1"
+              "bytes": 3239,
+              "sha256": "f5fd9c12bead5443663e544c84b0665ec849cc21ccee7fa199d842001209c874"
             },
             "pptx": {
               "name": "06_samco_pco_14_pro_mat_14_material_status.pptx",
-              "bytes": 30751,
-              "sha256": "3a2780e69d2605ee5c0f6e754df70f426b7f0abe5bed852e95e31cf23387235e"
+              "bytes": 30743,
+              "sha256": "1b6f52254a4d17137c766f708792efa62b4acc5cd63a7fdf4512067cf9a31eb2"
             }
           }
         },
@@ -30944,18 +30929,18 @@
           "files": {
             "html": {
               "name": "06_samco_pco_15_pro_lah_15_labour_hours.html",
-              "bytes": 21341,
-              "sha256": "d1b0875a282bd4b7f50057d9ce1e50ec11d2294a53e018b19a7f55d26e57cb0b"
+              "bytes": 21276,
+              "sha256": "b8ebcafb8d0df28d77ec776336d65aff4442e862429f3b50118f89257892413f"
             },
             "pdf": {
               "name": "06_samco_pco_15_pro_lah_15_labour_hours.pdf",
-              "bytes": 3302,
-              "sha256": "7d3a26e3ae371950a026e4de58fb7e25903b2d3d4f932aec5902a7be34ee4af2"
+              "bytes": 3242,
+              "sha256": "02488e202d041dacc8199b56f643e749c717ab88376212e4565b5730e840a9a8"
             },
             "pptx": {
               "name": "06_samco_pco_15_pro_lah_15_labour_hours.pptx",
-              "bytes": 30749,
-              "sha256": "6112457e469bc362e4ec8bc6a236caab8bc6ff17e4c7fc7e568a2fabeef2f74d"
+              "bytes": 30741,
+              "sha256": "18e0b3ae591b48bc393666e9fffd62b9013acde4a05e16d580f03b45cb8e7ae8"
             }
           }
         },
@@ -30972,18 +30957,18 @@
           "files": {
             "html": {
               "name": "06_samco_pco_16_pro_cpm_16_critical_path.html",
-              "bytes": 31341,
-              "sha256": "d80422dff747c467bda07e793749199f3f81db44301635912cc8acd795bfeefb"
+              "bytes": 31276,
+              "sha256": "67d9c53ab234931a7c2ff6ed304087a48bb68f4d55ab4326c3aa5f17f57fbe3c"
             },
             "pdf": {
               "name": "06_samco_pco_16_pro_cpm_16_critical_path.pdf",
-              "bytes": 3402,
-              "sha256": "fccc645a8fed9a7982e5ad53afef122fd4fb5a79712c1b17b602fd38419980a0"
+              "bytes": 3332,
+              "sha256": "de263274754cce4ac3aeb741a824097abb792ec0442633d78def6bd7afdcbb36"
             },
             "pptx": {
               "name": "06_samco_pco_16_pro_cpm_16_critical_path.pptx",
-              "bytes": 30804,
-              "sha256": "87cf6afe6adaac52543f995dadb6385adef31405072b9f33a61b29d2c1832123"
+              "bytes": 30794,
+              "sha256": "5d4e8006b3981f5bcccef0e4c93a0e869e1d077147a57bfb3e20cf9c81652fa5"
             }
           }
         },
@@ -31000,18 +30985,18 @@
           "files": {
             "html": {
               "name": "06_samco_pco_17_pro_flt_17_float_analysis.html",
-              "bytes": 31344,
-              "sha256": "5da5b149dc044f8f866b8a7b2ddebc730aa860a70f4e480c0fe4409c0a99e562"
+              "bytes": 31279,
+              "sha256": "f81efc4e53d55f034c00b5502c2923537acf755e443e7f251708d01c5309663e"
             },
             "pdf": {
               "name": "06_samco_pco_17_pro_flt_17_float_analysis.pdf",
-              "bytes": 3400,
-              "sha256": "df9c3c81e5afe189bb381100b1de609819fd7462cb5372f341243c79009eaabb"
+              "bytes": 3329,
+              "sha256": "422ac2c964f624e71747320d45b57faf86b5d97eb58ad9d59bdd1f78dc3a7605"
             },
             "pptx": {
               "name": "06_samco_pco_17_pro_flt_17_float_analysis.pptx",
-              "bytes": 30802,
-              "sha256": "cc723c63ad734c6e32ba00b22b11f85bbf9246cd047fa2ea56099e5eb4f09e00"
+              "bytes": 30795,
+              "sha256": "3939a6c66c25cd890b884fe8dd76b7d900808258de757d58304b567799b0d47c"
             }
           }
         },
@@ -31029,17 +31014,17 @@
             "html": {
               "name": "06_samco_pco_18_pro_mil_18_milestone_status.html",
               "bytes": 4058,
-              "sha256": "26432e038541411e78e1fd08f800f9ca2d1ba4fda6a53fe4372226121d3696e4"
+              "sha256": "80f29273071be066a5ba2e9095fc4973e2589312fd259afc5d0b81b8df2b8987"
             },
             "pdf": {
               "name": "06_samco_pco_18_pro_mil_18_milestone_status.pdf",
               "bytes": 2639,
-              "sha256": "34fa6977a8bb3c1d637c78b67f91517c860640b312906b1dc5d8cb5b0c5d9615"
+              "sha256": "c7463169df1d1e503592ad49690f31cda412f3f20867abf6adbb5429f4fce690"
             },
             "pptx": {
               "name": "06_samco_pco_18_pro_mil_18_milestone_status.pptx",
               "bytes": 30410,
-              "sha256": "e2bd1a6bcf7203230d980e92c57ccaa8b1f52d885a8f4e1afcf0b5634c1f2dc8"
+              "sha256": "e82d315ebc50ce4a8ffd08426e9537ebdc5d7d916cdc59450dff53320181d906"
             }
           }
         },
@@ -31057,17 +31042,17 @@
             "html": {
               "name": "06_samco_pco_19_pro_rsk_19_risk_report.html",
               "bytes": 3834,
-              "sha256": "110b21c076782d903155621e58f3eb9bab4524df48eb51e9bd64593a33df1125"
+              "sha256": "8f4e4171854f7f2ca7057ad3883f9ff8fcdd76fb78005298ac7ae74421cb7af2"
             },
             "pdf": {
               "name": "06_samco_pco_19_pro_rsk_19_risk_report.pdf",
               "bytes": 2517,
-              "sha256": "ca60e34ceba14061565a16217098f8eaafd55f810c2182d8ee426b518b9a9a1a"
+              "sha256": "e11e4b1fda2852353c8d8b80209a19f46e930bf282c23cd5cdcc37e30d0314c6"
             },
             "pptx": {
               "name": "06_samco_pco_19_pro_rsk_19_risk_report.pptx",
               "bytes": 30343,
-              "sha256": "81630e8c29a5950759f42b818f0bbe8d496e55fbcd3cba16175e9e851e78633a"
+              "sha256": "9a453f8b2fa6a9a9d9f36785fd19d702c6951e3bfffb88338f17a8af30cc2f34"
             }
           }
         },
@@ -31085,17 +31070,17 @@
             "html": {
               "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
               "bytes": 4622,
-              "sha256": "72e2e6d4d39ac561df887b70b92ec5b730f482893c2b4056ccd451ac74df4877"
+              "sha256": "713304095cb84cafdbcfec1f649b806ba362555eadc3da2213a92270bb96f7ab"
             },
             "pdf": {
               "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
               "bytes": 2723,
-              "sha256": "5f817cda251776c5b787619d169c313bd5e3d6ec8b0ea2730e621b715c600613"
+              "sha256": "f6ba5473ad0256f582b6fb58b6c226b7c0d25671a7d2b6730c644b96a1a07881"
             },
             "pptx": {
               "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx",
-              "bytes": 30471,
-              "sha256": "952e1e3f091de9a45b2f94de2d24ce68b49c4b456ec69ae67bc1e33372bd0813"
+              "bytes": 30472,
+              "sha256": "fe95fcefd8176216184e14fc11b0ebb3a9d2d5deb222ab49383a23d99f767ac6"
             }
           }
         },
@@ -31113,17 +31098,17 @@
             "html": {
               "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
               "bytes": 3197,
-              "sha256": "6e367a1e5de87c86ecebb7984bf4ff279a37945c7a2862ff3ea790b606c2ecc9"
+              "sha256": "52f280187b4c865db55da039f19145670385cd07b20a1cb0602650e955d33811"
             },
             "pdf": {
               "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
-              "bytes": 2081,
-              "sha256": "f3c2301fc3e15824142614136de35cc8c63b334d87dc5a05cd3c0ce94fc05f6c"
+              "bytes": 2079,
+              "sha256": "a80ec319465c3ad7471e21fd524de1d8e8f11c808b9d6ac472a4d5fc8357f1bb"
             },
             "pptx": {
               "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx",
               "bytes": 30013,
-              "sha256": "f76b11fe9d2e72efd8c7e64970d8924629c2ae29a450f3b24207896b41998faf"
+              "sha256": "10ab931573a2e011c0586619672ee5e42c165a264051b91893dac99e9958341a"
             }
           }
         },
@@ -31140,18 +31125,18 @@
           "files": {
             "html": {
               "name": "06_samco_pco_22_pro_prod_22_productivity.html",
-              "bytes": 21514,
-              "sha256": "7b0c06a2e7790634bb3f68bce1adff573d2aa7d83efa26bf3df0c440638b5afb"
+              "bytes": 21390,
+              "sha256": "3e47a33037e390376b9b5cf7217646d0aa4aed5cf7f86ba1ff123de2f267bf64"
             },
             "pdf": {
               "name": "06_samco_pco_22_pro_prod_22_productivity.pdf",
-              "bytes": 3335,
-              "sha256": "c25293516d1289ff684ecdf881d3f599fb77de8e882c06716c118664429c6d1d"
+              "bytes": 3283,
+              "sha256": "77a38052a5ee0edb8f05e124470b2216441e676ac0b509b20a6e3e66eab2d771"
             },
             "pptx": {
               "name": "06_samco_pco_22_pro_prod_22_productivity.pptx",
-              "bytes": 30761,
-              "sha256": "890d6358df623efdc2ef7a7c18785e0db821791ee5c6c74ebe64faea33b43cea"
+              "bytes": 30759,
+              "sha256": "5ab160c1ebda58b32265abb9a5f3f0c6e855f0eb3c9013a4e56c6e4e93dc0468"
             }
           }
         },
@@ -31168,18 +31153,18 @@
           "files": {
             "html": {
               "name": "06_samco_pco_23_pro_exe_23_executive_report.html",
-              "bytes": 4237,
-              "sha256": "1c95368af068e4d0857780f240789d06906eb5df71690e166ec9541b6ce4775f"
+              "bytes": 4100,
+              "sha256": "3af85c7bb387b811e7db95b7cf599e2c4e041ceb8fcc2c75e8e24ca8b5688c0d"
             },
             "pdf": {
               "name": "06_samco_pco_23_pro_exe_23_executive_report.pdf",
-              "bytes": 2635,
-              "sha256": "20516fb7e7eb5b351eff3b52e012937142117b0baeadc853873cfff7b6b65d48"
+              "bytes": 2563,
+              "sha256": "54e88722ebd6565b7bc2ff26f15f53d2936718e59e1e6af1f91167456d19a574"
             },
             "pptx": {
               "name": "06_samco_pco_23_pro_exe_23_executive_report.pptx",
-              "bytes": 30372,
-              "sha256": "6339d7b9242e8268f36b7421fac702c861305fdb718338bcdfa9d3d78850e889"
+              "bytes": 30371,
+              "sha256": "bdc5bd8fc0a995d33f3dc982ab1fbbd7eae236b72d912e25a4879df203291bd1"
             }
           }
         },
@@ -31196,18 +31181,18 @@
           "files": {
             "html": {
               "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
-              "bytes": 31359,
-              "sha256": "de4172282af68c7d38ad59c33340d8c1e2a08ebad8520bd44d246331f029fc00"
+              "bytes": 31294,
+              "sha256": "a87c144c9d3a81bca205babe16d605cf20ec33b23ed131e1628eed6402c1451e"
             },
             "pdf": {
               "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
-              "bytes": 3405,
-              "sha256": "476dfc5f61198f48cf700bad8f8618d3aa779abc872efae4838cd91157523343"
+              "bytes": 3335,
+              "sha256": "b1f9912d61b58fc19b57a6a8eb7dce2a849d4889e9812631d6d283bf038f3792"
             },
             "pptx": {
               "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx",
-              "bytes": 30811,
-              "sha256": "679db32d0652b68e22390db14a04941f081a00e78bed5e21636efb59e7c1dc9d"
+              "bytes": 30803,
+              "sha256": "93a25ea71930c5669bffc3d03c5daeb84c3bb56805adf9d886fa153c2dd019c4"
             }
           }
         },
@@ -31224,18 +31209,18 @@
           "files": {
             "html": {
               "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.html",
-              "bytes": 21526,
-              "sha256": "b1c64711427d405f01fc6d3ea000c812f0d62658f46006b03ba1362ef5abd2e0"
+              "bytes": 21389,
+              "sha256": "855241fdd1eebb081c4b43fcfd1740b3304c1023237a17ac4d3efe44c7ff577d"
             },
             "pdf": {
               "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
-              "bytes": 3339,
-              "sha256": "2a3162f5b014be14e188bf6da07e1aa359eb757334618ab5bbb4c832f506fccc"
+              "bytes": 3282,
+              "sha256": "6ba55d936571f9cbc5b7bb1928d5eac214557e1f3c65e8bc52d148c3bbac2493"
             },
             "pptx": {
               "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pptx",
-              "bytes": 30765,
-              "sha256": "db36306e8523c6cd4ada4581ebe1adbc0c9a18b5c17ed2fb8db70b6530bf517a"
+              "bytes": 30759,
+              "sha256": "514743910c1a5b483b9a557d394193d23db3e224447c1e1b871df1704784ecc5"
             }
           }
         },
@@ -31252,18 +31237,18 @@
           "files": {
             "html": {
               "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.html",
-              "bytes": 21615,
-              "sha256": "bac8058b5e8f867285414272c14be62be49f9be7dc903ef17dc0ec7a93e69a91"
+              "bytes": 21478,
+              "sha256": "55bf9b2e3b7e1b9b02193c3ce82463e92b2064b37b15e93c29a0c77d919e8ae4"
             },
             "pdf": {
               "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
-              "bytes": 3385,
-              "sha256": "4cd1c9a3f99540b1aa0f9b66660bd943db4ca4e085a9ff0b54f11702f8f4ff05"
+              "bytes": 3320,
+              "sha256": "1e7b983969653227b2c718b48ace3c4b5dd94b0e187a8db11c36cf4ba222f006"
             },
             "pptx": {
               "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pptx",
-              "bytes": 30773,
-              "sha256": "9d3fca26441e871e1d09e3cd632ad6f45a7dfe230c9a323d53fe6b6d9fbf3960"
+              "bytes": 30771,
+              "sha256": "8da2ec36e359bb5a19e0c4b398fcec326bbceec5fbc6993a7d15d0ac1ce83482"
             }
           }
         },
@@ -31281,17 +31266,17 @@
             "html": {
               "name": "06_samco_pco_27_pro_cad_27_contract_administration.html",
               "bytes": 3939,
-              "sha256": "8cb9cbf2e4d7c0ccb42935a9808ff909d6b443ca98183c7c75ac98fe01514531"
+              "sha256": "e567f5ecabf9d092ec38c75ada0b5ce76cbc382b41ee6a2e0216826dba3c831c"
             },
             "pdf": {
               "name": "06_samco_pco_27_pro_cad_27_contract_administration.pdf",
               "bytes": 2512,
-              "sha256": "bb7bcd54a49ea4de142079cef19d3e5c69713b299ca3cad1ee0eb84b42565116"
+              "sha256": "691af39c6736dd1c19ce79cdf31b4d56520b391454529f6fafbc3468397c9248"
             },
             "pptx": {
               "name": "06_samco_pco_27_pro_cad_27_contract_administration.pptx",
               "bytes": 30344,
-              "sha256": "172bf21b91097ad757d2b33413d197e792b8d92ddd1a34b4824508d25a1a72af"
+              "sha256": "b8c735b7c3eb0be86d1ca9005e3bd34af54b3d81e85125e6e9d64724210810bc"
             }
           }
         },
@@ -31309,17 +31294,17 @@
             "html": {
               "name": "06_samco_pco_28_pro_chg_28_change_control.html",
               "bytes": 3670,
-              "sha256": "fa56129b6f4036dfea878495ed5214dc464098f6f566371833e53526347c22eb"
+              "sha256": "2cc9df20c41d5c32f683554947ed3b117e511043f36db0eddf0d231497f43ecf"
             },
             "pdf": {
               "name": "06_samco_pco_28_pro_chg_28_change_control.pdf",
               "bytes": 2433,
-              "sha256": "5b727374f7ec41ea7215e48b8fbfae34139b0c705498290c2fbc068b6c27bad0"
+              "sha256": "508c7318fcc2ce5e51a8d6dfb3cb5a56aed5162e7fcae2a44d47d3af532b1ee0"
             },
             "pptx": {
               "name": "06_samco_pco_28_pro_chg_28_change_control.pptx",
               "bytes": 30298,
-              "sha256": "65ff8a5c2bd19944a6d71bfb15b9b51310e3c4963e17573b058b93b0675bc9e9"
+              "sha256": "120c760964ff6714aadaf56e760a437218ec47aceb6bdb00d0b8179d0fbb4f7d"
             }
           }
         },
@@ -31337,17 +31322,17 @@
             "html": {
               "name": "06_samco_pco_29_pro_doc_29_document_control.html",
               "bytes": 3190,
-              "sha256": "8c8cf8f1ca63b91237f5b1b744e592b3cde403999aede59fdd3904339dc69d43"
+              "sha256": "c13b95e96d2931afaa2f1104d5940baf69f6afb41bd7065671769bbeb4e944ef"
             },
             "pdf": {
               "name": "06_samco_pco_29_pro_doc_29_document_control.pdf",
-              "bytes": 2077,
-              "sha256": "f0b03ffe954e7f17d7ae92f4c3a8f3a326bdb6ecc31f2b9395a55758bb82517d"
+              "bytes": 2076,
+              "sha256": "4b87d9ad4e2fd8d19a9a91b035df01517d790da4725e00f62d717b15f463de00"
             },
             "pptx": {
               "name": "06_samco_pco_29_pro_doc_29_document_control.pptx",
               "bytes": 30000,
-              "sha256": "2f09c748eda9926fe1b96c11f56e8cc9adeb4988fd91e631edfb1772629b7af0"
+              "sha256": "79dc93b83d8356348ea896cca4b99cd014315f0d6d0af9b95c3eb409edd11545"
             }
           }
         },
@@ -31365,23 +31350,23 @@
             "html": {
               "name": "06_samco_pco_30_pro_ifc_30_interface_management.html",
               "bytes": 10972,
-              "sha256": "dc57f7b3ce7d72735b1a7cd6e2d3adbf70ac6a0bb2d8b1dc1e1a2404ea5a205a"
+              "sha256": "9f83f30da315112e6a2ed423eb7d3f70c12d9da0740496769095d7aaf3359268"
             },
             "pdf": {
               "name": "06_samco_pco_30_pro_ifc_30_interface_management.pdf",
               "bytes": 3100,
-              "sha256": "02323dc25288ec7953eaad3deda8bdb2df3809e5b2f9c12022658c72d9c2fac4"
+              "sha256": "6fb24db164d5f51e5e2a7ef7ec06b0d093ef2790ed49e39f4ae2ea76ce1cf857"
             },
             "pptx": {
               "name": "06_samco_pco_30_pro_ifc_30_interface_management.pptx",
               "bytes": 30620,
-              "sha256": "e71cfd25e3e5e8643d586ab07f04849a3576e4da5ea6fd4411549e35f086bb1f"
+              "sha256": "30727ade1908fb9e22e799d5711dd29b2a4ac9a4d16bc99bb5c2fced438e5d6b"
             }
           }
         }
       },
       "source_project_id": "The Big -P.01-UP-20-April-26",
-      "source_report_fingerprint": "13195d67b3de99702d2d72083ffcc4a1908c2aeb85d208ccb861a976892320dd",
+      "source_report_fingerprint": "2a4cf48f5ff51300a6bbc4f65ff8726f7168375fbcb63f470dd71f1d264e8c96",
       "generator": {
         "name": "SAMCO-PCO Report Generator",
         "mode": "data-driven project CSV adapter",
@@ -31393,33 +31378,87 @@
   "universal_report_engine": {
     "project_id": "The Big -P.01-UP-20-April-26",
     "project_key": "the-big-p-01-up-20-april-26",
-    "source_fingerprint": "fd6dcbe45275377694040a3d78d393924beea3fcddb959f0369477585b61ac5d",
+    "source_fingerprint": "b356d47e1032a77763763f746c27db2202ac774a1a27d58dc6acd35efb60f8e5",
     "source_scope": "active project folder only",
-    "source_file_count": 43,
+    "source_file_count": 35,
     "source_inventory": [
       {
-        "relative_path": "01-data/import_templates/project_input_bundle.csv",
+        "relative_path": "01-data/import_templates/01_project_contract.csv",
         "extension": ".csv",
-        "size_bytes": 2332151,
-        "sha256": "ab6c712ed291aadd3cd27bf953fab2ca53479ab6ae156d5f1f70322e8e742f4e"
+        "size_bytes": 1776,
+        "sha256": "52a7515573ccb653444e00889264046f7beb5caa3df3dfc10377f7db69c94843"
+      },
+      {
+        "relative_path": "01-data/import_templates/02_schedule_activities.csv",
+        "extension": ".csv",
+        "size_bytes": 1855299,
+        "sha256": "40d5cf207e1ea5249aee7c6e04ecffb11d97ddf863a98c91226c80c59ea53d95"
+      },
+      {
+        "relative_path": "01-data/import_templates/03_schedule_logic.csv",
+        "extension": ".csv",
+        "size_bytes": 326488,
+        "sha256": "bb7220aa91ce0d8bc7862682cc282fafd679c8b1a94443d93735bf4d2485db17"
+      },
+      {
+        "relative_path": "01-data/import_templates/04_progress_evm.csv",
+        "extension": ".csv",
+        "size_bytes": 73,
+        "sha256": "a9002da41c8d5a9a5461613d48eb2eefc90921b6644c74a3b84041a349daa78e"
+      },
+      {
+        "relative_path": "01-data/import_templates/05_milestones_scurve.csv",
+        "extension": ".csv",
+        "size_bytes": 5938,
+        "sha256": "f2b86c6a32419fea5139c131b23a5072bd94891ff78877a4e0d956604e538fd4"
+      },
+      {
+        "relative_path": "01-data/import_templates/06_delay_events.csv",
+        "extension": ".csv",
+        "size_bytes": 10287,
+        "sha256": "7f6181a6a627b5506e72d63ad9e72a9374a0d3854b5ff764a55b33eb04271d1c"
+      },
+      {
+        "relative_path": "01-data/import_templates/07_tia_evidence_scenarios.csv",
+        "extension": ".csv",
+        "size_bytes": 106607,
+        "sha256": "601e5e3e68bc8d10008934191df1395a23623cc40b6275051660e72fbd5bf584"
+      },
+      {
+        "relative_path": "01-data/import_templates/08_commercial_payments_claims.csv",
+        "extension": ".csv",
+        "size_bytes": 11876,
+        "sha256": "a0815f2985941c52e936da10385799939c42c29153e325df289e4d4befa6d185"
+      },
+      {
+        "relative_path": "01-data/import_templates/09_risks_rfi_interfaces.csv",
+        "extension": ".csv",
+        "size_bytes": 14391,
+        "sha256": "f053a90e0efbcf875b32e79d79438dae2e1283a3c78756810608a662f522d5a7"
+      },
+      {
+        "relative_path": "01-data/import_templates/10_letters_intelligence.csv",
+        "extension": ".csv",
+        "size_bytes": 471327,
+        "sha256": "97867b186855fa23f1f94a9dab272a8526edc5f7201b4fd93d30b3a29dbefe10"
       },
       {
         "relative_path": "02-delay_analysis/approved_submission/approved_before_after_fragnet_comparison.csv",
         "extension": ".csv",
-        "size_bytes": 4862,
-        "sha256": "06fcba409d1bb108bef12cda67d4a0c27483ba46885fd8337688b09b451385ce"
+        "size_bytes": 4849,
+        "sha256": "5368dd6dd7f72648b1f124aabcc686425cc61c3ad4d0b81c97d5ea3fd6bb81c4"
       },
       {
         "relative_path": "02-delay_analysis/approved_submission/submission_manifest.json",
         "extension": ".json",
-        "size_bytes": 11179,
-        "sha256": "7f779ba80445bfb9e51a09bde80f64dc3cd3484af6ef5cd039c6d1084cf3391d"
+        "size_bytes": 11063,
+        "sha256": "57225e7fd4be70274ca6c7fa705e405d324a70f1c4984c73eef621919553d6b7"
       },
       {
         "relative_path": "02-delay_analysis/controlled_runs/latest.json",
         "extension": ".json",
-        "size_bytes": 59039,
-        "sha256": "147330c2ca0cd99ff448f1c93fc312a4558f1542dbc248ccd05f5494f1862cd0"
+        "size_bytes": 58196,
+        "sha256": "619f0668677ae41253ad79ad9832721e8b95958f075b6bf4b96c15f998f3e0ef"
       },
       {
         "relative_path": "02-delay_analysis/methodology/TIA methodology.docx",
@@ -31482,6 +31521,12 @@
         "sha256": "ae5d1b225a298e446bb49454bbbd45d8312464b39ad9eff7e46876f0714a2dc2"
       },
       {
+        "relative_path": "05-contracts/source/~$erall Contract.pdf",
+        "extension": ".pdf",
+        "size_bytes": 162,
+        "sha256": "5755e85de3494db422d1ff1d6d01122776f6cb6abeca69509e9cd696f2c37808"
+      },
+      {
         "relative_path": "06-evidence/clause_reference_template.csv",
         "extension": ".csv",
         "size_bytes": 83,
@@ -31518,118 +31563,10 @@
         "sha256": "bffe9199e03aaded0fc664949c20b9fbdefab8ae7e2f0fd7aa57de4ec513763b"
       },
       {
-        "relative_path": "07-letters_intelligence/inbox/From ACE/032.pdf",
-        "extension": ".pdf",
-        "size_bytes": 129324,
-        "sha256": "9f590b160ecd1a9ae5f66c76192d46659b338d8ecd5c26c8da2ea7fdece9a7d5"
-      },
-      {
-        "relative_path": "07-letters_intelligence/inbox/From ACE/033.pdf",
-        "extension": ".pdf",
-        "size_bytes": 129324,
-        "sha256": "9f590b160ecd1a9ae5f66c76192d46659b338d8ecd5c26c8da2ea7fdece9a7d5"
-      },
-      {
-        "relative_path": "07-letters_intelligence/inbox/From ACE/034-Submission of proof of payment for engineering stamps due on contractual works..pdf",
-        "extension": ".pdf",
-        "size_bytes": 121049,
-        "sha256": "ecd3239b4cbc827d216eff4635cc82ad8b36b3373d2d8074358dbbb9430e0a3d"
-      },
-      {
-        "relative_path": "07-letters_intelligence/inbox/From ACE/035-Re Notification of Reinforcement Steel Supply Status and Entitlement to Tim Extensions.pdf",
-        "extension": ".pdf",
-        "size_bytes": 89278,
-        "sha256": "c2a2de01d8d1d45feea1f433b2f7b2e76642504b667a10afde1b52b90fb1cbac"
-      },
-      {
-        "relative_path": "07-letters_intelligence/inbox/From ACE/036-Failure to Achieve Section (1) Milestone within the contractual Due Date.pdf",
-        "extension": ".pdf",
-        "size_bytes": 79347,
-        "sha256": "9550bbb4f94954bf12624a3b57c4150758070f489bf933eaca61a447d1247d99"
-      },
-      {
-        "relative_path": "07-letters_intelligence/inbox/From ACE/037-Notice of Slow Progress Rate and Comments on Monthly Progress Report - April 2026.pdf",
-        "extension": ".pdf",
-        "size_bytes": 260226,
-        "sha256": "0c3dcde2fb354602f680e1d09980cc5de7e6c713a2e6e48da7a8b0629643ae34"
-      },
-      {
-        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-072.pdf",
-        "extension": ".pdf",
-        "size_bytes": 1514612,
-        "sha256": "52ec893683ca57324813e67cd1d89a3fbe3669ce61a5efff7ea828d4b05969cd"
-      },
-      {
-        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-073.pdf",
-        "extension": ".pdf",
-        "size_bytes": 183472,
-        "sha256": "88607530292d184083eebbd35a3cc14984a83701807b78f0f5c050c83b5dbef1"
-      },
-      {
-        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-074.pdf",
-        "extension": ".pdf",
-        "size_bytes": 202575,
-        "sha256": "e57dc31ec8a276024575890a58f2d03f124954df2c68dd2412e5cec9284c87f2"
-      },
-      {
-        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-075.pdf",
-        "extension": ".pdf",
-        "size_bytes": 117145,
-        "sha256": "4f0580f61a5e12e01f25d3b6733bd16c5803c636fafda485ee96b35928373983"
-      },
-      {
-        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-076.pdf",
-        "extension": ".pdf",
-        "size_bytes": 165633,
-        "sha256": "7168f77e1e1624f7ed1650f898eea24dd1f5d9033544d6b0376ffec42f641e5d"
-      },
-      {
-        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-077.pdf",
-        "extension": ".pdf",
-        "size_bytes": 293286,
-        "sha256": "be9dd570d4c62dade99e731ae0028736ac9879a02597b542274746e1304591e4"
-      },
-      {
-        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-078.pdf",
-        "extension": ".pdf",
-        "size_bytes": 230803,
-        "sha256": "e4579ee3fbd851f57e2bfec44d9eef8ca74da815bd37498c7db198c594383380"
-      },
-      {
-        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-079.pdf",
-        "extension": ".pdf",
-        "size_bytes": 122399,
-        "sha256": "f3179ea344420f4e64a215f0b586f8746e495257cd8e75c9216b873ea1013e97"
-      },
-      {
-        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-080.pdf",
-        "extension": ".pdf",
-        "size_bytes": 130631,
-        "sha256": "60ccedb3ff9365713c0e908ae438aafea6b15ced3d4ad3243a9ca195fac7ded7"
-      },
-      {
-        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-081.pdf",
-        "extension": ".pdf",
-        "size_bytes": 42665,
-        "sha256": "0343884834639372c2f4c4ce257d370a4e6cd3b104650a18a0cd39ff176accf5"
-      },
-      {
-        "relative_path": "07-letters_intelligence/inbox/From SAMCO/BD-CW-SAMCO-ACE-LET-STR-082.pdf",
-        "extension": ".pdf",
-        "size_bytes": 399536,
-        "sha256": "30246763da0d2b9b5885befda44463381b1fa451322da9d58214b408cb452652"
-      },
-      {
-        "relative_path": "07-letters_intelligence/letters_intelligence.xlsx",
-        "extension": ".xlsx",
-        "size_bytes": 54699,
-        "sha256": "0bea0ac4b6f67a9a93c07043fe6e9bbd2d0a509caf92e743a38f65786e61eefa"
-      },
-      {
         "relative_path": "08-branding/color_palette_template.csv",
         "extension": ".csv",
-        "size_bytes": 215,
-        "sha256": "8516cd2fbbaae18e9c4961c0032bbdd3c222701fde9d8fb3d5dbd647d7c8e6f9"
+        "size_bytes": 210,
+        "sha256": "a72c3ba768ea09c1f2b3c8cb87439297d02119857034431bb411faf3b990418b"
       },
       {
         "relative_path": "08-branding/project_identity_template.json",
@@ -31653,7 +31590,7 @@
         "relative_path": "project_manifest.json",
         "extension": ".json",
         "size_bytes": 1204,
-        "sha256": "ddb4db904a613d20474d96f6b81dc4cb5a0bc071e941bacc5b1c15423d20012f"
+        "sha256": "33a6e9c4a55eb590f0797314f6263b4fadd71ff2cdf3b71e194beb83c2aa93b9"
       }
     ],
     "engine": {
@@ -31686,7 +31623,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -31706,7 +31643,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_02_pro_dly_02_delay_analysis.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -31726,7 +31663,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_03_pro_prg_03_project_progress.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_03_pro_prg_03_project_progress.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -31746,7 +31683,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -31766,7 +31703,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_05_pro_var_05_variation_report.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_05_pro_var_05_variation_report.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -31785,7 +31722,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_06_pro_ipc_06_interim_payment.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -31805,7 +31742,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_07_pro_res_07_resource_manpower.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_07_pro_res_07_resource_manpower.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -31824,7 +31761,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_08_pro_eqp_08_equipment_plant.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "AWAITING CONTROLLED CSV DATA"
       },
@@ -31843,7 +31780,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_09_pro_cst_09_cost_control.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_09_pro_cst_09_cost_control.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -31862,7 +31799,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_10_pro_evm_10_earned_value.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_10_pro_evm_10_earned_value.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -31881,7 +31818,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_11_pro_cfs_11_cash_flow.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -31900,7 +31837,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_12_pro_scv_12_s_curve.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_12_pro_scv_12_s_curve.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -31920,7 +31857,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_13_pro_prc_13_procurement_status.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_13_pro_prc_13_procurement_status.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -31939,7 +31876,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_14_pro_mat_14_material_status.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_14_pro_mat_14_material_status.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -31959,7 +31896,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_15_pro_lah_15_labour_hours.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_15_pro_lah_15_labour_hours.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -31979,7 +31916,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_16_pro_cpm_16_critical_path.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_16_pro_cpm_16_critical_path.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -31999,7 +31936,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_17_pro_flt_17_float_analysis.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_17_pro_flt_17_float_analysis.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -32019,7 +31956,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_18_pro_mil_18_milestone_status.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_18_pro_mil_18_milestone_status.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -32038,7 +31975,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_19_pro_rsk_19_risk_report.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_19_pro_rsk_19_risk_report.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -32058,7 +31995,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -32077,7 +32014,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "AWAITING CONTROLLED CSV DATA"
       },
@@ -32096,7 +32033,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_22_pro_prod_22_productivity.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_22_pro_prod_22_productivity.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -32115,7 +32052,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_23_pro_exe_23_executive_report.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_23_pro_exe_23_executive_report.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -32135,7 +32072,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -32155,7 +32092,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_25_pro_fcf_25_forecast_completion.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -32174,7 +32111,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_26_pro_ml_26_ml_project_controls.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -32193,7 +32130,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_27_pro_cad_27_contract_administration.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_27_pro_cad_27_contract_administration.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -32212,7 +32149,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_28_pro_chg_28_change_control.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_28_pro_chg_28_change_control.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       },
@@ -32231,7 +32168,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_29_pro_doc_29_document_control.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_29_pro_doc_29_document_control.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "AWAITING CONTROLLED CSV DATA"
       },
@@ -32251,7 +32188,7 @@
           "pdf": "/generated/The-BIG-PH01/06_samco_pco_30_pro_ifc_30_interface_management.pdf",
           "pptx": "/generated/The-BIG-PH01/06_samco_pco_30_pro_ifc_30_interface_management.pptx"
         },
-        "generated_at": "2026-08-15T05:31:00+00:00",
+        "generated_at": "2026-08-15T06:50:15+00:00",
         "release_status": "CSV_BOUND_TEMPLATE",
         "validation_status": "DATA AVAILABLE"
       }
@@ -32346,7 +32283,7 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-15T05:31:02+00:00",
+    "updated_at": "2026-08-15T06:50:17+00:00",
     "overall_artifacts": {
       "html": "/generated/The-BIG-PH01/05_samco_pco_31_slide_report.html",
       "pdf": "/generated/The-BIG-PH01/05_samco_pco_31_slide_report.pdf",

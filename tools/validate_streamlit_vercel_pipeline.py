@@ -142,11 +142,11 @@ def validate_unified_tia_template_pack(errors: list[str], checks: list[str]) -> 
     """Validate physical or bundled project-local TIA contract tables."""
     packs = [("project template", UNIFIED_TIA_PROJECT_TEMPLATE_PACK, None)]
     packs.extend(
-        (str(project["project_key"]), Path(project["path"]) / "02-delay_analysis" / "unified_tia_csv", Path(project["path"]) / "01-data" / "import_templates" / "project_input_bundle.csv")
+        (str(project["project_key"]), Path(project["path"]) / "02-delay_analysis" / "unified_tia_csv", Path(project["path"]) / "01-data" / "import_templates")
         for project in discover_projects()
     )
     for label, path, bundle in packs:
-        if bundle is None or not bundle.exists():
+        if bundle is None or not has_bundle_table(bundle / "projects.csv"):
             result = validate_pack(path, template_mode=True)
         else:
             with tempfile.TemporaryDirectory(prefix="tia-bundle-contract-") as temp:
@@ -208,7 +208,7 @@ def validate_project_workspace_surface(
     delay_dir = project_path / "02-delay_analysis" / "unified_tia_csv"
     bundle = data_dir / "project_input_bundle.csv"
     master = data_dir / "activity_master.csv"
-    if bundle.exists() or master.exists():
+    if has_bundle_table(data_dir / "projects.csv") or master.exists():
         for logical_name in ("activities", "progress_updates", "evm"):
             if not load_logical_rows(data_dir, delay_dir, logical_name):
                 errors.append(f"{project_key}: canonical input bundle cannot rebuild {logical_name}")

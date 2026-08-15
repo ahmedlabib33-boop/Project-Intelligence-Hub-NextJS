@@ -19,6 +19,7 @@ from typing import Any
 import samco_pco_report_generator as samco_template
 
 from project_input_contracts import has_bundle_table, load_logical_rows, load_payment_rows, logical_source_path, read_csv_rows
+from project_input_bundle import physical_input_path
 
 
 WORKSPACE_ROOT = Path(__file__).resolve().parents[1]
@@ -77,7 +78,7 @@ def _sha256(path: Path) -> str:
     if not path.exists() and has_bundle_table(path):
         for parent in path.parents:
             if parent.name == "01-data":
-                path = parent / "import_templates" / "project_input_bundle.csv"
+                path = physical_input_path(path) or path
                 break
     digest = hashlib.sha256()
     with path.open("rb") as handle:

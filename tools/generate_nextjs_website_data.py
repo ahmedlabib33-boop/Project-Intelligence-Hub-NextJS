@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from advanced_analytics import build_advanced_analytics
-from project_input_contracts import csv_headers, has_bundle_table, load_logical_rows, load_payment_rows, logical_source_path, read_csv_rows as read_project_csv_rows
+from project_input_contracts import csv_headers, has_bundle_table, load_letters_input, load_logical_rows, load_payment_rows, logical_source_path, read_csv_rows as read_project_csv_rows
 from project_chart_payloads import build_project_chart_payloads
 from project_report_artifacts import ensure_project_report_artifacts
 from universal_report_engine_adapter import (
@@ -999,6 +999,7 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     letters_dir = base / "07-letters_intelligence"
     outputs_dir = OUTPUTS_ROOT / project["project_folder_name"]
 
+    letters_snapshot = load_letters_input(data_dir)
     letter_files = list_project_files(letters_dir / "inbox", base, 160)
     letter_workbook_path = letters_dir / "letters_intelligence.xlsx"
     letter_workbook = xlsx_summary(letter_workbook_path)
@@ -1052,7 +1053,7 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
                 key: workspace_logical_table(path, overview_rows.get(key, [])) for key, path in overview_paths.items()
             },
         },
-        "letters_intelligence": {
+        "letters_intelligence": letters_snapshot if letters_snapshot is not None else {
             "folder": "07-letters_intelligence",
             "inbox_files": letter_files,
             "inbox_file_count": len(letter_files),

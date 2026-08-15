@@ -320,3 +320,27 @@ def logical_source_path(data_dir: Path, delay_dir: Path, logical_name: str) -> P
     if has_bundle_table(legacy):
         return data_dir / PROJECT_INPUT_BUNDLE_FILENAME
     return legacy
+
+# Ten-input redesign: preserve all legacy logical table paths as project-local virtual sources.
+from project_input_bundle import physical_input_path as _physical_input_path
+
+
+def load_letters_input(data_dir: Path) -> dict[str, Any] | None:
+    """Return the published Letters Intelligence snapshot held in input 10."""
+    input_path = data_dir / "10_letters_intelligence.csv"
+    if not input_path.exists():
+        return None
+    for record in _read_csv_rows_physical(input_path):
+        if record.get("source_scope") != "letters/payload" or record.get("row_kind") != "snapshot":
+            continue
+        try:
+            payload = json.loads(record.get("payload_json") or "{}")
+        except (TypeError, ValueError):
+            return None
+        return payload if isinstance(payload, dict) else None
+    return None
+
+
+def logical_source_path(data_dir: Path, delay_dir: Path, logical_name: str) -> Path:
+    legacy = _logical_source_path_legacy(data_dir, delay_dir, logical_name)
+    return _physical_input_path(legacy) or legacy
