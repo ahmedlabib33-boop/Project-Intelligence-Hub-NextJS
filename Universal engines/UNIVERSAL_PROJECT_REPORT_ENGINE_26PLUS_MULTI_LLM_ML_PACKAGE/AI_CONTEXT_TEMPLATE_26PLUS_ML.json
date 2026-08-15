@@ -1,0 +1,37 @@
+{
+  "author": "Eng. Ahmed Labib",
+  "attribution": "Python AI Programming by Eng. Ahmed Labib",
+  "project_name": "Project Name",
+  "report_type": "auto",
+  "data_date": "DD-Mmm-YYYY",
+  "period": "Reporting Period",
+  "metrics": {},
+  "progress": {"planned": null, "actual": null},
+  "events": [],
+  "milestones": [],
+  "constraints": [],
+  "risks": [],
+  "actions": [],
+  "conclusions": [],
+  "warnings": [],
+  "review_controls": {
+    "native_schedule_verified": false,
+    "contract_text_verified_against_signed_pdf": false,
+    "source_conflicts_reconciled": false,
+    "engineer_determination_status": "Not established",
+    "reviewer_notes": []
+  },
+  "ml_controls": {
+    "decision_support_only": true,
+    "native_cpm_supremacy": true,
+    "project_id_column": "project_id",
+    "training_dataset_provenance_verified": false,
+    "validation_project_isolation_verified": false,
+    "model_drift_reviewed": false,
+    "ood_reviewed": false,
+    "prediction_may_override_native_cpm": false,
+    "universal_accuracy_claim": false,
+    "approved_model_directories": [],
+    "notes": []
+  }
+}

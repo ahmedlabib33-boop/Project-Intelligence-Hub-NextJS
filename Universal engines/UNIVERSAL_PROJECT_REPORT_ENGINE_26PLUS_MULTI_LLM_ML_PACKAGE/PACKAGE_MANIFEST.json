@@ -1,0 +1,223 @@
+{
+  "attribution": "Python AI Programming by Eng. Ahmed Labib",
+  "author": "Eng. Ahmed Labib",
+  "package": "UNIVERSAL_PROJECT_REPORT_ENGINE_26PLUS_MULTI_LLM_ML_PACKAGE",
+  "version": "2.0.0",
+  "generated_at_utc": "2026-08-10T06:03:29+00:00",
+  "governance": {
+    "rules": 26,
+    "report_families": 30,
+    "pipeline_layers": 32,
+    "canonical_rules_sha256": "50a3f033cafc0530d58f34e3c3674277d0f844569e8dc92531ea7762c8c021b2"
+  },
+  "advanced_ml": {
+    "five_framework_competition": true,
+    "ensemble_quality_latency_weighting": true,
+    "project_aware_validation": true,
+    "ood": true,
+    "drift": true
+  },
+  "multi_llm": {
+    "providers": [
+      "claude",
+      "kimi",
+      "deepseek"
+    ],
+    "modes": [
+      "fast",
+      "balanced",
+      "assurance",
+      "auto"
+    ],
+    "live_run_performed": false,
+    "live_run_reason": "API keys not present in build runtime"
+  },
+  "file_count": 37,
+  "files": [
+    {
+      "path": "ADVANCED_ENSEMBLE_FULL_BACKEND_SELF_TEST.json",
+      "size_bytes": 1506,
+      "sha256": "d4f392a39bcb55cf57b53f695fb0a40312f29936897137496e6ff55be329048f"
+    },
+    {
+      "path": "AI_CONTEXT_TEMPLATE_26PLUS_ML.json",
+      "size_bytes": 1097,
+      "sha256": "e2f7d1ac3401478e5dd0b90f39abde11666f5170a44c99d5de6866b50b98a2c1"
+    },
+    {
+      "path": "CHATGPT_PROJECT_REPORT_WORKFLOW_26PLUS_ML.py",
+      "size_bytes": 39083,
+      "sha256": "b1df194f045c6759bf0a53ddedc73f43380727217547eb2cad37ff2b69dc7be3"
+    },
+    {
+      "path": "FRAMEWORK_SELF_TEST_CURRENT_RUNTIME.json",
+      "size_bytes": 1638,
+      "sha256": "e4cbb9c6249f1dd22cf1052b355119f7c21223304dd4fb3ed9636b38362ed6cd"
+    },
+    {
+      "path": "INSTALL_FULL_RUNTIME.py",
+      "size_bytes": 3049,
+      "sha256": "bda4389ac8bb441867920c293d27ec99d6c6a7817bf9f46ae0bb704ebcc8f66f"
+    },
+    {
+      "path": "LLM_PROVIDER_RUNTIME_STATUS.txt",
+      "size_bytes": 1168,
+      "sha256": "11dc768037addf9de9ab252f3d25049bfd36f2fdb0ebcb4099878ad81caeaf5f"
+    },
+    {
+      "path": "ML_GOVERNANCE_ENFORCEMENT_MATRIX.json",
+      "size_bytes": 13672,
+      "sha256": "c6b5e918375a1499fd4a4a30227fc7d517e6d69fd39bffc311ad41ee57dcd502"
+    },
+    {
+      "path": "ML_TASK_REGISTRY.json",
+      "size_bytes": 3759,
+      "sha256": "6fd567ac41935a3168635c28939a82c234214494860c55b300e0b9615b992171"
+    },
+    {
+      "path": "ML_TRAINING_SPEC_TEMPLATE.json",
+      "size_bytes": 791,
+      "sha256": "3b8b183ed1a92928ea8a5b43cb539a0d59912c09e9005766c91b06f2fd5b2ffe"
+    },
+    {
+      "path": "MULTI_LLM_AND_ADVANCED_ML_METADATA_SCHEMA.json",
+      "size_bytes": 1388,
+      "sha256": "98bc9f4eabb7e8cf7608bcd91d7d597a51f98357bf65b33bebf5034a77d072ba"
+    },
+    {
+      "path": "MULTI_LLM_ENV_EXAMPLE.txt",
+      "size_bytes": 405,
+      "sha256": "3ed7862bfbf2f3fcab274403c4a09d7cd62bd9d063f5df4cf957931c0226a86a"
+    },
+    {
+      "path": "MULTI_LLM_ORCHESTRATION_POLICY.json",
+      "size_bytes": 2096,
+      "sha256": "04a1dbf5fe1fccf46d44b9952e1950bd14fcf3df4b118fd5b35737eca791adf9"
+    },
+    {
+      "path": "OUTPUT_STUDIO_MODULE_MANIFEST.json",
+      "size_bytes": 9189,
+      "sha256": "0c30bd0e0c747cb36f1e47884c5a435ab0eeff8726e7e4a58126c6844eb314af"
+    },
+    {
+      "path": "OUTPUT_STUDIO_PROJECT_CONTROLS.js",
+      "size_bytes": 3971,
+      "sha256": "aa7941cc984ffca608269c5addd966c6f6cf6b6880575ffcbe0606415d49db85"
+    },
+    {
+      "path": "OUTPUT_STUDIO_PROJECT_CONTROLS_WEB.py",
+      "size_bytes": 18587,
+      "sha256": "4e208ca5f1506e9062627a6f83c055a2995ea891ef9965043e3a4d90a0e6cc81"
+    },
+    {
+      "path": "OUTPUT_STUDIO_SERVER.py",
+      "size_bytes": 520,
+      "sha256": "291c817e7ef9cf16b5c341cf334e12c88f5a23cd96e36e036610c8c31a84eb0b"
+    },
+    {
+      "path": "PROJECT_CONTROLS_ADVANCED_ENSEMBLE_ML.py",
+      "size_bytes": 21681,
+      "sha256": "f8d046a2c1e9f6ee6802b8cc72039df9c828de3a756fb01bf7c63f1122658312"
+    },
+    {
+      "path": "PROJECT_CONTROLS_ML_DECISION_SUPPORT.py",
+      "size_bytes": 51841,
+      "sha256": "ab2f914d63a82b1208574dcd02544d68cd4887a7a2093ce1431ded3ce1d444b5"
+    },
+    {
+      "path": "PROJECT_CONTROLS_MODEL_REGISTRY.py",
+      "size_bytes": 3706,
+      "sha256": "5f560e2996e6a6030b1c5ba59a7fd0870fc0958af2e54e5d86bca8bff393dbc5"
+    },
+    {
+      "path": "PROJECT_CONTROLS_MULTI_LLM_ORCHESTRATOR.py",
+      "size_bytes": 27740,
+      "sha256": "06f8f9062bd401302e4f2fb2c8f969dee9d3948c3fed80e3d74183190d63c0be"
+    },
+    {
+      "path": "README_MULTI_LLM_ADVANCED_ML.md",
+      "size_bytes": 5823,
+      "sha256": "9b6638471e7697b8601d76a3aff3666bf0f1ce6f803f42fa6a56f12d5f5d3611"
+    },
+    {
+      "path": "README_WEB_ML.md",
+      "size_bytes": 5738,
+      "sha256": "a43ef5c3a667edf3049190b7b66093cddd49c521e9e45abe28217f5fe8c66de2"
+    },
+    {
+      "path": "REAL_PROJECT_ML_DATA_CONTRACT.json",
+      "size_bytes": 3090,
+      "sha256": "86399178d2089291670486603542280379ee02455c789ed04acfa31df711ac18"
+    },
+    {
+      "path": "REAL_PROJECT_TRAINING_TEMPLATE.csv",
+      "size_bytes": 139,
+      "sha256": "622ae02c34efb09575707caba4eed3b41dfa0ff20ddc6e01d627d5685f2e08b3"
+    },
+    {
+      "path": "RUNTIME_DEPENDENCY_STATUS.json",
+      "size_bytes": 3212,
+      "sha256": "91858d93aaae5437abb577aa3b93772bed649f1689889f548be47c8aa8ae85eb"
+    },
+    {
+      "path": "RUNTIME_DEPENDENCY_STATUS_V2.json",
+      "size_bytes": 3212,
+      "sha256": "91858d93aaae5437abb577aa3b93772bed649f1689889f548be47c8aa8ae85eb"
+    },
+    {
+      "path": "UNIVERSAL_GOVERNANCE_26_RULES_AND_30_REPORT_RULEBOOKS.json",
+      "size_bytes": 85437,
+      "sha256": "0819695710a22de985d1a1099eb919cc861dadb2cba00cc19a5e0754fd7bc37c"
+    },
+    {
+      "path": "UNIVERSAL_PROJECT_REPORT_ENGINE.py",
+      "size_bytes": 77362,
+      "sha256": "80b4000e8160cda2cad9ddc453c11a3bc860002b516c35949c4c45f687095030"
+    },
+    {
+      "path": "UNIVERSAL_PROJECT_REPORT_ENGINE_26PLUS.py",
+      "size_bytes": 41171,
+      "sha256": "410235683d6ec9ab4b5d71014416b845b977ecc6b71851b19ccd557474e3bde2"
+    },
+    {
+      "path": "UNIVERSAL_PROJECT_REPORT_ENGINE_26PLUS_ML.py",
+      "size_bytes": 19446,
+      "sha256": "a9e0ab796c7c2f7f5ddd4e4acf1d37946738b19d4fb06f28418f31b9b3c4473b"
+    },
+    {
+      "path": "UNIVERSAL_PROJECT_REPORT_ENGINE_requirements.txt",
+      "size_bytes": 1189,
+      "sha256": "813e1cca5bb3035788d825264ae1c4085847ea463e8d512e6c6e633818704aac"
+    },
+    {
+      "path": "UPGRADE_ANALYSIS_SUMMARY.json",
+      "size_bytes": 2362,
+      "sha256": "615151046f1cf23eb0689ecf9ebda1e2cd26a9810f8078852de6890a202804b3"
+    },
+    {
+      "path": "VALIDATE_WEB_ML_PACKAGE.py",
+      "size_bytes": 7127,
+      "sha256": "d88ffee2d0ab19a19a0c1ac1cc4c583f9ce875d01b6cc65ba497887bf5baed77"
+    },
+    {
+      "path": "VALIDATION_MULTI_LLM_ML_DEEP_OUTPUT.txt",
+      "size_bytes": 1495,
+      "sha256": "b06f464e27dd917f69d95cece41832f5f175f98b813ed799037b802c3e0c5e71"
+    },
+    {
+      "path": "VALIDATION_MULTI_LLM_ML_OUTPUT.txt",
+      "size_bytes": 1495,
+      "sha256": "b06f464e27dd917f69d95cece41832f5f175f98b813ed799037b802c3e0c5e71"
+    },
+    {
+      "path": "VALIDATION_WEB_ML_OUTPUT.txt",
+      "size_bytes": 1160,
+      "sha256": "5b7d191055e7e390e2ebd19d4ba62dfa89f5faeea346439f04e6af5e97bbd6e8"
+    },
+    {
+      "path": "install_full_runtime.ps1",
+      "size_bytes": 383,
+      "sha256": "babb5f3c2f6bfd1cd306025e01fcc9c3d35f6ea5db27c0dc0403d1dc4b0a76ff"
+    }
+  ]
+}

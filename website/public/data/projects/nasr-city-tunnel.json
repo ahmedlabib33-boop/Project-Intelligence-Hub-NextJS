@@ -111,7 +111,7 @@
     },
     "s_curve_forecast": {
       "status": "outside_horizon",
-      "method": "numpy linear trend fallback",
+      "method": "statsmodels damped Holt trend",
       "periods_available": 10,
       "current_actual_value": 494460000.0,
       "current_planned_value": 1175000000.0,
@@ -190,25 +190,25 @@
           "installed": true
         },
         "seaborn": {
-          "installed": false
+          "installed": true
         },
         "scikit_learn": {
           "installed": true
         },
         "statsmodels": {
-          "installed": false
+          "installed": true
         },
         "spacy": {
           "installed": true
         },
         "xgboost": {
-          "installed": false
+          "installed": true
         },
         "pytorch": {
           "installed": true
         },
         "tensorflow": {
-          "installed": false
+          "installed": true
         }
       },
       "xgboost": {
@@ -233,14 +233,14 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-15T09:49:05",
-  "fingerprint": "c30ee352e408d5036360d0c0b3ccf7e7f3cb158d41ea3d4ba035c0053962c53e",
+  "last_updated": "2026-08-15T16:47:59",
+  "fingerprint": "e6862eba7606818245f40a2269f1f613191174d94df2091f62f29a7a0a74f774",
   "source_files": {
     "projects": 1,
     "contracts": 2,
     "payments": 6,
     "planned_cash_flow": 12,
-    "progress": 17,
+    "progress": 0,
     "evm": 17,
     "risks": 3,
     "claims": 2,
@@ -248,6 +248,7 @@
     "milestones": 5,
     "delay_events": 5,
     "s_curve": 10,
+    "wbs": 16,
     "historical_outcomes": 0
   },
   "metric_sources": {
@@ -307,7 +308,7 @@
         "contracts": 2,
         "payments": 6,
         "planned_cash_flow": 12,
-        "progress": 17,
+        "progress": 0,
         "evm": 17,
         "risks": 3,
         "claims": 2,
@@ -315,11 +316,12 @@
         "milestones": 5,
         "delay_events": 5,
         "s_curve": 10,
+        "wbs": 16,
         "historical_outcomes": 0
       },
       "source_tables": {
         "projects": {
-          "file": "projects.csv",
+          "file": "01_project_contract.csv",
           "exists": true,
           "row_count": 1,
           "column_count": 14,
@@ -529,111 +531,12 @@
           ]
         },
         "progress_updates": {
-          "file": "04_progress_evm.csv",
-          "exists": true,
-          "row_count": 17,
-          "column_count": 9,
-          "columns": [
-            "project_id",
-            "activity_id",
-            "update_date",
-            "planned_progress",
-            "actual_progress",
-            "planned_value",
-            "earned_value",
-            "actual_cost",
-            "notes"
-          ],
-          "rows": [
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-MS-1000",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "4500000.00",
-              "earned_value": "4500000.00",
-              "actual_cost": "4635000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-MS-1010",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "5625000.00",
-              "earned_value": "5625000.00",
-              "actual_cost": "5934375.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-ENG-1020",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "6750000.00",
-              "earned_value": "6750000.00",
-              "actual_cost": "7290000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-ENG-1030",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "7125000.00",
-              "earned_value": "7125000.00",
-              "actual_cost": "7338750.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-PRC-1040",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "8250000.00",
-              "earned_value": "8250000.00",
-              "actual_cost": "8703750.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-PRC-1050",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "9375000.00",
-              "earned_value": "9375000.00",
-              "actual_cost": "10125000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-A-EXC-1060",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "9750000.00",
-              "earned_value": "9750000.00",
-              "actual_cost": "10042500.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-A-PC-1070",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "10875000.00",
-              "earned_value": "10875000.00",
-              "actual_cost": "11473125.00",
-              "notes": "Completed"
-            }
-          ]
+          "file": "progress_updates.csv",
+          "exists": false,
+          "row_count": 0,
+          "column_count": 0,
+          "columns": [],
+          "rows": []
         },
         "evm": {
           "file": "04_progress_evm.csv",
@@ -770,7 +673,7 @@
           ]
         },
         "risks": {
-          "file": "risks.csv",
+          "file": "09_risks_rfi_interfaces.csv",
           "exists": true,
           "row_count": 3,
           "column_count": 11,
@@ -830,7 +733,7 @@
           ]
         },
         "claims": {
-          "file": "claims.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 2,
           "column_count": 12,
@@ -880,7 +783,7 @@
           ]
         },
         "contracts": {
-          "file": "contracts.csv",
+          "file": "01_project_contract.csv",
           "exists": true,
           "row_count": 2,
           "column_count": 11,
@@ -927,7 +830,7 @@
           ]
         },
         "payments": {
-          "file": "payments.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 6,
           "column_count": 18,
@@ -1075,7 +978,7 @@
           ]
         },
         "planned_cash_flow": {
-          "file": "planned_cash_flow.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 12,
           "column_count": 10,
@@ -1191,7 +1094,7 @@
           ]
         },
         "milestones": {
-          "file": "milestones.csv",
+          "file": "05_milestones_scurve.csv",
           "exists": true,
           "row_count": 5,
           "column_count": 7,
@@ -1253,7 +1156,7 @@
           ]
         },
         "delay_events": {
-          "file": "delay_events.csv",
+          "file": "06_delay_events.csv",
           "exists": true,
           "row_count": 5,
           "column_count": 14,
@@ -1357,7 +1260,7 @@
           ]
         },
         "wbs": {
-          "file": "wbs.csv",
+          "file": "03_schedule_logic.csv",
           "exists": true,
           "row_count": 16,
           "column_count": 16,
@@ -1527,7 +1430,7 @@
           ]
         },
         "s_curve": {
-          "file": "s_curve.csv",
+          "file": "05_milestones_scurve.csv",
           "exists": true,
           "row_count": 10,
           "column_count": 8,
@@ -1627,7 +1530,7 @@
       },
       "workspace_tables": {
         "projects": {
-          "file": "projects.csv",
+          "file": "01_project_contract.csv",
           "exists": true,
           "row_count": 1,
           "column_count": 14,
@@ -1666,7 +1569,7 @@
             }
           ],
           "truncated": false,
-          "source_path": "projects.csv"
+          "source_path": "01_project_contract.csv"
         },
         "activities": {
           "file": "02_schedule_activities.csv",
@@ -2003,212 +1906,14 @@
           "source_path": "02_schedule_activities.csv"
         },
         "progress_updates": {
-          "file": "04_progress_evm.csv",
-          "exists": true,
-          "row_count": 17,
-          "column_count": 9,
-          "columns": [
-            "project_id",
-            "activity_id",
-            "update_date",
-            "planned_progress",
-            "actual_progress",
-            "planned_value",
-            "earned_value",
-            "actual_cost",
-            "notes"
-          ],
-          "rows": [
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-MS-1000",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "4500000.00",
-              "earned_value": "4500000.00",
-              "actual_cost": "4635000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-MS-1010",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "5625000.00",
-              "earned_value": "5625000.00",
-              "actual_cost": "5934375.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-ENG-1020",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "6750000.00",
-              "earned_value": "6750000.00",
-              "actual_cost": "7290000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-ENG-1030",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "7125000.00",
-              "earned_value": "7125000.00",
-              "actual_cost": "7338750.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-PRC-1040",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "8250000.00",
-              "earned_value": "8250000.00",
-              "actual_cost": "8703750.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-PRC-1050",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "9375000.00",
-              "earned_value": "9375000.00",
-              "actual_cost": "10125000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-A-EXC-1060",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "9750000.00",
-              "earned_value": "9750000.00",
-              "actual_cost": "10042500.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-A-PC-1070",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "10875000.00",
-              "earned_value": "10875000.00",
-              "actual_cost": "11473125.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-A-RFT-1080",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "12000000.00",
-              "earned_value": "12000000.00",
-              "actual_cost": "12960000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-A-CON-1090",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "12375000.00",
-              "earned_value": "12375000.00",
-              "actual_cost": "12746250.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-B-EXC-1100",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "13500000.00",
-              "earned_value": "13500000.00",
-              "actual_cost": "14242500.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-B-PC-1110",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "14625000.00",
-              "earned_value": "14625000.00",
-              "actual_cost": "15795000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-B-RFT-1120",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "15000000.00",
-              "earned_value": "15000000.00",
-              "actual_cost": "15450000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-B-CON-1130",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "16125000.00",
-              "earned_value": "16125000.00",
-              "actual_cost": "17011875.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-UTL-1140",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "17250000.00",
-              "earned_value": "17250000.00",
-              "actual_cost": "18630000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-STR-1150",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "0.89",
-              "planned_value": "17625000.00",
-              "earned_value": "15737166.67",
-              "actual_cost": "16209281.67",
-              "notes": "In progress under recovery sequence"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-MS-1160",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "0.92",
-              "planned_value": "18750000.00",
-              "earned_value": "17250000.00",
-              "actual_cost": "18198750.00",
-              "notes": "In progress under recovery sequence"
-            }
-          ],
+          "file": "progress_updates.csv",
+          "exists": false,
+          "row_count": 0,
+          "column_count": 0,
+          "columns": [],
+          "rows": [],
           "truncated": false,
-          "source_path": "04_progress_evm.csv"
+          "source_path": "progress_updates.csv"
         },
         "evm": {
           "file": "04_progress_evm.csv",
@@ -2473,7 +2178,7 @@
           "source_path": "04_progress_evm.csv"
         },
         "risks": {
-          "file": "risks.csv",
+          "file": "09_risks_rfi_interfaces.csv",
           "exists": true,
           "row_count": 3,
           "column_count": 11,
@@ -2532,10 +2237,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "risks.csv"
+          "source_path": "09_risks_rfi_interfaces.csv"
         },
         "claims": {
-          "file": "claims.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 2,
           "column_count": 12,
@@ -2584,10 +2289,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "claims.csv"
+          "source_path": "08_commercial_payments_claims.csv"
         },
         "contracts": {
-          "file": "contracts.csv",
+          "file": "01_project_contract.csv",
           "exists": true,
           "row_count": 2,
           "column_count": 11,
@@ -2633,10 +2338,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "contracts.csv"
+          "source_path": "01_project_contract.csv"
         },
         "payments": {
-          "file": "payments.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 6,
           "column_count": 18,
@@ -2783,10 +2488,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "payments.csv"
+          "source_path": "08_commercial_payments_claims.csv"
         },
         "planned_cash_flow": {
-          "file": "planned_cash_flow.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 12,
           "column_count": 10,
@@ -2949,10 +2654,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "planned_cash_flow.csv"
+          "source_path": "08_commercial_payments_claims.csv"
         },
         "milestones": {
-          "file": "milestones.csv",
+          "file": "05_milestones_scurve.csv",
           "exists": true,
           "row_count": 5,
           "column_count": 7,
@@ -3013,10 +2718,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "milestones.csv"
+          "source_path": "05_milestones_scurve.csv"
         },
         "delay_events": {
-          "file": "delay_events.csv",
+          "file": "06_delay_events.csv",
           "exists": true,
           "row_count": 5,
           "column_count": 14,
@@ -3119,10 +2824,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "delay_events.csv"
+          "source_path": "06_delay_events.csv"
         },
         "wbs": {
-          "file": "wbs.csv",
+          "file": "03_schedule_logic.csv",
           "exists": true,
           "row_count": 16,
           "column_count": 16,
@@ -3435,10 +3140,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "wbs.csv"
+          "source_path": "03_schedule_logic.csv"
         },
         "s_curve": {
-          "file": "s_curve.csv",
+          "file": "05_milestones_scurve.csv",
           "exists": true,
           "row_count": 10,
           "column_count": 8,
@@ -3555,7 +3260,7 @@
             }
           ],
           "truncated": false,
-          "source_path": "s_curve.csv"
+          "source_path": "05_milestones_scurve.csv"
         }
       }
     },
@@ -3750,14 +3455,14 @@
       },
       "logic_mode": "Controlled project-local Time Impact Analysis",
       "controlled_tia": {
-        "engine": "2026.08.controlled-project-tia.v2.1",
+        "engine": "2026.08.controlled-project-tia.v2.2",
         "project_id": "Nasr city-Tunnel",
         "project_key": "nasr-city-tunnel",
         "status": "SETUP_REQUIRED",
         "approval_status": "not_submitted",
         "message": "No project-local approved TIA release is configured in project_manifest.json.",
         "workflow_tabs": [
-          "Source Integrity",
+          "Time Impact Methodology",
           "Schedule and CPM",
           "Events and Fragnets",
           "Concurrency and Entitlement",
@@ -5194,6 +4899,7 @@
               {
                 "id": 3,
                 "file_name": "Overall_Contract_clause_library.xlsx",
+                "file_path": "C:\\Users\\pc\\OneDrive\\Documents\\Project Intelligence Hub\\projects\\Tunnels\\Suez-Tunnel\\05-contracts\\source\\Overall_Contract_clause_library.xlsx",
                 "file_hash": "b977c2cbca9385310712ddc6f0f2c70c46865c901330f10f0339327276ea2f44",
                 "file_type": ".xlsx",
                 "upload_date": "2026-06-27T02:23:55+00:00",
@@ -5398,7 +5104,7 @@
       "controlled_assessment": {
         "status": {
           "knowledge_base_status": "Needs review",
-          "error": "cannot import name 'build_project_contract_controls' from 'contract_claims_center' ([local path removed])"
+          "error": "cannot import name 'build_project_contract_controls' from 'contract_claims_center' (D:\\Project Intelligence Hub NextJS\\contract_claims_center.py)"
         },
         "controls": {
           "project_id": "Nasr city-Tunnel",
@@ -6036,750 +5742,92 @@
           "name": "01_executive_dashboard.html",
           "relative_path": "Nasr city-Tunnel/01_executive_dashboard.html",
           "extension": "html",
-          "size_kb": 1.2,
-          "modified": "2026-08-13T21:54:10"
+          "size_kb": 1.1,
+          "modified": "2026-08-15T16:48:46"
         },
         {
           "name": "01_executive_dashboard.pdf",
           "relative_path": "Nasr city-Tunnel/01_executive_dashboard.pdf",
           "extension": "pdf",
-          "size_kb": 53.4,
-          "modified": "2026-08-13T21:54:10"
+          "size_kb": 52.7,
+          "modified": "2026-08-15T16:48:47"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "Nasr city-Tunnel/01_executive_dashboard.pptx",
           "extension": "pptx",
-          "size_kb": 28.5,
-          "modified": "2026-08-13T21:54:10"
+          "size_kb": 28.3,
+          "modified": "2026-08-15T16:48:48"
         },
         {
           "name": "02_master_dashboard.html",
           "relative_path": "Nasr city-Tunnel/02_master_dashboard.html",
           "extension": "html",
           "size_kb": 1.1,
-          "modified": "2026-08-13T21:54:10"
+          "modified": "2026-08-15T16:48:48"
         },
         {
           "name": "02_master_dashboard.pdf",
           "relative_path": "Nasr city-Tunnel/02_master_dashboard.pdf",
           "extension": "pdf",
-          "size_kb": 53.2,
-          "modified": "2026-08-13T21:54:10"
+          "size_kb": 52.5,
+          "modified": "2026-08-15T16:48:49"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "Nasr city-Tunnel/02_master_dashboard.pptx",
           "extension": "pptx",
-          "size_kb": 28.5,
-          "modified": "2026-08-13T21:54:10"
+          "size_kb": 28.3,
+          "modified": "2026-08-15T16:48:49"
         },
         {
           "name": "03_elite_svg_charts.html",
           "relative_path": "Nasr city-Tunnel/03_elite_svg_charts.html",
           "extension": "html",
           "size_kb": 1.1,
-          "modified": "2026-08-13T21:54:10"
+          "modified": "2026-08-15T16:48:49"
         },
         {
           "name": "03_elite_svg_charts.pdf",
           "relative_path": "Nasr city-Tunnel/03_elite_svg_charts.pdf",
           "extension": "pdf",
-          "size_kb": 52.9,
-          "modified": "2026-08-13T21:54:10"
+          "size_kb": 52.2,
+          "modified": "2026-08-15T16:48:50"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "Nasr city-Tunnel/03_elite_svg_charts.pptx",
           "extension": "pptx",
-          "size_kb": 28.5,
-          "modified": "2026-08-13T21:54:10"
+          "size_kb": 28.3,
+          "modified": "2026-08-15T16:48:50"
         },
         {
           "name": "04_linked_executive_dashboard.html",
           "relative_path": "Nasr city-Tunnel/04_linked_executive_dashboard.html",
           "extension": "html",
-          "size_kb": 1.2,
-          "modified": "2026-08-13T21:54:10"
+          "size_kb": 1.1,
+          "modified": "2026-08-15T16:48:50"
         },
         {
           "name": "04_linked_executive_dashboard.pdf",
           "relative_path": "Nasr city-Tunnel/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
-          "size_kb": 53.7,
-          "modified": "2026-08-13T21:54:10"
+          "size_kb": 52.9,
+          "modified": "2026-08-15T16:48:51"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "Nasr city-Tunnel/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
-          "size_kb": 28.5,
-          "modified": "2026-08-13T21:54:10"
-        },
-        {
-          "name": "05_samco_pco_31_slide_report.html",
-          "relative_path": "Nasr city-Tunnel/05_samco_pco_31_slide_report.html",
-          "extension": "html",
-          "size_kb": 112.5,
-          "modified": "2026-08-15T09:50:21"
-        },
-        {
-          "name": "05_samco_pco_31_slide_report.pdf",
-          "relative_path": "Nasr city-Tunnel/05_samco_pco_31_slide_report.pdf",
-          "extension": "pdf",
-          "size_kb": 54.4,
-          "modified": "2026-08-15T09:50:21"
-        },
-        {
-          "name": "05_samco_pco_31_slide_report.pptx",
-          "relative_path": "Nasr city-Tunnel/05_samco_pco_31_slide_report.pptx",
-          "extension": "pptx",
-          "size_kb": 83.5,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
-          "extension": "html",
-          "size_kb": 6.3,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
-          "extension": "pdf",
-          "size_kb": 3.0,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx",
-          "extension": "pptx",
-          "size_kb": 30.0,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_02_pro_dly_02_delay_analysis.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_02_pro_dly_02_delay_analysis.html",
-          "extension": "html",
-          "size_kb": 4.9,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
-          "extension": "pdf",
-          "size_kb": 2.8,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_02_pro_dly_02_delay_analysis.pptx",
-          "extension": "pptx",
-          "size_kb": 29.9,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_03_pro_prg_03_project_progress.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_03_pro_prg_03_project_progress.html",
-          "extension": "html",
-          "size_kb": 9.0,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_03_pro_prg_03_project_progress.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_03_pro_prg_03_project_progress.pdf",
-          "extension": "pdf",
-          "size_kb": 3.3,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_03_pro_prg_03_project_progress.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_03_pro_prg_03_project_progress.pptx",
-          "extension": "pptx",
-          "size_kb": 30.0,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
-          "extension": "html",
-          "size_kb": 7.0,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
-          "extension": "pdf",
-          "size_kb": 3.0,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx",
-          "extension": "pptx",
-          "size_kb": 30.0,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_05_pro_var_05_variation_report.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_05_pro_var_05_variation_report.html",
-          "extension": "html",
-          "size_kb": 3.9,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_05_pro_var_05_variation_report.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_05_pro_var_05_variation_report.pdf",
-          "extension": "pdf",
-          "size_kb": 2.5,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_05_pro_var_05_variation_report.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_05_pro_var_05_variation_report.pptx",
-          "extension": "pptx",
-          "size_kb": 29.6,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_06_pro_ipc_06_interim_payment.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_06_pro_ipc_06_interim_payment.html",
-          "extension": "html",
-          "size_kb": 5.2,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
-          "extension": "pdf",
-          "size_kb": 2.6,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_06_pro_ipc_06_interim_payment.pptx",
-          "extension": "pptx",
-          "size_kb": 29.7,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_07_pro_res_07_resource_manpower.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_07_pro_res_07_resource_manpower.html",
-          "extension": "html",
-          "size_kb": 8.9,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_07_pro_res_07_resource_manpower.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_07_pro_res_07_resource_manpower.pdf",
-          "extension": "pdf",
-          "size_kb": 3.2,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_07_pro_res_07_resource_manpower.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_07_pro_res_07_resource_manpower.pptx",
-          "extension": "pptx",
-          "size_kb": 30.0,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_08_pro_eqp_08_equipment_plant.html",
-          "extension": "html",
-          "size_kb": 3.1,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
-          "extension": "pdf",
-          "size_kb": 2.0,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_08_pro_eqp_08_equipment_plant.pptx",
-          "extension": "pptx",
-          "size_kb": 29.3,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_09_pro_cst_09_cost_control.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_09_pro_cst_09_cost_control.html",
-          "extension": "html",
-          "size_kb": 7.3,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_09_pro_cst_09_cost_control.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_09_pro_cst_09_cost_control.pdf",
-          "extension": "pdf",
-          "size_kb": 3.1,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_09_pro_cst_09_cost_control.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_09_pro_cst_09_cost_control.pptx",
-          "extension": "pptx",
-          "size_kb": 30.0,
-          "modified": "2026-08-15T09:50:22"
-        },
-        {
-          "name": "06_samco_pco_10_pro_evm_10_earned_value.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_10_pro_evm_10_earned_value.html",
-          "extension": "html",
-          "size_kb": 7.3,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_10_pro_evm_10_earned_value.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_10_pro_evm_10_earned_value.pdf",
-          "extension": "pdf",
-          "size_kb": 3.1,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_10_pro_evm_10_earned_value.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_10_pro_evm_10_earned_value.pptx",
-          "extension": "pptx",
-          "size_kb": 30.0,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_11_pro_cfs_11_cash_flow.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_11_pro_cfs_11_cash_flow.html",
-          "extension": "html",
-          "size_kb": 6.3,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
-          "extension": "pdf",
-          "size_kb": 2.9,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_11_pro_cfs_11_cash_flow.pptx",
-          "extension": "pptx",
-          "size_kb": 29.8,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_12_pro_scv_12_s_curve.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_12_pro_scv_12_s_curve.html",
-          "extension": "html",
-          "size_kb": 4.9,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_12_pro_scv_12_s_curve.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_12_pro_scv_12_s_curve.pdf",
-          "extension": "pdf",
-          "size_kb": 2.8,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_12_pro_scv_12_s_curve.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_12_pro_scv_12_s_curve.pptx",
-          "extension": "pptx",
-          "size_kb": 29.8,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_13_pro_prc_13_procurement_status.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_13_pro_prc_13_procurement_status.html",
-          "extension": "html",
-          "size_kb": 8.8,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_13_pro_prc_13_procurement_status.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_13_pro_prc_13_procurement_status.pdf",
-          "extension": "pdf",
-          "size_kb": 3.2,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_13_pro_prc_13_procurement_status.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_13_pro_prc_13_procurement_status.pptx",
-          "extension": "pptx",
-          "size_kb": 30.0,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_14_pro_mat_14_material_status.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_14_pro_mat_14_material_status.html",
-          "extension": "html",
-          "size_kb": 8.8,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_14_pro_mat_14_material_status.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_14_pro_mat_14_material_status.pdf",
-          "extension": "pdf",
-          "size_kb": 3.2,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_14_pro_mat_14_material_status.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_14_pro_mat_14_material_status.pptx",
-          "extension": "pptx",
-          "size_kb": 30.0,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_15_pro_lah_15_labour_hours.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_15_pro_lah_15_labour_hours.html",
-          "extension": "html",
-          "size_kb": 8.8,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_15_pro_lah_15_labour_hours.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_15_pro_lah_15_labour_hours.pdf",
-          "extension": "pdf",
-          "size_kb": 3.2,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_15_pro_lah_15_labour_hours.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_15_pro_lah_15_labour_hours.pptx",
-          "extension": "pptx",
-          "size_kb": 30.0,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_16_pro_cpm_16_critical_path.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_16_pro_cpm_16_critical_path.html",
-          "extension": "html",
-          "size_kb": 8.9,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_16_pro_cpm_16_critical_path.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_16_pro_cpm_16_critical_path.pdf",
-          "extension": "pdf",
-          "size_kb": 3.3,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_16_pro_cpm_16_critical_path.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_16_pro_cpm_16_critical_path.pptx",
-          "extension": "pptx",
-          "size_kb": 30.0,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_17_pro_flt_17_float_analysis.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_17_pro_flt_17_float_analysis.html",
-          "extension": "html",
-          "size_kb": 8.9,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_17_pro_flt_17_float_analysis.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_17_pro_flt_17_float_analysis.pdf",
-          "extension": "pdf",
-          "size_kb": 3.3,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_17_pro_flt_17_float_analysis.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_17_pro_flt_17_float_analysis.pptx",
-          "extension": "pptx",
-          "size_kb": 30.0,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_18_pro_mil_18_milestone_status.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_18_pro_mil_18_milestone_status.html",
-          "extension": "html",
-          "size_kb": 4.0,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_18_pro_mil_18_milestone_status.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_18_pro_mil_18_milestone_status.pdf",
-          "extension": "pdf",
-          "size_kb": 2.6,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_18_pro_mil_18_milestone_status.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_18_pro_mil_18_milestone_status.pptx",
-          "extension": "pptx",
-          "size_kb": 29.7,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_19_pro_rsk_19_risk_report.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_19_pro_rsk_19_risk_report.html",
-          "extension": "html",
-          "size_kb": 4.0,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_19_pro_rsk_19_risk_report.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_19_pro_rsk_19_risk_report.pdf",
-          "extension": "pdf",
-          "size_kb": 2.6,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_19_pro_rsk_19_risk_report.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_19_pro_rsk_19_risk_report.pptx",
-          "extension": "pptx",
-          "size_kb": 29.7,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
-          "extension": "html",
-          "size_kb": 3.1,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
-          "extension": "pdf",
-          "size_kb": 2.1,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx",
-          "extension": "pptx",
-          "size_kb": 29.3,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
-          "extension": "html",
-          "size_kb": 3.1,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
-          "extension": "pdf",
-          "size_kb": 2.0,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx",
-          "extension": "pptx",
-          "size_kb": 29.3,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_22_pro_prod_22_productivity.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_22_pro_prod_22_productivity.html",
-          "extension": "html",
-          "size_kb": 9.0,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_22_pro_prod_22_productivity.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_22_pro_prod_22_productivity.pdf",
-          "extension": "pdf",
-          "size_kb": 3.3,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_22_pro_prod_22_productivity.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_22_pro_prod_22_productivity.pptx",
-          "extension": "pptx",
-          "size_kb": 30.0,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_23_pro_exe_23_executive_report.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_23_pro_exe_23_executive_report.html",
-          "extension": "html",
-          "size_kb": 4.1,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_23_pro_exe_23_executive_report.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_23_pro_exe_23_executive_report.pdf",
-          "extension": "pdf",
-          "size_kb": 2.6,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_23_pro_exe_23_executive_report.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_23_pro_exe_23_executive_report.pptx",
-          "extension": "pptx",
-          "size_kb": 29.7,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
-          "extension": "html",
-          "size_kb": 9.0,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
-          "extension": "pdf",
-          "size_kb": 3.3,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx",
-          "extension": "pptx",
-          "size_kb": 30.0,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_25_pro_fcf_25_forecast_completion.html",
-          "extension": "html",
-          "size_kb": 9.0,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
-          "extension": "pdf",
-          "size_kb": 3.3,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_25_pro_fcf_25_forecast_completion.pptx",
-          "extension": "pptx",
-          "size_kb": 30.0,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_26_pro_ml_26_ml_project_controls.html",
-          "extension": "html",
-          "size_kb": 9.1,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
-          "extension": "pdf",
-          "size_kb": 3.3,
-          "modified": "2026-08-15T09:50:23"
-        },
-        {
-          "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_26_pro_ml_26_ml_project_controls.pptx",
-          "extension": "pptx",
-          "size_kb": 30.0,
-          "modified": "2026-08-15T09:50:24"
-        },
-        {
-          "name": "06_samco_pco_27_pro_cad_27_contract_administration.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_27_pro_cad_27_contract_administration.html",
-          "extension": "html",
-          "size_kb": 3.9,
-          "modified": "2026-08-15T09:50:24"
-        },
-        {
-          "name": "06_samco_pco_27_pro_cad_27_contract_administration.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_27_pro_cad_27_contract_administration.pdf",
-          "extension": "pdf",
-          "size_kb": 2.5,
-          "modified": "2026-08-15T09:50:24"
-        },
-        {
-          "name": "06_samco_pco_27_pro_cad_27_contract_administration.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_27_pro_cad_27_contract_administration.pptx",
-          "extension": "pptx",
-          "size_kb": 29.7,
-          "modified": "2026-08-15T09:50:24"
-        },
-        {
-          "name": "06_samco_pco_28_pro_chg_28_change_control.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_28_pro_chg_28_change_control.html",
-          "extension": "html",
-          "size_kb": 3.9,
-          "modified": "2026-08-15T09:50:24"
-        },
-        {
-          "name": "06_samco_pco_28_pro_chg_28_change_control.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_28_pro_chg_28_change_control.pdf",
-          "extension": "pdf",
-          "size_kb": 2.5,
-          "modified": "2026-08-15T09:50:24"
-        },
-        {
-          "name": "06_samco_pco_28_pro_chg_28_change_control.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_28_pro_chg_28_change_control.pptx",
-          "extension": "pptx",
-          "size_kb": 29.6,
-          "modified": "2026-08-15T09:50:24"
-        },
-        {
-          "name": "06_samco_pco_29_pro_doc_29_document_control.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_29_pro_doc_29_document_control.html",
-          "extension": "html",
-          "size_kb": 3.1,
-          "modified": "2026-08-15T09:50:24"
-        },
-        {
-          "name": "06_samco_pco_29_pro_doc_29_document_control.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_29_pro_doc_29_document_control.pdf",
-          "extension": "pdf",
-          "size_kb": 2.0,
-          "modified": "2026-08-15T09:50:24"
-        },
-        {
-          "name": "06_samco_pco_29_pro_doc_29_document_control.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_29_pro_doc_29_document_control.pptx",
-          "extension": "pptx",
-          "size_kb": 29.3,
-          "modified": "2026-08-15T09:50:24"
-        },
-        {
-          "name": "06_samco_pco_30_pro_ifc_30_interface_management.html",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_30_pro_ifc_30_interface_management.html",
-          "extension": "html",
-          "size_kb": 3.1,
-          "modified": "2026-08-15T09:50:24"
-        },
-        {
-          "name": "06_samco_pco_30_pro_ifc_30_interface_management.pdf",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_30_pro_ifc_30_interface_management.pdf",
-          "extension": "pdf",
-          "size_kb": 2.1,
-          "modified": "2026-08-15T09:50:24"
-        },
-        {
-          "name": "06_samco_pco_30_pro_ifc_30_interface_management.pptx",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_30_pro_ifc_30_interface_management.pptx",
-          "extension": "pptx",
-          "size_kb": 29.3,
-          "modified": "2026-08-15T09:50:24"
-        },
-        {
-          "name": "06_samco_pco_complete_project_report_package.zip",
-          "relative_path": "Nasr city-Tunnel/06_samco_pco_complete_project_report_package.zip",
-          "extension": "zip",
-          "size_kb": 955.2,
-          "modified": "2026-08-15T09:50:24"
+          "size_kb": 28.4,
+          "modified": "2026-08-15T16:48:51"
         },
         {
           "name": "universal_report_engine_manifest.json",
           "relative_path": "Nasr city-Tunnel/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
-          "size_kb": 27.2,
-          "modified": "2026-08-15T09:50:24"
+          "size_kb": 27.9,
+          "modified": "2026-08-15T18:39:33"
         }
       ],
       "watchers": [
@@ -7027,17 +6075,56 @@
         "tab": "WBS",
         "title": "WBS Progress Distribution",
         "type": "bar",
-        "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete wbs.csv.",
-        "labels": [],
-        "series": [],
+        "status": "ready",
+        "message": "Selected-project WBS performance values.",
+        "labels": [
+          "Mobilization and Site Establishment",
+          "Depot Civil and Structural Works",
+          "Engineering and Design Coordination",
+          "Utilities Diversion and External Works",
+          "Procurement and Free-Issue Materials",
+          "Nasr city-Tunnel",
+          "No Priority",
+          "Project Management and Controls",
+          "Construction Works",
+          "Viaduct and Elevated Structures",
+          "MEP and Depot Systems",
+          "Rail Systems and Integration",
+          "Contractual Milestones",
+          "Handover, Training and Closeout",
+          "Key Dates",
+          "Testing and Commissioning"
+        ],
+        "series": [
+          {
+            "label": "Performance %",
+            "color": "#06b6d4",
+            "values": [
+              1.0,
+              0.4,
+              0.36,
+              0.3,
+              0.29,
+              0.268,
+              0.268,
+              0.268,
+              0.24,
+              0.14,
+              0.04,
+              0.01,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
         "source_lineage": {
           "files": [
             "wbs.csv"
           ],
           "required_columns": [
-            "project_id",
-            "wbs_name"
+            "project_id"
           ]
         },
         "validation": [],
@@ -7048,17 +6135,56 @@
         "tab": "WBS",
         "title": "WBS Duration Breakdown",
         "type": "horizontal_bar",
-        "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete wbs.csv.",
-        "labels": [],
-        "series": [],
+        "status": "ready",
+        "message": "Selected-project baseline or remaining WBS durations.",
+        "labels": [
+          "Contractual Milestones",
+          "Key Dates",
+          "Nasr city-Tunnel",
+          "No Priority",
+          "Project Management and Controls",
+          "Construction Works",
+          "Viaduct and Elevated Structures",
+          "Procurement and Free-Issue Materials",
+          "Engineering and Design Coordination",
+          "Depot Civil and Structural Works",
+          "MEP and Depot Systems",
+          "Rail Systems and Integration",
+          "Utilities Diversion and External Works",
+          "Testing and Commissioning",
+          "Handover, Training and Closeout",
+          "Mobilization and Site Establishment"
+        ],
+        "series": [
+          {
+            "label": "Duration days",
+            "color": "#8b5cf6",
+            "values": [
+              900.0,
+              900.0,
+              900.0,
+              900.0,
+              900.0,
+              760.0,
+              630.0,
+              620.0,
+              560.0,
+              540.0,
+              520.0,
+              430.0,
+              410.0,
+              150.0,
+              85.0,
+              30.0
+            ]
+          }
+        ],
         "source_lineage": {
           "files": [
             "wbs.csv"
           ],
           "required_columns": [
-            "project_id",
-            "wbs_name"
+            "project_id"
           ]
         },
         "validation": [],
@@ -7613,80 +6739,13 @@
         "tab": "Contracts",
         "title": "Contract Cash Flow",
         "type": "line",
-        "status": "ready",
-        "message": "Planned values are compared with selected-project certified and paid payment records.",
-        "labels": [
-          "2026-01",
-          "2026-02",
-          "2026-03",
-          "2026-04",
-          "2026-05",
-          "2026-06",
-          "2026-07",
-          "2026-08",
-          "2026-09",
-          "2026-10",
-          "2026-11",
-          "2026-12"
-        ],
-        "series": [
-          {
-            "label": "Planned cash out",
-            "color": "#d6a23a",
-            "values": [
-              45950000.0,
-              53900000.0,
-              49250000.0,
-              57200000.0,
-              65150000.0,
-              60500000.0,
-              68450000.0,
-              76400000.0,
-              71750000.0,
-              79700000.0,
-              87650000.0,
-              83000000.0
-            ]
-          },
-          {
-            "label": "Certified",
-            "color": "#63a8ff",
-            "values": [
-              42000000.0,
-              51500000.0,
-              83550000.0,
-              68400000.0,
-              26400000.0,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null
-            ]
-          },
-          {
-            "label": "Paid",
-            "color": "#39d7d2",
-            "values": [
-              42000000.0,
-              51500000.0,
-              83550000.0,
-              0.0,
-              0.0,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null
-            ]
-          }
-        ],
+        "status": "awaiting_data",
+        "message": "Add project-matched planned cash-flow periods to activate this chart.",
+        "labels": [],
+        "series": [],
         "source_lineage": {
           "files": [
+            "planned_cash_flow.csv",
             "planned_cash_flow.csv",
             "payments.csv"
           ],
@@ -7914,6 +6973,7 @@
         "source_lineage": {
           "files": [
             "12_delay_event_classification.csv",
+            "vercel/14-delay_event_classification.csv",
             "delay_events.csv"
           ],
           "required_columns": [
@@ -7922,44 +6982,7 @@
             "root_cause"
           ]
         },
-        "validation": [
-          {
-            "file": "12_delay_event_classification.csv",
-            "source_row": "2",
-            "field": "analyst_status",
-            "message": "Only Verified classifications are used for delay charts."
-          },
-          {
-            "file": "12_delay_event_classification.csv",
-            "source_row": "3",
-            "field": "analyst_status",
-            "message": "Only Verified classifications are used for delay charts."
-          },
-          {
-            "file": "12_delay_event_classification.csv",
-            "source_row": "4",
-            "field": "analyst_status",
-            "message": "Only Verified classifications are used for delay charts."
-          },
-          {
-            "file": "12_delay_event_classification.csv",
-            "source_row": "5",
-            "field": "analyst_status",
-            "message": "Only Verified classifications are used for delay charts."
-          },
-          {
-            "file": "12_delay_event_classification.csv",
-            "source_row": "6",
-            "field": "analyst_status",
-            "message": "Only Verified classifications are used for delay charts."
-          },
-          {
-            "file": "12_delay_event_classification.csv",
-            "source_row": "7",
-            "field": "analyst_status",
-            "message": "Only Verified classifications are used for delay charts."
-          }
-        ],
+        "validation": [],
         "scenario": null
       },
       {
@@ -7974,6 +6997,7 @@
         "source_lineage": {
           "files": [
             "12_delay_event_classification.csv",
+            "vercel/14-delay_event_classification.csv",
             "delay_events.csv"
           ],
           "required_columns": [
@@ -7982,44 +7006,7 @@
             "delay_type"
           ]
         },
-        "validation": [
-          {
-            "file": "12_delay_event_classification.csv",
-            "source_row": "2",
-            "field": "analyst_status",
-            "message": "Only Verified classifications are used for delay charts."
-          },
-          {
-            "file": "12_delay_event_classification.csv",
-            "source_row": "3",
-            "field": "analyst_status",
-            "message": "Only Verified classifications are used for delay charts."
-          },
-          {
-            "file": "12_delay_event_classification.csv",
-            "source_row": "4",
-            "field": "analyst_status",
-            "message": "Only Verified classifications are used for delay charts."
-          },
-          {
-            "file": "12_delay_event_classification.csv",
-            "source_row": "5",
-            "field": "analyst_status",
-            "message": "Only Verified classifications are used for delay charts."
-          },
-          {
-            "file": "12_delay_event_classification.csv",
-            "source_row": "6",
-            "field": "analyst_status",
-            "message": "Only Verified classifications are used for delay charts."
-          },
-          {
-            "file": "12_delay_event_classification.csv",
-            "source_row": "7",
-            "field": "analyst_status",
-            "message": "Only Verified classifications are used for delay charts."
-          }
-        ],
+        "validation": [],
         "scenario": null
       },
       {
@@ -8055,6 +7042,7 @@
         "source_lineage": {
           "files": [
             "13_tia_recovery_scenario.csv",
+            "vercel/15-tia_recovery_scenario.csv",
             "activities.csv"
           ],
           "required_columns": [
@@ -8063,160 +7051,14 @@
             "activity_id"
           ]
         },
-        "validation": [
-          {
-            "file": "15-tia_recovery_scenario.csv",
-            "source_row": "2",
-            "field": "activity_id",
-            "message": "Activity ID is not present in this selected project's activities.csv."
-          },
-          {
-            "file": "15-tia_recovery_scenario.csv",
-            "source_row": "3",
-            "field": "activity_id",
-            "message": "Activity ID is not present in this selected project's activities.csv."
-          },
-          {
-            "file": "15-tia_recovery_scenario.csv",
-            "source_row": "4",
-            "field": "activity_id",
-            "message": "Activity ID is not present in this selected project's activities.csv."
-          },
-          {
-            "file": "15-tia_recovery_scenario.csv",
-            "source_row": "5",
-            "field": "activity_id",
-            "message": "Activity ID is not present in this selected project's activities.csv."
-          },
-          {
-            "file": "15-tia_recovery_scenario.csv",
-            "source_row": "6",
-            "field": "activity_id",
-            "message": "Activity ID is not present in this selected project's activities.csv."
-          },
-          {
-            "file": "15-tia_recovery_scenario.csv",
-            "source_row": "7",
-            "field": "activity_id",
-            "message": "Activity ID is not present in this selected project's activities.csv."
-          }
-        ],
+        "validation": [],
         "scenario": null
       }
     ],
-    "ready_count": 19,
+    "ready_count": 20,
     "draft_count": 0,
-    "awaiting_count": 17,
-    "validation": [
-      {
-        "file": "12_delay_event_classification.csv",
-        "source_row": "2",
-        "field": "analyst_status",
-        "message": "Only Verified classifications are used for delay charts."
-      },
-      {
-        "file": "12_delay_event_classification.csv",
-        "source_row": "3",
-        "field": "analyst_status",
-        "message": "Only Verified classifications are used for delay charts."
-      },
-      {
-        "file": "12_delay_event_classification.csv",
-        "source_row": "4",
-        "field": "analyst_status",
-        "message": "Only Verified classifications are used for delay charts."
-      },
-      {
-        "file": "12_delay_event_classification.csv",
-        "source_row": "5",
-        "field": "analyst_status",
-        "message": "Only Verified classifications are used for delay charts."
-      },
-      {
-        "file": "12_delay_event_classification.csv",
-        "source_row": "6",
-        "field": "analyst_status",
-        "message": "Only Verified classifications are used for delay charts."
-      },
-      {
-        "file": "12_delay_event_classification.csv",
-        "source_row": "7",
-        "field": "analyst_status",
-        "message": "Only Verified classifications are used for delay charts."
-      },
-      {
-        "file": "12_delay_event_classification.csv",
-        "source_row": "2",
-        "field": "analyst_status",
-        "message": "Only Verified classifications are used for delay charts."
-      },
-      {
-        "file": "12_delay_event_classification.csv",
-        "source_row": "3",
-        "field": "analyst_status",
-        "message": "Only Verified classifications are used for delay charts."
-      },
-      {
-        "file": "12_delay_event_classification.csv",
-        "source_row": "4",
-        "field": "analyst_status",
-        "message": "Only Verified classifications are used for delay charts."
-      },
-      {
-        "file": "12_delay_event_classification.csv",
-        "source_row": "5",
-        "field": "analyst_status",
-        "message": "Only Verified classifications are used for delay charts."
-      },
-      {
-        "file": "12_delay_event_classification.csv",
-        "source_row": "6",
-        "field": "analyst_status",
-        "message": "Only Verified classifications are used for delay charts."
-      },
-      {
-        "file": "12_delay_event_classification.csv",
-        "source_row": "7",
-        "field": "analyst_status",
-        "message": "Only Verified classifications are used for delay charts."
-      },
-      {
-        "file": "15-tia_recovery_scenario.csv",
-        "source_row": "2",
-        "field": "activity_id",
-        "message": "Activity ID is not present in this selected project's activities.csv."
-      },
-      {
-        "file": "15-tia_recovery_scenario.csv",
-        "source_row": "3",
-        "field": "activity_id",
-        "message": "Activity ID is not present in this selected project's activities.csv."
-      },
-      {
-        "file": "15-tia_recovery_scenario.csv",
-        "source_row": "4",
-        "field": "activity_id",
-        "message": "Activity ID is not present in this selected project's activities.csv."
-      },
-      {
-        "file": "15-tia_recovery_scenario.csv",
-        "source_row": "5",
-        "field": "activity_id",
-        "message": "Activity ID is not present in this selected project's activities.csv."
-      },
-      {
-        "file": "15-tia_recovery_scenario.csv",
-        "source_row": "6",
-        "field": "activity_id",
-        "message": "Activity ID is not present in this selected project's activities.csv."
-      },
-      {
-        "file": "15-tia_recovery_scenario.csv",
-        "source_row": "7",
-        "field": "activity_id",
-        "message": "Activity ID is not present in this selected project's activities.csv."
-      }
-    ]
+    "awaiting_count": 16,
+    "validation": []
   },
   "reports": {
     "executive_dashboard": "/generated/Nasr-city-Tunnel/01_executive_dashboard.html",
@@ -8232,23 +7074,23 @@
       "files": {
         "html": {
           "name": "01_executive_dashboard.html",
-          "bytes": 1183,
-          "sha256": "e88f0cee0337d2d07622757ab9856bf2d8e20989c71b79058bd58ece999ff124"
+          "bytes": 1101,
+          "sha256": "3374592e60f3851c04b621aae4ed1e5db46786c03eddd4f4f39a7ef4491a6d67"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 54684,
-          "sha256": "c07ce94f4d12838cf093c85bf2faba75a6609f587330ec8051f8495ee380035a"
+          "bytes": 53926,
+          "sha256": "18b39da65d7e84bbef0bd6211ec0da45116032de0a366588f216abd65701345b"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
-          "bytes": 29206,
-          "sha256": "e753d3cdb52b16fb61fdd76c7dc62a2e9a54988a52333c32d9f06eb9560093f4"
+          "bytes": 29030,
+          "sha256": "ece36873e06a2422aef2ba8eff1d09a44be6750fafe55f7010c4617eb340bd87"
         }
       },
       "html_origin": "controlled_fallback",
       "source_project_id": "Nasr city-Tunnel",
-      "source_report_fingerprint": "0cca320cc62d4e10ea747fb20eb8a10d85a8997b43cd24fc583e80bda1bc15c5"
+      "source_report_fingerprint": "e6862eba7606818245f40a2269f1f613191174d94df2091f62f29a7a0a74f774"
     },
     "master_dashboard": {
       "html": "/generated/Nasr-city-Tunnel/02_master_dashboard.html",
@@ -8257,23 +7099,23 @@
       "files": {
         "html": {
           "name": "02_master_dashboard.html",
-          "bytes": 1177,
-          "sha256": "5335ba7096a6ba4789100ca02fc126fb08e43aae0b7ea26426bd57642837c3fd"
+          "bytes": 1095,
+          "sha256": "5ce8ba10178bf53b628334eeea331a938278cb89c83b2390b41d22d3a7e3405d"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
-          "bytes": 54525,
-          "sha256": "00ae4b32b7cb90cd4232570a2ef840cd19519c190a6cc85ef02c063c2d7d9fad"
+          "bytes": 53771,
+          "sha256": "148a69c4890814108ba8fea087698cc9370a16ba9e021d111ca5c9c5ea918c12"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
-          "bytes": 29203,
-          "sha256": "e013bbd13393fe366644be2ed7b17442bf4725cc8fde44b1a816a7bb0b251b3f"
+          "bytes": 29027,
+          "sha256": "64d1c2943f2a965eb9ad933ec9bf0516a1b2fdd3e911fd754b5e618cc766dfd9"
         }
       },
       "html_origin": "controlled_fallback",
       "source_project_id": "Nasr city-Tunnel",
-      "source_report_fingerprint": "0cca320cc62d4e10ea747fb20eb8a10d85a8997b43cd24fc583e80bda1bc15c5"
+      "source_report_fingerprint": "e6862eba7606818245f40a2269f1f613191174d94df2091f62f29a7a0a74f774"
     },
     "elite_svg_charts": {
       "html": "/generated/Nasr-city-Tunnel/03_elite_svg_charts.html",
@@ -8282,23 +7124,23 @@
       "files": {
         "html": {
           "name": "03_elite_svg_charts.html",
-          "bytes": 1177,
-          "sha256": "ef1d4d5db7fe184302bfc015a1344cb79ace9f55d576a51afebd2492b8427554"
+          "bytes": 1095,
+          "sha256": "c36f1969e6f121e0b2989d1ea18065a43fd68c7b27b34006fd21a3e90d8e649b"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
-          "bytes": 54170,
-          "sha256": "0bef5e2950d6c14d6ebd17afa3efb1b1494101c61d5d50e89426a7a7e2607858"
+          "bytes": 53418,
+          "sha256": "161b26766679843ae90c4a7ed6e39b07bcb5f07f9c54cbf668c38a9652288fc5"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
-          "bytes": 29203,
-          "sha256": "621a66e2f646904ce005f63371d13e4996092046330e3ea4ad308d918a50f9eb"
+          "bytes": 29028,
+          "sha256": "898ddfda5b97e759ffedec20165caa756937fa3e15b2c46b3995274e3ab18aa3"
         }
       },
       "html_origin": "controlled_fallback",
       "source_project_id": "Nasr city-Tunnel",
-      "source_report_fingerprint": "0cca320cc62d4e10ea747fb20eb8a10d85a8997b43cd24fc583e80bda1bc15c5"
+      "source_report_fingerprint": "e6862eba7606818245f40a2269f1f613191174d94df2091f62f29a7a0a74f774"
     },
     "linked_executive_dashboard": {
       "html": "/generated/Nasr-city-Tunnel/04_linked_executive_dashboard.html",
@@ -8307,910 +7149,31 @@
       "files": {
         "html": {
           "name": "04_linked_executive_dashboard.html",
-          "bytes": 1197,
-          "sha256": "c73f8a7068ff0f55570ef568cb9bcf8fed125f807bb91300b0f23f35d2b373b7"
+          "bytes": 1115,
+          "sha256": "8cfa7434268398e2fc7c75ce3fd7aca685581eae5d5c314fcc9ab4f5465a5c4a"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
-          "bytes": 54975,
-          "sha256": "e7bb5cedb82c7811f64126f04b0459ed3087a38e5555b045d37cbb6ffdc3faf4"
+          "bytes": 54217,
+          "sha256": "3dfc5e02809b3a2a9662ae2070bbd131cd297a803c94aa13a83717385c851efc"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
-          "bytes": 29212,
-          "sha256": "46411e45505084c4123169f894d79678b72efdd3b0f855aa13571cc71b6130df"
+          "bytes": 29037,
+          "sha256": "682d0f6b1260f05f8b10361e86772f66b94e513db9260de50383eefb5a6d40a3"
         }
       },
       "html_origin": "controlled_fallback",
       "source_project_id": "Nasr city-Tunnel",
-      "source_report_fingerprint": "0cca320cc62d4e10ea747fb20eb8a10d85a8997b43cd24fc583e80bda1bc15c5"
-    },
-    "samco_pco_31_slide_report": {
-      "generated_at": "2026-08-15T06:50:21+00:00",
-      "html": "/generated/Nasr-city-Tunnel/05_samco_pco_31_slide_report.html",
-      "pdf": "/generated/Nasr-city-Tunnel/05_samco_pco_31_slide_report.pdf",
-      "pptx": "/generated/Nasr-city-Tunnel/05_samco_pco_31_slide_report.pptx",
-      "complete_package_zip": "/generated/Nasr-city-Tunnel/06_samco_pco_complete_project_report_package.zip",
-      "files": {
-        "html": {
-          "name": "05_samco_pco_31_slide_report.html",
-          "bytes": 115233,
-          "sha256": "a8d938af65298824eabc9fbf14453941275089165bb41f8a3dd0310d80f88fb3"
-        },
-        "pdf": {
-          "name": "05_samco_pco_31_slide_report.pdf",
-          "bytes": 55707,
-          "sha256": "94f0824f7cf1e4fe197fd9356e01717f2ff487b5e428bc158334ff2b436cff6b"
-        },
-        "pptx": {
-          "name": "05_samco_pco_31_slide_report.pptx",
-          "bytes": 85453,
-          "sha256": "1be77d4069a39bbeec448ab744b6fbd97f6ad5b8efb8d7033821e6fac7de4e10"
-        },
-        "complete_package_zip": {
-          "name": "06_samco_pco_complete_project_report_package.zip",
-          "bytes": 978164,
-          "sha256": "2c64ea2c36b4fbea0da5e7ae09bcf7f4905c8bf3dbdf3215002bbf10f38e0c46"
-        }
-      },
-      "individual_reports": {
-        "eot": {
-          "code": "PRO-TIA-01",
-          "title": "Time Impact & Extension of Time",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
-              "bytes": 6456,
-              "sha256": "42e67b6d29f2bd835e15ad2e836d0b1518c9fad25d2f6101b9d6eea69bfb23f9"
-            },
-            "pdf": {
-              "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
-              "bytes": 3079,
-              "sha256": "36d5e81a371316dcb7d8433894298d890cd8c819503ea6b44b6dba24bd887752"
-            },
-            "pptx": {
-              "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx",
-              "bytes": 30690,
-              "sha256": "2d96e326cb24e884b7d2fa5a625429aa1af073b856ee74ad452616c28f21ef9b"
-            }
-          }
-        },
-        "delay": {
-          "code": "PRO-DLY-02",
-          "title": "Delay Analysis",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_02_pro_dly_02_delay_analysis.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_02_pro_dly_02_delay_analysis.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_02_pro_dly_02_delay_analysis.html",
-              "bytes": 5058,
-              "sha256": "516b04e6f318c9b63b841f0d983d4da390280be168f9ad9af13be4e8eacf4ee7"
-            },
-            "pdf": {
-              "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
-              "bytes": 2914,
-              "sha256": "12f01917f950db88237c239a1c457f0c63e2f324da0717bbb291c05ca0e027f5"
-            },
-            "pptx": {
-              "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pptx",
-              "bytes": 30594,
-              "sha256": "468d220f1bf6cf226e4908ef613c96dd269d4a903094bb431659df151f7285d4"
-            }
-          }
-        },
-        "progress": {
-          "code": "PRO-PRG-03",
-          "title": "Project Progress",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_03_pro_prg_03_project_progress.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_03_pro_prg_03_project_progress.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_03_pro_prg_03_project_progress.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_03_pro_prg_03_project_progress.html",
-              "bytes": 9206,
-              "sha256": "c58546dfeaa81be88d0291c85dcf3782da01c2217eb37515d5fe024343c04e82"
-            },
-            "pdf": {
-              "name": "06_samco_pco_03_pro_prg_03_project_progress.pdf",
-              "bytes": 3360,
-              "sha256": "5bdf3d39e4d539942c0b3c311defa0f4b07fd7232581d06e37c95a9fb5a12273"
-            },
-            "pptx": {
-              "name": "06_samco_pco_03_pro_prg_03_project_progress.pptx",
-              "bytes": 30723,
-              "sha256": "4ed9463d800023f5573b8abab9dbe7957a12f81e6c9781bcd642b4c75e03d0c9"
-            }
-          }
-        },
-        "recovery": {
-          "code": "PRO-REC-04",
-          "title": "Recovery & Mitigation",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
-              "bytes": 7162,
-              "sha256": "98158bf7885d7278242c5f80fb1757e5b74c9f1193796b061f52ad09eff6735b"
-            },
-            "pdf": {
-              "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
-              "bytes": 3102,
-              "sha256": "4ee09183a39cdff8f784eef5d4fd79d5c945ed381105df9a99e2e1d0389c4143"
-            },
-            "pptx": {
-              "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx",
-              "bytes": 30671,
-              "sha256": "66679bf914351bc6f11a596b3413ac5fd8f4857f0ddfa3e138c94a6d04d0a484"
-            }
-          }
-        },
-        "variation": {
-          "code": "PRO-VAR-05",
-          "title": "Variation Report",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_05_pro_var_05_variation_report.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_05_pro_var_05_variation_report.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_05_pro_var_05_variation_report.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_05_pro_var_05_variation_report.html",
-              "bytes": 3968,
-              "sha256": "cf1f9b6db4a3c4d8c4e0312eac31e9601f533c56a1953534e3e750af58d590d7"
-            },
-            "pdf": {
-              "name": "06_samco_pco_05_pro_var_05_variation_report.pdf",
-              "bytes": 2522,
-              "sha256": "246843054813806a3657995e57cd341fbfa69ce0f9f169713de9b360463c1d10"
-            },
-            "pptx": {
-              "name": "06_samco_pco_05_pro_var_05_variation_report.pptx",
-              "bytes": 30343,
-              "sha256": "c461af6a60e9b66f232b4a7099e660ba8961754f7d87d6d1c07913db7322d444"
-            }
-          }
-        },
-        "hybrid": {
-          "code": "PRO-IPC-06",
-          "title": "Interim Payment",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_06_pro_ipc_06_interim_payment.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_06_pro_ipc_06_interim_payment.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_06_pro_ipc_06_interim_payment.html",
-              "bytes": 5338,
-              "sha256": "df9d570acc2857829ce8ff8cd2ad365d62b1c8c052b96c739c58d18e7889d87c"
-            },
-            "pdf": {
-              "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
-              "bytes": 2618,
-              "sha256": "3b2a72ca0f2236af8f951d7d504485c014b869a4e28ce8ec33a8b9b56f74d1b0"
-            },
-            "pptx": {
-              "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pptx",
-              "bytes": 30370,
-              "sha256": "d8d959c49558609f5bde48fd47ed5af6622198a37fce2aa489de6162f375c9e5"
-            }
-          }
-        },
-        "resource": {
-          "code": "PRO-RES-07",
-          "title": "Resource & Manpower",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_07_pro_res_07_resource_manpower.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_07_pro_res_07_resource_manpower.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_07_pro_res_07_resource_manpower.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_07_pro_res_07_resource_manpower.html",
-              "bytes": 9065,
-              "sha256": "9161e429b9792e804d77e1782c59341e863108d5581666cfd27c81711e7c31d5"
-            },
-            "pdf": {
-              "name": "06_samco_pco_07_pro_res_07_resource_manpower.pdf",
-              "bytes": 3283,
-              "sha256": "0ecc44b386de661640e93d2f5e78401a49c4b5536657e4a72230a3256075b62b"
-            },
-            "pptx": {
-              "name": "06_samco_pco_07_pro_res_07_resource_manpower.pptx",
-              "bytes": 30725,
-              "sha256": "9dc46025f3ca66c67dcebedb51ae7b28b84ea73a359346fcc4221429d2d33b7a"
-            }
-          }
-        },
-        "equipment": {
-          "code": "PRO-EQP-08",
-          "title": "Equipment & Plant",
-          "status": "AWAITING CONTROLLED CSV DATA",
-          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_08_pro_eqp_08_equipment_plant.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_08_pro_eqp_08_equipment_plant.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.html",
-              "bytes": 3177,
-              "sha256": "60418d45d8a93a757dbcb7a0364e3634b00819c479d96820ee41e7a5b0dd0ebf"
-            },
-            "pdf": {
-              "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
-              "bytes": 2069,
-              "sha256": "eb3a7bbfa184cf94bd6a2375be0f1641d73d2ca2a26a7d14041c70b627f591d7"
-            },
-            "pptx": {
-              "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pptx",
-              "bytes": 30003,
-              "sha256": "0119fc2552e40573a463492bc9bdf9b1f9c9dfbfda88e436cad070e2c52dbd9a"
-            }
-          }
-        },
-        "cost": {
-          "code": "PRO-CST-09",
-          "title": "Cost Control",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_09_pro_cst_09_cost_control.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_09_pro_cst_09_cost_control.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_09_pro_cst_09_cost_control.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_09_pro_cst_09_cost_control.html",
-              "bytes": 7515,
-              "sha256": "16328d97c28297166aafbfda8875a47c56e78324aa233543e129d85a753e491f"
-            },
-            "pdf": {
-              "name": "06_samco_pco_09_pro_cst_09_cost_control.pdf",
-              "bytes": 3198,
-              "sha256": "9ff1a68087c53d26c00d5d3c8456c8e92f4f0141fd68f145cb4b554691802a8d"
-            },
-            "pptx": {
-              "name": "06_samco_pco_09_pro_cst_09_cost_control.pptx",
-              "bytes": 30691,
-              "sha256": "ce394184d677a7b31c4f65791a194a5b76d92587f4be359dc0dba65c35d01ee4"
-            }
-          }
-        },
-        "evm": {
-          "code": "PRO-EVM-10",
-          "title": "Earned Value",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_10_pro_evm_10_earned_value.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_10_pro_evm_10_earned_value.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_10_pro_evm_10_earned_value.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_10_pro_evm_10_earned_value.html",
-              "bytes": 7515,
-              "sha256": "93da973f7d7d95b2f472ad8fdebd81e8b353e1564706bc363442e158861520fb"
-            },
-            "pdf": {
-              "name": "06_samco_pco_10_pro_evm_10_earned_value.pdf",
-              "bytes": 3200,
-              "sha256": "4e7b062bb8ac5ec9a66f66a1f31fa43a2c59c20765ff781a01a83fdadc0834cc"
-            },
-            "pptx": {
-              "name": "06_samco_pco_10_pro_evm_10_earned_value.pptx",
-              "bytes": 30698,
-              "sha256": "86775a3c94583c74b6f6ef11d9581debb3fc285d6637b795ddbd123eca80738f"
-            }
-          }
-        },
-        "cashflow": {
-          "code": "PRO-CFS-11",
-          "title": "Cash Flow",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_11_pro_cfs_11_cash_flow.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_11_pro_cfs_11_cash_flow.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_11_pro_cfs_11_cash_flow.html",
-              "bytes": 6491,
-              "sha256": "d0d09c123d205b929203fecab14f31467a64795631f3f260b7859b1cadc7d48e"
-            },
-            "pdf": {
-              "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
-              "bytes": 2989,
-              "sha256": "c84e8adcaa70f3fc9f8a5382f31cc7236ba5cbb857a86184b84909b2e2937ca7"
-            },
-            "pptx": {
-              "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pptx",
-              "bytes": 30550,
-              "sha256": "dd3de7a5b1f725bb858d7cf32a1eac047becac00f42ff09f96fa86aef75c6d75"
-            }
-          }
-        },
-        "scurve": {
-          "code": "PRO-SCV-12",
-          "title": "S-Curve",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_12_pro_scv_12_s_curve.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_12_pro_scv_12_s_curve.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_12_pro_scv_12_s_curve.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_12_pro_scv_12_s_curve.html",
-              "bytes": 5023,
-              "sha256": "22e9d478075879420ae2686a72b7962b5781d64916ff2ca3994332e3a8e8d135"
-            },
-            "pdf": {
-              "name": "06_samco_pco_12_pro_scv_12_s_curve.pdf",
-              "bytes": 2829,
-              "sha256": "a52e830338606c4620dc405bac2ac09a493d37e7915b9279220501cff9afbb61"
-            },
-            "pptx": {
-              "name": "06_samco_pco_12_pro_scv_12_s_curve.pptx",
-              "bytes": 30503,
-              "sha256": "4a60c8a22199c35aea3d6a38b0a8ba7c328d01b0c7af2b1c01d97289b016a29e"
-            }
-          }
-        },
-        "procurement": {
-          "code": "PRO-PRC-13",
-          "title": "Procurement Status",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_13_pro_prc_13_procurement_status.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_13_pro_prc_13_procurement_status.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_13_pro_prc_13_procurement_status.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_13_pro_prc_13_procurement_status.html",
-              "bytes": 9050,
-              "sha256": "b7729960c27c9d0c4c90fe8f6815021f42a8886738d74eb1b7335d8c357ccf89"
-            },
-            "pdf": {
-              "name": "06_samco_pco_13_pro_prc_13_procurement_status.pdf",
-              "bytes": 3257,
-              "sha256": "cf2e4c8ce1165fe19f1def3d3ac9eb13b0f5aa3e72a7989e938a47c642c7b072"
-            },
-            "pptx": {
-              "name": "06_samco_pco_13_pro_prc_13_procurement_status.pptx",
-              "bytes": 30704,
-              "sha256": "53687abd69a542d2feb230d218e50af15af0b67d4636aec83f861fb0d79ff217"
-            }
-          }
-        },
-        "material": {
-          "code": "PRO-MAT-14",
-          "title": "Material Status",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_14_pro_mat_14_material_status.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_14_pro_mat_14_material_status.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_14_pro_mat_14_material_status.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_14_pro_mat_14_material_status.html",
-              "bytes": 9041,
-              "sha256": "1d1a2aae72166c40ced971fea589ea163a03e00bb67088462c86e62e79c691f4"
-            },
-            "pdf": {
-              "name": "06_samco_pco_14_pro_mat_14_material_status.pdf",
-              "bytes": 3259,
-              "sha256": "4c6381588fe1706585773b76dcbfcb4660c45f69285cc1791b6ec78860b2f8ee"
-            },
-            "pptx": {
-              "name": "06_samco_pco_14_pro_mat_14_material_status.pptx",
-              "bytes": 30706,
-              "sha256": "48a6ff91962036b26b0a774a9bfa8eef2c390d1152f9bbc28c8919e56b4350d1"
-            }
-          }
-        },
-        "lookahead": {
-          "code": "PRO-LAH-15",
-          "title": "Labour Hours",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_15_pro_lah_15_labour_hours.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_15_pro_lah_15_labour_hours.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_15_pro_lah_15_labour_hours.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_15_pro_lah_15_labour_hours.html",
-              "bytes": 9032,
-              "sha256": "f933cff4069e642d835b9c759d3cfe4dcb33f621b24d58018ef4d23605ee2a27"
-            },
-            "pdf": {
-              "name": "06_samco_pco_15_pro_lah_15_labour_hours.pdf",
-              "bytes": 3265,
-              "sha256": "b1133e06956cf56c97d32bbe98354ff2dc4d411373ecc7b962c2dfb9f2a8d5bb"
-            },
-            "pptx": {
-              "name": "06_samco_pco_15_pro_lah_15_labour_hours.pptx",
-              "bytes": 30708,
-              "sha256": "995a8b14073aab70efdadbd16bc0c43534ab5b0fdf4fd56ddd2839bc607b1da6"
-            }
-          }
-        },
-        "critical_path": {
-          "code": "PRO-CPM-16",
-          "title": "Critical Path",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_16_pro_cpm_16_critical_path.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_16_pro_cpm_16_critical_path.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_16_pro_cpm_16_critical_path.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_16_pro_cpm_16_critical_path.html",
-              "bytes": 9151,
-              "sha256": "37e8b1dfc0e7d376451d103545e004704ee86c47bf18bf0df99f0d1eaa6c4937"
-            },
-            "pdf": {
-              "name": "06_samco_pco_16_pro_cpm_16_critical_path.pdf",
-              "bytes": 3355,
-              "sha256": "bebebbd21fbbc99449d85331b7a418d6697848f354968e239e9c8bd989fbc670"
-            },
-            "pptx": {
-              "name": "06_samco_pco_16_pro_cpm_16_critical_path.pptx",
-              "bytes": 30756,
-              "sha256": "b0fd1d169b21234ad52160f8e6282865138c4cbcf707d42a7e8aded7d2a432c7"
-            }
-          }
-        },
-        "float": {
-          "code": "PRO-FLT-17",
-          "title": "Float Analysis",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_17_pro_flt_17_float_analysis.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_17_pro_flt_17_float_analysis.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_17_pro_flt_17_float_analysis.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_17_pro_flt_17_float_analysis.html",
-              "bytes": 9154,
-              "sha256": "3294c8d0958fab24ddec95c53c65834c2bf53c6fefaf24529db949e10304acef"
-            },
-            "pdf": {
-              "name": "06_samco_pco_17_pro_flt_17_float_analysis.pdf",
-              "bytes": 3354,
-              "sha256": "43687e76ed0985f049440fbbf8d46ee59b64c202b2f75aedd8a9ddbb87bde42b"
-            },
-            "pptx": {
-              "name": "06_samco_pco_17_pro_flt_17_float_analysis.pptx",
-              "bytes": 30756,
-              "sha256": "0c8062991cd78fc777769a0ffe7aaf168ae59822dfd3802c11929c862bba00ab"
-            }
-          }
-        },
-        "milestone": {
-          "code": "PRO-MIL-18",
-          "title": "Milestone Status",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_18_pro_mil_18_milestone_status.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_18_pro_mil_18_milestone_status.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_18_pro_mil_18_milestone_status.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_18_pro_mil_18_milestone_status.html",
-              "bytes": 4130,
-              "sha256": "811abf9ffef5df9d697192d0c2891ed361583ba098e02df04b7618f33e291bc3"
-            },
-            "pdf": {
-              "name": "06_samco_pco_18_pro_mil_18_milestone_status.pdf",
-              "bytes": 2650,
-              "sha256": "fdc488d72f105ff255f5de217c8d34936f26a31708e48888fc93d625eb4be4f5"
-            },
-            "pptx": {
-              "name": "06_samco_pco_18_pro_mil_18_milestone_status.pptx",
-              "bytes": 30417,
-              "sha256": "719cd96a85701bed9620b407d3739fbd9308c223d96229b1638daec6ff57eb43"
-            }
-          }
-        },
-        "risk": {
-          "code": "PRO-RSK-19",
-          "title": "Risk Report",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_19_pro_rsk_19_risk_report.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_19_pro_rsk_19_risk_report.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_19_pro_rsk_19_risk_report.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_19_pro_rsk_19_risk_report.html",
-              "bytes": 4087,
-              "sha256": "f2ae1bcb61ee152ac5860600dc3a71d84f459aebe0b0a1f2123dec9e926490ae"
-            },
-            "pdf": {
-              "name": "06_samco_pco_19_pro_rsk_19_risk_report.pdf",
-              "bytes": 2614,
-              "sha256": "559335ca7bcd47e87d6ed7f303a90bb24a978f0f048b5ea0af0cdb7793ed00af"
-            },
-            "pptx": {
-              "name": "06_samco_pco_19_pro_rsk_19_risk_report.pptx",
-              "bytes": 30412,
-              "sha256": "27b21b5dfbb58b92feaadd155847a31199445f814a29650c29873f49c7a42352"
-            }
-          }
-        },
-        "rfi_submittal": {
-          "code": "PRO-RFI-20",
-          "title": "RFI & Submittals",
-          "status": "AWAITING CONTROLLED CSV DATA",
-          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
-              "bytes": 3220,
-              "sha256": "affc9835041a8c85c47778c3a60aa0deab108cbccc02ff0c5cb1d69868a3cad8"
-            },
-            "pdf": {
-              "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
-              "bytes": 2166,
-              "sha256": "df429ab6d0b4aeb8162f49cb2691882194b61dd5d97300b9685045743cf0465c"
-            },
-            "pptx": {
-              "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx",
-              "bytes": 30037,
-              "sha256": "dd0a8acdf319e33d48227ced8432689246aec08cae7e94b95ebee33eb6b78b2c"
-            }
-          }
-        },
-        "qaqc": {
-          "code": "PRO-QAQC-21",
-          "title": "QA/QC Performance",
-          "status": "AWAITING CONTROLLED CSV DATA",
-          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
-              "bytes": 3169,
-              "sha256": "a7f4d9189ed80e45cda4e0b6cf2ba7cfc2159429de0480f8932e8424205a2bfc"
-            },
-            "pdf": {
-              "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
-              "bytes": 2059,
-              "sha256": "a2b56fc972502ceff1e0dea64a69a5d835958f1611fb906ed5135b8bacf60707"
-            },
-            "pptx": {
-              "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx",
-              "bytes": 29995,
-              "sha256": "50663fb707b27b94cc3fd2399f6c083b7fba1eed23b958d46b73055fd22417fe"
-            }
-          }
-        },
-        "productivity": {
-          "code": "PRO-PROD-22",
-          "title": "Productivity",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_22_pro_prod_22_productivity.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_22_pro_prod_22_productivity.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_22_pro_prod_22_productivity.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_22_pro_prod_22_productivity.html",
-              "bytes": 9198,
-              "sha256": "610dd75cab55e6b5a86a41a7524e40257156cbd6d857b8e5fc6fb379deb8a8eb"
-            },
-            "pdf": {
-              "name": "06_samco_pco_22_pro_prod_22_productivity.pdf",
-              "bytes": 3364,
-              "sha256": "9c16ba71e377c414751391db374daca4369e281fada40653c9ea72487492e51f"
-            },
-            "pptx": {
-              "name": "06_samco_pco_22_pro_prod_22_productivity.pptx",
-              "bytes": 30724,
-              "sha256": "459d8ed8ddf15c7b34653179d9a95670c0b78c18ee3456292d1db4a16c266903"
-            }
-          }
-        },
-        "executive": {
-          "code": "PRO-EXE-23",
-          "title": "Executive Report",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_23_pro_exe_23_executive_report.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_23_pro_exe_23_executive_report.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_23_pro_exe_23_executive_report.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_23_pro_exe_23_executive_report.html",
-              "bytes": 4222,
-              "sha256": "70bdd8123010086887c6e5d70b77006ff647e4378e7b371fe34292115ca8aeb7"
-            },
-            "pdf": {
-              "name": "06_samco_pco_23_pro_exe_23_executive_report.pdf",
-              "bytes": 2710,
-              "sha256": "79a8a1d5329cf142f9e974e893cad683a6d9fe0182cd2768b497c900620fe54c"
-            },
-            "pptx": {
-              "name": "06_samco_pco_23_pro_exe_23_executive_report.pptx",
-              "bytes": 30370,
-              "sha256": "1d650779de2dd8661bbdd0eba679e5ab15a7fa07eb373ed01b334b5473f54e99"
-            }
-          }
-        },
-        "baseline_current": {
-          "code": "PRO-BLC-24",
-          "title": "Baseline vs Current",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
-              "bytes": 9169,
-              "sha256": "5bbddef5c422a2ab250242f96e49298c2f38cc03bd14df693b1a01470d1516a5"
-            },
-            "pdf": {
-              "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
-              "bytes": 3362,
-              "sha256": "a6315f101ea07d047c15636c5c73406b73179ea686d30c1984fc35bb00542dcd"
-            },
-            "pptx": {
-              "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx",
-              "bytes": 30765,
-              "sha256": "f0c970bda97d6edff286a11191699e63f14bce9f2e25f51623200db21df3dab4"
-            }
-          }
-        },
-        "forecast_completion": {
-          "code": "PRO-FCF-25",
-          "title": "Forecast Completion",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_25_pro_fcf_25_forecast_completion.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_25_pro_fcf_25_forecast_completion.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.html",
-              "bytes": 9210,
-              "sha256": "19d2cf0db31b4be3f9c9a2401ddcef02089d95d627086c1acedee46cfda7e456"
-            },
-            "pdf": {
-              "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
-              "bytes": 3378,
-              "sha256": "e86ecf73ac15de597296fbe738669a76edc5661d4cdaa34ca48a926fec50d759"
-            },
-            "pptx": {
-              "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pptx",
-              "bytes": 30730,
-              "sha256": "9bd8000ef7cfc25ee61941530391d795e8bed4690e5a498c9950ea624bde400d"
-            }
-          }
-        },
-        "ml_project_controls": {
-          "code": "PRO-ML-26",
-          "title": "ML Project Controls",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_26_pro_ml_26_ml_project_controls.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_26_pro_ml_26_ml_project_controls.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.html",
-              "bytes": 9299,
-              "sha256": "7b4260b5f1f8c9e3c408e018288d9441c3f6fc4e663a6a7e5888467b1847b34d"
-            },
-            "pdf": {
-              "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
-              "bytes": 3422,
-              "sha256": "c6e5dae3e0d56d3f37ee700c19cb2a19b4cb010f37e0bd9f3cf7bca67f8af1a9"
-            },
-            "pptx": {
-              "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pptx",
-              "bytes": 30748,
-              "sha256": "ff5b58ecec225e587f181b6064eb6abc604f379f1f35899825ffe3bfef5fdb33"
-            }
-          }
-        },
-        "contract_admin": {
-          "code": "PRO-CAD-27",
-          "title": "Contract Administration",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_27_pro_cad_27_contract_administration.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_27_pro_cad_27_contract_administration.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_27_pro_cad_27_contract_administration.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_27_pro_cad_27_contract_administration.html",
-              "bytes": 3997,
-              "sha256": "7892927b959aa81123b013e251a4e4c67367293dd4fd55082ede87ad2df3c918"
-            },
-            "pdf": {
-              "name": "06_samco_pco_27_pro_cad_27_contract_administration.pdf",
-              "bytes": 2552,
-              "sha256": "c8bf695f927a0c42041b76672bce51035d3526338ec3d68775e6849be9e0c37d"
-            },
-            "pptx": {
-              "name": "06_samco_pco_27_pro_cad_27_contract_administration.pptx",
-              "bytes": 30374,
-              "sha256": "057788325774d8e1414d837910e570f837aa979d0c5e68330a66e46b42b9ef98"
-            }
-          }
-        },
-        "change_control": {
-          "code": "PRO-CHG-28",
-          "title": "Change Control",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_28_pro_chg_28_change_control.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_28_pro_chg_28_change_control.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_28_pro_chg_28_change_control.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_28_pro_chg_28_change_control.html",
-              "bytes": 3962,
-              "sha256": "4eac5f2fb860d11b1a5eb30197b2d9aaf309967083f2cddfc3918f72f69967ba"
-            },
-            "pdf": {
-              "name": "06_samco_pco_28_pro_chg_28_change_control.pdf",
-              "bytes": 2520,
-              "sha256": "85afe85609d979af11ec39f21d1979887a7b65fa8dccde5bb1e7a2ac00936f09"
-            },
-            "pptx": {
-              "name": "06_samco_pco_28_pro_chg_28_change_control.pptx",
-              "bytes": 30346,
-              "sha256": "f01390652519a055fbf1cc4b5961dc8958cd87f3776c367e031ab25c15ded0af"
-            }
-          }
-        },
-        "document_control": {
-          "code": "PRO-DOC-29",
-          "title": "Document Control",
-          "status": "AWAITING CONTROLLED CSV DATA",
-          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_29_pro_doc_29_document_control.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_29_pro_doc_29_document_control.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_29_pro_doc_29_document_control.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_29_pro_doc_29_document_control.html",
-              "bytes": 3162,
-              "sha256": "f0bcc5b4fb74b53c7241a01e192e6a9ba4013c7b423d0ec86ee83a4990c9f3e2"
-            },
-            "pdf": {
-              "name": "06_samco_pco_29_pro_doc_29_document_control.pdf",
-              "bytes": 2054,
-              "sha256": "e20b6a0fe778c502dbb05b903fa10efc882be932718dc3c120a8f957747f9c95"
-            },
-            "pptx": {
-              "name": "06_samco_pco_29_pro_doc_29_document_control.pptx",
-              "bytes": 29983,
-              "sha256": "d8315a43d05df69777b6e27cb4880710f5217f33bcbb0c7d02094063ad2add13"
-            }
-          }
-        },
-        "interface_management": {
-          "code": "PRO-IFC-30",
-          "title": "Interface Management",
-          "status": "AWAITING CONTROLLED CSV DATA",
-          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-          "artifacts": {
-            "html": "/generated/Nasr-city-Tunnel/06_samco_pco_30_pro_ifc_30_interface_management.html",
-            "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_30_pro_ifc_30_interface_management.pdf",
-            "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_30_pro_ifc_30_interface_management.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_30_pro_ifc_30_interface_management.html",
-              "bytes": 3222,
-              "sha256": "3f2f1928bc9b16c541f6d9251ebc5df36e30ed5fa285e9586f3c783e31e3defb"
-            },
-            "pdf": {
-              "name": "06_samco_pco_30_pro_ifc_30_interface_management.pdf",
-              "bytes": 2166,
-              "sha256": "136b2dd1704bf078ed58030116f890b774f945beb4f716b16e8d168117481cd0"
-            },
-            "pptx": {
-              "name": "06_samco_pco_30_pro_ifc_30_interface_management.pptx",
-              "bytes": 30033,
-              "sha256": "c599a3f6ba6a44099cc274cf9f4abd593eeece803fec518fa65a6e63a9af3524"
-            }
-          }
-        }
-      },
-      "source_project_id": "Nasr city-Tunnel",
-      "source_report_fingerprint": "c30ee352e408d5036360d0c0b3ccf7e7f3cb158d41ea3d4ba035c0053962c53e",
-      "generator": {
-        "name": "SAMCO-PCO Report Generator",
-        "mode": "data-driven project CSV adapter",
-        "template_sha256": "11ca0efc7649dc04361cc47fa80c473c1d0fe4251420113fc00e79c47d547aed",
-        "version": "2026.08.samco-pco-data-driven.v1"
-      }
+      "source_report_fingerprint": "e6862eba7606818245f40a2269f1f613191174d94df2091f62f29a7a0a74f774"
     }
   },
   "universal_report_engine": {
     "project_id": "Nasr city-Tunnel",
     "project_key": "nasr-city-tunnel",
-    "source_fingerprint": "b4f55059d84043e4134eb483c14bc66771968bfd1c005cd626d2f3ff776642b5",
+    "source_fingerprint": "69a41e6009997fff0e7950617a4e4c3caa09ff13c3c8c1ebc81ef94c83987ba1",
     "source_scope": "active project folder only",
-    "source_file_count": 30,
+    "source_file_count": 33,
     "source_inventory": [
       {
         "relative_path": "01-data/import_templates/01_project_contract.csv",
@@ -9273,10 +7236,28 @@
         "sha256": "d96c372a27bf975e42cda4c8665a70df82c62fedb25df1bfabb0fd66e1adac8c"
       },
       {
+        "relative_path": "01-data/import_templates/planned_cash_flow.csv",
+        "extension": ".csv",
+        "size_bytes": 126,
+        "sha256": "939013ded9fd937a507cfdb493df74b1b490b09277184ef4d7f4de57275c0864"
+      },
+      {
         "relative_path": "02-delay_analysis/methodology/TIA methodology.docx",
         "extension": ".docx",
         "size_bytes": 3699219,
         "sha256": "13c9567516bfdd4e14376a595de426c0abb2e892505d0bdb52db7c148c86735f"
+      },
+      {
+        "relative_path": "02-delay_analysis/unified_tia_csv/14-delay_event_classification.csv",
+        "extension": ".csv",
+        "size_bytes": 204,
+        "sha256": "ae95fac637a5a4cc21519fe9cff117c4957586c33a34b2242816d6457df0409d"
+      },
+      {
+        "relative_path": "02-delay_analysis/unified_tia_csv/15-tia_recovery_scenario.csv",
+        "extension": ".csv",
+        "size_bytes": 357,
+        "sha256": "186b52e9473e855acbc9918e329ddedc09a076284849e5329bdcf2ef25d176c6"
       },
       {
         "relative_path": "03-schedule/BL critical path.csv",
@@ -9389,16 +7370,16 @@
       {
         "relative_path": "project_manifest.json",
         "extension": ".json",
-        "size_bytes": 384,
-        "sha256": "767387ef496b1c2127374f9eb95868e6b88b18031046cb94f6c52c505de8e1a4"
+        "size_bytes": 367,
+        "sha256": "c4d0316ded6152151cfb4a59c592dc2764f5b6f8ed98b7482fc4d08213bc3675"
       }
     ],
     "engine": {
-      "available": false,
+      "available": true,
       "runtime_location": "local controlled runtime",
       "package_name": "Universal Project Report Engine",
       "package_version": "2.0.0",
-      "wrapper_version": null,
+      "wrapper_version": "3.1.0",
       "author": "Eng. Ahmed Labib",
       "attribution": "Python AI Programming by Eng. Ahmed Labib",
       "rules": null,
@@ -9416,16 +7397,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "delay",
@@ -9436,16 +7413,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_02_pro_dly_02_delay_analysis.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_02_pro_dly_02_delay_analysis.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "progress",
@@ -9456,16 +7429,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_03_pro_prg_03_project_progress.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_03_pro_prg_03_project_progress.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_03_pro_prg_03_project_progress.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "recovery",
@@ -9476,16 +7445,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "variation",
@@ -9496,16 +7461,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_05_pro_var_05_variation_report.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_05_pro_var_05_variation_report.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_05_pro_var_05_variation_report.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "hybrid",
@@ -9515,16 +7476,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_06_pro_ipc_06_interim_payment.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_06_pro_ipc_06_interim_payment.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "resource",
@@ -9535,16 +7492,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_07_pro_res_07_resource_manpower.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_07_pro_res_07_resource_manpower.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_07_pro_res_07_resource_manpower.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "equipment",
@@ -9554,16 +7507,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_08_pro_eqp_08_equipment_plant.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_08_pro_eqp_08_equipment_plant.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "AWAITING CONTROLLED CSV DATA"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "cost",
@@ -9573,16 +7522,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_09_pro_cst_09_cost_control.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_09_pro_cst_09_cost_control.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_09_pro_cst_09_cost_control.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "evm",
@@ -9592,16 +7537,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_10_pro_evm_10_earned_value.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_10_pro_evm_10_earned_value.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_10_pro_evm_10_earned_value.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "cashflow",
@@ -9611,16 +7552,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_11_pro_cfs_11_cash_flow.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_11_pro_cfs_11_cash_flow.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "scurve",
@@ -9630,16 +7567,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_12_pro_scv_12_s_curve.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_12_pro_scv_12_s_curve.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_12_pro_scv_12_s_curve.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "procurement",
@@ -9650,16 +7583,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_13_pro_prc_13_procurement_status.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_13_pro_prc_13_procurement_status.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_13_pro_prc_13_procurement_status.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "material",
@@ -9669,16 +7598,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_14_pro_mat_14_material_status.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_14_pro_mat_14_material_status.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_14_pro_mat_14_material_status.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "lookahead",
@@ -9689,16 +7614,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_15_pro_lah_15_labour_hours.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_15_pro_lah_15_labour_hours.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_15_pro_lah_15_labour_hours.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "critical_path",
@@ -9709,16 +7630,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_16_pro_cpm_16_critical_path.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_16_pro_cpm_16_critical_path.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_16_pro_cpm_16_critical_path.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "float",
@@ -9729,16 +7646,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_17_pro_flt_17_float_analysis.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_17_pro_flt_17_float_analysis.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_17_pro_flt_17_float_analysis.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "milestone",
@@ -9749,16 +7662,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_18_pro_mil_18_milestone_status.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_18_pro_mil_18_milestone_status.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_18_pro_mil_18_milestone_status.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "risk",
@@ -9768,16 +7677,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_19_pro_rsk_19_risk_report.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_19_pro_rsk_19_risk_report.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_19_pro_rsk_19_risk_report.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "rfi_submittal",
@@ -9788,16 +7693,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "AWAITING CONTROLLED CSV DATA"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "qaqc",
@@ -9807,16 +7708,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "AWAITING CONTROLLED CSV DATA"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "productivity",
@@ -9826,16 +7723,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_22_pro_prod_22_productivity.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_22_pro_prod_22_productivity.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_22_pro_prod_22_productivity.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "executive",
@@ -9845,16 +7738,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_23_pro_exe_23_executive_report.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_23_pro_exe_23_executive_report.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_23_pro_exe_23_executive_report.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "baseline_current",
@@ -9865,16 +7754,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "forecast_completion",
@@ -9885,16 +7770,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_25_pro_fcf_25_forecast_completion.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_25_pro_fcf_25_forecast_completion.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "ml_project_controls",
@@ -9904,16 +7785,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_26_pro_ml_26_ml_project_controls.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_26_pro_ml_26_ml_project_controls.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "contract_admin",
@@ -9923,16 +7800,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_27_pro_cad_27_contract_administration.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_27_pro_cad_27_contract_administration.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_27_pro_cad_27_contract_administration.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "change_control",
@@ -9942,16 +7815,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_28_pro_chg_28_change_control.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_28_pro_chg_28_change_control.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_28_pro_chg_28_change_control.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "document_control",
@@ -9961,16 +7830,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_29_pro_doc_29_document_control.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_29_pro_doc_29_document_control.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_29_pro_doc_29_document_control.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "AWAITING CONTROLLED CSV DATA"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "interface_management",
@@ -9981,23 +7846,19 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-        "artifacts": {
-          "html": "/generated/Nasr-city-Tunnel/06_samco_pco_30_pro_ifc_30_interface_management.html",
-          "pdf": "/generated/Nasr-city-Tunnel/06_samco_pco_30_pro_ifc_30_interface_management.pdf",
-          "pptx": "/generated/Nasr-city-Tunnel/06_samco_pco_30_pro_ifc_30_interface_management.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:21+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "AWAITING CONTROLLED CSV DATA"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       }
     ],
     "summary": {
       "catalog_count": 30,
-      "generated_count": 30,
+      "generated_count": 0,
       "draft_review_count": 0,
-      "ready_count": 0,
+      "ready_count": 30,
       "blocked_count": 0
     },
     "ml_capability": {
@@ -10083,12 +7944,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-15T06:50:24+00:00",
-    "overall_artifacts": {
-      "html": "/generated/Nasr-city-Tunnel/05_samco_pco_31_slide_report.html",
-      "pdf": "/generated/Nasr-city-Tunnel/05_samco_pco_31_slide_report.pdf",
-      "pptx": "/generated/Nasr-city-Tunnel/05_samco_pco_31_slide_report.pptx",
-      "package_zip": "/generated/Nasr-city-Tunnel/06_samco_pco_complete_project_report_package.zip"
-    }
+    "updated_at": "2026-08-15T15:39:33+00:00"
   }
 }

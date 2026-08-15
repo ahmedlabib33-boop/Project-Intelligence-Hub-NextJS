@@ -34,6 +34,7 @@ $statePath = Join-Path $root ".sync_state\vercel_project_pipeline_state.json"
 $script:WatchMutex = $null
 $script:WatchMutexAcquired = $false
 $script:WatchHashCache = @{}
+$script:WorkspaceFileWatcher = $null
 
 New-Item -ItemType Directory -Force -Path (Split-Path -Parent $logPath), (Split-Path -Parent $statePath) | Out-Null
 
@@ -46,8 +47,8 @@ if (-not (Test-Path -LiteralPath (Join-Path $canonicalRoot "projects"))) {
     throw "Canonical project source is missing its projects folder: $canonicalRoot"
 }
 
-if ($IntervalSeconds -lt 10) {
-    $IntervalSeconds = 10
+if ($IntervalSeconds -lt 3) {
+    $IntervalSeconds = 3
 }
 
 if ([string]::IsNullOrWhiteSpace($PublicUrl)) {
@@ -94,7 +95,7 @@ function Get-RelativePath([string]$FullName) {
 function Test-TrackedPath([string]$FullName) {
     $relative = Get-RelativePath $FullName
     $lower = $relative.ToLowerInvariant()
-    if ($lower -match '(^|/)(\.git|\.next|node_modules|\.vercel|11-outputs|12-logs|backups|\.sync_state|__pycache__)(/|$)') { return $false }
+    if ($lower -match '(^|/)(\.git|\.next|node_modules|\.vercel|\.venv|\.venv-analytics|venv|__pycache__|\.pytest_cache|\.mypy_cache|\.ruff_cache|\.tmp|\.pip-cache|\.pip-tmp|11-outputs|12-logs|backups|\.sync_state|out)(/|$)') { return $false }
     if ($lower -match '^website/public/(data|generated)(/|$)') { return $false }
     if ($lower -match '^website/src/generated(/|$)') { return $false }
     if ($lower -eq 'website/next-env.d.ts') { return $false }
@@ -103,51 +104,37 @@ function Test-TrackedPath([string]$FullName) {
     if ($lower -match '(^|/)05-contracts/contract_claims\.db$') { return $false }
     # Local preview logs and TypeScript build state are generated artifacts, not source changes.
     if ($lower -match '\.(log|tsbuildinfo)$') { return $false }
-    if ($lower -match '(^|/)(\.env|\.env\.local)$') { return $false }
+    $name = [System.IO.Path]::GetFileName($FullName)
+    if ($name -like '.env*' -or $name -like '*.token' -or $name -like '*.secret' -or $name -like '*.pem' -or $name -like '*.key') { return $false }
     return $true
 }
 
 function Get-WatchedItems {
     $items = New-Object System.Collections.Generic.List[object]
-    $watchRoots = @(
-        (Join-Path $canonicalRoot "projects"),
-        (Join-Path $canonicalRoot "src"),
-        (Join-Path $canonicalRoot "dashboard.py"),
-        (Join-Path $websiteRoot "src"),
-        (Join-Path $websiteRoot "public"),
-        $generatorPath,
-        $validatorPath,
-        $chartPayloadPath,
-        $reportArtifactsPath,
-        $chartCatalogPath,
-        (Join-Path $PSScriptRoot "pih_data_guardrails.py"),
-        $PSCommandPath,
-        (Join-Path $root "analytics\requirements-advanced.txt"),
-        $githubSyncPath,
-        (Join-Path $PSScriptRoot "github_sync_config.json"),
-        (Join-Path $websiteRoot "package.json"),
-        (Join-Path $websiteRoot "package-lock.json"),
-        (Join-Path $websiteRoot "next.config.js"),
-        (Join-Path $websiteRoot "vercel.json")
-    )
-
-    foreach ($watchRoot in $watchRoots) {
-        if (-not (Test-Path -LiteralPath $watchRoot)) { continue }
-        $item = Get-Item -LiteralPath $watchRoot
-        if ($item.PSIsContainer) {
-            foreach ($directory in (Get-ChildItem -LiteralPath $item.FullName -Recurse -Directory -Force -ErrorAction SilentlyContinue)) {
-                if (Test-TrackedPath $directory.FullName) {
-                    $items.Add([PSCustomObject]@{ Type = 'D'; FullName = $directory.FullName; RelativePath = Get-RelativePath $directory.FullName; Length = 0; Modified = $directory.LastWriteTimeUtc.Ticks })
-                }
-            }
-            foreach ($file in (Get-ChildItem -LiteralPath $item.FullName -Recurse -File -Force -ErrorAction SilentlyContinue)) {
-                if (Test-TrackedPath $file.FullName) {
-                    $items.Add([PSCustomObject]@{ Type = 'F'; FullName = $file.FullName; RelativePath = Get-RelativePath $file.FullName; Length = $file.Length; Modified = $file.LastWriteTimeUtc.Ticks })
-                }
-            }
+    # Enumerate one directory at a time. Excluded generated folders are never
+    # entered, so a three-second poll does not scan node_modules or Python venvs.
+    $pending = New-Object System.Collections.Generic.Stack[string]
+    $pending.Push($canonicalRoot)
+    while ($pending.Count -gt 0) {
+        $currentDirectory = $pending.Pop()
+        try {
+            $children = Get-ChildItem -LiteralPath $currentDirectory -Force -ErrorAction Stop
         }
-        elseif (Test-TrackedPath $item.FullName) {
-            $items.Add([PSCustomObject]@{ Type = 'F'; FullName = $item.FullName; RelativePath = Get-RelativePath $item.FullName; Length = $item.Length; Modified = $item.LastWriteTimeUtc.Ticks })
+        catch {
+            Write-PipelineLog "Skipped unreadable directory while watching: $(Get-RelativePath $currentDirectory)"
+            continue
+        }
+        foreach ($item in $children) {
+            if (-not (Test-TrackedPath $item.FullName)) { continue }
+            if ($item.PSIsContainer) {
+                # Never follow junctions/symlinks outside the canonical workspace.
+                if (($item.Attributes -band [System.IO.FileAttributes]::ReparsePoint) -ne 0) { continue }
+                $items.Add([PSCustomObject]@{ Type = 'D'; FullName = $item.FullName; RelativePath = Get-RelativePath $item.FullName; Length = 0; Modified = $item.LastWriteTimeUtc.Ticks })
+                $pending.Push($item.FullName)
+            }
+            else {
+                $items.Add([PSCustomObject]@{ Type = 'F'; FullName = $item.FullName; RelativePath = Get-RelativePath $item.FullName; Length = $item.Length; Modified = $item.LastWriteTimeUtc.Ticks })
+            }
         }
     }
     return @($items | Sort-Object Type, RelativePath -Unique)
@@ -254,28 +241,48 @@ function Write-PipelineState([string]$Fingerprint) {
     $state | ConvertTo-Json | Set-Content -LiteralPath $statePath -Encoding utf8
 }
 
+function New-WorkspaceFileWatcher {
+    $watcher = New-Object System.IO.FileSystemWatcher
+    $watcher.Path = $canonicalRoot
+    $watcher.IncludeSubdirectories = $true
+    $watcher.NotifyFilter = [System.IO.NotifyFilters]::FileName -bor [System.IO.NotifyFilters]::DirectoryName -bor [System.IO.NotifyFilters]::LastWrite -bor [System.IO.NotifyFilters]::Size
+    $watcher.InternalBufferSize = 65536
+    $watcher.EnableRaisingEvents = $true
+    return $watcher
+}
+
 function Test-WatcherDetection {
     $before = Get-WatchedFingerprint
-    $probeDirectory = Join-Path $canonicalRoot "projects\_pipeline_watcher_probe"
+    $probeDirectory = Join-Path $canonicalRoot "_pipeline_watcher_probe"
     $probeFile = Join-Path $probeDirectory "probe.txt"
     try {
         New-Item -ItemType Directory -Force -Path $probeDirectory | Out-Null
         [System.IO.File]::WriteAllText($probeFile, "Pipeline watcher probe $(Get-Date -Format o)", [System.Text.UTF8Encoding]::new($false))
-        $during = Get-WatchedFingerprint
-        if ($before -eq $during) {
-            throw "Pipeline watcher did not detect a new project-folder file."
+        $added = Get-WatchedFingerprint
+        if ($before -eq $added) {
+            throw "Pipeline watcher did not detect a new root-level folder and file."
+        }
+        [System.IO.File]::AppendAllText($probeFile, "`nchanged", [System.Text.UTF8Encoding]::new($false))
+        $edited = Get-WatchedFingerprint
+        if ($added -eq $edited) {
+            throw "Pipeline watcher did not detect an in-file content change."
         }
     }
     finally {
         if (Test-Path -LiteralPath $probeDirectory) {
+            $beforeDeletion = Get-WatchedFingerprint
             Remove-Item -LiteralPath $probeDirectory -Recurse -Force
+            $afterDeletion = Get-WatchedFingerprint
+            if ($beforeDeletion -eq $afterDeletion) {
+                throw "Pipeline watcher did not detect removal of a root-level folder and file."
+            }
         }
     }
     $after = Get-WatchedFingerprint
     if ($before -ne $after) {
         throw "Pipeline watcher probe did not restore the original workspace fingerprint."
     }
-    Write-PipelineLog "PASS watcher detection test: new project-folder files and folders are detected."
+    Write-PipelineLog "PASS watcher detection test: root-level file/folder additions, in-file edits, and deletions are detected."
 }
 
 function Invoke-PublishPipeline {
@@ -376,18 +383,35 @@ try {
             else {
                 $lastFingerprint = Invoke-PublishPipeline
             }
-            Write-PipelineLog "Watcher active. Polling tracked code and project folders every $IntervalSeconds seconds."
+            $script:WorkspaceFileWatcher = New-WorkspaceFileWatcher
+            $lastSafetyScan = [DateTime]::UtcNow
+            $safetyScanSeconds = [Math]::Max(60, $IntervalSeconds * 20)
+            Write-PipelineLog "Watcher active. Windows event detection is immediate; a $safetyScanSeconds-second full scan is the missed-event safety fallback."
             while ($true) {
-                Start-Sleep -Seconds $IntervalSeconds
-                $currentFingerprint = Get-WatchedFingerprint
-                if ($currentFingerprint -eq $lastFingerprint) { continue }
-                Write-PipelineLog "Change detected in tracked project or website source. Starting validated publish pipeline."
+                $change = $script:WorkspaceFileWatcher.WaitForChanged([System.IO.WatcherChangeTypes]::All, 1000)
+                $publishRequired = $false
+                if (-not $change.TimedOut -and (Test-TrackedPath $change.FullPath)) {
+                    Write-PipelineLog "Filesystem event detected: $($change.ChangeType) $(Get-RelativePath $change.FullPath)"
+                    $publishRequired = $true
+                }
+                if (-not $publishRequired -and (([DateTime]::UtcNow - $lastSafetyScan).TotalSeconds -ge $safetyScanSeconds)) {
+                    $lastSafetyScan = [DateTime]::UtcNow
+                    $currentFingerprint = Get-WatchedFingerprint
+                    if ($currentFingerprint -ne $lastFingerprint) {
+                        Write-PipelineLog "Safety scan detected a tracked source change."
+                        $publishRequired = $true
+                    }
+                }
+                if (-not $publishRequired) { continue }
+                # Coalesce a save operation that produces several filesystem events.
+                Start-Sleep -Milliseconds 750
                 try {
                     $lastFingerprint = Invoke-PublishPipeline
+                    $lastSafetyScan = [DateTime]::UtcNow
                 }
                 catch {
                     Write-PipelineLog "Pipeline failed: $($_.Exception.Message)"
-                    Write-PipelineLog "The watcher will retry on the next polling cycle."
+                    Write-PipelineLog "The watcher will retry on the next source event or safety scan."
                 }
             }
         }
@@ -398,6 +422,9 @@ catch {
     exit 1
 }
 finally {
+    if ($null -ne $script:WorkspaceFileWatcher) {
+        $script:WorkspaceFileWatcher.Dispose()
+    }
     if ($null -ne $script:WatchMutex) {
         if ($script:WatchMutexAcquired) {
             $script:WatchMutex.ReleaseMutex() | Out-Null

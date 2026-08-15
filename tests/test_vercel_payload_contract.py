@@ -61,7 +61,7 @@ def test_generated_project_payloads_keep_identity_tia_and_artifacts_scoped() -> 
             "READY_AND_CALCULATED",
         }
         assert controlled_tia["workflow_tabs"] == [
-            "Source Integrity",
+            "Time Impact Methodology",
             "Schedule and CPM",
             "Events and Fragnets",
             "Concurrency and Entitlement",
@@ -81,6 +81,23 @@ def test_generated_project_payloads_keep_identity_tia_and_artifacts_scoped() -> 
             assert exhibit["project_key"] == payload["project_key"]
             assert exhibit["url"].startswith(f"/generated/{project_slug}/tia-controlled-event-exhibits/")
             assert "source_relative_path" not in exhibit
+            exhibit_path = ROOT / "website" / "public" / exhibit["url"].lstrip("/")
+            assert exhibit_path.exists()
+            assert exhibit_path.stat().st_size > 0
+
+        view_exhibits = controlled_tia.get("view_exhibits", [])
+        if payload["project_id"] == "The Big -P.01-UP-20-April-26":
+            assert [item.get("view") for item in view_exhibits] == [
+                "Time Impact Methodology",
+                "Concurrency and Entitlement",
+                "EOT Position",
+            ]
+        else:
+            assert view_exhibits == []
+        for exhibit in view_exhibits:
+            assert exhibit["project_id"] == payload["project_id"]
+            assert exhibit["project_key"] == payload["project_key"]
+            assert exhibit["url"].startswith(f"/generated/{project_slug}/tia-controlled-view-exhibits/")
             exhibit_path = ROOT / "website" / "public" / exhibit["url"].lstrip("/")
             assert exhibit_path.exists()
             assert exhibit_path.stat().st_size > 0

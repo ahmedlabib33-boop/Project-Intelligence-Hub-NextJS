@@ -1,12 +1,12 @@
 {
-  "engine": "2026.08.controlled-project-tia.v2.1",
+  "engine": "2026.08.controlled-project-tia.v2.2",
   "project_id": "The Big -P.01-UP-20-April-26",
   "project_key": "the-big-p-01-up-20-april-26",
-  "status": "RECONCILIATION_REQUIRED",
+  "status": "CONDITIONAL_RESULT",
   "approval_status": "submitted_position_pending_p6_verification",
-  "message": "The submitted EOT register contains evidence or arithmetic reconciliation findings.",
+  "message": "The approved submitted EOT position is published with P6 verification gates.",
   "workflow_tabs": [
-    "Source Integrity",
+    "Time Impact Methodology",
     "Schedule and CPM",
     "Events and Fragnets",
     "Concurrency and Entitlement",
@@ -16,46 +16,46 @@
   "source_integrity": {
     "release_configured": true,
     "release_type": "approved_eot_submission_archive",
-    "release_path": "D:\\Project Intelligence Hub NextJS-minimize-release\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission",
+    "release_path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission",
     "archive": {
       "file": "Sub02-Delay Analysis (TIA) - Workbook to dashboard.rar",
-      "path": "D:\\Project Intelligence Hub NextJS-minimize-release\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\Sub02-Delay Analysis (TIA) - Workbook to dashboard.rar",
+      "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\Sub02-Delay Analysis (TIA) - Workbook to dashboard.rar",
       "required": true,
-      "exists": false,
-      "sha256": null,
-      "size_bytes": 0,
+      "exists": true,
+      "sha256": "8c4d95fe6af8c4ae4a54ce26b803d68b30494c13baba36e439960a178492bbee",
+      "size_bytes": 56693839,
       "expected_sha256": "8c4d95fe6af8c4ae4a54ce26b803d68b30494c13baba36e439960a178492bbee",
-      "integrity": "failed",
-      "message": "Archive hash does not match the approved submission register."
+      "integrity": "verified",
+      "message": "Archive hash matches the approved submission register."
     },
     "files": [
       {
         "file": "Sub02-Delay Analysis (TIA) - Workbook to dashboard.rar",
-        "path": "D:\\Project Intelligence Hub NextJS-minimize-release\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\Sub02-Delay Analysis (TIA) - Workbook to dashboard.rar",
+        "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\Sub02-Delay Analysis (TIA) - Workbook to dashboard.rar",
         "required": true,
-        "exists": false,
-        "sha256": null,
-        "size_bytes": 0
+        "exists": true,
+        "sha256": "8c4d95fe6af8c4ae4a54ce26b803d68b30494c13baba36e439960a178492bbee",
+        "size_bytes": 56693839
       },
       {
         "file": "submission_manifest.json",
-        "path": "D:\\Project Intelligence Hub NextJS-minimize-release\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\submission_manifest.json",
+        "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\submission_manifest.json",
         "required": true,
         "exists": true,
-        "sha256": "7f779ba80445bfb9e51a09bde80f64dc3cd3484af6ef5cd039c6d1084cf3391d",
-        "size_bytes": 11179
+        "sha256": "57225e7fd4be70274ca6c7fa705e405d324a70f1c4984c73eef621919553d6b7",
+        "size_bytes": 11063
       },
       {
         "file": "approved_before_after_fragnet_comparison.csv",
-        "path": "D:\\Project Intelligence Hub NextJS-minimize-release\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\approved_before_after_fragnet_comparison.csv",
+        "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\approved_before_after_fragnet_comparison.csv",
         "required": true,
         "exists": true,
-        "sha256": "06fcba409d1bb108bef12cda67d4a0c27483ba46885fd8337688b09b451385ce",
-        "size_bytes": 4862
+        "sha256": "5368dd6dd7f72648b1f124aabcc686425cc61c3ad4d0b81c97d5ea3fd6bb81c4",
+        "size_bytes": 4849
       },
       {
         "file": "Event_01_Steel_Supply_TIA_EOT_Mapping.png",
-        "path": "D:\\Project Intelligence Hub NextJS-minimize-release\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\Event_01_Steel_Supply_TIA_EOT_Mapping.png",
+        "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\Event_01_Steel_Supply_TIA_EOT_Mapping.png",
         "required": false,
         "exists": true,
         "sha256": "759ae5934ea266f733cdfd4c7a88cfd9edcea5306ddd1b164dfab37f025e980c",
@@ -63,7 +63,7 @@
       },
       {
         "file": "Event_02_IFC_Revised_Drawings_TIA_EOT_Mapping.png",
-        "path": "D:\\Project Intelligence Hub NextJS-minimize-release\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\Event_02_IFC_Revised_Drawings_TIA_EOT_Mapping.png",
+        "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\Event_02_IFC_Revised_Drawings_TIA_EOT_Mapping.png",
         "required": false,
         "exists": true,
         "sha256": "cd4c3dde657bf0630e2ae468407969151b53fe8c702ea2f0cd7cd7ad8f779e1a",
@@ -71,7 +71,7 @@
       },
       {
         "file": "Event_03_MEP_Variation_TIA_EOT_Mapping.png",
-        "path": "D:\\Project Intelligence Hub NextJS-minimize-release\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\Event_03_MEP_Variation_TIA_EOT_Mapping.png",
+        "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\Event_03_MEP_Variation_TIA_EOT_Mapping.png",
         "required": false,
         "exists": true,
         "sha256": "ea96272568d7abf760e3a65b1f49e581aed034a16244ccc4c8bee49f0182e26f",
@@ -79,7 +79,7 @@
       },
       {
         "file": "Event_04_RFI_Delay_TIA_EOT_Mapping.png",
-        "path": "D:\\Project Intelligence Hub NextJS-minimize-release\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\Event_04_RFI_Delay_TIA_EOT_Mapping.png",
+        "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\Event_04_RFI_Delay_TIA_EOT_Mapping.png",
         "required": false,
         "exists": true,
         "sha256": "3f2359727323f4130bb6233fa5b75c45f4bc26493d9eb3dd63d545afb598a6b5",
@@ -87,27 +87,27 @@
       },
       {
         "file": "13_TIA_Methodology_Flowchart.svg",
-        "path": "D:\\Project Intelligence Hub NextJS-minimize-release\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\13_TIA_Methodology_Flowchart.svg",
+        "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\13_TIA_Methodology_Flowchart.svg",
         "required": false,
         "exists": true,
-        "sha256": "d7c2f72fb97c834f603e1961440cf6876d2d2186f8cbfa396077b80058887538",
-        "size_bytes": 137200
+        "sha256": "5f726b61160d9016da0aada1a40faa98b7472af901b8703bc0cced1f9e1eed2d",
+        "size_bytes": 133499
       },
       {
         "file": "07_Concurrency_Overlap_Analysis_Large_Font.svg",
-        "path": "D:\\Project Intelligence Hub NextJS-minimize-release\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\07_Concurrency_Overlap_Analysis_Large_Font.svg",
+        "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\07_Concurrency_Overlap_Analysis_Large_Font.svg",
         "required": false,
         "exists": true,
-        "sha256": "f3e5d832767a294292bc6e3377f051ee3609fb7bb82068a5005ee432b76f149e",
-        "size_bytes": 89409
+        "sha256": "9fd89762c2709fb40abd22e6a79ba2051b2519b21a41883c69b563c9d7e2bc3d",
+        "size_bytes": 86761
       },
       {
         "file": "10_EOT_Summary_Dashboard.svg",
-        "path": "D:\\Project Intelligence Hub NextJS-minimize-release\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\10_EOT_Summary_Dashboard.svg",
+        "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\10_EOT_Summary_Dashboard.svg",
         "required": false,
         "exists": true,
-        "sha256": "bba5179ca66d7dbcbffb8bf5d0778a63aff3a860e733e284350660095f667bae",
-        "size_bytes": 157922
+        "sha256": "3fe6e12ff2c9637e462156211f90ca8e5882060e4e1e04e305a4caa112f4c789",
+        "size_bytes": 153584
       }
     ],
     "inventory": [
@@ -143,8 +143,8 @@
       }
     ],
     "signature": {
-      "status": "hash_failed",
-      "message": "Archive hash does not match the approved submission register."
+      "status": "hash_verified",
+      "message": "Archive hash matches the approved submission register."
     },
     "project_match": true,
     "validation_findings": []
@@ -153,14 +153,14 @@
     {
       "project_id": "The Big -P.01-UP-20-April-26",
       "project_key": "the-big-p-01-up-20-april-26",
-      "view": "Source Integrity",
+      "view": "Time Impact Methodology",
       "title": "Time Impact Analysis Methodology Flowchart",
       "display_order": 1,
       "evidence_use": "Submitted methodology exhibit only",
       "control_note": "This exhibit presents the submitted methodology sequence. The approved before/after comparison matrix remains the authority for active project-finish movement.",
       "source_file": "13_TIA_Methodology_Flowchart.svg",
       "source_relative_path": "exhibits/13_TIA_Methodology_Flowchart.svg",
-      "sha256": "d7c2f72fb97c834f603e1961440cf6876d2d2186f8cbfa396077b80058887538"
+      "sha256": "5f726b61160d9016da0aada1a40faa98b7472af901b8703bc0cced1f9e1eed2d"
     },
     {
       "project_id": "The Big -P.01-UP-20-April-26",
@@ -172,7 +172,7 @@
       "control_note": "The submitted integrated reconciliation remains 117 + 71 - 62 = 126 calendar days. Entitlement and compensation require contract and P6 verification.",
       "source_file": "07_Concurrency_Overlap_Analysis_Large_Font.svg",
       "source_relative_path": "exhibits/07_Concurrency_Overlap_Analysis_Large_Font.svg",
-      "sha256": "f3e5d832767a294292bc6e3377f051ee3609fb7bb82068a5005ee432b76f149e"
+      "sha256": "9fd89762c2709fb40abd22e6a79ba2051b2519b21a41883c69b563c9d7e2bc3d"
     },
     {
       "project_id": "The Big -P.01-UP-20-April-26",
@@ -184,7 +184,7 @@
       "control_note": "The active submitted position is 126 calendar days, subject to Primavera P6 verification and the controlled reconciliation register.",
       "source_file": "10_EOT_Summary_Dashboard.svg",
       "source_relative_path": "exhibits/10_EOT_Summary_Dashboard.svg",
-      "sha256": "bba5179ca66d7dbcbffb8bf5d0778a63aff3a860e733e284350660095f667bae"
+      "sha256": "3fe6e12ff2c9637e462156211f90ca8e5882060e4e1e04e305a4caa112f4c789"
     }
   ],
   "schedule_cpm": {
@@ -1251,9 +1251,9 @@
       "resolution": "Reconciliation-only record. The approved matrix project-finish movement for EV02 is 71 calendar days."
     }
   ],
-  "source_fingerprint": "6a566153309a8772f6f2edd5c7bb7635be32e68688f110726132c553ed852878",
+  "source_fingerprint": "5a5f56f34ef5e21c6c64ec270e5f55ed0cf821fa861f7055ccb90245fe274aa5",
   "automatic_draft": true,
-  "last_run_at": "2026-08-14T03:05:24.139556+00:00",
-  "run_id": "549c68d21700e165",
-  "run_path": "D:\\Project Intelligence Hub NextJS-minimize-release\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\controlled_runs\\latest.json"
+  "last_run_at": "2026-08-09T14:42:16.586883+00:00",
+  "run_id": "6d7b26bd0d09cf1e",
+  "run_path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\controlled_runs\\latest.json"
 }

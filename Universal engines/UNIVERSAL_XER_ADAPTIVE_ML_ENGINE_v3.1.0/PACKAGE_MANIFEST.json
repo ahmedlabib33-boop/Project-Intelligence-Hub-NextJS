@@ -1,0 +1,158 @@
+{
+  "engine": "Universal XER Adaptive ML Schedule Engine",
+  "version": "3.1.0",
+  "author": "Python AI Programming by Eng. Ahmed Labib",
+  "generated_at": "2026-08-11",
+  "files": [
+    {
+      "path": "DEEP_CONFIG.json",
+      "bytes": 664,
+      "sha256": "04f47eba9e7151667d8bd6be0a4a7c54cf7b2653d883bd12d557f7970e439650"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/P6_CHANGE_REGISTER.csv",
+      "bytes": 16989,
+      "sha256": "40cbb9003d13702cb38441eb326a449a8a330221b762753fae3a598731f6ed10"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/REVISED_SCHEDULE_PROPOSAL.csv",
+      "bytes": 419530,
+      "sha256": "5dc4042a16536a1a94ee2758a185b8a5138ca4e21de58e410a893a629bf3f9bf"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/UNIVERSAL_SCHEDULE_ML_REPORT.md",
+      "bytes": 2147,
+      "sha256": "0bc32ee044ade7e2dd445cc322db9d38d88da072fd0abaa8e692ad740b9ed886"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/activity_cluster_model.json",
+      "bytes": 105,
+      "sha256": "e191016d00376988df68726c6878bd820fed4123acc4a03a732eb7f77564166c"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/analysis_manifest.json",
+      "bytes": 768,
+      "sha256": "be1866f95b66e2f2be26a04bf5c2706e0d6c8c50bf95135628b3fc8004cefbe6"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/learned_activity_clusters.csv",
+      "bytes": 486,
+      "sha256": "d953a59824f372a2e048b9200081056317ef904817f046807d09bed645ad03e6"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/local_ml_models/local_catboost.joblib",
+      "bytes": 541101,
+      "sha256": "fe7f2df62d48a5fab5cb214ab67506ba89637ad6e158ddce9d8a50dac26bf01a"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/local_ml_models/local_extra_trees.joblib",
+      "bytes": 1866849,
+      "sha256": "f199a9e4655976f57d9d714049d27d5e6b17a77aa3376e8f0c7eb631fe975c89"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/local_ml_models/local_gradient_boosting.joblib",
+      "bytes": 387322,
+      "sha256": "49701ce78ed2a272a91dd144b9d64d5f2827bb700305f9f1d04317c2e37e53fb"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/local_ml_models/local_hist_gradient_boosting.joblib",
+      "bytes": 192640,
+      "sha256": "5db1720c3c1ea3d18ba13c82d82235192ac592b16717925bb167233078cde1cd"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/local_ml_models/local_lightgbm.joblib",
+      "bytes": 274918,
+      "sha256": "ab83fb333527e766989122314fe92ec432a3eed5195853698e0aaca90afdef66"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/local_ml_models/local_ml_manifest.json",
+      "bytes": 1540,
+      "sha256": "7fda967fe205a17d4bc112bdb101b5470afae3f0c8a5768635f40fddbc21263b"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/local_ml_models/local_random_forest.joblib",
+      "bytes": 1189089,
+      "sha256": "d40535f7552c45bdf564c931215e010f0d4fbbc4905cf877bda4c99fbab53ef8"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/local_ml_models/local_viability_classifier.joblib",
+      "bytes": 215401,
+      "sha256": "200946b3d8f361fdb15707cafa56e0e3b3293a5ddc0257147ecbc4e0abe4e348"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/local_ml_models/local_xgboost.joblib",
+      "bytes": 533443,
+      "sha256": "8e83ea2f261f773e34c17bd5966a289ab958c3cad701b060a5a4c472e5a9a624"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/optimized_scenario.json",
+      "bytes": 6760,
+      "sha256": "38063024fd2ad48528efdf8efcf5d2172c4d7df50b043b375039121330f2f707"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/project_local_ml_manifest.json",
+      "bytes": 1540,
+      "sha256": "7fda967fe205a17d4bc112bdb101b5470afae3f0c8a5768635f40fddbc21263b"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/project_local_ml_training.csv",
+      "bytes": 18610,
+      "sha256": "dfbdf1e5e3ad72d5bb9632288f7648ad1fa44f8ed49c0ad2bc0bbf42b35ad640"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/schedule_profile.json",
+      "bytes": 1662,
+      "sha256": "6eb4c523b204b5edf86b534de746b7ad901da0fbf28e55e379480149998a28ed"
+    },
+    {
+      "path": "DEMO_EVENT02_RECOVERY/universal_ml_candidates.csv",
+      "bytes": 105500,
+      "sha256": "dfc6f779413d14a15165bae657bb73a99e75513318b79cae3ef01ac26dda0587"
+    },
+    {
+      "path": "MODEL_CARD.md",
+      "bytes": 2038,
+      "sha256": "fe106ca29bb20d33d05c93c78f4037d1a9e68c5447ae8db05a5ca3022389a927"
+    },
+    {
+      "path": "MULTI_XER_RECOGNITION_VALIDATION.json",
+      "bytes": 1587,
+      "sha256": "8afb6634dd742fcb55c9a862144b13692446f12463e77933cce1959cb3293366"
+    },
+    {
+      "path": "QUICK_MODE_VALIDATION_CONFIG.json",
+      "bytes": 313,
+      "sha256": "37e96fb066823038426b24c579b8e1b0741bcdc397d862acfcbc24ba2977682f"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5996,
+      "sha256": "c9b3e48e9daa32b61c9ec4175014d727210eeaeba9ce83ab9e133396a3cffd89"
+    },
+    {
+      "path": "STANDARD_CONFIG.json",
+      "bytes": 603,
+      "sha256": "4498e0e48f721bd4f23d2c9c2ba2dc831ec02d1273a2e30f9bf11d422aef2d29"
+    },
+    {
+      "path": "UNIVERSAL_XER_ADAPTIVE_ML_ENGINE_v3.1.0.py",
+      "bytes": 59717,
+      "sha256": "d85c5cc27929d0855dc0a3d413d043ba66202287150f4f5ab56fd8cff072d752"
+    },
+    {
+      "path": "VALIDATION_CONFIG.json",
+      "bytes": 324,
+      "sha256": "d60d39b654157d88b0330024fd14526a02c0ab32582c17e49a9aff4af96cf07c"
+    },
+    {
+      "path": "VALIDATION_REPORT.md",
+      "bytes": 3622,
+      "sha256": "7f4832977d0179f0b70a7f3eaf516233d640316cebe2547755b6f12f2fef3f92"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 141,
+      "sha256": "5413779b2953f55b82ce1db2c4c1f39d0bae4b082e39c60e6b79c6f5898288ea"
+    }
+  ]
+}

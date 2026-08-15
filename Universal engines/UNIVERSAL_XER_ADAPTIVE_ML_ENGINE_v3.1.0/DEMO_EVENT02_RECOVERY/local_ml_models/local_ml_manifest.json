@@ -1,0 +1,70 @@
+{
+  "status": "trained",
+  "training_rows": 150,
+  "feature_names": [
+    "action_count",
+    "sum_individual_gain",
+    "max_individual_gain",
+    "mean_individual_gain",
+    "sum_nominal_reduction",
+    "mean_nominal_reduction",
+    "duration_actions",
+    "lag_actions",
+    "fast_track_actions",
+    "cycle_actions",
+    "unique_clusters",
+    "mean_path_position",
+    "min_path_position",
+    "max_path_position",
+    "resource_supported_fraction",
+    "mean_risk_score"
+  ],
+  "models": {
+    "extra_trees": {
+      "mae": 0.01273,
+      "rmse": 0.06148,
+      "r2": 0.99445
+    },
+    "random_forest": {
+      "mae": 0.03389,
+      "rmse": 0.07845,
+      "r2": 0.99097
+    },
+    "hist_gradient_boosting": {
+      "mae": 0.37693,
+      "rmse": 0.66645,
+      "r2": 0.34833
+    },
+    "gradient_boosting": {
+      "mae": 0.00309,
+      "rmse": 0.0175,
+      "r2": 0.99955
+    },
+    "xgboost": {
+      "mae": 0.00388,
+      "rmse": 0.0192,
+      "r2": 0.99946
+    },
+    "lightgbm": {
+      "mae": 0.40694,
+      "rmse": 0.6919,
+      "r2": 0.2976
+    },
+    "catboost": {
+      "mae": 0.03122,
+      "rmse": 0.04813,
+      "r2": 0.9966
+    }
+  },
+  "ensemble_weights": {
+    "extra_trees": 0.10811859844821937,
+    "random_forest": 0.040612267873881155,
+    "hist_gradient_boosting": 0.0036514731070645284,
+    "gradient_boosting": 0.4454206337365154,
+    "xgboost": 0.35472931913552386,
+    "lightgbm": 0.0033821933411457036,
+    "catboost": 0.04408551435764999
+  },
+  "viability_threshold_days": 0.9,
+  "viability_accuracy": 1.0
+}

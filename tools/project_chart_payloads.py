@@ -215,8 +215,8 @@ def _read_canonical_first_rows(
     register.  Header-only templates never suppress populated source data, and all
     rows remain filtered to the active project ID.
     """
-    primary_rows = read_csv_rows(primary_path)
-    fallback_rows = read_csv_rows(fallback_path) if fallback_path else []
+    primary_rows = read_csv_rows(primary_path) if primary_path.exists() else []
+    fallback_rows = read_csv_rows(fallback_path) if fallback_path and fallback_path.exists() else []
     primary_accepted, primary_issues = _project_rows(primary_rows, project_id, primary_path.name)
     fallback_accepted, fallback_issues = _project_rows(
         fallback_rows, project_id, fallback_path.name if fallback_path else file_name
@@ -827,7 +827,6 @@ def build_project_chart_payloads(
     activity_rows: list[dict[str, Any]],
     read_csv_rows: Any,
     workspace_rows: dict[str, list[dict[str, Any]]] | None = None,
-    logical_table_rows: dict[str, list[dict[str, Any]]] | None = None,
     project_metrics: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Return only project-owned, data-gated chart datasets and validation findings."""
@@ -848,14 +847,14 @@ def build_project_chart_payloads(
         project_id=project_id,
         file_name="delay_event_classification.csv",
         primary_path=delay_dir / "12_delay_event_classification.csv",
-        fallback_path=None,
+        fallback_path=delay_dir / "14-delay_event_classification.csv",
         read_csv_rows=read_csv_rows,
     )
     recovery_rows, recovery_sources, recovery_issues, _ = _read_canonical_first_rows(
         project_id=project_id,
         file_name="tia_recovery_scenario.csv",
         primary_path=delay_dir / "13_tia_recovery_scenario.csv",
-        fallback_path=None,
+        fallback_path=delay_dir / "15-tia_recovery_scenario.csv",
         read_csv_rows=read_csv_rows,
     )
     discipline_rows, discipline_sources, discipline_issues, _ = _read_canonical_first_rows(
@@ -879,15 +878,6 @@ def build_project_chart_payloads(
         fallback_path=None,
         read_csv_rows=read_csv_rows,
     )
-    if logical_table_rows is not None and "evm" in logical_table_rows:
-        logical_evm_accepted, logical_evm_issues = _project_rows(
-            logical_table_rows["evm"], project_id, "activity_master.csv"
-        )
-        if logical_evm_accepted:
-            evm_history_rows = [row for _, row in logical_evm_accepted]
-            evm_history_sources = ["activity_master.csv"]
-            evm_history_issues = logical_evm_issues
-            evm_origin = "activity_master"
     risk_history_rows, risk_history_sources, risk_history_issues, _ = _read_canonical_first_rows(
         project_id=project_id,
         file_name="risk_assessment_history.csv",

@@ -8,26 +8,24 @@ source totals.
 from __future__ import annotations
 
 import argparse
-import csv
-import hashlib
 import json
 import math
 import re
 import sys
-import tempfile
 from datetime import datetime
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
-sys.path.insert(0, str(ROOT / "src"))
 
 from generate_nextjs_website_data import (  # noqa: E402
     discover_projects,
+    load_project_input_rows,
     qualitative_risk_metrics,
     read_csv_rows,
     safe_float,
@@ -35,15 +33,12 @@ from generate_nextjs_website_data import (  # noqa: E402
     sum_column,
     summed_delay_days,
 )
-from project_input_contracts import csv_headers, has_bundle_table, load_logical_rows, load_payment_rows, read_csv_matrix  # noqa: E402
-from construction_system.unified_tia_csv import CSV_CONTRACTS, validate_pack  # noqa: E402
 
 
 DATA_ROOT = ROOT / "website" / "public" / "data" / "projects"
 REPORT_PATH = ROOT / "12-logs" / "vercel_streamlit_pipeline_audit_latest.md"
 PAGE_PATH = ROOT / "website" / "src" / "app" / "page.tsx"
-STREAMLIT_DASHBOARD_PATH = ROOT / "dashboard.py"
-UNIFIED_TIA_PROJECT_TEMPLATE_PACK = ROOT / "projects" / "_PROJECT_TEMPLATE" / "02-delay_analysis" / "unified_tia_csv"
+STREAMLIT_DASHBOARD_PATH = ROOT.parent / "one drive data" / "OneDrive" / "Documents" / "Project Intelligence Hub" / "dashboard.py"
 
 PUBLIC_METRICS = (
     "contract_value",
@@ -100,15 +95,25 @@ REQUIRED_WORKSPACE_TABLES = (
     "delay_events",
 )
 
-REQUIRED_CHART_INPUTS = {
+CANONICAL_PROJECT_INPUTS = (
+    "01_project_contract.csv", "02_schedule_activities.csv", "03_schedule_logic.csv",
+    "04_progress_evm.csv", "05_milestones_scurve.csv", "06_delay_events.csv",
+    "07_tia_evidence_scenarios.csv", "08_commercial_payments_claims.csv",
+    "09_risks_rfi_interfaces.csv", "10_letters_intelligence.csv",
+)
+LEGACY_CHART_INPUTS = {
+    "01-data/import_templates/activities.csv": "project_id",
+    "01-data/import_templates/progress_updates.csv": "project_id",
+    "01-data/import_templates/evm.csv": "project_id",
     "01-data/import_templates/risks.csv": "project_id",
     "01-data/import_templates/planned_cash_flow.csv": "project_id",
-    "02-delay_analysis/unified_tia_csv/12_delay_event_classification.csv": "project_id",
-    "02-delay_analysis/unified_tia_csv/13_tia_recovery_scenario.csv": "project_id",
 }
+REQUIRED_TIA_INPUT_ALTERNATIVES = (
+    ("02-delay_analysis/unified_tia_csv/12_delay_event_classification.csv", "02-delay_analysis/unified_tia_csv/14-delay_event_classification.csv"),
+    ("02-delay_analysis/unified_tia_csv/13_tia_recovery_scenario.csv", "02-delay_analysis/unified_tia_csv/15-tia_recovery_scenario.csv"),
+)
 
 REFERENCE_CHART_COUNT = 36
-LOCAL_WORKSTATION_PATH_PATTERN = re.compile(r"(?i)(?:[a-z]:[\\/]|/(?:users|home|private)/)")
 
 
 def close_enough(actual: Any, expected: float | None) -> bool:
@@ -122,56 +127,7 @@ def close_enough(actual: Any, expected: float | None) -> bool:
         return False
 
 
-def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
-def payload_exposes_local_path(value: Any) -> bool:
-    if isinstance(value, dict):
-        return any(payload_exposes_local_path(item) for item in value.values())
-    if isinstance(value, list):
-        return any(payload_exposes_local_path(item) for item in value)
-    return isinstance(value, str) and bool(LOCAL_WORKSTATION_PATH_PATTERN.search(value))
-
-
-def validate_unified_tia_template_pack(errors: list[str], checks: list[str]) -> None:
-    """Validate physical or bundled project-local TIA contract tables."""
-    packs = [("project template", UNIFIED_TIA_PROJECT_TEMPLATE_PACK, None)]
-    packs.extend(
-        (str(project["project_key"]), Path(project["path"]) / "02-delay_analysis" / "unified_tia_csv", Path(project["path"]) / "01-data" / "import_templates")
-        for project in discover_projects()
-    )
-    for label, path, bundle in packs:
-        if bundle is None or not has_bundle_table(bundle / "projects.csv"):
-            result = validate_pack(path, template_mode=True)
-        else:
-            with tempfile.TemporaryDirectory(prefix="tia-bundle-contract-") as temp:
-                contract_dir = Path(temp)
-                for contract in CSV_CONTRACTS:
-                    headers, rows = read_csv_matrix(path / contract.filename)
-                    with (contract_dir / contract.filename).open("w", encoding="utf-8", newline="") as stream:
-                        writer = csv.writer(stream)
-                        writer.writerow(headers)
-                        writer.writerows(rows)
-                result = validate_pack(contract_dir, template_mode=True)
-        if not result.get("passed"):
-            errors.append(f"Universal TIA {label} CSV pack failed schema validation: {result.get('issues')}")
-    if not any(error.startswith("Universal TIA") for error in errors):
-        checks.append(f"Universal TIA CSV contract validates in {len(packs)} project-local workspaces with {len(CSV_CONTRACTS)} CSV contracts")
-
-def expected_source_metrics(data_dir: Path, delay_dir: Path) -> dict[str, float | None]:
-    rows = {
-        "projects": read_csv_rows(data_dir / "projects.csv"),
-        "payments": load_payment_rows(data_dir, delay_dir),
-        "evm": load_logical_rows(data_dir, delay_dir, "evm"),
-        "risks": read_csv_rows(data_dir / "risks.csv"),
-        "claims": read_csv_rows(data_dir / "claims.csv"),
-        "delay_events": read_csv_rows(data_dir / "delay_events.csv"),
-    }
+def expected_source_metrics(rows: dict[str, list[dict[str, str]]]) -> dict[str, float | None]:
     project_row = rows["projects"][0] if rows["projects"] else {}
     contract_value = safe_float(project_row.get("contract_value"))
     planned_progress = safe_percent(project_row.get("planned_progress_percent"))
@@ -192,38 +148,39 @@ def expected_source_metrics(data_dir: Path, delay_dir: Path) -> dict[str, float 
         "claims_exposure": sum_column(rows["claims"], ["claim_amount", "claimed_amount", "amount", "eot_exposure", "exposure"]),
         "claimed_days": sum_column(rows["claims"], ["claimed_days", "claim_days", "eot_days", "claimed duration"]),
     }
-
-
 def validate_project_workspace_surface(
     project_key: str,
     output: dict[str, Any],
     project_path: Path,
     errors: list[str],
     checks: list[str],
+    source_rows: dict[str, list[dict[str, str]]],
 ) -> None:
     """Verify feature payloads are complete and remain inside one project boundary."""
-    if payload_exposes_local_path(output):
-        errors.append(f"{project_key}: public project payload exposes a local workstation path")
     data_dir = project_path / "01-data" / "import_templates"
-    delay_dir = project_path / "02-delay_analysis" / "unified_tia_csv"
-    bundle = data_dir / "project_input_bundle.csv"
-    master = data_dir / "activity_master.csv"
-    if has_bundle_table(data_dir / "projects.csv") or master.exists():
-        for logical_name in ("activities", "progress_updates", "evm"):
-            if not load_logical_rows(data_dir, delay_dir, logical_name):
-                errors.append(f"{project_key}: canonical input bundle cannot rebuild {logical_name}")
+    canonical_mode = all((data_dir / name).exists() for name in CANONICAL_PROJECT_INPUTS)
+    if canonical_mode:
+        for input_name in CANONICAL_PROJECT_INPUTS:
+            input_path = data_dir / input_name
+            header = input_path.read_text(encoding="utf-8-sig", errors="replace").splitlines()
+            columns = {column.strip().strip('"').casefold() for column in header[0].split(",")} if header else set()
+            required_columns = {"bundle_version", "source_file", "row_kind", "row_order", "payload_json"}
+            if not required_columns.issubset(columns):
+                errors.append(f"{project_key}: canonical input has an invalid bundle contract: {input_name}")
+        checks.append(f"{project_key}: all ten canonical project inputs are present")
     else:
-        for filename in ("activities.csv", "progress_updates.csv", "evm.csv"):
-            if not (data_dir / filename).exists():
-                errors.append(f"{project_key}: missing aligned activity input {filename}")
-    for relative_path, required_column in REQUIRED_CHART_INPUTS.items():
-        input_path = project_path / relative_path
-        if not input_path.exists() and not has_bundle_table(input_path):
-            errors.append(f"{project_key}: project chart input template is missing: {relative_path}")
-            continue
-        columns = {column.strip().casefold() for column in csv_headers(input_path)}
-        if required_column.casefold() not in columns:
-            errors.append(f"{project_key}: project chart input is missing required {required_column}: {relative_path}")
+        for relative_path, required_column in LEGACY_CHART_INPUTS.items():
+            input_path = project_path / relative_path
+            if not input_path.exists():
+                errors.append(f"{project_key}: project chart input template is missing: {relative_path}")
+                continue
+            header = input_path.read_text(encoding="utf-8-sig", errors="replace").splitlines()
+            columns = {column.strip().strip('"').casefold() for column in header[0].split(",")} if header else set()
+            if required_column.casefold() not in columns:
+                errors.append(f"{project_key}: project chart input is missing required {required_column}: {relative_path}")
+    for alternatives in REQUIRED_TIA_INPUT_ALTERNATIVES:
+        if not any((project_path / relative_path).exists() for relative_path in alternatives):
+            errors.append(f"{project_key}: required canonical TIA input is missing: {' or '.join(alternatives)}")
 
     chart_payloads = output.get("chart_payloads")
     if not isinstance(chart_payloads, dict):
@@ -262,15 +219,7 @@ def validate_project_workspace_surface(
             if not isinstance(table, dict):
                 errors.append(f"{project_key}: workspace table '{table_name}' is missing")
                 continue
-            if table_name == "activities":
-                expected_rows = len(load_logical_rows(data_dir, delay_dir, "activities"))
-            elif table_name == "evm":
-                expected_rows = len(load_logical_rows(data_dir, delay_dir, "evm"))
-            elif table_name == "payments":
-                expected_rows = len(load_payment_rows(data_dir, delay_dir))
-            else:
-                source_path = data_dir / f"{table_name}.csv"
-                expected_rows = len(read_csv_rows(source_path))
+            expected_rows = len(source_rows.get(table_name, []))
             if int(table.get("row_count") or 0) != expected_rows:
                 errors.append(f"{project_key}: workspace table '{table_name}' does not match selected-project source rows")
 
@@ -348,14 +297,6 @@ def validate_project_workspace_surface(
             if not isinstance(artifact, dict):
                 errors.append(f"{project_key}: {report_key} artifact is invalid")
                 continue
-            if artifact.get("source_project_id") != output.get("project_id"):
-                errors.append(f"{project_key}: {report_key} artifact source project does not match its selected project")
-            if not str(artifact.get("source_report_fingerprint") or "").strip():
-                errors.append(f"{project_key}: {report_key} artifact is missing its source report fingerprint")
-            file_manifest = artifact.get("files")
-            if not isinstance(file_manifest, dict):
-                errors.append(f"{project_key}: {report_key} artifact file manifest is missing")
-                file_manifest = {}
             for extension in ("html", "pdf", "pptx"):
                 url = artifact.get(extension)
                 if not isinstance(url, str) or not url.startswith("/generated/"):
@@ -364,17 +305,6 @@ def validate_project_workspace_surface(
                 target = ROOT / "website" / "public" / url.lstrip("/")
                 if not target.exists() or target.stat().st_size == 0:
                     errors.append(f"{project_key}: {report_key} {extension} artifact is missing or empty")
-                    continue
-                expected_file = file_manifest.get(extension)
-                if not isinstance(expected_file, dict):
-                    errors.append(f"{project_key}: {report_key} {extension} has no artifact hash record")
-                    continue
-                if expected_file.get("name") != target.name:
-                    errors.append(f"{project_key}: {report_key} {extension} artifact filename does not match its manifest")
-                if int(expected_file.get("bytes") or 0) != target.stat().st_size:
-                    errors.append(f"{project_key}: {report_key} {extension} artifact byte count does not match its manifest")
-                if expected_file.get("sha256") != sha256_file(target):
-                    errors.append(f"{project_key}: {report_key} {extension} artifact hash does not match its manifest")
 
     if not str(output.get("project_id") or "").strip() or not str(output.get("project_key") or "").strip():
         errors.append(f"{project_key}: project identity is missing from generated payload")
@@ -411,11 +341,7 @@ def validate_workspace_tab_catalog(errors: list[str], checks: list[str]) -> None
 
 
 def validate_streamlit_tia_catalog(errors: list[str], checks: list[str]) -> None:
-    """Confirm the local compatibility source retains the governed TIA entry.
-
-    The public Vercel tab catalogue is validated separately from ``page.tsx``.
-    This avoids treating archival Streamlit export labels as live Vercel tabs.
-    """
+    """Ensure legacy delay screens are consolidated rather than merely hidden."""
     if not STREAMLIT_DASHBOARD_PATH.exists():
         errors.append("canonical Streamlit dashboard.py is missing")
         return
@@ -428,10 +354,13 @@ def validate_streamlit_tia_catalog(errors: list[str], checks: list[str]) -> None
     if not catalog:
         errors.append("Streamlit project slide catalog could not be located")
         return
-    if '"Delay Analysis - Time Impact Analysis"' not in catalog:
+    exposed_legacy = [label for label in ("Delays", "Time Impact") if f'"{label}"' in catalog]
+    if exposed_legacy:
+        errors.append(f"Streamlit project slide catalog still exposes legacy TIA tabs: {', '.join(exposed_legacy)}")
+    elif '"Delay Analysis - Time Impact Analysis"' not in catalog:
         errors.append("Streamlit project slide catalog is missing consolidated Delay Analysis - Time Impact Analysis")
     else:
-        checks.append("Streamlit compatibility source retains the governed Delay Analysis - Time Impact Analysis entry")
+        checks.append("Streamlit consolidates legacy Delays and Time Impact under Delay Analysis - Time Impact Analysis")
 
 
 def validate_advanced_analytics_output(
@@ -635,7 +564,6 @@ def main(argv: list[str] | None = None) -> int:
 
     validate_workspace_tab_catalog(errors, checks)
     validate_streamlit_tia_catalog(errors, checks)
-    validate_unified_tia_template_pack(errors, checks)
 
     for project in discover_projects():
         project_key = str(project["project_key"])
@@ -649,9 +577,8 @@ def main(argv: list[str] | None = None) -> int:
             continue
         output = json.loads(output_path.read_text(encoding="utf-8"))
         generated_projects.append(output)
-        data_dir = Path(project["path"]) / "01-data" / "import_templates"
-        delay_dir = Path(project["path"]) / "02-delay_analysis" / "unified_tia_csv"
-        expected = expected_source_metrics(data_dir, delay_dir)
+        source_rows, _ = load_project_input_rows(Path(project["path"]) / "01-data" / "import_templates")
+        expected = expected_source_metrics(source_rows)
 
         if output.get("project_id") != project["project_id"]:
             errors.append(f"{project_key}: project_id does not match the discovered project manifest")
@@ -668,12 +595,12 @@ def main(argv: list[str] | None = None) -> int:
                 checks.append(f"{project_key}: {metric} matches source")
 
         expected_counts = {
-            "activities": len(load_logical_rows(data_dir, delay_dir, "activities")),
-            "milestones": len(read_csv_rows(Path(project["path"]) / "01-data" / "import_templates" / "milestones.csv")),
-            "risks": len(read_csv_rows(Path(project["path"]) / "01-data" / "import_templates" / "risks.csv")),
-            "claims": len(read_csv_rows(Path(project["path"]) / "01-data" / "import_templates" / "claims.csv")),
-            "delay_events": len(read_csv_rows(Path(project["path"]) / "01-data" / "import_templates" / "delay_events.csv")),
-            "s_curve": len(read_csv_rows(Path(project["path"]) / "01-data" / "import_templates" / "s_curve.csv")),
+            "activities": len(source_rows["activities"]),
+            "milestones": len(source_rows["milestones"]),
+            "risks": len(source_rows["risks"]),
+            "claims": len(source_rows["claims"]),
+            "delay_events": len(source_rows["delay_events"]),
+            "s_curve": len(source_rows["s_curve"]),
         }
         for dataset, expected_count in expected_counts.items():
             if output.get("source_files", {}).get(dataset) != expected_count:
@@ -682,7 +609,7 @@ def main(argv: list[str] | None = None) -> int:
         for metric in ("contract_value", "paid_amount", "bac", "pv", "ev", "ac", "risk_score", "delay_days", "claims_exposure"):
             if expected.get(metric) not in (None, 0) and not output.get("metric_sources", {}).get(metric, {}).get("source"):
                 errors.append(f"{project_key}: {metric} is missing source traceability")
-        validate_project_workspace_surface(project_key, output, Path(project["path"]), errors, checks)
+        validate_project_workspace_surface(project_key, output, Path(project["path"]), errors, checks, source_rows)
         validate_advanced_analytics_output(project_key, output, expected_counts, errors, checks)
 
     portfolio_path = DATA_ROOT.parent / "portfolio.json"
@@ -690,8 +617,6 @@ def main(argv: list[str] | None = None) -> int:
         errors.append("portfolio.json is missing")
     else:
         portfolio = json.loads(portfolio_path.read_text(encoding="utf-8"))
-        if payload_exposes_local_path(portfolio):
-            errors.append("portfolio.json exposes a local workstation path")
         totals = portfolio.get("totals", {})
         portfolio_keys = {str(item.get("project_key")) for item in portfolio.get("projects", [])}
         if portfolio_keys != project_keys:

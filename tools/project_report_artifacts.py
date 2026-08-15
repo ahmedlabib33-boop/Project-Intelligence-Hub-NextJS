@@ -18,10 +18,6 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from samco_pco_project_report import REPORT_KEY as SAMCO_PCO_REPORT_KEY
-from samco_pco_project_report import REPORT_STEM as SAMCO_PCO_REPORT_STEM
-from samco_pco_project_report import ensure_samco_pco_project_report
-
 
 REPORTS: tuple[tuple[str, str, str], ...] = (
     ("executive_dashboard", "01_executive_dashboard", "Executive Dashboard"),
@@ -29,7 +25,7 @@ REPORTS: tuple[tuple[str, str, str], ...] = (
     ("elite_svg_charts", "03_elite_svg_charts", "Elite SVG Charts"),
     ("linked_executive_dashboard", "04_linked_executive_dashboard", "Linked Executive Dashboard"),
 )
-REPORT_GENERATOR_VERSION = "2026.08.project-scoped-html-pdf-pptx.v7-samco-pco-data-driven"
+REPORT_GENERATOR_VERSION = "2026.08.project-scoped-html-pdf-pptx.v6-source-html"
 WORKSPACE_ROOT = Path(__file__).resolve().parents[1]
 CANONICAL_OUTPUTS_ROOT = WORKSPACE_ROOT / "11-outputs"
 
@@ -290,92 +286,50 @@ def _ensure_controlled_tia_artifacts(project: dict[str, Any], output_dir: Path, 
 
 
 def ensure_project_report_artifacts(
-    project: dict[str, Any], output_dir: Path, public_slug: str | None = None, served_dir: Path | None = None
+    project: dict[str, Any], output_dir: Path, public_slug: str | None = None
 ) -> dict[str, dict[str, Any]]:
     """Create or refresh the HTML/PDF/PPTX triplet for every primary report."""
     output_dir.mkdir(parents=True, exist_ok=True)
     project_slug = str(public_slug or project.get("project_key") or project.get("project_id") or "project")
     manifest_path = output_dir / ".report_manifest.json"
-    existing_reports: dict[str, dict[str, Any]] = {}
     if manifest_path.exists():
         try:
             existing = json.loads(manifest_path.read_text(encoding="utf-8"))
-            raw_reports = existing.get("reports", {})
-            if isinstance(raw_reports, dict):
-                existing_reports = {key: value for key, value in raw_reports.items() if isinstance(value, dict)}
+            existing_reports = existing.get("reports", {})
+            if (
+                existing.get("project_fingerprint") == project.get("fingerprint")
+                and existing.get("generator_version") == REPORT_GENERATOR_VERSION
+                and all(
+                    (output_dir / f"{stem}.{extension}").exists()
+                    for _, stem, _ in REPORTS
+                    for extension in ("html", "pdf", "pptx")
+                )
+                and existing_reports
+            ):
+                return existing_reports
         except Exception:
-            existing_reports = {}
-    standard_files_present = all(
-        (output_dir / f"{stem}.{extension}").exists()
-        for _, stem, _ in REPORTS
-        for extension in ("html", "pdf", "pptx")
-    )
-    if standard_files_present:
-        # A previously deployed generated directory can contain the approved
-        # report triplets without a local output manifest. Reuse its published
-        # metadata so a CSV cleanup never regenerates client report artifacts.
-        payload_key = str(project.get("project_key") or project_slug)
-        public_payload = WORKSPACE_ROOT / "website" / "public" / "data" / "projects" / f"{payload_key}.json"
-        try:
-            prior_payload = json.loads(public_payload.read_text(encoding="utf-8"))
-            prior_artifacts = prior_payload.get("report_artifacts", {})
-            if isinstance(prior_artifacts, dict):
-                existing_reports.update({
-                    key: value for key, value in prior_artifacts.items()
-                    if key in {item[0] for item in REPORTS} and isinstance(value, dict)
-                })
-        except (OSError, ValueError, TypeError):
             pass
-    results: dict[str, dict[str, Any]] = {
-        key: existing_reports[key]
-        for key, _, _ in REPORTS
-        if key in existing_reports
-    } if standard_files_present else {}
-    if len(results) == len(REPORTS):
-        # Keep the report bytes untouched, but repair stale metadata so the
-        # published download manifest always proves the exact served artifact.
-        for key, stem, _ in REPORTS:
-            artifact = dict(results[key])
-            paths = {
-                "html": output_dir / f"{stem}.html",
-                "pdf": output_dir / f"{stem}.pdf",
-                "pptx": output_dir / f"{stem}.pptx",
-            }
-            # When a stable public report already exists, that is the file
-            # Vercel serves.  Preserve it during input cleanup and make the
-            # browser metadata prove that exact served byte stream.
-            artifact["files"] = {
-                extension: {
-                    "name": path.name,
-                    "bytes": (served_dir / path.name).stat().st_size if served_dir and (served_dir / path.name).exists() else path.stat().st_size,
-                    "sha256": _sha256(served_dir / path.name) if served_dir and (served_dir / path.name).exists() else _sha256(path),
-                }
-                for extension, path in paths.items()
-            }
-            results[key] = artifact
-    if len(results) != len(REPORTS):
-        source_reports, source_manifest = _canonical_html_sources(project)
-        results = {}
-        for key, stem, title in REPORTS:
-            html_path = output_dir / f"{stem}.html"
-            pdf_path = output_dir / f"{stem}.pdf"
-            pptx_path = output_dir / f"{stem}.pptx"
-            html_origin = _publish_source_html_or_fallback(html_path, key, title, project, source_reports)
-            _write_pdf(pdf_path, title, project, html_path)
-            _write_pptx(pptx_path, title, project)
-            results[key] = {
-                "html": f"/generated/{project_slug}/{html_path.name}",
-                "pdf": f"/generated/{project_slug}/{pdf_path.name}",
-                "pptx": f"/generated/{project_slug}/{pptx_path.name}",
-                "files": {
-                    extension: {"name": path.name, "bytes": path.stat().st_size, "sha256": _sha256(path)}
-                    for extension, path in (("html", html_path), ("pdf", pdf_path), ("pptx", pptx_path))
-                },
-                "html_origin": html_origin,
-                "source_project_id": source_manifest.get("project_id") if html_origin == "canonical_project_html" else project.get("project_id"),
-                "source_report_fingerprint": source_manifest.get("fingerprint") if html_origin == "canonical_project_html" else project.get("fingerprint"),
-            }
-    results[SAMCO_PCO_REPORT_KEY] = ensure_samco_pco_project_report(project, output_dir, project_slug)
+    source_reports, source_manifest = _canonical_html_sources(project)
+    results: dict[str, dict[str, Any]] = {}
+    for key, stem, title in REPORTS:
+        html_path = output_dir / f"{stem}.html"
+        pdf_path = output_dir / f"{stem}.pdf"
+        pptx_path = output_dir / f"{stem}.pptx"
+        html_origin = _publish_source_html_or_fallback(html_path, key, title, project, source_reports)
+        _write_pdf(pdf_path, title, project, html_path)
+        _write_pptx(pptx_path, title, project)
+        results[key] = {
+            "html": f"/generated/{project_slug}/{html_path.name}",
+            "pdf": f"/generated/{project_slug}/{pdf_path.name}",
+            "pptx": f"/generated/{project_slug}/{pptx_path.name}",
+            "files": {
+                extension: {"name": path.name, "bytes": path.stat().st_size, "sha256": _sha256(path)}
+                for extension, path in (("html", html_path), ("pdf", pdf_path), ("pptx", pptx_path))
+            },
+            "html_origin": html_origin,
+            "source_project_id": source_manifest.get("project_id") if html_origin == "canonical_project_html" else project.get("project_id"),
+            "source_report_fingerprint": source_manifest.get("fingerprint") if html_origin == "canonical_project_html" else project.get("fingerprint"),
+        }
     tia_artifacts = _ensure_controlled_tia_artifacts(project, output_dir, project_slug)
     if tia_artifacts:
         results["tia_controlled_assessment"] = tia_artifacts

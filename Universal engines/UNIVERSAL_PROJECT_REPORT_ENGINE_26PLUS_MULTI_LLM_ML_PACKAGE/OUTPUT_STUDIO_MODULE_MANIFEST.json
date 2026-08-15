@@ -1,0 +1,336 @@
+{
+  "attribution": "Python AI Programming by Eng. Ahmed Labib",
+  "author": "Eng. Ahmed Labib",
+  "module": "Project Controls Intelligence / Reporting Engine",
+  "module_version": "2.0.0",
+  "report_family_count": 30,
+  "reports": [
+    {
+      "key": "eot",
+      "id": "R01",
+      "title": "Extension of Time / Time Impact Analysis Report",
+      "native_schedule_required": true,
+      "rule_count": 12
+    },
+    {
+      "key": "delay",
+      "id": "R02",
+      "title": "Delay Analysis Report",
+      "native_schedule_required": true,
+      "rule_count": 10
+    },
+    {
+      "key": "progress",
+      "id": "R03",
+      "title": "Project Progress Report",
+      "native_schedule_required": true,
+      "rule_count": 10
+    },
+    {
+      "key": "recovery",
+      "id": "R04",
+      "title": "Recovery & Mitigation Report",
+      "native_schedule_required": true,
+      "rule_count": 10
+    },
+    {
+      "key": "variation",
+      "id": "R05",
+      "title": "Variation / Change Impact Report",
+      "native_schedule_required": true,
+      "rule_count": 10
+    },
+    {
+      "key": "hybrid",
+      "id": "R06",
+      "title": "Integrated Project Controls Report",
+      "native_schedule_required": false,
+      "rule_count": 7
+    },
+    {
+      "key": "resource",
+      "id": "R07",
+      "title": "Resource / Manpower Report",
+      "native_schedule_required": true,
+      "rule_count": 10
+    },
+    {
+      "key": "equipment",
+      "id": "R08",
+      "title": "Equipment Resource Report",
+      "native_schedule_required": false,
+      "rule_count": 7
+    },
+    {
+      "key": "cost",
+      "id": "R09",
+      "title": "Cost Control Report",
+      "native_schedule_required": false,
+      "rule_count": 8
+    },
+    {
+      "key": "evm",
+      "id": "R10",
+      "title": "Earned Value Management Report",
+      "native_schedule_required": false,
+      "rule_count": 6
+    },
+    {
+      "key": "cashflow",
+      "id": "R11",
+      "title": "Cash Flow Report",
+      "native_schedule_required": false,
+      "rule_count": 6
+    },
+    {
+      "key": "scurve",
+      "id": "R12",
+      "title": "S-Curve Performance Report",
+      "native_schedule_required": false,
+      "rule_count": 6
+    },
+    {
+      "key": "procurement",
+      "id": "R13",
+      "title": "Procurement Status & Schedule Impact Report",
+      "native_schedule_required": true,
+      "rule_count": 8
+    },
+    {
+      "key": "material",
+      "id": "R14",
+      "title": "Material Tracking Report",
+      "native_schedule_required": false,
+      "rule_count": 7
+    },
+    {
+      "key": "lookahead",
+      "id": "R15",
+      "title": "Look-Ahead Planning Report",
+      "native_schedule_required": true,
+      "rule_count": 6
+    },
+    {
+      "key": "critical_path",
+      "id": "R16",
+      "title": "Critical / Longest Path Report",
+      "native_schedule_required": true,
+      "rule_count": 8
+    },
+    {
+      "key": "float",
+      "id": "R17",
+      "title": "Float Analysis Report",
+      "native_schedule_required": true,
+      "rule_count": 5
+    },
+    {
+      "key": "milestone",
+      "id": "R18",
+      "title": "Milestone Status Report",
+      "native_schedule_required": true,
+      "rule_count": 5
+    },
+    {
+      "key": "risk",
+      "id": "R19",
+      "title": "Project Risk Report",
+      "native_schedule_required": false,
+      "rule_count": 6
+    },
+    {
+      "key": "rfi_submittal",
+      "id": "R20",
+      "title": "RFI / Submittal Performance Report",
+      "native_schedule_required": true,
+      "rule_count": 6
+    },
+    {
+      "key": "qaqc",
+      "id": "R21",
+      "title": "QA/QC Performance Report",
+      "native_schedule_required": false,
+      "rule_count": 5
+    },
+    {
+      "key": "productivity",
+      "id": "R22",
+      "title": "Productivity Performance Report",
+      "native_schedule_required": false,
+      "rule_count": 5
+    },
+    {
+      "key": "executive",
+      "id": "R23",
+      "title": "Weekly / Monthly Executive Project Report",
+      "native_schedule_required": false,
+      "rule_count": 6
+    },
+    {
+      "key": "baseline_current",
+      "id": "R24",
+      "title": "Baseline vs Current Schedule Report",
+      "native_schedule_required": true,
+      "rule_count": 6
+    },
+    {
+      "key": "forecast_completion",
+      "id": "R25",
+      "title": "Forecast Completion Report",
+      "native_schedule_required": true,
+      "rule_count": 6
+    },
+    {
+      "key": "ml_project_controls",
+      "id": "R26",
+      "title": "Machine Learning Project Controls Report",
+      "native_schedule_required": false,
+      "rule_count": 9
+    },
+    {
+      "key": "contract_admin",
+      "id": "R27",
+      "title": "Contract Administration Report",
+      "native_schedule_required": false,
+      "rule_count": 5
+    },
+    {
+      "key": "change_control",
+      "id": "R28",
+      "title": "Change Control Register Report",
+      "native_schedule_required": false,
+      "rule_count": 5
+    },
+    {
+      "key": "document_control",
+      "id": "R29",
+      "title": "Document Control Performance Report",
+      "native_schedule_required": false,
+      "rule_count": 5
+    },
+    {
+      "key": "interface_management",
+      "id": "R30",
+      "title": "Interface Management Report",
+      "native_schedule_required": true,
+      "rule_count": 5
+    }
+  ],
+  "ml_task_count": 15,
+  "ml_tasks": {
+    "event_classification": {
+      "id": "ML01",
+      "type": "classification",
+      "target_hint": "event_class",
+      "description": "Classify delay/change/project-control events from verified features/evidence."
+    },
+    "delay_risk_prediction": {
+      "id": "ML02",
+      "type": "classification",
+      "target_hint": "delay_risk",
+      "description": "Estimate verified activity/event delay-risk class or probability."
+    },
+    "forecast_finish_deviation_prediction": {
+      "id": "ML03",
+      "type": "regression",
+      "target_hint": "finish_deviation_days",
+      "description": "Predict analytical deviation days; native CPM forecast remains governing."
+    },
+    "activity_anomaly_detection": {
+      "id": "ML04",
+      "type": "anomaly",
+      "target_hint": null,
+      "description": "Detect unusual activity records using Isolation Forest novelty scoring."
+    },
+    "resource_demand_prediction": {
+      "id": "ML05",
+      "type": "regression",
+      "target_hint": "resource_demand",
+      "description": "Predict analytical manpower/equipment demand from verified historical features."
+    },
+    "cost_overrun_risk_prediction": {
+      "id": "ML06",
+      "type": "classification",
+      "target_hint": "cost_overrun_risk",
+      "description": "Estimate cost-overrun risk; does not replace approved cost-control calculations."
+    },
+    "productivity_prediction": {
+      "id": "ML07",
+      "type": "regression",
+      "target_hint": "productivity",
+      "description": "Predict productivity from verified quantities/resource inputs."
+    },
+    "schedule_health_anomaly_detection": {
+      "id": "ML08",
+      "type": "anomaly",
+      "target_hint": null,
+      "description": "Detect schedule-health anomalies; native P6 logic audit remains governing."
+    },
+    "similar_event_evidence_retrieval": {
+      "id": "ML09",
+      "type": "retrieval",
+      "target_hint": null,
+      "description": "Retrieve similar events/evidence using TF-IDF cosine similarity with traceability."
+    },
+    "risk_prioritization": {
+      "id": "ML10",
+      "type": "classification",
+      "target_hint": "risk_priority",
+      "description": "Prioritize risk classes from available verified risk features."
+    },
+    "procurement_delay_risk": {
+      "id": "ML11",
+      "type": "classification",
+      "target_hint": "procurement_delay_risk",
+      "description": "Estimate procurement delay risk from verified procurement history."
+    },
+    "progress_slippage_prediction": {
+      "id": "ML12",
+      "type": "classification",
+      "target_hint": "progress_slippage",
+      "description": "Estimate progress-slippage risk from verified period/status data."
+    },
+    "model_confidence_ood_detection": {
+      "id": "ML13",
+      "type": "monitoring",
+      "target_hint": null,
+      "description": "Return prediction confidence and real Isolation-Forest OOD score/flag."
+    },
+    "model_drift_monitoring": {
+      "id": "ML14",
+      "type": "monitoring",
+      "target_hint": null,
+      "description": "Measure population drift with PSI/KS/categorical distribution distance."
+    },
+    "native_cpm_vs_ml_comparison": {
+      "id": "ML15",
+      "type": "comparison",
+      "target_hint": null,
+      "description": "Compare ML analytical output with native CPM while explicitly preserving native supremacy."
+    }
+  },
+  "multi_llm": {
+    "providers": [
+      "claude",
+      "kimi",
+      "deepseek"
+    ],
+    "advisory_only": true,
+    "routing_modes": [
+      "fast",
+      "balanced",
+      "assurance",
+      "auto"
+    ]
+  },
+  "advanced_ensemble_ml": {
+    "enabled": true,
+    "quality_latency_weighting": true,
+    "project_aware_validation": true
+  },
+  "governance": {
+    "global_rule_count": 26,
+    "native_schedule_supremacy": true,
+    "ml_decision_support_only": true
+  }
+}

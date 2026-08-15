@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from construction_system.controlled_tia import RECONCILIATION_REQUIRED, SETUP_REQUIRED, build_controlled_tia_snapshot
+from construction_system.controlled_tia import CONDITIONAL_RESULT, SETUP_REQUIRED, build_controlled_tia_snapshot
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,9 +21,7 @@ def the_big_project() -> dict[str, str]:
 def test_the_big_submission_matrix_is_the_active_position() -> None:
     snapshot = build_controlled_tia_snapshot(the_big_project())
 
-    # The submitted 126-day position is active, but archived 131/164-day and
-    # EV02 76-day figures remain open reconciliation records by design.
-    assert snapshot["status"] == RECONCILIATION_REQUIRED
+    assert snapshot["status"] == CONDITIONAL_RESULT
     assert snapshot["approval_status"] == "submitted_position_pending_p6_verification"
     assert len(snapshot["schedule_cpm"]["approved_matrix"]) == 12
 
@@ -54,6 +52,21 @@ def test_the_big_event_mapping_exhibits_are_evidence_only_and_project_scoped() -
     assert all(exhibit["source_file"].endswith(".png") for exhibit in exhibits)
     assert all("mapping exhibit" in exhibit["evidence_use"].lower() for exhibit in exhibits)
     assert snapshot["eot_position"]["integrated_eot_calendar_days"] == 126
+
+
+def test_the_big_view_exhibits_are_project_scoped_and_match_the_public_workflow() -> None:
+    snapshot = build_controlled_tia_snapshot(the_big_project())
+    exhibits = snapshot["view_exhibits"]
+
+    assert snapshot["workflow_tabs"][0] == "Time Impact Methodology"
+    assert [exhibit["view"] for exhibit in exhibits] == [
+        "Time Impact Methodology",
+        "Concurrency and Entitlement",
+        "EOT Position",
+    ]
+    assert all(exhibit["project_id"] == THE_BIG_ID for exhibit in exhibits)
+    assert all(exhibit["project_key"] == THE_BIG_KEY for exhibit in exhibits)
+    assert all(exhibit["source_file"].endswith(".svg") for exhibit in exhibits)
 
 
 def test_historic_values_are_reconciliation_only() -> None:
@@ -93,3 +106,4 @@ def test_project_without_submission_never_receives_the_big_data(tmp_path: Path) 
     assert snapshot["eot_position"]["label"] == "Not available"
     assert snapshot["schedule_cpm"]["xer_pairs"] == []
     assert snapshot["events_and_fragnets"]["event_exhibits"] == []
+    assert snapshot["view_exhibits"] == []

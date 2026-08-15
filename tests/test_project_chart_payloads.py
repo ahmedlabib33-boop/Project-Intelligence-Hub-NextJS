@@ -47,9 +47,9 @@ def _payload(
     if planned is not None:
         _write_rows(data_dir / "planned_cash_flow.csv", planned)
     if classifications is not None:
-        _write_rows(delay_dir / "12_delay_event_classification.csv", classifications)
+        _write_rows(delay_dir / "14-delay_event_classification.csv", classifications)
     if recovery is not None:
-        _write_rows(delay_dir / "13_tia_recovery_scenario.csv", recovery)
+        _write_rows(delay_dir / "15-tia_recovery_scenario.csv", recovery)
     if vercel_planned is not None:
         _write_rows(vercel_dir / "planned_cash_flow.csv", vercel_planned)
     elif vercel_header_only:

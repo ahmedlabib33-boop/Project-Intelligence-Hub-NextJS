@@ -96,8 +96,8 @@ def test_standard_structure_and_samples_are_non_destructive(tmp_path):
     assert (project / "06-evidence" / "photo_log_template.csv").exists()
     assert (project / "09-notes" / "claims_notes_template.md").exists()
     assert (project / "01-data" / "import_templates" / "planned_cash_flow.csv").exists()
-    assert (project / "02-delay_analysis" / "unified_tia_csv" / "12_delay_event_classification.csv").exists()
-    assert (project / "02-delay_analysis" / "unified_tia_csv" / "13_tia_recovery_scenario.csv").exists()
+    assert (project / "02-delay_analysis" / "unified_tia_csv" / "14-delay_event_classification.csv").exists()
+    assert (project / "02-delay_analysis" / "unified_tia_csv" / "15-tia_recovery_scenario.csv").exists()
 
 
 def test_chart_inputs_use_canonical_project_locations_without_vercel_duplicates(tmp_path):
@@ -106,8 +106,8 @@ def test_chart_inputs_use_canonical_project_locations_without_vercel_duplicates(
 
     expected = {
         project / "01-data" / "import_templates" / "planned_cash_flow.csv",
-        project / "02-delay_analysis" / "unified_tia_csv" / "12_delay_event_classification.csv",
-        project / "02-delay_analysis" / "unified_tia_csv" / "13_tia_recovery_scenario.csv",
+        project / "02-delay_analysis" / "unified_tia_csv" / "14-delay_event_classification.csv",
+        project / "02-delay_analysis" / "unified_tia_csv" / "15-tia_recovery_scenario.csv",
     }
     assert not (project / "vercel").exists()
     for path in expected:

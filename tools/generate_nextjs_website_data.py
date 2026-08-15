@@ -14,7 +14,6 @@ from pathlib import Path
 from typing import Any
 
 from advanced_analytics import build_advanced_analytics
-from project_input_contracts import csv_headers, has_bundle_table, load_letters_input, load_logical_rows, load_payment_rows, logical_source_path, read_csv_rows as read_project_csv_rows
 from project_chart_payloads import build_project_chart_payloads
 from project_report_artifacts import ensure_project_report_artifacts
 from universal_report_engine_adapter import (
@@ -41,19 +40,6 @@ WEBSITE_SOURCE_GENERATED = ROOT / "website" / "src" / "generated"
 # in browser payloads makes selected-project navigation unreliable on mobile and
 # does not add report capability; complete report artifacts stay in Output Studio.
 WORKSPACE_TABLE_ROW_LIMIT = 200
-PUBLIC_LOCAL_PATH_KEYS = {
-    "path",
-    "file_path",
-    "project_dir",
-    "project_folder_path",
-    "database_path",
-    "contracts_dir",
-    "evidence_dir",
-    "run_path",
-    "snapshot_dir",
-    "report_path",
-}
-LOCAL_PATH_TEXT_PATTERN = re.compile(r"(?i)(?:[a-z]:[\\/]|/(?:users|home|private)/)[^\r\n\"')]+")
 
 
 def slugify(value: str) -> str:
@@ -64,34 +50,6 @@ def slugify(value: str) -> str:
 def normalize_field_name(value: Any) -> str:
     """Match CSV headers despite spaces, punctuation, case, or underscores."""
     return re.sub(r"[^a-z0-9]+", "", str(value or "").strip().lower())
-
-
-def _is_absolute_local_path(value: Any) -> bool:
-    text = str(value or "").strip()
-    return bool(re.match(r"^[a-zA-Z]:[\\/]", text) or text.startswith("/Users/") or text.startswith("/home/") or text.startswith("/private/"))
-
-
-def public_safe_payload(value: Any) -> Any:
-    """Remove workstation paths from browser payloads without removing lineage.
-
-    Relative source names and published ``/generated`` URLs remain visible. Only
-    absolute local paths and their occurrence inside diagnostics are removed.
-    """
-    if isinstance(value, dict):
-        result: dict[str, Any] = {}
-        for key, item in value.items():
-            key_text = str(key)
-            if key_text in PUBLIC_LOCAL_PATH_KEYS and _is_absolute_local_path(item):
-                continue
-            result[key_text] = public_safe_payload(item)
-        return result
-    if isinstance(value, list):
-        return [public_safe_payload(item) for item in value]
-    if isinstance(value, tuple):
-        return [public_safe_payload(item) for item in value]
-    if isinstance(value, str):
-        return LOCAL_PATH_TEXT_PATTERN.sub("[local path removed]", value)
-    return value
 
 
 def safe_float(value: Any) -> float | None:
@@ -139,9 +97,152 @@ def read_json(path: Path) -> dict[str, Any]:
 
 
 def read_csv_rows(path: Path) -> list[dict[str, str]]:
-    """Read physical or lossless-bundled project data through one contract."""
-    return read_project_csv_rows(path)
+    if not path.exists():
+        return []
+    for encoding in ("utf-8-sig", "utf-8", "cp1256", "cp1252"):
+        try:
+            with path.open("r", encoding=encoding, newline="") as handle:
+                return list(csv.DictReader(handle))
+        except Exception:
+            continue
+    return []
 
+
+CANONICAL_BUNDLE_NAMES = (
+    "01_project_contract.csv",
+    "02_schedule_activities.csv",
+    "03_schedule_logic.csv",
+    "04_progress_evm.csv",
+    "05_milestones_scurve.csv",
+    "06_delay_events.csv",
+    "07_tia_evidence_scenarios.csv",
+    "08_commercial_payments_claims.csv",
+    "09_risks_rfi_interfaces.csv",
+    "10_letters_intelligence.csv",
+)
+
+LOGICAL_DATASETS = (
+    "projects", "contracts", "payments", "planned_cash_flow", "progress", "evm",
+    "risks", "claims", "activities", "milestones", "delay_events", "s_curve",
+    "wbs", "historical_outcomes",
+)
+
+
+def _bundle_value(value: Any) -> str:
+    return "" if value is None else str(value)
+
+
+def _decode_canonical_input_bundles(data_dir: Path) -> tuple[dict[str, list[dict[str, str]]], dict[str, Path]]:
+    """Rebuild legacy logical rows from the ten compact, lossless input bundles.
+
+    The bundles preserve original headers and row order in payload_json.  This is
+    intentionally in-memory: the ten files remain the only active project inputs.
+    """
+    tables: dict[str, dict[str, Any]] = {}
+    sources: dict[str, Path] = {}
+    found_bundle = False
+    for bundle_name in CANONICAL_BUNDLE_NAMES:
+        bundle_path = data_dir / bundle_name
+        for record in read_csv_rows(bundle_path):
+            if not record.get("bundle_version") or not record.get("source_file"):
+                continue
+            found_bundle = True
+            source_name = Path(str(record["source_file"])).stem
+            table = tables.setdefault(source_name, {"headers": [], "rows": []})
+            sources.setdefault(source_name, bundle_path)
+            try:
+                payload = json.loads(str(record.get("payload_json") or "null"))
+            except json.JSONDecodeError:
+                continue
+            kind = str(record.get("row_kind") or "").strip().casefold()
+            if kind == "schema" and isinstance(payload, dict):
+                headers = payload.get("headers")
+                if isinstance(headers, list):
+                    table["headers"] = [str(header) for header in headers]
+            elif kind == "data" and isinstance(payload, list):
+                try:
+                    row_order = int(str(record.get("row_order") or "0"))
+                except ValueError:
+                    row_order = len(table["rows"])
+                table["rows"].append((row_order, payload))
+    if not found_bundle:
+        return {}, {}
+
+    result: dict[str, list[dict[str, str]]] = {}
+    for name, table in tables.items():
+        headers = table["headers"]
+        result[name] = [
+            {header: _bundle_value(values[index]) if index < len(values) else "" for index, header in enumerate(headers)}
+            for _, values in sorted(table["rows"], key=lambda item: item[0])
+            if headers
+        ]
+
+    # Some original TIA files carry their numbered filename in source_file.
+    # Alias them to the dashboard's stable logical dataset names.
+    for original_name, logical_name in {
+        "08- payments": "payments",
+    }.items():
+        if original_name in result and logical_name not in result:
+            result[logical_name] = result[original_name]
+            sources[logical_name] = sources[original_name]
+    # activity_master is the lossless merge of the former activity, EVM, and
+    # progress feeds. Reconstruct each old logical view only in memory.
+    master_rows = result.get("activity_master", [])
+    for target, prefix in (("activities", "activity__"), ("evm", "evm__"), ("progress", "progress__")):
+        rebuilt: list[dict[str, str]] = []
+        for master in master_rows:
+            row = {column[len(prefix):]: value for column, value in master.items() if column.startswith(prefix)}
+            if str(row.get("activity_id") or "").strip():
+                rebuilt.append(row)
+        if rebuilt:
+            result[target] = rebuilt
+            sources[target] = sources.get("activity_master", data_dir / "02_schedule_activities.csv")
+    return result, sources
+
+
+def load_project_input_rows(data_dir: Path) -> tuple[dict[str, list[dict[str, str]]], dict[str, Path]]:
+    """Return the logical datasets used by the app from canonical or legacy inputs."""
+    decoded, sources = _decode_canonical_input_bundles(data_dir)
+    rows: dict[str, list[dict[str, str]]] = {}
+    source_paths: dict[str, Path] = {}
+    for dataset in LOGICAL_DATASETS:
+        canonical_name = dataset
+        if decoded:
+            rows[dataset] = list(decoded.get(canonical_name, []))
+            if canonical_name in sources:
+                source_paths[dataset] = sources[canonical_name]
+        else:
+            filename = "progress_updates.csv" if dataset == "progress" else f"{dataset}.csv"
+            path = data_dir / filename
+            rows[dataset] = read_csv_rows(path)
+            source_paths[dataset] = path
+    return rows, source_paths
+
+
+def preview_rows_table(rows: list[dict[str, Any]], source_path: Path, limit: int = 8) -> dict[str, Any]:
+    columns = list(rows[0].keys()) if rows else []
+    return {
+        "file": source_path.name,
+        "exists": source_path.exists(),
+        "row_count": len(rows),
+        "column_count": len(columns),
+        "columns": columns,
+        "rows": rows[:limit],
+    }
+
+
+def workspace_rows_table(rows: list[dict[str, Any]], source_path: Path, limit: int = WORKSPACE_TABLE_ROW_LIMIT) -> dict[str, Any]:
+    columns = list(rows[0].keys()) if rows else []
+    return {
+        "file": source_path.name,
+        "exists": source_path.exists(),
+        "row_count": len(rows),
+        "column_count": len(columns),
+        "columns": columns,
+        "rows": rows[:limit],
+        "truncated": len(rows) > limit,
+        "source_path": source_path.name,
+    }
 
 def compact_file_record(path: Path, base: Path) -> dict[str, Any]:
     stat = path.stat()
@@ -170,24 +271,16 @@ def preview_table(path: Path, limit: int = 8) -> dict[str, Any]:
     columns: list[str] = []
     if rows:
         columns = list(rows[0].keys())
-    elif path.exists() or has_bundle_table(path):
-        columns = csv_headers(path)
+    elif path.exists():
+        try:
+            with path.open("r", encoding="utf-8-sig", newline="") as handle:
+                reader = csv.reader(handle)
+                columns = next(reader, [])
+        except Exception:
+            columns = []
     return {
         "file": path.name,
-        "exists": path.exists() or has_bundle_table(path),
-        "row_count": len(rows),
-        "column_count": len(columns),
-        "columns": columns,
-        "rows": rows[:limit],
-    }
-
-
-def preview_logical_table(path: Path, rows: list[dict[str, str]], limit: int = 8) -> dict[str, Any]:
-    """Publish a logical table reconstructed from its validated canonical input."""
-    columns = list(rows[0].keys()) if rows else []
-    return {
-        "file": path.name,
-        "exists": path.exists() or has_bundle_table(path),
+        "exists": path.exists(),
         "row_count": len(rows),
         "column_count": len(columns),
         "columns": columns,
@@ -206,22 +299,7 @@ def workspace_table(path: Path, limit: int = WORKSPACE_TABLE_ROW_LIMIT) -> dict[
     columns = list(rows[0].keys()) if rows else []
     return {
         "file": path.name,
-        "exists": path.exists() or has_bundle_table(path),
-        "row_count": len(rows),
-        "column_count": len(columns),
-        "columns": columns,
-        "rows": rows[:limit],
-        "truncated": len(rows) > limit,
-        "source_path": path.name,
-    }
-
-
-def workspace_logical_table(path: Path, rows: list[dict[str, str]], limit: int = WORKSPACE_TABLE_ROW_LIMIT) -> dict[str, Any]:
-    """Keep workspace rows unchanged while exposing their physical source path."""
-    columns = list(rows[0].keys()) if rows else []
-    return {
-        "file": path.name,
-        "exists": path.exists() or has_bundle_table(path),
+        "exists": path.exists(),
         "row_count": len(rows),
         "column_count": len(columns),
         "columns": columns,
@@ -989,7 +1067,7 @@ def build_contract_controls_snapshot(
         }
 
 
-def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str, str]]]) -> dict[str, Any]:
+def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str, str]]], source_paths: dict[str, Path]) -> dict[str, Any]:
     base = Path(project["path"])
     data_dir = base / "01-data" / "import_templates"
     delay_dir = base / "02-delay_analysis" / "unified_tia_csv"
@@ -999,7 +1077,6 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     letters_dir = base / "07-letters_intelligence"
     outputs_dir = OUTPUTS_ROOT / project["project_folder_name"]
 
-    letters_snapshot = load_letters_input(data_dir)
     letter_files = list_project_files(letters_dir / "inbox", base, 160)
     letter_workbook_path = letters_dir / "letters_intelligence.xlsx"
     letter_workbook = xlsx_summary(letter_workbook_path)
@@ -1013,47 +1090,30 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     four_pipeline = build_four_pipeline_snapshot(project, controlled_tia)
     contract_controls = build_contract_controls_snapshot(project, contracts_dir, evidence_dir)
     overview_paths = {
-        "projects": data_dir / "projects.csv",
-        "activities": logical_source_path(data_dir, delay_dir, "activities"),
-        "progress_updates": logical_source_path(data_dir, delay_dir, "progress_updates"),
-        "evm": logical_source_path(data_dir, delay_dir, "evm"),
-        "risks": data_dir / "risks.csv",
-        "claims": data_dir / "claims.csv",
-        "contracts": data_dir / "contracts.csv",
-        "payments": data_dir / "payments.csv",
-        "planned_cash_flow": data_dir / "planned_cash_flow.csv",
-        "milestones": data_dir / "milestones.csv",
-        "delay_events": data_dir / "delay_events.csv",
-        "wbs": data_dir / "wbs.csv",
-        "s_curve": data_dir / "s_curve.csv",
-    }
-    overview_rows = {
-        "projects": rows.get("projects", []),
-        "activities": rows.get("activities", []),
-        "progress_updates": rows.get("progress", []),
-        "evm": rows.get("evm", []),
-        "risks": rows.get("risks", []),
-        "claims": rows.get("claims", []),
-        "contracts": rows.get("contracts", []),
-        "payments": rows.get("payments", []),
-        "planned_cash_flow": rows.get("planned_cash_flow", []),
-        "milestones": rows.get("milestones", []),
-        "delay_events": rows.get("delay_events", []),
-        "wbs": read_csv_rows(data_dir / "wbs.csv"),
-        "s_curve": rows.get("s_curve", []),
+        "projects": source_paths.get("projects", data_dir / "projects.csv"),
+        "activities": source_paths.get("activities", data_dir / "activities.csv"),
+        "progress_updates": source_paths.get("progress", data_dir / "progress_updates.csv"),
+        "evm": source_paths.get("evm", data_dir / "evm.csv"),
+        "risks": source_paths.get("risks", data_dir / "risks.csv"),
+        "claims": source_paths.get("claims", data_dir / "claims.csv"),
+        "contracts": source_paths.get("contracts", data_dir / "contracts.csv"),
+        "payments": source_paths.get("payments", data_dir / "payments.csv"),
+        "planned_cash_flow": source_paths.get("planned_cash_flow", data_dir / "planned_cash_flow.csv"),
+        "milestones": source_paths.get("milestones", data_dir / "milestones.csv"),
+        "delay_events": source_paths.get("delay_events", data_dir / "delay_events.csv"),
+        "wbs": source_paths.get("wbs", data_dir / "wbs.csv"),
+        "s_curve": source_paths.get("s_curve", data_dir / "s_curve.csv"),
     }
 
     return {
         "overview": {
             "data_sources": {key: len(value) for key, value in rows.items()},
             "source_tables": {
-                key: preview_logical_table(path, overview_rows.get(key, [])) for key, path in overview_paths.items()
+                key: preview_rows_table(rows.get("progress" if key == "progress_updates" else key, []), path) for key, path in overview_paths.items()
             },
-            "workspace_tables": {
-                key: workspace_logical_table(path, overview_rows.get(key, [])) for key, path in overview_paths.items()
-            },
+            "workspace_tables": {key: workspace_rows_table(rows.get("progress" if key == "progress_updates" else key, []), path) for key, path in overview_paths.items()},
         },
-        "letters_intelligence": letters_snapshot if letters_snapshot is not None else {
+        "letters_intelligence": {
             "folder": "07-letters_intelligence",
             "inbox_files": letter_files,
             "inbox_file_count": len(letter_files),
@@ -1442,30 +1502,24 @@ def build_decision_reasons(args: dict[str, Any]) -> list[dict[str, str]]:
     return reasons[:5]
 
 
-def latest_mtime(path: Path, ignored_relative_roots: tuple[str, ...] = ()) -> str | None:
-    """Return latest operational-source timestamp, excluding generated state."""
+def latest_mtime(path: Path) -> str | None:
     if not path.exists():
         return None
     latest = 0.0
     for child in path.rglob("*"):
         if child.is_file():
-            relative = child.relative_to(path).as_posix()
-            if any(relative == root or relative.startswith(f"{root}/") for root in ignored_relative_roots):
-                continue
             latest = max(latest, child.stat().st_mtime)
     if latest == 0:
         return None
     return datetime.fromtimestamp(latest).isoformat(timespec="seconds")
 
 
-def fingerprint(path: Path, ignored_relative_roots: tuple[str, ...] = ()) -> str:
+def fingerprint(path: Path) -> str:
     digest = hashlib.sha256()
     if not path.exists():
         return ""
     for child in sorted(p for p in path.rglob("*") if p.is_file()):
         rel = child.relative_to(path).as_posix()
-        if any(rel == root or rel.startswith(f"{root}/") for root in ignored_relative_roots):
-            continue
         if any(part in {".git", ".venv", "node_modules", "__pycache__"} for part in child.parts):
             continue
         digest.update(rel.encode("utf-8"))
@@ -1517,25 +1571,8 @@ def discover_projects() -> list[dict[str, Any]]:
 def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
     base = Path(project["path"])
     data_dir = base / "01-data" / "import_templates"
-    delay_dir = base / "02-delay_analysis" / "unified_tia_csv"
-    rows = {
-        "projects": read_csv_rows(data_dir / "projects.csv"),
-        "contracts": read_csv_rows(data_dir / "contracts.csv"),
-        # The normal payment input is used until the minimization proof has
-        # archived it.  In that case the validated TIA payment register is the
-        # only physical source and is projected back into the same logical table.
-        "payments": load_payment_rows(data_dir, delay_dir),
-        "planned_cash_flow": read_csv_rows(data_dir / "planned_cash_flow.csv"),
-        "progress": load_logical_rows(data_dir, delay_dir, "progress_updates"),
-        "evm": load_logical_rows(data_dir, delay_dir, "evm"),
-        "risks": read_csv_rows(data_dir / "risks.csv"),
-        "claims": read_csv_rows(data_dir / "claims.csv"),
-        "activities": load_logical_rows(data_dir, delay_dir, "activities"),
-        "milestones": read_csv_rows(data_dir / "milestones.csv"),
-        "delay_events": read_csv_rows(data_dir / "delay_events.csv"),
-        "s_curve": read_csv_rows(data_dir / "s_curve.csv"),
-        "historical_outcomes": read_csv_rows(data_dir / "historical_outcomes.csv"),
-    }
+    rows, source_paths = load_project_input_rows(data_dir)
+
 
     project_meta = rows["projects"][0] if rows["projects"] else {}
 
@@ -1684,20 +1721,17 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         "advanced_analytics": advanced_analytics,
     })
 
-    features = build_feature_payload(project, rows)
+    features = build_feature_payload(project, rows, source_paths)
     chart_payloads = build_project_chart_payloads(
         project_id=str(project["project_id"]),
         project_key=str(project["project_key"]),
         data_dir=data_dir,
         vercel_dir=base / "vercel",
-        delay_dir=delay_dir,
+        delay_dir=base / "02-delay_analysis" / "unified_tia_csv",
         payment_rows=rows["payments"],
         delay_event_rows=rows["delay_events"],
         activity_rows=rows["activities"],
         read_csv_rows=read_csv_rows,
-        logical_table_rows={
-            "evm": rows["evm"],
-        },
         workspace_rows=rows,
         project_metrics={
             "bac": bac,
@@ -1755,8 +1789,8 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         "data_quality": data_quality,
         "advanced_analytics": advanced_analytics,
         "decision_required": decision_required,
-        "last_updated": latest_mtime(base, ("02-delay_analysis/controlled_runs", "11-outputs", "12-logs")),
-        "fingerprint": fingerprint(base, ("02-delay_analysis/controlled_runs", "11-outputs", "12-logs")),
+        "last_updated": latest_mtime(base),
+        "fingerprint": fingerprint(base),
         "source_files": {
             key: len(value) for key, value in rows.items()
         },
@@ -1809,12 +1843,10 @@ def _json_default(value: Any) -> str:
 def write_json_if_changed(path: Path, payload: dict[str, Any]) -> bool:
     """Write generated data only when its content changes, preserving project freshness."""
     content = json.dumps(payload, indent=2, ensure_ascii=False, default=_json_default) + "\n"
-    encoded = content.encode("utf-8")
-    if path.exists() and path.read_bytes() == encoded:
+    if path.exists() and path.read_text(encoding="utf-8") == content:
         return False
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="\n") as stream:
-        stream.write(content)
+    path.write_text(content, encoding="utf-8")
     return True
 
 
@@ -1826,72 +1858,26 @@ def _sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def established_public_output_slug(project: dict[str, Any]) -> str:
-    """Return the already-published artifact directory for this project.
-
-    Project keys identify payload JSON files, while historic approved reports
-    can use a different stable directory name.  Input minimization must never
-    rewrite those public download URLs.
-    """
-    payload_key = str(project.get("project_key") or "").strip()
-    if payload_key:
-        payload_path = DATA_ROOT / "projects" / f"{payload_key}.json"
-        try:
-            payload = read_json(payload_path)
-            artifacts = payload.get("report_artifacts", {}) if isinstance(payload, dict) else {}
-            if isinstance(artifacts, dict):
-                for artifact in artifacts.values():
-                    if not isinstance(artifact, dict):
-                        continue
-                    candidate = str(artifact.get("html") or "")
-                    match = re.fullmatch(r"/generated/([^/]+)/[^/]+\\.html", candidate)
-                    if match:
-                        return match.group(1)
-        except (OSError, TypeError, ValueError):
-            pass
-    return slugify(str(project.get("project_folder_name") or payload_key or "project"))
-
-
 def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
     """Publish selected-project report artifacts without rewriting unchanged projects."""
     GENERATED_ROOT.mkdir(parents=True, exist_ok=True)
     OUTPUTS_ROOT.mkdir(parents=True, exist_ok=True)
-    active_public_dirs = {established_public_output_slug(project) for project in projects}
-    # Do not delete a published artifact directory during a data rebuild.
-    # Removed projects require an explicit archival workflow, not an implicit
-    # side effect of generating a different project.
+    active_public_dirs = {slugify(project["project_folder_name"]) for project in projects}
+    for orphan in GENERATED_ROOT.iterdir():
+        if orphan.is_dir() and orphan.name not in active_public_dirs:
+            shutil.rmtree(orphan)
 
     for project in projects:
         project_folder = project["project_folder_name"]
         source = SOURCE_OUTPUTS_ROOT / project_folder
         output_dir = OUTPUTS_ROOT / project_folder
         output_dir.mkdir(parents=True, exist_ok=True)
-        public_slug = established_public_output_slug(project)
-        target = GENERATED_ROOT / public_slug
-        target.mkdir(parents=True, exist_ok=True)
-        # Preserve an already published report triplet while input sources are
-        # consolidated.  The reporting engine creates a new artifact only when
-        # a file is genuinely absent, never as a side effect of this cleanup.
-        for _, stem, _ in (
-            ("executive_dashboard", "01_executive_dashboard", ""),
-            ("master_dashboard", "02_master_dashboard", ""),
-            ("elite_svg_charts", "03_elite_svg_charts", ""),
-            ("linked_executive_dashboard", "04_linked_executive_dashboard", ""),
-        ):
-            for extension in ("html", "pdf", "pptx"):
-                published = target / f"{stem}.{extension}"
-                local_artifact = output_dir / f"{stem}.{extension}"
-                # The public directory holds the established artifact byte
-                # stream.  Rehydrate the local mirror from it before metadata
-                # generation; a CSV cleanup must never overwrite an approved
-                # report with a differently-rendered local copy.
-                if published.exists():
-                    copy_if_changed(published, local_artifact)
         if source.exists() and source.resolve() != output_dir.resolve():
             for html_report in sorted(source.glob("*.html")):
                 copy_if_changed(html_report, output_dir / html_report.name)
 
-        artifacts = ensure_project_report_artifacts(project, output_dir, public_slug=public_slug, served_dir=target)
+        public_slug = slugify(project_folder)
+        artifacts = ensure_project_report_artifacts(project, output_dir, public_slug=public_slug)
         project["report_artifacts"] = artifacts
 
         # The Universal Report Engine is a local controlled tool.  Its catalogue
@@ -1902,43 +1888,12 @@ def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
             project["universal_report_engine"] = ensure_universal_report_engine_catalog(
                 project, project_dir, output_dir, public_slug
             )
+        project["features"]["outputs_and_watchers"]["output_files"] = list_project_files(output_dir, OUTPUTS_ROOT, 80)
 
-        # The supplied SAMCO-PCO template is the public Output Studio report
-        # format.  Publish its 30 source-bound sections directly into the
-        # Universal Report Engine catalogue so every visible family has real
-        # HTML, PDF and editable PowerPoint downloads.  A section with no rows
-        # stays explicit about that gap; no value or conclusion is fabricated.
-        samco_pco = artifacts.get("samco_pco_31_slide_report", {})
-        individual_reports = samco_pco.get("individual_reports", {}) if isinstance(samco_pco, dict) else {}
-        universal_catalog = project.get("universal_report_engine")
-        if isinstance(universal_catalog, dict) and isinstance(individual_reports, dict):
-            generated_count = 0
-            for family in universal_catalog.get("report_families", []):
-                report = individual_reports.get(family.get("key")) if isinstance(family, dict) else None
-                if not isinstance(report, dict):
-                    continue
-                family["status"] = "GENERATED"
-                family["detail"] = report.get("detail") or family.get("detail")
-                family["artifacts"] = report.get("artifacts") or {}
-                family["generated_at"] = samco_pco.get("generated_at")
-                family["release_status"] = "CSV_BOUND_TEMPLATE"
-                family["validation_status"] = report.get("status") or "AWAITING_CONTROLLED_CSV_DATA"
-                generated_count += 1
-            summary = universal_catalog.get("summary")
-            if isinstance(summary, dict):
-                summary["generated_count"] = generated_count
-                summary["ready_count"] = max(0, int(summary.get("catalog_count") or 0) - generated_count)
-            universal_catalog["overall_artifacts"] = {
-                "html": samco_pco.get("html"),
-                "pdf": samco_pco.get("pdf"),
-                "pptx": samco_pco.get("pptx"),
-                "package_zip": samco_pco.get("complete_package_zip"),
-            }
-
-        project["features"]["outputs_and_watchers"]["output_files"] = list_project_files(output_dir, OUTPUTS_ROOT, 180)
-
+        target = GENERATED_ROOT / public_slug
+        target.mkdir(parents=True, exist_ok=True)
         for artifact in sorted(output_dir.iterdir()):
-            if artifact.is_file() and artifact.suffix.lower() in {".html", ".pdf", ".pptx", ".docx", ".zip"}:
+            if artifact.is_file() and artifact.suffix.lower() in {".html", ".pdf", ".pptx", ".docx"}:
                 copy_if_changed(artifact, target / artifact.name)
 
         # Publish only release-approved Universal Report Engine artifacts.
@@ -2238,13 +2193,12 @@ def _generate() -> None:
     # Historic submitted-guide assets remain recoverable on disk but are not
     # copied into active website payloads or reports.  Controlled TIA runs are
     # published through each project's approved source contract instead.
-    public_project_records = [public_safe_payload(project) for project in project_records]
-    portfolio = build_portfolio(public_project_records)
+    portfolio = build_portfolio(project_records)
     write_json_if_changed(DATA_ROOT / "portfolio.json", portfolio)
     projects_dir = DATA_ROOT / "projects"
     projects_dir.mkdir(parents=True, exist_ok=True)
-    active_project_files = {f"{project['project_key']}.json" for project in public_project_records}
-    for project in public_project_records:
+    active_project_files = {f"{project['project_key']}.json" for project in project_records}
+    for project in project_records:
         write_json_if_changed(projects_dir / f"{project['project_key']}.json", project)
     for stale in projects_dir.glob("*.json"):
         if stale.name not in active_project_files:
@@ -2268,7 +2222,7 @@ def _generate() -> None:
             report_path=ROOT / "12-logs" / "guardrail_report_latest.md",
             block_on_issues=block_on_issues,
         )
-        portfolio["guardrails"] = public_safe_payload(guardrails)
+        portfolio["guardrails"] = guardrails
         write_json_if_changed(DATA_ROOT / "portfolio.json", portfolio)
         print(
             "Guardrails: "

@@ -1,0 +1,2693 @@
+{
+  "schema": "Universal Project Report Governance v2.6",
+  "version": "2.6.0",
+  "author": "Eng. Ahmed Labib",
+  "attribution": "Python AI Programming by Eng. Ahmed Labib",
+  "global_governance_layer": {
+    "rule_count": 26,
+    "rules": [
+      {
+        "id": "G01",
+        "title": "Attribution rule",
+        "text": "Every AI/chat-facing output must start with: “Python AI Programming by Eng. Ahmed Labib”. Generated reports, manifests, metadata and package identity should preserve the author attribution."
+      },
+      {
+        "id": "G02",
+        "title": "Evidence-first rule",
+        "text": "Never invent missing evidence, activities, dates, relationships, clauses, notices, float values, event dates, or entitlement. Missing evidence must be identified as missing, pending, weak, unverified, or not embedded rather than inferred as fact."
+      },
+      {
+        "id": "G03",
+        "title": "Native schedule supremacy rule",
+        "text": "The native Primavera P6/XER network is the governing technical schedule evidence. JSON extracts, Excel sheets, screenshots, generated visuals and ML predictions remain analytical/supporting evidence until checked against native calendars, relationships, schedule settings and longest/critical-path outputs."
+      },
+      {
+        "id": "G04",
+        "title": "Before/after TIA rule",
+        "text": "An event's EOT must come from the measured movement of the controlling completion milestone after fragnet insertion and CPM recalculation. Event duration itself is not automatically EOT."
+      },
+      {
+        "id": "G05",
+        "title": "Project Finish rule",
+        "text": "The engine must distinguish event duration, activity movement, float movement, milestone movement and Project Finish movement. Only demonstrated completion movement supports the current time impact."
+      },
+      {
+        "id": "G06",
+        "title": "Fragnet rule",
+        "text": "Each delay event must be modeled separately with a defensible cause → delay mechanism → affected activity → successor/critical path → Project Finish chain. Original construction logic should be preserved wherever possible; the fragnet represents the event rather than rewriting unrelated schedule logic."
+      },
+      {
+        "id": "G07",
+        "title": "Data-date rule",
+        "text": "Each TIA uses the schedule update immediately preceding or appropriately representing the event. A delivery date, cut-off date, correspondence date and P6 Data Date are not automatically the same thing."
+      },
+      {
+        "id": "G08",
+        "title": "Event isolation rule",
+        "text": "Each event must retain its own ID, chronology, evidence, fragnet, before/after schedules, affected activities, contractual route and measured result. Event effects must not be mixed simply because they occur in the same project."
+      },
+      {
+        "id": "G09",
+        "title": "Concurrency proof rule",
+        "text": "Calendar overlap alone is not conclusive proof of legal/critical concurrency. Native P6 evidence should demonstrate whether both events independently controlled the contemporaneous critical/longest path. The 62-day period is therefore an analytical non-duplication position pending native schedule confirmation."
+      },
+      {
+        "id": "G10",
+        "title": "Legacy quarantine rule",
+        "text": "`_combined_handoff` legacy information is excluded from normal reporting/search and may be accessed only for audit/reference. It must not override the active controlled position."
+      },
+      {
+        "id": "G11",
+        "title": "Contract evidence rule",
+        "text": "Contract routes may be indexed and searched, but OCR-derived wording must be checked against the signed contract/PDF image before direct quotation."
+      },
+      {
+        "id": "G12",
+        "title": "Contract precedence rule",
+        "text": "When contractual documents conflict, the engine must apply the project's contractual document priority/precedence rather than selecting the clause that produces the preferred result."
+      },
+      {
+        "id": "G13",
+        "title": "No automatic entitlement rule",
+        "text": "A delay event, Employer responsibility, negative float, instruction, RFI delay or variation does not by itself establish EOT. The engine must demonstrate responsibility + causation + schedule effect + criticality + notice/contract route + measured completion impact."
+      },
+      {
+        "id": "G14",
+        "title": "ML-governance rule",
+        "text": "Machine learning is a decision-support layer, not the contractual calculation engine. ML may classify events, identify anomalies, estimate likely shifts and retrieve similar evidence, but it must never overwrite native CPM/TIA results merely because the model prediction differs."
+      },
+      {
+        "id": "G15",
+        "title": "ML confidence rule",
+        "text": "Predictions must carry confidence/quality information. Weak, unseen or poorly represented classes must be identified as uncertain rather than presented as proven."
+      },
+      {
+        "id": "G16",
+        "title": "No ML fabrication rule",
+        "text": "ML cannot create missing P6 logic, correspondence, contract clauses, entitlement, notices or historical facts. It can identify patterns only from available evidence."
+      },
+      {
+        "id": "G17",
+        "title": "Training isolation rule",
+        "text": "Training and validation data must remain project-aware. Project-specific performance must not be advertised as universal accuracy on unrelated projects without independent validation."
+      },
+      {
+        "id": "G18",
+        "title": "Source traceability rule",
+        "text": "Evidence-model outputs should retain source inventory and traceability, including SHA-256 hashes where applicable. The universal reporting engine specifically incorporates source inventory, hashing and checks for missing/orphan/conflicting evidence."
+      },
+      {
+        "id": "G19",
+        "title": "Conflict-detection rule",
+        "text": "Where two sources provide different values, the engine must flag a reconciliation issue rather than silently selecting whichever number is more favorable."
+      },
+      {
+        "id": "G20",
+        "title": "Stale-visual rule",
+        "text": "SVGs or charts containing superseded values are excluded from current-output selection."
+      },
+      {
+        "id": "G21",
+        "title": "Visual QA rule",
+        "text": "Generated SVG/report visuals should pass XML validity, consistent canvas/background, unique element IDs, accessibility metadata, contrast and editable-vector checks."
+      },
+      {
+        "id": "G22",
+        "title": "Report-content rule",
+        "text": "Every formal TIA package should preserve the chain: event chronology → cause → responsibility → fragnet methodology → affected activities → before/after CPM → float/path change → milestone movement → concurrency → EOT treatment → contractual route → evidence/reliance limitations. AND YOU OWN RULSES FOR OTHER REPORTS"
+      },
+      {
+        "id": "G23",
+        "title": "Table rule",
+        "text": "Executive metrics, event matrices, affected-activity schedules, contractual routes and visual registers have controlled column arrangements. Notes should sit below crowded tables; detailed wide activity tables should use landscape orientation, while presentation tables should limit visible rows and move detail to appendices."
+      },
+      {
+        "id": "G24",
+        "title": "No hard-coded universal-project rule",
+        "text": "Project-specific facts may exist in the current brain, but reusable TIA/ML/report-engine architecture must isolate projects and derive values from each project's input evidence rather than assuming THE BIG values for another project."
+      },
+      {
+        "id": "G25",
+        "title": "Validation-before-release rule",
+        "text": "Python compilation, JSON parsing, package validation, EOT arithmetic, evidence consistency and available self-tests should pass before a package is released. The source validation report confirms these controls are part of the package philosophy."
+      },
+      {
+        "id": "G26",
+        "title": "Engineer-determination rule",
+        "text": "The engine may calculate and substantiate the Contractor's EOT position, but it must not represent the current 126 days as an awarded contractual extension until the Engineer's determination."
+      }
+    ]
+  },
+  "governing_formula": "Evidence → Event → Fragnet → CPM Recalculation → Critical/Longest Path → Project Finish Movement → Concurrency/Non-Duplication → Contractual Entitlement → Engineer Determination",
+  "pipeline_layer_count": 32,
+  "pipeline_layers": [
+    {
+      "layer": 1,
+      "name": "Attribution Enforcement",
+      "purpose": "Enforce author identity on AI/chat outputs, reports, manifests, metadata and packages."
+    },
+    {
+      "layer": 2,
+      "name": "Run Identity",
+      "purpose": "Assign engine version, run timestamp, project identity and report-family identity."
+    },
+    {
+      "layer": 3,
+      "name": "Input Discovery",
+      "purpose": "Discover supported evidence without inventing missing files."
+    },
+    {
+      "layer": 4,
+      "name": "Project Isolation",
+      "purpose": "Keep each project's evidence, context, models and outputs separated."
+    },
+    {
+      "layer": 5,
+      "name": "Legacy Quarantine",
+      "purpose": "Exclude _combined_handoff from normal search/reporting while retaining audit visibility."
+    },
+    {
+      "layer": 6,
+      "name": "File-Type Control",
+      "purpose": "Validate supported file types and explicitly flag unsupported evidence."
+    },
+    {
+      "layer": 7,
+      "name": "Source Hashing",
+      "purpose": "Calculate SHA-256 hashes for traceability."
+    },
+    {
+      "layer": 8,
+      "name": "Source Inventory",
+      "purpose": "Create source IDs, filenames, kinds, sizes, hashes, warnings and metadata."
+    },
+    {
+      "layer": 9,
+      "name": "Reader Validation",
+      "purpose": "Capture extraction failures without silently dropping evidence."
+    },
+    {
+      "layer": 10,
+      "name": "Text/Table Extraction",
+      "purpose": "Extract textual and structured evidence from supported documents."
+    },
+    {
+      "layer": 11,
+      "name": "Native Schedule Extraction",
+      "purpose": "Parse XER tasks, relationships, data date, calendars/settings indicators and completion candidates."
+    },
+    {
+      "layer": 12,
+      "name": "Contract Quote Control",
+      "purpose": "Flag OCR/scanned contract text for image/signed-source verification before quotation."
+    },
+    {
+      "layer": 13,
+      "name": "Evidence Normalization",
+      "purpose": "Normalize dates, values, units, labels and source references while retaining raw evidence."
+    },
+    {
+      "layer": 14,
+      "name": "Evidence Indexing",
+      "purpose": "Create traceable searchable evidence chunks."
+    },
+    {
+      "layer": 15,
+      "name": "Duplicate Detection",
+      "purpose": "Identify repeated evidence/records without double counting."
+    },
+    {
+      "layer": 16,
+      "name": "Conflict Detection",
+      "purpose": "Flag inconsistent values across sources for reconciliation."
+    },
+    {
+      "layer": 17,
+      "name": "Stale Visual Control",
+      "purpose": "Exclude superseded/obsolete visuals from current-output selection."
+    },
+    {
+      "layer": 18,
+      "name": "Evidence Hierarchy",
+      "purpose": "Apply native/controlled source precedence appropriate to the report family."
+    },
+    {
+      "layer": 19,
+      "name": "Report-Family Classification",
+      "purpose": "Select one of 30 controlled report families or honor an explicit report type."
+    },
+    {
+      "layer": 20,
+      "name": "Independent Rulebook Loading",
+      "purpose": "Load the report family's own rules, metrics, tables, visuals, checks and release gates."
+    },
+    {
+      "layer": 21,
+      "name": "Data-Date Reconciliation",
+      "purpose": "Keep Data Date distinct from cut-off, delivery, instruction and correspondence dates."
+    },
+    {
+      "layer": 22,
+      "name": "Event/Record Isolation",
+      "purpose": "Maintain independent identity and chronology for each event/change/risk/material/document record."
+    },
+    {
+      "layer": 23,
+      "name": "Native Technical Calculation",
+      "purpose": "Perform deterministic calculations from governing native evidence."
+    },
+    {
+      "layer": 24,
+      "name": "Schedule Supremacy Gate",
+      "purpose": "Prevent supporting extracts/ML/visuals from overriding native CPM evidence."
+    },
+    {
+      "layer": 25,
+      "name": "ML Decision-Support",
+      "purpose": "Run ML classification/anomaly/prediction only as a confidence-scored supporting layer."
+    },
+    {
+      "layer": 26,
+      "name": "Entitlement Separation",
+      "purpose": "Separate technical effect, responsibility, contractual entitlement and Engineer determination."
+    },
+    {
+      "layer": 27,
+      "name": "Missing-Evidence Assessment",
+      "purpose": "Label unsupported requirements as missing, pending, weak or unverified."
+    },
+    {
+      "layer": 28,
+      "name": "Content Assembly",
+      "purpose": "Build report sections using only established evidence and controlled analytical statements."
+    },
+    {
+      "layer": 29,
+      "name": "Controlled Table Layout",
+      "purpose": "Apply report-family table arrangements, landscape appendices and row limits."
+    },
+    {
+      "layer": 30,
+      "name": "Visual QA",
+      "purpose": "Check SVG/XML validity, canvas consistency, IDs, metadata, contrast and editability."
+    },
+    {
+      "layer": 31,
+      "name": "Validation & Release Gate",
+      "purpose": "Run compile/JSON/arithmetic/evidence/layout/self-tests and determine release status."
+    },
+    {
+      "layer": 32,
+      "name": "Manifest & Package Integrity",
+      "purpose": "Write author attribution, report identity, validation state and SHA-256 file manifest into the package."
+    }
+  ],
+  "report_family_count": 30,
+  "report_families": {
+    "eot": {
+      "id": "R01",
+      "title": "Extension of Time / Time Impact Analysis Report",
+      "governing_chain": [
+        "Evidence",
+        "Event chronology",
+        "Responsibility",
+        "Data-date selection",
+        "Fragnet",
+        "Before CPM",
+        "After CPM",
+        "Critical/longest path",
+        "Project Finish movement",
+        "Concurrency/non-duplication",
+        "Contractual entitlement",
+        "Engineer determination"
+      ],
+      "keywords": [
+        "extension of time",
+        "time impact analysis",
+        "eot",
+        "fragnet",
+        "concurrency",
+        "before xer",
+        "after xer",
+        "project finish"
+      ],
+      "rules": [
+        "Native XER governs schedule calculations.",
+        "Every event must retain a separate before/after schedule pair.",
+        "Event duration is not EOT.",
+        "Activity delay and float consumption are not automatically Project Finish delay.",
+        "Fragnet scope must represent the event while preserving unrelated construction logic.",
+        "The selected Data Date must appropriately represent the event chronology.",
+        "Before/after calendars, constraints and scheduling settings require reconciliation.",
+        "Criticality must be demonstrated through the native network.",
+        "Concurrency requires contemporaneous independent criticality, not calendar overlap alone.",
+        "Gross event movements must not be summed without proving independence/non-cumulative measurement.",
+        "Technical impact and contractual entitlement remain separate determinations.",
+        "Contractor EOT position must not be represented as Engineer-awarded EOT before determination."
+      ],
+      "required_metrics": [
+        "before_project_finish",
+        "after_project_finish",
+        "project_finish_movement_days",
+        "before_total_float",
+        "after_total_float",
+        "longest_path_change",
+        "gross_impact_days",
+        "overlap_days",
+        "net_eot_days",
+        "contractor_eot_position",
+        "engineer_determined_eot"
+      ],
+      "required_tables": [
+        "event_chronology",
+        "event_matrix",
+        "affected_activities",
+        "before_after_cpm",
+        "float_path_change",
+        "contractual_routes",
+        "evidence_register"
+      ],
+      "required_visuals": [
+        "executive_eot_dashboard",
+        "event_timeline",
+        "fragnet_diagram",
+        "before_after_finish",
+        "critical_path_chain",
+        "concurrency_control",
+        "gross_to_net_waterfall"
+      ],
+      "evidence_hierarchy": [
+        "Native P6/XER before schedule",
+        "Native P6/XER impacted schedule",
+        "Contemporaneous event evidence",
+        "Approved baseline/update",
+        "Signed contract and precedence documents",
+        "Correspondence/notices",
+        "Reviewed context"
+      ],
+      "prohibited_inferences": [
+        "event duration = EOT",
+        "negative float = EOT",
+        "calendar overlap = concurrency",
+        "Employer responsibility = entitlement",
+        "ML prediction overrides CPM"
+      ],
+      "validation_checks": [
+        "before/after pair exists",
+        "same controlling completion milestone identified",
+        "CPM recalculation basis documented",
+        "calendars/settings reconciled",
+        "event isolated",
+        "completion movement arithmetic verified",
+        "concurrency basis verified",
+        "contract route and notice status identified",
+        "Engineer determination status stated"
+      ],
+      "release_gate": [
+        "native schedule available",
+        "event evidence traceable",
+        "calculation reproducible",
+        "no unresolved source conflict on controlling dates",
+        "visual QA passes",
+        "package validation passes"
+      ],
+      "native_schedule_required": true,
+      "contract_verification_relevant": true,
+      "aliases": [
+        "tia"
+      ]
+    },
+    "delay": {
+      "id": "R02",
+      "title": "Delay Analysis Report",
+      "governing_chain": [
+        "Schedule evidence",
+        "Delay identification",
+        "Chronology",
+        "Affected work",
+        "Criticality",
+        "Delay path",
+        "Completion effect",
+        "Responsibility",
+        "Concurrency",
+        "Delay allocation"
+      ],
+      "keywords": [
+        "delay analysis",
+        "windows analysis",
+        "critical path",
+        "delay event",
+        "schedule impact",
+        "float"
+      ],
+      "rules": [
+        "Delay must be tied to identified activities.",
+        "Elapsed calendar delay alone is insufficient.",
+        "A delayed activity is not automatically a critical delay.",
+        "Float consumption must be separated from completion movement.",
+        "The selected delay-analysis methodology must be declared and consistently applied.",
+        "Each analysis window must have controlled boundaries and status evidence.",
+        "Criticality must be assessed contemporaneously.",
+        "Responsibility classification must not be inferred solely from schedule behavior.",
+        "Concurrency must be proven through independent contemporaneous control of completion.",
+        "Methodology changes or mixed methods require explicit disclosure."
+      ],
+      "required_metrics": [
+        "delay_days",
+        "critical_delay_days",
+        "float_consumption_days",
+        "completion_movement_days",
+        "concurrent_days",
+        "allocated_delay_days"
+      ],
+      "required_tables": [
+        "delay_register",
+        "window_register",
+        "affected_activities",
+        "critical_path_register",
+        "responsibility_matrix",
+        "concurrency_matrix"
+      ],
+      "required_visuals": [
+        "delay_timeline",
+        "windows_chart",
+        "critical_path_map",
+        "float_movement",
+        "completion_movement",
+        "concurrency_overlay"
+      ],
+      "evidence_hierarchy": [
+        "Native P6/XER updates",
+        "Approved baseline",
+        "As-built/status evidence",
+        "Delay records",
+        "Correspondence",
+        "Contract documents"
+      ],
+      "prohibited_inferences": [
+        "elapsed delay = critical delay",
+        "negative float proves responsibility",
+        "late correspondence alone proves EOT"
+      ],
+      "validation_checks": [
+        "methodology declared",
+        "window dates controlled",
+        "native network checked",
+        "criticality demonstrated",
+        "completion effect measured",
+        "source conflicts reconciled"
+      ],
+      "release_gate": [
+        "native schedule available",
+        "methodology reproducible",
+        "critical path evidence available",
+        "validation passes"
+      ],
+      "native_schedule_required": true,
+      "contract_verification_relevant": true,
+      "aliases": []
+    },
+    "progress": {
+      "id": "R03",
+      "title": "Project Progress Report",
+      "governing_chain": [
+        "Approved baseline",
+        "Current update",
+        "Data Date",
+        "Planned progress",
+        "Verified actual progress",
+        "Variance",
+        "Critical work",
+        "Forecast",
+        "Constraints",
+        "Management actions"
+      ],
+      "keywords": [
+        "progress report",
+        "planned progress",
+        "actual progress",
+        "weekly report",
+        "monthly report",
+        "spi",
+        "look ahead"
+      ],
+      "rules": [
+        "Planned progress must reference an identified approved baseline.",
+        "Actual progress must be traceable to status, quantity or approved measurement evidence.",
+        "Schedule progress and physical progress must remain distinct.",
+        "Earned progress and manually entered percentages must be identified separately.",
+        "A single controlled Data Date must govern period comparison.",
+        "Out-of-sequence progress and future actual dates must be flagged.",
+        "Spreadsheet progress must be reconciled with P6 when schedule progress is claimed.",
+        "Forecast dates must come from the current native schedule or be labeled analytical.",
+        "Progress variance does not by itself establish delay entitlement.",
+        "Critical delayed activities must be distinguished from general delayed activities."
+      ],
+      "required_metrics": [
+        "planned_progress_pct",
+        "actual_progress_pct",
+        "variance_pct_points",
+        "spi_proxy",
+        "forecast_finish",
+        "critical_activities_count",
+        "constraints_count"
+      ],
+      "required_tables": [
+        "progress_summary",
+        "critical_activities",
+        "milestones",
+        "constraints",
+        "lookahead",
+        "actions"
+      ],
+      "required_visuals": [
+        "planned_actual_chart",
+        "s_curve",
+        "milestone_status",
+        "critical_workfronts",
+        "constraints_dashboard"
+      ],
+      "evidence_hierarchy": [
+        "Approved baseline",
+        "Current P6 update",
+        "Quantity/progress records",
+        "Daily/weekly/monthly reports",
+        "Inspection/measurement evidence"
+      ],
+      "prohibited_inferences": [
+        "physical progress = earned value",
+        "variance = entitlement",
+        "spreadsheet forecast = native CPM forecast"
+      ],
+      "validation_checks": [
+        "baseline identified",
+        "Data Date aligned",
+        "actual status evidence checked",
+        "future dates checked",
+        "forecast reconciled",
+        "progress definitions disclosed"
+      ],
+      "release_gate": [
+        "period sources available",
+        "progress basis traceable",
+        "forecast status disclosed",
+        "validation passes"
+      ],
+      "native_schedule_required": true,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "recovery": {
+      "id": "R04",
+      "title": "Recovery & Mitigation Report",
+      "governing_chain": [
+        "Current delay position",
+        "Remaining work",
+        "Critical path",
+        "Root causes",
+        "Recovery measures",
+        "Logic/resource changes",
+        "CPM recalculation",
+        "Revised forecast",
+        "Feasibility",
+        "Monitoring"
+      ],
+      "keywords": [
+        "recovery plan",
+        "mitigation plan",
+        "acceleration",
+        "catch-up",
+        "resequence"
+      ],
+      "rules": [
+        "Recovery must begin from the current verified schedule position.",
+        "Duration reduction requires a stated production/resource basis.",
+        "Logic changes must be explicitly disclosed.",
+        "Additional resources, shifts and overtime assumptions must be quantified where used.",
+        "Productivity assumptions must be evidence-based.",
+        "Recovery must not conceal historical delay responsibility.",
+        "The approved baseline must not be overwritten by a mitigation scenario.",
+        "Mitigation and acceleration must be distinguished.",
+        "Recovery benefit must be measured against an unmitigated current forecast.",
+        "Feasibility must consider resources, access, procurement, interfaces and calendars."
+      ],
+      "required_metrics": [
+        "unmitigated_finish",
+        "mitigated_finish",
+        "recovery_gain_days",
+        "additional_manpower",
+        "additional_equipment",
+        "productivity_gain_pct",
+        "critical_path_change"
+      ],
+      "required_tables": [
+        "recovery_actions",
+        "affected_activities",
+        "resource_delta",
+        "logic_changes",
+        "constraint_closure",
+        "monitoring_kpis"
+      ],
+      "required_visuals": [
+        "recovery_gantt",
+        "before_after_forecast",
+        "resource_histogram",
+        "critical_path_recovery",
+        "action_dashboard"
+      ],
+      "evidence_hierarchy": [
+        "Current native schedule",
+        "Recovery scenario schedule",
+        "Resource/productivity basis",
+        "Constraints",
+        "Procurement/interface records"
+      ],
+      "prohibited_inferences": [
+        "shorter duration proves feasible recovery",
+        "logic deletion is mitigation",
+        "recovery schedule resets entitlement"
+      ],
+      "validation_checks": [
+        "current position verified",
+        "scenario changes logged",
+        "resource basis checked",
+        "CPM recalculated",
+        "recovery gain measured",
+        "feasibility warnings captured"
+      ],
+      "release_gate": [
+        "native current schedule available",
+        "scenario auditable",
+        "recovery assumptions disclosed",
+        "validation passes"
+      ],
+      "native_schedule_required": true,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "variation": {
+      "id": "R05",
+      "title": "Variation / Change Impact Report",
+      "governing_chain": [
+        "Instruction/change evidence",
+        "Scope delta",
+        "Affected activities",
+        "Quantity/duration effect",
+        "Logic impact",
+        "CPM effect",
+        "Cost/resource effect",
+        "Entitlement route"
+      ],
+      "keywords": [
+        "variation",
+        "change order",
+        "additional works",
+        "scope change",
+        "instruction"
+      ],
+      "rules": [
+        "Existence of the change must be supported by evidence.",
+        "Scope change must be distinguished from clarification or correction.",
+        "Instruction date is not automatically the impact date.",
+        "Additional quantity must be linked to affected activities before schedule effect is claimed.",
+        "Duration must have a stated calculation basis.",
+        "Schedule effect must be recalculated rather than assumed from change magnitude.",
+        "Cost impact and time impact remain separate.",
+        "Variation value does not establish EOT.",
+        "Deleted and substituted work must be treated transparently.",
+        "Mitigation/resequencing must be identified and measured."
+      ],
+      "required_metrics": [
+        "change_value",
+        "quantity_delta",
+        "duration_delta",
+        "completion_movement_days",
+        "cost_impact",
+        "resource_impact"
+      ],
+      "required_tables": [
+        "change_register",
+        "scope_delta",
+        "affected_activities",
+        "quantity_duration_basis",
+        "schedule_impact",
+        "contract_route"
+      ],
+      "required_visuals": [
+        "change_timeline",
+        "scope_delta_chart",
+        "before_after_schedule",
+        "cost_time_matrix"
+      ],
+      "evidence_hierarchy": [
+        "Instruction/variation documents",
+        "Native schedules",
+        "Drawings/specifications/BOQ",
+        "Quantity records",
+        "Contract documents"
+      ],
+      "prohibited_inferences": [
+        "instruction date = impact date",
+        "variation value = EOT",
+        "scope change automatically critical"
+      ],
+      "validation_checks": [
+        "change evidence verified",
+        "scope delta defined",
+        "activity linkage identified",
+        "duration basis documented",
+        "CPM effect measured",
+        "contract route checked"
+      ],
+      "release_gate": [
+        "change source traceable",
+        "schedule impact basis available where time is claimed",
+        "validation passes"
+      ],
+      "native_schedule_required": true,
+      "contract_verification_relevant": true,
+      "aliases": []
+    },
+    "hybrid": {
+      "id": "R06",
+      "title": "Integrated Project Controls Report",
+      "governing_chain": [
+        "Schedule",
+        "Progress",
+        "Cost",
+        "Resources",
+        "Risks",
+        "Procurement",
+        "Changes",
+        "Cross-source reconciliation",
+        "Integrated KPIs",
+        "Forecast",
+        "Management decisions"
+      ],
+      "keywords": [
+        "project controls",
+        "integrated report",
+        "dashboard",
+        "portfolio",
+        "executive controls"
+      ],
+      "rules": [
+        "Every KPI must state its source and cut-off date.",
+        "Different Data Dates must be disclosed rather than silently merged.",
+        "Schedule, cost and physical progress must not be treated as interchangeable.",
+        "Cross-system conflicts must be reconciled or flagged.",
+        "Forecasts must state their calculation basis.",
+        "ML outputs must remain distinct from deterministic controls.",
+        "Management conclusions must state evidence strength and limitations."
+      ],
+      "required_metrics": [
+        "planned_progress_pct",
+        "actual_progress_pct",
+        "forecast_finish",
+        "cost_variance",
+        "resource_variance",
+        "open_risks",
+        "open_changes"
+      ],
+      "required_tables": [
+        "integrated_kpis",
+        "schedule_summary",
+        "cost_summary",
+        "resource_summary",
+        "risk_summary",
+        "procurement_summary",
+        "change_summary",
+        "actions"
+      ],
+      "required_visuals": [
+        "executive_dashboard",
+        "integrated_trends",
+        "exception_matrix",
+        "management_action_board"
+      ],
+      "evidence_hierarchy": [
+        "All controlled project systems",
+        "Native P6 schedule",
+        "Cost records",
+        "Resource records",
+        "Registers",
+        "Approved reports"
+      ],
+      "prohibited_inferences": [
+        "cross-system values are equivalent without reconciliation",
+        "ML forecast = contractual forecast"
+      ],
+      "validation_checks": [
+        "source dates disclosed",
+        "KPI definitions documented",
+        "conflicts flagged",
+        "forecast basis stated",
+        "traceability retained"
+      ],
+      "release_gate": [
+        "minimum source set available",
+        "unresolved conflicts disclosed",
+        "validation passes"
+      ],
+      "native_schedule_required": false,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "resource": {
+      "id": "R07",
+      "title": "Resource / Manpower Report",
+      "governing_chain": [
+        "Scheduled activities",
+        "Resource assignments",
+        "Calendars",
+        "Planned headcount",
+        "Actual headcount",
+        "Variance",
+        "Productivity",
+        "Forecast demand",
+        "Corrective action"
+      ],
+      "keywords": [
+        "manpower",
+        "resource loading",
+        "resource histogram",
+        "labor",
+        "headcount",
+        "crew"
+      ],
+      "rules": [
+        "Headcount is not man-hours.",
+        "Monthly manpower must represent people/resource units when headcount is requested.",
+        "Man-hours remain a separate metric.",
+        "Planned resources should come from native resource assignments where available.",
+        "Duplicate resource assignments must be detected.",
+        "Resource calendars must be considered.",
+        "Actual manpower must be traceable to timesheet/site records where claimed.",
+        "Unresourced activities must be labeled rather than assigned fabricated values.",
+        "Peak manpower must identify period and basis.",
+        "Resource histograms must not fabricate missing assignments."
+      ],
+      "required_metrics": [
+        "planned_headcount",
+        "actual_headcount",
+        "headcount_variance",
+        "peak_headcount",
+        "average_headcount",
+        "manhours",
+        "required_headcount",
+        "utilization_pct",
+        "productivity"
+      ],
+      "required_tables": [
+        "monthly_manpower",
+        "resource_assignment_register",
+        "peak_resources",
+        "resource_variance",
+        "unresourced_activities"
+      ],
+      "required_visuals": [
+        "manpower_histogram",
+        "planned_actual_manpower",
+        "resource_heatmap",
+        "peak_demand_timeline"
+      ],
+      "evidence_hierarchy": [
+        "P6 resource assignments",
+        "Resource calendars",
+        "Timesheets/site manpower records",
+        "Current schedule",
+        "Productivity records"
+      ],
+      "prohibited_inferences": [
+        "manhours = manpower",
+        "activity duration implies crew size",
+        "missing assignments may be estimated as fact"
+      ],
+      "validation_checks": [
+        "resource units normalized",
+        "headcount/manhours separated",
+        "calendar basis checked",
+        "duplicates checked",
+        "actual source identified"
+      ],
+      "release_gate": [
+        "resource basis available or report marked incomplete",
+        "validation passes"
+      ],
+      "native_schedule_required": true,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "equipment": {
+      "id": "R08",
+      "title": "Equipment Resource Report",
+      "governing_chain": [
+        "Activities",
+        "Equipment assignments",
+        "Planned units",
+        "Actual units",
+        "Utilization",
+        "Downtime",
+        "Productivity",
+        "Future requirement"
+      ],
+      "keywords": [
+        "equipment",
+        "plant",
+        "machinery",
+        "equipment utilization",
+        "equipment hours"
+      ],
+      "rules": [
+        "Equipment quantity is not equipment-hours.",
+        "Operating, standby and unavailable equipment must be separated where evidence allows.",
+        "Ownership/rental status must not be inferred.",
+        "Utilization requires a defined available-time basis.",
+        "Equipment capacity should be considered in productivity calculations.",
+        "Duplicate assignment across simultaneous activities must be flagged.",
+        "Missing equipment assignments must remain missing."
+      ],
+      "required_metrics": [
+        "planned_equipment_units",
+        "actual_equipment_units",
+        "equipment_variance",
+        "equipment_hours",
+        "utilization_pct",
+        "downtime_hours",
+        "productivity"
+      ],
+      "required_tables": [
+        "monthly_equipment",
+        "equipment_assignment_register",
+        "utilization_register",
+        "downtime_register",
+        "future_demand"
+      ],
+      "required_visuals": [
+        "equipment_histogram",
+        "utilization_chart",
+        "planned_actual_equipment",
+        "downtime_pareto"
+      ],
+      "evidence_hierarchy": [
+        "P6/nonlabor assignments",
+        "Equipment logs",
+        "Daily reports",
+        "Current schedule",
+        "Productivity records"
+      ],
+      "prohibited_inferences": [
+        "equipment-hours = equipment count",
+        "presence = productive utilization"
+      ],
+      "validation_checks": [
+        "unit basis normalized",
+        "count/hours separated",
+        "duplicate allocation checked",
+        "actual log source identified"
+      ],
+      "release_gate": [
+        "equipment evidence available or gaps disclosed",
+        "validation passes"
+      ],
+      "native_schedule_required": false,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "cost": {
+      "id": "R09",
+      "title": "Cost Control Report",
+      "governing_chain": [
+        "Budget",
+        "Commitments",
+        "Actual cost",
+        "Earned value",
+        "Variance",
+        "Estimate to complete",
+        "Forecast final cost",
+        "Management action"
+      ],
+      "keywords": [
+        "cost report",
+        "budget",
+        "actual cost",
+        "commitment",
+        "estimate to complete",
+        "eac",
+        "cost variance"
+      ],
+      "rules": [
+        "Budget revisions require traceability.",
+        "Original and current budget must remain separate.",
+        "Commitment is not actual cost.",
+        "Certified value is not automatically cost incurred.",
+        "ETC methodology must be stated.",
+        "Missing cost data must not be imputed as fact.",
+        "Currency/exchange-rate basis must be identified.",
+        "Contingency must remain separately identifiable."
+      ],
+      "required_metrics": [
+        "original_budget",
+        "current_budget",
+        "commitments",
+        "actual_cost",
+        "earned_value",
+        "cost_variance",
+        "cpi",
+        "etc",
+        "eac",
+        "contingency"
+      ],
+      "required_tables": [
+        "cost_summary",
+        "budget_changes",
+        "commitment_register",
+        "actual_cost_register",
+        "forecast_at_completion"
+      ],
+      "required_visuals": [
+        "cost_dashboard",
+        "budget_actual_forecast",
+        "variance_waterfall",
+        "eac_trend"
+      ],
+      "evidence_hierarchy": [
+        "Approved budget",
+        "Cost ledger",
+        "Commitments/POs",
+        "Valuations",
+        "Forecast assumptions"
+      ],
+      "prohibited_inferences": [
+        "certified value = actual cost",
+        "commitment = incurred cost",
+        "missing ETC may be silently derived"
+      ],
+      "validation_checks": [
+        "currency identified",
+        "budget version controlled",
+        "actual cut-off defined",
+        "EAC formula stated",
+        "source reconciliation completed"
+      ],
+      "release_gate": [
+        "cost sources available",
+        "forecast basis disclosed",
+        "validation passes"
+      ],
+      "native_schedule_required": false,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "evm": {
+      "id": "R10",
+      "title": "Earned Value Management Report",
+      "governing_chain": [
+        "BAC",
+        "PV",
+        "EV",
+        "AC",
+        "SV/CV",
+        "SPI/CPI",
+        "Forecast",
+        "Management thresholds"
+      ],
+      "keywords": [
+        "earned value",
+        "evm",
+        "planned value",
+        "earned value",
+        "actual cost",
+        "spi",
+        "cpi",
+        "bac"
+      ],
+      "rules": [
+        "EV measurement method must be identified.",
+        "PV, EV and AC must share a consistent cut-off date.",
+        "SPI and CPI require valid denominators.",
+        "Physical progress must not automatically substitute for EV.",
+        "EAC formula and assumptions must be stated.",
+        "Schedule forecasts derived from SPI are analytical and do not replace native CPM forecast."
+      ],
+      "required_metrics": [
+        "bac",
+        "pv",
+        "ev",
+        "ac",
+        "sv",
+        "cv",
+        "spi",
+        "cpi",
+        "eac",
+        "etc",
+        "vac"
+      ],
+      "required_tables": [
+        "evm_summary",
+        "wbs_performance",
+        "variance_register",
+        "forecast_register"
+      ],
+      "required_visuals": [
+        "evm_dashboard",
+        "pv_ev_ac_curve",
+        "spi_cpi_trend",
+        "variance_bubble"
+      ],
+      "evidence_hierarchy": [
+        "Approved performance baseline",
+        "Cost actuals",
+        "EV measurement rules",
+        "Current schedule"
+      ],
+      "prohibited_inferences": [
+        "physical percent = EV",
+        "SPI forecast = contractual completion forecast"
+      ],
+      "validation_checks": [
+        "common cut-off verified",
+        "EV method documented",
+        "denominators validated",
+        "forecast method stated"
+      ],
+      "release_gate": [
+        "BAC/PV/EV/AC evidence sufficient for claimed metrics",
+        "validation passes"
+      ],
+      "native_schedule_required": false,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "cashflow": {
+      "id": "R11",
+      "title": "Cash Flow Report",
+      "governing_chain": [
+        "Baseline cash flow",
+        "Planned billing",
+        "Actual billing",
+        "Collections",
+        "Costs",
+        "Net cash",
+        "Forecast"
+      ],
+      "keywords": [
+        "cash flow",
+        "billing",
+        "collection",
+        "invoice",
+        "payment",
+        "retention",
+        "advance recovery"
+      ],
+      "rules": [
+        "Revenue, invoice, certification and collection must remain distinct.",
+        "Planned cash flow must identify its schedule/budget basis.",
+        "Retention and advance recovery must be separately tracked.",
+        "Tax treatment must be explicit where material.",
+        "Forecast cash position must identify assumptions.",
+        "Missing payment dates must not be invented."
+      ],
+      "required_metrics": [
+        "planned_inflow",
+        "actual_invoiced",
+        "certified_value",
+        "collections",
+        "cash_outflow",
+        "net_cash",
+        "retention",
+        "advance_recovery",
+        "forecast_cash"
+      ],
+      "required_tables": [
+        "cashflow_summary",
+        "invoice_register",
+        "collection_register",
+        "outflow_register",
+        "retention_advance"
+      ],
+      "required_visuals": [
+        "cashflow_curve",
+        "inflow_outflow",
+        "collection_aging",
+        "net_cash_forecast"
+      ],
+      "evidence_hierarchy": [
+        "Approved cash-flow baseline",
+        "Invoices/certificates",
+        "Bank/collection records",
+        "Cost forecast"
+      ],
+      "prohibited_inferences": [
+        "invoice = collection",
+        "certification = revenue",
+        "missing payment date can be assumed"
+      ],
+      "validation_checks": [
+        "cut-off aligned",
+        "cash categories separated",
+        "retention/advance handled",
+        "forecast assumptions disclosed"
+      ],
+      "release_gate": [
+        "financial sources traceable",
+        "validation passes"
+      ],
+      "native_schedule_required": false,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "scurve": {
+      "id": "R12",
+      "title": "S-Curve Performance Report",
+      "governing_chain": [
+        "Time-phased baseline",
+        "Current plan",
+        "Actual/earned",
+        "Variance",
+        "Trend",
+        "Forecast"
+      ],
+      "keywords": [
+        "s-curve",
+        "s curve",
+        "cumulative progress",
+        "planned curve",
+        "actual curve",
+        "earned curve"
+      ],
+      "rules": [
+        "Compared curves must use the same measurement basis.",
+        "Physical, cost, manpower and earned-value curves must not be mixed without clear labeling.",
+        "Baseline curve must identify baseline version.",
+        "Actual points must not extend beyond the Data Date.",
+        "Forecast portion must be visually distinguished.",
+        "Rebaselined curves must not erase original baseline history."
+      ],
+      "required_metrics": [
+        "planned_cumulative",
+        "actual_cumulative",
+        "earned_cumulative",
+        "variance",
+        "forecast_cumulative"
+      ],
+      "required_tables": [
+        "s_curve_data",
+        "baseline_versions",
+        "period_variance"
+      ],
+      "required_visuals": [
+        "s_curve",
+        "variance_band",
+        "forecast_extension"
+      ],
+      "evidence_hierarchy": [
+        "Time-phased baseline",
+        "Current period actuals",
+        "Current forecast"
+      ],
+      "prohibited_inferences": [
+        "different measurement bases are directly comparable",
+        "future actuals are acceptable"
+      ],
+      "validation_checks": [
+        "measurement basis consistent",
+        "Data Date boundary checked",
+        "baseline version identified",
+        "forecast visually separated"
+      ],
+      "release_gate": [
+        "time-phased data available",
+        "validation passes"
+      ],
+      "native_schedule_required": false,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "procurement": {
+      "id": "R13",
+      "title": "Procurement Status & Schedule Impact Report",
+      "governing_chain": [
+        "Requirement",
+        "Submittal",
+        "Approval",
+        "PO",
+        "Manufacturing",
+        "Inspection",
+        "Shipping",
+        "Delivery",
+        "Required-on-site date",
+        "Schedule impact"
+      ],
+      "keywords": [
+        "procurement",
+        "purchase order",
+        "po",
+        "manufacturing",
+        "shipping",
+        "delivery",
+        "long lead",
+        "ros date"
+      ],
+      "rules": [
+        "Required-on-site date must be schedule-linked where schedule impact is claimed.",
+        "PO date is not delivery date.",
+        "Vendor promise is not verified delivery.",
+        "Procurement status must have documentary evidence.",
+        "Long-lead status must reference a schedule need date.",
+        "Late procurement becomes schedule delay only if controlling work is affected.",
+        "Free-issue material must be separately identified.",
+        "Partial deliveries must be quantity-aware."
+      ],
+      "required_metrics": [
+        "required_on_site",
+        "planned_po",
+        "actual_po",
+        "planned_delivery",
+        "actual_delivery",
+        "procurement_delay_days",
+        "delivered_qty",
+        "required_qty"
+      ],
+      "required_tables": [
+        "procurement_register",
+        "long_lead_items",
+        "partial_deliveries",
+        "approval_status",
+        "schedule_linkage"
+      ],
+      "required_visuals": [
+        "procurement_timeline",
+        "delivery_curve",
+        "ros_gap",
+        "long_lead_heatmap"
+      ],
+      "evidence_hierarchy": [
+        "Procurement register",
+        "POs",
+        "Vendor records",
+        "MIR/delivery notes",
+        "Current P6 schedule"
+      ],
+      "prohibited_inferences": [
+        "PO = delivery",
+        "vendor promise = actual delivery",
+        "late delivery automatically = EOT"
+      ],
+      "validation_checks": [
+        "ROS basis identified",
+        "status evidence checked",
+        "quantity units normalized",
+        "schedule linkage checked"
+      ],
+      "release_gate": [
+        "procurement source traceable",
+        "schedule impact claims native-verified",
+        "validation passes"
+      ],
+      "native_schedule_required": true,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "material": {
+      "id": "R14",
+      "title": "Material Tracking Report",
+      "governing_chain": [
+        "Required quantity",
+        "Ordered quantity",
+        "Approved quantity",
+        "Delivered quantity",
+        "Accepted quantity",
+        "Installed quantity",
+        "Balance"
+      ],
+      "keywords": [
+        "material tracking",
+        "material delivery",
+        "ordered quantity",
+        "delivered quantity",
+        "installed quantity",
+        "stock"
+      ],
+      "rules": [
+        "Ordered is not delivered.",
+        "Delivered is not accepted.",
+        "Accepted is not installed.",
+        "Quantity units must be normalized.",
+        "Partial batches must remain traceable.",
+        "Rejected material must not count as usable stock.",
+        "Material shortage must link to affected schedule work before time impact is claimed."
+      ],
+      "required_metrics": [
+        "required_qty",
+        "ordered_qty",
+        "approved_qty",
+        "delivered_qty",
+        "accepted_qty",
+        "installed_qty",
+        "balance_qty",
+        "rejected_qty"
+      ],
+      "required_tables": [
+        "material_register",
+        "delivery_batches",
+        "acceptance_status",
+        "installation_balance"
+      ],
+      "required_visuals": [
+        "material_funnel",
+        "delivery_vs_requirement",
+        "stock_balance",
+        "batch_timeline"
+      ],
+      "evidence_hierarchy": [
+        "Material schedule",
+        "POs",
+        "Delivery notes",
+        "MIRs",
+        "Installation/quantity records",
+        "Current schedule"
+      ],
+      "prohibited_inferences": [
+        "delivered = accepted",
+        "accepted = installed",
+        "shortage automatically critical"
+      ],
+      "validation_checks": [
+        "units normalized",
+        "batch traceability retained",
+        "rejections treated correctly",
+        "schedule linkage checked where impact claimed"
+      ],
+      "release_gate": [
+        "material data traceable",
+        "validation passes"
+      ],
+      "native_schedule_required": false,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "lookahead": {
+      "id": "R15",
+      "title": "Look-Ahead Planning Report",
+      "governing_chain": [
+        "Current Data Date",
+        "Upcoming activities",
+        "Preconditions",
+        "Resources",
+        "Materials",
+        "Drawings",
+        "Access",
+        "Constraints",
+        "Required actions"
+      ],
+      "keywords": [
+        "look ahead",
+        "lookahead",
+        "four week",
+        "two week",
+        "upcoming activities",
+        "constraints"
+      ],
+      "rules": [
+        "Look-ahead activities should originate from the current schedule.",
+        "Completed activities must be excluded.",
+        "Constraints should carry owner and required-by date where evidence exists.",
+        "Activities missing prerequisites must be flagged.",
+        "Look-ahead does not replace the approved baseline.",
+        "Manual additions must be clearly labeled as manual/planning additions."
+      ],
+      "required_metrics": [
+        "upcoming_activities",
+        "ready_activities",
+        "constrained_activities",
+        "resource_requirements",
+        "material_requirements",
+        "actions_due"
+      ],
+      "required_tables": [
+        "lookahead_schedule",
+        "constraint_register",
+        "resource_requirements",
+        "material_requirements",
+        "action_log"
+      ],
+      "required_visuals": [
+        "lookahead_gantt",
+        "constraint_heatmap",
+        "readiness_dashboard"
+      ],
+      "evidence_hierarchy": [
+        "Current P6 update",
+        "Constraint register",
+        "Resource/material status",
+        "Submittal/drawing status"
+      ],
+      "prohibited_inferences": [
+        "manual lookahead = approved schedule",
+        "missing prerequisite can be assumed available"
+      ],
+      "validation_checks": [
+        "Data Date identified",
+        "completed work excluded",
+        "prerequisite checks performed",
+        "manual items labeled"
+      ],
+      "release_gate": [
+        "current schedule available",
+        "validation passes"
+      ],
+      "native_schedule_required": true,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "critical_path": {
+      "id": "R16",
+      "title": "Critical / Longest Path Report",
+      "governing_chain": [
+        "Native network",
+        "Schedule settings",
+        "Calendars",
+        "Relationships",
+        "Constraints",
+        "Longest path",
+        "Near-critical paths",
+        "Completion milestone"
+      ],
+      "keywords": [
+        "critical path",
+        "longest path",
+        "driving path",
+        "near critical",
+        "relationships",
+        "open ends"
+      ],
+      "rules": [
+        "Native P6 network governs path analysis.",
+        "Critical is not synonymous with negative float.",
+        "Longest-path and total-float criticality must be distinguished.",
+        "Open ends must be flagged.",
+        "Constraints driving criticality must be identified.",
+        "Excessive lags and relationship anomalies must be flagged.",
+        "Calendar differences must be retained.",
+        "The critical path must trace continuously to the controlling completion milestone."
+      ],
+      "required_metrics": [
+        "critical_path_length",
+        "near_critical_count",
+        "negative_float_count",
+        "open_ends",
+        "constraints_on_path",
+        "lags_on_path"
+      ],
+      "required_tables": [
+        "critical_path_activities",
+        "near_critical_paths",
+        "relationship_audit",
+        "constraint_audit",
+        "calendar_audit"
+      ],
+      "required_visuals": [
+        "critical_path_map",
+        "longest_path_chain",
+        "float_band",
+        "relationship_network"
+      ],
+      "evidence_hierarchy": [
+        "Native P6/XER schedule",
+        "Scheduling settings",
+        "Calendars",
+        "Baseline/current comparison where relevant"
+      ],
+      "prohibited_inferences": [
+        "negative float = critical path",
+        "screenshot path overrides native network"
+      ],
+      "validation_checks": [
+        "network parsed",
+        "completion milestone identified",
+        "open ends checked",
+        "constraints/lags/calendars reviewed"
+      ],
+      "release_gate": [
+        "native schedule available",
+        "path continuity demonstrated",
+        "validation passes"
+      ],
+      "native_schedule_required": true,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "float": {
+      "id": "R17",
+      "title": "Float Analysis Report",
+      "governing_chain": [
+        "Native CPM",
+        "Total float",
+        "Free float",
+        "Path",
+        "Constraint influence",
+        "Float consumption",
+        "Completion impact"
+      ],
+      "keywords": [
+        "total float",
+        "free float",
+        "float analysis",
+        "negative float",
+        "float consumption"
+      ],
+      "rules": [
+        "Float must come from the native schedule where formal values are stated.",
+        "Negative float is not automatically attributable to one party.",
+        "Float consumption is not automatically EOT.",
+        "Float ownership must not be assumed unless established by contract/project rules.",
+        "Before/after float changes should be reconciled with completion movement."
+      ],
+      "required_metrics": [
+        "total_float",
+        "free_float",
+        "float_consumed",
+        "negative_float_activities",
+        "completion_movement_days"
+      ],
+      "required_tables": [
+        "float_register",
+        "negative_float_register",
+        "before_after_float",
+        "constraint_influence"
+      ],
+      "required_visuals": [
+        "float_histogram",
+        "before_after_float",
+        "float_path_map"
+      ],
+      "evidence_hierarchy": [
+        "Native P6/XER schedule",
+        "Before/after schedules where change is analyzed",
+        "Contract if float ownership is material"
+      ],
+      "prohibited_inferences": [
+        "negative float = EOT",
+        "float consumption = completion delay",
+        "float ownership can be assumed"
+      ],
+      "validation_checks": [
+        "native float values available",
+        "constraint basis checked",
+        "before/after reconciliation performed"
+      ],
+      "release_gate": [
+        "native schedule available",
+        "validation passes"
+      ],
+      "native_schedule_required": true,
+      "contract_verification_relevant": true,
+      "aliases": []
+    },
+    "milestone": {
+      "id": "R18",
+      "title": "Milestone Status Report",
+      "governing_chain": [
+        "Contractual/internal milestone",
+        "Baseline date",
+        "Current forecast",
+        "Actual date",
+        "Variance",
+        "Cause",
+        "Action"
+      ],
+      "keywords": [
+        "milestone",
+        "completion milestone",
+        "key date",
+        "contract date",
+        "target date"
+      ],
+      "rules": [
+        "Contractual, internal and interface milestones must be classified.",
+        "Actual dates require evidence.",
+        "Forecast dates should come from the current schedule.",
+        "Variance must state the governing reference/baseline.",
+        "Milestone slippage does not automatically establish entitlement."
+      ],
+      "required_metrics": [
+        "baseline_date",
+        "forecast_date",
+        "actual_date",
+        "variance_days",
+        "milestones_due",
+        "milestones_late"
+      ],
+      "required_tables": [
+        "milestone_register",
+        "milestone_variance",
+        "milestone_actions"
+      ],
+      "required_visuals": [
+        "milestone_timeline",
+        "variance_chart",
+        "milestone_dashboard"
+      ],
+      "evidence_hierarchy": [
+        "Contract milestone schedule",
+        "Approved baseline",
+        "Current P6 update",
+        "Completion evidence"
+      ],
+      "prohibited_inferences": [
+        "forecast = actual",
+        "milestone slippage = entitlement"
+      ],
+      "validation_checks": [
+        "milestone type classified",
+        "reference date identified",
+        "forecast/actual sources checked"
+      ],
+      "release_gate": [
+        "milestone sources traceable",
+        "validation passes"
+      ],
+      "native_schedule_required": true,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "risk": {
+      "id": "R19",
+      "title": "Project Risk Report",
+      "governing_chain": [
+        "Risk identification",
+        "Cause",
+        "Event",
+        "Consequence",
+        "Probability",
+        "Impact",
+        "Exposure",
+        "Response",
+        "Owner",
+        "Residual risk"
+      ],
+      "keywords": [
+        "risk register",
+        "risk",
+        "probability",
+        "impact",
+        "exposure",
+        "mitigation",
+        "residual risk"
+      ],
+      "rules": [
+        "Risk and issue must remain distinct.",
+        "Probability is not certainty.",
+        "Schedule/financial impact basis must be stated.",
+        "ML risk scores must include confidence/quality.",
+        "Closed risks must retain historical traceability.",
+        "A realized risk becomes an issue/event and requires separate treatment."
+      ],
+      "required_metrics": [
+        "open_risks",
+        "high_risks",
+        "probability",
+        "impact",
+        "exposure",
+        "residual_exposure",
+        "overdue_actions"
+      ],
+      "required_tables": [
+        "risk_register",
+        "top_risks",
+        "response_actions",
+        "realized_risks"
+      ],
+      "required_visuals": [
+        "risk_heatmap",
+        "exposure_trend",
+        "top_risk_dashboard"
+      ],
+      "evidence_hierarchy": [
+        "Risk register",
+        "Workshop/assessment records",
+        "Schedule/cost impact analysis",
+        "Action logs"
+      ],
+      "prohibited_inferences": [
+        "probability = occurrence",
+        "ML risk score = proven outcome"
+      ],
+      "validation_checks": [
+        "risk/issue classification checked",
+        "scoring basis documented",
+        "owners/actions traceable",
+        "ML confidence shown where used"
+      ],
+      "release_gate": [
+        "risk source traceable",
+        "validation passes"
+      ],
+      "native_schedule_required": false,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "rfi_submittal": {
+      "id": "R20",
+      "title": "RFI / Submittal Performance Report",
+      "governing_chain": [
+        "Submission",
+        "Required response date",
+        "Actual response",
+        "Aging",
+        "Affected activity",
+        "Schedule need date",
+        "Criticality",
+        "Impact"
+      ],
+      "keywords": [
+        "rfi",
+        "submittal",
+        "response date",
+        "approval",
+        "shop drawing",
+        "technical query"
+      ],
+      "rules": [
+        "Late response alone is not EOT.",
+        "Required response date must have a documented basis.",
+        "Response date and usable-information date may differ.",
+        "Revision cycles must remain traceable.",
+        "Affected activity must be identified before schedule impact is claimed.",
+        "Critical impact must be demonstrated through the native schedule."
+      ],
+      "required_metrics": [
+        "open_items",
+        "overdue_items",
+        "average_response_days",
+        "max_aging_days",
+        "critical_overdue_items",
+        "approval_cycles"
+      ],
+      "required_tables": [
+        "rfi_register",
+        "submittal_register",
+        "aging_register",
+        "affected_activities",
+        "critical_items"
+      ],
+      "required_visuals": [
+        "aging_dashboard",
+        "response_time_chart",
+        "critical_rfi_timeline"
+      ],
+      "evidence_hierarchy": [
+        "RFI/submittal register",
+        "Correspondence",
+        "Approval records",
+        "Current P6 schedule"
+      ],
+      "prohibited_inferences": [
+        "late response = EOT",
+        "response date = usable date",
+        "overdue item is critical without schedule proof"
+      ],
+      "validation_checks": [
+        "required response basis checked",
+        "revision cycles traced",
+        "schedule need date identified where impact claimed",
+        "criticality verified"
+      ],
+      "release_gate": [
+        "register evidence traceable",
+        "validation passes"
+      ],
+      "native_schedule_required": true,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "qaqc": {
+      "id": "R21",
+      "title": "QA/QC Performance Report",
+      "governing_chain": [
+        "Planned inspection",
+        "IR/MIR submission",
+        "Inspection",
+        "Acceptance/rejection",
+        "NCR",
+        "Corrective action",
+        "Closure",
+        "Schedule effect"
+      ],
+      "keywords": [
+        "qa/qc",
+        "quality",
+        "inspection request",
+        "mir",
+        "ir",
+        "ncr",
+        "car",
+        "rework"
+      ],
+      "rules": [
+        "Submitted is not approved.",
+        "Passed inspection is not automatically activity completion unless scope supports it.",
+        "NCR quantities must be traceable.",
+        "Rework schedule effect must be demonstrated.",
+        "Missing inspection records must not be invented."
+      ],
+      "required_metrics": [
+        "irs_submitted",
+        "irs_approved",
+        "mirs_submitted",
+        "mirs_approved",
+        "open_ncr",
+        "closed_ncr",
+        "rework_qty",
+        "quality_aging"
+      ],
+      "required_tables": [
+        "inspection_register",
+        "material_inspection_register",
+        "ncr_register",
+        "corrective_actions",
+        "rework_schedule_linkage"
+      ],
+      "required_visuals": [
+        "quality_dashboard",
+        "approval_rate",
+        "ncr_aging",
+        "rework_trend"
+      ],
+      "evidence_hierarchy": [
+        "IR/MIR registers",
+        "NCR/CAR records",
+        "Inspection records",
+        "Schedule where delay effect is claimed"
+      ],
+      "prohibited_inferences": [
+        "submission = approval",
+        "passed IR = schedule completion",
+        "NCR automatically causes critical delay"
+      ],
+      "validation_checks": [
+        "status definitions controlled",
+        "NCR closure evidence checked",
+        "rework impact schedule-linked where claimed"
+      ],
+      "release_gate": [
+        "quality records traceable",
+        "validation passes"
+      ],
+      "native_schedule_required": false,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "productivity": {
+      "id": "R22",
+      "title": "Productivity Performance Report",
+      "governing_chain": [
+        "Installed quantity",
+        "Resource consumption",
+        "Working time",
+        "Actual productivity",
+        "Planned productivity",
+        "Variance",
+        "Remaining productivity requirement"
+      ],
+      "keywords": [
+        "productivity",
+        "production rate",
+        "installed quantity",
+        "manhours",
+        "output per hour",
+        "crew output"
+      ],
+      "rules": [
+        "Quantity units must be consistent.",
+        "Idle and productive time should be separated where evidence supports it.",
+        "Productivity must identify crew/resource basis.",
+        "Small-sample productivity must carry lower confidence.",
+        "Future productivity assumptions must be explicitly identified as assumptions."
+      ],
+      "required_metrics": [
+        "installed_qty",
+        "resource_input",
+        "actual_productivity",
+        "planned_productivity",
+        "productivity_variance",
+        "required_remaining_productivity"
+      ],
+      "required_tables": [
+        "productivity_register",
+        "crew_performance",
+        "quantity_progress",
+        "remaining_work"
+      ],
+      "required_visuals": [
+        "productivity_trend",
+        "planned_actual_productivity",
+        "crew_comparison"
+      ],
+      "evidence_hierarchy": [
+        "Quantity records",
+        "Timesheets/resource logs",
+        "Planned production basis",
+        "Current schedule"
+      ],
+      "prohibited_inferences": [
+        "small sample = reliable universal rate",
+        "missing resource input may be backfilled as fact"
+      ],
+      "validation_checks": [
+        "units normalized",
+        "resource basis identified",
+        "sample quality stated",
+        "future assumptions disclosed"
+      ],
+      "release_gate": [
+        "quantity/resource evidence sufficient for claimed rates",
+        "validation passes"
+      ],
+      "native_schedule_required": false,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "executive": {
+      "id": "R23",
+      "title": "Weekly / Monthly Executive Project Report",
+      "governing_chain": [
+        "Reporting cut-off",
+        "Schedule",
+        "Progress",
+        "Cost",
+        "Resources",
+        "Procurement",
+        "Risks",
+        "Changes",
+        "Quality/HSE where provided",
+        "Forecast",
+        "Decisions"
+      ],
+      "keywords": [
+        "monthly report",
+        "weekly report",
+        "executive report",
+        "management report",
+        "dashboard",
+        "kpi"
+      ],
+      "rules": [
+        "One controlled reporting cut-off must be stated.",
+        "KPI sources must be traceable.",
+        "Previous-period figures should remain frozen unless correction is disclosed.",
+        "Current and cumulative values must be distinguished.",
+        "Management actions should identify owner and target date when supported.",
+        "Executive dashboards must surface exceptions rather than suppress them."
+      ],
+      "required_metrics": [
+        "planned_progress",
+        "actual_progress",
+        "forecast_finish",
+        "cost_status",
+        "manpower",
+        "procurement_status",
+        "open_risks",
+        "open_changes",
+        "quality_status",
+        "actions_due"
+      ],
+      "required_tables": [
+        "executive_kpis",
+        "schedule_summary",
+        "progress_summary",
+        "cost_summary",
+        "resource_summary",
+        "procurement_summary",
+        "risk_change_summary",
+        "actions"
+      ],
+      "required_visuals": [
+        "executive_dashboard",
+        "trend_dashboard",
+        "exceptions_board",
+        "decision_log"
+      ],
+      "evidence_hierarchy": [
+        "Controlled period reports",
+        "Current schedule",
+        "Cost/resource/procurement registers",
+        "Risk/change logs"
+      ],
+      "prohibited_inferences": [
+        "different cut-off dates can be merged silently",
+        "corrected history can overwrite prior report without disclosure"
+      ],
+      "validation_checks": [
+        "cut-off disclosed",
+        "prior/current values separated",
+        "KPI source map built",
+        "exceptions identified"
+      ],
+      "release_gate": [
+        "minimum period evidence available",
+        "validation passes"
+      ],
+      "native_schedule_required": false,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "baseline_current": {
+      "id": "R24",
+      "title": "Baseline vs Current Schedule Report",
+      "governing_chain": [
+        "Approved baseline",
+        "Current schedule",
+        "Activity mapping",
+        "Date movement",
+        "Logic changes",
+        "Duration changes",
+        "Float changes",
+        "Milestone movement",
+        "Forecast"
+      ],
+      "keywords": [
+        "baseline vs current",
+        "baseline comparison",
+        "schedule variance",
+        "logic changes",
+        "duration changes",
+        "added activities"
+      ],
+      "rules": [
+        "Baseline version must be verified.",
+        "Added and deleted activities must be identified.",
+        "Activity-ID mismatch must be reconciled rather than silently paired.",
+        "Logic changes must be quantified.",
+        "Calendar and constraint changes must be disclosed.",
+        "Baseline movement is analytical; responsibility requires separate evidence."
+      ],
+      "required_metrics": [
+        "activities_added",
+        "activities_deleted",
+        "activities_moved",
+        "logic_changes",
+        "duration_changes",
+        "calendar_changes",
+        "milestone_variance_days",
+        "forecast_finish"
+      ],
+      "required_tables": [
+        "activity_comparison",
+        "logic_change_register",
+        "duration_change_register",
+        "calendar_constraint_changes",
+        "milestone_variance"
+      ],
+      "required_visuals": [
+        "baseline_current_gantt",
+        "movement_histogram",
+        "logic_change_map",
+        "milestone_variance"
+      ],
+      "evidence_hierarchy": [
+        "Approved baseline XER",
+        "Current XER",
+        "Baseline approval evidence"
+      ],
+      "prohibited_inferences": [
+        "date variance proves responsibility",
+        "ID similarity guarantees same activity"
+      ],
+      "validation_checks": [
+        "baseline approval/status identified",
+        "activity mapping quality assessed",
+        "logic/calendar/constraint changes checked"
+      ],
+      "release_gate": [
+        "both native schedules available",
+        "mapping confidence disclosed",
+        "validation passes"
+      ],
+      "native_schedule_required": true,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "forecast_completion": {
+      "id": "R25",
+      "title": "Forecast Completion Report",
+      "governing_chain": [
+        "Current status",
+        "Remaining durations",
+        "Current logic",
+        "Calendars",
+        "Constraints",
+        "Critical path",
+        "Forecast completion"
+      ],
+      "keywords": [
+        "forecast completion",
+        "forecast finish",
+        "expected finish",
+        "remaining duration",
+        "completion forecast"
+      ],
+      "rules": [
+        "Forecast should come from current native CPM whenever available.",
+        "Forecast is not contractual completion.",
+        "Forecast is not approved EOT.",
+        "Manual forecast overrides must be disclosed.",
+        "Remaining durations must be reconciled with progress.",
+        "ML forecast may be shown only as a separate decision-support scenario."
+      ],
+      "required_metrics": [
+        "current_forecast_finish",
+        "contractual_finish",
+        "variance_days",
+        "remaining_duration",
+        "critical_path_length",
+        "ml_forecast_finish"
+      ],
+      "required_tables": [
+        "forecast_summary",
+        "critical_path",
+        "remaining_work",
+        "forecast_assumptions",
+        "scenario_comparison"
+      ],
+      "required_visuals": [
+        "forecast_timeline",
+        "critical_path_forecast",
+        "scenario_chart"
+      ],
+      "evidence_hierarchy": [
+        "Current native P6 update",
+        "Contract dates",
+        "Progress status",
+        "Forecast assumptions"
+      ],
+      "prohibited_inferences": [
+        "forecast = contractual date",
+        "forecast = approved EOT",
+        "ML forecast overrides CPM"
+      ],
+      "validation_checks": [
+        "native schedule recalculated",
+        "remaining durations checked",
+        "manual overrides disclosed",
+        "contractual/forecast dates separated"
+      ],
+      "release_gate": [
+        "native schedule available",
+        "forecast reproducible",
+        "validation passes"
+      ],
+      "native_schedule_required": true,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "ml_project_controls": {
+      "id": "R26",
+      "title": "Machine Learning Project Controls Report",
+      "governing_chain": [
+        "Evidence",
+        "Feature engineering",
+        "Project-isolated training",
+        "Validation",
+        "Prediction",
+        "Confidence",
+        "Comparison to native controls",
+        "Decision support"
+      ],
+      "keywords": [
+        "machine learning",
+        "ml",
+        "prediction",
+        "classification",
+        "anomaly",
+        "model confidence",
+        "training"
+      ],
+      "rules": [
+        "ML is never the contractual calculation engine.",
+        "Training/testing split must prevent project leakage.",
+        "Model type and version must be recorded.",
+        "Training dataset hashes should be retained where available.",
+        "Prediction confidence/quality must be reported.",
+        "Out-of-distribution inputs must be flagged.",
+        "Native CPM overrides ML schedule predictions for formal schedule results.",
+        "ML can recommend investigation but cannot fabricate evidence.",
+        "Model drift should be monitored for deployed workflows."
+      ],
+      "required_metrics": [
+        "model_version",
+        "training_records",
+        "validation_records",
+        "accuracy",
+        "precision",
+        "recall",
+        "f1",
+        "confidence",
+        "ood_score",
+        "drift_score"
+      ],
+      "required_tables": [
+        "model_registry",
+        "training_validation_split",
+        "prediction_register",
+        "confidence_register",
+        "native_vs_ml_comparison"
+      ],
+      "required_visuals": [
+        "model_performance",
+        "confusion_matrix",
+        "confidence_distribution",
+        "native_vs_ml",
+        "drift_monitor"
+      ],
+      "evidence_hierarchy": [
+        "Training dataset",
+        "Validation dataset",
+        "Feature definitions",
+        "Model artifact/metadata",
+        "Native project-controls evidence"
+      ],
+      "prohibited_inferences": [
+        "prediction = fact",
+        "project-specific accuracy = universal accuracy",
+        "ML may create missing evidence",
+        "ML overrides native CPM"
+      ],
+      "validation_checks": [
+        "project isolation verified",
+        "leakage checks performed",
+        "model version recorded",
+        "confidence present",
+        "OOD handling present",
+        "native comparison present"
+      ],
+      "release_gate": [
+        "training/validation provenance available",
+        "confidence disclosed",
+        "validation passes"
+      ],
+      "native_schedule_required": false,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "contract_admin": {
+      "id": "R27",
+      "title": "Contract Administration Report",
+      "governing_chain": [
+        "Contract documents",
+        "Precedence",
+        "Obligations",
+        "Notices",
+        "Submissions",
+        "Responses",
+        "Outstanding actions",
+        "Potential consequences"
+      ],
+      "keywords": [
+        "contract",
+        "clause",
+        "notice",
+        "contract administration",
+        "fidic",
+        "correspondence",
+        "obligation"
+      ],
+      "rules": [
+        "Signed contract and document precedence govern contractual interpretation.",
+        "OCR text must be verified before direct quotation.",
+        "Notice compliance must be assessed against actual contract wording and dates.",
+        "The engine must not select favorable clauses while ignoring precedence.",
+        "Schedule/cost entitlement must remain separate from administrative non-compliance unless causation is established."
+      ],
+      "required_metrics": [
+        "open_notices",
+        "notices_due",
+        "responses_due",
+        "contract_actions",
+        "unverified_clauses"
+      ],
+      "required_tables": [
+        "contract_document_index",
+        "notice_register",
+        "obligation_register",
+        "response_register",
+        "precedence_matrix"
+      ],
+      "required_visuals": [
+        "contract_dashboard",
+        "notice_timeline",
+        "precedence_map"
+      ],
+      "evidence_hierarchy": [
+        "Signed contract",
+        "Particular conditions",
+        "Appendices",
+        "Correspondence/notices",
+        "Instructions"
+      ],
+      "prohibited_inferences": [
+        "OCR clause = verified quote",
+        "late notice automatically forfeits entitlement without contract analysis"
+      ],
+      "validation_checks": [
+        "signed source identified",
+        "precedence mapped",
+        "quotes verified",
+        "notice dates traceable"
+      ],
+      "release_gate": [
+        "contract evidence sufficient",
+        "validation passes"
+      ],
+      "native_schedule_required": false,
+      "contract_verification_relevant": true,
+      "aliases": []
+    },
+    "change_control": {
+      "id": "R28",
+      "title": "Change Control Register Report",
+      "governing_chain": [
+        "Potential change",
+        "Initiation",
+        "Assessment",
+        "Approval status",
+        "Time impact",
+        "Cost impact",
+        "Implementation",
+        "Closure"
+      ],
+      "keywords": [
+        "change control",
+        "change register",
+        "potential variation",
+        "change request",
+        "approval status"
+      ],
+      "rules": [
+        "Potential change and approved variation must remain distinct.",
+        "Time and cost impacts must show separate bases.",
+        "Approval status must be evidence-based.",
+        "Implemented unapproved work must be explicitly classified.",
+        "Duplicate change records must be reconciled."
+      ],
+      "required_metrics": [
+        "open_changes",
+        "approved_changes",
+        "pending_changes",
+        "rejected_changes",
+        "time_impact",
+        "cost_impact"
+      ],
+      "required_tables": [
+        "change_register",
+        "approval_status",
+        "time_cost_matrix",
+        "implementation_status"
+      ],
+      "required_visuals": [
+        "change_dashboard",
+        "approval_funnel",
+        "time_cost_scatter"
+      ],
+      "evidence_hierarchy": [
+        "Change register",
+        "Instructions",
+        "Approvals",
+        "Schedule/cost assessments"
+      ],
+      "prohibited_inferences": [
+        "potential change = approved variation",
+        "approval can be inferred from implementation"
+      ],
+      "validation_checks": [
+        "status evidence checked",
+        "duplicates reconciled",
+        "time/cost bases disclosed"
+      ],
+      "release_gate": [
+        "change evidence traceable",
+        "validation passes"
+      ],
+      "native_schedule_required": false,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "document_control": {
+      "id": "R29",
+      "title": "Document Control Performance Report",
+      "governing_chain": [
+        "Document requirement",
+        "Submission",
+        "Review",
+        "Revision",
+        "Approval",
+        "Distribution",
+        "Outstanding status",
+        "Schedule need"
+      ],
+      "keywords": [
+        "document control",
+        "drawing register",
+        "document register",
+        "revision",
+        "transmittal",
+        "approval"
+      ],
+      "rules": [
+        "Latest revision must be identified from controlled records.",
+        "Submitted, reviewed, approved and issued-for-construction statuses must remain distinct.",
+        "Superseded documents must be quarantined from current selection.",
+        "Document delay affects schedule only when linked to an affected work need date.",
+        "Missing transmittal evidence must be flagged rather than inferred."
+      ],
+      "required_metrics": [
+        "documents_total",
+        "approved_documents",
+        "pending_documents",
+        "overdue_documents",
+        "superseded_documents",
+        "average_review_days"
+      ],
+      "required_tables": [
+        "document_register",
+        "revision_history",
+        "overdue_register",
+        "superseded_register",
+        "schedule_need_link"
+      ],
+      "required_visuals": [
+        "document_status_dashboard",
+        "revision_flow",
+        "aging_chart"
+      ],
+      "evidence_hierarchy": [
+        "Controlled document register",
+        "Transmittals",
+        "Review records",
+        "Current schedule"
+      ],
+      "prohibited_inferences": [
+        "latest file timestamp = approved revision",
+        "submission = approval",
+        "document overdue = critical delay"
+      ],
+      "validation_checks": [
+        "revision control checked",
+        "superseded files quarantined",
+        "status evidence verified",
+        "schedule linkage checked where impact claimed"
+      ],
+      "release_gate": [
+        "controlled register available",
+        "validation passes"
+      ],
+      "native_schedule_required": false,
+      "contract_verification_relevant": false,
+      "aliases": []
+    },
+    "interface_management": {
+      "id": "R30",
+      "title": "Interface Management Report",
+      "governing_chain": [
+        "Interface identification",
+        "Parties",
+        "Required input/output",
+        "Need date",
+        "Actual delivery",
+        "Dependency",
+        "Constraint",
+        "Schedule effect",
+        "Closure"
+      ],
+      "keywords": [
+        "interface",
+        "dependency",
+        "handover",
+        "access",
+        "coordination",
+        "third party",
+        "mep interface"
+      ],
+      "rules": [
+        "Interfaces must identify both parties and the required exchange/deliverable.",
+        "Need dates should be schedule-linked where impact is claimed.",
+        "Coordination issue alone does not establish critical delay.",
+        "Interface closure requires evidence.",
+        "Cross-party dependencies must not be merged into one generic delay event without event-specific chronology."
+      ],
+      "required_metrics": [
+        "open_interfaces",
+        "overdue_interfaces",
+        "critical_interfaces",
+        "average_aging_days",
+        "closed_interfaces"
+      ],
+      "required_tables": [
+        "interface_register",
+        "dependency_matrix",
+        "overdue_interfaces",
+        "affected_activities",
+        "closure_actions"
+      ],
+      "required_visuals": [
+        "interface_map",
+        "aging_dashboard",
+        "dependency_timeline"
+      ],
+      "evidence_hierarchy": [
+        "Interface register",
+        "Meeting/correspondence records",
+        "Current schedule",
+        "Handover/access evidence"
+      ],
+      "prohibited_inferences": [
+        "coordination issue = critical delay",
+        "party responsibility can be inferred without evidence"
+      ],
+      "validation_checks": [
+        "parties identified",
+        "need date basis checked",
+        "closure evidence checked",
+        "schedule linkage verified where impact claimed"
+      ],
+      "release_gate": [
+        "interface evidence traceable",
+        "validation passes"
+      ],
+      "native_schedule_required": true,
+      "contract_verification_relevant": false,
+      "aliases": []
+    }
+  },
+  "release_statuses": [
+    "PASS",
+    "PASS_WITH_WARNINGS",
+    "DRAFT_EVIDENCE_INCOMPLETE",
+    "DRAFT_NATIVE_SCHEDULE_VERIFICATION_REQUIRED",
+    "DRAFT_CONTRACT_VERIFICATION_REQUIRED",
+    "FAIL_CALCULATION_INCONSISTENCY",
+    "FAIL_SOURCE_CONFLICT",
+    "FAIL_VALIDATION_ERROR"
+  ]
+}

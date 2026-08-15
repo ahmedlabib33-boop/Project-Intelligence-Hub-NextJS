@@ -70,14 +70,7 @@ def _catalog_path(primary: Path, portable: Path) -> Path:
 
 def _write_json(path: Path, value: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    content = json.dumps(value, indent=2, ensure_ascii=True)
-    if path.exists():
-        try:
-            if path.read_text(encoding="utf-8") == content:
-                return
-        except OSError:
-            pass
-    path.write_text(content, encoding="utf-8")
+    path.write_text(json.dumps(value, indent=2, ensure_ascii=True), encoding="utf-8")
 
 
 def _sha256_file(path: Path) -> str:

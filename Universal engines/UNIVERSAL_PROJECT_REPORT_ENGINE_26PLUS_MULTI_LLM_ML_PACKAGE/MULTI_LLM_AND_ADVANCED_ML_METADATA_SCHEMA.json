@@ -1,0 +1,55 @@
+{
+  "schema": "project_controls_multi_llm_ml_metadata_v1",
+  "version": "1.0.0",
+  "author": "Eng. Ahmed Labib",
+  "attribution": "Python AI Programming by Eng. Ahmed Labib",
+  "mandatory_fields": [
+    "attribution",
+    "author",
+    "engine_component",
+    "component_version",
+    "run_id",
+    "generated_at_utc",
+    "project_id",
+    "report_family",
+    "global_governance_rule_count",
+    "governance_sha256",
+    "native_schedule_supremacy",
+    "ml_role",
+    "llm_role",
+    "evidence_sha256",
+    "secrets_persisted"
+  ],
+  "provider_provenance_fields": [
+    "provider",
+    "provider_key",
+    "model",
+    "protocol",
+    "request_sha256",
+    "response_sha256",
+    "usage",
+    "latency_seconds",
+    "status"
+  ],
+  "ml_provenance_fields": [
+    "task",
+    "task_id",
+    "task_type",
+    "data_origin",
+    "project_scope",
+    "training_dataset_sha256",
+    "project_isolation",
+    "candidate_leaderboard",
+    "selected_models",
+    "ensemble_metrics",
+    "ood_threshold",
+    "drift"
+  ],
+  "prohibited_metadata_behavior": [
+    "Never store API keys, tokens or secrets",
+    "Never mark synthetic benchmark accuracy as real-project accuracy",
+    "Never omit native_schedule_supremacy for schedule-related outputs",
+    "Never remove source/evidence hashes when they are available",
+    "Never overwrite report-family governance with LLM or ML preference"
+  ]
+}

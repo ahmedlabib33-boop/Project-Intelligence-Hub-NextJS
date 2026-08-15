@@ -1,0 +1,61 @@
+{
+  "engine_version": "3.1.0",
+  "project": {
+    "proj_id": "5895",
+    "project_name": "UPD-TheBIG-PH01upto 17-MAR (FR)-IFC",
+    "data_date": "2026-03-17 00:00",
+    "plan_start": "2025-09-11 08:00",
+    "scheduled_finish": "2027-09-20 16:00",
+    "terminal_activity_id": "KD-MS-1050",
+    "terminal_activity_name": "Project Finish Date",
+    "hours_per_day": 8.0
+  },
+  "network": {
+    "activities": 1398,
+    "relationships": 3141,
+    "wbs_nodes": 388,
+    "resource_assignments": 1441,
+    "resource_coverage_pct": 37.63,
+    "constraints": 4,
+    "is_dag": true,
+    "shadow_network_days": 468.0,
+    "critical_corridor_count": 141
+  },
+  "status": {
+    "complete": 329,
+    "active": 12,
+    "not_started_or_other": 1057,
+    "physical_progress_proxy_pct": 23.53,
+    "status_codes": {
+      "TK_Complete": 329,
+      "TK_NotStart": 1057,
+      "TK_Active": 12
+    },
+    "task_types": {
+      "TT_Mile": 4,
+      "TT_FinMile": 3,
+      "TT_Task": 1391
+    }
+  },
+  "distribution": {
+    "remaining_duration_median_days": 11.0,
+    "remaining_duration_p90_days": 18.0,
+    "total_float_median_days": -42.0,
+    "positive_lag_count": 1495,
+    "positive_lag_median_days": 10.0
+  },
+  "recovery_requirement": {
+    "forecast_finish": "2027-09-20 16:00",
+    "required_finish": "2027-04-10 16:00",
+    "required_recovery_calendar_days": 163.0,
+    "basis": "terminal constraint date"
+  },
+  "recognition": {
+    "schedule_state": "progress_update",
+    "has_resources": true,
+    "has_activity_codes": true,
+    "has_wbs": true,
+    "has_constraints": true,
+    "method": "native XER structural recognition; no project-specific dictionary required"
+  }
+}

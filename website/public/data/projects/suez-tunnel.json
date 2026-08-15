@@ -111,15 +111,15 @@
     },
     "s_curve_forecast": {
       "status": "ready",
-      "method": "numpy linear trend fallback",
+      "method": "statsmodels damped Holt trend",
       "periods_available": 10,
       "current_actual_value": 916040000.0,
       "current_planned_value": 1150000000.0,
       "completion_target_value": 1250000000.0,
       "excluded_cumulative_reset_periods": 0,
       "recent_period_change": 72800000.0,
-      "projected_completion_date": "2026-09-01",
-      "months_to_target": 3,
+      "projected_completion_date": "2026-10-01",
+      "months_to_target": 4,
       "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
     },
     "s_curve_chart_url": "/data/analytics/suez-tunnel-s-curve-analytics.png",
@@ -190,25 +190,25 @@
           "installed": true
         },
         "seaborn": {
-          "installed": false
+          "installed": true
         },
         "scikit_learn": {
           "installed": true
         },
         "statsmodels": {
-          "installed": false
+          "installed": true
         },
         "spacy": {
           "installed": true
         },
         "xgboost": {
-          "installed": false
+          "installed": true
         },
         "pytorch": {
           "installed": true
         },
         "tensorflow": {
-          "installed": false
+          "installed": true
         }
       },
       "xgboost": {
@@ -233,14 +233,14 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-15T09:49:05",
-  "fingerprint": "1e07292416b492a4417efe39d39cce907354bee4cb3b58492d294122730ad211",
+  "last_updated": "2026-08-15T16:47:59",
+  "fingerprint": "79e81f3bc4f246f505929658aaa336b08c118c610233fb5bd996dde5182312fb",
   "source_files": {
     "projects": 1,
     "contracts": 2,
     "payments": 6,
     "planned_cash_flow": 0,
-    "progress": 17,
+    "progress": 0,
     "evm": 17,
     "risks": 3,
     "claims": 2,
@@ -248,6 +248,7 @@
     "milestones": 5,
     "delay_events": 5,
     "s_curve": 10,
+    "wbs": 16,
     "historical_outcomes": 0
   },
   "metric_sources": {
@@ -307,7 +308,7 @@
         "contracts": 2,
         "payments": 6,
         "planned_cash_flow": 0,
-        "progress": 17,
+        "progress": 0,
         "evm": 17,
         "risks": 3,
         "claims": 2,
@@ -315,11 +316,12 @@
         "milestones": 5,
         "delay_events": 5,
         "s_curve": 10,
+        "wbs": 16,
         "historical_outcomes": 0
       },
       "source_tables": {
         "projects": {
-          "file": "projects.csv",
+          "file": "01_project_contract.csv",
           "exists": true,
           "row_count": 1,
           "column_count": 14,
@@ -529,111 +531,12 @@
           ]
         },
         "progress_updates": {
-          "file": "04_progress_evm.csv",
-          "exists": true,
-          "row_count": 17,
-          "column_count": 9,
-          "columns": [
-            "project_id",
-            "activity_id",
-            "update_date",
-            "planned_progress",
-            "actual_progress",
-            "planned_value",
-            "earned_value",
-            "actual_cost",
-            "notes"
-          ],
-          "rows": [
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "KD-MS-1000",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "15060240.96",
-              "earned_value": "15060240.96",
-              "actual_cost": "15963855.42",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "KD-MS-1010",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "15060240.96",
-              "earned_value": "15060240.96",
-              "actual_cost": "15963855.42",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "KD-MS-1020",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "15060240.96",
-              "earned_value": "15060240.96",
-              "actual_cost": "15963855.42",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "KD-MOB-1000",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "30120481.93",
-              "earned_value": "30120481.93",
-              "actual_cost": "31927710.84",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "SUR-ST-1010",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "30120481.93",
-              "earned_value": "30120481.93",
-              "actual_cost": "31927710.84",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "E-SUB-ST-1020",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "0.83",
-              "planned_value": "45180722.89",
-              "earned_value": "37500000.00",
-              "actual_cost": "39750000.00",
-              "notes": "Critical activity behind planned curve"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "E-APP-ST-1020",
-              "update_date": "31-May-26",
-              "planned_progress": "0.80",
-              "actual_progress": "0.66",
-              "planned_value": "36144578.31",
-              "earned_value": "30000000.00",
-              "actual_cost": "31800000.00",
-              "notes": "Critical activity behind planned curve"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "P-MDEL-ST-1000",
-              "update_date": "31-May-26",
-              "planned_progress": "0.72",
-              "actual_progress": "0.60",
-              "planned_value": "54216867.47",
-              "earned_value": "45000000.00",
-              "actual_cost": "47700000.00",
-              "notes": "Critical activity behind planned curve"
-            }
-          ]
+          "file": "progress_updates.csv",
+          "exists": false,
+          "row_count": 0,
+          "column_count": 0,
+          "columns": [],
+          "rows": []
         },
         "evm": {
           "file": "04_progress_evm.csv",
@@ -770,7 +673,7 @@
           ]
         },
         "risks": {
-          "file": "risks.csv",
+          "file": "09_risks_rfi_interfaces.csv",
           "exists": true,
           "row_count": 3,
           "column_count": 11,
@@ -830,7 +733,7 @@
           ]
         },
         "claims": {
-          "file": "claims.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 2,
           "column_count": 12,
@@ -880,7 +783,7 @@
           ]
         },
         "contracts": {
-          "file": "contracts.csv",
+          "file": "01_project_contract.csv",
           "exists": true,
           "row_count": 2,
           "column_count": 11,
@@ -927,7 +830,7 @@
           ]
         },
         "payments": {
-          "file": "payments.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 6,
           "column_count": 18,
@@ -1075,7 +978,7 @@
           ]
         },
         "planned_cash_flow": {
-          "file": "planned_cash_flow.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 0,
           "column_count": 0,
@@ -1083,7 +986,7 @@
           "rows": []
         },
         "milestones": {
-          "file": "milestones.csv",
+          "file": "05_milestones_scurve.csv",
           "exists": true,
           "row_count": 5,
           "column_count": 7,
@@ -1145,7 +1048,7 @@
           ]
         },
         "delay_events": {
-          "file": "delay_events.csv",
+          "file": "06_delay_events.csv",
           "exists": true,
           "row_count": 5,
           "column_count": 14,
@@ -1249,7 +1152,7 @@
           ]
         },
         "wbs": {
-          "file": "wbs.csv",
+          "file": "03_schedule_logic.csv",
           "exists": true,
           "row_count": 16,
           "column_count": 16,
@@ -1419,7 +1322,7 @@
           ]
         },
         "s_curve": {
-          "file": "s_curve.csv",
+          "file": "05_milestones_scurve.csv",
           "exists": true,
           "row_count": 10,
           "column_count": 8,
@@ -1519,7 +1422,7 @@
       },
       "workspace_tables": {
         "projects": {
-          "file": "projects.csv",
+          "file": "01_project_contract.csv",
           "exists": true,
           "row_count": 1,
           "column_count": 14,
@@ -1558,7 +1461,7 @@
             }
           ],
           "truncated": false,
-          "source_path": "projects.csv"
+          "source_path": "01_project_contract.csv"
         },
         "activities": {
           "file": "02_schedule_activities.csv",
@@ -1895,212 +1798,14 @@
           "source_path": "02_schedule_activities.csv"
         },
         "progress_updates": {
-          "file": "04_progress_evm.csv",
-          "exists": true,
-          "row_count": 17,
-          "column_count": 9,
-          "columns": [
-            "project_id",
-            "activity_id",
-            "update_date",
-            "planned_progress",
-            "actual_progress",
-            "planned_value",
-            "earned_value",
-            "actual_cost",
-            "notes"
-          ],
-          "rows": [
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "KD-MS-1000",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "15060240.96",
-              "earned_value": "15060240.96",
-              "actual_cost": "15963855.42",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "KD-MS-1010",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "15060240.96",
-              "earned_value": "15060240.96",
-              "actual_cost": "15963855.42",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "KD-MS-1020",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "15060240.96",
-              "earned_value": "15060240.96",
-              "actual_cost": "15963855.42",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "KD-MOB-1000",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "30120481.93",
-              "earned_value": "30120481.93",
-              "actual_cost": "31927710.84",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "SUR-ST-1010",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "30120481.93",
-              "earned_value": "30120481.93",
-              "actual_cost": "31927710.84",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "E-SUB-ST-1020",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "0.83",
-              "planned_value": "45180722.89",
-              "earned_value": "37500000.00",
-              "actual_cost": "39750000.00",
-              "notes": "Critical activity behind planned curve"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "E-APP-ST-1020",
-              "update_date": "31-May-26",
-              "planned_progress": "0.80",
-              "actual_progress": "0.66",
-              "planned_value": "36144578.31",
-              "earned_value": "30000000.00",
-              "actual_cost": "31800000.00",
-              "notes": "Critical activity behind planned curve"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "P-MDEL-ST-1000",
-              "update_date": "31-May-26",
-              "planned_progress": "0.72",
-              "actual_progress": "0.60",
-              "planned_value": "54216867.47",
-              "earned_value": "45000000.00",
-              "actual_cost": "47700000.00",
-              "notes": "Critical activity behind planned curve"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "CON-ST-EXC-1010",
-              "update_date": "31-May-26",
-              "planned_progress": "0.82",
-              "actual_progress": "0.68",
-              "planned_value": "123493975.90",
-              "earned_value": "102500000.00",
-              "actual_cost": "108650000.00",
-              "notes": "Critical activity behind planned curve"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "CON-ST-RFT-1020",
-              "update_date": "31-May-26",
-              "planned_progress": "0.60",
-              "actual_progress": "0.50",
-              "planned_value": "90361445.78",
-              "earned_value": "75000000.00",
-              "actual_cost": "79500000.00",
-              "notes": "Critical activity behind planned curve"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "CON-ST-CON-1030",
-              "update_date": "31-May-26",
-              "planned_progress": "0.42",
-              "actual_progress": "0.35",
-              "planned_value": "63253012.05",
-              "earned_value": "52500000.00",
-              "actual_cost": "55650000.00",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "CON-ST-WALL-1040",
-              "update_date": "31-May-26",
-              "planned_progress": "0.25",
-              "actual_progress": "0.21",
-              "planned_value": "37650602.41",
-              "earned_value": "31250000.00",
-              "actual_cost": "33125000.00",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "CON-ST-SLAB-1050",
-              "update_date": "31-May-26",
-              "planned_progress": "0.05",
-              "actual_progress": "0.04",
-              "planned_value": "7530120.48",
-              "earned_value": "6250000.00",
-              "actual_cost": "6625000.00",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "MEP-ST-DRN-1060",
-              "update_date": "31-May-26",
-              "planned_progress": "0.00",
-              "actual_progress": "0.00",
-              "planned_value": "0.00",
-              "earned_value": "0.00",
-              "actual_cost": "0.00",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "FIN-ST-RD-1070",
-              "update_date": "31-May-26",
-              "planned_progress": "0.00",
-              "actual_progress": "0.00",
-              "planned_value": "0.00",
-              "earned_value": "0.00",
-              "actual_cost": "0.00",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "TST-ST-1080",
-              "update_date": "31-May-26",
-              "planned_progress": "0.00",
-              "actual_progress": "0.00",
-              "planned_value": "0.00",
-              "earned_value": "0.00",
-              "actual_cost": "0.00",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Suez-Tunnel",
-              "activity_id": "KD-MS-9000",
-              "update_date": "31-May-26",
-              "planned_progress": "0.00",
-              "actual_progress": "0.00",
-              "planned_value": "0.00",
-              "earned_value": "0.00",
-              "actual_cost": "0.00",
-              "notes": "Progress aligned with update narrative"
-            }
-          ],
+          "file": "progress_updates.csv",
+          "exists": false,
+          "row_count": 0,
+          "column_count": 0,
+          "columns": [],
+          "rows": [],
           "truncated": false,
-          "source_path": "04_progress_evm.csv"
+          "source_path": "progress_updates.csv"
         },
         "evm": {
           "file": "04_progress_evm.csv",
@@ -2365,7 +2070,7 @@
           "source_path": "04_progress_evm.csv"
         },
         "risks": {
-          "file": "risks.csv",
+          "file": "09_risks_rfi_interfaces.csv",
           "exists": true,
           "row_count": 3,
           "column_count": 11,
@@ -2424,10 +2129,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "risks.csv"
+          "source_path": "09_risks_rfi_interfaces.csv"
         },
         "claims": {
-          "file": "claims.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 2,
           "column_count": 12,
@@ -2476,10 +2181,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "claims.csv"
+          "source_path": "08_commercial_payments_claims.csv"
         },
         "contracts": {
-          "file": "contracts.csv",
+          "file": "01_project_contract.csv",
           "exists": true,
           "row_count": 2,
           "column_count": 11,
@@ -2525,10 +2230,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "contracts.csv"
+          "source_path": "01_project_contract.csv"
         },
         "payments": {
-          "file": "payments.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 6,
           "column_count": 18,
@@ -2675,20 +2380,20 @@
             }
           ],
           "truncated": false,
-          "source_path": "payments.csv"
+          "source_path": "08_commercial_payments_claims.csv"
         },
         "planned_cash_flow": {
-          "file": "planned_cash_flow.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 0,
           "column_count": 0,
           "columns": [],
           "rows": [],
           "truncated": false,
-          "source_path": "planned_cash_flow.csv"
+          "source_path": "08_commercial_payments_claims.csv"
         },
         "milestones": {
-          "file": "milestones.csv",
+          "file": "05_milestones_scurve.csv",
           "exists": true,
           "row_count": 5,
           "column_count": 7,
@@ -2749,10 +2454,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "milestones.csv"
+          "source_path": "05_milestones_scurve.csv"
         },
         "delay_events": {
-          "file": "delay_events.csv",
+          "file": "06_delay_events.csv",
           "exists": true,
           "row_count": 5,
           "column_count": 14,
@@ -2855,10 +2560,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "delay_events.csv"
+          "source_path": "06_delay_events.csv"
         },
         "wbs": {
-          "file": "wbs.csv",
+          "file": "03_schedule_logic.csv",
           "exists": true,
           "row_count": 16,
           "column_count": 16,
@@ -3171,10 +2876,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "wbs.csv"
+          "source_path": "03_schedule_logic.csv"
         },
         "s_curve": {
-          "file": "s_curve.csv",
+          "file": "05_milestones_scurve.csv",
           "exists": true,
           "row_count": 10,
           "column_count": 8,
@@ -3291,7 +2996,7 @@
             }
           ],
           "truncated": false,
-          "source_path": "s_curve.csv"
+          "source_path": "05_milestones_scurve.csv"
         }
       }
     },
@@ -3486,14 +3191,14 @@
       },
       "logic_mode": "Controlled project-local Time Impact Analysis",
       "controlled_tia": {
-        "engine": "2026.08.controlled-project-tia.v2.1",
+        "engine": "2026.08.controlled-project-tia.v2.2",
         "project_id": "Suez-Tunnel",
         "project_key": "suez-tunnel",
         "status": "SETUP_REQUIRED",
         "approval_status": "not_submitted",
         "message": "No project-local approved TIA release is configured in project_manifest.json.",
         "workflow_tabs": [
-          "Source Integrity",
+          "Time Impact Methodology",
           "Schedule and CPM",
           "Events and Fragnets",
           "Concurrency and Entitlement",
@@ -4930,6 +4635,7 @@
               {
                 "id": 3,
                 "file_name": "Overall_Contract_clause_library.xlsx",
+                "file_path": "C:\\Users\\pc\\OneDrive\\Documents\\Project Intelligence Hub\\projects\\Tunnels\\Suez-Tunnel\\05-contracts\\source\\Overall_Contract_clause_library.xlsx",
                 "file_hash": "b977c2cbca9385310712ddc6f0f2c70c46865c901330f10f0339327276ea2f44",
                 "file_type": ".xlsx",
                 "upload_date": "2026-06-27T02:23:55+00:00",
@@ -5134,7 +4840,7 @@
       "controlled_assessment": {
         "status": {
           "knowledge_base_status": "Needs review",
-          "error": "cannot import name 'build_project_contract_controls' from 'contract_claims_center' ([local path removed])"
+          "error": "cannot import name 'build_project_contract_controls' from 'contract_claims_center' (D:\\Project Intelligence Hub NextJS\\contract_claims_center.py)"
         },
         "controls": {
           "project_id": "Suez-Tunnel",
@@ -5773,784 +5479,126 @@
           "relative_path": "Suez-Tunnel/01_executive_dashboard.html",
           "extension": "html",
           "size_kb": 17.8,
-          "modified": "2026-08-13T21:54:08"
+          "modified": "2026-08-01T12:03:40"
         },
         {
           "name": "01_executive_dashboard.pdf",
           "relative_path": "Suez-Tunnel/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 897.3,
-          "modified": "2026-08-13T21:54:10"
+          "modified": "2026-08-15T16:48:54"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "Suez-Tunnel/01_executive_dashboard.pptx",
           "extension": "pptx",
-          "size_kb": 28.5,
-          "modified": "2026-08-13T21:54:10"
+          "size_kb": 28.4,
+          "modified": "2026-08-15T16:48:54"
         },
         {
           "name": "02_master_dashboard.html",
           "relative_path": "Suez-Tunnel/02_master_dashboard.html",
           "extension": "html",
           "size_kb": 85.0,
-          "modified": "2026-08-13T21:54:08"
+          "modified": "2026-08-01T12:03:40"
         },
         {
           "name": "02_master_dashboard.pdf",
           "relative_path": "Suez-Tunnel/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 864.0,
-          "modified": "2026-08-13T21:54:10"
+          "modified": "2026-08-15T16:49:00"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "Suez-Tunnel/02_master_dashboard.pptx",
           "extension": "pptx",
-          "size_kb": 28.5,
-          "modified": "2026-08-13T21:54:10"
+          "size_kb": 28.4,
+          "modified": "2026-08-15T16:49:00"
         },
         {
           "name": "03_elite_svg_charts.html",
           "relative_path": "Suez-Tunnel/03_elite_svg_charts.html",
           "extension": "html",
           "size_kb": 50.8,
-          "modified": "2026-08-13T21:54:08"
+          "modified": "2026-08-01T12:03:40"
         },
         {
           "name": "03_elite_svg_charts.pdf",
           "relative_path": "Suez-Tunnel/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 235.7,
-          "modified": "2026-08-13T21:54:10"
+          "modified": "2026-08-15T16:49:02"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "Suez-Tunnel/03_elite_svg_charts.pptx",
           "extension": "pptx",
-          "size_kb": 28.5,
-          "modified": "2026-08-13T21:54:10"
+          "size_kb": 28.4,
+          "modified": "2026-08-15T16:49:02"
         },
         {
           "name": "04_linked_executive_dashboard.html",
           "relative_path": "Suez-Tunnel/04_linked_executive_dashboard.html",
           "extension": "html",
           "size_kb": 56.4,
-          "modified": "2026-08-13T21:54:08"
+          "modified": "2026-08-01T12:03:40"
         },
         {
           "name": "04_linked_executive_dashboard.pdf",
           "relative_path": "Suez-Tunnel/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1095.7,
-          "modified": "2026-08-13T21:54:10"
+          "modified": "2026-08-15T16:49:06"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "Suez-Tunnel/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
-          "size_kb": 28.6,
-          "modified": "2026-08-13T21:54:10"
+          "size_kb": 28.4,
+          "modified": "2026-08-15T16:49:06"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
           "relative_path": "Suez-Tunnel/05_delay_tia_governed_assessment.docx",
           "extension": "docx",
           "size_kb": 34.8,
-          "modified": "2026-08-13T21:25:35"
+          "modified": "2026-08-01T15:48:58"
         },
         {
           "name": "05_delay_tia_governed_assessment.html",
           "relative_path": "Suez-Tunnel/05_delay_tia_governed_assessment.html",
           "extension": "html",
           "size_kb": 2.5,
-          "modified": "2026-08-13T21:25:35"
+          "modified": "2026-08-05T01:08:59"
         },
         {
           "name": "05_delay_tia_governed_assessment.manifest.json",
           "relative_path": "Suez-Tunnel/05_delay_tia_governed_assessment.manifest.json",
           "extension": "json",
           "size_kb": 0.6,
-          "modified": "2026-08-13T21:25:35"
+          "modified": "2026-08-05T01:08:59"
         },
         {
           "name": "05_delay_tia_governed_assessment.pdf",
           "relative_path": "Suez-Tunnel/05_delay_tia_governed_assessment.pdf",
           "extension": "pdf",
-          "size_kb": 2.1,
-          "modified": "2026-08-13T21:25:35"
+          "size_kb": 2.0,
+          "modified": "2026-08-05T01:08:59"
         },
         {
           "name": "05_delay_tia_governed_assessment.pptx",
           "relative_path": "Suez-Tunnel/05_delay_tia_governed_assessment.pptx",
           "extension": "pptx",
           "size_kb": 27.8,
-          "modified": "2026-08-13T21:25:35"
-        },
-        {
-          "name": "05_samco_pco_31_slide_report.html",
-          "relative_path": "Suez-Tunnel/05_samco_pco_31_slide_report.html",
-          "extension": "html",
-          "size_kb": 107.1,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "05_samco_pco_31_slide_report.pdf",
-          "relative_path": "Suez-Tunnel/05_samco_pco_31_slide_report.pdf",
-          "extension": "pdf",
-          "size_kb": 55.6,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "05_samco_pco_31_slide_report.pptx",
-          "relative_path": "Suez-Tunnel/05_samco_pco_31_slide_report.pptx",
-          "extension": "pptx",
-          "size_kb": 84.1,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
-          "extension": "html",
-          "size_kb": 3.5,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
-          "extension": "pdf",
-          "size_kb": 2.3,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx",
-          "extension": "pptx",
-          "size_kb": 29.4,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_02_pro_dly_02_delay_analysis.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_02_pro_dly_02_delay_analysis.html",
-          "extension": "html",
-          "size_kb": 5.0,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
-          "extension": "pdf",
-          "size_kb": 2.9,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_02_pro_dly_02_delay_analysis.pptx",
-          "extension": "pptx",
-          "size_kb": 29.9,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_03_pro_prg_03_project_progress.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_03_pro_prg_03_project_progress.html",
-          "extension": "html",
-          "size_kb": 8.7,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_03_pro_prg_03_project_progress.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_03_pro_prg_03_project_progress.pdf",
-          "extension": "pdf",
-          "size_kb": 3.4,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_03_pro_prg_03_project_progress.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_03_pro_prg_03_project_progress.pptx",
-          "extension": "pptx",
-          "size_kb": 30.1,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
-          "extension": "html",
-          "size_kb": 8.7,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
-          "extension": "pdf",
-          "size_kb": 3.4,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx",
-          "extension": "pptx",
-          "size_kb": 30.2,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_05_pro_var_05_variation_report.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_05_pro_var_05_variation_report.html",
-          "extension": "html",
-          "size_kb": 3.9,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_05_pro_var_05_variation_report.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_05_pro_var_05_variation_report.pdf",
-          "extension": "pdf",
-          "size_kb": 2.5,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_05_pro_var_05_variation_report.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_05_pro_var_05_variation_report.pptx",
-          "extension": "pptx",
-          "size_kb": 29.6,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_06_pro_ipc_06_interim_payment.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_06_pro_ipc_06_interim_payment.html",
-          "extension": "html",
-          "size_kb": 5.2,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
-          "extension": "pdf",
-          "size_kb": 2.6,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_06_pro_ipc_06_interim_payment.pptx",
-          "extension": "pptx",
-          "size_kb": 29.7,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_07_pro_res_07_resource_manpower.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_07_pro_res_07_resource_manpower.html",
-          "extension": "html",
-          "size_kb": 8.6,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_07_pro_res_07_resource_manpower.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_07_pro_res_07_resource_manpower.pdf",
-          "extension": "pdf",
-          "size_kb": 3.3,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_07_pro_res_07_resource_manpower.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_07_pro_res_07_resource_manpower.pptx",
-          "extension": "pptx",
-          "size_kb": 30.1,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_08_pro_eqp_08_equipment_plant.html",
-          "extension": "html",
-          "size_kb": 3.1,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
-          "extension": "pdf",
-          "size_kb": 2.0,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_08_pro_eqp_08_equipment_plant.pptx",
-          "extension": "pptx",
-          "size_kb": 29.3,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_09_pro_cst_09_cost_control.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_09_pro_cst_09_cost_control.html",
-          "extension": "html",
-          "size_kb": 7.4,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_09_pro_cst_09_cost_control.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_09_pro_cst_09_cost_control.pdf",
-          "extension": "pdf",
-          "size_kb": 3.2,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_09_pro_cst_09_cost_control.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_09_pro_cst_09_cost_control.pptx",
-          "extension": "pptx",
-          "size_kb": 30.0,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_10_pro_evm_10_earned_value.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_10_pro_evm_10_earned_value.html",
-          "extension": "html",
-          "size_kb": 7.4,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_10_pro_evm_10_earned_value.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_10_pro_evm_10_earned_value.pdf",
-          "extension": "pdf",
-          "size_kb": 3.2,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_10_pro_evm_10_earned_value.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_10_pro_evm_10_earned_value.pptx",
-          "extension": "pptx",
-          "size_kb": 30.0,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_11_pro_cfs_11_cash_flow.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_11_pro_cfs_11_cash_flow.html",
-          "extension": "html",
-          "size_kb": 5.3,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
-          "extension": "pdf",
-          "size_kb": 2.6,
-          "modified": "2026-08-15T09:50:25"
-        },
-        {
-          "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_11_pro_cfs_11_cash_flow.pptx",
-          "extension": "pptx",
-          "size_kb": 29.7,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_12_pro_scv_12_s_curve.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_12_pro_scv_12_s_curve.html",
-          "extension": "html",
-          "size_kb": 4.9,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_12_pro_scv_12_s_curve.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_12_pro_scv_12_s_curve.pdf",
-          "extension": "pdf",
-          "size_kb": 2.8,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_12_pro_scv_12_s_curve.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_12_pro_scv_12_s_curve.pptx",
-          "extension": "pptx",
-          "size_kb": 29.8,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_13_pro_prc_13_procurement_status.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_13_pro_prc_13_procurement_status.html",
-          "extension": "html",
-          "size_kb": 8.6,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_13_pro_prc_13_procurement_status.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_13_pro_prc_13_procurement_status.pdf",
-          "extension": "pdf",
-          "size_kb": 3.3,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_13_pro_prc_13_procurement_status.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_13_pro_prc_13_procurement_status.pptx",
-          "extension": "pptx",
-          "size_kb": 30.1,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_14_pro_mat_14_material_status.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_14_pro_mat_14_material_status.html",
-          "extension": "html",
-          "size_kb": 8.6,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_14_pro_mat_14_material_status.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_14_pro_mat_14_material_status.pdf",
-          "extension": "pdf",
-          "size_kb": 3.3,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_14_pro_mat_14_material_status.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_14_pro_mat_14_material_status.pptx",
-          "extension": "pptx",
-          "size_kb": 30.1,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_15_pro_lah_15_labour_hours.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_15_pro_lah_15_labour_hours.html",
-          "extension": "html",
-          "size_kb": 8.6,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_15_pro_lah_15_labour_hours.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_15_pro_lah_15_labour_hours.pdf",
-          "extension": "pdf",
-          "size_kb": 3.3,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_15_pro_lah_15_labour_hours.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_15_pro_lah_15_labour_hours.pptx",
-          "extension": "pptx",
-          "size_kb": 30.1,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_16_pro_cpm_16_critical_path.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_16_pro_cpm_16_critical_path.html",
-          "extension": "html",
-          "size_kb": 8.7,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_16_pro_cpm_16_critical_path.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_16_pro_cpm_16_critical_path.pdf",
-          "extension": "pdf",
-          "size_kb": 3.4,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_16_pro_cpm_16_critical_path.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_16_pro_cpm_16_critical_path.pptx",
-          "extension": "pptx",
-          "size_kb": 30.1,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_17_pro_flt_17_float_analysis.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_17_pro_flt_17_float_analysis.html",
-          "extension": "html",
-          "size_kb": 8.7,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_17_pro_flt_17_float_analysis.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_17_pro_flt_17_float_analysis.pdf",
-          "extension": "pdf",
-          "size_kb": 3.4,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_17_pro_flt_17_float_analysis.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_17_pro_flt_17_float_analysis.pptx",
-          "extension": "pptx",
-          "size_kb": 30.1,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_18_pro_mil_18_milestone_status.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_18_pro_mil_18_milestone_status.html",
-          "extension": "html",
-          "size_kb": 4.0,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_18_pro_mil_18_milestone_status.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_18_pro_mil_18_milestone_status.pdf",
-          "extension": "pdf",
-          "size_kb": 2.6,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_18_pro_mil_18_milestone_status.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_18_pro_mil_18_milestone_status.pptx",
-          "extension": "pptx",
-          "size_kb": 29.7,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_19_pro_rsk_19_risk_report.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_19_pro_rsk_19_risk_report.html",
-          "extension": "html",
-          "size_kb": 4.0,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_19_pro_rsk_19_risk_report.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_19_pro_rsk_19_risk_report.pdf",
-          "extension": "pdf",
-          "size_kb": 2.6,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_19_pro_rsk_19_risk_report.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_19_pro_rsk_19_risk_report.pptx",
-          "extension": "pptx",
-          "size_kb": 29.7,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
-          "extension": "html",
-          "size_kb": 3.2,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
-          "extension": "pdf",
-          "size_kb": 2.1,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx",
-          "extension": "pptx",
-          "size_kb": 29.3,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
-          "extension": "html",
-          "size_kb": 3.1,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
-          "extension": "pdf",
-          "size_kb": 2.0,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx",
-          "extension": "pptx",
-          "size_kb": 29.3,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_22_pro_prod_22_productivity.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_22_pro_prod_22_productivity.html",
-          "extension": "html",
-          "size_kb": 8.7,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_22_pro_prod_22_productivity.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_22_pro_prod_22_productivity.pdf",
-          "extension": "pdf",
-          "size_kb": 3.4,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_22_pro_prod_22_productivity.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_22_pro_prod_22_productivity.pptx",
-          "extension": "pptx",
-          "size_kb": 30.1,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_23_pro_exe_23_executive_report.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_23_pro_exe_23_executive_report.html",
-          "extension": "html",
-          "size_kb": 4.1,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_23_pro_exe_23_executive_report.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_23_pro_exe_23_executive_report.pdf",
-          "extension": "pdf",
-          "size_kb": 2.7,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_23_pro_exe_23_executive_report.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_23_pro_exe_23_executive_report.pptx",
-          "extension": "pptx",
-          "size_kb": 29.7,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
-          "extension": "html",
-          "size_kb": 8.7,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
-          "extension": "pdf",
-          "size_kb": 3.4,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx",
-          "extension": "pptx",
-          "size_kb": 30.2,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_25_pro_fcf_25_forecast_completion.html",
-          "extension": "html",
-          "size_kb": 8.7,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
-          "extension": "pdf",
-          "size_kb": 3.4,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_25_pro_fcf_25_forecast_completion.pptx",
-          "extension": "pptx",
-          "size_kb": 30.1,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_26_pro_ml_26_ml_project_controls.html",
-          "extension": "html",
-          "size_kb": 8.8,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
-          "extension": "pdf",
-          "size_kb": 3.5,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_26_pro_ml_26_ml_project_controls.pptx",
-          "extension": "pptx",
-          "size_kb": 30.1,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_27_pro_cad_27_contract_administration.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_27_pro_cad_27_contract_administration.html",
-          "extension": "html",
-          "size_kb": 3.9,
-          "modified": "2026-08-15T09:50:26"
-        },
-        {
-          "name": "06_samco_pco_27_pro_cad_27_contract_administration.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_27_pro_cad_27_contract_administration.pdf",
-          "extension": "pdf",
-          "size_kb": 2.4,
-          "modified": "2026-08-15T09:50:27"
-        },
-        {
-          "name": "06_samco_pco_27_pro_cad_27_contract_administration.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_27_pro_cad_27_contract_administration.pptx",
-          "extension": "pptx",
-          "size_kb": 29.6,
-          "modified": "2026-08-15T09:50:27"
-        },
-        {
-          "name": "06_samco_pco_28_pro_chg_28_change_control.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_28_pro_chg_28_change_control.html",
-          "extension": "html",
-          "size_kb": 3.9,
-          "modified": "2026-08-15T09:50:27"
-        },
-        {
-          "name": "06_samco_pco_28_pro_chg_28_change_control.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_28_pro_chg_28_change_control.pdf",
-          "extension": "pdf",
-          "size_kb": 2.5,
-          "modified": "2026-08-15T09:50:27"
-        },
-        {
-          "name": "06_samco_pco_28_pro_chg_28_change_control.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_28_pro_chg_28_change_control.pptx",
-          "extension": "pptx",
-          "size_kb": 29.6,
-          "modified": "2026-08-15T09:50:27"
-        },
-        {
-          "name": "06_samco_pco_29_pro_doc_29_document_control.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_29_pro_doc_29_document_control.html",
-          "extension": "html",
-          "size_kb": 3.1,
-          "modified": "2026-08-15T09:50:27"
-        },
-        {
-          "name": "06_samco_pco_29_pro_doc_29_document_control.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_29_pro_doc_29_document_control.pdf",
-          "extension": "pdf",
-          "size_kb": 2.0,
-          "modified": "2026-08-15T09:50:27"
-        },
-        {
-          "name": "06_samco_pco_29_pro_doc_29_document_control.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_29_pro_doc_29_document_control.pptx",
-          "extension": "pptx",
-          "size_kb": 29.3,
-          "modified": "2026-08-15T09:50:27"
-        },
-        {
-          "name": "06_samco_pco_30_pro_ifc_30_interface_management.html",
-          "relative_path": "Suez-Tunnel/06_samco_pco_30_pro_ifc_30_interface_management.html",
-          "extension": "html",
-          "size_kb": 3.2,
-          "modified": "2026-08-15T09:50:27"
-        },
-        {
-          "name": "06_samco_pco_30_pro_ifc_30_interface_management.pdf",
-          "relative_path": "Suez-Tunnel/06_samco_pco_30_pro_ifc_30_interface_management.pdf",
-          "extension": "pdf",
-          "size_kb": 2.1,
-          "modified": "2026-08-15T09:50:27"
-        },
-        {
-          "name": "06_samco_pco_30_pro_ifc_30_interface_management.pptx",
-          "relative_path": "Suez-Tunnel/06_samco_pco_30_pro_ifc_30_interface_management.pptx",
-          "extension": "pptx",
-          "size_kb": 29.3,
-          "modified": "2026-08-15T09:50:27"
-        },
-        {
-          "name": "06_samco_pco_complete_project_report_package.zip",
-          "relative_path": "Suez-Tunnel/06_samco_pco_complete_project_report_package.zip",
-          "extension": "zip",
-          "size_kb": 960.6,
-          "modified": "2026-08-15T09:50:27"
+          "modified": "2026-08-05T01:08:59"
         },
         {
           "name": "universal_report_engine_manifest.json",
           "relative_path": "Suez-Tunnel/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
-          "size_kb": 27.3,
-          "modified": "2026-08-15T09:50:27"
+          "size_kb": 28.1,
+          "modified": "2026-08-15T18:39:33"
         }
       ],
       "watchers": [
@@ -7635,7 +6683,7 @@
         "source_lineage": {
           "files": [
             "12_delay_event_classification.csv",
-            "delay_event_classification.csv",
+            "vercel/14-delay_event_classification.csv",
             "delay_events.csv"
           ],
           "required_columns": [
@@ -7659,7 +6707,7 @@
         "source_lineage": {
           "files": [
             "12_delay_event_classification.csv",
-            "delay_event_classification.csv",
+            "vercel/14-delay_event_classification.csv",
             "delay_events.csv"
           ],
           "required_columns": [
@@ -7704,7 +6752,7 @@
         "source_lineage": {
           "files": [
             "13_tia_recovery_scenario.csv",
-            "tia_recovery_scenario.csv",
+            "vercel/15-tia_recovery_scenario.csv",
             "activities.csv"
           ],
           "required_columns": [
@@ -7742,12 +6790,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 918800,
-          "sha256": "c1549a8987eb35433296ef21db2b0ac4b1d1e137a9541446b195fdb453b70e44"
+          "sha256": "735add1b8971d40713fd7f3c2f84e8ecefc5d7f6b263bb0383383f2dbba5f007"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
-          "bytes": 29234,
-          "sha256": "7f59f798a881a4dbecf529035d5195e820c58d1b8e0425a006ee5bc8494f7e58"
+          "bytes": 29055,
+          "sha256": "ec6712df9f72df65484a5dc0f533fa36f3fe1e30aea1771bbcbdbc181b9929fc"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7767,12 +6815,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 884770,
-          "sha256": "7ccc72a68dc22e8d0fc6b531cb823a3b47857ab7ace2717de45b5477264ced04"
+          "sha256": "bae1b5efe5498c016f60e5baceb532cef27ca2aee7c9229af120990db5d70226"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
-          "bytes": 29230,
-          "sha256": "87754e372b0d86f8e7ca207ba66a0e678b615cc628b501e0280f085374395463"
+          "bytes": 29052,
+          "sha256": "f69d34670d810d0b2ece50e38a94d6f3f2d83163ee0b4b18e35668d76d27a22d"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7792,12 +6840,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 241398,
-          "sha256": "b7779a9a646a687d2536ee95d9fdc8d92e438b7e6dfb4209997fbce5b605bbed"
+          "sha256": "16509846334b366d560b1fb2386cba89337635ca2b38e40019dd00cbc3aefe19"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
-          "bytes": 29231,
-          "sha256": "3fe10065859acba8a1a1b2ff161674580d86f5289f1f21794e4c5bcc7350750f"
+          "bytes": 29053,
+          "sha256": "640ef2e093237e6dafe461e53199eee182561de269a51157319a1f6b8518750b"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7817,904 +6865,25 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1121976,
-          "sha256": "42b1574a279101d46b3d6fac19600907a9ec5236450be38a52274c4d40c593f0"
+          "sha256": "f3f42947aa4c7e24d80ade73b8970fc26e35823060f99bf0207b8d4a854cb109"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
-          "bytes": 29240,
-          "sha256": "b05d9d98ce3ac531d192001ca6cc08a59b6254dbc8e4cc9b8bfb98f65890d44b"
+          "bytes": 29061,
+          "sha256": "f6b2e45aa5dd920b479c3808988742eb1b5d8404bc46cd00ced8d91341177206"
         }
       },
       "html_origin": "canonical_project_html",
       "source_project_id": "Suez-Tunnel",
       "source_report_fingerprint": "627228c9f917f87f1b487038b7575a0e5d78c9c349a477240a476fe46aaed7d1"
-    },
-    "samco_pco_31_slide_report": {
-      "generated_at": "2026-08-15T06:50:24+00:00",
-      "html": "/generated/Suez-Tunnel/05_samco_pco_31_slide_report.html",
-      "pdf": "/generated/Suez-Tunnel/05_samco_pco_31_slide_report.pdf",
-      "pptx": "/generated/Suez-Tunnel/05_samco_pco_31_slide_report.pptx",
-      "complete_package_zip": "/generated/Suez-Tunnel/06_samco_pco_complete_project_report_package.zip",
-      "files": {
-        "html": {
-          "name": "05_samco_pco_31_slide_report.html",
-          "bytes": 109713,
-          "sha256": "d39bf2f7f470f5becff8e2f0094d182be618708c142d92e9b06b2e418470a99d"
-        },
-        "pdf": {
-          "name": "05_samco_pco_31_slide_report.pdf",
-          "bytes": 56946,
-          "sha256": "7e1f590904a9cdfc76b18246f984ac053e5443c0e57b8f3825e1344a2ea203ff"
-        },
-        "pptx": {
-          "name": "05_samco_pco_31_slide_report.pptx",
-          "bytes": 86090,
-          "sha256": "d41cfcdbcec10ef11092c8870fbc27ecbfc688af89f8fae595b3fb262dd50f81"
-        },
-        "complete_package_zip": {
-          "name": "06_samco_pco_complete_project_report_package.zip",
-          "bytes": 983680,
-          "sha256": "5a6c010c832b7715bd37e9d084fe88db1b9eb0b234e10645a811dd945403eed7"
-        }
-      },
-      "individual_reports": {
-        "eot": {
-          "code": "PRO-TIA-01",
-          "title": "Time Impact & Extension of Time",
-          "status": "AWAITING CONTROLLED CSV DATA",
-          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
-              "bytes": 3570,
-              "sha256": "697cf8444c754ebbd9857a27565ad75d77d3b4bbce8778735add46edd8e67be1"
-            },
-            "pdf": {
-              "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
-              "bytes": 2318,
-              "sha256": "888bbf072238712934eb0b83a89e87cfbd6d64951ac5af2d7aaa462316d95414"
-            },
-            "pptx": {
-              "name": "06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx",
-              "bytes": 30118,
-              "sha256": "cb93dcc6895c3c08159ff616191f4fcf6b4c05840da6b8805d6d92397401f920"
-            }
-          }
-        },
-        "delay": {
-          "code": "PRO-DLY-02",
-          "title": "Delay Analysis",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_02_pro_dly_02_delay_analysis.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_02_pro_dly_02_delay_analysis.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_02_pro_dly_02_delay_analysis.html",
-              "bytes": 5123,
-              "sha256": "707399d154bcf9f6a5bf29b9861a9f0b210d3fe04bb40de986972ae51acd6fdc"
-            },
-            "pdf": {
-              "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
-              "bytes": 2989,
-              "sha256": "73942992e45d39b13bdca77f33e182b233e6fc67d04d58ee37110bd290e4496b"
-            },
-            "pptx": {
-              "name": "06_samco_pco_02_pro_dly_02_delay_analysis.pptx",
-              "bytes": 30644,
-              "sha256": "1233797c852dbe5cacffd9d1bde33b8217468f247a4c98dc78e1b7a8f35a2f97"
-            }
-          }
-        },
-        "progress": {
-          "code": "PRO-PRG-03",
-          "title": "Project Progress",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_03_pro_prg_03_project_progress.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_03_pro_prg_03_project_progress.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_03_pro_prg_03_project_progress.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_03_pro_prg_03_project_progress.html",
-              "bytes": 8951,
-              "sha256": "9dc05288fe942e8dc148ae2cbee960dde697e5a12c365ad8f506438731cde9d1"
-            },
-            "pdf": {
-              "name": "06_samco_pco_03_pro_prg_03_project_progress.pdf",
-              "bytes": 3493,
-              "sha256": "de0f751bcca9415909c047d532d530098d951d418adbb0e569db1826798996ac"
-            },
-            "pptx": {
-              "name": "06_samco_pco_03_pro_prg_03_project_progress.pptx",
-              "bytes": 30838,
-              "sha256": "24c82d0621654787677123f6552b8fa5efefb150847316020f5f82155f1e211c"
-            }
-          }
-        },
-        "recovery": {
-          "code": "PRO-REC-04",
-          "title": "Recovery & Mitigation",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
-              "bytes": 8944,
-              "sha256": "cd92b79aab24bc389505725a82e979620b3b584d49bf725aa28ee15a9d35e6f6"
-            },
-            "pdf": {
-              "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
-              "bytes": 3493,
-              "sha256": "4fedaa305a72228a152779d5755fcdaee95ddefa5fa46bd32331740b3b14949d"
-            },
-            "pptx": {
-              "name": "06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx",
-              "bytes": 30884,
-              "sha256": "2a90c2d5ca5c1ea983b3f141c2a1794c32198bc2f5818b27596d0776325e90a2"
-            }
-          }
-        },
-        "variation": {
-          "code": "PRO-VAR-05",
-          "title": "Variation Report",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_05_pro_var_05_variation_report.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_05_pro_var_05_variation_report.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_05_pro_var_05_variation_report.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_05_pro_var_05_variation_report.html",
-              "bytes": 3977,
-              "sha256": "bc10aafaa8af70b87ef4a1b91315e3b8a1219a9cab6db9ce4030fd46b175c3d7"
-            },
-            "pdf": {
-              "name": "06_samco_pco_05_pro_var_05_variation_report.pdf",
-              "bytes": 2529,
-              "sha256": "e9da01978731a96eca4b5071beef8a46c3e26c5832464ccffdabb72888f0477e"
-            },
-            "pptx": {
-              "name": "06_samco_pco_05_pro_var_05_variation_report.pptx",
-              "bytes": 30346,
-              "sha256": "842c1b9c149d3adc83323efa0bf20c33255eb2d3b7d4043d419471f3302977f9"
-            }
-          }
-        },
-        "hybrid": {
-          "code": "PRO-IPC-06",
-          "title": "Interim Payment",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_06_pro_ipc_06_interim_payment.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_06_pro_ipc_06_interim_payment.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_06_pro_ipc_06_interim_payment.html",
-              "bytes": 5328,
-              "sha256": "952155a12aab3e2a7292e701730a948f83f351145c626db88dd6510db8921518"
-            },
-            "pdf": {
-              "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
-              "bytes": 2639,
-              "sha256": "5dba0e94275d284f6f7d684a0f259841985f672af11e573dbe007d53ae0766cc"
-            },
-            "pptx": {
-              "name": "06_samco_pco_06_pro_ipc_06_interim_payment.pptx",
-              "bytes": 30368,
-              "sha256": "13b17c544408b55b791da2e141c7b1fbd5d05b39b964f4ed50fb7ef912eb617c"
-            }
-          }
-        },
-        "resource": {
-          "code": "PRO-RES-07",
-          "title": "Resource & Manpower",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_07_pro_res_07_resource_manpower.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_07_pro_res_07_resource_manpower.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_07_pro_res_07_resource_manpower.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_07_pro_res_07_resource_manpower.html",
-              "bytes": 8810,
-              "sha256": "40c53615eba0dc26f475c751387a0810f68091a1ddfdb3ae9e0d97166f73f15e"
-            },
-            "pdf": {
-              "name": "06_samco_pco_07_pro_res_07_resource_manpower.pdf",
-              "bytes": 3394,
-              "sha256": "3b163009d5181d825ca9260b929b9dc6a75a3b24e699eb4d9a3b04f3de4b678c"
-            },
-            "pptx": {
-              "name": "06_samco_pco_07_pro_res_07_resource_manpower.pptx",
-              "bytes": 30831,
-              "sha256": "cf1a05cb00f0810078b4d39bd7d219f9f8a3e239bf7380f96c1d3fd7eafce073"
-            }
-          }
-        },
-        "equipment": {
-          "code": "PRO-EQP-08",
-          "title": "Equipment & Plant",
-          "status": "AWAITING CONTROLLED CSV DATA",
-          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_08_pro_eqp_08_equipment_plant.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_08_pro_eqp_08_equipment_plant.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.html",
-              "bytes": 3206,
-              "sha256": "9fbd6112f2edde552fcb08b24a73e7a2f3be8e4c733382be8cd8cc18a55fa84b"
-            },
-            "pdf": {
-              "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
-              "bytes": 2079,
-              "sha256": "b6d39e4560e941128c4d283292a53729bba235196c91e77623b3eac394f40b00"
-            },
-            "pptx": {
-              "name": "06_samco_pco_08_pro_eqp_08_equipment_plant.pptx",
-              "bytes": 30014,
-              "sha256": "69745d3351983e996476d34db073d445424eb83d0bfc61caffa66ed7cb5c4b76"
-            }
-          }
-        },
-        "cost": {
-          "code": "PRO-CST-09",
-          "title": "Cost Control",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_09_pro_cst_09_cost_control.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_09_pro_cst_09_cost_control.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_09_pro_cst_09_cost_control.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_09_pro_cst_09_cost_control.html",
-              "bytes": 7555,
-              "sha256": "5e941833c4cfda181e75b9c5bfb3e928de49e155c6ae2a4f0934c124d9383129"
-            },
-            "pdf": {
-              "name": "06_samco_pco_09_pro_cst_09_cost_control.pdf",
-              "bytes": 3307,
-              "sha256": "c601fb8e63fe5fc02ea453bf16782f42f924ec9c6b16b50af449cd2b4687e23e"
-            },
-            "pptx": {
-              "name": "06_samco_pco_09_pro_cst_09_cost_control.pptx",
-              "bytes": 30765,
-              "sha256": "f578c8bd4f370a93f9ffe291777fece0e03a12807b9a3ff9ba91d462e5b5bb4c"
-            }
-          }
-        },
-        "evm": {
-          "code": "PRO-EVM-10",
-          "title": "Earned Value",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_10_pro_evm_10_earned_value.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_10_pro_evm_10_earned_value.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_10_pro_evm_10_earned_value.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_10_pro_evm_10_earned_value.html",
-              "bytes": 7555,
-              "sha256": "6ddf7336d734f1ba4fd2e6d247df03b87071465a69da90b23da3911f051e30ac"
-            },
-            "pdf": {
-              "name": "06_samco_pco_10_pro_evm_10_earned_value.pdf",
-              "bytes": 3309,
-              "sha256": "3cf3b1f188a5d5e3af54ad91ae8557e28e1fc51def0bde41751fbbec1f6b850a"
-            },
-            "pptx": {
-              "name": "06_samco_pco_10_pro_evm_10_earned_value.pptx",
-              "bytes": 30769,
-              "sha256": "a18f79350e0e9a9e3ab6b8af62cc1edb0c90da60cfde769dc7c45da55a430f40"
-            }
-          }
-        },
-        "cashflow": {
-          "code": "PRO-CFS-11",
-          "title": "Cash Flow",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_11_pro_cfs_11_cash_flow.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_11_pro_cfs_11_cash_flow.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_11_pro_cfs_11_cash_flow.html",
-              "bytes": 5427,
-              "sha256": "2c3bc8d655d3d250c0db94b8d7af8b28d5f1dfb150855819687db5b43165b899"
-            },
-            "pdf": {
-              "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
-              "bytes": 2683,
-              "sha256": "7663bf72687cb0c577a90d57e509fd1fea587cbaba08851af3f842d4c3c3bb86"
-            },
-            "pptx": {
-              "name": "06_samco_pco_11_pro_cfs_11_cash_flow.pptx",
-              "bytes": 30386,
-              "sha256": "865fb1c08e349ef72cd649fc6ca6157311ad18ccc1e04663460027dd89d38b63"
-            }
-          }
-        },
-        "scurve": {
-          "code": "PRO-SCV-12",
-          "title": "S-Curve",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_12_pro_scv_12_s_curve.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_12_pro_scv_12_s_curve.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_12_pro_scv_12_s_curve.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_12_pro_scv_12_s_curve.html",
-              "bytes": 5052,
-              "sha256": "17b8aa6572d3f148ca6e0c7dade70edb0f2308eb9351c816ef804667238e6168"
-            },
-            "pdf": {
-              "name": "06_samco_pco_12_pro_scv_12_s_curve.pdf",
-              "bytes": 2899,
-              "sha256": "52c25e6af3d327e6a6ae6bbe70d2e0ee5a3142b54c1e161dbf1fb580b9d2fc4a"
-            },
-            "pptx": {
-              "name": "06_samco_pco_12_pro_scv_12_s_curve.pptx",
-              "bytes": 30543,
-              "sha256": "72779bc2c096477068e91dbd697ff620556635123f8a3cb19cf86e8f4f6a2662"
-            }
-          }
-        },
-        "procurement": {
-          "code": "PRO-PRC-13",
-          "title": "Procurement Status",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_13_pro_prc_13_procurement_status.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_13_pro_prc_13_procurement_status.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_13_pro_prc_13_procurement_status.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_13_pro_prc_13_procurement_status.html",
-              "bytes": 8795,
-              "sha256": "f4b026e5505c95fee4ef7a779d4d8782c228d34c64a2f09e013824cc2bdcd1f2"
-            },
-            "pdf": {
-              "name": "06_samco_pco_13_pro_prc_13_procurement_status.pdf",
-              "bytes": 3394,
-              "sha256": "c115aa10a8846debd23c42bbadeea7f55f7622d21b515e10568da234cef688dc"
-            },
-            "pptx": {
-              "name": "06_samco_pco_13_pro_prc_13_procurement_status.pptx",
-              "bytes": 30826,
-              "sha256": "01eac6b2336c18f2a2226bf80e2bc87d079448a82e85e836517db04262bdfc77"
-            }
-          }
-        },
-        "material": {
-          "code": "PRO-MAT-14",
-          "title": "Material Status",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_14_pro_mat_14_material_status.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_14_pro_mat_14_material_status.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_14_pro_mat_14_material_status.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_14_pro_mat_14_material_status.html",
-              "bytes": 8786,
-              "sha256": "109765e8eac110943d8b2a9f3d6438876e87dbeaf97e6493c2beaef5f886a9ad"
-            },
-            "pdf": {
-              "name": "06_samco_pco_14_pro_mat_14_material_status.pdf",
-              "bytes": 3393,
-              "sha256": "9ca9c682fc584610cb4f7def20a81412e681b70823942bacc18c2497f87286f8"
-            },
-            "pptx": {
-              "name": "06_samco_pco_14_pro_mat_14_material_status.pptx",
-              "bytes": 30825,
-              "sha256": "5490f9c7abb843046210cb8fa1edd5e8329258b592d8901deb46c1703d041527"
-            }
-          }
-        },
-        "lookahead": {
-          "code": "PRO-LAH-15",
-          "title": "Labour Hours",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_15_pro_lah_15_labour_hours.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_15_pro_lah_15_labour_hours.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_15_pro_lah_15_labour_hours.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_15_pro_lah_15_labour_hours.html",
-              "bytes": 8777,
-              "sha256": "50f39703bdcd5557a0a369ee5ca4980f748b9ce08e1d6b07aa4663de01561dd3"
-            },
-            "pdf": {
-              "name": "06_samco_pco_15_pro_lah_15_labour_hours.pdf",
-              "bytes": 3393,
-              "sha256": "4207cb8b6856d8228611eaaa5d21829874070ea08e03689364ce549a0c2882c7"
-            },
-            "pptx": {
-              "name": "06_samco_pco_15_pro_lah_15_labour_hours.pptx",
-              "bytes": 30824,
-              "sha256": "b5c462bc3a9ddcff870b3a007e53f356c49c5b7ac1aed8f6f6a61420864b09ec"
-            }
-          }
-        },
-        "critical_path": {
-          "code": "PRO-CPM-16",
-          "title": "Critical Path",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_16_pro_cpm_16_critical_path.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_16_pro_cpm_16_critical_path.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_16_pro_cpm_16_critical_path.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_16_pro_cpm_16_critical_path.html",
-              "bytes": 8896,
-              "sha256": "cc5a1eadd955e26a8c2d2ee49c1d036ea12be52b1e5ee0c3ebaa536cea87d58c"
-            },
-            "pdf": {
-              "name": "06_samco_pco_16_pro_cpm_16_critical_path.pdf",
-              "bytes": 3485,
-              "sha256": "d16991db99fc39b5f7f4b91972d1f05c46d92df23220fa7e8b0ab55917294d60"
-            },
-            "pptx": {
-              "name": "06_samco_pco_16_pro_cpm_16_critical_path.pptx",
-              "bytes": 30871,
-              "sha256": "5f07fb0232152dfdfec1dd4ac6b1d34e41f67583264b634a169d8000a38ede5d"
-            }
-          }
-        },
-        "float": {
-          "code": "PRO-FLT-17",
-          "title": "Float Analysis",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_17_pro_flt_17_float_analysis.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_17_pro_flt_17_float_analysis.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_17_pro_flt_17_float_analysis.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_17_pro_flt_17_float_analysis.html",
-              "bytes": 8899,
-              "sha256": "097f20ef6cddb1c01f18a9d3cd6eee518f389d4e67fc62f11d1a7ffe06140a95"
-            },
-            "pdf": {
-              "name": "06_samco_pco_17_pro_flt_17_float_analysis.pdf",
-              "bytes": 3483,
-              "sha256": "565b1a173ada697553d8a737a106b0d770363b1f81ab0a96c587ac972960b413"
-            },
-            "pptx": {
-              "name": "06_samco_pco_17_pro_flt_17_float_analysis.pptx",
-              "bytes": 30870,
-              "sha256": "6859a3d2a2b32399fee418ff0cb6d3d7c0b4439d576153a45800f4c9a1a18c05"
-            }
-          }
-        },
-        "milestone": {
-          "code": "PRO-MIL-18",
-          "title": "Milestone Status",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_18_pro_mil_18_milestone_status.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_18_pro_mil_18_milestone_status.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_18_pro_mil_18_milestone_status.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_18_pro_mil_18_milestone_status.html",
-              "bytes": 4132,
-              "sha256": "e925c080f684cce6782a73a84b4633e081daf423f521863f75e19908668bba76"
-            },
-            "pdf": {
-              "name": "06_samco_pco_18_pro_mil_18_milestone_status.pdf",
-              "bytes": 2685,
-              "sha256": "76ffeac0e65c865bf6736a27424b91b1f04c9e08633992b04fb3722bb88ba3bf"
-            },
-            "pptx": {
-              "name": "06_samco_pco_18_pro_mil_18_milestone_status.pptx",
-              "bytes": 30436,
-              "sha256": "c94d9eae581d4cfbc2bc84de7cc4bc67365bd58b4800292a0567e62e872019c3"
-            }
-          }
-        },
-        "risk": {
-          "code": "PRO-RSK-19",
-          "title": "Risk Report",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_19_pro_rsk_19_risk_report.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_19_pro_rsk_19_risk_report.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_19_pro_rsk_19_risk_report.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_19_pro_rsk_19_risk_report.html",
-              "bytes": 4076,
-              "sha256": "c328bafb697a3b69b141404d23104a71543d1143f2d943ba36117521f9c3bf0c"
-            },
-            "pdf": {
-              "name": "06_samco_pco_19_pro_rsk_19_risk_report.pdf",
-              "bytes": 2612,
-              "sha256": "9a8fb9119476578c331f15c7baa3e04b7539b5585554ee072ca3eae48376d563"
-            },
-            "pptx": {
-              "name": "06_samco_pco_19_pro_rsk_19_risk_report.pptx",
-              "bytes": 30403,
-              "sha256": "f8b5905482858729a2035e220346457d1b8cb47d2c7c416a69e94cf096f82193"
-            }
-          }
-        },
-        "rfi_submittal": {
-          "code": "PRO-RFI-20",
-          "title": "RFI & Submittals",
-          "status": "AWAITING CONTROLLED CSV DATA",
-          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
-              "bytes": 3249,
-              "sha256": "994e5256abb2be325194abf371600f7aad5dd0f5d427848f95230ab882138561"
-            },
-            "pdf": {
-              "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
-              "bytes": 2179,
-              "sha256": "873ed255840abdb802788c466c9678e216ab63cf2a5cde71b13717e49c461c40"
-            },
-            "pptx": {
-              "name": "06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx",
-              "bytes": 30048,
-              "sha256": "915e447d981356514580c4c2cec43e35fbb26739ab9635e44c20c064611dbcaf"
-            }
-          }
-        },
-        "qaqc": {
-          "code": "PRO-QAQC-21",
-          "title": "QA/QC Performance",
-          "status": "AWAITING CONTROLLED CSV DATA",
-          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
-              "bytes": 3198,
-              "sha256": "1ff76dfb7cad8b334b3c0fc21702bd13ee3a662e865c733551ef529e3916f225"
-            },
-            "pdf": {
-              "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
-              "bytes": 2084,
-              "sha256": "390eab26212195a7256af7b4ef77cb050bc9df4ea6dcba14ebaa9497b3107341"
-            },
-            "pptx": {
-              "name": "06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx",
-              "bytes": 30010,
-              "sha256": "67f7cfd042d58b2e8e41f32f3004c2773d9a48bf5f6ff6131bc221eac1f5baa7"
-            }
-          }
-        },
-        "productivity": {
-          "code": "PRO-PROD-22",
-          "title": "Productivity",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_22_pro_prod_22_productivity.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_22_pro_prod_22_productivity.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_22_pro_prod_22_productivity.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_22_pro_prod_22_productivity.html",
-              "bytes": 8943,
-              "sha256": "712e5c6a7ae0af5ee7dd357268fc32d59dab48f2ed9aa48141d75d4d5aa42a10"
-            },
-            "pdf": {
-              "name": "06_samco_pco_22_pro_prod_22_productivity.pdf",
-              "bytes": 3497,
-              "sha256": "d26ffbf1df98b45cb0130b3d9b5e0b3755c4e8575e7de26ddcc87cf0ead2ff47"
-            },
-            "pptx": {
-              "name": "06_samco_pco_22_pro_prod_22_productivity.pptx",
-              "bytes": 30841,
-              "sha256": "d9a0d8253b45d501d151ecba6d99ff34cc93f19c8dbb9261ff0751319d3fd01e"
-            }
-          }
-        },
-        "executive": {
-          "code": "PRO-EXE-23",
-          "title": "Executive Report",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_23_pro_exe_23_executive_report.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_23_pro_exe_23_executive_report.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_23_pro_exe_23_executive_report.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_23_pro_exe_23_executive_report.html",
-              "bytes": 4245,
-              "sha256": "7cca9c489eff3eb4b524d80c3c52e4b35369d7ddc3ad7bc4d5d583461b9c5147"
-            },
-            "pdf": {
-              "name": "06_samco_pco_23_pro_exe_23_executive_report.pdf",
-              "bytes": 2718,
-              "sha256": "1609d0534c66b3052057082d7d15e9ebfa0a44c992d61f6853be825b5166dfbf"
-            },
-            "pptx": {
-              "name": "06_samco_pco_23_pro_exe_23_executive_report.pptx",
-              "bytes": 30390,
-              "sha256": "a6501fbd9cbf90b83ab152733fe2127cdad1ac9b7cf2a513629ea7b266d2e390"
-            }
-          }
-        },
-        "baseline_current": {
-          "code": "PRO-BLC-24",
-          "title": "Baseline vs Current",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
-              "bytes": 8914,
-              "sha256": "fd380c53f2f032eea7ab143fd860ba6f5f1bbc05781ef4912d467abecb1f250d"
-            },
-            "pdf": {
-              "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
-              "bytes": 3493,
-              "sha256": "37f72a3a21d9c8933f4c7b7323d291797ba4315470a5dceae6966faa4a8f06fe"
-            },
-            "pptx": {
-              "name": "06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx",
-              "bytes": 30879,
-              "sha256": "3f938b7af5b11022b9e950c8bec579ae71f7a778579b06b122d75db10ee97390"
-            }
-          }
-        },
-        "forecast_completion": {
-          "code": "PRO-FCF-25",
-          "title": "Forecast Completion",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_25_pro_fcf_25_forecast_completion.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_25_pro_fcf_25_forecast_completion.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.html",
-              "bytes": 8955,
-              "sha256": "89ed09e1272d6b6ababc3540042d4b2c532be9a9058e57442a5b4b2941d3fee9"
-            },
-            "pdf": {
-              "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
-              "bytes": 3509,
-              "sha256": "cae9fe9e997e24589ca4a164595f3f1add328ebed0f9b6f37420eba9d2fcd9f1"
-            },
-            "pptx": {
-              "name": "06_samco_pco_25_pro_fcf_25_forecast_completion.pptx",
-              "bytes": 30847,
-              "sha256": "ef0709cb2be4b4bbbedde260f3c09057c3e89153f0d3a4d239dd4f11f79cd56f"
-            }
-          }
-        },
-        "ml_project_controls": {
-          "code": "PRO-ML-26",
-          "title": "ML Project Controls",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_26_pro_ml_26_ml_project_controls.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_26_pro_ml_26_ml_project_controls.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.html",
-              "bytes": 9044,
-              "sha256": "1af89fda93aa362dcfc73f129b0cfa6813e33c4423cf25134128dee86bed9d3b"
-            },
-            "pdf": {
-              "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
-              "bytes": 3553,
-              "sha256": "8b4dfb92c231f663269a3c58574c96d0c0a1543980aaea812b6b8d41685004bc"
-            },
-            "pptx": {
-              "name": "06_samco_pco_26_pro_ml_26_ml_project_controls.pptx",
-              "bytes": 30859,
-              "sha256": "82324ff60594a5db00d77fbaba8f64eded2b9b97e55f67a17f516cf223cad6fe"
-            }
-          }
-        },
-        "contract_admin": {
-          "code": "PRO-CAD-27",
-          "title": "Contract Administration",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_27_pro_cad_27_contract_administration.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_27_pro_cad_27_contract_administration.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_27_pro_cad_27_contract_administration.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_27_pro_cad_27_contract_administration.html",
-              "bytes": 3950,
-              "sha256": "90f45cf2369b4ef512119afb913548bdf000c95546f88044a3c01f8399aca6e3"
-            },
-            "pdf": {
-              "name": "06_samco_pco_27_pro_cad_27_contract_administration.pdf",
-              "bytes": 2504,
-              "sha256": "ab8a9660293d2a89c7e39e0f343ff2de17d907b3c838286e9bb59a5db217f6c4"
-            },
-            "pptx": {
-              "name": "06_samco_pco_27_pro_cad_27_contract_administration.pptx",
-              "bytes": 30336,
-              "sha256": "749116b4bf8eb34ef22252580fcc2a9bf57468e7f691ac0450d2a4f08aec2b6c"
-            }
-          }
-        },
-        "change_control": {
-          "code": "PRO-CHG-28",
-          "title": "Change Control",
-          "status": "DATA AVAILABLE",
-          "detail": "Generated from the selected project's controlled CSV inputs.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_28_pro_chg_28_change_control.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_28_pro_chg_28_change_control.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_28_pro_chg_28_change_control.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_28_pro_chg_28_change_control.html",
-              "bytes": 3971,
-              "sha256": "786305048344f77b157743847ece7de110d2c8e3f26a3da1c0b261cb1d930833"
-            },
-            "pdf": {
-              "name": "06_samco_pco_28_pro_chg_28_change_control.pdf",
-              "bytes": 2529,
-              "sha256": "c63f939fe9d21b5eacbf7da6fee3f1b460788642b420fc330a7747cfec18e98a"
-            },
-            "pptx": {
-              "name": "06_samco_pco_28_pro_chg_28_change_control.pptx",
-              "bytes": 30348,
-              "sha256": "55645d5c5a64950f4c9fe6293b5313ed8f7460cd9de9c6508320f268c9688cd0"
-            }
-          }
-        },
-        "document_control": {
-          "code": "PRO-DOC-29",
-          "title": "Document Control",
-          "status": "AWAITING CONTROLLED CSV DATA",
-          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_29_pro_doc_29_document_control.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_29_pro_doc_29_document_control.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_29_pro_doc_29_document_control.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_29_pro_doc_29_document_control.html",
-              "bytes": 3191,
-              "sha256": "daec18d921b87ae72d2c7f1f3a806aaccef9f8e58132795641968a32a2b8b405"
-            },
-            "pdf": {
-              "name": "06_samco_pco_29_pro_doc_29_document_control.pdf",
-              "bytes": 2079,
-              "sha256": "76ebaf402d006732335afa1bc27965e0d6f741c306a44c1b88c81de0dc4be7ed"
-            },
-            "pptx": {
-              "name": "06_samco_pco_29_pro_doc_29_document_control.pptx",
-              "bytes": 29997,
-              "sha256": "7a46301e4a96b83d75e33dcdfe106ea858816953bea5328e975621860bcdfe27"
-            }
-          }
-        },
-        "interface_management": {
-          "code": "PRO-IFC-30",
-          "title": "Interface Management",
-          "status": "AWAITING CONTROLLED CSV DATA",
-          "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-          "artifacts": {
-            "html": "/generated/Suez-Tunnel/06_samco_pco_30_pro_ifc_30_interface_management.html",
-            "pdf": "/generated/Suez-Tunnel/06_samco_pco_30_pro_ifc_30_interface_management.pdf",
-            "pptx": "/generated/Suez-Tunnel/06_samco_pco_30_pro_ifc_30_interface_management.pptx"
-          },
-          "files": {
-            "html": {
-              "name": "06_samco_pco_30_pro_ifc_30_interface_management.html",
-              "bytes": 3251,
-              "sha256": "83ca04d2060181b85bdf813cf5fa9aefcf8bcdb87af135c328c23621fbb507e8"
-            },
-            "pdf": {
-              "name": "06_samco_pco_30_pro_ifc_30_interface_management.pdf",
-              "bytes": 2187,
-              "sha256": "d11204ecb099806b2daf205b3deb2632d613acb0421e856b4e0e62a5d1d91b9f"
-            },
-            "pptx": {
-              "name": "06_samco_pco_30_pro_ifc_30_interface_management.pptx",
-              "bytes": 30048,
-              "sha256": "ba0d56e422ffd3d6f36cc29247401a8219b14c9a1b0df28614e9a32a22f57cae"
-            }
-          }
-        }
-      },
-      "source_project_id": "Suez-Tunnel",
-      "source_report_fingerprint": "1e07292416b492a4417efe39d39cce907354bee4cb3b58492d294122730ad211",
-      "generator": {
-        "name": "SAMCO-PCO Report Generator",
-        "mode": "data-driven project CSV adapter",
-        "template_sha256": "11ca0efc7649dc04361cc47fa80c473c1d0fe4251420113fc00e79c47d547aed",
-        "version": "2026.08.samco-pco-data-driven.v1"
-      }
     }
   },
   "universal_report_engine": {
     "project_id": "Suez-Tunnel",
     "project_key": "suez-tunnel",
-    "source_fingerprint": "92a349f5cb40b8cfeadb99854125ef4513caeacffa274291d034852fa48fa0ba",
+    "source_fingerprint": "ef05f1c6142c3965b03be63da47a2fb134fedf2fe4202c17f52079879081d385",
     "source_scope": "active project folder only",
-    "source_file_count": 31,
+    "source_file_count": 34,
     "source_inventory": [
       {
         "relative_path": "01-data/import_templates/01_project_contract.csv",
@@ -8777,10 +6946,28 @@
         "sha256": "d96c372a27bf975e42cda4c8665a70df82c62fedb25df1bfabb0fd66e1adac8c"
       },
       {
+        "relative_path": "01-data/import_templates/planned_cash_flow.csv",
+        "extension": ".csv",
+        "size_bytes": 126,
+        "sha256": "939013ded9fd937a507cfdb493df74b1b490b09277184ef4d7f4de57275c0864"
+      },
+      {
         "relative_path": "02-delay_analysis/methodology/TIA methodology.docx",
         "extension": ".docx",
         "size_bytes": 3699219,
         "sha256": "13c9567516bfdd4e14376a595de426c0abb2e892505d0bdb52db7c148c86735f"
+      },
+      {
+        "relative_path": "02-delay_analysis/unified_tia_csv/14-delay_event_classification.csv",
+        "extension": ".csv",
+        "size_bytes": 204,
+        "sha256": "ae95fac637a5a4cc21519fe9cff117c4957586c33a34b2242816d6457df0409d"
+      },
+      {
+        "relative_path": "02-delay_analysis/unified_tia_csv/15-tia_recovery_scenario.csv",
+        "extension": ".csv",
+        "size_bytes": 357,
+        "sha256": "186b52e9473e855acbc9918e329ddedc09a076284849e5329bdcf2ef25d176c6"
       },
       {
         "relative_path": "03-schedule/BL critical path.csv",
@@ -8899,16 +7086,16 @@
       {
         "relative_path": "project_manifest.json",
         "extension": ".json",
-        "size_bytes": 382,
-        "sha256": "5161e2d6a0408ed3663d0cfc59113f2c3f7a99eaf29ca0c84f46ff37f18a7a91"
+        "size_bytes": 365,
+        "sha256": "89256cd401cdb8d54f4db7fcc362ae0807280469efa24b8d2f58a5a6e6c7021e"
       }
     ],
     "engine": {
-      "available": false,
+      "available": true,
       "runtime_location": "local controlled runtime",
       "package_name": "Universal Project Report Engine",
       "package_version": "2.0.0",
-      "wrapper_version": null,
+      "wrapper_version": "3.1.0",
       "author": "Eng. Ahmed Labib",
       "attribution": "Python AI Programming by Eng. Ahmed Labib",
       "rules": null,
@@ -8926,16 +7113,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_01_pro_tia_01_time_impact_extension_of_time.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "AWAITING CONTROLLED CSV DATA"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "delay",
@@ -8946,16 +7129,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_02_pro_dly_02_delay_analysis.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_02_pro_dly_02_delay_analysis.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_02_pro_dly_02_delay_analysis.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "progress",
@@ -8966,16 +7145,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_03_pro_prg_03_project_progress.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_03_pro_prg_03_project_progress.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_03_pro_prg_03_project_progress.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "recovery",
@@ -8986,16 +7161,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_04_pro_rec_04_recovery_mitigation.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_04_pro_rec_04_recovery_mitigation.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_04_pro_rec_04_recovery_mitigation.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "variation",
@@ -9006,16 +7177,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_05_pro_var_05_variation_report.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_05_pro_var_05_variation_report.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_05_pro_var_05_variation_report.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "hybrid",
@@ -9025,16 +7192,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_06_pro_ipc_06_interim_payment.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_06_pro_ipc_06_interim_payment.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_06_pro_ipc_06_interim_payment.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "resource",
@@ -9045,16 +7208,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_07_pro_res_07_resource_manpower.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_07_pro_res_07_resource_manpower.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_07_pro_res_07_resource_manpower.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "equipment",
@@ -9064,16 +7223,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_08_pro_eqp_08_equipment_plant.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_08_pro_eqp_08_equipment_plant.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_08_pro_eqp_08_equipment_plant.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "AWAITING CONTROLLED CSV DATA"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "cost",
@@ -9083,16 +7238,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_09_pro_cst_09_cost_control.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_09_pro_cst_09_cost_control.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_09_pro_cst_09_cost_control.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "evm",
@@ -9102,16 +7253,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_10_pro_evm_10_earned_value.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_10_pro_evm_10_earned_value.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_10_pro_evm_10_earned_value.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "cashflow",
@@ -9121,16 +7268,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_11_pro_cfs_11_cash_flow.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_11_pro_cfs_11_cash_flow.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_11_pro_cfs_11_cash_flow.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "scurve",
@@ -9140,16 +7283,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_12_pro_scv_12_s_curve.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_12_pro_scv_12_s_curve.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_12_pro_scv_12_s_curve.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "procurement",
@@ -9160,16 +7299,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_13_pro_prc_13_procurement_status.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_13_pro_prc_13_procurement_status.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_13_pro_prc_13_procurement_status.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "material",
@@ -9179,16 +7314,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_14_pro_mat_14_material_status.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_14_pro_mat_14_material_status.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_14_pro_mat_14_material_status.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "lookahead",
@@ -9199,16 +7330,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_15_pro_lah_15_labour_hours.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_15_pro_lah_15_labour_hours.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_15_pro_lah_15_labour_hours.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "critical_path",
@@ -9219,16 +7346,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_16_pro_cpm_16_critical_path.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_16_pro_cpm_16_critical_path.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_16_pro_cpm_16_critical_path.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "float",
@@ -9239,16 +7362,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_17_pro_flt_17_float_analysis.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_17_pro_flt_17_float_analysis.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_17_pro_flt_17_float_analysis.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "milestone",
@@ -9259,16 +7378,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_18_pro_mil_18_milestone_status.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_18_pro_mil_18_milestone_status.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_18_pro_mil_18_milestone_status.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "risk",
@@ -9278,16 +7393,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_19_pro_rsk_19_risk_report.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_19_pro_rsk_19_risk_report.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_19_pro_rsk_19_risk_report.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "rfi_submittal",
@@ -9298,16 +7409,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_20_pro_rfi_20_rfi_submittals.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_20_pro_rfi_20_rfi_submittals.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_20_pro_rfi_20_rfi_submittals.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "AWAITING CONTROLLED CSV DATA"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "qaqc",
@@ -9317,16 +7424,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_21_pro_qaqc_21_qa_qc_performance.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "AWAITING CONTROLLED CSV DATA"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "productivity",
@@ -9336,16 +7439,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_22_pro_prod_22_productivity.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_22_pro_prod_22_productivity.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_22_pro_prod_22_productivity.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "executive",
@@ -9355,16 +7454,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_23_pro_exe_23_executive_report.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_23_pro_exe_23_executive_report.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_23_pro_exe_23_executive_report.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "baseline_current",
@@ -9375,16 +7470,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_24_pro_blc_24_baseline_vs_current.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_24_pro_blc_24_baseline_vs_current.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_24_pro_blc_24_baseline_vs_current.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "forecast_completion",
@@ -9395,16 +7486,12 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_25_pro_fcf_25_forecast_completion.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_25_pro_fcf_25_forecast_completion.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_25_pro_fcf_25_forecast_completion.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "ml_project_controls",
@@ -9414,16 +7501,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_26_pro_ml_26_ml_project_controls.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_26_pro_ml_26_ml_project_controls.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_26_pro_ml_26_ml_project_controls.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "contract_admin",
@@ -9433,16 +7516,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_27_pro_cad_27_contract_administration.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_27_pro_cad_27_contract_administration.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_27_pro_cad_27_contract_administration.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "change_control",
@@ -9452,16 +7531,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated from the selected project's controlled CSV inputs.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_28_pro_chg_28_change_control.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_28_pro_chg_28_change_control.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_28_pro_chg_28_change_control.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "DATA AVAILABLE"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "document_control",
@@ -9471,16 +7546,12 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "GENERATED",
-        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_29_pro_doc_29_document_control.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_29_pro_doc_29_document_control.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_29_pro_doc_29_document_control.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "AWAITING CONTROLLED CSV DATA"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       },
       {
         "key": "interface_management",
@@ -9491,23 +7562,19 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "GENERATED",
-        "detail": "Generated template has no controlled CSV rows for its mapped source area; no value or conclusion is inferred.",
-        "artifacts": {
-          "html": "/generated/Suez-Tunnel/06_samco_pco_30_pro_ifc_30_interface_management.html",
-          "pdf": "/generated/Suez-Tunnel/06_samco_pco_30_pro_ifc_30_interface_management.pdf",
-          "pptx": "/generated/Suez-Tunnel/06_samco_pco_30_pro_ifc_30_interface_management.pptx"
-        },
-        "generated_at": "2026-08-15T06:50:24+00:00",
-        "release_status": "CSV_BOUND_TEMPLATE",
-        "validation_status": "AWAITING CONTROLLED CSV DATA"
+        "status": "READY_TO_GENERATE",
+        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
+        "artifacts": {},
+        "generated_at": null,
+        "release_status": null,
+        "validation_status": null
       }
     ],
     "summary": {
       "catalog_count": 30,
-      "generated_count": 30,
+      "generated_count": 0,
       "draft_review_count": 0,
-      "ready_count": 0,
+      "ready_count": 30,
       "blocked_count": 0
     },
     "ml_capability": {
@@ -9593,12 +7660,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-15T06:50:27+00:00",
-    "overall_artifacts": {
-      "html": "/generated/Suez-Tunnel/05_samco_pco_31_slide_report.html",
-      "pdf": "/generated/Suez-Tunnel/05_samco_pco_31_slide_report.pdf",
-      "pptx": "/generated/Suez-Tunnel/05_samco_pco_31_slide_report.pptx",
-      "package_zip": "/generated/Suez-Tunnel/06_samco_pco_complete_project_report_package.zip"
-    }
+    "updated_at": "2026-08-15T15:39:33+00:00"
   }
 }

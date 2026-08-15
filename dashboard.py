@@ -975,7 +975,7 @@ def render_decision_making_dashboard(projects_catalog_df: pd.DataFrame) -> None:
         .decision-kpi-icon{flex:0 0 auto}
         .decision-kpi-value{font-size:23px;font-weight:900;color:#061A2D;margin:16px 0 10px;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
         .decision-badge{display:inline-block;border-radius:999px;padding:5px 9px;font-size:10px;font-weight:900!important;white-space:nowrap;max-width:118px;overflow:hidden;text-overflow:ellipsis;color:#FFFFFF!important;-webkit-text-fill-color:#FFFFFF!important;text-shadow:0 1px 1px rgba(0,0,0,.35)}
-
+        
         /* DECISION_BADGE_WHITE_BOLD_FINAL_OVERRIDE */
         .decision-badge,
         .decision-badge *{
@@ -11088,4 +11088,5 @@ if active_slide_name == PROJECT_HUB_SLIDE_NAMES[12]:
 
 st.divider()
 st.markdown("<p style='text-align:center;color:#667085;font-size:12px;'>Construction Project Control Platform | Designed and Developed By Eng. Ahmed Labib © Planning Department</p>", unsafe_allow_html=True)
+
 

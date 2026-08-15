@@ -21,8 +21,8 @@ echo Flow: local changes ^> GitHub main ^> Vercel automatic deployment
 echo.
 
 if /I "%MODE%"=="Watch" (
-  powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\vercel_project_pipeline.ps1" -Mode Watch -IntervalSeconds 10
+  powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\vercel_project_pipeline.ps1" -Mode Watch -IntervalSeconds 3
 ) else (
-  powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\vercel_project_pipeline.ps1" -Mode "%MODE%" -IntervalSeconds 10
+  powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\vercel_project_pipeline.ps1" -Mode "%MODE%" -IntervalSeconds 3
 )
 exit /b %ERRORLEVEL%

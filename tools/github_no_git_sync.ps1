@@ -35,7 +35,16 @@ if ($Mode -eq "Watch") {
 function Write-SyncLog([string]$Text) {
     $line = "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] $Text"
     Write-Host $line
-    Add-Content -LiteralPath $logPath -Value $line
+    for ($attempt = 1; $attempt -le 4; $attempt++) {
+        try {
+            Add-Content -LiteralPath $logPath -Value $line -ErrorAction Stop
+            return
+        }
+        catch {
+            Start-Sleep -Milliseconds (100 * $attempt)
+        }
+    }
+    Write-Host "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] Sync log is temporarily locked; console record retained."
 }
 
 function Convert-ToRelativePath([string]$FullName) {
@@ -84,7 +93,26 @@ function Ensure-EmptyDirectoryPlaceholders {
 }
 
 function Get-Sha256([string]$Path) {
-    return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
+    $lastError = $null
+    for ($attempt = 1; $attempt -le 6; $attempt++) {
+        $stream = $null
+        $sha256 = $null
+        try {
+            $stream = [System.IO.File]::Open($Path, [System.IO.FileMode]::Open, [System.IO.FileAccess]::Read, [System.IO.FileShare]::ReadWrite)
+            $sha256 = [System.Security.Cryptography.SHA256]::Create()
+            $hash = -join ($sha256.ComputeHash($stream) | ForEach-Object { $_.ToString('x2') })
+            return $hash
+        }
+        catch {
+            $lastError = $_
+            Start-Sleep -Milliseconds (150 * $attempt)
+        }
+        finally {
+            if ($sha256) { $sha256.Dispose() }
+            if ($stream) { $stream.Dispose() }
+        }
+    }
+    throw "SHA-256 could not read '$Path' after six attempts: $($lastError.Exception.Message)"
 }
 
 function Get-GitBlobSha([byte[]]$Bytes) {
@@ -106,8 +134,7 @@ function Get-WorkspaceManifest {
         try {
             $sha256 = Get-Sha256 $file.FullName
         } catch {
-            Write-SyncLog "Skipped unreadable or locked file during scan: $relative"
-            continue
+            throw "Cannot read deployable source file during synchronization: $relative. $($_.Exception.Message) No partial publication was created."
         }
         $entries[$relative] = [ordered]@{
             sha256 = $sha256
@@ -116,25 +143,6 @@ function Get-WorkspaceManifest {
         }
     }
     return $entries
-}
-
-function Wait-ForProjectPayloadGeneration {
-    $generatorLockPath = Join-Path $root ".sync_state\generator.lock"
-    $maxWaitSeconds = 120
-    $elapsedSeconds = 0
-    $announced = $false
-
-    while (Test-Path -LiteralPath $generatorLockPath) {
-        if (-not $announced) {
-            Write-SyncLog "Waiting for project payload generation to complete before synchronizing."
-            $announced = $true
-        }
-        if ($elapsedSeconds -ge $maxWaitSeconds) {
-            throw "Project payload generation lock did not clear within $maxWaitSeconds seconds."
-        }
-        Start-Sleep -Seconds 2
-        $elapsedSeconds += 2
-    }
 }
 
 function Read-PreviousManifest {
@@ -210,53 +218,33 @@ function Invoke-GitHubApi([string]$Method, [string]$Uri, [object]$Body = $null) 
         "X-GitHub-Api-Version" = "2022-11-28"
         "User-Agent" = "Project-Intelligence-Hub-NoGit-Sync"
     }
-    # Prevent one stalled GitHub request from stopping the whole publisher.
-    # The retry block below safely retries transient timeouts.
-    $params = @{ Method = $Method; Uri = $Uri; Headers = $headers; TimeoutSec = 60 }
+    $params = @{ Method = $Method; Uri = $Uri; Headers = $headers }
     if ($null -ne $Body) {
         $jsonBody = $Body | ConvertTo-Json -Depth 20 -Compress
         $params.Body = [System.Text.Encoding]::UTF8.GetBytes($jsonBody)
         $params.ContentType = "application/json"
     }
-    for ($attempt = 1; $attempt -le 4; $attempt++) {
-        try {
-            # Invoke-RestMethod intermittently sends malformed binary blob payloads
-            # from Windows PowerShell 5.1. Use the lower-level HTTP response path
-            # and parse the JSON explicitly so XLSX/PDF source files sync reliably.
-            $response = Invoke-WebRequest @params -UseBasicParsing
-            if ([string]::IsNullOrWhiteSpace([string]$response.Content)) {
-                return $null
-            }
-            return ($response.Content | ConvertFrom-Json)
-        } catch {
-            $statusCode = $null
-            $responseBody = ""
-            if ($null -ne $_.Exception.Response) {
-                $statusCode = [int]$_.Exception.Response.StatusCode
-                try {
-                    $reader = New-Object System.IO.StreamReader($_.Exception.Response.GetResponseStream())
-                    $responseBody = $reader.ReadToEnd()
-                    $reader.Dispose()
-                } catch { $responseBody = "" }
-            }
-            $isRetryable = $null -eq $statusCode -or $statusCode -in @(408, 429, 500, 502, 503, 504)
-            if ($isRetryable -and $attempt -lt 4) {
-                $delaySeconds = [int][math]::Pow(2, $attempt)
-                Write-SyncLog "Transient GitHub API failure for $Method. Retrying attempt $($attempt + 1) of 4 in $delaySeconds seconds."
-                Start-Sleep -Seconds $delaySeconds
-                continue
-            }
-            $detail = if ($responseBody) { " Response: $responseBody" } else { "" }
-            throw "GitHub API $Method $Uri failed$(if ($statusCode) { " (HTTP $statusCode)" }): $($_.Exception.Message)$detail"
+    try {
+        return Invoke-RestMethod @params
+    } catch {
+        $statusCode = $null
+        $responseBody = ""
+        if ($null -ne $_.Exception.Response) {
+            $statusCode = [int]$_.Exception.Response.StatusCode
+            try {
+                $reader = New-Object System.IO.StreamReader($_.Exception.Response.GetResponseStream())
+                $responseBody = $reader.ReadToEnd()
+                $reader.Dispose()
+            } catch { $responseBody = "" }
         }
+        $detail = if ($responseBody) { " Response: $responseBody" } else { "" }
+        throw "GitHub API $Method $Uri failed$(if ($statusCode) { " (HTTP $statusCode)" }): $($_.Exception.Message)$detail"
     }
 }
 
-function Invoke-SyncCycle([int]$StabilityAttempt = 1) {
-    Wait-ForProjectPayloadGeneration
+function Invoke-SyncCycle {
     Ensure-EmptyDirectoryPlaceholders
     $current = Get-WorkspaceManifest
-    Wait-ForProjectPayloadGeneration
     $previous = Read-PreviousManifest
     $changed = @($current.Keys | Where-Object { -not $previous.ContainsKey($_) -or $previous[$_].sha256 -ne $current[$_].sha256 } | Sort-Object)
     $deleted = @($previous.Keys | Where-Object { -not $current.Contains($_) } | Sort-Object)
@@ -286,32 +274,17 @@ function Invoke-SyncCycle([int]$StabilityAttempt = 1) {
     $maxBytes = [int64]$config.max_file_size_mb * 1MB
     foreach ($path in $current.Keys) {
         $fullName = Join-Path $root ($path -replace "/", "\")
-        if (-not (Test-Path -LiteralPath $fullName)) {
-            if ($StabilityAttempt -lt 3) {
-                Write-SyncLog "Workspace changed during synchronization before upload: $path. Re-scanning (attempt $($StabilityAttempt + 1)/3)."
-                return Invoke-SyncCycle -StabilityAttempt ($StabilityAttempt + 1)
-            }
-            throw "Workspace changed repeatedly during synchronization before upload: $path"
-        }
         $info = Get-Item -LiteralPath $fullName
         if ($info.Length -gt $maxBytes) { Write-SyncLog "Skipped over-size file: $path"; continue }
         try {
             $bytes = [System.IO.File]::ReadAllBytes($fullName)
         } catch {
-            if ($StabilityAttempt -lt 3) {
-                Write-SyncLog "Workspace changed during file read: $path. Re-scanning (attempt $($StabilityAttempt + 1)/3)."
-                return Invoke-SyncCycle -StabilityAttempt ($StabilityAttempt + 1)
-            }
-            throw "Workspace file could not be read after three stable synchronization attempts: $path"
+            Write-SyncLog "Skipped unreadable or locked file during upload: $path"
+            continue
         }
         $localBlobSha = Get-GitBlobSha $bytes
         if ($remote.ContainsKey($path) -and $remote[$path] -eq $localBlobSha) { continue }
-        try {
-            $blob = Invoke-GitHubApi "Post" "$apiBase/git/blobs" @{ content = [Convert]::ToBase64String($bytes); encoding = "base64" }
-        } catch {
-            Write-SyncLog "Blob upload failed for path: $path ($($info.Length) bytes)."
-            throw
-        }
+        $blob = Invoke-GitHubApi "Post" "$apiBase/git/blobs" @{ content = [Convert]::ToBase64String($bytes); encoding = "base64" }
         $uploadEntries += @{ path = $path; mode = "100644"; type = "blob"; sha = $blob.sha }
     }
     if ([bool]$config.sync_deletions -or [bool]$config.prune_legacy_project_folders) {

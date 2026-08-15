@@ -1,0 +1,150 @@
+{
+  "attribution": "Python AI Programming by Eng. Ahmed Labib",
+  "python": "3.13.5",
+  "core_ready": true,
+  "full_ml_backend_ready": true,
+  "web_ready": true,
+  "llm_sdk_ready": false,
+  "optimization_extensions_ready": true,
+  "missing": [
+    "anthropic",
+    "openai"
+  ],
+  "sections": {
+    "core": {
+      "numpy": {
+        "installed": true,
+        "version": "2.3.5",
+        "module": "numpy"
+      },
+      "pandas": {
+        "installed": true,
+        "version": "2.2.3",
+        "module": "pandas"
+      },
+      "scipy": {
+        "installed": true,
+        "version": "1.17.0",
+        "module": "scipy"
+      },
+      "joblib": {
+        "installed": true,
+        "version": "1.5.3",
+        "module": "joblib"
+      },
+      "scikit-learn": {
+        "installed": true,
+        "version": "1.8.0",
+        "module": "sklearn"
+      },
+      "pypdf": {
+        "installed": true,
+        "version": "5.9.0",
+        "module": "pypdf"
+      },
+      "pdfplumber": {
+        "installed": true,
+        "version": "0.11.9",
+        "module": "pdfplumber"
+      },
+      "python-docx": {
+        "installed": true,
+        "version": "1.2.0",
+        "module": "docx"
+      },
+      "openpyxl": {
+        "installed": true,
+        "version": "3.1.5",
+        "module": "openpyxl"
+      },
+      "python-pptx": {
+        "installed": true,
+        "version": "1.0.2",
+        "module": "pptx"
+      },
+      "Pillow": {
+        "installed": true,
+        "version": "12.3.0",
+        "module": "PIL"
+      },
+      "reportlab": {
+        "installed": true,
+        "version": "4.4.9",
+        "module": "reportlab"
+      }
+    },
+    "ml_backends": {
+      "xgboost": {
+        "installed": true,
+        "version": "3.1.3",
+        "module": "xgboost"
+      },
+      "lightgbm": {
+        "installed": true,
+        "version": "4.6.0",
+        "module": "lightgbm"
+      },
+      "catboost": {
+        "installed": true,
+        "version": "1.2.8",
+        "module": "catboost"
+      },
+      "torch": {
+        "installed": true,
+        "version": "2.10.0+cpu",
+        "module": "torch"
+      }
+    },
+    "web": {
+      "fastapi": {
+        "installed": true,
+        "version": "0.128.2",
+        "module": "fastapi"
+      },
+      "uvicorn": {
+        "installed": true,
+        "version": "0.48.0",
+        "module": "uvicorn"
+      },
+      "pydantic": {
+        "installed": true,
+        "version": "2.13.4",
+        "module": "pydantic"
+      },
+      "python-multipart": {
+        "installed": true,
+        "version": "0.0.29",
+        "module": "multipart"
+      },
+      "httpx": {
+        "installed": true,
+        "version": "0.28.1",
+        "module": "httpx"
+      }
+    },
+    "llm_sdk": {
+      "anthropic": {
+        "installed": false,
+        "version": null,
+        "module": "anthropic"
+      },
+      "openai": {
+        "installed": false,
+        "version": null,
+        "module": "openai"
+      }
+    },
+    "optimization_optional": {
+      "optuna": {
+        "installed": true,
+        "version": "4.8.0",
+        "module": "optuna"
+      },
+      "shap": {
+        "installed": true,
+        "version": "0.50.0",
+        "module": "shap"
+      }
+    }
+  }
+}

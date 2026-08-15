@@ -1,0 +1,50 @@
+[
+  {
+    "file": "Schedule-Event01-batch01-after fargent network DD31-OCT-2025 .xer",
+    "project": "UPD-TheBIG-PH01-upto31-OCT-FR",
+    "data_date": "2025-10-31 00:00",
+    "activities": 1371,
+    "relationships": 3046,
+    "terminal": "KD-MS-1050",
+    "forecast_finish": "2027-04-22 16:00",
+    "required_finish": "2027-04-10 16:00",
+    "required_recovery_days": 12.0,
+    "is_dag": true
+  },
+  {
+    "file": "Schedule-Event01-batch02-after fargent network DD26-NOV-2025 .xer",
+    "project": "The Big - P.01 - UP-26-Nov-FR",
+    "data_date": "2025-11-26 00:00",
+    "activities": 1387,
+    "relationships": 3141,
+    "terminal": "KD-MS-1050",
+    "forecast_finish": "2027-09-06 16:00",
+    "required_finish": "2027-04-10 16:00",
+    "required_recovery_days": 149.0,
+    "is_dag": true
+  },
+  {
+    "file": "Schedule-Event02-IFC-after fargent network DD17-03-2026 .xer",
+    "project": "UPD-TheBIG-PH01upto 17-MAR (FR)-IFC",
+    "data_date": "2026-03-17 00:00",
+    "activities": 1398,
+    "relationships": 3141,
+    "terminal": "KD-MS-1050",
+    "forecast_finish": "2027-09-20 16:00",
+    "required_finish": "2027-04-10 16:00",
+    "required_recovery_days": 163.0,
+    "is_dag": true
+  },
+  {
+    "file": "Schedule-Event03-MEP-after fargent network DD25-13-2025 .xer",
+    "project": "The Big - P.01 - UP-25-DEC-2",
+    "data_date": "2025-12-25 00:00",
+    "activities": 1368,
+    "relationships": 3022,
+    "terminal": "KD-MS-1050",
+    "forecast_finish": "2027-05-12 16:00",
+    "required_finish": "2027-04-10 16:00",
+    "required_recovery_days": 32.0,
+    "is_dag": true
+  }
+]
