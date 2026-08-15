@@ -302,14 +302,14 @@ function Invoke-PublishPipeline {
     )
     $watchSnapshotBefore = Get-WatchedSnapshot
     $fingerprintBefore = Get-WatchedFingerprint -Snapshot $watchSnapshotBefore
-    Invoke-PipelineStep "Generating project-scoped Next.js data" $pythonExecutable @($generatorPath) $root
-    Invoke-PipelineStep "Validating Streamlit to Next.js source parity" $pythonExecutable @($validatorPath) $root
-    Invoke-PipelineStep "Building Next.js production application" "npm.cmd" @("run", "build") $websiteRoot
-    Invoke-PipelineStep "Publishing validated workspace changes to GitHub without Git CLI" "powershell.exe" @(
+    [void](Invoke-PipelineStep "Generating project-scoped Next.js data" $pythonExecutable @($generatorPath) $root)
+    [void](Invoke-PipelineStep "Validating Streamlit to Next.js source parity" $pythonExecutable @($validatorPath) $root)
+    [void](Invoke-PipelineStep "Building Next.js production application" "npm.cmd" @("run", "build") $websiteRoot)
+    [void](Invoke-PipelineStep "Publishing validated workspace changes to GitHub without Git CLI" "powershell.exe" @(
         "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", $githubSyncPath,
         "-Mode", "Once", "-IntervalSeconds", [string]$IntervalSeconds,
         "-Message", "Publish validated Next.js project pipeline"
-    ) $root
+    ) $root)
     # GitHub is the sole deployment trigger.  Vercel is connected to the main
     # branch and deploys the pushed commit itself.  Do not run Vercel CLI here:
     # a second deployment path can race the GitHub deployment or publish a stale
@@ -319,7 +319,7 @@ function Invoke-PublishPipeline {
     $verified = $false
     for ($attempt = 1; $attempt -le 8; $attempt++) {
         try {
-            Invoke-PipelineStep "Verifying GitHub-triggered Vercel deployment (attempt $attempt of 8)" $pythonExecutable @($validatorPath, "--public-url", $PublicUrl) $root
+            [void](Invoke-PipelineStep "Verifying GitHub-triggered Vercel deployment (attempt $attempt of 8)" $pythonExecutable @($validatorPath, "--public-url", $PublicUrl) $root)
             $verified = $true
             break
         }
