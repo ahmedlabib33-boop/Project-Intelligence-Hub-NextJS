@@ -17722,7 +17722,7 @@
           "relative_path": "The BIG - PH01/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 29.1,
-          "modified": "2026-08-15T18:54:26"
+          "modified": "2026-08-15T18:56:18"
         }
       ],
       "watchers": [
@@ -20140,6 +20140,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-15T15:54:26+00:00"
+    "updated_at": "2026-08-15T15:56:18+00:00"
   }
 }
