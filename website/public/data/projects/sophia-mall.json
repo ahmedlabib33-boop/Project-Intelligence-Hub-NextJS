@@ -5613,7 +5613,7 @@
           "relative_path": "Sophia-Mall/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 28.1,
-          "modified": "2026-08-15T18:58:56"
+          "modified": "2026-08-15T19:00:47"
         }
       ],
       "watchers": [
@@ -7681,6 +7681,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-15T15:58:56+00:00"
+    "updated_at": "2026-08-15T16:00:47+00:00"
   }
 }
