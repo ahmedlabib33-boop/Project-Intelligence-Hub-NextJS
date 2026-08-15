@@ -396,8 +396,8 @@ try {
             }
             $script:WorkspaceFileWatcher = New-WorkspaceFileWatcher
             $lastSafetyScan = [DateTime]::UtcNow
-            $safetyScanSeconds = [Math]::Max(60, $IntervalSeconds * 20)
-            Write-PipelineLog "Watcher active. Windows event detection is immediate; a $safetyScanSeconds-second full scan is the missed-event safety fallback."
+            $safetyScanSeconds = [Math]::Max(3, $IntervalSeconds)
+            Write-PipelineLog "Watcher active. Windows events trigger immediately when delivered; a $safetyScanSeconds-second complete pruned source scan guarantees detection if an event is missed."
             while ($true) {
                 $change = $script:WorkspaceFileWatcher.WaitForChanged([System.IO.WatcherChangeTypes]::All, 1000)
                 $publishRequired = $false
