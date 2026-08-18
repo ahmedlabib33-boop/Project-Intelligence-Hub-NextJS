@@ -88,6 +88,12 @@ def set_repeat_table_header(row) -> None:
     tr_pr.append(repeat)
 
 
+def prevent_row_split(row) -> None:
+    tr_pr = row._tr.get_or_add_trPr()
+    if tr_pr.find(qn("w:cantSplit")) is None:
+        tr_pr.append(OxmlElement("w:cantSplit"))
+
+
 def set_fixed_table(table) -> None:
     table.alignment = WD_TABLE_ALIGNMENT.LEFT
     table.autofit = False
@@ -305,8 +311,11 @@ def add_table(doc: Document, headers: list[str], rows: list[list[str]], widths: 
         set_paragraph(p, 0, 0, 1.0)
         set_run(p.add_run(header), size=8.7, color=NAVY, bold=True)
     set_repeat_table_header(table.rows[0])
+    prevent_row_split(table.rows[0])
     for row in rows:
-        cells = table.add_row().cells
+        table_row = table.add_row()
+        prevent_row_split(table_row)
+        cells = table_row.cells
         for index, value in enumerate(row):
             cell = cells[index]
             cell.width = Inches(widths[index])
@@ -461,7 +470,7 @@ def make_handover() -> Path:
 
     doc.add_heading("1. Executive Summary", level=1)
     add_paragraph(doc, "Project Intelligence Hub is a project-controls operating system. It reads separate project files, validates and calculates project controls information locally, then publishes a project-scoped view to the Vercel website.")
-    add_paragraph(doc, "There are two connected layers. The Streamlit/Python layer is the calculation and controlled document-ingestion layer. The Next.js/Vercel layer is the mobile-friendly management and selected-project viewing layer. The Vercel site does not write to local project source files.")
+    add_paragraph(doc, "There are two connected layers. The Streamlit/Python layer is the calculation and controlled document-ingestion layer. The Next.js/Vercel layer is the mobile-friendly management and selected-project viewing layer. The Vercel site does not write to local project source files; its Universal Report Engine creates an editable PowerPoint only in the user's browser from the active project payload and the current form/CSV inputs.")
     add_callout(doc, "Non-negotiable control", "project_id is the identity boundary. Every project payload, output artifact, TIA result, claims record and AI context must carry project_id and project_key. A missing selected-project file produces an empty state; it must never use a different project's data.")
     add_table(doc, ["Layer", "Plain-English purpose", "Main operator"], [
         ["Local project folders", "The controlled source of truth for project data, contracts, letters, schedules and evidence.", "Planning / project team"],
@@ -481,7 +490,7 @@ def make_handover() -> Path:
         "The no-Git sync helper publishes the validated workspace through the GitHub API. Vercel builds the website from the published repository.",
         "The Vercel watcher watches canonical project files and website code every 30 seconds, then repeats the validated release path when content changes.",
     ])
-    add_callout(doc, "Important limitation", "Browser users can review, search and download. They cannot safely upload local P6, contract or letter data into the public Vercel application. Ingestion, contract rebuilding and TIA recalculation remain controlled local operations.", tone="gold")
+    add_callout(doc, "Important limitation", "Browser users can review, search, complete the Universal Report Engine form, load a report-input CSV and download an editable PowerPoint. The CSV is used only for that browser report and is not written to project storage. P6 ingestion, contract/letter rebuilding and TIA recalculation remain controlled local operations.", tone="gold")
 
     doc.add_heading("3. Architecture and Data Flow", level=1)
     add_table(doc, ["Area", "Canonical files / folders", "What it does", "Output surface"], [
@@ -492,7 +501,7 @@ def make_handover() -> Path:
         ["Letters", "07-letters_intelligence/inbox", "Ingests, classifies, links and groups correspondence threads by project.", "Letters Intelligence"],
         ["Brand and reports", "08-branding, 10-deliverables, 11-outputs", "Applies project branding and stores generated report artifacts.", "Output Studio and direct downloads"],
     ], [1.1, 1.7, 2.25, 1.45])
-    add_paragraph(doc, "The Vercel generator is intentionally a publisher, not a second calculation engine. It consumes the locally calculated project data and report artifacts so cost, progress, EVM and TIA logic are not reimplemented differently in browser JavaScript.")
+    add_paragraph(doc, "The Vercel generator remains a publisher, not a second calculation engine. It consumes locally calculated project data and report artifacts so cost, progress, EVM and TIA logic are not recalculated differently in browser JavaScript. The Universal Report Engine presentation builder is a packaging surface only: it places active-project values and user-supplied report rows into the approved presentation format without creating analytical conclusions.")
 
     doc.add_heading("4. Project Identity and Isolation", level=1)
     add_bullets(doc, [
@@ -541,8 +550,20 @@ def make_handover() -> Path:
         ["Contract & Claims Intelligence", "Clauses, evidence mapping, rebuttals, claim builder and project-scoped exports.", "05-contracts, 06-evidence and project claims database"],
         ["Technical Advisor", "Question-bank guidance separated from confirmed project evidence.", "Selected project payload plus shared technical knowledge bank"],
         ["Conference", "Project meeting URL and inline review context.", "Project meeting configuration only"],
-        ["Output Studio", "Executive, master, elite SVG and linked dashboards with direct download formats.", "Canonical project metric payload and project output manifest"],
+        ["Output Studio", "Executive, master, elite SVG and linked dashboards, plus a form/CSV-driven Universal Report Engine that downloads an editable PowerPoint.", "Active ProjectRecord, user form/CSV input and project output manifest"],
     ], [1.55, 2.7, 2.25])
+
+    doc.add_page_break()
+    doc.add_heading("Universal Project Report Engine - production update", level=2)
+    add_paragraph(doc, "Production release 4f58587 was published to GitHub main and deployed by the connected Vercel production project on 18 August 2026. The public alias is https://samcoegyptdashboard.vercel.app.")
+    add_table(doc, ["Control", "Implemented behavior", "Verification evidence"], [
+        ["Report selection", "Uses the selected family from the existing 30-family engine catalogue; the UI does not maintain a separate report list.", "Public Output Studio catalogue and production form verified"],
+        ["Project inputs", "Prefills project name, project_id, key, sector, progress, SPI, CPI, delay exposure, risk and data quality from the active ProjectRecord.", "Switch test replaced ROYA values with Sophia values and retained no ROYA CSV values"],
+        ["User inputs", "Accepts reporting period, author, status, notes and editable/uploaded Metric, Value, Status and Notes CSV rows.", "CSV template download and completed CSV workflow verified"],
+        ["Download", "Generates a three-slide editable PPTX in the browser: cover, report table/KPIs and input/governance register.", "Production download completed with no browser console errors"],
+        ["Isolation", "The component receives only project={project}, performs no fetch and resets form/CSV state when the active project changes.", "18 targeted tests passed; 115 pipeline checks passed; deck contained only the selected project identity"],
+    ], [1.15, 3.45, 2.15])
+    add_callout(doc, "Report governance", "A browser-generated report is a presentation of supplied inputs. It does not replace controlled local evidence validation, native schedule calculations, contractual determination or release approval.", tone="gold")
 
     doc.add_heading("7. Delay Analysis - Time Impact Analysis", level=1)
     add_paragraph(doc, "The TIA module is evidence-led. It does not fabricate a delay, grant EOT or treat compensation as automatic. Its function is to show what can safely be modelled, what is supporting evidence, and what must be checked in Primavera P6.")
@@ -588,7 +609,7 @@ def make_handover() -> Path:
     add_callout(
         doc,
         "Latest verification recorded for this handover",
-        "On 01 August 2026, the D-drive delivery test suite completed with 24 passed tests. Two non-blocking pandas FutureWarnings were reported in the letters auto-ingest path; they do not fail the pipeline but should be addressed during normal maintenance.",
+        "On 18 August 2026, the clean Universal Report Engine release passed the Next.js production build, 18 targeted isolation/report tests and 115 pipeline validation checks with zero failures. The generated PPTX rendered as three slides with no overflow; its XML contained the selected ROYA project name and ID and none of the four other project names. VERCEL_SYNC DryRun passed watcher detection, GitHub main advanced to 4f58587, and Vercel deployment dpl_6cKrnvb2p23vrS7hTwjgGUorBG9u reached Ready with the production alias attached.",
         tone="teal",
     )
     add_paragraph(doc, "Run commands in PowerShell from the stated directory. Do not run deployment commands while an unrelated long-running deployment is active. Commands below deliberately do not include secret values.")
@@ -663,6 +684,7 @@ code "{ROOT}\website"
         "Verify each project report manifest contains only that project's HTML, PDF and PPTX artifacts.",
         "Run npm run build from website.",
         "Use the validated pipeline Once mode, then confirm the public URL and sample downloads return 200.",
+        "In Output Studio > Universal Report Engine - ML, confirm the form shows the active project_id, download the CSV template, generate a PPTX, and verify its governance register contains only the selected project identity.",
         "Review guardrail warnings. Warnings are management-visible; do not silently suppress missing or suspicious data.",
         "Keep the watcher running only on a controlled local machine that has the canonical project folders and required credentials.",
     ])
