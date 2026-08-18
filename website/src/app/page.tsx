@@ -17,6 +17,7 @@ import ScenarioPlanner from "../components/executive/ScenarioPlanner";
 import UnifiedIntelligenceSearch from "../components/executive/UnifiedIntelligenceSearch";
 import OutputStudioDownloadButton from "../components/OutputStudioDownloadButton";
 import ScheduleIntelligencePanel from "../components/schedule/ScheduleIntelligencePanel";
+import UniversalReportBuilder from "../components/UniversalReportBuilder";
 
 type ReportKey = "executive_dashboard" | "master_dashboard" | "elite_svg_charts" | "linked_executive_dashboard";
 
@@ -1221,6 +1222,8 @@ function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
       </section>
 
       {selectedFamily ? (
+        <>
+        <UniversalReportBuilder project={project} family={selectedFamily} />
         <section className="feature-card universal-family-detail">
           <div className="feature-card-head">
             <div>
@@ -1248,6 +1251,7 @@ function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
             <iframe src={selectedFamily.artifacts.html} title={`${project.project_display_name} - ${selectedFamily.title}`} />
           ) : null}
         </section>
+        </>
       ) : null}
 
       <section className="feature-card universal-ml-panel">

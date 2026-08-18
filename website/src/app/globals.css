@@ -16,6 +16,39 @@
   --shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
 }
 
+/* Browser-side, project-isolated Universal Report Engine form. */
+.universal-report-builder { border-color: rgba(57, 215, 210, 0.34); }
+.universal-builder-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+.universal-builder-form label { display: grid; gap: 7px; color: var(--muted); font-size: .75rem; font-weight: 800; letter-spacing: .035em; text-transform: uppercase; }
+.universal-builder-form input,
+.universal-builder-form textarea,
+.universal-builder-csv { width: 100%; border: 1px solid rgba(130,184,219,.3); border-radius: 10px; outline: none; background: rgba(7,25,43,.82); color: var(--text); padding: 10px 12px; }
+.universal-builder-form input:focus,
+.universal-builder-form textarea:focus,
+.universal-builder-csv:focus { border-color: rgba(57,215,210,.7); box-shadow: 0 0 0 3px rgba(57,215,210,.1); }
+.universal-builder-form input { min-height: 42px; }
+.universal-builder-form textarea { min-height: 90px; resize: vertical; }
+.universal-builder-notes { grid-column: span 2; }
+.universal-builder-data { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 18px; }
+.universal-builder-data > div:first-child { display: grid; gap: 4px; }
+.universal-builder-data small { color: var(--muted); }
+.universal-builder-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.universal-builder-actions button { min-height: 39px; border: 1px solid rgba(57,215,210,.4); border-radius: 8px; background: rgba(57,215,210,.1); color: var(--cyan); padding: 8px 12px; font-size: .76rem; font-weight: 900; cursor: pointer; }
+.universal-builder-actions button.primary { border-color: var(--cyan); background: var(--cyan); color: #03111b; }
+.universal-builder-actions button:disabled { cursor: wait; opacity: .62; }
+.universal-builder-csv { min-height: 210px; margin-top: 12px; resize: vertical; font: .78rem/1.55 Consolas, "Courier New", monospace; }
+.universal-builder-message { margin: 10px 0 0; color: var(--muted); font-size: .8rem; }
+.universal-builder-message.done { color: #79dfb0; }
+.universal-builder-message.error { color: #ff9c9c; }
+@media (max-width: 900px) { .universal-builder-form { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) {
+  .universal-builder-form { grid-template-columns: 1fr; }
+  .universal-builder-notes { grid-column: auto; }
+  .universal-builder-data { align-items: stretch; flex-direction: column; }
+  .universal-builder-actions { justify-content: stretch; }
+  .universal-builder-actions button { flex: 1 1 100%; }
+}
+
 * {
   box-sizing: border-box;
 }
