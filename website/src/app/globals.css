@@ -816,15 +816,21 @@ h2 {
 }
 
 .workspace-tab {
-  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
   border: 1px solid var(--line);
   border-radius: 12px;
   color: var(--muted);
   background: rgba(8, 29, 47, 0.72);
   cursor: pointer;
-  font-size: 0.88rem;
+  font-size: 0.96rem;
   font-weight: 800;
-  padding: 10px 14px;
+  line-height: 1.2;
+  letter-spacing: 0.012em;
+  padding: 11px 17px;
+  text-align: center;
   transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
 }
 
@@ -943,13 +949,16 @@ h2 {
 }
 
 .output-studio-tabs button {
-  min-height: 42px;
-  padding: 0 16px;
+  min-height: 46px;
+  padding: 0 18px;
   border: 1px solid transparent;
   border-radius: 11px;
   color: var(--muted);
   background: transparent;
+  font-size: 0.93rem;
   font-weight: 800;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
 }
 
 .output-studio-tabs button.active {
@@ -3097,8 +3106,9 @@ h2 {
   }
 
   .workspace-tab {
-    font-size: 0.8rem;
-    padding: 9px 10px;
+    min-height: 44px;
+    font-size: 0.88rem;
+    padding: 10px 12px;
   }
 
   .workspace-two iframe {
@@ -3350,15 +3360,16 @@ h2 {
 
 .operations-tabs button,
 .project-view-switch button {
-  min-height: 40px;
+  min-height: 44px;
   flex: 1 0 168px;
   border: 0;
   border-bottom: 2px solid transparent;
   background: transparent;
   color: #a8c0d2;
   padding: 0 14px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 900;
+  letter-spacing: 0.01em;
   cursor: pointer;
   white-space: nowrap;
 }
@@ -3659,13 +3670,13 @@ h2 {
 
 .module-tabs button {
   flex: 0 0 auto;
-  min-height: 38px;
+  min-height: 42px;
   border: 1px solid transparent;
   border-radius: 8px;
   background: transparent;
   color: var(--muted);
-  padding: 8px 12px;
-  font-size: 0.8rem;
+  padding: 9px 14px;
+  font-size: 0.88rem;
   font-weight: 800;
   cursor: pointer;
   transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
@@ -4309,7 +4320,7 @@ h2 {
   .operations-chart-grid { grid-template-columns: 1fr; }
   .operations-kpi-grid .holo-kpi { min-height: 118px; }
   .operations-tabs { width: 100%; margin: 0; border-radius: 10px; flex-wrap: wrap; overflow: visible; }
-  .operations-tabs button { min-width: 0; flex: 1 1 calc(50% - 4px); white-space: normal; padding: 8px 10px; }
+  .operations-tabs button { min-width: 0; flex: 1 1 calc(50% - 4px); white-space: normal; padding: 8px 10px; font-size: .84rem; }
   .ops-chart-card { min-height: 0; padding: 16px; }
   .sector-composition { grid-template-columns: 1fr; gap: 15px; padding-top: 18px; }
   .sector-donut { width: 154px; height: 154px; }
@@ -4459,9 +4470,12 @@ h2 {
   border-radius: 9px;
   background: transparent;
   color: #94aabd;
-  padding: 11px 13px;
-  font-size: .86rem;
+  min-height: 46px;
+  padding: 11px 14px;
+  font-size: .93rem;
   font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: .01em;
   text-align: left;
   cursor: pointer;
 }
