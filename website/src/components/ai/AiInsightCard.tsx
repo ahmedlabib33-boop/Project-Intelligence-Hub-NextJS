@@ -86,7 +86,7 @@ export default function AiInsightCard({ type, projectKey }: AiInsightCardProps) 
     <section className="ai-insight-card">
       <div className="ai-insight-head">
         <div>
-          <span>Groq analysis</span>
+          <span>{data?.status === "fallback" ? "Source-backed analysis" : "AI analysis"}</span>
           <h3>{titleByType[type]}</h3>
         </div>
         <button type="button" onClick={() => void loadInsight()} disabled={loading}>
@@ -98,6 +98,7 @@ export default function AiInsightCard({ type, projectKey }: AiInsightCardProps) 
       {!error && data ? (
         <div className="ai-insight-body">
           {"summary" in data ? <p>{displayValue(data.summary)}</p> : null}
+          {"notice" in data ? <p className="ai-insight-muted">{displayValue(data.notice)}</p> : null}
           {"criticalPathImpact" in data ? <p>{displayValue(data.criticalPathImpact)}</p> : null}
           {"riskExposure" in data ? <p><b>Risk exposure:</b> {displayValue(data.riskExposure)}</p> : null}
           {"claimExposure" in data ? <p><b>Claim exposure:</b> {displayValue(data.claimExposure)}</p> : null}

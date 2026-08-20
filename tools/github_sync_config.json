@@ -6,7 +6,7 @@
   "interval_seconds": 30,
   "sync_deletions": true,
   "prune_legacy_project_folders": true,
-  "max_file_size_mb": 95,
+  "max_file_size_mb": 45,
   "excluded_directories": [
     ".git",
     ".venv",

@@ -22,6 +22,14 @@ from universal_report_engine_adapter import (
     is_released_artifact,
 )
 
+# Canonical inputs embed lossless JSON snapshots in ``payload_json``.  Letter
+# registers can exceed Python's small default CSV field limit (131,072 bytes).
+# Raise the parser limit once for every controlled project input.
+try:
+    csv.field_size_limit(sys.maxsize)
+except OverflowError:
+    csv.field_size_limit(2**31 - 1)
+
 
 ROOT = Path(__file__).resolve().parents[1]
 # This delivery is self-contained.  Generated website data must always come
@@ -217,6 +225,105 @@ def load_project_input_rows(data_dir: Path) -> tuple[dict[str, list[dict[str, st
             rows[dataset] = read_csv_rows(path)
             source_paths[dataset] = path
     return rows, source_paths
+
+
+def load_canonical_letters_payload(project: dict[str, Any], data_dir: Path) -> dict[str, Any] | None:
+    """Read the project-scoped Letters snapshot from canonical input 10.
+
+    The ten-input redesign stores the former workbook and inbox result as one
+    lossless snapshot row.  It must be read directly instead of looking for the
+    archived ``07-letters_intelligence`` workbook folder.
+    """
+    bundle_path = data_dir / "10_letters_intelligence.csv"
+    project_id = str(project.get("project_id") or "").strip()
+    if not bundle_path.exists() or not project_id:
+        return None
+
+    for record in read_csv_rows(bundle_path):
+        if str(record.get("row_kind") or "").strip().casefold() != "snapshot":
+            continue
+        try:
+            snapshot = json.loads(str(record.get("payload_json") or "null"))
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(snapshot, dict):
+            continue
+
+        workbook_tables = snapshot.get("workbook_tables")
+        if not isinstance(workbook_tables, dict):
+            continue
+
+        published_sheets: list[dict[str, Any]] = []
+        rejected_rows = 0
+        for source_sheet in workbook_tables.get("sheets", []):
+            if not isinstance(source_sheet, dict):
+                continue
+            source_rows = source_sheet.get("rows")
+            if not isinstance(source_rows, list):
+                source_rows = []
+            scoped_rows: list[dict[str, Any]] = []
+            for source_row in source_rows:
+                if not isinstance(source_row, dict):
+                    continue
+                row = {str(key): excel_value(value) for key, value in source_row.items()}
+                row_project_id = str(row.get("project_id") or "").strip()
+                if row_project_id and row_project_id != project_id:
+                    rejected_rows += 1
+                    continue
+                row["project_id"] = project_id
+                scoped_rows.append(row)
+            columns = [str(column) for column in source_sheet.get("columns", [])]
+            if "project_id" not in columns:
+                columns.append("project_id")
+            declared_number = safe_float(source_sheet.get("row_count"))
+            declared_count = int(declared_number) if declared_number is not None else len(scoped_rows)
+            published_sheets.append(
+                {
+                    "name": str(source_sheet.get("name") or "Letters Register"),
+                    "row_count": declared_count if declared_count >= len(scoped_rows) else len(scoped_rows),
+                    "column_count": len(columns),
+                    "columns": columns,
+                    "rows": scoped_rows[:WORKSPACE_TABLE_ROW_LIMIT],
+                    "truncated": bool(source_sheet.get("truncated")) or len(scoped_rows) > WORKSPACE_TABLE_ROW_LIMIT,
+                }
+            )
+
+        source_files = snapshot.get("inbox_files")
+        inbox_files = [
+            {
+                "name": str(item.get("name") or "Letter file"),
+                "relative_path": str(item.get("relative_path") or item.get("name") or ""),
+                "extension": str(item.get("extension") or "file"),
+                "size_kb": safe_float(item.get("size_kb")) or 0,
+                "modified": str(item.get("modified") or ""),
+            }
+            for item in source_files
+            if isinstance(item, dict)
+        ] if isinstance(source_files, list) else []
+
+        workbook = snapshot.get("workbook") if isinstance(snapshot.get("workbook"), dict) else {}
+        return {
+            "folder": "01-data/import_templates",
+            "inbox_files": inbox_files,
+            "inbox_file_count": len(inbox_files),
+            "workbook": {
+                "file": bundle_path.name,
+                "exists": True,
+                "source_workbook": str(workbook.get("file") or "letters_intelligence.xlsx"),
+                "sheets": published_sheets,
+            },
+            "workbook_tables": {
+                "file": bundle_path.name,
+                "exists": True,
+                "sheets": published_sheets,
+                "rejected_cross_project_rows": rejected_rows,
+                "source_scope": "selected_project_only",
+                "inbox_auto_ingest": True,
+                "source_mode": "canonical_csv_snapshot",
+            },
+            "source_file": bundle_path.name,
+        }
+    return None
 
 
 def preview_rows_table(rows: list[dict[str, Any]], source_path: Path, limit: int = 8) -> dict[str, Any]:
@@ -1077,10 +1184,25 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     letters_dir = base / "07-letters_intelligence"
     outputs_dir = OUTPUTS_ROOT / project["project_folder_name"]
 
-    letter_files = list_project_files(letters_dir / "inbox", base, 160)
-    letter_workbook_path = letters_dir / "letters_intelligence.xlsx"
-    letter_workbook = xlsx_summary(letter_workbook_path)
-    letter_workspace_tables = build_letters_workspace_tables(project, letter_workbook_path, letters_dir / "inbox")
+    canonical_letters = load_canonical_letters_payload(project, data_dir)
+    if canonical_letters is not None:
+        letter_files = canonical_letters["inbox_files"]
+        letter_workbook = canonical_letters["workbook"]
+        letter_workspace_tables = canonical_letters["workbook_tables"]
+        letters_folder = canonical_letters["folder"]
+        letters_source_detail = (
+            "Reads the selected project's published correspondence snapshot from "
+            "10_letters_intelligence.csv; no archived workbook or inbox folder is used."
+        )
+        letters_detector_status = "Active" if letter_workspace_tables.get("sheets") else "Awaiting Data"
+    else:
+        letter_files = list_project_files(letters_dir / "inbox", base, 160)
+        letter_workbook_path = letters_dir / "letters_intelligence.xlsx"
+        letter_workbook = xlsx_summary(letter_workbook_path)
+        letter_workspace_tables = build_letters_workspace_tables(project, letter_workbook_path, letters_dir / "inbox")
+        letters_folder = "07-letters_intelligence"
+        letters_source_detail = "Uses the project-local workbook, inbox ingestion, correspondence links, and issue-thread workflow."
+        letters_detector_status = "Active" if letter_workspace_tables.get("sheets") else "Awaiting Data"
     contract_files = list_project_files(contracts_dir / "source", base, 80)
     evidence_files = list_project_files(evidence_dir, base, 80)
     output_files = list_project_files(outputs_dir, OUTPUTS_ROOT, 20)
@@ -1114,14 +1236,14 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
             "workspace_tables": {key: workspace_rows_table(rows.get("progress" if key == "progress_updates" else key, []), path) for key, path in overview_paths.items()},
         },
         "letters_intelligence": {
-            "folder": "07-letters_intelligence",
+            "folder": letters_folder,
             "inbox_files": letter_files,
             "inbox_file_count": len(letter_files),
             "workbook": letter_workbook,
             "workbook_tables": letter_workspace_tables,
             "detectors": [
-                {"name": "Inbox folder detector", "status": "Active" if (letters_dir / "inbox").exists() else "Missing", "detail": "Recognizes new PDF, DOCX, XLSX, CSV, and message files under project letters inbox."},
-                {"name": "Letters intelligence workflow", "status": "Active" if letter_workspace_tables.get("sheets") else "Awaiting Data", "detail": "Uses the Streamlit workbook, inbox ingestion, correspondence links, and issue-thread workflow for this project only."},
+                {"name": "Canonical letters source", "status": "Active" if canonical_letters is not None else ("Active" if (letters_dir / "inbox").exists() else "Missing"), "detail": letters_source_detail},
+                {"name": "Letters intelligence workflow", "status": letters_detector_status, "detail": "Publishes the selected project's correspondence registers, links, issue threads, and inbox metadata only."},
                 {"name": "Project isolation", "status": "Active", "detail": "Only files inside the selected project folder are listed."},
             ],
         },

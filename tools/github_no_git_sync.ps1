@@ -284,6 +284,7 @@ function Invoke-SyncCycle {
         }
         $localBlobSha = Get-GitBlobSha $bytes
         if ($remote.ContainsKey($path) -and $remote[$path] -eq $localBlobSha) { continue }
+        Write-SyncLog "Uploading blob: $path ($($bytes.Length) bytes)"
         $blob = Invoke-GitHubApi "Post" "$apiBase/git/blobs" @{ content = [Convert]::ToBase64String($bytes); encoding = "base64" }
         $uploadEntries += @{ path = $path; mode = "100644"; type = "blob"; sha = $blob.sha }
     }
