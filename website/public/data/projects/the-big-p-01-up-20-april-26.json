@@ -169,15 +169,15 @@
     },
     "s_curve_forecast": {
       "status": "ready",
-      "method": "statsmodels damped Holt trend",
+      "method": "numpy linear trend fallback",
       "periods_available": 8,
       "current_actual_value": 113085034.8,
       "current_planned_value": 258975038.6,
       "completion_target_value": 367286025.0,
       "excluded_cumulative_reset_periods": 10,
       "recent_period_change": 5277326.6,
-      "projected_completion_date": "2027-12-01",
-      "months_to_target": 19,
+      "projected_completion_date": "2027-07-01",
+      "months_to_target": 14,
       "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
     },
     "s_curve_chart_url": "/data/analytics/the-big-p-01-up-20-april-26-s-curve-analytics.png",
@@ -248,25 +248,25 @@
           "installed": true
         },
         "seaborn": {
-          "installed": true
+          "installed": false
         },
         "scikit_learn": {
           "installed": true
         },
         "statsmodels": {
-          "installed": true
+          "installed": false
         },
         "spacy": {
           "installed": true
         },
         "xgboost": {
-          "installed": true
+          "installed": false
         },
         "pytorch": {
           "installed": true
         },
         "tensorflow": {
-          "installed": true
+          "installed": false
         }
       },
       "xgboost": {
@@ -17417,6 +17417,181 @@
           "modified": "2026-08-05T01:08:35"
         },
         {
+          "name": "universal-baseline_current-program-report.html",
+          "relative_path": "The BIG - PH01/universal-baseline_current-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-cashflow-program-report.html",
+          "relative_path": "The BIG - PH01/universal-cashflow-program-report.html",
+          "extension": "html",
+          "size_kb": 9.9,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-change_control-program-report.html",
+          "relative_path": "The BIG - PH01/universal-change_control-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-contract_admin-program-report.html",
+          "relative_path": "The BIG - PH01/universal-contract_admin-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-cost-program-report.html",
+          "relative_path": "The BIG - PH01/universal-cost-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-critical_path-program-report.html",
+          "relative_path": "The BIG - PH01/universal-critical_path-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-delay-program-report.html",
+          "relative_path": "The BIG - PH01/universal-delay-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-document_control-program-report.html",
+          "relative_path": "The BIG - PH01/universal-document_control-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-eot-program-report.html",
+          "relative_path": "The BIG - PH01/universal-eot-program-report.html",
+          "extension": "html",
+          "size_kb": 10.1,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-equipment-program-report.html",
+          "relative_path": "The BIG - PH01/universal-equipment-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-evm-program-report.html",
+          "relative_path": "The BIG - PH01/universal-evm-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-executive-program-report.html",
+          "relative_path": "The BIG - PH01/universal-executive-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-float-program-report.html",
+          "relative_path": "The BIG - PH01/universal-float-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-forecast_completion-program-report.html",
+          "relative_path": "The BIG - PH01/universal-forecast_completion-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-hybrid-program-report.html",
+          "relative_path": "The BIG - PH01/universal-hybrid-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-interface_management-program-report.html",
+          "relative_path": "The BIG - PH01/universal-interface_management-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-lookahead-program-report.html",
+          "relative_path": "The BIG - PH01/universal-lookahead-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-material-program-report.html",
+          "relative_path": "The BIG - PH01/universal-material-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-milestone-program-report.html",
+          "relative_path": "The BIG - PH01/universal-milestone-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-ml_project_controls-program-report.html",
+          "relative_path": "The BIG - PH01/universal-ml_project_controls-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-procurement-program-report.html",
+          "relative_path": "The BIG - PH01/universal-procurement-program-report.html",
+          "extension": "html",
+          "size_kb": 10.1,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-productivity-program-report.html",
+          "relative_path": "The BIG - PH01/universal-productivity-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-progress-program-report.html",
+          "relative_path": "The BIG - PH01/universal-progress-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-qaqc-program-report.html",
+          "relative_path": "The BIG - PH01/universal-qaqc-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
+          "name": "universal-recovery-program-report.html",
+          "relative_path": "The BIG - PH01/universal-recovery-program-report.html",
+          "extension": "html",
+          "size_kb": 10.0,
+          "modified": "2026-08-20T12:09:27"
+        },
+        {
           "name": "pih_universal_report_artifact.json",
           "relative_path": "The BIG - PH01/universal-report-engine/executive/pih_universal_report_artifact.json",
           "extension": "json",
@@ -17674,181 +17849,6 @@
           "extension": "svg",
           "size_kb": 13.4,
           "modified": "2026-08-10T18:20:39"
-        },
-        {
-          "name": "04_EVIDENCE_INTEGRITY_CONFLICTS_AND_GAPS.svg",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260810T152033Z-6348bd8231/SVG_EDITABLE/04_EVIDENCE_INTEGRITY_CONFLICTS_AND_GAPS.svg",
-          "extension": "svg",
-          "size_kb": 9.0,
-          "modified": "2026-08-10T18:20:39"
-        },
-        {
-          "name": "05_32_LAYER_PROJECT_REPORT_PIPELINE.svg",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260810T152033Z-6348bd8231/SVG_EDITABLE/05_32_LAYER_PROJECT_REPORT_PIPELINE.svg",
-          "extension": "svg",
-          "size_kb": 26.1,
-          "modified": "2026-08-10T18:20:39"
-        },
-        {
-          "name": "06_26_GLOBAL_RULES_CONTROLLED_AND_PRESERVED.svg",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260810T152033Z-6348bd8231/SVG_EDITABLE/06_26_GLOBAL_RULES_CONTROLLED_AND_PRESERVED.svg",
-          "extension": "svg",
-          "size_kb": 18.4,
-          "modified": "2026-08-10T18:20:39"
-        },
-        {
-          "name": "07_REPORT_SPECIFIC_VALIDATION_RELEASE_GATES.svg",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260810T152033Z-6348bd8231/SVG_EDITABLE/07_REPORT_SPECIFIC_VALIDATION_RELEASE_GATES.svg",
-          "extension": "svg",
-          "size_kb": 5.8,
-          "modified": "2026-08-10T18:20:39"
-        },
-        {
-          "name": "governed_validation_report.json",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260810T152033Z-6348bd8231/VALIDATION/governed_validation_report.json",
-          "extension": "json",
-          "size_kb": 1.7,
-          "modified": "2026-08-10T18:20:43"
-        },
-        {
-          "name": "REPORT_GENERATION_SUMMARY.txt",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260810T152033Z-6348bd8231/VALIDATION/REPORT_GENERATION_SUMMARY.txt",
-          "extension": "txt",
-          "size_kb": 0.4,
-          "modified": "2026-08-10T18:20:43"
-        },
-        {
-          "name": "run-20260810T152033Z-6348bd8231_FULL_PACKAGE.zip",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260810T152033Z-6348bd8231_FULL_PACKAGE.zip",
-          "extension": "zip",
-          "size_kb": 3432.1,
-          "modified": "2026-08-10T18:20:44"
-        },
-        {
-          "name": "ENGINE_RUN_MANIFEST.json",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/ENGINE_RUN_MANIFEST.json",
-          "extension": "json",
-          "size_kb": 7.1,
-          "modified": "2026-08-20T11:46:32"
-        },
-        {
-          "name": "32_LAYER_PIPELINE.json",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/GOVERNANCE/32_LAYER_PIPELINE.json",
-          "extension": "json",
-          "size_kb": 5.4,
-          "modified": "2026-08-20T11:46:31"
-        },
-        {
-          "name": "FULL_GOVERNANCE_REGISTRY.json",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/GOVERNANCE/FULL_GOVERNANCE_REGISTRY.json",
-          "extension": "json",
-          "size_kb": 86.1,
-          "modified": "2026-08-20T11:46:31"
-        },
-        {
-          "name": "REPORT_FAMILY_RULEBOOK.json",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/GOVERNANCE/REPORT_FAMILY_RULEBOOK.json",
-          "extension": "json",
-          "size_kb": 2.1,
-          "modified": "2026-08-20T11:46:31"
-        },
-        {
-          "name": "UNIVERSAL_26_RULES.json",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/GOVERNANCE/UNIVERSAL_26_RULES.json",
-          "extension": "json",
-          "size_kb": 8.0,
-          "modified": "2026-08-20T11:46:31"
-        },
-        {
-          "name": "EXECUTIVE_Report_Gallery.html",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/HTML/EXECUTIVE_Report_Gallery.html",
-          "extension": "html",
-          "size_kb": 3.0,
-          "modified": "2026-08-20T11:46:31"
-        },
-        {
-          "name": "ML_CAPABILITY_AND_RUN_STATUS.json",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/ML_DECISION_SUPPORT/ML_CAPABILITY_AND_RUN_STATUS.json",
-          "extension": "json",
-          "size_kb": 3.6,
-          "modified": "2026-08-20T11:46:31"
-        },
-        {
-          "name": "ML_DECISION_SUPPORT_REPORT.html",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/ML_DECISION_SUPPORT/ML_DECISION_SUPPORT_REPORT.html",
-          "extension": "html",
-          "size_kb": 5.2,
-          "modified": "2026-08-20T11:46:31"
-        },
-        {
-          "name": "ML_TASK_REGISTRY.json",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/ML_DECISION_SUPPORT/ML_TASK_REGISTRY.json",
-          "extension": "json",
-          "size_kb": 3.5,
-          "modified": "2026-08-20T11:46:31"
-        },
-        {
-          "name": "EXECUTIVE_Report_A4_Landscape_FULL_BLEED.pdf",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/PDF_A4_LANDSCAPE/EXECUTIVE_Report_A4_Landscape_FULL_BLEED.pdf",
-          "extension": "pdf",
-          "size_kb": 668.3,
-          "modified": "2026-08-20T11:46:31"
-        },
-        {
-          "name": "PIH_PROJECT_CONTEXT.json",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/PIH_PROJECT_CONTEXT.json",
-          "extension": "json",
-          "size_kb": 0.7,
-          "modified": "2026-08-20T11:46:13"
-        },
-        {
-          "name": "01_WEEKLY_MONTHLY_EXECUTIVE_PROJECT_REPORT_EXECUTIVE_CONTROL.png",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/PNG_HIGH_RES/01_WEEKLY_MONTHLY_EXECUTIVE_PROJECT_REPORT_EXECUTIVE_CONTROL.png",
-          "extension": "png",
-          "size_kb": 129.3,
-          "modified": "2026-08-20T11:46:29"
-        },
-        {
-          "name": "02_R23_Weekly_Monthly_Executive_Project_Report.png",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/PNG_HIGH_RES/02_R23_Weekly_Monthly_Executive_Project_Report.png",
-          "extension": "png",
-          "size_kb": 76.6,
-          "modified": "2026-08-20T11:46:29"
-        },
-        {
-          "name": "03_CONTROLLED_METRICS_TABLES_AND_VISUALS.png",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/PNG_HIGH_RES/03_CONTROLLED_METRICS_TABLES_AND_VISUALS.png",
-          "extension": "png",
-          "size_kb": 72.9,
-          "modified": "2026-08-20T11:46:29"
-        },
-        {
-          "name": "04_EVIDENCE_INTEGRITY_CONFLICTS_AND_GAPS.png",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/PNG_HIGH_RES/04_EVIDENCE_INTEGRITY_CONFLICTS_AND_GAPS.png",
-          "extension": "png",
-          "size_kb": 92.3,
-          "modified": "2026-08-20T11:46:29"
-        },
-        {
-          "name": "05_32_LAYER_PROJECT_REPORT_PIPELINE.png",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/PNG_HIGH_RES/05_32_LAYER_PROJECT_REPORT_PIPELINE.png",
-          "extension": "png",
-          "size_kb": 147.1,
-          "modified": "2026-08-20T11:46:30"
-        },
-        {
-          "name": "06_26_GLOBAL_RULES_CONTROLLED_AND_PRESERVED.png",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/PNG_HIGH_RES/06_26_GLOBAL_RULES_CONTROLLED_AND_PRESERVED.png",
-          "extension": "png",
-          "size_kb": 201.5,
-          "modified": "2026-08-20T11:46:30"
-        },
-        {
-          "name": "07_REPORT_SPECIFIC_VALIDATION_RELEASE_GATES.png",
-          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/PNG_HIGH_RES/07_REPORT_SPECIFIC_VALIDATION_RELEASE_GATES.png",
-          "extension": "png",
-          "size_kb": 57.3,
-          "modified": "2026-08-20T11:46:30"
         }
       ],
       "watchers": [
@@ -19731,12 +19731,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-eot-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "delay",
@@ -19747,12 +19749,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-delay-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "progress",
@@ -19763,12 +19767,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-progress-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "recovery",
@@ -19779,12 +19785,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-recovery-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "variation",
@@ -19795,12 +19803,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-variation-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "hybrid",
@@ -19810,12 +19820,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-hybrid-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "resource",
@@ -19826,12 +19838,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-resource-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "equipment",
@@ -19841,12 +19855,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-equipment-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "cost",
@@ -19856,12 +19872,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-cost-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "evm",
@@ -19871,12 +19889,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-evm-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "cashflow",
@@ -19886,12 +19906,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-cashflow-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "scurve",
@@ -19901,12 +19923,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-scurve-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "procurement",
@@ -19917,12 +19941,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-procurement-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "material",
@@ -19932,12 +19958,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-material-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "lookahead",
@@ -19948,12 +19976,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-lookahead-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "critical_path",
@@ -19964,12 +19994,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-critical_path-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "float",
@@ -19980,12 +20012,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-float-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "milestone",
@@ -19996,12 +20030,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-milestone-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "risk",
@@ -20011,12 +20047,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-risk-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "rfi_submittal",
@@ -20027,12 +20065,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-rfi_submittal-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "qaqc",
@@ -20042,12 +20082,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-qaqc-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "productivity",
@@ -20057,12 +20099,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-productivity-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "executive",
@@ -20072,12 +20116,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "DRAFT_REVIEW_REQUIRED",
-        "detail": "A local draft package exists, but its validation/release gate did not pass. Use it only for internal review until the stated source gaps are resolved.",
-        "artifacts": {},
-        "generated_at": "2026-08-20T08:46:32+00:00",
-        "release_status": "FAIL_VALIDATION_ERROR",
-        "validation_status": "FAIL_VALIDATION_ERROR"
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-executive-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "baseline_current",
@@ -20088,12 +20134,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-baseline_current-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "forecast_completion",
@@ -20104,12 +20152,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-forecast_completion-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "ml_project_controls",
@@ -20119,12 +20169,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-ml_project_controls-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "contract_admin",
@@ -20134,12 +20186,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-contract_admin-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "change_control",
@@ -20149,12 +20203,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-change_control-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "document_control",
@@ -20164,12 +20220,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-document_control-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "interface_management",
@@ -20180,19 +20238,21 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/The-BIG-PH01/universal-interface_management-program-report.html"
+        },
+        "generated_at": "2026-08-20T09:09:27+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       }
     ],
     "summary": {
       "catalog_count": 30,
-      "generated_count": 0,
-      "draft_review_count": 1,
-      "ready_count": 29,
+      "generated_count": 30,
+      "draft_review_count": 0,
+      "ready_count": 0,
       "blocked_count": 0
     },
     "ml_capability": {
@@ -20278,6 +20338,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-20T09:01:24+00:00"
+    "updated_at": "2026-08-20T09:09:27+00:00"
   }
 }

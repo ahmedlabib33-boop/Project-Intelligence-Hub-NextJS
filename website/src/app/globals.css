@@ -1181,6 +1181,34 @@ h2 {
   line-height: 1.45;
 }
 
+.universal-status.published { color: var(--green); background: rgba(27, 210, 147, 0.1); }
+
+.universal-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.universal-card-actions button,
+.universal-card-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  padding: 0 10px;
+  border: 1px solid rgba(57, 215, 210, 0.58);
+  border-radius: 8px;
+  background: rgba(12, 58, 74, 0.55);
+  color: var(--cyan);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.universal-card-actions a { background: var(--cyan); color: #062033; }
+
 .universal-status {
   width: fit-content;
   padding: 4px 7px;

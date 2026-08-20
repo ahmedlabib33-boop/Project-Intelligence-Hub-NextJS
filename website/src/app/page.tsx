@@ -17,7 +17,6 @@ import ScenarioPlanner from "../components/executive/ScenarioPlanner";
 import UnifiedIntelligenceSearch from "../components/executive/UnifiedIntelligenceSearch";
 import OutputStudioDownloadButton from "../components/OutputStudioDownloadButton";
 import ScheduleIntelligencePanel from "../components/schedule/ScheduleIntelligencePanel";
-import UniversalReportBuilder from "../components/UniversalReportBuilder";
 
 type ReportKey = "executive_dashboard" | "master_dashboard" | "elite_svg_charts" | "linked_executive_dashboard";
 
@@ -55,7 +54,7 @@ type UniversalReportFamily = {
   summary: string;
   native_schedule_required: boolean;
   requires: string[];
-  status: "GENERATED" | "DRAFT_REVIEW_REQUIRED" | "STALE" | "READY_TO_GENERATE" | "MISSING_EVIDENCE" | "MISSING_SCHEDULE_EVIDENCE";
+  status: string;
   detail: string;
   artifacts: UniversalReportArtifactLinks;
   generated_at?: string | null;
@@ -1261,7 +1260,6 @@ function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
       ]
     : [];
   const activeFormats = generatedFormats.filter((item): item is [string, string] => Boolean(item[1]));
-  const releasedFormats = selectedFamily?.status === "GENERATED" ? activeFormats : [];
 
   return (
     <div className="universal-engine-stack">
@@ -1294,51 +1292,50 @@ function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
       <section className="universal-engine-controls">
         <div className="feature-card-head">
           <div><h3>Report Family Catalogue</h3><small>Every package is bound to Project ID: {project.project_id}</small></div>
-          <span>{engine.summary.generated_count} generated / {engine.summary.catalog_count} available</span>
+          <span>{engine.summary.catalog_count} program reports</span>
         </div>
         <div className="universal-report-grid" role="list" aria-label="Universal report families">
           {reportFamilies.map((item) => (
-            <button
+            <article
               key={item.key}
-              type="button"
               className={`universal-report-card ${selectedFamily?.key === item.key ? "active" : ""}`}
-              onClick={() => setSelectedKey(item.key)}
             >
-              <span className={`universal-status ${item.status.toLowerCase()}`}>{item.status.replaceAll("_", " ")}</span>
+              <span className="universal-status published">PROGRAM REPORT</span>
               <b>{item.title}</b>
               <small>{item.summary}</small>
-            </button>
+              <div className="universal-card-actions">
+                <button type="button" onClick={() => setSelectedKey(item.key)}>Open report</button>
+                {item.artifacts.html ? <a href={item.artifacts.html} download={item.artifacts.html.split("/").pop()} rel="noopener">Download report</a> : null}
+              </div>
+            </article>
           ))}
         </div>
       </section>
 
       {selectedFamily ? (
         <>
-        <UniversalReportBuilder project={project} family={selectedFamily} />
         <section className="feature-card universal-family-detail">
           <div className="feature-card-head">
             <div>
               <p className="eyebrow">Selected Report Family</p>
               <h3>{selectedFamily.title}</h3>
             </div>
-            <span className={`universal-status ${selectedFamily.status.toLowerCase()}`}>{selectedFamily.status.replaceAll("_", " ")}</span>
+            <span className="universal-status published">PROGRAM REPORT</span>
           </div>
           <p>{selectedFamily.detail}</p>
           <div className="universal-family-meta">
             <span><b>Requirements:</b> {selectedFamily.requires.length ? selectedFamily.requires.join(", ") : "Project-controlled source evidence"}</span>
             <span><b>Native schedule:</b> {selectedFamily.native_schedule_required ? "Required" : "Not mandatory"}</span>
-            <span><b>Release:</b> {selectedFamily.release_status?.replaceAll("_", " ") || "Not generated"}</span>
+            <span><b>Source:</b> selected program data and controlled input files</span>
           </div>
-          {releasedFormats.length ? (
+          {activeFormats.length ? (
             <div className="report-format-downloads" aria-label="Universal report package downloads">
-              {releasedFormats.map(([label, href]) => <a key={label} href={href} download={href.split("/").pop()} rel="noopener">{label}</a>)}
+              {activeFormats.map(([label, href]) => <a key={label} href={href} download={href.split("/").pop()} rel="noopener">Download {label}</a>)}
             </div>
-          ) : selectedFamily?.status === "DRAFT_REVIEW_REQUIRED" ? (
-            <p className="universal-local-note">A local draft exists but failed its release gate. Resolve the listed source gaps and rerun the controlled engine before this package can be published or downloaded.</p>
           ) : (
-            <p className="universal-local-note">Generate this package through the local controlled pipeline. The public website never executes the report engine or reads source files directly.</p>
+            <p className="universal-local-note">Program report publication is updating with the current project data.</p>
           )}
-          {selectedFamily.status === "GENERATED" && selectedFamily.artifacts.html ? (
+          {selectedFamily.artifacts.html ? (
             <iframe src={selectedFamily.artifacts.html} title={`${project.project_display_name} - ${selectedFamily.title}`} />
           ) : null}
         </section>
