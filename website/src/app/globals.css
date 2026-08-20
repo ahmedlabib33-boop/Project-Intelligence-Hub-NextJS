@@ -971,10 +971,6 @@ h2 {
   background: linear-gradient(135deg, rgba(8, 37, 58, 0.92), rgba(13, 57, 56, 0.62));
 }
 
-.published-downloads.compact {
-  margin-top: 2px;
-}
-
 .published-downloads-head {
   display: flex;
   gap: 18px;

@@ -1173,10 +1173,10 @@ function ReportFormatDownloads({ project, reportKey }: { project: ProjectRecord;
   );
 }
 
-function PublishedProjectDownloads({ project, compact = false }: { project: ProjectRecord; compact?: boolean }) {
+function PublishedProjectDownloads({ project }: { project: ProjectRecord }) {
   const packageUrl = project.report_package?.zip;
   return (
-    <section className={compact ? "published-downloads compact" : "published-downloads"} aria-label="Published project report downloads">
+    <section className="published-downloads" aria-label="Published project report downloads">
       <div className="published-downloads-head">
         <div>
           <p className="eyebrow">Published Project Outputs</p>
@@ -1278,8 +1278,6 @@ function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
           <span><b>{numberValue(engine.source_file_count)}</b> Project sources</span>
         </div>
       </section>
-
-      <PublishedProjectDownloads project={project} compact />
 
       <section className="universal-diagram-workspace" aria-label="Universal report engine control charts">
         <div className="universal-diagram-intro">
