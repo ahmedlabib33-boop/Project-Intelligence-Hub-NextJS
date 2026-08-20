@@ -50,12 +50,18 @@ function sourceBackedLettersFallback(project: JsonRecord) {
   const letters = asRecord(features.letters_intelligence);
   const workbookTables = asRecord(letters.workbook_tables);
   const sheets = Array.isArray(workbookTables.sheets) ? workbookTables.sheets.map(asRecord) : [];
-  const rows = sheets.flatMap((sheet) => Array.isArray(sheet.rows) ? sheet.rows.map(asRecord) : []);
-  const registerRows = sheets.reduce((total, sheet) => total + Number(sheet.row_count || 0), 0);
-  const critical = rows.filter((row) => /^(high|critical)$/i.test(fieldValue(row, ["Delay Risk", "delay_risk", "Risk Level"])));
+  const correspondenceSheets = sheets.filter((sheet) => /from (contractor|consultant|samco|ace)/i.test(String(sheet.name || "")));
+  const correspondenceRows = correspondenceSheets.flatMap((sheet) => Array.isArray(sheet.rows) ? sheet.rows.map(asRecord) : []);
+  const byReference = new Map<string, JsonRecord>();
+  for (const row of correspondenceRows) {
+    const reference = fieldValue(row, ["Ref No", "Reference", "reference"]);
+    if (reference && !byReference.has(reference)) byReference.set(reference, row);
+  }
+  const screenedRows = byReference.size ? [...byReference.values()] : correspondenceRows;
+  const critical = screenedRows.filter((row) => /^(high|critical)$/i.test(fieldValue(row, ["Delay Risk", "delay_risk", "Risk Level"])));
   return {
     themes: [
-      `Published correspondence register: ${registerRows || rows.length} rows across ${sheets.length} letter tables.`,
+      `Published correspondence register: ${screenedRows.length} unique correspondence references across ${sheets.length} letter tables.`,
       critical.length ? `${critical.length} published high/critical delay-risk records are visible in the register.` : "No high/critical delay-risk label is published in the visible correspondence rows."
     ],
     criticalLetters: unique(critical.map((row) => {
@@ -63,7 +69,7 @@ function sourceBackedLettersFallback(project: JsonRecord) {
       const subject = fieldValue(row, ["Subject", "subject", "Main Purpose"]);
       return `${reference || "Unreferenced letter"}${subject ? ` — ${subject}` : ""}`;
     })),
-    actionItems: unique(rows.map((row) => fieldValue(row, ["Required Actions", "Required Action", "Action", "action_items"]))),
+    actionItems: unique(screenedRows.map((row) => fieldValue(row, ["Required Actions", "Required Action", "Action", "action_items"]))),
     deadlines: [],
     provider: "source-backed",
     model: "published correspondence register",
