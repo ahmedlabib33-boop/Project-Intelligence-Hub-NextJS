@@ -567,6 +567,53 @@ function portfolioDecisionMermaid() {
     F --> G["Decision Brief\\nOwner / evidence / impact / deadline"]`;
 }
 
+function mermaidLabel(value: unknown) {
+  return String(value ?? "Not supplied")
+    .replaceAll('"', "'")
+    .replaceAll("[", "(")
+    .replaceAll("]", ")")
+    .replaceAll("\n", " ");
+}
+
+function universalReportEvidenceMermaid(project: ProjectRecord, engine: UniversalReportEnginePayload) {
+  const actual = project.actual_progress === null ? "Not supplied" : `${numberValue(project.actual_progress * 100, 1)}%`;
+  const planned = project.planned_progress === null ? "Not supplied" : `${numberValue(project.planned_progress * 100, 1)}%`;
+  return `flowchart LR
+    classDef source fill:#0f2a42,stroke:#39d7d2,color:#f4fbff,stroke-width:2px;
+    classDef control fill:#152f49,stroke:#d6a23a,color:#f4fbff,stroke-width:2px;
+    classDef gate fill:#3d1d36,stroke:#fb7185,color:#f4fbff,stroke-width:2px;
+    classDef output fill:#0e3b38,stroke:#34d399,color:#f4fbff,stroke-width:2px;
+
+    A["${mermaidLabel(project.project_display_name)}<br/>${mermaidLabel(project.project_id)}"]:::source
+    B["Canonical project inputs<br/>${numberValue(engine.source_file_count)} controlled sources"]:::source
+    C["Performance position<br/>Actual ${actual} / Plan ${planned}"]:::control
+    D["Validation controls<br/>${numberValue(engine.engine.rules)} rules"]:::control
+    E{"Release evidence complete?"}:::gate
+    F["Decision-ready reports<br/>HTML / PDF / PPTX"]:::output
+
+    A --> B --> C --> D --> E
+    E -- approved --> F
+    E -- evidence gap --> D`;
+}
+
+function universalReportReleaseMermaid(project: ProjectRecord, engine: UniversalReportEnginePayload, family: UniversalReportFamily | undefined) {
+  const nativeSchedule = family?.native_schedule_required ? "Native schedule required" : "Project controls sources";
+  return `flowchart TB
+    classDef signal fill:#0f2a42,stroke:#63a8ff,color:#f4fbff,stroke-width:2px;
+    classDef analysis fill:#152f49,stroke:#a78bfa,color:#f4fbff,stroke-width:2px;
+    classDef decision fill:#3d1d36,stroke:#fb7185,color:#f4fbff,stroke-width:2px;
+    classDef release fill:#0e3b38,stroke:#34d399,color:#f4fbff,stroke-width:2px;
+
+    A["Selected family<br/>${mermaidLabel(family?.title || "Report catalogue")}"]:::signal
+    B["Evidence and lineage<br/>${nativeSchedule}"]:::signal
+    C["Controlled analysis<br/>SPI ${numberValue(project.spi, 2)} / CPI ${numberValue(project.cpi, 2)}"]:::analysis
+    D{"Publication gate<br/>${numberValue(engine.summary.generated_count)} generated of ${numberValue(engine.summary.catalog_count)}"]:::decision
+    E["Interactive HTML review"]:::release
+    F["Download package<br/>PDF / PPTX / ZIP"]:::release
+
+    A --> B --> C --> D --> E --> F`;
+}
+
 function ProjectConsole({ selectedProject }: { selectedProject: ProjectRecord }) {
   return (
     <section className="project-console">
@@ -1197,6 +1244,18 @@ function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
           <span><b>{numberValue(engine.engine.report_families)}</b> Families</span>
           <span><b>{numberValue(engine.engine.layers)}</b> Layers</span>
           <span><b>{numberValue(engine.source_file_count)}</b> Project sources</span>
+        </div>
+      </section>
+
+      <section className="universal-diagram-workspace" aria-label="Universal report engine control charts">
+        <div className="universal-diagram-intro">
+          <p className="eyebrow">Report intelligence charts</p>
+          <h3>Evidence, control, and release at a glance</h3>
+          <p>These diagrams are generated from the active project, its controlled report catalogue, and the selected report family. They show governance and delivery flow; they never infer missing project evidence.</p>
+        </div>
+        <div className="universal-diagram-grid">
+          <MermaidDiagram chart={universalReportEvidenceMermaid(project, engine)} title="Evidence-to-Decision Control" />
+          <MermaidDiagram chart={universalReportReleaseMermaid(project, engine, selectedFamily)} title="Release Assurance Map" />
         </div>
       </section>
 

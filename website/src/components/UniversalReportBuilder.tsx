@@ -297,4 +297,3 @@ export default function UniversalReportBuilder({ project, family }: { project: P
     </section>
   );
 }
-
