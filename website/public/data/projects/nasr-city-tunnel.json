@@ -111,7 +111,7 @@
     },
     "s_curve_forecast": {
       "status": "outside_horizon",
-      "method": "statsmodels damped Holt trend",
+      "method": "numpy linear trend fallback",
       "periods_available": 10,
       "current_actual_value": 494460000.0,
       "current_planned_value": 1175000000.0,
@@ -190,25 +190,25 @@
           "installed": true
         },
         "seaborn": {
-          "installed": true
+          "installed": false
         },
         "scikit_learn": {
           "installed": true
         },
         "statsmodels": {
-          "installed": true
+          "installed": false
         },
         "spacy": {
           "installed": true
         },
         "xgboost": {
-          "installed": true
+          "installed": false
         },
         "pytorch": {
           "installed": true
         },
         "tensorflow": {
-          "installed": true
+          "installed": false
         }
       },
       "xgboost": {
@@ -5739,95 +5739,102 @@
       "outputs_folder": "11-outputs/Nasr city-Tunnel",
       "output_files": [
         {
+          "name": "00_published_project_reports.zip",
+          "relative_path": "Nasr city-Tunnel/00_published_project_reports.zip",
+          "extension": "zip",
+          "size_kb": 269.5,
+          "modified": "2026-08-20T11:49:28"
+        },
+        {
           "name": "01_executive_dashboard.html",
           "relative_path": "Nasr city-Tunnel/01_executive_dashboard.html",
           "extension": "html",
-          "size_kb": 1.1,
-          "modified": "2026-08-15T16:48:46"
+          "size_kb": 1.2,
+          "modified": "2026-08-20T11:49:24"
         },
         {
           "name": "01_executive_dashboard.pdf",
           "relative_path": "Nasr city-Tunnel/01_executive_dashboard.pdf",
           "extension": "pdf",
-          "size_kb": 52.7,
-          "modified": "2026-08-15T16:48:47"
+          "size_kb": 53.4,
+          "modified": "2026-08-20T11:49:25"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "Nasr city-Tunnel/01_executive_dashboard.pptx",
           "extension": "pptx",
-          "size_kb": 28.3,
-          "modified": "2026-08-15T16:48:48"
+          "size_kb": 28.4,
+          "modified": "2026-08-20T11:49:25"
         },
         {
           "name": "02_master_dashboard.html",
           "relative_path": "Nasr city-Tunnel/02_master_dashboard.html",
           "extension": "html",
           "size_kb": 1.1,
-          "modified": "2026-08-15T16:48:48"
+          "modified": "2026-08-20T11:49:25"
         },
         {
           "name": "02_master_dashboard.pdf",
           "relative_path": "Nasr city-Tunnel/02_master_dashboard.pdf",
           "extension": "pdf",
-          "size_kb": 52.5,
-          "modified": "2026-08-15T16:48:49"
+          "size_kb": 53.2,
+          "modified": "2026-08-20T11:49:26"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "Nasr city-Tunnel/02_master_dashboard.pptx",
           "extension": "pptx",
-          "size_kb": 28.3,
-          "modified": "2026-08-15T16:48:49"
+          "size_kb": 28.4,
+          "modified": "2026-08-20T11:49:26"
         },
         {
           "name": "03_elite_svg_charts.html",
           "relative_path": "Nasr city-Tunnel/03_elite_svg_charts.html",
           "extension": "html",
           "size_kb": 1.1,
-          "modified": "2026-08-15T16:48:49"
+          "modified": "2026-08-20T11:49:26"
         },
         {
           "name": "03_elite_svg_charts.pdf",
           "relative_path": "Nasr city-Tunnel/03_elite_svg_charts.pdf",
           "extension": "pdf",
-          "size_kb": 52.2,
-          "modified": "2026-08-15T16:48:50"
+          "size_kb": 52.9,
+          "modified": "2026-08-20T11:49:27"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "Nasr city-Tunnel/03_elite_svg_charts.pptx",
           "extension": "pptx",
-          "size_kb": 28.3,
-          "modified": "2026-08-15T16:48:50"
+          "size_kb": 28.4,
+          "modified": "2026-08-20T11:49:27"
         },
         {
           "name": "04_linked_executive_dashboard.html",
           "relative_path": "Nasr city-Tunnel/04_linked_executive_dashboard.html",
           "extension": "html",
-          "size_kb": 1.1,
-          "modified": "2026-08-15T16:48:50"
+          "size_kb": 1.2,
+          "modified": "2026-08-20T11:49:27"
         },
         {
           "name": "04_linked_executive_dashboard.pdf",
           "relative_path": "Nasr city-Tunnel/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
-          "size_kb": 52.9,
-          "modified": "2026-08-15T16:48:51"
+          "size_kb": 53.7,
+          "modified": "2026-08-20T11:49:28"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "Nasr city-Tunnel/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-15T16:48:51"
+          "modified": "2026-08-20T11:49:28"
         },
         {
           "name": "universal_report_engine_manifest.json",
           "relative_path": "Nasr city-Tunnel/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 27.9,
-          "modified": "2026-08-20T11:25:16"
+          "modified": "2026-08-20T11:49:44"
         }
       ],
       "watchers": [
@@ -7066,6 +7073,18 @@
     "elite_svg_charts": "/generated/Nasr-city-Tunnel/03_elite_svg_charts.html",
     "linked_executive_dashboard": "/generated/Nasr-city-Tunnel/04_linked_executive_dashboard.html"
   },
+  "report_package": {
+    "zip": "/generated/Nasr-city-Tunnel/00_published_project_reports.zip",
+    "files": {
+      "zip": {
+        "name": "00_published_project_reports.zip",
+        "bytes": 276007,
+        "sha256": "89c03d1e916dd47378c652c5a6fd27e0313fe88f77beac1c7338546053b85b8e"
+      }
+    },
+    "source_project_id": "Nasr city-Tunnel",
+    "source_report_fingerprint": "e6862eba7606818245f40a2269f1f613191174d94df2091f62f29a7a0a74f774"
+  },
   "report_artifacts": {
     "executive_dashboard": {
       "html": "/generated/Nasr-city-Tunnel/01_executive_dashboard.html",
@@ -7074,18 +7093,18 @@
       "files": {
         "html": {
           "name": "01_executive_dashboard.html",
-          "bytes": 1101,
-          "sha256": "3374592e60f3851c04b621aae4ed1e5db46786c03eddd4f4f39a7ef4491a6d67"
+          "bytes": 1183,
+          "sha256": "a2fbbe4cf389c66721bfda6061d07949425337cc49453efb5dd7ec6db3c12a5c"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 53926,
-          "sha256": "18b39da65d7e84bbef0bd6211ec0da45116032de0a366588f216abd65701345b"
+          "bytes": 54684,
+          "sha256": "7b059956173c548ea5e6f4244a99d7b3b8016a371b03664a8419a4705ab6343a"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
-          "bytes": 29030,
-          "sha256": "ece36873e06a2422aef2ba8eff1d09a44be6750fafe55f7010c4617eb340bd87"
+          "bytes": 29095,
+          "sha256": "36f7aefc8c230d2dcfc11d3024c3342a749941fd76537eea529f3ee66b126c35"
         }
       },
       "html_origin": "controlled_fallback",
@@ -7099,18 +7118,18 @@
       "files": {
         "html": {
           "name": "02_master_dashboard.html",
-          "bytes": 1095,
-          "sha256": "5ce8ba10178bf53b628334eeea331a938278cb89c83b2390b41d22d3a7e3405d"
+          "bytes": 1177,
+          "sha256": "1e8091208bfc687b9f1380dc7b7d2d7b799d5e131861f8a5fbdc6b03914e8565"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
-          "bytes": 53771,
-          "sha256": "148a69c4890814108ba8fea087698cc9370a16ba9e021d111ca5c9c5ea918c12"
+          "bytes": 54526,
+          "sha256": "40ac85f714518dc89ab976069f4af930df12bec3b7578e1b97de8679983e7414"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
-          "bytes": 29027,
-          "sha256": "64d1c2943f2a965eb9ad933ec9bf0516a1b2fdd3e911fd754b5e618cc766dfd9"
+          "bytes": 29092,
+          "sha256": "dbcc9c2b2f8af2721c065802d872cf750d433197d1b6a13ad7d71015de593353"
         }
       },
       "html_origin": "controlled_fallback",
@@ -7124,18 +7143,18 @@
       "files": {
         "html": {
           "name": "03_elite_svg_charts.html",
-          "bytes": 1095,
-          "sha256": "c36f1969e6f121e0b2989d1ea18065a43fd68c7b27b34006fd21a3e90d8e649b"
+          "bytes": 1177,
+          "sha256": "515ba05e95781d127beeb1dc5ad9a28d39b011f9c7f230faaeda70d77758692b"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
-          "bytes": 53418,
-          "sha256": "161b26766679843ae90c4a7ed6e39b07bcb5f07f9c54cbf668c38a9652288fc5"
+          "bytes": 54171,
+          "sha256": "e4089509ba00f64794c32bedac3eb6a67cdc22fef372b2b52689e3189af77de5"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
-          "bytes": 29028,
-          "sha256": "898ddfda5b97e759ffedec20165caa756937fa3e15b2c46b3995274e3ab18aa3"
+          "bytes": 29093,
+          "sha256": "f756a20d5444288338f11c5f62a1a48ee6175a227386548e12f16a0cd04aee51"
         }
       },
       "html_origin": "controlled_fallback",
@@ -7149,18 +7168,18 @@
       "files": {
         "html": {
           "name": "04_linked_executive_dashboard.html",
-          "bytes": 1115,
-          "sha256": "8cfa7434268398e2fc7c75ce3fd7aca685581eae5d5c314fcc9ab4f5465a5c4a"
+          "bytes": 1197,
+          "sha256": "a50a1af09f447f5b77530f92dc09a4819db5140a21a72e19e7a666f94521058a"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
-          "bytes": 54217,
-          "sha256": "3dfc5e02809b3a2a9662ae2070bbd131cd297a803c94aa13a83717385c851efc"
+          "bytes": 54978,
+          "sha256": "9957ad462f2aa7ff06d69245a3d052079bd73380e569b35583289be2d8f508c5"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
-          "bytes": 29037,
-          "sha256": "682d0f6b1260f05f8b10361e86772f66b94e513db9260de50383eefb5a6d40a3"
+          "bytes": 29102,
+          "sha256": "6619ca5f50ebcf60b70f62a38599c157513e5afd9bdf6adfa606a067f2920e6b"
         }
       },
       "html_origin": "controlled_fallback",
@@ -7944,6 +7963,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-20T08:25:16+00:00"
+    "updated_at": "2026-08-20T08:49:44+00:00"
   }
 }

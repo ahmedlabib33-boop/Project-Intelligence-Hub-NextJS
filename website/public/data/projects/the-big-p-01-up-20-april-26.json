@@ -169,15 +169,15 @@
     },
     "s_curve_forecast": {
       "status": "ready",
-      "method": "statsmodels damped Holt trend",
+      "method": "numpy linear trend fallback",
       "periods_available": 8,
       "current_actual_value": 113085034.8,
       "current_planned_value": 258975038.6,
       "completion_target_value": 367286025.0,
       "excluded_cumulative_reset_periods": 10,
       "recent_period_change": 5277326.6,
-      "projected_completion_date": "2027-12-01",
-      "months_to_target": 19,
+      "projected_completion_date": "2027-07-01",
+      "months_to_target": 14,
       "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
     },
     "s_curve_chart_url": "/data/analytics/the-big-p-01-up-20-april-26-s-curve-analytics.png",
@@ -248,25 +248,25 @@
           "installed": true
         },
         "seaborn": {
-          "installed": true
+          "installed": false
         },
         "scikit_learn": {
           "installed": true
         },
         "statsmodels": {
-          "installed": true
+          "installed": false
         },
         "spacy": {
           "installed": true
         },
         "xgboost": {
-          "installed": true
+          "installed": false
         },
         "pytorch": {
           "installed": true
         },
         "tensorflow": {
-          "installed": true
+          "installed": false
         }
       },
       "xgboost": {
@@ -17291,6 +17291,13 @@
       "outputs_folder": "11-outputs/The BIG - PH01",
       "output_files": [
         {
+          "name": "00_published_project_reports.zip",
+          "relative_path": "The BIG - PH01/00_published_project_reports.zip",
+          "extension": "zip",
+          "size_kb": 1912.3,
+          "modified": "2026-08-20T11:49:13"
+        },
+        {
           "name": "01_executive_dashboard.html",
           "relative_path": "The BIG - PH01/01_executive_dashboard.html",
           "extension": "html",
@@ -17302,14 +17309,14 @@
           "relative_path": "The BIG - PH01/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 889.7,
-          "modified": "2026-08-15T16:48:16"
+          "modified": "2026-08-20T11:49:04"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/01_executive_dashboard.pptx",
           "extension": "pptx",
-          "size_kb": 28.4,
-          "modified": "2026-08-15T16:48:16"
+          "size_kb": 28.5,
+          "modified": "2026-08-20T11:49:05"
         },
         {
           "name": "02_master_dashboard.html",
@@ -17323,14 +17330,14 @@
           "relative_path": "The BIG - PH01/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 864.7,
-          "modified": "2026-08-15T16:48:20"
+          "modified": "2026-08-20T11:49:07"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "The BIG - PH01/02_master_dashboard.pptx",
           "extension": "pptx",
-          "size_kb": 28.4,
-          "modified": "2026-08-15T16:48:20"
+          "size_kb": 28.5,
+          "modified": "2026-08-20T11:49:07"
         },
         {
           "name": "03_elite_svg_charts.html",
@@ -17344,14 +17351,14 @@
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 236.2,
-          "modified": "2026-08-15T16:48:21"
+          "modified": "2026-08-20T11:49:08"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "The BIG - PH01/03_elite_svg_charts.pptx",
           "extension": "pptx",
-          "size_kb": 28.4,
-          "modified": "2026-08-15T16:48:21"
+          "size_kb": 28.5,
+          "modified": "2026-08-20T11:49:09"
         },
         {
           "name": "04_linked_executive_dashboard.html",
@@ -17365,14 +17372,14 @@
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1276.9,
-          "modified": "2026-08-15T16:48:26"
+          "modified": "2026-08-20T11:49:12"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "The BIG - PH01/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
-          "size_kb": 28.4,
-          "modified": "2026-08-15T16:48:26"
+          "size_kb": 28.5,
+          "modified": "2026-08-20T11:49:12"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
@@ -17414,7 +17421,7 @@
           "relative_path": "The BIG - PH01/universal-report-engine/executive/pih_universal_report_artifact.json",
           "extension": "json",
           "size_kb": 1.7,
-          "modified": "2026-08-10T18:20:44"
+          "modified": "2026-08-20T11:46:32"
         },
         {
           "name": "PIH_PROJECT_CONTEXT.json",
@@ -17718,11 +17725,130 @@
           "modified": "2026-08-10T18:20:44"
         },
         {
-          "name": "universal_report_engine_manifest.json",
-          "relative_path": "The BIG - PH01/universal-report-engine/universal_report_engine_manifest.json",
+          "name": "ENGINE_RUN_MANIFEST.json",
+          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/ENGINE_RUN_MANIFEST.json",
           "extension": "json",
-          "size_kb": 29.1,
-          "modified": "2026-08-20T11:25:11"
+          "size_kb": 7.1,
+          "modified": "2026-08-20T11:46:32"
+        },
+        {
+          "name": "32_LAYER_PIPELINE.json",
+          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/GOVERNANCE/32_LAYER_PIPELINE.json",
+          "extension": "json",
+          "size_kb": 5.4,
+          "modified": "2026-08-20T11:46:31"
+        },
+        {
+          "name": "FULL_GOVERNANCE_REGISTRY.json",
+          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/GOVERNANCE/FULL_GOVERNANCE_REGISTRY.json",
+          "extension": "json",
+          "size_kb": 86.1,
+          "modified": "2026-08-20T11:46:31"
+        },
+        {
+          "name": "REPORT_FAMILY_RULEBOOK.json",
+          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/GOVERNANCE/REPORT_FAMILY_RULEBOOK.json",
+          "extension": "json",
+          "size_kb": 2.1,
+          "modified": "2026-08-20T11:46:31"
+        },
+        {
+          "name": "UNIVERSAL_26_RULES.json",
+          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/GOVERNANCE/UNIVERSAL_26_RULES.json",
+          "extension": "json",
+          "size_kb": 8.0,
+          "modified": "2026-08-20T11:46:31"
+        },
+        {
+          "name": "EXECUTIVE_Report_Gallery.html",
+          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/HTML/EXECUTIVE_Report_Gallery.html",
+          "extension": "html",
+          "size_kb": 3.0,
+          "modified": "2026-08-20T11:46:31"
+        },
+        {
+          "name": "ML_CAPABILITY_AND_RUN_STATUS.json",
+          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/ML_DECISION_SUPPORT/ML_CAPABILITY_AND_RUN_STATUS.json",
+          "extension": "json",
+          "size_kb": 3.6,
+          "modified": "2026-08-20T11:46:31"
+        },
+        {
+          "name": "ML_DECISION_SUPPORT_REPORT.html",
+          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/ML_DECISION_SUPPORT/ML_DECISION_SUPPORT_REPORT.html",
+          "extension": "html",
+          "size_kb": 5.2,
+          "modified": "2026-08-20T11:46:31"
+        },
+        {
+          "name": "ML_TASK_REGISTRY.json",
+          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/ML_DECISION_SUPPORT/ML_TASK_REGISTRY.json",
+          "extension": "json",
+          "size_kb": 3.5,
+          "modified": "2026-08-20T11:46:31"
+        },
+        {
+          "name": "EXECUTIVE_Report_A4_Landscape_FULL_BLEED.pdf",
+          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/PDF_A4_LANDSCAPE/EXECUTIVE_Report_A4_Landscape_FULL_BLEED.pdf",
+          "extension": "pdf",
+          "size_kb": 668.3,
+          "modified": "2026-08-20T11:46:31"
+        },
+        {
+          "name": "PIH_PROJECT_CONTEXT.json",
+          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/PIH_PROJECT_CONTEXT.json",
+          "extension": "json",
+          "size_kb": 0.7,
+          "modified": "2026-08-20T11:46:13"
+        },
+        {
+          "name": "01_WEEKLY_MONTHLY_EXECUTIVE_PROJECT_REPORT_EXECUTIVE_CONTROL.png",
+          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/PNG_HIGH_RES/01_WEEKLY_MONTHLY_EXECUTIVE_PROJECT_REPORT_EXECUTIVE_CONTROL.png",
+          "extension": "png",
+          "size_kb": 129.3,
+          "modified": "2026-08-20T11:46:29"
+        },
+        {
+          "name": "02_R23_Weekly_Monthly_Executive_Project_Report.png",
+          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/PNG_HIGH_RES/02_R23_Weekly_Monthly_Executive_Project_Report.png",
+          "extension": "png",
+          "size_kb": 76.6,
+          "modified": "2026-08-20T11:46:29"
+        },
+        {
+          "name": "03_CONTROLLED_METRICS_TABLES_AND_VISUALS.png",
+          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/PNG_HIGH_RES/03_CONTROLLED_METRICS_TABLES_AND_VISUALS.png",
+          "extension": "png",
+          "size_kb": 72.9,
+          "modified": "2026-08-20T11:46:29"
+        },
+        {
+          "name": "04_EVIDENCE_INTEGRITY_CONFLICTS_AND_GAPS.png",
+          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/PNG_HIGH_RES/04_EVIDENCE_INTEGRITY_CONFLICTS_AND_GAPS.png",
+          "extension": "png",
+          "size_kb": 92.3,
+          "modified": "2026-08-20T11:46:29"
+        },
+        {
+          "name": "05_32_LAYER_PROJECT_REPORT_PIPELINE.png",
+          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/PNG_HIGH_RES/05_32_LAYER_PROJECT_REPORT_PIPELINE.png",
+          "extension": "png",
+          "size_kb": 147.1,
+          "modified": "2026-08-20T11:46:30"
+        },
+        {
+          "name": "06_26_GLOBAL_RULES_CONTROLLED_AND_PRESERVED.png",
+          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/PNG_HIGH_RES/06_26_GLOBAL_RULES_CONTROLLED_AND_PRESERVED.png",
+          "extension": "png",
+          "size_kb": 201.5,
+          "modified": "2026-08-20T11:46:30"
+        },
+        {
+          "name": "07_REPORT_SPECIFIC_VALIDATION_RELEASE_GATES.png",
+          "relative_path": "The BIG - PH01/universal-report-engine/executive/run-20260820T084613Z-c22f26f37d/PNG_HIGH_RES/07_REPORT_SPECIFIC_VALIDATION_RELEASE_GATES.png",
+          "extension": "png",
+          "size_kb": 57.3,
+          "modified": "2026-08-20T11:46:30"
         }
       ],
       "watchers": [
@@ -19232,6 +19358,18 @@
     "elite_svg_charts": "/generated/The-BIG-PH01/03_elite_svg_charts.html",
     "linked_executive_dashboard": "/generated/The-BIG-PH01/04_linked_executive_dashboard.html"
   },
+  "report_package": {
+    "zip": "/generated/The-BIG-PH01/00_published_project_reports.zip",
+    "files": {
+      "zip": {
+        "name": "00_published_project_reports.zip",
+        "bytes": 1958184,
+        "sha256": "9bb69e1910d4cd53df6558f127ef041c6364aa5fe53ce3a20c65fc1f052c0bae"
+      }
+    },
+    "source_project_id": "The Big -P.01-UP-20-April-26",
+    "source_report_fingerprint": "477a0b6ddc37010f4629f27a09438ae4d6e1fa95da6af386c75fbcc10cbacfa9"
+  },
   "report_artifacts": {
     "executive_dashboard": {
       "html": "/generated/The-BIG-PH01/01_executive_dashboard.html",
@@ -19246,12 +19384,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 911076,
-          "sha256": "cae9fbd13be515a787e3d1c0d0c48d48353a4cefcc1d43702eac1de65d4ded71"
+          "sha256": "02c69fcad9562e62ecd8d37fbd25ff2dda12943a09a84028154b803d05fa3f3b"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
-          "bytes": 29076,
-          "sha256": "dbec52ba2e42b9b7ec728242a37d2befd546235eeaca756462157639f78bca4e"
+          "bytes": 29139,
+          "sha256": "0f052a7c2b30cb331e84d2998c3388bb317748df80e2af5b434ea76f43af4b01"
         }
       },
       "html_origin": "canonical_project_html",
@@ -19271,12 +19409,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 885433,
-          "sha256": "2c44714719d96ed34deb21ced86bac3ba88b32e4ad188af45f279f8cdf13d5c2"
+          "sha256": "3e9e14a32679435d51c4a5a232970c257dd12d872122a0632fb4e8fd6b1035bb"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
-          "bytes": 29073,
-          "sha256": "75abde242f452ba32afc98935be20956d754a2f1ea0057e17f5024de4e337460"
+          "bytes": 29137,
+          "sha256": "0d621b5a438ee896728502d29c5dd5f39f7b14e0e9fce4bea085ce05c81fb60e"
         }
       },
       "html_origin": "canonical_project_html",
@@ -19296,12 +19434,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 241841,
-          "sha256": "ab0689d9cce6b206d2752fe81a69273ccbcb0780ffa315ceda6b51dbfed83082"
+          "sha256": "c49eaded11e723827f49fd236d02f82a4594d5e626c33ce6aa87d1c2ae76450c"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
-          "bytes": 29074,
-          "sha256": "257c342225c4a66e34dc69a4c4287f2f8dfdcd3e33ec78bc722291e732008fa6"
+          "bytes": 29137,
+          "sha256": "04c65e814485d2b19fa3c43254cc7cd2f8f6a5282b089dc6da9a6929c357c303"
         }
       },
       "html_origin": "canonical_project_html",
@@ -19321,12 +19459,12 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1307548,
-          "sha256": "2dc2bb6e16e5a913bcf83241b0ffd6719361e06cc9118e5255e6ae5f6c19209c"
+          "sha256": "47928d556377ceddb0cc56298f61b1249aee1a6b7ef2d53db0f1bf210bebcbb3"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
-          "bytes": 29083,
-          "sha256": "d9bcc46225bd81c65f32cf14ddeafcf63222d3255e78563c21dc93b8a481bdc6"
+          "bytes": 29147,
+          "sha256": "b9aa506827811ea7ee554bf1a66a0f56ac2c23514b5b7733f701b4a1e4f6d6f4"
         }
       },
       "html_origin": "canonical_project_html",
@@ -19934,10 +20072,10 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "STALE",
-        "detail": "Project source files changed after this package was generated. Regenerate locally before relying on it.",
+        "status": "DRAFT_REVIEW_REQUIRED",
+        "detail": "A local draft package exists, but its validation/release gate did not pass. Use it only for internal review until the stated source gaps are resolved.",
         "artifacts": {},
-        "generated_at": "2026-08-10T15:20:44+00:00",
+        "generated_at": "2026-08-20T08:46:32+00:00",
         "release_status": "FAIL_VALIDATION_ERROR",
         "validation_status": "FAIL_VALIDATION_ERROR"
       },
@@ -20053,7 +20191,7 @@
     "summary": {
       "catalog_count": 30,
       "generated_count": 0,
-      "draft_review_count": 0,
+      "draft_review_count": 1,
       "ready_count": 29,
       "blocked_count": 0
     },
@@ -20140,6 +20278,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-20T08:25:11+00:00"
+    "updated_at": "2026-08-20T08:49:42+00:00"
   }
 }

@@ -84,15 +84,15 @@
     },
     "s_curve_forecast": {
       "status": "ready",
-      "method": "statsmodels damped Holt trend",
+      "method": "numpy linear trend fallback",
       "periods_available": 10,
       "current_actual_value": 1890281400.0,
       "current_planned_value": 1932000000.0,
       "completion_target_value": 2100000000.0,
       "excluded_cumulative_reset_periods": 0,
       "recent_period_change": 122304000.0,
-      "projected_completion_date": "2026-09-01",
-      "months_to_target": 2,
+      "projected_completion_date": "2026-08-01",
+      "months_to_target": 1,
       "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
     },
     "s_curve_chart_url": "/data/analytics/sophia-mall-s-curve-analytics.png",
@@ -163,25 +163,25 @@
           "installed": true
         },
         "seaborn": {
-          "installed": true
+          "installed": false
         },
         "scikit_learn": {
           "installed": true
         },
         "statsmodels": {
-          "installed": true
+          "installed": false
         },
         "spacy": {
           "installed": true
         },
         "xgboost": {
-          "installed": true
+          "installed": false
         },
         "pytorch": {
           "installed": true
         },
         "tensorflow": {
-          "installed": true
+          "installed": false
         }
       },
       "xgboost": {
@@ -5490,6 +5490,13 @@
       "outputs_folder": "11-outputs/Sophia-Mall",
       "output_files": [
         {
+          "name": "00_published_project_reports.zip",
+          "relative_path": "Sophia-Mall/00_published_project_reports.zip",
+          "extension": "zip",
+          "size_kb": 1802.2,
+          "modified": "2026-08-20T11:49:24"
+        },
+        {
           "name": "01_executive_dashboard.html",
           "relative_path": "Sophia-Mall/01_executive_dashboard.html",
           "extension": "html",
@@ -5501,14 +5508,14 @@
           "relative_path": "Sophia-Mall/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 829.0,
-          "modified": "2026-08-15T16:48:30"
+          "modified": "2026-08-20T11:49:15"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "Sophia-Mall/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-15T16:48:30"
+          "modified": "2026-08-20T11:49:15"
         },
         {
           "name": "02_master_dashboard.html",
@@ -5522,14 +5529,14 @@
           "relative_path": "Sophia-Mall/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 862.6,
-          "modified": "2026-08-15T16:48:35"
+          "modified": "2026-08-20T11:49:18"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "Sophia-Mall/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-15T16:48:35"
+          "modified": "2026-08-20T11:49:18"
         },
         {
           "name": "03_elite_svg_charts.html",
@@ -5543,14 +5550,14 @@
           "relative_path": "Sophia-Mall/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 234.6,
-          "modified": "2026-08-15T16:48:37"
+          "modified": "2026-08-20T11:49:19"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "Sophia-Mall/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-15T16:48:37"
+          "modified": "2026-08-20T11:49:19"
         },
         {
           "name": "04_linked_executive_dashboard.html",
@@ -5564,14 +5571,14 @@
           "relative_path": "Sophia-Mall/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1093.9,
-          "modified": "2026-08-15T16:48:44"
+          "modified": "2026-08-20T11:49:23"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "Sophia-Mall/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-15T16:48:44"
+          "modified": "2026-08-20T11:49:23"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
@@ -5613,7 +5620,7 @@
           "relative_path": "Sophia-Mall/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 28.1,
-          "modified": "2026-08-20T11:25:13"
+          "modified": "2026-08-20T11:49:43"
         }
       ],
       "watchers": [
@@ -6797,6 +6804,18 @@
     "elite_svg_charts": "/generated/Sophia-Mall/03_elite_svg_charts.html",
     "linked_executive_dashboard": "/generated/Sophia-Mall/04_linked_executive_dashboard.html"
   },
+  "report_package": {
+    "zip": "/generated/Sophia-Mall/00_published_project_reports.zip",
+    "files": {
+      "zip": {
+        "name": "00_published_project_reports.zip",
+        "bytes": 1845414,
+        "sha256": "30308c31888210ccc46b3ff7f5432408c27d16ca48f0e05768d1a59cd1b6f52c"
+      }
+    },
+    "source_project_id": "Sophia-Mall",
+    "source_report_fingerprint": "d5c28320b6f09beb1f15b005ec14df907315334869c7687222b5898320303893"
+  },
   "report_artifacts": {
     "executive_dashboard": {
       "html": "/generated/Sophia-Mall/01_executive_dashboard.html",
@@ -6811,12 +6830,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 848904,
-          "sha256": "4658d3a94d36130705807bf26cadf4c35d2b6a25067c2f21ac0de3cdc3762a77"
+          "sha256": "7044256268900ce10a9a5805bedfa69664e05b6c1be3e178778dd66ae4c44b4a"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
-          "bytes": 29054,
-          "sha256": "57091f1808bd558f0808e5220045ff9683b2bab5f0d00cd22e83362b251b0669"
+          "bytes": 29124,
+          "sha256": "0705ee39ba6c9f318a756f8174512c2f9d3e934409b725631afcd6eb1d0a6543"
         }
       },
       "html_origin": "canonical_project_html",
@@ -6836,12 +6855,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 883327,
-          "sha256": "096d69876f3d62557cdfd2779b59ee77f5e06b2d65e69fa12992e2186e468635"
+          "sha256": "d269e59640836e16cf38508c2cb73a3d5dd5f9a1fb4e325188dfebfc5107af9e"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
-          "bytes": 29051,
-          "sha256": "b56b2fb1be2be31cd435ff1777b5af5137ef8b614e91ced24ac943f341896bbe"
+          "bytes": 29121,
+          "sha256": "403fde2a81a45f7bbd377aae6ec861b8d1ebaa990da78c816ffb155a0a0bab34"
         }
       },
       "html_origin": "canonical_project_html",
@@ -6861,12 +6880,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 240246,
-          "sha256": "7731b33fed607d45c4f773d6b50ca0833a3f73131c0a8eb0b39d77094705fad9"
+          "sha256": "1e9f3c97c4e02028eed1a9f5fc3b6ac5a9ac82fac5e406d512d9c4112962345f"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
-          "bytes": 29053,
-          "sha256": "e90bc248b3c3afe1d566105aa1f7b05395c0f47013c669b120873b5c5ccda51a"
+          "bytes": 29122,
+          "sha256": "8efb609fbbd250a4a765ee026e7d541e3a621ae7df0009f6e00548f6c7179a19"
         }
       },
       "html_origin": "canonical_project_html",
@@ -6886,12 +6905,12 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1120164,
-          "sha256": "f4fff5e2177e3e1b93b58e3832de6a57dcde0794a6539322cffaee1065c53114"
+          "sha256": "6925bfb64875bc5c737901e1fb673ead9e991a802e8cece056ab3a58e0a2cbd8"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
-          "bytes": 29061,
-          "sha256": "428a99b05a5775658882e0e5ca2edc14535cf05bd23ac2a0add6d32e343acdfb"
+          "bytes": 29130,
+          "sha256": "728a1e853d1100d9cf1884b2afe22374f8a1dafa3dd22768f823c5a79379982f"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7681,6 +7700,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-20T08:25:13+00:00"
+    "updated_at": "2026-08-20T08:49:43+00:00"
   }
 }

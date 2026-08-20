@@ -31,6 +31,11 @@ type ReportArtifact = {
   files?: Record<string, { name: string; bytes: number; sha256: string }>;
 };
 
+type ReportPackage = {
+  zip?: string;
+  files?: Record<string, { name: string; bytes: number; sha256: string }>;
+};
+
 type UniversalReportArtifactLinks = Partial<{
   html: string;
   pdf: string;
@@ -176,6 +181,7 @@ type ProjectRecord = {
   features: FeaturePayload;
   reports: Record<ReportKey, string>;
   report_artifacts?: Partial<Record<ReportKey, ReportArtifact>> & Record<string, ReportArtifact | undefined>;
+  report_package?: ReportPackage | null;
   universal_report_engine?: UniversalReportEnginePayload;
 };
 
@@ -570,9 +576,11 @@ function portfolioDecisionMermaid() {
 function mermaidLabel(value: unknown) {
   return String(value ?? "Not supplied")
     .replaceAll('"', "'")
-    .replaceAll("[", "(")
-    .replaceAll("]", ")")
-    .replaceAll("\n", " ");
+    .replace(/[\[\]{}<>`]/g, " ")
+    .replace(/[;|]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 140) || "Not supplied";
 }
 
 function universalReportEvidenceMermaid(project: ProjectRecord, engine: UniversalReportEnginePayload) {
@@ -1165,6 +1173,30 @@ function ReportFormatDownloads({ project, reportKey }: { project: ProjectRecord;
   );
 }
 
+function PublishedProjectDownloads({ project, compact = false }: { project: ProjectRecord; compact?: boolean }) {
+  const packageUrl = project.report_package?.zip;
+  return (
+    <section className={compact ? "published-downloads compact" : "published-downloads"} aria-label="Published project report downloads">
+      <div className="published-downloads-head">
+        <div>
+          <p className="eyebrow">Published Project Outputs</p>
+          <h3>Verified downloadable project reports</h3>
+          <small>These are generated for the selected project. Universal Engine families remain unavailable until their separate release gate passes.</small>
+        </div>
+        {packageUrl ? <a className="output-download-button" href={packageUrl} download={packageUrl.split("/").pop()} rel="noopener">Download all reports (ZIP)</a> : null}
+      </div>
+      <div className="published-download-grid">
+        {reportTabs.map((tab) => (
+          <article key={tab.key}>
+            <strong>{tab.label}</strong>
+            <ReportFormatDownloads project={project} reportKey={tab.key} />
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function GovernedTiaReportDownloads({ project }: { project: ProjectRecord }) {
   const artifact = project.report_artifacts?.tia_governed_assessment;
   if (!artifact?.html) return null;
@@ -1246,6 +1278,8 @@ function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
           <span><b>{numberValue(engine.source_file_count)}</b> Project sources</span>
         </div>
       </section>
+
+      <PublishedProjectDownloads project={project} compact />
 
       <section className="universal-diagram-workspace" aria-label="Universal report engine control charts">
         <div className="universal-diagram-intro">
@@ -1365,6 +1399,7 @@ function OutputStudioPanel({
             ))}
           </div>
           <OutputStudioDownloadButton href={reportHtml(project, selectedReport)} label={`Download ${reportTabs.find((tab) => tab.key === selectedReport)?.label || "Report"}`} />
+          <PublishedProjectDownloads project={project} />
           <ReportFormatDownloads project={project} reportKey={selectedReport} />
           {INTERNAL_TIA_SURFACE_ENABLED ? <GovernedTiaReportDownloads project={project} /> : null}
           <FileList title="Automatic Project Outputs" files={project.features.outputs_and_watchers.output_files} />

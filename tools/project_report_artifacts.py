@@ -14,6 +14,7 @@ import os
 import shutil
 import subprocess
 import sys
+import zipfile
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -304,6 +305,7 @@ def ensure_project_report_artifacts(
                     for _, stem, _ in REPORTS
                     for extension in ("html", "pdf", "pptx")
                 )
+                and (output_dir / "00_published_project_reports.zip").exists()
                 and existing_reports
             ):
                 return existing_reports
@@ -330,6 +332,19 @@ def ensure_project_report_artifacts(
             "source_project_id": source_manifest.get("project_id") if html_origin == "canonical_project_html" else project.get("project_id"),
             "source_report_fingerprint": source_manifest.get("fingerprint") if html_origin == "canonical_project_html" else project.get("fingerprint"),
         }
+    package_path = output_dir / "00_published_project_reports.zip"
+    with zipfile.ZipFile(package_path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+        for _, stem, _ in REPORTS:
+            for extension in ("html", "pdf", "pptx"):
+                artifact_path = output_dir / f"{stem}.{extension}"
+                if artifact_path.is_file():
+                    archive.write(artifact_path, arcname=artifact_path.name)
+    results["published_project_package"] = {
+        "zip": f"/generated/{project_slug}/{package_path.name}",
+        "files": {"zip": {"name": package_path.name, "bytes": package_path.stat().st_size, "sha256": _sha256(package_path)}},
+        "source_project_id": project.get("project_id"),
+        "source_report_fingerprint": project.get("fingerprint"),
+    }
     tia_artifacts = _ensure_controlled_tia_artifacts(project, output_dir, project_slug)
     if tia_artifacts:
         results["tia_controlled_assessment"] = tia_artifacts

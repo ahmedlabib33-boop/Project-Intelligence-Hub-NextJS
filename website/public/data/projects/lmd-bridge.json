@@ -111,15 +111,15 @@
     },
     "s_curve_forecast": {
       "status": "ready",
-      "method": "statsmodels damped Holt trend",
+      "method": "numpy linear trend fallback",
       "periods_available": 10,
       "current_actual_value": 616724300.0,
       "current_planned_value": 782000000.0,
       "completion_target_value": 850000000.0,
       "excluded_cumulative_reset_periods": 0,
       "recent_period_change": 49504000.0,
-      "projected_completion_date": "2027-02-01",
-      "months_to_target": 6,
+      "projected_completion_date": "2026-11-01",
+      "months_to_target": 3,
       "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
     },
     "s_curve_chart_url": "/data/analytics/lmd-bridge-s-curve-analytics.png",
@@ -190,25 +190,25 @@
           "installed": true
         },
         "seaborn": {
-          "installed": true
+          "installed": false
         },
         "scikit_learn": {
           "installed": true
         },
         "statsmodels": {
-          "installed": true
+          "installed": false
         },
         "spacy": {
           "installed": true
         },
         "xgboost": {
-          "installed": true
+          "installed": false
         },
         "pytorch": {
           "installed": true
         },
         "tensorflow": {
-          "installed": true
+          "installed": false
         }
       },
       "xgboost": {
@@ -5475,6 +5475,13 @@
       "outputs_folder": "11-outputs/LMD-Bridgs",
       "output_files": [
         {
+          "name": "00_published_project_reports.zip",
+          "relative_path": "LMD-Bridgs/00_published_project_reports.zip",
+          "extension": "zip",
+          "size_kb": 1908.3,
+          "modified": "2026-08-20T11:49:03"
+        },
+        {
           "name": "01_executive_dashboard.html",
           "relative_path": "LMD-Bridgs/01_executive_dashboard.html",
           "extension": "html",
@@ -5486,14 +5493,14 @@
           "relative_path": "LMD-Bridgs/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 930.7,
-          "modified": "2026-08-15T16:48:02"
+          "modified": "2026-08-20T11:48:52"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "LMD-Bridgs/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-15T16:48:02"
+          "modified": "2026-08-20T11:48:53"
         },
         {
           "name": "02_master_dashboard.html",
@@ -5507,14 +5514,14 @@
           "relative_path": "LMD-Bridgs/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 862.9,
-          "modified": "2026-08-15T16:48:06"
+          "modified": "2026-08-20T11:48:56"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "LMD-Bridgs/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-15T16:48:06"
+          "modified": "2026-08-20T11:48:56"
         },
         {
           "name": "03_elite_svg_charts.html",
@@ -5528,14 +5535,14 @@
           "relative_path": "LMD-Bridgs/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 236.0,
-          "modified": "2026-08-15T16:48:08"
+          "modified": "2026-08-20T11:48:57"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "LMD-Bridgs/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-15T16:48:08"
+          "modified": "2026-08-20T11:48:58"
         },
         {
           "name": "04_linked_executive_dashboard.html",
@@ -5549,14 +5556,14 @@
           "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1096.1,
-          "modified": "2026-08-15T16:48:12"
+          "modified": "2026-08-20T11:49:02"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-15T16:48:13"
+          "modified": "2026-08-20T11:49:02"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
@@ -5598,7 +5605,7 @@
           "relative_path": "LMD-Bridgs/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 28.0,
-          "modified": "2026-08-20T11:25:09"
+          "modified": "2026-08-20T11:49:41"
         }
       ],
       "watchers": [
@@ -6781,6 +6788,18 @@
     "elite_svg_charts": "/generated/LMD-Bridgs/03_elite_svg_charts.html",
     "linked_executive_dashboard": "/generated/LMD-Bridgs/04_linked_executive_dashboard.html"
   },
+  "report_package": {
+    "zip": "/generated/LMD-Bridgs/00_published_project_reports.zip",
+    "files": {
+      "zip": {
+        "name": "00_published_project_reports.zip",
+        "bytes": 1954129,
+        "sha256": "4bc02c3938c33fe268400c1ab7c86e052ddfc763088f220b8286d87b143575fb"
+      }
+    },
+    "source_project_id": "LMD-Bridge",
+    "source_report_fingerprint": "7f8cd518e98dffe8576e3fcfab5d372dc92e21ba1995164d39140aee1ce8a3b1"
+  },
   "report_artifacts": {
     "executive_dashboard": {
       "html": "/generated/LMD-Bridgs/01_executive_dashboard.html",
@@ -6795,12 +6814,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 953015,
-          "sha256": "a2f1f2d16a38ebd95eb2d697b735c7698dae96647c8306336a1390958e75291f"
+          "sha256": "21e201e93d9b8d06103e8ad6b2a35c8225349b349ae89929ad6a2a8d96dfc404"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
-          "bytes": 29053,
-          "sha256": "d0b704b850c97b1fb79c26df7627c6a3ab13c4d37e2008e7dcde73655fe117b3"
+          "bytes": 29122,
+          "sha256": "bbbe35fb376a9a30aa62c4561cbaacc43c7558a97834239660071e93870a8381"
         }
       },
       "html_origin": "canonical_project_html",
@@ -6820,12 +6839,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 883572,
-          "sha256": "e1ed91c6db8d9c02eddb62e4f3c9cfc36a0a944dd7202be1be2da763d8d3e768"
+          "sha256": "38f9ee2667452e366ad62525d94cdfd034bfef9205572504bc245733084fc5d6"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
-          "bytes": 29050,
-          "sha256": "077ae36163e8aa1bef00058af7c7c2338111274f6bec6bfa750b170c13f13b64"
+          "bytes": 29118,
+          "sha256": "9504d30bd80b9b7cc1995cd11033b008a3fd92dbe522a0e7b82500af1936e616"
         }
       },
       "html_origin": "canonical_project_html",
@@ -6845,12 +6864,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 241628,
-          "sha256": "c99aeaed3608ec422e3d846f5a9084a408b78660fc8fe8b14501e50a88018241"
+          "sha256": "8f6351cf07d0a4c2fe2129e584acd71da757880952bdaa014f6335483e726125"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
-          "bytes": 29051,
-          "sha256": "3f035a8206d1fa53c63c64bccfcc3cbd11b98aa2323d0164f8fa85bab572852c"
+          "bytes": 29119,
+          "sha256": "3521133ba40ab1e0a24135b69cbc509560600d46dcaf047d60e7df49cfc768d9"
         }
       },
       "html_origin": "canonical_project_html",
@@ -6870,12 +6889,12 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1122400,
-          "sha256": "2f976cbe2f9563d78c4b79d71755bfac7f0c55ee420d4975a0a7710dea62c027"
+          "sha256": "debfb44fb337cbc6317e89970d27107fbaeae1fa00e3c3c13bcb3e7b15c9168e"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
-          "bytes": 29059,
-          "sha256": "6360e18f3037eec502975e3ee1345185a4c98c5673ffdf07dfa00e8f6d858817"
+          "bytes": 29127,
+          "sha256": "385bdb6e34d0807742e88484f5c45e67a712099601a78d95d2b78bc550e8f9a4"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7665,6 +7684,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-20T08:25:09+00:00"
+    "updated_at": "2026-08-20T08:49:41+00:00"
   }
 }

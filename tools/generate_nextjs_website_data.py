@@ -1878,6 +1878,7 @@ def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
 
         public_slug = slugify(project_folder)
         artifacts = ensure_project_report_artifacts(project, output_dir, public_slug=public_slug)
+        project["report_package"] = artifacts.pop("published_project_package", None)
         project["report_artifacts"] = artifacts
 
         # The Universal Report Engine is a local controlled tool.  Its catalogue
@@ -1893,7 +1894,7 @@ def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
         target = GENERATED_ROOT / public_slug
         target.mkdir(parents=True, exist_ok=True)
         for artifact in sorted(output_dir.iterdir()):
-            if artifact.is_file() and artifact.suffix.lower() in {".html", ".pdf", ".pptx", ".docx"}:
+            if artifact.is_file() and artifact.suffix.lower() in {".html", ".pdf", ".pptx", ".docx", ".zip"}:
                 copy_if_changed(artifact, target / artifact.name)
 
         # Publish only release-approved Universal Report Engine artifacts.
