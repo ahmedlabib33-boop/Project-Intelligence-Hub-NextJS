@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-20T11:49:45",
+  "generated_at": "2026-08-20T11:53:33",
   "project_count": 5,
   "sector_count": 3,
   "totals": {
     "contract_value": 6412286025.0,
-    "paid_amount": 1905346531.59,
-    "spent_amount": 2301561022.7999997,
+    "paid_amount": 1905346531.5900002,
+    "spent_amount": 2301561022.8,
     "remaining_value": 4506939493.41,
     "average_progress": 0.31207955238865065,
     "average_spi": 0.8397258072940478,
@@ -1054,8 +1054,8 @@
     "warn_count": 0,
     "issue_count": 0,
     "report_path": "D:/Project Intelligence Hub NextJS/12-logs/guardrail_report_latest.md",
-    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260820_114945",
-    "last_checked": "2026-08-20T11:49:45",
+    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260820_115333",
+    "last_checked": "2026-08-20T11:53:33",
     "top_issues": []
   }
 }

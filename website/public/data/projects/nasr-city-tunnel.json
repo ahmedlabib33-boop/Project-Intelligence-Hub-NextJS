@@ -111,7 +111,7 @@
     },
     "s_curve_forecast": {
       "status": "outside_horizon",
-      "method": "numpy linear trend fallback",
+      "method": "statsmodels damped Holt trend",
       "periods_available": 10,
       "current_actual_value": 494460000.0,
       "current_planned_value": 1175000000.0,
@@ -190,25 +190,25 @@
           "installed": true
         },
         "seaborn": {
-          "installed": false
+          "installed": true
         },
         "scikit_learn": {
           "installed": true
         },
         "statsmodels": {
-          "installed": false
+          "installed": true
         },
         "spacy": {
           "installed": true
         },
         "xgboost": {
-          "installed": false
+          "installed": true
         },
         "pytorch": {
           "installed": true
         },
         "tensorflow": {
-          "installed": false
+          "installed": true
         }
       },
       "xgboost": {
@@ -5834,7 +5834,7 @@
           "relative_path": "Nasr city-Tunnel/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 27.9,
-          "modified": "2026-08-20T11:49:44"
+          "modified": "2026-08-20T11:53:33"
         }
       ],
       "watchers": [
@@ -7963,6 +7963,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-20T08:49:44+00:00"
+    "updated_at": "2026-08-20T08:53:33+00:00"
   }
 }
