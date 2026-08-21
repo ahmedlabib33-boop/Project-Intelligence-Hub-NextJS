@@ -3677,8 +3677,9 @@ h2 {
 .project-view-switch button { flex: 0 1 auto; }
 
 .operations-footer {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
   gap: 16px;
   color: #9db8ca;
   padding: 4px 2px 0;
@@ -3893,6 +3894,14 @@ h2 {
 .operations-footer .footer-credit {
   color: #9db8ca;
   font-weight: 600;
+  text-align: right;
+}
+
+.operations-footer .footer-samco {
+  color: #9db8ca;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .operations-footer .footer-approval {
