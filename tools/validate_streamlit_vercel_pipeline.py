@@ -164,9 +164,11 @@ def validate_project_workspace_surface(
             input_path = data_dir / input_name
             header = input_path.read_text(encoding="utf-8-sig", errors="replace").splitlines()
             columns = {column.strip().strip('"').casefold() for column in header[0].split(",")} if header else set()
-            required_columns = {"bundle_version", "source_file", "row_kind", "row_order", "payload_json"}
-            if not required_columns.issubset(columns):
-                errors.append(f"{project_key}: canonical input has an invalid bundle contract: {input_name}")
+            bundled_columns = {"bundle_version", "source_file", "row_kind", "row_order", "payload_json"}
+            readable_columns = {"source_table", "source_path", "row_order"}
+            readable_letters_columns = {"record_type", "sheet_name", "row_order"}
+            if not bundled_columns.issubset(columns) and not readable_columns.issubset(columns) and not readable_letters_columns.issubset(columns):
+                errors.append(f"{project_key}: canonical input has an invalid readable or bundled contract: {input_name}")
         checks.append(f"{project_key}: all ten canonical project inputs are present")
     else:
         for relative_path, required_column in LEGACY_CHART_INPUTS.items():

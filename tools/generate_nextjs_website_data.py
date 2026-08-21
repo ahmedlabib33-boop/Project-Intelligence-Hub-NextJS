@@ -152,6 +152,26 @@ def _decode_canonical_input_bundles(data_dir: Path) -> tuple[dict[str, list[dict
     for bundle_name in CANONICAL_BUNDLE_NAMES:
         bundle_path = data_dir / bundle_name
         for record in read_csv_rows(bundle_path):
+            # Readable canonical CSVs expose one source row per spreadsheet row.
+            # They deliberately replace the former payload_json envelope while
+            # retaining the same logical source tables and values.
+            readable_table = str(record.get("source_table") or "").strip()
+            readable_path = str(record.get("source_path") or "").strip()
+            if readable_table and readable_path:
+                found_bundle = True
+                table = tables.setdefault(readable_table, {"headers": [], "rows": [], "direct_rows": []})
+                try:
+                    row_order = int(str(record.get("row_order") or "0"))
+                except ValueError:
+                    row_order = len(table["direct_rows"])
+                direct_row = {
+                    key: value
+                    for key, value in record.items()
+                    if key not in {"source_table", "source_path", "row_order"} and value not in (None, "")
+                }
+                table["direct_rows"].append((row_order, direct_row))
+                sources.setdefault(readable_table, bundle_path)
+                continue
             if not record.get("bundle_version") or not record.get("source_file"):
                 continue
             found_bundle = True
@@ -178,6 +198,10 @@ def _decode_canonical_input_bundles(data_dir: Path) -> tuple[dict[str, list[dict
 
     result: dict[str, list[dict[str, str]]] = {}
     for name, table in tables.items():
+        direct_rows = table.get("direct_rows", [])
+        if direct_rows:
+            result[name] = [row for _, row in sorted(direct_rows, key=lambda item: item[0])]
+            continue
         headers = table["headers"]
         result[name] = [
             {header: _bundle_value(values[index]) if index < len(values) else "" for index, header in enumerate(headers)}
@@ -239,7 +263,70 @@ def load_canonical_letters_payload(project: dict[str, Any], data_dir: Path) -> d
     if not bundle_path.exists() or not project_id:
         return None
 
-    for record in read_csv_rows(bundle_path):
+    records = read_csv_rows(bundle_path)
+    if records and "record_type" in records[0] and "sheet_name" in records[0]:
+        inbox_files: list[dict[str, Any]] = []
+        sheets: dict[str, dict[str, Any]] = {}
+        letters_metadata = {"record_type", "sheet_name", "row_order", "file_name", "relative_path", "extension", "size_kb", "modified"}
+        for record in records:
+            record_type = str(record.get("record_type") or "").strip().casefold()
+            if record_type == "inbox_file":
+                inbox_files.append(
+                    {
+                        "name": str(record.get("file_name") or "Letter file"),
+                        "relative_path": str(record.get("relative_path") or record.get("file_name") or ""),
+                        "extension": str(record.get("extension") or "file"),
+                        "size_kb": safe_float(record.get("size_kb")) or 0,
+                        "modified": str(record.get("modified") or ""),
+                    }
+                )
+                continue
+            if record_type != "letter_register":
+                continue
+            row_project_id = str(record.get("project_id") or "").strip()
+            if row_project_id and row_project_id != project_id:
+                continue
+            sheet_name = str(record.get("sheet_name") or "Letters Register")
+            sheet = sheets.setdefault(sheet_name, {"name": sheet_name, "columns": [], "rows": []})
+            row = {
+                key: excel_value(value)
+                for key, value in record.items()
+                if key not in letters_metadata and value not in (None, "")
+            }
+            row["project_id"] = project_id
+            for column in row:
+                if column not in sheet["columns"]:
+                    sheet["columns"].append(column)
+            sheet["rows"].append(row)
+        published_sheets = [
+            {
+                "name": sheet["name"],
+                "row_count": len(sheet["rows"]),
+                "column_count": len(sheet["columns"]),
+                "columns": sheet["columns"],
+                "rows": sheet["rows"][:WORKSPACE_TABLE_ROW_LIMIT],
+                "truncated": len(sheet["rows"]) > WORKSPACE_TABLE_ROW_LIMIT,
+            }
+            for sheet in sheets.values()
+        ]
+        return {
+            "folder": "01-data/import_templates",
+            "inbox_files": inbox_files,
+            "inbox_file_count": len(inbox_files),
+            "workbook": {"file": bundle_path.name, "exists": True, "source_workbook": "letters_intelligence.xlsx", "sheets": published_sheets},
+            "workbook_tables": {
+                "file": bundle_path.name,
+                "exists": True,
+                "sheets": published_sheets,
+                "rejected_cross_project_rows": 0,
+                "source_scope": "selected_project_only",
+                "inbox_auto_ingest": True,
+                "source_mode": "readable_csv_register",
+            },
+            "source_file": bundle_path.name,
+        }
+
+    for record in records:
         if str(record.get("row_kind") or "").strip().casefold() != "snapshot":
             continue
         try:
