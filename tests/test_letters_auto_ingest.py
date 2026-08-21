@@ -82,7 +82,7 @@ def test_auto_ingest_recognizes_the_canonical_contractor_and_consultant_folders(
     assert result[SAMCO_SHEET].iloc[0]["Ref No"] == "BD-CW-SAMCO-ACE-LET-STR-084"
     assert result[ACE_SHEET].iloc[0]["Ref No"] == "BD-ACEPM-SAMCO-LET-039"
     assert set(result[AUTO_REGISTER_SHEET]["Direction"]) == {
-        "Contractor to Consultant", "Consultant to Contractor"
+        "SAMCO to Consultant", "Consultant to SAMCO"
     }
     assert result[AUTO_REGISTER_SHEET]["Status"].eq("Added Automatically").all()
 
