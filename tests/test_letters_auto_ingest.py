@@ -61,6 +61,32 @@ def test_auto_ingest_does_not_duplicate_existing_reference(tmp_path):
     assert result[AUTO_REGISTER_SHEET].iloc[0]["Status"] == "Already Registered"
 
 
+def test_auto_ingest_recognizes_the_canonical_contractor_and_consultant_folders(tmp_path):
+    contractor_dir = tmp_path / "From Contractor"
+    consultant_dir = tmp_path / "From Consultant"
+    contractor_dir.mkdir(parents=True)
+    consultant_dir.mkdir(parents=True)
+    (contractor_dir / "084-steel-delay.txt").write_text(
+        "Date: 20-Jun-2026\nSubject: Reinforcement steel supply delay\n"
+        "Notice of programme impact and request for extension of time.",
+        encoding="utf-8",
+    )
+    (consultant_dir / "039-response.txt").write_text(
+        "Date: 21-Jun-2026\nSubject: Consultant response to steel delay\n"
+        "Reference BD-CW-SAMCO-ACE-LET-STR-084.",
+        encoding="utf-8",
+    )
+
+    result = merge_inbox_letters({}, tmp_path, read_text)
+
+    assert result[SAMCO_SHEET].iloc[0]["Ref No"] == "BD-CW-SAMCO-ACE-LET-STR-084"
+    assert result[ACE_SHEET].iloc[0]["Ref No"] == "BD-ACEPM-SAMCO-LET-039"
+    assert set(result[AUTO_REGISTER_SHEET]["Direction"]) == {
+        "Contractor to Consultant", "Consultant to Contractor"
+    }
+    assert result[AUTO_REGISTER_SHEET]["Status"].eq("Added Automatically").all()
+
+
 def test_folder_fingerprint_changes_when_letter_changes(tmp_path):
     letter = tmp_path / "From SAMCO to ACEPM" / "084.txt"
     letter.parent.mkdir(parents=True)

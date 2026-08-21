@@ -100,9 +100,9 @@ def _extract_reference(path: Path, text: str, direction: str) -> str:
         return ""
     number = int(leading_number.group(1))
     folder_text = " ".join(part.lower() for part in path.parts)
-    if "from samco" in folder_text:
+    if "from samco" in folder_text or "from contractor" in folder_text:
         return f"BD-CW-SAMCO-ACE-LET-STR-{number:03d}"
-    if "from acepm" in folder_text or "from ace" in folder_text:
+    if "from acepm" in folder_text or "from ace" in folder_text or "from consultant" in folder_text:
         return f"BD-ACEPM-SAMCO-LET-{number:03d}"
     if direction == "Contractor to Consultant":
         return f"LTR-CTR-{number:03d}"
