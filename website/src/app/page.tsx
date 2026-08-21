@@ -1675,7 +1675,7 @@ function LettersIntelligencePanel({ project }: { project: ProjectRecord }) {
       <div className="workspace-two">
         <section className="feature-card">
           <div className="feature-card-head"><h3>Letters Intelligence</h3><span>Selected project only</span></div>
-          <p>Correspondence is classified from the selected project&apos;s inbox and workbook. New files are collected by the local pipeline, then published to Vercel through the generated project JSON.</p>
+          <p>SAMCO is the Main Contractor for this project. Correspondence is controlled only as SAMCO → Consultant or Consultant → SAMCO, then published through the selected project&apos;s local pipeline and generated Vercel data.</p>
           <div className="workspace-grid compact-grid">
             <MiniMetric label="Inbox Files" value={numberValue(letters.inbox_file_count)} note="Recognized project letters" />
             <MiniMetric label="Claims Rows" value={numberValue(project.source_files.claims)} note="Project claims register" />
@@ -1687,9 +1687,9 @@ function LettersIntelligencePanel({ project }: { project: ProjectRecord }) {
       <ProjectSmartChart project={project} mode="letters" />
       <ModuleTabs label="Letters Intelligence views" tabs={["Inbox & Auto Ingest", "Letter Registers", "Issue Threads", "Linked Correspondence", "AI Letter Review", "Response Studio"]} activeTab={view} onChange={setView} />
       {view === "Inbox & Auto Ingest" ? <FileList title="Automatic Letter Inbox" files={letters.inbox_files} emptyText="No correspondence files were detected in this project inbox." /> : null}
-      {view === "Letter Registers" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="Letters Registers" preferred={["From Contractor", "From Consultant", "ACE", "SAMCO"]} /> : null}
+      {view === "Letter Registers" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="SAMCO & Consultant Letter Registers" preferred={["From SAMCO", "From Consultant"]} /> : null}
       {view === "Issue Threads" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="Issue Threads & Alerts" preferred={["Issue Threads", "Alerts"]} /> : null}
-      {view === "Linked Correspondence" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="Linked Correspondence Engine" preferred={["Contractor Links", "Consultant Links"]} /> : null}
+      {view === "Linked Correspondence" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="SAMCO ↔ Consultant Correspondence Engine" preferred={["SAMCO → Consultant Links", "Consultant → SAMCO Links"]} /> : null}
       {view === "AI Letter Review" ? <div className="feature-stack"><AiInsightCard type="letters" projectKey={project.project_key} /><UnifiedIntelligenceSearch mode="project" projectKey={project.project_key} projectName={project.project_display_name} /></div> : null}
       {view === "Response Studio" ? <LetterResponseStudio project={project} /> : null}
     </div>
@@ -2449,7 +2449,8 @@ function DigitalOperationsApp() {
             : <section className="feature-card project-load-state"><h2>{selectedProjectSummary.project_display_name}</h2><p>{projectLoadState === "error" ? "The selected project payload failed its identity or availability check. Regenerate the verified project pipeline." : "Project workspace data is not available. Regenerate the verified website data pipeline for this selected project."}</p></section>
       )}
       <footer className="operations-footer">
-        <span className="footer-credit">Designed &amp; Created | <strong>Eng. Ahmed Labib</strong> | &copy; 2026</span>
+        <span className="footer-credit">Designed &amp; Developed | <strong>Eng. Ahmed Labib</strong> | &copy; 2026</span>
+        <span className="footer-approval"><em>Concept &amp; Executive Approval</em> | <strong>Eng. Ola</strong> | Head of Technical &amp; Planning</span>
         <span>Source-backed controls | Project-isolated intelligence</span>
       </footer>
       <AiChatPanel projectKey={isDecisionDashboard ? undefined : selectedProjectSummary.project_key} projectName={isDecisionDashboard ? "Decision Making Dashboard" : selectedProjectSummary.project_display_name} sector={isDecisionDashboard ? undefined : selectedProjectSummary.sector} />

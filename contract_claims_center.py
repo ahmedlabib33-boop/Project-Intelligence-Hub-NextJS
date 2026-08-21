@@ -935,9 +935,10 @@ def _read_pdf_text(path: Path) -> str:
             continue
         except Exception:
             continue
-    word_text = _read_pdf_text_via_word(path)
-    if normalize_text(word_text):
-        return word_text
+    # Never use Word COM as a PDF fallback.  A malformed, protected, or
+    # image-based PDF can show a modal dialog and freeze every automatic
+    # project-data build.  Direct PDF extraction followed by OCR is safe for
+    # the letters, contract, claims, and evidence pipelines.
     return _read_pdf_text_via_ocr(path)
 
 

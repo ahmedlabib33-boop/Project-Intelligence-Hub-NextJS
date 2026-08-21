@@ -3895,6 +3895,23 @@ h2 {
   font-weight: 600;
 }
 
+.operations-footer .footer-approval {
+  color: #d8e7f2;
+  font-weight: 650;
+  letter-spacing: .01em;
+  padding: 2px 12px;
+  border-left: 1px solid rgba(242, 191, 75, .45);
+  border-right: 1px solid rgba(242, 191, 75, .22);
+  background: linear-gradient(90deg, rgba(242, 191, 75, .10), rgba(57, 215, 210, .05));
+}
+
+.operations-footer .footer-approval em {
+  color: #f2bf4b;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: normal;
+  font-weight: 800;
+}
+
 .operations-footer strong {
   color: #f2bf4b;
   font-family: Georgia, "Times New Roman", serif;
