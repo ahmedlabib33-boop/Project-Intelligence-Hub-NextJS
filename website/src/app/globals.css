@@ -3684,6 +3684,8 @@ h2 {
   color: #9db8ca;
   padding: 4px 2px 0;
   font-size: 0.76rem;
+  border: 0;
+  box-shadow: none;
 }
 
 /* Project-control subviews keep the legacy feature depth inside the new digital shell. */
@@ -3909,9 +3911,8 @@ h2 {
   font-weight: 650;
   letter-spacing: .01em;
   padding: 2px 12px;
-  border-left: 1px solid rgba(242, 191, 75, .45);
-  border-right: 1px solid rgba(242, 191, 75, .22);
-  background: linear-gradient(90deg, rgba(242, 191, 75, .10), rgba(57, 215, 210, .05));
+  border: 0;
+  background: transparent;
 }
 
 .operations-footer .footer-approval em {
