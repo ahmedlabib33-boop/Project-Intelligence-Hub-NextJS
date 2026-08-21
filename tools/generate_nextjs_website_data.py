@@ -618,6 +618,55 @@ def _frames_to_workspace_tables(
     return result
 
 
+def merge_canonical_letters_with_inbox(
+    project: dict[str, Any], canonical_letters: dict[str, Any], inbox_dir: Path
+) -> dict[str, Any]:
+    """Overlay the live, project-local inbox on the canonical letters register.
+
+    The ten-input letters CSV remains the historical register authority.  New
+    controlled correspondence placed in either direction folder is processed in
+    memory by the same Streamlit ingestion engine and then published with the
+    selected project's generated JSON.  This deliberately does not rewrite the
+    canonical CSV or the original evidence file.
+    """
+    project_id = str(project.get("project_id") or "").strip()
+    workspace = dict(canonical_letters.get("workbook_tables") or {})
+    if not project_id or not inbox_dir.exists():
+        return workspace
+    try:
+        import pandas as pd
+
+        source_sheets: dict[str, Any] = {}
+        for sheet in workspace.get("sheets") or []:
+            if not isinstance(sheet, dict):
+                continue
+            name = str(sheet.get("name") or "").strip()
+            if not name:
+                continue
+            rows = sheet.get("rows") if isinstance(sheet.get("rows"), list) else []
+            source_sheets[name] = pd.DataFrame(rows).fillna("")
+
+        canonical_src = CANONICAL_ROOT / "src"
+        if canonical_src.exists() and str(canonical_src) not in sys.path:
+            sys.path.insert(0, str(canonical_src))
+        if str(CANONICAL_ROOT) not in sys.path:
+            sys.path.insert(0, str(CANONICAL_ROOT))
+        from construction_system.letters_auto_ingest import merge_inbox_letters
+        from contract_claims_center import extract_text_from_path
+
+        merged = _frames_to_workspace_tables(
+            merge_inbox_letters(source_sheets, inbox_dir, extract_text_from_path), project_id
+        )
+        merged["file"] = str(workspace.get("file") or "10_letters_intelligence.csv")
+        merged["exists"] = True
+        merged["inbox_auto_ingest"] = True
+        merged["source_workbook"] = str(workspace.get("source_workbook") or "letters_intelligence.xlsx")
+        return merged
+    except Exception as exc:
+        workspace["inbox_processing_error"] = str(exc)
+        return workspace
+
+
 def build_letters_workspace_tables(
     project: dict[str, Any], workbook_path: Path, inbox_dir: Path
 ) -> dict[str, Any]:
@@ -1273,13 +1322,25 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
 
     canonical_letters = load_canonical_letters_payload(project, data_dir)
     if canonical_letters is not None:
-        letter_files = canonical_letters["inbox_files"]
+        live_inbox_files = list_project_files(letters_dir / "inbox", base, 160)
+        historical_inbox_files = canonical_letters["inbox_files"]
+        seen_inbox_paths: set[str] = set()
+        letter_files = []
+        for item in [*live_inbox_files, *historical_inbox_files]:
+            relative_path = str(item.get("relative_path") or item.get("name") or "")
+            if not relative_path or relative_path.casefold() in seen_inbox_paths:
+                continue
+            seen_inbox_paths.add(relative_path.casefold())
+            letter_files.append(item)
         letter_workbook = canonical_letters["workbook"]
-        letter_workspace_tables = canonical_letters["workbook_tables"]
-        letters_folder = canonical_letters["folder"]
+        letter_workspace_tables = merge_canonical_letters_with_inbox(
+            project, canonical_letters, letters_dir / "inbox"
+        )
+        letters_folder = "07-letters_intelligence/inbox + 01-data/import_templates"
         letters_source_detail = (
-            "Reads the selected project's published correspondence snapshot from "
-            "10_letters_intelligence.csv; no archived workbook or inbox folder is used."
+            "Uses the selected project's 10_letters_intelligence.csv historical register and "
+            "automatically evaluates new files in 07-letters_intelligence/inbox/From Contractor "
+            "and From Consultant during the local data build."
         )
         letters_detector_status = "Active" if letter_workspace_tables.get("sheets") else "Awaiting Data"
     else:

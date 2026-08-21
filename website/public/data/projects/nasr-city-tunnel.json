@@ -3265,7 +3265,7 @@
       }
     },
     "letters_intelligence": {
-      "folder": "01-data/import_templates",
+      "folder": "07-letters_intelligence/inbox + 01-data/import_templates",
       "inbox_files": [],
       "inbox_file_count": 0,
       "workbook": {
@@ -3567,13 +3567,13 @@
         "rejected_cross_project_rows": 0,
         "source_scope": "selected_project_only",
         "inbox_auto_ingest": true,
-        "source_mode": "canonical_csv_snapshot"
+        "source_workbook": "letters_intelligence.xlsx"
       },
       "detectors": [
         {
           "name": "Canonical letters source",
           "status": "Active",
-          "detail": "Reads the selected project's published correspondence snapshot from 10_letters_intelligence.csv; no archived workbook or inbox folder is used."
+          "detail": "Uses the selected project's 10_letters_intelligence.csv historical register and automatically evaluates new files in 07-letters_intelligence/inbox/From Contractor and From Consultant during the local data build."
         },
         {
           "name": "Letters intelligence workflow",
@@ -6154,7 +6154,7 @@
           "relative_path": "Nasr city-Tunnel/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 31.9,
-          "modified": "2026-08-21T21:56:55"
+          "modified": "2026-08-21T22:55:54"
         },
         {
           "name": "universal-resource-program-report.html",
@@ -7776,7 +7776,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-eot-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7794,7 +7794,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-delay-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7812,7 +7812,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-progress-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7830,7 +7830,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-recovery-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7848,7 +7848,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-variation-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7865,7 +7865,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-hybrid-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7883,7 +7883,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-resource-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7900,7 +7900,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-equipment-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7917,7 +7917,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-cost-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7934,7 +7934,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-evm-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7951,7 +7951,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-cashflow-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7968,7 +7968,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-scurve-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7986,7 +7986,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-procurement-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8003,7 +8003,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-material-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8021,7 +8021,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-lookahead-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8039,7 +8039,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-critical_path-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8057,7 +8057,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-float-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8075,7 +8075,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-milestone-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8092,7 +8092,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-risk-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8110,7 +8110,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-rfi_submittal-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8127,7 +8127,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-qaqc-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8144,7 +8144,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-productivity-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8161,7 +8161,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-executive-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8179,7 +8179,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-baseline_current-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8197,7 +8197,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-forecast_completion-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8214,7 +8214,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-ml_project_controls-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8231,7 +8231,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-contract_admin-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8248,7 +8248,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-change_control-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8265,7 +8265,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-document_control-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8283,7 +8283,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-interface_management-program-report.html"
         },
-        "generated_at": "2026-08-21T18:56:55+00:00",
+        "generated_at": "2026-08-21T19:55:54+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       }
@@ -8378,6 +8378,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-21T18:56:55+00:00"
+    "updated_at": "2026-08-21T19:55:54+00:00"
   }
 }

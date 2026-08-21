@@ -1685,12 +1685,92 @@ function LettersIntelligencePanel({ project }: { project: ProjectRecord }) {
         <FeatureSvg mode="letters" />
       </div>
       <ProjectSmartChart project={project} mode="letters" />
-      <ModuleTabs label="Letters Intelligence views" tabs={["Inbox & Auto Ingest", "Letter Registers", "Issue Threads", "Linked Correspondence", "AI Letter Review"]} activeTab={view} onChange={setView} />
+      <ModuleTabs label="Letters Intelligence views" tabs={["Inbox & Auto Ingest", "Letter Registers", "Issue Threads", "Linked Correspondence", "AI Letter Review", "Response Studio"]} activeTab={view} onChange={setView} />
       {view === "Inbox & Auto Ingest" ? <FileList title="Automatic Letter Inbox" files={letters.inbox_files} emptyText="No correspondence files were detected in this project inbox." /> : null}
       {view === "Letter Registers" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="Letters Registers" preferred={["From Contractor", "From Consultant", "ACE", "SAMCO"]} /> : null}
       {view === "Issue Threads" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="Issue Threads & Alerts" preferred={["Issue Threads", "Alerts"]} /> : null}
       {view === "Linked Correspondence" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="Linked Correspondence Engine" preferred={["Contractor Links", "Consultant Links"]} /> : null}
       {view === "AI Letter Review" ? <div className="feature-stack"><AiInsightCard type="letters" projectKey={project.project_key} /><UnifiedIntelligenceSearch mode="project" projectKey={project.project_key} projectName={project.project_display_name} /></div> : null}
+      {view === "Response Studio" ? <LetterResponseStudio project={project} /> : null}
+    </div>
+  );
+}
+
+type LetterResponseDraft = {
+  status: string;
+  draft?: string;
+  notice?: string;
+  prior_correspondence?: Array<{ reference?: string; date?: string; subject?: string; required_action?: string }>;
+  contract_evidence?: Array<{ clause_number?: string; clause_title?: string; exact_clause_text?: string; required_evidence?: string; notice_required?: string }>;
+};
+
+function LetterResponseStudio({ project }: { project: ProjectRecord }) {
+  const [selectedReference, setSelectedReference] = useState("");
+  const [draft, setDraft] = useState<LetterResponseDraft | null>(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const sheets = project.features.letters_intelligence.workbook_tables?.sheets || [];
+  const incomingLetters = useMemo(() => {
+    const byReference = new Map<string, Record<string, unknown>>();
+    sheets.filter((sheet) => /from (consultant|ace)/i.test(sheet.name)).forEach((sheet) => {
+      sheet.rows.forEach((row) => {
+        const reference = String(row["Ref No"] || row.Reference || "").trim();
+        if (reference && !byReference.has(reference)) byReference.set(reference, row);
+      });
+    });
+    return [...byReference.entries()].map(([reference, row]) => ({
+      reference,
+      date: String(row.Date || ""),
+      subject: String(row.Subject || row["Main Purpose"] || "")
+    }));
+  }, [sheets]);
+  const generate = async () => {
+    if (!selectedReference) return;
+    setLoading(true);
+    setError("");
+    setDraft(null);
+    try {
+      const response = await fetch("/api/letters-response-draft", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ projectKey: project.project_key, reference: selectedReference })
+      });
+      const payload = await response.json() as LetterResponseDraft & { error?: string };
+      if (!response.ok) throw new Error(payload.error || "The controlled response draft could not be produced.");
+      setDraft(payload);
+    } catch (reason) {
+      setError(reason instanceof Error ? reason.message : "The controlled response draft could not be produced.");
+    } finally {
+      setLoading(false);
+    }
+  };
+  const copyDraft = async () => {
+    if (draft?.draft) await navigator.clipboard.writeText(draft.draft);
+  };
+  return (
+    <div className="feature-stack">
+      <section className="feature-card">
+        <div className="feature-card-head"><div><h3>Controlled Consultant-Letter Response Studio</h3><small>Select a published consultant letter. The engine screens only this project&apos;s published SAMCO history and Contract & Claims evidence.</small></div><span>Not sent by app</span></div>
+        <label className="controlled-tia-event-select" htmlFor="letter-response-select">
+          <span>Consultant letter</span>
+          <select id="letter-response-select" value={selectedReference} onChange={(event) => setSelectedReference(event.target.value)}>
+            <option value="">Select a consultant letter</option>
+            {incomingLetters.map((letter) => <option key={letter.reference} value={letter.reference}>{letter.reference}{letter.date ? ` | ${letter.date}` : ""}{letter.subject ? ` | ${letter.subject}` : ""}</option>)}
+          </select>
+        </label>
+        <div className="conference-actions">
+          <button type="button" onClick={generate} disabled={!selectedReference || loading}>{loading ? "Reviewing project evidence…" : "Generate controlled response"}</button>
+          {draft?.draft ? <button type="button" onClick={copyDraft}>Copy controlled draft</button> : null}
+        </div>
+        <p>It will not invent facts, clause language, acceptance, liability, notices, or commitments. A draft is produced only where the selected project has matching published clause text; authorised SAMCO review is mandatory before issue.</p>
+        {error ? <p className="ai-error">{error}</p> : null}
+      </section>
+      {draft ? <>
+        <section className="feature-card"><div className="feature-card-head"><h3>Control Result</h3><span>{draft.status.replaceAll("_", " ")}</span></div><p>{draft.notice || "No control note was returned."}</p></section>
+        <ProjectDataTable table={recordsToTable("Prior SAMCO Correspondence Reviewed", draft.prior_correspondence || [])} title="Prior SAMCO Correspondence Reviewed" empty="No related published SAMCO correspondence was identified automatically." />
+        <ProjectDataTable table={recordsToTable("Quoted Contract Evidence", draft.contract_evidence || [])} title="Quoted Contract Evidence" empty="No matching published clause text was found. The engine has correctly withheld a response draft." />
+        {draft.draft ? <section className="feature-card"><div className="feature-card-head"><h3>Controlled Response Draft</h3><span>Authorised review required</span></div><pre className="letter-response-draft">{draft.draft}</pre></section> : null}
+      </> : null}
     </div>
   );
 }
