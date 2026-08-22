@@ -48,7 +48,38 @@ def safe_sector_name(value: Any) -> str:
 
 
 def _read_project_csv_identity(project_dir: Path) -> dict[str, str]:
-    """Read the user-maintained project identity from projects.csv when present."""
+    """Read identity from the ten-input contract first, then legacy projects.csv.
+
+    New project folders use only the canonical editable inputs; they must not
+    need a hidden or obsolete projects.csv just to be discovered correctly.
+    """
+    canonical_contract = project_dir / "01-data" / "import_templates" / "01_project_contract.csv"
+    if canonical_contract.exists():
+        try:
+            canonical_rows = pd.read_csv(canonical_contract, dtype=str, keep_default_na=False)
+            if not canonical_rows.empty:
+                if "source_table" in canonical_rows.columns:
+                    project_rows = canonical_rows[
+                        canonical_rows["source_table"].astype(str).str.strip().str.casefold().eq("projects")
+                    ]
+                    if project_rows.empty:
+                        project_rows = canonical_rows
+                else:
+                    project_rows = canonical_rows
+                row = project_rows.iloc[0]
+                identity = {
+                    "project_id": safe_project_id(row.get("project_id")),
+                    "project_name": str(row.get("project_name", "") or "").strip(),
+                    "client_name": str(row.get("client_name", "") or "").strip(),
+                    "contractor": str(row.get("contractor", "") or "").strip(),
+                    "currency": str(row.get("currency", "") or "").strip(),
+                    "status": str(row.get("status", "") or "").strip(),
+                    "sector_name": str(row.get("sector_name", "") or "").strip(),
+                }
+                if any(identity.values()):
+                    return identity
+        except (OSError, UnicodeDecodeError, pd.errors.ParserError):
+            pass
     for project_csv in (
         project_dir / "01-data" / "import_templates" / "projects.csv",
         project_dir / "data" / "import_templates" / "projects.csv",
