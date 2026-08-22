@@ -2449,7 +2449,7 @@ function DigitalOperationsApp() {
             : <section className="feature-card project-load-state"><h2>{selectedProjectSummary.project_display_name}</h2><p>{projectLoadState === "error" ? "The selected project payload failed its identity or availability check. Regenerate the verified project pipeline." : "Project workspace data is not available. Regenerate the verified website data pipeline for this selected project."}</p></section>
       )}
       <footer className="operations-footer">
-        <span className="footer-approval"><em>Concept &amp; Executive Approval</em> | <strong>Eng. Ola</strong> | Head of Technical &amp; Planning</span>
+        <span className="footer-approval">Concept &amp; Executive Approval | <strong>Eng. Ola</strong> | Head of Technical &amp; Planning</span>
         <span className="footer-samco"><strong>SAMCO</strong> | &copy; 2026</span>
         <span className="footer-credit">Designed &amp; Developed | <strong>Eng. Ahmed Labib</strong> | Senior Planning Engineer</span>
       </footer>
