@@ -10,7 +10,9 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import hashlib
 import os
+import shutil
 import sys
 from collections import OrderedDict
 from pathlib import Path
@@ -19,6 +21,10 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 PROJECTS_ROOT = ROOT / "projects"
+PROJECT_TEMPLATE = PROJECTS_ROOT / "_PROJECT_TEMPLATE"
+DEFAULT_TEMPLATE_ARCHIVE = (
+    ROOT.parent / "Project Intelligence Hub NextJS-unneeded files" / "2026-08-22-readable-input-migration"
+)
 CANONICAL_INPUTS = (
     "01_project_contract.csv",
     "02_schedule_activities.csv",
@@ -173,31 +179,144 @@ def input_is_readable(path: Path) -> bool:
 
 
 def ensure_inputs_are_writable(paths: list[Path]) -> None:
+    locked: list[str] = []
     for path in paths:
         try:
             with path.open("r+b"):
                 pass
-        except PermissionError as exc:
-            raise RuntimeError(f"Close '{path.name}' in Excel before conversion. No inputs were changed.") from exc
+        except PermissionError:
+            locked.append(path.name)
+    if locked:
+        names = ", ".join(f"'{name}'" for name in locked)
+        raise RuntimeError(f"Close {names} in Excel before conversion. No inputs were changed.")
 
 
 def find_projects() -> list[Path]:
     return [path.parent.parent.parent for path in PROJECTS_ROOT.rglob("01-data/import_templates/02_schedule_activities.csv")]
 
 
+def readable_fieldnames(path: Path) -> list[str]:
+    """Return editable field names from either a readable input or its envelope."""
+    if input_is_readable(path):
+        with path.open("r", encoding="utf-8-sig", newline="") as handle:
+            return [str(name) for name in (csv.DictReader(handle).fieldnames or [])]
+    if path.name == "10_letters_intelligence.csv":
+        columns, _ = decode_letters_snapshot(path)
+        return columns
+    tables = decode_envelope(path)
+    headers: list[str] = ["source_table", "source_path", "row_order"]
+    for table in tables.values():
+        for header in table["headers"]:
+            if header not in headers:
+                headers.append(header)
+    return headers
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def prepare_future_project_template(dry_run: bool, archive_root: Path) -> None:
+    """Make the copyable project template use only the ten editable CSV contracts.
+
+    Headers are the union of the active project contracts, so the template never
+    forces a new project to use an opaque payload_json envelope. Old template
+    files are moved, never deleted, and each move is hash-recorded.
+    """
+    projects = find_projects()
+    if not projects:
+        raise RuntimeError("Cannot create the future-project template: no active canonical project inputs were found.")
+    target_dir = PROJECT_TEMPLATE / "01-data" / "import_templates"
+    target_paths = [target_dir / name for name in CANONICAL_INPUTS]
+    legacy_paths = [
+        path for path in target_dir.glob("*.csv")
+        if path.name not in CANONICAL_INPUTS
+    ]
+
+    fieldnames_by_input: dict[str, list[str]] = {}
+    for input_name in CANONICAL_INPUTS:
+        fields: list[str] = []
+        for project in projects:
+            candidate = project / "01-data" / "import_templates" / input_name
+            for field in readable_fieldnames(candidate):
+                if field not in fields:
+                    fields.append(field)
+        if not fields:
+            raise RuntimeError(f"Cannot derive editable columns for {input_name}.")
+        fieldnames_by_input[input_name] = fields
+
+    if dry_run:
+        print(f"WOULD PREPARE template with {len(target_paths)} editable canonical inputs")
+        for path in legacy_paths:
+            print(f"WOULD ARCHIVE template legacy input: {path.name}")
+        return
+
+    target_dir.mkdir(parents=True, exist_ok=True)
+    for path in target_paths:
+        with path.open("w", encoding="utf-8-sig", newline="") as handle:
+            csv.DictWriter(handle, fieldnames=fieldnames_by_input[path.name]).writeheader()
+
+    archive_base = archive_root / "projects" / "_PROJECT_TEMPLATE" / "01-data" / "import_templates"
+    archive_base.mkdir(parents=True, exist_ok=True)
+    records: list[dict[str, str]] = []
+    for path in legacy_paths:
+        destination = archive_base / path.name
+        if destination.exists():
+            raise RuntimeError(
+                f"Archive destination already exists: {destination}. "
+                "No template input was moved; choose a new archive directory."
+            )
+        else:
+            source_hash = sha256(path)
+            shutil.move(str(path), str(destination))
+            if sha256(destination) != source_hash:
+                raise RuntimeError(f"Archive hash verification failed for {path.name}")
+        records.append({
+            "original_relative_path": str(path.relative_to(ROOT)),
+            "archive_path": str(destination),
+            "sha256": sha256(destination),
+        })
+    register = archive_root / "template_input_archive_sha256.csv"
+    with register.open("w", encoding="utf-8", newline="") as handle:
+        csv.DictWriter(handle, fieldnames=["original_relative_path", "archive_path", "sha256"]).writeheader()
+        csv.DictWriter(handle, fieldnames=["original_relative_path", "archive_path", "sha256"]).writerows(records)
+    print(f"PREPARED template with {len(target_paths)} editable canonical inputs; archived {len(records)} legacy template CSVs")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--project", action="append", default=[], help="Project folder name to convert; default is every project.")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--prepare-template", action="store_true", help="Create a header-only, ten-input template for future projects and archive its legacy CSV inputs.")
+    parser.add_argument("--template-archive", default=str(DEFAULT_TEMPLATE_ARCHIVE), help="Archive directory used only with --prepare-template.")
     args = parser.parse_args()
     selected = {name.casefold() for name in args.project}
+    if args.prepare_template:
+        prepare_future_project_template(args.dry_run, Path(args.template_archive).resolve())
+        return 0
     projects = [path for path in find_projects() if not selected or path.name.casefold() in selected]
     if not projects:
         raise RuntimeError("No matching project inputs found.")
+    # A five-project migration must be all-or-nothing at the preflight stage:
+    # never convert one project and then discover an Excel lock in another.
+    project_inputs = {
+        project: [project / "01-data" / "import_templates" / input_name for input_name in CANONICAL_INPUTS]
+        for project in projects
+    }
+    locked_by_project: list[str] = []
+    for project, input_paths in project_inputs.items():
+        try:
+            ensure_inputs_are_writable(input_paths)
+        except RuntimeError as exc:
+            locked_by_project.append(f"{project.name}: {exc}")
+    if locked_by_project:
+        raise RuntimeError("All-project conversion was not started.\n" + "\n".join(locked_by_project))
     for project in projects:
         data_dir = project / "01-data" / "import_templates"
-        input_paths = [data_dir / input_name for input_name in CANONICAL_INPUTS]
-        ensure_inputs_are_writable(input_paths)
         for input_name in CANONICAL_INPUTS:
             path = data_dir / input_name
             if input_is_readable(path):
