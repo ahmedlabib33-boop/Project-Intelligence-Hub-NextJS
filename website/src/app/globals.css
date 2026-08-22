@@ -3907,19 +3907,19 @@ h2 {
 }
 
 .operations-footer .footer-approval {
-  color: #d8e7f2;
-  font-weight: 650;
-  letter-spacing: .01em;
-  padding: 2px 12px;
+  color: #9db8ca;
+  font-weight: 600;
+  letter-spacing: normal;
+  padding: 0;
   border: 0;
   background: transparent;
 }
 
 .operations-footer .footer-approval em {
-  color: #f2bf4b;
-  font-family: Georgia, "Times New Roman", serif;
+  color: inherit;
+  font-family: inherit;
   font-style: normal;
-  font-weight: 800;
+  font-weight: inherit;
 }
 
 .operations-footer strong {
