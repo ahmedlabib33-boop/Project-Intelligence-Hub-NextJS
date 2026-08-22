@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-08-22T05:25:50",
+  "generated_at": "2026-08-22T05:38:14",
   "project_count": 5,
   "sector_count": 3,
   "totals": {
     "contract_value": 6412286025.0,
-    "paid_amount": 1905346531.5900002,
+    "paid_amount": 1905346531.59,
     "spent_amount": 2301561022.8,
     "remaining_value": 4506939493.41,
     "average_progress": 0.31207955238865065,
-    "average_spi": 0.8397258072940479,
+    "average_spi": 0.8397258072940478,
     "average_cpi": 0.9690549937807866,
     "average_risk_score": 45.0,
     "delayed_projects": 5,
@@ -358,7 +358,9 @@
         "delay_events": 5,
         "s_curve": 10,
         "wbs": 16,
-        "historical_outcomes": 0
+        "historical_outcomes": 0,
+        "delay_event_classification": 0,
+        "tia_recovery_scenario": 0
       },
       "metric_sources": {
         "contract_value": {
@@ -515,7 +517,9 @@
         "delay_events": 25,
         "s_curve": 18,
         "wbs": 15,
-        "historical_outcomes": 0
+        "historical_outcomes": 0,
+        "delay_event_classification": 0,
+        "tia_recovery_scenario": 0
       },
       "metric_sources": {
         "contract_value": {
@@ -654,7 +658,9 @@
         "delay_events": 5,
         "s_curve": 10,
         "wbs": 16,
-        "historical_outcomes": 0
+        "historical_outcomes": 0,
+        "delay_event_classification": 0,
+        "tia_recovery_scenario": 0
       },
       "metric_sources": {
         "contract_value": {
@@ -820,7 +826,9 @@
         "delay_events": 5,
         "s_curve": 10,
         "wbs": 16,
-        "historical_outcomes": 0
+        "historical_outcomes": 0,
+        "delay_event_classification": 6,
+        "tia_recovery_scenario": 6
       },
       "metric_sources": {
         "contract_value": {
@@ -986,7 +994,9 @@
         "delay_events": 5,
         "s_curve": 10,
         "wbs": 16,
-        "historical_outcomes": 0
+        "historical_outcomes": 0,
+        "delay_event_classification": 0,
+        "tia_recovery_scenario": 0
       },
       "metric_sources": {
         "contract_value": {
@@ -1054,8 +1064,8 @@
     "warn_count": 0,
     "issue_count": 0,
     "report_path": "D:/Project Intelligence Hub NextJS/12-logs/guardrail_report_latest.md",
-    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260822_052550",
-    "last_checked": "2026-08-22T05:25:50",
+    "snapshot_dir": "D:/Project Intelligence Hub NextJS/12-logs/_guardrail_backups/20260822_053814",
+    "last_checked": "2026-08-22T05:38:14",
     "top_issues": []
   }
 }

@@ -132,7 +132,7 @@ CANONICAL_BUNDLE_NAMES = (
 LOGICAL_DATASETS = (
     "projects", "contracts", "payments", "planned_cash_flow", "progress", "evm",
     "risks", "claims", "activities", "milestones", "delay_events", "s_curve",
-    "wbs", "historical_outcomes",
+    "wbs", "historical_outcomes", "delay_event_classification", "tia_recovery_scenario",
 )
 
 
@@ -213,6 +213,10 @@ def _decode_canonical_input_bundles(data_dir: Path) -> tuple[dict[str, list[dict
     # Alias them to the dashboard's stable logical dataset names.
     for original_name, logical_name in {
         "08- payments": "payments",
+        "12_delay_event_classification": "delay_event_classification",
+        "14-delay_event_classification": "delay_event_classification",
+        "13_tia_recovery_scenario": "tia_recovery_scenario",
+        "15-tia_recovery_scenario": "tia_recovery_scenario",
     }.items():
         if original_name in result and logical_name not in result:
             result[logical_name] = result[original_name]

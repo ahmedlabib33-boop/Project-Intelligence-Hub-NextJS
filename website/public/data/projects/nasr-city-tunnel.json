@@ -111,7 +111,7 @@
     },
     "s_curve_forecast": {
       "status": "outside_horizon",
-      "method": "statsmodels damped Holt trend",
+      "method": "numpy linear trend fallback",
       "periods_available": 10,
       "current_actual_value": 494460000.0,
       "current_planned_value": 1175000000.0,
@@ -190,25 +190,25 @@
           "installed": true
         },
         "seaborn": {
-          "installed": true
+          "installed": false
         },
         "scikit_learn": {
           "installed": true
         },
         "statsmodels": {
-          "installed": true
+          "installed": false
         },
         "spacy": {
           "installed": true
         },
         "xgboost": {
-          "installed": true
+          "installed": false
         },
         "pytorch": {
           "installed": true
         },
         "tensorflow": {
-          "installed": true
+          "installed": false
         }
       },
       "xgboost": {
@@ -249,7 +249,9 @@
     "delay_events": 5,
     "s_curve": 10,
     "wbs": 16,
-    "historical_outcomes": 0
+    "historical_outcomes": 0,
+    "delay_event_classification": 6,
+    "tia_recovery_scenario": 6
   },
   "metric_sources": {
     "contract_value": {
@@ -317,7 +319,9 @@
         "delay_events": 5,
         "s_curve": 10,
         "wbs": 16,
-        "historical_outcomes": 0
+        "historical_outcomes": 0,
+        "delay_event_classification": 6,
+        "tia_recovery_scenario": 6
       },
       "source_tables": {
         "projects": {
@@ -5911,7 +5915,7 @@
           "relative_path": "Nasr city-Tunnel/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 31.7,
-          "modified": "2026-08-22T05:25:50"
+          "modified": "2026-08-22T05:38:13"
         },
         {
           "name": "universal-resource-program-report.html",
@@ -6128,7 +6132,7 @@
         "title": "Discipline Health",
         "type": "radar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/discipline_progress_history.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6150,7 +6154,7 @@
         "title": "Earned Value Trend",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete evm.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6172,7 +6176,7 @@
         "title": "Performance Indices",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete evm.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6619,7 +6623,7 @@
         "title": "Master S-Curve - Cumulative Progress",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete s_curve.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6640,7 +6644,7 @@
         "title": "S-Curve by Discipline",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/discipline_progress_history.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6662,7 +6666,7 @@
         "title": "Progress Variance Over Time",
         "type": "bar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete s_curve.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6766,7 +6770,7 @@
         "title": "SPI Trend",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete evm.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6788,7 +6792,7 @@
         "title": "CPI Trend",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete evm.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6858,14 +6862,81 @@
         "tab": "Contracts",
         "title": "Contract Cash Flow",
         "type": "line",
-        "status": "awaiting_data",
-        "message": "Add project-matched planned cash-flow periods to activate this chart.",
-        "labels": [],
-        "series": [],
+        "status": "ready",
+        "message": "Planned values are compared with selected-project certified and paid payment records.",
+        "labels": [
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09",
+          "2026-10",
+          "2026-11",
+          "2026-12"
+        ],
+        "series": [
+          {
+            "label": "Planned cash out",
+            "color": "#d6a23a",
+            "values": [
+              45950000.0,
+              53900000.0,
+              49250000.0,
+              57200000.0,
+              65150000.0,
+              60500000.0,
+              68450000.0,
+              76400000.0,
+              71750000.0,
+              79700000.0,
+              87650000.0,
+              83000000.0
+            ]
+          },
+          {
+            "label": "Certified",
+            "color": "#63a8ff",
+            "values": [
+              42000000.0,
+              51500000.0,
+              83550000.0,
+              68400000.0,
+              26400000.0,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          },
+          {
+            "label": "Paid",
+            "color": "#39d7d2",
+            "values": [
+              42000000.0,
+              51500000.0,
+              83550000.0,
+              0.0,
+              0.0,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        ],
         "source_lineage": {
           "files": [
-            "planned_cash_flow.csv",
-            "planned_cash_flow.csv",
+            "08_commercial_payments_claims.csv",
             "payments.csv"
           ],
           "required_columns": [
@@ -6952,7 +7023,7 @@
         "title": "Risk Category Breakdown",
         "type": "bar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete risks.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -7005,7 +7076,7 @@
         "title": "Risk Trend Over Time",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/risk_assessment_history.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -7026,7 +7097,7 @@
         "title": "Mitigation Effectiveness",
         "type": "bar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/risk_assessment_history.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -7091,8 +7162,7 @@
         "series": [],
         "source_lineage": {
           "files": [
-            "12_delay_event_classification.csv",
-            "vercel/14-delay_event_classification.csv",
+            "06_delay_events.csv",
             "delay_events.csv"
           ],
           "required_columns": [
@@ -7101,7 +7171,44 @@
             "root_cause"
           ]
         },
-        "validation": [],
+        "validation": [
+          {
+            "file": "06_delay_events.csv",
+            "source_row": "2",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "06_delay_events.csv",
+            "source_row": "3",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "06_delay_events.csv",
+            "source_row": "4",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "06_delay_events.csv",
+            "source_row": "5",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "06_delay_events.csv",
+            "source_row": "6",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "06_delay_events.csv",
+            "source_row": "7",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          }
+        ],
         "scenario": null
       },
       {
@@ -7115,8 +7222,7 @@
         "series": [],
         "source_lineage": {
           "files": [
-            "12_delay_event_classification.csv",
-            "vercel/14-delay_event_classification.csv",
+            "06_delay_events.csv",
             "delay_events.csv"
           ],
           "required_columns": [
@@ -7125,7 +7231,44 @@
             "delay_type"
           ]
         },
-        "validation": [],
+        "validation": [
+          {
+            "file": "06_delay_events.csv",
+            "source_row": "2",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "06_delay_events.csv",
+            "source_row": "3",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "06_delay_events.csv",
+            "source_row": "4",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "06_delay_events.csv",
+            "source_row": "5",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "06_delay_events.csv",
+            "source_row": "6",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          },
+          {
+            "file": "06_delay_events.csv",
+            "source_row": "7",
+            "field": "analyst_status",
+            "message": "Only Verified classifications are used for delay charts."
+          }
+        ],
         "scenario": null
       },
       {
@@ -7134,7 +7277,7 @@
         "title": "Monthly Delay Accumulation",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/delay_event_classification.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -7160,8 +7303,7 @@
         "series": [],
         "source_lineage": {
           "files": [
-            "13_tia_recovery_scenario.csv",
-            "vercel/15-tia_recovery_scenario.csv",
+            "07_tia_evidence_scenarios.csv",
             "activities.csv"
           ],
           "required_columns": [
@@ -7170,14 +7312,160 @@
             "activity_id"
           ]
         },
-        "validation": [],
+        "validation": [
+          {
+            "file": "15-tia_recovery_scenario.csv",
+            "source_row": "2",
+            "field": "activity_id",
+            "message": "Activity ID is not present in this selected project's activities.csv."
+          },
+          {
+            "file": "15-tia_recovery_scenario.csv",
+            "source_row": "3",
+            "field": "activity_id",
+            "message": "Activity ID is not present in this selected project's activities.csv."
+          },
+          {
+            "file": "15-tia_recovery_scenario.csv",
+            "source_row": "4",
+            "field": "activity_id",
+            "message": "Activity ID is not present in this selected project's activities.csv."
+          },
+          {
+            "file": "15-tia_recovery_scenario.csv",
+            "source_row": "5",
+            "field": "activity_id",
+            "message": "Activity ID is not present in this selected project's activities.csv."
+          },
+          {
+            "file": "15-tia_recovery_scenario.csv",
+            "source_row": "6",
+            "field": "activity_id",
+            "message": "Activity ID is not present in this selected project's activities.csv."
+          },
+          {
+            "file": "15-tia_recovery_scenario.csv",
+            "source_row": "7",
+            "field": "activity_id",
+            "message": "Activity ID is not present in this selected project's activities.csv."
+          }
+        ],
         "scenario": null
       }
     ],
-    "ready_count": 20,
+    "ready_count": 21,
     "draft_count": 0,
-    "awaiting_count": 16,
-    "validation": []
+    "awaiting_count": 15,
+    "validation": [
+      {
+        "file": "06_delay_events.csv",
+        "source_row": "2",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "06_delay_events.csv",
+        "source_row": "3",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "06_delay_events.csv",
+        "source_row": "4",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "06_delay_events.csv",
+        "source_row": "5",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "06_delay_events.csv",
+        "source_row": "6",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "06_delay_events.csv",
+        "source_row": "7",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "06_delay_events.csv",
+        "source_row": "2",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "06_delay_events.csv",
+        "source_row": "3",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "06_delay_events.csv",
+        "source_row": "4",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "06_delay_events.csv",
+        "source_row": "5",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "06_delay_events.csv",
+        "source_row": "6",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "06_delay_events.csv",
+        "source_row": "7",
+        "field": "analyst_status",
+        "message": "Only Verified classifications are used for delay charts."
+      },
+      {
+        "file": "15-tia_recovery_scenario.csv",
+        "source_row": "2",
+        "field": "activity_id",
+        "message": "Activity ID is not present in this selected project's activities.csv."
+      },
+      {
+        "file": "15-tia_recovery_scenario.csv",
+        "source_row": "3",
+        "field": "activity_id",
+        "message": "Activity ID is not present in this selected project's activities.csv."
+      },
+      {
+        "file": "15-tia_recovery_scenario.csv",
+        "source_row": "4",
+        "field": "activity_id",
+        "message": "Activity ID is not present in this selected project's activities.csv."
+      },
+      {
+        "file": "15-tia_recovery_scenario.csv",
+        "source_row": "5",
+        "field": "activity_id",
+        "message": "Activity ID is not present in this selected project's activities.csv."
+      },
+      {
+        "file": "15-tia_recovery_scenario.csv",
+        "source_row": "6",
+        "field": "activity_id",
+        "message": "Activity ID is not present in this selected project's activities.csv."
+      },
+      {
+        "file": "15-tia_recovery_scenario.csv",
+        "source_row": "7",
+        "field": "activity_id",
+        "message": "Activity ID is not present in this selected project's activities.csv."
+      }
+    ]
   },
   "reports": {
     "executive_dashboard": "/generated/Nasr-city-Tunnel/01_executive_dashboard.html",
@@ -7527,7 +7815,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-eot-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7545,7 +7833,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-delay-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7563,7 +7851,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-progress-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7581,7 +7869,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-recovery-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7599,7 +7887,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-variation-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7616,7 +7904,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-hybrid-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7634,7 +7922,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-resource-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7651,7 +7939,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-equipment-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7668,7 +7956,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-cost-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7685,7 +7973,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-evm-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7702,7 +7990,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-cashflow-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7719,7 +8007,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-scurve-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7737,7 +8025,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-procurement-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7754,7 +8042,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-material-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7772,7 +8060,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-lookahead-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7790,7 +8078,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-critical_path-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7808,7 +8096,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-float-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7826,7 +8114,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-milestone-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7843,7 +8131,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-risk-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7861,7 +8149,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-rfi_submittal-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7878,7 +8166,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-qaqc-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7895,7 +8183,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-productivity-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7912,7 +8200,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-executive-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7930,7 +8218,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-baseline_current-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7948,7 +8236,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-forecast_completion-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7965,7 +8253,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-ml_project_controls-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7982,7 +8270,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-contract_admin-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7999,7 +8287,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-change_control-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8016,7 +8304,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-document_control-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8034,7 +8322,7 @@
         "artifacts": {
           "html": "/generated/Nasr-city-Tunnel/universal-interface_management-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:13+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       }
@@ -8129,6 +8417,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-22T02:25:50+00:00"
+    "updated_at": "2026-08-22T02:38:13+00:00"
   }
 }

@@ -810,7 +810,7 @@ def _complete_catalog(
     for chart_id, definition in definitions.items():
         result.append(by_id.get(chart_id) or _awaiting(
             definition,
-            f"Awaiting selected-project source data. Add or complete {definition.get('sources', ['the mapped input'])[0]}.",
+            "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         ))
     return result
 
@@ -836,6 +836,12 @@ def build_project_chart_payloads(
     missing_definitions = [chart_id for chart_id in required_ids if chart_id not in definitions]
     if missing_definitions:
         return {"catalog_version": version, "project_id": project_id, "project_key": project_key, "charts": [], "validation": [{"file": "chart_catalog.json", "source_row": "", "field": "id", "message": f"Missing chart definitions: {', '.join(missing_definitions)}"}]}
+    # The ten canonical inputs are authoritative.  Legacy per-table paths are
+    # consulted only when a project has not yet been migrated to those inputs.
+    canonical_workspace_rows = dict(workspace_rows or {})
+    def canonical_rows(table_name: str) -> list[dict[str, Any]]:
+        return _workspace_rows(canonical_workspace_rows.get(table_name, []), project_id)
+
     planned_rows, planned_sources, planned_issues, _ = _read_canonical_first_rows(
         project_id=project_id,
         file_name="planned_cash_flow.csv",
@@ -885,6 +891,23 @@ def build_project_chart_payloads(
         fallback_path=None,
         read_csv_rows=read_csv_rows,
     )
+    for table_name, bundle_name, target in (
+        ("planned_cash_flow", "08_commercial_payments_claims.csv", "planned"),
+        ("delay_event_classification", "06_delay_events.csv", "classification"),
+        ("tia_recovery_scenario", "07_tia_evidence_scenarios.csv", "recovery"),
+        ("evm", "04_progress_evm.csv", "evm"),
+    ):
+        values = canonical_rows(table_name)
+        if not values:
+            continue
+        if target == "planned":
+            planned_rows, planned_sources, planned_issues = values, [bundle_name], []
+        elif target == "classification":
+            classification_rows, classification_sources, classification_issues = values, [bundle_name], []
+        elif target == "recovery":
+            recovery_rows, recovery_sources, recovery_issues = values, [bundle_name], []
+        else:
+            evm_history_rows, evm_history_sources, evm_history_issues, evm_origin = values, [bundle_name], [], "canonical"
     cash = _cash_flow(definitions["contracts.planned_vs_actual_cash_flow"], project_id, planned_rows, payment_rows)
     cash["source_lineage"]["files"] = [*planned_sources, "payments.csv"]
     cash["validation"].extend(planned_issues)

@@ -111,15 +111,15 @@
     },
     "s_curve_forecast": {
       "status": "ready",
-      "method": "statsmodels damped Holt trend",
+      "method": "numpy linear trend fallback",
       "periods_available": 10,
       "current_actual_value": 916040000.0,
       "current_planned_value": 1150000000.0,
       "completion_target_value": 1250000000.0,
       "excluded_cumulative_reset_periods": 0,
       "recent_period_change": 72800000.0,
-      "projected_completion_date": "2026-10-01",
-      "months_to_target": 4,
+      "projected_completion_date": "2026-09-01",
+      "months_to_target": 3,
       "message": "Trend projection only. Confirm against the accepted programme, actual updates, resource plan, and TIA before making contractual decisions."
     },
     "s_curve_chart_url": "/data/analytics/suez-tunnel-s-curve-analytics.png",
@@ -190,25 +190,25 @@
           "installed": true
         },
         "seaborn": {
-          "installed": true
+          "installed": false
         },
         "scikit_learn": {
           "installed": true
         },
         "statsmodels": {
-          "installed": true
+          "installed": false
         },
         "spacy": {
           "installed": true
         },
         "xgboost": {
-          "installed": true
+          "installed": false
         },
         "pytorch": {
           "installed": true
         },
         "tensorflow": {
-          "installed": true
+          "installed": false
         }
       },
       "xgboost": {
@@ -249,7 +249,9 @@
     "delay_events": 5,
     "s_curve": 10,
     "wbs": 16,
-    "historical_outcomes": 0
+    "historical_outcomes": 0,
+    "delay_event_classification": 0,
+    "tia_recovery_scenario": 0
   },
   "metric_sources": {
     "contract_value": {
@@ -317,7 +319,9 @@
         "delay_events": 5,
         "s_curve": 10,
         "wbs": 16,
-        "historical_outcomes": 0
+        "historical_outcomes": 0,
+        "delay_event_classification": 0,
+        "tia_recovery_scenario": 0
       },
       "source_tables": {
         "projects": {
@@ -5659,7 +5663,7 @@
           "relative_path": "Suez-Tunnel/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 31.7,
-          "modified": "2026-08-22T05:25:50"
+          "modified": "2026-08-22T05:38:14"
         },
         {
           "name": "universal-resource-program-report.html",
@@ -5876,7 +5880,7 @@
         "title": "Discipline Health",
         "type": "radar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/discipline_progress_history.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -5898,7 +5902,7 @@
         "title": "Earned Value Trend",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete evm.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -5920,7 +5924,7 @@
         "title": "Performance Indices",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete evm.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -5943,7 +5947,7 @@
         "title": "WBS Progress Distribution",
         "type": "bar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete wbs.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -5964,7 +5968,7 @@
         "title": "WBS Duration Breakdown",
         "type": "horizontal_bar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete wbs.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6303,7 +6307,7 @@
         "title": "Master S-Curve - Cumulative Progress",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete s_curve.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6324,7 +6328,7 @@
         "title": "S-Curve by Discipline",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/discipline_progress_history.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6346,7 +6350,7 @@
         "title": "Progress Variance Over Time",
         "type": "bar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete s_curve.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6450,7 +6454,7 @@
         "title": "SPI Trend",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete evm.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6472,7 +6476,7 @@
         "title": "CPI Trend",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete evm.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6639,7 +6643,7 @@
         "title": "Risk Category Breakdown",
         "type": "bar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete risks.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6692,7 +6696,7 @@
         "title": "Risk Trend Over Time",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/risk_assessment_history.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6713,7 +6717,7 @@
         "title": "Mitigation Effectiveness",
         "type": "bar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/risk_assessment_history.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6821,7 +6825,7 @@
         "title": "Monthly Delay Accumulation",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/delay_event_classification.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -7220,7 +7224,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-eot-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7238,7 +7242,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-delay-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7256,7 +7260,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-progress-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7274,7 +7278,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-recovery-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7292,7 +7296,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-variation-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7309,7 +7313,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-hybrid-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7327,7 +7331,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-resource-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7344,7 +7348,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-equipment-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7361,7 +7365,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-cost-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7378,7 +7382,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-evm-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7395,7 +7399,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-cashflow-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7412,7 +7416,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-scurve-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7430,7 +7434,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-procurement-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7447,7 +7451,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-material-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7465,7 +7469,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-lookahead-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7483,7 +7487,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-critical_path-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7501,7 +7505,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-float-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7519,7 +7523,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-milestone-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7536,7 +7540,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-risk-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7554,7 +7558,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-rfi_submittal-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7571,7 +7575,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-qaqc-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7588,7 +7592,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-productivity-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7605,7 +7609,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-executive-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7623,7 +7627,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-baseline_current-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7641,7 +7645,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-forecast_completion-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7658,7 +7662,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-ml_project_controls-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7675,7 +7679,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-contract_admin-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7692,7 +7696,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-change_control-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7709,7 +7713,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-document_control-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7727,7 +7731,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-interface_management-program-report.html"
         },
-        "generated_at": "2026-08-22T02:25:50+00:00",
+        "generated_at": "2026-08-22T02:38:14+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       }
@@ -7822,6 +7826,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-22T02:25:50+00:00"
+    "updated_at": "2026-08-22T02:38:14+00:00"
   }
 }
