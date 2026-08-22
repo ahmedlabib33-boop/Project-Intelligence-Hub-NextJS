@@ -250,6 +250,54 @@ def normalize_readable_columns(projects: list[Path], dry_run: bool) -> None:
             print(f"{state} {project.name} / {input_name}: {len(existing)} to {len(target)} editable columns")
 
 
+def materialize_embedded_progress_evm(projects: list[Path], dry_run: bool) -> None:
+    """Expose real EVM/progress fields when an old activity master embedded them.
+
+    The original Big Project bundle put these records inside activity_master,
+    leaving the dedicated input 04 header-only.  This writes the already
+    controlled values to their proper editable input; it never invents values.
+    """
+    for project in projects:
+        data_dir = project / "01-data" / "import_templates"
+        target = data_dir / "04_progress_evm.csv"
+        existing_rows = read_rows(target)
+        if existing_rows:
+            continue
+        master_path = data_dir / "02_schedule_activities.csv"
+        master_rows = [
+            row for row in read_rows(master_path)
+            if str(row.get("source_table") or "").strip() == "activity_master"
+        ]
+        output_rows: list[dict[str, Any]] = []
+        for source_table, prefix, order_column in (
+            ("evm", "evm__", "master_evm_row_order"),
+            ("progress_updates", "progress__", "master_progress_row_order"),
+        ):
+            for fallback_order, master in enumerate(master_rows, start=1):
+                values = {
+                    column[len(prefix):]: value
+                    for column, value in master.items()
+                    if column.startswith(prefix) and value not in (None, "")
+                }
+                if not str(values.get("activity_id") or "").strip():
+                    continue
+                try:
+                    row_order = int(str(master.get(order_column) or fallback_order)) + 1
+                except ValueError:
+                    row_order = fallback_order
+                output_rows.append({
+                    "source_table": source_table,
+                    "source_path": str(master.get("source_path") or "01-data/import_templates/activity_master.csv"),
+                    "row_order": row_order,
+                    **values,
+                })
+        if not output_rows:
+            continue
+        replace_csv(target, csv_fieldnames(target), output_rows, dry_run)
+        state = "WOULD MATERIALIZE" if dry_run else "MATERIALIZED"
+        print(f"{state} {project.name} / 04_progress_evm.csv: {len(output_rows)} existing EVM and progress rows")
+
+
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
@@ -371,6 +419,7 @@ def main() -> int:
             state = "WOULD CONVERT" if args.dry_run else "CONVERTED"
             print(f"{state} {project.name} / {input_name}: {count} editable rows, {len(tables)} source tables")
     normalize_readable_columns(projects, args.dry_run)
+    materialize_embedded_progress_evm(projects, args.dry_run)
     return 0
 
 

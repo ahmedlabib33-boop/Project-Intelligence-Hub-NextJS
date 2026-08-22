@@ -226,7 +226,10 @@ def _decode_canonical_input_bundles(data_dir: Path) -> tuple[dict[str, list[dict
             row = {column[len(prefix):]: value for column, value in master.items() if column.startswith(prefix)}
             if str(row.get("activity_id") or "").strip():
                 rebuilt.append(row)
-        if rebuilt:
+        # A dedicated readable input (04_progress_evm.csv) takes precedence.
+        # activity_master remains a backward-compatible fallback for legacy
+        # bundles that have not yet materialized those records.
+        if rebuilt and target not in result:
             result[target] = rebuilt
             sources[target] = sources.get("activity_master", data_dir / "02_schedule_activities.csv")
     return result, sources
