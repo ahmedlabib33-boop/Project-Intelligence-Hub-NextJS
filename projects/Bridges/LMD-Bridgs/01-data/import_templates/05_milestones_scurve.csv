@@ -1,18 +1,16 @@
-bundle_version,source_scope,source_file,row_kind,row_order,payload_json
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,schema,0,"{""headers"":[""milestone_id"",""project_id"",""activity_name"",""planned_date"",""forecast_date"",""actual_date"",""milestone_contractual_type""],""source_sha256"":""e17a148a39324595b285bfaf65ad3765adb69c1a00c1d565675e7b9042735680""}"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,1,"[""KD-MS-1000"",""LMD-Bridge"",""Project Start Date"",""5-Nov-25"",""5-Nov-25"",""5-Nov-25"",""Start milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,2,"[""KD-MS-1010"",""LMD-Bridge"",""Contract Agreement"",""5-Nov-25"",""5-Nov-25"",""5-Nov-25"",""Start milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,3,"[""KD-MS-1020"",""LMD-Bridge"",""IFC Drawing Package"",""12-Nov-25"",""3-Dec-25"",""12-Nov-25"",""Key milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,4,"[""KD-MS-5000"",""LMD-Bridge"",""Structural Works Completion"",""5-Nov-26"",""7-Jan-27"","""",""Interim milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,5,"[""KD-MS-9000"",""LMD-Bridge"",""Substantial Completion"",""20-Mar-27"",""9-Jun-27"","""",""Finish milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,schema,0,"{""headers"":[""project_id"",""months"",""monthly_planned"",""cumm_monthly_planned"",""monthly_actual"",""cumm_monthly_actual"",""monthly_invoiced"",""cumm_monthly_invoiced""],""source_sha256"":""c99147a0b0a12c96e53c2a6d7efba7950e0035ebf613e0d639e2002360363cba""}"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,1,"[""LMD-Bridge"",""1-Nov-25"",""17000000.00"",""17000000.00"",""11849000.00"",""11849000.00"",""0.00"",""0.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,2,"[""LMD-Bridge"",""1-Dec-25"",""34000000.00"",""51000000.00"",""24534400.00"",""36383400.00"",""0.00"",""0.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,3,"[""LMD-Bridge"",""1-Jan-26"",""59500000.00"",""110500000.00"",""44398900.00"",""80782300.00"",""34631142.00"",""34631142.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,4,"[""LMD-Bridge"",""1-Feb-26"",""85000000.00"",""195500000.00"",""65518000.00"",""146300300.00"",""51104040.00"",""85735182.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,5,"[""LMD-Bridge"",""1-Mar-26"",""102000000.00"",""297500000.00"",""81130800.00"",""227431100.00"",""63282024.00"",""149017206.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,6,"[""LMD-Bridge"",""1-Apr-26"",""119000000.00"",""416500000.00"",""97580000.00"",""325011100.00"",""76112400.00"",""225129606.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,7,"[""LMD-Bridge"",""1-May-26"",""110500000.00"",""527000000.00"",""93328300.00"",""418339400.00"",""72796074.00"",""297925680.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,8,"[""LMD-Bridge"",""1-Jun-26"",""102000000.00"",""629000000.00"",""88658400.00"",""506997800.00"",""69153552.00"",""367079232.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,9,"[""LMD-Bridge"",""1-Jul-26"",""85000000.00"",""714000000.00"",""60222500.00"",""567220300.00"",""46973550.00"",""414052782.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,10,"[""LMD-Bridge"",""1-Aug-26"",""68000000.00"",""782000000.00"",""49504000.00"",""616724300.00"",""38613120.00"",""452665902.00""]"
+﻿source_table,source_path,row_order,milestone_id,project_id,activity_name,planned_date,forecast_date,actual_date,milestone_contractual_type,months,monthly_planned,cumm_monthly_planned,monthly_actual,cumm_monthly_actual,monthly_invoiced,cumm_monthly_invoiced
+milestones,01-data/import_templates/milestones.csv,1,KD-MS-1000,LMD-Bridge,Project Start Date,5-Nov-25,5-Nov-25,5-Nov-25,Start milestone,,,,,,,
+milestones,01-data/import_templates/milestones.csv,2,KD-MS-1010,LMD-Bridge,Contract Agreement,5-Nov-25,5-Nov-25,5-Nov-25,Start milestone,,,,,,,
+milestones,01-data/import_templates/milestones.csv,3,KD-MS-1020,LMD-Bridge,IFC Drawing Package,12-Nov-25,3-Dec-25,12-Nov-25,Key milestone,,,,,,,
+milestones,01-data/import_templates/milestones.csv,4,KD-MS-5000,LMD-Bridge,Structural Works Completion,5-Nov-26,7-Jan-27,,Interim milestone,,,,,,,
+milestones,01-data/import_templates/milestones.csv,5,KD-MS-9000,LMD-Bridge,Substantial Completion,20-Mar-27,9-Jun-27,,Finish milestone,,,,,,,
+s_curve,01-data/import_templates/s_curve.csv,1,,LMD-Bridge,,,,,,1-Nov-25,17000000.00,17000000.00,11849000.00,11849000.00,0.00,0.00
+s_curve,01-data/import_templates/s_curve.csv,2,,LMD-Bridge,,,,,,1-Dec-25,34000000.00,51000000.00,24534400.00,36383400.00,0.00,0.00
+s_curve,01-data/import_templates/s_curve.csv,3,,LMD-Bridge,,,,,,1-Jan-26,59500000.00,110500000.00,44398900.00,80782300.00,34631142.00,34631142.00
+s_curve,01-data/import_templates/s_curve.csv,4,,LMD-Bridge,,,,,,1-Feb-26,85000000.00,195500000.00,65518000.00,146300300.00,51104040.00,85735182.00
+s_curve,01-data/import_templates/s_curve.csv,5,,LMD-Bridge,,,,,,1-Mar-26,102000000.00,297500000.00,81130800.00,227431100.00,63282024.00,149017206.00
+s_curve,01-data/import_templates/s_curve.csv,6,,LMD-Bridge,,,,,,1-Apr-26,119000000.00,416500000.00,97580000.00,325011100.00,76112400.00,225129606.00
+s_curve,01-data/import_templates/s_curve.csv,7,,LMD-Bridge,,,,,,1-May-26,110500000.00,527000000.00,93328300.00,418339400.00,72796074.00,297925680.00
+s_curve,01-data/import_templates/s_curve.csv,8,,LMD-Bridge,,,,,,1-Jun-26,102000000.00,629000000.00,88658400.00,506997800.00,69153552.00,367079232.00
+s_curve,01-data/import_templates/s_curve.csv,9,,LMD-Bridge,,,,,,1-Jul-26,85000000.00,714000000.00,60222500.00,567220300.00,46973550.00,414052782.00
+s_curve,01-data/import_templates/s_curve.csv,10,,LMD-Bridge,,,,,,1-Aug-26,68000000.00,782000000.00,49504000.00,616724300.00,38613120.00,452665902.00

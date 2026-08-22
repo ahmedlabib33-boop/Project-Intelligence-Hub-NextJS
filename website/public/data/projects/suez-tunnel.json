@@ -234,7 +234,7 @@
   },
   "decision_required": true,
   "last_updated": "2026-08-15T16:47:59",
-  "fingerprint": "79e81f3bc4f246f505929658aaa336b08c118c610233fb5bd996dde5182312fb",
+  "fingerprint": "523947922bf542734fcdcce899a544877423cf3b2a6bce591f5b1d2bd78e8701",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -327,15 +327,15 @@
           "column_count": 14,
           "columns": [
             "project_id",
+            "contractor",
+            "status",
             "project_name",
             "client_name",
-            "contractor",
             "planned_start",
             "planned_finish",
             "forecast_finish",
             "contract_value",
             "currency",
-            "status",
             "planned_progress_percent",
             "actual_progress_percent",
             "planned_value",
@@ -344,15 +344,15 @@
           "rows": [
             {
               "project_id": "Suez-Tunnel",
+              "contractor": "Nile Infra JV",
+              "status": "Delayed",
               "project_name": "Suez Tunnel Civil & MEP Works",
               "client_name": "Suez Urban Development Authority",
-              "contractor": "Nile Infra JV",
               "planned_start": "1-Sep-25",
               "planned_finish": "28-Feb-27",
               "forecast_finish": "18-May-27",
               "contract_value": "1250000000",
               "currency": "EGP",
-              "status": "Delayed",
               "planned_progress_percent": "42.00",
               "actual_progress_percent": "35.00",
               "planned_value": "525000000",
@@ -364,18 +364,16 @@
           "file": "02_schedule_activities.csv",
           "exists": true,
           "row_count": 17,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_id",
             "activity_id",
             "activity_name",
             "planned_start",
-            "planned_finish",
             "actual_start",
             "actual_finish",
             "forecast_start",
-            "forecast_finish",
             "planned_weight",
             "planned_progress",
             "actual_progress",
@@ -390,11 +388,9 @@
               "activity_id": "KD-MS-1000",
               "activity_name": "Project Start Date",
               "planned_start": "1-Sep-25",
-              "planned_finish": "",
               "actual_start": "1-Sep-25 A",
               "actual_finish": "1-Sep-25 A",
               "forecast_start": "1-Sep-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
@@ -408,11 +404,9 @@
               "activity_id": "KD-MS-1010",
               "activity_name": "Contract Agreement",
               "planned_start": "1-Sep-25",
-              "planned_finish": "",
               "actual_start": "1-Sep-25 A",
               "actual_finish": "1-Sep-25 A",
               "forecast_start": "1-Sep-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
@@ -426,15 +420,12 @@
               "activity_id": "KD-MS-1020",
               "activity_name": "IFC Drawing Package",
               "planned_start": "6-Sep-25",
-              "planned_finish": "",
               "actual_start": "6-Sep-25 A",
               "actual_finish": "6-Sep-25 A",
               "forecast_start": "6-Sep-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
-              "total_float_days": "",
               "is_critical": "Yes",
               "responsible_party": "Engineering"
             },
@@ -482,7 +473,6 @@
               "planned_start": "6-Oct-25",
               "planned_finish": "10-Nov-25",
               "actual_start": "28-Oct-25 A",
-              "actual_finish": "",
               "forecast_start": "28-Oct-25",
               "forecast_finish": "30-Nov-25",
               "planned_weight": "0.0361",
@@ -500,7 +490,6 @@
               "planned_start": "12-Nov-25",
               "planned_finish": "7-Dec-25",
               "actual_start": "28-Nov-25 A",
-              "actual_finish": "",
               "forecast_start": "28-Nov-25",
               "forecast_finish": "27-Dec-25",
               "planned_weight": "0.0361",
@@ -518,7 +507,6 @@
               "planned_start": "2-Nov-25",
               "planned_finish": "27-Dec-25",
               "actual_start": "21-Nov-25 A",
-              "actual_finish": "",
               "forecast_start": "21-Nov-25",
               "forecast_finish": "16-Jan-26",
               "planned_weight": "0.0602",
@@ -678,8 +666,8 @@
           "row_count": 3,
           "column_count": 11,
           "columns": [
-            "risk_id",
             "project_id",
+            "risk_id",
             "risk_title",
             "risk_category",
             "probability",
@@ -692,8 +680,8 @@
           ],
           "rows": [
             {
-              "risk_id": "R-001",
               "project_id": "Suez-Tunnel",
+              "risk_id": "R-001",
               "risk_title": "Steel delivery delay",
               "risk_category": "Schedule",
               "probability": "high",
@@ -705,8 +693,8 @@
               "due_date": "30-Jun-26"
             },
             {
-              "risk_id": "R-002",
               "project_id": "Suez-Tunnel",
+              "risk_id": "R-002",
               "risk_title": "Late design clarification and IFC revisions",
               "risk_category": "Engineering",
               "probability": "medium",
@@ -718,8 +706,8 @@
               "due_date": "15-Jul-26"
             },
             {
-              "risk_id": "R-003",
               "project_id": "Suez-Tunnel",
+              "risk_id": "R-003",
               "risk_title": "Cashflow pressure due to delayed certification",
               "risk_category": "Commercial",
               "probability": "medium",
@@ -833,7 +821,7 @@
           "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 6,
-          "column_count": 18,
+          "column_count": 15,
           "columns": [
             "project_id",
             "payment",
@@ -849,10 +837,7 @@
             "Period for payment release",
             "Period in which interest is applied",
             "Amount of interest claimed (EGP)",
-            "delayed duration(Days) ",
-            "Unnamed: 14",
-            "Unnamed: 15",
-            "Unnamed: 16"
+            "delayed duration(Days) "
           ],
           "rows": [
             {
@@ -870,10 +855,7 @@
               "Period for payment release": "50.0",
               "Period in which interest is applied": "5.0",
               "Amount of interest claimed (EGP)": "35250.0000",
-              "delayed duration(Days) ": "5.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "5.0"
             },
             {
               "project_id": "Suez-Tunnel",
@@ -890,10 +872,7 @@
               "Period for payment release": "55.0",
               "Period in which interest is applied": "10.0",
               "Amount of interest claimed (EGP)": "88500.0000",
-              "delayed duration(Days) ": "10.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "10.0"
             },
             {
               "project_id": "Suez-Tunnel",
@@ -910,10 +889,7 @@
               "Period for payment release": "60.0",
               "Period in which interest is applied": "15.0",
               "Amount of interest claimed (EGP)": "159750.0000",
-              "delayed duration(Days) ": "15.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "15.0"
             },
             {
               "project_id": "Suez-Tunnel",
@@ -930,10 +906,7 @@
               "Period for payment release": "65.0",
               "Period in which interest is applied": "20.0",
               "Amount of interest claimed (EGP)": "249000.0000",
-              "delayed duration(Days) ": "20.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "20.0"
             },
             {
               "project_id": "Suez-Tunnel",
@@ -950,10 +923,7 @@
               "Period for payment release": "70.0",
               "Period in which interest is applied": "25.0",
               "Amount of interest claimed (EGP)": "356250.0000",
-              "delayed duration(Days) ": "25.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "25.0"
             },
             {
               "project_id": "Suez-Tunnel",
@@ -966,19 +936,13 @@
               "paid amount": "82925000.00",
               "payment status": "Certified",
               "Contractual interest due": "45.0",
-              "Date of Cash Cheque Receipt": "",
-              "Period for payment release": "",
               "Period in which interest is applied": "0.0",
-              "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "Amount of interest claimed (EGP)": "0.0000"
             }
           ]
         },
         "planned_cash_flow": {
-          "file": "08_commercial_payments_claims.csv",
+          "file": "planned_cash_flow.csv",
           "exists": true,
           "row_count": 0,
           "column_count": 0,
@@ -1033,7 +997,6 @@
               "activity_name": "Structural Works Completion",
               "planned_date": "1-Sep-26",
               "forecast_date": "19-Oct-26",
-              "actual_date": "",
               "milestone_contractual_type": "Interim milestone"
             },
             {
@@ -1042,7 +1005,6 @@
               "activity_name": "Substantial Completion",
               "planned_date": "28-Feb-27",
               "forecast_date": "18-May-27",
-              "actual_date": "",
               "milestone_contractual_type": "Finish milestone"
             }
           ]
@@ -1155,11 +1117,10 @@
           "file": "03_schedule_logic.csv",
           "exists": true,
           "row_count": 16,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_code",
-            "wbs_name",
             "total_activities",
             "bl_project_duration",
             "remaining_duration",
@@ -1167,7 +1128,6 @@
             "bl_project_start",
             "bl_project_finish",
             "actual_start",
-            "actual_finish",
             "schedule_%_complete",
             "performance_%_complete",
             "budget_at_completion",
@@ -1178,7 +1138,6 @@
             {
               "project_id": "Suez-Tunnel-P.01-UP-20-April-26",
               "wbs_code": "No Priority",
-              "wbs_name": "",
               "total_activities": "1218",
               "bl_project_duration": "614",
               "remaining_duration": "492",
@@ -1186,7 +1145,6 @@
               "bl_project_start": "15-Sep-25",
               "bl_project_finish": "22-May-27",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.545",
               "performance_%_complete": "0.287",
               "budget_at_completion": "495750000",
@@ -1204,7 +1162,6 @@
               "bl_project_start": "15-Sep-25",
               "bl_project_finish": "22-May-27",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.545",
               "performance_%_complete": "0.287",
               "budget_at_completion": "495750000",
@@ -1222,7 +1179,6 @@
               "bl_project_start": "15-Sep-25",
               "bl_project_finish": "22-May-27",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -1240,7 +1196,6 @@
               "bl_project_start": "15-Sep-25",
               "bl_project_finish": "22-May-27",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -1254,7 +1209,6 @@
               "total_activities": "12",
               "bl_project_duration": "18",
               "remaining_duration": "0",
-              "total_float": "",
               "bl_project_start": "15-Sep-25",
               "bl_project_finish": "3-Oct-25",
               "actual_start": "18-Sep-25",
@@ -1276,7 +1230,6 @@
               "bl_project_start": "15-Sep-25",
               "bl_project_finish": "4-Jul-26",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -1294,7 +1247,6 @@
               "bl_project_start": "15-Sep-25",
               "bl_project_finish": "17-Feb-27",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -1312,7 +1264,6 @@
               "bl_project_start": "20-Oct-25",
               "bl_project_finish": "13-Mar-27",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.545",
               "performance_%_complete": "0.287",
               "budget_at_completion": "495750000",
@@ -1428,15 +1379,15 @@
           "column_count": 14,
           "columns": [
             "project_id",
+            "contractor",
+            "status",
             "project_name",
             "client_name",
-            "contractor",
             "planned_start",
             "planned_finish",
             "forecast_finish",
             "contract_value",
             "currency",
-            "status",
             "planned_progress_percent",
             "actual_progress_percent",
             "planned_value",
@@ -1445,15 +1396,15 @@
           "rows": [
             {
               "project_id": "Suez-Tunnel",
+              "contractor": "Nile Infra JV",
+              "status": "Delayed",
               "project_name": "Suez Tunnel Civil & MEP Works",
               "client_name": "Suez Urban Development Authority",
-              "contractor": "Nile Infra JV",
               "planned_start": "1-Sep-25",
               "planned_finish": "28-Feb-27",
               "forecast_finish": "18-May-27",
               "contract_value": "1250000000",
               "currency": "EGP",
-              "status": "Delayed",
               "planned_progress_percent": "42.00",
               "actual_progress_percent": "35.00",
               "planned_value": "525000000",
@@ -1467,18 +1418,16 @@
           "file": "02_schedule_activities.csv",
           "exists": true,
           "row_count": 17,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_id",
             "activity_id",
             "activity_name",
             "planned_start",
-            "planned_finish",
             "actual_start",
             "actual_finish",
             "forecast_start",
-            "forecast_finish",
             "planned_weight",
             "planned_progress",
             "actual_progress",
@@ -1493,11 +1442,9 @@
               "activity_id": "KD-MS-1000",
               "activity_name": "Project Start Date",
               "planned_start": "1-Sep-25",
-              "planned_finish": "",
               "actual_start": "1-Sep-25 A",
               "actual_finish": "1-Sep-25 A",
               "forecast_start": "1-Sep-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
@@ -1511,11 +1458,9 @@
               "activity_id": "KD-MS-1010",
               "activity_name": "Contract Agreement",
               "planned_start": "1-Sep-25",
-              "planned_finish": "",
               "actual_start": "1-Sep-25 A",
               "actual_finish": "1-Sep-25 A",
               "forecast_start": "1-Sep-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
@@ -1529,15 +1474,12 @@
               "activity_id": "KD-MS-1020",
               "activity_name": "IFC Drawing Package",
               "planned_start": "6-Sep-25",
-              "planned_finish": "",
               "actual_start": "6-Sep-25 A",
               "actual_finish": "6-Sep-25 A",
               "forecast_start": "6-Sep-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
-              "total_float_days": "",
               "is_critical": "Yes",
               "responsible_party": "Engineering"
             },
@@ -1585,7 +1527,6 @@
               "planned_start": "6-Oct-25",
               "planned_finish": "10-Nov-25",
               "actual_start": "28-Oct-25 A",
-              "actual_finish": "",
               "forecast_start": "28-Oct-25",
               "forecast_finish": "30-Nov-25",
               "planned_weight": "0.0361",
@@ -1603,7 +1544,6 @@
               "planned_start": "12-Nov-25",
               "planned_finish": "7-Dec-25",
               "actual_start": "28-Nov-25 A",
-              "actual_finish": "",
               "forecast_start": "28-Nov-25",
               "forecast_finish": "27-Dec-25",
               "planned_weight": "0.0361",
@@ -1621,7 +1561,6 @@
               "planned_start": "2-Nov-25",
               "planned_finish": "27-Dec-25",
               "actual_start": "21-Nov-25 A",
-              "actual_finish": "",
               "forecast_start": "21-Nov-25",
               "forecast_finish": "16-Jan-26",
               "planned_weight": "0.0602",
@@ -1639,7 +1578,6 @@
               "planned_start": "29-Oct-25",
               "planned_finish": "27-Jan-26",
               "actual_start": "20-Nov-25 A",
-              "actual_finish": "",
               "forecast_start": "20-Nov-25",
               "forecast_finish": "16-Feb-26",
               "planned_weight": "0.1205",
@@ -1657,7 +1595,6 @@
               "planned_start": "28-Dec-25",
               "planned_finish": "25-Jan-26",
               "actual_start": "13-Jan-26 A",
-              "actual_finish": "",
               "forecast_start": "13-Jan-26",
               "forecast_finish": "14-Feb-26",
               "planned_weight": "0.1205",
@@ -1675,7 +1612,6 @@
               "planned_start": "28-Jan-26",
               "planned_finish": "21-Feb-26",
               "actual_start": "16-Feb-26 A",
-              "actual_finish": "",
               "forecast_start": "16-Feb-26",
               "forecast_finish": "13-Mar-26",
               "planned_weight": "0.1205",
@@ -1693,7 +1629,6 @@
               "planned_start": "26-Feb-26",
               "planned_finish": "27-Apr-26",
               "actual_start": "20-Mar-26 A",
-              "actual_finish": "",
               "forecast_start": "20-Mar-26",
               "forecast_finish": "17-May-26",
               "planned_weight": "0.1205",
@@ -1711,7 +1646,6 @@
               "planned_start": "27-Apr-26",
               "planned_finish": "1-Jul-26",
               "actual_start": "13-May-26 A",
-              "actual_finish": "",
               "forecast_start": "13-May-26",
               "forecast_finish": "21-Jul-26",
               "planned_weight": "0.1205",
@@ -1728,8 +1662,6 @@
               "activity_name": "Drainage and pump station rough-in",
               "planned_start": "13-Jun-26",
               "planned_finish": "7-Aug-26",
-              "actual_start": "",
-              "actual_finish": "",
               "forecast_start": "29-Jun-26",
               "forecast_finish": "15-Aug-26",
               "planned_weight": "0.0723",
@@ -1746,8 +1678,6 @@
               "activity_name": "Road reinstatement and asphalt works",
               "planned_start": "12-Aug-26",
               "planned_finish": "11-Oct-26",
-              "actual_start": "",
-              "actual_finish": "",
               "forecast_start": "28-Aug-26",
               "forecast_finish": "19-Oct-26",
               "planned_weight": "0.0723",
@@ -1764,8 +1694,6 @@
               "activity_name": "Integrated testing and commissioning",
               "planned_start": "5-Nov-26",
               "planned_finish": "10-Dec-26",
-              "actual_start": "",
-              "actual_finish": "",
               "forecast_start": "21-Nov-26",
               "forecast_finish": "18-Dec-26",
               "planned_weight": "0.0241",
@@ -1781,11 +1709,7 @@
               "activity_id": "KD-MS-9000",
               "activity_name": "Substantial Completion",
               "planned_start": "28-Feb-27",
-              "planned_finish": "",
-              "actual_start": "",
-              "actual_finish": "",
               "forecast_start": "16-Mar-27",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "0.00",
               "actual_progress": "0.00",
@@ -2075,8 +1999,8 @@
           "row_count": 3,
           "column_count": 11,
           "columns": [
-            "risk_id",
             "project_id",
+            "risk_id",
             "risk_title",
             "risk_category",
             "probability",
@@ -2089,8 +2013,8 @@
           ],
           "rows": [
             {
-              "risk_id": "R-001",
               "project_id": "Suez-Tunnel",
+              "risk_id": "R-001",
               "risk_title": "Steel delivery delay",
               "risk_category": "Schedule",
               "probability": "high",
@@ -2102,8 +2026,8 @@
               "due_date": "30-Jun-26"
             },
             {
-              "risk_id": "R-002",
               "project_id": "Suez-Tunnel",
+              "risk_id": "R-002",
               "risk_title": "Late design clarification and IFC revisions",
               "risk_category": "Engineering",
               "probability": "medium",
@@ -2115,8 +2039,8 @@
               "due_date": "15-Jul-26"
             },
             {
-              "risk_id": "R-003",
               "project_id": "Suez-Tunnel",
+              "risk_id": "R-003",
               "risk_title": "Cashflow pressure due to delayed certification",
               "risk_category": "Commercial",
               "probability": "medium",
@@ -2236,7 +2160,7 @@
           "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 6,
-          "column_count": 18,
+          "column_count": 15,
           "columns": [
             "project_id",
             "payment",
@@ -2252,10 +2176,7 @@
             "Period for payment release",
             "Period in which interest is applied",
             "Amount of interest claimed (EGP)",
-            "delayed duration(Days) ",
-            "Unnamed: 14",
-            "Unnamed: 15",
-            "Unnamed: 16"
+            "delayed duration(Days) "
           ],
           "rows": [
             {
@@ -2273,10 +2194,7 @@
               "Period for payment release": "50.0",
               "Period in which interest is applied": "5.0",
               "Amount of interest claimed (EGP)": "35250.0000",
-              "delayed duration(Days) ": "5.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "5.0"
             },
             {
               "project_id": "Suez-Tunnel",
@@ -2293,10 +2211,7 @@
               "Period for payment release": "55.0",
               "Period in which interest is applied": "10.0",
               "Amount of interest claimed (EGP)": "88500.0000",
-              "delayed duration(Days) ": "10.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "10.0"
             },
             {
               "project_id": "Suez-Tunnel",
@@ -2313,10 +2228,7 @@
               "Period for payment release": "60.0",
               "Period in which interest is applied": "15.0",
               "Amount of interest claimed (EGP)": "159750.0000",
-              "delayed duration(Days) ": "15.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "15.0"
             },
             {
               "project_id": "Suez-Tunnel",
@@ -2333,10 +2245,7 @@
               "Period for payment release": "65.0",
               "Period in which interest is applied": "20.0",
               "Amount of interest claimed (EGP)": "249000.0000",
-              "delayed duration(Days) ": "20.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "20.0"
             },
             {
               "project_id": "Suez-Tunnel",
@@ -2353,10 +2262,7 @@
               "Period for payment release": "70.0",
               "Period in which interest is applied": "25.0",
               "Amount of interest claimed (EGP)": "356250.0000",
-              "delayed duration(Days) ": "25.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "25.0"
             },
             {
               "project_id": "Suez-Tunnel",
@@ -2369,28 +2275,22 @@
               "paid amount": "82925000.00",
               "payment status": "Certified",
               "Contractual interest due": "45.0",
-              "Date of Cash Cheque Receipt": "",
-              "Period for payment release": "",
               "Period in which interest is applied": "0.0",
-              "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "Amount of interest claimed (EGP)": "0.0000"
             }
           ],
           "truncated": false,
           "source_path": "08_commercial_payments_claims.csv"
         },
         "planned_cash_flow": {
-          "file": "08_commercial_payments_claims.csv",
+          "file": "planned_cash_flow.csv",
           "exists": true,
           "row_count": 0,
           "column_count": 0,
           "columns": [],
           "rows": [],
           "truncated": false,
-          "source_path": "08_commercial_payments_claims.csv"
+          "source_path": "planned_cash_flow.csv"
         },
         "milestones": {
           "file": "05_milestones_scurve.csv",
@@ -2440,7 +2340,6 @@
               "activity_name": "Structural Works Completion",
               "planned_date": "1-Sep-26",
               "forecast_date": "19-Oct-26",
-              "actual_date": "",
               "milestone_contractual_type": "Interim milestone"
             },
             {
@@ -2449,7 +2348,6 @@
               "activity_name": "Substantial Completion",
               "planned_date": "28-Feb-27",
               "forecast_date": "18-May-27",
-              "actual_date": "",
               "milestone_contractual_type": "Finish milestone"
             }
           ],
@@ -2566,11 +2464,10 @@
           "file": "03_schedule_logic.csv",
           "exists": true,
           "row_count": 16,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_code",
-            "wbs_name",
             "total_activities",
             "bl_project_duration",
             "remaining_duration",
@@ -2578,7 +2475,6 @@
             "bl_project_start",
             "bl_project_finish",
             "actual_start",
-            "actual_finish",
             "schedule_%_complete",
             "performance_%_complete",
             "budget_at_completion",
@@ -2589,7 +2485,6 @@
             {
               "project_id": "Suez-Tunnel-P.01-UP-20-April-26",
               "wbs_code": "No Priority",
-              "wbs_name": "",
               "total_activities": "1218",
               "bl_project_duration": "614",
               "remaining_duration": "492",
@@ -2597,7 +2492,6 @@
               "bl_project_start": "15-Sep-25",
               "bl_project_finish": "22-May-27",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.545",
               "performance_%_complete": "0.287",
               "budget_at_completion": "495750000",
@@ -2615,7 +2509,6 @@
               "bl_project_start": "15-Sep-25",
               "bl_project_finish": "22-May-27",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.545",
               "performance_%_complete": "0.287",
               "budget_at_completion": "495750000",
@@ -2633,7 +2526,6 @@
               "bl_project_start": "15-Sep-25",
               "bl_project_finish": "22-May-27",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -2651,7 +2543,6 @@
               "bl_project_start": "15-Sep-25",
               "bl_project_finish": "22-May-27",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -2665,7 +2556,6 @@
               "total_activities": "12",
               "bl_project_duration": "18",
               "remaining_duration": "0",
-              "total_float": "",
               "bl_project_start": "15-Sep-25",
               "bl_project_finish": "3-Oct-25",
               "actual_start": "18-Sep-25",
@@ -2687,7 +2577,6 @@
               "bl_project_start": "15-Sep-25",
               "bl_project_finish": "4-Jul-26",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -2705,7 +2594,6 @@
               "bl_project_start": "15-Sep-25",
               "bl_project_finish": "17-Feb-27",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -2723,7 +2611,6 @@
               "bl_project_start": "20-Oct-25",
               "bl_project_finish": "13-Mar-27",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.545",
               "performance_%_complete": "0.287",
               "budget_at_completion": "495750000",
@@ -2759,7 +2646,6 @@
               "bl_project_start": "24-Nov-25",
               "bl_project_finish": "16-Jan-27",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.57",
               "performance_%_complete": "0.31",
               "budget_at_completion": "86300000",
@@ -2777,7 +2663,6 @@
               "bl_project_start": "2-Dec-25",
               "bl_project_finish": "30-Jan-27",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.53",
               "performance_%_complete": "0.28",
               "budget_at_completion": "82900000",
@@ -2795,7 +2680,6 @@
               "bl_project_start": "13-Jan-26",
               "bl_project_finish": "16-May-27",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.49",
               "performance_%_complete": "0.22",
               "budget_at_completion": "148600000",
@@ -2813,7 +2697,6 @@
               "bl_project_start": "4-Mar-26",
               "bl_project_finish": "20-May-27",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.38",
               "performance_%_complete": "0.19",
               "budget_at_completion": "95850000",
@@ -2831,7 +2714,6 @@
               "bl_project_start": "3-May-26",
               "bl_project_finish": "3-May-27",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.21",
               "performance_%_complete": "0.09",
               "budget_at_completion": "43650000",
@@ -2849,7 +2731,6 @@
               "bl_project_start": "2-Jun-26",
               "bl_project_finish": "18-Jan-27",
               "actual_start": "17-Sep-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.32",
               "performance_%_complete": "0.16",
               "budget_at_completion": "28950000",
@@ -2866,8 +2747,6 @@
               "total_float": "-86",
               "bl_project_start": "24-Nov-25",
               "bl_project_finish": "22-May-27",
-              "actual_start": "",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -3001,164 +2880,20 @@
       }
     },
     "letters_intelligence": {
-      "folder": "07-letters_intelligence/inbox + 01-data/import_templates",
+      "folder": "07-letters_intelligence",
       "inbox_files": [],
       "inbox_file_count": 0,
       "workbook": {
-        "file": "10_letters_intelligence.csv",
-        "exists": true,
-        "source_workbook": "letters_intelligence.xlsx",
-        "sheets": [
-          {
-            "name": "From Contractor",
-            "row_count": 0,
-            "column_count": 19,
-            "columns": [
-              "Ref No",
-              "Date",
-              "Type",
-              "Subject",
-              "Main Purpose",
-              "Key Requests",
-              "Scope Impact",
-              "Responsibility",
-              "Affected Activities",
-              "Start Dependency",
-              "Sequence Impact",
-              "Commercial Impact",
-              "Risk Type",
-              "Risk Owner",
-              "Delay Risk",
-              "EOT Potential",
-              "Claim Strength",
-              "Required Actions",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "From Consultant",
-            "row_count": 0,
-            "column_count": 19,
-            "columns": [
-              "Ref No",
-              "Date",
-              "Type",
-              "Subject",
-              "Main Purpose",
-              "Key Requests",
-              "Scope Impact",
-              "Responsibility",
-              "Affected Activities",
-              "Start Dependency",
-              "Sequence Impact",
-              "Commercial Impact",
-              "Risk Type",
-              "Risk Owner",
-              "Delay Risk",
-              "EOT Potential",
-              "Claim Strength",
-              "Required Actions",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "Contractor Links",
-            "row_count": 0,
-            "column_count": 18,
-            "columns": [
-              "Thread",
-              "SAMCO Ref No",
-              "SAMCO Sheet Row",
-              "SAMCO Date",
-              "SAMCO Type",
-              "SAMCO Subject",
-              "Related ACE Ref No(s)",
-              "ACE Sheet Row(s)",
-              "ACE Date(s)",
-              "ACE Subject(s)",
-              "Relationship",
-              "Confidence",
-              "SAMCO Claim Strength",
-              "ACE Claim Strength",
-              "SAMCO Delay Risk",
-              "ACE Delay Risk",
-              "Recommended Follow-up",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "Consultant Links",
-            "row_count": 0,
-            "column_count": 14,
-            "columns": [
-              "ACE Ref No",
-              "ACE Sheet Row",
-              "ACE Date",
-              "ACE Type",
-              "ACE Subject",
-              "Related SAMCO Ref No(s)",
-              "SAMCO Sheet Row(s)",
-              "SAMCO Subject(s)",
-              "Thread(s)",
-              "ACE Delay Risk",
-              "ACE EOT Potential",
-              "ACE Claim Strength",
-              "ACE Required Actions",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "Issue Threads",
-            "row_count": 0,
-            "column_count": 7,
-            "columns": [
-              "Thread",
-              "SAMCO Ref(s)",
-              "6",
-              "Main Link",
-              "Priority",
-              "Next Action",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "Auto Ingest Register",
-            "row_count": 0,
-            "column_count": 11,
-            "columns": [
-              "Source File",
-              "Direction",
-              "Reference",
-              "Date",
-              "Subject",
-              "Classification",
-              "Delay Risk",
-              "Issue Thread",
-              "Status",
-              "Message",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          }
-        ]
+        "file": "letters_intelligence.xlsx",
+        "exists": false,
+        "sheets": []
       },
       "workbook_tables": {
-        "file": "10_letters_intelligence.csv",
+        "file": "letters_intelligence.xlsx",
         "exists": true,
         "sheets": [
           {
-            "name": "From Consultant",
+            "name": "From SAMCO",
             "row_count": 0,
             "column_count": 19,
             "columns": [
@@ -3186,43 +2921,7 @@
             "truncated": false
           },
           {
-            "name": "Issue Threads",
-            "row_count": 0,
-            "column_count": 7,
-            "columns": [
-              "Thread",
-              "SAMCO Ref(s)",
-              "6",
-              "Main Link",
-              "Priority",
-              "Next Action",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "Auto Ingest Register",
-            "row_count": 0,
-            "column_count": 11,
-            "columns": [
-              "Source File",
-              "Direction",
-              "Reference",
-              "Date",
-              "Subject",
-              "Classification",
-              "Delay Risk",
-              "Issue Thread",
-              "Status",
-              "Message",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "From SAMCO",
+            "name": "From Consultant",
             "row_count": 0,
             "column_count": 19,
             "columns": [
@@ -3298,18 +2997,53 @@
             ],
             "rows": [],
             "truncated": false
+          },
+          {
+            "name": "Issue Threads",
+            "row_count": 0,
+            "column_count": 7,
+            "columns": [
+              "Thread",
+              "SAMCO Ref(s)",
+              "6",
+              "Main Link",
+              "Priority",
+              "Next Action",
+              "project_id"
+            ],
+            "rows": [],
+            "truncated": false
+          },
+          {
+            "name": "Auto Ingest Register",
+            "row_count": 0,
+            "column_count": 11,
+            "columns": [
+              "Source File",
+              "Direction",
+              "Reference",
+              "Date",
+              "Subject",
+              "Classification",
+              "Delay Risk",
+              "Issue Thread",
+              "Status",
+              "Message",
+              "project_id"
+            ],
+            "rows": [],
+            "truncated": false
           }
         ],
         "rejected_cross_project_rows": 0,
         "source_scope": "selected_project_only",
-        "inbox_auto_ingest": true,
-        "source_workbook": "letters_intelligence.xlsx"
+        "inbox_auto_ingest": true
       },
       "detectors": [
         {
           "name": "Canonical letters source",
           "status": "Active",
-          "detail": "Uses the selected project's 10_letters_intelligence.csv historical register and automatically evaluates new files in 07-letters_intelligence/inbox/From Contractor and From Consultant during the local data build."
+          "detail": "Uses the project-local workbook, inbox ingestion, correspondence links, and issue-thread workflow."
         },
         {
           "name": "Letters intelligence workflow",
@@ -5624,7 +5358,7 @@
           "relative_path": "Suez-Tunnel/00_published_project_reports.zip",
           "extension": "zip",
           "size_kb": 1881.7,
-          "modified": "2026-08-20T11:49:39"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "01_executive_dashboard.html",
@@ -5638,14 +5372,14 @@
           "relative_path": "Suez-Tunnel/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 897.3,
-          "modified": "2026-08-20T11:49:30"
+          "modified": "2026-08-22T04:17:58"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "Suez-Tunnel/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-20T11:49:30"
+          "modified": "2026-08-22T04:17:58"
         },
         {
           "name": "02_master_dashboard.html",
@@ -5659,14 +5393,14 @@
           "relative_path": "Suez-Tunnel/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 864.0,
-          "modified": "2026-08-20T11:49:32"
+          "modified": "2026-08-22T04:18:03"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "Suez-Tunnel/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-20T11:49:33"
+          "modified": "2026-08-22T04:18:03"
         },
         {
           "name": "03_elite_svg_charts.html",
@@ -5680,14 +5414,14 @@
           "relative_path": "Suez-Tunnel/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 235.7,
-          "modified": "2026-08-20T11:49:34"
+          "modified": "2026-08-22T04:18:05"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "Suez-Tunnel/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-20T11:49:34"
+          "modified": "2026-08-22T04:18:06"
         },
         {
           "name": "04_linked_executive_dashboard.html",
@@ -5701,14 +5435,14 @@
           "relative_path": "Suez-Tunnel/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1095.7,
-          "modified": "2026-08-20T11:49:38"
+          "modified": "2026-08-22T04:18:10"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "Suez-Tunnel/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-20T11:49:38"
+          "modified": "2026-08-22T04:18:11"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
@@ -5750,217 +5484,217 @@
           "relative_path": "Suez-Tunnel/universal-baseline_current-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-cashflow-program-report.html",
           "relative_path": "Suez-Tunnel/universal-cashflow-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-change_control-program-report.html",
           "relative_path": "Suez-Tunnel/universal-change_control-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-contract_admin-program-report.html",
           "relative_path": "Suez-Tunnel/universal-contract_admin-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-cost-program-report.html",
           "relative_path": "Suez-Tunnel/universal-cost-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-critical_path-program-report.html",
           "relative_path": "Suez-Tunnel/universal-critical_path-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-delay-program-report.html",
           "relative_path": "Suez-Tunnel/universal-delay-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-document_control-program-report.html",
           "relative_path": "Suez-Tunnel/universal-document_control-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-eot-program-report.html",
           "relative_path": "Suez-Tunnel/universal-eot-program-report.html",
           "extension": "html",
           "size_kb": 9.3,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-equipment-program-report.html",
           "relative_path": "Suez-Tunnel/universal-equipment-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-evm-program-report.html",
           "relative_path": "Suez-Tunnel/universal-evm-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-executive-program-report.html",
           "relative_path": "Suez-Tunnel/universal-executive-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-float-program-report.html",
           "relative_path": "Suez-Tunnel/universal-float-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-forecast_completion-program-report.html",
           "relative_path": "Suez-Tunnel/universal-forecast_completion-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-hybrid-program-report.html",
           "relative_path": "Suez-Tunnel/universal-hybrid-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-interface_management-program-report.html",
           "relative_path": "Suez-Tunnel/universal-interface_management-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-lookahead-program-report.html",
           "relative_path": "Suez-Tunnel/universal-lookahead-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-material-program-report.html",
           "relative_path": "Suez-Tunnel/universal-material-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-milestone-program-report.html",
           "relative_path": "Suez-Tunnel/universal-milestone-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-ml_project_controls-program-report.html",
           "relative_path": "Suez-Tunnel/universal-ml_project_controls-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-procurement-program-report.html",
           "relative_path": "Suez-Tunnel/universal-procurement-program-report.html",
           "extension": "html",
           "size_kb": 9.3,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-productivity-program-report.html",
           "relative_path": "Suez-Tunnel/universal-productivity-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-progress-program-report.html",
           "relative_path": "Suez-Tunnel/universal-progress-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-qaqc-program-report.html",
           "relative_path": "Suez-Tunnel/universal-qaqc-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-recovery-program-report.html",
           "relative_path": "Suez-Tunnel/universal-recovery-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal_report_engine_manifest.json",
           "relative_path": "Suez-Tunnel/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 32.0,
-          "modified": "2026-08-22T04:05:31"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-resource-program-report.html",
           "relative_path": "Suez-Tunnel/universal-resource-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-rfi_submittal-program-report.html",
           "relative_path": "Suez-Tunnel/universal-rfi_submittal-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-risk-program-report.html",
           "relative_path": "Suez-Tunnel/universal-risk-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-scurve-program-report.html",
           "relative_path": "Suez-Tunnel/universal-scurve-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         },
         {
           "name": "universal-variation-program-report.html",
           "relative_path": "Suez-Tunnel/universal-variation-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:18:12"
         }
       ],
       "watchers": [
@@ -7143,12 +6877,12 @@
     "files": {
       "zip": {
         "name": "00_published_project_reports.zip",
-        "bytes": 1926900,
-        "sha256": "d3b58f9c51b650f954d4c140a8f6376160ad53b300d6b05f1fb91348113fbc90"
+        "bytes": 1926901,
+        "sha256": "8f62d615f8d2ef04cd271cfde758dcedcd034758a677290726a73a98eccf9d00"
       }
     },
     "source_project_id": "Suez-Tunnel",
-    "source_report_fingerprint": "79e81f3bc4f246f505929658aaa336b08c118c610233fb5bd996dde5182312fb"
+    "source_report_fingerprint": "523947922bf542734fcdcce899a544877423cf3b2a6bce591f5b1d2bd78e8701"
   },
   "report_artifacts": {
     "executive_dashboard": {
@@ -7164,12 +6898,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 918800,
-          "sha256": "0f7d42ae7bc8b65952304497d026a02cafa6cb14518e1993987868df4e41f140"
+          "sha256": "d0f8bbc029f3150b7326763beecdfd785304c1c5034118e6f1b2428187e9d439"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29125,
-          "sha256": "c5bbd19ef0cb8b00964a19d3953a20f140022d8ec1a073741d1dcc99d2901a22"
+          "sha256": "d8f018d7700cb865a5b4a9962a867ff4a59be3966d57b155911f8ee848c141a6"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7189,12 +6923,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 884770,
-          "sha256": "63b0e3698740e87bdbb6bbc3f15c39cbfd3d680dbc898433383e3038d5ed3920"
+          "sha256": "0cdcae3ce66d4d68dd1b079bfde8a64c099b0940afb6c5ea76d1a453d7cf1151"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
           "bytes": 29121,
-          "sha256": "5fc0bcdfccd846f2688c36bf1da86ac9aea2633cdb7ec77e0cc9a27a4c7cab36"
+          "sha256": "4ff85331a17e130f28775292a61805f5ec8b5a946f1cbbebb0aa1a127de131f9"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7214,12 +6948,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 241398,
-          "sha256": "d692ecd741c0ee6163dfc3aaee434cbe3adb0e30ecae9c78d380b405a3f866cc"
+          "sha256": "b27d384a5c7c7952c63b68d22d4544b9683132a2a0945c8956334e858244e7f9"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29121,
-          "sha256": "bf708658c498b5771bd327fa2a25b0429e6c72de36a777ee007b466a718eeb8a"
+          "sha256": "3f86e7e08d3b450c0931f2e25729b46a2f5690dfc5d411c69f1d0c21e8820efb"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7239,12 +6973,12 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1121976,
-          "sha256": "9b65a6434b335c391aeb9213235a776aceeae4325a5ad9ed36986e09188a0ce2"
+          "sha256": "a5b0a9737bd7604c085b19aa1ce11f389459f2d095c92183caf4dadfce6ede0e"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
           "bytes": 29131,
-          "sha256": "b5dd73733ba7e520d751b5b620fa024d3fb7f3c684d61e33bbc414817368a4c0"
+          "sha256": "fcfc3b5794ee128a72ea71b9cacbc0493a7370c310a832cea937f9d937c8c7a5"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7255,69 +6989,69 @@
   "universal_report_engine": {
     "project_id": "Suez-Tunnel",
     "project_key": "suez-tunnel",
-    "source_fingerprint": "ef05f1c6142c3965b03be63da47a2fb134fedf2fe4202c17f52079879081d385",
+    "source_fingerprint": "8017443a963378bf727bafbb869075128c2587219aeda40a798b85002bcdb027",
     "source_scope": "active project folder only",
     "source_file_count": 34,
     "source_inventory": [
       {
         "relative_path": "01-data/import_templates/01_project_contract.csv",
         "extension": ".csv",
-        "size_bytes": 1796,
-        "sha256": "c449fd311b32be13a460bbd26ac90affb6154ab92381fd2eeb42b995f18786e4"
+        "size_bytes": 901,
+        "sha256": "0d822f32d48f660f3acb57f8d2a94e82802b7d3745dbccbb8fffd1e405821fd7"
       },
       {
         "relative_path": "01-data/import_templates/02_schedule_activities.csv",
         "extension": ".csv",
-        "size_bytes": 16286,
-        "sha256": "25faea30f0adac159ff1346eeed6082823ec2bcda1be7ce082c0f33c2a58f9a6"
+        "size_bytes": 13840,
+        "sha256": "7674fcca68c555e370ff4ca5c0a8cbc14cf68b42922d5135d604710ee208e96e"
       },
       {
         "relative_path": "01-data/import_templates/03_schedule_logic.csv",
         "extension": ".csv",
-        "size_bytes": 12573,
-        "sha256": "75474fca38538f4ebe8708010c5314f7dcb48d1ca41303ed9dcf8fb150f22725"
+        "size_bytes": 8538,
+        "sha256": "edd19e0357f3e1cc1db2ec4457bad0ec0f494cc8f8aa2c7392528cfb9258fd82"
       },
       {
         "relative_path": "01-data/import_templates/04_progress_evm.csv",
         "extension": ".csv",
-        "size_bytes": 10443,
-        "sha256": "3d8aaafa19cfdedc448ee54968296eae3aea2708c7240e00b34b29f64d4c5361"
+        "size_bytes": 6619,
+        "sha256": "e77d854172a4cb637986a3c9c641f2bf5ecf8a154b139a8ae23bf2f1d9b65de3"
       },
       {
         "relative_path": "01-data/import_templates/05_milestones_scurve.csv",
         "extension": ".csv",
-        "size_bytes": 4308,
-        "sha256": "986d123fbd6a7bbbcc706264ae84d638b6d06d2acf9dd8934eadb073a2f0bb78"
+        "size_bytes": 2476,
+        "sha256": "107d13e2877383ba529d0bcd0c55efc077cd87e574855aff86d8d71242a2107b"
       },
       {
         "relative_path": "01-data/import_templates/06_delay_events.csv",
         "extension": ".csv",
-        "size_bytes": 2812,
-        "sha256": "5a3ae47c86354eec649cf8d0696f202f3ace3f3c320c6f1ed6b4155f982f439c"
+        "size_bytes": 1644,
+        "sha256": "6c8a2ee2f22955ede9888fa2416a6edf567bd03e90b75af3373785c18c252674"
       },
       {
         "relative_path": "01-data/import_templates/07_tia_evidence_scenarios.csv",
         "extension": ".csv",
-        "size_bytes": 29442,
-        "sha256": "38f62534e5763268654061b788ec44d44e41eb10eee6c0dfbb9d82f909992b9b"
+        "size_bytes": 25834,
+        "sha256": "bacccf0be8440e2d312f186dc60aa9245cc2fc5be2aa274c309fffe685653adf"
       },
       {
         "relative_path": "01-data/import_templates/08_commercial_payments_claims.csv",
         "extension": ".csv",
-        "size_bytes": 6409,
-        "sha256": "14592767d411e2354cd5bae0bea9fb52eb4ff775eb074f1d260f104ca8ab9f2a"
+        "size_bytes": 3471,
+        "sha256": "a0b86806c5f79c9c7832d592a6226b0b352ee109d56f0f95441e3bee01259e4f"
       },
       {
         "relative_path": "01-data/import_templates/09_risks_rfi_interfaces.csv",
         "extension": ".csv",
-        "size_bytes": 10110,
-        "sha256": "f5132578e7f8e6a223f90fca6fd13e33dddc8dd0153c0976547cb790af6992d8"
+        "size_bytes": 6612,
+        "sha256": "6a676868d9afdd7127bce4d61142c2e29119e88e57bda3701d542b203307b283"
       },
       {
         "relative_path": "01-data/import_templates/10_letters_intelligence.csv",
         "extension": ".csv",
-        "size_bytes": 3198,
-        "sha256": "d96c372a27bf975e42cda4c8665a70df82c62fedb25df1bfabb0fd66e1adac8c"
+        "size_bytes": 868,
+        "sha256": "436c277dbd7fa5eb5c3037b99b41ddea6673046c1e9ac94db2e84d30fe214169"
       },
       {
         "relative_path": "01-data/import_templates/planned_cash_flow.csv",
@@ -7492,7 +7226,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-eot-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7510,7 +7244,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-delay-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7528,7 +7262,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-progress-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7546,7 +7280,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-recovery-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7564,7 +7298,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-variation-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7581,7 +7315,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-hybrid-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7599,7 +7333,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-resource-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7616,7 +7350,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-equipment-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7633,7 +7367,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-cost-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7650,7 +7384,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-evm-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7667,7 +7401,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-cashflow-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7684,7 +7418,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-scurve-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7702,7 +7436,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-procurement-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7719,7 +7453,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-material-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7737,7 +7471,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-lookahead-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7755,7 +7489,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-critical_path-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7773,7 +7507,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-float-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7791,7 +7525,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-milestone-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7808,7 +7542,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-risk-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7826,7 +7560,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-rfi_submittal-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7843,7 +7577,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-qaqc-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7860,7 +7594,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-productivity-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7877,7 +7611,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-executive-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7895,7 +7629,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-baseline_current-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7913,7 +7647,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-forecast_completion-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7930,7 +7664,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-ml_project_controls-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7947,7 +7681,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-contract_admin-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7964,7 +7698,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-change_control-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7981,7 +7715,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-document_control-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7999,7 +7733,7 @@
         "artifacts": {
           "html": "/generated/Suez-Tunnel/universal-interface_management-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:18:12+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       }
@@ -8094,6 +7828,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-22T01:05:31+00:00"
+    "updated_at": "2026-08-22T01:18:12+00:00"
   }
 }

@@ -207,7 +207,7 @@
   },
   "decision_required": true,
   "last_updated": "2026-08-15T16:47:59",
-  "fingerprint": "d5c28320b6f09beb1f15b005ec14df907315334869c7687222b5898320303893",
+  "fingerprint": "86d153430fa53531c30ab25bfb8c01902c461501ca3a38a105c9773a8d97fbb6",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -300,15 +300,15 @@
           "column_count": 14,
           "columns": [
             "project_id",
+            "contractor",
+            "status",
             "project_name",
             "client_name",
-            "contractor",
             "planned_start",
             "planned_finish",
             "forecast_finish",
             "contract_value",
             "currency",
-            "status",
             "planned_progress_percent",
             "actual_progress_percent",
             "planned_value",
@@ -317,15 +317,15 @@
           "rows": [
             {
               "project_id": "Sophia-Mall",
+              "contractor": "Delta Build Contractors",
+              "status": "On Track",
               "project_name": "Sophia Mall Mixed-Use Development",
               "client_name": "Sophia Retail Properties",
-              "contractor": "Delta Build Contractors",
               "planned_start": "15-Oct-25",
               "planned_finish": "31-Jul-27",
               "forecast_finish": "25-Aug-27",
               "contract_value": "2100000000",
               "currency": "EGP",
-              "status": "On Track",
               "planned_progress_percent": "31.00",
               "actual_progress_percent": "33.00",
               "planned_value": "651000000",
@@ -337,18 +337,16 @@
           "file": "02_schedule_activities.csv",
           "exists": true,
           "row_count": 17,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_id",
             "activity_id",
             "activity_name",
             "planned_start",
-            "planned_finish",
             "actual_start",
             "actual_finish",
             "forecast_start",
-            "forecast_finish",
             "planned_weight",
             "planned_progress",
             "actual_progress",
@@ -363,11 +361,9 @@
               "activity_id": "KD-MS-1000",
               "activity_name": "Project Start Date",
               "planned_start": "15-Oct-25",
-              "planned_finish": "",
               "actual_start": "15-Oct-25 A",
               "actual_finish": "15-Oct-25 A",
               "forecast_start": "15-Oct-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
@@ -381,11 +377,9 @@
               "activity_id": "KD-MS-1010",
               "activity_name": "Contract Agreement",
               "planned_start": "15-Oct-25",
-              "planned_finish": "",
               "actual_start": "15-Oct-25 A",
               "actual_finish": "15-Oct-25 A",
               "forecast_start": "15-Oct-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
@@ -399,15 +393,12 @@
               "activity_id": "KD-MS-1020",
               "activity_name": "IFC Drawing Package",
               "planned_start": "25-Oct-25",
-              "planned_finish": "",
               "actual_start": "25-Oct-25 A",
               "actual_finish": "25-Oct-25 A",
               "forecast_start": "25-Oct-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
-              "total_float_days": "",
               "is_critical": "Yes",
               "responsible_party": "Engineering"
             },
@@ -455,7 +446,6 @@
               "planned_start": "22-Nov-25",
               "planned_finish": "6-Jan-26",
               "actual_start": "3-Dec-25 A",
-              "actual_finish": "",
               "forecast_start": "3-Dec-25",
               "forecast_finish": "8-Jan-26",
               "planned_weight": "0.0361",
@@ -473,7 +463,6 @@
               "planned_start": "5-Jan-26",
               "planned_finish": "10-Feb-26",
               "actual_start": "10-Jan-26 A",
-              "actual_finish": "",
               "forecast_start": "10-Jan-26",
               "forecast_finish": "12-Feb-26",
               "planned_weight": "0.0361",
@@ -491,7 +480,6 @@
               "planned_start": "24-Dec-25",
               "planned_finish": "2-Mar-26",
               "actual_start": "1-Jan-26 A",
-              "actual_finish": "",
               "forecast_start": "1-Jan-26",
               "forecast_finish": "4-Mar-26",
               "planned_weight": "0.0602",
@@ -651,8 +639,8 @@
           "row_count": 3,
           "column_count": 11,
           "columns": [
-            "risk_id",
             "project_id",
+            "risk_id",
             "risk_title",
             "risk_category",
             "probability",
@@ -665,8 +653,8 @@
           ],
           "rows": [
             {
-              "risk_id": "R-001",
               "project_id": "Sophia-Mall",
+              "risk_id": "R-001",
               "risk_title": "Steel delivery delay",
               "risk_category": "Schedule",
               "probability": "medium",
@@ -678,8 +666,8 @@
               "due_date": "30-Jun-26"
             },
             {
-              "risk_id": "R-002",
               "project_id": "Sophia-Mall",
+              "risk_id": "R-002",
               "risk_title": "Late design clarification and IFC revisions",
               "risk_category": "Engineering",
               "probability": "medium",
@@ -691,8 +679,8 @@
               "due_date": "15-Jul-26"
             },
             {
-              "risk_id": "R-003",
               "project_id": "Sophia-Mall",
+              "risk_id": "R-003",
               "risk_title": "Cashflow pressure due to delayed certification",
               "risk_category": "Commercial",
               "probability": "medium",
@@ -806,7 +794,7 @@
           "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 6,
-          "column_count": 18,
+          "column_count": 15,
           "columns": [
             "project_id",
             "payment",
@@ -822,10 +810,7 @@
             "Period for payment release",
             "Period in which interest is applied",
             "Amount of interest claimed (EGP)",
-            "delayed duration(Days) ",
-            "Unnamed: 14",
-            "Unnamed: 15",
-            "Unnamed: 16"
+            "delayed duration(Days) "
           ],
           "rows": [
             {
@@ -843,10 +828,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -863,10 +845,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -883,10 +862,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -903,10 +879,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -923,10 +896,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -939,19 +909,13 @@
               "paid amount": "139314000.00",
               "payment status": "Certified",
               "Contractual interest due": "45.0",
-              "Date of Cash Cheque Receipt": "",
-              "Period for payment release": "",
               "Period in which interest is applied": "0.0",
-              "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "Amount of interest claimed (EGP)": "0.0000"
             }
           ]
         },
         "planned_cash_flow": {
-          "file": "08_commercial_payments_claims.csv",
+          "file": "planned_cash_flow.csv",
           "exists": true,
           "row_count": 0,
           "column_count": 0,
@@ -1006,7 +970,6 @@
               "activity_name": "Structural Works Completion",
               "planned_date": "15-Oct-26",
               "forecast_date": "30-Oct-26",
-              "actual_date": "",
               "milestone_contractual_type": "Interim milestone"
             },
             {
@@ -1015,7 +978,6 @@
               "activity_name": "Substantial Completion",
               "planned_date": "31-Jul-27",
               "forecast_date": "25-Aug-27",
-              "actual_date": "",
               "milestone_contractual_type": "Finish milestone"
             }
           ]
@@ -1128,11 +1090,10 @@
           "file": "03_schedule_logic.csv",
           "exists": true,
           "row_count": 16,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_code",
-            "wbs_name",
             "total_activities",
             "bl_project_duration",
             "remaining_duration",
@@ -1140,7 +1101,6 @@
             "bl_project_start",
             "bl_project_finish",
             "actual_start",
-            "actual_finish",
             "schedule_%_complete",
             "performance_%_complete",
             "budget_at_completion",
@@ -1151,7 +1111,6 @@
             {
               "project_id": "Sophia-Mall-P.01-UP-20-April-26",
               "wbs_code": "No Priority",
-              "wbs_name": "",
               "total_activities": "1064",
               "bl_project_duration": "543",
               "remaining_duration": "376",
@@ -1159,7 +1118,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "18-Feb-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.623",
               "performance_%_complete": "0.354",
               "budget_at_completion": "382400000",
@@ -1177,7 +1135,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "18-Feb-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.623",
               "performance_%_complete": "0.354",
               "budget_at_completion": "382400000",
@@ -1195,7 +1152,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "18-Feb-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -1213,7 +1169,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "18-Feb-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -1227,7 +1182,6 @@
               "total_activities": "10",
               "bl_project_duration": "16",
               "remaining_duration": "0",
-              "total_float": "",
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "10-Sep-25",
               "actual_start": "29-Aug-25",
@@ -1249,7 +1203,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "30-Apr-26",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -1267,7 +1220,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "8-Nov-26",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -1285,7 +1237,6 @@
               "bl_project_start": "29-Sep-25",
               "bl_project_finish": "10-Dec-26",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.623",
               "performance_%_complete": "0.354",
               "budget_at_completion": "382400000",
@@ -1401,15 +1352,15 @@
           "column_count": 14,
           "columns": [
             "project_id",
+            "contractor",
+            "status",
             "project_name",
             "client_name",
-            "contractor",
             "planned_start",
             "planned_finish",
             "forecast_finish",
             "contract_value",
             "currency",
-            "status",
             "planned_progress_percent",
             "actual_progress_percent",
             "planned_value",
@@ -1418,15 +1369,15 @@
           "rows": [
             {
               "project_id": "Sophia-Mall",
+              "contractor": "Delta Build Contractors",
+              "status": "On Track",
               "project_name": "Sophia Mall Mixed-Use Development",
               "client_name": "Sophia Retail Properties",
-              "contractor": "Delta Build Contractors",
               "planned_start": "15-Oct-25",
               "planned_finish": "31-Jul-27",
               "forecast_finish": "25-Aug-27",
               "contract_value": "2100000000",
               "currency": "EGP",
-              "status": "On Track",
               "planned_progress_percent": "31.00",
               "actual_progress_percent": "33.00",
               "planned_value": "651000000",
@@ -1440,18 +1391,16 @@
           "file": "02_schedule_activities.csv",
           "exists": true,
           "row_count": 17,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_id",
             "activity_id",
             "activity_name",
             "planned_start",
-            "planned_finish",
             "actual_start",
             "actual_finish",
             "forecast_start",
-            "forecast_finish",
             "planned_weight",
             "planned_progress",
             "actual_progress",
@@ -1466,11 +1415,9 @@
               "activity_id": "KD-MS-1000",
               "activity_name": "Project Start Date",
               "planned_start": "15-Oct-25",
-              "planned_finish": "",
               "actual_start": "15-Oct-25 A",
               "actual_finish": "15-Oct-25 A",
               "forecast_start": "15-Oct-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
@@ -1484,11 +1431,9 @@
               "activity_id": "KD-MS-1010",
               "activity_name": "Contract Agreement",
               "planned_start": "15-Oct-25",
-              "planned_finish": "",
               "actual_start": "15-Oct-25 A",
               "actual_finish": "15-Oct-25 A",
               "forecast_start": "15-Oct-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
@@ -1502,15 +1447,12 @@
               "activity_id": "KD-MS-1020",
               "activity_name": "IFC Drawing Package",
               "planned_start": "25-Oct-25",
-              "planned_finish": "",
               "actual_start": "25-Oct-25 A",
               "actual_finish": "25-Oct-25 A",
               "forecast_start": "25-Oct-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
-              "total_float_days": "",
               "is_critical": "Yes",
               "responsible_party": "Engineering"
             },
@@ -1558,7 +1500,6 @@
               "planned_start": "22-Nov-25",
               "planned_finish": "6-Jan-26",
               "actual_start": "3-Dec-25 A",
-              "actual_finish": "",
               "forecast_start": "3-Dec-25",
               "forecast_finish": "8-Jan-26",
               "planned_weight": "0.0361",
@@ -1576,7 +1517,6 @@
               "planned_start": "5-Jan-26",
               "planned_finish": "10-Feb-26",
               "actual_start": "10-Jan-26 A",
-              "actual_finish": "",
               "forecast_start": "10-Jan-26",
               "forecast_finish": "12-Feb-26",
               "planned_weight": "0.0361",
@@ -1594,7 +1534,6 @@
               "planned_start": "24-Dec-25",
               "planned_finish": "2-Mar-26",
               "actual_start": "1-Jan-26 A",
-              "actual_finish": "",
               "forecast_start": "1-Jan-26",
               "forecast_finish": "4-Mar-26",
               "planned_weight": "0.0602",
@@ -1618,7 +1557,6 @@
               "planned_weight": "0.1205",
               "planned_progress": "0.95",
               "actual_progress": "1.00",
-              "total_float_days": "",
               "is_critical": "Yes",
               "responsible_party": "Construction"
             },
@@ -1630,7 +1568,6 @@
               "planned_start": "22-Feb-26",
               "planned_finish": "30-Mar-26",
               "actual_start": "27-Feb-26 A",
-              "actual_finish": "",
               "forecast_start": "27-Feb-26",
               "forecast_finish": "1-Apr-26",
               "planned_weight": "0.1205",
@@ -1648,7 +1585,6 @@
               "planned_start": "30-Mar-26",
               "planned_finish": "29-Apr-26",
               "actual_start": "7-Apr-26 A",
-              "actual_finish": "",
               "forecast_start": "7-Apr-26",
               "forecast_finish": "1-May-26",
               "planned_weight": "0.1205",
@@ -1666,7 +1602,6 @@
               "planned_start": "29-Apr-26",
               "planned_finish": "26-Jun-26",
               "actual_start": "10-May-26 A",
-              "actual_finish": "",
               "forecast_start": "10-May-26",
               "forecast_finish": "28-Jun-26",
               "planned_weight": "0.1205",
@@ -1684,7 +1619,6 @@
               "planned_start": "26-Jun-26",
               "planned_finish": "4-Sep-26",
               "actual_start": "1-Jul-26 A",
-              "actual_finish": "",
               "forecast_start": "1-Jul-26",
               "forecast_finish": "6-Sep-26",
               "planned_weight": "0.1205",
@@ -1702,7 +1636,6 @@
               "planned_start": "27-Jul-26",
               "planned_finish": "15-Oct-26",
               "actual_start": "4-Aug-26 A",
-              "actual_finish": "",
               "forecast_start": "4-Aug-26",
               "forecast_finish": "17-Oct-26",
               "planned_weight": "0.0723",
@@ -1719,8 +1652,6 @@
               "activity_name": "Façade and retail shell finishing",
               "planned_start": "9-Nov-26",
               "planned_finish": "9-Mar-27",
-              "actual_start": "",
-              "actual_finish": "",
               "forecast_start": "14-Nov-26",
               "forecast_finish": "11-Mar-27",
               "planned_weight": "0.0723",
@@ -1737,8 +1668,6 @@
               "activity_name": "Testing, commissioning and authorities handover",
               "planned_start": "28-May-27",
               "planned_finish": "12-Jul-27",
-              "actual_start": "",
-              "actual_finish": "",
               "forecast_start": "2-Jun-27",
               "forecast_finish": "14-Jul-27",
               "planned_weight": "0.0241",
@@ -1754,11 +1683,7 @@
               "activity_id": "KD-MS-9000",
               "activity_name": "Substantial Completion",
               "planned_start": "1-Aug-27",
-              "planned_finish": "",
-              "actual_start": "",
-              "actual_finish": "",
               "forecast_start": "6-Aug-27",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "0.00",
               "actual_progress": "0.00",
@@ -2048,8 +1973,8 @@
           "row_count": 3,
           "column_count": 11,
           "columns": [
-            "risk_id",
             "project_id",
+            "risk_id",
             "risk_title",
             "risk_category",
             "probability",
@@ -2062,8 +1987,8 @@
           ],
           "rows": [
             {
-              "risk_id": "R-001",
               "project_id": "Sophia-Mall",
+              "risk_id": "R-001",
               "risk_title": "Steel delivery delay",
               "risk_category": "Schedule",
               "probability": "medium",
@@ -2075,8 +2000,8 @@
               "due_date": "30-Jun-26"
             },
             {
-              "risk_id": "R-002",
               "project_id": "Sophia-Mall",
+              "risk_id": "R-002",
               "risk_title": "Late design clarification and IFC revisions",
               "risk_category": "Engineering",
               "probability": "medium",
@@ -2088,8 +2013,8 @@
               "due_date": "15-Jul-26"
             },
             {
-              "risk_id": "R-003",
               "project_id": "Sophia-Mall",
+              "risk_id": "R-003",
               "risk_title": "Cashflow pressure due to delayed certification",
               "risk_category": "Commercial",
               "probability": "medium",
@@ -2209,7 +2134,7 @@
           "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 6,
-          "column_count": 18,
+          "column_count": 15,
           "columns": [
             "project_id",
             "payment",
@@ -2225,10 +2150,7 @@
             "Period for payment release",
             "Period in which interest is applied",
             "Amount of interest claimed (EGP)",
-            "delayed duration(Days) ",
-            "Unnamed: 14",
-            "Unnamed: 15",
-            "Unnamed: 16"
+            "delayed duration(Days) "
           ],
           "rows": [
             {
@@ -2246,10 +2168,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -2266,10 +2185,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -2286,10 +2202,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -2306,10 +2219,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -2326,10 +2236,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -2342,28 +2249,22 @@
               "paid amount": "139314000.00",
               "payment status": "Certified",
               "Contractual interest due": "45.0",
-              "Date of Cash Cheque Receipt": "",
-              "Period for payment release": "",
               "Period in which interest is applied": "0.0",
-              "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "Amount of interest claimed (EGP)": "0.0000"
             }
           ],
           "truncated": false,
           "source_path": "08_commercial_payments_claims.csv"
         },
         "planned_cash_flow": {
-          "file": "08_commercial_payments_claims.csv",
+          "file": "planned_cash_flow.csv",
           "exists": true,
           "row_count": 0,
           "column_count": 0,
           "columns": [],
           "rows": [],
           "truncated": false,
-          "source_path": "08_commercial_payments_claims.csv"
+          "source_path": "planned_cash_flow.csv"
         },
         "milestones": {
           "file": "05_milestones_scurve.csv",
@@ -2413,7 +2314,6 @@
               "activity_name": "Structural Works Completion",
               "planned_date": "15-Oct-26",
               "forecast_date": "30-Oct-26",
-              "actual_date": "",
               "milestone_contractual_type": "Interim milestone"
             },
             {
@@ -2422,7 +2322,6 @@
               "activity_name": "Substantial Completion",
               "planned_date": "31-Jul-27",
               "forecast_date": "25-Aug-27",
-              "actual_date": "",
               "milestone_contractual_type": "Finish milestone"
             }
           ],
@@ -2539,11 +2438,10 @@
           "file": "03_schedule_logic.csv",
           "exists": true,
           "row_count": 16,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_code",
-            "wbs_name",
             "total_activities",
             "bl_project_duration",
             "remaining_duration",
@@ -2551,7 +2449,6 @@
             "bl_project_start",
             "bl_project_finish",
             "actual_start",
-            "actual_finish",
             "schedule_%_complete",
             "performance_%_complete",
             "budget_at_completion",
@@ -2562,7 +2459,6 @@
             {
               "project_id": "Sophia-Mall-P.01-UP-20-April-26",
               "wbs_code": "No Priority",
-              "wbs_name": "",
               "total_activities": "1064",
               "bl_project_duration": "543",
               "remaining_duration": "376",
@@ -2570,7 +2466,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "18-Feb-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.623",
               "performance_%_complete": "0.354",
               "budget_at_completion": "382400000",
@@ -2588,7 +2483,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "18-Feb-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.623",
               "performance_%_complete": "0.354",
               "budget_at_completion": "382400000",
@@ -2606,7 +2500,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "18-Feb-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -2624,7 +2517,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "18-Feb-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -2638,7 +2530,6 @@
               "total_activities": "10",
               "bl_project_duration": "16",
               "remaining_duration": "0",
-              "total_float": "",
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "10-Sep-25",
               "actual_start": "29-Aug-25",
@@ -2660,7 +2551,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "30-Apr-26",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -2678,7 +2568,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "8-Nov-26",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -2696,7 +2585,6 @@
               "bl_project_start": "29-Sep-25",
               "bl_project_finish": "10-Dec-26",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.623",
               "performance_%_complete": "0.354",
               "budget_at_completion": "382400000",
@@ -2710,7 +2598,6 @@
               "total_activities": "31",
               "bl_project_duration": "62",
               "remaining_duration": "0",
-              "total_float": "",
               "bl_project_start": "24-Sep-25",
               "bl_project_finish": "25-Nov-25",
               "actual_start": "22-Sep-25",
@@ -2732,7 +2619,6 @@
               "bl_project_start": "14-Oct-25",
               "bl_project_finish": "20-Aug-26",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.68",
               "performance_%_complete": "0.41",
               "budget_at_completion": "97300000",
@@ -2750,7 +2636,6 @@
               "bl_project_start": "3-Dec-25",
               "bl_project_finish": "30-Nov-26",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.59",
               "performance_%_complete": "0.33",
               "budget_at_completion": "83450000",
@@ -2768,7 +2653,6 @@
               "bl_project_start": "14-Jan-26",
               "bl_project_finish": "8-Feb-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.55",
               "performance_%_complete": "0.3",
               "budget_at_completion": "91600000",
@@ -2786,7 +2670,6 @@
               "bl_project_start": "1-Mar-26",
               "bl_project_finish": "9-Jan-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.36",
               "performance_%_complete": "0.18",
               "budget_at_completion": "47850000",
@@ -2804,7 +2687,6 @@
               "bl_project_start": "12-Apr-26",
               "bl_project_finish": "7-Apr-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.28",
               "performance_%_complete": "0.14",
               "budget_at_completion": "52400000",
@@ -2822,7 +2704,6 @@
               "bl_project_start": "2-Apr-26",
               "bl_project_finish": "13-Jan-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.22",
               "performance_%_complete": "0.11",
               "budget_at_completion": "39950000",
@@ -2839,8 +2720,6 @@
               "total_float": "-38",
               "bl_project_start": "3-Nov-25",
               "bl_project_finish": "18-Feb-27",
-              "actual_start": "",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -2974,164 +2853,20 @@
       }
     },
     "letters_intelligence": {
-      "folder": "07-letters_intelligence/inbox + 01-data/import_templates",
+      "folder": "07-letters_intelligence",
       "inbox_files": [],
       "inbox_file_count": 0,
       "workbook": {
-        "file": "10_letters_intelligence.csv",
-        "exists": true,
-        "source_workbook": "letters_intelligence.xlsx",
-        "sheets": [
-          {
-            "name": "From Contractor",
-            "row_count": 0,
-            "column_count": 19,
-            "columns": [
-              "Ref No",
-              "Date",
-              "Type",
-              "Subject",
-              "Main Purpose",
-              "Key Requests",
-              "Scope Impact",
-              "Responsibility",
-              "Affected Activities",
-              "Start Dependency",
-              "Sequence Impact",
-              "Commercial Impact",
-              "Risk Type",
-              "Risk Owner",
-              "Delay Risk",
-              "EOT Potential",
-              "Claim Strength",
-              "Required Actions",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "From Consultant",
-            "row_count": 0,
-            "column_count": 19,
-            "columns": [
-              "Ref No",
-              "Date",
-              "Type",
-              "Subject",
-              "Main Purpose",
-              "Key Requests",
-              "Scope Impact",
-              "Responsibility",
-              "Affected Activities",
-              "Start Dependency",
-              "Sequence Impact",
-              "Commercial Impact",
-              "Risk Type",
-              "Risk Owner",
-              "Delay Risk",
-              "EOT Potential",
-              "Claim Strength",
-              "Required Actions",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "Contractor Links",
-            "row_count": 0,
-            "column_count": 18,
-            "columns": [
-              "Thread",
-              "SAMCO Ref No",
-              "SAMCO Sheet Row",
-              "SAMCO Date",
-              "SAMCO Type",
-              "SAMCO Subject",
-              "Related ACE Ref No(s)",
-              "ACE Sheet Row(s)",
-              "ACE Date(s)",
-              "ACE Subject(s)",
-              "Relationship",
-              "Confidence",
-              "SAMCO Claim Strength",
-              "ACE Claim Strength",
-              "SAMCO Delay Risk",
-              "ACE Delay Risk",
-              "Recommended Follow-up",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "Consultant Links",
-            "row_count": 0,
-            "column_count": 14,
-            "columns": [
-              "ACE Ref No",
-              "ACE Sheet Row",
-              "ACE Date",
-              "ACE Type",
-              "ACE Subject",
-              "Related SAMCO Ref No(s)",
-              "SAMCO Sheet Row(s)",
-              "SAMCO Subject(s)",
-              "Thread(s)",
-              "ACE Delay Risk",
-              "ACE EOT Potential",
-              "ACE Claim Strength",
-              "ACE Required Actions",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "Issue Threads",
-            "row_count": 0,
-            "column_count": 7,
-            "columns": [
-              "Thread",
-              "SAMCO Ref(s)",
-              "6",
-              "Main Link",
-              "Priority",
-              "Next Action",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "Auto Ingest Register",
-            "row_count": 0,
-            "column_count": 11,
-            "columns": [
-              "Source File",
-              "Direction",
-              "Reference",
-              "Date",
-              "Subject",
-              "Classification",
-              "Delay Risk",
-              "Issue Thread",
-              "Status",
-              "Message",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          }
-        ]
+        "file": "letters_intelligence.xlsx",
+        "exists": false,
+        "sheets": []
       },
       "workbook_tables": {
-        "file": "10_letters_intelligence.csv",
+        "file": "letters_intelligence.xlsx",
         "exists": true,
         "sheets": [
           {
-            "name": "From Consultant",
+            "name": "From SAMCO",
             "row_count": 0,
             "column_count": 19,
             "columns": [
@@ -3159,43 +2894,7 @@
             "truncated": false
           },
           {
-            "name": "Issue Threads",
-            "row_count": 0,
-            "column_count": 7,
-            "columns": [
-              "Thread",
-              "SAMCO Ref(s)",
-              "6",
-              "Main Link",
-              "Priority",
-              "Next Action",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "Auto Ingest Register",
-            "row_count": 0,
-            "column_count": 11,
-            "columns": [
-              "Source File",
-              "Direction",
-              "Reference",
-              "Date",
-              "Subject",
-              "Classification",
-              "Delay Risk",
-              "Issue Thread",
-              "Status",
-              "Message",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "From SAMCO",
+            "name": "From Consultant",
             "row_count": 0,
             "column_count": 19,
             "columns": [
@@ -3271,18 +2970,53 @@
             ],
             "rows": [],
             "truncated": false
+          },
+          {
+            "name": "Issue Threads",
+            "row_count": 0,
+            "column_count": 7,
+            "columns": [
+              "Thread",
+              "SAMCO Ref(s)",
+              "6",
+              "Main Link",
+              "Priority",
+              "Next Action",
+              "project_id"
+            ],
+            "rows": [],
+            "truncated": false
+          },
+          {
+            "name": "Auto Ingest Register",
+            "row_count": 0,
+            "column_count": 11,
+            "columns": [
+              "Source File",
+              "Direction",
+              "Reference",
+              "Date",
+              "Subject",
+              "Classification",
+              "Delay Risk",
+              "Issue Thread",
+              "Status",
+              "Message",
+              "project_id"
+            ],
+            "rows": [],
+            "truncated": false
           }
         ],
         "rejected_cross_project_rows": 0,
         "source_scope": "selected_project_only",
-        "inbox_auto_ingest": true,
-        "source_workbook": "letters_intelligence.xlsx"
+        "inbox_auto_ingest": true
       },
       "detectors": [
         {
           "name": "Canonical letters source",
           "status": "Active",
-          "detail": "Uses the selected project's 10_letters_intelligence.csv historical register and automatically evaluates new files in 07-letters_intelligence/inbox/From Contractor and From Consultant during the local data build."
+          "detail": "Uses the project-local workbook, inbox ingestion, correspondence links, and issue-thread workflow."
         },
         {
           "name": "Letters intelligence workflow",
@@ -5639,7 +5373,7 @@
           "relative_path": "Sophia-Mall/00_published_project_reports.zip",
           "extension": "zip",
           "size_kb": 1802.2,
-          "modified": "2026-08-20T11:49:24"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "01_executive_dashboard.html",
@@ -5653,14 +5387,14 @@
           "relative_path": "Sophia-Mall/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 829.0,
-          "modified": "2026-08-20T11:49:15"
+          "modified": "2026-08-22T04:17:17"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "Sophia-Mall/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-20T11:49:15"
+          "modified": "2026-08-22T04:17:17"
         },
         {
           "name": "02_master_dashboard.html",
@@ -5674,14 +5408,14 @@
           "relative_path": "Sophia-Mall/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 862.6,
-          "modified": "2026-08-20T11:49:18"
+          "modified": "2026-08-22T04:17:41"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "Sophia-Mall/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-20T11:49:18"
+          "modified": "2026-08-22T04:17:42"
         },
         {
           "name": "03_elite_svg_charts.html",
@@ -5695,14 +5429,14 @@
           "relative_path": "Sophia-Mall/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 234.6,
-          "modified": "2026-08-20T11:49:19"
+          "modified": "2026-08-22T04:17:43"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "Sophia-Mall/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-20T11:49:19"
+          "modified": "2026-08-22T04:17:43"
         },
         {
           "name": "04_linked_executive_dashboard.html",
@@ -5716,14 +5450,14 @@
           "relative_path": "Sophia-Mall/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1093.9,
-          "modified": "2026-08-20T11:49:23"
+          "modified": "2026-08-22T04:17:47"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "Sophia-Mall/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-20T11:49:23"
+          "modified": "2026-08-22T04:17:47"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
@@ -5765,217 +5499,217 @@
           "relative_path": "Sophia-Mall/universal-baseline_current-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-cashflow-program-report.html",
           "relative_path": "Sophia-Mall/universal-cashflow-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-change_control-program-report.html",
           "relative_path": "Sophia-Mall/universal-change_control-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-contract_admin-program-report.html",
           "relative_path": "Sophia-Mall/universal-contract_admin-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-cost-program-report.html",
           "relative_path": "Sophia-Mall/universal-cost-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-critical_path-program-report.html",
           "relative_path": "Sophia-Mall/universal-critical_path-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-delay-program-report.html",
           "relative_path": "Sophia-Mall/universal-delay-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-document_control-program-report.html",
           "relative_path": "Sophia-Mall/universal-document_control-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-eot-program-report.html",
           "relative_path": "Sophia-Mall/universal-eot-program-report.html",
           "extension": "html",
           "size_kb": 9.3,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-equipment-program-report.html",
           "relative_path": "Sophia-Mall/universal-equipment-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-evm-program-report.html",
           "relative_path": "Sophia-Mall/universal-evm-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-executive-program-report.html",
           "relative_path": "Sophia-Mall/universal-executive-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-float-program-report.html",
           "relative_path": "Sophia-Mall/universal-float-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-forecast_completion-program-report.html",
           "relative_path": "Sophia-Mall/universal-forecast_completion-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-hybrid-program-report.html",
           "relative_path": "Sophia-Mall/universal-hybrid-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-interface_management-program-report.html",
           "relative_path": "Sophia-Mall/universal-interface_management-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-lookahead-program-report.html",
           "relative_path": "Sophia-Mall/universal-lookahead-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-material-program-report.html",
           "relative_path": "Sophia-Mall/universal-material-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-milestone-program-report.html",
           "relative_path": "Sophia-Mall/universal-milestone-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-ml_project_controls-program-report.html",
           "relative_path": "Sophia-Mall/universal-ml_project_controls-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-procurement-program-report.html",
           "relative_path": "Sophia-Mall/universal-procurement-program-report.html",
           "extension": "html",
           "size_kb": 9.3,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-productivity-program-report.html",
           "relative_path": "Sophia-Mall/universal-productivity-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-progress-program-report.html",
           "relative_path": "Sophia-Mall/universal-progress-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-qaqc-program-report.html",
           "relative_path": "Sophia-Mall/universal-qaqc-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-recovery-program-report.html",
           "relative_path": "Sophia-Mall/universal-recovery-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal_report_engine_manifest.json",
           "relative_path": "Sophia-Mall/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 32.0,
-          "modified": "2026-08-22T04:05:31"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-resource-program-report.html",
           "relative_path": "Sophia-Mall/universal-resource-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-rfi_submittal-program-report.html",
           "relative_path": "Sophia-Mall/universal-rfi_submittal-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-risk-program-report.html",
           "relative_path": "Sophia-Mall/universal-risk-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-scurve-program-report.html",
           "relative_path": "Sophia-Mall/universal-scurve-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         },
         {
           "name": "universal-variation-program-report.html",
           "relative_path": "Sophia-Mall/universal-variation-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:27"
+          "modified": "2026-08-22T04:17:48"
         }
       ],
       "watchers": [
@@ -7165,11 +6899,11 @@
       "zip": {
         "name": "00_published_project_reports.zip",
         "bytes": 1845414,
-        "sha256": "30308c31888210ccc46b3ff7f5432408c27d16ca48f0e05768d1a59cd1b6f52c"
+        "sha256": "8a33e8db5f7f4d4bb1a9ebbadd7582a5851e0d6d1e0be38054c5927de08e146a"
       }
     },
     "source_project_id": "Sophia-Mall",
-    "source_report_fingerprint": "d5c28320b6f09beb1f15b005ec14df907315334869c7687222b5898320303893"
+    "source_report_fingerprint": "86d153430fa53531c30ab25bfb8c01902c461501ca3a38a105c9773a8d97fbb6"
   },
   "report_artifacts": {
     "executive_dashboard": {
@@ -7185,12 +6919,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 848904,
-          "sha256": "7044256268900ce10a9a5805bedfa69664e05b6c1be3e178778dd66ae4c44b4a"
+          "sha256": "541ddf3fe641e86a535c3e210febc64fbc0b2b5599f088badc55f658229e60e9"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
-          "bytes": 29124,
-          "sha256": "0705ee39ba6c9f318a756f8174512c2f9d3e934409b725631afcd6eb1d0a6543"
+          "bytes": 29125,
+          "sha256": "25d8ddea33e63fb02a3366ef1cb4b1cfbb4c89fc289c1a8746516e828fe23286"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7210,12 +6944,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 883327,
-          "sha256": "d269e59640836e16cf38508c2cb73a3d5dd5f9a1fb4e325188dfebfc5107af9e"
+          "sha256": "d990677b8fdd09152dfb1d1cc1a1d189cd1914c4eaf9617dd86a297ce1aa5e6b"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
-          "bytes": 29121,
-          "sha256": "403fde2a81a45f7bbd377aae6ec861b8d1ebaa990da78c816ffb155a0a0bab34"
+          "bytes": 29122,
+          "sha256": "a7d7506e63f869a5f16cc04840e2e032845791f9095f9dba8e5421f6fb6d40ee"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7235,12 +6969,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 240246,
-          "sha256": "1e9f3c97c4e02028eed1a9f5fc3b6ac5a9ac82fac5e406d512d9c4112962345f"
+          "sha256": "ae17feea41834eac239f92edae4e472c2a8f599eb9df5e710c5704abc3f30a08"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
-          "bytes": 29122,
-          "sha256": "8efb609fbbd250a4a765ee026e7d541e3a621ae7df0009f6e00548f6c7179a19"
+          "bytes": 29123,
+          "sha256": "95086c0b6b5104731da38b5656b162758c5d14a810b37e47bed87c6364ea02c3"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7260,12 +6994,12 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1120164,
-          "sha256": "6925bfb64875bc5c737901e1fb673ead9e991a802e8cece056ab3a58e0a2cbd8"
+          "sha256": "659a77bc5e8f01cd0204941c8a3eb21da049c5c84588a41f750ff8b503520fac"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
-          "bytes": 29130,
-          "sha256": "728a1e853d1100d9cf1884b2afe22374f8a1dafa3dd22768f823c5a79379982f"
+          "bytes": 29131,
+          "sha256": "f75777e9593c1905405bfe5e11565d26f833476e505dc778eb6be6d5fc738842"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7276,69 +7010,69 @@
   "universal_report_engine": {
     "project_id": "Sophia-Mall",
     "project_key": "sophia-mall",
-    "source_fingerprint": "050618f23508aaa2214f543e958e06b08184b32913b6b53b92137c6849bc9d6c",
+    "source_fingerprint": "9122984b3d591ae37db818910cbca7b5b5b14cf02c38955e2121418ec3d4efa6",
     "source_scope": "active project folder only",
     "source_file_count": 34,
     "source_inventory": [
       {
         "relative_path": "01-data/import_templates/01_project_contract.csv",
         "extension": ".csv",
-        "size_bytes": 1824,
-        "sha256": "3a697c0e870d2ec0c8ebb8ad9ae1ee346218ca7ad60a9ee3be80c8d010b37be1"
+        "size_bytes": 929,
+        "sha256": "39840bff6ce035c0a43d253f42e1039d063f4a8e26f255c71d22d413ffe17c55"
       },
       {
         "relative_path": "01-data/import_templates/02_schedule_activities.csv",
         "extension": ".csv",
-        "size_bytes": 16268,
-        "sha256": "994fb7068c3494d673ee1f17b714260f0372f16f3dfa1b1ea27d531a3ae15fc3"
+        "size_bytes": 13826,
+        "sha256": "bcdc8fd797676ed005cfe6737635dd6a0cd8daadbab4f2438ff5998bc442f9ef"
       },
       {
         "relative_path": "01-data/import_templates/03_schedule_logic.csv",
         "extension": ".csv",
-        "size_bytes": 12581,
-        "sha256": "b565742863e9bdae85266524cf4c5909bcf8df9273eed3a09f620fc535dc22ee"
+        "size_bytes": 8546,
+        "sha256": "62eb1bb25e3ee0dd618a020f539f07541595f061d86edebfe9064f3606c5080b"
       },
       {
         "relative_path": "01-data/import_templates/04_progress_evm.csv",
         "extension": ".csv",
-        "size_bytes": 10442,
-        "sha256": "76098b7d9f5af8dc8f7e1ece037fff96c8482091181013b244d700baa4048ed1"
+        "size_bytes": 6622,
+        "sha256": "0cc1b2d6298bcd9636658652ebf9c44cc3804ea772c69eb6d41de247b7cef9cc"
       },
       {
         "relative_path": "01-data/import_templates/05_milestones_scurve.csv",
         "extension": ".csv",
-        "size_bytes": 4340,
-        "sha256": "8832e1f30b4ad10a81eabb35a303b80680c20c427d6e51af8178af553aff7e0e"
+        "size_bytes": 2508,
+        "sha256": "3f9df52fea8fb1c10638acd42b6b269f43c4537146dfe2c9ec74e0d516fe2a6c"
       },
       {
         "relative_path": "01-data/import_templates/06_delay_events.csv",
         "extension": ".csv",
-        "size_bytes": 2778,
-        "sha256": "ab881a7a56bba75e5c4cd5f14e1265aca451683b03659b963bd24fba5f4871e3"
+        "size_bytes": 1610,
+        "sha256": "f654b6ad8e5e2015b84e27ec7cfe98f4364023865b44cc526eaa1b14575f4446"
       },
       {
         "relative_path": "01-data/import_templates/07_tia_evidence_scenarios.csv",
         "extension": ".csv",
-        "size_bytes": 29497,
-        "sha256": "c164bc1ca1c66667db15428ef26c5788c358d426f6564315f2b8036aa17690be"
+        "size_bytes": 25887,
+        "sha256": "cf2b5886f810c728c81e4b2c4d11f1727c282b50f334db8771c0eca8b7f1c495"
       },
       {
         "relative_path": "01-data/import_templates/08_commercial_payments_claims.csv",
         "extension": ".csv",
-        "size_bytes": 6381,
-        "sha256": "313345bf492c4bd931290c2185874c9a80da3edd9ef53bd05204f19e546127ee"
+        "size_bytes": 3443,
+        "sha256": "af0e0b811060fb64dd9c71219eb84ddac7a811757afc78de5bc7a430cf7cfa26"
       },
       {
         "relative_path": "01-data/import_templates/09_risks_rfi_interfaces.csv",
         "extension": ".csv",
-        "size_bytes": 10023,
-        "sha256": "c5b68e1dad2641228f4c92ee61651af04db10ad14b17242340fab9c5c2ac30b4"
+        "size_bytes": 6525,
+        "sha256": "5d7d716a227e777fc4253377b38b4207377c5abf038deadabf881776a238eeef"
       },
       {
         "relative_path": "01-data/import_templates/10_letters_intelligence.csv",
         "extension": ".csv",
-        "size_bytes": 3198,
-        "sha256": "d96c372a27bf975e42cda4c8665a70df82c62fedb25df1bfabb0fd66e1adac8c"
+        "size_bytes": 868,
+        "sha256": "436c277dbd7fa5eb5c3037b99b41ddea6673046c1e9ac94db2e84d30fe214169"
       },
       {
         "relative_path": "01-data/import_templates/planned_cash_flow.csv",
@@ -7513,7 +7247,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-eot-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7531,7 +7265,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-delay-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7549,7 +7283,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-progress-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7567,7 +7301,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-recovery-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7585,7 +7319,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-variation-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7602,7 +7336,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-hybrid-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7620,7 +7354,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-resource-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7637,7 +7371,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-equipment-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7654,7 +7388,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-cost-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7671,7 +7405,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-evm-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7688,7 +7422,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-cashflow-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7705,7 +7439,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-scurve-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7723,7 +7457,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-procurement-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7740,7 +7474,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-material-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7758,7 +7492,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-lookahead-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7776,7 +7510,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-critical_path-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7794,7 +7528,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-float-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7812,7 +7546,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-milestone-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7829,7 +7563,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-risk-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7847,7 +7581,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-rfi_submittal-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7864,7 +7598,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-qaqc-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7881,7 +7615,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-productivity-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7898,7 +7632,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-executive-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7916,7 +7650,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-baseline_current-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7934,7 +7668,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-forecast_completion-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7951,7 +7685,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-ml_project_controls-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7968,7 +7702,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-contract_admin-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7985,7 +7719,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-change_control-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8002,7 +7736,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-document_control-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8020,7 +7754,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-interface_management-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:17:48+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       }
@@ -8115,6 +7849,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-22T01:05:31+00:00"
+    "updated_at": "2026-08-22T01:17:48+00:00"
   }
 }

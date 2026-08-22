@@ -1,25 +1,23 @@
-bundle_version,source_scope,source_file,row_kind,row_order,payload_json
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,schema,0,"{""headers"":[""milestone_id"",""project_id"",""activity_name"",""planned_date"",""forecast_date"",""actual_date"",""milestone_contractual_type""],""source_sha256"":""6fb57c383030a05019f4e7e4a42f49a53b30318717b9a266b565b86583247a82""}"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,1,"[""KD`-MS-1000"",""The Big -P.01-UP-20-April-26"",""Project Start Date"",""11-Sep-25"",""11-Sep-25"",""11-Sep-25"",""Start milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,2,"[""KD-MS-1010"",""The Big -P.01-UP-20-April-26"",""Contract Agreement"",""11-Sep-25"",""11-Sep-25"",""11-Sep-25"",""Start milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,3,"[""KD-MS-1020"",""The Big -P.01-UP-20-April-26"",""IFC Drawing Package"",""11-Sep-25"",""11-Sep-25"",""11-Sep-25"",""Start milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,4,"[""KD-MS-1040"",""The Big -P.01-UP-20-April-26"",""Ground Works Finish Date"",""11-May-26"",""10-Sep-26"","""",""Finish milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,schema,0,"{""headers"":[""project_id"",""months"",""monthly_planned"",""cumm_monthly_planned"",""monthly_actual"",""cumm_monthly_actual"",""monthly_invoiced"",""cumm_monthly_invoiced""],""source_sha256"":""37c7c3984f7719338a30052084fe62f4df71e7a9c1ed2c758ac7480cfe6c3f6a""}"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,1,"[""The Big -P.01-UP-20-April-26"",""1-Oct-25"",""0.0"",""0.0"",""3974600.57"",""3974600.57"",""0.0"",""0.0""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,2,"[""The Big -P.01-UP-20-April-26"",""1-Nov-25"",""8347296.45"",""8347296.45"",""8089030.9"",""12063631.47"",""0.0"",""0.0""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,3,"[""The Big -P.01-UP-20-April-26"",""1-Dec-25"",""61405155.86"",""69752452.31"",""8521118.53"",""20584750.0"",""23485862.02"",""23485862.02""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,4,"[""The Big -P.01-UP-20-April-26"",""1-Jan-26"",""67496644.02"",""137249096.3"",""34796118.93"",""55380868.93"",""46408963.51"",""69894825.53""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,5,"[""The Big -P.01-UP-20-April-26"",""1-Feb-26"",""33633991.22"",""170883087.6"",""20205303.35"",""75586172.28"",""40393706.06"",""110288531.6""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,6,"[""The Big -P.01-UP-20-April-26"",""1-Mar-26"",""38111113.51"",""208994201.1"",""14348185.06"",""89934357.34"",""17641618.94"",""127930150.5""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,7,"[""The Big -P.01-UP-20-April-26"",""1-Apr-26"",""29721101.71"",""238715302.8"",""17873350.85"",""107807708.2"",""15475615.0"",""143405765.5""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,8,"[""The Big -P.01-UP-20-April-26"",""1-May-26"",""20259735.78"",""258975038.6"",""5277326.61"",""113085034.8"",""0.0"",""0.0""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,9,"[""The Big -P.01-UP-20-April-26"",""1-Jun-26"",""13490432.04"",""272465470.6"",""0.0"",""0.0"",""0.0"",""0.0""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,10,"[""The Big -P.01-UP-20-April-26"",""1-Jul-26"",""14762397.2"",""287227867.8"",""0.0"",""0.0"",""0.0"",""0.0""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,11,"[""The Big -P.01-UP-20-April-26"",""1-Aug-26"",""9924530.76"",""297152398.6"",""0.0"",""0.0"",""0.0"",""0.0""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,12,"[""The Big -P.01-UP-20-April-26"",""1-Sep-26"",""12399329.58"",""309551728.1"",""0.0"",""0.0"",""0.0"",""0.0""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,13,"[""The Big -P.01-UP-20-April-26"",""1-Oct-26"",""8650019.18"",""318201747.3"",""0.0"",""0.0"",""0.0"",""0.0""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,14,"[""The Big -P.01-UP-20-April-26"",""1-Nov-26"",""14242110.8"",""332443858.1"",""0.0"",""0.0"",""0.0"",""0.0""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,15,"[""The Big -P.01-UP-20-April-26"",""1-Dec-26"",""10767589.67"",""343211447.8"",""0.0"",""0.0"",""0.0"",""0.0""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,16,"[""The Big -P.01-UP-20-April-26"",""1-Jan-27"",""14357924.01"",""357569371.8"",""0.0"",""0.0"",""0.0"",""0.0""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,17,"[""The Big -P.01-UP-20-April-26"",""1-Feb-27"",""9156113.78"",""366725485.6"",""0.0"",""0.0"",""0.0"",""0.0""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,18,"[""The Big -P.01-UP-20-April-26"",""1-Mar-27"",""560539.45"",""367286025.0"",""0.0"",""0.0"",""0.0"",""0.0""]"
+﻿source_table,source_path,row_order,milestone_id,project_id,activity_name,planned_date,forecast_date,actual_date,milestone_contractual_type,months,monthly_planned,cumm_monthly_planned,monthly_actual,cumm_monthly_actual,monthly_invoiced,cumm_monthly_invoiced
+milestones,01-data/import_templates/milestones.csv,1,KD`-MS-1000,The Big -P.01-UP-20-April-26,Project Start Date,11-Sep-25,11-Sep-25,11-Sep-25,Start milestone,,,,,,,
+milestones,01-data/import_templates/milestones.csv,2,KD-MS-1010,The Big -P.01-UP-20-April-26,Contract Agreement,11-Sep-25,11-Sep-25,11-Sep-25,Start milestone,,,,,,,
+milestones,01-data/import_templates/milestones.csv,3,KD-MS-1020,The Big -P.01-UP-20-April-26,IFC Drawing Package,11-Sep-25,11-Sep-25,11-Sep-25,Start milestone,,,,,,,
+milestones,01-data/import_templates/milestones.csv,4,KD-MS-1040,The Big -P.01-UP-20-April-26,Ground Works Finish Date,11-May-26,10-Sep-26,,Finish milestone,,,,,,,
+s_curve,01-data/import_templates/s_curve.csv,1,,The Big -P.01-UP-20-April-26,,,,,,1-Oct-25,0.0,0.0,3974600.57,3974600.57,0.0,0.0
+s_curve,01-data/import_templates/s_curve.csv,2,,The Big -P.01-UP-20-April-26,,,,,,1-Nov-25,8347296.45,8347296.45,8089030.9,12063631.47,0.0,0.0
+s_curve,01-data/import_templates/s_curve.csv,3,,The Big -P.01-UP-20-April-26,,,,,,1-Dec-25,61405155.86,69752452.31,8521118.53,20584750.0,23485862.02,23485862.02
+s_curve,01-data/import_templates/s_curve.csv,4,,The Big -P.01-UP-20-April-26,,,,,,1-Jan-26,67496644.02,137249096.3,34796118.93,55380868.93,46408963.51,69894825.53
+s_curve,01-data/import_templates/s_curve.csv,5,,The Big -P.01-UP-20-April-26,,,,,,1-Feb-26,33633991.22,170883087.6,20205303.35,75586172.28,40393706.06,110288531.6
+s_curve,01-data/import_templates/s_curve.csv,6,,The Big -P.01-UP-20-April-26,,,,,,1-Mar-26,38111113.51,208994201.1,14348185.06,89934357.34,17641618.94,127930150.5
+s_curve,01-data/import_templates/s_curve.csv,7,,The Big -P.01-UP-20-April-26,,,,,,1-Apr-26,29721101.71,238715302.8,17873350.85,107807708.2,15475615.0,143405765.5
+s_curve,01-data/import_templates/s_curve.csv,8,,The Big -P.01-UP-20-April-26,,,,,,1-May-26,20259735.78,258975038.6,5277326.61,113085034.8,0.0,0.0
+s_curve,01-data/import_templates/s_curve.csv,9,,The Big -P.01-UP-20-April-26,,,,,,1-Jun-26,13490432.04,272465470.6,0.0,0.0,0.0,0.0
+s_curve,01-data/import_templates/s_curve.csv,10,,The Big -P.01-UP-20-April-26,,,,,,1-Jul-26,14762397.2,287227867.8,0.0,0.0,0.0,0.0
+s_curve,01-data/import_templates/s_curve.csv,11,,The Big -P.01-UP-20-April-26,,,,,,1-Aug-26,9924530.76,297152398.6,0.0,0.0,0.0,0.0
+s_curve,01-data/import_templates/s_curve.csv,12,,The Big -P.01-UP-20-April-26,,,,,,1-Sep-26,12399329.58,309551728.1,0.0,0.0,0.0,0.0
+s_curve,01-data/import_templates/s_curve.csv,13,,The Big -P.01-UP-20-April-26,,,,,,1-Oct-26,8650019.18,318201747.3,0.0,0.0,0.0,0.0
+s_curve,01-data/import_templates/s_curve.csv,14,,The Big -P.01-UP-20-April-26,,,,,,1-Nov-26,14242110.8,332443858.1,0.0,0.0,0.0,0.0
+s_curve,01-data/import_templates/s_curve.csv,15,,The Big -P.01-UP-20-April-26,,,,,,1-Dec-26,10767589.67,343211447.8,0.0,0.0,0.0,0.0
+s_curve,01-data/import_templates/s_curve.csv,16,,The Big -P.01-UP-20-April-26,,,,,,1-Jan-27,14357924.01,357569371.8,0.0,0.0,0.0,0.0
+s_curve,01-data/import_templates/s_curve.csv,17,,The Big -P.01-UP-20-April-26,,,,,,1-Feb-27,9156113.78,366725485.6,0.0,0.0,0.0,0.0
+s_curve,01-data/import_templates/s_curve.csv,18,,The Big -P.01-UP-20-April-26,,,,,,1-Mar-27,560539.45,367286025.0,0.0,0.0,0.0,0.0

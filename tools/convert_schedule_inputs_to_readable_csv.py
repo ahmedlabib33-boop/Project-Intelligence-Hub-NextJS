@@ -178,6 +178,11 @@ def input_is_readable(path: Path) -> bool:
     return {"source_table", "source_path", "row_order"}.issubset(columns) or {"record_type", "sheet_name", "row_order"}.issubset(columns)
 
 
+def csv_fieldnames(path: Path) -> list[str]:
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        return [str(name) for name in (csv.DictReader(handle).fieldnames or [])]
+
+
 def ensure_inputs_are_writable(paths: list[Path]) -> None:
     locked: list[str] = []
     for path in paths:
@@ -192,14 +197,17 @@ def ensure_inputs_are_writable(paths: list[Path]) -> None:
 
 
 def find_projects() -> list[Path]:
-    return [path.parent.parent.parent for path in PROJECTS_ROOT.rglob("01-data/import_templates/02_schedule_activities.csv")]
+    return [
+        path.parent.parent.parent
+        for path in PROJECTS_ROOT.rglob("01-data/import_templates/02_schedule_activities.csv")
+        if path.parent.parent.parent.name != PROJECT_TEMPLATE.name
+    ]
 
 
 def readable_fieldnames(path: Path) -> list[str]:
     """Return editable field names from either a readable input or its envelope."""
     if input_is_readable(path):
-        with path.open("r", encoding="utf-8-sig", newline="") as handle:
-            return [str(name) for name in (csv.DictReader(handle).fieldnames or [])]
+        return csv_fieldnames(path)
     if path.name == "10_letters_intelligence.csv":
         columns, _ = decode_letters_snapshot(path)
         return columns
@@ -210,6 +218,36 @@ def readable_fieldnames(path: Path) -> list[str]:
             if header not in headers:
                 headers.append(header)
     return headers
+
+
+def normalize_readable_columns(projects: list[Path], dry_run: bool) -> None:
+    """Give every project the same editable header contract without changing rows.
+
+    Empty original bundles have no schema record. They must still show the
+    normal domain columns in Excel, rather than only internal source metadata.
+    """
+    union_by_input: dict[str, list[str]] = {}
+    for input_name in CANONICAL_INPUTS:
+        fields: list[str] = []
+        for project in [*projects, PROJECT_TEMPLATE]:
+            path = project / "01-data" / "import_templates" / input_name
+            for field in readable_fieldnames(path):
+                if field not in fields:
+                    fields.append(field)
+        union_by_input[input_name] = fields
+
+    for project in projects:
+        data_dir = project / "01-data" / "import_templates"
+        for input_name in CANONICAL_INPUTS:
+            path = data_dir / input_name
+            existing = csv_fieldnames(path)
+            target = union_by_input[input_name]
+            if existing == target:
+                continue
+            rows = read_rows(path)
+            replace_csv(path, target, rows, dry_run)
+            state = "WOULD NORMALIZE" if dry_run else "NORMALIZED"
+            print(f"{state} {project.name} / {input_name}: {len(existing)} to {len(target)} editable columns")
 
 
 def sha256(path: Path) -> str:
@@ -332,6 +370,7 @@ def main() -> int:
             count = write_readable_csv(path, tables, args.dry_run)
             state = "WOULD CONVERT" if args.dry_run else "CONVERTED"
             print(f"{state} {project.name} / {input_name}: {count} editable rows, {len(tables)} source tables")
+    normalize_readable_columns(projects, args.dry_run)
     return 0
 
 

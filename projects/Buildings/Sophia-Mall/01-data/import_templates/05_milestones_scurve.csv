@@ -1,18 +1,16 @@
-bundle_version,source_scope,source_file,row_kind,row_order,payload_json
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,schema,0,"{""headers"":[""milestone_id"",""project_id"",""activity_name"",""planned_date"",""forecast_date"",""actual_date"",""milestone_contractual_type""],""source_sha256"":""253788e9bffa4e540f869183dd827dbc3a478764c19d8c5cd847cf8b3a04dc3c""}"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,1,"[""KD-MS-1000"",""Sophia-Mall"",""Project Start Date"",""15-Oct-25"",""15-Oct-25"",""15-Oct-25"",""Start milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,2,"[""KD-MS-1010"",""Sophia-Mall"",""Contract Agreement"",""15-Oct-25"",""15-Oct-25"",""15-Oct-25"",""Start milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,3,"[""KD-MS-1020"",""Sophia-Mall"",""IFC Drawing Package"",""22-Oct-25"",""27-Oct-25"",""22-Oct-25"",""Key milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,4,"[""KD-MS-5000"",""Sophia-Mall"",""Structural Works Completion"",""15-Oct-26"",""30-Oct-26"","""",""Interim milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,5,"[""KD-MS-9000"",""Sophia-Mall"",""Substantial Completion"",""31-Jul-27"",""25-Aug-27"","""",""Finish milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,schema,0,"{""headers"":[""project_id"",""months"",""monthly_planned"",""cumm_monthly_planned"",""monthly_actual"",""cumm_monthly_actual"",""monthly_invoiced"",""cumm_monthly_invoiced""],""source_sha256"":""8f6e811670ca2f1bf42deaf383826069ed79e6793d25a86493dc7df50a038e28""}"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,1,"[""Sophia-Mall"",""1-Oct-25"",""42000000.00"",""42000000.00"",""37842000.00"",""37842000.00"",""0.00"",""0.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,2,"[""Sophia-Mall"",""1-Nov-25"",""84000000.00"",""126000000.00"",""78355200.00"",""116197200.00"",""0.00"",""0.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,3,"[""Sophia-Mall"",""1-Dec-25"",""147000000.00"",""273000000.00"",""141796200.00"",""257993400.00"",""110601036.00"",""110601036.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,4,"[""Sophia-Mall"",""1-Jan-26"",""210000000.00"",""483000000.00"",""209244000.00"",""467237400.00"",""163210320.00"",""273811356.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,5,"[""Sophia-Mall"",""1-Feb-26"",""252000000.00"",""735000000.00"",""259106400.00"",""726343800.00"",""202102992.00"",""475914348.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,6,"[""Sophia-Mall"",""1-Mar-26"",""294000000.00"",""1029000000.00"",""311640000.00"",""1037983800.00"",""243079200.00"",""718993548.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,7,"[""Sophia-Mall"",""1-Apr-26"",""273000000.00"",""1302000000.00"",""298061400.00"",""1336045200.00"",""232487892.00"",""951481440.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,8,"[""Sophia-Mall"",""1-May-26"",""252000000.00"",""1554000000.00"",""283147200.00"",""1619192400.00"",""220854816.00"",""1172336256.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,9,"[""Sophia-Mall"",""1-Jun-26"",""210000000.00"",""1764000000.00"",""148785000.00"",""1767977400.00"",""116052300.00"",""1288388556.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,10,"[""Sophia-Mall"",""1-Jul-26"",""168000000.00"",""1932000000.00"",""122304000.00"",""1890281400.00"",""95397120.00"",""1383785676.00""]"
+﻿source_table,source_path,row_order,milestone_id,project_id,activity_name,planned_date,forecast_date,actual_date,milestone_contractual_type,months,monthly_planned,cumm_monthly_planned,monthly_actual,cumm_monthly_actual,monthly_invoiced,cumm_monthly_invoiced
+milestones,01-data/import_templates/milestones.csv,1,KD-MS-1000,Sophia-Mall,Project Start Date,15-Oct-25,15-Oct-25,15-Oct-25,Start milestone,,,,,,,
+milestones,01-data/import_templates/milestones.csv,2,KD-MS-1010,Sophia-Mall,Contract Agreement,15-Oct-25,15-Oct-25,15-Oct-25,Start milestone,,,,,,,
+milestones,01-data/import_templates/milestones.csv,3,KD-MS-1020,Sophia-Mall,IFC Drawing Package,22-Oct-25,27-Oct-25,22-Oct-25,Key milestone,,,,,,,
+milestones,01-data/import_templates/milestones.csv,4,KD-MS-5000,Sophia-Mall,Structural Works Completion,15-Oct-26,30-Oct-26,,Interim milestone,,,,,,,
+milestones,01-data/import_templates/milestones.csv,5,KD-MS-9000,Sophia-Mall,Substantial Completion,31-Jul-27,25-Aug-27,,Finish milestone,,,,,,,
+s_curve,01-data/import_templates/s_curve.csv,1,,Sophia-Mall,,,,,,1-Oct-25,42000000.00,42000000.00,37842000.00,37842000.00,0.00,0.00
+s_curve,01-data/import_templates/s_curve.csv,2,,Sophia-Mall,,,,,,1-Nov-25,84000000.00,126000000.00,78355200.00,116197200.00,0.00,0.00
+s_curve,01-data/import_templates/s_curve.csv,3,,Sophia-Mall,,,,,,1-Dec-25,147000000.00,273000000.00,141796200.00,257993400.00,110601036.00,110601036.00
+s_curve,01-data/import_templates/s_curve.csv,4,,Sophia-Mall,,,,,,1-Jan-26,210000000.00,483000000.00,209244000.00,467237400.00,163210320.00,273811356.00
+s_curve,01-data/import_templates/s_curve.csv,5,,Sophia-Mall,,,,,,1-Feb-26,252000000.00,735000000.00,259106400.00,726343800.00,202102992.00,475914348.00
+s_curve,01-data/import_templates/s_curve.csv,6,,Sophia-Mall,,,,,,1-Mar-26,294000000.00,1029000000.00,311640000.00,1037983800.00,243079200.00,718993548.00
+s_curve,01-data/import_templates/s_curve.csv,7,,Sophia-Mall,,,,,,1-Apr-26,273000000.00,1302000000.00,298061400.00,1336045200.00,232487892.00,951481440.00
+s_curve,01-data/import_templates/s_curve.csv,8,,Sophia-Mall,,,,,,1-May-26,252000000.00,1554000000.00,283147200.00,1619192400.00,220854816.00,1172336256.00
+s_curve,01-data/import_templates/s_curve.csv,9,,Sophia-Mall,,,,,,1-Jun-26,210000000.00,1764000000.00,148785000.00,1767977400.00,116052300.00,1288388556.00
+s_curve,01-data/import_templates/s_curve.csv,10,,Sophia-Mall,,,,,,1-Jul-26,168000000.00,1932000000.00,122304000.00,1890281400.00,95397120.00,1383785676.00

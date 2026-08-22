@@ -1,18 +1,16 @@
-bundle_version,source_scope,source_file,row_kind,row_order,payload_json
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,schema,0,"{""headers"":[""milestone_id"",""project_id"",""activity_name"",""planned_date"",""forecast_date"",""actual_date"",""milestone_contractual_type""],""source_sha256"":""3411d90ed2a0b51ebac7008162b1f62ac13f5ac8fe27a2fc4673bc0ab4582711""}"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,1,"[""NCT-MS-1000"",""Nasr city-Tunnel"",""Notice to Proceed"",""5-Jan-26"",""5-Jan-26"",""5-Jan-26"",""Start milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,2,"[""NCT-MS-1010"",""Nasr city-Tunnel"",""Site Handover"",""8-Jan-26"",""10-Jan-26"",""10-Jan-26"",""Start milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,3,"[""NCT-MS-1020"",""Nasr city-Tunnel"",""IFC Package Complete"",""31-Jan-26"",""18-Mar-26"",""18-Mar-26"",""Key milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,4,"[""NCT-MS-1030"",""Nasr city-Tunnel"",""Substructure Completion"",""28-May-26"",""19-Jun-26"","""",""Contract milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/milestones.csv,01-data/import_templates/milestones.csv,data,5,"[""NCT-MS-1040"",""Nasr city-Tunnel"",""Project Completion"",""15-Dec-26"",""12-Jan-27"","""",""Completion milestone""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,schema,0,"{""headers"":[""project_id"",""months"",""monthly_planned"",""cumm_monthly_planned"",""monthly_actual"",""cumm_monthly_actual"",""monthly_invoiced"",""cumm_monthly_invoiced""],""source_sha256"":""2e7e154344f55b5e672271faf5dabf68a673949b03ccbf85eb704bd00617232c""}"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,1,"[""Nasr city-Tunnel"",""1-Jan-26"",""30000000.00"",""30000000.00"",""24450000.00"",""24450000.00"",""0.00"",""0.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,2,"[""Nasr city-Tunnel"",""1-Feb-26"",""52000000.00"",""82000000.00"",""41600000.00"",""66050000.00"",""0.00"",""0.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,3,"[""Nasr city-Tunnel"",""1-Mar-26"",""76000000.00"",""158000000.00"",""59432000.00"",""125482000.00"",""41200000.00"",""41200000.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,4,"[""Nasr city-Tunnel"",""1-Apr-26"",""94000000.00"",""252000000.00"",""74260000.00"",""199742000.00"",""57600000.00"",""98800000.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,5,"[""Nasr city-Tunnel"",""1-May-26"",""116000000.00"",""368000000.00"",""88740000.00"",""288482000.00"",""69100000.00"",""167900000.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,6,"[""Nasr city-Tunnel"",""1-Jun-26"",""138000000.00"",""506000000.00"",""105570000.00"",""394052000.00"",""82600000.00"",""250500000.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,7,"[""Nasr city-Tunnel"",""1-Jul-26"",""151000000.00"",""657000000.00"",""100408000.00"",""494460000.00"",""75400000.00"",""325900000.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,8,"[""Nasr city-Tunnel"",""1-Aug-26"",""164000000.00"",""821000000.00"",""0.00"",""494460000.00"",""0.00"",""325900000.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,9,"[""Nasr city-Tunnel"",""1-Sep-26"",""173000000.00"",""994000000.00"",""0.00"",""494460000.00"",""0.00"",""325900000.00""]"
-2026-08-15.lossless-project-input-bundle.v1,data/s_curve.csv,01-data/import_templates/s_curve.csv,data,10,"[""Nasr city-Tunnel"",""1-Oct-26"",""181000000.00"",""1175000000.00"",""0.00"",""494460000.00"",""0.00"",""325900000.00""]"
+﻿source_table,source_path,row_order,milestone_id,project_id,activity_name,planned_date,forecast_date,actual_date,milestone_contractual_type,months,monthly_planned,cumm_monthly_planned,monthly_actual,cumm_monthly_actual,monthly_invoiced,cumm_monthly_invoiced
+milestones,01-data/import_templates/milestones.csv,1,NCT-MS-1000,Nasr city-Tunnel,Notice to Proceed,5-Jan-26,5-Jan-26,5-Jan-26,Start milestone,,,,,,,
+milestones,01-data/import_templates/milestones.csv,2,NCT-MS-1010,Nasr city-Tunnel,Site Handover,8-Jan-26,10-Jan-26,10-Jan-26,Start milestone,,,,,,,
+milestones,01-data/import_templates/milestones.csv,3,NCT-MS-1020,Nasr city-Tunnel,IFC Package Complete,31-Jan-26,18-Mar-26,18-Mar-26,Key milestone,,,,,,,
+milestones,01-data/import_templates/milestones.csv,4,NCT-MS-1030,Nasr city-Tunnel,Substructure Completion,28-May-26,19-Jun-26,,Contract milestone,,,,,,,
+milestones,01-data/import_templates/milestones.csv,5,NCT-MS-1040,Nasr city-Tunnel,Project Completion,15-Dec-26,12-Jan-27,,Completion milestone,,,,,,,
+s_curve,01-data/import_templates/s_curve.csv,1,,Nasr city-Tunnel,,,,,,1-Jan-26,30000000.00,30000000.00,24450000.00,24450000.00,0.00,0.00
+s_curve,01-data/import_templates/s_curve.csv,2,,Nasr city-Tunnel,,,,,,1-Feb-26,52000000.00,82000000.00,41600000.00,66050000.00,0.00,0.00
+s_curve,01-data/import_templates/s_curve.csv,3,,Nasr city-Tunnel,,,,,,1-Mar-26,76000000.00,158000000.00,59432000.00,125482000.00,41200000.00,41200000.00
+s_curve,01-data/import_templates/s_curve.csv,4,,Nasr city-Tunnel,,,,,,1-Apr-26,94000000.00,252000000.00,74260000.00,199742000.00,57600000.00,98800000.00
+s_curve,01-data/import_templates/s_curve.csv,5,,Nasr city-Tunnel,,,,,,1-May-26,116000000.00,368000000.00,88740000.00,288482000.00,69100000.00,167900000.00
+s_curve,01-data/import_templates/s_curve.csv,6,,Nasr city-Tunnel,,,,,,1-Jun-26,138000000.00,506000000.00,105570000.00,394052000.00,82600000.00,250500000.00
+s_curve,01-data/import_templates/s_curve.csv,7,,Nasr city-Tunnel,,,,,,1-Jul-26,151000000.00,657000000.00,100408000.00,494460000.00,75400000.00,325900000.00
+s_curve,01-data/import_templates/s_curve.csv,8,,Nasr city-Tunnel,,,,,,1-Aug-26,164000000.00,821000000.00,0.00,494460000.00,0.00,325900000.00
+s_curve,01-data/import_templates/s_curve.csv,9,,Nasr city-Tunnel,,,,,,1-Sep-26,173000000.00,994000000.00,0.00,494460000.00,0.00,325900000.00
+s_curve,01-data/import_templates/s_curve.csv,10,,Nasr city-Tunnel,,,,,,1-Oct-26,181000000.00,1175000000.00,0.00,494460000.00,0.00,325900000.00

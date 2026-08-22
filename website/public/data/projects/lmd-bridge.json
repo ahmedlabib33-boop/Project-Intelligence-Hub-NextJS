@@ -234,7 +234,7 @@
   },
   "decision_required": true,
   "last_updated": "2026-08-15T16:47:59",
-  "fingerprint": "7f8cd518e98dffe8576e3fcfab5d372dc92e21ba1995164d39140aee1ce8a3b1",
+  "fingerprint": "5b284023ebe811e511663998c172835f42b67615e974f0e759bb88a3272c4ff5",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -327,15 +327,15 @@
           "column_count": 14,
           "columns": [
             "project_id",
+            "contractor",
+            "status",
             "project_name",
             "client_name",
-            "contractor",
             "planned_start",
             "planned_finish",
             "forecast_finish",
             "contract_value",
             "currency",
-            "status",
             "planned_progress_percent",
             "actual_progress_percent",
             "planned_value",
@@ -344,15 +344,15 @@
           "rows": [
             {
               "project_id": "LMD-Bridge",
+              "contractor": "Prime Roads & Bridges",
+              "status": "Delayed",
               "project_name": "LMD Bridge & Road Interchange",
               "client_name": "LMD Infrastructure Company",
-              "contractor": "Prime Roads & Bridges",
               "planned_start": "5-Nov-25",
               "planned_finish": "20-Mar-27",
               "forecast_finish": "9-Jun-27",
               "contract_value": "850000000",
               "currency": "EGP",
-              "status": "Delayed",
               "planned_progress_percent": "38.00",
               "actual_progress_percent": "31.00",
               "planned_value": "323000000",
@@ -364,18 +364,16 @@
           "file": "02_schedule_activities.csv",
           "exists": true,
           "row_count": 17,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_id",
             "activity_id",
             "activity_name",
             "planned_start",
-            "planned_finish",
             "actual_start",
             "actual_finish",
             "forecast_start",
-            "forecast_finish",
             "planned_weight",
             "planned_progress",
             "actual_progress",
@@ -390,11 +388,9 @@
               "activity_id": "KD-MS-1000",
               "activity_name": "Project Start Date",
               "planned_start": "5-Nov-25",
-              "planned_finish": "",
               "actual_start": "5-Nov-25 A",
               "actual_finish": "5-Nov-25 A",
               "forecast_start": "5-Nov-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
@@ -408,11 +404,9 @@
               "activity_id": "KD-MS-1010",
               "activity_name": "Contract Agreement",
               "planned_start": "5-Nov-25",
-              "planned_finish": "",
               "actual_start": "5-Nov-25 A",
               "actual_finish": "5-Nov-25 A",
               "forecast_start": "5-Nov-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
@@ -426,15 +420,12 @@
               "activity_id": "KD-MS-1020",
               "activity_name": "IFC Drawing Package",
               "planned_start": "12-Nov-25",
-              "planned_finish": "",
               "actual_start": "12-Nov-25 A",
               "actual_finish": "12-Nov-25 A",
               "forecast_start": "12-Nov-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
-              "total_float_days": "",
               "is_critical": "Yes",
               "responsible_party": "Engineering"
             },
@@ -482,7 +473,6 @@
               "planned_start": "20-Dec-25",
               "planned_finish": "24-Jan-26",
               "actual_start": "16-Jan-26 A",
-              "actual_finish": "",
               "forecast_start": "16-Jan-26",
               "forecast_finish": "20-Feb-26",
               "planned_weight": "0.0361",
@@ -500,7 +490,6 @@
               "planned_start": "26-Jan-26",
               "planned_finish": "27-Feb-26",
               "actual_start": "16-Feb-26 A",
-              "actual_finish": "",
               "forecast_start": "16-Feb-26",
               "forecast_finish": "26-Mar-26",
               "planned_weight": "0.0361",
@@ -518,7 +507,6 @@
               "planned_start": "14-Jan-26",
               "planned_finish": "25-Mar-26",
               "actual_start": "7-Feb-26 A",
-              "actual_finish": "",
               "forecast_start": "7-Feb-26",
               "forecast_finish": "21-Apr-26",
               "planned_weight": "0.0602",
@@ -678,8 +666,8 @@
           "row_count": 3,
           "column_count": 11,
           "columns": [
-            "risk_id",
             "project_id",
+            "risk_id",
             "risk_title",
             "risk_category",
             "probability",
@@ -692,8 +680,8 @@
           ],
           "rows": [
             {
-              "risk_id": "R-001",
               "project_id": "LMD-Bridge",
+              "risk_id": "R-001",
               "risk_title": "Steel delivery delay",
               "risk_category": "Schedule",
               "probability": "high",
@@ -705,8 +693,8 @@
               "due_date": "30-Jun-26"
             },
             {
-              "risk_id": "R-002",
               "project_id": "LMD-Bridge",
+              "risk_id": "R-002",
               "risk_title": "Late design clarification and IFC revisions",
               "risk_category": "Engineering",
               "probability": "medium",
@@ -718,8 +706,8 @@
               "due_date": "15-Jul-26"
             },
             {
-              "risk_id": "R-003",
               "project_id": "LMD-Bridge",
+              "risk_id": "R-003",
               "risk_title": "Cashflow pressure due to delayed certification",
               "risk_category": "Commercial",
               "probability": "medium",
@@ -833,7 +821,7 @@
           "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 6,
-          "column_count": 18,
+          "column_count": 15,
           "columns": [
             "project_id",
             "payment",
@@ -849,10 +837,7 @@
             "Period for payment release",
             "Period in which interest is applied",
             "Amount of interest claimed (EGP)",
-            "delayed duration(Days) ",
-            "Unnamed: 14",
-            "Unnamed: 15",
-            "Unnamed: 16"
+            "delayed duration(Days) "
           ],
           "rows": [
             {
@@ -870,10 +855,7 @@
               "Period for payment release": "50.0",
               "Period in which interest is applied": "5.0",
               "Amount of interest claimed (EGP)": "23970.0000",
-              "delayed duration(Days) ": "5.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "5.0"
             },
             {
               "project_id": "LMD-Bridge",
@@ -890,10 +872,7 @@
               "Period for payment release": "55.0",
               "Period in which interest is applied": "10.0",
               "Amount of interest claimed (EGP)": "60180.0000",
-              "delayed duration(Days) ": "10.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "10.0"
             },
             {
               "project_id": "LMD-Bridge",
@@ -910,10 +889,7 @@
               "Period for payment release": "60.0",
               "Period in which interest is applied": "15.0",
               "Amount of interest claimed (EGP)": "108630.0000",
-              "delayed duration(Days) ": "15.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "15.0"
             },
             {
               "project_id": "LMD-Bridge",
@@ -930,10 +906,7 @@
               "Period for payment release": "65.0",
               "Period in which interest is applied": "20.0",
               "Amount of interest claimed (EGP)": "169320.0000",
-              "delayed duration(Days) ": "20.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "20.0"
             },
             {
               "project_id": "LMD-Bridge",
@@ -950,10 +923,7 @@
               "Period for payment release": "70.0",
               "Period in which interest is applied": "25.0",
               "Amount of interest claimed (EGP)": "242250.0000",
-              "delayed duration(Days) ": "25.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "25.0"
             },
             {
               "project_id": "LMD-Bridge",
@@ -966,19 +936,13 @@
               "paid amount": "56389000.00",
               "payment status": "Certified",
               "Contractual interest due": "45.0",
-              "Date of Cash Cheque Receipt": "",
-              "Period for payment release": "",
               "Period in which interest is applied": "0.0",
-              "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "Amount of interest claimed (EGP)": "0.0000"
             }
           ]
         },
         "planned_cash_flow": {
-          "file": "08_commercial_payments_claims.csv",
+          "file": "planned_cash_flow.csv",
           "exists": true,
           "row_count": 0,
           "column_count": 0,
@@ -1033,7 +997,6 @@
               "activity_name": "Structural Works Completion",
               "planned_date": "5-Nov-26",
               "forecast_date": "7-Jan-27",
-              "actual_date": "",
               "milestone_contractual_type": "Interim milestone"
             },
             {
@@ -1042,7 +1005,6 @@
               "activity_name": "Substantial Completion",
               "planned_date": "20-Mar-27",
               "forecast_date": "9-Jun-27",
-              "actual_date": "",
               "milestone_contractual_type": "Finish milestone"
             }
           ]
@@ -1155,11 +1117,10 @@
           "file": "03_schedule_logic.csv",
           "exists": true,
           "row_count": 16,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_code",
-            "wbs_name",
             "total_activities",
             "bl_project_duration",
             "remaining_duration",
@@ -1167,7 +1128,6 @@
             "bl_project_start",
             "bl_project_finish",
             "actual_start",
-            "actual_finish",
             "schedule_%_complete",
             "performance_%_complete",
             "budget_at_completion",
@@ -1178,7 +1138,6 @@
             {
               "project_id": "LMD-Bridge-P.01-UP-20-April-26",
               "wbs_code": "No Priority",
-              "wbs_name": "",
               "total_activities": "912",
               "bl_project_duration": "485",
               "remaining_duration": "338",
@@ -1186,7 +1145,6 @@
               "bl_project_start": "1-Oct-25",
               "bl_project_finish": "28-Jan-27",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.588",
               "performance_%_complete": "0.329",
               "budget_at_completion": "318250000",
@@ -1204,7 +1162,6 @@
               "bl_project_start": "1-Oct-25",
               "bl_project_finish": "28-Jan-27",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.588",
               "performance_%_complete": "0.329",
               "budget_at_completion": "318250000",
@@ -1222,7 +1179,6 @@
               "bl_project_start": "1-Oct-25",
               "bl_project_finish": "28-Jan-27",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -1240,7 +1196,6 @@
               "bl_project_start": "1-Oct-25",
               "bl_project_finish": "28-Jan-27",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -1254,7 +1209,6 @@
               "total_activities": "9",
               "bl_project_duration": "14",
               "remaining_duration": "0",
-              "total_float": "",
               "bl_project_start": "1-Oct-25",
               "bl_project_finish": "15-Oct-25",
               "actual_start": "3-Oct-25",
@@ -1276,7 +1230,6 @@
               "bl_project_start": "1-Oct-25",
               "bl_project_finish": "3-May-26",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -1294,7 +1247,6 @@
               "bl_project_start": "1-Oct-25",
               "bl_project_finish": "31-Oct-26",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -1312,7 +1264,6 @@
               "bl_project_start": "5-Nov-25",
               "bl_project_finish": "19-Nov-26",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.588",
               "performance_%_complete": "0.329",
               "budget_at_completion": "318250000",
@@ -1428,15 +1379,15 @@
           "column_count": 14,
           "columns": [
             "project_id",
+            "contractor",
+            "status",
             "project_name",
             "client_name",
-            "contractor",
             "planned_start",
             "planned_finish",
             "forecast_finish",
             "contract_value",
             "currency",
-            "status",
             "planned_progress_percent",
             "actual_progress_percent",
             "planned_value",
@@ -1445,15 +1396,15 @@
           "rows": [
             {
               "project_id": "LMD-Bridge",
+              "contractor": "Prime Roads & Bridges",
+              "status": "Delayed",
               "project_name": "LMD Bridge & Road Interchange",
               "client_name": "LMD Infrastructure Company",
-              "contractor": "Prime Roads & Bridges",
               "planned_start": "5-Nov-25",
               "planned_finish": "20-Mar-27",
               "forecast_finish": "9-Jun-27",
               "contract_value": "850000000",
               "currency": "EGP",
-              "status": "Delayed",
               "planned_progress_percent": "38.00",
               "actual_progress_percent": "31.00",
               "planned_value": "323000000",
@@ -1467,18 +1418,16 @@
           "file": "02_schedule_activities.csv",
           "exists": true,
           "row_count": 17,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_id",
             "activity_id",
             "activity_name",
             "planned_start",
-            "planned_finish",
             "actual_start",
             "actual_finish",
             "forecast_start",
-            "forecast_finish",
             "planned_weight",
             "planned_progress",
             "actual_progress",
@@ -1493,11 +1442,9 @@
               "activity_id": "KD-MS-1000",
               "activity_name": "Project Start Date",
               "planned_start": "5-Nov-25",
-              "planned_finish": "",
               "actual_start": "5-Nov-25 A",
               "actual_finish": "5-Nov-25 A",
               "forecast_start": "5-Nov-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
@@ -1511,11 +1458,9 @@
               "activity_id": "KD-MS-1010",
               "activity_name": "Contract Agreement",
               "planned_start": "5-Nov-25",
-              "planned_finish": "",
               "actual_start": "5-Nov-25 A",
               "actual_finish": "5-Nov-25 A",
               "forecast_start": "5-Nov-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
@@ -1529,15 +1474,12 @@
               "activity_id": "KD-MS-1020",
               "activity_name": "IFC Drawing Package",
               "planned_start": "12-Nov-25",
-              "planned_finish": "",
               "actual_start": "12-Nov-25 A",
               "actual_finish": "12-Nov-25 A",
               "forecast_start": "12-Nov-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
-              "total_float_days": "",
               "is_critical": "Yes",
               "responsible_party": "Engineering"
             },
@@ -1585,7 +1527,6 @@
               "planned_start": "20-Dec-25",
               "planned_finish": "24-Jan-26",
               "actual_start": "16-Jan-26 A",
-              "actual_finish": "",
               "forecast_start": "16-Jan-26",
               "forecast_finish": "20-Feb-26",
               "planned_weight": "0.0361",
@@ -1603,7 +1544,6 @@
               "planned_start": "26-Jan-26",
               "planned_finish": "27-Feb-26",
               "actual_start": "16-Feb-26 A",
-              "actual_finish": "",
               "forecast_start": "16-Feb-26",
               "forecast_finish": "26-Mar-26",
               "planned_weight": "0.0361",
@@ -1621,7 +1561,6 @@
               "planned_start": "14-Jan-26",
               "planned_finish": "25-Mar-26",
               "actual_start": "7-Feb-26 A",
-              "actual_finish": "",
               "forecast_start": "7-Feb-26",
               "forecast_finish": "21-Apr-26",
               "planned_weight": "0.0602",
@@ -1639,7 +1578,6 @@
               "planned_start": "10-Jan-26",
               "planned_finish": "15-Apr-26",
               "actual_start": "6-Feb-26 A",
-              "actual_finish": "",
               "forecast_start": "6-Feb-26",
               "forecast_finish": "12-May-26",
               "planned_weight": "0.1205",
@@ -1657,7 +1595,6 @@
               "planned_start": "17-Mar-26",
               "planned_finish": "24-Apr-26",
               "actual_start": "7-Apr-26 A",
-              "actual_finish": "",
               "forecast_start": "7-Apr-26",
               "forecast_finish": "21-May-26",
               "planned_weight": "0.1205",
@@ -1675,7 +1612,6 @@
               "planned_start": "24-Apr-26",
               "planned_finish": "29-May-26",
               "actual_start": "18-May-26 A",
-              "actual_finish": "",
               "forecast_start": "18-May-26",
               "forecast_finish": "25-Jun-26",
               "planned_weight": "0.1205",
@@ -1693,7 +1629,6 @@
               "planned_start": "13-Jun-26",
               "planned_finish": "1-Sep-26",
               "actual_start": "10-Jul-26 A",
-              "actual_finish": "",
               "forecast_start": "10-Jul-26",
               "forecast_finish": "28-Sep-26",
               "planned_weight": "0.1205",
@@ -1711,7 +1646,6 @@
               "planned_start": "27-Aug-26",
               "planned_finish": "30-Nov-26",
               "actual_start": "17-Sep-26 A",
-              "actual_finish": "",
               "forecast_start": "17-Sep-26",
               "forecast_finish": "27-Dec-26",
               "planned_weight": "0.1205",
@@ -1728,8 +1662,6 @@
               "activity_name": "Street lighting and drainage works",
               "planned_start": "31-Oct-26",
               "planned_finish": "25-Dec-26",
-              "actual_start": "",
-              "actual_finish": "",
               "forecast_start": "21-Nov-26",
               "forecast_finish": "4-Jan-27",
               "planned_weight": "0.0723",
@@ -1746,8 +1678,6 @@
               "activity_name": "Barriers, asphalt and road marking",
               "planned_start": "20-Dec-26",
               "planned_finish": "18-Feb-27",
-              "actual_start": "",
-              "actual_finish": "",
               "forecast_start": "10-Jan-27",
               "forecast_finish": "28-Feb-27",
               "planned_weight": "0.0723",
@@ -1764,8 +1694,6 @@
               "activity_name": "Load testing and handover inspections",
               "planned_start": "20-Mar-27",
               "planned_finish": "24-Apr-27",
-              "actual_start": "",
-              "actual_finish": "",
               "forecast_start": "10-Apr-27",
               "forecast_finish": "4-May-27",
               "planned_weight": "0.0241",
@@ -1781,11 +1709,7 @@
               "activity_id": "KD-MS-9000",
               "activity_name": "Substantial Completion",
               "planned_start": "4-Apr-27",
-              "planned_finish": "",
-              "actual_start": "",
-              "actual_finish": "",
               "forecast_start": "25-Apr-27",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "0.00",
               "actual_progress": "0.00",
@@ -2075,8 +1999,8 @@
           "row_count": 3,
           "column_count": 11,
           "columns": [
-            "risk_id",
             "project_id",
+            "risk_id",
             "risk_title",
             "risk_category",
             "probability",
@@ -2089,8 +2013,8 @@
           ],
           "rows": [
             {
-              "risk_id": "R-001",
               "project_id": "LMD-Bridge",
+              "risk_id": "R-001",
               "risk_title": "Steel delivery delay",
               "risk_category": "Schedule",
               "probability": "high",
@@ -2102,8 +2026,8 @@
               "due_date": "30-Jun-26"
             },
             {
-              "risk_id": "R-002",
               "project_id": "LMD-Bridge",
+              "risk_id": "R-002",
               "risk_title": "Late design clarification and IFC revisions",
               "risk_category": "Engineering",
               "probability": "medium",
@@ -2115,8 +2039,8 @@
               "due_date": "15-Jul-26"
             },
             {
-              "risk_id": "R-003",
               "project_id": "LMD-Bridge",
+              "risk_id": "R-003",
               "risk_title": "Cashflow pressure due to delayed certification",
               "risk_category": "Commercial",
               "probability": "medium",
@@ -2236,7 +2160,7 @@
           "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 6,
-          "column_count": 18,
+          "column_count": 15,
           "columns": [
             "project_id",
             "payment",
@@ -2252,10 +2176,7 @@
             "Period for payment release",
             "Period in which interest is applied",
             "Amount of interest claimed (EGP)",
-            "delayed duration(Days) ",
-            "Unnamed: 14",
-            "Unnamed: 15",
-            "Unnamed: 16"
+            "delayed duration(Days) "
           ],
           "rows": [
             {
@@ -2273,10 +2194,7 @@
               "Period for payment release": "50.0",
               "Period in which interest is applied": "5.0",
               "Amount of interest claimed (EGP)": "23970.0000",
-              "delayed duration(Days) ": "5.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "5.0"
             },
             {
               "project_id": "LMD-Bridge",
@@ -2293,10 +2211,7 @@
               "Period for payment release": "55.0",
               "Period in which interest is applied": "10.0",
               "Amount of interest claimed (EGP)": "60180.0000",
-              "delayed duration(Days) ": "10.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "10.0"
             },
             {
               "project_id": "LMD-Bridge",
@@ -2313,10 +2228,7 @@
               "Period for payment release": "60.0",
               "Period in which interest is applied": "15.0",
               "Amount of interest claimed (EGP)": "108630.0000",
-              "delayed duration(Days) ": "15.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "15.0"
             },
             {
               "project_id": "LMD-Bridge",
@@ -2333,10 +2245,7 @@
               "Period for payment release": "65.0",
               "Period in which interest is applied": "20.0",
               "Amount of interest claimed (EGP)": "169320.0000",
-              "delayed duration(Days) ": "20.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "20.0"
             },
             {
               "project_id": "LMD-Bridge",
@@ -2353,10 +2262,7 @@
               "Period for payment release": "70.0",
               "Period in which interest is applied": "25.0",
               "Amount of interest claimed (EGP)": "242250.0000",
-              "delayed duration(Days) ": "25.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "25.0"
             },
             {
               "project_id": "LMD-Bridge",
@@ -2369,28 +2275,22 @@
               "paid amount": "56389000.00",
               "payment status": "Certified",
               "Contractual interest due": "45.0",
-              "Date of Cash Cheque Receipt": "",
-              "Period for payment release": "",
               "Period in which interest is applied": "0.0",
-              "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "Amount of interest claimed (EGP)": "0.0000"
             }
           ],
           "truncated": false,
           "source_path": "08_commercial_payments_claims.csv"
         },
         "planned_cash_flow": {
-          "file": "08_commercial_payments_claims.csv",
+          "file": "planned_cash_flow.csv",
           "exists": true,
           "row_count": 0,
           "column_count": 0,
           "columns": [],
           "rows": [],
           "truncated": false,
-          "source_path": "08_commercial_payments_claims.csv"
+          "source_path": "planned_cash_flow.csv"
         },
         "milestones": {
           "file": "05_milestones_scurve.csv",
@@ -2440,7 +2340,6 @@
               "activity_name": "Structural Works Completion",
               "planned_date": "5-Nov-26",
               "forecast_date": "7-Jan-27",
-              "actual_date": "",
               "milestone_contractual_type": "Interim milestone"
             },
             {
@@ -2449,7 +2348,6 @@
               "activity_name": "Substantial Completion",
               "planned_date": "20-Mar-27",
               "forecast_date": "9-Jun-27",
-              "actual_date": "",
               "milestone_contractual_type": "Finish milestone"
             }
           ],
@@ -2566,11 +2464,10 @@
           "file": "03_schedule_logic.csv",
           "exists": true,
           "row_count": 16,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_code",
-            "wbs_name",
             "total_activities",
             "bl_project_duration",
             "remaining_duration",
@@ -2578,7 +2475,6 @@
             "bl_project_start",
             "bl_project_finish",
             "actual_start",
-            "actual_finish",
             "schedule_%_complete",
             "performance_%_complete",
             "budget_at_completion",
@@ -2589,7 +2485,6 @@
             {
               "project_id": "LMD-Bridge-P.01-UP-20-April-26",
               "wbs_code": "No Priority",
-              "wbs_name": "",
               "total_activities": "912",
               "bl_project_duration": "485",
               "remaining_duration": "338",
@@ -2597,7 +2492,6 @@
               "bl_project_start": "1-Oct-25",
               "bl_project_finish": "28-Jan-27",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.588",
               "performance_%_complete": "0.329",
               "budget_at_completion": "318250000",
@@ -2615,7 +2509,6 @@
               "bl_project_start": "1-Oct-25",
               "bl_project_finish": "28-Jan-27",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.588",
               "performance_%_complete": "0.329",
               "budget_at_completion": "318250000",
@@ -2633,7 +2526,6 @@
               "bl_project_start": "1-Oct-25",
               "bl_project_finish": "28-Jan-27",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -2651,7 +2543,6 @@
               "bl_project_start": "1-Oct-25",
               "bl_project_finish": "28-Jan-27",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -2665,7 +2556,6 @@
               "total_activities": "9",
               "bl_project_duration": "14",
               "remaining_duration": "0",
-              "total_float": "",
               "bl_project_start": "1-Oct-25",
               "bl_project_finish": "15-Oct-25",
               "actual_start": "3-Oct-25",
@@ -2687,7 +2577,6 @@
               "bl_project_start": "1-Oct-25",
               "bl_project_finish": "3-May-26",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -2705,7 +2594,6 @@
               "bl_project_start": "1-Oct-25",
               "bl_project_finish": "31-Oct-26",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -2723,7 +2611,6 @@
               "bl_project_start": "5-Nov-25",
               "bl_project_finish": "19-Nov-26",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.588",
               "performance_%_complete": "0.329",
               "budget_at_completion": "318250000",
@@ -2759,7 +2646,6 @@
               "bl_project_start": "15-Nov-25",
               "bl_project_finish": "18-Jul-26",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.71",
               "performance_%_complete": "0.46",
               "budget_at_completion": "72500000",
@@ -2777,7 +2663,6 @@
               "bl_project_start": "5-Jan-26",
               "bl_project_finish": "18-Oct-26",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.58",
               "performance_%_complete": "0.34",
               "budget_at_completion": "61800000",
@@ -2795,7 +2680,6 @@
               "bl_project_start": "14-Feb-26",
               "bl_project_finish": "10-Jan-27",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.45",
               "performance_%_complete": "0.25",
               "budget_at_completion": "88200000",
@@ -2813,7 +2697,6 @@
               "bl_project_start": "24-Mar-26",
               "bl_project_finish": "13-Jan-27",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.41",
               "performance_%_complete": "0.21",
               "budget_at_completion": "49700000",
@@ -2831,7 +2714,6 @@
               "bl_project_start": "18-Jun-26",
               "bl_project_finish": "21-Feb-27",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.36",
               "performance_%_complete": "0.17",
               "budget_at_completion": "31900000",
@@ -2849,7 +2731,6 @@
               "bl_project_start": "3-May-26",
               "bl_project_finish": "28-Jan-27",
               "actual_start": "2-Oct-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.25",
               "performance_%_complete": "0.11",
               "budget_at_completion": "20650000",
@@ -2866,8 +2747,6 @@
               "total_float": "-61",
               "bl_project_start": "10-Dec-25",
               "bl_project_finish": "28-Jan-27",
-              "actual_start": "",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -3001,164 +2880,20 @@
       }
     },
     "letters_intelligence": {
-      "folder": "07-letters_intelligence/inbox + 01-data/import_templates",
+      "folder": "07-letters_intelligence",
       "inbox_files": [],
       "inbox_file_count": 0,
       "workbook": {
-        "file": "10_letters_intelligence.csv",
-        "exists": true,
-        "source_workbook": "letters_intelligence.xlsx",
-        "sheets": [
-          {
-            "name": "From Contractor",
-            "row_count": 0,
-            "column_count": 19,
-            "columns": [
-              "Ref No",
-              "Date",
-              "Type",
-              "Subject",
-              "Main Purpose",
-              "Key Requests",
-              "Scope Impact",
-              "Responsibility",
-              "Affected Activities",
-              "Start Dependency",
-              "Sequence Impact",
-              "Commercial Impact",
-              "Risk Type",
-              "Risk Owner",
-              "Delay Risk",
-              "EOT Potential",
-              "Claim Strength",
-              "Required Actions",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "From Consultant",
-            "row_count": 0,
-            "column_count": 19,
-            "columns": [
-              "Ref No",
-              "Date",
-              "Type",
-              "Subject",
-              "Main Purpose",
-              "Key Requests",
-              "Scope Impact",
-              "Responsibility",
-              "Affected Activities",
-              "Start Dependency",
-              "Sequence Impact",
-              "Commercial Impact",
-              "Risk Type",
-              "Risk Owner",
-              "Delay Risk",
-              "EOT Potential",
-              "Claim Strength",
-              "Required Actions",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "Contractor Links",
-            "row_count": 0,
-            "column_count": 18,
-            "columns": [
-              "Thread",
-              "SAMCO Ref No",
-              "SAMCO Sheet Row",
-              "SAMCO Date",
-              "SAMCO Type",
-              "SAMCO Subject",
-              "Related ACE Ref No(s)",
-              "ACE Sheet Row(s)",
-              "ACE Date(s)",
-              "ACE Subject(s)",
-              "Relationship",
-              "Confidence",
-              "SAMCO Claim Strength",
-              "ACE Claim Strength",
-              "SAMCO Delay Risk",
-              "ACE Delay Risk",
-              "Recommended Follow-up",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "Consultant Links",
-            "row_count": 0,
-            "column_count": 14,
-            "columns": [
-              "ACE Ref No",
-              "ACE Sheet Row",
-              "ACE Date",
-              "ACE Type",
-              "ACE Subject",
-              "Related SAMCO Ref No(s)",
-              "SAMCO Sheet Row(s)",
-              "SAMCO Subject(s)",
-              "Thread(s)",
-              "ACE Delay Risk",
-              "ACE EOT Potential",
-              "ACE Claim Strength",
-              "ACE Required Actions",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "Issue Threads",
-            "row_count": 0,
-            "column_count": 7,
-            "columns": [
-              "Thread",
-              "SAMCO Ref(s)",
-              "6",
-              "Main Link",
-              "Priority",
-              "Next Action",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "Auto Ingest Register",
-            "row_count": 0,
-            "column_count": 11,
-            "columns": [
-              "Source File",
-              "Direction",
-              "Reference",
-              "Date",
-              "Subject",
-              "Classification",
-              "Delay Risk",
-              "Issue Thread",
-              "Status",
-              "Message",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          }
-        ]
+        "file": "letters_intelligence.xlsx",
+        "exists": false,
+        "sheets": []
       },
       "workbook_tables": {
-        "file": "10_letters_intelligence.csv",
+        "file": "letters_intelligence.xlsx",
         "exists": true,
         "sheets": [
           {
-            "name": "From Consultant",
+            "name": "From SAMCO",
             "row_count": 0,
             "column_count": 19,
             "columns": [
@@ -3186,43 +2921,7 @@
             "truncated": false
           },
           {
-            "name": "Issue Threads",
-            "row_count": 0,
-            "column_count": 7,
-            "columns": [
-              "Thread",
-              "SAMCO Ref(s)",
-              "6",
-              "Main Link",
-              "Priority",
-              "Next Action",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "Auto Ingest Register",
-            "row_count": 0,
-            "column_count": 11,
-            "columns": [
-              "Source File",
-              "Direction",
-              "Reference",
-              "Date",
-              "Subject",
-              "Classification",
-              "Delay Risk",
-              "Issue Thread",
-              "Status",
-              "Message",
-              "project_id"
-            ],
-            "rows": [],
-            "truncated": false
-          },
-          {
-            "name": "From SAMCO",
+            "name": "From Consultant",
             "row_count": 0,
             "column_count": 19,
             "columns": [
@@ -3298,18 +2997,53 @@
             ],
             "rows": [],
             "truncated": false
+          },
+          {
+            "name": "Issue Threads",
+            "row_count": 0,
+            "column_count": 7,
+            "columns": [
+              "Thread",
+              "SAMCO Ref(s)",
+              "6",
+              "Main Link",
+              "Priority",
+              "Next Action",
+              "project_id"
+            ],
+            "rows": [],
+            "truncated": false
+          },
+          {
+            "name": "Auto Ingest Register",
+            "row_count": 0,
+            "column_count": 11,
+            "columns": [
+              "Source File",
+              "Direction",
+              "Reference",
+              "Date",
+              "Subject",
+              "Classification",
+              "Delay Risk",
+              "Issue Thread",
+              "Status",
+              "Message",
+              "project_id"
+            ],
+            "rows": [],
+            "truncated": false
           }
         ],
         "rejected_cross_project_rows": 0,
         "source_scope": "selected_project_only",
-        "inbox_auto_ingest": true,
-        "source_workbook": "letters_intelligence.xlsx"
+        "inbox_auto_ingest": true
       },
       "detectors": [
         {
           "name": "Canonical letters source",
           "status": "Active",
-          "detail": "Uses the selected project's 10_letters_intelligence.csv historical register and automatically evaluates new files in 07-letters_intelligence/inbox/From Contractor and From Consultant during the local data build."
+          "detail": "Uses the project-local workbook, inbox ingestion, correspondence links, and issue-thread workflow."
         },
         {
           "name": "Letters intelligence workflow",
@@ -5624,7 +5358,7 @@
           "relative_path": "LMD-Bridgs/00_published_project_reports.zip",
           "extension": "zip",
           "size_kb": 1908.3,
-          "modified": "2026-08-20T11:49:03"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "01_executive_dashboard.html",
@@ -5638,14 +5372,14 @@
           "relative_path": "LMD-Bridgs/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 930.7,
-          "modified": "2026-08-20T11:48:52"
+          "modified": "2026-08-22T04:16:46"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "LMD-Bridgs/01_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-20T11:48:53"
+          "modified": "2026-08-22T04:16:46"
         },
         {
           "name": "02_master_dashboard.html",
@@ -5659,14 +5393,14 @@
           "relative_path": "LMD-Bridgs/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 862.9,
-          "modified": "2026-08-20T11:48:56"
+          "modified": "2026-08-22T04:16:51"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "LMD-Bridgs/02_master_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-20T11:48:56"
+          "modified": "2026-08-22T04:16:51"
         },
         {
           "name": "03_elite_svg_charts.html",
@@ -5680,14 +5414,14 @@
           "relative_path": "LMD-Bridgs/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 236.0,
-          "modified": "2026-08-20T11:48:57"
+          "modified": "2026-08-22T04:16:53"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "LMD-Bridgs/03_elite_svg_charts.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-20T11:48:58"
+          "modified": "2026-08-22T04:16:53"
         },
         {
           "name": "04_linked_executive_dashboard.html",
@@ -5701,14 +5435,14 @@
           "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1096.1,
-          "modified": "2026-08-20T11:49:02"
+          "modified": "2026-08-22T04:16:58"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "LMD-Bridgs/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
           "size_kb": 28.4,
-          "modified": "2026-08-20T11:49:02"
+          "modified": "2026-08-22T04:16:58"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
@@ -5750,217 +5484,217 @@
           "relative_path": "LMD-Bridgs/universal-baseline_current-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-cashflow-program-report.html",
           "relative_path": "LMD-Bridgs/universal-cashflow-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-change_control-program-report.html",
           "relative_path": "LMD-Bridgs/universal-change_control-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-contract_admin-program-report.html",
           "relative_path": "LMD-Bridgs/universal-contract_admin-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-cost-program-report.html",
           "relative_path": "LMD-Bridgs/universal-cost-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-critical_path-program-report.html",
           "relative_path": "LMD-Bridgs/universal-critical_path-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-delay-program-report.html",
           "relative_path": "LMD-Bridgs/universal-delay-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-document_control-program-report.html",
           "relative_path": "LMD-Bridgs/universal-document_control-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-eot-program-report.html",
           "relative_path": "LMD-Bridgs/universal-eot-program-report.html",
           "extension": "html",
           "size_kb": 9.3,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-equipment-program-report.html",
           "relative_path": "LMD-Bridgs/universal-equipment-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-evm-program-report.html",
           "relative_path": "LMD-Bridgs/universal-evm-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-executive-program-report.html",
           "relative_path": "LMD-Bridgs/universal-executive-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-float-program-report.html",
           "relative_path": "LMD-Bridgs/universal-float-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-forecast_completion-program-report.html",
           "relative_path": "LMD-Bridgs/universal-forecast_completion-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-hybrid-program-report.html",
           "relative_path": "LMD-Bridgs/universal-hybrid-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-interface_management-program-report.html",
           "relative_path": "LMD-Bridgs/universal-interface_management-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-lookahead-program-report.html",
           "relative_path": "LMD-Bridgs/universal-lookahead-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-material-program-report.html",
           "relative_path": "LMD-Bridgs/universal-material-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-milestone-program-report.html",
           "relative_path": "LMD-Bridgs/universal-milestone-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-ml_project_controls-program-report.html",
           "relative_path": "LMD-Bridgs/universal-ml_project_controls-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-procurement-program-report.html",
           "relative_path": "LMD-Bridgs/universal-procurement-program-report.html",
           "extension": "html",
           "size_kb": 9.3,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-productivity-program-report.html",
           "relative_path": "LMD-Bridgs/universal-productivity-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-progress-program-report.html",
           "relative_path": "LMD-Bridgs/universal-progress-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-qaqc-program-report.html",
           "relative_path": "LMD-Bridgs/universal-qaqc-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-recovery-program-report.html",
           "relative_path": "LMD-Bridgs/universal-recovery-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal_report_engine_manifest.json",
           "relative_path": "LMD-Bridgs/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
           "size_kb": 31.9,
-          "modified": "2026-08-22T04:05:31"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-resource-program-report.html",
           "relative_path": "LMD-Bridgs/universal-resource-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-rfi_submittal-program-report.html",
           "relative_path": "LMD-Bridgs/universal-rfi_submittal-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-risk-program-report.html",
           "relative_path": "LMD-Bridgs/universal-risk-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-scurve-program-report.html",
           "relative_path": "LMD-Bridgs/universal-scurve-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         },
         {
           "name": "universal-variation-program-report.html",
           "relative_path": "LMD-Bridgs/universal-variation-program-report.html",
           "extension": "html",
           "size_kb": 9.2,
-          "modified": "2026-08-20T12:09:26"
+          "modified": "2026-08-22T04:16:59"
         }
       ],
       "watchers": [
@@ -7148,12 +6882,12 @@
     "files": {
       "zip": {
         "name": "00_published_project_reports.zip",
-        "bytes": 1954129,
-        "sha256": "4bc02c3938c33fe268400c1ab7c86e052ddfc763088f220b8286d87b143575fb"
+        "bytes": 1954128,
+        "sha256": "44b6174c0d52226bc2c90449b5a7d949dead30759633d891da8651462ea7a0ce"
       }
     },
     "source_project_id": "LMD-Bridge",
-    "source_report_fingerprint": "7f8cd518e98dffe8576e3fcfab5d372dc92e21ba1995164d39140aee1ce8a3b1"
+    "source_report_fingerprint": "5b284023ebe811e511663998c172835f42b67615e974f0e759bb88a3272c4ff5"
   },
   "report_artifacts": {
     "executive_dashboard": {
@@ -7169,12 +6903,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 953015,
-          "sha256": "21e201e93d9b8d06103e8ad6b2a35c8225349b349ae89929ad6a2a8d96dfc404"
+          "sha256": "250666045a689603b57188465c4124b9b4eb66905015de66d19c417ce919ca74"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
           "bytes": 29122,
-          "sha256": "bbbe35fb376a9a30aa62c4561cbaacc43c7558a97834239660071e93870a8381"
+          "sha256": "eb257a2d0dd8fe9474d5f1d8fbd4db53e07f4e149f51c6e9bb74fb162fc2951d"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7194,12 +6928,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 883572,
-          "sha256": "38f9ee2667452e366ad62525d94cdfd034bfef9205572504bc245733084fc5d6"
+          "sha256": "439cb58173afeb162696487adbe5a95ca852968177164d029e876cfd4cca627f"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
-          "bytes": 29118,
-          "sha256": "9504d30bd80b9b7cc1995cd11033b008a3fd92dbe522a0e7b82500af1936e616"
+          "bytes": 29119,
+          "sha256": "78f0b52f407715828a069201d98b19a42fc08ab0d4f03e4a4e27d5a8d70b830d"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7219,12 +6953,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 241628,
-          "sha256": "8f6351cf07d0a4c2fe2129e584acd71da757880952bdaa014f6335483e726125"
+          "sha256": "3e47102f4430b5ef776a37eaa694e2371f91fd9472794bd31819f2462222a7ea"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
           "bytes": 29119,
-          "sha256": "3521133ba40ab1e0a24135b69cbc509560600d46dcaf047d60e7df49cfc768d9"
+          "sha256": "f16723e106077b1b4283cfea2261cbf7e6541c3af7ed8a1ad0d9e42c5b0056ac"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7244,12 +6978,12 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1122400,
-          "sha256": "debfb44fb337cbc6317e89970d27107fbaeae1fa00e3c3c13bcb3e7b15c9168e"
+          "sha256": "b745df10bdacdfee7534225a5c079fa60126398a3b93c35ac82af34da5666ac6"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
-          "bytes": 29127,
-          "sha256": "385bdb6e34d0807742e88484f5c45e67a712099601a78d95d2b78bc550e8f9a4"
+          "bytes": 29128,
+          "sha256": "370c1cd68ea316a8dd5869520a91198b907ba09e2feab069c9bcc6abd7db3e51"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7260,69 +6994,69 @@
   "universal_report_engine": {
     "project_id": "LMD-Bridge",
     "project_key": "lmd-bridge",
-    "source_fingerprint": "92b5c60a72350d2194ba1489e0f37c61183c994b3eb356ec6fb54071c6532281",
+    "source_fingerprint": "2446191c8bf63938eb60750845e1a6ca137fe4e6a733a88bc2a0969542250e55",
     "source_scope": "active project folder only",
     "source_file_count": 34,
     "source_inventory": [
       {
         "relative_path": "01-data/import_templates/01_project_contract.csv",
         "extension": ".csv",
-        "size_bytes": 1808,
-        "sha256": "1a7e1734d5d8d3e247568e5f4597af9e2bd28c43bad0c3ed58b88167d8e5d38b"
+        "size_bytes": 913,
+        "sha256": "2ec2360e193fe451dd522632cfe399fba8a6753175e9c5cd381420143fc42a94"
       },
       {
         "relative_path": "01-data/import_templates/02_schedule_activities.csv",
         "extension": ".csv",
-        "size_bytes": 16142,
-        "sha256": "1186f8a0e128493483254d97c193f7eb4465632658c067362dc384c493b7bd7f"
+        "size_bytes": 11400,
+        "sha256": "6c64e13eb1bbcdca75cc43a13a5eaf4f9bba5655a47db01fc81650bec484a4bc"
       },
       {
         "relative_path": "01-data/import_templates/03_schedule_logic.csv",
         "extension": ".csv",
-        "size_bytes": 12481,
-        "sha256": "2afc43d7747875d808ee95c208659635a7468b99229d2651fe2cda2aece97d3b"
+        "size_bytes": 8446,
+        "sha256": "cb397f0ea184dfd139a13a85b9b4490cadbf9cf9c38dbb19f9ec48d0093c49fd"
       },
       {
         "relative_path": "01-data/import_templates/04_progress_evm.csv",
         "extension": ".csv",
-        "size_bytes": 10400,
-        "sha256": "b2beee16cc3918fa83c47972c25fb687f769bd216e01e6da56fcec9dfde48a06"
+        "size_bytes": 6580,
+        "sha256": "ca952b32da76063a6b8ca632769a2ec3d81e68f5bcefc13d95962ac1b2565fee"
       },
       {
         "relative_path": "01-data/import_templates/05_milestones_scurve.csv",
         "extension": ".csv",
-        "size_bytes": 4278,
-        "sha256": "204253925629c6b2491b77ea1116b930205d9b4d2850c1f5e4bff3a416987d30"
+        "size_bytes": 2446,
+        "sha256": "0b8dac9a057fb365ad2afece69f5984c7dc830d317a1b61dfe7b0c29682a8487"
       },
       {
         "relative_path": "01-data/import_templates/06_delay_events.csv",
         "extension": ".csv",
-        "size_bytes": 2807,
-        "sha256": "e1dd89210b69dae0847f02fd5dc62a72e620246ef972f3cd8d900a83c866c751"
+        "size_bytes": 1639,
+        "sha256": "158da1e54e6cb4d44ec467a0be9ba2c90f0511647ec4cc84246d1556eb731456"
       },
       {
         "relative_path": "01-data/import_templates/07_tia_evidence_scenarios.csv",
         "extension": ".csv",
-        "size_bytes": 29456,
-        "sha256": "3c33aebb8589118275163c7ed3b24b9a5a6629770a9f0d506a3cbf85e260c353"
+        "size_bytes": 25846,
+        "sha256": "fa350602680ada6419189752abd9136cd757c3d67b8134b6cc727de93cf141c6"
       },
       {
         "relative_path": "01-data/import_templates/08_commercial_payments_claims.csv",
         "extension": ".csv",
-        "size_bytes": 6375,
-        "sha256": "ee040d8f92501617d853edd8fdade5a2044c95810ef143b3076dfea8a703df57"
+        "size_bytes": 3437,
+        "sha256": "33077fe16503f37f0305e3d069501860df3a096b8bcdf60ba12b7256a95c585c"
       },
       {
         "relative_path": "01-data/import_templates/09_risks_rfi_interfaces.csv",
         "extension": ".csv",
-        "size_bytes": 10042,
-        "sha256": "1ae62b173769cc470a53c9c69da7d55929163f29fe8becacc6e2b3242fb5adfb"
+        "size_bytes": 6544,
+        "sha256": "6ebcf8588d06d2d7cce704845be8e1a0dd5d9b346ea5207a62f43b8ae51038a8"
       },
       {
         "relative_path": "01-data/import_templates/10_letters_intelligence.csv",
         "extension": ".csv",
-        "size_bytes": 3198,
-        "sha256": "d96c372a27bf975e42cda4c8665a70df82c62fedb25df1bfabb0fd66e1adac8c"
+        "size_bytes": 868,
+        "sha256": "436c277dbd7fa5eb5c3037b99b41ddea6673046c1e9ac94db2e84d30fe214169"
       },
       {
         "relative_path": "01-data/import_templates/planned_cash_flow.csv",
@@ -7497,7 +7231,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-eot-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7515,7 +7249,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-delay-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7533,7 +7267,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-progress-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7551,7 +7285,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-recovery-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7569,7 +7303,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-variation-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7586,7 +7320,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-hybrid-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7604,7 +7338,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-resource-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7621,7 +7355,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-equipment-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7638,7 +7372,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-cost-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7655,7 +7389,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-evm-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7672,7 +7406,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-cashflow-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7689,7 +7423,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-scurve-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7707,7 +7441,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-procurement-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7724,7 +7458,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-material-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7742,7 +7476,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-lookahead-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7760,7 +7494,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-critical_path-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7778,7 +7512,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-float-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7796,7 +7530,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-milestone-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7813,7 +7547,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-risk-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7831,7 +7565,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-rfi_submittal-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7848,7 +7582,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-qaqc-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7865,7 +7599,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-productivity-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7882,7 +7616,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-executive-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7900,7 +7634,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-baseline_current-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7918,7 +7652,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-forecast_completion-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7935,7 +7669,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-ml_project_controls-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7952,7 +7686,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-contract_admin-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7969,7 +7703,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-change_control-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7986,7 +7720,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-document_control-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -8004,7 +7738,7 @@
         "artifacts": {
           "html": "/generated/LMD-Bridgs/universal-interface_management-program-report.html"
         },
-        "generated_at": "2026-08-22T01:05:31+00:00",
+        "generated_at": "2026-08-22T01:16:59+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       }
@@ -8099,6 +7833,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-22T01:05:31+00:00"
+    "updated_at": "2026-08-22T01:16:59+00:00"
   }
 }
