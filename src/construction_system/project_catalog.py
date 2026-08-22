@@ -14,6 +14,18 @@ PROJECT_METADATA_FILE = "project.json"
 PROJECT_MANIFEST_FILE = "project_manifest.json"
 PROJECT_TEMPLATE_DIRNAME = "_PROJECT_TEMPLATE"
 DEFAULT_SECTOR_NAME = "Unassigned"
+CANONICAL_PROJECT_INPUTS = (
+    "01_project_contract.csv",
+    "02_schedule_activities.csv",
+    "03_schedule_logic.csv",
+    "04_progress_evm.csv",
+    "05_milestones_scurve.csv",
+    "06_delay_events.csv",
+    "07_tia_evidence_scenarios.csv",
+    "08_commercial_payments_claims.csv",
+    "09_risks_rfi_interfaces.csv",
+    "10_letters_intelligence.csv",
+)
 PROJECT_SUBDIRECTORIES = (
     "01-data/import_templates",
     "02-delay_analysis/unified_tia_csv",
@@ -239,7 +251,10 @@ def ensure_project_structure(project_dir: Path) -> None:
     for relative_dir in PROJECT_SUBDIRECTORIES:
         folder = project_dir / relative_dir
         folder.mkdir(parents=True, exist_ok=True)
-        has_canonical_bundle = (project_dir / "01-data" / "import_templates" / "project_input_bundle.csv").is_file()
+        input_dir = project_dir / "01-data" / "import_templates"
+        has_canonical_bundle = (input_dir / "project_input_bundle.csv").is_file() or all(
+            (input_dir / input_name).is_file() for input_name in CANONICAL_PROJECT_INPUTS
+        )
         canonical_input_folder = relative_dir in {"01-data/import_templates", "02-delay_analysis/unified_tia_csv"}
         if not any(folder.iterdir()) and not (has_canonical_bundle and canonical_input_folder):
             (folder / ".gitkeep").touch(exist_ok=True)
@@ -277,7 +292,10 @@ def ensure_project_samples(project_dir: Path) -> None:
         "09-notes/engineering_notes_template.md": "# Engineering Notes\n\n- Date:\n- Discipline:\n- Drawing / RFI reference:\n- Constraint:\n- Required action:\n",
         "09-notes/claims_notes_template.md": "# Claims Notes\n\n- Date:\n- Event ID:\n- Clause reference:\n- Notice status:\n- Cause and effect:\n- Missing evidence:\n",
     }
-    has_canonical_bundle = (project_dir / "01-data" / "import_templates" / "project_input_bundle.csv").is_file()
+    input_dir = project_dir / "01-data" / "import_templates"
+    has_canonical_bundle = (input_dir / "project_input_bundle.csv").is_file() or all(
+        (input_dir / input_name).is_file() for input_name in CANONICAL_PROJECT_INPUTS
+    )
     for relative_path, content in samples.items():
         # Bundled projects intentionally keep no physical legacy templates.
         if has_canonical_bundle and relative_path.lower().endswith(".csv"):
