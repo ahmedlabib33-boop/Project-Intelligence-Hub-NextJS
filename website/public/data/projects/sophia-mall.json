@@ -207,7 +207,7 @@
   },
   "decision_required": true,
   "last_updated": "2026-08-15T16:47:59",
-  "fingerprint": "a6d34a325c0e21ced9d70aac594e9ada74861f086b9d698c41ad6784f6450e14",
+  "fingerprint": "76d5eca991e8cca0eb31bc21ac6a0e84bcb31f2b7f8af6c6406ff3c54562d37f",
   "source_files": {
     "projects": 1,
     "contracts": 2,
@@ -916,7 +916,7 @@
         },
         "planned_cash_flow": {
           "file": "planned_cash_flow.csv",
-          "exists": true,
+          "exists": false,
           "row_count": 0,
           "column_count": 0,
           "columns": [],
@@ -2258,7 +2258,7 @@
         },
         "planned_cash_flow": {
           "file": "planned_cash_flow.csv",
-          "exists": true,
+          "exists": false,
           "row_count": 0,
           "column_count": 0,
           "columns": [],
@@ -5372,8 +5372,8 @@
           "name": "00_published_project_reports.zip",
           "relative_path": "Sophia-Mall/00_published_project_reports.zip",
           "extension": "zip",
-          "size_kb": 1816.4,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 1802.2,
+          "modified": "2026-08-22T04:34:58"
         },
         {
           "name": "01_executive_dashboard.html",
@@ -5387,14 +5387,14 @@
           "relative_path": "Sophia-Mall/01_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 829.0,
-          "modified": "2026-08-22T04:18:41"
+          "modified": "2026-08-22T04:34:47"
         },
         {
           "name": "01_executive_dashboard.pptx",
           "relative_path": "Sophia-Mall/01_executive_dashboard.pptx",
           "extension": "pptx",
-          "size_kb": 28.5,
-          "modified": "2026-08-22T04:18:42"
+          "size_kb": 28.4,
+          "modified": "2026-08-22T04:34:47"
         },
         {
           "name": "02_master_dashboard.html",
@@ -5408,14 +5408,14 @@
           "relative_path": "Sophia-Mall/02_master_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 862.6,
-          "modified": "2026-08-22T04:18:45"
+          "modified": "2026-08-22T04:34:50"
         },
         {
           "name": "02_master_dashboard.pptx",
           "relative_path": "Sophia-Mall/02_master_dashboard.pptx",
           "extension": "pptx",
-          "size_kb": 28.5,
-          "modified": "2026-08-22T04:18:46"
+          "size_kb": 28.4,
+          "modified": "2026-08-22T04:34:50"
         },
         {
           "name": "03_elite_svg_charts.html",
@@ -5429,14 +5429,14 @@
           "relative_path": "Sophia-Mall/03_elite_svg_charts.pdf",
           "extension": "pdf",
           "size_kb": 234.6,
-          "modified": "2026-08-22T04:18:48"
+          "modified": "2026-08-22T04:34:51"
         },
         {
           "name": "03_elite_svg_charts.pptx",
           "relative_path": "Sophia-Mall/03_elite_svg_charts.pptx",
           "extension": "pptx",
-          "size_kb": 28.5,
-          "modified": "2026-08-22T04:18:49"
+          "size_kb": 28.4,
+          "modified": "2026-08-22T04:34:53"
         },
         {
           "name": "04_linked_executive_dashboard.html",
@@ -5450,14 +5450,14 @@
           "relative_path": "Sophia-Mall/04_linked_executive_dashboard.pdf",
           "extension": "pdf",
           "size_kb": 1093.9,
-          "modified": "2026-08-22T04:18:53"
+          "modified": "2026-08-22T04:34:57"
         },
         {
           "name": "04_linked_executive_dashboard.pptx",
           "relative_path": "Sophia-Mall/04_linked_executive_dashboard.pptx",
           "extension": "pptx",
-          "size_kb": 28.6,
-          "modified": "2026-08-22T04:18:54"
+          "size_kb": 28.4,
+          "modified": "2026-08-22T04:34:58"
         },
         {
           "name": "05_delay_tia_governed_assessment.docx",
@@ -5498,218 +5498,218 @@
           "name": "universal-baseline_current-program-report.html",
           "relative_path": "Sophia-Mall/universal-baseline_current-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.1,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-cashflow-program-report.html",
           "relative_path": "Sophia-Mall/universal-cashflow-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-change_control-program-report.html",
           "relative_path": "Sophia-Mall/universal-change_control-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-contract_admin-program-report.html",
           "relative_path": "Sophia-Mall/universal-contract_admin-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-cost-program-report.html",
           "relative_path": "Sophia-Mall/universal-cost-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-critical_path-program-report.html",
           "relative_path": "Sophia-Mall/universal-critical_path-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-delay-program-report.html",
           "relative_path": "Sophia-Mall/universal-delay-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:58"
         },
         {
           "name": "universal-document_control-program-report.html",
           "relative_path": "Sophia-Mall/universal-document_control-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-eot-program-report.html",
           "relative_path": "Sophia-Mall/universal-eot-program-report.html",
           "extension": "html",
-          "size_kb": 9.3,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.1,
+          "modified": "2026-08-22T04:34:58"
         },
         {
           "name": "universal-equipment-program-report.html",
           "relative_path": "Sophia-Mall/universal-equipment-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-evm-program-report.html",
           "relative_path": "Sophia-Mall/universal-evm-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-executive-program-report.html",
           "relative_path": "Sophia-Mall/universal-executive-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.1,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-float-program-report.html",
           "relative_path": "Sophia-Mall/universal-float-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-forecast_completion-program-report.html",
           "relative_path": "Sophia-Mall/universal-forecast_completion-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-hybrid-program-report.html",
           "relative_path": "Sophia-Mall/universal-hybrid-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:58"
         },
         {
           "name": "universal-interface_management-program-report.html",
           "relative_path": "Sophia-Mall/universal-interface_management-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-lookahead-program-report.html",
           "relative_path": "Sophia-Mall/universal-lookahead-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-material-program-report.html",
           "relative_path": "Sophia-Mall/universal-material-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-milestone-program-report.html",
           "relative_path": "Sophia-Mall/universal-milestone-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-ml_project_controls-program-report.html",
           "relative_path": "Sophia-Mall/universal-ml_project_controls-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.1,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-procurement-program-report.html",
           "relative_path": "Sophia-Mall/universal-procurement-program-report.html",
           "extension": "html",
-          "size_kb": 9.3,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.1,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-productivity-program-report.html",
           "relative_path": "Sophia-Mall/universal-productivity-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-progress-program-report.html",
           "relative_path": "Sophia-Mall/universal-progress-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:58"
         },
         {
           "name": "universal-qaqc-program-report.html",
           "relative_path": "Sophia-Mall/universal-qaqc-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-recovery-program-report.html",
           "relative_path": "Sophia-Mall/universal-recovery-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.1,
+          "modified": "2026-08-22T04:34:58"
         },
         {
           "name": "universal_report_engine_manifest.json",
           "relative_path": "Sophia-Mall/universal-report-engine/universal_report_engine_manifest.json",
           "extension": "json",
-          "size_kb": 32.0,
-          "modified": "2026-08-22T04:32:19"
+          "size_kb": 31.7,
+          "modified": "2026-08-22T04:36:37"
         },
         {
           "name": "universal-resource-program-report.html",
           "relative_path": "Sophia-Mall/universal-resource-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-rfi_submittal-program-report.html",
           "relative_path": "Sophia-Mall/universal-rfi_submittal-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.1,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-risk-program-report.html",
           "relative_path": "Sophia-Mall/universal-risk-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-scurve-program-report.html",
           "relative_path": "Sophia-Mall/universal-scurve-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.0,
+          "modified": "2026-08-22T04:34:59"
         },
         {
           "name": "universal-variation-program-report.html",
           "relative_path": "Sophia-Mall/universal-variation-program-report.html",
           "extension": "html",
-          "size_kb": 9.2,
-          "modified": "2026-08-22T04:18:55"
+          "size_kb": 9.1,
+          "modified": "2026-08-22T04:34:58"
         }
       ],
       "watchers": [
@@ -6898,12 +6898,12 @@
     "files": {
       "zip": {
         "name": "00_published_project_reports.zip",
-        "bytes": 1859954,
-        "sha256": "ca1cc9b21c9146aa0b92eb96763e5eab4e893026d4b830c77fb4d09644d55e5b"
+        "bytes": 1845415,
+        "sha256": "7d46bad2f559f070e2edfee81741aa2044ee9b7b04ae2d97e8fed864d7196eaf"
       }
     },
     "source_project_id": "Sophia-Mall",
-    "source_report_fingerprint": "a6d34a325c0e21ced9d70aac594e9ada74861f086b9d698c41ad6784f6450e14"
+    "source_report_fingerprint": "76d5eca991e8cca0eb31bc21ac6a0e84bcb31f2b7f8af6c6406ff3c54562d37f"
   },
   "report_artifacts": {
     "executive_dashboard": {
@@ -6919,12 +6919,12 @@
         "pdf": {
           "name": "01_executive_dashboard.pdf",
           "bytes": 848904,
-          "sha256": "ca0323b220e81482fb1c5a0dc8deacd0511ab3671cb2b396d4070bc4e8d0a45b"
+          "sha256": "ed7d0ab68a9ba63ec7f11c91a831c585ca8e65b9b6c622bf9da1f66a4f668645"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
-          "bytes": 29235,
-          "sha256": "746f4abe82f2022efdb8f8620df0d488965c2d533c099e43586fa9995a8d2d88"
+          "bytes": 29125,
+          "sha256": "f5d292d2e884492a058b28ff54679471d2d19d4b10e6ceffc0083337ef0da448"
         }
       },
       "html_origin": "canonical_project_html",
@@ -6944,12 +6944,12 @@
         "pdf": {
           "name": "02_master_dashboard.pdf",
           "bytes": 883327,
-          "sha256": "eb0328c362dfaef6b9edd2282a0bd3a9364889d0da9e2ad05a241c9c0e31655c"
+          "sha256": "78a8b5e17f1f5510363bcbf17f19a545a4a6fb711553450149be99d934b131b9"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
-          "bytes": 29232,
-          "sha256": "21dd484fc195eeb4368dd714c67ede32883048d2a8f4098f76803d0a0488cc14"
+          "bytes": 29122,
+          "sha256": "fc22008b715d0810dfb13405fb4478b502be0a9d5593c33038e7632801cf82ed"
         }
       },
       "html_origin": "canonical_project_html",
@@ -6969,12 +6969,12 @@
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
           "bytes": 240246,
-          "sha256": "fb3a9b0a348588fdcf41c119079ee928ac8836f8605e83b4d614c1c57c641fb6"
+          "sha256": "0058517234ff926ecd5535c2d8ade1fd4c64f4a4b448a6e16078a9fce276d6c4"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
-          "bytes": 29233,
-          "sha256": "82701c07dd65706406a3616ee7e95f085c3563591206260e6dba6b421a179604"
+          "bytes": 29123,
+          "sha256": "79d468de22525d7dc739f6f71a533afc367444a44e8b732780808caadf33b2a2"
         }
       },
       "html_origin": "canonical_project_html",
@@ -6994,12 +6994,12 @@
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
           "bytes": 1120164,
-          "sha256": "5ce1fc9874a07269579d9a4f76901d0f3ac10e63610b4c81e408fc403be5c023"
+          "sha256": "297eebc0a8e93dd11ef7bd6a218e903bc7dc6541401e341fbe0a9b06831f0152"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
-          "bytes": 29241,
-          "sha256": "bda1fc0c7202036a93fad5f99ffbf1406f933882b845a87da935fd4ec7d3ea37"
+          "bytes": 29131,
+          "sha256": "ab0b168e774536de45487ce291355006da54dda75384438685bf163521344ffc"
         }
       },
       "html_origin": "canonical_project_html",
@@ -7010,9 +7010,9 @@
   "universal_report_engine": {
     "project_id": "Sophia-Mall",
     "project_key": "sophia-mall",
-    "source_fingerprint": "fbabf6c1b7d55a06450ac82bcd9f13c9314fa3eea3a4a8a14f42a186419feda9",
+    "source_fingerprint": "760383f0cc4a5f266082b59c84785b82e3f59f4c255a65e2fa517f3152a778ba",
     "source_scope": "active project folder only",
-    "source_file_count": 34,
+    "source_file_count": 33,
     "source_inventory": [
       {
         "relative_path": "01-data/import_templates/01_project_contract.csv",
@@ -7073,12 +7073,6 @@
         "extension": ".csv",
         "size_bytes": 868,
         "sha256": "436c277dbd7fa5eb5c3037b99b41ddea6673046c1e9ac94db2e84d30fe214169"
-      },
-      {
-        "relative_path": "01-data/import_templates/planned_cash_flow.csv",
-        "extension": ".csv",
-        "size_bytes": 126,
-        "sha256": "939013ded9fd937a507cfdb493df74b1b490b09277184ef4d7f4de57275c0864"
       },
       {
         "relative_path": "02-delay_analysis/methodology/TIA methodology.docx",
@@ -7247,7 +7241,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-eot-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7265,7 +7259,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-delay-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7283,7 +7277,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-progress-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7301,7 +7295,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-recovery-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7319,7 +7313,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-variation-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7336,7 +7330,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-hybrid-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7354,7 +7348,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-resource-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7371,7 +7365,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-equipment-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7388,7 +7382,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-cost-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7405,7 +7399,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-evm-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7422,7 +7416,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-cashflow-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7439,7 +7433,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-scurve-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7457,7 +7451,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-procurement-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7474,7 +7468,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-material-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7492,7 +7486,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-lookahead-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7510,7 +7504,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-critical_path-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7528,7 +7522,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-float-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7546,7 +7540,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-milestone-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7563,7 +7557,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-risk-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7581,7 +7575,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-rfi_submittal-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7598,7 +7592,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-qaqc-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7615,7 +7609,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-productivity-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7632,7 +7626,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-executive-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7650,7 +7644,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-baseline_current-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7668,7 +7662,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-forecast_completion-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7685,7 +7679,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-ml_project_controls-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7702,7 +7696,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-contract_admin-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7719,7 +7713,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-change_control-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7736,7 +7730,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-document_control-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       },
@@ -7754,7 +7748,7 @@
         "artifacts": {
           "html": "/generated/Sophia-Mall/universal-interface_management-program-report.html"
         },
-        "generated_at": "2026-08-22T01:32:19+00:00",
+        "generated_at": "2026-08-22T01:36:37+00:00",
         "release_status": "PUBLISHED_PROJECT_DATA",
         "validation_status": "PROGRAM_DATA_BOUND"
       }
@@ -7849,6 +7843,6 @@
       "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
       "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
     },
-    "updated_at": "2026-08-22T01:32:19+00:00"
+    "updated_at": "2026-08-22T01:36:37+00:00"
   }
 }
