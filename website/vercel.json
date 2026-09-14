@@ -5,8 +5,7 @@
   "outputDirectory": ".next",
   "functions": {
     "api/schedule_intelligence.py": {
-      "maxDuration": 60,
-      "excludeFiles": "{.next,node_modules,public,src,scripts,out}/**"
+      "maxDuration": 60
     }
   }
 }
