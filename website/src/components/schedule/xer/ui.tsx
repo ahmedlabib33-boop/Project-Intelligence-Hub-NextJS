@@ -169,7 +169,8 @@ export function LineChart({
   const sx = (x: number) => padL + ((x - minX) / Math.max(1, maxX - minX)) * (W - padL - padR);
   const sy = (y: number) => padT + (1 - y / maxY) * (H - padT - padB);
 
-  const yTicks = [0, 0.25, 0.5, 0.75, 1].map((f) => Math.round(maxY * f));
+  // Small schedules round several quarter ticks to the same value; keep each label once.
+  const yTicks = Array.from(new Set([0, 0.25, 0.5, 0.75, 1].map((f) => Math.round(maxY * f))));
   const xTickCount = 5;
   const xTicks = Array.from({ length: xTickCount }, (_, i) => minX + ((maxX - minX) * i) / (xTickCount - 1));
 

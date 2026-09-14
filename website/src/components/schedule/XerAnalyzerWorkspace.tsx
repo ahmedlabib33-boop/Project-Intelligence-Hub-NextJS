@@ -45,6 +45,8 @@ import { Badge, Card, DataTable, Drawer, KeyValues, SectionTitle } from "./xer/u
 import LibraryWorkspace from "./planning/LibraryWorkspace";
 import MappingView from "./planning/MappingView";
 import ScenarioView, { type ScenarioRun } from "./planning/ScenarioView";
+import ScheduleCreationStage from "./planning/ScheduleCreationStage";
+import { CHECKING, checkService, type ServiceStatus } from "../../lib/planning/service";
 
 type Slot = "A" | "B";
 
@@ -68,7 +70,7 @@ const TABS: { k: TabKey; label: string; eyebrow: string; needsBoth?: boolean }[]
 
 type Pipeline = ProjectPipelineState & { key: string };
 
-export default function XerAnalyzerWorkspace() {
+export default function XerAnalyzerWorkspace({ projectName = "" }: { projectName?: string }) {
   const [A, setA] = useState<LoadedSchedule | null>(null);
   const [B, setB] = useState<LoadedSchedule | null>(null);
   const [scope, setScope] = useState<Slot>("A");
@@ -95,6 +97,25 @@ export default function XerAnalyzerWorkspace() {
   const [libraryNote, setLibraryNote] = useState<string | null>(null);
   const [pipeline, setPipeline] = useState<Pipeline | null>(null);
   const [scenario, setScenario] = useState<{ view: ProjectView; run: ScenarioRun } | null>(null);
+  const [stage, setStage] = useState<"create" | "analyse">("analyse");
+  const [service, setService] = useState<ServiceStatus>(CHECKING);
+
+  /* -------------------------------------------- schedule-creation service */
+
+  useEffect(() => {
+    let cancelled = false;
+    void checkService().then((status) => {
+      if (!cancelled) setService(status);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const recheckService = useCallback(() => {
+    setService(CHECKING);
+    void checkService().then(setService);
+  }, []);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingSlot = useRef<Slot>("A");
@@ -343,6 +364,33 @@ export default function XerAnalyzerWorkspace() {
     >
       <input ref={inputRef} type="file" accept=".xer" multiple className="xer-hidden-input" onChange={(e) => onFiles(e.target.files)} />
 
+      <nav className="schedule-intelligence-tabs pl-stages" aria-label="Pipeline stage">
+        <button type="button" className={stage === "create" ? "active" : ""} onClick={() => setStage("create")}>
+          <span>Stage 1 · {service.state === "wired" ? "service wired" : service.state === "checking" ? "checking service" : "not wired on this deployment"}</span>
+          Create schedule — Tender / Detailed
+        </button>
+        <button type="button" className={stage === "analyse" ? "active" : ""} onClick={() => setStage("analyse")}>
+          <span>Stages 2–7 · browser engine</span>
+          Analyse, plan &amp; recover
+        </button>
+      </nav>
+
+      {stage === "create" ? (
+        <ScheduleCreationStage
+          service={service}
+          onRecheck={recheckService}
+          library={library}
+          index={index}
+          projectName={projectName}
+          onOpenSchedule={(file) => {
+            setScope("A");
+            setTab("dash");
+            setStage("analyse");
+            void loadFile(file, "A");
+          }}
+        />
+      ) : (
+      <>
       <section className="schedule-intelligence-card xer-loader">
         <div className="schedule-intelligence-card-head">
           <div>
@@ -577,6 +625,8 @@ export default function XerAnalyzerWorkspace() {
             </div>
           ) : null}
         </>
+      )}
+      </>
       )}
 
       <p className="xer-footnote">
