@@ -14,10 +14,12 @@ export type AiHealth = {
   provider: string;
   extractionModel: string | null;
   reasoningModel: string | null;
+  /** A second provider the request layer fails over to if the primary one errors, or null if there is none. */
+  fallback: string | null;
   detail: string;
 };
 
-export const AI_CHECKING: AiHealth = { state: "checking", provider: "", extractionModel: null, reasoningModel: null, detail: "Checking the language model connection…" };
+export const AI_CHECKING: AiHealth = { state: "checking", provider: "", extractionModel: null, reasoningModel: null, fallback: null, detail: "Checking the language model connection…" };
 
 export async function checkEvidenceAi(): Promise<AiHealth> {
   try {
@@ -25,13 +27,17 @@ export async function checkEvidenceAi(): Promise<AiHealth> {
     if (!response.ok) {
       return { ...AI_CHECKING, state: "not-wired", detail: `The analysis route is not available on this deployment (HTTP ${response.status}).` };
     }
-    const data = (await response.json()) as { configured?: boolean; provider?: string; extractionModel?: string | null; reasoningModel?: string | null };
+    const data = (await response.json()) as {
+      configured?: boolean; provider?: string; extractionModel?: string | null; reasoningModel?: string | null; fallback?: string | null;
+    };
     if (!data.configured) {
       return { ...AI_CHECKING, state: "not-wired", provider: "none", detail: "No language model key is configured on the server (GROQ_API_KEY or OPENAI_API_KEY)." };
     }
     return {
       state: "wired", provider: data.provider || "", extractionModel: data.extractionModel || null, reasoningModel: data.reasoningModel || null,
-      detail: `Connected to ${data.provider} — extraction ${data.extractionModel}, brief and answers ${data.reasoningModel}.`,
+      fallback: data.fallback || null,
+      detail: `Connected to ${data.provider} — extraction ${data.extractionModel}, brief and answers ${data.reasoningModel}.`
+        + (data.fallback ? ` Fails over to ${data.fallback} if ${data.provider} errors.` : ` No fallback provider configured — a ${data.provider} outage or model retirement stops this step until fixed.`),
     };
   } catch {
     return { ...AI_CHECKING, state: "not-wired", detail: "The analysis route could not be reached." };
