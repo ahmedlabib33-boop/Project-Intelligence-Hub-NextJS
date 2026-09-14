@@ -3,6 +3,7 @@
 import XerAnalyzerWorkspace from "./XerAnalyzerWorkspace";
 
 const STAGES = [
+  "Create schedule — Tender / Detailed",
   "Load XER",
   "Analyse & DCMA health",
   "Planning library",
@@ -23,9 +24,9 @@ export default function ScheduleIntelligencePanel({ projectName }: { projectName
       <section className="schedule-intelligence-hero">
         <div>
           <p>Schedule Intelligence · one pipeline</p>
-          <h2>Analyse, plan and recover {projectName} from one schedule</h2>
+          <h2>Create, analyse, plan and recover {projectName} in one pipeline</h2>
           <span>
-            Load a Primavera P6 XER once. The same calendar-aware CPM — the one that reproduces P6&apos;s stored finish — drives the
+            Create a tender or detailed schedule, or load a Primavera P6 XER. The same calendar-aware CPM — the one that reproduces P6&apos;s stored finish — drives the
             health analysis, the editable planning library and activity mapping, and Mitigation, Recovery and Revised programme
             scenarios, then compares any two revisions.
           </span>
@@ -40,7 +41,7 @@ export default function ScheduleIntelligencePanel({ projectName }: { projectName
           <li key={stage}><b>{i + 1}</b>{stage}</li>
         ))}
       </ol>
-      <XerAnalyzerWorkspace />
+      <XerAnalyzerWorkspace projectName={projectName} />
     </div>
   );
 }
