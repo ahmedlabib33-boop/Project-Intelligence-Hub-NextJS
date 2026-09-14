@@ -2,5 +2,11 @@
   "framework": "nextjs",
   "buildCommand": "npm run build",
   "installCommand": "npm install",
-  "outputDirectory": ".next"
+  "outputDirectory": ".next",
+  "functions": {
+    "api/schedule_intelligence.py": {
+      "maxDuration": 60,
+      "excludeFiles": "{.next,node_modules,public,src,scripts,out}/**"
+    }
+  }
 }

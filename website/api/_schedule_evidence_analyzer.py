@@ -1,0 +1,497 @@
+from __future__ import annotations
+
+from collections import defaultdict
+from datetime import datetime
+import re
+import unicodedata
+from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
+
+
+ARABIC_RE = re.compile(r"[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff\ufb50-\ufdff\ufe70-\ufeff]")
+LATIN_RE = re.compile(r"[A-Za-z]")
+ARABIC_DIACRITICS_RE = re.compile(r"[\u0610-\u061a\u064b-\u065f\u0670\u06d6-\u06ed]")
+MARKER_RE = re.compile(r"^\[(PAGE|SHEET|SLIDE|TABLE)\s+([^\]]+)\]$", re.IGNORECASE)
+ARABIC_DIGITS = str.maketrans("٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹", "01234567890123456789")
+
+
+def _normalize(value: Any) -> str:
+    text = unicodedata.normalize("NFKC", str(value or "")).translate(ARABIC_DIGITS)
+    text = ARABIC_DIACRITICS_RE.sub("", text.lower())
+    text = text.replace("أ", "ا").replace("إ", "ا").replace("آ", "ا").replace("ى", "ي").replace("ة", "ه")
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _short(value: Any, limit: int = 520) -> str:
+    text = re.sub(r"\s+", " ", str(value or "")).strip()
+    return text if len(text) <= limit else f"{text[: limit - 1]}…"
+
+
+def _language(text: str) -> str:
+    arabic = len(ARABIC_RE.findall(text))
+    latin = len(LATIN_RE.findall(text))
+    if arabic and latin:
+        return "Arabic and English"
+    if arabic:
+        return "Arabic"
+    if latin:
+        return "English"
+    return "Language not confirmed"
+
+
+DOCUMENT_TYPES: Sequence[Tuple[str, Sequence[str]]] = (
+    ("Contract / Conditions", ("contract", "conditions of contract", "particular conditions", "general conditions", "عقد", "شروط العقد", "الشروط الخاصه", "الشروط العامه")),
+    ("BOQ / Quantity", ("bill of quantities", "priced boq", "boq", "جدول الكميات", "مقايسه", "كميات")),
+    ("Technical Specification", ("technical specification", "special specification", "specification", "المواصفات الفنيه", "المواصفات الخاصه", "مواصفات")),
+    ("Method Statement / Methodology", ("method statement", "construction methodology", "work method", "بيان طريقه", "منهجيه التنفيذ", "طريقه التنفيذ")),
+    ("Drawing", ("drawing", "ifc drawing", "shop drawing", "مخطط", "لوحه", "رسومات", "رسم تنفيذي")),
+    ("Schedule / Programme", ("primavera", "xer", "baseline schedule", "programme", "program", "البرنامج الزمني", "جدول زمني", "بريمافيرا")),
+    ("Submittal / Register", ("submittal register", "shop drawing register", "material register", "سجل الاعتمادات", "سجل المخططات", "سجل المواد")),
+    ("Procurement / Long Lead", ("procurement", "long lead", "purchase order", "توريدات", "مشتريات", "طويل التوريد")),
+    ("RFI / Technical Query", ("request for information", "rfi", "استفسار فني", "طلب معلومات")),
+    ("ITP / QA-QC", ("inspection and test plan", "itp", "hold point", "خطه الفحص", "نقطه توقف", "ضبط الجوده")),
+    ("Testing / Commissioning", ("testing and commissioning", "commissioning", "اختبارات وتشغيل", "التشغيل التجريبي")),
+    ("Handover", ("handover", "taking over", "as-built", "o&m manual", "تسليم", "مستندات التسليم", "حسب التنفيذ")),
+    ("Geotechnical", ("geotechnical", "soil report", "foundation recommendation", "تقرير التربه", "جسات", "توصيات الاساسات")),
+    ("Authority / Permit", ("authority approval", "permit", "noc", "موافقه جهه", "تصريح", "عدم ممانعه")),
+    ("Correspondence / Minutes", ("correspondence", "letter", "minutes of meeting", "mom", "مراسلات", "خطاب", "محضر اجتماع")),
+    ("Resource / Productivity", ("resource plan", "manpower", "productivity", "equipment plan", "خطه الموارد", "العماله", "الانتاجيه", "المعدات")),
+)
+
+
+REQUIREMENTS: Sequence[Dict[str, Any]] = (
+    {"id": "project_name", "label": "Project Name", "terms": ("project name", "اسم المشروع"), "priority": "Critical", "source": "Contract / Contract Data"},
+    {"id": "employer", "label": "Client / Employer", "terms": ("employer", "client", "owner", "صاحب العمل", "المالك", "العميل"), "priority": "High", "source": "Contract / Contract Data"},
+    {"id": "engineer", "label": "Engineer / Consultant", "terms": ("engineer", "consultant", "المهندس", "الاستشاري"), "priority": "High", "source": "Contract / Contract Data"},
+    {"id": "contractor", "label": "Contractor", "terms": ("contractor", "المقاول"), "priority": "High", "source": "Contract / Contract Data"},
+    {"id": "contract_number", "label": "Contract Number", "terms": ("contract no", "contract number", "رقم العقد"), "priority": "High", "source": "Contract Agreement"},
+    {"id": "location", "label": "Project Location", "terms": ("project location", "site location", "موقع المشروع", "موقع الاعمال"), "priority": "Medium", "source": "Contract / Drawings"},
+    {"id": "contract_type", "label": "Contract Type", "terms": ("contract type", "lump sum", "unit rate", "نوع العقد", "مقطوعيه", "سعر الوحده"), "priority": "Medium", "source": "Contract / BOQ"},
+    {"id": "commencement_date", "label": "Contract Commencement Date", "terms": ("commencement date", "commencement of the works", "تاريخ البدء", "تاريخ بدء الاعمال", "تاريخ المباشره"), "priority": "Critical", "source": "Contract / Notice to Proceed", "scalar": "date"},
+    {"id": "notice_to_proceed", "label": "Notice to Proceed Date", "terms": ("notice to proceed", "ntp", "امر الاسناد", "امر المباشره", "اخطار المباشره"), "priority": "Critical", "source": "Notice to Proceed", "scalar": "date"},
+    {"id": "time_for_completion", "label": "Time for Completion", "terms": ("time for completion", "contract duration", "period of completion", "مده التنفيذ", "مده العقد", "فتره التنفيذ"), "priority": "Critical", "source": "Contract / Contract Data", "scalar": "duration"},
+    {"id": "completion_date", "label": "Required Completion Date", "terms": ("completion date", "contract completion", "required completion", "تاريخ الانتهاء", "تاريخ اتمام الاعمال", "تاريخ التسليم"), "priority": "Critical", "source": "Contract / Contract Data", "scalar": "date"},
+    {"id": "milestones", "label": "Contractual / Sectional Milestones", "terms": ("contractual milestone", "sectional completion", "key milestone", "milestone", "معلم تعاقدي", "مراحل التسليم", "مواعيد مرحليه"), "priority": "Critical", "source": "Contract / Appendix", "table": "Contract and Milestones"},
+    {"id": "calendar", "label": "Working Calendar", "terms": ("working days", "working hours", "project calendar", "calendar", "ايام العمل", "ساعات العمل", "تقويم المشروع"), "priority": "Critical", "source": "Contract / Site Rules", "table": "Calendars"},
+    {"id": "scope", "label": "Scope / Main Deliverables", "terms": ("scope of work", "works include", "main deliverables", "نطاق الاعمال", "يشمل نطاق", "المخرجات الرئيسيه"), "priority": "Critical", "source": "Scope / Employer Requirements", "table": "Scope and Deliverables"},
+    {"id": "boq", "label": "BOQ / Quantities", "terms": ("bill of quantities", "boq", "quantity", "جدول الكميات", "الكميه", "بند الكميه"), "priority": "Critical", "source": "BOQ / Drawings", "table": "Scope, BOQ and Quantities"},
+    {"id": "drawings", "label": "Drawings / Areas / Zones", "terms": ("drawing no", "drawing title", "ifc drawing", "area", "zone", "floor", "رقم اللوحه", "عنوان اللوحه", "منطقه", "قطاع", "دور"), "priority": "Critical", "source": "Drawing Register / Drawings", "table": "Drawings and Derived Scope"},
+    {"id": "specifications", "label": "Technical Specifications", "terms": ("specification section", "technical specification", "special specification", "curing", "مواصفات فنيه", "قسم المواصفات", "معالجه الخرسانه"), "priority": "Critical", "source": "Technical / Special Specifications", "table": "Technical Durations and Specifications"},
+    {"id": "methodology", "label": "Construction Methodology", "terms": ("method statement", "construction methodology", "construction sequence", "طريقه التنفيذ", "منهجيه التنفيذ", "تسلسل التنفيذ"), "priority": "Critical", "source": "Method Statement / Methodology", "table": "Construction Methodology and Sequence"},
+    {"id": "work_fronts", "label": "Work Fronts / Sequence", "terms": ("work front", "construction sequence", "sequence of works", "جبهه عمل", "واجهه عمل", "تسلسل الاعمال"), "priority": "High", "source": "Methodology / Logistics", "table": "Construction Methodology and Sequence"},
+    {"id": "shop_drawings", "label": "Shop Drawing Cycle", "terms": ("shop drawing", "shop drawings", "مخططات الورشه", "رسومات تنفيذييه", "لوحات الشوب"), "priority": "High", "source": "Contract / Shop Drawing Register", "table": "Engineering and Approval Cycles"},
+    {"id": "material_submittals", "label": "Material Submittal Cycle", "terms": ("material submittal", "material approval", "اعتماد المواد", "تقديم المواد"), "priority": "High", "source": "Contract / Material Register", "table": "Engineering and Approval Cycles"},
+    {"id": "rfi_cycle", "label": "RFI Cycle", "terms": ("rfi response", "request for information", "technical query", "مده الرد علي الاستفسار", "استفسار فني", "طلب معلومات"), "priority": "High", "source": "Contract / RFI Register", "table": "Engineering and Approval Cycles"},
+    {"id": "review_durations", "label": "Consultant Review Durations", "terms": ("review duration", "engineer review period", "consultant review", "مده المراجعه", "فتره مراجعه الاستشاري"), "priority": "Critical", "source": "Contract / Submittal Procedure", "table": "Engineering and Approval Cycles"},
+    {"id": "procurement", "label": "Procurement Cycle", "terms": ("procurement lead time", "manufacturing period", "shipping duration", "procurement", "مده التوريد", "فتره التصنيع", "الشحن", "المشتريات"), "priority": "High", "source": "Procurement Register / Vendor Data", "table": "Procurement and Long-Lead Items"},
+    {"id": "long_lead", "label": "Long-Lead Items", "terms": ("long lead", "long-lead", "طويل التوريد", "مواد طويله التوريد"), "priority": "Critical", "source": "Long-Lead Register", "table": "Procurement and Long-Lead Items"},
+    {"id": "resources", "label": "Resources / Manpower", "terms": ("resource plan", "manpower", "crew", "خطه الموارد", "العماله", "طاقم العمل"), "priority": "High", "source": "Resource / Manpower Plan", "table": "Resources, Equipment and Productivity"},
+    {"id": "productivity", "label": "Productivity Rates", "terms": ("productivity", "output per day", "production rate", "الانتاجيه", "معدل الانتاج"), "priority": "High", "source": "Productivity Data / Methodology", "table": "Resources, Equipment and Productivity"},
+    {"id": "equipment", "label": "Equipment Requirements", "terms": ("equipment plan", "equipment requirement", "plant and equipment", "خطه المعدات", "المعدات المطلوبه"), "priority": "High", "source": "Equipment Plan / Methodology", "table": "Resources, Equipment and Productivity"},
+    {"id": "site_logistics", "label": "Site Logistics / Restrictions", "terms": ("site logistics", "access restriction", "storage area", "traffic restriction", "لوجستيات الموقع", "قيود الدخول", "منطقه التخزين", "قيود المرور"), "priority": "High", "source": "Logistics Plan / Contract", "table": "Constraints and Interfaces"},
+    {"id": "itp", "label": "ITP / Inspections / Hold Points", "terms": ("inspection and test plan", "hold point", "witness point", "inspection notice", "خطه الفحص", "نقطه توقف", "نقطه مشاهده", "اخطار فحص"), "priority": "High", "source": "ITP / Specification", "table": "QA-QC, Inspections and Testing"},
+    {"id": "authority", "label": "Authority Approvals / Permits", "terms": ("authority approval", "permit approval", "noc", "موافقه الجهات", "تصريح", "عدم ممانعه"), "priority": "High", "source": "Authority Register / Contract", "table": "Authorities and Permits"},
+    {"id": "testing", "label": "Testing & Commissioning", "terms": ("testing and commissioning", "integrated testing", "pre-commissioning", "اختبارات وتشغيل", "اختبارات متكامله", "ما قبل التشغيل"), "priority": "High", "source": "T&C Requirements / Specifications", "table": "Testing, Commissioning and Handover"},
+    {"id": "handover", "label": "Handover Requirements", "terms": ("handover requirement", "taking over", "as-built drawings", "o&m manuals", "متطلبات التسليم", "الاستلام", "رسومات حسب التنفيذ", "ادله التشغيل والصيانه"), "priority": "High", "source": "Contract / Handover Requirements", "table": "Testing, Commissioning and Handover"},
+    {"id": "constraints", "label": "Constraints / Interfaces", "terms": ("schedule constraint", "interface milestone", "dependency", "قيد زمني", "واجهه تنسيق", "اعتماديه"), "priority": "High", "source": "Contract / Interface Register", "table": "Constraints and Interfaces"},
+    {"id": "progress_measurement", "label": "Progress Measurement / Update Frequency", "terms": ("progress measurement", "update frequency", "monthly update", "weekly update", "قياس التقدم", "دوريه التحديث", "تحديث شهري", "تحديث اسبوعي"), "priority": "High", "source": "Contract / Project Controls Procedure", "table": "Project Controls Requirements"},
+    {"id": "cost_loading", "label": "Cost Loading / Cash Flow", "terms": ("cost loading", "cash flow", "priced programme", "تحميل التكاليف", "التدفق النقدي", "برنامج مسعر"), "priority": "Medium", "source": "Contract / BOQ", "table": "Project Controls Requirements"},
+    {"id": "resource_loading", "label": "Resource Loading", "terms": ("resource loading", "resource-loaded", "تحميل الموارد", "برنامج محمل بالموارد"), "priority": "Medium", "source": "Contract / Planning Requirements", "table": "Project Controls Requirements"},
+)
+
+
+MUST_HAVE_IDS = {
+    "commencement_date", "time_for_completion", "completion_date", "milestones", "scope", "boq", "drawings",
+    "specifications", "methodology", "review_durations", "long_lead", "calendar",
+}
+
+
+DATE_RE = re.compile(
+    r"\b(?:\d{4}[-/]\d{1,2}[-/]\d{1,2}|\d{1,2}[-/]\d{1,2}[-/]\d{2,4}|\d{1,2}\s+(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?|يناير|فبراير|مارس|ابريل|أبريل|مايو|يونيو|يوليو|اغسطس|أغسطس|سبتمبر|اكتوبر|أكتوبر|نوفمبر|ديسمبر)\s+\d{4})\b",
+    re.IGNORECASE,
+)
+DURATION_RE = re.compile(r"\b\d+(?:\.\d+)?\s*(?:calendar\s+days?|working\s+days?|days?|weeks?|months?|hours?|يوم(?:ا|ين)?|ايام|أيام|اسابيع|أسابيع|اسبوع|أسبوع|شهور|اشهر|أشهر|شهر|ساعات|ساعه)\b", re.IGNORECASE)
+
+
+def _document_type(document: Any) -> str:
+    haystack = _normalize(f"{getattr(document, 'filename', '')} {getattr(document, 'text', '')[:30000]}")
+    scores: List[Tuple[int, str]] = []
+    for label, terms in DOCUMENT_TYPES:
+        score = sum(1 for term in terms if _normalize(term) in haystack)
+        if score:
+            scores.append((score, label))
+    return max(scores)[1] if scores else "Other Project Evidence"
+
+
+def _segments(document: Any) -> Iterable[Tuple[str, str]]:
+    location = "EXACT SOURCE LOCATION UNAVAILABLE"
+    seen: set[Tuple[str, str]] = set()
+    for raw in str(getattr(document, "text", "") or "").splitlines():
+        line = raw.strip()
+        marker = MARKER_RE.match(line)
+        if marker:
+            location = f"{marker.group(1).title()} {marker.group(2).strip()}"
+            continue
+        if len(line) < 3:
+            continue
+        key = (location, _normalize(line))
+        if key not in seen:
+            seen.add(key)
+            yield location, line
+    for table in getattr(document, "tables", []) or []:
+        headers = [str(item or "") for item in getattr(table, "headers", [])]
+        for row_number, row in enumerate(getattr(table, "rows", []) or [], start=2):
+            cells = [str(item or "") for item in row]
+            content = " | ".join(
+                f"{headers[index] if index < len(headers) and headers[index] else f'Column {index + 1}'}: {cell}"
+                for index, cell in enumerate(cells)
+                if cell.strip()
+            )
+            if not content:
+                continue
+            loc = f"{getattr(table, 'name', 'Table')}, row {row_number}"
+            key = (loc, _normalize(content))
+            if key not in seen:
+                seen.add(key)
+                yield loc, content
+
+
+def _contains_term(normalized_line: str, terms: Sequence[str]) -> bool:
+    return any(_normalize(term) in normalized_line for term in terms)
+
+
+def _scalar_value(requirement: Dict[str, Any], line: str) -> Optional[Tuple[str, str]]:
+    kind = requirement.get("scalar")
+    normalized = _normalize(line)
+    positions = [normalized.find(_normalize(term)) for term in requirement["terms"] if _normalize(term) in normalized]
+    start = max(0, min(positions)) if positions else 0
+    window = normalized[start : start + 260]
+    match = DATE_RE.search(window) if kind == "date" else DURATION_RE.search(window) if kind == "duration" else None
+    if not match:
+        return None
+    raw = match.group(0)
+    canonical = _normalize(raw)
+    if kind == "date":
+        parsed = _parse_date(canonical)
+        canonical = parsed.date().isoformat() if parsed else canonical
+    return raw, canonical
+
+
+def _parse_date(value: str) -> Optional[datetime]:
+    month_map = {
+        "يناير": "January", "فبراير": "February", "مارس": "March", "ابريل": "April", "أبريل": "April",
+        "مايو": "May", "يونيو": "June", "يوليو": "July", "اغسطس": "August", "أغسطس": "August",
+        "سبتمبر": "September", "اكتوبر": "October", "أكتوبر": "October", "نوفمبر": "November", "ديسمبر": "December",
+    }
+    text = value.translate(ARABIC_DIGITS)
+    for arabic, english in month_map.items():
+        text = text.replace(_normalize(arabic), english)
+    for fmt in ("%Y-%m-%d", "%Y/%m/%d", "%d-%m-%Y", "%d/%m/%Y", "%d-%m-%y", "%d/%m/%y", "%d %B %Y", "%d %b %Y"):
+        try:
+            return datetime.strptime(text.title(), fmt)
+        except ValueError:
+            continue
+    return None
+
+
+def _structured_schedule_rows(documents: Sequence[Any]) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], List[Dict[str, Any]]]:
+    wbs_rows: List[Dict[str, Any]] = []
+    activity_rows: List[Dict[str, Any]] = []
+    logic_rows: List[Dict[str, Any]] = []
+    aliases = {
+        "activity_id": ("activity id", "activity code", "task id", "رمز النشاط", "كود النشاط"),
+        "activity_name": ("activity name", "task name", "activity", "اسم النشاط", "النشاط"),
+        "wbs": ("wbs", "work breakdown structure", "هيكل تقسيم العمل"),
+        "predecessor": ("predecessor", "predecessors", "النشاط السابق", "سابق"),
+        "successor": ("successor", "successors", "النشاط اللاحق", "لاحق"),
+        "relationship": ("relationship", "relation", "نوع العلاقه", "العلاقه"),
+        "lag": ("lag", "time lag", "فاصل زمني", "تأخير العلاقه"),
+    }
+    for document in documents:
+        for table in getattr(document, "tables", []) or []:
+            normalized_headers = [_normalize(item) for item in getattr(table, "headers", [])]
+            found: Dict[str, int] = {}
+            for key, names in aliases.items():
+                for index, header in enumerate(normalized_headers):
+                    if any(_normalize(name) == header for name in names):
+                        found[key] = index
+                        break
+            for row_number, row in enumerate(getattr(table, "rows", []) or [], start=2):
+                def cell(key: str) -> str:
+                    index = found.get(key)
+                    return _short(row[index], 240) if index is not None and index < len(row) else ""
+                source = f"{document.filename} — {table.name}, row {row_number}"
+                if cell("wbs"):
+                    wbs_rows.append({"WBS": cell("wbs"), "Source": source, "Status": "AVAILABLE"})
+                if cell("activity_id") or cell("activity_name"):
+                    activity_rows.append({
+                        "Activity ID": cell("activity_id") or "UNAVAILABLE",
+                        "Activity Name": cell("activity_name") or "UNAVAILABLE",
+                        "WBS": cell("wbs") or "UNAVAILABLE",
+                        "Source": source,
+                        "Status": "AVAILABLE" if cell("activity_id") and cell("activity_name") else "PARTIALLY AVAILABLE",
+                    })
+                if cell("predecessor") or cell("successor"):
+                    logic_rows.append({
+                        "Predecessor": cell("predecessor") or "UNAVAILABLE",
+                        "Successor": cell("successor") or cell("activity_id") or "UNAVAILABLE",
+                        "Relationship": cell("relationship") or "UNAVAILABLE",
+                        "Lag": cell("lag") or "UNAVAILABLE",
+                        "Source": source,
+                        "Status": "AVAILABLE" if cell("predecessor") and (cell("successor") or cell("activity_id")) else "PARTIALLY AVAILABLE",
+                    })
+    unique_wbs = {(_normalize(row["WBS"]), row["Source"]): row for row in wbs_rows}
+    return list(unique_wbs.values())[:2000], activity_rows[:5000], logic_rows[:5000]
+
+
+def analyze_schedule_evidence(documents: Sequence[Any], *, project_name: str = "") -> Dict[str, Any]:
+    document_types = {document.sha256: _document_type(document) for document in documents}
+    evidence: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
+    scalar_candidates: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
+    traceability: List[Dict[str, Any]] = []
+
+    for requirement in REQUIREMENTS:
+        seen: set[Tuple[str, str, str]] = set()
+        for document in documents:
+            language = _language(str(getattr(document, "text", "") or ""))
+            for location, line in _segments(document):
+                normalized_line = _normalize(line)
+                if not _contains_term(normalized_line, requirement["terms"]):
+                    continue
+                key = (document.sha256, location, normalized_line)
+                if key in seen:
+                    continue
+                seen.add(key)
+                exact = location != "EXACT SOURCE LOCATION UNAVAILABLE"
+                scalar = _scalar_value(requirement, line)
+                status = "AVAILABLE" if exact else "UNVERIFIED"
+                confidence = "High" if exact and scalar else "Medium" if exact else "Low"
+                row = {
+                    "Requirement": requirement["label"],
+                    "Extracted Evidence": _short(line),
+                    "Source Document": document.filename,
+                    "Document Type": document_types[document.sha256],
+                    "Source Reference": location,
+                    "Language": language,
+                    "Status": status,
+                    "Confidence": confidence,
+                }
+                evidence[requirement["id"]].append(row)
+                traceability.append({
+                    "Data ID": f"{requirement['id']}-{len(evidence[requirement['id']]):03d}",
+                    "Extracted Data": _short(line),
+                    "File Name": document.filename,
+                    "Document Type": document_types[document.sha256],
+                    "Exact Source Location": location,
+                    "Language": language,
+                    "Status": status,
+                })
+                if scalar:
+                    scalar_candidates[requirement["id"]].append({**row, "Value": scalar[0], "Canonical Value": scalar[1]})
+                if len(evidence[requirement["id"]]) >= 80:
+                    break
+
+    conflicts: List[Dict[str, Any]] = []
+    for requirement in REQUIREMENTS:
+        candidates = scalar_candidates.get(requirement["id"], [])
+        by_value: Dict[str, Dict[str, Any]] = {}
+        for candidate in candidates:
+            by_value.setdefault(candidate["Canonical Value"], candidate)
+        if len(by_value) < 2:
+            continue
+        values = list(by_value.values())[:2]
+        source_1, source_2 = values[0], values[1]
+        conflict_id = f"C-{len(conflicts) + 1:03d}"
+        conflicts.append({
+            "Conflict ID": conflict_id,
+            "Category": requirement["label"],
+            "Source 1": source_1["Source Document"],
+            "Source 1 Type": source_1["Document Type"],
+            "Source 1 Location": source_1["Source Reference"],
+            "Source 1 Requirement": source_1["Value"],
+            "Source 2": source_2["Source Document"],
+            "Source 2 Type": source_2["Document Type"],
+            "Source 2 Location": source_2["Source Reference"],
+            "Source 2 Requirement": source_2["Value"],
+            "Conflict Description": f"Two different explicit values were found for {requirement['label']}.",
+            "Conflict Cause": "CAUSE NOT CONFIRMED — USER REVIEW REQUIRED",
+            "Schedule Impact": f"{requirement['label']} cannot be finalized for Schedule Builder until resolved.",
+            "Criticality": requirement["priority"],
+            "Status": "CONFLICTING — AWAITING USER DECISION",
+            "Affected Outputs": [requirement["label"], "Schedule readiness", "Schedule Builder input"],
+            "Options": [
+                {"Option": "Option 1", "Decision": f"Apply Source 1: {source_1['Value']}", "Consequence": f"Use the value cited at {source_1['Source Reference']}."},
+                {"Option": "Option 2", "Decision": f"Apply Source 2: {source_2['Value']}", "Consequence": f"Use the value cited at {source_2['Source Reference']}."},
+                {"Option": "Option 3", "Decision": "Keep unresolved and request formal clarification", "Consequence": "Do not transfer this value to Schedule Builder until an approved instruction or clarification is received."},
+            ],
+        })
+
+    conflict_ids = {conflict["Category"] for conflict in conflicts}
+    master_summary: List[Dict[str, Any]] = []
+    missing: List[Dict[str, Any]] = []
+    for requirement in REQUIREMENTS:
+        rows = evidence.get(requirement["id"], [])
+        category_conflict = requirement["label"] in conflict_ids
+        if category_conflict:
+            status = "CONFLICTING"
+        elif rows:
+            status = rows[0]["Status"]
+        else:
+            status = "UNAVAILABLE"
+        master_summary.append({
+            "Requirement": requirement["label"],
+            "Extracted Data": rows[0]["Extracted Evidence"] if rows else "UNAVAILABLE",
+            "Source Document": rows[0]["Source Document"] if rows else "UNAVAILABLE",
+            "Source Reference": rows[0]["Source Reference"] if rows else "EXACT SOURCE LOCATION UNAVAILABLE",
+            "Status": status,
+            "Confidence": rows[0]["Confidence"] if rows else "Not available",
+        })
+        if not rows:
+            missing.append({
+                "Missing Information": requirement["label"],
+                "Why Required": "Required to create or validate the corresponding Primavera schedule input.",
+                "Schedule Impact": "Schedule Builder input remains unavailable." if requirement["priority"] != "Critical" else "Reliable schedule generation is blocked.",
+                "Priority": requirement["priority"],
+                "Expected Source": requirement["source"],
+                "Can Schedule Proceed?": "No" if requirement["priority"] == "Critical" else "Only with approved review or assumption",
+                "Status": "UNAVAILABLE",
+            })
+
+    dynamic_groups: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
+    for requirement in REQUIREMENTS:
+        table = requirement.get("table")
+        if table and evidence.get(requirement["id"]):
+            dynamic_groups[table].extend(evidence[requirement["id"]])
+
+    wbs_rows, activity_rows, logic_rows = _structured_schedule_rows(documents)
+    dynamic_tables = [{"title": title, "rows": rows} for title, rows in dynamic_groups.items()]
+    if wbs_rows:
+        dynamic_tables.append({"title": "Evidence-Derived WBS", "rows": wbs_rows})
+    if activity_rows:
+        dynamic_tables.append({"title": "Evidence-Derived Activity Register", "rows": activity_rows})
+    if logic_rows:
+        dynamic_tables.append({"title": "Evidence-Derived Logic Register", "rows": logic_rows})
+
+    document_register: List[Dict[str, Any]] = []
+    languages: set[str] = set()
+    unreadable = 0
+    schedule_documents = 0
+    for document in documents:
+        text = str(getattr(document, "text", "") or "")
+        language = _language(text)
+        if language == "Arabic and English":
+            languages.update({"Arabic", "English"})
+        elif language != "Language not confirmed":
+            languages.add(language)
+        warnings = list(getattr(document, "warnings", []) or [])
+        ocr_required = not text.strip() and any("OCR" in warning or "scanned/image-only" in warning for warning in warnings)
+        has_data = any(row["Source Document"] == document.filename for rows in evidence.values() for row in rows)
+        if ocr_required:
+            status = "OCR REQUIRED — NOT ANALYZED"
+            unreadable += 1
+        elif text.strip() and has_data:
+            status = "PARTIALLY ANALYZED"
+            schedule_documents += 1
+        elif text.strip():
+            status = "NO SCHEDULE DATA IDENTIFIED"
+        else:
+            status = "UNSUPPORTED CONTENT — REVIEW REQUIRED"
+            unreadable += 1
+        document_register.append({
+            "File": document.filename,
+            "Detected Type": document_types[document.sha256],
+            "Language": language,
+            "Read Status": status,
+            "Tables Extracted": len(getattr(document, "tables", []) or []),
+            "Schedule Data Found": "Yes" if has_data else "No",
+            "Issues": "; ".join(warnings) if warnings else "None",
+            "SHA-256": document.sha256,
+        })
+
+    critical_missing = sum(1 for row in missing if row["Priority"] == "Critical")
+    if critical_missing or conflicts or unreadable:
+        readiness = "NOT READY"
+    elif missing:
+        readiness = "READY WITH ASSUMPTIONS"
+    else:
+        readiness = "READY"
+
+    readiness_areas: List[Dict[str, Any]] = []
+    area_map = {
+        "Contract": ("project_name", "employer", "engineer", "contractor", "contract_number", "commencement_date", "time_for_completion", "completion_date"),
+        "Milestones and Calendar": ("milestones", "calendar"),
+        "Scope, BOQ and Drawings": ("scope", "boq", "drawings"),
+        "Methodology and Specifications": ("specifications", "methodology", "work_fronts"),
+        "Engineering and Procurement": ("shop_drawings", "material_submittals", "rfi_cycle", "review_durations", "procurement", "long_lead"),
+        "Resources and Execution": ("resources", "productivity", "equipment", "site_logistics", "itp"),
+        "Testing and Handover": ("authority", "testing", "handover"),
+        "Project Controls": ("constraints", "progress_measurement", "cost_loading", "resource_loading"),
+    }
+    for area, ids in area_map.items():
+        found = sum(1 for item in ids if evidence.get(item))
+        area_missing = sum(1 for item in ids if not evidence.get(item))
+        area_conflicts = sum(1 for conflict in conflicts if any(req["id"] in ids and req["label"] == conflict["Category"] for req in REQUIREMENTS))
+        completeness = round(found / len(ids) * 100) if ids else 0
+        readiness_areas.append({
+            "Area": area,
+            "Completeness": f"{completeness}%",
+            "Missing Inputs": area_missing,
+            "Conflicts": area_conflicts,
+            "Ready": "Review" if area_missing or area_conflicts else "Yes",
+        })
+
+    dashboard = {
+        "Documents Uploaded": len(documents),
+        "Documents With Schedule Data": schedule_documents,
+        "Documents Requiring Review": unreadable,
+        "Project": project_name or "Selected project",
+        "Contract Duration": next((item["Value"] for item in scalar_candidates.get("time_for_completion", [])), "UNAVAILABLE"),
+        "Contract Milestones Found": len(evidence.get("milestones", [])),
+        "Evidence-Derived WBS Nodes": len(wbs_rows),
+        "Evidence-Derived Activities": len(activity_rows),
+        "Evidence-Derived Logic Links": len(logic_rows),
+        "Missing Critical Inputs": critical_missing,
+        "Conflicting Inputs": len(conflicts),
+        "Unresolved Assumptions": 0,
+    }
+
+    return {
+        "analyzer": "Schedule Evidence Analyzer",
+        "project": project_name or "Selected project",
+        "languages_detected": sorted(languages),
+        "language_policy": "Arabic and English source wording is preserved. No machine translation is treated as contractual evidence.",
+        "readiness_status": readiness,
+        "schedule_builder_transfer_allowed": readiness == "READY",
+        "dashboard": dashboard,
+        "project_master_summary": master_summary,
+        "must_have_data_check": [
+            {
+                "Required Schedule Input": req["label"],
+                "Tender Schedule": "Must",
+                "Detailed / Baseline": "Must",
+                "Status": next((row["Status"] for row in master_summary if row["Requirement"] == req["label"]), "UNAVAILABLE"),
+                "Source": next((row["Source Document"] for row in master_summary if row["Requirement"] == req["label"]), "UNAVAILABLE"),
+            }
+            for req in REQUIREMENTS if req["id"] in MUST_HAVE_IDS
+        ],
+        "dynamic_tables": dynamic_tables,
+        "conflicts": conflicts,
+        "missing_information": missing,
+        "source_traceability": traceability[:8000],
+        "document_register": document_register,
+        "readiness_table": readiness_areas,
+        "schedule_builder_output": {
+            "status": "BLOCKED" if readiness != "READY" else "READY FOR USER APPROVAL",
+            "reason": "Critical missing, unreadable or conflicting evidence must be resolved first." if readiness != "READY" else "All controlled requirements were found; user approval remains mandatory.",
+            "project_data": [row for row in master_summary if row["Status"] == "AVAILABLE"],
+            "wbs": wbs_rows,
+            "activities": activity_rows,
+            "relationships": logic_rows,
+        },
+        "controls": [
+            "The analyzer does not invent dates, durations, quantities, logic, clauses or page references.",
+            "Scanned or unreadable files are not counted as analyzed evidence.",
+            "Unresolved conflicts block affected Schedule Builder inputs.",
+            "The master schedule is not changed by this analysis.",
+            "Native Primavera P6 review and recalculation remain mandatory before reliance.",
+        ],
+    }
