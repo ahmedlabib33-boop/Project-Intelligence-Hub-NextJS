@@ -366,7 +366,7 @@ export default function XerAnalyzerWorkspace({ projectName = "" }: { projectName
 
       <nav className="schedule-intelligence-tabs pl-stages" aria-label="Pipeline stage">
         <button type="button" className={stage === "create" ? "active" : ""} onClick={() => setStage("create")}>
-          <span>Stage 1 · {service.state === "wired" ? "10X engine wired" : service.state === "checking" ? "checking 10X engine" : "10X engine not wired"}</span>
+          <span>Stage 1 · {service.state === "wired" ? "engine wired" : service.state === "checking" ? "checking engine" : "engine not wired"}</span>
           Create schedule — Tender / Detailed
         </button>
         <button type="button" className={stage === "analyse" ? "active" : ""} onClick={() => setStage("analyse")}>
