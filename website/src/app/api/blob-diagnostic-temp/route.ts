@@ -10,9 +10,11 @@ export async function GET() {
     return NextResponse.json({ ok: false, error: "BLOB_READ_WRITE_TOKEN is not set in this environment" }, { status: 500 });
   }
   try {
-    const blob = await put(`diagnostics/ping-${Date.now()}.txt`, "ok", { access: "public", addRandomSuffix: true });
+    const blob = await put(`diagnostics/ping-${Date.now()}.txt`, "ok", { access: "private", addRandomSuffix: true });
+    const fetched = await fetch(blob.url, { headers: { Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` } });
+    const body = await fetched.text();
     await del(blob.url);
-    return NextResponse.json({ ok: true, url: blob.url, message: "put() and del() both succeeded" });
+    return NextResponse.json({ ok: true, url: blob.url, fetchStatus: fetched.status, body, message: "put(), authenticated fetch and del() all succeeded" });
   } catch (error) {
     return NextResponse.json({ ok: false, error: error instanceof Error ? error.message : String(error) }, { status: 500 });
   }
