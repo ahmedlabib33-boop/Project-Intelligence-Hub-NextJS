@@ -17,8 +17,10 @@ WHEEL = HERE.parent / "vendor" / "primavera_planning_recovery_intelligence_10x-6
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 if WHEEL.is_file() and str(WHEEL) not in sys.path:
-    # Local RUN_LOCAL uses the verified pure-Python wheel directly. Vercel installs
-    # the same wheel from website/requirements.txt before importing this module.
+    # The wheel is loaded directly via zipimport, both by RUN_LOCAL and here on
+    # Vercel — it is never pip/uv-installed. requirements.txt only lists its own
+    # runtime dependencies (Vercel's uv failed to resolve a local wheel path
+    # given through requirements.txt, so pip/uv never touches this file at all).
     sys.path.insert(0, str(WHEEL))
 
 from app import schedule_summary  # type: ignore  # noqa: E402
