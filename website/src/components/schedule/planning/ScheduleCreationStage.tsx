@@ -12,16 +12,19 @@
  * into analysis, mapping and Mitigation / Recovery / Revised.
  */
 
-import { useMemo, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { AI_CHECKING, checkEvidenceAi, type AiHealth } from "../../../lib/evidence/run";
 import { activityBasis, cellText, type LibraryIndex, type PlanningLibrary } from "../../../lib/planning/library";
 import { callService, type JsonRecord, type ServiceReply, type ServiceStatus } from "../../../lib/planning/service";
 import { formatNum } from "../../../lib/xer/format";
 import { Badge, Card, Kpi, Kpis, SectionTitle } from "../xer/ui";
+import EvidenceIntelligenceStep from "./EvidenceIntelligenceStep";
 import { downloadBlob } from "./LibraryWorkspace";
 
-type Step = "analyzer" | "tender" | "detailed" | "reader" | "reports";
+type Step = "understand" | "analyzer" | "tender" | "detailed" | "reader" | "reports";
 
 const STEPS: { key: Step; label: string; eyebrow: string }[] = [
+  { key: "understand", label: "Project brief & requirements", eyebrow: "AI · any format" },
   { key: "analyzer", label: "Evidence analyzer", eyebrow: "Readiness · conflicts" },
   { key: "tender", label: "Tender schedule", eyebrow: "From evidence documents" },
   { key: "detailed", label: "Detailed schedule", eyebrow: "Library · answers · crews" },
@@ -58,7 +61,7 @@ export default function ScheduleCreationStage({
   onOpenSchedule: (file: File) => void;
 }) {
   const wired = service.state === "wired";
-  const [step, setStep] = useState<Step>("tender");
+  const [step, setStep] = useState<Step>("understand");
   const [evidence, setEvidence] = useState<File[]>([]);
   const [name, setName] = useState(projectName);
   const [busy, setBusy] = useState("");
@@ -67,6 +70,9 @@ export default function ScheduleCreationStage({
   const [tender, setTender] = useState<JsonRecord | null>(null);
   const [reader, setReader] = useState<JsonRecord | null>(null);
   const [inspection, setInspection] = useState<JsonRecord | null>(null);
+  const [aiHealth, setAiHealth] = useState<AiHealth>(AI_CHECKING);
+  const recheckAi = () => { setAiHealth(AI_CHECKING); void checkEvidenceAi().then(setAiHealth); };
+  useEffect(() => { void checkEvidenceAi().then(setAiHealth); }, []);
 
   const projectLabel = name.trim() || projectName || "Schedule";
   const noData = wired ? "No data yet — run this step." : "No data — not wired on this deployment.";
@@ -102,7 +108,7 @@ export default function ScheduleCreationStage({
 
   return (
     <div className="xer-view pl-create">
-      <Card eyebrow="Stage 1 · Create schedule" title="Tender and detailed schedule creation" aside={<Badge tone={stateTone}>{stateLabel}</Badge>}>
+      <Card eyebrow="Stage 1 · Create schedule" title="Project evidence, tender and detailed schedule creation" aside={<Badge tone={stateTone}>{stateLabel}</Badge>}>
         <Kpis>
           <Kpi label="Schedule-creation service" value={stateLabel} note={service.detail} tone={wired ? "ok" : service.state === "checking" ? "info" : "crit"} />
           <Kpi label="Endpoint" value={<span className="xer-mono pl-endpoint">{service.endpoint || "—"}</span>} note={service.checkedAt ? `Checked ${new Date(service.checkedAt).toLocaleTimeString()}` : ""} />
@@ -135,9 +141,13 @@ export default function ScheduleCreationStage({
         {STEPS.map((s) => (
           <button key={s.key} type="button" className={step === s.key ? "active" : ""} onClick={() => setStep(s.key)}>
             {s.label}
-            <i>{wired ? s.eyebrow : "not wired"}</i>
+            <i>{s.key === "understand" || wired ? s.eyebrow : "not wired"}</i>
           </button>
         ))}
+      </div>
+
+      <div hidden={step !== "understand"}>
+        <EvidenceIntelligenceStep evidence={evidence} projectName={projectLabel} health={aiHealth} onRecheckAi={recheckAi} />
       </div>
 
       <div hidden={step !== "analyzer"}>

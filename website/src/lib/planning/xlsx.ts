@@ -55,7 +55,12 @@ async function unzip(buffer: ArrayBuffer): Promise<Map<string, Uint8Array>> {
   return files;
 }
 
-function decodeXml(text: string): string {
+/** Every file inside an Office Open XML (or any zip) package, decompressed. */
+export async function readZip(buffer: ArrayBuffer): Promise<Map<string, Uint8Array>> {
+  return unzip(buffer);
+}
+
+export function decodeXml(text: string): string {
   return text
     .replace(/&#x([0-9a-f]+);/gi, (_, hex: string) => String.fromCodePoint(Number.parseInt(hex, 16)))
     .replace(/&#(\d+);/g, (_, dec: string) => String.fromCodePoint(Number.parseInt(dec, 10)))

@@ -5,3 +5,10 @@ out
 
 .vercel
 .env*
+
+# pdf.js decoders, CMaps and fonts, copied from pdfjs-dist before dev/build
+public/pdfjs/
+
+# Python engine — local caches and the editor password hash stay on this machine
+__pycache__/
+api/.editor-password.sha256

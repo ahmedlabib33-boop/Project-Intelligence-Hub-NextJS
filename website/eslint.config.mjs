@@ -10,5 +10,7 @@ export default defineConfig([
     "out/**",
     "coverage/**",
     "next-env.d.ts",
+    // Decoders copied from pdfjs-dist before dev/build — third-party, not source.
+    "public/pdfjs/**",
   ]),
 ]);
