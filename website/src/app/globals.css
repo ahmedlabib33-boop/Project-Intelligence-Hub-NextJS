@@ -4763,7 +4763,7 @@ h2 {
 
 /* ---- badges ---- */
 .xer-badge {
-  display: inline-block; border-radius: 6px; padding: 2px 7px; font-size: .68rem; font-weight: 800;
+  display: inline-block; border-radius: 6px; padding: 3px 8px; font-size: .74rem; font-weight: 800;
   letter-spacing: .03em; white-space: nowrap;
 }
 .xer-badge-bad { background: rgba(251,113,133,.18); color: #ffb3bf; }
@@ -4958,7 +4958,7 @@ h2 {
 .xer-analyzer .pl-grid td.pl-cell { cursor: text; }
 .xer-analyzer .pl-grid td.pl-cell:hover { background: rgba(57,215,210,.05); }
 .pl-num, .xer-analyzer .pl-grid td.pl-num { text-align: right; font-variant-numeric: tabular-nums; }
-.pl-cell-input { width: 100%; min-width: 70px; border: 1px solid rgba(57,215,210,.45); border-radius: 6px; background: rgba(4,12,24,.95); color: #eef8ff; padding: 5px 7px; font: inherit; font-size: .78rem; outline: none; }
+.pl-cell-input { width: 100%; min-width: 70px; border: 1px solid rgba(57,215,210,.45); border-radius: 6px; background: rgba(4,12,24,.95); color: #eef8ff; padding: 5px 7px; font: inherit; font-size: .95rem; outline: none; }
 .pl-cell-input:disabled { border-color: rgba(99,168,255,.12); color: #56728a; background: transparent; }
 .pl-cell-input::placeholder { color: #6d8aa2; }
 .pl-num-input { text-align: right; min-width: 78px; }
@@ -5018,12 +5018,17 @@ h2 {
 .pl-excerpts li { color: #9bb8ca; font-size: .74rem; line-height: 1.5; }
 .pl-excerpts b { display: block; color: #cfe6f6; }
 .pl-brief { margin: 0; color: #dff2ff; font-size: .9rem; line-height: 1.75; white-space: pre-wrap; }
-.pl-sources summary { cursor: pointer; color: #93ecea; font-size: .74rem; }
+.pl-sources summary { cursor: pointer; color: #93ecea; font-size: .82rem; }
 .pl-sources ul { margin: 6px 0 0; padding-left: 16px; display: grid; gap: 6px; }
-.pl-sources li { color: #9bb8ca; font-size: .72rem; line-height: 1.45; }
+.pl-sources li { color: #9bb8ca; font-size: .8rem; line-height: 1.55; }
 .pl-sources q { display: block; margin-top: 2px; color: #dff2ff; font-style: italic; }
 .pl-candidate { display: block; margin-top: 6px; width: 100%; }
 .pl-conflict { border-top: 1px solid rgba(99,168,255,.12); padding-top: 4px; }
 .pl-conflict-option { display: grid; grid-template-columns: auto minmax(0, .6fr) 1fr; gap: 10px; align-items: start; padding: 6px 0; color: #dff2ff; font-size: .8rem; }
 .xer-analyzer .pl-grid tr.pl-row-rejected td { opacity: .55; text-decoration: line-through; text-decoration-color: rgba(251,113,133,.5); }
+/* Evidence review tables (master data, requirements, milestones, parties) read
+   like documents — legible body text matters more here than in dense numeric
+   XER tables, so this overrides the smaller .xer-analyzer .xer-table size. */
+.xer-analyzer .pl-grid td { font-size: .95rem; line-height: 1.6; padding: 12px 11px; }
+.xer-analyzer .pl-grid th { font-size: .76rem; }
 @media (max-width: 700px) { .pl-conflict-option { grid-template-columns: 1fr; } }
