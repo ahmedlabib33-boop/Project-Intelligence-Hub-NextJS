@@ -116,12 +116,15 @@ function aiFailure(result: { error?: string; answer: string }) {
 export async function GET() {
   const groq = Boolean(getServerEnv("GROQ_API_KEY"));
   const openai = Boolean(getServerEnv("OPENAI_API_KEY"));
-  // Health must not spend model tokens.
+  // Health must not spend model tokens. askConfiguredAI (gateway.ts) already
+  // fails over from Groq to OpenAI on any Groq failure, not only a missing
+  // key — "fallback" reports whether that failover has anywhere to go.
   return NextResponse.json({
     configured: groq || openai,
     provider: groq ? "groq" : openai ? "openai" : "none",
     extractionModel: groq ? GROQ_MODEL_PRIMARY : openai ? "openai default" : null,
     reasoningModel: groq ? REASONING_MODEL : openai ? "openai default" : null,
+    fallback: groq && openai ? "openai" : null,
   });
 }
 
