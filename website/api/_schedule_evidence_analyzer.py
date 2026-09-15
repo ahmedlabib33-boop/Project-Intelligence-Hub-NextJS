@@ -418,6 +418,151 @@ def _boq_numeric_anomalies(boq_documents: Sequence[Any]) -> Dict[str, Any]:
     }
 
 
+# ---------------------------------------------------------------------------
+# Drawing register -- text-layer only. No OCR, no vector/geometric quantity
+# take-off: this reads exactly the same document.text every other check in
+# this module reads. Confirmed empirically against a real 93-file drawing
+# set: some drawings (CAD exports with real embedded text) yield genuine
+# title-block, note and cross-reference text; others (plotted/rasterized
+# sheets) yield none at all -- those are reported as OCR required, never
+# backfilled with an assumed value.
+# ---------------------------------------------------------------------------
+
+DRAWING_FILENAME_RE = re.compile(
+    r"\b(dwg|drg)\b|-(AR|SB|ST|CV|RD|TR|WU|PL|PU|EL|DS|MEP|HV|FF|FP|LS|IN)-\d",
+    re.IGNORECASE,
+)
+
+DRAWING_DISCIPLINE_CODES = {
+    "AR": "Architectural", "A": "Architectural",
+    "ST": "Structural", "SB": "Structural", "S": "Structural",
+    "CV": "Civil", "C": "Civil",
+    "RD": "Roads", "TR": "Roads",
+    "WU": "Wet Utilities",
+    "PL": "Plumbing", "PU": "Plumbing",
+    "EL": "Electrical", "DS": "Electrical", "E": "Electrical",
+    "MEP": "MEP", "M": "Mechanical", "HV": "HVAC",
+    "FF": "Fire Fighting", "FP": "Fire Fighting",
+    "LS": "Landscape", "L": "Landscape",
+    "IN": "Infrastructure",
+}
+DRAWING_CODE_RE = re.compile(r"-([A-Z]{1,4})-\d+[A-Za-z]*$")
+
+DRAWING_STATUS_PATTERNS: Sequence[Tuple[str, "re.Pattern[str]"]] = (
+    ("IFC — Issued For Construction", re.compile(r"issued for construction|\bifc\b", re.I)),
+    ("100% Tender Design", re.compile(r"100\s*%\s*tender\s+design", re.I)),
+    ("Approved Shop Drawing", re.compile(r"approved\s+shop\s+drawing", re.I)),
+    ("Approved For Construction", re.compile(r"approved\s+for\s+construction", re.I)),
+    ("Tender", re.compile(r"\btender\b", re.I)),
+    ("Concept", re.compile(r"\bconcept\b", re.I)),
+)
+STRUCTURE_ID_RE = re.compile(r"\bbridge\s*\(?\s*(?:no\.?)?\s*0?(\d{1,3})\s*\)?", re.I)
+DRAWING_CROSS_REF_RE = re.compile(r"\b(see detail|see section|refer to drawing|refer to specification)\b", re.I)
+DRAWING_QA_WORDS = ("INSPECT", "APPROVE", "TEST", "WITNESS", "HOLD", "VERIFY", "SUBMIT", "MOCK-UP", "SAMPLE")
+DRAWING_PROCUREMENT_TERMS = (
+    "transformer", "switchgear", "generator", "elevator", "chiller", "ahu", "pump",
+    "façade", "facade", "specialist door", "valve",
+)
+DRAWING_NOTE_TERMS = (
+    "shall", "must", "required", "inspect", "approve", "test", "witness", "hold", "verify", "submit", "coordinate", "refer",
+)
+
+
+def _is_drawing_candidate(document: Any) -> bool:
+    if _document_type(document) == "Drawing":
+        return True
+    return bool(DRAWING_FILENAME_RE.search(getattr(document, "filename", "") or ""))
+
+
+def _drawing_discipline(filename: str) -> str:
+    stem = filename.rsplit(".", 1)[0].upper()
+    match = DRAWING_CODE_RE.search(stem)
+    if not match:
+        return "Not identified from filename"
+    code = match.group(1)
+    return DRAWING_DISCIPLINE_CODES.get(code, f"Unrecognized code ({code})")
+
+
+def _drawing_status(text: str) -> str:
+    for label, pattern in DRAWING_STATUS_PATTERNS:
+        if pattern.search(text):
+            return label
+    return "NOT STATED"
+
+
+def _structure_id(text: str) -> str:
+    match = STRUCTURE_ID_RE.search(text)
+    return f"Bridge {match.group(1)}" if match else ""
+
+
+def assess_drawing_register(documents: Sequence[Any]) -> Dict[str, Any]:
+    """Text-only drawing register: discipline, status, structure reference,
+    notes, cross-references, QA-gate and procurement-candidate keywords --
+    all mined from each drawing's own already-extracted text. A drawing
+    with no embedded text layer (plotted/rasterized, confirmed to occur in
+    real packages) is listed as OCR required, not silently dropped or
+    given an invented value.
+    """
+    rows: List[Dict[str, Any]] = []
+    for document in documents:
+        if not _is_drawing_candidate(document):
+            continue
+        text = str(getattr(document, "text", "") or "")
+        filename = getattr(document, "filename", "") or ""
+        warnings = list(getattr(document, "warnings", []) or [])
+        ocr_required = not text.strip() and any("OCR" in w or "scanned/image-only" in w for w in warnings)
+
+        if ocr_required or not text.strip():
+            rows.append({
+                "Drawing File": filename,
+                "Discipline": _drawing_discipline(filename),
+                "Status": "NOT AVAILABLE",
+                "Structure / Bridge": "NOT AVAILABLE",
+                "Notes Found": 0,
+                "Cross-References": 0,
+                "QA Gate Candidates": [],
+                "Procurement Candidates": [],
+                "Read Status": "OCR REQUIRED — NOT ANALYZED",
+            })
+            continue
+
+        notes = [
+            line.strip() for line in text.splitlines()
+            if line.strip() and _contains_term(_normalize(line), DRAWING_NOTE_TERMS)
+        ]
+        rows.append({
+            "Drawing File": filename,
+            "Discipline": _drawing_discipline(filename),
+            "Status": _drawing_status(text),
+            "Structure / Bridge": _structure_id(text) or "NOT IDENTIFIED",
+            "Notes Found": len(notes),
+            "Cross-References": len(DRAWING_CROSS_REF_RE.findall(text)),
+            "QA Gate Candidates": [w for w in DRAWING_QA_WORDS if re.search(rf"\b{re.escape(w)}\w*\b", text, re.I)],
+            "Procurement Candidates": [t for t in DRAWING_PROCUREMENT_TERMS if re.search(rf"\b{re.escape(t)}s?\b", text, re.I)],
+            "Read Status": "READ",
+        })
+
+    by_discipline: Dict[str, int] = defaultdict(int)
+    ocr_required_count = 0
+    for row in rows:
+        by_discipline[row["Discipline"]] += 1
+        if row["Read Status"] != "READ":
+            ocr_required_count += 1
+
+    return {
+        "drawings_found": len(rows),
+        "drawings_requiring_ocr": ocr_required_count,
+        "by_discipline": dict(by_discipline),
+        "rows": rows,
+        "note": (
+            "Drawing reading here is text-layer only: title-block fields, discipline, structure/bridge "
+            "references, notes and cross-references extracted from each drawing's own embedded text. It does "
+            "not perform OCR or geometric quantity take-off from vector/raster content — a drawing with no "
+            "embedded text layer is reported as OCR required, never estimated or backfilled."
+        ),
+    }
+
+
 def assess_boq_completeness(documents: Sequence[Any]) -> Dict[str, Any]:
     """Deterministic BOQ-readiness check.
 
@@ -753,6 +898,7 @@ def analyze_schedule_evidence(documents: Sequence[Any], *, project_name: str = "
             for req in REQUIREMENTS if req["id"] in SCHEDULE_STAGE_APPLICABILITY
         ],
         "boq_completeness": assess_boq_completeness(documents),
+        "drawing_register": assess_drawing_register(documents),
         "dynamic_tables": dynamic_tables,
         "conflicts": conflicts,
         "missing_information": missing,

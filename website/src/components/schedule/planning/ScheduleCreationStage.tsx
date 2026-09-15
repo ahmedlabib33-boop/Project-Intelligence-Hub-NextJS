@@ -325,6 +325,7 @@ function AnalyzerStep({ service, onRecheck, busy, evidence, noData, result, onRu
       <Card eyebrow="Evidence-controlled output" title="Project schedule master summary"><RecordTable rows={records(result?.project_master_summary)} empty={noData} /></Card>
       <Card eyebrow="Evidence-controlled output" title="Must-have schedule data check"><RecordTable rows={records(result?.must_have_data_check)} empty={noData} /></Card>
       <BoqCompletenessCard completeness={(result?.boq_completeness || null) as JsonRecord | null} noData={noData} />
+      <DrawingRegisterCard register={(result?.drawing_register || null) as JsonRecord | null} noData={noData} />
       {tables.map((t) => (
         <Card key={str(t.title)} eyebrow="Evidence-controlled output" title={str(t.title)}><RecordTable rows={records(t.rows)} empty={noData} /></Card>
       ))}
@@ -371,6 +372,39 @@ function BoqCompletenessCard({ completeness, noData }: { completeness: JsonRecor
               {str(anomalies.blank_values && (anomalies.blank_values as unknown[]).length)} blank line(s) found. {str(anomalies.note)}
             </p>
           ) : null}
+        </>
+      )}
+    </Card>
+  );
+}
+
+function DrawingRegisterCard({ register, noData }: { register: JsonRecord | null; noData: string }) {
+  const found = Number(register?.drawings_found ?? 0);
+  const requiringOcr = Number(register?.drawings_requiring_ocr ?? 0);
+  const byDiscipline = (register?.by_discipline || {}) as Record<string, number>;
+  return (
+    <Card
+      eyebrow="Evidence-controlled output — text layer only, no OCR or geometric take-off"
+      title="Drawing register"
+      aside={found ? `${found} drawing(s) reviewed` : "No drawings found"}
+    >
+      {!register || !found ? (
+        <div className="schedule-intelligence-empty"><b>{register ? str(register.note) : noData}</b></div>
+      ) : (
+        <>
+          <p className="xer-muted">{str(register.note)}</p>
+          <Kpis>
+            <Kpi label="Drawings found" value={String(found)} />
+            <Kpi label="Requiring OCR" value={String(requiringOcr)} note={requiringOcr ? "No embedded text layer — not analyzed" : "All drawings had a readable text layer"} tone={requiringOcr ? "warn" : "ok"} />
+            {Object.entries(byDiscipline).map(([discipline, count]) => (
+              <Kpi key={discipline} label={discipline} value={String(count)} />
+            ))}
+          </Kpis>
+          <RecordTable
+            rows={records(register.rows)}
+            empty={noData}
+            columns={["Drawing File", "Discipline", "Status", "Structure / Bridge", "Notes Found", "Cross-References", "QA Gate Candidates", "Procurement Candidates", "Read Status"]}
+          />
         </>
       )}
     </Card>
