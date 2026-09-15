@@ -1,0 +1,28 @@
+{
+  "attribution": "Python AI Programming by Eng. Ahmed Labib",
+  "author": "Eng. Ahmed Labib",
+  "project_id_column": "project_id",
+  "governance": {
+    "decision_support_only": true,
+    "native_p6_cpm_supremacy": true,
+    "universal_accuracy_claim": false,
+    "require_project_isolation_when_possible": true,
+    "require_confidence": true,
+    "require_ood": true,
+    "require_drift_monitoring": true
+  },
+  "models": [
+    {
+      "task": "event_classification",
+      "data": "path/to/events.csv",
+      "target": "event_class",
+      "exclude_columns": ["source_file", "document_hash"]
+    },
+    {
+      "task": "forecast_finish_deviation_prediction",
+      "data": "path/to/schedule_history.csv",
+      "target": "finish_deviation_days",
+      "exclude_columns": []
+    }
+  ]
+}

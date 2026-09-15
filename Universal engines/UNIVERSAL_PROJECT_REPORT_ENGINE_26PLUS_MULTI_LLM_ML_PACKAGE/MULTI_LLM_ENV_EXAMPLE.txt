@@ -1,0 +1,9 @@
+Python AI Programming by Eng. Ahmed Labib
+# Copy these variable names into your secure deployment environment. Do not put real keys in this file.
+ANTHROPIC_API_KEY=YOUR_SECURE_KEY
+MOONSHOT_API_KEY=YOUR_SECURE_KEY
+DEEPSEEK_API_KEY=YOUR_SECURE_KEY
+PROJECT_CONTROLS_CLAUDE_MODEL=claude-opus-5
+PROJECT_CONTROLS_KIMI_MODEL=kimi-k3
+PROJECT_CONTROLS_DEEPSEEK_MODEL=deepseek-v4-pro
+PROJECT_CONTROLS_FAST_LLM=kimi

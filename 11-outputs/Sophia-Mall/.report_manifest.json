@@ -1,0 +1,185 @@
+{
+  "project_id": "Sophia-Mall",
+  "project_key": "Sophia-Mall",
+  "project_fingerprint": "ac4aeadb77cf6dd972f085e6f562d1241083c057b867dbf39446a83213989305",
+  "generator_version": "2026.08.project-scoped-html-pdf-pptx.v6-source-html",
+  "chart_catalog_version": "2026-08-02-reference-36",
+  "chart_status": {
+    "overview.schedule_performance_s_curve": "ready",
+    "overview.overall_completion_gauge": "ready",
+    "overview.activity_status": "ready",
+    "overview.discipline_health": "awaiting_data",
+    "overview.earned_value_trend": "awaiting_data",
+    "overview.performance_indices": "awaiting_data",
+    "wbs.progress_distribution": "awaiting_data",
+    "wbs.duration_breakdown": "awaiting_data",
+    "activities.status_distribution": "ready",
+    "activities.critical_path": "ready",
+    "activities.float_distribution": "ready",
+    "activities.monthly_completion": "awaiting_data",
+    "activities.responsible_party_workload": "ready",
+    "milestones.schedule_health": "ready",
+    "milestones.variance_trend": "ready",
+    "milestones.type_breakdown": "ready",
+    "s_curve.master": "awaiting_data",
+    "s_curve.discipline": "awaiting_data",
+    "s_curve.variance": "awaiting_data",
+    "evm.burnup": "ready",
+    "evm.variance_waterfall": "ready",
+    "evm.spi_trend": "awaiting_data",
+    "evm.cpi_trend": "awaiting_data",
+    "contracts.payment_history": "ready",
+    "contracts.planned_vs_actual_cash_flow": "awaiting_data",
+    "contracts.payment_status": "ready",
+    "contracts.variations": "ready",
+    "risks.category": "awaiting_data",
+    "risks.status": "ready",
+    "risks.trend": "awaiting_data",
+    "risks.mitigation_effectiveness": "awaiting_data",
+    "delay.events_timeline": "ready",
+    "delay.root_cause_pareto": "awaiting_data",
+    "delay.type_distribution": "awaiting_data",
+    "delay.monthly_accumulation": "awaiting_data",
+    "delay.tia_recovery_scenario": "awaiting_data"
+  },
+  "assessment": {
+    "analysis_run_id": "7b74a153fdbf31627b11",
+    "assessment_profile": "readiness_only",
+    "assessment_status": "readiness_only",
+    "determination_status": "p6_recalculation_required",
+    "source_scope": "selected_project_only"
+  },
+  "generated_at": "2026-08-05T01:08:48",
+  "reports": {
+    "executive_dashboard": {
+      "html": "/generated/Sophia-Mall/01_executive_dashboard.html",
+      "pdf": "/generated/Sophia-Mall/01_executive_dashboard.pdf",
+      "pptx": "/generated/Sophia-Mall/01_executive_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "01_executive_dashboard.html",
+          "bytes": 18264,
+          "sha256": "60d697bfa9096222daa218cf74fd7452998d2828b0ffe7488eecbe983b7a84a9"
+        },
+        "pdf": {
+          "name": "01_executive_dashboard.pdf",
+          "bytes": 848904,
+          "sha256": "63fed049879c61e892301a43f4c98d5eb322fb17eed82af8169ee05f8ace768e"
+        },
+        "pptx": {
+          "name": "01_executive_dashboard.pptx",
+          "bytes": 29125,
+          "sha256": "281a8318f57de03ae96b5350aceb5eece64954dc5b7bf813ed415108df3ba6d4"
+        }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Sophia-Mall",
+      "source_report_fingerprint": "6cc1e6ed4356fd60ae10462f9f3bf76f658212e0674279ecaee1f0864e7f7845"
+    },
+    "master_dashboard": {
+      "html": "/generated/Sophia-Mall/02_master_dashboard.html",
+      "pdf": "/generated/Sophia-Mall/02_master_dashboard.pdf",
+      "pptx": "/generated/Sophia-Mall/02_master_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "02_master_dashboard.html",
+          "bytes": 86946,
+          "sha256": "2d40c3c52ae67133df4e50c49c3e87c9bdedf8b0c57f95567990d09f5481488a"
+        },
+        "pdf": {
+          "name": "02_master_dashboard.pdf",
+          "bytes": 883327,
+          "sha256": "58534a3a8a427263653cd994fd6cb08af7bef12f7ca516a18b2bd6f8c8b10633"
+        },
+        "pptx": {
+          "name": "02_master_dashboard.pptx",
+          "bytes": 29122,
+          "sha256": "6e803af9508f01bbd6f2c5e0aad4dcc83e695e37cb0754a9fa21704b2633e3e4"
+        }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Sophia-Mall",
+      "source_report_fingerprint": "6cc1e6ed4356fd60ae10462f9f3bf76f658212e0674279ecaee1f0864e7f7845"
+    },
+    "elite_svg_charts": {
+      "html": "/generated/Sophia-Mall/03_elite_svg_charts.html",
+      "pdf": "/generated/Sophia-Mall/03_elite_svg_charts.pdf",
+      "pptx": "/generated/Sophia-Mall/03_elite_svg_charts.pptx",
+      "files": {
+        "html": {
+          "name": "03_elite_svg_charts.html",
+          "bytes": 52018,
+          "sha256": "422fdaaa49c0ac3fafa56a00cd6c0a302abeed5c9aedda7d4afbd5003d6885d7"
+        },
+        "pdf": {
+          "name": "03_elite_svg_charts.pdf",
+          "bytes": 240246,
+          "sha256": "f2c531e36f9602f22e0f52a86edc782bffdd1694cfcc59f3b6469d479f41d448"
+        },
+        "pptx": {
+          "name": "03_elite_svg_charts.pptx",
+          "bytes": 29123,
+          "sha256": "d93c4391c416c6080d24c34b31c750996edb3f7a8b2ffb04c3edf4e05c973344"
+        }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Sophia-Mall",
+      "source_report_fingerprint": "6cc1e6ed4356fd60ae10462f9f3bf76f658212e0674279ecaee1f0864e7f7845"
+    },
+    "linked_executive_dashboard": {
+      "html": "/generated/Sophia-Mall/04_linked_executive_dashboard.html",
+      "pdf": "/generated/Sophia-Mall/04_linked_executive_dashboard.pdf",
+      "pptx": "/generated/Sophia-Mall/04_linked_executive_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "04_linked_executive_dashboard.html",
+          "bytes": 57776,
+          "sha256": "b5ad6545566af6dd990cabbbebdf7f2fca51eb561044213cf671efa3e1cf6885"
+        },
+        "pdf": {
+          "name": "04_linked_executive_dashboard.pdf",
+          "bytes": 1120145,
+          "sha256": "611c32938882bd638fada0792f88279e08ae1a7d513fb4fa8ef3010766b5ac63"
+        },
+        "pptx": {
+          "name": "04_linked_executive_dashboard.pptx",
+          "bytes": 29131,
+          "sha256": "7fcce66586a339b8c6871a266cba7c49ac910563e5484f704d2d6e13533beff3"
+        }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Sophia-Mall",
+      "source_report_fingerprint": "6cc1e6ed4356fd60ae10462f9f3bf76f658212e0674279ecaee1f0864e7f7845"
+    },
+    "tia_governed_assessment": {
+      "html": "/generated/Sophia-Mall/05_delay_tia_governed_assessment.html",
+      "pdf": "/generated/Sophia-Mall/05_delay_tia_governed_assessment.pdf",
+      "pptx": "/generated/Sophia-Mall/05_delay_tia_governed_assessment.pptx",
+      "docx": "/generated/Sophia-Mall/05_delay_tia_governed_assessment.docx",
+      "files": {
+        "html": {
+          "name": "05_delay_tia_governed_assessment.html",
+          "bytes": 2557,
+          "sha256": "52ef22e1eb0f50b0b16dc60785757e9c8980ec8a54fb2829c8b59a3db9d44d85"
+        },
+        "pdf": {
+          "name": "05_delay_tia_governed_assessment.pdf",
+          "bytes": 2042,
+          "sha256": "4083040cd5f68e44e5797a52c534be81f37f827e9400e832a2142de51004c3f9"
+        },
+        "pptx": {
+          "name": "05_delay_tia_governed_assessment.pptx",
+          "bytes": 28475,
+          "sha256": "f3fe71bf7127087f8b53db393c33ab6ec157312a5ea16c4ae977eef4717a142a"
+        },
+        "docx": {
+          "name": "05_delay_tia_governed_assessment.docx",
+          "bytes": 35681,
+          "sha256": "85706db64d2d0a132df560a78cb1fe9b970230c54c19e100efbb6ddb5dc0317d"
+        }
+      },
+      "assessment_status": "awaiting_sources",
+      "source_scope": "selected_project_only"
+    }
+  }
+}

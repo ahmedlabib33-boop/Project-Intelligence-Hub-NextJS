@@ -1,0 +1,22 @@
+{
+  "engine": "Universal XER Adaptive ML Schedule Engine",
+  "version": "3.1.0",
+  "author": "Python AI Programming by Eng. Ahmed Labib",
+  "source_xer": "/mnt/data/Schedule-Event02-IFC-after fargent network DD17-03-2026 .xer",
+  "source_sha256": "a8416bab0e17d9e945ff001ae8649a6a477647727b04d935dfcf84af9078dc64",
+  "mode": "recovery",
+  "generated_at": "2026-08-11T06:20:11",
+  "outputs": [
+    "project_local_ml_manifest.json",
+    "REVISED_SCHEDULE_PROPOSAL.csv",
+    "optimized_scenario.json",
+    "UNIVERSAL_SCHEDULE_ML_REPORT.md",
+    "P6_CHANGE_REGISTER.csv",
+    "project_local_ml_training.csv",
+    "activity_cluster_model.json",
+    "schedule_profile.json",
+    "learned_activity_clusters.csv",
+    "local_ml_models",
+    "universal_ml_candidates.csv"
+  ]
+}

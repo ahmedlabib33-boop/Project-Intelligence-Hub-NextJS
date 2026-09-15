@@ -1,0 +1,12 @@
+{
+  "universal_ml": {
+    "synthetic_training_scenarios": 50,
+    "optimizer_population": 8,
+    "optimizer_generations": 2,
+    "optimizer_max_actions": 6,
+    "max_universal_candidates": 60,
+    "max_activity_clusters": 8,
+    "duration_reduction_ratios": [0.15, 0.30],
+    "lag_reduction_ratios": [0.50]
+  }
+}

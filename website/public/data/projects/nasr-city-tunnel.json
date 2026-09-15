@@ -5,6 +5,7 @@
   "project_display_name": "Nasr city-Tunnel",
   "sector": "Tunnels",
   "meeting_url": null,
+  "contractor": "SAMCO",
   "status": "Delayed",
   "contract_value": 1845000000.0,
   "paid_amount": 177050000.0,
@@ -12,6 +13,7 @@
   "remaining_value": 1667950000.0,
   "planned_progress": 0.315,
   "actual_progress": 0.268,
+  "forecast_progress": null,
   "progress_variance": -0.046999999999999986,
   "bac": 199500000.0,
   "pv": 199500000.0,
@@ -233,14 +235,14 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-07T07:56:19",
-  "fingerprint": "a9f57f86ec8b53ea7ac7da67cda23804dd14f1680efad13c89cf6eccfee65982",
+  "last_updated": "2026-09-03T03:41:53",
+  "fingerprint": "affde0bffeeb003c35fa2884d8e04a6efb1d6aa3b49d318108b46199cef9cf97",
   "source_files": {
     "projects": 1,
     "contracts": 2,
     "payments": 6,
     "planned_cash_flow": 12,
-    "progress": 17,
+    "progress": 0,
     "evm": 17,
     "risks": 3,
     "claims": 2,
@@ -248,7 +250,10 @@
     "milestones": 5,
     "delay_events": 5,
     "s_curve": 10,
-    "historical_outcomes": 0
+    "wbs": 16,
+    "historical_outcomes": 0,
+    "delay_event_classification": 6,
+    "tia_recovery_scenario": 6
   },
   "metric_sources": {
     "contract_value": {
@@ -307,7 +312,7 @@
         "contracts": 2,
         "payments": 6,
         "planned_cash_flow": 12,
-        "progress": 17,
+        "progress": 0,
         "evm": 17,
         "risks": 3,
         "claims": 2,
@@ -315,25 +320,28 @@
         "milestones": 5,
         "delay_events": 5,
         "s_curve": 10,
-        "historical_outcomes": 0
+        "wbs": 16,
+        "historical_outcomes": 0,
+        "delay_event_classification": 6,
+        "tia_recovery_scenario": 6
       },
       "source_tables": {
         "projects": {
-          "file": "projects.csv",
+          "file": "01_project_contract.csv",
           "exists": true,
           "row_count": 1,
           "column_count": 14,
           "columns": [
             "project_id",
+            "contractor",
+            "status",
             "project_name",
             "client_name",
-            "contractor",
             "planned_start",
             "planned_finish",
             "forecast_finish",
             "contract_value",
             "currency",
-            "status",
             "planned_progress_percent",
             "actual_progress_percent",
             "planned_value",
@@ -342,15 +350,15 @@
           "rows": [
             {
               "project_id": "Nasr city-Tunnel",
+              "contractor": "SAMCO",
+              "status": "Delayed",
               "project_name": "Nasr city-Tunnel",
               "client_name": "Alexandria Transit Development Authority",
-              "contractor": "Delta Rail Builders JV",
               "planned_start": "12-Jan-26",
               "planned_finish": "30-Jun-28",
               "forecast_finish": "18-Sep-28",
               "contract_value": "1845000000",
               "currency": "EGP",
-              "status": "Delayed",
               "planned_progress_percent": "31.50",
               "actual_progress_percent": "26.80",
               "planned_value": "581175000",
@@ -359,21 +367,19 @@
           ]
         },
         "activities": {
-          "file": "activities.csv",
+          "file": "02_schedule_activities.csv",
           "exists": true,
           "row_count": 17,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_id",
             "activity_id",
             "activity_name",
             "planned_start",
-            "planned_finish",
             "actual_start",
             "actual_finish",
             "forecast_start",
-            "forecast_finish",
             "planned_weight",
             "planned_progress",
             "actual_progress",
@@ -388,17 +394,15 @@
               "activity_id": "NCT-MS-1000",
               "activity_name": "Notice to Proceed",
               "planned_start": "5-Jan-26",
-              "planned_finish": "",
               "actual_start": "5-Jan-26 A",
               "actual_finish": "5-Jan-26 A",
               "forecast_start": "5-Jan-26",
-              "forecast_finish": "",
               "planned_weight": "0.0200",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
               "total_float_days": "8",
               "is_critical": "No",
-              "responsible_party": "Project Controls"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -406,17 +410,15 @@
               "activity_id": "NCT-MS-1010",
               "activity_name": "Site Handover",
               "planned_start": "8-Jan-26",
-              "planned_finish": "",
               "actual_start": "9-Jan-26 A",
               "actual_finish": "9-Jan-26 A",
               "forecast_start": "9-Jan-26",
-              "forecast_finish": "",
               "planned_weight": "0.0280",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
               "total_float_days": "10",
               "is_critical": "No",
-              "responsible_party": "Commercial"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -434,7 +436,7 @@
               "actual_progress": "1.00",
               "total_float_days": "12",
               "is_critical": "No",
-              "responsible_party": "Engineering"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -452,7 +454,7 @@
               "actual_progress": "1.00",
               "total_float_days": "14",
               "is_critical": "No",
-              "responsible_party": "Engineering"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -470,7 +472,7 @@
               "actual_progress": "1.00",
               "total_float_days": "16",
               "is_critical": "No",
-              "responsible_party": "Procurement"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -488,7 +490,7 @@
               "actual_progress": "1.00",
               "total_float_days": "18",
               "is_critical": "No",
-              "responsible_party": "Procurement"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -506,7 +508,7 @@
               "actual_progress": "1.00",
               "total_float_days": "20",
               "is_critical": "No",
-              "responsible_party": "Civil"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -524,119 +526,20 @@
               "actual_progress": "1.00",
               "total_float_days": "22",
               "is_critical": "No",
-              "responsible_party": "Civil"
+              "responsible_party": "SAMCO"
             }
           ]
         },
         "progress_updates": {
           "file": "progress_updates.csv",
-          "exists": true,
-          "row_count": 17,
-          "column_count": 9,
-          "columns": [
-            "project_id",
-            "activity_id",
-            "update_date",
-            "planned_progress",
-            "actual_progress",
-            "planned_value",
-            "earned_value",
-            "actual_cost",
-            "notes"
-          ],
-          "rows": [
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-MS-1000",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "4500000.00",
-              "earned_value": "4500000.00",
-              "actual_cost": "4635000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-MS-1010",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "5625000.00",
-              "earned_value": "5625000.00",
-              "actual_cost": "5934375.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-ENG-1020",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "6750000.00",
-              "earned_value": "6750000.00",
-              "actual_cost": "7290000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-ENG-1030",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "7125000.00",
-              "earned_value": "7125000.00",
-              "actual_cost": "7338750.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-PRC-1040",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "8250000.00",
-              "earned_value": "8250000.00",
-              "actual_cost": "8703750.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-PRC-1050",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "9375000.00",
-              "earned_value": "9375000.00",
-              "actual_cost": "10125000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-A-EXC-1060",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "9750000.00",
-              "earned_value": "9750000.00",
-              "actual_cost": "10042500.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-A-PC-1070",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "10875000.00",
-              "earned_value": "10875000.00",
-              "actual_cost": "11473125.00",
-              "notes": "Completed"
-            }
-          ]
+          "exists": false,
+          "row_count": 0,
+          "column_count": 0,
+          "columns": [],
+          "rows": []
         },
         "evm": {
-          "file": "evm.csv",
+          "file": "04_progress_evm.csv",
           "exists": true,
           "row_count": 17,
           "column_count": 12,
@@ -770,13 +673,13 @@
           ]
         },
         "risks": {
-          "file": "risks.csv",
+          "file": "09_risks_rfi_interfaces.csv",
           "exists": true,
           "row_count": 3,
           "column_count": 11,
           "columns": [
-            "risk_id",
             "project_id",
+            "risk_id",
             "risk_title",
             "risk_category",
             "probability",
@@ -789,8 +692,8 @@
           ],
           "rows": [
             {
-              "risk_id": "R-101",
               "project_id": "Nasr city-Tunnel",
+              "risk_id": "R-101",
               "risk_title": "Employer-supplied reinforcement steel delivery slippage",
               "risk_category": "Schedule",
               "probability": "high",
@@ -802,8 +705,8 @@
               "due_date": "31-Aug-26"
             },
             {
-              "risk_id": "R-102",
               "project_id": "Nasr city-Tunnel",
+              "risk_id": "R-102",
               "risk_title": "Late approval of viaduct bearing-seat details",
               "risk_category": "Engineering",
               "probability": "medium",
@@ -815,8 +718,8 @@
               "due_date": "15-Sep-26"
             },
             {
-              "risk_id": "R-103",
               "project_id": "Nasr city-Tunnel",
+              "risk_id": "R-103",
               "risk_title": "Delayed interim payment certification",
               "risk_category": "Commercial",
               "probability": "medium",
@@ -830,7 +733,7 @@
           ]
         },
         "claims": {
-          "file": "claims.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 2,
           "column_count": 12,
@@ -880,7 +783,7 @@
           ]
         },
         "contracts": {
-          "file": "contracts.csv",
+          "file": "01_project_contract.csv",
           "exists": true,
           "row_count": 2,
           "column_count": 11,
@@ -902,7 +805,7 @@
               "contract_id": "NCT-PKG-01",
               "project_id": "Nasr city-Tunnel",
               "package": "Main Buildings and External Works",
-              "contractor": "Vertex Build JV",
+              "contractor": "SAMCO",
               "contract_type": "Lump sum",
               "original_value": "980000000",
               "approved_variations": "28500000",
@@ -915,7 +818,7 @@
               "contract_id": "NCT-PKG-02",
               "project_id": "Nasr city-Tunnel",
               "package": "MEP and Utility Networks",
-              "contractor": "Nova MEP Consortium",
+              "contractor": "SAMCO",
               "contract_type": "Unit rate",
               "original_value": "310000000",
               "approved_variations": "9200000",
@@ -927,10 +830,10 @@
           ]
         },
         "payments": {
-          "file": "payments.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 6,
-          "column_count": 18,
+          "column_count": 15,
           "columns": [
             "project_id",
             "payment",
@@ -946,10 +849,7 @@
             "Period for payment release",
             "Period in which interest is applied",
             "Amount of interest claimed (EGP)",
-            "delayed duration(Days) ",
-            "Unnamed: 14",
-            "Unnamed: 15",
-            "Unnamed: 16"
+            "delayed duration(Days) "
           ],
           "rows": [
             {
@@ -967,10 +867,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -987,10 +884,7 @@
               "Period for payment release": "50.0",
               "Period in which interest is applied": "5.0",
               "Amount of interest claimed (EGP)": "30900.0000",
-              "delayed duration(Days) ": "5.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "5.0"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1007,10 +901,7 @@
               "Period for payment release": "55.0",
               "Period in which interest is applied": "10.0",
               "Amount of interest claimed (EGP)": "72960.0000",
-              "delayed duration(Days) ": "10.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "10.0"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1023,14 +914,10 @@
               "paid amount": "0.00",
               "payment status": "Certified",
               "Contractual interest due": "45.0",
-              "Date of Cash Cheque Receipt": "",
               "Period for payment release": "0.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1047,10 +934,7 @@
               "Period for payment release": "48.0",
               "Period in which interest is applied": "3.0",
               "Amount of interest claimed (EGP)": "8190.0000",
-              "delayed duration(Days) ": "3.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "3.0"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1063,19 +947,15 @@
               "paid amount": "0.00",
               "payment status": "Submitted",
               "Contractual interest due": "45.0",
-              "Date of Cash Cheque Receipt": "",
               "Period for payment release": "0.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             }
           ]
         },
         "planned_cash_flow": {
-          "file": "planned_cash_flow.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 12,
           "column_count": 10,
@@ -1191,7 +1071,7 @@
           ]
         },
         "milestones": {
-          "file": "milestones.csv",
+          "file": "05_milestones_scurve.csv",
           "exists": true,
           "row_count": 5,
           "column_count": 7,
@@ -1238,7 +1118,6 @@
               "activity_name": "Substructure Completion",
               "planned_date": "28-May-26",
               "forecast_date": "19-Jun-26",
-              "actual_date": "",
               "milestone_contractual_type": "Contract milestone"
             },
             {
@@ -1247,13 +1126,12 @@
               "activity_name": "Project Completion",
               "planned_date": "15-Dec-26",
               "forecast_date": "12-Jan-27",
-              "actual_date": "",
               "milestone_contractual_type": "Completion milestone"
             }
           ]
         },
         "delay_events": {
-          "file": "delay_events.csv",
+          "file": "06_delay_events.csv",
           "exists": true,
           "row_count": 5,
           "column_count": 14,
@@ -1357,14 +1235,13 @@
           ]
         },
         "wbs": {
-          "file": "wbs.csv",
+          "file": "03_schedule_logic.csv",
           "exists": true,
           "row_count": 16,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_code",
-            "wbs_name",
             "total_activities",
             "bl_project_duration",
             "remaining_duration",
@@ -1372,7 +1249,6 @@
             "bl_project_start",
             "bl_project_finish",
             "actual_start",
-            "actual_finish",
             "schedule_%_complete",
             "performance_%_complete",
             "budget_at_completion",
@@ -1383,7 +1259,6 @@
             {
               "project_id": "Nasr city-Tunnel",
               "wbs_code": "No Priority",
-              "wbs_name": "",
               "total_activities": "1460",
               "bl_project_duration": "900",
               "remaining_duration": "706",
@@ -1391,7 +1266,6 @@
               "bl_project_start": "12-Jan-26",
               "bl_project_finish": "30-Jun-28",
               "actual_start": "15-Jan-26",
-              "actual_finish": "",
               "schedule_%_complete": "0.315",
               "performance_%_complete": "0.268",
               "budget_at_completion": "1845000000",
@@ -1409,7 +1283,6 @@
               "bl_project_start": "12-Jan-26",
               "bl_project_finish": "30-Jun-28",
               "actual_start": "15-Jan-26",
-              "actual_finish": "",
               "schedule_%_complete": "0.315",
               "performance_%_complete": "0.268",
               "budget_at_completion": "1845000000",
@@ -1427,7 +1300,6 @@
               "bl_project_start": "12-Jan-26",
               "bl_project_finish": "30-Jun-28",
               "actual_start": "15-Jan-26",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -1445,7 +1317,6 @@
               "bl_project_start": "12-Jan-26",
               "bl_project_finish": "30-Jun-28",
               "actual_start": "15-Jan-26",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -1481,7 +1352,6 @@
               "bl_project_start": "20-Jan-26",
               "bl_project_finish": "2-Aug-27",
               "actual_start": "25-Jan-26",
-              "actual_finish": "",
               "schedule_%_complete": "0.42",
               "performance_%_complete": "0.36",
               "budget_at_completion": "147600000",
@@ -1499,7 +1369,6 @@
               "bl_project_start": "1-Feb-26",
               "bl_project_finish": "13-Oct-27",
               "actual_start": "3-Feb-26",
-              "actual_finish": "",
               "schedule_%_complete": "0.38",
               "performance_%_complete": "0.29",
               "budget_at_completion": "221400000",
@@ -1517,7 +1386,6 @@
               "bl_project_start": "12-Feb-26",
               "bl_project_finish": "12-Mar-28",
               "actual_start": "20-Feb-26",
-              "actual_finish": "",
               "schedule_%_complete": "0.29",
               "performance_%_complete": "0.24",
               "budget_at_completion": "1180800000",
@@ -1527,7 +1395,7 @@
           ]
         },
         "s_curve": {
-          "file": "s_curve.csv",
+          "file": "05_milestones_scurve.csv",
           "exists": true,
           "row_count": 10,
           "column_count": 8,
@@ -1627,21 +1495,21 @@
       },
       "workspace_tables": {
         "projects": {
-          "file": "projects.csv",
+          "file": "01_project_contract.csv",
           "exists": true,
           "row_count": 1,
           "column_count": 14,
           "columns": [
             "project_id",
+            "contractor",
+            "status",
             "project_name",
             "client_name",
-            "contractor",
             "planned_start",
             "planned_finish",
             "forecast_finish",
             "contract_value",
             "currency",
-            "status",
             "planned_progress_percent",
             "actual_progress_percent",
             "planned_value",
@@ -1650,15 +1518,15 @@
           "rows": [
             {
               "project_id": "Nasr city-Tunnel",
+              "contractor": "SAMCO",
+              "status": "Delayed",
               "project_name": "Nasr city-Tunnel",
               "client_name": "Alexandria Transit Development Authority",
-              "contractor": "Delta Rail Builders JV",
               "planned_start": "12-Jan-26",
               "planned_finish": "30-Jun-28",
               "forecast_finish": "18-Sep-28",
               "contract_value": "1845000000",
               "currency": "EGP",
-              "status": "Delayed",
               "planned_progress_percent": "31.50",
               "actual_progress_percent": "26.80",
               "planned_value": "581175000",
@@ -1666,24 +1534,22 @@
             }
           ],
           "truncated": false,
-          "source_path": "projects.csv"
+          "source_path": "01_project_contract.csv"
         },
         "activities": {
-          "file": "activities.csv",
+          "file": "02_schedule_activities.csv",
           "exists": true,
           "row_count": 17,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_id",
             "activity_id",
             "activity_name",
             "planned_start",
-            "planned_finish",
             "actual_start",
             "actual_finish",
             "forecast_start",
-            "forecast_finish",
             "planned_weight",
             "planned_progress",
             "actual_progress",
@@ -1698,17 +1564,15 @@
               "activity_id": "NCT-MS-1000",
               "activity_name": "Notice to Proceed",
               "planned_start": "5-Jan-26",
-              "planned_finish": "",
               "actual_start": "5-Jan-26 A",
               "actual_finish": "5-Jan-26 A",
               "forecast_start": "5-Jan-26",
-              "forecast_finish": "",
               "planned_weight": "0.0200",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
               "total_float_days": "8",
               "is_critical": "No",
-              "responsible_party": "Project Controls"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1716,17 +1580,15 @@
               "activity_id": "NCT-MS-1010",
               "activity_name": "Site Handover",
               "planned_start": "8-Jan-26",
-              "planned_finish": "",
               "actual_start": "9-Jan-26 A",
               "actual_finish": "9-Jan-26 A",
               "forecast_start": "9-Jan-26",
-              "forecast_finish": "",
               "planned_weight": "0.0280",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
               "total_float_days": "10",
               "is_critical": "No",
-              "responsible_party": "Commercial"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1744,7 +1606,7 @@
               "actual_progress": "1.00",
               "total_float_days": "12",
               "is_critical": "No",
-              "responsible_party": "Engineering"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1762,7 +1624,7 @@
               "actual_progress": "1.00",
               "total_float_days": "14",
               "is_critical": "No",
-              "responsible_party": "Engineering"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1780,7 +1642,7 @@
               "actual_progress": "1.00",
               "total_float_days": "16",
               "is_critical": "No",
-              "responsible_party": "Procurement"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1798,7 +1660,7 @@
               "actual_progress": "1.00",
               "total_float_days": "18",
               "is_critical": "No",
-              "responsible_party": "Procurement"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1816,7 +1678,7 @@
               "actual_progress": "1.00",
               "total_float_days": "20",
               "is_critical": "No",
-              "responsible_party": "Civil"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1834,7 +1696,7 @@
               "actual_progress": "1.00",
               "total_float_days": "22",
               "is_critical": "No",
-              "responsible_party": "Civil"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1852,7 +1714,7 @@
               "actual_progress": "1.00",
               "total_float_days": "12",
               "is_critical": "No",
-              "responsible_party": "Civil"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1870,7 +1732,7 @@
               "actual_progress": "1.00",
               "total_float_days": "15",
               "is_critical": "No",
-              "responsible_party": "Civil"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1888,7 +1750,7 @@
               "actual_progress": "1.00",
               "total_float_days": "28",
               "is_critical": "No",
-              "responsible_party": "Civil"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1906,7 +1768,7 @@
               "actual_progress": "1.00",
               "total_float_days": "30",
               "is_critical": "No",
-              "responsible_party": "Civil"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1924,7 +1786,7 @@
               "actual_progress": "1.00",
               "total_float_days": "24",
               "is_critical": "No",
-              "responsible_party": "Civil"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1942,7 +1804,7 @@
               "actual_progress": "1.00",
               "total_float_days": "27",
               "is_critical": "No",
-              "responsible_party": "Civil"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1960,7 +1822,7 @@
               "actual_progress": "1.00",
               "total_float_days": "36",
               "is_critical": "No",
-              "responsible_party": "MEP"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1970,7 +1832,6 @@
               "planned_start": "13-Apr-26",
               "planned_finish": "27-May-26",
               "actual_start": "13-Apr-26 A",
-              "actual_finish": "",
               "forecast_start": "13-Apr-26",
               "forecast_finish": "12-Jun-26",
               "planned_weight": "0.0440",
@@ -1978,7 +1839,7 @@
               "actual_progress": "0.89",
               "total_float_days": "33",
               "is_critical": "No",
-              "responsible_party": "Civil"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -1986,232 +1847,31 @@
               "activity_id": "NCT-MS-1160",
               "activity_name": "Substructure Completion",
               "planned_start": "28-May-26",
-              "planned_finish": "",
               "actual_start": "29-May-26 A",
-              "actual_finish": "",
               "forecast_start": "29-May-26",
-              "forecast_finish": "",
               "planned_weight": "0.0520",
               "planned_progress": "1.00",
               "actual_progress": "0.92",
               "total_float_days": "36",
               "is_critical": "No",
-              "responsible_party": "Project Controls"
+              "responsible_party": "SAMCO"
             }
           ],
           "truncated": false,
-          "source_path": "activities.csv"
+          "source_path": "02_schedule_activities.csv"
         },
         "progress_updates": {
           "file": "progress_updates.csv",
-          "exists": true,
-          "row_count": 17,
-          "column_count": 9,
-          "columns": [
-            "project_id",
-            "activity_id",
-            "update_date",
-            "planned_progress",
-            "actual_progress",
-            "planned_value",
-            "earned_value",
-            "actual_cost",
-            "notes"
-          ],
-          "rows": [
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-MS-1000",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "4500000.00",
-              "earned_value": "4500000.00",
-              "actual_cost": "4635000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-MS-1010",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "5625000.00",
-              "earned_value": "5625000.00",
-              "actual_cost": "5934375.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-ENG-1020",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "6750000.00",
-              "earned_value": "6750000.00",
-              "actual_cost": "7290000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-ENG-1030",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "7125000.00",
-              "earned_value": "7125000.00",
-              "actual_cost": "7338750.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-PRC-1040",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "8250000.00",
-              "earned_value": "8250000.00",
-              "actual_cost": "8703750.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-PRC-1050",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "9375000.00",
-              "earned_value": "9375000.00",
-              "actual_cost": "10125000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-A-EXC-1060",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "9750000.00",
-              "earned_value": "9750000.00",
-              "actual_cost": "10042500.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-A-PC-1070",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "10875000.00",
-              "earned_value": "10875000.00",
-              "actual_cost": "11473125.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-A-RFT-1080",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "12000000.00",
-              "earned_value": "12000000.00",
-              "actual_cost": "12960000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-A-CON-1090",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "12375000.00",
-              "earned_value": "12375000.00",
-              "actual_cost": "12746250.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-B-EXC-1100",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "13500000.00",
-              "earned_value": "13500000.00",
-              "actual_cost": "14242500.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-B-PC-1110",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "14625000.00",
-              "earned_value": "14625000.00",
-              "actual_cost": "15795000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-B-RFT-1120",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "15000000.00",
-              "earned_value": "15000000.00",
-              "actual_cost": "15450000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-B-CON-1130",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "16125000.00",
-              "earned_value": "16125000.00",
-              "actual_cost": "17011875.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-UTL-1140",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "17250000.00",
-              "earned_value": "17250000.00",
-              "actual_cost": "18630000.00",
-              "notes": "Completed"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-STR-1150",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "0.89",
-              "planned_value": "17625000.00",
-              "earned_value": "15737166.67",
-              "actual_cost": "16209281.67",
-              "notes": "In progress under recovery sequence"
-            },
-            {
-              "project_id": "Nasr city-Tunnel",
-              "activity_id": "NCT-MS-1160",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "0.92",
-              "planned_value": "18750000.00",
-              "earned_value": "17250000.00",
-              "actual_cost": "18198750.00",
-              "notes": "In progress under recovery sequence"
-            }
-          ],
+          "exists": false,
+          "row_count": 0,
+          "column_count": 0,
+          "columns": [],
+          "rows": [],
           "truncated": false,
           "source_path": "progress_updates.csv"
         },
         "evm": {
-          "file": "evm.csv",
+          "file": "04_progress_evm.csv",
           "exists": true,
           "row_count": 17,
           "column_count": 12,
@@ -2470,16 +2130,16 @@
             }
           ],
           "truncated": false,
-          "source_path": "evm.csv"
+          "source_path": "04_progress_evm.csv"
         },
         "risks": {
-          "file": "risks.csv",
+          "file": "09_risks_rfi_interfaces.csv",
           "exists": true,
           "row_count": 3,
           "column_count": 11,
           "columns": [
-            "risk_id",
             "project_id",
+            "risk_id",
             "risk_title",
             "risk_category",
             "probability",
@@ -2492,8 +2152,8 @@
           ],
           "rows": [
             {
-              "risk_id": "R-101",
               "project_id": "Nasr city-Tunnel",
+              "risk_id": "R-101",
               "risk_title": "Employer-supplied reinforcement steel delivery slippage",
               "risk_category": "Schedule",
               "probability": "high",
@@ -2505,8 +2165,8 @@
               "due_date": "31-Aug-26"
             },
             {
-              "risk_id": "R-102",
               "project_id": "Nasr city-Tunnel",
+              "risk_id": "R-102",
               "risk_title": "Late approval of viaduct bearing-seat details",
               "risk_category": "Engineering",
               "probability": "medium",
@@ -2518,8 +2178,8 @@
               "due_date": "15-Sep-26"
             },
             {
-              "risk_id": "R-103",
               "project_id": "Nasr city-Tunnel",
+              "risk_id": "R-103",
               "risk_title": "Delayed interim payment certification",
               "risk_category": "Commercial",
               "probability": "medium",
@@ -2532,10 +2192,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "risks.csv"
+          "source_path": "09_risks_rfi_interfaces.csv"
         },
         "claims": {
-          "file": "claims.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 2,
           "column_count": 12,
@@ -2584,10 +2244,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "claims.csv"
+          "source_path": "08_commercial_payments_claims.csv"
         },
         "contracts": {
-          "file": "contracts.csv",
+          "file": "01_project_contract.csv",
           "exists": true,
           "row_count": 2,
           "column_count": 11,
@@ -2609,7 +2269,7 @@
               "contract_id": "NCT-PKG-01",
               "project_id": "Nasr city-Tunnel",
               "package": "Main Buildings and External Works",
-              "contractor": "Vertex Build JV",
+              "contractor": "SAMCO",
               "contract_type": "Lump sum",
               "original_value": "980000000",
               "approved_variations": "28500000",
@@ -2622,7 +2282,7 @@
               "contract_id": "NCT-PKG-02",
               "project_id": "Nasr city-Tunnel",
               "package": "MEP and Utility Networks",
-              "contractor": "Nova MEP Consortium",
+              "contractor": "SAMCO",
               "contract_type": "Unit rate",
               "original_value": "310000000",
               "approved_variations": "9200000",
@@ -2633,13 +2293,13 @@
             }
           ],
           "truncated": false,
-          "source_path": "contracts.csv"
+          "source_path": "01_project_contract.csv"
         },
         "payments": {
-          "file": "payments.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 6,
-          "column_count": 18,
+          "column_count": 15,
           "columns": [
             "project_id",
             "payment",
@@ -2655,10 +2315,7 @@
             "Period for payment release",
             "Period in which interest is applied",
             "Amount of interest claimed (EGP)",
-            "delayed duration(Days) ",
-            "Unnamed: 14",
-            "Unnamed: 15",
-            "Unnamed: 16"
+            "delayed duration(Days) "
           ],
           "rows": [
             {
@@ -2676,10 +2333,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -2696,10 +2350,7 @@
               "Period for payment release": "50.0",
               "Period in which interest is applied": "5.0",
               "Amount of interest claimed (EGP)": "30900.0000",
-              "delayed duration(Days) ": "5.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "5.0"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -2716,10 +2367,7 @@
               "Period for payment release": "55.0",
               "Period in which interest is applied": "10.0",
               "Amount of interest claimed (EGP)": "72960.0000",
-              "delayed duration(Days) ": "10.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "10.0"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -2732,14 +2380,10 @@
               "paid amount": "0.00",
               "payment status": "Certified",
               "Contractual interest due": "45.0",
-              "Date of Cash Cheque Receipt": "",
               "Period for payment release": "0.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -2756,10 +2400,7 @@
               "Period for payment release": "48.0",
               "Period in which interest is applied": "3.0",
               "Amount of interest claimed (EGP)": "8190.0000",
-              "delayed duration(Days) ": "3.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "3.0"
             },
             {
               "project_id": "Nasr city-Tunnel",
@@ -2772,21 +2413,17 @@
               "paid amount": "0.00",
               "payment status": "Submitted",
               "Contractual interest due": "45.0",
-              "Date of Cash Cheque Receipt": "",
               "Period for payment release": "0.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             }
           ],
           "truncated": false,
-          "source_path": "payments.csv"
+          "source_path": "08_commercial_payments_claims.csv"
         },
         "planned_cash_flow": {
-          "file": "planned_cash_flow.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 12,
           "column_count": 10,
@@ -2949,10 +2586,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "planned_cash_flow.csv"
+          "source_path": "08_commercial_payments_claims.csv"
         },
         "milestones": {
-          "file": "milestones.csv",
+          "file": "05_milestones_scurve.csv",
           "exists": true,
           "row_count": 5,
           "column_count": 7,
@@ -2999,7 +2636,6 @@
               "activity_name": "Substructure Completion",
               "planned_date": "28-May-26",
               "forecast_date": "19-Jun-26",
-              "actual_date": "",
               "milestone_contractual_type": "Contract milestone"
             },
             {
@@ -3008,15 +2644,14 @@
               "activity_name": "Project Completion",
               "planned_date": "15-Dec-26",
               "forecast_date": "12-Jan-27",
-              "actual_date": "",
               "milestone_contractual_type": "Completion milestone"
             }
           ],
           "truncated": false,
-          "source_path": "milestones.csv"
+          "source_path": "05_milestones_scurve.csv"
         },
         "delay_events": {
-          "file": "delay_events.csv",
+          "file": "06_delay_events.csv",
           "exists": true,
           "row_count": 5,
           "column_count": 14,
@@ -3119,17 +2754,16 @@
             }
           ],
           "truncated": false,
-          "source_path": "delay_events.csv"
+          "source_path": "06_delay_events.csv"
         },
         "wbs": {
-          "file": "wbs.csv",
+          "file": "03_schedule_logic.csv",
           "exists": true,
           "row_count": 16,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_code",
-            "wbs_name",
             "total_activities",
             "bl_project_duration",
             "remaining_duration",
@@ -3137,7 +2771,6 @@
             "bl_project_start",
             "bl_project_finish",
             "actual_start",
-            "actual_finish",
             "schedule_%_complete",
             "performance_%_complete",
             "budget_at_completion",
@@ -3148,7 +2781,6 @@
             {
               "project_id": "Nasr city-Tunnel",
               "wbs_code": "No Priority",
-              "wbs_name": "",
               "total_activities": "1460",
               "bl_project_duration": "900",
               "remaining_duration": "706",
@@ -3156,7 +2788,6 @@
               "bl_project_start": "12-Jan-26",
               "bl_project_finish": "30-Jun-28",
               "actual_start": "15-Jan-26",
-              "actual_finish": "",
               "schedule_%_complete": "0.315",
               "performance_%_complete": "0.268",
               "budget_at_completion": "1845000000",
@@ -3174,7 +2805,6 @@
               "bl_project_start": "12-Jan-26",
               "bl_project_finish": "30-Jun-28",
               "actual_start": "15-Jan-26",
-              "actual_finish": "",
               "schedule_%_complete": "0.315",
               "performance_%_complete": "0.268",
               "budget_at_completion": "1845000000",
@@ -3192,7 +2822,6 @@
               "bl_project_start": "12-Jan-26",
               "bl_project_finish": "30-Jun-28",
               "actual_start": "15-Jan-26",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -3210,7 +2839,6 @@
               "bl_project_start": "12-Jan-26",
               "bl_project_finish": "30-Jun-28",
               "actual_start": "15-Jan-26",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -3246,7 +2874,6 @@
               "bl_project_start": "20-Jan-26",
               "bl_project_finish": "2-Aug-27",
               "actual_start": "25-Jan-26",
-              "actual_finish": "",
               "schedule_%_complete": "0.42",
               "performance_%_complete": "0.36",
               "budget_at_completion": "147600000",
@@ -3264,7 +2891,6 @@
               "bl_project_start": "1-Feb-26",
               "bl_project_finish": "13-Oct-27",
               "actual_start": "3-Feb-26",
-              "actual_finish": "",
               "schedule_%_complete": "0.38",
               "performance_%_complete": "0.29",
               "budget_at_completion": "221400000",
@@ -3282,7 +2908,6 @@
               "bl_project_start": "12-Feb-26",
               "bl_project_finish": "12-Mar-28",
               "actual_start": "20-Feb-26",
-              "actual_finish": "",
               "schedule_%_complete": "0.29",
               "performance_%_complete": "0.24",
               "budget_at_completion": "1180800000",
@@ -3300,7 +2925,6 @@
               "bl_project_start": "12-Feb-26",
               "bl_project_finish": "6-Aug-27",
               "actual_start": "20-Feb-26",
-              "actual_finish": "",
               "schedule_%_complete": "0.46",
               "performance_%_complete": "0.40",
               "budget_at_completion": "442800000",
@@ -3318,7 +2942,6 @@
               "bl_project_start": "16-Jul-26",
               "bl_project_finish": "6-Apr-28",
               "actual_start": "9-Aug-26",
-              "actual_finish": "",
               "schedule_%_complete": "0.18",
               "performance_%_complete": "0.14",
               "budget_at_completion": "516600000",
@@ -3336,7 +2959,6 @@
               "bl_project_start": "5-Mar-26",
               "bl_project_finish": "19-Apr-27",
               "actual_start": "12-Mar-26",
-              "actual_finish": "",
               "schedule_%_complete": "0.36",
               "performance_%_complete": "0.30",
               "budget_at_completion": "147600000",
@@ -3353,8 +2975,6 @@
               "total_float": "-41",
               "bl_project_start": "10-Oct-26",
               "bl_project_finish": "13-Mar-28",
-              "actual_start": "",
-              "actual_finish": "",
               "schedule_%_complete": "0.08",
               "performance_%_complete": "0.04",
               "budget_at_completion": "184500000",
@@ -3371,8 +2991,6 @@
               "total_float": "-48",
               "bl_project_start": "1-Feb-27",
               "bl_project_finish": "5-Apr-28",
-              "actual_start": "",
-              "actual_finish": "",
               "schedule_%_complete": "0.03",
               "performance_%_complete": "0.01",
               "budget_at_completion": "129150000",
@@ -3389,8 +3007,6 @@
               "total_float": "-74",
               "bl_project_start": "7-Feb-28",
               "bl_project_finish": "6-Jul-28",
-              "actual_start": "",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "55350000",
@@ -3407,8 +3023,6 @@
               "total_float": "-74",
               "bl_project_start": "7-Apr-28",
               "bl_project_finish": "30-Jun-28",
-              "actual_start": "",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "36900000",
@@ -3426,7 +3040,6 @@
               "bl_project_start": "12-Jan-26",
               "bl_project_finish": "30-Jun-28",
               "actual_start": "15-Jan-26",
-              "actual_finish": "",
               "schedule_%_complete": "0.315",
               "performance_%_complete": "0.268",
               "budget_at_completion": "73800000",
@@ -3435,10 +3048,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "wbs.csv"
+          "source_path": "03_schedule_logic.csv"
         },
         "s_curve": {
-          "file": "s_curve.csv",
+          "file": "05_milestones_scurve.csv",
           "exists": true,
           "row_count": 10,
           "column_count": 8,
@@ -3555,7 +3168,7 @@
             }
           ],
           "truncated": false,
-          "source_path": "s_curve.csv"
+          "source_path": "05_milestones_scurve.csv"
         }
       }
     },
@@ -3573,7 +3186,7 @@
         "exists": true,
         "sheets": [
           {
-            "name": "From Contractor",
+            "name": "From SAMCO",
             "row_count": 0,
             "column_count": 19,
             "columns": [
@@ -3629,7 +3242,7 @@
             "truncated": false
           },
           {
-            "name": "Contractor Links",
+            "name": "SAMCO → Consultant Links",
             "row_count": 0,
             "column_count": 18,
             "columns": [
@@ -3656,7 +3269,7 @@
             "truncated": false
           },
           {
-            "name": "Consultant Links",
+            "name": "Consultant → SAMCO Links",
             "row_count": 0,
             "column_count": 14,
             "columns": [
@@ -3721,14 +3334,14 @@
       },
       "detectors": [
         {
-          "name": "Inbox folder detector",
+          "name": "Canonical letters source",
           "status": "Active",
-          "detail": "Recognizes new PDF, DOCX, XLSX, CSV, and message files under project letters inbox."
+          "detail": "Uses the project-local workbook, inbox ingestion, correspondence links, and issue-thread workflow."
         },
         {
           "name": "Letters intelligence workflow",
           "status": "Active",
-          "detail": "Uses the Streamlit workbook, inbox ingestion, correspondence links, and issue-thread workflow for this project only."
+          "detail": "Publishes the selected project's correspondence registers, links, issue threads, and inbox metadata only."
         },
         {
           "name": "Project isolation",
@@ -6037,92 +5650,29 @@
           "name": "01_executive_dashboard.html",
           "relative_path": "Nasr city-Tunnel/01_executive_dashboard.html",
           "extension": "html",
-          "size_kb": 1.2,
-          "modified": "2026-08-09T00:13:43"
-        },
-        {
-          "name": "01_executive_dashboard.pdf",
-          "relative_path": "Nasr city-Tunnel/01_executive_dashboard.pdf",
-          "extension": "pdf",
-          "size_kb": 53.4,
-          "modified": "2026-08-09T00:13:44"
-        },
-        {
-          "name": "01_executive_dashboard.pptx",
-          "relative_path": "Nasr city-Tunnel/01_executive_dashboard.pptx",
-          "extension": "pptx",
-          "size_kb": 28.4,
-          "modified": "2026-08-09T00:13:44"
+          "size_kb": 4.6,
+          "modified": "2026-09-03T05:24:24"
         },
         {
           "name": "02_master_dashboard.html",
           "relative_path": "Nasr city-Tunnel/02_master_dashboard.html",
           "extension": "html",
-          "size_kb": 1.1,
-          "modified": "2026-08-09T00:13:44"
-        },
-        {
-          "name": "02_master_dashboard.pdf",
-          "relative_path": "Nasr city-Tunnel/02_master_dashboard.pdf",
-          "extension": "pdf",
-          "size_kb": 53.2,
-          "modified": "2026-08-09T00:13:45"
-        },
-        {
-          "name": "02_master_dashboard.pptx",
-          "relative_path": "Nasr city-Tunnel/02_master_dashboard.pptx",
-          "extension": "pptx",
-          "size_kb": 28.4,
-          "modified": "2026-08-09T00:13:45"
+          "size_kb": 4.6,
+          "modified": "2026-09-03T05:24:25"
         },
         {
           "name": "03_elite_svg_charts.html",
           "relative_path": "Nasr city-Tunnel/03_elite_svg_charts.html",
           "extension": "html",
-          "size_kb": 1.1,
-          "modified": "2026-08-09T00:13:45"
-        },
-        {
-          "name": "03_elite_svg_charts.pdf",
-          "relative_path": "Nasr city-Tunnel/03_elite_svg_charts.pdf",
-          "extension": "pdf",
-          "size_kb": 52.9,
-          "modified": "2026-08-09T00:13:45"
-        },
-        {
-          "name": "03_elite_svg_charts.pptx",
-          "relative_path": "Nasr city-Tunnel/03_elite_svg_charts.pptx",
-          "extension": "pptx",
-          "size_kb": 28.4,
-          "modified": "2026-08-09T00:13:46"
+          "size_kb": 4.6,
+          "modified": "2026-09-03T05:24:26"
         },
         {
           "name": "04_linked_executive_dashboard.html",
           "relative_path": "Nasr city-Tunnel/04_linked_executive_dashboard.html",
           "extension": "html",
-          "size_kb": 1.2,
-          "modified": "2026-08-09T00:13:46"
-        },
-        {
-          "name": "04_linked_executive_dashboard.pdf",
-          "relative_path": "Nasr city-Tunnel/04_linked_executive_dashboard.pdf",
-          "extension": "pdf",
-          "size_kb": 53.7,
-          "modified": "2026-08-09T00:13:46"
-        },
-        {
-          "name": "04_linked_executive_dashboard.pptx",
-          "relative_path": "Nasr city-Tunnel/04_linked_executive_dashboard.pptx",
-          "extension": "pptx",
-          "size_kb": 28.4,
-          "modified": "2026-08-09T00:13:46"
-        },
-        {
-          "name": "universal_report_engine_manifest.json",
-          "relative_path": "Nasr city-Tunnel/universal-report-engine/universal_report_engine_manifest.json",
-          "extension": "json",
-          "size_kb": 33.4,
-          "modified": "2026-08-10T21:23:14"
+          "size_kb": 4.6,
+          "modified": "2026-09-03T05:24:28"
         }
       ],
       "watchers": [
@@ -6304,7 +5854,7 @@
         "title": "Discipline Health",
         "type": "radar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/discipline_progress_history.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6326,7 +5876,7 @@
         "title": "Earned Value Trend",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete evm.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6348,7 +5898,7 @@
         "title": "Performance Indices",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete evm.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6370,17 +5920,56 @@
         "tab": "WBS",
         "title": "WBS Progress Distribution",
         "type": "bar",
-        "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete wbs.csv.",
-        "labels": [],
-        "series": [],
+        "status": "ready",
+        "message": "Selected-project WBS performance values.",
+        "labels": [
+          "Mobilization and Site Establishment",
+          "Depot Civil and Structural Works",
+          "Engineering and Design Coordination",
+          "Utilities Diversion and External Works",
+          "Procurement and Free-Issue Materials",
+          "Nasr city-Tunnel",
+          "No Priority",
+          "Project Management and Controls",
+          "Construction Works",
+          "Viaduct and Elevated Structures",
+          "MEP and Depot Systems",
+          "Rail Systems and Integration",
+          "Contractual Milestones",
+          "Handover, Training and Closeout",
+          "Key Dates",
+          "Testing and Commissioning"
+        ],
+        "series": [
+          {
+            "label": "Performance %",
+            "color": "#06b6d4",
+            "values": [
+              1.0,
+              0.4,
+              0.36,
+              0.3,
+              0.29,
+              0.268,
+              0.268,
+              0.268,
+              0.24,
+              0.14,
+              0.04,
+              0.01,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ],
         "source_lineage": {
           "files": [
             "wbs.csv"
           ],
           "required_columns": [
-            "project_id",
-            "wbs_name"
+            "project_id"
           ]
         },
         "validation": [],
@@ -6391,17 +5980,56 @@
         "tab": "WBS",
         "title": "WBS Duration Breakdown",
         "type": "horizontal_bar",
-        "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete wbs.csv.",
-        "labels": [],
-        "series": [],
+        "status": "ready",
+        "message": "Selected-project baseline or remaining WBS durations.",
+        "labels": [
+          "Contractual Milestones",
+          "Key Dates",
+          "Nasr city-Tunnel",
+          "No Priority",
+          "Project Management and Controls",
+          "Construction Works",
+          "Viaduct and Elevated Structures",
+          "Procurement and Free-Issue Materials",
+          "Engineering and Design Coordination",
+          "Depot Civil and Structural Works",
+          "MEP and Depot Systems",
+          "Rail Systems and Integration",
+          "Utilities Diversion and External Works",
+          "Testing and Commissioning",
+          "Handover, Training and Closeout",
+          "Mobilization and Site Establishment"
+        ],
+        "series": [
+          {
+            "label": "Duration days",
+            "color": "#8b5cf6",
+            "values": [
+              900.0,
+              900.0,
+              900.0,
+              900.0,
+              900.0,
+              760.0,
+              630.0,
+              620.0,
+              560.0,
+              540.0,
+              520.0,
+              430.0,
+              410.0,
+              150.0,
+              85.0,
+              30.0
+            ]
+          }
+        ],
         "source_lineage": {
           "files": [
             "wbs.csv"
           ],
           "required_columns": [
-            "project_id",
-            "wbs_name"
+            "project_id"
           ]
         },
         "validation": [],
@@ -6573,24 +6201,14 @@
         "status": "ready",
         "message": "Selected-project activities grouped by responsible party.",
         "labels": [
-          "Civil",
-          "Engineering",
-          "Procurement",
-          "Project Controls",
-          "Commercial",
-          "MEP"
+          "SAMCO"
         ],
         "series": [
           {
             "label": "Activities",
             "color": "#06b6d4",
             "values": [
-              9.0,
-              2.0,
-              2.0,
-              2.0,
-              1.0,
-              1.0
+              17.0
             ]
           }
         ],
@@ -6717,7 +6335,7 @@
         "title": "Master S-Curve - Cumulative Progress",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete s_curve.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6738,7 +6356,7 @@
         "title": "S-Curve by Discipline",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/discipline_progress_history.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6760,7 +6378,7 @@
         "title": "Progress Variance Over Time",
         "type": "bar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete s_curve.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6864,7 +6482,7 @@
         "title": "SPI Trend",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete evm.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6886,7 +6504,7 @@
         "title": "CPI Trend",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete evm.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -7030,7 +6648,7 @@
         ],
         "source_lineage": {
           "files": [
-            "planned_cash_flow.csv",
+            "08_commercial_payments_claims.csv",
             "payments.csv"
           ],
           "required_columns": [
@@ -7117,7 +6735,7 @@
         "title": "Risk Category Breakdown",
         "type": "bar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete risks.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -7170,7 +6788,7 @@
         "title": "Risk Trend Over Time",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/risk_assessment_history.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -7191,7 +6809,7 @@
         "title": "Mitigation Effectiveness",
         "type": "bar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/risk_assessment_history.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -7256,7 +6874,7 @@
         "series": [],
         "source_lineage": {
           "files": [
-            "14-delay_event_classification.csv",
+            "06_delay_events.csv",
             "delay_events.csv"
           ],
           "required_columns": [
@@ -7267,37 +6885,37 @@
         },
         "validation": [
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "06_delay_events.csv",
             "source_row": "2",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "06_delay_events.csv",
             "source_row": "3",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "06_delay_events.csv",
             "source_row": "4",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "06_delay_events.csv",
             "source_row": "5",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "06_delay_events.csv",
             "source_row": "6",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "06_delay_events.csv",
             "source_row": "7",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
@@ -7316,7 +6934,7 @@
         "series": [],
         "source_lineage": {
           "files": [
-            "14-delay_event_classification.csv",
+            "06_delay_events.csv",
             "delay_events.csv"
           ],
           "required_columns": [
@@ -7327,37 +6945,37 @@
         },
         "validation": [
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "06_delay_events.csv",
             "source_row": "2",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "06_delay_events.csv",
             "source_row": "3",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "06_delay_events.csv",
             "source_row": "4",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "06_delay_events.csv",
             "source_row": "5",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "06_delay_events.csv",
             "source_row": "6",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
           },
           {
-            "file": "14-delay_event_classification.csv",
+            "file": "06_delay_events.csv",
             "source_row": "7",
             "field": "analyst_status",
             "message": "Only Verified classifications are used for delay charts."
@@ -7371,7 +6989,7 @@
         "title": "Monthly Delay Accumulation",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/delay_event_classification.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -7397,7 +7015,7 @@
         "series": [],
         "source_lineage": {
           "files": [
-            "15-tia_recovery_scenario.csv",
+            "07_tia_evidence_scenarios.csv",
             "activities.csv"
           ],
           "required_columns": [
@@ -7447,78 +7065,78 @@
         "scenario": null
       }
     ],
-    "ready_count": 19,
+    "ready_count": 21,
     "draft_count": 0,
-    "awaiting_count": 17,
+    "awaiting_count": 15,
     "validation": [
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "06_delay_events.csv",
         "source_row": "2",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "06_delay_events.csv",
         "source_row": "3",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "06_delay_events.csv",
         "source_row": "4",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "06_delay_events.csv",
         "source_row": "5",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "06_delay_events.csv",
         "source_row": "6",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "06_delay_events.csv",
         "source_row": "7",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "06_delay_events.csv",
         "source_row": "2",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "06_delay_events.csv",
         "source_row": "3",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "06_delay_events.csv",
         "source_row": "4",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "06_delay_events.csv",
         "source_row": "5",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "06_delay_events.csv",
         "source_row": "6",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
       },
       {
-        "file": "14-delay_event_classification.csv",
+        "file": "06_delay_events.csv",
         "source_row": "7",
         "field": "analyst_status",
         "message": "Only Verified classifications are used for delay charts."
@@ -7567,6 +7185,18 @@
     "elite_svg_charts": "/generated/Nasr-city-Tunnel/03_elite_svg_charts.html",
     "linked_executive_dashboard": "/generated/Nasr-city-Tunnel/04_linked_executive_dashboard.html"
   },
+  "report_package": {
+    "zip": "/generated/Nasr-city-Tunnel/00_published_project_reports.zip",
+    "files": {
+      "zip": {
+        "name": "00_published_project_reports.zip",
+        "bytes": 343489,
+        "sha256": "2ebffda23d9289999472cd8115b75156244e3ecfc68fde708428c4e2e293e90f"
+      }
+    },
+    "source_project_id": "Nasr city-Tunnel",
+    "source_report_fingerprint": "affde0bffeeb003c35fa2884d8e04a6efb1d6aa3b49d318108b46199cef9cf97"
+  },
   "report_artifacts": {
     "executive_dashboard": {
       "html": "/generated/Nasr-city-Tunnel/01_executive_dashboard.html",
@@ -7575,23 +7205,23 @@
       "files": {
         "html": {
           "name": "01_executive_dashboard.html",
-          "bytes": 1183,
-          "sha256": "172e0493126578be7470a2c0df416ac0c8798df2d894f2f5dd2dde93582af187"
+          "bytes": 4676,
+          "sha256": "8a3b654931e7cb5755bcf17b4c81ca56abf89b2db86bc5d07076b642e835ef39"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 54682,
-          "sha256": "ad448e6f3cb1534f6d9904b76b8763a91f84cdcaa601580b16130925ec001cf1"
+          "bytes": 79961,
+          "sha256": "9b2cb4d3d6073fdd5b564643bf1c08399615a3dccd4fd9a4e613ce9de2d1ab16"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
-          "bytes": 29096,
-          "sha256": "aae381a3d0847cf33f1ff6ded6f2f9d30dd3b637d699260b959690cad0ec809f"
+          "bytes": 29206,
+          "sha256": "eeb17f8ab05a04ffa30206e5b2c620843ceedd60fee3b5026db2c80f0d27dcd7"
         }
       },
       "html_origin": "controlled_fallback",
       "source_project_id": "Nasr city-Tunnel",
-      "source_report_fingerprint": "a9f57f86ec8b53ea7ac7da67cda23804dd14f1680efad13c89cf6eccfee65982"
+      "source_report_fingerprint": "affde0bffeeb003c35fa2884d8e04a6efb1d6aa3b49d318108b46199cef9cf97"
     },
     "master_dashboard": {
       "html": "/generated/Nasr-city-Tunnel/02_master_dashboard.html",
@@ -7600,23 +7230,23 @@
       "files": {
         "html": {
           "name": "02_master_dashboard.html",
-          "bytes": 1177,
-          "sha256": "67047f2032ba1b550d0c9eb442b3e674eea678ee036594230efd28aea86ff1b0"
+          "bytes": 4670,
+          "sha256": "5c36768d59a10d7b95827d93349084dce7490880bd574a3557bdf7d96c60c226"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
-          "bytes": 54524,
-          "sha256": "9be58b5fbec4740b48735739626f38bd56761eb162c2f4565eb7a14a017350a8"
+          "bytes": 79858,
+          "sha256": "42cd13d166029a9efc00ce681b392dfeec79b0681beed4fc3b1b5c09823abf23"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
-          "bytes": 29093,
-          "sha256": "b5600cc13d7b8b6c639e94ca3b0b188f45c0559ef476fec303c4d99afd04d335"
+          "bytes": 29203,
+          "sha256": "97970ad58ce7b70b7bc4dca6bc2951f17bbb2c81068691b2509eab65dc12ab84"
         }
       },
       "html_origin": "controlled_fallback",
       "source_project_id": "Nasr city-Tunnel",
-      "source_report_fingerprint": "a9f57f86ec8b53ea7ac7da67cda23804dd14f1680efad13c89cf6eccfee65982"
+      "source_report_fingerprint": "affde0bffeeb003c35fa2884d8e04a6efb1d6aa3b49d318108b46199cef9cf97"
     },
     "elite_svg_charts": {
       "html": "/generated/Nasr-city-Tunnel/03_elite_svg_charts.html",
@@ -7625,23 +7255,23 @@
       "files": {
         "html": {
           "name": "03_elite_svg_charts.html",
-          "bytes": 1177,
-          "sha256": "c64930f6fbabbd2854f0de494bc183dcddf45ea879220c398e6032703cc1065b"
+          "bytes": 4670,
+          "sha256": "47dc9f5ba1fa84b0ed995012b2a1a324e967f818a5dda2640386bed784af5709"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
-          "bytes": 54170,
-          "sha256": "c6f4de639ec1d55579746b8f852a8ed7766917bdc67770f2a19b3cf449eaad4f"
+          "bytes": 79823,
+          "sha256": "9c0f597c46718a238aa2082656e9f97b62a4f6fea9e3ab13a700fbdd138afcc7"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
-          "bytes": 29093,
-          "sha256": "d56ba5cc45c046377d467ee9f12e7f403117c19a51778bf55ddbfbadfc41c8b0"
+          "bytes": 29203,
+          "sha256": "6177a7b998d1df4a7ebd3fd9995f0aa592609d275c26e72fad53d038c9ab16ac"
         }
       },
       "html_origin": "controlled_fallback",
       "source_project_id": "Nasr city-Tunnel",
-      "source_report_fingerprint": "a9f57f86ec8b53ea7ac7da67cda23804dd14f1680efad13c89cf6eccfee65982"
+      "source_report_fingerprint": "affde0bffeeb003c35fa2884d8e04a6efb1d6aa3b49d318108b46199cef9cf97"
     },
     "linked_executive_dashboard": {
       "html": "/generated/Nasr-city-Tunnel/04_linked_executive_dashboard.html",
@@ -7650,163 +7280,97 @@
       "files": {
         "html": {
           "name": "04_linked_executive_dashboard.html",
-          "bytes": 1197,
-          "sha256": "4ea2ebbe23212519eb5af9392acc872438ffe2677f6f5b7ab3a0d826550ff8df"
+          "bytes": 4690,
+          "sha256": "ba8b9cc99ef49a47dcdff48c06cf19875e65fec6dc59ef6e029d4741e466dc9c"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
-          "bytes": 54977,
-          "sha256": "b0f77e617ac06105a7f07e22db14d540d6a1c8833793d579d59bbf934e7e24a8"
+          "bytes": 80223,
+          "sha256": "dd9432c4510c1c39cc2858cd4dfa91a6d862e7e87589f01906b8eb2630e9a20b"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
-          "bytes": 29103,
-          "sha256": "da3a6b216dab02ff7b4d45e586bb783a96b007520ee634866e0efcdbc27a27d0"
+          "bytes": 29212,
+          "sha256": "83b969423fd5abf739a5c60890f1e1a002e452b897ebccf53e3cb6e7bf8527c0"
         }
       },
       "html_origin": "controlled_fallback",
       "source_project_id": "Nasr city-Tunnel",
-      "source_report_fingerprint": "a9f57f86ec8b53ea7ac7da67cda23804dd14f1680efad13c89cf6eccfee65982"
+      "source_report_fingerprint": "affde0bffeeb003c35fa2884d8e04a6efb1d6aa3b49d318108b46199cef9cf97"
     }
   },
   "universal_report_engine": {
     "project_id": "Nasr city-Tunnel",
     "project_key": "nasr-city-tunnel",
-    "source_fingerprint": "1c5cdea324662e53bb8a27da5c62e226c2651a816ef0df75c15c5bb6a32c4e2c",
+    "source_fingerprint": "8adfa52d61b4ab24bee2254e2dd1ff5f9314f6f07498f42b3f0cdb8fc5b408ae",
     "source_scope": "active project folder only",
-    "source_file_count": 57,
+    "source_file_count": 33,
     "source_inventory": [
       {
-        "relative_path": "01-data/import_templates/activities.csv",
+        "relative_path": "01-data/import_templates/01_project_contract.csv",
         "extension": ".csv",
-        "size_bytes": 3331,
-        "sha256": "33e62e4290bc3157371d8301b8580cecc6287a19cc23274f757cad208381462e"
+        "size_bytes": 987,
+        "sha256": "ac1864ca85566b442499a667a047aa1ed15234a65774b0159d857c366b3edbe2"
       },
       {
-        "relative_path": "01-data/import_templates/change_orders.csv",
+        "relative_path": "01-data/import_templates/02_schedule_activities.csv",
         "extension": ".csv",
-        "size_bytes": 535,
-        "sha256": "34e2ee07c386f6ff41d3dc0842a432e71572409e45fe3df3074f2ee36377e6cf"
+        "size_bytes": 15605,
+        "sha256": "320e60af73a322a867e579d9b6c3b82cd3180a71a48446b0743d5070a1682bad"
       },
       {
-        "relative_path": "01-data/import_templates/claims.csv",
+        "relative_path": "01-data/import_templates/03_schedule_logic.csv",
         "extension": ".csv",
-        "size_bytes": 483,
-        "sha256": "88491d0359d296662ad3f557769c3550134dc69c5cafe14ac9118460f5ec519d"
+        "size_bytes": 9169,
+        "sha256": "9d55aef29bcf93b765d9927533bde74053d5169e239d1865811e67b47cb7ab00"
       },
       {
-        "relative_path": "01-data/import_templates/contracts.csv",
+        "relative_path": "01-data/import_templates/04_progress_evm.csv",
         "extension": ".csv",
-        "size_bytes": 414,
-        "sha256": "60957b438759509bbcbbb08ddc4f826f072ed6ecd05dd54af7f69f8063322dcd"
+        "size_bytes": 6313,
+        "sha256": "55b57765f5414bf103ff9d43f513056e2633e6a41b714abf5e34557db898006b"
       },
       {
-        "relative_path": "01-data/import_templates/cost_items.csv",
+        "relative_path": "01-data/import_templates/05_milestones_scurve.csv",
         "extension": ".csv",
-        "size_bytes": 2377,
-        "sha256": "c64ea41bca85c9a5e06b469f4a2053936f67a0c708dcea47ff8a04434f832f7b"
+        "size_bytes": 2503,
+        "sha256": "3f5f5c1bf57f05347faff2d44ae90c1dcfdedcf14f89e9342fad1a673b0602a3"
       },
       {
-        "relative_path": "01-data/import_templates/delay_events.csv",
+        "relative_path": "01-data/import_templates/06_delay_events.csv",
         "extension": ".csv",
-        "size_bytes": 1015,
-        "sha256": "fad83bf2c30cc2b2568e1d990bc0a42d2c35041a511ecde0e5abb86f981e02e4"
+        "size_bytes": 4066,
+        "sha256": "25cbe79d45454470870e7120c84d269752167ccf9193ce2dcb902395982bf0bc"
       },
       {
-        "relative_path": "01-data/import_templates/Delivered_steel_site.csv",
+        "relative_path": "01-data/import_templates/07_tia_evidence_scenarios.csv",
         "extension": ".csv",
-        "size_bytes": 626,
-        "sha256": "c0ba5b80facbc0205c375f75270a0f7a5a6239f05bd25728c1114c82815a7a12"
+        "size_bytes": 30979,
+        "sha256": "13ddc5f320a77bc457026efd7a449cc291dd918c1585f6c83c8df2451efcf977"
       },
       {
-        "relative_path": "01-data/import_templates/engineering_log.csv",
+        "relative_path": "01-data/import_templates/08_commercial_payments_claims.csv",
         "extension": ".csv",
-        "size_bytes": 354,
-        "sha256": "72c07bac84a65da4a783afa89a4a87e8bdab99c9edbaf4c0b93d3f126efb5605"
+        "size_bytes": 6522,
+        "sha256": "9a29743dd18875e2b6cc4d7e72ab4d823d1a37945e328ef6777f3312a89118ab"
       },
       {
-        "relative_path": "01-data/import_templates/evm.csv",
+        "relative_path": "01-data/import_templates/09_risks_rfi_interfaces.csv",
         "extension": ".csv",
-        "size_bytes": 2404,
-        "sha256": "86f9b2d9a09bee8805c032eec90e55fd55b4c4b009f16e975e34d47e27aa91f7"
+        "size_bytes": 6187,
+        "sha256": "2cf870480cbe2297d345b118f0a60038d86e73a618c528d9600c9c465a1f0f47"
       },
       {
-        "relative_path": "01-data/import_templates/ifc_conflict.csv",
+        "relative_path": "01-data/import_templates/10_letters_intelligence.csv",
         "extension": ".csv",
-        "size_bytes": 927,
-        "sha256": "1076ba22695ce882a5c69c127f07cb012226e84663e0d6e9bea8046ae904816b"
+        "size_bytes": 868,
+        "sha256": "436c277dbd7fa5eb5c3037b99b41ddea6673046c1e9ac94db2e84d30fe214169"
       },
       {
-        "relative_path": "01-data/import_templates/milestones.csv",
-        "extension": ".csv",
-        "size_bytes": 562,
-        "sha256": "3411d90ed2a0b51ebac7008162b1f62ac13f5ac8fe27a2fc4673bc0ab4582711"
-      },
-      {
-        "relative_path": "01-data/import_templates/payments.csv",
-        "extension": ".csv",
-        "size_bytes": 1096,
-        "sha256": "9a9f20001609299b27d5306d9a1e12009e1c03a467f970e9ec39428ce30ce9f3"
-      },
-      {
-        "relative_path": "01-data/import_templates/planned_cash_flow.csv",
-        "extension": ".csv",
-        "size_bytes": 2062,
-        "sha256": "7d059aaf059caf0cc445b45dcc2c848d3bdf8fe1af1cd6a587f52420bb592b4b"
-      },
-      {
-        "relative_path": "01-data/import_templates/progress_updates.csv",
-        "extension": ".csv",
-        "size_bytes": 1792,
-        "sha256": "49578d7235402380ff2656a78016fbd849866d9905a6a3de79fcf805be80f3e3"
-      },
-      {
-        "relative_path": "01-data/import_templates/projects.csv",
-        "extension": ".csv",
-        "size_bytes": 385,
-        "sha256": "54d89171690c8cb3e6a3cd32605d1886216a7299c5dc4deefb35898e4ae5e8f7"
-      },
-      {
-        "relative_path": "01-data/import_templates/rfi_ status.csv",
-        "extension": ".csv",
-        "size_bytes": 892,
-        "sha256": "230af589b7fa7684222488b4e1d5ff24b39820d33ab3607d2e61187180efd10b"
-      },
-      {
-        "relative_path": "01-data/import_templates/rft_qtys.csv",
-        "extension": ".csv",
-        "size_bytes": 1503,
-        "sha256": "d3c76e24583dad45765e1335abb009cbc69c93f5e68c8dfa9d166847fcf0704a"
-      },
-      {
-        "relative_path": "01-data/import_templates/risks.csv",
-        "extension": ".csv",
-        "size_bytes": 546,
-        "sha256": "3555a308d9506ae99fa4a9ae95b17120c0fa4ee9002b12157031a83e3757196a"
-      },
-      {
-        "relative_path": "01-data/import_templates/s_curve.csv",
-        "extension": ".csv",
-        "size_bytes": 1073,
-        "sha256": "2e7e154344f55b5e672271faf5dabf68a673949b03ccbf85eb704bd00617232c"
-      },
-      {
-        "relative_path": "01-data/import_templates/steel_activities_relationship.csv",
-        "extension": ".csv",
-        "size_bytes": 1306,
-        "sha256": "db95f081e50be82b600b4470b155c53a35fda6dc864f32e4da1ba5423d2c66e4"
-      },
-      {
-        "relative_path": "01-data/import_templates/steel_delay_status_mployer_free_issue_material.csv",
-        "extension": ".csv",
-        "size_bytes": 4922,
-        "sha256": "81be7dd6471cdc6f7094ee74ae4de4ebe2efdb778c49fbb045966b3b0ddad23b"
-      },
-      {
-        "relative_path": "01-data/import_templates/wbs.csv",
-        "extension": ".csv",
-        "size_bytes": 2512,
-        "sha256": "4601d1f6a8ba9b279e61a7c0c6a3ddedb1af4d61a2f7185cac66af581be32141"
+        "relative_path": "01-data/Project_Data_Entry.xlsx",
+        "extension": ".xlsx",
+        "size_bytes": 17242,
+        "sha256": "5c91ff3a9315904a4f45ecd508ff9369609b92e299fe34007fa80c25592a3012"
       },
       {
         "relative_path": "02-delay_analysis/methodology/TIA methodology.docx",
@@ -7815,94 +7379,16 @@
         "sha256": "13c9567516bfdd4e14376a595de426c0abb2e892505d0bdb52db7c148c86735f"
       },
       {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/01-project_metadata_template.csv",
+        "relative_path": "02-delay_analysis/unified_tia_csv/14-delay_event_classification.csv",
         "extension": ".csv",
-        "size_bytes": 751,
-        "sha256": "ec20cc52f169e5bc64b9a00da9035cc2f1f758da4f50fb22a77f8ff094482590"
+        "size_bytes": 204,
+        "sha256": "ae95fac637a5a4cc21519fe9cff117c4957586c33a34b2242816d6457df0409d"
       },
       {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/02-master_activity_steel_analysis.csv",
+        "relative_path": "02-delay_analysis/unified_tia_csv/15-tia_recovery_scenario.csv",
         "extension": ".csv",
-        "size_bytes": 3466,
-        "sha256": "7e4cc6e97703d49af679d0b662055e878050a25d1c4b84349c194bc7a72c70fb"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/03-employer_steel_supply_at_site.csv",
-        "extension": ".csv",
-        "size_bytes": 631,
-        "sha256": "6671c1598f5838f5b008c6afed624e99fd3d9226fdbd19ebf6d10db3ad2fcd4f"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/04-p6_activity_export.csv",
-        "extension": ".csv",
-        "size_bytes": 5671,
-        "sha256": "d935a0f7b4bec0006b531d98fa55db7cb27e83a25153f4803c6bae79a6353ab6"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/05-relationship_file.csv",
-        "extension": ".csv",
-        "size_bytes": 3177,
-        "sha256": "958aaa518bac0426c162fe5cb35b9d733105a0de067a3e7f68229435464799ec"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/06-contract_library.csv",
-        "extension": ".csv",
-        "size_bytes": 3587,
-        "sha256": "e21dfb856cc9beeb0fff8579b33ab7899c3acd0c14c17cdb21dbbf48c13c3bc4"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/07-ifc_conflict.csv",
-        "extension": ".csv",
-        "size_bytes": 1349,
-        "sha256": "766f88797458f21c0c3120851622e80146cd1d899b4b9b8957d7049c1088c78f"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/08-payments.csv",
-        "extension": ".csv",
-        "size_bytes": 1005,
-        "sha256": "99dfd1ae3190f85262b8c943ebaeafb01f8114754c015540a664826806bc3775"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/09-rfi_status.csv",
-        "extension": ".csv",
-        "size_bytes": 1038,
-        "sha256": "597a1979411bca88addbaba076cd75bc64e3d075aee9b88ee407bdea445bfb4a"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/10-contractor_steel_supplied_at_site.csv",
-        "extension": ".csv",
-        "size_bytes": 530,
-        "sha256": "0140424684c2082dcfa4be8e8dcfee3c0ff56d91fbfde06b5c7e2f607ef0d4b8"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/11-concurrency_matrix_template.updated.csv",
-        "extension": ".csv",
-        "size_bytes": 2163,
-        "sha256": "9f36957fa892ba66bb51b900e03b81d33de2d5a2a57c74f77f12f41df4eb7385"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/12-client_steel_demand_by_dia_wide.csv",
-        "extension": ".csv",
-        "size_bytes": 1206,
-        "sha256": "4f69b73cb78f2c88cfb02a998c941b090068a795c91453baace342e287e966a2"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/13-client_steel_supply_by_dia_wide.csv",
-        "extension": ".csv",
-        "size_bytes": 293,
-        "sha256": "6bc07849072ac75e899545cbc0817b606e082d6287a49441d545136e6d25559c"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/14-delay_event_classification.csv",
-        "extension": ".csv",
-        "size_bytes": 1965,
-        "sha256": "2cd62e433008656f435924c066f6857d5ec9a39829cd2da4836a1377f601ae83"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/15-tia_recovery_scenario.csv",
-        "extension": ".csv",
-        "size_bytes": 2439,
-        "sha256": "75bbf78c4e0d033eff7d4b79080d7ea9304101f663cfc869388073a6255ceec4"
+        "size_bytes": 357,
+        "sha256": "186b52e9473e855acbc9918e329ddedc09a076284849e5329bdcf2ef25d176c6"
       },
       {
         "relative_path": "03-schedule/BL critical path.csv",
@@ -8022,14 +7508,14 @@
     "engine": {
       "available": true,
       "runtime_location": "local controlled runtime",
-      "package_name": "Universal Project Report Engine",
+      "package_name": "UNIVERSAL_PROJECT_REPORT_ENGINE_26PLUS_MULTI_LLM_ML_PACKAGE",
       "package_version": "2.0.0",
       "wrapper_version": "3.1.0",
       "author": "Eng. Ahmed Labib",
       "attribution": "Python AI Programming by Eng. Ahmed Labib",
-      "rules": null,
-      "report_families": null,
-      "layers": null,
+      "rules": 26,
+      "report_families": 30,
+      "layers": 32,
       "capability_note": "Runs locally against the active project's controlled source files. The public Vercel site displays generated artifacts only."
     },
     "report_families": [
@@ -8042,12 +7528,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-eot-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "delay",
@@ -8058,12 +7546,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-delay-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "progress",
@@ -8074,12 +7564,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-progress-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "recovery",
@@ -8090,12 +7582,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-recovery-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "variation",
@@ -8106,12 +7600,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-variation-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "hybrid",
@@ -8121,12 +7617,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-hybrid-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "resource",
@@ -8137,12 +7635,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-resource-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "equipment",
@@ -8152,12 +7652,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-equipment-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "cost",
@@ -8167,12 +7669,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-cost-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "evm",
@@ -8182,12 +7686,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-evm-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "cashflow",
@@ -8197,12 +7703,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-cashflow-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "scurve",
@@ -8212,12 +7720,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-scurve-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "procurement",
@@ -8228,12 +7738,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-procurement-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "material",
@@ -8243,12 +7755,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-material-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "lookahead",
@@ -8259,12 +7773,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-lookahead-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "critical_path",
@@ -8275,12 +7791,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-critical_path-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "float",
@@ -8291,12 +7809,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-float-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "milestone",
@@ -8307,12 +7827,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-milestone-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "risk",
@@ -8322,12 +7844,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-risk-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "rfi_submittal",
@@ -8338,12 +7862,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-rfi_submittal-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "qaqc",
@@ -8353,12 +7879,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-qaqc-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "productivity",
@@ -8368,12 +7896,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-productivity-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "executive",
@@ -8383,12 +7913,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-executive-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "baseline_current",
@@ -8399,12 +7931,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-baseline_current-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "forecast_completion",
@@ -8415,27 +7949,31 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-forecast_completion-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "ml_project_controls",
-        "title": "Machine Learning Project Controls Report",
+        "title": "Integrated Project Controls Report",
         "summary": "Controlled report family with 9 validation rules.",
         "native_schedule_required": false,
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-ml_project_controls-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "contract_admin",
@@ -8445,12 +7983,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-contract_admin-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "change_control",
@@ -8460,12 +8000,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-change_control-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "document_control",
@@ -8475,12 +8017,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-document_control-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "interface_management",
@@ -8491,104 +8035,23 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Nasr-city-Tunnel/universal-interface_management-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:29+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       }
     ],
     "summary": {
       "catalog_count": 30,
-      "generated_count": 0,
+      "generated_count": 30,
       "draft_review_count": 0,
-      "ready_count": 30,
+      "ready_count": 0,
       "blocked_count": 0
     },
-    "ml_capability": {
-      "task_count": 15,
-      "tasks": [
-        {
-          "key": "event_classification",
-          "title": "ML01",
-          "description": "Classify delay/change/project-control events from verified features/evidence."
-        },
-        {
-          "key": "delay_risk_prediction",
-          "title": "ML02",
-          "description": "Estimate verified activity/event delay-risk class or probability."
-        },
-        {
-          "key": "forecast_finish_deviation_prediction",
-          "title": "ML03",
-          "description": "Predict analytical deviation days; native CPM forecast remains governing."
-        },
-        {
-          "key": "activity_anomaly_detection",
-          "title": "ML04",
-          "description": "Detect unusual activity records using Isolation Forest novelty scoring."
-        },
-        {
-          "key": "resource_demand_prediction",
-          "title": "ML05",
-          "description": "Predict analytical manpower/equipment demand from verified historical features."
-        },
-        {
-          "key": "cost_overrun_risk_prediction",
-          "title": "ML06",
-          "description": "Estimate cost-overrun risk; does not replace approved cost-control calculations."
-        },
-        {
-          "key": "productivity_prediction",
-          "title": "ML07",
-          "description": "Predict productivity from verified quantities/resource inputs."
-        },
-        {
-          "key": "schedule_health_anomaly_detection",
-          "title": "ML08",
-          "description": "Detect schedule-health anomalies; native P6 logic audit remains governing."
-        },
-        {
-          "key": "similar_event_evidence_retrieval",
-          "title": "ML09",
-          "description": "Retrieve similar events/evidence using TF-IDF cosine similarity with traceability."
-        },
-        {
-          "key": "risk_prioritization",
-          "title": "ML10",
-          "description": "Prioritize risk classes from available verified risk features."
-        },
-        {
-          "key": "procurement_delay_risk",
-          "title": "ML11",
-          "description": "Estimate procurement delay risk from verified procurement history."
-        },
-        {
-          "key": "progress_slippage_prediction",
-          "title": "ML12",
-          "description": "Estimate progress-slippage risk from verified period/status data."
-        },
-        {
-          "key": "model_confidence_ood_detection",
-          "title": "ML13",
-          "description": "Return prediction confidence and real Isolation-Forest OOD score/flag."
-        },
-        {
-          "key": "model_drift_monitoring",
-          "title": "ML14",
-          "description": "Measure population drift with PSI/KS/categorical distribution distance."
-        },
-        {
-          "key": "native_cpm_vs_ml_comparison",
-          "title": "ML15",
-          "description": "Compare ML analytical output with native CPM while explicitly preserving native supremacy."
-        }
-      ],
-      "status": "LOCAL_CONTROLLED_EXECUTION",
-      "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
-      "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
-    },
-    "updated_at": "2026-08-10T18:23:14+00:00"
+    "updated_at": "2026-09-03T02:24:29+00:00"
   }
 }

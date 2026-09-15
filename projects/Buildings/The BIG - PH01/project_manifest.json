@@ -5,5 +5,17 @@
   "project_folder_path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01",
   "created_at": "2026-06-19T06:24:12.173499+00:00",
   "updated_at": "2026-07-27T20:22:25.286799+00:00",
-  "status": "Active"
+  "status": "Active",
+  "submitted_tia_guide_path": "../../../TIA submitted Guide",
+  "approved_tia_release": {
+    "active": true,
+    "project_id": "The Big -P.01-UP-20-April-26",
+    "source_type": "approved_eot_submission_archive",
+    "source_path": "02-delay_analysis/approved_submission",
+    "source_manifest": "submission_manifest.json",
+    "approved_matrix": "approved_before_after_fragnet_comparison.csv",
+    "archive_file": "Sub02-Delay Analysis (TIA) - Workbook to dashboard.rar",
+    "approval_status": "submitted_position_pending_p6_verification",
+    "note": "The approved project-local before/after fragnet matrix controls the active submitted EOT position. Historic BRAIN material remains reconciliation-only and cannot overwrite active TIA metrics, charts, AI facts, or outputs."
+  }
 }

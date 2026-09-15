@@ -1,0 +1,4 @@
+﻿source_table,source_path,row_order,contract_id,project_id,package,contractor,contract_type,original_value,approved_variations,pending_variations,paid_to_date,retention_percent,status,project_name,client_name,planned_start,planned_finish,forecast_finish,contract_value,currency,planned_progress_percent,actual_progress_percent,planned_value,earned_value
+contracts,01-data/import_templates/contracts.csv,1,PH-01,The Big -P.01-UP-20-April-26,1,SAMCO,Unite rate,367286025,17671310,0,17671310,5%,Active,,,,,,,,,,,
+contracts,01-data/import_templates/contracts.csv,2,PH-02,The Big -P.01-UP-20-April-26,2,SAMCO,Unite rate,900000000,0,0,0,5%,In-Active,,,,,,,,,,,
+projects,01-data/import_templates/projects.csv,1,,The Big -P.01-UP-20-April-26,,SAMCO,,,,,,,Active,ROYA-BIG PROJECT PHASE01 (B1-4),ROYA,11-Sep-25,10-Apr-27,19-Aug-27,"$367,286,025.00 ",EGP,65.32,30.68,2399284478,112676721

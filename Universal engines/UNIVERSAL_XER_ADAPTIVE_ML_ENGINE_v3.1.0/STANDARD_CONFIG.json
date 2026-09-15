@@ -1,0 +1,28 @@
+{
+  "analysis": {
+    "hours_per_day_fallback": 8.0,
+    "critical_corridor_float_quantile": 0.12
+  },
+  "universal_ml": {
+    "random_seed": 42,
+    "max_activity_clusters": 20,
+    "duration_reduction_ratios": [
+      0.08,
+      0.15,
+      0.22,
+      0.3
+    ],
+    "lag_reduction_ratios": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "fast_track_overlap_fraction": 0.18,
+    "minimum_remaining_duration_days": 1.0,
+    "max_universal_candidates": 500,
+    "synthetic_training_scenarios": 420,
+    "optimizer_population": 42,
+    "optimizer_generations": 10,
+    "optimizer_max_actions": 18
+  }
+}

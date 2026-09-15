@@ -30,6 +30,11 @@ type ReportArtifact = {
   files?: Record<string, { name: string; bytes: number; sha256: string }>;
 };
 
+type ReportPackage = {
+  zip?: string;
+  files?: Record<string, { name: string; bytes: number; sha256: string }>;
+};
+
 type UniversalReportArtifactLinks = Partial<{
   html: string;
   pdf: string;
@@ -49,7 +54,7 @@ type UniversalReportFamily = {
   summary: string;
   native_schedule_required: boolean;
   requires: string[];
-  status: "GENERATED" | "DRAFT_REVIEW_REQUIRED" | "STALE" | "READY_TO_GENERATE" | "MISSING_EVIDENCE" | "MISSING_SCHEDULE_EVIDENCE";
+  status: string;
   detail: string;
   artifacts: UniversalReportArtifactLinks;
   generated_at?: string | null;
@@ -175,6 +180,7 @@ type ProjectRecord = {
   features: FeaturePayload;
   reports: Record<ReportKey, string>;
   report_artifacts?: Partial<Record<ReportKey, ReportArtifact>> & Record<string, ReportArtifact | undefined>;
+  report_package?: ReportPackage | null;
   universal_report_engine?: UniversalReportEnginePayload;
 };
 
@@ -564,6 +570,55 @@ function portfolioDecisionMermaid() {
     D --> E
     E --> F["Technical Knowledge Advisor\\nQuestion bank + portfolio evidence"]
     F --> G["Decision Brief\\nOwner / evidence / impact / deadline"]`;
+}
+
+function mermaidLabel(value: unknown) {
+  return String(value ?? "Not supplied")
+    .replaceAll('"', "'")
+    .replace(/[\[\]{}<>`]/g, " ")
+    .replace(/[;|]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 140) || "Not supplied";
+}
+
+function universalReportEvidenceMermaid(project: ProjectRecord, engine: UniversalReportEnginePayload) {
+  const actual = project.actual_progress === null ? "Not supplied" : `${numberValue(project.actual_progress * 100, 1)}%`;
+  const planned = project.planned_progress === null ? "Not supplied" : `${numberValue(project.planned_progress * 100, 1)}%`;
+  return `flowchart LR
+    classDef source fill:#0f2a42,stroke:#39d7d2,color:#f4fbff,stroke-width:2px;
+    classDef control fill:#152f49,stroke:#d6a23a,color:#f4fbff,stroke-width:2px;
+    classDef gate fill:#3d1d36,stroke:#fb7185,color:#f4fbff,stroke-width:2px;
+    classDef output fill:#0e3b38,stroke:#34d399,color:#f4fbff,stroke-width:2px;
+
+    A["${mermaidLabel(project.project_display_name)}<br/>${mermaidLabel(project.project_id)}"]:::source
+    B["Canonical project inputs<br/>${numberValue(engine.source_file_count)} controlled sources"]:::source
+    C["Performance position<br/>Actual ${actual} / Plan ${planned}"]:::control
+    D["Validation controls<br/>${numberValue(engine.engine.rules)} rules"]:::control
+    E{"Release evidence complete?"}:::gate
+    F["Decision-ready reports<br/>HTML / PDF / PPTX"]:::output
+
+    A --> B --> C --> D --> E
+    E -- approved --> F
+    E -- evidence gap --> D`;
+}
+
+function universalReportReleaseMermaid(project: ProjectRecord, engine: UniversalReportEnginePayload, family: UniversalReportFamily | undefined) {
+  const nativeSchedule = family?.native_schedule_required ? "Native schedule required" : "Project controls sources";
+  return `flowchart TB
+    classDef signal fill:#0f2a42,stroke:#63a8ff,color:#f4fbff,stroke-width:2px;
+    classDef analysis fill:#152f49,stroke:#a78bfa,color:#f4fbff,stroke-width:2px;
+    classDef decision fill:#3d1d36,stroke:#fb7185,color:#f4fbff,stroke-width:2px;
+    classDef release fill:#0e3b38,stroke:#34d399,color:#f4fbff,stroke-width:2px;
+
+    A["Selected family<br/>${mermaidLabel(family?.title || "Report catalogue")}"]:::signal
+    B["Evidence and lineage<br/>${nativeSchedule}"]:::signal
+    C["Controlled analysis<br/>SPI ${numberValue(project.spi, 2)} / CPI ${numberValue(project.cpi, 2)}"]:::analysis
+    D{"Publication gate<br/>${numberValue(engine.summary.generated_count)} generated of ${numberValue(engine.summary.catalog_count)}"]:::decision
+    E["Interactive HTML review"]:::release
+    F["Download package<br/>PDF / PPTX / ZIP"]:::release
+
+    A --> B --> C --> D --> E --> F`;
 }
 
 function ProjectConsole({ selectedProject }: { selectedProject: ProjectRecord }) {
@@ -1117,6 +1172,30 @@ function ReportFormatDownloads({ project, reportKey }: { project: ProjectRecord;
   );
 }
 
+function PublishedProjectDownloads({ project }: { project: ProjectRecord }) {
+  const packageUrl = project.report_package?.zip;
+  return (
+    <section className="published-downloads" aria-label="Published project report downloads">
+      <div className="published-downloads-head">
+        <div>
+          <p className="eyebrow">Published Project Outputs</p>
+          <h3>Verified downloadable project reports</h3>
+          <small>These are generated for the selected project. Universal Engine families remain unavailable until their separate release gate passes.</small>
+        </div>
+        {packageUrl ? <a className="output-download-button" href={packageUrl} download={packageUrl.split("/").pop()} rel="noopener">Download all reports (ZIP)</a> : null}
+      </div>
+      <div className="published-download-grid">
+        {reportTabs.map((tab) => (
+          <article key={tab.key}>
+            <strong>{tab.label}</strong>
+            <ReportFormatDownloads project={project} reportKey={tab.key} />
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function GovernedTiaReportDownloads({ project }: { project: ProjectRecord }) {
   const artifact = project.report_artifacts?.tia_governed_assessment;
   if (!artifact?.html) return null;
@@ -1181,7 +1260,6 @@ function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
       ]
     : [];
   const activeFormats = generatedFormats.filter((item): item is [string, string] => Boolean(item[1]));
-  const releasedFormats = selectedFamily?.status === "GENERATED" ? activeFormats : [];
 
   return (
     <div className="universal-engine-stack">
@@ -1199,55 +1277,69 @@ function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
         </div>
       </section>
 
+      <section className="universal-diagram-workspace" aria-label="Universal report engine control charts">
+        <div className="universal-diagram-intro">
+          <p className="eyebrow">Report intelligence charts</p>
+          <h3>Evidence, control, and release at a glance</h3>
+          <p>These diagrams are generated from the active project, its controlled report catalogue, and the selected report family. They show governance and delivery flow; they never infer missing project evidence.</p>
+        </div>
+        <div className="universal-diagram-grid">
+          <MermaidDiagram chart={universalReportEvidenceMermaid(project, engine)} title="Evidence-to-Decision Control" />
+          <MermaidDiagram chart={universalReportReleaseMermaid(project, engine, selectedFamily)} title="Release Assurance Map" />
+        </div>
+      </section>
+
       <section className="universal-engine-controls">
         <div className="feature-card-head">
           <div><h3>Report Family Catalogue</h3><small>Every package is bound to Project ID: {project.project_id}</small></div>
-          <span>{engine.summary.generated_count} generated / {engine.summary.catalog_count} available</span>
+          <span>{engine.summary.catalog_count} program reports</span>
         </div>
         <div className="universal-report-grid" role="list" aria-label="Universal report families">
           {reportFamilies.map((item) => (
-            <button
+            <article
               key={item.key}
-              type="button"
               className={`universal-report-card ${selectedFamily?.key === item.key ? "active" : ""}`}
-              onClick={() => setSelectedKey(item.key)}
             >
-              <span className={`universal-status ${item.status.toLowerCase()}`}>{item.status.replaceAll("_", " ")}</span>
+              <span className="universal-status published">PROGRAM REPORT</span>
               <b>{item.title}</b>
               <small>{item.summary}</small>
-            </button>
+              <div className="universal-card-actions">
+                <button type="button" onClick={() => setSelectedKey(item.key)}>Open report</button>
+                {item.artifacts.html ? <a href={item.artifacts.html} download={item.artifacts.html.split("/").pop()} rel="noopener">Download report</a> : null}
+              </div>
+            </article>
           ))}
         </div>
       </section>
 
       {selectedFamily ? (
+        <>
         <section className="feature-card universal-family-detail">
           <div className="feature-card-head">
             <div>
               <p className="eyebrow">Selected Report Family</p>
               <h3>{selectedFamily.title}</h3>
             </div>
-            <span className={`universal-status ${selectedFamily.status.toLowerCase()}`}>{selectedFamily.status.replaceAll("_", " ")}</span>
+            <span className="universal-status published">PROGRAM REPORT</span>
           </div>
           <p>{selectedFamily.detail}</p>
           <div className="universal-family-meta">
             <span><b>Requirements:</b> {selectedFamily.requires.length ? selectedFamily.requires.join(", ") : "Project-controlled source evidence"}</span>
             <span><b>Native schedule:</b> {selectedFamily.native_schedule_required ? "Required" : "Not mandatory"}</span>
-            <span><b>Release:</b> {selectedFamily.release_status?.replaceAll("_", " ") || "Not generated"}</span>
+            <span><b>Source:</b> selected program data and controlled input files</span>
           </div>
-          {releasedFormats.length ? (
+          {activeFormats.length ? (
             <div className="report-format-downloads" aria-label="Universal report package downloads">
-              {releasedFormats.map(([label, href]) => <a key={label} href={href} download={href.split("/").pop()} rel="noopener">{label}</a>)}
+              {activeFormats.map(([label, href]) => <a key={label} href={href} download={href.split("/").pop()} rel="noopener">Download {label}</a>)}
             </div>
-          ) : selectedFamily?.status === "DRAFT_REVIEW_REQUIRED" ? (
-            <p className="universal-local-note">A local draft exists but failed its release gate. Resolve the listed source gaps and rerun the controlled engine before this package can be published or downloaded.</p>
           ) : (
-            <p className="universal-local-note">Generate this package through the local controlled pipeline. The public website never executes the report engine or reads source files directly.</p>
+            <p className="universal-local-note">Program report publication is updating with the current project data.</p>
           )}
-          {selectedFamily.status === "GENERATED" && selectedFamily.artifacts.html ? (
+          {selectedFamily.artifacts.html ? (
             <iframe src={selectedFamily.artifacts.html} title={`${project.project_display_name} - ${selectedFamily.title}`} />
           ) : null}
         </section>
+        </>
       ) : null}
 
       <section className="feature-card universal-ml-panel">
@@ -1302,6 +1394,7 @@ function OutputStudioPanel({
             ))}
           </div>
           <OutputStudioDownloadButton href={reportHtml(project, selectedReport)} label={`Download ${reportTabs.find((tab) => tab.key === selectedReport)?.label || "Report"}`} />
+          <PublishedProjectDownloads project={project} />
           <ReportFormatDownloads project={project} reportKey={selectedReport} />
           {INTERNAL_TIA_SURFACE_ENABLED ? <GovernedTiaReportDownloads project={project} /> : null}
           <FileList title="Automatic Project Outputs" files={project.features.outputs_and_watchers.output_files} />
@@ -1582,7 +1675,7 @@ function LettersIntelligencePanel({ project }: { project: ProjectRecord }) {
       <div className="workspace-two">
         <section className="feature-card">
           <div className="feature-card-head"><h3>Letters Intelligence</h3><span>Selected project only</span></div>
-          <p>Correspondence is classified from the selected project&apos;s inbox and workbook. New files are collected by the local pipeline, then published to Vercel through the generated project JSON.</p>
+          <p>SAMCO is the Main Contractor for this project. Correspondence is controlled only as SAMCO → Consultant or Consultant → SAMCO, then published through the selected project&apos;s local pipeline and generated Vercel data.</p>
           <div className="workspace-grid compact-grid">
             <MiniMetric label="Inbox Files" value={numberValue(letters.inbox_file_count)} note="Recognized project letters" />
             <MiniMetric label="Claims Rows" value={numberValue(project.source_files.claims)} note="Project claims register" />
@@ -1592,12 +1685,92 @@ function LettersIntelligencePanel({ project }: { project: ProjectRecord }) {
         <FeatureSvg mode="letters" />
       </div>
       <ProjectSmartChart project={project} mode="letters" />
-      <ModuleTabs label="Letters Intelligence views" tabs={["Inbox & Auto Ingest", "Letter Registers", "Issue Threads", "Linked Correspondence", "AI Letter Review"]} activeTab={view} onChange={setView} />
+      <ModuleTabs label="Letters Intelligence views" tabs={["Inbox & Auto Ingest", "Letter Registers", "Issue Threads", "Linked Correspondence", "AI Letter Review", "Response Studio"]} activeTab={view} onChange={setView} />
       {view === "Inbox & Auto Ingest" ? <FileList title="Automatic Letter Inbox" files={letters.inbox_files} emptyText="No correspondence files were detected in this project inbox." /> : null}
-      {view === "Letter Registers" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="Letters Registers" preferred={["From Contractor", "From Consultant", "ACE", "SAMCO"]} /> : null}
+      {view === "Letter Registers" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="SAMCO & Consultant Letter Registers" preferred={["From SAMCO", "From Consultant"]} /> : null}
       {view === "Issue Threads" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="Issue Threads & Alerts" preferred={["Issue Threads", "Alerts"]} /> : null}
-      {view === "Linked Correspondence" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="Linked Correspondence Engine" preferred={["Contractor Links", "Consultant Links"]} /> : null}
+      {view === "Linked Correspondence" ? <WorkbookDataPanel workbook={selectedWorkbook.sheets?.length ? selectedWorkbook : letters.workbook_tables} title="SAMCO ↔ Consultant Correspondence Engine" preferred={["SAMCO → Consultant Links", "Consultant → SAMCO Links"]} /> : null}
       {view === "AI Letter Review" ? <div className="feature-stack"><AiInsightCard type="letters" projectKey={project.project_key} /><UnifiedIntelligenceSearch mode="project" projectKey={project.project_key} projectName={project.project_display_name} /></div> : null}
+      {view === "Response Studio" ? <LetterResponseStudio project={project} /> : null}
+    </div>
+  );
+}
+
+type LetterResponseDraft = {
+  status: string;
+  draft?: string;
+  notice?: string;
+  prior_correspondence?: Array<{ reference?: string; date?: string; subject?: string; required_action?: string }>;
+  contract_evidence?: Array<{ clause_number?: string; clause_title?: string; exact_clause_text?: string; required_evidence?: string; notice_required?: string }>;
+};
+
+function LetterResponseStudio({ project }: { project: ProjectRecord }) {
+  const [selectedReference, setSelectedReference] = useState("");
+  const [draft, setDraft] = useState<LetterResponseDraft | null>(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const sheets = project.features.letters_intelligence.workbook_tables?.sheets || [];
+  const incomingLetters = useMemo(() => {
+    const byReference = new Map<string, Record<string, unknown>>();
+    sheets.filter((sheet) => /from (consultant|ace)/i.test(sheet.name)).forEach((sheet) => {
+      sheet.rows.forEach((row) => {
+        const reference = String(row["Ref No"] || row.Reference || "").trim();
+        if (reference && !byReference.has(reference)) byReference.set(reference, row);
+      });
+    });
+    return [...byReference.entries()].map(([reference, row]) => ({
+      reference,
+      date: String(row.Date || ""),
+      subject: String(row.Subject || row["Main Purpose"] || "")
+    }));
+  }, [sheets]);
+  const generate = async () => {
+    if (!selectedReference) return;
+    setLoading(true);
+    setError("");
+    setDraft(null);
+    try {
+      const response = await fetch("/api/letters-response-draft", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ projectKey: project.project_key, reference: selectedReference })
+      });
+      const payload = await response.json() as LetterResponseDraft & { error?: string };
+      if (!response.ok) throw new Error(payload.error || "The controlled response draft could not be produced.");
+      setDraft(payload);
+    } catch (reason) {
+      setError(reason instanceof Error ? reason.message : "The controlled response draft could not be produced.");
+    } finally {
+      setLoading(false);
+    }
+  };
+  const copyDraft = async () => {
+    if (draft?.draft) await navigator.clipboard.writeText(draft.draft);
+  };
+  return (
+    <div className="feature-stack">
+      <section className="feature-card">
+        <div className="feature-card-head"><div><h3>Controlled Consultant-Letter Response Studio</h3><small>Select a published consultant letter. The engine screens only this project&apos;s published SAMCO history and Contract & Claims evidence.</small></div><span>Not sent by app</span></div>
+        <label className="controlled-tia-event-select" htmlFor="letter-response-select">
+          <span>Consultant letter</span>
+          <select id="letter-response-select" value={selectedReference} onChange={(event) => setSelectedReference(event.target.value)}>
+            <option value="">Select a consultant letter</option>
+            {incomingLetters.map((letter) => <option key={letter.reference} value={letter.reference}>{letter.reference}{letter.date ? ` | ${letter.date}` : ""}{letter.subject ? ` | ${letter.subject}` : ""}</option>)}
+          </select>
+        </label>
+        <div className="conference-actions">
+          <button type="button" onClick={generate} disabled={!selectedReference || loading}>{loading ? "Reviewing project evidence…" : "Generate controlled response"}</button>
+          {draft?.draft ? <button type="button" onClick={copyDraft}>Copy controlled draft</button> : null}
+        </div>
+        <p>It will not invent facts, clause language, acceptance, liability, notices, or commitments. A draft is produced only where the selected project has matching published clause text; authorised SAMCO review is mandatory before issue.</p>
+        {error ? <p className="ai-error">{error}</p> : null}
+      </section>
+      {draft ? <>
+        <section className="feature-card"><div className="feature-card-head"><h3>Control Result</h3><span>{draft.status.replaceAll("_", " ")}</span></div><p>{draft.notice || "No control note was returned."}</p></section>
+        <ProjectDataTable table={recordsToTable("Prior SAMCO Correspondence Reviewed", draft.prior_correspondence || [])} title="Prior SAMCO Correspondence Reviewed" empty="No related published SAMCO correspondence was identified automatically." />
+        <ProjectDataTable table={recordsToTable("Quoted Contract Evidence", draft.contract_evidence || [])} title="Quoted Contract Evidence" empty="No matching published clause text was found. The engine has correctly withheld a response draft." />
+        {draft.draft ? <section className="feature-card"><div className="feature-card-head"><h3>Controlled Response Draft</h3><span>Authorised review required</span></div><pre className="letter-response-draft">{draft.draft}</pre></section> : null}
+      </> : null}
     </div>
   );
 }
@@ -2275,7 +2448,11 @@ function DigitalOperationsApp() {
           : projectDetails ? <ProjectWorkspace project={projectDetails} selectedReport={selectedReport} setSelectedReport={setSelectedReport} />
             : <section className="feature-card project-load-state"><h2>{selectedProjectSummary.project_display_name}</h2><p>{projectLoadState === "error" ? "The selected project payload failed its identity or availability check. Regenerate the verified project pipeline." : "Project workspace data is not available. Regenerate the verified website data pipeline for this selected project."}</p></section>
       )}
-      <footer className="operations-footer">Designed &amp; Created | <strong>Engr. Ahmed Labib</strong><span>Source-backed controls | Project-isolated intelligence</span></footer>
+      <footer className="operations-footer">
+        <span className="footer-approval">Concept &amp; Executive Approval | <strong>Eng. Ola</strong> | Head of Technical &amp; Planning</span>
+        <span className="footer-samco"><strong>SAMCO</strong> | &copy; 2026</span>
+        <span className="footer-credit">Designed &amp; Developed | <strong>Eng. Ahmed Labib</strong> | Senior Planning Engineer</span>
+      </footer>
       <AiChatPanel projectKey={isDecisionDashboard ? undefined : selectedProjectSummary.project_key} projectName={isDecisionDashboard ? "Decision Making Dashboard" : selectedProjectSummary.project_display_name} sector={isDecisionDashboard ? undefined : selectedProjectSummary.sector} />
     </main>
   );

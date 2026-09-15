@@ -1,0 +1,185 @@
+{
+  "project_id": "LMD-Bridge",
+  "project_key": "LMD-Bridgs",
+  "project_fingerprint": "fb69211a483d005098ac75f931ec7bf1d34832a75e8be3b0cc92541276bfbc0e",
+  "generator_version": "2026.08.project-scoped-html-pdf-pptx.v6-source-html",
+  "chart_catalog_version": "2026-08-02-reference-36",
+  "chart_status": {
+    "overview.schedule_performance_s_curve": "ready",
+    "overview.overall_completion_gauge": "ready",
+    "overview.activity_status": "ready",
+    "overview.discipline_health": "awaiting_data",
+    "overview.earned_value_trend": "awaiting_data",
+    "overview.performance_indices": "awaiting_data",
+    "wbs.progress_distribution": "awaiting_data",
+    "wbs.duration_breakdown": "awaiting_data",
+    "activities.status_distribution": "ready",
+    "activities.critical_path": "ready",
+    "activities.float_distribution": "ready",
+    "activities.monthly_completion": "awaiting_data",
+    "activities.responsible_party_workload": "ready",
+    "milestones.schedule_health": "ready",
+    "milestones.variance_trend": "ready",
+    "milestones.type_breakdown": "ready",
+    "s_curve.master": "awaiting_data",
+    "s_curve.discipline": "awaiting_data",
+    "s_curve.variance": "awaiting_data",
+    "evm.burnup": "ready",
+    "evm.variance_waterfall": "ready",
+    "evm.spi_trend": "awaiting_data",
+    "evm.cpi_trend": "awaiting_data",
+    "contracts.payment_history": "ready",
+    "contracts.planned_vs_actual_cash_flow": "awaiting_data",
+    "contracts.payment_status": "ready",
+    "contracts.variations": "ready",
+    "risks.category": "awaiting_data",
+    "risks.status": "ready",
+    "risks.trend": "awaiting_data",
+    "risks.mitigation_effectiveness": "awaiting_data",
+    "delay.events_timeline": "ready",
+    "delay.root_cause_pareto": "awaiting_data",
+    "delay.type_distribution": "awaiting_data",
+    "delay.monthly_accumulation": "awaiting_data",
+    "delay.tia_recovery_scenario": "awaiting_data"
+  },
+  "assessment": {
+    "analysis_run_id": "e251d0b48d40715e2a46",
+    "assessment_profile": "readiness_only",
+    "assessment_status": "readiness_only",
+    "determination_status": "p6_recalculation_required",
+    "source_scope": "selected_project_only"
+  },
+  "generated_at": "2026-08-05T01:08:22",
+  "reports": {
+    "executive_dashboard": {
+      "html": "/generated/LMD-Bridgs/01_executive_dashboard.html",
+      "pdf": "/generated/LMD-Bridgs/01_executive_dashboard.pdf",
+      "pptx": "/generated/LMD-Bridgs/01_executive_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "01_executive_dashboard.html",
+          "bytes": 18249,
+          "sha256": "bd0c74a617f9a7077c3982b05c92c95dc6ce463cd394e80e045c331db7a21228"
+        },
+        "pdf": {
+          "name": "01_executive_dashboard.pdf",
+          "bytes": 953015,
+          "sha256": "8fb0bffb9219482c3b6b45aa63701549a0a208bb1a85b610994621cef86d0bc7"
+        },
+        "pptx": {
+          "name": "01_executive_dashboard.pptx",
+          "bytes": 29122,
+          "sha256": "5ccf3d3f56b2dec34dbe756ba6d003e0ae531097c79f87ab0311febf35b8dc38"
+        }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "LMD-Bridge",
+      "source_report_fingerprint": "34606039476e273b350bc96f6fbebb88277f974b880660503ef5bf68d8abcecc"
+    },
+    "master_dashboard": {
+      "html": "/generated/LMD-Bridgs/02_master_dashboard.html",
+      "pdf": "/generated/LMD-Bridgs/02_master_dashboard.pdf",
+      "pptx": "/generated/LMD-Bridgs/02_master_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "02_master_dashboard.html",
+          "bytes": 86791,
+          "sha256": "32b3a194f349cb898594f87871d4a656ac75a2a4f022b42c8e9e5ced0e3a1b77"
+        },
+        "pdf": {
+          "name": "02_master_dashboard.pdf",
+          "bytes": 883572,
+          "sha256": "30d23b3a8a8441bc700e9fab0c5e7dae81da6286942fc581074ed6fef5e6ba69"
+        },
+        "pptx": {
+          "name": "02_master_dashboard.pptx",
+          "bytes": 29119,
+          "sha256": "fa4bff9e5edc839ab6cb734bcad446bbfcd9789ec573ea1babf7be53880edbd1"
+        }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "LMD-Bridge",
+      "source_report_fingerprint": "34606039476e273b350bc96f6fbebb88277f974b880660503ef5bf68d8abcecc"
+    },
+    "elite_svg_charts": {
+      "html": "/generated/LMD-Bridgs/03_elite_svg_charts.html",
+      "pdf": "/generated/LMD-Bridgs/03_elite_svg_charts.pdf",
+      "pptx": "/generated/LMD-Bridgs/03_elite_svg_charts.pptx",
+      "files": {
+        "html": {
+          "name": "03_elite_svg_charts.html",
+          "bytes": 51985,
+          "sha256": "2e9aee7d45f05b8086e17186f13688ba1f9312bc6146eeedd28c13df784709b1"
+        },
+        "pdf": {
+          "name": "03_elite_svg_charts.pdf",
+          "bytes": 241628,
+          "sha256": "d48242884d17e57977153e9ae4973c761199e04603faef03b38bd785f07a7d30"
+        },
+        "pptx": {
+          "name": "03_elite_svg_charts.pptx",
+          "bytes": 29119,
+          "sha256": "c18143c81550509544c469b08b648ed6ed1d0458c9771b014be5a3034f8267f7"
+        }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "LMD-Bridge",
+      "source_report_fingerprint": "34606039476e273b350bc96f6fbebb88277f974b880660503ef5bf68d8abcecc"
+    },
+    "linked_executive_dashboard": {
+      "html": "/generated/LMD-Bridgs/04_linked_executive_dashboard.html",
+      "pdf": "/generated/LMD-Bridgs/04_linked_executive_dashboard.pdf",
+      "pptx": "/generated/LMD-Bridgs/04_linked_executive_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "04_linked_executive_dashboard.html",
+          "bytes": 57783,
+          "sha256": "50db0d0b0f36fe8ad61028a777af379108b131316556a79e9306b3071db144f3"
+        },
+        "pdf": {
+          "name": "04_linked_executive_dashboard.pdf",
+          "bytes": 1122392,
+          "sha256": "12df368889d0b14011e66631ddb659d613c92e348511dfa41fcb12c8004e46d7"
+        },
+        "pptx": {
+          "name": "04_linked_executive_dashboard.pptx",
+          "bytes": 29128,
+          "sha256": "6f12c78e317839426b81f0463fa586a63fcdf32896a5528e9dedcc7f9c1419ca"
+        }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "LMD-Bridge",
+      "source_report_fingerprint": "34606039476e273b350bc96f6fbebb88277f974b880660503ef5bf68d8abcecc"
+    },
+    "tia_governed_assessment": {
+      "html": "/generated/LMD-Bridgs/05_delay_tia_governed_assessment.html",
+      "pdf": "/generated/LMD-Bridgs/05_delay_tia_governed_assessment.pdf",
+      "pptx": "/generated/LMD-Bridgs/05_delay_tia_governed_assessment.pptx",
+      "docx": "/generated/LMD-Bridgs/05_delay_tia_governed_assessment.docx",
+      "files": {
+        "html": {
+          "name": "05_delay_tia_governed_assessment.html",
+          "bytes": 2556,
+          "sha256": "264e92ce8ecbbd5242edce206379459a4a163be7bc78aaef1da407ded837a6db"
+        },
+        "pdf": {
+          "name": "05_delay_tia_governed_assessment.pdf",
+          "bytes": 2048,
+          "sha256": "f6daec0c4a4c58f3f122e0f09b7431ff54a38d0f6c6c638e08cdf9643bd2ec19"
+        },
+        "pptx": {
+          "name": "05_delay_tia_governed_assessment.pptx",
+          "bytes": 28477,
+          "sha256": "25c7892a4d0107f8d9522752117aa26cc65d46bd173a5f59e398cd10563a8d5a"
+        },
+        "docx": {
+          "name": "05_delay_tia_governed_assessment.docx",
+          "bytes": 35682,
+          "sha256": "7821c2df98e4cd6235ab2974130378f45374ad021540bc3009249ac54e599bb2"
+        }
+      },
+      "assessment_status": "awaiting_sources",
+      "source_scope": "selected_project_only"
+    }
+  }
+}

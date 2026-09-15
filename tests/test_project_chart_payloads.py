@@ -42,7 +42,7 @@ def _payload(
     vercel_header_only: bool = False,
 ):
     data_dir = tmp_path / "01-data" / "import_templates"
-    delay_dir = tmp_path / "02-delay_analysis" / "steel_delay_tia_templates"
+    delay_dir = tmp_path / "02-delay_analysis" / "unified_tia_csv"
     vercel_dir = tmp_path / "vercel"
     if planned is not None:
         _write_rows(data_dir / "planned_cash_flow.csv", planned)

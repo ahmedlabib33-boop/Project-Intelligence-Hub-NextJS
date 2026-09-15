@@ -3,7 +3,7 @@
 Copy this folder into `projects` using any folder name. On refresh, the app generates `project_manifest.json`; keep its `project_id` stable even if the folder is renamed later.
 
 - `data/import_templates`: dashboard CSVs.
-- `delay_analysis/steel_delay_tia_templates`: Delay TIA CSVs.
+- `delay_analysis/unified_tia_csv`: Delay TIA CSVs.
 - `delay_analysis/methodology`: project methodology documents.
 - `bl`: baseline, critical path, float, longest path, and MEP files.
 - `letters_intelligence/inbox/From Contractor`: outgoing letters.

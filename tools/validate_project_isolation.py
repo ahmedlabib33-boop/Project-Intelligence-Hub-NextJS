@@ -147,10 +147,16 @@ def main() -> int:
     results.check("11. Standard folders exist", not missing_structures, ", ".join(missing_structures[:3]))
     results.check("12. project_manifest.json exists", not missing_manifests, ", ".join(missing_manifests))
     results.check("13. data_to_program.md exists", (ROOT / "data_to_program.md").stat().st_size > 1000)
-    results.check("14. RUN_FULL_PROJECT_NO_GIT_SYNC.bat exists", (ROOT / "RUN_FULL_PROJECT_NO_GIT_SYNC.bat").exists())
+    vercel_sync_bat = ROOT / "VERCEL_SYNC.bat"
+    vercel_pipeline = ROOT / "tools/vercel_project_pipeline.ps1"
+    results.check("14. VERCEL_SYNC.bat exists", vercel_sync_bat.exists() and vercel_pipeline.exists())
     sync_files = [ROOT / "tools/github_no_git_sync.ps1", ROOT / "tools/github_sync_config.json", ROOT / "12-logs/github_sync.log", ROOT / ".sync_state/local_manifest.json"]
     results.check("15. Synchronization configuration exists", all(path.exists() for path in sync_files))
-    sync_text = (ROOT / "tools/github_no_git_sync.ps1").read_text(encoding="utf-8") + (ROOT / "RUN_FULL_PROJECT_NO_GIT_SYNC.bat").read_text(encoding="utf-8")
+    sync_text = (
+        (ROOT / "tools/github_no_git_sync.ps1").read_text(encoding="utf-8")
+        + vercel_sync_bat.read_text(encoding="utf-8")
+        + vercel_pipeline.read_text(encoding="utf-8")
+    )
     forbidden_git_cli = any(token in sync_text.lower() for token in ["git add", "git commit", "git push", "git status", "git.exe"])
     results.check("16. No Git CLI command is required", not forbidden_git_cli)
     results.check("18. Dynamic onboarding needs no code registration", "discover_projects" in (ROOT / "dashboard.py").read_text(encoding="utf-8"))
@@ -166,21 +172,54 @@ def main() -> int:
     expected_output_dirs = {project_output_dir(root_outputs, record).resolve() for record in records}
     actual_output_dirs = {path.resolve() for path in root_outputs.iterdir() if path.is_dir()} if root_outputs.exists() else set()
     root_output_files = [path.name for path in root_outputs.iterdir() if path.is_file()] if root_outputs.exists() else []
-    results.check("28. Root 11-outputs contains only project folders", not root_output_files and actual_output_dirs.issubset(expected_output_dirs), f"files={root_output_files[:3]}")
+    unexpected_output_dirs = actual_output_dirs - expected_output_dirs
+    results.check(
+        "28. Root 11-outputs contains only recognized project folders",
+        not root_output_files and not unexpected_output_dirs,
+        f"files={root_output_files[:3]}; folders={[path.name for path in sorted(unexpected_output_dirs)[:3]]}",
+    )
     missing_auto_outputs = []
-    extra_generated_files = []
+    invalid_output_files = []
+    invalid_output_manifests = []
     for record in records:
         output_dir = project_output_dir(root_outputs, record)
         for file_name in AUTO_HTML_REPORTS:
             if not (output_dir / file_name).exists():
                 missing_auto_outputs.append(f"{output_dir.name}/{file_name}")
-        if not (output_dir / ".output_manifest.json").exists():
-            missing_auto_outputs.append(f"{output_dir.name}/.output_manifest.json")
+        if not (output_dir / ".report_manifest.json").exists():
+            missing_auto_outputs.append(f"{output_dir.name}/.report_manifest.json")
+        allowed_files = set(AUTO_HTML_REPORTS) | {
+            ".output_manifest.json",
+            ".report_manifest.json",
+            "05_delay_tia_governed_assessment.manifest.json",
+            "05_delay_tia_governed_assessment.docx",
+            "05_delay_tia_governed_assessment.html",
+            "05_delay_tia_governed_assessment.pdf",
+            "05_delay_tia_governed_assessment.pptx",
+        }
+        report_manifest_path = output_dir / ".report_manifest.json"
+        if report_manifest_path.exists():
+            try:
+                report_manifest = json.loads(report_manifest_path.read_text(encoding="utf-8"))
+                if str(report_manifest.get("project_id") or "") != str(record.get("project_id") or ""):
+                    invalid_output_manifests.append(f"{output_dir.name}/.report_manifest.json project_id")
+                for artifact in (report_manifest.get("reports") or {}).values():
+                    if not isinstance(artifact, dict):
+                        continue
+                    for metadata in (artifact.get("files") or {}).values():
+                        if isinstance(metadata, dict) and metadata.get("name"):
+                            allowed_files.add(str(metadata["name"]))
+            except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+                invalid_output_manifests.append(f"{output_dir.name}/.report_manifest.json unreadable")
         for path in output_dir.iterdir() if output_dir.exists() else []:
-            if path.is_file() and path.name not in set(AUTO_HTML_REPORTS) | {".output_manifest.json"}:
-                extra_generated_files.append(f"{output_dir.name}/{path.name}")
+            if path.is_file() and path.name not in allowed_files:
+                invalid_output_files.append(f"{output_dir.name}/{path.name}")
     results.check("29. Project auto HTML outputs exist", not missing_auto_outputs, ", ".join(missing_auto_outputs[:3]))
-    results.check("30. Project output folders contain only HTML reports and manifest", not extra_generated_files, ", ".join(extra_generated_files[:3]))
+    results.check(
+        "30. Project Output Studio artifacts are complete and project-owned",
+        not invalid_output_files and not invalid_output_manifests,
+        ", ".join((invalid_output_files + invalid_output_manifests)[:3]),
+    )
 
     if args.sync_probe:
         probe = ROOT / "sync_validation_probe.validation"

@@ -5,6 +5,7 @@
   "project_display_name": "Sophia Mall Mixed-Use Development",
   "sector": "Buildings",
   "meeting_url": null,
+  "contractor": "SAMCO",
   "status": "On Track",
   "contract_value": 2100000000.0,
   "paid_amount": 809004000.0,
@@ -12,6 +13,7 @@
   "remaining_value": 1290996000.0,
   "planned_progress": 0.31,
   "actual_progress": 0.33,
+  "forecast_progress": null,
   "progress_variance": 0.020000000000000018,
   "bac": 2100000000.0100005,
   "pv": 1112493975.9099996,
@@ -206,14 +208,14 @@
     "disclaimer": "Analytics are decision-support indicators generated from the selected project files. They do not replace accepted programme updates, Primavera P6 recalculation, contractual interpretation, or engineering review."
   },
   "decision_required": true,
-  "last_updated": "2026-08-07T07:56:19",
-  "fingerprint": "12bd5ac6999e806b9d427df0fc541072805e1703820bb7fad0541de59e89da09",
+  "last_updated": "2026-09-03T03:41:52",
+  "fingerprint": "a9db5ccb596137bd3f02941e33f1e8fba444835ce8edc44e17d2890069a1dda1",
   "source_files": {
     "projects": 1,
     "contracts": 2,
     "payments": 6,
     "planned_cash_flow": 0,
-    "progress": 17,
+    "progress": 0,
     "evm": 17,
     "risks": 3,
     "claims": 2,
@@ -221,7 +223,10 @@
     "milestones": 5,
     "delay_events": 5,
     "s_curve": 10,
-    "historical_outcomes": 0
+    "wbs": 16,
+    "historical_outcomes": 0,
+    "delay_event_classification": 0,
+    "tia_recovery_scenario": 0
   },
   "metric_sources": {
     "contract_value": {
@@ -280,7 +285,7 @@
         "contracts": 2,
         "payments": 6,
         "planned_cash_flow": 0,
-        "progress": 17,
+        "progress": 0,
         "evm": 17,
         "risks": 3,
         "claims": 2,
@@ -288,25 +293,28 @@
         "milestones": 5,
         "delay_events": 5,
         "s_curve": 10,
-        "historical_outcomes": 0
+        "wbs": 16,
+        "historical_outcomes": 0,
+        "delay_event_classification": 0,
+        "tia_recovery_scenario": 0
       },
       "source_tables": {
         "projects": {
-          "file": "projects.csv",
+          "file": "01_project_contract.csv",
           "exists": true,
           "row_count": 1,
           "column_count": 14,
           "columns": [
             "project_id",
+            "contractor",
+            "status",
             "project_name",
             "client_name",
-            "contractor",
             "planned_start",
             "planned_finish",
             "forecast_finish",
             "contract_value",
             "currency",
-            "status",
             "planned_progress_percent",
             "actual_progress_percent",
             "planned_value",
@@ -315,15 +323,15 @@
           "rows": [
             {
               "project_id": "Sophia-Mall",
+              "contractor": "SAMCO",
+              "status": "On Track",
               "project_name": "Sophia Mall Mixed-Use Development",
               "client_name": "Sophia Retail Properties",
-              "contractor": "Delta Build Contractors",
               "planned_start": "15-Oct-25",
               "planned_finish": "31-Jul-27",
               "forecast_finish": "25-Aug-27",
               "contract_value": "2100000000",
               "currency": "EGP",
-              "status": "On Track",
               "planned_progress_percent": "31.00",
               "actual_progress_percent": "33.00",
               "planned_value": "651000000",
@@ -332,21 +340,19 @@
           ]
         },
         "activities": {
-          "file": "activities.csv",
+          "file": "02_schedule_activities.csv",
           "exists": true,
           "row_count": 17,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_id",
             "activity_id",
             "activity_name",
             "planned_start",
-            "planned_finish",
             "actual_start",
             "actual_finish",
             "forecast_start",
-            "forecast_finish",
             "planned_weight",
             "planned_progress",
             "actual_progress",
@@ -361,17 +367,15 @@
               "activity_id": "KD-MS-1000",
               "activity_name": "Project Start Date",
               "planned_start": "15-Oct-25",
-              "planned_finish": "",
               "actual_start": "15-Oct-25 A",
               "actual_finish": "15-Oct-25 A",
               "forecast_start": "15-Oct-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
               "total_float_days": "5",
               "is_critical": "No",
-              "responsible_party": "Project Controls"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -379,17 +383,15 @@
               "activity_id": "KD-MS-1010",
               "activity_name": "Contract Agreement",
               "planned_start": "15-Oct-25",
-              "planned_finish": "",
               "actual_start": "15-Oct-25 A",
               "actual_finish": "15-Oct-25 A",
               "forecast_start": "15-Oct-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
               "total_float_days": "6",
               "is_critical": "No",
-              "responsible_party": "Commercial"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -397,17 +399,14 @@
               "activity_id": "KD-MS-1020",
               "activity_name": "IFC Drawing Package",
               "planned_start": "25-Oct-25",
-              "planned_finish": "",
               "actual_start": "25-Oct-25 A",
               "actual_finish": "25-Oct-25 A",
               "forecast_start": "25-Oct-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
-              "total_float_days": "",
               "is_critical": "Yes",
-              "responsible_party": "Engineering"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -425,7 +424,7 @@
               "actual_progress": "1.00",
               "total_float_days": "8",
               "is_critical": "No",
-              "responsible_party": "Construction"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -443,7 +442,7 @@
               "actual_progress": "1.00",
               "total_float_days": "9",
               "is_critical": "No",
-              "responsible_party": "Survey Team"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -453,7 +452,6 @@
               "planned_start": "22-Nov-25",
               "planned_finish": "6-Jan-26",
               "actual_start": "3-Dec-25 A",
-              "actual_finish": "",
               "forecast_start": "3-Dec-25",
               "forecast_finish": "8-Jan-26",
               "planned_weight": "0.0361",
@@ -461,7 +459,7 @@
               "actual_progress": "0.95",
               "total_float_days": "-15",
               "is_critical": "Yes",
-              "responsible_party": "Engineering"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -471,7 +469,6 @@
               "planned_start": "5-Jan-26",
               "planned_finish": "10-Feb-26",
               "actual_start": "10-Jan-26 A",
-              "actual_finish": "",
               "forecast_start": "10-Jan-26",
               "forecast_finish": "12-Feb-26",
               "planned_weight": "0.0361",
@@ -479,7 +476,7 @@
               "actual_progress": "0.83",
               "total_float_days": "-17",
               "is_critical": "Yes",
-              "responsible_party": "Engineer"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -489,7 +486,6 @@
               "planned_start": "24-Dec-25",
               "planned_finish": "2-Mar-26",
               "actual_start": "1-Jan-26 A",
-              "actual_finish": "",
               "forecast_start": "1-Jan-26",
               "forecast_finish": "4-Mar-26",
               "planned_weight": "0.0602",
@@ -497,119 +493,20 @@
               "actual_progress": "0.71",
               "total_float_days": "-19",
               "is_critical": "Yes",
-              "responsible_party": "Procurement"
+              "responsible_party": "SAMCO"
             }
           ]
         },
         "progress_updates": {
           "file": "progress_updates.csv",
-          "exists": true,
-          "row_count": 17,
-          "column_count": 9,
-          "columns": [
-            "project_id",
-            "activity_id",
-            "update_date",
-            "planned_progress",
-            "actual_progress",
-            "planned_value",
-            "earned_value",
-            "actual_cost",
-            "notes"
-          ],
-          "rows": [
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "KD-MS-1000",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "25301204.82",
-              "earned_value": "25301204.82",
-              "actual_cost": "25048192.77",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "KD-MS-1010",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "25301204.82",
-              "earned_value": "25301204.82",
-              "actual_cost": "25048192.77",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "KD-MS-1020",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "25301204.82",
-              "earned_value": "25301204.82",
-              "actual_cost": "25048192.77",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "KD-MOB-1000",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "50602409.64",
-              "earned_value": "50602409.64",
-              "actual_cost": "50096385.54",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "SUR-SM-1010",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "50602409.64",
-              "earned_value": "50602409.64",
-              "actual_cost": "50096385.54",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "E-SUB-SM-1020",
-              "update_date": "31-May-26",
-              "planned_progress": "0.90",
-              "actual_progress": "0.95",
-              "planned_value": "68313253.01",
-              "earned_value": "72412048.19",
-              "actual_cost": "71687927.71",
-              "notes": "Ahead of plan / mitigation effective"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "E-APP-SM-1020",
-              "update_date": "31-May-26",
-              "planned_progress": "0.78",
-              "actual_progress": "0.83",
-              "planned_value": "59204819.28",
-              "earned_value": "62757108.43",
-              "actual_cost": "62129537.35",
-              "notes": "Ahead of plan / mitigation effective"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "P-MDEL-SM-1000",
-              "update_date": "31-May-26",
-              "planned_progress": "0.67",
-              "actual_progress": "0.71",
-              "planned_value": "84759036.14",
-              "earned_value": "89844578.31",
-              "actual_cost": "88946132.53",
-              "notes": "Ahead of plan / mitigation effective"
-            }
-          ]
+          "exists": false,
+          "row_count": 0,
+          "column_count": 0,
+          "columns": [],
+          "rows": []
         },
         "evm": {
-          "file": "evm.csv",
+          "file": "04_progress_evm.csv",
           "exists": true,
           "row_count": 17,
           "column_count": 12,
@@ -743,13 +640,13 @@
           ]
         },
         "risks": {
-          "file": "risks.csv",
+          "file": "09_risks_rfi_interfaces.csv",
           "exists": true,
           "row_count": 3,
           "column_count": 11,
           "columns": [
-            "risk_id",
             "project_id",
+            "risk_id",
             "risk_title",
             "risk_category",
             "probability",
@@ -762,8 +659,8 @@
           ],
           "rows": [
             {
-              "risk_id": "R-001",
               "project_id": "Sophia-Mall",
+              "risk_id": "R-001",
               "risk_title": "Steel delivery delay",
               "risk_category": "Schedule",
               "probability": "medium",
@@ -775,8 +672,8 @@
               "due_date": "30-Jun-26"
             },
             {
-              "risk_id": "R-002",
               "project_id": "Sophia-Mall",
+              "risk_id": "R-002",
               "risk_title": "Late design clarification and IFC revisions",
               "risk_category": "Engineering",
               "probability": "medium",
@@ -788,8 +685,8 @@
               "due_date": "15-Jul-26"
             },
             {
-              "risk_id": "R-003",
               "project_id": "Sophia-Mall",
+              "risk_id": "R-003",
               "risk_title": "Cashflow pressure due to delayed certification",
               "risk_category": "Commercial",
               "probability": "medium",
@@ -803,7 +700,7 @@
           ]
         },
         "claims": {
-          "file": "claims.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 2,
           "column_count": 12,
@@ -853,7 +750,7 @@
           ]
         },
         "contracts": {
-          "file": "contracts.csv",
+          "file": "01_project_contract.csv",
           "exists": true,
           "row_count": 2,
           "column_count": 11,
@@ -875,7 +772,7 @@
               "contract_id": "SM-PH-01",
               "project_id": "Sophia-Mall",
               "package": "1",
-              "contractor": "Delta Build Contractors",
+              "contractor": "SAMCO",
               "contract_type": "Unit rate",
               "original_value": "2100000000",
               "approved_variations": "73500000",
@@ -888,7 +785,7 @@
               "contract_id": "SM-PH-02",
               "project_id": "Sophia-Mall",
               "package": "2",
-              "contractor": "Delta Build Contractors",
+              "contractor": "SAMCO",
               "contract_type": "Lump sum",
               "original_value": "378000000",
               "approved_variations": "3780000",
@@ -900,10 +797,10 @@
           ]
         },
         "payments": {
-          "file": "payments.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 6,
-          "column_count": 18,
+          "column_count": 15,
           "columns": [
             "project_id",
             "payment",
@@ -919,10 +816,7 @@
             "Period for payment release",
             "Period in which interest is applied",
             "Amount of interest claimed (EGP)",
-            "delayed duration(Days) ",
-            "Unnamed: 14",
-            "Unnamed: 15",
-            "Unnamed: 16"
+            "delayed duration(Days) "
           ],
           "rows": [
             {
@@ -940,10 +834,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -960,10 +851,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -980,10 +868,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1000,10 +885,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1020,10 +902,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1036,38 +915,21 @@
               "paid amount": "139314000.00",
               "payment status": "Certified",
               "Contractual interest due": "45.0",
-              "Date of Cash Cheque Receipt": "",
-              "Period for payment release": "",
               "Period in which interest is applied": "0.0",
-              "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "Amount of interest claimed (EGP)": "0.0000"
             }
           ]
         },
         "planned_cash_flow": {
           "file": "planned_cash_flow.csv",
-          "exists": true,
+          "exists": false,
           "row_count": 0,
-          "column_count": 10,
-          "columns": [
-            "project_id",
-            "period_date",
-            "planned_cash_out",
-            "planned_cumulative_cash_out",
-            "currency",
-            "basis",
-            "source_file",
-            "source_sheet",
-            "source_row",
-            "notes"
-          ],
+          "column_count": 0,
+          "columns": [],
           "rows": []
         },
         "milestones": {
-          "file": "milestones.csv",
+          "file": "05_milestones_scurve.csv",
           "exists": true,
           "row_count": 5,
           "column_count": 7,
@@ -1114,7 +976,6 @@
               "activity_name": "Structural Works Completion",
               "planned_date": "15-Oct-26",
               "forecast_date": "30-Oct-26",
-              "actual_date": "",
               "milestone_contractual_type": "Interim milestone"
             },
             {
@@ -1123,13 +984,12 @@
               "activity_name": "Substantial Completion",
               "planned_date": "31-Jul-27",
               "forecast_date": "25-Aug-27",
-              "actual_date": "",
               "milestone_contractual_type": "Finish milestone"
             }
           ]
         },
         "delay_events": {
-          "file": "delay_events.csv",
+          "file": "06_delay_events.csv",
           "exists": true,
           "row_count": 5,
           "column_count": 14,
@@ -1233,14 +1093,13 @@
           ]
         },
         "wbs": {
-          "file": "wbs.csv",
+          "file": "03_schedule_logic.csv",
           "exists": true,
           "row_count": 16,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_code",
-            "wbs_name",
             "total_activities",
             "bl_project_duration",
             "remaining_duration",
@@ -1248,7 +1107,6 @@
             "bl_project_start",
             "bl_project_finish",
             "actual_start",
-            "actual_finish",
             "schedule_%_complete",
             "performance_%_complete",
             "budget_at_completion",
@@ -1259,7 +1117,6 @@
             {
               "project_id": "Sophia-Mall-P.01-UP-20-April-26",
               "wbs_code": "No Priority",
-              "wbs_name": "",
               "total_activities": "1064",
               "bl_project_duration": "543",
               "remaining_duration": "376",
@@ -1267,7 +1124,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "18-Feb-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.623",
               "performance_%_complete": "0.354",
               "budget_at_completion": "382400000",
@@ -1285,7 +1141,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "18-Feb-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.623",
               "performance_%_complete": "0.354",
               "budget_at_completion": "382400000",
@@ -1303,7 +1158,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "18-Feb-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -1321,7 +1175,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "18-Feb-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -1335,7 +1188,6 @@
               "total_activities": "10",
               "bl_project_duration": "16",
               "remaining_duration": "0",
-              "total_float": "",
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "10-Sep-25",
               "actual_start": "29-Aug-25",
@@ -1357,7 +1209,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "30-Apr-26",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -1375,7 +1226,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "8-Nov-26",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -1393,7 +1243,6 @@
               "bl_project_start": "29-Sep-25",
               "bl_project_finish": "10-Dec-26",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.623",
               "performance_%_complete": "0.354",
               "budget_at_completion": "382400000",
@@ -1403,7 +1252,7 @@
           ]
         },
         "s_curve": {
-          "file": "s_curve.csv",
+          "file": "05_milestones_scurve.csv",
           "exists": true,
           "row_count": 10,
           "column_count": 8,
@@ -1503,21 +1352,21 @@
       },
       "workspace_tables": {
         "projects": {
-          "file": "projects.csv",
+          "file": "01_project_contract.csv",
           "exists": true,
           "row_count": 1,
           "column_count": 14,
           "columns": [
             "project_id",
+            "contractor",
+            "status",
             "project_name",
             "client_name",
-            "contractor",
             "planned_start",
             "planned_finish",
             "forecast_finish",
             "contract_value",
             "currency",
-            "status",
             "planned_progress_percent",
             "actual_progress_percent",
             "planned_value",
@@ -1526,15 +1375,15 @@
           "rows": [
             {
               "project_id": "Sophia-Mall",
+              "contractor": "SAMCO",
+              "status": "On Track",
               "project_name": "Sophia Mall Mixed-Use Development",
               "client_name": "Sophia Retail Properties",
-              "contractor": "Delta Build Contractors",
               "planned_start": "15-Oct-25",
               "planned_finish": "31-Jul-27",
               "forecast_finish": "25-Aug-27",
               "contract_value": "2100000000",
               "currency": "EGP",
-              "status": "On Track",
               "planned_progress_percent": "31.00",
               "actual_progress_percent": "33.00",
               "planned_value": "651000000",
@@ -1542,24 +1391,22 @@
             }
           ],
           "truncated": false,
-          "source_path": "projects.csv"
+          "source_path": "01_project_contract.csv"
         },
         "activities": {
-          "file": "activities.csv",
+          "file": "02_schedule_activities.csv",
           "exists": true,
           "row_count": 17,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_id",
             "activity_id",
             "activity_name",
             "planned_start",
-            "planned_finish",
             "actual_start",
             "actual_finish",
             "forecast_start",
-            "forecast_finish",
             "planned_weight",
             "planned_progress",
             "actual_progress",
@@ -1574,17 +1421,15 @@
               "activity_id": "KD-MS-1000",
               "activity_name": "Project Start Date",
               "planned_start": "15-Oct-25",
-              "planned_finish": "",
               "actual_start": "15-Oct-25 A",
               "actual_finish": "15-Oct-25 A",
               "forecast_start": "15-Oct-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
               "total_float_days": "5",
               "is_critical": "No",
-              "responsible_party": "Project Controls"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1592,17 +1437,15 @@
               "activity_id": "KD-MS-1010",
               "activity_name": "Contract Agreement",
               "planned_start": "15-Oct-25",
-              "planned_finish": "",
               "actual_start": "15-Oct-25 A",
               "actual_finish": "15-Oct-25 A",
               "forecast_start": "15-Oct-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
               "total_float_days": "6",
               "is_critical": "No",
-              "responsible_party": "Commercial"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1610,17 +1453,14 @@
               "activity_id": "KD-MS-1020",
               "activity_name": "IFC Drawing Package",
               "planned_start": "25-Oct-25",
-              "planned_finish": "",
               "actual_start": "25-Oct-25 A",
               "actual_finish": "25-Oct-25 A",
               "forecast_start": "25-Oct-25",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "1.00",
               "actual_progress": "1.00",
-              "total_float_days": "",
               "is_critical": "Yes",
-              "responsible_party": "Engineering"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1638,7 +1478,7 @@
               "actual_progress": "1.00",
               "total_float_days": "8",
               "is_critical": "No",
-              "responsible_party": "Construction"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1656,7 +1496,7 @@
               "actual_progress": "1.00",
               "total_float_days": "9",
               "is_critical": "No",
-              "responsible_party": "Survey Team"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1666,7 +1506,6 @@
               "planned_start": "22-Nov-25",
               "planned_finish": "6-Jan-26",
               "actual_start": "3-Dec-25 A",
-              "actual_finish": "",
               "forecast_start": "3-Dec-25",
               "forecast_finish": "8-Jan-26",
               "planned_weight": "0.0361",
@@ -1674,7 +1513,7 @@
               "actual_progress": "0.95",
               "total_float_days": "-15",
               "is_critical": "Yes",
-              "responsible_party": "Engineering"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1684,7 +1523,6 @@
               "planned_start": "5-Jan-26",
               "planned_finish": "10-Feb-26",
               "actual_start": "10-Jan-26 A",
-              "actual_finish": "",
               "forecast_start": "10-Jan-26",
               "forecast_finish": "12-Feb-26",
               "planned_weight": "0.0361",
@@ -1692,7 +1530,7 @@
               "actual_progress": "0.83",
               "total_float_days": "-17",
               "is_critical": "Yes",
-              "responsible_party": "Engineer"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1702,7 +1540,6 @@
               "planned_start": "24-Dec-25",
               "planned_finish": "2-Mar-26",
               "actual_start": "1-Jan-26 A",
-              "actual_finish": "",
               "forecast_start": "1-Jan-26",
               "forecast_finish": "4-Mar-26",
               "planned_weight": "0.0602",
@@ -1710,7 +1547,7 @@
               "actual_progress": "0.71",
               "total_float_days": "-19",
               "is_critical": "Yes",
-              "responsible_party": "Procurement"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1726,9 +1563,8 @@
               "planned_weight": "0.1205",
               "planned_progress": "0.95",
               "actual_progress": "1.00",
-              "total_float_days": "",
               "is_critical": "Yes",
-              "responsible_party": "Construction"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1738,7 +1574,6 @@
               "planned_start": "22-Feb-26",
               "planned_finish": "30-Mar-26",
               "actual_start": "27-Feb-26 A",
-              "actual_finish": "",
               "forecast_start": "27-Feb-26",
               "forecast_finish": "1-Apr-26",
               "planned_weight": "0.1205",
@@ -1746,7 +1581,7 @@
               "actual_progress": "0.87",
               "total_float_days": "-23",
               "is_critical": "Yes",
-              "responsible_party": "Construction"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1756,7 +1591,6 @@
               "planned_start": "30-Mar-26",
               "planned_finish": "29-Apr-26",
               "actual_start": "7-Apr-26 A",
-              "actual_finish": "",
               "forecast_start": "7-Apr-26",
               "forecast_finish": "1-May-26",
               "planned_weight": "0.1205",
@@ -1764,7 +1598,7 @@
               "actual_progress": "0.66",
               "total_float_days": "-25",
               "is_critical": "Yes",
-              "responsible_party": "Construction"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1774,7 +1608,6 @@
               "planned_start": "29-Apr-26",
               "planned_finish": "26-Jun-26",
               "actual_start": "10-May-26 A",
-              "actual_finish": "",
               "forecast_start": "10-May-26",
               "forecast_finish": "28-Jun-26",
               "planned_weight": "0.1205",
@@ -1782,7 +1615,7 @@
               "actual_progress": "0.37",
               "total_float_days": "-27",
               "is_critical": "Yes",
-              "responsible_party": "Construction"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1792,7 +1625,6 @@
               "planned_start": "26-Jun-26",
               "planned_finish": "4-Sep-26",
               "actual_start": "1-Jul-26 A",
-              "actual_finish": "",
               "forecast_start": "1-Jul-26",
               "forecast_finish": "6-Sep-26",
               "planned_weight": "0.1205",
@@ -1800,7 +1632,7 @@
               "actual_progress": "0.11",
               "total_float_days": "-29",
               "is_critical": "Yes",
-              "responsible_party": "Construction"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1810,7 +1642,6 @@
               "planned_start": "27-Jul-26",
               "planned_finish": "15-Oct-26",
               "actual_start": "4-Aug-26 A",
-              "actual_finish": "",
               "forecast_start": "4-Aug-26",
               "forecast_finish": "17-Oct-26",
               "planned_weight": "0.0723",
@@ -1818,7 +1649,7 @@
               "actual_progress": "0.03",
               "total_float_days": "18",
               "is_critical": "No",
-              "responsible_party": "MEP"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1827,8 +1658,6 @@
               "activity_name": "Façade and retail shell finishing",
               "planned_start": "9-Nov-26",
               "planned_finish": "9-Mar-27",
-              "actual_start": "",
-              "actual_finish": "",
               "forecast_start": "14-Nov-26",
               "forecast_finish": "11-Mar-27",
               "planned_weight": "0.0723",
@@ -1836,7 +1665,7 @@
               "actual_progress": "0.00",
               "total_float_days": "19",
               "is_critical": "No",
-              "responsible_party": "Finishing"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1845,8 +1674,6 @@
               "activity_name": "Testing, commissioning and authorities handover",
               "planned_start": "28-May-27",
               "planned_finish": "12-Jul-27",
-              "actual_start": "",
-              "actual_finish": "",
               "forecast_start": "2-Jun-27",
               "forecast_finish": "14-Jul-27",
               "planned_weight": "0.0241",
@@ -1854,7 +1681,7 @@
               "actual_progress": "0.00",
               "total_float_days": "-35",
               "is_critical": "Yes",
-              "responsible_party": "QA/QC"
+              "responsible_party": "SAMCO"
             },
             {
               "project_id": "Sophia-Mall",
@@ -1862,232 +1689,30 @@
               "activity_id": "KD-MS-9000",
               "activity_name": "Substantial Completion",
               "planned_start": "1-Aug-27",
-              "planned_finish": "",
-              "actual_start": "",
-              "actual_finish": "",
               "forecast_start": "6-Aug-27",
-              "forecast_finish": "",
               "planned_weight": "0.0120",
               "planned_progress": "0.00",
               "actual_progress": "0.00",
               "total_float_days": "-37",
               "is_critical": "Yes",
-              "responsible_party": "Project Controls"
+              "responsible_party": "SAMCO"
             }
           ],
           "truncated": false,
-          "source_path": "activities.csv"
+          "source_path": "02_schedule_activities.csv"
         },
         "progress_updates": {
           "file": "progress_updates.csv",
-          "exists": true,
-          "row_count": 17,
-          "column_count": 9,
-          "columns": [
-            "project_id",
-            "activity_id",
-            "update_date",
-            "planned_progress",
-            "actual_progress",
-            "planned_value",
-            "earned_value",
-            "actual_cost",
-            "notes"
-          ],
-          "rows": [
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "KD-MS-1000",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "25301204.82",
-              "earned_value": "25301204.82",
-              "actual_cost": "25048192.77",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "KD-MS-1010",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "25301204.82",
-              "earned_value": "25301204.82",
-              "actual_cost": "25048192.77",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "KD-MS-1020",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "25301204.82",
-              "earned_value": "25301204.82",
-              "actual_cost": "25048192.77",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "KD-MOB-1000",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "50602409.64",
-              "earned_value": "50602409.64",
-              "actual_cost": "50096385.54",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "SUR-SM-1010",
-              "update_date": "31-May-26",
-              "planned_progress": "1.00",
-              "actual_progress": "1.00",
-              "planned_value": "50602409.64",
-              "earned_value": "50602409.64",
-              "actual_cost": "50096385.54",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "E-SUB-SM-1020",
-              "update_date": "31-May-26",
-              "planned_progress": "0.90",
-              "actual_progress": "0.95",
-              "planned_value": "68313253.01",
-              "earned_value": "72412048.19",
-              "actual_cost": "71687927.71",
-              "notes": "Ahead of plan / mitigation effective"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "E-APP-SM-1020",
-              "update_date": "31-May-26",
-              "planned_progress": "0.78",
-              "actual_progress": "0.83",
-              "planned_value": "59204819.28",
-              "earned_value": "62757108.43",
-              "actual_cost": "62129537.35",
-              "notes": "Ahead of plan / mitigation effective"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "P-MDEL-SM-1000",
-              "update_date": "31-May-26",
-              "planned_progress": "0.67",
-              "actual_progress": "0.71",
-              "planned_value": "84759036.14",
-              "earned_value": "89844578.31",
-              "actual_cost": "88946132.53",
-              "notes": "Ahead of plan / mitigation effective"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "CON-SM-EXC-1010",
-              "update_date": "31-May-26",
-              "planned_progress": "0.95",
-              "actual_progress": "1.00",
-              "planned_value": "240361445.78",
-              "earned_value": "253012048.19",
-              "actual_cost": "250481927.71",
-              "notes": "Ahead of plan / mitigation effective"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "CON-SM-RFT-1020",
-              "update_date": "31-May-26",
-              "planned_progress": "0.82",
-              "actual_progress": "0.87",
-              "planned_value": "207469879.52",
-              "earned_value": "219918072.29",
-              "actual_cost": "217718891.57",
-              "notes": "Ahead of plan / mitigation effective"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "CON-SM-CON-1030",
-              "update_date": "31-May-26",
-              "planned_progress": "0.62",
-              "actual_progress": "0.66",
-              "planned_value": "156867469.88",
-              "earned_value": "166279518.07",
-              "actual_cost": "164616722.89",
-              "notes": "Ahead of plan / mitigation effective"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "CON-SM-B1-1040",
-              "update_date": "31-May-26",
-              "planned_progress": "0.35",
-              "actual_progress": "0.37",
-              "planned_value": "88554216.87",
-              "earned_value": "93867469.88",
-              "actual_cost": "92928795.18",
-              "notes": "Ahead of plan / mitigation effective"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "CON-SM-GF-1050",
-              "update_date": "31-May-26",
-              "planned_progress": "0.10",
-              "actual_progress": "0.11",
-              "planned_value": "25301204.82",
-              "earned_value": "26819277.11",
-              "actual_cost": "26551084.34",
-              "notes": "Ahead of plan / mitigation effective"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "MEP-SM-1060",
-              "update_date": "31-May-26",
-              "planned_progress": "0.03",
-              "actual_progress": "0.03",
-              "planned_value": "4554216.87",
-              "earned_value": "4827469.88",
-              "actual_cost": "4779195.18",
-              "notes": "Ahead of plan / mitigation effective"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "FIN-SM-1070",
-              "update_date": "31-May-26",
-              "planned_progress": "0.00",
-              "actual_progress": "0.00",
-              "planned_value": "0.00",
-              "earned_value": "0.00",
-              "actual_cost": "0.00",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "TST-SM-1080",
-              "update_date": "31-May-26",
-              "planned_progress": "0.00",
-              "actual_progress": "0.00",
-              "planned_value": "0.00",
-              "earned_value": "0.00",
-              "actual_cost": "0.00",
-              "notes": "Progress aligned with update narrative"
-            },
-            {
-              "project_id": "Sophia-Mall",
-              "activity_id": "KD-MS-9000",
-              "update_date": "31-May-26",
-              "planned_progress": "0.00",
-              "actual_progress": "0.00",
-              "planned_value": "0.00",
-              "earned_value": "0.00",
-              "actual_cost": "0.00",
-              "notes": "Progress aligned with update narrative"
-            }
-          ],
+          "exists": false,
+          "row_count": 0,
+          "column_count": 0,
+          "columns": [],
+          "rows": [],
           "truncated": false,
           "source_path": "progress_updates.csv"
         },
         "evm": {
-          "file": "evm.csv",
+          "file": "04_progress_evm.csv",
           "exists": true,
           "row_count": 17,
           "column_count": 12,
@@ -2346,16 +1971,16 @@
             }
           ],
           "truncated": false,
-          "source_path": "evm.csv"
+          "source_path": "04_progress_evm.csv"
         },
         "risks": {
-          "file": "risks.csv",
+          "file": "09_risks_rfi_interfaces.csv",
           "exists": true,
           "row_count": 3,
           "column_count": 11,
           "columns": [
-            "risk_id",
             "project_id",
+            "risk_id",
             "risk_title",
             "risk_category",
             "probability",
@@ -2368,8 +1993,8 @@
           ],
           "rows": [
             {
-              "risk_id": "R-001",
               "project_id": "Sophia-Mall",
+              "risk_id": "R-001",
               "risk_title": "Steel delivery delay",
               "risk_category": "Schedule",
               "probability": "medium",
@@ -2381,8 +2006,8 @@
               "due_date": "30-Jun-26"
             },
             {
-              "risk_id": "R-002",
               "project_id": "Sophia-Mall",
+              "risk_id": "R-002",
               "risk_title": "Late design clarification and IFC revisions",
               "risk_category": "Engineering",
               "probability": "medium",
@@ -2394,8 +2019,8 @@
               "due_date": "15-Jul-26"
             },
             {
-              "risk_id": "R-003",
               "project_id": "Sophia-Mall",
+              "risk_id": "R-003",
               "risk_title": "Cashflow pressure due to delayed certification",
               "risk_category": "Commercial",
               "probability": "medium",
@@ -2408,10 +2033,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "risks.csv"
+          "source_path": "09_risks_rfi_interfaces.csv"
         },
         "claims": {
-          "file": "claims.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 2,
           "column_count": 12,
@@ -2460,10 +2085,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "claims.csv"
+          "source_path": "08_commercial_payments_claims.csv"
         },
         "contracts": {
-          "file": "contracts.csv",
+          "file": "01_project_contract.csv",
           "exists": true,
           "row_count": 2,
           "column_count": 11,
@@ -2485,7 +2110,7 @@
               "contract_id": "SM-PH-01",
               "project_id": "Sophia-Mall",
               "package": "1",
-              "contractor": "Delta Build Contractors",
+              "contractor": "SAMCO",
               "contract_type": "Unit rate",
               "original_value": "2100000000",
               "approved_variations": "73500000",
@@ -2498,7 +2123,7 @@
               "contract_id": "SM-PH-02",
               "project_id": "Sophia-Mall",
               "package": "2",
-              "contractor": "Delta Build Contractors",
+              "contractor": "SAMCO",
               "contract_type": "Lump sum",
               "original_value": "378000000",
               "approved_variations": "3780000",
@@ -2509,13 +2134,13 @@
             }
           ],
           "truncated": false,
-          "source_path": "contracts.csv"
+          "source_path": "01_project_contract.csv"
         },
         "payments": {
-          "file": "payments.csv",
+          "file": "08_commercial_payments_claims.csv",
           "exists": true,
           "row_count": 6,
-          "column_count": 18,
+          "column_count": 15,
           "columns": [
             "project_id",
             "payment",
@@ -2531,10 +2156,7 @@
             "Period for payment release",
             "Period in which interest is applied",
             "Amount of interest claimed (EGP)",
-            "delayed duration(Days) ",
-            "Unnamed: 14",
-            "Unnamed: 15",
-            "Unnamed: 16"
+            "delayed duration(Days) "
           ],
           "rows": [
             {
@@ -2552,10 +2174,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -2572,10 +2191,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -2592,10 +2208,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -2612,10 +2225,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -2632,10 +2242,7 @@
               "Period for payment release": "45.0",
               "Period in which interest is applied": "0.0",
               "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "0.0",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "delayed duration(Days) ": "0.0"
             },
             {
               "project_id": "Sophia-Mall",
@@ -2648,22 +2255,16 @@
               "paid amount": "139314000.00",
               "payment status": "Certified",
               "Contractual interest due": "45.0",
-              "Date of Cash Cheque Receipt": "",
-              "Period for payment release": "",
               "Period in which interest is applied": "0.0",
-              "Amount of interest claimed (EGP)": "0.0000",
-              "delayed duration(Days) ": "",
-              "Unnamed: 14": "",
-              "Unnamed: 15": "",
-              "Unnamed: 16": ""
+              "Amount of interest claimed (EGP)": "0.0000"
             }
           ],
           "truncated": false,
-          "source_path": "payments.csv"
+          "source_path": "08_commercial_payments_claims.csv"
         },
         "planned_cash_flow": {
           "file": "planned_cash_flow.csv",
-          "exists": true,
+          "exists": false,
           "row_count": 0,
           "column_count": 0,
           "columns": [],
@@ -2672,7 +2273,7 @@
           "source_path": "planned_cash_flow.csv"
         },
         "milestones": {
-          "file": "milestones.csv",
+          "file": "05_milestones_scurve.csv",
           "exists": true,
           "row_count": 5,
           "column_count": 7,
@@ -2719,7 +2320,6 @@
               "activity_name": "Structural Works Completion",
               "planned_date": "15-Oct-26",
               "forecast_date": "30-Oct-26",
-              "actual_date": "",
               "milestone_contractual_type": "Interim milestone"
             },
             {
@@ -2728,15 +2328,14 @@
               "activity_name": "Substantial Completion",
               "planned_date": "31-Jul-27",
               "forecast_date": "25-Aug-27",
-              "actual_date": "",
               "milestone_contractual_type": "Finish milestone"
             }
           ],
           "truncated": false,
-          "source_path": "milestones.csv"
+          "source_path": "05_milestones_scurve.csv"
         },
         "delay_events": {
-          "file": "delay_events.csv",
+          "file": "06_delay_events.csv",
           "exists": true,
           "row_count": 5,
           "column_count": 14,
@@ -2839,17 +2438,16 @@
             }
           ],
           "truncated": false,
-          "source_path": "delay_events.csv"
+          "source_path": "06_delay_events.csv"
         },
         "wbs": {
-          "file": "wbs.csv",
+          "file": "03_schedule_logic.csv",
           "exists": true,
           "row_count": 16,
-          "column_count": 16,
+          "column_count": 14,
           "columns": [
             "project_id",
             "wbs_code",
-            "wbs_name",
             "total_activities",
             "bl_project_duration",
             "remaining_duration",
@@ -2857,7 +2455,6 @@
             "bl_project_start",
             "bl_project_finish",
             "actual_start",
-            "actual_finish",
             "schedule_%_complete",
             "performance_%_complete",
             "budget_at_completion",
@@ -2868,7 +2465,6 @@
             {
               "project_id": "Sophia-Mall-P.01-UP-20-April-26",
               "wbs_code": "No Priority",
-              "wbs_name": "",
               "total_activities": "1064",
               "bl_project_duration": "543",
               "remaining_duration": "376",
@@ -2876,7 +2472,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "18-Feb-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.623",
               "performance_%_complete": "0.354",
               "budget_at_completion": "382400000",
@@ -2894,7 +2489,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "18-Feb-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.623",
               "performance_%_complete": "0.354",
               "budget_at_completion": "382400000",
@@ -2912,7 +2506,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "18-Feb-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -2930,7 +2523,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "18-Feb-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -2944,7 +2536,6 @@
               "total_activities": "10",
               "bl_project_duration": "16",
               "remaining_duration": "0",
-              "total_float": "",
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "10-Sep-25",
               "actual_start": "29-Aug-25",
@@ -2966,7 +2557,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "30-Apr-26",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -2984,7 +2574,6 @@
               "bl_project_start": "25-Aug-25",
               "bl_project_finish": "8-Nov-26",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -3002,7 +2591,6 @@
               "bl_project_start": "29-Sep-25",
               "bl_project_finish": "10-Dec-26",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.623",
               "performance_%_complete": "0.354",
               "budget_at_completion": "382400000",
@@ -3016,7 +2604,6 @@
               "total_activities": "31",
               "bl_project_duration": "62",
               "remaining_duration": "0",
-              "total_float": "",
               "bl_project_start": "24-Sep-25",
               "bl_project_finish": "25-Nov-25",
               "actual_start": "22-Sep-25",
@@ -3038,7 +2625,6 @@
               "bl_project_start": "14-Oct-25",
               "bl_project_finish": "20-Aug-26",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.68",
               "performance_%_complete": "0.41",
               "budget_at_completion": "97300000",
@@ -3056,7 +2642,6 @@
               "bl_project_start": "3-Dec-25",
               "bl_project_finish": "30-Nov-26",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.59",
               "performance_%_complete": "0.33",
               "budget_at_completion": "83450000",
@@ -3074,7 +2659,6 @@
               "bl_project_start": "14-Jan-26",
               "bl_project_finish": "8-Feb-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.55",
               "performance_%_complete": "0.3",
               "budget_at_completion": "91600000",
@@ -3092,7 +2676,6 @@
               "bl_project_start": "1-Mar-26",
               "bl_project_finish": "9-Jan-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.36",
               "performance_%_complete": "0.18",
               "budget_at_completion": "47850000",
@@ -3110,7 +2693,6 @@
               "bl_project_start": "12-Apr-26",
               "bl_project_finish": "7-Apr-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.28",
               "performance_%_complete": "0.14",
               "budget_at_completion": "52400000",
@@ -3128,7 +2710,6 @@
               "bl_project_start": "2-Apr-26",
               "bl_project_finish": "13-Jan-27",
               "actual_start": "28-Aug-25",
-              "actual_finish": "",
               "schedule_%_complete": "0.22",
               "performance_%_complete": "0.11",
               "budget_at_completion": "39950000",
@@ -3145,8 +2726,6 @@
               "total_float": "-38",
               "bl_project_start": "3-Nov-25",
               "bl_project_finish": "18-Feb-27",
-              "actual_start": "",
-              "actual_finish": "",
               "schedule_%_complete": "0",
               "performance_%_complete": "0",
               "budget_at_completion": "0",
@@ -3155,10 +2734,10 @@
             }
           ],
           "truncated": false,
-          "source_path": "wbs.csv"
+          "source_path": "03_schedule_logic.csv"
         },
         "s_curve": {
-          "file": "s_curve.csv",
+          "file": "05_milestones_scurve.csv",
           "exists": true,
           "row_count": 10,
           "column_count": 8,
@@ -3275,7 +2854,7 @@
             }
           ],
           "truncated": false,
-          "source_path": "s_curve.csv"
+          "source_path": "05_milestones_scurve.csv"
         }
       }
     },
@@ -3293,7 +2872,7 @@
         "exists": true,
         "sheets": [
           {
-            "name": "From Contractor",
+            "name": "From SAMCO",
             "row_count": 0,
             "column_count": 19,
             "columns": [
@@ -3349,7 +2928,7 @@
             "truncated": false
           },
           {
-            "name": "Contractor Links",
+            "name": "SAMCO → Consultant Links",
             "row_count": 0,
             "column_count": 18,
             "columns": [
@@ -3376,7 +2955,7 @@
             "truncated": false
           },
           {
-            "name": "Consultant Links",
+            "name": "Consultant → SAMCO Links",
             "row_count": 0,
             "column_count": 14,
             "columns": [
@@ -3441,14 +3020,14 @@
       },
       "detectors": [
         {
-          "name": "Inbox folder detector",
+          "name": "Canonical letters source",
           "status": "Active",
-          "detail": "Recognizes new PDF, DOCX, XLSX, CSV, and message files under project letters inbox."
+          "detail": "Uses the project-local workbook, inbox ingestion, correspondence links, and issue-thread workflow."
         },
         {
           "name": "Letters intelligence workflow",
           "status": "Active",
-          "detail": "Uses the Streamlit workbook, inbox ingestion, correspondence links, and issue-thread workflow for this project only."
+          "detail": "Publishes the selected project's correspondence registers, links, issue threads, and inbox metadata only."
         },
         {
           "name": "Project isolation",
@@ -5799,127 +5378,29 @@
           "name": "01_executive_dashboard.html",
           "relative_path": "Sophia-Mall/01_executive_dashboard.html",
           "extension": "html",
-          "size_kb": 17.8,
-          "modified": "2026-08-01T12:03:39"
-        },
-        {
-          "name": "01_executive_dashboard.pdf",
-          "relative_path": "Sophia-Mall/01_executive_dashboard.pdf",
-          "extension": "pdf",
-          "size_kb": 829.0,
-          "modified": "2026-08-09T00:13:30"
-        },
-        {
-          "name": "01_executive_dashboard.pptx",
-          "relative_path": "Sophia-Mall/01_executive_dashboard.pptx",
-          "extension": "pptx",
-          "size_kb": 28.4,
-          "modified": "2026-08-09T00:13:30"
+          "size_kb": 4.6,
+          "modified": "2026-09-03T05:23:34"
         },
         {
           "name": "02_master_dashboard.html",
           "relative_path": "Sophia-Mall/02_master_dashboard.html",
           "extension": "html",
-          "size_kb": 84.9,
-          "modified": "2026-08-01T12:03:39"
-        },
-        {
-          "name": "02_master_dashboard.pdf",
-          "relative_path": "Sophia-Mall/02_master_dashboard.pdf",
-          "extension": "pdf",
-          "size_kb": 862.6,
-          "modified": "2026-08-09T00:13:35"
-        },
-        {
-          "name": "02_master_dashboard.pptx",
-          "relative_path": "Sophia-Mall/02_master_dashboard.pptx",
-          "extension": "pptx",
-          "size_kb": 28.4,
-          "modified": "2026-08-09T00:13:35"
+          "size_kb": 4.6,
+          "modified": "2026-09-03T05:23:36"
         },
         {
           "name": "03_elite_svg_charts.html",
           "relative_path": "Sophia-Mall/03_elite_svg_charts.html",
           "extension": "html",
-          "size_kb": 50.8,
-          "modified": "2026-08-01T12:03:39"
-        },
-        {
-          "name": "03_elite_svg_charts.pdf",
-          "relative_path": "Sophia-Mall/03_elite_svg_charts.pdf",
-          "extension": "pdf",
-          "size_kb": 234.6,
-          "modified": "2026-08-09T00:13:36"
-        },
-        {
-          "name": "03_elite_svg_charts.pptx",
-          "relative_path": "Sophia-Mall/03_elite_svg_charts.pptx",
-          "extension": "pptx",
-          "size_kb": 28.4,
-          "modified": "2026-08-09T00:13:36"
+          "size_kb": 4.6,
+          "modified": "2026-09-03T05:23:38"
         },
         {
           "name": "04_linked_executive_dashboard.html",
           "relative_path": "Sophia-Mall/04_linked_executive_dashboard.html",
           "extension": "html",
-          "size_kb": 56.4,
-          "modified": "2026-08-01T12:03:39"
-        },
-        {
-          "name": "04_linked_executive_dashboard.pdf",
-          "relative_path": "Sophia-Mall/04_linked_executive_dashboard.pdf",
-          "extension": "pdf",
-          "size_kb": 1093.9,
-          "modified": "2026-08-09T00:13:41"
-        },
-        {
-          "name": "04_linked_executive_dashboard.pptx",
-          "relative_path": "Sophia-Mall/04_linked_executive_dashboard.pptx",
-          "extension": "pptx",
-          "size_kb": 28.4,
-          "modified": "2026-08-09T00:13:41"
-        },
-        {
-          "name": "05_delay_tia_governed_assessment.docx",
-          "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.docx",
-          "extension": "docx",
-          "size_kb": 34.8,
-          "modified": "2026-08-01T15:48:50"
-        },
-        {
-          "name": "05_delay_tia_governed_assessment.html",
-          "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.html",
-          "extension": "html",
-          "size_kb": 2.5,
-          "modified": "2026-08-05T01:08:48"
-        },
-        {
-          "name": "05_delay_tia_governed_assessment.manifest.json",
-          "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.manifest.json",
-          "extension": "json",
-          "size_kb": 0.6,
-          "modified": "2026-08-05T01:08:48"
-        },
-        {
-          "name": "05_delay_tia_governed_assessment.pdf",
-          "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.pdf",
-          "extension": "pdf",
-          "size_kb": 2.0,
-          "modified": "2026-08-05T01:08:48"
-        },
-        {
-          "name": "05_delay_tia_governed_assessment.pptx",
-          "relative_path": "Sophia-Mall/05_delay_tia_governed_assessment.pptx",
-          "extension": "pptx",
-          "size_kb": 27.8,
-          "modified": "2026-08-05T01:08:48"
-        },
-        {
-          "name": "universal_report_engine_manifest.json",
-          "relative_path": "Sophia-Mall/universal-report-engine/universal_report_engine_manifest.json",
-          "extension": "json",
-          "size_kb": 33.6,
-          "modified": "2026-08-10T21:23:14"
+          "size_kb": 4.6,
+          "modified": "2026-09-03T05:23:40"
         }
       ],
       "watchers": [
@@ -6101,7 +5582,7 @@
         "title": "Discipline Health",
         "type": "radar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/discipline_progress_history.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6123,7 +5604,7 @@
         "title": "Earned Value Trend",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete evm.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6145,7 +5626,7 @@
         "title": "Performance Indices",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete evm.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6168,7 +5649,7 @@
         "title": "WBS Progress Distribution",
         "type": "bar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete wbs.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6189,7 +5670,7 @@
         "title": "WBS Duration Breakdown",
         "type": "horizontal_bar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete wbs.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6382,32 +5863,14 @@
         "status": "ready",
         "message": "Selected-project activities grouped by responsible party.",
         "labels": [
-          "Construction",
-          "Engineering",
-          "Project Controls",
-          "Commercial",
-          "Engineer",
-          "Finishing",
-          "MEP",
-          "Procurement",
-          "QA/QC",
-          "Survey Team"
+          "SAMCO"
         ],
         "series": [
           {
             "label": "Activities",
             "color": "#06b6d4",
             "values": [
-              6.0,
-              2.0,
-              2.0,
-              1.0,
-              1.0,
-              1.0,
-              1.0,
-              1.0,
-              1.0,
-              1.0
+              17.0
             ]
           }
         ],
@@ -6534,7 +5997,7 @@
         "title": "Master S-Curve - Cumulative Progress",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete s_curve.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6555,7 +6018,7 @@
         "title": "S-Curve by Discipline",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/discipline_progress_history.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6577,7 +6040,7 @@
         "title": "Progress Variance Over Time",
         "type": "bar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete s_curve.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6681,7 +6144,7 @@
         "title": "SPI Trend",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete evm.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6703,7 +6166,7 @@
         "title": "CPI Trend",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete evm.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6870,7 +6333,7 @@
         "title": "Risk Category Breakdown",
         "type": "bar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete risks.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6923,7 +6386,7 @@
         "title": "Risk Trend Over Time",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/risk_assessment_history.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -6944,7 +6407,7 @@
         "title": "Mitigation Effectiveness",
         "type": "bar",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/risk_assessment_history.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -7009,8 +6472,8 @@
         "series": [],
         "source_lineage": {
           "files": [
-            "14-delay_event_classification.csv",
-            "delay_event_classification.csv",
+            "12_delay_event_classification.csv",
+            "vercel/14-delay_event_classification.csv",
             "delay_events.csv"
           ],
           "required_columns": [
@@ -7033,8 +6496,8 @@
         "series": [],
         "source_lineage": {
           "files": [
-            "14-delay_event_classification.csv",
-            "delay_event_classification.csv",
+            "12_delay_event_classification.csv",
+            "vercel/14-delay_event_classification.csv",
             "delay_events.csv"
           ],
           "required_columns": [
@@ -7052,7 +6515,7 @@
         "title": "Monthly Delay Accumulation",
         "type": "line",
         "status": "awaiting_data",
-        "message": "Awaiting selected-project source data. Add or complete vercel/delay_event_classification.csv.",
+        "message": "Awaiting selected-project source data. Add the required values to the mapped canonical project input.",
         "labels": [],
         "series": [],
         "source_lineage": {
@@ -7078,8 +6541,8 @@
         "series": [],
         "source_lineage": {
           "files": [
-            "15-tia_recovery_scenario.csv",
-            "tia_recovery_scenario.csv",
+            "13_tia_recovery_scenario.csv",
+            "vercel/15-tia_recovery_scenario.csv",
             "activities.csv"
           ],
           "required_columns": [
@@ -7103,6 +6566,18 @@
     "elite_svg_charts": "/generated/Sophia-Mall/03_elite_svg_charts.html",
     "linked_executive_dashboard": "/generated/Sophia-Mall/04_linked_executive_dashboard.html"
   },
+  "report_package": {
+    "zip": "/generated/Sophia-Mall/00_published_project_reports.zip",
+    "files": {
+      "zip": {
+        "name": "00_published_project_reports.zip",
+        "bytes": 345927,
+        "sha256": "efb4b5b1c16a3ca1cf555f3c466764ce74d7d077362ea829408a90327711a7f6"
+      }
+    },
+    "source_project_id": "Sophia-Mall",
+    "source_report_fingerprint": "a9db5ccb596137bd3f02941e33f1e8fba444835ce8edc44e17d2890069a1dda1"
+  },
   "report_artifacts": {
     "executive_dashboard": {
       "html": "/generated/Sophia-Mall/01_executive_dashboard.html",
@@ -7111,23 +6586,23 @@
       "files": {
         "html": {
           "name": "01_executive_dashboard.html",
-          "bytes": 18264,
-          "sha256": "60d697bfa9096222daa218cf74fd7452998d2828b0ffe7488eecbe983b7a84a9"
+          "bytes": 4718,
+          "sha256": "d09b82ef53887b9a60c8485af66994f7811965cf92557064b4e47fea4f744189"
         },
         "pdf": {
           "name": "01_executive_dashboard.pdf",
-          "bytes": 848904,
-          "sha256": "7a15ee6399d445627018e361fcc6fe5bd1b9be50a879a835b8e2e7e6d4c108d1"
+          "bytes": 80470,
+          "sha256": "f1d3a549adfe9716851785ed6ebd2ffec54cc1203f955b94b11e6622f768d4f0"
         },
         "pptx": {
           "name": "01_executive_dashboard.pptx",
-          "bytes": 29125,
-          "sha256": "95c4d99df5b8a900b09d174f0cdd9acb2574119f9d4790a7ebecc7826aa5ff92"
+          "bytes": 29235,
+          "sha256": "9436a3c001bfba5752458e57f267f19b43ba1435d2e23e241b29f2f959cc0b7e"
         }
       },
-      "html_origin": "canonical_project_html",
+      "html_origin": "controlled_fallback",
       "source_project_id": "Sophia-Mall",
-      "source_report_fingerprint": "4f3cebb0591f853ce2c464e9c28dfa70b5ce06b94f6c79304cd2905c0d559ea1"
+      "source_report_fingerprint": "a9db5ccb596137bd3f02941e33f1e8fba444835ce8edc44e17d2890069a1dda1"
     },
     "master_dashboard": {
       "html": "/generated/Sophia-Mall/02_master_dashboard.html",
@@ -7136,23 +6611,23 @@
       "files": {
         "html": {
           "name": "02_master_dashboard.html",
-          "bytes": 86946,
-          "sha256": "2d40c3c52ae67133df4e50c49c3e87c9bdedf8b0c57f95567990d09f5481488a"
+          "bytes": 4712,
+          "sha256": "9756d49fb1743b7fed21f976bc3964f160f47b70d4f2cf154f845caaa017df2c"
         },
         "pdf": {
           "name": "02_master_dashboard.pdf",
-          "bytes": 883327,
-          "sha256": "2d2cf6e6e3a7edbc4c3213bb805fb07fca63efadfae4904b069f2e41cc3d60a6"
+          "bytes": 80370,
+          "sha256": "f1c7d69c8c505e5dc394de973b236de9ffed547f5c64d946e446eb46d03c0bbe"
         },
         "pptx": {
           "name": "02_master_dashboard.pptx",
-          "bytes": 29122,
-          "sha256": "3e48bd52807ae865bce4ad308d767255a4455e07f67f0f9b9de49e4f2e3565cb"
+          "bytes": 29232,
+          "sha256": "a2b10060ac8adc958afacc8757a8893849dd0752040cab2943b9d5464481d8c2"
         }
       },
-      "html_origin": "canonical_project_html",
+      "html_origin": "controlled_fallback",
       "source_project_id": "Sophia-Mall",
-      "source_report_fingerprint": "4f3cebb0591f853ce2c464e9c28dfa70b5ce06b94f6c79304cd2905c0d559ea1"
+      "source_report_fingerprint": "a9db5ccb596137bd3f02941e33f1e8fba444835ce8edc44e17d2890069a1dda1"
     },
     "elite_svg_charts": {
       "html": "/generated/Sophia-Mall/03_elite_svg_charts.html",
@@ -7161,23 +6636,23 @@
       "files": {
         "html": {
           "name": "03_elite_svg_charts.html",
-          "bytes": 52018,
-          "sha256": "422fdaaa49c0ac3fafa56a00cd6c0a302abeed5c9aedda7d4afbd5003d6885d7"
+          "bytes": 4712,
+          "sha256": "14320d7d2a2e05b1c25964ee15d6f706b137f8d93c98d066a716a4f18d09516f"
         },
         "pdf": {
           "name": "03_elite_svg_charts.pdf",
-          "bytes": 240246,
-          "sha256": "2e8af5f7a3b15e99df0f5828f726bb1c92c3fc3197b3469e59ddd7fa4ae276a9"
+          "bytes": 80335,
+          "sha256": "e4020a48b7e4bab0bfaec5d3071ac2b9426a7260fb5be0f14a5486cdf18b68f1"
         },
         "pptx": {
           "name": "03_elite_svg_charts.pptx",
-          "bytes": 29123,
-          "sha256": "e1b98f0577444fe318ca044de328745742cf52dabf8eab7045912f2b1d9a2b74"
+          "bytes": 29232,
+          "sha256": "9f06f86af78eeaedd2a146b461eaa4223d2e7ebbdc59083712e0224e4967d4b3"
         }
       },
-      "html_origin": "canonical_project_html",
+      "html_origin": "controlled_fallback",
       "source_project_id": "Sophia-Mall",
-      "source_report_fingerprint": "4f3cebb0591f853ce2c464e9c28dfa70b5ce06b94f6c79304cd2905c0d559ea1"
+      "source_report_fingerprint": "a9db5ccb596137bd3f02941e33f1e8fba444835ce8edc44e17d2890069a1dda1"
     },
     "linked_executive_dashboard": {
       "html": "/generated/Sophia-Mall/04_linked_executive_dashboard.html",
@@ -7186,163 +6661,97 @@
       "files": {
         "html": {
           "name": "04_linked_executive_dashboard.html",
-          "bytes": 57776,
-          "sha256": "b5ad6545566af6dd990cabbbebdf7f2fca51eb561044213cf671efa3e1cf6885"
+          "bytes": 4732,
+          "sha256": "182690f8aac71f6f7bc5647bfef28b95676e91b0cfe08cfb72ae9edddd51fcad"
         },
         "pdf": {
           "name": "04_linked_executive_dashboard.pdf",
-          "bytes": 1120145,
-          "sha256": "9dbf78ebd49d04ec1d6097a934fd26ddb3c5b1b608beab0e9b265e0803e0f592"
+          "bytes": 80731,
+          "sha256": "b7c690f254106c939e365b44d10951b35834b3c2f939fbd22c8740fed5ed0772"
         },
         "pptx": {
           "name": "04_linked_executive_dashboard.pptx",
-          "bytes": 29131,
-          "sha256": "a2d8089c2acef1d47a9d696ede98b9f374b4f1541a037e10c7ec5f15975c67a5"
+          "bytes": 29241,
+          "sha256": "47e5ede37ea8e5a2cfd439d3ff3e93393f05d7b1dc086af8ce6983d7ea05c292"
         }
       },
-      "html_origin": "canonical_project_html",
+      "html_origin": "controlled_fallback",
       "source_project_id": "Sophia-Mall",
-      "source_report_fingerprint": "4f3cebb0591f853ce2c464e9c28dfa70b5ce06b94f6c79304cd2905c0d559ea1"
+      "source_report_fingerprint": "a9db5ccb596137bd3f02941e33f1e8fba444835ce8edc44e17d2890069a1dda1"
     }
   },
   "universal_report_engine": {
     "project_id": "Sophia-Mall",
     "project_key": "sophia-mall",
-    "source_fingerprint": "a20a7e785f93612c60e29d83752c6bb398a38b790cea34ec7394c3f5b1ef32d2",
+    "source_fingerprint": "de1e7726dee7f43611f443188a6c2d3d841b8e4fb748b8e9f49ccac583c6f387",
     "source_scope": "active project folder only",
-    "source_file_count": 58,
+    "source_file_count": 34,
     "source_inventory": [
       {
-        "relative_path": "01-data/import_templates/activities.csv",
+        "relative_path": "01-data/import_templates/01_project_contract.csv",
         "extension": ".csv",
-        "size_bytes": 3064,
-        "sha256": "41a19f9dc64f88e3c2b7d128e13a95072f75076d8365163f513d2944c0c2d234"
+        "size_bytes": 929,
+        "sha256": "39840bff6ce035c0a43d253f42e1039d063f4a8e26f255c71d22d413ffe17c55"
       },
       {
-        "relative_path": "01-data/import_templates/change_orders.csv",
+        "relative_path": "01-data/import_templates/02_schedule_activities.csv",
         "extension": ".csv",
-        "size_bytes": 554,
-        "sha256": "356937db82aa1edece4a0eb80c013423d97a5fa42fd72f95d05a56228a27a114"
+        "size_bytes": 13826,
+        "sha256": "bcdc8fd797676ed005cfe6737635dd6a0cd8daadbab4f2438ff5998bc442f9ef"
       },
       {
-        "relative_path": "01-data/import_templates/claims.csv",
+        "relative_path": "01-data/import_templates/03_schedule_logic.csv",
         "extension": ".csv",
-        "size_bytes": 468,
-        "sha256": "d7dfd07c6ee35b2b8cdabb044313853b0a371e4e20ee2c8e754a8050e8a0e69d"
+        "size_bytes": 8546,
+        "sha256": "62eb1bb25e3ee0dd618a020f539f07541595f061d86edebfe9064f3606c5080b"
       },
       {
-        "relative_path": "01-data/import_templates/contracts.csv",
+        "relative_path": "01-data/import_templates/04_progress_evm.csv",
         "extension": ".csv",
-        "size_bytes": 361,
-        "sha256": "719e5ba575305c8d03a214b23577eeeb659647b3d201406ce757d57f2b4cb1cf"
+        "size_bytes": 6622,
+        "sha256": "0cc1b2d6298bcd9636658652ebf9c44cc3804ea772c69eb6d41de247b7cef9cc"
       },
       {
-        "relative_path": "01-data/import_templates/cost_items.csv",
+        "relative_path": "01-data/import_templates/05_milestones_scurve.csv",
         "extension": ".csv",
-        "size_bytes": 2293,
-        "sha256": "7598955853ba8625e1cbf102a60cc2da81244debbfdc7fa4cfaf60f0eb156c07"
+        "size_bytes": 2508,
+        "sha256": "3f9df52fea8fb1c10638acd42b6b269f43c4537146dfe2c9ec74e0d516fe2a6c"
       },
       {
-        "relative_path": "01-data/import_templates/delay_events.csv",
+        "relative_path": "01-data/import_templates/06_delay_events.csv",
         "extension": ".csv",
-        "size_bytes": 1023,
-        "sha256": "94acd6440eceb53d53f2c01e8fa6eb0ed2081f05e1f0b68b3aa19071ac4cdbc5"
+        "size_bytes": 1610,
+        "sha256": "f654b6ad8e5e2015b84e27ec7cfe98f4364023865b44cc526eaa1b14575f4446"
       },
       {
-        "relative_path": "01-data/import_templates/Delivered_steel_site.csv",
+        "relative_path": "01-data/import_templates/07_tia_evidence_scenarios.csv",
         "extension": ".csv",
-        "size_bytes": 608,
-        "sha256": "b2ad8eeeb787cf3c3ff366a68cf423cffd0d5782cc8f9fdb5d2454e4a0698d1c"
+        "size_bytes": 25887,
+        "sha256": "cf2b5886f810c728c81e4b2c4d11f1727c282b50f334db8771c0eca8b7f1c495"
       },
       {
-        "relative_path": "01-data/import_templates/engineering_log.csv",
+        "relative_path": "01-data/import_templates/08_commercial_payments_claims.csv",
         "extension": ".csv",
-        "size_bytes": 341,
-        "sha256": "5a5628f3790157302b21be81ce1adc1215d6208b4ef9f87fb1b00f588ea9c23e"
+        "size_bytes": 3443,
+        "sha256": "af0e0b811060fb64dd9c71219eb84ddac7a811757afc78de5bc7a430cf7cfa26"
       },
       {
-        "relative_path": "01-data/import_templates/evm.csv",
+        "relative_path": "01-data/import_templates/09_risks_rfi_interfaces.csv",
         "extension": ".csv",
-        "size_bytes": 2438,
-        "sha256": "89ded13e42c5d09cf51153f40f71c192b8eb042d20b89da34a45adc1ca7f62c9"
+        "size_bytes": 6525,
+        "sha256": "5d7d716a227e777fc4253377b38b4207377c5abf038deadabf881776a238eeef"
       },
       {
-        "relative_path": "01-data/import_templates/ifc_conflict.csv",
+        "relative_path": "01-data/import_templates/10_letters_intelligence.csv",
         "extension": ".csv",
-        "size_bytes": 1164,
-        "sha256": "571792c88c9c3198f058ed4eb9da422487b3461dd480d4b6024f4fc02dbc55d3"
+        "size_bytes": 868,
+        "sha256": "436c277dbd7fa5eb5c3037b99b41ddea6673046c1e9ac94db2e84d30fe214169"
       },
       {
-        "relative_path": "01-data/import_templates/milestones.csv",
-        "extension": ".csv",
-        "size_bytes": 550,
-        "sha256": "253788e9bffa4e540f869183dd827dbc3a478764c19d8c5cd847cf8b3a04dc3c"
-      },
-      {
-        "relative_path": "01-data/import_templates/payments.csv",
-        "extension": ".csv",
-        "size_bytes": 1040,
-        "sha256": "de1f39b751507cc40c0e20469b891ad26bd4b8e30e62c15ed791f922ec33e3ca"
-      },
-      {
-        "relative_path": "01-data/import_templates/planned_cash_flow.csv",
-        "extension": ".csv",
-        "size_bytes": 126,
-        "sha256": "939013ded9fd937a507cfdb493df74b1b490b09277184ef4d7f4de57275c0864"
-      },
-      {
-        "relative_path": "01-data/import_templates/progress_updates.csv",
-        "extension": ".csv",
-        "size_bytes": 2103,
-        "sha256": "106a9d57216cccc163fcfd169fd4748006cab7da5328cf0dc45ae35461e0bf8c"
-      },
-      {
-        "relative_path": "01-data/import_templates/projects.csv",
-        "extension": ".csv",
-        "size_bytes": 385,
-        "sha256": "006e1c6f1bcbe6192cad447a20e0e5e4bf8db3d94c052c44613fa505a27d348e"
-      },
-      {
-        "relative_path": "01-data/import_templates/rfi_ status.csv",
-        "extension": ".csv",
-        "size_bytes": 725,
-        "sha256": "cb6846e8468b9e4dc8cc0467c0d4b3a6064f3db1184ec198a13b96194b96c6d8"
-      },
-      {
-        "relative_path": "01-data/import_templates/rft_qtys.csv",
-        "extension": ".csv",
-        "size_bytes": 1370,
-        "sha256": "b7df569dd31e85eff39795ccd09000a74a553bbdfe93215bf9aff2fcad310fec"
-      },
-      {
-        "relative_path": "01-data/import_templates/risks.csv",
-        "extension": ".csv",
-        "size_bytes": 512,
-        "sha256": "59af00ff6e239da989d60720b768b82973a87881138935a2d1b3208e17bd5583"
-      },
-      {
-        "relative_path": "01-data/import_templates/s_curve.csv",
-        "extension": ".csv",
-        "size_bytes": 1107,
-        "sha256": "8f6e811670ca2f1bf42deaf383826069ed79e6793d25a86493dc7df50a038e28"
-      },
-      {
-        "relative_path": "01-data/import_templates/steel_activities_relationship.csv",
-        "extension": ".csv",
-        "size_bytes": 1221,
-        "sha256": "2a02c77fdda71e1d8ae3179306b0c9d732c96d297e217cf07a2c1a45777548fd"
-      },
-      {
-        "relative_path": "01-data/import_templates/steel_delay_status_mployer_free_issue_material.csv",
-        "extension": ".csv",
-        "size_bytes": 5039,
-        "sha256": "d3f6775f4fce7fff8e72bfcd102f0315ee60a6426e2c4a83640a0576698c3075"
-      },
-      {
-        "relative_path": "01-data/import_templates/wbs.csv",
-        "extension": ".csv",
-        "size_bytes": 2862,
-        "sha256": "160fd582900eacb46b70d42b0b9cf582b57408c101c03368a6cbf38ef91a653e"
+        "relative_path": "01-data/Project_Data_Entry.xlsx",
+        "extension": ".xlsx",
+        "size_bytes": 16499,
+        "sha256": "0835b2e64f39ba354bfd924916111706c97226076aee4e84d6738cacc3e1d540"
       },
       {
         "relative_path": "02-delay_analysis/methodology/TIA methodology.docx",
@@ -7351,91 +6760,13 @@
         "sha256": "13c9567516bfdd4e14376a595de426c0abb2e892505d0bdb52db7c148c86735f"
       },
       {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/01-project_metadata_template.csv",
-        "extension": ".csv",
-        "size_bytes": 688,
-        "sha256": "e5754f43e3b16181b62c5b55fd0846c7ba4e971295bdc6399c0338fb4786abde"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/02-master_activity_steel_analysis.csv",
-        "extension": ".csv",
-        "size_bytes": 2810,
-        "sha256": "74deefd413b99e3cc8ba8fed64ef88f07b8e3f3fc357cc94fa9b5c98630833a5"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/03-employer_steel_supply_at_site.csv",
-        "extension": ".csv",
-        "size_bytes": 693,
-        "sha256": "732fe18e28a88dcaf8da017e294655ff4d1446a928057d7e797a7f8ca912f831"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/04-p6_activity_export.csv",
-        "extension": ".csv",
-        "size_bytes": 4816,
-        "sha256": "06c30a164f050356885f3146613ee266a681dfe7e1b5dddc9be4752f570ed24d"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/05-relationship_file.csv",
-        "extension": ".csv",
-        "size_bytes": 2591,
-        "sha256": "4344d44803df04a51262afa4fee11a52954717fe4740be621de722fe044168cc"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/06-contract_library.csv",
-        "extension": ".csv",
-        "size_bytes": 2938,
-        "sha256": "c8a412532678a2e0dcf44673201dc4d18b91731279dd9fc5011f460e7343045f"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/07-ifc_conflict.csv",
-        "extension": ".csv",
-        "size_bytes": 1594,
-        "sha256": "0abc7f363c10b19377d3fb6fcbc74d33278d2aebf7b1136c3503976b2607971b"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/08-payments.csv",
-        "extension": ".csv",
-        "size_bytes": 1126,
-        "sha256": "d45f0ea2ce02bd701c3d4a2e361aaca0adef5e97e78f8ebe868b4d036c4481fc"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/09-rfi_status.csv",
-        "extension": ".csv",
-        "size_bytes": 1122,
-        "sha256": "cfa9dcd78a0b33e6a623daa4103c398fdaff0c71e6c4ac6ae6ebc26e155733ff"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/10-contractor_steel_supplied_at_site.csv",
-        "extension": ".csv",
-        "size_bytes": 681,
-        "sha256": "6a78171f5765794f62addc62a701ec17182f94e5076ce195128f7d962efa6e63"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/11-concurrency_matrix_template.updated.csv",
-        "extension": ".csv",
-        "size_bytes": 2236,
-        "sha256": "1a77ab3c2706de34ab4bb70b7fc72094a5ba7a20ac5ddc86438f454f95e2b7b2"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/12-client_steel_demand_by_dia_wide.csv",
-        "extension": ".csv",
-        "size_bytes": 1250,
-        "sha256": "a2d9980b9802a7d8cdcf2634eabadee34497dd22fc4e39462e770ed846177a58"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/13-client_steel_supply_by_dia_wide.csv",
-        "extension": ".csv",
-        "size_bytes": 393,
-        "sha256": "c2f78f2b70e745f4103ef2f9233399ec97d33940f51cd534bc8a0af56bc1b589"
-      },
-      {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/14-delay_event_classification.csv",
+        "relative_path": "02-delay_analysis/unified_tia_csv/14-delay_event_classification.csv",
         "extension": ".csv",
         "size_bytes": 204,
         "sha256": "ae95fac637a5a4cc21519fe9cff117c4957586c33a34b2242816d6457df0409d"
       },
       {
-        "relative_path": "02-delay_analysis/steel_delay_tia_templates/15-tia_recovery_scenario.csv",
+        "relative_path": "02-delay_analysis/unified_tia_csv/15-tia_recovery_scenario.csv",
         "extension": ".csv",
         "size_bytes": 357,
         "sha256": "186b52e9473e855acbc9918e329ddedc09a076284849e5329bdcf2ef25d176c6"
@@ -7564,14 +6895,14 @@
     "engine": {
       "available": true,
       "runtime_location": "local controlled runtime",
-      "package_name": "Universal Project Report Engine",
+      "package_name": "UNIVERSAL_PROJECT_REPORT_ENGINE_26PLUS_MULTI_LLM_ML_PACKAGE",
       "package_version": "2.0.0",
       "wrapper_version": "3.1.0",
       "author": "Eng. Ahmed Labib",
       "attribution": "Python AI Programming by Eng. Ahmed Labib",
-      "rules": null,
-      "report_families": null,
-      "layers": null,
+      "rules": 26,
+      "report_families": 30,
+      "layers": 32,
       "capability_note": "Runs locally against the active project's controlled source files. The public Vercel site displays generated artifacts only."
     },
     "report_families": [
@@ -7584,12 +6915,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-eot-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "delay",
@@ -7600,12 +6933,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-delay-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "progress",
@@ -7616,12 +6951,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-progress-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "recovery",
@@ -7632,12 +6969,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-recovery-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "variation",
@@ -7648,12 +6987,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-variation-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "hybrid",
@@ -7663,12 +7004,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-hybrid-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "resource",
@@ -7679,12 +7022,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-resource-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "equipment",
@@ -7694,12 +7039,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-equipment-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "cost",
@@ -7709,12 +7056,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-cost-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "evm",
@@ -7724,12 +7073,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-evm-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "cashflow",
@@ -7739,12 +7090,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-cashflow-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "scurve",
@@ -7754,12 +7107,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-scurve-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "procurement",
@@ -7770,12 +7125,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-procurement-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "material",
@@ -7785,12 +7142,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-material-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "lookahead",
@@ -7801,12 +7160,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-lookahead-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "critical_path",
@@ -7817,12 +7178,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-critical_path-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "float",
@@ -7833,12 +7196,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-float-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "milestone",
@@ -7849,12 +7214,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-milestone-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "risk",
@@ -7864,12 +7231,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-risk-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "rfi_submittal",
@@ -7880,12 +7249,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-rfi_submittal-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "qaqc",
@@ -7895,12 +7266,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-qaqc-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "productivity",
@@ -7910,12 +7283,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-productivity-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "executive",
@@ -7925,12 +7300,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-executive-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "baseline_current",
@@ -7941,12 +7318,14 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-baseline_current-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "forecast_completion",
@@ -7957,27 +7336,31 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-forecast_completion-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "ml_project_controls",
-        "title": "Machine Learning Project Controls Report",
+        "title": "Integrated Project Controls Report",
         "summary": "Controlled report family with 9 validation rules.",
         "native_schedule_required": false,
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-ml_project_controls-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "contract_admin",
@@ -7987,12 +7370,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-contract_admin-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "change_control",
@@ -8002,12 +7387,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-change_control-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "document_control",
@@ -8017,12 +7404,14 @@
         "requires": [
           "Project-local source evidence"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-document_control-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       },
       {
         "key": "interface_management",
@@ -8033,104 +7422,23 @@
           "Native schedule / XER",
           "relationship logic"
         ],
-        "status": "READY_TO_GENERATE",
-        "detail": "Source files are available. Generate this controlled package locally to publish its artifacts.",
-        "artifacts": {},
-        "generated_at": null,
-        "release_status": null,
-        "validation_status": null
+        "status": "PUBLISHED",
+        "detail": "Published from the selected project's program data and controlled input-file register.",
+        "artifacts": {
+          "html": "/generated/Sophia-Mall/universal-interface_management-program-report.html"
+        },
+        "generated_at": "2026-09-03T02:24:24+00:00",
+        "release_status": "PUBLISHED_PROJECT_DATA",
+        "validation_status": "PROGRAM_DATA_BOUND"
       }
     ],
     "summary": {
       "catalog_count": 30,
-      "generated_count": 0,
+      "generated_count": 30,
       "draft_review_count": 0,
-      "ready_count": 30,
+      "ready_count": 0,
       "blocked_count": 0
     },
-    "ml_capability": {
-      "task_count": 15,
-      "tasks": [
-        {
-          "key": "event_classification",
-          "title": "ML01",
-          "description": "Classify delay/change/project-control events from verified features/evidence."
-        },
-        {
-          "key": "delay_risk_prediction",
-          "title": "ML02",
-          "description": "Estimate verified activity/event delay-risk class or probability."
-        },
-        {
-          "key": "forecast_finish_deviation_prediction",
-          "title": "ML03",
-          "description": "Predict analytical deviation days; native CPM forecast remains governing."
-        },
-        {
-          "key": "activity_anomaly_detection",
-          "title": "ML04",
-          "description": "Detect unusual activity records using Isolation Forest novelty scoring."
-        },
-        {
-          "key": "resource_demand_prediction",
-          "title": "ML05",
-          "description": "Predict analytical manpower/equipment demand from verified historical features."
-        },
-        {
-          "key": "cost_overrun_risk_prediction",
-          "title": "ML06",
-          "description": "Estimate cost-overrun risk; does not replace approved cost-control calculations."
-        },
-        {
-          "key": "productivity_prediction",
-          "title": "ML07",
-          "description": "Predict productivity from verified quantities/resource inputs."
-        },
-        {
-          "key": "schedule_health_anomaly_detection",
-          "title": "ML08",
-          "description": "Detect schedule-health anomalies; native P6 logic audit remains governing."
-        },
-        {
-          "key": "similar_event_evidence_retrieval",
-          "title": "ML09",
-          "description": "Retrieve similar events/evidence using TF-IDF cosine similarity with traceability."
-        },
-        {
-          "key": "risk_prioritization",
-          "title": "ML10",
-          "description": "Prioritize risk classes from available verified risk features."
-        },
-        {
-          "key": "procurement_delay_risk",
-          "title": "ML11",
-          "description": "Estimate procurement delay risk from verified procurement history."
-        },
-        {
-          "key": "progress_slippage_prediction",
-          "title": "ML12",
-          "description": "Estimate progress-slippage risk from verified period/status data."
-        },
-        {
-          "key": "model_confidence_ood_detection",
-          "title": "ML13",
-          "description": "Return prediction confidence and real Isolation-Forest OOD score/flag."
-        },
-        {
-          "key": "model_drift_monitoring",
-          "title": "ML14",
-          "description": "Measure population drift with PSI/KS/categorical distribution distance."
-        },
-        {
-          "key": "native_cpm_vs_ml_comparison",
-          "title": "ML15",
-          "description": "Compare ML analytical output with native CPM while explicitly preserving native supremacy."
-        }
-      ],
-      "status": "LOCAL_CONTROLLED_EXECUTION",
-      "detail": "ML tasks are available only when a project-approved, source-backed model is supplied locally. No browser prediction or synthetic ML result is published.",
-      "ai_governance": "Groq remains the application AI advisor. The package multi-provider council is not activated unless its providers and approvals are configured locally."
-    },
-    "updated_at": "2026-08-10T18:23:14+00:00"
+    "updated_at": "2026-09-03T02:24:24+00:00"
   }
 }

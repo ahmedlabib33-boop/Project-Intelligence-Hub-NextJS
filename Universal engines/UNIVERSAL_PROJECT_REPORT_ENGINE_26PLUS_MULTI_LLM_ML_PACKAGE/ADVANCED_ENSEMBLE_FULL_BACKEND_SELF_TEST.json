@@ -1,0 +1,73 @@
+{
+  "attribution": "Python AI Programming by Eng. Ahmed Labib",
+  "status": "PASS",
+  "candidate_frameworks_passed": [
+    "CatBoost",
+    "LightGBM",
+    "PyTorch",
+    "XGBoost",
+    "scikit-learn"
+  ],
+  "candidate_count_passed": 7,
+  "failures": [],
+  "selected_models": [
+    {
+      "model": "pytorch_mlp",
+      "framework": "PyTorch",
+      "weight": 0.3816791068310602,
+      "efficiency_score": 0.9914276034779477
+    },
+    {
+      "model": "sklearn_logistic",
+      "framework": "scikit-learn",
+      "weight": 0.314015573780041,
+      "efficiency_score": 0.9758165924057625
+    },
+    {
+      "model": "sklearn_extra_trees",
+      "framework": "scikit-learn",
+      "weight": 0.3043053193888988,
+      "efficiency_score": 0.9733037087885855
+    }
+  ],
+  "metrics": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "balanced_accuracy": 1.0,
+    "log_loss": 0.1275321552818105,
+    "confidence": 0.8880894565112376,
+    "ece": 0.11191054348876231,
+    "confusion_matrix": [
+      [
+        14,
+        0
+      ],
+      [
+        0,
+        10
+      ]
+    ],
+    "classes": [
+      "HIGH",
+      "LOW"
+    ]
+  },
+  "project_isolation": {
+    "mode": "group_shuffle_split",
+    "project_aware": true,
+    "project_column": "project_id",
+    "warning": null,
+    "train_projects": [
+      "PX1",
+      "PX3",
+      "PX4",
+      "PX5"
+    ],
+    "validation_projects": [
+      "PX2"
+    ]
+  },
+  "note": "Synthetic integration test only; not production accuracy."
+}

@@ -1,0 +1,242 @@
+{
+  "attribution": "Python AI Programming by Eng. Ahmed Labib",
+  "author": "Eng. Ahmed Labib",
+  "global_rule_count": 26,
+  "rules_preserved_verbatim": true,
+  "enforcement_matrix": [
+    {
+      "id": "G01",
+      "title": "Attribution rule",
+      "rule_text": "Every AI/chat-facing output must start with: “Python AI Programming by Eng. Ahmed Labib”. Generated reports, manifests, metadata and package identity should preserve the author attribution.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "ATTRIBUTION constant enforced in CLI output, model cards, ML HTML, manifests and report metadata."
+      ]
+    },
+    {
+      "id": "G02",
+      "title": "Evidence-first rule",
+      "rule_text": "Never invent missing evidence, activities, dates, relationships, clauses, notices, float values, event dates, or entitlement. Missing evidence must be identified as missing, pending, weak, unverified, or not embedded rather than inferred as fact.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "ML trainers require supplied labeled data; inference fails on missing required features; unsupported facts are not synthesized."
+      ]
+    },
+    {
+      "id": "G03",
+      "title": "Native schedule supremacy rule",
+      "rule_text": "The native Primavera P6/XER network is the governing technical schedule evidence. JSON extracts, Excel sheets, screenshots, generated visuals and ML predictions remain analytical/supporting evidence until checked against native calendars, relationships, schedule settings and longest/critical-path outputs.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "Integrated wrapper states NATIVE_P6_CPM_GOVERNS_FORMAL_SCHEDULE_RESULT on inference; native-vs-ML comparison always selects NATIVE_CPM as governing."
+      ]
+    },
+    {
+      "id": "G04",
+      "title": "Before/after TIA rule",
+      "rule_text": "An event's EOT must come from the measured movement of the controlling completion milestone after fragnet insertion and CPM recalculation. Event duration itself is not automatically EOT.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "Existing governed TIA rulebook remains unchanged; ML forecast outputs are decision support and cannot substitute measured before/after CPM movement."
+      ]
+    },
+    {
+      "id": "G05",
+      "title": "Project Finish rule",
+      "rule_text": "The engine must distinguish event duration, activity movement, float movement, milestone movement and Project Finish movement. Only demonstrated completion movement supports the current time impact.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "ML forecast deviation is separately labeled analytical; no event duration or float signal is promoted to Project Finish movement."
+      ]
+    },
+    {
+      "id": "G06",
+      "title": "Fragnet rule",
+      "rule_text": "Each delay event must be modeled separately with a defensible cause → delay mechanism → affected activity → successor/critical path → Project Finish chain. Original construction logic should be preserved wherever possible; the fragnet represents the event rather than rewriting unrelated schedule logic.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "Fragnet methodology remains governed by the 26+ report engine; ML cannot generate or rewrite missing P6 logic."
+      ]
+    },
+    {
+      "id": "G07",
+      "title": "Data-date rule",
+      "rule_text": "Each TIA uses the schedule update immediately preceding or appropriately representing the event. A delivery date, cut-off date, correspondence date and P6 Data Date are not automatically the same thing.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "Existing report engine controls Data Date; ML datasets do not redefine P6 Data Date."
+      ]
+    },
+    {
+      "id": "G08",
+      "title": "Event isolation rule",
+      "rule_text": "Each event must retain its own ID, chronology, evidence, fragnet, before/after schedules, affected activities, contractual route and measured result. Event effects must not be mixed simply because they occur in the same project.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "ML task/event records preserve IDs/features and do not merge formal event analysis results."
+      ]
+    },
+    {
+      "id": "G09",
+      "title": "Concurrency proof rule",
+      "rule_text": "Calendar overlap alone is not conclusive proof of legal/critical concurrency. Native P6 evidence should demonstrate whether both events independently controlled the contemporaneous critical/longest path. The 62-day period is therefore an analytical non-duplication position pending native schedule confirmation.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "ML does not infer legal/critical concurrency from temporal overlap; native CPM proof remains required."
+      ]
+    },
+    {
+      "id": "G10",
+      "title": "Legacy quarantine rule",
+      "rule_text": "`_combined_handoff` legacy information is excluded from normal reporting/search and may be accessed only for audit/reference. It must not override the active controlled position.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "Existing governed engine legacy quarantine remains active before ML report packaging."
+      ]
+    },
+    {
+      "id": "G11",
+      "title": "Contract evidence rule",
+      "rule_text": "Contract routes may be indexed and searched, but OCR-derived wording must be checked against the signed contract/PDF image before direct quotation.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "ML retrieval surfaces existing contract/evidence text only; no OCR wording is treated as verified direct quotation by ML."
+      ]
+    },
+    {
+      "id": "G12",
+      "title": "Contract precedence rule",
+      "rule_text": "When contractual documents conflict, the engine must apply the project's contractual document priority/precedence rather than selecting the clause that produces the preferred result.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "Contract precedence remains a governed report-engine determination; ML cannot choose a preferred clause."
+      ]
+    },
+    {
+      "id": "G13",
+      "title": "No automatic entitlement rule",
+      "rule_text": "A delay event, Employer responsibility, negative float, instruction, RFI delay or variation does not by itself establish EOT. The engine must demonstrate responsibility + causation + schedule effect + criticality + notice/contract route + measured completion impact.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "All ML outputs are marked decision support; entitlement is never created from prediction/risk/float classification."
+      ]
+    },
+    {
+      "id": "G14",
+      "title": "ML-governance rule",
+      "rule_text": "Machine learning is a decision-support layer, not the contractual calculation engine. ML may classify events, identify anomalies, estimate likely shifts and retrieve similar evidence, but it must never overwrite native CPM/TIA results merely because the model prediction differs.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "ML is a separate decision-support layer; integrated package retains native schedule supremacy and independent ML release status."
+      ]
+    },
+    {
+      "id": "G15",
+      "title": "ML confidence rule",
+      "rule_text": "Predictions must carry confidence/quality information. Weak, unseen or poorly represented classes must be identified as uncertain rather than presented as proven.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "Classification confidence, regression quality confidence, OOD score/rate, validation metrics and drift are persisted."
+      ]
+    },
+    {
+      "id": "G16",
+      "title": "No ML fabrication rule",
+      "rule_text": "ML cannot create missing P6 logic, correspondence, contract clauses, entitlement, notices or historical facts. It can identify patterns only from available evidence.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "Missing features raise errors; retrieval returns existing records; ML cannot create correspondence, clauses, notices or P6 relationships."
+      ]
+    },
+    {
+      "id": "G17",
+      "title": "Training isolation rule",
+      "rule_text": "Training and validation data must remain project-aware. Project-specific performance must not be advertised as universal accuracy on unrelated projects without independent validation.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "GroupShuffleSplit and GroupKFold are used when project_id is available; row-level fallback is explicitly warned as non-universal validation."
+      ]
+    },
+    {
+      "id": "G18",
+      "title": "Source traceability rule",
+      "rule_text": "Evidence-model outputs should retain source inventory and traceability, including SHA-256 hashes where applicable. The universal reporting engine specifically incorporates source inventory, hashing and checks for missing/orphan/conflicting evidence.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "Model artifacts, training manifests, report manifests and source inventories retain SHA-256 hashing/traceability."
+      ]
+    },
+    {
+      "id": "G19",
+      "title": "Conflict-detection rule",
+      "rule_text": "Where two sources provide different values, the engine must flag a reconciliation issue rather than silently selecting whichever number is more favorable.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "Existing source conflict detector remains active; ML output does not silently reconcile conflicting project facts."
+      ]
+    },
+    {
+      "id": "G20",
+      "title": "Stale-visual rule",
+      "rule_text": "SVGs or charts containing superseded values are excluded from current-output selection.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "Existing stale-visual quarantine remains active in the governed report engine."
+      ]
+    },
+    {
+      "id": "G21",
+      "title": "Visual QA rule",
+      "rule_text": "Generated SVG/report visuals should pass XML validity, consistent canvas/background, unique element IDs, accessibility metadata, contrast and editable-vector checks.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "Existing SVG/layout validation remains active; ML HTML is additional analytical output and does not bypass visual QA."
+      ]
+    },
+    {
+      "id": "G22",
+      "title": "Report-content rule",
+      "rule_text": "Every formal TIA package should preserve the chain: event chronology → cause → responsibility → fragnet methodology → affected activities → before/after CPM → float/path change → milestone movement → concurrency → EOT treatment → contractual route → evidence/reliance limitations. AND YOU OWN RULSES FOR OTHER REPORTS",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "Formal TIA report chain remains in the report-family rulebook; ML evidence is supplemental only."
+      ]
+    },
+    {
+      "id": "G23",
+      "title": "Table rule",
+      "rule_text": "Executive metrics, event matrices, affected-activity schedules, contractual routes and visual registers have controlled column arrangements. Notes should sit below crowded tables; detailed wide activity tables should use landscape orientation, while presentation tables should limit visible rows and move detail to appendices.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "Existing controlled table/report layout rules remain active; ML detailed outputs are written to CSV/JSON/HTML appendices."
+      ]
+    },
+    {
+      "id": "G24",
+      "title": "No hard-coded universal-project rule",
+      "rule_text": "Project-specific facts may exist in the current brain, but reusable TIA/ML/report-engine architecture must isolate projects and derive values from each project's input evidence rather than assuming THE BIG values for another project.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "No project-specific facts are embedded in the ML source; training data and project models are supplied externally and isolated."
+      ]
+    },
+    {
+      "id": "G25",
+      "title": "Validation-before-release rule",
+      "rule_text": "Python compilation, JSON parsing, package validation, EOT arithmetic, evidence consistency and available self-tests should pass before a package is released. The source validation report confirms these controls are part of the package philosophy.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "Package validator compiles Python, parses governance, verifies exact 26-rule hash, runs framework fit/predict and integrated self-test before release."
+      ]
+    },
+    {
+      "id": "G26",
+      "title": "Engineer-determination rule",
+      "rule_text": "The engine may calculate and substantiate the Contractor's EOT position, but it must not represent the current 126 days as an awarded contractual extension until the Engineer's determination.",
+      "ml_enforcement_status": "IMPLEMENTED",
+      "mechanisms": [
+        "ML and report engine distinguish Contractor/analytical positions from Engineer determination; ML cannot award EOT."
+      ]
+    }
+  ]
+}

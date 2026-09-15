@@ -1,0 +1,61 @@
+{
+  "schema": "project_controls_multi_llm_orchestration_policy_v1",
+  "version": "1.0.0",
+  "author": "Eng. Ahmed Labib",
+  "attribution": "Python AI Programming by Eng. Ahmed Labib",
+  "providers": {
+    "claude": {
+      "provider": "Anthropic",
+      "default_model": "claude-opus-5",
+      "key_env": "ANTHROPIC_API_KEY",
+      "role": "independent evidence reviewer"
+    },
+    "kimi": {
+      "provider": "Moonshot AI",
+      "default_model": "kimi-k3",
+      "key_env": "MOONSHOT_API_KEY",
+      "role": "independent evidence reviewer"
+    },
+    "deepseek": {
+      "provider": "DeepSeek",
+      "default_model": "deepseek-v4-pro",
+      "key_env": "DEEPSEEK_API_KEY",
+      "role": "independent evidence reviewer"
+    }
+  },
+  "routing": {
+    "fast": {
+      "providers": 1,
+      "purpose": "low-risk, low-conflict analytical support",
+      "default_provider": "kimi"
+    },
+    "balanced": {
+      "providers": 3,
+      "purpose": "parallel independent review with deterministic consensus"
+    },
+    "assurance": {
+      "providers": 3,
+      "purpose": "high-risk/contractual/disputed analysis plus cross-review"
+    },
+    "auto": {
+      "rule": "high risk, evidence conflict, or ML confidence < 0.70 => assurance; medium => balanced; otherwise fast"
+    }
+  },
+  "consensus_controls": [
+    "Provider majority is advisory only and is not evidence proof",
+    "Provider disagreement creates a reconciliation issue",
+    "Consensus confidence is capped by provider agreement and evidence-reference agreement",
+    "Missing evidence remains missing even when all providers agree",
+    "No provider or consensus may override native P6/XER CPM/TIA",
+    "No provider or consensus may create contractual entitlement or Engineer determination"
+  ],
+  "efficiency_controls": [
+    "asynchronous parallel calls",
+    "disk cache keyed by prompt/model hash",
+    "retry with backoff",
+    "risk-based routing",
+    "no cross-review in fast/balanced mode"
+  ],
+  "governance_rule_count": 26,
+  "governance_rules_sha256": "50a3f033cafc0530d58f34e3c3674277d0f844569e8dc92531ea7762c8c021b2"
+}

@@ -1,0 +1,42 @@
+{
+  "attribution": "Python AI Programming by Eng. Ahmed Labib",
+  "author": "Eng. Ahmed Labib",
+  "upgrade": "Advanced Ensemble ML + Claude/Kimi/DeepSeek Evidence Council",
+  "version": "2.0.0",
+  "generated_at_utc": "2026-08-10T06:03:06+00:00",
+  "governance": {
+    "universal_rule_count": 26,
+    "report_family_count": 30,
+    "pipeline_layer_count": 32,
+    "rules_changed": false,
+    "canonical_rules_sha256": "50a3f033cafc0530d58f34e3c3674277d0f844569e8dc92531ea7762c8c021b2",
+    "governance_file_sha256": "0819695710a22de985d1a1099eb919cc861dadb2cba00cc19a5e0754fd7bc37c",
+    "native_p6_xer_supremacy": true,
+    "llm_and_ml_decision_support_only": true
+  },
+  "deep_analysis_fixes": [
+    "Added governed asynchronous Claude/Kimi/DeepSeek provider adapters and deterministic consensus.",
+    "Added risk-based fast/balanced/assurance routing to reduce unnecessary external calls.",
+    "Added disagreement and missing-evidence escalation rather than silent consensus averaging.",
+    "Added prompt/request/response/evidence/governance hashes and secret-exclusion metadata.",
+    "Added quality+stability+calibration+latency weighted ensemble ML.",
+    "Added sklearn-compatible wrappers to make XGBoost and CatBoost participate correctly with string labels/current sklearn APIs.",
+    "Added ensemble OOD, drift reference profile and project-aware validation.",
+    "Added web endpoints and JavaScript client functions for multi-LLM and ensemble training/inference.",
+    "Preserved synthetic-vs-real-project accuracy isolation and no-100%-claim rule."
+  ],
+  "validation": {
+    "deep_package_validator": "PASS",
+    "five_ml_frameworks_fit_predict": "PASS_FULL",
+    "advanced_ensemble_five_framework_competition": "PASS",
+    "multi_llm_offline_consensus": "PASS",
+    "web_health": "PASS",
+    "report_registry_count": 30
+  },
+  "live_external_llm_execution": {
+    "performed": false,
+    "reason": "No Anthropic, Moonshot or DeepSeek API keys are present in this runtime.",
+    "behavior": "The package is ready to execute live once server-side environment keys are configured; no key is embedded or persisted."
+  },
+  "accuracy_control": "Any 100% score is reported only when an actual declared validation set measures 100%. Synthetic scores remain software-integration evidence and are never promoted to universal or real-project accuracy."
+}

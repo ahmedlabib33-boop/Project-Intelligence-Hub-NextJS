@@ -1,0 +1,106 @@
+{
+  "attribution": "Python AI Programming by Eng. Ahmed Labib",
+  "author": "Eng. Ahmed Labib",
+  "ml_engine_version": "1.0.0",
+  "task_count": 15,
+  "tasks": {
+    "event_classification": {
+      "id": "ML01",
+      "type": "classification",
+      "target_hint": "event_class",
+      "description": "Classify delay/change/project-control events from verified features/evidence."
+    },
+    "delay_risk_prediction": {
+      "id": "ML02",
+      "type": "classification",
+      "target_hint": "delay_risk",
+      "description": "Estimate verified activity/event delay-risk class or probability."
+    },
+    "forecast_finish_deviation_prediction": {
+      "id": "ML03",
+      "type": "regression",
+      "target_hint": "finish_deviation_days",
+      "description": "Predict analytical deviation days; native CPM forecast remains governing."
+    },
+    "activity_anomaly_detection": {
+      "id": "ML04",
+      "type": "anomaly",
+      "target_hint": null,
+      "description": "Detect unusual activity records using Isolation Forest novelty scoring."
+    },
+    "resource_demand_prediction": {
+      "id": "ML05",
+      "type": "regression",
+      "target_hint": "resource_demand",
+      "description": "Predict analytical manpower/equipment demand from verified historical features."
+    },
+    "cost_overrun_risk_prediction": {
+      "id": "ML06",
+      "type": "classification",
+      "target_hint": "cost_overrun_risk",
+      "description": "Estimate cost-overrun risk; does not replace approved cost-control calculations."
+    },
+    "productivity_prediction": {
+      "id": "ML07",
+      "type": "regression",
+      "target_hint": "productivity",
+      "description": "Predict productivity from verified quantities/resource inputs."
+    },
+    "schedule_health_anomaly_detection": {
+      "id": "ML08",
+      "type": "anomaly",
+      "target_hint": null,
+      "description": "Detect schedule-health anomalies; native P6 logic audit remains governing."
+    },
+    "similar_event_evidence_retrieval": {
+      "id": "ML09",
+      "type": "retrieval",
+      "target_hint": null,
+      "description": "Retrieve similar events/evidence using TF-IDF cosine similarity with traceability."
+    },
+    "risk_prioritization": {
+      "id": "ML10",
+      "type": "classification",
+      "target_hint": "risk_priority",
+      "description": "Prioritize risk classes from available verified risk features."
+    },
+    "procurement_delay_risk": {
+      "id": "ML11",
+      "type": "classification",
+      "target_hint": "procurement_delay_risk",
+      "description": "Estimate procurement delay risk from verified procurement history."
+    },
+    "progress_slippage_prediction": {
+      "id": "ML12",
+      "type": "classification",
+      "target_hint": "progress_slippage",
+      "description": "Estimate progress-slippage risk from verified period/status data."
+    },
+    "model_confidence_ood_detection": {
+      "id": "ML13",
+      "type": "monitoring",
+      "target_hint": null,
+      "description": "Return prediction confidence and real Isolation-Forest OOD score/flag."
+    },
+    "model_drift_monitoring": {
+      "id": "ML14",
+      "type": "monitoring",
+      "target_hint": null,
+      "description": "Measure population drift with PSI/KS/categorical distribution distance."
+    },
+    "native_cpm_vs_ml_comparison": {
+      "id": "ML15",
+      "type": "comparison",
+      "target_hint": null,
+      "description": "Compare ML analytical output with native CPM while explicitly preserving native supremacy."
+    }
+  },
+  "governance": {
+    "native_schedule_supremacy": true,
+    "decision_support_only": true,
+    "no_automatic_entitlement": true,
+    "no_ml_fabrication": true,
+    "project_aware_training": true,
+    "measured_accuracy_only": true
+  }
+}

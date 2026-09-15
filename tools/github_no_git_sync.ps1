@@ -35,7 +35,16 @@ if ($Mode -eq "Watch") {
 function Write-SyncLog([string]$Text) {
     $line = "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] $Text"
     Write-Host $line
-    Add-Content -LiteralPath $logPath -Value $line
+    for ($attempt = 1; $attempt -le 4; $attempt++) {
+        try {
+            Add-Content -LiteralPath $logPath -Value $line -ErrorAction Stop
+            return
+        }
+        catch {
+            Start-Sleep -Milliseconds (100 * $attempt)
+        }
+    }
+    Write-Host "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] Sync log is temporarily locked; console record retained."
 }
 
 function Convert-ToRelativePath([string]$FullName) {
@@ -84,7 +93,26 @@ function Ensure-EmptyDirectoryPlaceholders {
 }
 
 function Get-Sha256([string]$Path) {
-    return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
+    $lastError = $null
+    for ($attempt = 1; $attempt -le 6; $attempt++) {
+        $stream = $null
+        $sha256 = $null
+        try {
+            $stream = [System.IO.File]::Open($Path, [System.IO.FileMode]::Open, [System.IO.FileAccess]::Read, [System.IO.FileShare]::ReadWrite)
+            $sha256 = [System.Security.Cryptography.SHA256]::Create()
+            $hash = -join ($sha256.ComputeHash($stream) | ForEach-Object { $_.ToString('x2') })
+            return $hash
+        }
+        catch {
+            $lastError = $_
+            Start-Sleep -Milliseconds (150 * $attempt)
+        }
+        finally {
+            if ($sha256) { $sha256.Dispose() }
+            if ($stream) { $stream.Dispose() }
+        }
+    }
+    throw "SHA-256 could not read '$Path' after six attempts: $($lastError.Exception.Message)"
 }
 
 function Get-GitBlobSha([byte[]]$Bytes) {
@@ -106,8 +134,7 @@ function Get-WorkspaceManifest {
         try {
             $sha256 = Get-Sha256 $file.FullName
         } catch {
-            Write-SyncLog "Skipped unreadable or locked file during scan: $relative"
-            continue
+            throw "Cannot read deployable source file during synchronization: $relative. $($_.Exception.Message) No partial publication was created."
         }
         $entries[$relative] = [ordered]@{
             sha256 = $sha256
@@ -257,6 +284,7 @@ function Invoke-SyncCycle {
         }
         $localBlobSha = Get-GitBlobSha $bytes
         if ($remote.ContainsKey($path) -and $remote[$path] -eq $localBlobSha) { continue }
+        Write-SyncLog "Uploading blob: $path ($($bytes.Length) bytes)"
         $blob = Invoke-GitHubApi "Post" "$apiBase/git/blobs" @{ content = [Convert]::ToBase64String($bytes); encoding = "base64" }
         $uploadEntries += @{ path = $path; mode = "100644"; type = "blob"; sha = $blob.sha }
     }

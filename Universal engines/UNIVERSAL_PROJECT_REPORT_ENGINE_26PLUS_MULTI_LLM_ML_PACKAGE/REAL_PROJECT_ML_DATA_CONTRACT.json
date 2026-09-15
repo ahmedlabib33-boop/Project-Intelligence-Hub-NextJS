@@ -1,0 +1,78 @@
+{
+  "attribution": "Python AI Programming by Eng. Ahmed Labib",
+  "purpose": "Data contract for real-project supervised model training. No model may be labelled real_project without verified project data and an explicit target.",
+  "global_required_fields": [
+    "project_id"
+  ],
+  "rules": [
+    "Target labels must come from verified project records; the engine must not manufacture labels.",
+    "project_id should be retained to enable project-aware validation when multiple projects are available.",
+    "Native P6/XER fields remain authoritative for formal schedule calculations.",
+    "Training data must not include post-outcome leakage fields that would not exist at inference time."
+  ],
+  "tasks": {
+    "event_classification": {
+      "id": "ML01",
+      "type": "classification",
+      "target_hint": "event_class",
+      "description": "Classify delay/change/project-control events from verified features/evidence.",
+      "minimum_labeled_records": 20
+    },
+    "delay_risk_prediction": {
+      "id": "ML02",
+      "type": "classification",
+      "target_hint": "delay_risk",
+      "description": "Estimate verified activity/event delay-risk class or probability.",
+      "minimum_labeled_records": 20
+    },
+    "forecast_finish_deviation_prediction": {
+      "id": "ML03",
+      "type": "regression",
+      "target_hint": "finish_deviation_days",
+      "description": "Predict analytical deviation days; native CPM forecast remains governing.",
+      "minimum_labeled_records": 20
+    },
+    "resource_demand_prediction": {
+      "id": "ML05",
+      "type": "regression",
+      "target_hint": "resource_demand",
+      "description": "Predict analytical manpower/equipment demand from verified historical features.",
+      "minimum_labeled_records": 20
+    },
+    "cost_overrun_risk_prediction": {
+      "id": "ML06",
+      "type": "classification",
+      "target_hint": "cost_overrun_risk",
+      "description": "Estimate cost-overrun risk; does not replace approved cost-control calculations.",
+      "minimum_labeled_records": 20
+    },
+    "productivity_prediction": {
+      "id": "ML07",
+      "type": "regression",
+      "target_hint": "productivity",
+      "description": "Predict productivity from verified quantities/resource inputs.",
+      "minimum_labeled_records": 20
+    },
+    "risk_prioritization": {
+      "id": "ML10",
+      "type": "classification",
+      "target_hint": "risk_priority",
+      "description": "Prioritize risk classes from available verified risk features.",
+      "minimum_labeled_records": 20
+    },
+    "procurement_delay_risk": {
+      "id": "ML11",
+      "type": "classification",
+      "target_hint": "procurement_delay_risk",
+      "description": "Estimate procurement delay risk from verified procurement history.",
+      "minimum_labeled_records": 20
+    },
+    "progress_slippage_prediction": {
+      "id": "ML12",
+      "type": "classification",
+      "target_hint": "progress_slippage",
+      "description": "Estimate progress-slippage risk from verified period/status data.",
+      "minimum_labeled_records": 20
+    }
+  }
+}

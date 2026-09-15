@@ -1,0 +1,185 @@
+{
+  "project_id": "Suez-Tunnel",
+  "project_key": "Suez-Tunnel",
+  "project_fingerprint": "f4dc60eb21199d7408ba1056c903738ab08833fe19c50910692a3148992e07a7",
+  "generator_version": "2026.08.project-scoped-html-pdf-pptx.v6-source-html",
+  "chart_catalog_version": "2026-08-02-reference-36",
+  "chart_status": {
+    "overview.schedule_performance_s_curve": "ready",
+    "overview.overall_completion_gauge": "ready",
+    "overview.activity_status": "ready",
+    "overview.discipline_health": "awaiting_data",
+    "overview.earned_value_trend": "awaiting_data",
+    "overview.performance_indices": "awaiting_data",
+    "wbs.progress_distribution": "awaiting_data",
+    "wbs.duration_breakdown": "awaiting_data",
+    "activities.status_distribution": "ready",
+    "activities.critical_path": "ready",
+    "activities.float_distribution": "ready",
+    "activities.monthly_completion": "awaiting_data",
+    "activities.responsible_party_workload": "ready",
+    "milestones.schedule_health": "ready",
+    "milestones.variance_trend": "ready",
+    "milestones.type_breakdown": "ready",
+    "s_curve.master": "awaiting_data",
+    "s_curve.discipline": "awaiting_data",
+    "s_curve.variance": "awaiting_data",
+    "evm.burnup": "ready",
+    "evm.variance_waterfall": "ready",
+    "evm.spi_trend": "awaiting_data",
+    "evm.cpi_trend": "awaiting_data",
+    "contracts.payment_history": "ready",
+    "contracts.planned_vs_actual_cash_flow": "awaiting_data",
+    "contracts.payment_status": "ready",
+    "contracts.variations": "ready",
+    "risks.category": "awaiting_data",
+    "risks.status": "ready",
+    "risks.trend": "awaiting_data",
+    "risks.mitigation_effectiveness": "awaiting_data",
+    "delay.events_timeline": "ready",
+    "delay.root_cause_pareto": "awaiting_data",
+    "delay.type_distribution": "awaiting_data",
+    "delay.monthly_accumulation": "awaiting_data",
+    "delay.tia_recovery_scenario": "awaiting_data"
+  },
+  "assessment": {
+    "analysis_run_id": "b888aba791a50cd7578e",
+    "assessment_profile": "readiness_only",
+    "assessment_status": "readiness_only",
+    "determination_status": "p6_recalculation_required",
+    "source_scope": "selected_project_only"
+  },
+  "generated_at": "2026-08-05T01:08:59",
+  "reports": {
+    "executive_dashboard": {
+      "html": "/generated/Suez-Tunnel/01_executive_dashboard.html",
+      "pdf": "/generated/Suez-Tunnel/01_executive_dashboard.pdf",
+      "pptx": "/generated/Suez-Tunnel/01_executive_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "01_executive_dashboard.html",
+          "bytes": 18243,
+          "sha256": "510b429eb8af37a45e920616a52695641b87ccd10650d6314650542b19e94ccd"
+        },
+        "pdf": {
+          "name": "01_executive_dashboard.pdf",
+          "bytes": 918800,
+          "sha256": "b974262bca998b77b55b872ed911459cee29ead01dbd281be4826b6163eede88"
+        },
+        "pptx": {
+          "name": "01_executive_dashboard.pptx",
+          "bytes": 29125,
+          "sha256": "0f6258b64bd2014e9d6ec49d5caf62c5934f3dbb13cf8a5fb933b63e47b35f2f"
+        }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Suez-Tunnel",
+      "source_report_fingerprint": "7edca5ab5c71cac026e5d36eefb3cd0fe426cf7d18f7510d5ca7877f7729bee4"
+    },
+    "master_dashboard": {
+      "html": "/generated/Suez-Tunnel/02_master_dashboard.html",
+      "pdf": "/generated/Suez-Tunnel/02_master_dashboard.pdf",
+      "pptx": "/generated/Suez-Tunnel/02_master_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "02_master_dashboard.html",
+          "bytes": 87011,
+          "sha256": "309aa8a622f2b0f673377feba8ddd2fc6a56622125c444048a0491b7462f83b5"
+        },
+        "pdf": {
+          "name": "02_master_dashboard.pdf",
+          "bytes": 884770,
+          "sha256": "ad553a377d6df38735c6424217c0c0a87fd77e5cf74055cb5e71c0cb47bd71e3"
+        },
+        "pptx": {
+          "name": "02_master_dashboard.pptx",
+          "bytes": 29122,
+          "sha256": "6acd9aa1e02ae5e06323e812de422d5d176a9c174d28f907ce5e2be41010af31"
+        }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Suez-Tunnel",
+      "source_report_fingerprint": "7edca5ab5c71cac026e5d36eefb3cd0fe426cf7d18f7510d5ca7877f7729bee4"
+    },
+    "elite_svg_charts": {
+      "html": "/generated/Suez-Tunnel/03_elite_svg_charts.html",
+      "pdf": "/generated/Suez-Tunnel/03_elite_svg_charts.pdf",
+      "pptx": "/generated/Suez-Tunnel/03_elite_svg_charts.pptx",
+      "files": {
+        "html": {
+          "name": "03_elite_svg_charts.html",
+          "bytes": 52006,
+          "sha256": "1715ce5feded555db34e4f7ddcfd670d1227e63da0676746e095616dadde43e7"
+        },
+        "pdf": {
+          "name": "03_elite_svg_charts.pdf",
+          "bytes": 241398,
+          "sha256": "9e9b71aa1523912187c11cc9a89c3e8a0ecf1142f3797fb25af26b4b7fe12829"
+        },
+        "pptx": {
+          "name": "03_elite_svg_charts.pptx",
+          "bytes": 29122,
+          "sha256": "ce2514c7b245efbb356e7d2821d082b221adffa9f93af83bb18f54c7bb5d94d7"
+        }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Suez-Tunnel",
+      "source_report_fingerprint": "7edca5ab5c71cac026e5d36eefb3cd0fe426cf7d18f7510d5ca7877f7729bee4"
+    },
+    "linked_executive_dashboard": {
+      "html": "/generated/Suez-Tunnel/04_linked_executive_dashboard.html",
+      "pdf": "/generated/Suez-Tunnel/04_linked_executive_dashboard.pdf",
+      "pptx": "/generated/Suez-Tunnel/04_linked_executive_dashboard.pptx",
+      "files": {
+        "html": {
+          "name": "04_linked_executive_dashboard.html",
+          "bytes": 57801,
+          "sha256": "89656a81a090cfb88f156f19c15ce4e6faf58c48cebf426acad06c0e9fc48cfd"
+        },
+        "pdf": {
+          "name": "04_linked_executive_dashboard.pdf",
+          "bytes": 1121973,
+          "sha256": "78ca56c48a2d96f2922538821508f800d155bdde306c7a85ba51404bca6d832d"
+        },
+        "pptx": {
+          "name": "04_linked_executive_dashboard.pptx",
+          "bytes": 29131,
+          "sha256": "6e13925513958537d5bb59e77e6457f5db47e1f28a955463d4ab138b2ff78925"
+        }
+      },
+      "html_origin": "canonical_project_html",
+      "source_project_id": "Suez-Tunnel",
+      "source_report_fingerprint": "7edca5ab5c71cac026e5d36eefb3cd0fe426cf7d18f7510d5ca7877f7729bee4"
+    },
+    "tia_governed_assessment": {
+      "html": "/generated/Suez-Tunnel/05_delay_tia_governed_assessment.html",
+      "pdf": "/generated/Suez-Tunnel/05_delay_tia_governed_assessment.pdf",
+      "pptx": "/generated/Suez-Tunnel/05_delay_tia_governed_assessment.pptx",
+      "docx": "/generated/Suez-Tunnel/05_delay_tia_governed_assessment.docx",
+      "files": {
+        "html": {
+          "name": "05_delay_tia_governed_assessment.html",
+          "bytes": 2557,
+          "sha256": "5342393a87ba320084120116b9cfe9cd8bc8cd9020b6af0e1cfae02632e62a2f"
+        },
+        "pdf": {
+          "name": "05_delay_tia_governed_assessment.pdf",
+          "bytes": 2049,
+          "sha256": "fbcb08255baa8a0ad0584b83d3591535fbbe7d4f776590311819a26c01791fa5"
+        },
+        "pptx": {
+          "name": "05_delay_tia_governed_assessment.pptx",
+          "bytes": 28478,
+          "sha256": "7ed37c8fc0a5782bfd7462898e8eba58cb32ec3951098958cc354fed48389978"
+        },
+        "docx": {
+          "name": "05_delay_tia_governed_assessment.docx",
+          "bytes": 35684,
+          "sha256": "1085732ae6e1031006c38d8ee083666a588299ce14fb0162455293ab8d223258"
+        }
+      },
+      "assessment_status": "awaiting_sources",
+      "source_scope": "selected_project_only"
+    }
+  }
+}

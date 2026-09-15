@@ -14,9 +14,21 @@ PROJECT_METADATA_FILE = "project.json"
 PROJECT_MANIFEST_FILE = "project_manifest.json"
 PROJECT_TEMPLATE_DIRNAME = "_PROJECT_TEMPLATE"
 DEFAULT_SECTOR_NAME = "Unassigned"
+CANONICAL_PROJECT_INPUTS = (
+    "01_project_contract.csv",
+    "02_schedule_activities.csv",
+    "03_schedule_logic.csv",
+    "04_progress_evm.csv",
+    "05_milestones_scurve.csv",
+    "06_delay_events.csv",
+    "07_tia_evidence_scenarios.csv",
+    "08_commercial_payments_claims.csv",
+    "09_risks_rfi_interfaces.csv",
+    "10_letters_intelligence.csv",
+)
 PROJECT_SUBDIRECTORIES = (
     "01-data/import_templates",
-    "02-delay_analysis/steel_delay_tia_templates",
+    "02-delay_analysis/unified_tia_csv",
     "02-delay_analysis/methodology",
     "02-delay_analysis/approved_release",
     "02-delay_analysis/controlled_runs",
@@ -48,7 +60,38 @@ def safe_sector_name(value: Any) -> str:
 
 
 def _read_project_csv_identity(project_dir: Path) -> dict[str, str]:
-    """Read the user-maintained project identity from projects.csv when present."""
+    """Read identity from the ten-input contract first, then legacy projects.csv.
+
+    New project folders use only the canonical editable inputs; they must not
+    need a hidden or obsolete projects.csv just to be discovered correctly.
+    """
+    canonical_contract = project_dir / "01-data" / "import_templates" / "01_project_contract.csv"
+    if canonical_contract.exists():
+        try:
+            canonical_rows = pd.read_csv(canonical_contract, dtype=str, keep_default_na=False)
+            if not canonical_rows.empty:
+                if "source_table" in canonical_rows.columns:
+                    project_rows = canonical_rows[
+                        canonical_rows["source_table"].astype(str).str.strip().str.casefold().eq("projects")
+                    ]
+                    if project_rows.empty:
+                        project_rows = canonical_rows
+                else:
+                    project_rows = canonical_rows
+                row = project_rows.iloc[0]
+                identity = {
+                    "project_id": safe_project_id(row.get("project_id")),
+                    "project_name": str(row.get("project_name", "") or "").strip(),
+                    "client_name": str(row.get("client_name", "") or "").strip(),
+                    "contractor": str(row.get("contractor", "") or "").strip(),
+                    "currency": str(row.get("currency", "") or "").strip(),
+                    "status": str(row.get("status", "") or "").strip(),
+                    "sector_name": str(row.get("sector_name", "") or "").strip(),
+                }
+                if any(identity.values()):
+                    return identity
+        except (OSError, UnicodeDecodeError, pd.errors.ParserError):
+            pass
     for project_csv in (
         project_dir / "01-data" / "import_templates" / "projects.csv",
         project_dir / "data" / "import_templates" / "projects.csv",
@@ -184,7 +227,7 @@ def project_directory(projects_root: Path, project_id: str) -> Path:
 def project_data_path(projects_root: Path, project_id: str, family: str, relative_path: Path | str) -> Path:
     family_roots = {
         "core": Path("01-data/import_templates"),
-        "delay_analysis": Path("02-delay_analysis/steel_delay_tia_templates"),
+        "delay_analysis": Path("02-delay_analysis/unified_tia_csv"),
         "bl": Path("03-schedule"),
         "fixed": Path("03-schedule"),
         "letters": Path("07-letters_intelligence"),
@@ -208,7 +251,12 @@ def ensure_project_structure(project_dir: Path) -> None:
     for relative_dir in PROJECT_SUBDIRECTORIES:
         folder = project_dir / relative_dir
         folder.mkdir(parents=True, exist_ok=True)
-        if not any(folder.iterdir()):
+        input_dir = project_dir / "01-data" / "import_templates"
+        has_canonical_bundle = (input_dir / "project_input_bundle.csv").is_file() or all(
+            (input_dir / input_name).is_file() for input_name in CANONICAL_PROJECT_INPUTS
+        )
+        canonical_input_folder = relative_dir in {"01-data/import_templates", "02-delay_analysis/unified_tia_csv"}
+        if not any(folder.iterdir()) and not (has_canonical_bundle and canonical_input_folder):
             (folder / ".gitkeep").touch(exist_ok=True)
     ensure_project_samples(project_dir)
 
@@ -224,8 +272,8 @@ def ensure_project_samples(project_dir: Path) -> None:
             pass
     samples = {
         "01-data/import_templates/planned_cash_flow.csv": "project_id,period_date,planned_cash_out,planned_cumulative_cash_out,currency,basis,source_file,source_sheet,source_row,notes\n",
-        "02-delay_analysis/steel_delay_tia_templates/14-delay_event_classification.csv": "project_id,event_id,activity_id,root_cause,delay_type,entitlement_status,responsible_party,event_start,event_finish,delay_days,evidence_reference,source_file,source_sheet,source_row,analyst_status,notes\n",
-        "02-delay_analysis/steel_delay_tia_templates/15-tia_recovery_scenario.csv": "project_id,scenario_id,scenario_name,analyst_status,activity_id,status_date,baseline_progress_percent,impacted_progress_percent,recovery_progress_percent,baseline_finish,impacted_finish,recovery_finish,predecessor_activity_id,successor_activity_id,relationship_type,lag_days,p6_update_reference,evidence_reference,source_file,source_sheet,source_row,notes\n",
+        "02-delay_analysis/unified_tia_csv/14-delay_event_classification.csv": "project_id,event_id,activity_id,root_cause,delay_type,entitlement_status,responsible_party,event_start,event_finish,delay_days,evidence_reference,source_file,source_sheet,source_row,analyst_status,notes\n",
+        "02-delay_analysis/unified_tia_csv/15-tia_recovery_scenario.csv": "project_id,scenario_id,scenario_name,analyst_status,activity_id,status_date,baseline_progress_percent,impacted_progress_percent,recovery_progress_percent,baseline_finish,impacted_finish,recovery_finish,predecessor_activity_id,successor_activity_id,relationship_type,lag_days,p6_update_reference,evidence_reference,source_file,source_sheet,source_row,notes\n",
         "02-delay_analysis/approved_release/README.md": "# Approved TIA Release\n\nStore only this project's approved source package here, or declare its controlled external source in project_manifest.json. Do not copy another project's XER, contract, event, or evidence package into this folder.\n",
         "02-delay_analysis/controlled_runs/README.md": "# Controlled TIA Runs\n\nThis folder stores generated project-local draft and approved control records. Do not manually copy runs between projects.\n",
         "02-delay_analysis/_legacy_archive/README.md": "# Legacy TIA Archive\n\nHistoric generic TIA templates and outputs may remain recoverable outside the active controlled workflow. They are not an active evidence source.\n",
@@ -244,7 +292,14 @@ def ensure_project_samples(project_dir: Path) -> None:
         "09-notes/engineering_notes_template.md": "# Engineering Notes\n\n- Date:\n- Discipline:\n- Drawing / RFI reference:\n- Constraint:\n- Required action:\n",
         "09-notes/claims_notes_template.md": "# Claims Notes\n\n- Date:\n- Event ID:\n- Clause reference:\n- Notice status:\n- Cause and effect:\n- Missing evidence:\n",
     }
+    input_dir = project_dir / "01-data" / "import_templates"
+    has_canonical_bundle = (input_dir / "project_input_bundle.csv").is_file() or all(
+        (input_dir / input_name).is_file() for input_name in CANONICAL_PROJECT_INPUTS
+    )
     for relative_path, content in samples.items():
+        # Bundled projects intentionally keep no physical legacy templates.
+        if has_canonical_bundle and relative_path.lower().endswith(".csv"):
+            continue
         path = project_dir / relative_path
         if not path.exists():
             path.parent.mkdir(parents=True, exist_ok=True)

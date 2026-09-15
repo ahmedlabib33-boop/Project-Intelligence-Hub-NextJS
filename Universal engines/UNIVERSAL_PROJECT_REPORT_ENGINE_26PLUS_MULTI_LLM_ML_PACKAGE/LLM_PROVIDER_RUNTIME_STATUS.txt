@@ -1,0 +1,35 @@
+Python AI Programming by Eng. Ahmed Labib
+{
+  "attribution": "Python AI Programming by Eng. Ahmed Labib",
+  "component_version": "2.0.0",
+  "provider_count": 3,
+  "all_configured": false,
+  "providers": {
+    "claude": {
+      "provider": "Anthropic",
+      "model": "claude-opus-5",
+      "protocol": "anthropic_messages",
+      "api_key_configured": false,
+      "key_environment_variable": "ANTHROPIC_API_KEY",
+      "status": "MISSING_API_KEY"
+    },
+    "kimi": {
+      "provider": "Moonshot AI",
+      "model": "kimi-k3",
+      "protocol": "openai_chat_completions",
+      "api_key_configured": false,
+      "key_environment_variable": "MOONSHOT_API_KEY",
+      "status": "MISSING_API_KEY"
+    },
+    "deepseek": {
+      "provider": "DeepSeek",
+      "model": "deepseek-v4-pro",
+      "protocol": "openai_chat_completions",
+      "api_key_configured": false,
+      "key_environment_variable": "DEEPSEEK_API_KEY",
+      "status": "MISSING_API_KEY"
+    }
+  },
+  "governance_sha256": "0819695710a22de985d1a1099eb919cc861dadb2cba00cc19a5e0754fd7bc37c",
+  "note": "Provider availability is runtime configuration only; it is not evidence quality or model accuracy."
+}

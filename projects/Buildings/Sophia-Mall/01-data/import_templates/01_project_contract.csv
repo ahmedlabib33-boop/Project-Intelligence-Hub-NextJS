@@ -1,0 +1,4 @@
+﻿source_table,source_path,row_order,contract_id,project_id,package,contractor,contract_type,original_value,approved_variations,pending_variations,paid_to_date,retention_percent,status,project_name,client_name,planned_start,planned_finish,forecast_finish,contract_value,currency,planned_progress_percent,actual_progress_percent,planned_value,earned_value
+contracts,01-data/import_templates/contracts.csv,1,SM-PH-01,Sophia-Mall,1,Delta Build Contractors,Unit rate,2100000000,73500000,25200000,519750000,5%,Active,,,,,,,,,,,
+contracts,01-data/import_templates/contracts.csv,2,SM-PH-02,Sophia-Mall,2,Delta Build Contractors,Lump sum,378000000,3780000,7560000,43659000,5%,Active,,,,,,,,,,,
+projects,01-data/import_templates/projects.csv,1,,Sophia-Mall,,Delta Build Contractors,,,,,,,On Track,Sophia Mall Mixed-Use Development,Sophia Retail Properties,15-Oct-25,31-Jul-27,25-Aug-27,2100000000,EGP,31.00,33.00,651000000,693000000

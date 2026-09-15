@@ -22,6 +22,14 @@ from universal_report_engine_adapter import (
     is_released_artifact,
 )
 
+# Canonical inputs embed lossless JSON snapshots in ``payload_json``.  Letter
+# registers can exceed Python's small default CSV field limit (131,072 bytes).
+# Raise the parser limit once for every controlled project input.
+try:
+    csv.field_size_limit(sys.maxsize)
+except OverflowError:
+    csv.field_size_limit(2**31 - 1)
+
 
 ROOT = Path(__file__).resolve().parents[1]
 # This delivery is self-contained.  Generated website data must always come
@@ -107,6 +115,335 @@ def read_csv_rows(path: Path) -> list[dict[str, str]]:
             continue
     return []
 
+
+CANONICAL_BUNDLE_NAMES = (
+    "01_project_contract.csv",
+    "02_schedule_activities.csv",
+    "03_schedule_logic.csv",
+    "04_progress_evm.csv",
+    "05_milestones_scurve.csv",
+    "06_delay_events.csv",
+    "07_tia_evidence_scenarios.csv",
+    "08_commercial_payments_claims.csv",
+    "09_risks_rfi_interfaces.csv",
+    "10_letters_intelligence.csv",
+)
+
+LOGICAL_DATASETS = (
+    "projects", "contracts", "payments", "planned_cash_flow", "progress", "evm",
+    "risks", "claims", "activities", "milestones", "delay_events", "s_curve",
+    "wbs", "historical_outcomes", "delay_event_classification", "tia_recovery_scenario",
+)
+
+
+def _bundle_value(value: Any) -> str:
+    return "" if value is None else str(value)
+
+
+def _decode_canonical_input_bundles(data_dir: Path) -> tuple[dict[str, list[dict[str, str]]], dict[str, Path]]:
+    """Rebuild legacy logical rows from the ten compact, lossless input bundles.
+
+    The bundles preserve original headers and row order in payload_json.  This is
+    intentionally in-memory: the ten files remain the only active project inputs.
+    """
+    tables: dict[str, dict[str, Any]] = {}
+    sources: dict[str, Path] = {}
+    found_bundle = False
+    for bundle_name in CANONICAL_BUNDLE_NAMES:
+        bundle_path = data_dir / bundle_name
+        for record in read_csv_rows(bundle_path):
+            # Readable canonical CSVs expose one source row per spreadsheet row.
+            # They deliberately replace the former payload_json envelope while
+            # retaining the same logical source tables and values.
+            readable_table = str(record.get("source_table") or "").strip()
+            readable_path = str(record.get("source_path") or "").strip()
+            if readable_table and readable_path:
+                found_bundle = True
+                table = tables.setdefault(readable_table, {"headers": [], "rows": [], "direct_rows": []})
+                try:
+                    row_order = int(str(record.get("row_order") or "0"))
+                except ValueError:
+                    row_order = len(table["direct_rows"])
+                direct_row = {
+                    key: value
+                    for key, value in record.items()
+                    if key not in {"source_table", "source_path", "row_order"} and value not in (None, "")
+                }
+                table["direct_rows"].append((row_order, direct_row))
+                sources.setdefault(readable_table, bundle_path)
+                continue
+            if not record.get("bundle_version") or not record.get("source_file"):
+                continue
+            found_bundle = True
+            source_name = Path(str(record["source_file"])).stem
+            table = tables.setdefault(source_name, {"headers": [], "rows": []})
+            sources.setdefault(source_name, bundle_path)
+            try:
+                payload = json.loads(str(record.get("payload_json") or "null"))
+            except json.JSONDecodeError:
+                continue
+            kind = str(record.get("row_kind") or "").strip().casefold()
+            if kind == "schema" and isinstance(payload, dict):
+                headers = payload.get("headers")
+                if isinstance(headers, list):
+                    table["headers"] = [str(header) for header in headers]
+            elif kind == "data" and isinstance(payload, list):
+                try:
+                    row_order = int(str(record.get("row_order") or "0"))
+                except ValueError:
+                    row_order = len(table["rows"])
+                table["rows"].append((row_order, payload))
+    if not found_bundle:
+        return {}, {}
+
+    result: dict[str, list[dict[str, str]]] = {}
+    for name, table in tables.items():
+        direct_rows = table.get("direct_rows", [])
+        if direct_rows:
+            result[name] = [row for _, row in sorted(direct_rows, key=lambda item: item[0])]
+            continue
+        headers = table["headers"]
+        result[name] = [
+            {header: _bundle_value(values[index]) if index < len(values) else "" for index, header in enumerate(headers)}
+            for _, values in sorted(table["rows"], key=lambda item: item[0])
+            if headers
+        ]
+
+    # Some original TIA files carry their numbered filename in source_file.
+    # Alias them to the dashboard's stable logical dataset names.
+    for original_name, logical_name in {
+        "08- payments": "payments",
+        "12_delay_event_classification": "delay_event_classification",
+        "14-delay_event_classification": "delay_event_classification",
+        "13_tia_recovery_scenario": "tia_recovery_scenario",
+        "15-tia_recovery_scenario": "tia_recovery_scenario",
+    }.items():
+        if original_name in result and logical_name not in result:
+            result[logical_name] = result[original_name]
+            sources[logical_name] = sources[original_name]
+    # activity_master is the lossless merge of the former activity, EVM, and
+    # progress feeds. Reconstruct each old logical view only in memory.
+    master_rows = result.get("activity_master", [])
+    for target, prefix in (("activities", "activity__"), ("evm", "evm__"), ("progress", "progress__")):
+        rebuilt: list[dict[str, str]] = []
+        for master in master_rows:
+            row = {column[len(prefix):]: value for column, value in master.items() if column.startswith(prefix)}
+            if str(row.get("activity_id") or "").strip():
+                rebuilt.append(row)
+        # A dedicated readable input (04_progress_evm.csv) takes precedence.
+        # activity_master remains a backward-compatible fallback for legacy
+        # bundles that have not yet materialized those records.
+        if rebuilt and target not in result:
+            result[target] = rebuilt
+            sources[target] = sources.get("activity_master", data_dir / "02_schedule_activities.csv")
+    return result, sources
+
+
+def load_project_input_rows(data_dir: Path) -> tuple[dict[str, list[dict[str, str]]], dict[str, Path]]:
+    """Return the logical datasets used by the app from canonical or legacy inputs."""
+    decoded, sources = _decode_canonical_input_bundles(data_dir)
+    rows: dict[str, list[dict[str, str]]] = {}
+    source_paths: dict[str, Path] = {}
+    for dataset in LOGICAL_DATASETS:
+        canonical_name = dataset
+        if decoded:
+            rows[dataset] = list(decoded.get(canonical_name, []))
+            if canonical_name in sources:
+                source_paths[dataset] = sources[canonical_name]
+        else:
+            filename = "progress_updates.csv" if dataset == "progress" else f"{dataset}.csv"
+            path = data_dir / filename
+            rows[dataset] = read_csv_rows(path)
+            source_paths[dataset] = path
+    return rows, source_paths
+
+
+def load_canonical_letters_payload(project: dict[str, Any], data_dir: Path) -> dict[str, Any] | None:
+    """Read the project-scoped Letters snapshot from canonical input 10.
+
+    The ten-input redesign stores the former workbook and inbox result as one
+    lossless snapshot row.  It must be read directly instead of looking for the
+    archived ``07-letters_intelligence`` workbook folder.
+    """
+    bundle_path = data_dir / "10_letters_intelligence.csv"
+    project_id = str(project.get("project_id") or "").strip()
+    if not bundle_path.exists() or not project_id:
+        return None
+
+    records = read_csv_rows(bundle_path)
+    if records and "record_type" in records[0] and "sheet_name" in records[0]:
+        inbox_files: list[dict[str, Any]] = []
+        sheets: dict[str, dict[str, Any]] = {}
+        letters_metadata = {"record_type", "sheet_name", "row_order", "file_name", "relative_path", "extension", "size_kb", "modified"}
+        for record in records:
+            record_type = str(record.get("record_type") or "").strip().casefold()
+            if record_type == "inbox_file":
+                inbox_files.append(
+                    {
+                        "name": str(record.get("file_name") or "Letter file"),
+                        "relative_path": str(record.get("relative_path") or record.get("file_name") or ""),
+                        "extension": str(record.get("extension") or "file"),
+                        "size_kb": safe_float(record.get("size_kb")) or 0,
+                        "modified": str(record.get("modified") or ""),
+                    }
+                )
+                continue
+            if record_type != "letter_register":
+                continue
+            row_project_id = str(record.get("project_id") or "").strip()
+            if row_project_id and row_project_id != project_id:
+                continue
+            sheet_name = str(record.get("sheet_name") or "Letters Register")
+            sheet = sheets.setdefault(sheet_name, {"name": sheet_name, "columns": [], "rows": []})
+            row = {
+                key: excel_value(value)
+                for key, value in record.items()
+                if key not in letters_metadata and value not in (None, "")
+            }
+            row["project_id"] = project_id
+            for column in row:
+                if column not in sheet["columns"]:
+                    sheet["columns"].append(column)
+            sheet["rows"].append(row)
+        published_sheets = [
+            {
+                "name": sheet["name"],
+                "row_count": len(sheet["rows"]),
+                "column_count": len(sheet["columns"]),
+                "columns": sheet["columns"],
+                "rows": sheet["rows"][:WORKSPACE_TABLE_ROW_LIMIT],
+                "truncated": len(sheet["rows"]) > WORKSPACE_TABLE_ROW_LIMIT,
+            }
+            for sheet in sheets.values()
+        ]
+        return {
+            "folder": "01-data/import_templates",
+            "inbox_files": inbox_files,
+            "inbox_file_count": len(inbox_files),
+            "workbook": {"file": bundle_path.name, "exists": True, "source_workbook": "letters_intelligence.xlsx", "sheets": published_sheets},
+            "workbook_tables": {
+                "file": bundle_path.name,
+                "exists": True,
+                "sheets": published_sheets,
+                "rejected_cross_project_rows": 0,
+                "source_scope": "selected_project_only",
+                "inbox_auto_ingest": True,
+                "source_mode": "readable_csv_register",
+            },
+            "source_file": bundle_path.name,
+        }
+
+    for record in records:
+        if str(record.get("row_kind") or "").strip().casefold() != "snapshot":
+            continue
+        try:
+            snapshot = json.loads(str(record.get("payload_json") or "null"))
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(snapshot, dict):
+            continue
+
+        workbook_tables = snapshot.get("workbook_tables")
+        if not isinstance(workbook_tables, dict):
+            continue
+
+        published_sheets: list[dict[str, Any]] = []
+        rejected_rows = 0
+        for source_sheet in workbook_tables.get("sheets", []):
+            if not isinstance(source_sheet, dict):
+                continue
+            source_rows = source_sheet.get("rows")
+            if not isinstance(source_rows, list):
+                source_rows = []
+            scoped_rows: list[dict[str, Any]] = []
+            for source_row in source_rows:
+                if not isinstance(source_row, dict):
+                    continue
+                row = {str(key): excel_value(value) for key, value in source_row.items()}
+                row_project_id = str(row.get("project_id") or "").strip()
+                if row_project_id and row_project_id != project_id:
+                    rejected_rows += 1
+                    continue
+                row["project_id"] = project_id
+                scoped_rows.append(row)
+            columns = [str(column) for column in source_sheet.get("columns", [])]
+            if "project_id" not in columns:
+                columns.append("project_id")
+            declared_number = safe_float(source_sheet.get("row_count"))
+            declared_count = int(declared_number) if declared_number is not None else len(scoped_rows)
+            published_sheets.append(
+                {
+                    "name": str(source_sheet.get("name") or "Letters Register"),
+                    "row_count": declared_count if declared_count >= len(scoped_rows) else len(scoped_rows),
+                    "column_count": len(columns),
+                    "columns": columns,
+                    "rows": scoped_rows[:WORKSPACE_TABLE_ROW_LIMIT],
+                    "truncated": bool(source_sheet.get("truncated")) or len(scoped_rows) > WORKSPACE_TABLE_ROW_LIMIT,
+                }
+            )
+
+        source_files = snapshot.get("inbox_files")
+        inbox_files = [
+            {
+                "name": str(item.get("name") or "Letter file"),
+                "relative_path": str(item.get("relative_path") or item.get("name") or ""),
+                "extension": str(item.get("extension") or "file"),
+                "size_kb": safe_float(item.get("size_kb")) or 0,
+                "modified": str(item.get("modified") or ""),
+            }
+            for item in source_files
+            if isinstance(item, dict)
+        ] if isinstance(source_files, list) else []
+
+        workbook = snapshot.get("workbook") if isinstance(snapshot.get("workbook"), dict) else {}
+        return {
+            "folder": "01-data/import_templates",
+            "inbox_files": inbox_files,
+            "inbox_file_count": len(inbox_files),
+            "workbook": {
+                "file": bundle_path.name,
+                "exists": True,
+                "source_workbook": str(workbook.get("file") or "letters_intelligence.xlsx"),
+                "sheets": published_sheets,
+            },
+            "workbook_tables": {
+                "file": bundle_path.name,
+                "exists": True,
+                "sheets": published_sheets,
+                "rejected_cross_project_rows": rejected_rows,
+                "source_scope": "selected_project_only",
+                "inbox_auto_ingest": True,
+                "source_mode": "canonical_csv_snapshot",
+            },
+            "source_file": bundle_path.name,
+        }
+    return None
+
+
+def preview_rows_table(rows: list[dict[str, Any]], source_path: Path, limit: int = 8) -> dict[str, Any]:
+    columns = list(rows[0].keys()) if rows else []
+    return {
+        "file": source_path.name,
+        "exists": source_path.exists(),
+        "row_count": len(rows),
+        "column_count": len(columns),
+        "columns": columns,
+        "rows": rows[:limit],
+    }
+
+
+def workspace_rows_table(rows: list[dict[str, Any]], source_path: Path, limit: int = WORKSPACE_TABLE_ROW_LIMIT) -> dict[str, Any]:
+    columns = list(rows[0].keys()) if rows else []
+    return {
+        "file": source_path.name,
+        "exists": source_path.exists(),
+        "row_count": len(rows),
+        "column_count": len(columns),
+        "columns": columns,
+        "rows": rows[:limit],
+        "truncated": len(rows) > limit,
+        "source_path": source_path.name,
+    }
 
 def compact_file_record(path: Path, base: Path) -> dict[str, Any]:
     stat = path.stat()
@@ -286,6 +623,55 @@ def _frames_to_workspace_tables(
     result["rejected_cross_project_rows"] = rejected_rows
     result["source_scope"] = "selected_project_only"
     return result
+
+
+def merge_canonical_letters_with_inbox(
+    project: dict[str, Any], canonical_letters: dict[str, Any], inbox_dir: Path
+) -> dict[str, Any]:
+    """Overlay the live, project-local inbox on the canonical letters register.
+
+    The ten-input letters CSV remains the historical register authority.  New
+    controlled correspondence placed in either direction folder is processed in
+    memory by the same Streamlit ingestion engine and then published with the
+    selected project's generated JSON.  This deliberately does not rewrite the
+    canonical CSV or the original evidence file.
+    """
+    project_id = str(project.get("project_id") or "").strip()
+    workspace = dict(canonical_letters.get("workbook_tables") or {})
+    if not project_id or not inbox_dir.exists():
+        return workspace
+    try:
+        import pandas as pd
+
+        source_sheets: dict[str, Any] = {}
+        for sheet in workspace.get("sheets") or []:
+            if not isinstance(sheet, dict):
+                continue
+            name = str(sheet.get("name") or "").strip()
+            if not name:
+                continue
+            rows = sheet.get("rows") if isinstance(sheet.get("rows"), list) else []
+            source_sheets[name] = pd.DataFrame(rows).fillna("")
+
+        canonical_src = CANONICAL_ROOT / "src"
+        if canonical_src.exists() and str(canonical_src) not in sys.path:
+            sys.path.insert(0, str(canonical_src))
+        if str(CANONICAL_ROOT) not in sys.path:
+            sys.path.insert(0, str(CANONICAL_ROOT))
+        from construction_system.letters_auto_ingest import merge_inbox_letters
+        from contract_claims_center import extract_text_from_path
+
+        merged = _frames_to_workspace_tables(
+            merge_inbox_letters(source_sheets, inbox_dir, extract_text_from_path), project_id
+        )
+        merged["file"] = str(workspace.get("file") or "10_letters_intelligence.csv")
+        merged["exists"] = True
+        merged["inbox_auto_ingest"] = True
+        merged["source_workbook"] = str(workspace.get("source_workbook") or "letters_intelligence.xlsx")
+        return merged
+    except Exception as exc:
+        workspace["inbox_processing_error"] = str(exc)
+        return workspace
 
 
 def build_letters_workspace_tables(
@@ -931,20 +1317,47 @@ def build_contract_controls_snapshot(
         }
 
 
-def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str, str]]]) -> dict[str, Any]:
+def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str, str]]], source_paths: dict[str, Path]) -> dict[str, Any]:
     base = Path(project["path"])
     data_dir = base / "01-data" / "import_templates"
-    delay_dir = base / "02-delay_analysis" / "steel_delay_tia_templates"
+    delay_dir = base / "02-delay_analysis" / "unified_tia_csv"
     schedule_dir = base / "03-schedule"
     contracts_dir = base / "05-contracts"
     evidence_dir = base / "06-evidence"
     letters_dir = base / "07-letters_intelligence"
     outputs_dir = OUTPUTS_ROOT / project["project_folder_name"]
 
-    letter_files = list_project_files(letters_dir / "inbox", base, 160)
-    letter_workbook_path = letters_dir / "letters_intelligence.xlsx"
-    letter_workbook = xlsx_summary(letter_workbook_path)
-    letter_workspace_tables = build_letters_workspace_tables(project, letter_workbook_path, letters_dir / "inbox")
+    canonical_letters = load_canonical_letters_payload(project, data_dir)
+    if canonical_letters is not None:
+        live_inbox_files = list_project_files(letters_dir / "inbox", base, 160)
+        historical_inbox_files = canonical_letters["inbox_files"]
+        seen_inbox_paths: set[str] = set()
+        letter_files = []
+        for item in [*live_inbox_files, *historical_inbox_files]:
+            relative_path = str(item.get("relative_path") or item.get("name") or "")
+            if not relative_path or relative_path.casefold() in seen_inbox_paths:
+                continue
+            seen_inbox_paths.add(relative_path.casefold())
+            letter_files.append(item)
+        letter_workbook = canonical_letters["workbook"]
+        letter_workspace_tables = merge_canonical_letters_with_inbox(
+            project, canonical_letters, letters_dir / "inbox"
+        )
+        letters_folder = "07-letters_intelligence/inbox + 01-data/import_templates"
+        letters_source_detail = (
+            "Uses the selected project's 10_letters_intelligence.csv historical register and "
+            "automatically evaluates new files in 07-letters_intelligence/inbox/From Contractor "
+            "and From Consultant during the local data build."
+        )
+        letters_detector_status = "Active" if letter_workspace_tables.get("sheets") else "Awaiting Data"
+    else:
+        letter_files = list_project_files(letters_dir / "inbox", base, 160)
+        letter_workbook_path = letters_dir / "letters_intelligence.xlsx"
+        letter_workbook = xlsx_summary(letter_workbook_path)
+        letter_workspace_tables = build_letters_workspace_tables(project, letter_workbook_path, letters_dir / "inbox")
+        letters_folder = "07-letters_intelligence"
+        letters_source_detail = "Uses the project-local workbook, inbox ingestion, correspondence links, and issue-thread workflow."
+        letters_detector_status = "Active" if letter_workspace_tables.get("sheets") else "Awaiting Data"
     contract_files = list_project_files(contracts_dir / "source", base, 80)
     evidence_files = list_project_files(evidence_dir, base, 80)
     output_files = list_project_files(outputs_dir, OUTPUTS_ROOT, 20)
@@ -954,38 +1367,38 @@ def build_feature_payload(project: dict[str, Any], rows: dict[str, list[dict[str
     four_pipeline = build_four_pipeline_snapshot(project, controlled_tia)
     contract_controls = build_contract_controls_snapshot(project, contracts_dir, evidence_dir)
     overview_paths = {
-        "projects": data_dir / "projects.csv",
-        "activities": data_dir / "activities.csv",
-        "progress_updates": data_dir / "progress_updates.csv",
-        "evm": data_dir / "evm.csv",
-        "risks": data_dir / "risks.csv",
-        "claims": data_dir / "claims.csv",
-        "contracts": data_dir / "contracts.csv",
-        "payments": data_dir / "payments.csv",
-        "planned_cash_flow": data_dir / "planned_cash_flow.csv",
-        "milestones": data_dir / "milestones.csv",
-        "delay_events": data_dir / "delay_events.csv",
-        "wbs": data_dir / "wbs.csv",
-        "s_curve": data_dir / "s_curve.csv",
+        "projects": source_paths.get("projects", data_dir / "projects.csv"),
+        "activities": source_paths.get("activities", data_dir / "activities.csv"),
+        "progress_updates": source_paths.get("progress", data_dir / "progress_updates.csv"),
+        "evm": source_paths.get("evm", data_dir / "evm.csv"),
+        "risks": source_paths.get("risks", data_dir / "risks.csv"),
+        "claims": source_paths.get("claims", data_dir / "claims.csv"),
+        "contracts": source_paths.get("contracts", data_dir / "contracts.csv"),
+        "payments": source_paths.get("payments", data_dir / "payments.csv"),
+        "planned_cash_flow": source_paths.get("planned_cash_flow", data_dir / "planned_cash_flow.csv"),
+        "milestones": source_paths.get("milestones", data_dir / "milestones.csv"),
+        "delay_events": source_paths.get("delay_events", data_dir / "delay_events.csv"),
+        "wbs": source_paths.get("wbs", data_dir / "wbs.csv"),
+        "s_curve": source_paths.get("s_curve", data_dir / "s_curve.csv"),
     }
 
     return {
         "overview": {
             "data_sources": {key: len(value) for key, value in rows.items()},
             "source_tables": {
-                key: preview_table(path) for key, path in overview_paths.items()
+                key: preview_rows_table(rows.get("progress" if key == "progress_updates" else key, []), path) for key, path in overview_paths.items()
             },
-            "workspace_tables": {key: workspace_table(path) for key, path in overview_paths.items()},
+            "workspace_tables": {key: workspace_rows_table(rows.get("progress" if key == "progress_updates" else key, []), path) for key, path in overview_paths.items()},
         },
         "letters_intelligence": {
-            "folder": "07-letters_intelligence",
+            "folder": letters_folder,
             "inbox_files": letter_files,
             "inbox_file_count": len(letter_files),
             "workbook": letter_workbook,
             "workbook_tables": letter_workspace_tables,
             "detectors": [
-                {"name": "Inbox folder detector", "status": "Active" if (letters_dir / "inbox").exists() else "Missing", "detail": "Recognizes new PDF, DOCX, XLSX, CSV, and message files under project letters inbox."},
-                {"name": "Letters intelligence workflow", "status": "Active" if letter_workspace_tables.get("sheets") else "Awaiting Data", "detail": "Uses the Streamlit workbook, inbox ingestion, correspondence links, and issue-thread workflow for this project only."},
+                {"name": "Canonical letters source", "status": "Active" if canonical_letters is not None else ("Active" if (letters_dir / "inbox").exists() else "Missing"), "detail": letters_source_detail},
+                {"name": "Letters intelligence workflow", "status": letters_detector_status, "detail": "Publishes the selected project's correspondence registers, links, issue threads, and inbox metadata only."},
                 {"name": "Project isolation", "status": "Active", "detail": "Only files inside the selected project folder are listed."},
             ],
         },
@@ -1435,21 +1848,8 @@ def discover_projects() -> list[dict[str, Any]]:
 def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
     base = Path(project["path"])
     data_dir = base / "01-data" / "import_templates"
-    rows = {
-        "projects": read_csv_rows(data_dir / "projects.csv"),
-        "contracts": read_csv_rows(data_dir / "contracts.csv"),
-        "payments": read_csv_rows(data_dir / "payments.csv"),
-        "planned_cash_flow": read_csv_rows(data_dir / "planned_cash_flow.csv"),
-        "progress": read_csv_rows(data_dir / "progress_updates.csv"),
-        "evm": read_csv_rows(data_dir / "evm.csv"),
-        "risks": read_csv_rows(data_dir / "risks.csv"),
-        "claims": read_csv_rows(data_dir / "claims.csv"),
-        "activities": read_csv_rows(data_dir / "activities.csv"),
-        "milestones": read_csv_rows(data_dir / "milestones.csv"),
-        "delay_events": read_csv_rows(data_dir / "delay_events.csv"),
-        "s_curve": read_csv_rows(data_dir / "s_curve.csv"),
-        "historical_outcomes": read_csv_rows(data_dir / "historical_outcomes.csv"),
-    }
+    rows, source_paths = load_project_input_rows(data_dir)
+
 
     project_meta = rows["projects"][0] if rows["projects"] else {}
 
@@ -1598,13 +1998,13 @@ def build_project_record(project: dict[str, Any]) -> dict[str, Any]:
         "advanced_analytics": advanced_analytics,
     })
 
-    features = build_feature_payload(project, rows)
+    features = build_feature_payload(project, rows, source_paths)
     chart_payloads = build_project_chart_payloads(
         project_id=str(project["project_id"]),
         project_key=str(project["project_key"]),
         data_dir=data_dir,
         vercel_dir=base / "vercel",
-        delay_dir=base / "02-delay_analysis" / "steel_delay_tia_templates",
+        delay_dir=base / "02-delay_analysis" / "unified_tia_csv",
         payment_rows=rows["payments"],
         delay_event_rows=rows["delay_events"],
         activity_rows=rows["activities"],
@@ -1755,6 +2155,7 @@ def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
 
         public_slug = slugify(project_folder)
         artifacts = ensure_project_report_artifacts(project, output_dir, public_slug=public_slug)
+        project["report_package"] = artifacts.pop("published_project_package", None)
         project["report_artifacts"] = artifacts
 
         # The Universal Report Engine is a local controlled tool.  Its catalogue
@@ -1770,7 +2171,7 @@ def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
         target = GENERATED_ROOT / public_slug
         target.mkdir(parents=True, exist_ok=True)
         for artifact in sorted(output_dir.iterdir()):
-            if artifact.is_file() and artifact.suffix.lower() in {".html", ".pdf", ".pptx", ".docx"}:
+            if artifact.is_file() and artifact.suffix.lower() in {".html", ".pdf", ".pptx", ".docx", ".zip"}:
                 copy_if_changed(artifact, target / artifact.name)
 
         # Publish only release-approved Universal Report Engine artifacts.
