@@ -378,7 +378,7 @@ function TenderStep({
 
       <Kpis>
         <Kpi label="Activities" value={dash(summary?.activity_count)} note={summary ? `${dash(summary.relationship_count)} relationships` : noData} />
-        <Kpi label="Forecast finish" value={dash(summary?.forecast_finish)} note={summary ? `Data date ${dash(summary.data_date)}` : noData} />
+        <Kpi label="Forecast finish (native CPM)" value={dash(summary?.forecast_finish)} note={summary ? `Data date ${dash(summary.data_date)}` : noData} />
         <Kpi label="Critical activities" value={dash(summary?.critical_count)} note={summary ? `${dash(summary.driving_path_count)} driving paths` : noData} />
         <Kpi label="Schedule QA" value={qa ? str(qa.score) || "—" : "—"} note={qa ? `Grade ${str(qa.grade) || "—"} · ${str(qa.warnings) || "0"} warnings` : noData} />
       </Kpis>
