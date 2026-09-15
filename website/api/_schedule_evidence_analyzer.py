@@ -158,6 +158,42 @@ DATE_RE = re.compile(
 DURATION_RE = re.compile(r"\b\d+(?:\.\d+)?\s*(?:calendar\s+days?|working\s+days?|days?|weeks?|months?|hours?|يوم(?:ا|ين)?|ايام|أيام|اسابيع|أسابيع|اسبوع|أسبوع|شهور|اشهر|أشهر|شهر|ساعات|ساعه)\b", re.IGNORECASE)
 
 
+# Column-name terms distinctive enough to identify a real BOQ header row.
+# Some workbooks put a merged title (e.g. "BILL No.1 - BRIDGE 7 - STRUCTURES")
+# in row 1 with the real columns in row 2; the generic table extractor then
+# takes the title as `headers` and demotes the real header into row 0 of
+# `rows`. _effective_headers() detects and corrects for that rather than
+# trusting `table.headers` unconditionally.
+BOQ_HEADER_TERMS = (
+    "item", "description", "unit", "quantity", "qty", "rate", "amount", "section", "division",
+    "البند", "الوصف", "الوحده", "الكميه", "السعر", "الاجمالي", "القسم",
+)
+
+# "Item" column values that are section headings, carry-forward or subtotal
+# labels rather than a real item number -- observed directly in real BOQ
+# workbooks where these rows are interspersed with priced line items.
+NON_ITEM_LABEL_PREFIXES = ("section", "carried", "summary", "sub total", "subtotal", "bill no", "page", "total")
+
+
+def _header_like_score(cells: Sequence[Any]) -> int:
+    normalized = [_normalize(cell) for cell in cells]
+    return sum(1 for cell in normalized if cell and any(term in cell for term in BOQ_HEADER_TERMS))
+
+
+def _effective_headers(table: Any) -> Tuple[List[str], int]:
+    """Return (headers, data_row_offset). offset is 1 when the real header
+    was recovered from rows[0] and that row must be skipped as data.
+    """
+    headers = [str(h or "") for h in getattr(table, "headers", []) or []]
+    rows = getattr(table, "rows", []) or []
+    header_score = _header_like_score(headers)
+    if rows:
+        first_row_score = _header_like_score(rows[0])
+        if first_row_score > header_score and first_row_score >= 3:
+            return [str(cell or "") for cell in rows[0]], 1
+    return headers, 0
+
+
 def _document_type(document: Any) -> str:
     haystack = _normalize(f"{getattr(document, 'filename', '')} {getattr(document, 'text', '')[:30000]}")
     scores: List[Tuple[int, str]] = []
@@ -165,6 +201,19 @@ def _document_type(document: Any) -> str:
         score = sum(1 for term in terms if _normalize(term) in haystack)
         if score:
             scores.append((score, label))
+    # A BOQ is structurally a priced schedule of items: Description + Unit +
+    # Quantity + Rate/Amount together in one table is a far stronger signal
+    # than incidental free-text term matches (an item description that
+    # happens to mention "specification" can otherwise outscore "boq").
+    for table in getattr(document, "tables", []) or []:
+        headers, _ = _effective_headers(table)
+        normalized_headers = [_normalize(h) for h in headers]
+        has_quantity = any(any(t in h for t in ("quantity", "qty", "الكميه")) for h in normalized_headers)
+        has_price = any(any(t in h for t in ("rate", "unit cost", "amount", "السعر", "الاجمالي")) for h in normalized_headers)
+        has_description = any(any(t in h for t in ("description", "item", "الوصف", "البند")) for h in normalized_headers)
+        if has_quantity and has_price and has_description:
+            scores.append((6, "BOQ / Quantity"))
+            break
     return max(scores)[1] if scores else "Other Project Evidence"
 
 
@@ -314,7 +363,7 @@ def _boq_numeric_anomalies(boq_documents: Sequence[Any]) -> Dict[str, Any]:
     from columns actually identified in the reviewed tables.
     """
     quantity_aliases = ("quantity", "qty", "الكميه")
-    rate_aliases = ("rate", "unit rate", "سعر الوحده")
+    rate_aliases = ("rate", "unit rate", "unit cost", "unit price", "سعر الوحده")
     amount_aliases = ("amount", "total amount", "total", "الاجمالي", "القيمه")
 
     zero_rate: List[Dict[str, Any]] = []
@@ -325,13 +374,14 @@ def _boq_numeric_anomalies(boq_documents: Sequence[Any]) -> Dict[str, Any]:
 
     for document in boq_documents:
         for table in getattr(document, "tables", []) or []:
-            headers = [_normalize(item) for item in getattr(table, "headers", [])]
-            qty_index = next((i for i, header in enumerate(headers) if any(_normalize(t) == header for t in quantity_aliases)), None)
-            rate_index = next((i for i, header in enumerate(headers) if any(_normalize(t) == header for t in rate_aliases)), None)
-            amount_index = next((i for i, header in enumerate(headers) if any(_normalize(t) == header for t in amount_aliases)), None)
+            effective, offset = _effective_headers(table)
+            headers = [_normalize(item) for item in effective]
+            qty_index = next((i for i, header in enumerate(headers) if header and any(_normalize(t) in header for t in quantity_aliases)), None)
+            rate_index = next((i for i, header in enumerate(headers) if header and any(_normalize(t) in header for t in rate_aliases)), None)
+            amount_index = next((i for i, header in enumerate(headers) if header and any(_normalize(t) in header for t in amount_aliases)), None)
             if qty_index is None and rate_index is None and amount_index is None:
                 continue
-            for row_number, row in enumerate(getattr(table, "rows", []) or [], start=2):
+            for row_number, row in enumerate((getattr(table, "rows", []) or [])[offset:], start=2 + offset):
                 rows_checked += 1
                 source = f"{document.filename} — {getattr(table, 'name', 'Table')}, row {row_number}"
                 for label, index in (("Quantity", qty_index), ("Rate", rate_index), ("Amount", amount_index)):
@@ -392,7 +442,8 @@ def assess_boq_completeness(documents: Sequence[Any]) -> Dict[str, Any]:
     header_sources: Dict[str, List[str]] = defaultdict(list)
     for document in boq_documents:
         for table in getattr(document, "tables", []) or []:
-            for header in getattr(table, "headers", []) or []:
+            effective, _ = _effective_headers(table)
+            for header in effective:
                 normalized = _normalize(header)
                 if not normalized:
                     continue
@@ -412,21 +463,30 @@ def assess_boq_completeness(documents: Sequence[Any]) -> Dict[str, Any]:
 
     # Unique-key risk: does the same Item No. repeat across different
     # sections/sheets? Computed only from rows actually found.
-    item_no_aliases = ("item no", "item number", "bill no", "بند رقم", "رقم البند")
-    section_aliases = ("section", "division", "قسم", "الباب")
+    item_no_aliases = ("item no", "item number", "item code", "bill no", "item", "بند رقم", "رقم البند", "البند")
+    section_aliases = ("section", "division", "bill no", "قسم", "الباب")
     item_locations: Dict[str, set] = defaultdict(set)
     for document in boq_documents:
         for table in getattr(document, "tables", []) or []:
-            headers = [_normalize(item) for item in getattr(table, "headers", [])]
-            item_index = next((i for i, header in enumerate(headers) if any(_normalize(term) == header for term in item_no_aliases)), None)
+            effective, offset = _effective_headers(table)
+            headers = [_normalize(item) for item in effective]
+            item_index = next((i for i, header in enumerate(headers) if header and any(_normalize(term) in header for term in item_no_aliases)), None)
             if item_index is None:
                 continue
-            section_index = next((i for i, header in enumerate(headers) if any(_normalize(term) == header for term in section_aliases)), None)
-            for row in getattr(table, "rows", []) or []:
+            section_index = next((i for i, header in enumerate(headers) if header and any(_normalize(term) in header for term in section_aliases)), None)
+            for row in (getattr(table, "rows", []) or [])[offset:]:
                 if item_index >= len(row):
                     continue
                 item_no = _normalize(str(row[item_index] or ""))
-                if not item_no:
+                # Real BOQ "Item" columns routinely mix real item codes with
+                # section-heading, carried-forward and subtotal label rows
+                # (e.g. "Section 1.1 - Excavation", "Carried to Summary") and
+                # unevaluated formula text (openpyxl reads formulas, not
+                # their computed value, in this read mode). None of those
+                # are item numbers, so they must not count as one.
+                if not item_no or item_no.startswith("=") or any(
+                    item_no.startswith(prefix) for prefix in NON_ITEM_LABEL_PREFIXES
+                ):
                     continue
                 section = _normalize(str(row[section_index])) if section_index is not None and section_index < len(row) else getattr(table, "name", "")
                 item_locations[item_no].add(f"{document.filename} / {section or getattr(table, 'name', 'Table')}")
