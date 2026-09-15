@@ -15,6 +15,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { AI_CHECKING, checkEvidenceAi, type AiHealth } from "../../../lib/evidence/run";
 import { activityBasis, cellText, type LibraryIndex, type PlanningLibrary } from "../../../lib/planning/library";
+import { explainProductivityRange } from "../../../lib/planning/productivityNarrative";
 import { callService, type JsonRecord, type ServiceReply, type ServiceStatus } from "../../../lib/planning/service";
 import { formatNum } from "../../../lib/xer/format";
 import { Badge, Card, Kpi, Kpis, SectionTitle } from "../xer/ui";
@@ -478,6 +479,8 @@ function DetailedStep({
         uom: basis?.uom || cellText(row.uom),
         libraryProduction: basis?.dailyProduction ?? null,
         governing: basis?.governing || "",
+        productivityRange: basis?.productivityRange ?? null,
+        productivityNote: basis ? explainProductivityRange(basis) : "",
       };
     });
   }, [index]);
@@ -653,9 +656,14 @@ function DetailedStep({
                       <td>{c.description}<small className="pl-sub">{c.subdivision}</small></td>
                       <td>{c.uom}</td>
                       <td className="pl-num">{numberInput("quantity", picks[c.code]?.quantity ?? null, "Required")}</td>
-                      <td className="pl-num">
+                      <td className="pl-num" title={c.productivityNote || undefined}>
                         {numberInput("production", picks[c.code]?.production ?? null, c.libraryProduction === null ? "Missing" : formatNum(c.libraryProduction, 2))}
                         {c.governing ? <small className="pl-sub">{c.governing}</small> : null}
+                        {c.productivityRange && c.productivityRange.sampleCount > 1 ? (
+                          <small className="pl-sub">
+                            {formatNum(c.productivityRange.min, 2)}–{formatNum(c.productivityRange.max, 2)} across {c.productivityRange.sampleCount} recorded configurations
+                          </small>
+                        ) : null}
                       </td>
                       <td className="pl-num">{numberInput("crews", picks[c.code]?.crews ?? null, "Required")}</td>
                       <td className="pl-num">{line.duration ?? <span className="xer-dim">{line.selected ? `Missing ${line.missing.join(", ")}` : "—"}</span>}</td>
