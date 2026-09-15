@@ -1,0 +1,37 @@
+version: 1
+
+policy:
+  currency: USD
+  maximum_cost_per_request: 0.00
+  maximum_cost_per_day: 0.00
+  maximum_cost_lifetime: 0.00
+  allow_credit_card: false
+  allow_paid_credits: false
+  allow_automatic_topup: false
+  allow_paid_fallback: false
+  allow_unknown_pricing: false
+  allow_expired_terms_evidence: false
+  fail_closed: true
+  maximum_failover_attempts: 3
+  registry_refresh_can_auto_enable: false
+  terms_review_max_age_days: 30
+
+gateway:
+  bind_host: 127.0.0.1
+  port: 8000
+  database_url: sqlite:///./data/gateway.db
+  request_timeout_seconds: 60
+  local_api_key_env: ZERO_COST_GATEWAY_API_KEY
+  log_prompt_content: false
+  log_response_content: false
+
+cache:
+  enabled: true
+  backend: sqlite
+  semantic_threshold: 0.94
+  default_ttl_seconds: 86400
+  require_same_project_snapshot: true
+  bypass_for_tasks:
+    - contractual_conclusion
+    - current_provider_terms
+    - live_schedule_status
