@@ -323,6 +323,7 @@ function AnalyzerStep({ service, onRecheck, busy, evidence, noData, result, onRu
       </Card>
       <Card eyebrow="Evidence-controlled output" title="Project schedule master summary"><RecordTable rows={records(result?.project_master_summary)} empty={noData} /></Card>
       <Card eyebrow="Evidence-controlled output" title="Must-have schedule data check"><RecordTable rows={records(result?.must_have_data_check)} empty={noData} /></Card>
+      <BoqCompletenessCard completeness={(result?.boq_completeness || null) as JsonRecord | null} noData={noData} />
       {tables.map((t) => (
         <Card key={str(t.title)} eyebrow="Evidence-controlled output" title={str(t.title)}><RecordTable rows={records(t.rows)} empty={noData} /></Card>
       ))}
@@ -332,6 +333,46 @@ function AnalyzerStep({ service, onRecheck, busy, evidence, noData, result, onRu
       <Card eyebrow="Documents" title="Document understanding register"><RecordTable rows={records(result?.document_register)} empty={noData} /></Card>
       <Card eyebrow="Traceability" title="Source traceability"><RecordTable rows={records(result?.source_traceability)} empty={noData} /></Card>
     </div>
+  );
+}
+
+function BoqCompletenessCard({ completeness, noData }: { completeness: JsonRecord | null; noData: string }) {
+  const found = Number(completeness?.boq_documents_found ?? 0);
+  const uniqueKeyRisk = (completeness?.unique_key_risk || null) as JsonRecord | null;
+  const anomalies = (completeness?.numeric_anomalies || null) as JsonRecord | null;
+  return (
+    <Card
+      eyebrow="Evidence-controlled output — computed only from the BOQ's own columns and values"
+      title="BOQ completeness check"
+      aside={found ? `${found} BOQ document(s) reviewed` : "No BOQ found"}
+    >
+      {!completeness || !found ? (
+        <div className="schedule-intelligence-empty"><b>{completeness ? str(completeness.note) : noData}</b></div>
+      ) : (
+        <>
+          <p className="xer-muted">{str(completeness.note)}</p>
+          <RecordTable
+            rows={records(completeness.column_checks)}
+            empty={noData}
+            columns={["Data Point", "Status", "Matched Column", "Source", "Why It Matters"]}
+          />
+          {uniqueKeyRisk ? (
+            <p className="xer-muted">
+              <b>Item No. uniqueness:</b> {str(uniqueKeyRisk.recommendation)}
+              {Number(uniqueKeyRisk.repeated_item_numbers) > 0 ? ` (${str(uniqueKeyRisk.repeated_item_numbers)} repeated item number(s) found)` : ""}
+            </p>
+          ) : null}
+          {anomalies ? (
+            <p className="xer-muted">
+              <b>Numeric checks:</b> {str(anomalies.zero_quantity_lines && (anomalies.zero_quantity_lines as unknown[]).length)} zero-quantity,{" "}
+              {str(anomalies.zero_rate_lines && (anomalies.zero_rate_lines as unknown[]).length)} zero-rate,{" "}
+              {str(anomalies.negative_values && (anomalies.negative_values as unknown[]).length)} negative,{" "}
+              {str(anomalies.blank_values && (anomalies.blank_values as unknown[]).length)} blank line(s) found. {str(anomalies.note)}
+            </p>
+          ) : null}
+        </>
+      )}
+    </Card>
   );
 }
 

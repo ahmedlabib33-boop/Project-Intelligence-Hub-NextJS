@@ -96,12 +96,58 @@ REQUIREMENTS: Sequence[Dict[str, Any]] = (
     {"id": "progress_measurement", "label": "Progress Measurement / Update Frequency", "terms": ("progress measurement", "update frequency", "monthly update", "weekly update", "قياس التقدم", "دوريه التحديث", "تحديث شهري", "تحديث اسبوعي"), "priority": "High", "source": "Contract / Project Controls Procedure", "table": "Project Controls Requirements"},
     {"id": "cost_loading", "label": "Cost Loading / Cash Flow", "terms": ("cost loading", "cash flow", "priced programme", "تحميل التكاليف", "التدفق النقدي", "برنامج مسعر"), "priority": "Medium", "source": "Contract / BOQ", "table": "Project Controls Requirements"},
     {"id": "resource_loading", "label": "Resource Loading", "terms": ("resource loading", "resource-loaded", "تحميل الموارد", "برنامج محمل بالموارد"), "priority": "Medium", "source": "Contract / Planning Requirements", "table": "Project Controls Requirements"},
+    {"id": "geotechnical_report", "label": "Geotechnical / Foundation Recommendation", "terms": ("geotechnical investigation", "soil investigation report", "foundation recommendation", "borehole", "bearing capacity", "تقرير الجسات", "توصيات الاساسات", "تحمل التربه"), "priority": "Critical", "source": "Geotechnical Investigation / Foundation Recommendation Report", "table": "Geotechnical and Foundation"},
+    {"id": "letter_of_award", "label": "Letter of Award / Commencement Notice", "terms": ("letter of award", "notice of award", "commencement notice", "خطاب الترسيه", "خطاب الاحاله", "اخطار المباشره"), "priority": "High", "source": "Letter of Award / Commencement Notice", "table": "Contract and Milestones"},
+    {"id": "tender_clarifications", "label": "Tender Clarifications / Addenda", "terms": ("clarification", "addendum", "addenda", "tender query", "استفسار المناقصه", "توضيح", "ملحق توضيحي"), "priority": "Medium", "source": "Tender Clarifications / Addenda", "table": "Contract and Milestones"},
+    {"id": "wbs_coding_structure", "label": "Approved WBS / Coding Structure", "terms": ("wbs coding", "coding structure", "activity coding structure", "cost code structure", "هيكل الترميز", "نظام ترميز الانشطه"), "priority": "High", "source": "Approved WBS / Coding Structure", "table": "Construction Methodology and Sequence"},
+    {"id": "document_transmittal_register", "label": "Document Transmittal Register", "terms": ("transmittal register", "document transmittal", "issue and transmittal", "سجل التسليم", "سجل المراسلات", "سجل تسليم المستندات"), "priority": "High", "source": "Document Transmittal Register", "table": "Engineering and Approval Cycles"},
+    {"id": "submittal_procedure", "label": "Submittal / Approval Procedure", "terms": ("submittal procedure", "review and resubmission", "resubmission cycle", "approval procedure", "اجراء الاعتماد", "اعاده التقديم"), "priority": "Medium", "source": "Submittal / Approval Procedure", "table": "Engineering and Approval Cycles"},
+    {"id": "subcontractor_packages", "label": "Subcontractor Package List", "terms": ("subcontractor package", "subcontract package", "package list", "نطاق مقاول الباطن", "حزمه مقاول الباطن"), "priority": "Medium", "source": "Subcontractor Package List", "table": "Resources, Equipment and Productivity"},
+    {"id": "temporary_works", "label": "Temporary Works Requirements", "terms": ("temporary works", "shoring", "scaffolding", "dewatering", "temporary access road", "اعمال مؤقته", "دعامات", "سقالات", "خفض منسوب المياه الجوفيه"), "priority": "High", "source": "Temporary Works Requirements", "table": "Constraints and Interfaces"},
 )
 
 
-MUST_HAVE_IDS = {
-    "commencement_date", "time_for_completion", "completion_date", "milestones", "scope", "boq", "drawings",
-    "specifications", "methodology", "review_durations", "long_lead", "calendar",
+# Which of the REQUIREMENTS ids the Tender Schedule vs the Detailed / Baseline
+# Schedule needs, and how strictly -- mirrors the "must-have documents" tables
+# for each schedule type. This drives the wording in must_have_data_check
+# only; it does not change which requirements count as "Critical" for the
+# overall readiness gate (that stays a single, stage-independent priority
+# per requirement, set above).
+SCHEDULE_STAGE_APPLICABILITY: Dict[str, Tuple[str, str]] = {
+    "commencement_date": ("Must", "Must"),
+    "time_for_completion": ("Must", "Must"),
+    "completion_date": ("Must", "Must"),
+    "milestones": ("Must", "Must"),
+    "calendar": ("Must", "Must"),
+    "scope": ("Must", "Must"),
+    "boq": ("Must — Tender BOQ", "Must — Approved / Contract BOQ"),
+    "drawings": ("Must — Tender Drawings", "Must — IFC / Approved Drawings"),
+    "specifications": ("Must", "Must"),
+    "geotechnical_report": ("Must where applicable", "Must"),
+    "methodology": ("Preliminary", "Must — detailed / approved"),
+    "work_fronts": ("Preliminary", "Must — work-front specific"),
+    "shop_drawings": ("Major packages only", "Must — full register"),
+    "material_submittals": ("Major packages only", "Must — full register"),
+    "document_transmittal_register": ("Tender issue dates only", "Must — actual planned/actual dates"),
+    "submittal_procedure": ("Assumed", "Must — contractual cycles"),
+    "review_durations": ("Assumed / contract", "Must — contractual duration"),
+    "procurement": ("Major long-lead items", "Must — full procurement chain"),
+    "long_lead": ("Must", "Must"),
+    "resources": ("Preliminary", "Must — detailed"),
+    "productivity": ("Assumed / historical", "Must — project-specific / validated"),
+    "equipment": ("Major equipment", "Must — detailed"),
+    "itp": ("High-level if available", "Must"),
+    "rfi_cycle": ("Not normally detailed", "Must where relevant"),
+    "testing": ("High-level", "Must — detailed"),
+    "handover": ("High-level", "Must — detailed"),
+    "site_logistics": ("Preliminary", "Must — detailed"),
+    "cost_loading": ("Usually limited", "As contract requires"),
+    "progress_measurement": ("Not normally required", "Must"),
+    "tender_clarifications": ("Must", "—"),
+    "letter_of_award": ("—", "Must"),
+    "wbs_coding_structure": ("—", "Must"),
+    "subcontractor_packages": ("—", "Must — mobilization/approval"),
+    "temporary_works": ("—", "Must where applicable"),
 }
 
 
@@ -241,6 +287,179 @@ def _structured_schedule_rows(documents: Sequence[Any]) -> Tuple[List[Dict[str, 
                     })
     unique_wbs = {(_normalize(row["WBS"]), row["Source"]): row for row in wbs_rows}
     return list(unique_wbs.values())[:2000], activity_rows[:5000], logic_rows[:5000]
+
+
+# BOQ-specific data points that a priced BOQ commonly leaves composite or
+# absent even when it is otherwise well structured (reinforcement inside a
+# composite concrete rate, no productivity data, etc.). Each check only
+# reports what it can actually find in the uploaded BOQ's own column
+# headers -- never a guess at what the missing value would have been.
+BOQ_COLUMN_CHECKS: Sequence[Dict[str, Any]] = (
+    {"id": "reinforcement_quantity", "label": "Reinforcement quantity as a separate line/column", "terms": ("reinforcement", "rebar", "steel weight", "حديد التسليح", "وزن الحديد"), "why": "Without a separate reinforcement quantity, a defensible rebar duration (ton/day) cannot be calculated — it is otherwise buried inside composite concrete rates."},
+    {"id": "formwork_quantity", "label": "Formwork quantity as a separate line/column", "terms": ("formwork", "شده", "الشدات الخشبيه"), "why": "Formwork m² is needed to calculate formwork duration; when absent it is usually folded into composite concrete rates and must come from drawings/QTO instead."},
+    {"id": "cost_breakdown", "label": "Material / labour / equipment cost breakdown (not just one unit rate)", "terms": ("material cost", "labour cost", "labor cost", "equipment cost", "تكلفه المواد", "تكلفه العماله", "تكلفه المعدات"), "why": "A single composite unit rate cannot be split into direct-cost categories, which blocks cost-loaded scheduling, cash-flow forecasting and prolongation/delay cost analysis."},
+    {"id": "productivity_data", "label": "Productivity / output / crew data", "terms": ("productivity", "output per day", "crew size", "number of crews", "الانتاجيه", "معدل الانتاج", "عدد الطواقم"), "why": "Activity Duration = Quantity ÷ Productivity cannot be applied without a productivity or crew-size assumption; this is almost never carried inside a priced BOQ."},
+    {"id": "location_coding", "label": "Building / Floor / Zone location coding", "terms": ("building", "floor", "zone", "villa type", "block", "مبني", "دور", "منطقه", "قطاع"), "why": "Location-based WBS and work-front planning need a Building → Floor → Zone breakdown; BOQ line items rarely carry this beyond the section/sheet title."},
+    {"id": "discipline_classification", "label": "Discipline classification (Civil / Structural / Architectural / MEP)", "terms": ("discipline", "trade", "التخصص"), "why": "Discipline-level cost and schedule weighting needs an explicit discipline column, not just the BOQ section heading."},
+    {"id": "supply_install_flag", "label": "Supply-only / Install-only / Supply & Install flag", "terms": ("supply only", "install only", "supply and install", "supply & install", "توريد فقط", "تركيب فقط", "توريد وتركيب"), "why": "Procurement scheduling needs to separate supply from installation scope; without an explicit flag this must be inferred from free-text descriptions."},
+    {"id": "employer_supplied_flag", "label": "Employer-supplied / free-issue material flag", "terms": ("employer supplied", "free issue", "provided by employer", "توريد صاحب العمل", "بند مجاني"), "why": "Employer material-delivery milestones cannot be scheduled without knowing which items are Employer-supplied rather than Contractor-procured."},
+    {"id": "provisional_prime_lump_sum", "label": "Provisional Sum / Prime Cost / Lump Sum flags", "terms": ("provisional sum", "prime cost", "p.c. sum", "lump sum", "مبلغ احتياطي", "مبلغ نقدي محدد", "مبلغ اجمالي"), "why": "These items carry uncertain scope or cost and need separate treatment in the cost baseline rather than being treated as firm, measurable quantities."},
+    {"id": "long_lead_flag", "label": "Long-lead item flag", "terms": ("long lead", "long-lead", "طويل التوريد"), "why": "Long-lead procurement items should be identifiable directly in the BOQ so they can be scheduled as critical procurement activities."},
+    {"id": "p6_mapping_columns", "label": "P6 / WBS / Cost-code mapping columns", "terms": ("activity id", "wbs code", "cost code", "p6 code", "كود النشاط", "كود التكلفه"), "why": "Without a BOQ-to-P6 mapping column, linking BOQ items to Primavera activities, WBS and cost accounts has to be built as a separate register."},
+)
+
+
+def _boq_numeric_anomalies(boq_documents: Sequence[Any]) -> Dict[str, Any]:
+    """Zero/negative/blank Quantity, Rate or Amount cells -- computed only
+    from columns actually identified in the reviewed tables.
+    """
+    quantity_aliases = ("quantity", "qty", "الكميه")
+    rate_aliases = ("rate", "unit rate", "سعر الوحده")
+    amount_aliases = ("amount", "total amount", "total", "الاجمالي", "القيمه")
+
+    zero_rate: List[Dict[str, Any]] = []
+    zero_quantity: List[Dict[str, Any]] = []
+    negative_values: List[Dict[str, Any]] = []
+    blank_values: List[Dict[str, Any]] = []
+    rows_checked = 0
+
+    for document in boq_documents:
+        for table in getattr(document, "tables", []) or []:
+            headers = [_normalize(item) for item in getattr(table, "headers", [])]
+            qty_index = next((i for i, header in enumerate(headers) if any(_normalize(t) == header for t in quantity_aliases)), None)
+            rate_index = next((i for i, header in enumerate(headers) if any(_normalize(t) == header for t in rate_aliases)), None)
+            amount_index = next((i for i, header in enumerate(headers) if any(_normalize(t) == header for t in amount_aliases)), None)
+            if qty_index is None and rate_index is None and amount_index is None:
+                continue
+            for row_number, row in enumerate(getattr(table, "rows", []) or [], start=2):
+                rows_checked += 1
+                source = f"{document.filename} — {getattr(table, 'name', 'Table')}, row {row_number}"
+                for label, index in (("Quantity", qty_index), ("Rate", rate_index), ("Amount", amount_index)):
+                    if index is None or index >= len(row):
+                        continue
+                    raw = row[index]
+                    text = str(raw).strip() if raw is not None else ""
+                    if not text:
+                        blank_values.append({"Field": label, "Source": source})
+                        continue
+                    try:
+                        value = float(text.replace(",", ""))
+                    except ValueError:
+                        continue
+                    if value < 0:
+                        negative_values.append({"Field": label, "Value": value, "Source": source})
+                    elif value == 0:
+                        if label == "Rate":
+                            zero_rate.append({"Source": source})
+                        elif label == "Quantity":
+                            zero_quantity.append({"Source": source})
+
+    return {
+        "rows_checked": rows_checked,
+        "zero_rate_lines": zero_rate[:50],
+        "zero_quantity_lines": zero_quantity[:50],
+        "negative_values": negative_values[:50],
+        "blank_values": blank_values[:50],
+        "note": (
+            "Blank items require commercial review — they may be legitimate headers or alternates rather than data errors."
+            if rows_checked else
+            "No Quantity, Rate or Amount column was identified in the reviewed BOQ table(s), so numeric checks could not run."
+        ),
+    }
+
+
+def assess_boq_completeness(documents: Sequence[Any]) -> Dict[str, Any]:
+    """Deterministic BOQ-readiness check.
+
+    Reports what the priced BOQ actually carries versus what quantity/cost
+    loading and schedule-duration calculation need — computed only from
+    headers and values present in the uploaded BOQ table(s). It never
+    infers or assumes a value that is not present in the source; a data
+    point not found is reported as not separately available, not as zero
+    or as an estimate.
+    """
+    boq_documents = [document for document in documents if _document_type(document) == "BOQ / Quantity"]
+    if not boq_documents:
+        return {
+            "boq_documents_found": 0,
+            "column_checks": [],
+            "unique_key_risk": None,
+            "numeric_anomalies": None,
+            "note": "No document was classified as a BOQ / Quantity document; upload a priced BOQ to run this check.",
+        }
+
+    all_headers: List[str] = []
+    header_sources: Dict[str, List[str]] = defaultdict(list)
+    for document in boq_documents:
+        for table in getattr(document, "tables", []) or []:
+            for header in getattr(table, "headers", []) or []:
+                normalized = _normalize(header)
+                if not normalized:
+                    continue
+                all_headers.append(normalized)
+                header_sources[normalized].append(f"{document.filename} — {getattr(table, 'name', 'Table')}")
+
+    column_checks: List[Dict[str, Any]] = []
+    for check in BOQ_COLUMN_CHECKS:
+        matched_header = next((header for header in all_headers if any(_normalize(term) in header for term in check["terms"])), None)
+        column_checks.append({
+            "Data Point": check["label"],
+            "Status": "AVAILABLE AS A SEPARATE COLUMN" if matched_header else "NOT SEPARATELY AVAILABLE",
+            "Matched Column": matched_header or "—",
+            "Source": ", ".join(sorted(set(header_sources.get(matched_header, [])))) if matched_header else "—",
+            "Why It Matters": check["why"],
+        })
+
+    # Unique-key risk: does the same Item No. repeat across different
+    # sections/sheets? Computed only from rows actually found.
+    item_no_aliases = ("item no", "item number", "bill no", "بند رقم", "رقم البند")
+    section_aliases = ("section", "division", "قسم", "الباب")
+    item_locations: Dict[str, set] = defaultdict(set)
+    for document in boq_documents:
+        for table in getattr(document, "tables", []) or []:
+            headers = [_normalize(item) for item in getattr(table, "headers", [])]
+            item_index = next((i for i, header in enumerate(headers) if any(_normalize(term) == header for term in item_no_aliases)), None)
+            if item_index is None:
+                continue
+            section_index = next((i for i, header in enumerate(headers) if any(_normalize(term) == header for term in section_aliases)), None)
+            for row in getattr(table, "rows", []) or []:
+                if item_index >= len(row):
+                    continue
+                item_no = _normalize(str(row[item_index] or ""))
+                if not item_no:
+                    continue
+                section = _normalize(str(row[section_index])) if section_index is not None and section_index < len(row) else getattr(table, "name", "")
+                item_locations[item_no].add(f"{document.filename} / {section or getattr(table, 'name', 'Table')}")
+
+    repeated_items = {item_no: sorted(locations) for item_no, locations in item_locations.items() if len(locations) > 1}
+    if not item_locations:
+        key_recommendation = "No Item No. column was identified in the reviewed BOQ table(s)."
+    elif repeated_items:
+        key_recommendation = (
+            "BOQ Item No. repeats across different sections/sheets and is not a safe unique schedule/cost key on its "
+            "own; use a composite key (e.g. Section + Item No. + Description) or a generated BOQ Cost Code."
+        )
+    else:
+        key_recommendation = "No repeated Item No. values were found across sections/sheets in the reviewed tables."
+    unique_key_risk = {
+        "checked_items": len(item_locations),
+        "repeated_item_numbers": len(repeated_items),
+        "examples": [{"Item No.": item_no, "Appears In": locations} for item_no, locations in list(repeated_items.items())[:20]],
+        "recommendation": key_recommendation,
+    }
+
+    return {
+        "boq_documents_found": len(boq_documents),
+        "column_checks": column_checks,
+        "unique_key_risk": unique_key_risk,
+        "numeric_anomalies": _boq_numeric_anomalies(boq_documents),
+        "note": (
+            "These BOQs are generally strong enough for BOQ → WBS development → quantity loading → initial cost "
+            "loading → discipline weighting → high-value item identification. They are not yet sufficient, on their "
+            "own, for BOQ → productivity → duration → resources → procurement → a fully integrated Primavera P6 "
+            "baseline unless the data points above are also supplied."
+        ),
+    }
 
 
 def analyze_schedule_evidence(documents: Sequence[Any], *, project_name: str = "") -> Dict[str, Any]:
@@ -417,12 +636,12 @@ def analyze_schedule_evidence(documents: Sequence[Any], *, project_name: str = "
 
     readiness_areas: List[Dict[str, Any]] = []
     area_map = {
-        "Contract": ("project_name", "employer", "engineer", "contractor", "contract_number", "commencement_date", "time_for_completion", "completion_date"),
+        "Contract": ("project_name", "employer", "engineer", "contractor", "contract_number", "commencement_date", "time_for_completion", "completion_date", "letter_of_award", "tender_clarifications"),
         "Milestones and Calendar": ("milestones", "calendar"),
-        "Scope, BOQ and Drawings": ("scope", "boq", "drawings"),
-        "Methodology and Specifications": ("specifications", "methodology", "work_fronts"),
-        "Engineering and Procurement": ("shop_drawings", "material_submittals", "rfi_cycle", "review_durations", "procurement", "long_lead"),
-        "Resources and Execution": ("resources", "productivity", "equipment", "site_logistics", "itp"),
+        "Scope, BOQ and Drawings": ("scope", "boq", "drawings", "geotechnical_report"),
+        "Methodology and Specifications": ("specifications", "methodology", "work_fronts", "wbs_coding_structure"),
+        "Engineering and Procurement": ("shop_drawings", "material_submittals", "document_transmittal_register", "submittal_procedure", "rfi_cycle", "review_durations", "procurement", "long_lead"),
+        "Resources and Execution": ("resources", "productivity", "equipment", "site_logistics", "itp", "subcontractor_packages", "temporary_works"),
         "Testing and Handover": ("authority", "testing", "handover"),
         "Project Controls": ("constraints", "progress_measurement", "cost_loading", "resource_loading"),
     }
@@ -466,13 +685,14 @@ def analyze_schedule_evidence(documents: Sequence[Any], *, project_name: str = "
         "must_have_data_check": [
             {
                 "Required Schedule Input": req["label"],
-                "Tender Schedule": "Must",
-                "Detailed / Baseline": "Must",
+                "Tender Schedule": SCHEDULE_STAGE_APPLICABILITY[req["id"]][0],
+                "Detailed / Baseline": SCHEDULE_STAGE_APPLICABILITY[req["id"]][1],
                 "Status": next((row["Status"] for row in master_summary if row["Requirement"] == req["label"]), "UNAVAILABLE"),
                 "Source": next((row["Source Document"] for row in master_summary if row["Requirement"] == req["label"]), "UNAVAILABLE"),
             }
-            for req in REQUIREMENTS if req["id"] in MUST_HAVE_IDS
+            for req in REQUIREMENTS if req["id"] in SCHEDULE_STAGE_APPLICABILITY
         ],
+        "boq_completeness": assess_boq_completeness(documents),
         "dynamic_tables": dynamic_tables,
         "conflicts": conflicts,
         "missing_information": missing,
