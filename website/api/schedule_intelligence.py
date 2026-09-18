@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+import httpx
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, Response
@@ -63,6 +64,43 @@ MAX_REQUEST_BYTES = 4_000_000 if IS_VERCEL else 320 * 1024 * 1024
 MAX_EVIDENCE_TOTAL_BYTES = 4_000_000 if IS_VERCEL else 320 * 1024 * 1024
 MAX_EVIDENCE_FILES = 24 if IS_VERCEL else 500
 ARABIC = re.compile(r"[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff\ufb50-\ufdff\ufe70-\ufeff]")
+
+# Project Controls ML Decision-Support engine (Universal engines/.../OUTPUT_STUDIO_SERVER.py),
+# started locally via RUN_OUTPUT_STUDIO.bat. Training/registry logic lives there only, never
+# reimplemented here. Unreachable (e.g. on Vercel, or before it's started) degrades honestly
+# to {"wired": false} rather than a 500 \u2014 the same "Not wired" contract used elsewhere.
+PROJECT_CONTROLS_ML_URL = os.getenv("PROJECT_CONTROLS_ML_SERVICE_URL", "http://127.0.0.1:8767/api/project-controls")
+
+
+async def _proxy_ml_request(method: str, path: str, **kwargs: Any) -> Dict[str, Any]:
+    """Proxy one request to the Project Controls ML engine.
+
+    An unreachable engine (not started, or absent on Vercel) is a normal, expected
+    "not set up yet" state — it degrades to {"wired": false} at HTTP 200, same as
+    the schedule-creation service's own "Not wired" contract. The engine's own
+    validation errors (e.g. the <20-row training floor) are real errors and are
+    re-raised as HTTPExceptions so they surface through the existing callService()
+    error handling used by every other action in this file.
+    """
+    try:
+        async with httpx.AsyncClient(timeout=120.0) as client:
+            response = await client.request(method, f"{PROJECT_CONTROLS_ML_URL}{path}", **kwargs)
+    except (httpx.ConnectError, httpx.TimeoutException) as exc:
+        return {
+            "wired": False,
+            "detail": f"Could not reach the Project Controls ML engine at {PROJECT_CONTROLS_ML_URL}: {exc}. "
+            "Start it locally with RUN_OUTPUT_STUDIO.bat.",
+        }
+    if response.status_code >= 400:
+        try:
+            detail = response.json().get("detail", response.text)
+        except Exception:
+            detail = response.text
+        raise HTTPException(response.status_code, detail)
+    body = response.json()
+    body.setdefault("wired", True)
+    return body
+
 
 app = FastAPI(title="Project Intelligence Hub Schedule Intelligence 10X", version=VERSION)
 app.add_middleware(
@@ -254,6 +292,12 @@ async def schedule_intelligence(
     activity_payload: str = Form("{}"),
     development_answers: str = Form("{}"),
     crew_overrides: str = Form("{}"),
+    ml_task: str = Form(""),
+    ml_target: str = Form(""),
+    ml_data_origin: str = Form("unspecified"),
+    ml_project_scope: str = Form(""),
+    ml_promote: bool = Form(False),
+    ml_model_id: str = Form(""),
 ):
     action = action.strip().lower()
 
@@ -387,6 +431,47 @@ async def schedule_intelligence(
             values = {**schedule_data, **values, "schedule": schedule_data, "summary": schedule_summary(schedule)}
         content, media_type, extension = render_template(template_file.filename or "template", template, values)
         return _download(content, media_type, f"{Path(template_file.filename or 'report').stem}_POPULATED{extension}")
+
+    if action == "ml_status":
+        health = await _proxy_ml_request("GET", "/health")
+        if health.get("wired") is False:
+            return _json(health)
+        tasks = await _proxy_ml_request("GET", "/ml/tasks")
+        models = await _proxy_ml_request("GET", "/ml/models")
+        return _json({
+            "wired": True,
+            "detail": f"Connected to the Project Controls ML engine ({PROJECT_CONTROLS_ML_URL}).",
+            "health": health,
+            "tasks": tasks.get("tasks", {}),
+            "models": models,
+        })
+
+    if action == "ml_train":
+        if data_file is None:
+            raise HTTPException(400, "A training data file is required")
+        if not ml_task.strip() or not ml_target.strip():
+            raise HTTPException(400, "ml_task and ml_target are required")
+        payload = await _read(data_file)
+        files = {"data": (data_file.filename or "training_data.csv", payload, data_file.content_type or "application/octet-stream")}
+        form_data = {
+            "task": ml_task.strip(),
+            "target": ml_target.strip(),
+            "data_origin": ml_data_origin.strip() or "unspecified",
+            "project_scope": ml_project_scope.strip(),
+            "promote": "true" if ml_promote else "false",
+        }
+        result = await _proxy_ml_request("POST", "/ml/train", data=form_data, files=files)
+        return _json(result)
+
+    if action == "ml_predict":
+        if data_file is None:
+            raise HTTPException(400, "A data file to run inference on is required")
+        if not ml_model_id.strip():
+            raise HTTPException(400, "ml_model_id is required")
+        payload = await _read(data_file)
+        files = {"data": (data_file.filename or "inference_data.csv", payload, data_file.content_type or "application/octet-stream")}
+        result = await _proxy_ml_request("POST", "/ml/predict", data={"model_id": ml_model_id.strip()}, files=files)
+        return _json(result)
 
     schedule, filename, source_payload = await _schedule_upload(schedule_file, hours_per_day, project_id)
 
