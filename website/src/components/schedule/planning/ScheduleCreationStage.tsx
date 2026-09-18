@@ -15,7 +15,15 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { AI_CHECKING, checkEvidenceAi, type AiHealth } from "../../../lib/evidence/run";
 import { activityBasis, cellText, type LibraryIndex, type PlanningLibrary } from "../../../lib/planning/library";
-import { callService, type JsonRecord, type ServiceReply, type ServiceStatus } from "../../../lib/planning/service";
+import {
+  BLOB_UPLOAD_THRESHOLD_BYTES,
+  callService,
+  usesBlobUpload,
+  uploadFileToBlob,
+  type JsonRecord,
+  type ServiceReply,
+  type ServiceStatus,
+} from "../../../lib/planning/service";
 import { formatNum } from "../../../lib/xer/format";
 import { Badge, Card, Kpi, Kpis, SectionTitle } from "../xer/ui";
 import EvidenceIntelligenceStep from "./EvidenceIntelligenceStep";
@@ -33,7 +41,8 @@ const STEPS: { key: Step; label: string; eyebrow: string }[] = [
 ];
 
 type RunOptions = { download?: boolean; fallbackName?: string };
-type Runner = (label: string, form: FormData, options?: RunOptions) => Promise<ServiceReply | null>;
+type FormOrBuilder = FormData | (() => Promise<FormData>);
+type Runner = (label: string, form: FormOrBuilder, options?: RunOptions) => Promise<ServiceReply | null>;
 
 const str = (v: unknown): string => (v === null || v === undefined ? "" : typeof v === "object" ? JSON.stringify(v) : String(v));
 const records = (v: unknown): JsonRecord[] =>
@@ -77,11 +86,12 @@ export default function ScheduleCreationStage({
   const projectLabel = name.trim() || projectName || "Schedule";
   const noData = wired ? "No data yet — run this step." : "No data — not wired on this deployment.";
 
-  const run: Runner = async (label, form, options = {}) => {
+  const run: Runner = async (label, formOrBuilder, options = {}) => {
     if (!wired) return null;
     setBusy(label);
     setError("");
     try {
+      const form = typeof formOrBuilder === "function" ? await formOrBuilder() : formOrBuilder;
       form.set("project_name", projectLabel);
       const reply = await callService(form, options.fallbackName);
       if (reply.file && options.download !== false) {
@@ -96,10 +106,16 @@ export default function ScheduleCreationStage({
     }
   };
 
-  const evidenceForm = (action: string) => {
+  const evidenceForm = async (action: string): Promise<FormData> => {
     const form = new FormData();
     form.set("action", action);
-    evidence.forEach((file) => form.append("evidence_files", file));
+    const totalBytes = evidence.reduce((sum, file) => sum + file.size, 0);
+    if (usesBlobUpload() && totalBytes > BLOB_UPLOAD_THRESHOLD_BYTES) {
+      const refs = await Promise.all(evidence.map((file) => uploadFileToBlob(file)));
+      form.set("evidence_blob_files", JSON.stringify(refs));
+    } else {
+      evidence.forEach((file) => form.append("evidence_files", file));
+    }
     return form;
   };
 
@@ -116,7 +132,11 @@ export default function ScheduleCreationStage({
           <Kpi
             label="Upload limit"
             value={wired && service.limits?.combined_mb ? `${service.limits.combined_mb} MB` : "—"}
-            note={wired ? `${service.limits?.file_count ?? "—"} files per request · scanned documents ${service.ocr ? "read" : "not read (OCR required)"}` : "No data — not wired"}
+            note={
+              wired
+                ? `${service.limits?.file_count ?? "—"} files per request · files above ~3.5 MB upload directly to storage · scanned documents ${service.ocr ? "read" : "not read (OCR required)"}`
+                : "No data — not wired"
+            }
           />
           <Kpi
             label="Planning library"
@@ -153,7 +173,7 @@ export default function ScheduleCreationStage({
       <div hidden={step !== "analyzer"}>
         <AnalyzerStep service={service} onRecheck={onRecheck} busy={busy} evidence={evidence} noData={noData} result={analyzer}
           onRun={async () => {
-            const reply = await run("Analysing evidence", evidenceForm("evidence_analyze"));
+            const reply = await run("Analysing evidence", () => evidenceForm("evidence_analyze"));
             if (reply?.json) setAnalyzer(reply.json);
           }}
         />
@@ -162,10 +182,12 @@ export default function ScheduleCreationStage({
       <div hidden={step !== "tender"}>
         <TenderStep service={service} onRecheck={onRecheck} busy={busy} evidence={evidence} noData={noData} result={tender} projectLabel={projectLabel}
           onRun={async (dataDate) => {
-            const form = evidenceForm("tender_build");
-            form.set("data_date", dataDate);
-            form.set("build_mode", "TENDER");
-            const reply = await run("Building the tender schedule", form);
+            const reply = await run("Building the tender schedule", async () => {
+              const form = await evidenceForm("tender_build");
+              form.set("data_date", dataDate);
+              form.set("build_mode", "TENDER");
+              return form;
+            });
             if (reply?.json) setTender(reply.json);
           }}
         />
@@ -180,7 +202,7 @@ export default function ScheduleCreationStage({
       <div hidden={step !== "reader"}>
         <ReaderStep service={service} onRecheck={onRecheck} busy={busy} evidence={evidence} noData={noData} result={reader}
           onRun={async () => {
-            const reply = await run("Reading evidence", evidenceForm("evidence_read"));
+            const reply = await run("Reading evidence", () => evidenceForm("evidence_read"));
             if (reply?.json) setReader(reply.json);
           }}
         />
@@ -727,11 +749,23 @@ function ReportsStep({ service, onRecheck, busy, noData, result, run, onInspecte
   const [data, setData] = useState<File | null>(null);
   const templateRef = useRef<HTMLInputElement>(null);
   const dataRef = useRef<HTMLInputElement>(null);
-  const form = (action: string) => {
+  const form = async (action: string): Promise<FormData> => {
     const f = new FormData();
     f.set("action", action);
-    if (template) f.set("template_file", template);
-    if (data && action === "report_render") f.set("data_file", data);
+    if (template) {
+      if (usesBlobUpload() && template.size > BLOB_UPLOAD_THRESHOLD_BYTES) {
+        f.set("template_blob_file", JSON.stringify(await uploadFileToBlob(template)));
+      } else {
+        f.set("template_file", template);
+      }
+    }
+    if (data && action === "report_render") {
+      if (usesBlobUpload() && data.size > BLOB_UPLOAD_THRESHOLD_BYTES) {
+        f.set("data_blob_file", JSON.stringify(await uploadFileToBlob(data)));
+      } else {
+        f.set("data_file", data);
+      }
+    }
     return f;
   };
   const picker = (ref: React.RefObject<HTMLInputElement | null>, file: File | null, onPick: (f: File | null) => void, label: string, hint: string, accept?: string): ReactNode => (
@@ -752,13 +786,13 @@ function ReportsStep({ service, onRecheck, busy, noData, result, run, onInspecte
         <div className="xer-toolbar pl-run">
           <button type="button" className="schedule-intelligence-primary" disabled={!wired || !!busy || !template}
             onClick={async () => {
-              const reply = await run("Inspecting the template", form("report_inspect"));
+              const reply = await run("Inspecting the template", () => form("report_inspect"));
               if (reply?.json) onInspected(reply.json);
             }}>
             Inspect template
           </button>
           <button type="button" className="xer-btn" disabled={!wired || !!busy || !template}
-            onClick={() => void run("Populating the report", form("report_render"), { fallbackName: "populated-report" })}>
+            onClick={() => void run("Populating the report", () => form("report_render"), { fallbackName: "populated-report" })}>
             Populate and download
           </button>
           <span className="xer-dim">{wired ? "" : "Not wired"}</span>

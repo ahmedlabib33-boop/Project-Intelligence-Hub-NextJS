@@ -60,9 +60,17 @@ from _schedule_development import (  # noqa: E402
 
 
 IS_VERCEL = bool(os.getenv("VERCEL"))
+# Raw multipart body, per file / combined \u2014 bounded by Vercel's hard,
+# non-configurable 4.5 MB request-body cap on Python Functions.
 MAX_REQUEST_BYTES = 4_000_000 if IS_VERCEL else 320 * 1024 * 1024
 MAX_EVIDENCE_TOTAL_BYTES = 4_000_000 if IS_VERCEL else 320 * 1024 * 1024
-MAX_EVIDENCE_FILES = 24 if IS_VERCEL else 500
+MAX_EVIDENCE_FILES = 40 if IS_VERCEL else 500
+# Files resolved from Vercel Blob URLs never pass through the request body,
+# so they are not subject to the cap above \u2014 this is the real ceiling once a
+# file is uploaded client-side via /api/blob-upload.
+MAX_BLOB_TOTAL_BYTES = 200 * 1024 * 1024
+BLOB_URL_RE = re.compile(r"^https://[a-z0-9]{1,64}\.(public|private)\.blob\.vercel-storage\.com/")
+BLOB_READ_WRITE_TOKEN = os.getenv("BLOB_READ_WRITE_TOKEN", "")
 ARABIC = re.compile(r"[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff\ufb50-\ufdff\ufe70-\ufeff]")
 
 # Project Controls ML Decision-Support engine (Universal engines/.../OUTPUT_STUDIO_SERVER.py),
@@ -131,20 +139,118 @@ async def _read(file: UploadFile, *, limit: int = MAX_REQUEST_BYTES) -> bytes:
     return data
 
 
-async def _read_evidence_pack(uploads: List[UploadFile]) -> List[Tuple[str, bytes]]:
-    if not uploads:
+async def _fetch_blob_bytes(url: str, *, limit: int) -> bytes:
+    """Fetch a file previously uploaded to Vercel Blob by the browser.
+
+    Only Vercel Blob storage URLs are accepted — this endpoint must never be
+    used to make the server fetch an arbitrary attacker-supplied URL (SSRF).
+    """
+    if not BLOB_URL_RE.match(url):
+        raise HTTPException(400, "Rejected file URL: only Vercel Blob storage URLs are accepted")
+    if limit <= 0:
+        raise HTTPException(413, f"The combined upload exceeds {MAX_BLOB_TOTAL_BYTES / 1024 / 1024:.0f} MB")
+    headers = {"Authorization": f"Bearer {BLOB_READ_WRITE_TOKEN}"} if BLOB_READ_WRITE_TOKEN else {}
+    try:
+        async with httpx.AsyncClient(timeout=50.0) as client:
+            async with client.stream("GET", url, headers=headers) as response:
+                if response.status_code != 200:
+                    raise HTTPException(502, f"Storage returned HTTP {response.status_code} for this file")
+                chunks: List[bytes] = []
+                total = 0
+                async for chunk in response.aiter_bytes():
+                    total += len(chunk)
+                    if total > limit:
+                        raise HTTPException(413, f"File exceeds {limit / 1024 / 1024:.0f} MB")
+                    chunks.append(chunk)
+                return b"".join(chunks)
+    except HTTPException:
+        raise
+    except httpx.HTTPError as exc:
+        raise HTTPException(502, f"Could not reach storage: {type(exc).__name__}") from None
+
+
+def _parse_blob_refs(payload: str) -> List[Tuple[str, str]]:
+    text = (payload or "").strip()
+    if not text or text == "[]":
+        return []
+    try:
+        parsed = json.loads(text)
+    except json.JSONDecodeError:
+        raise HTTPException(400, "evidence_blob_files must be valid JSON") from None
+    if not isinstance(parsed, list):
+        raise HTTPException(400, "evidence_blob_files must be a JSON array")
+    refs: List[Tuple[str, str]] = []
+    for item in parsed:
+        if not isinstance(item, dict):
+            raise HTTPException(400, "Each evidence_blob_files entry must be an object with name and url")
+        url = str(item.get("url") or "").strip()
+        name = safe_filename(str(item.get("name") or "evidence"))
+        if not url:
+            raise HTTPException(400, f"'{name}' is missing its storage URL")
+        refs.append((name, url))
+    return refs
+
+
+def _parse_single_blob_ref(payload: str, label: str) -> Optional[Tuple[str, str]]:
+    text = (payload or "").strip()
+    if not text:
+        return None
+    try:
+        parsed = json.loads(text)
+    except json.JSONDecodeError:
+        raise HTTPException(400, f"{label} blob reference must be valid JSON") from None
+    if not isinstance(parsed, dict):
+        raise HTTPException(400, f"{label} blob reference must be a JSON object")
+    url = str(parsed.get("url") or "").strip()
+    name = safe_filename(str(parsed.get("name") or label))
+    if not url:
+        raise HTTPException(400, f"{label} blob reference is missing its storage URL")
+    return name, url
+
+
+async def _read_or_blob(file: Optional[UploadFile], blob_ref_json: str, *, label: str) -> Optional[Tuple[str, bytes]]:
+    if file is not None:
+        payload = await _read(file, limit=MAX_REQUEST_BYTES)
+        return safe_filename(file.filename or label), payload
+    ref = _parse_single_blob_ref(blob_ref_json, label)
+    if ref is None:
+        return None
+    name, url = ref
+    try:
+        payload = await _fetch_blob_bytes(url, limit=MAX_BLOB_TOTAL_BYTES)
+    except HTTPException as exc:
+        detail = exc.detail if isinstance(exc.detail, str) else json.dumps(exc.detail)
+        raise HTTPException(exc.status_code, f"Could not read '{name}' from storage: {detail}") from None
+    if not payload:
+        raise HTTPException(400, f"'{name}' uploaded to storage but is empty")
+    return name, payload
+
+
+async def _read_evidence_pack(uploads: List[UploadFile], blob_files_json: str = "[]") -> List[Tuple[str, bytes]]:
+    blob_refs = _parse_blob_refs(blob_files_json)
+    if not uploads and not blob_refs:
         raise HTTPException(400, "Add at least one evidence document")
-    if len(uploads) > MAX_EVIDENCE_FILES:
+    if len(uploads) + len(blob_refs) > MAX_EVIDENCE_FILES:
         raise HTTPException(400, f"A maximum of {MAX_EVIDENCE_FILES} files is allowed per request")
+    total_limit = MAX_BLOB_TOTAL_BYTES if blob_refs else MAX_EVIDENCE_TOTAL_BYTES
     packed: List[Tuple[str, bytes]] = []
     total = 0
     for upload in uploads:
         payload = await _read(upload, limit=MAX_REQUEST_BYTES)
         total += len(payload)
-        if total > MAX_EVIDENCE_TOTAL_BYTES:
-            runtime = "Vercel" if IS_VERCEL else "local"
-            raise HTTPException(413, f"The combined {runtime} upload exceeds {MAX_EVIDENCE_TOTAL_BYTES / 1024 / 1024:.0f} MB")
+        if total > total_limit:
+            raise HTTPException(413, f"The combined upload exceeds {total_limit / 1024 / 1024:.0f} MB")
         packed.append((safe_filename(upload.filename or "evidence"), payload))
+    for name, url in blob_refs:
+        try:
+            payload = await _fetch_blob_bytes(url, limit=total_limit - total)
+        except HTTPException as exc:
+            detail = exc.detail if isinstance(exc.detail, str) else json.dumps(exc.detail)
+            raise HTTPException(exc.status_code, f"Could not read '{name}' from storage: {detail}") from None
+        if not payload:
+            raise HTTPException(400, f"'{name}' uploaded to storage but is empty")
+        total += len(payload)
+        packed.append((name, payload))
     return packed
 
 
@@ -246,9 +352,10 @@ def health() -> Dict[str, Any]:
         "version": VERSION,
         "mode": "stateless-vercel-bridge" if IS_VERCEL else "persistent-local-runtime",
         "upload_limits": {
-            "single_file_mb": round(MAX_REQUEST_BYTES / 1024 / 1024),
-            "combined_mb": round(MAX_EVIDENCE_TOTAL_BYTES / 1024 / 1024),
+            "single_file_mb": round(MAX_BLOB_TOTAL_BYTES / 1024 / 1024) if IS_VERCEL else round(MAX_REQUEST_BYTES / 1024 / 1024),
+            "combined_mb": round(MAX_BLOB_TOTAL_BYTES / 1024 / 1024) if IS_VERCEL else round(MAX_EVIDENCE_TOTAL_BYTES / 1024 / 1024),
             "file_count": MAX_EVIDENCE_FILES,
+            "direct_request_mb": round(MAX_REQUEST_BYTES / 1024 / 1024),
         },
         "schedule_authority": "deterministic",
         "native_p6_verification_required": True,
@@ -268,6 +375,9 @@ async def schedule_intelligence(
     evidence_files: Optional[List[UploadFile]] = File(None),
     template_file: Optional[UploadFile] = File(None),
     data_file: Optional[UploadFile] = File(None),
+    evidence_blob_files: str = Form("[]"),
+    template_blob_file: str = Form(""),
+    data_blob_file: str = Form(""),
     hours_per_day: float = Form(8.0),
     project_id: str = Form(""),
     target_recovery_days: float = Form(0.0),
@@ -338,7 +448,7 @@ async def schedule_intelligence(
         return _json(load_activity_catalog())
 
     if action == "productivity_import":
-        packed = await _read_evidence_pack(evidence_files or [])
+        packed = await _read_evidence_pack(evidence_files or [], evidence_blob_files)
         documents = extract_document_pack(packed)
         result = build_productivity_library(documents, packed, project_name.strip())
         result["documents"] = [_document_result(item) for item in documents]
@@ -378,7 +488,7 @@ async def schedule_intelligence(
 
     if action in {"evidence_read", "evidence_analyze"}:
         uploads = evidence_files or []
-        packed = await _read_evidence_pack(uploads)
+        packed = await _read_evidence_pack(uploads, evidence_blob_files)
         documents = extract_document_pack(packed)
         if action == "evidence_analyze":
             analysis = analyze_schedule_evidence(documents, project_name=project_name.strip())
@@ -391,7 +501,7 @@ async def schedule_intelligence(
 
     if action == "tender_build":
         uploads = evidence_files or []
-        packed = await _read_evidence_pack(uploads)
+        packed = await _read_evidence_pack(uploads, evidence_blob_files)
         documents = extract_document_pack(packed)
         built, build = build_tender_schedule(
             documents,
@@ -413,24 +523,28 @@ async def schedule_intelligence(
         })
 
     if action == "report_inspect":
-        if template_file is None:
+        resolved_template = await _read_or_blob(template_file, template_blob_file, label="template")
+        if resolved_template is None:
             raise HTTPException(400, "A report template is required")
-        payload = await _read(template_file)
-        return _json(inspect_template(template_file.filename or "template", payload))
+        template_name, template_payload = resolved_template
+        return _json(inspect_template(template_name, template_payload))
 
     if action == "report_render":
-        if template_file is None:
+        resolved_template = await _read_or_blob(template_file, template_blob_file, label="template")
+        if resolved_template is None:
             raise HTTPException(400, "A report template is required")
-        template = await _read(template_file)
+        template_name, template = resolved_template
         values: Dict[str, Any] = {}
-        if data_file is not None:
-            values = load_report_data(data_file.filename or "data.json", await _read(data_file))
+        resolved_data = await _read_or_blob(data_file, data_blob_file, label="data")
+        if resolved_data is not None:
+            data_name, data_payload = resolved_data
+            values = load_report_data(data_name, data_payload)
         if schedule_file is not None:
             schedule, _, _ = await _schedule_upload(schedule_file, hours_per_day, project_id)
             schedule_data = schedule.to_dict(include_raw_tables=False)
             values = {**schedule_data, **values, "schedule": schedule_data, "summary": schedule_summary(schedule)}
-        content, media_type, extension = render_template(template_file.filename or "template", template, values)
-        return _download(content, media_type, f"{Path(template_file.filename or 'report').stem}_POPULATED{extension}")
+        content, media_type, extension = render_template(template_name, template, values)
+        return _download(content, media_type, f"{Path(template_name).stem}_POPULATED{extension}")
 
     if action == "ml_status":
         health = await _proxy_ml_request("GET", "/health")
