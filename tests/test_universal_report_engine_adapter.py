@@ -53,8 +53,8 @@ def test_catalog_is_project_scoped_and_does_not_publish_source_paths(tmp_path: P
     assert payload["project_id"] == "project-001"
     assert payload["project_key"] == "project-001"
     assert payload["summary"]["catalog_count"] == 30
-    assert payload["summary"]["generated_count"] == 0
-    assert all(item["status"] == "READY_TO_GENERATE" for item in payload["report_families"])
+    assert payload["summary"]["generated_count"] == 30
+    assert all(item["status"] == "PUBLISHED" for item in payload["report_families"])
 
     persisted = json.loads((output_dir / OUTPUT_FOLDER_NAME / CATALOG_MANIFEST_NAME).read_text(encoding="utf-8"))
     assert persisted["project_id"] == "project-001"

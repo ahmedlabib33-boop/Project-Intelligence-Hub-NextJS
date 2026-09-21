@@ -1,0 +1,38 @@
+# Approved zero-cost provider registry.
+#
+# Phase 0 ships this empty on purpose: per spec section 4, no provider
+# becomes routable until it has been reviewed against its own official
+# terms and approved by a human. Registry import and quarantine tooling
+# (turning a catalogue entry into a reviewable CANDIDATE) lands in Phase 2.
+#
+# Each entry, once added, must match ProviderSpec in app/policy/models.py:
+#
+# providers:
+#   groq:
+#     enabled: true
+#     approval_state: APPROVED_FREE
+#     base_url: https://api.groq.com/openai/v1
+#     secret_env: GROQ_API_KEY
+#     billing_instrument_present: false
+#     paid_credits_present: false
+#     automatic_topup_enabled: false
+#     terms:
+#       price_verified_zero: true
+#       verified_at: 2026-09-15T00:00:00Z
+#       expires_at: 2026-10-15T00:00:00Z
+#       official_url: https://console.groq.com/docs/rate-limits
+#       evidence_sha256: <64-char hex sha256 of the archived evidence>
+#     adapter: openai_compatible
+#     priority: 10
+#     models:
+#       - id: <provider's exact model id>
+#         capabilities: [text, reasoning]
+#         context_tokens: 131072
+#         max_output_tokens: 8192
+#         pricing:
+#           input_usd_per_million_tokens: 0.00
+#           output_usd_per_million_tokens: 0.00
+#
+# See docs/spec.md section 4.2 for the full minimum-evidence checklist
+# before any real entry may set enabled: true.
+providers: {}

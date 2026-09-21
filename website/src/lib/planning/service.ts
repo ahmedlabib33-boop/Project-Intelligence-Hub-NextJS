@@ -8,6 +8,8 @@
  * the engine itself.
  */
 
+import { upload } from "@vercel/blob/client";
+
 export type JsonRecord = Record<string, unknown>;
 
 export type ServiceStatus = {
@@ -30,6 +32,35 @@ export function serviceEndpoint(): string {
     return "http://127.0.0.1:8766/api/schedule_intelligence";
   }
   return "/api/schedule_intelligence";
+}
+
+/**
+ * Vercel's Python functions hard-cap the request body at 4.5 MB, non-configurable.
+ * Above this threshold (with headroom for multipart overhead and other form
+ * fields) a file goes to Vercel Blob first instead of the raw request body.
+ */
+export const BLOB_UPLOAD_THRESHOLD_BYTES = 3_500_000;
+
+/**
+ * True when the schedule-creation service is this same Next.js deployment
+ * (production or a Vercel preview) rather than a local RUN_LOCAL.bat engine —
+ * only that deployment is subject to the 4.5 MB cap, and only it has the
+ * /api/blob-upload route wired to a working Blob store.
+ */
+export function usesBlobUpload(): boolean {
+  return serviceEndpoint() === "/api/schedule_intelligence";
+}
+
+export type BlobFileRef = { name: string; url: string };
+
+/** Upload one file directly to Vercel Blob, bypassing the service's request body entirely. */
+export async function uploadFileToBlob(file: File): Promise<BlobFileRef> {
+  const blob = await upload(file.name, file, {
+    access: "private",
+    handleUploadUrl: "/api/blob-upload",
+    multipart: true,
+  });
+  return { name: file.name, url: blob.url };
 }
 
 export async function checkService(timeoutMs = 8000): Promise<ServiceStatus> {

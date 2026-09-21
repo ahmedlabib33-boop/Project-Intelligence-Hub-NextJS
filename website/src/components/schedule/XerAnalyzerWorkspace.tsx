@@ -28,9 +28,11 @@ import { DEFAULT_OPTIONS, type AnalyzerOptions, type MatchBy } from "../../lib/x
 import { buildLibraryIndex, emptyLibrary, type PlanningLibrary } from "../../lib/planning/library";
 import { productivityInputs } from "../../lib/planning/mapping";
 import {
-  clearStoredLibrary, loadLibrary, loadShippedLibrary, projectKey, readProjectState, writeProjectState, writeStoredLibrary,
+  clearStoredLibrary, clearStoredTenderPricing, loadLibrary, loadShippedLibrary, loadShippedTenderPricing, loadTenderPricing,
+  projectKey, readProjectState, writeProjectState, writeStoredLibrary, writeStoredTenderPricing,
   type ProjectPipelineState,
 } from "../../lib/planning/store";
+import { emptyTenderPricing, type TenderPricing } from "../../lib/planning/tenderPricing";
 import { ActivityDrawer } from "./xer/ActivityDrawer";
 import {
   CompareActivities, CompareCritical, CompareGantt, CompareImpact, CompareLogic, CompareStructure,
@@ -44,7 +46,9 @@ import {
 import { Badge, Card, DataTable, Drawer, KeyValues, SectionTitle } from "./xer/ui";
 import LibraryWorkspace from "./planning/LibraryWorkspace";
 import MappingView from "./planning/MappingView";
+import MlLearningView from "./planning/MlLearningView";
 import ScenarioView, { type ScenarioRun } from "./planning/ScenarioView";
+import TenderPricingWorkspace from "./planning/TenderPricingWorkspace";
 import ScheduleCreationStage from "./planning/ScheduleCreationStage";
 import { CHECKING, checkService, type ServiceStatus } from "../../lib/planning/service";
 
@@ -65,6 +69,8 @@ const TABS: { k: TabKey; label: string; eyebrow: string; needsBoth?: boolean }[]
   { k: "lib", label: "Planning library", eyebrow: "Activity list · rates" },
   { k: "map", label: "Activity mapping", eyebrow: "Schedule ↔ library" },
   { k: "scen", label: "Mitigation · Recovery · Revised", eyebrow: "One engine" },
+  { k: "ml", label: "Learning / ML", eyebrow: "Train · status" },
+  { k: "tender", label: "Tender pricing", eyebrow: "BOQ · bid build-up" },
   { k: "cmp", label: "Comparison", eyebrow: "A ⇄ B", needsBoth: true },
 ];
 
@@ -156,6 +162,44 @@ export default function XerAnalyzerWorkspace({ projectName = "" }: { projectName
   };
 
   const index = useMemo(() => (library ? buildLibraryIndex(library) : null), [library]);
+
+  /* -------------------------------------------------------- tender pricing */
+
+  const [tenderPricing, setTenderPricing] = useState<TenderPricing | null>(null);
+  const [tenderPricingNote, setTenderPricingNote] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    loadTenderPricing()
+      .then((tp) => {
+        if (!cancelled) setTenderPricing(tp);
+      })
+      .catch((cause) => {
+        if (cancelled) return;
+        setTenderPricingNote(cause instanceof Error ? cause.message : "Tender pricing data could not be loaded.");
+        setTenderPricing(emptyTenderPricing());
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!tenderPricing) return;
+    const handle = window.setTimeout(() => {
+      if (!writeStoredTenderPricing(tenderPricing)) {
+        setTenderPricingNote("This browser could not save tender pricing (storage full or blocked) — export it to keep your edits.");
+      }
+    }, 400);
+    return () => window.clearTimeout(handle);
+  }, [tenderPricing]);
+
+  const resetTenderPricing = () => {
+    clearStoredTenderPricing();
+    loadShippedTenderPricing()
+      .then(setTenderPricing)
+      .catch((cause) => setTenderPricingNote(cause instanceof Error ? cause.message : "The shipped tender pricing workbook could not be loaded."));
+  };
 
   /* ------------------------------------------------------------ loading */
 
@@ -556,6 +600,14 @@ export default function XerAnalyzerWorkspace({ projectName = "" }: { projectName
               goMapping={() => setTab("map")}
               goLibrary={() => setTab("lib")}
             />
+          ) : null}
+
+          {tab === "ml" ? <MlLearningView service={service} projectName={projectName} /> : null}
+
+          {tab === "tender" ? (
+            tenderPricing
+              ? <TenderPricingWorkspace data={tenderPricing} onChange={setTenderPricing} onReset={resetTenderPricing} />
+              : <p className="xer-dim">{tenderPricingNote || "Loading tender pricing…"}</p>
           ) : null}
 
           {tab === "cmp" && compareCtx ? (

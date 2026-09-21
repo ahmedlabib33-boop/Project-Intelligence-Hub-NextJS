@@ -1,0 +1,5 @@
+# Phase 0 only: policy schema + config loading. FastAPI, SQLAlchemy/aiosqlite
+# and provider HTTP clients are added in Phase 1+ (see docs/spec.md section 19)
+# once there is an adapter that actually needs them.
+pydantic>=2.6,<3
+PyYAML>=6,<7
