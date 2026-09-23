@@ -8,6 +8,7 @@ __pycache__/
 *.pyd
 
 # Secrets
+.secrets/
 .env
 .env.local
 .streamlit/secrets.toml
@@ -27,6 +28,10 @@ backups/
 .pip-tmp/
 .codex/
 .agents/
+tmp/
+
+# Claude Code local tooling state (worktrees, launch config)
+.claude/
 
 # Node / frontend
 node_modules/
@@ -47,3 +52,9 @@ Thumbs.db
 PIH.txt
 *.token
 *.secret
+PROGRAM_INPUT_TO_VERCEL_OUTPUT_DEPENDENCY_REGISTER.docx
+
+# Large local-only release/reference bundles (already excluded from data_release_config.json)
+Delay Analysis - Time Impact Analysis/BRAIN_LABIB_V34baba_SIGNED_RELEASE/
+Delay Analysis - Time Impact Analysis/THE_BIG_ALL_SOURCES_PLUS_PROMPTS_v1.0.0/
+Primavera_Planning_Recovery_Intelligence_10X_v6.0.0_RELEASE/

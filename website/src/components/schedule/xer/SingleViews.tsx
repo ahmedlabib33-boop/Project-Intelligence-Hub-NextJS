@@ -21,7 +21,7 @@ import { Badge, Bars, Card, type Column, DataTable, Kpi, Kpis, LineChart, Sectio
 export type TabKey =
   | "dash" | "act" | "logic" | "crit" | "float" | "health"
   | "gantt" | "wbs" | "res" | "cal" | "raw" | "cmp"
-  | "lib" | "map" | "scen";
+  | "lib" | "map" | "scen" | "ml" | "tender";
 
 export type ViewCtx = {
   P: ProjectView;

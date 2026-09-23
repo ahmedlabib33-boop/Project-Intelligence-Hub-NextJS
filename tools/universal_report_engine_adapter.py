@@ -312,6 +312,7 @@ body{{margin:0;background:#071525;color:#eaf6ff;font:15px Aptos,Arial,sans-serif
 def _ensure_program_report_assets(
     project: dict[str, Any], catalog: list[dict[str, Any]], sources: list[dict[str, Any]], fingerprint: str, output_dir: Path
 ) -> dict[str, str]:
+    output_dir.mkdir(parents=True, exist_ok=True)
     assets: dict[str, str] = {}
     for item in catalog:
         key = str(item.get("key") or "report")
@@ -396,7 +397,14 @@ def ensure_universal_report_engine_catalog(
         )
         for item in base_catalog
     ]
-    generated_count = len(catalog)
+    # Every catalogue card is published immediately from the selected project's
+    # program data (see _family_status) — there is no draft/ready/blocked state
+    # in this design, so those counts stay at 0 and generated_count is the full
+    # catalog.
+    generated_count = sum(1 for item in catalog if item.get("status") == "PUBLISHED")
+    draft_review_count = 0
+    ready_count = 0
+    blocked_count = 0
     payload = {
         "project_id": project_id,
         "project_key": project_key,
@@ -409,9 +417,9 @@ def ensure_universal_report_engine_catalog(
         "summary": {
             "catalog_count": len(catalog),
             "generated_count": generated_count,
-            "draft_review_count": 0,
-            "ready_count": 0,
-            "blocked_count": 0,
+            "draft_review_count": draft_review_count,
+            "ready_count": ready_count,
+            "blocked_count": blocked_count,
         },
         "ml_capability": {
             "task_count": len(ml_task_catalog()),
