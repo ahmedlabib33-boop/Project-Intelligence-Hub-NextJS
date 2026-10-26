@@ -263,10 +263,23 @@ export default function XerAnalyzerWorkspace({ projectName = "" }: { projectName
     if (tab === "cmp") setTab("dash");
   };
 
+  const swapSlots = () => {
+    setA(B);
+    setB(A);
+    setProjA(projB);
+    setProjB(projA);
+    setScope((current) => (current === "A" ? "B" : "A"));
+    setDrawerTask(null);
+    setDrawerDiff(null);
+    setDrawerCheck(null);
+  };
+
   /* ----------------------------------------------------------- analysis */
 
   const viewA = useMemo(() => (A ? projectView(A, projA) : null), [A, projA]);
   const viewB = useMemo(() => (B ? projectView(B, projB) : null), [B, projB]);
+  // The comparison reads A → B as earlier → later (BEI, missed activities, slips and gains).
+  const slotsReversed = !!(viewA?.dataDate && viewB?.dataDate && +viewA.dataDate > +viewB.dataDate);
 
   const active = scope === "B" && viewB ? viewB : viewA;
   const activeSchedule = scope === "B" && B ? B : A;
@@ -381,7 +394,7 @@ export default function XerAnalyzerWorkspace({ projectName = "" }: { projectName
       ) : (
         <button type="button" className="xer-slot-load" onClick={() => pickFile(slot)}>
           <b>Load schedule {slot}</b>
-          <span>{slot === "A" ? "Current / updated programme" : "Baseline / previous revision — enables comparison"}</span>
+          <span>{slot === "A" ? "Baseline / earlier revision (or a single programme)" : "Update / later revision — enables comparison"}</span>
         </button>
       )}
     </div>
@@ -476,6 +489,13 @@ export default function XerAnalyzerWorkspace({ projectName = "" }: { projectName
             </button>
           </div>
         </div>
+        {slotsReversed && viewA && viewB ? (
+          <p className="xer-error" role="alert">
+            Schedule A (data date {formatDate(viewA.dataDate)}) is later than schedule B ({formatDate(viewB.dataDate)}). The comparison
+            reads A → B as earlier → later, so slips, gains, BEI and missed activities are currently inverted.{" "}
+            <button type="button" className="xer-btn xer-btn-sm" onClick={swapSlots}>Swap A ⇄ B</button>
+          </p>
+        ) : null}
         {busy ? <p className="xer-busy">{busy}</p> : null}
         {notice ? <p className="xer-busy">{notice}</p> : null}
         {error ? <p className="xer-error">{error}</p> : null}
@@ -502,6 +522,16 @@ export default function XerAnalyzerWorkspace({ projectName = "" }: { projectName
             <details className="pl-standalone">
               <summary>Planning library — activity list, CSI coding, crews, production and equipment rates (editable without a schedule)</summary>
               <LibraryWorkspace library={library} onChange={setLibrary} onReset={resetLibrary} />
+            </details>
+          ) : null}
+          <details className="pl-standalone">
+            <summary>Learning / ML — real training data and models (trains from the saved set without a schedule loaded)</summary>
+            <MlLearningView service={service} projectName={projectName} view={null} cmp={null} />
+          </details>
+          {tenderPricing ? (
+            <details className="pl-standalone">
+              <summary>Tender pricing — rates, bid build-up and BOQs (editable without a schedule)</summary>
+              <TenderPricingWorkspace data={tenderPricing} onChange={setTenderPricing} onReset={resetTenderPricing} />
             </details>
           ) : null}
         </>
@@ -602,7 +632,7 @@ export default function XerAnalyzerWorkspace({ projectName = "" }: { projectName
             />
           ) : null}
 
-          {tab === "ml" ? <MlLearningView service={service} projectName={projectName} /> : null}
+          {tab === "ml" ? <MlLearningView service={service} projectName={projectName} view={active} cmp={cmp} /> : null}
 
           {tab === "tender" ? (
             tenderPricing

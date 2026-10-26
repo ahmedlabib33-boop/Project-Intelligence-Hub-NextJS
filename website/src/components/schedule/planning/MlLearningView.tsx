@@ -12,7 +12,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import { callService, type JsonRecord, type ServiceStatus } from "../../../lib/planning/service";
+import type { Comparison } from "../../../lib/xer/compare";
+import { formatNum } from "../../../lib/xer/format";
+import type { ProjectView } from "../../../lib/xer/model";
+import { judgeModel, type Benchmark, type TrainingDatasetSpec } from "../../../lib/xer/trainingData";
 import { Badge, Card, Kpi, Kpis, SectionTitle } from "../xer/ui";
+import TrainingDataPanel, { type UseTrainingPayload } from "./TrainingDataPanel";
 
 type DataOrigin = "real_project" | "synthetic_benchmark" | "external_reference" | "unspecified";
 
@@ -26,7 +31,17 @@ const DATA_ORIGINS: { value: DataOrigin; label: string }[] = [
 const str = (v: unknown): string => (v === null || v === undefined ? "" : typeof v === "object" ? JSON.stringify(v) : String(v));
 const num = (v: unknown): string => (typeof v === "number" && Number.isFinite(v) ? v.toFixed(3) : "—");
 
-export default function MlLearningView({ service, projectName }: { service: ServiceStatus; projectName: string }) {
+export default function MlLearningView({
+  service,
+  projectName,
+  view,
+  cmp,
+}: {
+  service: ServiceStatus;
+  projectName: string;
+  view: ProjectView | null;
+  cmp: Comparison | null;
+}) {
   const wired = service.state === "wired";
   const [busy, setBusy] = useState("");
   const [error, setError] = useState("");
@@ -44,6 +59,28 @@ export default function MlLearningView({ service, projectName }: { service: Serv
   const fileRef = useRef<HTMLInputElement>(null);
 
   const [result, setResult] = useState<JsonRecord | null>(null);
+  const [reference, setReference] = useState<{ spec: TrainingDatasetSpec; benchmark: Benchmark } | null>(null);
+  const targetTouched = useRef(false);
+
+  const useRealData = (payload: UseTrainingPayload) => {
+    setFile(payload.file);
+    setTask(payload.spec.task);
+    setTarget(payload.spec.target);
+    targetTouched.current = true;
+    setDataOrigin("real_project");
+    setProjectScope(payload.projectScope);
+    setPromote(false);
+    setResult(null);
+    setError("");
+    setReference({ spec: payload.spec, benchmark: payload.benchmark });
+  };
+
+  const changeTask = (key: string) => {
+    setTask(key);
+    const hint = (tasks[key] as JsonRecord | undefined)?.target_hint;
+    if (typeof hint === "string" && hint && !targetTouched.current) setTarget(hint);
+    if (reference && reference.spec.task !== key) setReference(null);
+  };
 
   type EngineStatus = { engineWired: boolean; engineDetail: string; tasks: JsonRecord; models: JsonRecord | null };
 
@@ -122,6 +159,7 @@ export default function MlLearningView({ service, projectName }: { service: Serv
   const isolation = (card?.training_isolation as JsonRecord | undefined) || null;
   const metrics = (card?.metrics as JsonRecord | undefined) || null;
   const modelRow = (result?.model as JsonRecord | undefined) || null;
+  const judgement = reference && card && str(card.task) === reference.spec.task ? judgeModel(metrics, reference.benchmark) : null;
 
   return (
     <div className="xer-view pl-create">
@@ -147,11 +185,13 @@ export default function MlLearningView({ service, projectName }: { service: Serv
         </p>
       </Card>
 
-      <Card eyebrow="Run learning" title="Upload training examples and train a model">
+      <TrainingDataPanel view={view} cmp={cmp} projectName={projectName} onUse={useRealData} />
+
+      <Card eyebrow="Run learning" title="Train a model on the selected file">
         <div className="pl-form-row">
           <label>
             Task
-            <select className="xer-select" value={task} onChange={(e) => setTask(e.target.value)} disabled={!wired}>
+            <select className="xer-select" value={task} onChange={(e) => changeTask(e.target.value)} disabled={!wired}>
               {taskList.length
                 ? taskList.map(([key, def]) => (
                     <option key={key} value={key}>{str((def as JsonRecord)?.title) || key}</option>
@@ -161,7 +201,7 @@ export default function MlLearningView({ service, projectName }: { service: Serv
           </label>
           <label>
             Target column
-            <input type="text" value={target} onChange={(e) => setTarget(e.target.value)} placeholder="e.g. actual_duration_days" disabled={!wired} />
+            <input type="text" className="xer-input" value={target} onChange={(e) => { targetTouched.current = true; setTarget(e.target.value); }} placeholder="e.g. finish_deviation_days" disabled={!wired} />
           </label>
           <label>
             Data origin
@@ -171,7 +211,7 @@ export default function MlLearningView({ service, projectName }: { service: Serv
           </label>
           <label>
             Project scope
-            <input type="text" value={projectScope} onChange={(e) => setProjectScope(e.target.value)} disabled={!wired} />
+            <input type="text" className="xer-input" value={projectScope} onChange={(e) => setProjectScope(e.target.value)} disabled={!wired} />
           </label>
           <label className="pl-checkbox">
             <input type="checkbox" checked={promote} onChange={(e) => setPromote(e.target.checked)} disabled={!wired} />
@@ -210,9 +250,42 @@ export default function MlLearningView({ service, projectName }: { service: Serv
           <Kpis>
             <Kpi label="Selected model" value={str(card.selected_model)} note={str(card.selected_framework)} />
             <Kpi label="Records" value={`${str(card.training_records)} train / ${str(card.validation_records)} test`} note={`${str(card.total_records)} total`} />
+            {typeof metrics?.mae === "number" ? <Kpi label="MAE (held-out)" value={num(metrics.mae)} note="working days" /> : null}
+            {typeof metrics?.rmse === "number" ? <Kpi label="RMSE (held-out)" value={num(metrics.rmse)} note="working days" /> : null}
+            {typeof metrics?.r2 === "number" ? <Kpi label="R² (held-out)" value={num(metrics.r2)} note="1.0 = perfect" /> : null}
+            {typeof metrics?.accuracy === "number" ? <Kpi label="Accuracy (held-out)" value={num(metrics.accuracy)} /> : null}
+            {typeof metrics?.balanced_accuracy === "number" ? <Kpi label="Balanced accuracy" value={num(metrics.balanced_accuracy)} note="averages per-class recall" /> : null}
             <Kpi label="Confidence" value={num(metrics?.confidence)} note={`OOD score ${num(metrics?.ood_score)}`} />
             <Kpi label="CV score" value={num(metrics?.cross_validation_score_mean)} note={str(metrics?.cross_validation_scoring)} />
           </Kpis>
+          {judgement && reference ? (
+            <>
+              <SectionTitle>Against the reference rules</SectionTitle>
+              <p className={judgement.level === "does_not_beat" ? "xer-error" : "xer-note"}>
+                <b>{judgement.level === "beats" ? "Beats the rules." : judgement.level === "mixed" ? "Inconclusive." : "Does not beat the rules."}</b> {judgement.message}
+              </p>
+              <div className="xer-table-wrap">
+                <table className="xer-table">
+                  <thead>
+                    <tr>
+                      <th>Rule</th>
+                      {reference.benchmark.kind === "regression" ? <><th>MAE (d)</th><th>RMSE (d)</th></> : <><th>Accuracy</th><th>Balanced accuracy</th></>}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {reference.benchmark.rules.map((rule) => (
+                      <tr key={rule.name}>
+                        <td>{rule.name}</td>
+                        {reference.benchmark.kind === "regression"
+                          ? <><td>{formatNum(rule.mae ?? null, 2)}</td><td>{formatNum(rule.rmse ?? null, 2)}</td></>
+                          : <><td>{formatNum(rule.accuracy ?? null, 3)}</td><td>{formatNum(rule.balancedAccuracy ?? null, 3)}</td></>}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          ) : null}
           {isolation?.warning ? <p className="xer-error">{str(isolation.warning)}</p> : null}
           <SectionTitle>Governance</SectionTitle>
           <p className="xer-dim">
