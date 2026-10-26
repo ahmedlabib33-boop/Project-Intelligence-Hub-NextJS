@@ -8,6 +8,7 @@
  */
 
 import { defaultControls, type ScenarioControls, type ScenarioObjective, type ScenarioState } from "../xer/scenario";
+import { parseObservationSet, serializeObservationSet, type Observation } from "../xer/trainingData";
 import { normLabel, parseLibraryJson, type PlanningLibrary } from "./library";
 import { MAPPING_SCHEMA, emptyMappingStore, type MappingStore } from "./mapping";
 import { emptyTenderPricing, parseTenderPricingJson, type TenderPricing } from "./tenderPricing";
@@ -90,6 +91,35 @@ export async function loadShippedTenderPricing(): Promise<TenderPricing> {
 /** The browser's saved tender pricing data, or the shipped one when nothing is saved yet. */
 export async function loadTenderPricing(): Promise<TenderPricing> {
   return readStoredTenderPricing() || loadShippedTenderPricing().catch(() => emptyTenderPricing());
+}
+
+const TRAINING_SET_KEY = "pih.scheduleIntelligence.trainingSet.v1";
+
+/** The accumulated real plan-vs-actual observations; malformed saved rows are dropped on read. */
+export function readStoredTrainingSet(): Observation[] {
+  try {
+    const raw = window.localStorage.getItem(TRAINING_SET_KEY);
+    return raw ? parseObservationSet(raw).observations : [];
+  } catch {
+    return [];
+  }
+}
+
+export function writeStoredTrainingSet(observations: Observation[]): boolean {
+  try {
+    window.localStorage.setItem(TRAINING_SET_KEY, serializeObservationSet(observations));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export function clearStoredTrainingSet(): void {
+  try {
+    window.localStorage.removeItem(TRAINING_SET_KEY);
+  } catch {
+    /* storage unavailable */
+  }
 }
 
 export type ProjectPipelineState = {

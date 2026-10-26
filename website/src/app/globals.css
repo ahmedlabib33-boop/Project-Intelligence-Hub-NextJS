@@ -5032,3 +5032,25 @@ h2 {
 .xer-analyzer .pl-grid td { font-size: .95rem; line-height: 1.6; padding: 12px 11px; }
 .xer-analyzer .pl-grid th { font-size: .76rem; }
 @media (max-width: 700px) { .pl-conflict-option { grid-template-columns: 1fr; } }
+
+/* ---- Learning / ML: training-data panel and engine form ---- */
+.xer-analyzer .pl-form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; align-items: end; margin-top: 12px; }
+.xer-analyzer .pl-form-row label { display: grid; gap: 5px; color: #9db7cc; font-size: .74rem; font-weight: 700; }
+.xer-analyzer .pl-form-row .xer-input, .xer-analyzer .pl-form-row .xer-select { width: 100%; }
+.xer-analyzer .pl-form-row .pl-checkbox { display: flex; gap: 9px; align-items: center; font-weight: 600; }
+.xer-analyzer .pl-actions { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; margin-top: 14px; }
+.xer-analyzer .pl-td-choice { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; margin-top: 10px; }
+.xer-analyzer .pl-td-choice label { display: flex; gap: 10px; align-items: flex-start; border: 1px solid rgba(99,168,255,.18); border-radius: 12px; background: rgba(7,17,32,.5); padding: 11px 13px; cursor: pointer; }
+.xer-analyzer .pl-td-choice label.active { border-color: rgba(57,215,210,.5); background: rgba(57,215,210,.08); }
+.xer-analyzer .pl-td-choice input { margin-top: 3px; }
+.xer-analyzer .pl-td-choice b { display: block; color: #e8f5ff; font-size: .82rem; }
+.xer-analyzer .pl-td-choice em { color: var(--cyan); font-style: normal; font-weight: 600; }
+.xer-analyzer .pl-td-choice small { display: block; margin-top: 3px; color: #7f9cb3; font-size: .72rem; line-height: 1.45; }
+.xer-analyzer .pl-td-empty { margin: 12px 0 0; }
+.xer-analyzer .pl-td-notice { margin-top: 12px; color: #9fe9e5; font-size: .8rem; line-height: 1.5; }
+.xer-analyzer .xer-btn-primary { border-color: rgba(57,215,210,.55); background: rgba(57,215,210,.14); color: #e8ffff; font-weight: 700; }
+.xer-analyzer .xer-btn-primary:hover:not(:disabled) { background: rgba(57,215,210,.24); }
+.xer-analyzer table.xer-table:not(.schedule-intelligence-table) { width: 100%; border-collapse: collapse; }
+.xer-analyzer table.xer-table:not(.schedule-intelligence-table) th { border-bottom: 1px solid rgba(99,168,255,.2); color: #77a1c5; font-size: .68rem; letter-spacing: .075em; text-align: left; text-transform: uppercase; }
+.xer-analyzer table.xer-table:not(.schedule-intelligence-table) td { border-bottom: 1px solid rgba(255,255,255,.055); color: #b2c8d9; vertical-align: top; }
+.xer-analyzer table.xer-table:not(.schedule-intelligence-table) tbody tr:last-child td { border-bottom: 0; }
