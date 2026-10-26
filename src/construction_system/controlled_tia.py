@@ -59,7 +59,13 @@ APPROVED_MATRIX_COLUMNS = (
 
 
 def _text(value: Any) -> str:
-    return str(value or "").strip()
+    # ``value or ""`` would be wrong here: 0, 0.0, and False are falsy in
+    # Python but are legitimate submitted values (a zero-day EOT, a zero
+    # concurrency adjustment, an explicit display_order of 0), not missing
+    # data. Only None and "" should normalise to empty.
+    if value is None:
+        return ""
+    return str(value).strip()
 
 
 def _sha256(path: Path) -> str:
@@ -541,13 +547,15 @@ def _submission_event_exhibits(
                 "detail": source_relative_path,
             })
             continue
+        declared_order = _int_value(raw.get("display_order"))
         records.append({
             "project_id": expected_project_id,
             "project_key": expected_project_key,
             "event_id": event_id,
             "event_variants": variants,
             "title": _text(raw.get("title")) or f"{event_id} submitted event mapping",
-            "display_order": _int_value(raw.get("display_order")) or index,
+            # ``or index`` would silently discard an explicitly submitted 0.
+            "display_order": declared_order if declared_order is not None else index,
             "evidence_use": _text(raw.get("evidence_use")) or "Submitted event mapping exhibit only",
             "control_note": _text(raw.get("control_note")) or "The approved project-local matrix controls active schedule and EOT values.",
             "source_file": source_path.name,
@@ -604,12 +612,14 @@ def _submission_view_exhibits(
         if not file_record["exists"]:
             findings.append({"source_row": f"view_exhibit:{index}", "issue": "Submitted TIA view exhibit file is missing.", "detail": source_relative_path})
             continue
+        declared_order = _int_value(raw.get("display_order"))
         records.append({
             "project_id": expected_project_id,
             "project_key": expected_project_key,
             "view": view,
             "title": _text(raw.get("title")) or view,
-            "display_order": _int_value(raw.get("display_order")) or index,
+            # ``or index`` would silently discard an explicitly submitted 0.
+            "display_order": declared_order if declared_order is not None else index,
             "evidence_use": _text(raw.get("evidence_use")) or "Submitted display exhibit only",
             "control_note": _text(raw.get("control_note")) or "The project-local approved matrix remains the calculation authority.",
             "source_file": source_path.name,
