@@ -1167,14 +1167,27 @@ def build_controlled_tia_snapshot(project: dict[str, Any]) -> dict[str, Any]:
     The former generic CSV engine is intentionally not called here.  The
     controlled adapter creates an unreviewed project-local draft when an
     approved source changes, or a setup state when no project package exists.
+
+    The refresh itself runs as a job on the shared orchestration core engine
+    (Event Broker -> Orchestration Core -> Relational DB, see
+    ``construction_system/orchestration.py``), so every refresh attempt is
+    durably recorded with a retry-on-failure policy, even though this script
+    still drains the job synchronously in the same process -- there is no
+    persistent worker for this offline batch step.
     """
     try:
         source_src = CANONICAL_ROOT / "src"
         if str(source_src) not in sys.path:
             sys.path.insert(0, str(source_src))
-        from construction_system.controlled_tia import refresh_controlled_tia_run
+        from construction_system import orchestration_handlers  # noqa: F401  (registers "tia_refresh")
+        from construction_system.orchestration import drain_queue, enqueue_job, get_job
 
-        return refresh_controlled_tia_run(project)
+        job_id = enqueue_job("tia_refresh", {"project": project})
+        drain_queue(job_types=["tia_refresh"], limit=1)
+        job = get_job(job_id)
+        if job is None or job.status != "DONE" or not isinstance(job.result, dict):
+            raise RuntimeError((job.error if job else None) or "tia_refresh job did not complete")
+        return job.result
     except Exception as exc:
         return {
             "engine": "controlled-project-tia",
@@ -2135,6 +2148,27 @@ def _sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _run_report_generate_job(project: dict[str, Any], output_dir: Path, public_slug: str) -> dict[str, Any]:
+    """Runs ``ensure_project_report_artifacts`` via the shared orchestration
+    core engine (Schema 1: Event Broker -> Orchestration Core -> Relational
+    DB) instead of a bare function call, so every report build is durably
+    recorded with a retry-on-failure policy in the same job queue used by
+    the Delay Analysis / TIA refresh jobs. Output on disk is unchanged from
+    a direct call."""
+    import orchestration_report_handler  # noqa: F401  (registers "report_generate"; also puts src/ on sys.path)
+    from construction_system.orchestration import drain_queue, enqueue_job, get_job
+
+    job_id = enqueue_job(
+        "report_generate",
+        {"project": project, "output_dir": str(output_dir), "public_slug": public_slug},
+    )
+    drain_queue(job_types=["report_generate"], limit=1)
+    job = get_job(job_id)
+    if job is None or job.status != "DONE" or not isinstance(job.result, dict):
+        raise RuntimeError((job.error if job else None) or "report_generate job did not complete")
+    return job.result
+
+
 def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
     """Publish selected-project report artifacts without rewriting unchanged projects."""
     GENERATED_ROOT.mkdir(parents=True, exist_ok=True)
@@ -2154,7 +2188,7 @@ def copy_generated_outputs(projects: list[dict[str, Any]]) -> None:
                 copy_if_changed(html_report, output_dir / html_report.name)
 
         public_slug = slugify(project_folder)
-        artifacts = ensure_project_report_artifacts(project, output_dir, public_slug=public_slug)
+        artifacts = _run_report_generate_job(project, output_dir, public_slug)
         project["report_package"] = artifacts.pop("published_project_package", None)
         project["report_artifacts"] = artifacts
 

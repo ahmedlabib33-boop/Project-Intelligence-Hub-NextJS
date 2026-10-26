@@ -1,8 +1,8 @@
-# Projects Pipeline Report
+# Projects Pipeline & SYNC Report
 
 ## Purpose
 
-This report explains how Project Intelligence Hub moves information from project folders into the Decision Making Dashboard and then into each selected project workspace.
+This report explains how Project Intelligence Hub moves information from project folders into the Decision Making Dashboard and then into each selected project workspace and how sync happened.
 
 ## Current Project Source
 
@@ -280,28 +280,85 @@ projects/<sector>/<project>/12-logs/
 
 This prevents cross-project output mixing.
 
-## Stage 12 - Sync Pipeline
+## Stage 12 - Local Folder to Vercel Sync Pipeline
 
-Full workspace sync launcher:
+`RUN_FULL_PROJECT_NO_GIT_SYNC.bat` no longer exists. There are now two separate,
+purpose-built entry points — a local-only preview and a full publish pipeline —
+and they must not be confused.
 
-```text
-RUN_FULL_PROJECT_NO_GIT_SYNC.bat
-```
-
-Main sync engine:
+### 12a. Local preview only (never publishes)
 
 ```text
-tools/github_no_git_sync.ps1
+RUN_LOCAL.bat
+  -> CrUp_JSON.bat all -> tools/crup_json.py
+  -> npm run dev (Next.js on http://127.0.0.1:5184)
+  -> tools/watch_local_json.ps1 (re-runs CrUp_JSON.bat on local CSV/user_input changes)
 ```
 
-Behavior:
+This regenerates `website/public/data/*.json` from `projects/*/01-data/user_inputs`
+and serves the site locally. It never touches GitHub or Vercel.
 
-- Watches the full workspace.
-- Includes code folders and project folders.
-- Does not use Git commands.
-- Reads credentials only from `GITHUB_TOKEN` or `GH_TOKEN`.
-- Writes logs to `logs/github_sync.log`.
-- Tracks local state in `.sync_state/local_manifest.json`.
+### 12b. Full local-folder-to-Vercel publish
+
+Launcher:
+
+```text
+VERCEL_SYNC.bat [watch|once|test|dryrun]
+```
+
+Engine:
+
+```text
+tools/vercel_project_pipeline.ps1
+```
+
+Flow (this is the only publisher — Vercel itself is never invoked directly; it
+is connected to `main` via its GitHub integration and deploys the pushed
+commit on its own, so no Vercel CLI step can race or double-deploy):
+
+```text
+local workspace change
+  -> tools/generate_nextjs_website_data.py   (regenerate all project JSON + dashboards)
+  -> tools/validate_streamlit_vercel_pipeline.py   (Streamlit <-> Next.js source parity)
+  -> npm run build   (production build must succeed before anything publishes)
+  -> tools/github_no_git_sync.ps1 -Mode Once   (publish via GitHub REST API, no git CLI)
+  -> GitHub main branch updated
+  -> Vercel's GitHub integration deploys automatically
+  -> tools/validate_streamlit_vercel_pipeline.py --public-url <url>   (verify the LIVE site, retried up to 8x / ~80s while the deployment propagates)
+  -> re-hash the watched workspace; if anything changed mid-publish, run one more stabilization pass before declaring success
+```
+
+Modes:
+
+| Mode | Behavior |
+|---|---|
+| `Watch` (default) | Publishes once immediately (unless the last saved state already matches the current workspace fingerprint), then watches the workspace continuously — a `FileSystemWatcher` event triggers immediately, with a redundant full-tree safety scan every `IntervalSeconds` (default 30, minimum 3) in case an OS event is missed. Only one watcher can run at a time (named mutex `Local\ProjectIntelligenceHubNextVercelPipeline`); a second launch exits immediately. |
+| `Once` | Runs a single publish pass and exits. |
+| `Test` | Runs the watcher self-test (`Test-WatcherDetection`: proves add/edit/delete of a probe file are all detected) then one full publish pass. |
+| `DryRun` | Runs only the watcher self-test; generates, validates, builds, or publishes nothing. |
+
+What is watched (`Test-TrackedPath` in `vercel_project_pipeline.ps1`): the whole
+canonical workspace (`$env:PIH_SOURCE_ROOT`, defaulting to this repo root),
+excluding `.git`, `.next`, `node_modules`, `.vercel`, Python venvs/caches,
+`11-outputs`, `12-logs`, `backups`, `.sync_state`, the already-generated
+`website/public/data`/`website/public/generated`/`website/src/generated`
+folders, `website/next-env.d.ts`, `*.log`/`*.tsbuildinfo` files, the derived
+`05-contracts/contract_claims.db`, and anything secret-shaped (`.env*`,
+`*.token`, `*.secret`, `*.pem`, `*.key`) — the same exclusion intent as
+`tools/data_release_config.json`.
+
+Credentials: `github_no_git_sync.ps1` reads only `GITHUB_TOKEN` or `GH_TOKEN`
+from the environment (never stored in the repo) and pushes over the GitHub
+REST API — no `git` CLI is invoked anywhere in this pipeline.
+
+Logging and state:
+
+- Log: `12-logs/vercel_project_pipeline.log` (tokens matching
+  `github_pat_*`/`gh[pousr]_*`/`gsk_*` are redacted before every write).
+- State: `.sync_state/vercel_project_pipeline_state.json` — last publish
+  status, UTC timestamp, public URL, and the workspace content fingerprint
+  used to skip a redundant rebuild when `Watch` mode restarts with nothing
+  changed since the last verified publish.
 
 ## Data Isolation Rules
 

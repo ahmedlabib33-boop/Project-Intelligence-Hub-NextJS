@@ -1,10 +1,10 @@
 ﻿import { NextRequest, NextResponse } from "next/server";
-import { askConfiguredAI } from "../../../lib/ai/gateway";
 import { buildProjectContext, contextToPrompt } from "../../../lib/ai/project-context";
 import { checkRateLimit } from "../../../lib/ai/rate-limit";
 import { sanitizeText } from "../../../lib/ai/provider";
 import { withSamcoDirectorPrompt } from "../../../lib/ai/samco-director";
 import { aiRequestFailure, aiTextList, formatAiText, readAiJson } from "../../../lib/ai/request";
+import { askConfiguredAIJob as askConfiguredAI } from "../../../lib/orchestration/llmWorker";
 
 export const runtime = "nodejs";
 
