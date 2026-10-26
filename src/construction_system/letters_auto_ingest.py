@@ -9,7 +9,7 @@ import pandas as pd
 
 # SAMCO is the project's Main Contractor.  These are business-role labels used
 # across every workspace; legacy aliases remain read-only for historic files.
-SAMCO_SHEET = "From SAMCO"
+SAMCO_SHEET = "From Contractor"
 ACE_SHEET = "From Consultant"
 SAMCO_LINKS_SHEET = "SAMCO → Consultant Links"
 ACE_LINKS_SHEET = "Consultant → SAMCO Links"
@@ -212,7 +212,7 @@ def _related_references(text: str, current_reference: str, opposite_direction: s
 
 def _ensure_frame(sheets: dict[str, pd.DataFrame], name: str, columns: list[str]) -> pd.DataFrame:
     legacy_aliases = {
-        SAMCO_SHEET: ["From Contractor", "From SAMCO to ACE"],
+        SAMCO_SHEET: ["From SAMCO", "From SAMCO to ACE"],
         ACE_SHEET: ["From ACE to SAMCO", "From ACE"],
         SAMCO_LINKS_SHEET: ["Contractor Links", "SAMCO to ACE Links"],
         ACE_LINKS_SHEET: ["Consultant Links", "ACE to SAMCO Links"],
@@ -383,7 +383,7 @@ def merge_inbox_letters(
     sheets[THREADS_SHEET] = text_safe(threads_df)
     sheets[AUTO_REGISTER_SHEET] = text_safe(pd.DataFrame(register_rows, columns=REGISTER_COLUMNS))
     for aliases in {
-        SAMCO_SHEET: ["From Contractor", "From SAMCO to ACE"],
+        SAMCO_SHEET: ["From SAMCO", "From SAMCO to ACE"],
         ACE_SHEET: ["From ACE to SAMCO", "From ACE"],
         SAMCO_LINKS_SHEET: ["Contractor Links", "SAMCO to ACE Links"],
         ACE_LINKS_SHEET: ["Consultant Links", "ACE to SAMCO Links"],
