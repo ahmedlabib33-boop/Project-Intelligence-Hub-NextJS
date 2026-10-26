@@ -5,7 +5,7 @@
   "outputDirectory": ".next",
   "functions": {
     "api/schedule_intelligence.py": {
-      "maxDuration": 60
+      "maxDuration": 300
     }
   }
 }
