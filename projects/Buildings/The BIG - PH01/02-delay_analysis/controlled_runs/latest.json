@@ -42,16 +42,16 @@
         "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\submission_manifest.json",
         "required": true,
         "exists": true,
-        "sha256": "57225e7fd4be70274ca6c7fa705e405d324a70f1c4984c73eef621919553d6b7",
-        "size_bytes": 11063
+        "sha256": "cd80329d21ab812e43d5f9b4ad22f13fca3a4d9f2e2d75638630e685dfcc4b51",
+        "size_bytes": 11186
       },
       {
         "file": "approved_before_after_fragnet_comparison.csv",
         "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\approved_before_after_fragnet_comparison.csv",
         "required": true,
         "exists": true,
-        "sha256": "5368dd6dd7f72648b1f124aabcc686425cc61c3ad4d0b81c97d5ea3fd6bb81c4",
-        "size_bytes": 4849
+        "sha256": "06fcba409d1bb108bef12cda67d4a0c27483ba46885fd8337688b09b451385ce",
+        "size_bytes": 4862
       },
       {
         "file": "Event_01_Steel_Supply_TIA_EOT_Mapping.png",
@@ -90,24 +90,24 @@
         "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\13_TIA_Methodology_Flowchart.svg",
         "required": false,
         "exists": true,
-        "sha256": "5f726b61160d9016da0aada1a40faa98b7472af901b8703bc0cced1f9e1eed2d",
-        "size_bytes": 133499
+        "sha256": "d7c2f72fb97c834f603e1961440cf6876d2d2186f8cbfa396077b80058887538",
+        "size_bytes": 137200
       },
       {
         "file": "07_Concurrency_Overlap_Analysis_Large_Font.svg",
         "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\07_Concurrency_Overlap_Analysis_Large_Font.svg",
         "required": false,
         "exists": true,
-        "sha256": "9fd89762c2709fb40abd22e6a79ba2051b2519b21a41883c69b563c9d7e2bc3d",
-        "size_bytes": 86761
+        "sha256": "f3e5d832767a294292bc6e3377f051ee3609fb7bb82068a5005ee432b76f149e",
+        "size_bytes": 89409
       },
       {
         "file": "10_EOT_Summary_Dashboard.svg",
         "path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\approved_submission\\exhibits\\10_EOT_Summary_Dashboard.svg",
         "required": false,
         "exists": true,
-        "sha256": "3fe6e12ff2c9637e462156211f90ca8e5882060e4e1e04e305a4caa112f4c789",
-        "size_bytes": 153584
+        "sha256": "bba5179ca66d7dbcbffb8bf5d0778a63aff3a860e733e284350660095f667bae",
+        "size_bytes": 157922
       }
     ],
     "inventory": [
@@ -160,7 +160,7 @@
       "control_note": "This exhibit presents the submitted methodology sequence. The approved before/after comparison matrix remains the authority for active project-finish movement.",
       "source_file": "13_TIA_Methodology_Flowchart.svg",
       "source_relative_path": "exhibits/13_TIA_Methodology_Flowchart.svg",
-      "sha256": "5f726b61160d9016da0aada1a40faa98b7472af901b8703bc0cced1f9e1eed2d"
+      "sha256": "d7c2f72fb97c834f603e1961440cf6876d2d2186f8cbfa396077b80058887538"
     },
     {
       "project_id": "The Big -P.01-UP-20-April-26",
@@ -172,7 +172,7 @@
       "control_note": "The submitted integrated reconciliation remains 117 + 71 - 62 = 126 calendar days. Entitlement and compensation require contract and P6 verification.",
       "source_file": "07_Concurrency_Overlap_Analysis_Large_Font.svg",
       "source_relative_path": "exhibits/07_Concurrency_Overlap_Analysis_Large_Font.svg",
-      "sha256": "9fd89762c2709fb40abd22e6a79ba2051b2519b21a41883c69b563c9d7e2bc3d"
+      "sha256": "f3e5d832767a294292bc6e3377f051ee3609fb7bb82068a5005ee432b76f149e"
     },
     {
       "project_id": "The Big -P.01-UP-20-April-26",
@@ -184,7 +184,7 @@
       "control_note": "The active submitted position is 126 calendar days, subject to Primavera P6 verification and the controlled reconciliation register.",
       "source_file": "10_EOT_Summary_Dashboard.svg",
       "source_relative_path": "exhibits/10_EOT_Summary_Dashboard.svg",
-      "sha256": "3fe6e12ff2c9637e462156211f90ca8e5882060e4e1e04e305a4caa112f4c789"
+      "sha256": "bba5179ca66d7dbcbffb8bf5d0778a63aff3a860e733e284350660095f667bae"
     }
   ],
   "schedule_cpm": {
@@ -1251,9 +1251,9 @@
       "resolution": "Reconciliation-only record. The approved matrix project-finish movement for EV02 is 71 calendar days."
     }
   ],
-  "source_fingerprint": "5a5f56f34ef5e21c6c64ec270e5f55ed0cf821fa861f7055ccb90245fe274aa5",
+  "source_fingerprint": "dd716c0914db56f72e003020e24452c214f668410521df76d4778faf33ddd544",
   "automatic_draft": true,
-  "last_run_at": "2026-08-09T14:42:16.586883+00:00",
-  "run_id": "6d7b26bd0d09cf1e",
+  "last_run_at": "2026-09-15T23:42:04.455566+00:00",
+  "run_id": "c2c9ecdd7cd18c3f",
   "run_path": "D:\\Project Intelligence Hub NextJS\\projects\\Buildings\\The BIG - PH01\\02-delay_analysis\\controlled_runs\\latest.json"
 }

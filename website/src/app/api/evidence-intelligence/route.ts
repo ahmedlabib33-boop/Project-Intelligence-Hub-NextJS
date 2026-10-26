@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerEnv } from "../../../lib/ai/env";
-import { askConfiguredAI } from "../../../lib/ai/gateway";
 import { currentGroqModel, GROQ_MODEL_PRIMARY } from "../../../lib/ai/groq";
 import { checkRateLimit } from "../../../lib/ai/rate-limit";
 import { aiRequestFailure, readAiJson } from "../../../lib/ai/request";
+import { askConfiguredAIJob as askConfiguredAI } from "../../../lib/orchestration/llmWorker";
 
 /**
  * Evidence intelligence — reads project documents with the Hub's configured
