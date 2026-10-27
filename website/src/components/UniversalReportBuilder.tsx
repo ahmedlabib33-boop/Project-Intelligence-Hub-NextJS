@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 type ReportFamily = {
   key: string;
@@ -116,7 +116,15 @@ function projectRows(project: ProjectInput) {
   ];
 }
 
-export default function UniversalReportBuilder({ project, family }: { project: ProjectInput; family: ReportFamily }) {
+/**
+ * Every project gets its own form: keying by project id resets all the inputs, the CSV and the
+ * status when the project changes by remounting, instead of copying props into state in an effect.
+ */
+export default function UniversalReportBuilder(props: { project: ProjectInput; family: ReportFamily }) {
+  return <UniversalReportBuilderForm key={props.project.project_id} {...props} />;
+}
+
+function UniversalReportBuilderForm({ project, family }: { project: ProjectInput; family: ReportFamily }) {
   const uploadRef = useRef<HTMLInputElement>(null);
   const initialRows = useMemo(() => projectRows(project), [project]);
   const [form, setForm] = useState<FormState>({
@@ -131,21 +139,6 @@ export default function UniversalReportBuilder({ project, family }: { project: P
   const [fileLabel, setFileLabel] = useState("Program inputs loaded");
   const [state, setState] = useState<"idle" | "working" | "done" | "error">("idle");
   const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    setForm({
-      projectName: project.project_display_name,
-      projectId: project.project_id,
-      reportingPeriod: project.last_updated || "",
-      preparedBy: "",
-      reportStatus: project.status || "Draft",
-      notes: "",
-    });
-    setCsvText(toCsv([INPUT_COLUMNS, ...projectRows(project)]));
-    setFileLabel("Program inputs loaded");
-    setState("idle");
-    setMessage("");
-  }, [project]);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((current) => ({ ...current, [key]: value }));
