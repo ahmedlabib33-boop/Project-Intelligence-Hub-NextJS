@@ -155,7 +155,15 @@ DATE_RE = re.compile(
     r"\b(?:\d{4}[-/]\d{1,2}[-/]\d{1,2}|\d{1,2}[-/]\d{1,2}[-/]\d{2,4}|\d{1,2}\s+(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?|يناير|فبراير|مارس|ابريل|أبريل|مايو|يونيو|يوليو|اغسطس|أغسطس|سبتمبر|اكتوبر|أكتوبر|نوفمبر|ديسمبر)\s+\d{4})\b",
     re.IGNORECASE,
 )
-DURATION_RE = re.compile(r"\b\d+(?:\.\d+)?\s*(?:calendar\s+days?|working\s+days?|days?|weeks?|months?|hours?|يوم(?:ا|ين)?|ايام|أيام|اسابيع|أسابيع|اسبوع|أسبوع|شهور|اشهر|أشهر|شهر|ساعات|ساعه)\b", re.IGNORECASE)
+# A number that directly follows a comparator ("less than 183 calendar days") is
+# a threshold -- e.g. a liquidated-damages tier -- not the stated duration.
+DURATION_THRESHOLD_RE = re.compile(
+    r"(?:(?:less|more|greater|longer|shorter)\s+than(?:\s+or\s+equal\s+to)?|equal\s+to|exceed(?:s|ing)?|in\s+excess\s+of"
+    r"|at\s+(?:least|most)|up\s+to|not\s+(?:more|less)\s+than)\s*$",
+    re.IGNORECASE,
+)
+# "\)?" lets "Fifteen (15) Months" read as 15 months.
+DURATION_RE = re.compile(r"\b\d+(?:\.\d+)?\)?\s*(?:calendar\s+days?|working\s+days?|days?|weeks?|months?|hours?|يوم(?:ا|ين)?|ايام|أيام|اسابيع|أسابيع|اسبوع|أسبوع|شهور|اشهر|أشهر|شهر|ساعات|ساعه)\b", re.IGNORECASE)
 
 
 # Column-name terms distinctive enough to identify a real BOQ header row.
@@ -260,10 +268,16 @@ def _scalar_value(requirement: Dict[str, Any], line: str) -> Optional[Tuple[str,
     positions = [normalized.find(_normalize(term)) for term in requirement["terms"] if _normalize(term) in normalized]
     start = max(0, min(positions)) if positions else 0
     window = normalized[start : start + 260]
-    match = DATE_RE.search(window) if kind == "date" else DURATION_RE.search(window) if kind == "duration" else None
+    pattern = DATE_RE if kind == "date" else DURATION_RE if kind == "duration" else None
+    match = None
+    for candidate in (pattern.finditer(window) if pattern else ()):
+        if kind == "duration" and DURATION_THRESHOLD_RE.search(window[max(0, candidate.start() - 40) : candidate.start()]):
+            continue
+        match = candidate
+        break
     if not match:
         return None
-    raw = match.group(0)
+    raw = match.group(0).replace(")", "") if kind == "duration" else match.group(0)
     canonical = _normalize(raw)
     if kind == "date":
         parsed = _parse_date(canonical)
