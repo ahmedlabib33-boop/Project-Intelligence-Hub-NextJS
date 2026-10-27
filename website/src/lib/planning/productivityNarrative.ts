@@ -19,11 +19,13 @@ export function explainProductivityRange(basis: ActivityBasis): string {
   if (!range) {
     return `${basis.code}: no recorded crew or equipment productivity is available in the planning library for this activity.`;
   }
+  // Library values carry float noise (e.g. 5.3999999999999995); round for display only.
+  const n = (value: number) => value.toLocaleString(undefined, { maximumFractionDigits: 2 });
   if (range.sampleCount === 1) {
-    return `${basis.code}: one recorded configuration (${range.sources[0]}) gives ${range.median} ${basis.uom || "units"}/day. No range is available yet — a second recorded configuration would be needed to show a spread.`;
+    return `${basis.code}: one recorded configuration (${range.sources[0]}) gives ${n(range.median)} ${basis.uom || "units"}/day. No range is available yet — a second recorded configuration would be needed to show a spread.`;
   }
   return (
-    `${basis.code}: ${range.sampleCount} recorded configurations in the planning library range from ${range.min} to ${range.max} ` +
-    `${basis.uom || "units"}/day (typical ${range.median}). Slowest: matches the governing rate used for scheduling; fastest: ${range.sources[range.sources.length - 1]}.`
+    `${basis.code}: ${range.sampleCount} recorded configurations in the planning library range from ${n(range.min)} to ${n(range.max)} ` +
+    `${basis.uom || "units"}/day (typical ${n(range.median)}). Slowest: matches the governing rate used for scheduling; fastest: ${range.sources[range.sources.length - 1]}.`
   );
 }

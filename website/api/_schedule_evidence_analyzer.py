@@ -157,9 +157,12 @@ DATE_RE = re.compile(
 )
 # A number that directly follows a comparator ("less than 183 calendar days") is
 # a threshold -- e.g. a liquidated-damages tier -- not the stated duration.
+# Matched against _normalize()d text, so the Arabic forms are written without
+# hamza/alef-maqsura ("اقل من" = "أقل من", "علي الاقل" = "على الأقل").
 DURATION_THRESHOLD_RE = re.compile(
     r"(?:(?:less|more|greater|longer|shorter)\s+than(?:\s+or\s+equal\s+to)?|equal\s+to|exceed(?:s|ing)?|in\s+excess\s+of"
-    r"|at\s+(?:least|most)|up\s+to|not\s+(?:more|less)\s+than)\s*$",
+    r"|at\s+(?:least|most)|up\s+to|not\s+(?:more|less)\s+than"
+    r"|اقل\s+من|اكثر\s+من|(?:يزيد|تزيد|يقل|تقل)\s+عن|يتجاوز|تتجاوز|علي\s+الاقل|بحد\s+اقصي)\s*\(?\s*$",
     re.IGNORECASE,
 )
 # "\)?" lets "Fifteen (15) Months" read as 15 months.
@@ -181,6 +184,22 @@ BOQ_HEADER_TERMS = (
 # labels rather than a real item number -- observed directly in real BOQ
 # workbooks where these rows are interspersed with priced line items.
 NON_ITEM_LABEL_PREFIXES = ("section", "carried", "summary", "sub total", "subtotal", "bill no", "page", "total")
+
+
+def _column_index(headers: Sequence[str], aliases: Sequence[str], exclude: Sequence[str] = ()) -> Optional[int]:
+    """First column matching the highest-priority alias, skipping headers that
+    contain an excluded term. `headers` must already be _normalize()d.
+
+    Aliases are tried in order across all headers, so "amount" beats a
+    "total quantity" column that a later, looser "total" alias would also
+    match, and an "item description" column is never taken as the Item No.
+    """
+    for alias in aliases:
+        term = _normalize(alias)
+        for index, header in enumerate(headers):
+            if header and term in header and not any(_normalize(word) in header for word in exclude):
+                return index
+    return None
 
 
 def _header_like_score(cells: Sequence[Any]) -> int:
@@ -377,8 +396,8 @@ def _boq_numeric_anomalies(boq_documents: Sequence[Any]) -> Dict[str, Any]:
     from columns actually identified in the reviewed tables.
     """
     quantity_aliases = ("quantity", "qty", "الكميه")
-    rate_aliases = ("rate", "unit rate", "unit cost", "unit price", "سعر الوحده")
-    amount_aliases = ("amount", "total amount", "total", "الاجمالي", "القيمه")
+    rate_aliases = ("unit rate", "unit cost", "unit price", "rate", "سعر الوحده")
+    amount_aliases = ("total amount", "amount", "الاجمالي", "القيمه", "total")
 
     zero_rate: List[Dict[str, Any]] = []
     zero_quantity: List[Dict[str, Any]] = []
@@ -386,23 +405,37 @@ def _boq_numeric_anomalies(boq_documents: Sequence[Any]) -> Dict[str, Any]:
     blank_values: List[Dict[str, Any]] = []
     rows_checked = 0
 
+    def cell_text(row: Sequence[Any], index: Optional[int]) -> str:
+        if index is None or index >= len(row) or row[index] is None:
+            return ""
+        return str(row[index]).strip()
+
     for document in boq_documents:
         for table in getattr(document, "tables", []) or []:
             effective, offset = _effective_headers(table)
             headers = [_normalize(item) for item in effective]
-            qty_index = next((i for i, header in enumerate(headers) if header and any(_normalize(t) in header for t in quantity_aliases)), None)
-            rate_index = next((i for i, header in enumerate(headers) if header and any(_normalize(t) in header for t in rate_aliases)), None)
-            amount_index = next((i for i, header in enumerate(headers) if header and any(_normalize(t) in header for t in amount_aliases)), None)
+            qty_index = _column_index(headers, quantity_aliases)
+            rate_index = _column_index(headers, rate_aliases, exclude=quantity_aliases)
+            amount_index = _column_index(headers, amount_aliases, exclude=quantity_aliases)
             if qty_index is None and rate_index is None and amount_index is None:
                 continue
+            unit_index = next(
+                (i for i, header in enumerate(headers) if re.sub(r"[^\w]", "", header) in ("unit", "units", "uom", "um", "الوحده")),
+                None,
+            )
             for row_number, row in enumerate((getattr(table, "rows", []) or [])[offset:], start=2 + offset):
+                # Section headings, sub-headings and description-only
+                # paragraphs carry no unit and no quantity/rate/amount at
+                # all; they are not BOQ lines, so a blank there is not a
+                # data gap. A line with a unit but nothing priced still is.
+                if not cell_text(row, unit_index) and not any(cell_text(row, i) for i in (qty_index, rate_index, amount_index)):
+                    continue
                 rows_checked += 1
                 source = f"{document.filename} — {getattr(table, 'name', 'Table')}, row {row_number}"
                 for label, index in (("Quantity", qty_index), ("Rate", rate_index), ("Amount", amount_index)):
                     if index is None or index >= len(row):
                         continue
-                    raw = row[index]
-                    text = str(raw).strip() if raw is not None else ""
+                    text = cell_text(row, index)
                     if not text:
                         blank_values.append({"Field": label, "Source": source})
                         continue
@@ -418,14 +451,21 @@ def _boq_numeric_anomalies(boq_documents: Sequence[Any]) -> Dict[str, Any]:
                         elif label == "Quantity":
                             zero_quantity.append({"Source": source})
 
+    # The lists are capped for payload size; the *_count fields are the real
+    # totals and are what the UI must display.
     return {
         "rows_checked": rows_checked,
+        "zero_rate_count": len(zero_rate),
+        "zero_quantity_count": len(zero_quantity),
+        "negative_count": len(negative_values),
+        "blank_count": len(blank_values),
         "zero_rate_lines": zero_rate[:50],
         "zero_quantity_lines": zero_quantity[:50],
         "negative_values": negative_values[:50],
         "blank_values": blank_values[:50],
         "note": (
-            "Blank items require commercial review — they may be legitimate headers or alternates rather than data errors."
+            "Blank cells are on BOQ lines that carry a unit or a value (section headings are skipped); they need "
+            "commercial review — an unpriced tender BOQ leaves Rate blank by design, and alternates may be blank too."
             if rows_checked else
             "No Quantity, Rate or Amount column was identified in the reviewed BOQ table(s), so numeric checks could not run."
         ),
@@ -460,7 +500,15 @@ DRAWING_DISCIPLINE_CODES = {
     "LS": "Landscape", "L": "Landscape",
     "IN": "Infrastructure",
 }
-DRAWING_CODE_RE = re.compile(r"-([A-Z]{1,4})-\d+[A-Za-z]*$")
+DRAWING_CODE_RE = re.compile(r"-([A-Z]{1,4})-\d")
+# Document-type segments in a filename that mark it as something other than
+# a drawing even when it carries a discipline code -- e.g. the real tender
+# package's "EG2571-TD-SPC-SB-001" (specification) and "EG2571-BOQ-TD-SB-001"
+# (bill of quantities) next to drawings named "EG2571-TD-DWG-SB-001".
+NON_DRAWING_FILENAME_SEGMENTS = {
+    "BOQ", "BQ", "SPC", "SPEC", "SPECS", "SPECIFICATION", "MS", "ITP", "RPT", "REP", "REPORT",
+    "CAL", "CALC", "LTR", "MOM", "TQ", "RFI", "SCH", "PRG", "PROG",
+}
 
 DRAWING_STATUS_PATTERNS: Sequence[Tuple[str, "re.Pattern[str]"]] = (
     ("IFC — Issued For Construction", re.compile(r"issued for construction|\bifc\b", re.I)),
@@ -477,23 +525,33 @@ DRAWING_PROCUREMENT_TERMS = (
     "transformer", "switchgear", "generator", "elevator", "chiller", "ahu", "pump",
     "façade", "facade", "specialist door", "valve",
 )
-DRAWING_NOTE_TERMS = (
-    "shall", "must", "required", "inspect", "approve", "test", "witness", "hold", "verify", "submit", "coordinate", "refer",
+# Whole words only: plain substring matching counted "LATEST" as a test note,
+# "REFERENCE"/"PREFERRED" as refer, "THRESHOLD" as hold.
+DRAWING_NOTE_RE = re.compile(
+    r"\b(?:shall|must|required|inspect\w*|approv\w*|test(?:s|ed|ing)?|witness\w*|hold|verif\w*|submi\w*|coordinat\w*|refer(?:s|red)?)\b",
+    re.IGNORECASE,
 )
 
 
 def _is_drawing_candidate(document: Any) -> bool:
+    filename = getattr(document, "filename", "") or ""
+    segments = {segment for segment in re.split(r"[-_ .]+", filename.rsplit(".", 1)[0].upper()) if segment}
+    if segments & {"DWG", "DRG"}:
+        return True
+    if segments & NON_DRAWING_FILENAME_SEGMENTS:
+        return False
     if _document_type(document) == "Drawing":
         return True
-    return bool(DRAWING_FILENAME_RE.search(getattr(document, "filename", "") or ""))
+    return bool(DRAWING_FILENAME_RE.search(filename))
 
 
 def _drawing_discipline(filename: str) -> str:
     stem = filename.rsplit(".", 1)[0].upper()
-    match = DRAWING_CODE_RE.search(stem)
-    if not match:
+    codes = DRAWING_CODE_RE.findall(stem)
+    if not codes:
         return "Not identified from filename"
-    code = match.group(1)
+    known = [code for code in codes if code in DRAWING_DISCIPLINE_CODES]
+    code = known[-1] if known else codes[-1]
     return DRAWING_DISCIPLINE_CODES.get(code, f"Unrecognized code ({code})")
 
 
@@ -524,9 +582,12 @@ def assess_drawing_register(documents: Sequence[Any]) -> Dict[str, Any]:
         text = str(getattr(document, "text", "") or "")
         filename = getattr(document, "filename", "") or ""
         warnings = list(getattr(document, "warnings", []) or [])
-        ocr_required = not text.strip() and any("OCR" in w or "scanned/image-only" in w for w in warnings)
 
-        if ocr_required or not text.strip():
+        if not text.strip():
+            # Only the engine's scanned-PDF / image warnings mean OCR would
+            # help; an unsupported format (e.g. native .dwg) or a parser
+            # failure also yields no text but is a different problem.
+            ocr_required = any("OCR" in w or "scanned/image-only" in w for w in warnings)
             rows.append({
                 "Drawing File": filename,
                 "Discipline": _drawing_discipline(filename),
@@ -536,14 +597,11 @@ def assess_drawing_register(documents: Sequence[Any]) -> Dict[str, Any]:
                 "Cross-References": 0,
                 "QA Gate Candidates": [],
                 "Procurement Candidates": [],
-                "Read Status": "OCR REQUIRED — NOT ANALYZED",
+                "Read Status": "OCR REQUIRED — NOT ANALYZED" if ocr_required else "NO TEXT EXTRACTED — NOT ANALYZED",
             })
             continue
 
-        notes = [
-            line.strip() for line in text.splitlines()
-            if line.strip() and _contains_term(_normalize(line), DRAWING_NOTE_TERMS)
-        ]
+        notes = [line.strip() for line in text.splitlines() if line.strip() and DRAWING_NOTE_RE.search(line)]
         rows.append({
             "Drawing File": filename,
             "Discipline": _drawing_discipline(filename),
@@ -558,21 +616,26 @@ def assess_drawing_register(documents: Sequence[Any]) -> Dict[str, Any]:
 
     by_discipline: Dict[str, int] = defaultdict(int)
     ocr_required_count = 0
+    not_read_count = 0
     for row in rows:
         by_discipline[row["Discipline"]] += 1
         if row["Read Status"] != "READ":
-            ocr_required_count += 1
+            not_read_count += 1
+            if row["Read Status"].startswith("OCR"):
+                ocr_required_count += 1
 
     return {
         "drawings_found": len(rows),
         "drawings_requiring_ocr": ocr_required_count,
+        "drawings_not_read": not_read_count,
         "by_discipline": dict(by_discipline),
         "rows": rows,
         "note": (
             "Drawing reading here is text-layer only: title-block fields, discipline, structure/bridge "
             "references, notes and cross-references extracted from each drawing's own embedded text. It does "
             "not perform OCR or geometric quantity take-off from vector/raster content — a drawing with no "
-            "embedded text layer is reported as OCR required, never estimated or backfilled."
+            "embedded text layer is reported as OCR required (or as no text extracted, for a format this reader "
+            "cannot open), never estimated or backfilled."
         ),
     }
 
@@ -622,17 +685,24 @@ def assess_boq_completeness(documents: Sequence[Any]) -> Dict[str, Any]:
 
     # Unique-key risk: does the same Item No. repeat across different
     # sections/sheets? Computed only from rows actually found.
-    item_no_aliases = ("item no", "item number", "item code", "bill no", "item", "بند رقم", "رقم البند", "البند")
+    item_no_aliases = ("item no", "item number", "item code", "item ref", "رقم البند", "بند رقم", "item", "البند")
     section_aliases = ("section", "division", "bill no", "قسم", "الباب")
+    # "Item Description" / "وصف البند" contain the item alias but hold
+    # descriptions; reading them as item numbers flags every repeated
+    # description as a repeated item number.
+    description_words = ("description", "الوصف", "وصف")
     item_locations: Dict[str, set] = defaultdict(set)
     for document in boq_documents:
         for table in getattr(document, "tables", []) or []:
             effective, offset = _effective_headers(table)
             headers = [_normalize(item) for item in effective]
-            item_index = next((i for i, header in enumerate(headers) if header and any(_normalize(term) in header for term in item_no_aliases)), None)
+            item_index = _column_index(headers, item_no_aliases, exclude=description_words)
             if item_index is None:
                 continue
-            section_index = next((i for i, header in enumerate(headers) if header and any(_normalize(term) in header for term in section_aliases)), None)
+            section_index = _column_index(headers, section_aliases, exclude=description_words)
+            if section_index == item_index:
+                section_index = None
+            table_name = getattr(table, "name", "") or "Table"
             for row in (getattr(table, "rows", []) or [])[offset:]:
                 if item_index >= len(row):
                     continue
@@ -647,8 +717,13 @@ def assess_boq_completeness(documents: Sequence[Any]) -> Dict[str, Any]:
                     item_no.startswith(prefix) for prefix in NON_ITEM_LABEL_PREFIXES
                 ):
                     continue
-                section = _normalize(str(row[section_index])) if section_index is not None and section_index < len(row) else getattr(table, "name", "")
-                item_locations[item_no].add(f"{document.filename} / {section or getattr(table, 'name', 'Table')}")
+                # Sheet name is always part of the location: a Section column
+                # is usually filled only on heading rows, and str(None) used
+                # to turn every blank one into the same "none" section,
+                # merging different sheets and hiding real repeats.
+                section = _normalize(row[section_index]) if section_index is not None and section_index < len(row) else ""
+                location = f"{document.filename} / {table_name}"
+                item_locations[item_no].add(f"{location} / {section}" if section else location)
 
     repeated_items = {item_no: sorted(locations) for item_no, locations in item_locations.items() if len(locations) > 1}
     if not item_locations:

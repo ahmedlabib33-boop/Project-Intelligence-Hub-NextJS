@@ -364,6 +364,10 @@ function BoqCompletenessCard({ completeness, noData }: { completeness: JsonRecor
   const found = Number(completeness?.boq_documents_found ?? 0);
   const uniqueKeyRisk = (completeness?.unique_key_risk || null) as JsonRecord | null;
   const anomalies = (completeness?.numeric_anomalies || null) as JsonRecord | null;
+  // The *_lines / *_values lists are capped at 50 for payload size; the
+  // *_count fields carry the real totals.
+  const anomalyCount = (countKey: string, listKey: string) =>
+    formatNum(Number(anomalies?.[countKey] ?? (anomalies?.[listKey] as unknown[] | undefined)?.length ?? 0));
   return (
     <Card
       eyebrow="Evidence-controlled output — computed only from the BOQ's own columns and values"
@@ -388,10 +392,10 @@ function BoqCompletenessCard({ completeness, noData }: { completeness: JsonRecor
           ) : null}
           {anomalies ? (
             <p className="xer-muted">
-              <b>Numeric checks:</b> {str(anomalies.zero_quantity_lines && (anomalies.zero_quantity_lines as unknown[]).length)} zero-quantity,{" "}
-              {str(anomalies.zero_rate_lines && (anomalies.zero_rate_lines as unknown[]).length)} zero-rate,{" "}
-              {str(anomalies.negative_values && (anomalies.negative_values as unknown[]).length)} negative,{" "}
-              {str(anomalies.blank_values && (anomalies.blank_values as unknown[]).length)} blank line(s) found. {str(anomalies.note)}
+              <b>Numeric checks</b> ({formatNum(Number(anomalies.rows_checked ?? 0))} BOQ line(s)): {anomalyCount("zero_quantity_count", "zero_quantity_lines")} zero-quantity,{" "}
+              {anomalyCount("zero_rate_count", "zero_rate_lines")} zero-rate,{" "}
+              {anomalyCount("negative_count", "negative_values")} negative,{" "}
+              {anomalyCount("blank_count", "blank_values")} blank cell(s) found. {str(anomalies.note)}
             </p>
           ) : null}
         </>
@@ -403,6 +407,8 @@ function BoqCompletenessCard({ completeness, noData }: { completeness: JsonRecor
 function DrawingRegisterCard({ register, noData }: { register: JsonRecord | null; noData: string }) {
   const found = Number(register?.drawings_found ?? 0);
   const requiringOcr = Number(register?.drawings_requiring_ocr ?? 0);
+  const notRead = Number(register?.drawings_not_read ?? requiringOcr);
+  const noTextOther = Math.max(0, notRead - requiringOcr);
   const byDiscipline = (register?.by_discipline || {}) as Record<string, number>;
   return (
     <Card
@@ -417,7 +423,10 @@ function DrawingRegisterCard({ register, noData }: { register: JsonRecord | null
           <p className="xer-muted">{str(register.note)}</p>
           <Kpis>
             <Kpi label="Drawings found" value={String(found)} />
-            <Kpi label="Requiring OCR" value={String(requiringOcr)} note={requiringOcr ? "No embedded text layer — not analyzed" : "All drawings had a readable text layer"} tone={requiringOcr ? "warn" : "ok"} />
+            <Kpi label="Requiring OCR" value={String(requiringOcr)} note={requiringOcr ? "No embedded text layer — not analyzed" : notRead ? "None needs OCR" : "All drawings had a readable text layer"} tone={requiringOcr ? "warn" : "ok"} />
+            {noTextOther ? (
+              <Kpi label="No text extracted" value={String(noTextOther)} note="Format or parser could not be read — not analyzed" tone="warn" />
+            ) : null}
             {Object.entries(byDiscipline).map(([discipline, count]) => (
               <Kpi key={discipline} label={discipline} value={String(count)} />
             ))}
