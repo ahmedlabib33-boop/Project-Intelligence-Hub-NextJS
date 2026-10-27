@@ -80,7 +80,8 @@ type UniversalReportEnginePayload = {
   };
   summary: { catalog_count: number; generated_count: number; ready_count: number; blocked_count: number };
   report_families: UniversalReportFamily[];
-  ml_capability: {
+  /** Absent from payloads published before the engine reported its ML capability. */
+  ml_capability?: {
     task_count: number;
     status: string;
     detail: string;
@@ -1231,16 +1232,15 @@ function GovernedTiaReportDownloads({ project }: { project: ProjectRecord }) {
 
 function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
   const engine = project.universal_report_engine;
-  const [selectedKey, setSelectedKey] = useState<string | null>(null);
   const reportFamilies = engine?.report_families || [];
+  // A pick belongs to one project and one catalogue size; when either changes it no longer
+  // applies and the default (first generated report) takes over, with no effect needed.
+  const selectionScope = `${project.project_id}|${project.project_key}|${reportFamilies.length}`;
+  const [selection, setSelection] = useState<{ scope: string; key: string } | null>(null);
+  const selectedKey = selection && selection.scope === selectionScope ? selection.key : null;
   const selectedFamily = reportFamilies.find((item) => item.key === selectedKey)
     || reportFamilies.find((item) => item.status === "GENERATED")
     || reportFamilies[0];
-
-  useEffect(() => {
-    const firstGenerated = reportFamilies.find((item) => item.status === "GENERATED");
-    setSelectedKey(firstGenerated?.key || reportFamilies[0]?.key || null);
-  }, [project.project_id, project.project_key, reportFamilies.length]);
 
   if (!engine || engine.project_id !== project.project_id || engine.project_key !== project.project_key) {
     return (
@@ -1304,7 +1304,7 @@ function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
               <b>{item.title}</b>
               <small>{item.summary}</small>
               <div className="universal-card-actions">
-                <button type="button" onClick={() => setSelectedKey(item.key)}>Open report</button>
+                <button type="button" onClick={() => setSelection({ scope: selectionScope, key: item.key })}>Open report</button>
                 {item.artifacts.html ? <a href={item.artifacts.html} download={item.artifacts.html.split("/").pop()} rel="noopener">Download report</a> : null}
               </div>
             </article>
@@ -1342,21 +1342,30 @@ function UniversalReportEnginePanel({ project }: { project: ProjectRecord }) {
         </>
       ) : null}
 
-      <section className="feature-card universal-ml-panel">
-        <div className="feature-card-head">
-          <div><h3>ML and AI Governance</h3><small>{engine.ml_capability.detail}</small></div>
-          <span>{engine.ml_capability.status.replaceAll("_", " ")}</span>
-        </div>
-        <p>{engine.ml_capability.ai_governance}</p>
-        <div className="universal-ml-grid">
-          {engine.ml_capability.tasks.map((task) => (
-            <div key={task.key || task.title} className="universal-ml-task">
-              <b>{task.title || task.key || "ML task"}</b>
-              <small>{task.description || "Source-backed local task."}</small>
-            </div>
-          ))}
-        </div>
-      </section>
+      {engine.ml_capability ? (
+        <section className="feature-card universal-ml-panel">
+          <div className="feature-card-head">
+            <div><h3>ML and AI Governance</h3><small>{engine.ml_capability.detail}</small></div>
+            <span>{engine.ml_capability.status.replaceAll("_", " ")}</span>
+          </div>
+          <p>{engine.ml_capability.ai_governance}</p>
+          <div className="universal-ml-grid">
+            {engine.ml_capability.tasks.map((task) => (
+              <div key={task.key || task.title} className="universal-ml-task">
+                <b>{task.title || task.key || "ML task"}</b>
+                <small>{task.description || "Source-backed local task."}</small>
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : (
+        <section className="feature-card universal-ml-panel">
+          <div className="feature-card-head">
+            <div><h3>ML and AI Governance</h3><small>Not in this project&apos;s published payload</small></div>
+          </div>
+          <p>The published report-engine data for this project does not include ML capability metadata, so none is shown rather than guessed. Regenerate the project payload to include it.</p>
+        </section>
+      )}
     </div>
   );
 }
@@ -1709,8 +1718,9 @@ function LetterResponseStudio({ project }: { project: ProjectRecord }) {
   const [draft, setDraft] = useState<LetterResponseDraft | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const sheets = project.features.letters_intelligence.workbook_tables?.sheets || [];
+  const workbookSheets = project.features.letters_intelligence.workbook_tables?.sheets;
   const incomingLetters = useMemo(() => {
+    const sheets = workbookSheets || [];
     const byReference = new Map<string, Record<string, unknown>>();
     sheets.filter((sheet) => /from (consultant|ace)/i.test(sheet.name)).forEach((sheet) => {
       sheet.rows.forEach((row) => {
@@ -1723,7 +1733,7 @@ function LetterResponseStudio({ project }: { project: ProjectRecord }) {
       date: String(row.Date || ""),
       subject: String(row.Subject || row["Main Purpose"] || "")
     }));
-  }, [sheets]);
+  }, [workbookSheets]);
   const generate = async () => {
     if (!selectedReference) return;
     setLoading(true);
@@ -2383,32 +2393,40 @@ function DecisionOperationsDashboard() {
 function DigitalOperationsApp() {
   const [scope, setScope] = useState(DECISION_DASHBOARD_KEY);
   const [selectedReport, setSelectedReport] = useState<ReportKey>("executive_dashboard");
-  const [projectDetails, setProjectDetails] = useState<ProjectRecord | null>(null);
-  const [projectLoadState, setProjectLoadState] = useState<"idle" | "loading" | "ready" | "error">("idle");
+  const [loaded, setLoaded] = useState<{ key: string; details: ProjectRecord | null; status: "ready" | "error" } | null>(null);
   const selectedProjectSummary = projects.find((project) => project.project_key === scope) || projects[0];
   const isDecisionDashboard = scope === DECISION_DASHBOARD_KEY;
   const selectScope = (nextScope: string) => {
     setScope(nextScope);
   };
 
+  // Load state is derived from the project on screen: a result fetched for another project
+  // never applies, so nothing has to be reset by an effect when the selection changes.
+  const activeProjectKey = isDecisionDashboard || !selectedProjectSummary ? null : selectedProjectSummary.project_key;
+  const current = loaded && loaded.key === activeProjectKey ? loaded : null;
+  const projectDetails = current ? current.details : null;
+  const projectLoadState: "idle" | "loading" | "ready" | "error" = activeProjectKey === null ? "idle" : current ? current.status : "loading";
+
   useEffect(() => {
+    let cancelled = false;
     const requestedProject = new URLSearchParams(window.location.search).get("project");
     if (requestedProject && projects.some((project) => project.project_key === requestedProject)) {
-      setScope(requestedProject);
+      // The URL is only readable in the browser, so it is applied after mount: reading it
+      // during render would not match the server render.
+      void Promise.resolve().then(() => {
+        if (!cancelled) setScope(requestedProject);
+      });
     }
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {
-    if (isDecisionDashboard || !selectedProjectSummary) {
-      setProjectDetails(null);
-      setProjectLoadState("idle");
-      return;
-    }
+    if (activeProjectKey === null || !selectedProjectSummary) return;
 
     let cancelled = false;
-    setProjectDetails(null);
-    setProjectLoadState("loading");
-    const projectKey = selectedProjectSummary.project_key;
+    const projectKey = activeProjectKey;
 
     fetch(`/data/projects/${encodeURIComponent(projectKey)}.json`, { cache: "no-store" })
       .then(async (response) => {
@@ -2419,22 +2437,16 @@ function DigitalOperationsApp() {
         if (payload.project_key !== projectKey || payload.project_id !== selectedProjectSummary.project_id) {
           throw new Error("Project payload identity validation failed.");
         }
-        if (!cancelled) {
-          setProjectDetails(payload);
-          setProjectLoadState("ready");
-        }
+        if (!cancelled) setLoaded({ key: projectKey, details: payload, status: "ready" });
       })
       .catch(() => {
-        if (!cancelled) {
-          setProjectDetails(null);
-          setProjectLoadState("error");
-        }
+        if (!cancelled) setLoaded({ key: projectKey, details: null, status: "error" });
       });
 
     return () => {
       cancelled = true;
     };
-  }, [isDecisionDashboard, selectedProjectSummary]);
+  }, [activeProjectKey, selectedProjectSummary]);
 
   return (
     <main className="future-shell operations-shell">
