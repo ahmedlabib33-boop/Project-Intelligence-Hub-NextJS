@@ -15,6 +15,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { AI_CHECKING, checkEvidenceAi, type AiHealth } from "../../../lib/evidence/run";
 import { activityBasis, cellText, type LibraryIndex, type PlanningLibrary } from "../../../lib/planning/library";
+import { explainProductivityRange } from "../../../lib/planning/productivityNarrative";
 import {
   BLOB_UPLOAD_THRESHOLD_BYTES,
   callService,
@@ -345,6 +346,8 @@ function AnalyzerStep({ service, onRecheck, busy, evidence, noData, result, onRu
       </Card>
       <Card eyebrow="Evidence-controlled output" title="Project schedule master summary"><RecordTable rows={records(result?.project_master_summary)} empty={noData} /></Card>
       <Card eyebrow="Evidence-controlled output" title="Must-have schedule data check"><RecordTable rows={records(result?.must_have_data_check)} empty={noData} /></Card>
+      <BoqCompletenessCard completeness={(result?.boq_completeness || null) as JsonRecord | null} noData={noData} />
+      <DrawingRegisterCard register={(result?.drawing_register || null) as JsonRecord | null} noData={noData} />
       {tables.map((t) => (
         <Card key={str(t.title)} eyebrow="Evidence-controlled output" title={str(t.title)}><RecordTable rows={records(t.rows)} empty={noData} /></Card>
       ))}
@@ -354,6 +357,88 @@ function AnalyzerStep({ service, onRecheck, busy, evidence, noData, result, onRu
       <Card eyebrow="Documents" title="Document understanding register"><RecordTable rows={records(result?.document_register)} empty={noData} /></Card>
       <Card eyebrow="Traceability" title="Source traceability"><RecordTable rows={records(result?.source_traceability)} empty={noData} /></Card>
     </div>
+  );
+}
+
+function BoqCompletenessCard({ completeness, noData }: { completeness: JsonRecord | null; noData: string }) {
+  const found = Number(completeness?.boq_documents_found ?? 0);
+  const uniqueKeyRisk = (completeness?.unique_key_risk || null) as JsonRecord | null;
+  const anomalies = (completeness?.numeric_anomalies || null) as JsonRecord | null;
+  // The *_lines / *_values lists are capped at 50 for payload size; the
+  // *_count fields carry the real totals.
+  const anomalyCount = (countKey: string, listKey: string) =>
+    formatNum(Number(anomalies?.[countKey] ?? (anomalies?.[listKey] as unknown[] | undefined)?.length ?? 0));
+  return (
+    <Card
+      eyebrow="Evidence-controlled output — computed only from the BOQ's own columns and values"
+      title="BOQ completeness check"
+      aside={found ? `${found} BOQ document(s) reviewed` : "No BOQ found"}
+    >
+      {!completeness || !found ? (
+        <div className="schedule-intelligence-empty"><b>{completeness ? str(completeness.note) : noData}</b></div>
+      ) : (
+        <>
+          <p className="xer-muted">{str(completeness.note)}</p>
+          <RecordTable
+            rows={records(completeness.column_checks)}
+            empty={noData}
+            columns={["Data Point", "Status", "Matched Column", "Source", "Why It Matters"]}
+          />
+          {uniqueKeyRisk ? (
+            <p className="xer-muted">
+              <b>Item No. uniqueness:</b> {str(uniqueKeyRisk.recommendation)}
+              {Number(uniqueKeyRisk.repeated_item_numbers) > 0 ? ` (${str(uniqueKeyRisk.repeated_item_numbers)} repeated item number(s) found)` : ""}
+            </p>
+          ) : null}
+          {anomalies ? (
+            <p className="xer-muted">
+              <b>Numeric checks</b> ({formatNum(Number(anomalies.rows_checked ?? 0))} BOQ line(s)): {anomalyCount("zero_quantity_count", "zero_quantity_lines")} zero-quantity,{" "}
+              {anomalyCount("zero_rate_count", "zero_rate_lines")} zero-rate,{" "}
+              {anomalyCount("negative_count", "negative_values")} negative,{" "}
+              {anomalyCount("blank_count", "blank_values")} blank cell(s) found. {str(anomalies.note)}
+            </p>
+          ) : null}
+        </>
+      )}
+    </Card>
+  );
+}
+
+function DrawingRegisterCard({ register, noData }: { register: JsonRecord | null; noData: string }) {
+  const found = Number(register?.drawings_found ?? 0);
+  const requiringOcr = Number(register?.drawings_requiring_ocr ?? 0);
+  const notRead = Number(register?.drawings_not_read ?? requiringOcr);
+  const noTextOther = Math.max(0, notRead - requiringOcr);
+  const byDiscipline = (register?.by_discipline || {}) as Record<string, number>;
+  return (
+    <Card
+      eyebrow="Evidence-controlled output — text layer only, no OCR or geometric take-off"
+      title="Drawing register"
+      aside={found ? `${found} drawing(s) reviewed` : "No drawings found"}
+    >
+      {!register || !found ? (
+        <div className="schedule-intelligence-empty"><b>{register ? str(register.note) : noData}</b></div>
+      ) : (
+        <>
+          <p className="xer-muted">{str(register.note)}</p>
+          <Kpis>
+            <Kpi label="Drawings found" value={String(found)} />
+            <Kpi label="Requiring OCR" value={String(requiringOcr)} note={requiringOcr ? "No embedded text layer — not analyzed" : notRead ? "None needs OCR" : "All drawings had a readable text layer"} tone={requiringOcr ? "warn" : "ok"} />
+            {noTextOther ? (
+              <Kpi label="No text extracted" value={String(noTextOther)} note="Format or parser could not be read — not analyzed" tone="warn" />
+            ) : null}
+            {Object.entries(byDiscipline).map(([discipline, count]) => (
+              <Kpi key={discipline} label={discipline} value={String(count)} />
+            ))}
+          </Kpis>
+          <RecordTable
+            rows={records(register.rows)}
+            empty={noData}
+            columns={["Drawing File", "Discipline", "Status", "Structure / Bridge", "Notes Found", "Cross-References", "QA Gate Candidates", "Procurement Candidates", "Read Status"]}
+          />
+        </>
+      )}
+    </Card>
   );
 }
 
@@ -459,6 +544,8 @@ function DetailedStep({
         uom: basis?.uom || cellText(row.uom),
         libraryProduction: basis?.dailyProduction ?? null,
         governing: basis?.governing || "",
+        productivityRange: basis?.productivityRange ?? null,
+        productivityNote: basis ? explainProductivityRange(basis) : "",
       };
     });
   }, [index]);
@@ -634,9 +721,14 @@ function DetailedStep({
                       <td>{c.description}<small className="pl-sub">{c.subdivision}</small></td>
                       <td>{c.uom}</td>
                       <td className="pl-num">{numberInput("quantity", picks[c.code]?.quantity ?? null, "Required")}</td>
-                      <td className="pl-num">
+                      <td className="pl-num" title={c.productivityNote || undefined}>
                         {numberInput("production", picks[c.code]?.production ?? null, c.libraryProduction === null ? "Missing" : formatNum(c.libraryProduction, 2))}
                         {c.governing ? <small className="pl-sub">{c.governing}</small> : null}
+                        {c.productivityRange && c.productivityRange.sampleCount > 1 ? (
+                          <small className="pl-sub">
+                            {formatNum(c.productivityRange.min, 2)}–{formatNum(c.productivityRange.max, 2)} across {c.productivityRange.sampleCount} recorded configurations
+                          </small>
+                        ) : null}
                       </td>
                       <td className="pl-num">{numberInput("crews", picks[c.code]?.crews ?? null, "Required")}</td>
                       <td className="pl-num">{line.duration ?? <span className="xer-dim">{line.selected ? `Missing ${line.missing.join(", ")}` : "—"}</span>}</td>

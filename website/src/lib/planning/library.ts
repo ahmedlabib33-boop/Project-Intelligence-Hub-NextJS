@@ -854,6 +854,21 @@ export type CrewLine = {
 
 export type MachineLine = { machineType: string; count: number; ratePerHour: number | null; costPerDay: number | null };
 
+/**
+ * Statistical spread of daily production computed only from the crew and
+ * equipment configurations actually recorded in the planning library for
+ * this activity — never an assumed or invented variance. `sampleCount` is
+ * how many real configurations the range is built from; a count of 1 means
+ * no range exists yet, only a single recorded value.
+ */
+export type ProductivityRange = {
+  min: number;
+  median: number;
+  max: number;
+  sampleCount: number;
+  sources: string[];
+};
+
 export type ActivityBasis = {
   code: string;
   description: string;
@@ -866,6 +881,8 @@ export type ActivityBasis = {
   governing: string;
   /** Cost of one set per working day; lines without a rate contribute nothing. */
   costPerDay: number;
+  /** Real recorded spread across every crew/equipment configuration found, or null if none had a usable rate. */
+  productivityRange: ProductivityRange | null;
   issues: string[];
 };
 
@@ -923,8 +940,21 @@ export function activityBasis(index: LibraryIndex, code: string, crewFilter: str
 
   const uom = crews.find((c) => c.uom)?.uom || cellText(equipmentRows[0]?.uom) || cellText(activity?.uom);
   const costPerDay = [...crews.map((c) => c.costPerDay || 0), ...machines.map((m) => m.costPerDay || 0)].reduce((s, v) => s + v, 0);
+
+  const productionPoints: { value: number; source: string }[] = [];
+  for (const line of crews) if (line.dailyProduction && line.dailyProduction > 0) productionPoints.push({ value: line.dailyProduction, source: line.crew });
+  if (equipmentProduction && equipmentProduction > 0) productionPoints.push({ value: equipmentProduction, source: "Equipment set" });
+  let productivityRange: ProductivityRange | null = null;
+  if (productionPoints.length) {
+    const sorted = [...productionPoints].sort((a, b) => a.value - b.value);
+    const values = sorted.map((p) => p.value);
+    const mid = Math.floor(values.length / 2);
+    const median = values.length % 2 ? values[mid] : (values[mid - 1] + values[mid]) / 2;
+    productivityRange = { min: values[0], median, max: values[values.length - 1], sampleCount: values.length, sources: sorted.map((p) => p.source) };
+  }
+
   return {
     code, description: cellText(activity?.description) || cellText(labourRows[0]?.description) || cellText(equipmentRows[0]?.description),
-    uom, crews, machines, equipmentProduction, dailyProduction, governing, costPerDay, issues,
+    uom, crews, machines, equipmentProduction, dailyProduction, governing, costPerDay, productivityRange, issues,
   };
 }

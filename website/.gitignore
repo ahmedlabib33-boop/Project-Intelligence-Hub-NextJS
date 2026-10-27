@@ -12,3 +12,6 @@ public/pdfjs/
 # Python engine — local caches and the editor password hash stay on this machine
 __pycache__/
 api/.editor-password.sha256
+
+# TypeScript incremental build cache
+*.tsbuildinfo
