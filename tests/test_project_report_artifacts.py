@@ -11,6 +11,14 @@ import project_report_artifacts as artifacts  # noqa: E402
 
 ensure_project_report_artifacts = artifacts.ensure_project_report_artifacts
 
+# Per-report entries; the result also carries one "published_project_package" entry
+# (a single zip with no html/pdf/pptx or html_origin), asserted separately.
+REPORT_KEYS = [key for key, _, _ in artifacts.REPORTS]
+
+
+def report_entries(reports: dict[str, dict]) -> list[dict]:
+    return [reports[key] for key in REPORT_KEYS]
+
 
 def sample_project() -> dict[str, object]:
     return {
@@ -47,8 +55,17 @@ def test_report_artifacts_are_project_scoped_and_reused_when_unchanged(tmp_path:
     output_dir = tmp_path / "Project One"
     reports = ensure_project_report_artifacts(sample_project(), output_dir, public_slug="project-one")
 
-    assert set(reports) == {"executive_dashboard", "master_dashboard", "elite_svg_charts", "linked_executive_dashboard"}
-    for artifact in reports.values():
+    assert set(REPORT_KEYS) == {"executive_dashboard", "master_dashboard", "elite_svg_charts", "linked_executive_dashboard"}
+    assert set(reports) == set(REPORT_KEYS) | {"published_project_package"}
+
+    package = reports["published_project_package"]
+    package_zip = output_dir / package["files"]["zip"]["name"]
+    assert package["zip"] == f"/generated/project-one/{package_zip.name}"
+    assert package["source_project_id"] == "project-001"
+    with zipfile.ZipFile(package_zip) as archive:
+        assert len(archive.namelist()) == 3 * len(REPORT_KEYS)
+
+    for artifact in report_entries(reports):
         for extension in ("html", "pdf", "pptx"):
             file_name = artifact["files"][extension]["name"]
             generated = output_dir / file_name
@@ -107,7 +124,7 @@ def test_matching_canonical_html_is_used_without_cross_project_leakage(tmp_path:
 
     reports = ensure_project_report_artifacts(sample_project(), tmp_path / "published", public_slug="project-one")
 
-    assert all(report["html_origin"] == "canonical_project_html" for report in reports.values())
+    assert all(report["html_origin"] == "canonical_project_html" for report in report_entries(reports))
     assert all(report["source_project_id"] == "project-001" for report in reports.values())
     assert "Approved report" in (tmp_path / "published" / "02_master_dashboard.html").read_text(encoding="utf-8")
 
@@ -123,5 +140,5 @@ def test_mismatched_canonical_html_is_rejected(tmp_path: Path, monkeypatch) -> N
 
     reports = ensure_project_report_artifacts(sample_project(), tmp_path / "published", public_slug="project-one")
 
-    assert all(report["html_origin"] == "controlled_fallback" for report in reports.values())
+    assert all(report["html_origin"] == "controlled_fallback" for report in report_entries(reports))
     assert "wrong project" not in (tmp_path / "published" / "02_master_dashboard.html").read_text(encoding="utf-8")
