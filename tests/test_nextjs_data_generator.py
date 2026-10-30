@@ -7,7 +7,9 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
+sys.path.insert(0, str(ROOT / "src"))
 
+from construction_system.letters_auto_ingest import SAMCO_SHEET  # noqa: E402
 from generate_nextjs_website_data import (  # noqa: E402
     build_project_record,
     build_submitted_tia_visuals,
@@ -81,7 +83,9 @@ def test_letters_workspace_uses_streamlit_register_and_inbox_logic_per_project()
 
     assert tables["source_scope"] == "selected_project_only"
     assert tables["inbox_auto_ingest"] is True
-    assert sheets["From Contractor"]["row_count"] > 0
+    # "From Contractor" is only a legacy alias; the register is published as "From SAMCO".
+    assert sheets[SAMCO_SHEET]["row_count"] > 0
+    assert "From Contractor" not in sheets
     assert sheets["Issue Threads"]["row_count"] > 0
     for sheet in tables["sheets"]:
         for row in sheet["rows"]:

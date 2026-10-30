@@ -5,11 +5,18 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from construction_system.controlled_tia import CONDITIONAL_RESULT, SETUP_REQUIRED, build_controlled_tia_snapshot
+from construction_system.controlled_tia import (
+    CONDITIONAL_RESULT,
+    RECONCILIATION_REQUIRED,
+    SETUP_REQUIRED,
+    build_controlled_tia_snapshot,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
 THE_BIG = ROOT / "projects" / "Buildings" / "The BIG - PH01"
+# The signed submission archive is not tracked in git, so it exists only on a machine that holds it.
+THE_BIG_ARCHIVE = THE_BIG / "02-delay_analysis" / "approved_submission" / "Sub02-Delay Analysis (TIA) - Workbook to dashboard.rar"
 THE_BIG_ID = "The Big -P.01-UP-20-April-26"
 THE_BIG_KEY = "the-big-p-01-up-20-april-26"
 
@@ -21,7 +28,16 @@ def the_big_project() -> dict[str, str]:
 def test_the_big_submission_matrix_is_the_active_position() -> None:
     snapshot = build_controlled_tia_snapshot(the_big_project())
 
-    assert snapshot["status"] == CONDITIONAL_RESULT
+    # The engine must never report an unverified submission as a conditional result: with the
+    # archive present and matching its registered hash the position is CONDITIONAL_RESULT;
+    # without it (a clean checkout) the same, otherwise valid, register must say RECONCILIATION_REQUIRED.
+    if THE_BIG_ARCHIVE.is_file():
+        assert snapshot["status"] == CONDITIONAL_RESULT
+        assert snapshot["source_integrity"]["archive"]["integrity"] == "verified"
+    else:
+        assert snapshot["status"] == RECONCILIATION_REQUIRED
+        assert snapshot["source_integrity"]["archive"]["integrity"] == "failed"
+        assert snapshot["source_integrity"]["validation_findings"] == []
     assert snapshot["approval_status"] == "submitted_position_pending_p6_verification"
     assert len(snapshot["schedule_cpm"]["approved_matrix"]) == 12
 
