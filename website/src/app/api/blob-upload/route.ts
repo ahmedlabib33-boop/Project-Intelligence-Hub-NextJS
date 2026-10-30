@@ -1,5 +1,6 @@
 import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { NextResponse } from "next/server";
+import { checkRateLimit } from "../../../lib/ai/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -15,7 +16,8 @@ export const runtime = "nodejs";
  *
  * This app has no per-user auth system, so — matching the existing,
  * unauthenticated schedule_intelligence API — this route does not gate on a
- * session. The extension allowlist below is the real restriction.
+ * session. The extension allowlist, the size cap and the per-client rate limit
+ * below are the restrictions.
  */
 
 const ALLOWED_EXTENSIONS = new Set([
@@ -26,13 +28,35 @@ const ALLOWED_EXTENSIONS = new Set([
 
 const MAX_UPLOAD_BYTES = 250 * 1024 * 1024;
 
+// One Stage 1 run sends at most ~24 evidence files plus a template and a data file, each
+// needing a token (multipart uploads reuse theirs), so this leaves room for several runs a minute.
+const TOKEN_REQUESTS_PER_MINUTE = 60;
+
 function extensionOf(pathname: string): string {
   const dot = pathname.lastIndexOf(".");
   return dot === -1 ? "" : pathname.slice(dot).toLowerCase();
 }
 
 export async function POST(request: Request): Promise<NextResponse> {
-  const body = (await request.json()) as HandleUploadBody;
+  let body: HandleUploadBody;
+  try {
+    body = (await request.json()) as HandleUploadBody;
+  } catch {
+    return NextResponse.json({ error: "The request body must be valid JSON." }, { status: 400 });
+  }
+
+  // Only token requests are limited, per client, like every other API route. The
+  // "blob.upload-completed" callback is sent by Vercel's servers (and verified by
+  // handleUpload), so it has no client address to limit.
+  if (body?.type === "blob.generate-client-token") {
+    const limit = checkRateLimit(`blob-upload:${request.headers.get("x-forwarded-for") || "local"}`, TOKEN_REQUESTS_PER_MINUTE);
+    if (!limit.allowed) {
+      return NextResponse.json(
+        { error: "Too many upload requests. Try again shortly." },
+        { status: 429, headers: { "Retry-After": String(limit.retryAfter) } },
+      );
+    }
+  }
 
   try {
     const jsonResponse = await handleUpload({
